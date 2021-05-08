@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace HenryMod.Modules.Survivors
 {
-    internal class MyCharacter : SurvivorBase
+    internal class JoeSurivor : SurvivorBase
     {
-        internal override string bodyName { get; set; } = "Henry";
+        internal override string bodyName { get; set; } = "Joe";
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
 
-        internal override float sortPosition { get; set; } = 100f;
+        internal override float sortPosition { get; set; } = 69f;
 
         internal override ConfigEntry<bool> characterEnabled { get; set; }
 
@@ -22,39 +22,30 @@ namespace HenryMod.Modules.Survivors
         {
             armor = 20f,
             armorGrowth = 0f,
-            bodyName = "HenryBody",
-            bodyNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_NAME",
+            bodyName = "JoeBody",
+            bodyNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_NAME",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
-            crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            characterPortrait = Modules.Assets.LoadCharacterIconButRetarded("joe_icon"),
+            crosshair = Modules.Assets.LoadCrosshair("CrocoCrosshair"),
             damage = 12f,
             healthGrowth = 33f,
             healthRegen = 1.5f,
             jumpCount = 1,
             maxHealth = 110f,
-            subtitleNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
+            subtitleNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
-        internal override int mainRendererIndex { get; set; } = 2;
+        internal static Material joeMat = Modules.Assets.CreateMaterial("0fdsa - Default");
+        internal override int mainRendererIndex { get; set; } = 0;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
                 new CustomRendererInfo
                 {
-                    childName = "SwordModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "GunModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "Model",
-                    material = henryMat
-                }};
+                    childName = "bodFrnt",
+                    material = joeMat,
+                }
+        };
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
 
@@ -67,7 +58,14 @@ namespace HenryMod.Modules.Survivors
 
         internal override void InitializeCharacter()
         {
+            updateRetardedRendererInfos();
+
             base.InitializeCharacter();
+        }
+
+        //JOE: renderers
+        private void updateRetardedRendererInfos() {
+            //bodyPrefab.GetComponentInChildren<CharacterRenderers>();
         }
 
         internal override void InitializeUnlockables()
@@ -82,21 +80,30 @@ namespace HenryMod.Modules.Survivors
 
         internal override void InitializeHitboxes()
         {
+            //hitboxes already set up baybee
+            return;
+
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
 
-            Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
+            //Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
+            //Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
         }
 
         internal override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = HenryPlugin.developerPrefix;
+            string prefix = FacelessJoePlugin.developerPrefix;
 
+            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), 
+                                                                            "Weapon", 
+                                                                            prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", 
+                                                                            prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", 
+                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), 
+                                                                            true);
             #region Primary
-            Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
+            Modules.Skills.AddPrimarySkill(bodyPrefab, primarySkillDef);
             #endregion
 
             #region Secondary
@@ -200,7 +207,7 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_JOE_BODY_DEFAULT_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
@@ -208,58 +215,58 @@ namespace HenryMod.Modules.Survivors
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
             {
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySword"),
-                    renderer = defaultRenderers[0].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryGun"),
-                    renderer = defaultRenderers[1].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenry"),
-                    renderer = defaultRenderers[instance.mainRendererIndex].renderer
-                }
+                //new SkinDef.MeshReplacement
+                //{
+                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySword"),
+                //    renderer = defaultRenderers[0].renderer
+                //},
+                //new SkinDef.MeshReplacement
+                //{
+                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryGun"),
+                //    renderer = defaultRenderers[1].renderer
+                //},
+                //new SkinDef.MeshReplacement
+                //{
+                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenry"),
+                //    renderer = defaultRenderers[instance.mainRendererIndex].renderer
+                //}
             };
 
             skins.Add(defaultSkin);
             #endregion
 
             #region MasterySkin
-            Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
-            CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
-            {
-                masteryMat,
-                masteryMat,
-                masteryMat,
-                masteryMat
-            });
+            //Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
+            //CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
+            //{
+            //    masteryMat,
+            //    masteryMat,
+            //    masteryMat,
+            //    masteryMat
+            //});
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
-                masteryRendererInfos,
-                mainRenderer,
-                model,
-                masterySkinUnlockableDef);
+            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
+            //    Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+            //    masteryRendererInfos,
+            //    mainRenderer,
+            //    model,
+            //    masterySkinUnlockableDef);
 
-            masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
-            {
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySwordAlt"),
-                    renderer = defaultRenderers[0].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryAlt"),
-                    renderer = defaultRenderers[instance.mainRendererIndex].renderer
-                }
-            };
+            //masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
+            //{
+            //    //new SkinDef.MeshReplacement
+            //    //{
+            //    //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySwordAlt"),
+            //    //    renderer = defaultRenderers[0].renderer
+            //    //},
+            //    //new SkinDef.MeshReplacement
+            //    //{
+            //    //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryAlt"),
+            //    //    renderer = defaultRenderers[instance.mainRendererIndex].renderer
+            //    //}
+            //};
 
-            skins.Add(masterySkin);
+            //skins.Add(masterySkin);
             #endregion
 
             skinController.skins = skins.ToArray();

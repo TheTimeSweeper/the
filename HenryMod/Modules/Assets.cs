@@ -6,6 +6,7 @@ using RoR2;
 using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
+using System;
 
 namespace HenryMod.Modules
 {
@@ -14,15 +15,8 @@ namespace HenryMod.Modules
         // the assetbundle to load assets from
         internal static AssetBundle mainAssetBundle;
 
-        // particle effects
-        internal static GameObject swordSwingEffect;
-        internal static GameObject swordHitImpactEffect;
-
-        internal static GameObject bombExplosionEffect;
-
-        // networked hit sounds
-        internal static NetworkSoundEventDef swordHitSoundEvent;
-
+        //HENRY: indev
+        #region indev
         // lists of assets to add to contentpack
         internal static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
         internal static List<EffectDef> effectDefs = new List<EffectDef>();
@@ -31,12 +25,35 @@ namespace HenryMod.Modules
         internal static Shader hotpoo = Resources.Load<Shader>("Shaders/Deferred/HGStandard");
         internal static Material commandoMat;
         private static string[] assetNames = new string[0];
+        #endregion
+
+        #region MY NAME'S NOT HENRY
+        // particle effects
+        internal static GameObject swordSwingEffect;
+        internal static GameObject swordHitImpactEffect;
+
+        internal static GameObject bombExplosionEffect;
+        // networked hit sounds
+        internal static NetworkSoundEventDef swordHitSoundEvent;
+        #endregion
 
         // CHANGE THIS
-        private const string assetbundleName = "myassetbundle";
+        private const string assetbundleName = "joe";
+
+        //jerry don't you know
+        public static GameObject JoeFireball = null;
+        public static GameObject JoeImpactEffect = null;
+
+        public static GameObject TestlaCoil = null;
+
+        // icons
+        public static Texture JoePortrait = null;
+        public static Sprite Skill1Icon = null;
+        public static Sprite Skill2Icon = null;
 
         internal static void Initialize()
         {
+            //HENRY: check this somewhere else secretly
             if (assetbundleName == "myassetbundle")
             {
                 Debug.LogError("AssetBundle name hasn't been changed- not loading any assets to avoid conflicts");
@@ -44,8 +61,21 @@ namespace HenryMod.Modules
             }
 
             LoadAssetBundle();
-            LoadSoundbank();
-            PopulateAssets();
+
+            //LoadSoundbank();
+            //PopulateHenrysAssetsThatNoLongerExist();
+            PopulateAss();
+        }
+
+        private static void PopulateAss() {
+
+            JoePortrait = mainAssetBundle.LoadAsset<Sprite>("joe_icon").texture;
+            Skill1Icon = mainAssetBundle.LoadAsset<Sprite>("skill1_icon");
+            Skill2Icon = mainAssetBundle.LoadAsset<Sprite>("skill2_icon");
+            JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
+            JoeImpactEffect = mainAssetBundle.LoadAsset<GameObject>("JoeImpactEffectBasic");
+
+            TestlaCoil = mainAssetBundle.LoadAsset<GameObject>("TeslaCoil");
         }
 
         internal static void LoadAssetBundle()
@@ -71,7 +101,7 @@ namespace HenryMod.Modules
             }
         }
 
-        internal static void PopulateAssets()
+        internal static void PopulateHenrysAssetsThatNoLongerExist()
         {
             if (!mainAssetBundle)
             {
@@ -186,6 +216,10 @@ namespace HenryMod.Modules
             return mainAssetBundle.LoadAsset<Texture>("tex" + characterName + "Icon");
         }
 
+        internal static Texture LoadCharacterIconButRetarded(string name) {
+            return mainAssetBundle.LoadAsset<Texture>(name);
+        }
+
         internal static GameObject LoadCrosshair(string crosshairName)
         {
             if (Resources.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return Resources.Load<GameObject>("Prefabs/Crosshair/StandardCrosshair");
@@ -261,6 +295,10 @@ namespace HenryMod.Modules
 
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength)
         {
+            foreach (var item in assetNames) {
+                Debug.Log(item);
+            }
+
             if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
 
             Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);

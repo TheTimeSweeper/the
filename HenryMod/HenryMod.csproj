@@ -14,12 +14,14 @@
 
   <ItemGroup>
     <None Remove="HenryBank.bnk" />
+    <None Remove="joe" />
     <None Remove="Modules\Survivors\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="HenryBank.bnk" />
+    <EmbeddedResource Include="joe" />
     <EmbeddedResource Include="myassetbundle" />
   </ItemGroup>
 
@@ -124,5 +126,9 @@
       <HintPath>..\libs\Zio.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-SillyItems&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\..\Release&quot;" />
+  </Target>
 
 </Project>

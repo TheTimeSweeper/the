@@ -21,21 +21,21 @@ namespace HenryMod
         "SoundAPI",
     })]
 
-    public class HenryPlugin : BaseUnityPlugin
+    public class FacelessJoePlugin : BaseUnityPlugin
     {
         // if you don't change these you're giving permission to deprecate the mod-
         //  please change the names to your own stuff, thanks
         //   this shouldn't even have to be said
-        public const string MODUID = "com.DeveloperName.MyCharacterMod";
-        public const string MODNAME = "MyCharacterMod";
-        public const string MODVERSION = "1.0.0";
+        public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
+        public const string MODNAME = "FacelessJoe";
+        public const string MODVERSION = "0.1.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
-        public const string developerPrefix = "ROB";
+        public const string developerPrefix = "JOE";
 
         internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
 
-        public static HenryPlugin instance;
+        public static FacelessJoePlugin instance;
 
         private void Awake()
         {
@@ -51,7 +51,7 @@ namespace HenryMod
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             // survivor initialization
-            new MyCharacter().Initialize();
+            new JoeSurivor().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
@@ -64,7 +64,7 @@ namespace HenryMod
         private void LateSetup(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj)
         {
             // have to set item displays later now because they require direct object references..
-            Modules.Survivors.MyCharacter.instance.SetItemDisplays();
+            Modules.Survivors.JoeSurivor.instance.SetItemDisplays();
         }
 
         private void Hook()

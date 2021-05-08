@@ -3,12 +3,71 @@ using System;
 
 namespace HenryMod.Modules
 {
-    internal static class Tokens
-    {
-        internal static void AddTokens()
+    internal static class Tokens {
+
+        internal static void AddTokens() {
+            #region not henry
+            string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
+
+            string desc = "joe has a funny vertex on his face that's painted wrong.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > goddammit jerry." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > use the Jump Attack to avoid damage and hit kniggas. this gonna be annoying not being able to swing in the air? probably" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > use the fireball to fill the empty space in his barren kit. seriously i gotta look at this thing." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > idk what R is but it's gonna be cool." + Environment.NewLine + Environment.NewLine;
+
+            string outro = "..and so he left, all zambambos trembling in fear.";
+            string outroFailure = "..and so he vanished, never getting his animations polished.";
+
+            string fullName = "Faceless Joe";
+            LanguageAPI.Add(prefix + "NAME", fullName);
+            LanguageAPI.Add(prefix + "DESCRIPTION", desc);
+            LanguageAPI.Add(prefix + "SUBTITLE", "and the zambambos");
+            LanguageAPI.Add(prefix + "LORE", "sample lore");
+            LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
+            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+
+            #region Skins
+            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
+            #endregion
+
+            #region Passive
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Joe passive");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
+            #endregion
+
+            #region Primary
+            LanguageAPI.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
+            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION",  $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * StaticValues.swordDamageCoefficient}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
+            #endregion
+
+            #region Secondary
+            LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_NAME", "Fireball");
+            LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_DESCRIPTION", $"{Helpers.agilePrefix} Fire a ball for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+            #endregion
+
+            #region Utility
+            LanguageAPI.Add(prefix + "UTILITY_DASH_NAME", "Dash");
+            LanguageAPI.Add(prefix + "UTILITY_DASH_DESCRIPTION", "very original, i know");
+            #endregion
+
+            #region Special
+            LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Something Cool, I'm Sure");
+            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticValues.bombDamageCoefficient}% damage</style>.");
+            #endregion
+
+            #region Achievements
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
+            #endregion
+            #endregion
+        }
+
+        internal static void AddHenryTokens()
         {
             #region Henry
-            string prefix = HenryPlugin.developerPrefix + "_HENRY_BODY_";
+            string prefix = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_";
 
             string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine;

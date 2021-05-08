@@ -5,7 +5,7 @@ namespace HenryMod.Modules
     internal class ContentPacks : IContentPackProvider
     {
         internal ContentPack contentPack = new ContentPack();
-        public string identifier => HenryPlugin.MODUID;
+        public string identifier => FacelessJoePlugin.MODUID;
 
         public void Initialize()
         {
