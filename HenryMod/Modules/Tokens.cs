@@ -1,11 +1,12 @@
 ﻿using R2API;
 using System;
+using HenryMod.SkillStates.Joe;
 
 namespace HenryMod.Modules
 {
     internal static class Tokens {
 
-        internal static void AddTokens() {
+        internal static void AddTokens() {  
             #region not henry
             string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
 
@@ -22,7 +23,7 @@ namespace HenryMod.Modules
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "and the zambambos");
-            LanguageAPI.Add(prefix + "LORE", "sample lore");
+            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from simple coconuts. They need to have the perfect lighting temperature, the perfect lifespan, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, there has been someone who’s been able to earn the trust of the trees. Maybe if we can hand him a hose, and he’ll put his swords down and join us, haha.");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -38,12 +39,12 @@ namespace HenryMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
-            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION",  $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * StaticValues.swordDamageCoefficient}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
+            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION",  $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_NAME", "Fireball");
-            LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_DESCRIPTION", $"{Helpers.agilePrefix} Fire a ball for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_DESCRIPTION", $"{Helpers.agilePrefix} Fire a ball for <style=cIsDamage>{100f * StaticHenryValues.gunDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Utility
@@ -53,7 +54,7 @@ namespace HenryMod.Modules
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Something Cool, I'm Sure");
-            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticValues.bombDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticHenryValues.bombDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Achievements
@@ -97,12 +98,12 @@ namespace HenryMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
-            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Helpers.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * StaticValues.swordDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Helpers.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * StaticHenryValues.swordDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticHenryValues.gunDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Utility
@@ -112,7 +113,7 @@ namespace HenryMod.Modules
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Bomb");
-            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticValues.bombDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticHenryValues.bombDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Achievements

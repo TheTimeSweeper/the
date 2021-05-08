@@ -2,11 +2,11 @@
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.SkillStates
+namespace HenryMod.SkillStates.Henry 
 {
     public class Shoot : BaseSkillState
     {
-        public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
+        public static float damageCoefficient = Modules.StaticHenryValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.6f;
         public static float force = 800f;

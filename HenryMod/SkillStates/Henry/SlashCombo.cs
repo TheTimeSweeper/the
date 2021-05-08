@@ -2,16 +2,17 @@
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.SkillStates
+namespace HenryMod.SkillStates.Henry
 {
-    public class SlashCombo : BaseMeleeAttack
+
+    public class SlashCombo : BaseMeleeAttackButEpic
     {
         public override void OnEnter()
         {
             this.hitboxName = "Sword";
 
             this.damageType = DamageType.Generic;
-            this.damageCoefficient = Modules.StaticValues.swordDamageCoefficient;
+            this.damageCoefficient = Modules.StaticHenryValues.swordDamageCoefficient;
             this.procCoefficient = 1f;
             this.pushForce = 300f;
             this.bonusForce = Vector3.zero;

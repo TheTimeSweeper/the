@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace HenryMod.SkillStates.BaseStates
 {
-    public class BaseMeleeAttack : BaseSkillState
+    public class BaseMeleeAttackButEpic : BaseSkillState
     {
         public int swingIndex;
 
@@ -153,7 +153,7 @@ namespace HenryMod.SkillStates.BaseStates
             if (index == 0) index = 1;
             else index = 0;
 
-            this.outer.SetNextState(new BaseMeleeAttack
+            this.outer.SetNextState(new BaseMeleeAttackButEpic
             {
                 swingIndex = index
             });

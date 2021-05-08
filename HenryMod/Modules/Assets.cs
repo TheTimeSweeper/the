@@ -62,7 +62,7 @@ namespace HenryMod.Modules
 
             LoadAssetBundle();
 
-            //LoadSoundbank();
+            LoadSoundbank();
             //PopulateHenrysAssetsThatNoLongerExist();
             PopulateAss();
         }
@@ -76,29 +76,10 @@ namespace HenryMod.Modules
             JoeImpactEffect = mainAssetBundle.LoadAsset<GameObject>("JoeImpactEffectBasic");
 
             TestlaCoil = mainAssetBundle.LoadAsset<GameObject>("TeslaCoil");
-        }
 
-        internal static void LoadAssetBundle()
-        {
-            if (mainAssetBundle == null)
-            {
-                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod." + assetbundleName))
-                {
-                    mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
-                }
-            }
+            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
 
-            assetNames = mainAssetBundle.GetAllAssetNames();
-        }
 
-        internal static void LoadSoundbank()
-        {
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod.HenryBank.bnk"))
-            {
-                byte[] array = new byte[manifestResourceStream2.Length];
-                manifestResourceStream2.Read(array, 0, array.Length);
-                SoundAPI.SoundBanks.Add(array);
-            }
         }
 
         internal static void PopulateHenrysAssetsThatNoLongerExist()
@@ -134,6 +115,29 @@ namespace HenryMod.Modules
 
             swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
             swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+        }
+
+        internal static void LoadAssetBundle()
+        {
+            if (mainAssetBundle == null)
+            {
+                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod." + assetbundleName))
+                {
+                    mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
+                }
+            }
+
+            assetNames = mainAssetBundle.GetAllAssetNames();
+        }
+
+        internal static void LoadSoundbank()
+        {
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod.HenryBank.bnk"))
+            {
+                byte[] array = new byte[manifestResourceStream2.Length];
+                manifestResourceStream2.Read(array, 0, array.Length);
+                SoundAPI.SoundBanks.Add(array);
+            }
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)
@@ -295,10 +299,6 @@ namespace HenryMod.Modules
 
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength)
         {
-            foreach (var item in assetNames) {
-                Debug.Log(item);
-            }
-
             if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
 
             Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);

@@ -39,13 +39,15 @@ namespace HenryMod.Modules.Survivors
         internal static Material joeMat = Modules.Assets.CreateMaterial("0fdsa - Default");
         internal override int mainRendererIndex { get; set; } = 0;
 
-        internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
-                new CustomRendererInfo
-                {
-                    childName = "bodFrnt",
-                    material = joeMat,
-                }
-        };
+        internal override CustomRendererInfo[] customRendererInfos { get; set; } 
+            //= new CustomRendererInfo[] 
+            //{
+            //        new CustomRendererInfo
+            //        {
+            //            childName = "bodFrnt",
+            //            material = joeMat,
+            //        }
+            //};
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
 
@@ -56,16 +58,52 @@ namespace HenryMod.Modules.Survivors
         internal override UnlockableDef characterUnlockableDef { get; set; }
         private static UnlockableDef masterySkinUnlockableDef;
 
-        internal override void InitializeCharacter()
+        internal override void InitializeCharacter() 
         {
-            updateRetardedRendererInfos();
-
             base.InitializeCharacter();
         }
 
-        //JOE: renderers
-        private void updateRetardedRendererInfos() {
-            //bodyPrefab.GetComponentInChildren<CharacterRenderers>();
+        //you ready for some stupid shit?
+        protected override void setRetardedRendererInfos() {
+
+            List<CustomRendererInfo> customInfos = new List<CustomRendererInfo>();
+
+            FacelessJoe.CharacterRenderers retardedRenderersComponent = bodyPrefab.GetComponentInChildren<FacelessJoe.CharacterRenderers>();
+            retardedRenderersComponent.setHoopooShaders();
+
+            ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
+            List<ChildLocator.NameTransformPair> pairs = new List<ChildLocator.NameTransformPair>(childLocator.transformPairs);
+
+
+            for (int i = 0; i < retardedRenderersComponent.Renderers.Count; i++) {
+                Renderer rend = retardedRenderersComponent.Renderers[i];
+
+                pairs.Add(new ChildLocator.NameTransformPair {
+                    name = rend.name,
+                    transform = rend.transform
+                });
+
+
+                customInfos.Add(new CustomRendererInfo {
+                    childName = rend.name,
+                    material = rend.material,
+                });
+
+                mainRendererIndex = i + 1;
+            }
+
+            pairs.Add(new ChildLocator.NameTransformPair {
+                name = retardedRenderersComponent.MainSkinnedMeshRenderer.name,
+                transform = retardedRenderersComponent.MainSkinnedMeshRenderer.transform,
+            });
+
+            customInfos.Add(new CustomRendererInfo {
+                childName = retardedRenderersComponent.MainSkinnedMeshRenderer.name,
+                material = joeMat,
+            });
+
+            childLocator.transformPairs = pairs.ToArray();
+            customRendererInfos = customInfos.ToArray();
         }
 
         internal override void InitializeUnlockables()
@@ -96,7 +134,7 @@ namespace HenryMod.Modules.Survivors
 
             string prefix = FacelessJoePlugin.developerPrefix;
 
-            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), 
+            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)), 
                                                                             "Weapon", 
                                                                             prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", 
                                                                             prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", 
@@ -113,7 +151,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_GUN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -142,7 +180,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_UTILITY_ROLL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Henry.Roll)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -170,7 +208,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Henry.ThrowBomb)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,

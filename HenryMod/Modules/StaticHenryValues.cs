@@ -2,7 +2,7 @@
 
 namespace HenryMod.Modules
 {
-    internal static class StaticValues
+    internal static class StaticHenryValues
     {
         internal const float swordDamageCoefficient = 2.8f;
 

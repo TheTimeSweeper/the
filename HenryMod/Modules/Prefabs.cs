@@ -207,7 +207,7 @@ namespace HenryMod.Modules
             return GameObject.Instantiate(Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(modelName));
         }
 
-        internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] rendererInfo, int mainRendererIndex)
+        internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex)
         {
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.AddComponent<CharacterModel>();
             ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
@@ -221,15 +221,15 @@ namespace HenryMod.Modules
 
             List<CharacterModel.RendererInfo> rendererInfos = new List<CharacterModel.RendererInfo>();
 
-            for (int i = 0; i < rendererInfo.Length; i++)
+            for (int i = 0; i < customInfos.Length; i++)
             {
-                if (!childLocator.FindChild(rendererInfo[i].childName))
+                if (!childLocator.FindChild(customInfos[i].childName))
                 {
-                    Debug.LogError("Trying to add a RendererInfo for a renderer that does not exist: " + rendererInfo[i].childName);
+                    Debug.LogError("Trying to add a RendererInfo for a renderer that does not exist: " + customInfos[i].childName);
                 }
                 else
                 {
-                    Renderer j = childLocator.FindChild(rendererInfo[i].childName).GetComponent<Renderer>();
+                    Renderer j = childLocator.FindChild(customInfos[i].childName).GetComponent<Renderer>();
                     if (!j)
                     {
 
@@ -238,9 +238,9 @@ namespace HenryMod.Modules
                     {
                         rendererInfos.Add(new CharacterModel.RendererInfo
                         {
-                            renderer = childLocator.FindChild(rendererInfo[i].childName).GetComponent<Renderer>(),
-                            defaultMaterial = rendererInfo[i].material,
-                            ignoreOverlays = rendererInfo[i].ignoreOverlays,
+                            renderer = childLocator.FindChild(customInfos[i].childName).GetComponent<Renderer>(),
+                            defaultMaterial = customInfos[i].material,
+                            ignoreOverlays = customInfos[i].ignoreOverlays,
                             defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On
                         });
                     }

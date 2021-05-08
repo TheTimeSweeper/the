@@ -41,16 +41,17 @@ namespace HenryMod.Modules.Survivors
 
         internal virtual void InitializeCharacter()
         {
-            // this creates a config option to enable the character- feel free to remove if the character is the only thing in your mod
-            characterEnabled = Modules.Config.CharacterEnableConfig(bodyName);
 
-            if (characterEnabled.Value)
-            {
+            // this creates a config option to enable the character- feel free to remove if the character is the only thing in your mod
+            //characterEnabled = Modules.Config.CharacterEnableConfig(bodyName);
+
+            //if (characterEnabled.Value)
+            //{
                 InitializeUnlockables();
 
                 bodyPrefab = Modules.Prefabs.CreatePrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
                 bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
-
+                setRetardedRendererInfos();
                 Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
 
                 displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
@@ -62,9 +63,12 @@ namespace HenryMod.Modules.Survivors
                 InitializeSkins();
                 InitializeItemDisplays();
                 InitializeDoppelganger();
-            }
+            //}
         }
 
+        protected virtual void setRetardedRendererInfos() {
+
+        }
 
         internal virtual void InitializeUnlockables()
         {
