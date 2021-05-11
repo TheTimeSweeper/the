@@ -6,9 +6,16 @@ namespace HenryMod.SkillStates.Joe {
 
     public class Primary1Swing : BaseMeleeAttackButEpic {
 
-        public static float swingDamage = 1.6f;
+        public static float swingDamage = 1.6f; 
 
         public override void OnEnter() {
+
+            SetSwingValues();
+
+            base.OnEnter();
+        }
+
+        protected virtual void SetSwingValues() {
             this.hitboxName = swingIndex % 2 == 0 ? "swing1" : "swing2";
 
             base.damageType = DamageType.Generic;
@@ -20,7 +27,7 @@ namespace HenryMod.SkillStates.Joe {
             base.baseDuration = 0.96f;
             base.attackStartTime = 0.05f;
             base.attackEndTime = 0.31f;
-            base.baseEarlyExitTime = 0.1f;
+            base.baseEarlyExitTime = 0.38f;
 
             base.hitStopDuration = 0.0069f;
             base.attackRecoil = 0.2f;
@@ -33,8 +40,11 @@ namespace HenryMod.SkillStates.Joe {
             base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
 
             base.impactSound = Modules.Assets.swordHitSoundEvent.index;
+        }
 
-            base.OnEnter();
+        public override void FixedUpdate() {
+            base.FixedUpdate();
+            base.StartAimMode();
         }
 
         protected override void PlayAttackAnimation() {
@@ -64,6 +74,27 @@ namespace HenryMod.SkillStates.Joe {
 
         public override void OnExit() {
             base.OnExit();
+        }
+
+        public class PrimaryStupidSwing : Primary1Swing {
+
+            protected override void SetSwingValues() {
+
+                base.SetSwingValues();
+
+                base.baseEarlyExitTime = 0.1f;
+                base.keypress = true;
+            }
+
+            protected override void SetNextState() {
+                //int index = this.swingIndex;
+                //if (index == 0) index = 1;
+                //else index = 0;
+
+                this.outer.SetNextState(new PrimaryStupidSwing {
+                    swingIndex = this.swingIndex + 1
+                });
+            }
         }
     }
 }

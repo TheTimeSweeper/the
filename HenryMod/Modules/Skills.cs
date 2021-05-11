@@ -132,7 +132,11 @@ namespace HenryMod.Modules
             }
         }
 
-        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile)
+        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile) {
+            return CreatePrimarySkillDef(state, stateMachine, skillNameToken, skillDescriptionToken, skillIcon, agile, false);
+        }
+
+        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile, bool keypress)
         {
             SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
 
@@ -152,7 +156,7 @@ namespace HenryMod.Modules
             skillDef.interruptPriority = InterruptPriority.Any;
             skillDef.resetCooldownTimerOnUse = false;
             skillDef.isCombatSkill = true;
-            skillDef.mustKeyPress = false;
+            skillDef.mustKeyPress = keypress;
             skillDef.cancelSprintingOnActivation = !agile;
             skillDef.rechargeStock = 1;
             skillDef.requiredStock = 0;

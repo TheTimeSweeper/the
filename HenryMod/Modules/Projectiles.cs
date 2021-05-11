@@ -16,6 +16,7 @@ namespace HenryMod.Modules
             CreateBomb();
 
             AddProjectile(bombPrefab);
+            AddProjectile(Assets.JoeFireball);
         }
 
         internal static void AddProjectile(GameObject projectileToAdd)

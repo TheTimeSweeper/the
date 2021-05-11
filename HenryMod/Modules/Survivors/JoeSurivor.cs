@@ -132,13 +132,14 @@ namespace HenryMod.Modules.Survivors
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = FacelessJoePlugin.developerPrefix;
+            string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
 
             SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)), 
                                                                             "Weapon", 
-                                                                            prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", 
-                                                                            prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", 
-                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), 
+                                                                            prefix + "PRIMARY_SLASH_NAME", 
+                                                                            prefix + "PRIMARY_SLASH_DESCRIPTION", 
+                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"), 
+                                                                            true,
                                                                             true);
             #region Primary
             Modules.Skills.AddPrimarySkill(bodyPrefab, primarySkillDef);
@@ -147,12 +148,12 @@ namespace HenryMod.Modules.Survivors
             #region Secondary
             SkillDef shootSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_GUN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)),
-                activationStateMachineName = "Slide",
+                skillName = prefix + "SECONDARY_FIREBALL_NAME",
+                skillNameToken = prefix + "SECONDARY_FIREBALL_NAME",
+                skillDescriptionToken = prefix + "SECONDARY_FIREBALL_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill2_icon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Secondary1Fireball)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,

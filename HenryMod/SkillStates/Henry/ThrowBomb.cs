@@ -3,8 +3,7 @@ using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 
-namespace HenryMod.SkillStates.Henry 
-{
+namespace HenryMod.SkillStates.Henry {
     public class ThrowBomb : BaseSkillState
     {
         public static float damageCoefficient = 16f;

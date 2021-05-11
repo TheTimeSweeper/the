@@ -73,7 +73,9 @@ namespace HenryMod.Modules
             Skill1Icon = mainAssetBundle.LoadAsset<Sprite>("skill1_icon");
             Skill2Icon = mainAssetBundle.LoadAsset<Sprite>("skill2_icon");
             JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
-            JoeImpactEffect = mainAssetBundle.LoadAsset<GameObject>("JoeImpactEffectBasic");
+
+            JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
+            //JoeImpactEffect = mainAssetBundle.LoadAsset<GameObject>("JoeImpactEffectBasic");
 
             TestlaCoil = mainAssetBundle.LoadAsset<GameObject>("TeslaCoil");
 
@@ -268,8 +270,10 @@ namespace HenryMod.Modules
             newEffect.AddComponent<DestroyOnTimer>().duration = 12;
             newEffect.AddComponent<NetworkIdentity>();
             newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
-            var effect = newEffect.AddComponent<EffectComponent>();
-            effect.applyScale = false;
+
+            EffectComponent effect = newEffect.GetComponent<EffectComponent>();
+            if (!effect) effect = newEffect.AddComponent<EffectComponent>();
+            effect.applyScale = true;
             effect.effectIndex = EffectIndex.Invalid;
             effect.parentToReferencedTransform = parentToTransform;
             effect.positionAtReferencedTransform = true;

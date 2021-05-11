@@ -26,6 +26,7 @@ namespace HenryMod.SkillStates.BaseStates
         protected float attackRecoil = 0.75f;
         protected float hitHopVelocity = 4f;
         protected bool cancelled = false;
+        protected bool keypress;
 
         protected string swingSoundString = "";
         protected string hitSoundString = "";
@@ -187,9 +188,9 @@ namespace HenryMod.SkillStates.BaseStates
                 this.FireAttack();
             }
 
-            if (this.stopwatch >= (this.duration - this.earlyExitTime) && base.isAuthority)
+            if (this.stopwatch >= (this.earlyExitTime) && base.isAuthority)
             {
-                if (base.inputBank.skill1.down)
+                if (keypress? base.inputBank.skill1.justPressed : base.inputBank.skill1.down)
                 {
                     if (!this.hasFired) this.FireAttack();
                     this.SetNextState();
