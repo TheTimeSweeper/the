@@ -75,26 +75,26 @@ namespace HenryMod.SkillStates.Joe {
         public override void OnExit() {
             base.OnExit();
         }
+    }
 
-        public class PrimaryStupidSwing : Primary1Swing {
+    public class PrimaryStupidSwing : Primary1Swing {
 
-            protected override void SetSwingValues() {
+        protected override void SetSwingValues() {
 
-                base.SetSwingValues();
+            base.SetSwingValues();
 
-                base.baseEarlyExitTime = 0.1f;
-                base.keypress = true;
-            }
+            base.baseEarlyExitTime = 0.1f;
+            base.keypress = true;
+        }
 
-            protected override void SetNextState() {
-                //int index = this.swingIndex;
-                //if (index == 0) index = 1;
-                //else index = 0;
+        protected override void SetNextState() {
+            //int index = this.swingIndex;
+            //if (index == 0) index = 1;
+            //else index = 0;
 
-                this.outer.SetNextState(new PrimaryStupidSwing {
-                    swingIndex = this.swingIndex + 1
-                });
-            }
+            this.outer.SetNextState(new PrimaryStupidSwing {
+                swingIndex = this.swingIndex + 1
+            });
         }
     }
 }

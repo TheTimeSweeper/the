@@ -72,6 +72,7 @@ namespace HenryMod.Modules
             JoePortrait = mainAssetBundle.LoadAsset<Sprite>("joe_icon").texture;
             Skill1Icon = mainAssetBundle.LoadAsset<Sprite>("skill1_icon");
             Skill2Icon = mainAssetBundle.LoadAsset<Sprite>("skill2_icon");
+
             JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
 
             JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
@@ -123,7 +124,7 @@ namespace HenryMod.Modules
         {
             if (mainAssetBundle == null)
             {
-                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod." + assetbundleName))
+                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod." + assetbundleName))
                 {
                     mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
                 }
@@ -134,7 +135,7 @@ namespace HenryMod.Modules
 
         internal static void LoadSoundbank()
         {
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod.HenryBank.bnk"))
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
             {
                 byte[] array = new byte[manifestResourceStream2.Length];
                 manifestResourceStream2.Read(array, 0, array.Length);

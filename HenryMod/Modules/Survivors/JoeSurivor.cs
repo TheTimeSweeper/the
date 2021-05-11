@@ -92,7 +92,7 @@ namespace HenryMod.Modules.Survivors
                 mainRendererIndex = i + 1;
             }
 
-            pairs.Add(new ChildLocator.NameTransformPair {
+            pairs.Add(new ChildLocator.NameTransformPair { 
                 name = retardedRenderersComponent.MainSkinnedMeshRenderer.name,
                 transform = retardedRenderersComponent.MainSkinnedMeshRenderer.transform,
             });
@@ -134,15 +134,24 @@ namespace HenryMod.Modules.Survivors
 
             string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
 
-            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)), 
-                                                                            "Weapon", 
-                                                                            prefix + "PRIMARY_SLASH_NAME", 
-                                                                            prefix + "PRIMARY_SLASH_DESCRIPTION", 
-                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"), 
+
+            #region Primary
+            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)),
+                                                                            "Weapon",
+                                                                            prefix + "PRIMARY_SWING_NAME",
+                                                                            prefix + "PRIMARY_SWING_DESCRIPTION",
+                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"),
+                                                                            true, 
+                                                                            true);
+
+            SkillDef primarySkillDefSilly = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.PrimaryStupidSwing)),
+                                                                            "Weapon",
+                                                                            prefix + "PRIMARY_SWING_NAME_CLASSIC",
+                                                                            prefix + "PRIMARY_SWING_DESCRIPTION",
+                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"),
                                                                             true,
                                                                             true);
-            #region Primary
-            Modules.Skills.AddPrimarySkill(bodyPrefab, primarySkillDef);
+            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDef, primarySkillDefSilly);
             #endregion
 
             #region Secondary
@@ -177,9 +186,9 @@ namespace HenryMod.Modules.Survivors
             #region Utility
             SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_UTILITY_ROLL_DESCRIPTION",
+                skillName = prefix + "UTILITY_DASH_NAME",
+                skillNameToken = prefix + "UTILITY_DASH_NAME",
+                skillDescriptionToken = prefix + "UTILITY_DASH_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Henry.Roll)),
                 activationStateMachineName = "Body",
@@ -205,9 +214,9 @@ namespace HenryMod.Modules.Survivors
             #region Special
             SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
+                skillName = prefix + "SPECIAL_BOMB_NAME",
+                skillNameToken = prefix + "SPECIAL_BOMB_NAME",
+                skillDescriptionToken = prefix + "SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Henry.ThrowBomb)),
                 activationStateMachineName = "Slide",
@@ -317,6 +326,7 @@ namespace HenryMod.Modules.Survivors
 
             // add item displays here
             //  HIGHLY recommend using KingEnderBrine's ItemDisplayPlacementHelper mod for this
+
             #region Item Displays
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
@@ -371,10 +381,10 @@ localScale = new Vector3(0.15F, 0.15F, 0.15F),
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayBFG"),
-childName = "Chest",
-localPos = new Vector3(0.0782F, 0.4078F, 0F),
-localAngles = new Vector3(0F, 0F, 313.6211F),
-localScale = new Vector3(0.3F, 0.3F, 0.3F),
+                            childName = "Head",
+                            localPos = new Vector3(-0.07651F, -0.05932F, -0.00394F),
+                            localAngles = new Vector3(273.7959F, 0F, 90F),
+                            localScale = new Vector3(0.2F, 0.2F, 0.2F),
                             limbMask = LimbFlags.None
                         }
                     }
@@ -392,10 +402,10 @@ localScale = new Vector3(0.3F, 0.3F, 0.3F),
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayGlasses"),
-childName = "Head",
-localPos = new Vector3(0F, 0.1687F, 0.1558F),
-localAngles = new Vector3(0F, 0F, 0F),
-localScale = new Vector3(0.3215F, 0.3034F, 0.3034F),
+                            childName = "Head",
+                            localPos = new Vector3(-0.02451F, 0.06624F, 0F),
+                            localAngles = new Vector3(270F, 270F, 0F),
+                            localScale = new Vector3(0.15881F, 0.14258F, 0.17229F),
                             limbMask = LimbFlags.None
                         }
                     }
@@ -476,10 +486,10 @@ localScale = new Vector3(0.1F, 0.1F, 0.1F),
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayDagger"),
-childName = "Chest",
-localPos = new Vector3(-0.0553F, 0.2856F, 0.0945F),
-localAngles = new Vector3(334.8839F, 31.5284F, 34.6784F),
-localScale = new Vector3(1.2428F, 1.2428F, 1.2299F),
+                            childName = "LArm_bicep",
+                            localPos = new Vector3(0.06231F, -0.01978F, 0.12755F),
+                            localAngles = new Vector3(325.987F, 122.8034F, 151.558F),
+                            localScale = new Vector3(-0.8F, 0.8F, 0.8F),
                             limbMask = LimbFlags.None
                         }
                     }
@@ -581,10 +591,10 @@ localScale = new Vector3(0.0501F, 0.0501F, 0.0501F),
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayWolfPelt"),
-childName = "Head",
-localPos = new Vector3(0F, 0.2783F, -0.002F),
-localAngles = new Vector3(358.4554F, 0F, 0F),
-localScale = new Vector3(0.5666F, 0.5666F, 0.5666F),
+                            childName = "RArm_bicep",
+                            localPos = new Vector3(0F, -0.00469F, 0.04091F),
+                            localAngles = new Vector3(0F, 4.94302F, 270F),
+                            localScale = new Vector3(0.23617F, 0.22356F, 0.22763F),
                             limbMask = LimbFlags.None
                         }
                     }
@@ -885,10 +895,10 @@ localScale = new Vector3(0.5253F, 0.5253F, 0.5253F),
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayWarhammer"),
-childName = "Chest",
-localPos = new Vector3(0.0513F, 0.0652F, -0.0792F),
-localAngles = new Vector3(64.189F, 90F, 90F),
-localScale = new Vector3(0.1722F, 0.1722F, 0.1722F),
+                            childName = "sword",
+                            localPos = new Vector3(-0.00014F, 5.01224F, -0.00003F),
+                            localAngles = new Vector3(270F, 189F, 0F),
+                            localScale = new Vector3(1.47667F, 0.97382F, 1.42529F),
                             limbMask = LimbFlags.None
                         }
                     }
@@ -1514,10 +1524,10 @@ localScale = new Vector3(0.1511F, 0.1511F, 0.1511F),
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayFossil"),
-childName = "Chest",
-localPos = new Vector3(-0.0722F, 0.0921F, 0F),
-localAngles = new Vector3(0F, 0F, 0F),
-localScale = new Vector3(0.4208F, 0.4208F, 0.4208F),
+                            childName = "RLeg_thigh",
+                            localPos = new Vector3(0.05131F, 0.09351F, -0.02012F),
+                            localAngles = new Vector3(338.6836F, 268.6124F, 304.663F),
+                            localScale = new Vector3(0.4208F, 0.4208F, 0.4208F),
                             limbMask = LimbFlags.None
                         }
                     }

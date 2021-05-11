@@ -52,18 +52,18 @@ namespace HenryMod.Modules
         }
 
         // this could all be a lot cleaner but at least it's simple and easy to work with
-        internal static void AddPrimarySkill(GameObject targetPrefab, SkillDef skillDef)
-        {
+        internal static void AddPrimarySkill(GameObject targetPrefab, SkillDef skillDef) {
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
             SkillFamily skillFamily = skillLocator.primary.skillFamily;
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
-            {
-                skillDef = skillDef,
-                viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-            };
+            AddSkillToFamily(skillDef, skillFamily);
+        }
+
+        internal static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+            foreach (SkillDef i in skillDefs) {
+                AddPrimarySkill(targetPrefab, i);
+            }
         }
 
         internal static void AddSecondarySkill(GameObject targetPrefab, SkillDef skillDef)
@@ -72,12 +72,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.secondary.skillFamily;
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
-            {
-                skillDef = skillDef,
-                viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-            };
+            AddSkillToFamily(skillDef, skillFamily);
         }
 
         internal static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
@@ -94,12 +89,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.utility.skillFamily;
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
-            {
-                skillDef = skillDef,
-                viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-            };
+            AddSkillToFamily(skillDef, skillFamily);
         }
 
         internal static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
@@ -116,12 +106,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.special.skillFamily;
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
-            {
-                skillDef = skillDef,
-                viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
-            };
+            AddSkillToFamily(skillDef, skillFamily);
         }
 
         internal static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
@@ -130,6 +115,14 @@ namespace HenryMod.Modules
             {
                 AddSpecialSkill(targetPrefab, i);
             }
+        }
+
+        private static void AddSkillToFamily(SkillDef skillDef, SkillFamily skillFamily) {
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant {
+                skillDef = skillDef,
+                viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+            };
         }
 
         internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile) {
