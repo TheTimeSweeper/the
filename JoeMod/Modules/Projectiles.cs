@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RoR2;
 using RoR2.Projectile;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,14 +10,17 @@ namespace HenryMod.Modules
     internal static class Projectiles
     {
         internal static GameObject bombPrefab;
+        internal static GameObject totallyNewBombPrefab;
 
         internal static void RegisterProjectiles()
         {
             // only separating into separate methods for my sanity
             CreateBomb();
+            totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb"); //CreateTotallyOriginalBomb();
 
             AddProjectile(bombPrefab);
             AddProjectile(Assets.JoeFireball);
+            AddProjectile(totallyNewBombPrefab);
         }
 
         internal static void AddProjectile(GameObject projectileToAdd)
@@ -24,6 +28,28 @@ namespace HenryMod.Modules
             Modules.Prefabs.projectilePrefabs.Add(projectileToAdd);
         }
 
+        private static void CreateTotallyOriginalBomb() {
+
+            totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb");
+
+            ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
+            InitializeImpactExplosion(bombImpactExplosion, true);
+
+            bombImpactExplosion.blastRadius = 16f;
+            bombImpactExplosion.destroyOnEnemy = true;
+            bombImpactExplosion.lifetime = 12f;
+            bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+            bombImpactExplosion.timerAfterImpact = true;
+            bombImpactExplosion.lifetimeAfterImpact = 0.1f;
+
+            ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
+            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
+            bombController.startSound = "";
+        }
+
+
+        #region henrybomb
         private static void CreateBomb()
         {
             bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
@@ -44,7 +70,7 @@ namespace HenryMod.Modules
             bombController.startSound = "";
         }
 
-        private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
+        private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion, bool RemoveThisDisgustingShit = false)
         {
             projectileImpactExplosion.blastDamageCoefficient = 1f;
             projectileImpactExplosion.blastProcCoefficient = 1f;
@@ -53,7 +79,7 @@ namespace HenryMod.Modules
             projectileImpactExplosion.childrenCount = 0;
             projectileImpactExplosion.childrenDamageCoefficient = 0f;
             projectileImpactExplosion.childrenProjectilePrefab = null;
-            projectileImpactExplosion.destroyOnEnemy = false;
+            projectileImpactExplosion.destroyOnEnemy = RemoveThisDisgustingShit ? true: false;
             projectileImpactExplosion.destroyOnWorld = false;
             projectileImpactExplosion.explosionSoundString = "";
             projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
@@ -85,5 +111,6 @@ namespace HenryMod.Modules
             GameObject newPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/" + prefabName), newPrefabName);
             return newPrefab;
         }
+        #endregion
     }
 }

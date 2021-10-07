@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.SkillStates.Henry 
+namespace HenryMod.EntityStates.Henry 
 {
     public class Shoot : BaseSkillState
     {
@@ -30,6 +30,22 @@ namespace HenryMod.SkillStates.Henry
             base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
 
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (base.fixedAge >= this.fireTime)
+            {
+                this.Fire();
+            }
+
+            if (base.fixedAge >= this.duration && base.isAuthority)
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
+        }
+
         public override void OnExit()
         {
             base.OnExit();
@@ -42,7 +58,7 @@ namespace HenryMod.SkillStates.Henry
                 this.hasFired = true;
 
                 base.characterBody.AddSpreadBloom(1.5f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(global::EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
                 Util.PlaySound("HenryShootPistol", base.gameObject);
 
                 if (base.isAuthority)
@@ -50,8 +66,7 @@ namespace HenryMod.SkillStates.Henry
                     Ray aimRay = base.GetAimRay();
                     base.AddRecoil(-1f * Shoot.recoil, -2f * Shoot.recoil, -0.5f * Shoot.recoil, 0.5f * Shoot.recoil);
 
-                    new BulletAttack
-                    {
+                    new BulletAttack {
                         bulletCount = 1,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
@@ -78,25 +93,9 @@ namespace HenryMod.SkillStates.Henry
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+                        hitEffectPrefab = global::EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
                     }.Fire();
                 }
-            }
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-
-            if (base.fixedAge >= this.fireTime)
-            {
-                this.Fire();
-            }
-
-            if (base.fixedAge >= this.duration && base.isAuthority)
-            {
-                this.outer.SetNextStateToMain();
-                return;
             }
         }
 

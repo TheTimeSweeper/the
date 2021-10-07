@@ -1,6 +1,6 @@
-﻿using HenryMod.SkillStates.Henry;
-using HenryMod.SkillStates.Joe;
-using HenryMod.SkillStates.BaseStates;
+﻿using HenryMod.EntityStates.Henry;
+using HenryMod.EntityStates.Joe;
+using HenryMod.EntityStates.BaseStates;
 using System.Collections.Generic;
 using System;
 
@@ -25,8 +25,20 @@ namespace HenryMod.Modules
             entityStates.Add(typeof(ThrowBomb));
             #endregion
 
+            //okay, I said I this for tokens, but now I know that makes more sense for translatoin
+            // but for here it's definitely asinine to have these so randomly separate from the skills
             #region joe
-            entityStates.Add(typeof(Primary1Swing ));
+            ////prim
+            //entityStates.Add(typeof(Primary1Swing));
+            //entityStates.Add(typeof(Primary1JumpSwingFall));
+            //entityStates.Add(typeof(Primary1JumpSwingLand));
+
+            //entityStates.Add(typeof(PrimaryStupidSwing));
+
+            //entityStates.Add(typeof(ThrowBoom));
+
+            ////sec
+            //entityStates.Add(typeof(Secondary1Fireball));
             #endregion
         }
     }

@@ -136,7 +136,7 @@
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(ProjectDir)\..\..\SurvivorUnityProj\AssetBundles\joe&quot; $(ProjectDir)" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)\..\..\SurvivorUnityProj\AssetBundles\joe&quot; $(ProjectDir)" />
   </Target>
 
 </Project>

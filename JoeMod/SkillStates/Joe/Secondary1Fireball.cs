@@ -2,7 +2,7 @@
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
-namespace HenryMod.SkillStates.Joe {
+namespace HenryMod.EntityStates.Joe {
 
     public class Secondary1Fireball : BaseSkillState {
 

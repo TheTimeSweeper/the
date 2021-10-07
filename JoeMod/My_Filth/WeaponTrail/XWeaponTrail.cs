@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Xft
 {
+    //not my filth for the record
     public class XWeaponTrail : MonoBehaviour
     {
         public class Element
@@ -105,8 +106,9 @@ namespace Xft
 
             mTrailWidth = (PointStart.position - PointEnd.position).magnitude;
 
-            InitMeshObj();
-
+            if (mMeshObj == null) {
+                InitMeshObj();
+            }
             InitOriginalElements();
 
             InitSpline();
@@ -211,7 +213,14 @@ namespace Xft
 
             UpdateVertex();
             //UpdateIndices();
+        }
 
+        void OnEnable() {
+            Activate();
+        }
+
+        void OnDisable() {
+            Deactivate();
         }
 
 

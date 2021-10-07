@@ -50,8 +50,8 @@ namespace HenryMod.Modules.Survivors
                 InitializeUnlockables();
 
                 bodyPrefab = Modules.Prefabs.CreatePrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
-                bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
-                setRetardedRendererInfos();
+            bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new global::EntityStates.SerializableEntityStateType(characterMainState);
+                setRetardedRendererInfosAndChildTransforms();
                 Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
 
                 displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
@@ -66,7 +66,7 @@ namespace HenryMod.Modules.Survivors
             //}
         }
 
-        protected virtual void setRetardedRendererInfos() {
+        protected virtual void setRetardedRendererInfosAndChildTransforms() {
 
         }
 

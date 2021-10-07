@@ -43,6 +43,7 @@ namespace HenryMod.Modules
         //jerry don't you know
         public static GameObject JoeFireball = null;
         public static GameObject JoeImpactEffect = null;
+        public static GameObject JoeJumpSwingEffect = null;
 
         public static GameObject TestlaCoil = null;
 
@@ -76,7 +77,7 @@ namespace HenryMod.Modules
             JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
 
             JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
-            //JoeImpactEffect = mainAssetBundle.LoadAsset<GameObject>("JoeImpactEffectBasic");
+            JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
 
             TestlaCoil = mainAssetBundle.LoadAsset<GameObject>("TeslaCoil");
 

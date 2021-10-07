@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HenryMod.SkillStates.BaseStates
+namespace HenryMod.EntityStates.BaseStates
 {
     public class BaseMeleeAttackButEpic : BaseSkillState
     {
@@ -36,7 +36,7 @@ namespace HenryMod.SkillStates.BaseStates
         protected NetworkSoundEventIndex impactSound;
 
         private float earlyExitTime;
-        public float duration;
+        protected float duration;
         private bool hasFired;
         private float hitPauseTimer;
         private OverlapAttack attack;

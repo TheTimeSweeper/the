@@ -1,6 +1,6 @@
 ﻿using R2API;
 using System;
-using HenryMod.SkillStates.Joe;
+using HenryMod.EntityStates.Joe;
 
 namespace HenryMod.Modules
 {
@@ -23,7 +23,7 @@ namespace HenryMod.Modules
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "and the zambambos");
-            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from simple coconuts. They need to have the perfect lighting temperature, the perfect lifespan, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, there has been someone who’s been able to earn the trust of the trees. Maybe if we can hand him a hose, and he’ll put his swords down and join us, haha.");
+            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and it's easy to grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from any coconuts. They need to have the perfect lighting temperature, the perfect lifetime, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, in this forest, there's someone who’s been able to earn the trust of the trees. Maybe if we can hand him a hose, and he’ll put his swords down and join us, haha.");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -43,6 +43,9 @@ namespace HenryMod.Modules
             LanguageAPI.Add(prefix + "PRIMARY_SWING_DESCRIPTION",  $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
             
             LanguageAPI.Add(prefix + "PRIMARY_SWING_NAME_CLASSIC", "Swing Classic");
+
+            LanguageAPI.Add(prefix + "PRIMARY_BOMB_NAME", "Throw");
+            LanguageAPI.Add(prefix + "PRIMARY_BOMB_DESCRIPTION", "is it happening?");
             #endregion
 
             #region Secondary

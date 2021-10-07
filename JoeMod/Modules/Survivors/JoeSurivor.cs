@@ -3,6 +3,7 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using HenryMod.EntityStates.Joe;
 using UnityEngine;
 
 namespace HenryMod.Modules.Survivors
@@ -24,13 +25,13 @@ namespace HenryMod.Modules.Survivors
             armorGrowth = 0f,
             bodyName = "JoeBody",
             bodyNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_NAME",
-            bodyColor = Color.grey,
+            bodyColor = Color.magenta,
             characterPortrait = Modules.Assets.LoadCharacterIconButRetarded("joe_icon"),
-            crosshair = Modules.Assets.LoadCrosshair("CrocoCrosshair"),
+            crosshair = Modules.Assets.LoadCrosshair("Mage"),
             damage = 12f,
             healthGrowth = 33f,
             healthRegen = 1.5f,
-            jumpCount = 1,
+            jumpCount = 2,
             maxHealth = 110f,
             subtitleNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
@@ -49,7 +50,7 @@ namespace HenryMod.Modules.Survivors
             //        }
             //};
 
-        internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
+        internal override Type characterMainState { get; set; } = typeof(global::EntityStates.GenericCharacterMain);
 
         // item display stuffs
         internal override ItemDisplayRuleSet itemDisplayRuleSet { get; set; }
@@ -64,7 +65,7 @@ namespace HenryMod.Modules.Survivors
         }
 
         //you ready for some stupid shit?
-        protected override void setRetardedRendererInfos() {
+        protected override void setRetardedRendererInfosAndChildTransforms() {
 
             List<CustomRendererInfo> customInfos = new List<CustomRendererInfo>();
 
@@ -136,32 +137,62 @@ namespace HenryMod.Modules.Survivors
 
 
             #region Primary
-            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Primary1Swing)),
+
+            States.entityStates.Add(typeof(Primary1Swing));
+            States.entityStates.Add(typeof(Primary1JumpSwingFall));
+            States.entityStates.Add(typeof(Primary1JumpSwingLand));
+
+            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Joe.Primary1Swing)),
                                                                             "Weapon",
                                                                             prefix + "PRIMARY_SWING_NAME",
                                                                             prefix + "PRIMARY_SWING_DESCRIPTION",
                                                                             Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"),
                                                                             true, 
-                                                                            true);
+                                                                            false);
 
-            SkillDef primarySkillDefSilly = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.PrimaryStupidSwing)),
+            States.entityStates.Add(typeof(PrimaryStupidSwing));
+
+            SkillDef primarySkillDefSilly = Modules.Skills.CreatePrimarySkillDef(new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Joe.PrimaryStupidSwing)),
                                                                             "Weapon",
                                                                             prefix + "PRIMARY_SWING_NAME_CLASSIC",
                                                                             prefix + "PRIMARY_SWING_DESCRIPTION",
                                                                             Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"),
                                                                             true,
                                                                             true);
-            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDef, primarySkillDefSilly);
-            #endregion
 
+            States.entityStates.Add(typeof(ThrowBoom));
+
+            SkillDef primarySkillDefBomeb = Modules.Skills.CreatePrimarySkillDef(new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Joe.ThrowBoom)),
+                                                                            "Weapon",
+                                                                            prefix + "PRIMARY_BOMB_NAME",
+                                                                            prefix + "PRIMARY_BOMB_DESCRIPTION",
+                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"),
+                                                                            false,
+                                                                            false);
+
+            States.entityStates.Add(typeof(ThroBoomButCoolerQuestionMaark));
+
+            SkillDef primarySkillDefBomebe = Modules.Skills.CreatePrimarySkillDef(new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Joe.ThroBoomButCoolerQuestionMaark)),
+                                                                            "Weapon",
+                                                                            prefix + "PRIMARY_BOMB_NAME",
+                                                                            prefix + "PRIMARY_BOMB_DESCRIPTION",
+                                                                            Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill1_icon"),
+                                                                            false,
+                                                                            false);
+
+            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDef, primarySkillDefSilly, primarySkillDefBomeb, primarySkillDefBomebe);
+            #endregion
+            
             #region Secondary
-            SkillDef shootSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+
+            States.entityStates.Add(typeof(ThrowBoom));
+
+            SkillDef fireballSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = prefix + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = prefix + "SECONDARY_FIREBALL_NAME",
                 skillDescriptionToken = prefix + "SECONDARY_FIREBALL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("skill2_icon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Joe.Secondary1Fireball)),
+                activationState = new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Joe.Secondary1Fireball)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -169,7 +200,7 @@ namespace HenryMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = global::EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
@@ -180,17 +211,16 @@ namespace HenryMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, shootSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, fireballSkillDef);
             #endregion
 
             #region Utility
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = prefix + "UTILITY_DASH_NAME",
                 skillNameToken = prefix + "UTILITY_DASH_NAME",
                 skillDescriptionToken = prefix + "UTILITY_DASH_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Henry.Roll)),
+                activationState = new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Henry.Roll)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -198,7 +228,7 @@ namespace HenryMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                interruptPriority = global::EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = false,
@@ -212,13 +242,12 @@ namespace HenryMod.Modules.Survivors
             #endregion
 
             #region Special
-            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = prefix + "SPECIAL_BOMB_NAME",
                 skillNameToken = prefix + "SPECIAL_BOMB_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Henry.ThrowBomb)),
+                activationState = new global::EntityStates.SerializableEntityStateType(typeof(EntityStates.Henry.ThrowBomb)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
@@ -226,7 +255,7 @@ namespace HenryMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = global::EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
@@ -263,21 +292,6 @@ namespace HenryMod.Modules.Survivors
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
             {
-                //new SkinDef.MeshReplacement
-                //{
-                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySword"),
-                //    renderer = defaultRenderers[0].renderer
-                //},
-                //new SkinDef.MeshReplacement
-                //{
-                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryGun"),
-                //    renderer = defaultRenderers[1].renderer
-                //},
-                //new SkinDef.MeshReplacement
-                //{
-                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenry"),
-                //    renderer = defaultRenderers[instance.mainRendererIndex].renderer
-                //}
             };
 
             skins.Add(defaultSkin);

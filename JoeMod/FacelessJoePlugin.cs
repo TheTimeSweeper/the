@@ -31,7 +31,7 @@ namespace HenryMod {
         public const string MODVERSION = "0.1.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
-        public const string developerPrefix = "JOE";
+        public const string developerPrefix = "HABIBI";
 
         internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
 
@@ -40,6 +40,8 @@ namespace HenryMod {
         private void Awake()
         {
             instance = this;
+
+            gameObject.AddComponent<TestValueManager>();
 
             // load assets and read config
             Modules.Assets.Initialize();
