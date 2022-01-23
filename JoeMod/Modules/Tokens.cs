@@ -1,6 +1,6 @@
 ﻿using R2API;
 using System;
-using HenryMod.EntityStates.Joe;
+using HenryMod.ModdedEntityStates.Joe;
 
 namespace HenryMod.Modules
 {
@@ -16,8 +16,8 @@ namespace HenryMod.Modules
             desc = desc + "< ! > use the fireball to fill the empty space in his barren kit. seriously i gotta look at this thing." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > idk what R is but it's gonna be cool." + Environment.NewLine + Environment.NewLine;
 
-            string outro = "..and so he left, all zambambos trembling in fear.";
-            string outroFailure = "..and so he vanished, never getting his animations polished.";
+            string outro = "..and so he left, jerrys' screams lingering in his hears.";
+            string outroFailure = "..and so he vanished, his normals never recalculated outside.";
 
             string fullName = "Faceless Joe";
             LanguageAPI.Add(prefix + "NAME", fullName);
@@ -46,11 +46,17 @@ namespace HenryMod.Modules
 
             LanguageAPI.Add(prefix + "PRIMARY_BOMB_NAME", "Throw");
             LanguageAPI.Add(prefix + "PRIMARY_BOMB_DESCRIPTION", "is it happening?");
+
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "S.I.C.K.L.E.");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", "it is happening");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_NAME", "Fireball");
             LanguageAPI.Add(prefix + "SECONDARY_FIREBALL_DESCRIPTION", $"{Helpers.agilePrefix} Fire a ball for <style=cIsDamage>{100f * StaticHenryValues.gunDamageCoefficient}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "Big Zap");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"2000 Volts");
             #endregion
 
             #region Utility
@@ -59,6 +65,9 @@ namespace HenryMod.Modules
             #endregion
 
             #region Special
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", "Construction Complete");
+
             LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Something Cool, I'm Sure");
             LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticHenryValues.bombDamageCoefficient}% damage</style>.");
             #endregion

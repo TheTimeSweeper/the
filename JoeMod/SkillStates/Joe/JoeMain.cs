@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using UnityEngine;
 
-namespace HenryMod.EntityStates.Joe {
+namespace HenryMod.ModdedEntityStates.Joe {
     public class JoeMain : GenericCharacterMain {
 
         public override void OnEnter() {

@@ -50,7 +50,7 @@ namespace HenryMod.Modules.Survivors
                 InitializeUnlockables();
 
                 bodyPrefab = Modules.Prefabs.CreatePrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
-            bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new global::EntityStates.SerializableEntityStateType(characterMainState);
+                bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new global::EntityStates.SerializableEntityStateType(characterMainState);
                 setRetardedRendererInfosAndChildTransforms();
                 Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
 

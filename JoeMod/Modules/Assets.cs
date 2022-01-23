@@ -46,6 +46,7 @@ namespace HenryMod.Modules
         public static GameObject JoeJumpSwingEffect = null;
 
         public static GameObject TestlaCoil = null;
+        public static GameObject TestlaCoilBlueprint = null;
 
         // icons
         public static Texture JoePortrait = null;
@@ -80,6 +81,7 @@ namespace HenryMod.Modules
             JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
 
             TestlaCoil = mainAssetBundle.LoadAsset<GameObject>("TeslaCoil");
+            TestlaCoilBlueprint = mainAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
 

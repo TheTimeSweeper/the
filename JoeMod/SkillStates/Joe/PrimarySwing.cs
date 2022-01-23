@@ -1,9 +1,9 @@
 ﻿using EntityStates;
-using HenryMod.EntityStates.BaseStates;
+using HenryMod.ModdedEntityStates.BaseStates;
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.EntityStates.Joe {
+namespace HenryMod.ModdedEntityStates.Joe {
 
     public class Primary1Swing : BaseMeleeAttackButEpic {
 

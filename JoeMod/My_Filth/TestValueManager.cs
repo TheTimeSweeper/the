@@ -7,21 +7,22 @@ public class TestValueManager : MonoBehaviour {
     //would be neat
     //public static float bloob = 0.7f;
 
-    private float tim;
-    private float holdTime = 0.4f;
+    private float _tim;
+    private float _holdTime = 0.4f;
 
     //compiler flags when
-    private bool testingEnabled = true;
+    private bool _testingEnabled = true;
 
     void Update() {
-        if (!testingEnabled)
+        if (!_testingEnabled)
             return;
 
         if (!Input.GetKey(KeyCode.LeftAlt))
             return;
 
-        manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.lowGravMultiplier, "bomb Grav", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
-        manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.smallhopVelocity, "bomb hop", KeyCode.Keypad8, KeyCode.Keypad5, 0.05f);
+        //manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.lowGravMultiplier, "bomb Grav", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
+        //manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.smallhopVelocity, "bomb hop", KeyCode.Keypad8, KeyCode.Keypad5, 0.05f);
+        manageTestValue(ref HenryMod.ModdedEntityStates.Joe.ThroBoomButCoolerQuestionMaark.lateralSlowMultiplier, "lat slow", KeyCode.Keypad8, KeyCode.Keypad5, 0.01f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {
@@ -41,9 +42,9 @@ public class TestValueManager : MonoBehaviour {
 
             float amount = incrementAmount * (Input.GetKey(upKey) ? 1 : -1);
 
-            tim += Time.deltaTime;
+            _tim += Time.deltaTime;
 
-            if (tim > holdTime) {
+            if (_tim > _holdTime) {
 
                 value = setTestValue(value + amount, valueName);
             }
@@ -51,13 +52,13 @@ public class TestValueManager : MonoBehaviour {
 
 
         if (Input.GetKeyUp(upKey) || Input.GetKeyUp(downKey)) {
-            tim = 0;
+            _tim = 0;
         }
 
     }
 
     private float setTestValue(float value, string print) {
-        Debug.LogWarning($"{print}: {value.ToString("X.XXX")}");
+        Debug.LogWarning($"{print}: {value.ToString("0.000")}");
         return value;
     }
 }

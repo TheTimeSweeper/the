@@ -1,6 +1,6 @@
-﻿using HenryMod.EntityStates.Henry;
-using HenryMod.EntityStates.Joe;
-using HenryMod.EntityStates.BaseStates;
+﻿using HenryMod.ModdedEntityStates.Henry;
+using HenryMod.ModdedEntityStates.Joe;
+using HenryMod.ModdedEntityStates.BaseStates;
 using System.Collections.Generic;
 using System;
 
@@ -12,9 +12,6 @@ namespace HenryMod.Modules
 
         internal static void RegisterStates()
         {
-            //testing if we need to register the base state
-            //entityStates.Add(typeof(BaseMeleeAttackButEpic));
-
             #region henry
             entityStates.Add(typeof(SlashCombo));
 
@@ -25,8 +22,9 @@ namespace HenryMod.Modules
             entityStates.Add(typeof(ThrowBomb));
             #endregion
 
-            //okay, I said I this for tokens, but now I know that makes more sense for translatoin
+            //okay, I said I this for tokens, and now I know that makes more sense for translatoin
             // but for here it's definitely asinine to have these so randomly separate from the skills
+            //oh i guess it's for organization of registering all the shit to the contentpack, however
             #region joe
             ////prim
             //entityStates.Add(typeof(Primary1Swing));

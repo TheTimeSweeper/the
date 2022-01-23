@@ -3,29 +3,47 @@ using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 
-namespace HenryMod.EntityStates.Joe {
+namespace HenryMod.ModdedEntityStates.Joe {
 
     public class ThroBoomButCoolerQuestionMaark : GenericProjectileBaseState {
 
-        public new static float damageCoefficient = 30f;
-        public static float procCoefficient = 1f;
-        public static float throwForce = 80f;
-        public static float boomForce = 100f;
-        public new float projectilePitchBonus = 0f;
-        public new float baseDelayBeforeFiringProjectile = 0.1f;
+        //the news didn't work. set them in onenter
+        public static float throwBombBaseDuration = 0.5f;
+        public static float throwBombBaseDelayDuration = 0.08f;
+
+        public static float throwBombDamage = 1f;
+        //needs to be set in the projectilecontroller component
+        //public static float procCoefficient = 1f;
+
+        public static float throwBombProjectilePitch= 0f;
+
+        public static float throwBombThrowForce = 80f;
+        public static float throwBombBoomForce = 100f;
         
-        public new static float baseDuration = 0.5f;
-        public static float lowGravMultiplier = 0.1f;
-        public static float smallhopVelocity = 5f;
+        public float lowGravMultiplier = 0.1f;
+        public float smallhopVelocity = 5f;
+        public static float lateralSlowMultiplier = 0.85f;
 
         public override void OnEnter() {
 
-            projectilePrefab = Modules.Projectiles.totallyNewBombPrefab;
-            //damageCoefficient = bombDamageCoefficient;
-            force = throwForce;
-            //baseDuration = bombBaseDuration
-            base.OnEnter();
+            base.projectilePrefab = Modules.Projectiles.totallyNewBombPrefab;
+            //base.effectPrefab
 
+            base.baseDuration = throwBombBaseDuration;
+            base.baseDelayBeforeFiringProjectile = throwBombBaseDelayDuration;
+
+            base.damageCoefficient = throwBombDamage;
+            base.force = throwBombThrowForce;
+            //base.projectilePitchBonus = 0;
+            //min/maxSpread
+            base.recoilAmplitude = 0.1f;
+            base.bloom = 10;
+
+            //targetmuzzle
+            base.attackSoundString = "HenryBombThrow";
+
+
+            base.OnEnter();
 
             if (!base.isGrounded) {
                 base.SmallHop(base.characterMotor, smallhopVelocity);
@@ -36,15 +54,23 @@ namespace HenryMod.EntityStates.Joe {
             base.FixedUpdate();
 
             if (!isGrounded) {
+                //mess with slowing horizontal velocity
                 ref float ySpeed = ref characterMotor.velocity.y;
                 if (ySpeed < 0) {
                     ySpeed += Physics.gravity.y * -lowGravMultiplier * Time.deltaTime;
                 }
+
+                //actuallylook into other movement affecting options
+                //what slows you in vanilla? well also how'd moff do it too.
+                ref float xSpeed = ref characterMotor.velocity.x;
+                xSpeed *= lateralSlowMultiplier;
+                ref float zSpeed = ref characterMotor.velocity.z;
+                zSpeed *= lateralSlowMultiplier;
             }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority() {
-            return InterruptPriority.Any;
+            return InterruptPriority.Skill;
         }
 
 
@@ -60,7 +86,8 @@ namespace HenryMod.EntityStates.Joe {
     public class ThrowBoom : BaseSkillState {
 
         public static float damageCoefficient = 3f;
-        public static float procCoefficient = 1f;
+        //needs to be set in the projectilecontroller component
+        //public static float procCoefficient = 1f;
         public static float throwForce = 80f;
         public static float boomForce = 100f;
 

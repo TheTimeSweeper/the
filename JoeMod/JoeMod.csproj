@@ -128,7 +128,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="My_Filth\WeaponTrail\" />
+    <Folder Include="My_Filth\Bundle\WeaponTrail\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -136,7 +136,7 @@
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="copy /Y &quot;$(ProjectDir)\..\..\SurvivorUnityProj\AssetBundles\joe&quot; $(ProjectDir)" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)&quot;" />
   </Target>
 
 </Project>
