@@ -198,13 +198,13 @@ namespace HenryMod.Modules
             FacelessJoePlugin.DestroyImmediate(main.transform.Find("CameraPivot").gameObject);
             FacelessJoePlugin.DestroyImmediate(main.transform.Find("AimOrigin").gameObject);
 
-            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(modelName) == null)
+            if (Modules.Assets.LoadAsset<GameObject>(modelName) == null)
             {
                 Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
                 return null;
             }
 
-            return GameObject.Instantiate(Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(modelName));
+            return GameObject.Instantiate(Modules.Assets.LoadAsset<GameObject>(modelName));
         }
 
         internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex)

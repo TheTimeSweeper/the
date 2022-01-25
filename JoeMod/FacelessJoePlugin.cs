@@ -21,11 +21,9 @@ namespace HenryMod {
         "SoundAPI",
     })]
 
+    //todo: separatable plugin
     public class FacelessJoePlugin : BaseUnityPlugin
     {
-        // if you don't change these you're giving permission to deprecate the mod-
-        //  please change the names to your own stuff, thanks
-        //   this shouldn't even have to be said
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
         public const string MODNAME = "FacelessJoe";
         public const string MODVERSION = "0.1.0";
@@ -54,6 +52,8 @@ namespace HenryMod {
 
             // survivor initialization
             new JoeSurivor().Initialize();
+            //todo compiler flags when
+            new TeslaTrooperSurvivor().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
@@ -67,6 +67,8 @@ namespace HenryMod {
         {
             // have to set item displays later now because they require direct object references..
             Modules.Survivors.JoeSurivor.instance.SetItemDisplays();
+            //todo compiler flags when
+            Modules.Survivors.TeslaTrooperSurvivor.instance.SetItemDisplays();
         }
 
         private void Hook()
@@ -87,6 +89,9 @@ namespace HenryMod {
             orig(self);
 
             // a simple stat hook, adds armor after stats are recalculated
+            // todo recalculatestatsapi
+                // this is getting messy
+                // but if it workssss
             if (self)
             {
                 if (self.HasBuff(Modules.Buffs.armorBuff))

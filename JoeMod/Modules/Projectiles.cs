@@ -44,7 +44,7 @@ namespace HenryMod.Modules
             bombImpactExplosion.lifetimeAfterImpact = 0.1f;
 
             ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
+            if (Modules.Assets.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
             bombController.startSound = "";
         }
 
@@ -66,7 +66,7 @@ namespace HenryMod.Modules
             bombImpactExplosion.lifetimeAfterImpact = 0.1f;
 
             ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
+            if (Modules.Assets.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
             bombController.startSound = "";
         }
 
@@ -97,7 +97,7 @@ namespace HenryMod.Modules
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {
-            GameObject ghostPrefab = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(ghostName);
+            GameObject ghostPrefab = Modules.Assets.LoadAsset<GameObject>(ghostName);
             if (!ghostPrefab.GetComponent<NetworkIdentity>()) ghostPrefab.AddComponent<NetworkIdentity>();
             if (!ghostPrefab.GetComponent<ProjectileGhostController>()) ghostPrefab.AddComponent<ProjectileGhostController>();
 

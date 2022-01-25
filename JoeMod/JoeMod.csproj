@@ -17,12 +17,14 @@
     <None Remove="joe" />
     <None Remove="Modules\Survivors\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
+    <None Remove="teslatrooper" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="HenryBank.bnk" />
     <EmbeddedResource Include="joe" />
     <EmbeddedResource Include="myassetbundle" />
+    <EmbeddedResource Include="teslatrooper" />
   </ItemGroup>
 
   <ItemGroup>
@@ -127,16 +129,12 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="My_Filth\Bundle\WeaponTrail\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-SillyItems&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\..\Release&quot;" />
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\HenryUnityProject\AssetBundles\teslatrooper&quot; &quot;$(ProjectDir)&quot;" />
   </Target>
 
 </Project>

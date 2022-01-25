@@ -13,7 +13,9 @@ namespace HenryMod.Modules
     internal static class Assets
     {
         // the assetbundle to load assets from
+        // survivor todo: separate assets between survivors
         internal static AssetBundle mainAssetBundle;
+        internal static AssetBundle teslaAssetBundle;
 
         //HENRY: indev
         #region indev
@@ -133,7 +135,27 @@ namespace HenryMod.Modules
                 }
             }
 
+            if (teslaAssetBundle == null)
+            {
+                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.teslatrooper"))
+                {
+                    teslaAssetBundle = AssetBundle.LoadFromStream(assetStream);
+                }
+            }
+
             assetNames = mainAssetBundle.GetAllAssetNames();
+        }
+        
+        internal static T LoadAsset<T>(string assString) where T : UnityEngine.Object
+        {
+            T assBundle = mainAssetBundle.LoadAsset<T>(assString);
+
+            if(assBundle == null)
+            {
+                assBundle = teslaAssetBundle.LoadAsset<T>(assString);
+            }
+
+            return assBundle;
         }
 
         internal static void LoadSoundbank()
@@ -223,11 +245,11 @@ namespace HenryMod.Modules
 
         internal static Texture LoadCharacterIcon(string characterName)
         {
-            return mainAssetBundle.LoadAsset<Texture>("tex" + characterName + "Icon");
+            return LoadAsset<Texture>("tex" + characterName + "Icon");
         }
 
         internal static Texture LoadCharacterIconButRetarded(string name) {
-            return mainAssetBundle.LoadAsset<Texture>(name);
+            return LoadAsset<Texture>(name);
         }
 
         internal static GameObject LoadCrosshair(string crosshairName)
@@ -269,7 +291,7 @@ namespace HenryMod.Modules
                 return null;
             }
 
-            GameObject newEffect = mainAssetBundle.LoadAsset<GameObject>(resourceName);
+            GameObject newEffect = LoadAsset<GameObject>(resourceName);
 
             newEffect.AddComponent<DestroyOnTimer>().duration = 12;
             newEffect.AddComponent<NetworkIdentity>();
@@ -310,7 +332,7 @@ namespace HenryMod.Modules
             if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
 
             Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
-            Material tempMat = Assets.mainAssetBundle.LoadAsset<Material>(materialName);
+            Material tempMat = Assets.LoadAsset<Material>(materialName);
 
             if (!tempMat)
             {
@@ -334,6 +356,13 @@ namespace HenryMod.Modules
             return Assets.CreateMaterial(materialName, 0f);
         }
 
+        public static Material CreateMaterialFull(string materialName)
+        {
+            Material mat = Assets.CreateMaterial(materialName, 1, Color.white, 1);
+            mat.SetInt("_Cull", 0);
+            return mat;
+        }
+
         public static Material CreateMaterial(string materialName, float emission)
         {
             return Assets.CreateMaterial(materialName, emission, Color.white);
@@ -342,6 +371,66 @@ namespace HenryMod.Modules
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor)
         {
             return Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
+        }
+
+        public class MaterialSetup
+        {
+            Material _mat;
+
+            public MaterialSetup(Material mat)
+            {
+                this._mat = mat;
+            }
+
+            public static MaterialSetup GenerateMaterial(string materialName)
+            {
+                if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
+
+                Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
+                Material tempMat = Assets.LoadAsset<Material>(materialName);
+
+                if (!tempMat)
+                {
+                    Debug.LogError("Failed to load material: " + materialName + " - Check to see that the name in your Unity project matches the one in this code");
+                    return new MaterialSetup(commandoMat);
+                }
+
+                mat.SetColor("_Color", tempMat.GetColor("_Color"));
+                mat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
+                mat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+
+                return new MaterialSetup(mat);
+            }
+
+            public MaterialSetup SetNormal(float normalStrength = 1)
+            {
+                _mat.SetFloat("_NormalStrength", normalStrength);
+                return this;
+            }
+
+            public MaterialSetup SetEmission()
+            {
+                return SetEmission(1, Color.white);
+            }
+            public MaterialSetup SetEmission(float emission)
+            {
+                return SetEmission(emission, Color.white);
+            }
+            public MaterialSetup SetEmission(float emission, Color emissionColor)
+            {
+                _mat.SetFloat("_EmPower", emission);
+                _mat.SetColor("_EmColor", emissionColor);
+                return this;
+            }
+            public MaterialSetup SetCull (bool cull = false)
+            {
+                _mat.SetInt("_Cull", cull ? 1 : 0);
+                return this;
+            }
+            public Material ReturnMaterial()
+            {
+                return _mat;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace HenryMod.Modules.Achievements
         public override string PrerequisiteUnlockableIdentifier { get; } = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_UNLOCKABLE_REWARD_ID";
         public override string UnlockableNameToken { get; } = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERYUNLOCKABLE_UNLOCKABLE_NAME";
         public override string AchievementDescToken { get; } = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_DESC";
-        public override Sprite Sprite { get; } = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement");
+        public override Sprite Sprite { get; } = Modules.Assets.LoadAsset<Sprite>("texMasteryAchievement");
 
         public override Func<string> GetHowToUnlock { get; } = (() => Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]
                             {

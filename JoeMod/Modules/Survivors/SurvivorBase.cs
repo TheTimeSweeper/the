@@ -25,7 +25,7 @@ namespace HenryMod.Modules.Survivors
 
         internal abstract BodyInfo bodyInfo { get; set; }
 
-        internal abstract int mainRendererIndex { get; set; }
+        internal abstract int mainRendererIndex { get; }
         internal abstract CustomRendererInfo[] customRendererInfos { get; set; }
 
         internal abstract Type characterMainState { get; set; }

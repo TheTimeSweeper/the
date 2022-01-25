@@ -6,7 +6,14 @@ namespace HenryMod.Modules
 {
     internal static class Tokens {
 
-        internal static void AddTokens() {  
+        internal static void AddTokens()
+        {
+            AddJoeTokens();
+            AddTeslaTokens();
+        }
+
+        private static void AddJoeTokens()
+        {
             #region not henry
             string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
 
@@ -40,8 +47,8 @@ namespace HenryMod.Modules
             //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_SWING_NAME", "Swing");
-            LanguageAPI.Add(prefix + "PRIMARY_SWING_DESCRIPTION",  $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
-            
+            LanguageAPI.Add(prefix + "PRIMARY_SWING_DESCRIPTION", $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
+
             LanguageAPI.Add(prefix + "PRIMARY_SWING_NAME_CLASSIC", "Swing Classic");
 
             LanguageAPI.Add(prefix + "PRIMARY_BOMB_NAME", "Throw");
@@ -78,6 +85,69 @@ namespace HenryMod.Modules
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
             #endregion
             #endregion
+        }
+
+        private static void AddTeslaTokens()
+        {
+            #region not henry 2
+            string prefix = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_";
+
+            string desc = "Tesla Trooper Ready.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Charging Up." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Let the Juice Flow" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Electrodes Ready" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Construction Complete." + Environment.NewLine + Environment.NewLine;
+
+            string outro = "..and so he left, rubber shoes in motion.";
+            string outroFailure = "..and so he vanished, unit lost.";
+
+            string fullName = "Tesla Trooper";
+            LanguageAPI.Add(prefix + "NAME", fullName);
+            //todo what the fuck is it teslatrooper when my prefix is tesla
+            LanguageAPI.Add("HABIBI_TESLATROOPER_BODY_NAME", fullName);
+            LanguageAPI.Add(prefix + "DESCRIPTION", desc);
+            LanguageAPI.Add(prefix + "SUBTITLE", "Electrician In the Field");
+            LanguageAPI.Add(prefix + "LORE", ".");
+            LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
+            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+
+            #region Skins
+            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
+            #endregion
+
+            #region Passive
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Joe passive");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
+            #endregion
+
+            //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
+            #region Primary
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", "it is happening");
+            #endregion
+
+            #region Secondary
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "2000 Volts");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"coming up");
+            #endregion
+
+            #region Utility
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", "(not implemented. henry's default roll)");
+            #endregion
+
+            #region Special
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", "Construction Complete (does nothing yet but has colliders)");
+            #endregion
+
+            #region Achievements
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
+            #endregion
+            #endregion not henry 2
         }
 
         internal static void AddHenryTokens()
