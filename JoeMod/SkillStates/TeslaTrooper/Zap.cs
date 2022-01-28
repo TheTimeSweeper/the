@@ -6,16 +6,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.ModdedEntityStates.Joe
+namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
-    public class Zap : BaseTimedSkillState {
+
+    public class Zap : BaseTimedSkillState
+    {
 
         #region Gameplay Values
         public static float DamageCoefficient = 1.2f;
         public static float BounceDamageMultplier = 0.69f;
         public static float ProcCoefficient = 1f;
-        public static int TotalCasts = 3;
-                
+        public static int OrbCasts = 3;
+
         public static float BaseDuration = 1f;
         public static float BaseCastTime = 0.05f;//todo anim
         #endregion
@@ -33,16 +35,17 @@ namespace HenryMod.ModdedEntityStates.Joe
 
         private float nextCastTime
         {
-            get => (_baseCastInterval * _currentCasts + castStartTime) / base.attackSpeedStat;
+            get => (_baseCastInterval * _currentCasts + castStartTime) / attackSpeedStat;
         }
-        #region cast iterations
+        #region orb iterations
         private Vector3 GetOrbOrigin
         {
-            get {
-                if(_muzzleTransform == null)
+            get
+            {
+                if (_muzzleTransform == null)
                 {
-                    return base.transform.position;
-                } 
+                    return transform.position;
+                }
                 else
                 {
                     switch (_currentCasts)
@@ -68,44 +71,45 @@ namespace HenryMod.ModdedEntityStates.Joe
         public override void OnEnter()
         {
             base.OnEnter();
-            SetDurationValues(BaseDuration, BaseCastTime);
+            InitDurationValues(BaseDuration, BaseCastTime);
 
-            this._tracker = base.GetComponent<TotallyOriginalTrackerComponent>();
+            _tracker = GetComponent<TotallyOriginalTrackerComponent>();
 
-            this._muzzleTransform = base.GetModelChildLocator().FindChild("MuzzleGauntlet");
+            _muzzleTransform = GetModelChildLocator().FindChild("MuzzleGauntlet");
 
-            base.StartAimMode(2);
+            StartAimMode(2);
 
             //todo: joe crosscompat
             //base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
 
             //todo incombat
-            base.PlayAnimation("Gesture, Override", "HandOut");
+            PlayAnimation("Gesture, Override", "HandOut");
             if (_tracker)
             {
                 _targetHurtbox = _tracker.GetTrackingTarget();
             }
             else
             {
-                _targetHurtbox = _lightningOrb.PickNextTarget(this.transform.position);
+                _targetHurtbox = _lightningOrb.PickNextTarget(transform.position);
             }
 
             if (!_targetHurtbox)
             {
-                duration = 0.1f;
+                //duration = 0.1f;
+                base.outer.SetNextStateToMain();
                 return;
             }
 
             _lightningOrb = new LightningOrb
             {
-                origin = base.transform.position,
-                damageValue = Zap.DamageCoefficient * base.damageStat,
-                isCrit = base.RollCrit(),
+                origin = transform.position,
+                damageValue = DamageCoefficient * damageStat,
+                isCrit = RollCrit(),
                 bouncesRemaining = 1,
                 damageCoefficientPerBounce = BounceDamageMultplier,
                 damageType = DamageType.SlowOnHit,
-                teamIndex = this.teamComponent.teamIndex,
-                attacker = base.gameObject,
+                teamIndex = teamComponent.teamIndex,
+                attacker = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
                 lightningType = LightningOrb.LightningType.Ukulele,
@@ -115,6 +119,8 @@ namespace HenryMod.ModdedEntityStates.Joe
 
             _lightningOrb.target = _targetHurtbox;
         }
+
+
 
         protected override void OnCastEnter()
         {
@@ -129,7 +135,7 @@ namespace HenryMod.ModdedEntityStates.Joe
         {
             base.OnCastFixedUpdate();
 
-            while (_currentCasts < TotalCasts && base.fixedAge > nextCastTime)
+            while (_currentCasts < OrbCasts && fixedAge > nextCastTime)
             {
                 FireZap();
                 _currentCasts++;
@@ -150,7 +156,7 @@ namespace HenryMod.ModdedEntityStates.Joe
         {
             //play sound
             //muzzle flash on gauntle
-            base.PlayAnimation("Gesture, Additive", "Shock"); 
+            PlayAnimation("Gesture, Additive", "Shock");
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

@@ -134,7 +134,7 @@ namespace HenryMod.Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", "(not implemented. henry's default roll)");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", "Electrodes Ready");
             #endregion
 
             #region Special

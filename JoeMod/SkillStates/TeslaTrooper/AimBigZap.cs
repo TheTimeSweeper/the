@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using RoR2;
 
-namespace HenryMod.ModdedEntityStates.Joe
+namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
     public class AimBigZap : AimThrowableBase //AimMortar
     {
@@ -12,19 +12,19 @@ namespace HenryMod.ModdedEntityStates.Joe
         {
             EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
 
-            this.maxDistance = 30;
-            this.rayRadius = 1.6f;
+            maxDistance = 30;
+            rayRadius = 1.6f;
             //this.arcVisualizerPrefab = goodState.arcVisualizerPrefab;
-            this.projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
-            this.endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
-            this.endpointVisualizerRadiusScale = BigZap.AttackRadius;
-            this.setFuse = false;
-            this.damageCoefficient = 0f;
-            this.baseMinimumDuration = 0.2f;
+            projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
+            endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
+            endpointVisualizerRadiusScale = BigZap.AttackRadius;
+            setFuse = false;
+            damageCoefficient = 0f;
+            baseMinimumDuration = 0.2f;
             //this.projectileBaseSpeed = 80;
 
             base.OnEnter();
-            Util.PlaySound(EnterSoundString, base.gameObject);
+            Util.PlaySound(EnterSoundString, gameObject);
         }
 
         public override void FixedUpdate()
@@ -33,23 +33,23 @@ namespace HenryMod.ModdedEntityStates.Joe
             StartAimMode();
 
             //todo incombat
-            base.PlayAnimation("Gesture, Override", "HandOut");
+            PlayAnimation("Gesture, Override", "HandOut");
         }
 
         // Token: 0x06003B19 RID: 15129 RVA: 0x0002B5A9 File Offset: 0x000297A9
         public override void OnExit()
         {
             base.OnExit();
-            this.outer.SetNextState(new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint});
-            if (!this.outer.destroying)
+            outer.SetNextState(new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint });
+            if (!outer.destroying)
             {
-                Util.PlaySound(ExitSoundString, base.gameObject);
+                Util.PlaySound(ExitSoundString, gameObject);
             }
         }
 
         public override void FireProjectile()
         {
-            
+
         }
 
         // Token: 0x06003B1A RID: 15130 RVA: 0x000150E1 File Offset: 0x000132E1

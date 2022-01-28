@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using System;
 
 namespace HenryMod.ModdedEntityStates.BaseStates
 {
@@ -12,8 +13,9 @@ namespace HenryMod.ModdedEntityStates.BaseStates
         protected float castStartTime;
         protected float castEndTime;
         protected bool hasFired;
+        protected bool isFiring;
 
-        protected virtual void SetDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1)
+        protected virtual void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1)
         {
             TimedBaseDuration = baseDuration;
             TimedBaseCastStartTime = baseCastStartTime;
@@ -36,10 +38,12 @@ namespace HenryMod.ModdedEntityStates.BaseStates
 
             bool fireStarted = fixedAge >= castStartTime;
             bool fireEnded = fixedAge >= castEndTime;
+            isFiring = false;
 
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
             if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired))
             {
+                isFiring = true;
                 OnCastFixedUpdate();
             }
 
@@ -49,8 +53,17 @@ namespace HenryMod.ModdedEntityStates.BaseStates
             }
         }
 
-        protected virtual void OnCastEnter() { }
+        public override void Update()
+        {
+            base.Update();
+            if (isFiring)
+            {
+                OnCastUpdate();
+            }
+        }
 
+        protected virtual void OnCastEnter() { }
         protected virtual void OnCastFixedUpdate() { }
+        protected virtual void OnCastUpdate() { }
     }
 }

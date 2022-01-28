@@ -1,8 +1,8 @@
 ﻿using EntityStates;
 using RoR2;
 using UnityEngine;
-                                      //todo states.teslatrooper
-namespace HenryMod.ModdedEntityStates.Joe
+
+namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
     public class BigZap : BaseSkillState
     {
@@ -22,22 +22,22 @@ namespace HenryMod.ModdedEntityStates.Joe
 
 
             //todo incombat
-            base.PlayAnimation("Gesture, Override", "HandOut");
+            PlayAnimation("Gesture, Override", "HandOut");
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
 
             new BlastAttack
             {
-                attacker = base.gameObject,
-                inflictor = base.gameObject,
-                teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
+                attacker = gameObject,
+                inflictor = gameObject,
+                teamIndex = TeamComponent.GetObjectTeam(gameObject),
                 //attackerFiltering = AttackerFiltering.NeverHit
 
                 position = aimPoint,
                 radius = AttackRadius,
                 falloffModel = BlastAttack.FalloffModel.None,
 
-                baseDamage = this.damageStat * DamageCoefficient,
-                crit = base.RollCrit(),
+                baseDamage = damageStat * DamageCoefficient,
+                crit = RollCrit(),
                 damageType = DamageType.Stun1s,
                 //damageColorIndex = DamageColorIndex.Default,
 
@@ -63,15 +63,15 @@ namespace HenryMod.ModdedEntityStates.Joe
                 return;
             }
 
-            EffectManager.SpawnEffect(bigZapEffectPrefabArea, fect, true);
+            EffectManager.SpawnEffect(bigZapEffectPrefabArea, fect, false);
 
-            if(!Input.GetKey(KeyCode.G))
-            EffectManager.SpawnEffect(bigZapEffectPrefab, fect, true);
+            if (!Input.GetKey(KeyCode.G))
+                EffectManager.SpawnEffect(bigZapEffectPrefab, fect, false);
 
             if (Input.GetKey(KeyCode.H))
             {
                 fect.scale /= 2f;
-                EffectManager.SpawnEffect(bigZapEffectPrefabFlash, fect, true);
+                EffectManager.SpawnEffect(bigZapEffectPrefabFlash, fect, false);
             }
 
         }

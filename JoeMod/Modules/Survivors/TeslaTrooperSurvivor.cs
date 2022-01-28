@@ -3,8 +3,8 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using HenryMod.ModdedEntityStates.Joe;
 using UnityEngine;
+using JoeMod.ModdedEntityStates.TeslaTrooper;
 
 namespace HenryMod.Modules.Survivors
 {
@@ -26,7 +26,7 @@ namespace HenryMod.Modules.Survivors
             bodyName = "TeslaTrooperBody",
             bodyNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_NAME",
             bodyColor = Color.magenta,
-            characterPortrait = Modules.Assets.LoadCharacterIconButRetarded("texIconTeslaTrooper"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
             crosshair = Modules.Assets.LoadCrosshair("Merc"),
             damage = 13f,
             healthGrowth = 33f,
@@ -38,10 +38,10 @@ namespace HenryMod.Modules.Survivors
         };
                                             
         internal static Material matTeslaBody = Modules.Assets.CreateMaterialFull("matTeslaBody");
-        internal static Material matTeslaArmor = Modules.Assets.CreateMaterialFull("matTeslaArmor");
+        internal static Material matTeslaArmor = Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
         //attempt at recursive buildijng
         //Assets.MaterialSetup.GenerateMaterial("matTeslaBody")
-        //    .SetEmission()
+        //    .SetEmission(1, new Color(0.28f, 0.70f, 1.0f))
         //    .SetNormal()
         //    .ReturnMaterial()
 
@@ -117,11 +117,11 @@ namespace HenryMod.Modules.Survivors
         private void InitializePrimarySkills(string prefix)
         {
             States.entityStates.Add(typeof(Zap));
-            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Zap)),
+            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                             "Weapon",
                                                                             prefix + "PRIMARY_ZAP_NAME",
                                                                             prefix + "PRIMARY_ZAP_DESCRIPTION",
-                                                                            null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
                                                                             false,
                                                                             false);
 
@@ -137,8 +137,8 @@ namespace HenryMod.Modules.Survivors
                 skillName = prefix + "SECONDARY_BIGZAP_NAME",
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION",
-                skillIcon = null,//Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.AimBigZap)),
+                skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4.5f,
@@ -162,25 +162,27 @@ namespace HenryMod.Modules.Survivors
 
         private void InitializeUtilitySkills(string prefix)
         {
+
+            States.entityStates.Add(typeof(ShieldZap));
             SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "UTILITY_BARRIER_NAME",
                 skillNameToken = prefix + "UTILITY_BARRIER_NAME",
                 skillDescriptionToken = prefix + "UTILITY_BARRIER_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Henry.Roll)),
-                activationStateMachineName = "Body",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZap)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
-                beginSkillCooldownOnSkillEnd = false,
+                baseRechargeInterval = 10f,
+                beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1
@@ -198,7 +200,7 @@ namespace HenryMod.Modules.Survivors
                 skillName = prefix + "SPECIAL_TOWER_NAME",
                 skillNameToken = prefix + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",
-                skillIcon = null,//Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Resources.Load<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TeslaCoil)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -235,8 +237,9 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
+
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_TESLA_BODY_DEFAULT_SKIN_NAME",
-                Assets.LoadAsset<Sprite>("texTeslaDefault"),
+                Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 mainRenderer,
                 model);

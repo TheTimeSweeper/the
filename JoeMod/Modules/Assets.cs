@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
 using System;
+using System.Linq;
 
 namespace HenryMod.Modules
 {
@@ -97,7 +98,7 @@ namespace HenryMod.Modules
                 Debug.LogError("There is no AssetBundle to load assets from.");
                 return;
             }
-
+            
             // feel free to delete everything in here and load in your own assets instead
             // it should work fine even if left as is- even if the assets aren't in the bundle
 
@@ -144,18 +145,19 @@ namespace HenryMod.Modules
             }
 
             assetNames = mainAssetBundle.GetAllAssetNames();
+            assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
         }
         
         internal static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
-            T assBundle = mainAssetBundle.LoadAsset<T>(assString);
+            T loadedAss = mainAssetBundle.LoadAsset<T>(assString);
 
-            if(assBundle == null)
+            if(loadedAss == null)
             {
-                assBundle = teslaAssetBundle.LoadAsset<T>(assString);
+                loadedAss = teslaAssetBundle.LoadAsset<T>(assString);
             }
 
-            return assBundle;
+            return loadedAss;
         }
 
         internal static void LoadSoundbank()
@@ -166,6 +168,13 @@ namespace HenryMod.Modules
                 manifestResourceStream2.Read(array, 0, array.Length);
                 SoundAPI.SoundBanks.Add(array);
             }
+
+            //using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.TeslaBank.bnk"))
+            //{
+            //    byte[] array = new byte[manifestResourceStream2.Length];
+            //    manifestResourceStream2.Read(array, 0, array.Length);
+            //    SoundAPI.SoundBanks.Add(array);
+            //}
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)
@@ -243,12 +252,12 @@ namespace HenryMod.Modules
             return rendererInfos;
         }
 
-        internal static Texture LoadCharacterIcon(string characterName)
+        internal static Texture LoadCharacterIconGeneric(string characterName)
         {
             return LoadAsset<Texture>("tex" + characterName + "Icon");
         }
 
-        internal static Texture LoadCharacterIconButRetarded(string name) {
+        internal static Texture LoadCharacterIcon(string name) {
             return LoadAsset<Texture>(name);
         }
 
@@ -327,6 +336,18 @@ namespace HenryMod.Modules
             effectDefs.Add(newEffectDef);
         }
 
+        public static Material CreateMaterial(string materialName) 
+        {
+            return Assets.CreateMaterial(materialName, 0f);
+        }
+        public static Material CreateMaterial(string materialName, float emission)
+        {
+            return Assets.CreateMaterial(materialName, emission, Color.white);
+        }
+        public static Material CreateMaterial(string materialName, float emission, Color emissionColor)
+        {
+            return Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
+        }
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength)
         {
             if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
@@ -351,26 +372,11 @@ namespace HenryMod.Modules
             return mat;
         }
 
-        public static Material CreateMaterial(string materialName)
-        {
-            return Assets.CreateMaterial(materialName, 0f);
-        }
-
         public static Material CreateMaterialFull(string materialName)
         {
             Material mat = Assets.CreateMaterial(materialName, 1, Color.white, 1);
             mat.SetInt("_Cull", 0);
             return mat;
-        }
-
-        public static Material CreateMaterial(string materialName, float emission)
-        {
-            return Assets.CreateMaterial(materialName, emission, Color.white);
-        }
-
-        public static Material CreateMaterial(string materialName, float emission, Color emissionColor)
-        {
-            return Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
         }
 
         public class MaterialSetup

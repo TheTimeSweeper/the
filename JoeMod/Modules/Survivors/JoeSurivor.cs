@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using HenryMod.ModdedEntityStates.Joe;
 using UnityEngine;
+using JoeMod.ModdedEntityStates.TeslaTrooper;
 
 namespace HenryMod.Modules.Survivors
 {
@@ -26,7 +27,7 @@ namespace HenryMod.Modules.Survivors
             bodyName = "JoeBody",
             bodyNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_NAME",
             bodyColor = Color.magenta,
-            characterPortrait = Modules.Assets.LoadCharacterIconButRetarded("joe_icon"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("joe_icon"),
             crosshair = Modules.Assets.LoadCrosshair("Merc"),
             damage = 12f,
             healthGrowth = 33f,
@@ -180,7 +181,7 @@ namespace HenryMod.Modules.Survivors
                                                                             false);
 
             States.entityStates.Add(typeof(Zap));
-            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Zap)),
+            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                             "Weapon",
                                                                             prefix + "PRIMARY_ZAP_NAME",
                                                                             prefix + "PRIMARY_ZAP_DESCRIPTION",
@@ -227,7 +228,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION",
                 skillIcon = null,//Modules.Assets.LoadAsset<Sprite>("skill2_icon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.AimBigZap)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,

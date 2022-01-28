@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace HenryMod.ModdedEntityStates.Joe
+namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
     public class TeslaCoil : BaseSkillState
     {
@@ -13,11 +13,11 @@ namespace HenryMod.ModdedEntityStates.Joe
             public Quaternion rotation;
         }
 
-        public GameObject blueprintPrefab = Modules.Assets.TestlaCoilBlueprint;
-        public GameObject teslacoilPrefab = Modules.Assets.TestlaCoil;
+        public GameObject blueprintPrefab = HenryMod.Modules.Assets.TestlaCoilBlueprint;
+        public GameObject teslacoilPrefab = HenryMod.Modules.Assets.TestlaCoil;
 
         private float _minTowerHeight = 3;
-        private TeslaCoil.TotallyOriginalPlacementInfo currentPlacementInfo;
+        private TotallyOriginalPlacementInfo currentPlacementInfo;
 
         private float entryCountdown = 0;//0.1f;
         private float exitCountdown = 0;//0.25f;
@@ -30,74 +30,74 @@ namespace HenryMod.ModdedEntityStates.Joe
         private bool ConstructionComplete;
 
         private BlueprintController blueprints;
-
+        
 
         public override void OnEnter()
         {
             base.OnEnter();
-            if (base.isAuthority)
+            if (isAuthority)
             {
-                currentPlacementInfo = this.GetPlacementInfo();
-                this.blueprints = UnityEngine.Object.Instantiate(this.blueprintPrefab, this.currentPlacementInfo.position, this.currentPlacementInfo.rotation).GetComponent<BlueprintController>();
+                currentPlacementInfo = GetPlacementInfo();
+                blueprints = Object.Instantiate(blueprintPrefab, currentPlacementInfo.position, currentPlacementInfo.rotation).GetComponent<BlueprintController>();
             }
 
             //todo:anim
             //base.PlayAnimation("Gesture, Override", "HandOut");
-            this.entryCountdown = 0.1f;
-            this.exitCountdown = 0.25f;
-            this.exitPending = false;
+            entryCountdown = 0.1f;
+            exitCountdown = 0.25f;
+            exitPending = false;
         }
 
         public override void Update()
         {
             base.Update();
-            this.currentPlacementInfo = this.GetPlacementInfo();
-            if (this.blueprints)
+            currentPlacementInfo = GetPlacementInfo();
+            if (blueprints)
             {
-                this.blueprints.PushState(this.currentPlacementInfo.position, this.currentPlacementInfo.rotation, this.currentPlacementInfo.ok);
+                blueprints.PushState(currentPlacementInfo.position, currentPlacementInfo.rotation, currentPlacementInfo.ok);
             }
         }
-        
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
             StartAimMode();
 
-            base.PlayAnimation("Gesture, Override", "HandOut");
+            PlayAnimation("Gesture, Override", "HandOut");
 
-            if (base.isAuthority)
+            if (isAuthority)
             {
-                this.entryCountdown -= Time.fixedDeltaTime;
+                entryCountdown -= Time.fixedDeltaTime;
 
-                if (this.exitPending)
+                if (exitPending)
                 {
-                    this.exitCountdown -= Time.fixedDeltaTime;
-                    if (this.exitCountdown <= 0f)
+                    exitCountdown -= Time.fixedDeltaTime;
+                    if (exitCountdown <= 0f)
                     {
-                        this.outer.SetNextStateToMain();
+                        outer.SetNextStateToMain();
                         return;
                     }
                 }
-                else if (base.inputBank && this.entryCountdown <= 0f)
+                else if (inputBank && entryCountdown <= 0f)
                 {
-                    if ((base.inputBank.skill1.down || base.inputBank.skill4.justPressed) && this.currentPlacementInfo.ok)
+                    if ((inputBank.skill1.down || inputBank.skill4.justPressed) && currentPlacementInfo.ok)
                     {
-                        if (base.characterBody)
+                        if (characterBody)
                         {
                             //base.characterBody.SendConstructTurret(base.characterBody, this.currentPlacementInfo.position, this.currentPlacementInfo.rotation, MasterCatalog.FindMasterIndex(this.turretMasterPrefab));
                             //GameObject coil = R2API.PrefabAPI.InstantiateClone(teslacoilPrefab, "TestlaCoil", true);
                             //UnityEngine.Networking.NetworkServer.Spawn(teslacoilPrefab);
-                            GameObject coil = UnityEngine.Object.Instantiate(teslacoilPrefab);
+                            GameObject coil = Object.Instantiate(teslacoilPrefab);
                             coil.transform.position = currentPlacementInfo.position;
                             coil.transform.rotation = currentPlacementInfo.rotation;
 
                             //base.PlayAnimation("Gesture, Override", "HandOut");
                             ConstructionComplete = true;
 
-                            if (base.skillLocator)
+                            if (skillLocator)
                             {
-                                GenericSkill skill = base.skillLocator.GetSkill(SkillSlot.Special);
+                                GenericSkill skill = skillLocator.GetSkill(SkillSlot.Special);
                                 if (skill)
                                 {
                                     skill.DeductStock(1);
@@ -105,13 +105,13 @@ namespace HenryMod.ModdedEntityStates.Joe
                             }
                         }
                         //Util.PlaySound(this.placeSoundString, base.gameObject);
-                        this.DestroyBlueprints();
-                        this.exitPending = true;
+                        DestroyBlueprints();
+                        exitPending = true;
                     }
-                    if (base.inputBank.skill2.justPressed)
+                    if (inputBank.skill2.justPressed)
                     {
-                        this.DestroyBlueprints();
-                        this.exitPending = true;
+                        DestroyBlueprints();
+                        exitPending = true;
                     }
                 }
             }
@@ -121,9 +121,9 @@ namespace HenryMod.ModdedEntityStates.Joe
         {
             base.OnExit();
 
-            this.DestroyBlueprints();
+            DestroyBlueprints();
 
-            if(!ConstructionComplete)
+            if (!ConstructionComplete)
             {
                 PlayCrossfade("Gesture, Override", "BufferEmpty", 0.5f);
             }
@@ -131,10 +131,10 @@ namespace HenryMod.ModdedEntityStates.Joe
 
         private void DestroyBlueprints()
         {
-            if (this.blueprints)
+            if (blueprints)
             {
-                EntityState.Destroy(this.blueprints.gameObject);
-                this.blueprints = null;
+                Destroy(blueprints.gameObject);
+                blueprints = null;
             }
         }
 
@@ -143,15 +143,15 @@ namespace HenryMod.ModdedEntityStates.Joe
             return InterruptPriority.PrioritySkill;
         }
 
-        private TeslaCoil.TotallyOriginalPlacementInfo GetPlacementInfo()
+        private TotallyOriginalPlacementInfo GetPlacementInfo()
         {
-            Ray aimRay = base.GetAimRay();
+            Ray aimRay = GetAimRay();
             Vector3 aimDirection = aimRay.direction;
             aimDirection.y = 0f;
             aimDirection.Normalize();
             aimRay.direction = aimDirection;
 
-            TeslaCoil.TotallyOriginalPlacementInfo placementInfo = default(TeslaCoil.TotallyOriginalPlacementInfo);
+            TotallyOriginalPlacementInfo placementInfo = default;
             placementInfo.ok = false;
             placementInfo.rotation = Util.QuaternionSafeLookRotation(-aimDirection);
 
