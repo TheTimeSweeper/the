@@ -8,17 +8,19 @@ using UnityEngine;
 
 namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
-
     public class Zap : BaseTimedSkillState
     {
 
+        //todo less damage on allies
+        //and more bounce range
         #region Gameplay Values
         public static float DamageCoefficient = 1.2f;
         public static float BounceDamageMultplier = 0.69f;
         public static float ProcCoefficient = 1f;
         public static int OrbCasts = 3;
+        public static float BounceDistance = 20;
 
-        public static float BaseDuration = 1f;
+        public static float BaseDuration = 1.2f;
         public static float BaseCastTime = 0.05f;//todo anim
         #endregion
 
@@ -50,13 +52,13 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                 {
                     switch (_currentCasts)
                     {
-                        default:
                         case 0:
-                            return _muzzleTransform.position;
-                        case 1:
                             return _muzzleTransform.position + _muzzleTransform.forward * _originSpacing;
-                        case 2:
+                        case 1:
                             return _muzzleTransform.position - _muzzleTransform.forward * _originSpacing;
+                        default:
+                        case 2:
+                            return _muzzleTransform.position;
                     }
                 }
             }
@@ -64,7 +66,19 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         private LightningOrb.LightningType GetOrbColor
         {
-            get => LightningOrb.LightningType.Ukulele;// _currentCasts == 0 ? LightningOrb.LightningType.Ukulele : LightningOrb.LightningType.Tesla;
+            get
+            {
+                switch (_currentCasts)
+                {
+                    default:
+                    case 0:
+                        return LightningOrb.LightningType.Ukulele;
+                    case 1:
+                        return LightningOrb.LightningType.Ukulele;
+                    case 2:
+                        return LightningOrb.LightningType.MageLightning;
+                }
+            }
         }
         #endregion
 
@@ -95,11 +109,10 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
             if (!_targetHurtbox)
             {
-                //duration = 0.1f;
-                base.outer.SetNextStateToMain();
+                duration = 0.1f;
+                //base.outer.SetNextStateToMain();
                 return;
             }
-
             _lightningOrb = new LightningOrb
             {
                 origin = transform.position,
@@ -114,13 +127,12 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                 bouncedObjects = new List<HealthComponent>(),
                 lightningType = LightningOrb.LightningType.Ukulele,
                 damageColorIndex = DamageColorIndex.Default,
-                range = 35f
+                range = BounceDistance,
+                speed = 690,
             };
 
             _lightningOrb.target = _targetHurtbox;
         }
-
-
 
         protected override void OnCastEnter()
         {
@@ -154,9 +166,21 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         private void PlayZap()
         {
-            //play sound
             //muzzle flash on gauntle
             PlayAnimation("Gesture, Additive", "Shock");
+
+
+            string sound = "Play_trooper_itesat2a_tesla_trooper_attack";
+            if (_lightningOrb.isCrit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
+
+            //todo sound wwise random sound
+                //oh wait the alt sound was the powered up one I think. 
+            //but not random pitch heh
+            PlaySoundAuthority(sound);
+
+            //god that was beautiful to my heart
+            //but hurtful my brain
+            //todo sound: actual audio engineering. too much high frequency there
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

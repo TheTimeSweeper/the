@@ -157,6 +157,11 @@ namespace HenryMod.Modules
                 loadedAss = teslaAssetBundle.LoadAsset<T>(assString);
             }
 
+            if(loadedAss == null)
+            {
+                Debug.LogError($"Null asset: {assString}.\nAttempt to load asset '{assString}' from assetbundles returned null");
+            }
+
             return loadedAss;
         }
 
@@ -169,12 +174,12 @@ namespace HenryMod.Modules
                 SoundAPI.SoundBanks.Add(array);
             }
 
-            //using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.TeslaBank.bnk"))
-            //{
-            //    byte[] array = new byte[manifestResourceStream2.Length];
-            //    manifestResourceStream2.Read(array, 0, array.Length);
-            //    SoundAPI.SoundBanks.Add(array);
-            //}
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.Tesla_Trooper.bnk"))
+            {
+                byte[] array = new byte[manifestResourceStream2.Length];
+                manifestResourceStream2.Read(array, 0, array.Length);
+                SoundAPI.SoundBanks.Add(array);
+            }
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

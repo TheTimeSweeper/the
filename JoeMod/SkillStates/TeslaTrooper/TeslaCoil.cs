@@ -31,7 +31,6 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         private BlueprintController blueprints;
         
-
         public override void OnEnter()
         {
             base.OnEnter();
@@ -104,7 +103,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                                 }
                             }
                         }
-                        //Util.PlaySound(this.placeSoundString, base.gameObject);
+                        //I am fucking exploding right now
+                        Util.PlaySound("Play_buliding_uplace", gameObject);
                         DestroyBlueprints();
                         exitPending = true;
                     }

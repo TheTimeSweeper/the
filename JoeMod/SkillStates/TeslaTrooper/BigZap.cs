@@ -14,14 +14,13 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         public GameObject bigZapEffectPrefab = Resources.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
         public GameObject bigZapEffectPrefabArea = Resources.Load<GameObject>("prefabs/effects/lightningstakenova");
-        public GameObject bigZapEffectPrefabFlash = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
+        public GameObject bigZapEffectFlashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
 
         public override void OnEnter()
         {
             base.OnEnter();
 
-
-            //todo incombat
+            //todo anim: incombat
             PlayAnimation("Gesture, Override", "HandOut");
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
 
@@ -49,8 +48,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                 //bonusForce = ;
 
                 //impactEffect = EffectIndex.uh;
-
             }.Fire();
+
+            #region effects
             EffectData fect = new EffectData
             {
                 origin = aimPoint,
@@ -71,13 +71,19 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             if (Input.GetKey(KeyCode.H))
             {
                 fect.scale /= 2f;
-                EffectManager.SpawnEffect(bigZapEffectPrefabFlash, fect, false);
+                EffectManager.SpawnEffect(bigZapEffectFlashPrefab, fect, false);
             }
 
+            if (isAuthority)
+            {
+                //todo sound wwise random sound
+                //Util.PlaySound("Play_tank_vtesattb_tesla_tank_attack", gameObject);
+            }
+            #endregion effects
         }
 
-        #region testEffects
-        public static float bigsexyeffect = 0;
+        #region testGameEffects
+        public static float keep_bigsexyeffect = 0;
 
         public static GameObject[] effects =
             {
@@ -104,12 +110,12 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             try
             {
                 // bigZapEffectPrefab
-                EffectManager.SpawnEffect(effects[(int)bigsexyeffect], fect, true);
+                EffectManager.SpawnEffect(effects[(int)keep_bigsexyeffect], fect, true);
             }
             catch
             {
-                bigsexyeffect = 0;
-                EffectManager.SpawnEffect(effects[(int)bigsexyeffect], fect, true);
+                keep_bigsexyeffect = 0;
+                EffectManager.SpawnEffect(effects[(int)keep_bigsexyeffect], fect, true);
             }
         }
         #endregion testeffects

@@ -3,6 +3,25 @@ using System.Collections.Generic;
 
 namespace HenryMod.Modules
 {
+    public enum TeslaVoiceLine
+    {
+        attack_2000Volts,
+        attack_HesFried,
+        attack_CompletingCircuit,
+        attack_Juice,
+        attack_CommencingShock,
+        move_GoingToSource,
+        move_MovingOut,
+        move_YesComrade,
+        move_SurgingForward,
+        move_Electrician,
+        move_RubberShoes,
+        select_TeslaSuit,
+        select_ChargingUp,
+        select_Electrodes,
+        select_CheckingConnection
+    }
+
     internal static class Helpers
     {
         internal const string agilePrefix = "<style=cIsUtility>Agile.</style> ";
@@ -22,6 +41,63 @@ namespace HenryMod.Modules
         }
 
         public static Func<T[], T[]> AppendDel<T>(List<T> list) => (r) => Append(ref r, list);
+
+        public static uint PlaySoundVoiceLine(TeslaVoiceLine line, UnityEngine.GameObject gameObject)
+        {
+            string voiceLineString = "";
+
+            switch (line)
+            {
+                case TeslaVoiceLine.attack_2000Volts:
+                    voiceLineString = "Play_itesata";
+                    break;
+                case TeslaVoiceLine.attack_HesFried:
+                    voiceLineString = "Play_itesatb";
+                    break;
+                case TeslaVoiceLine.attack_CompletingCircuit:
+                    voiceLineString = "Play_itesatc";
+                    break;
+                case TeslaVoiceLine.attack_Juice:
+                    voiceLineString = "Play_itesatd";
+                    break;
+                case TeslaVoiceLine.attack_CommencingShock:
+                    voiceLineString = "Play_itesate";
+                    break;
+                case TeslaVoiceLine.move_GoingToSource:
+                    voiceLineString = "Play_itesmoa";
+                    break;
+                case TeslaVoiceLine.move_MovingOut:
+                    voiceLineString = "Play_itesmob";
+                    break;
+                case TeslaVoiceLine.move_YesComrade:
+                    voiceLineString = "Play_itesmoc";
+                    break;
+                case TeslaVoiceLine.move_SurgingForward:
+                    voiceLineString = "Play_itesmod";
+                    break;
+                default:
+                case TeslaVoiceLine.move_Electrician:
+                    voiceLineString = "Play_itesmoe";
+                    break;
+                case TeslaVoiceLine.move_RubberShoes:
+                    voiceLineString = "Play_itesmof";
+                    break;
+                case TeslaVoiceLine.select_TeslaSuit:
+                    voiceLineString = "Play_itesea";
+                    break;
+                case TeslaVoiceLine.select_ChargingUp:
+                    voiceLineString = "Play_iteseb";
+                    break;
+                case TeslaVoiceLine.select_Electrodes:
+                    voiceLineString = "Play_itesec";
+                    break;
+                case TeslaVoiceLine.select_CheckingConnection:
+                    voiceLineString = "Play_itesed";
+                    break;
+            }
+
+            return RoR2.Util.PlaySound(voiceLineString, gameObject);
+        }
     }
 
     internal static class ArrayHelper

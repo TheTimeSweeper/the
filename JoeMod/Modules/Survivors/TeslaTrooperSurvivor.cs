@@ -25,7 +25,7 @@ namespace HenryMod.Modules.Survivors
             armorGrowth = 0f,
             bodyName = "TeslaTrooperBody",
             bodyNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_NAME",
-            bodyColor = Color.magenta,
+            bodyColor = new Color(0.8f, 2, 2),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
             crosshair = Modules.Assets.LoadCrosshair("Merc"),
             damage = 13f,
@@ -136,7 +136,7 @@ namespace HenryMod.Modules.Survivors
             {
                 skillName = prefix + "SECONDARY_BIGZAP_NAME",
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
-                skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION",
+                skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
                 skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",

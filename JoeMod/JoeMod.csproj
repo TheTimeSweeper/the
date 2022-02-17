@@ -18,6 +18,7 @@
     <None Remove="Modules\Survivors\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
     <None Remove="teslatrooper" />
+    <None Remove="Tesla_Trooper.bnk" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
     <EmbeddedResource Include="joe" />
     <EmbeddedResource Include="myassetbundle" />
     <EmbeddedResource Include="teslatrooper" />
+    <EmbeddedResource Include="Tesla_Trooper.bnk" />
   </ItemGroup>
 
   <ItemGroup>

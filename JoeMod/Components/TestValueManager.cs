@@ -23,7 +23,7 @@ public class TestValueManager : MonoBehaviour {
 
         //manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.lowGravMultiplier, "bomb Grav", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
         //manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.smallhopVelocity, "bomb hop", KeyCode.Keypad8, KeyCode.Keypad5, 0.05f);
-        manageTestValue(ref BigZap.bigsexyeffect, "effect", KeyCode.Alpha2, KeyCode.Alpha1, 1f);
+        manageTestValue(ref BigZap.keep_bigsexyeffect, "effect", KeyCode.Alpha2, KeyCode.Alpha1, 1f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {

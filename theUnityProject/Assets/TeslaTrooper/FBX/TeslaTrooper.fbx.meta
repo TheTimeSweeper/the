@@ -72,6 +72,28 @@ ModelImporter:
     100132: upper_arm.R
     100134: meshTeslaArmor
     100136: meshTeslaBody
+    100138: f_index.03.L_end
+    100140: f_index.03.R_end
+    100142: f_middle.03.L_end
+    100144: f_middle.03.R_end
+    100146: f_pinky.03.L_end
+    100148: f_pinky.03.R_end
+    100150: f_ring.03.L_end
+    100152: f_ring.03.R_end
+    100154: Head_end
+    100156: ik_foot.L_end
+    100158: ik_foot.R_end
+    100160: ik_foot_knee.L_end
+    100162: ik_foot_knee.R_end
+    100164: ik_hand.L_end
+    100166: ik_hand.R_end
+    100168: ik_hand_elbow.L_end
+    100170: ik_hand_elbow.R_end
+    100172: ik_head_point_end
+    100174: thumb.03.L_end
+    100176: thumb.03.R_end
+    100178: toe.L_end
+    100180: toe.R_end
     400000: hammor
     400002: //RootNode
     400004: TeslaTrooperJumpsuit
@@ -141,6 +163,28 @@ ModelImporter:
     400132: upper_arm.R
     400134: meshTeslaArmor
     400136: meshTeslaBody
+    400138: f_index.03.L_end
+    400140: f_index.03.R_end
+    400142: f_middle.03.L_end
+    400144: f_middle.03.R_end
+    400146: f_pinky.03.L_end
+    400148: f_pinky.03.R_end
+    400150: f_ring.03.L_end
+    400152: f_ring.03.R_end
+    400154: Head_end
+    400156: ik_foot.L_end
+    400158: ik_foot.R_end
+    400160: ik_foot_knee.L_end
+    400162: ik_foot_knee.R_end
+    400164: ik_hand.L_end
+    400166: ik_hand.R_end
+    400168: ik_hand_elbow.L_end
+    400170: ik_hand_elbow.R_end
+    400172: ik_head_point_end
+    400174: thumb.03.L_end
+    400176: thumb.03.R_end
+    400178: toe.L_end
+    400180: toe.R_end
     2100000: No Name
     2100002: Material.002
     2100004: Material.001
@@ -170,6 +214,7 @@ ModelImporter:
     7400020: Armature|Idle.RightFoot
     7400022: Armature|HeadYaw
     7400024: Armature|CastShield
+    7400026: Armature|AimYaw
     9500000: //RootNode
     13700000: TeslaTrooperJumpsuit
     13700002: TeslaTropperArmor
@@ -439,10 +484,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|HeadYaw
-      takeName: Armature|HeadYaw
+      name: Armature|AimYaw
+      takeName: Armature|AimYaw
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

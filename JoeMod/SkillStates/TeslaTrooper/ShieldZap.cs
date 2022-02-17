@@ -16,7 +16,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         public static float BaseDuration = 1;
 
-        public static float BaseCastStartTime = 0.13f;
+        public static float BaseCastStartTime = 0.0f; //todo: anim: 0.13 when legs are separated
         public static float MoveSlowEndTime = 0.8f;
 
         public GameObject ShieldEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
@@ -50,10 +50,15 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         public override void Update()
         {
             base.Update();
-            if (base.characterMotor)
+            if (base.characterMotor && isFiring)
             {
                 base.characterMotor.moveDirection = Vector3.zero;
             }
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return hasFired && isFiring ? InterruptPriority.PrioritySkill : InterruptPriority.Skill;
         }
     }
 }
