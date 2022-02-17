@@ -175,11 +175,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4735786425572373389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+  m_Script: {fileID: 1653386690, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.18
+  m_Radius: 0
   m_Height: 0
   m_Direction: 0
   m_Bound: 0
@@ -1505,13 +1505,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8315140139193097790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+  m_Script: {fileID: 1653386690, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Center: {x: 0, y: 0.19, z: 0}
-  m_Radius: 0.15
-  m_Height: 0.49
-  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0
+  m_Height: 0
+  m_Direction: 0
   m_Bound: 0
 --- !u!136 &7238953315125949121
 CapsuleCollider:
@@ -2116,7 +2116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8315140139193097814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
+  m_Script: {fileID: -226763392, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   transformPairs:
@@ -2187,27 +2187,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8315140139193097814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
+  m_Script: {fileID: -960361785, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Root: {fileID: 8315140139193319944}
-  m_UpdateRate: 240
-  m_UpdateMode: 1
-  m_Damping: 0.1
+  m_Root: {fileID: 0}
+  m_UpdateRate: 60
+  m_UpdateMode: 0
+  m_Damping: 0
   m_DampingDistrib:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Elasticity: 0.005
+  m_Elasticity: 0.1
   m_ElasticityDistrib:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Stiffness: 0.2
+  m_Stiffness: 0.1
   m_StiffnessDistrib:
     serializedVersion: 2
     m_Curve: []
@@ -2221,7 +2221,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Radius: 0.01
+  m_Radius: 0
   m_RadiusDistrib:
     serializedVersion: 2
     m_Curve: []
@@ -2232,16 +2232,12 @@ MonoBehaviour:
   m_EndOffset: {x: 0, y: 0, z: 0}
   m_Gravity: {x: 0, y: 0, z: 0}
   m_Force: {x: 0, y: 0, z: 0}
-  m_Colliders:
-  - {fileID: 662250192032420986}
-  - {fileID: 8026021457226145154}
-  m_Exclusions:
-  - {fileID: 4520737839041294053}
-  - {fileID: 6504392670548064762}
+  m_Colliders: []
+  m_Exclusions: []
   m_FreezeAxis: 0
-  m_DistantDisable: 1
+  m_DistantDisable: 0
   m_ReferenceObject: {fileID: 0}
-  m_DistanceToObject: 60
+  m_DistanceToObject: 20
 --- !u!114 &7238953315125949139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,7 +2247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8315140139193097814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
+  m_Script: {fileID: -517518216, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bones:
@@ -2270,7 +2266,6 @@ MonoBehaviour:
   - {fileID: 8315140139193320022}
   componentsToDisableOnRagdoll:
   - {fileID: 1209521308}
-  - {fileID: 0}
 --- !u!1 &8315140139193097816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,13 +2782,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8315140139193097840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+  m_Script: {fileID: 1653386690, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Center: {x: 0, y: 0.36, z: 0}
-  m_Radius: 0.11
-  m_Height: 0.47
-  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0
+  m_Height: 0
+  m_Direction: 0
   m_Bound: 0
 --- !u!1 &8315140139193097842
 GameObject:
@@ -2914,13 +2909,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8315140139193097842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+  m_Script: {fileID: 1653386690, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Center: {x: 0, y: 0.36, z: 0}
-  m_Radius: 0.11
-  m_Height: 0.47
-  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0
+  m_Height: 0
+  m_Direction: 0
   m_Bound: 0
 --- !u!1 &8315140139193097844
 GameObject:
