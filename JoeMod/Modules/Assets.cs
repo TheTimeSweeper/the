@@ -83,8 +83,8 @@ namespace HenryMod.Modules
             JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
             JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
 
-            TestlaCoil = mainAssetBundle.LoadAsset<GameObject>("TeslaCoil");
-            TestlaCoilBlueprint = mainAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
+            TestlaCoil = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoil");
+            TestlaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
 

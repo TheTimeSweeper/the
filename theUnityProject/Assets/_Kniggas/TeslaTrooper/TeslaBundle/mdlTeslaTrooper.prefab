@@ -45,39 +45,16 @@ MonoBehaviour:
   transformPairs:
   - name: MainHurtbox
     transform: {fileID: 8759506892152418555}
+  - name: meshTeslaBody
+    transform: {fileID: 3631804215789908912}
+  - name: meshTeslaArmor
+    transform: {fileID: 3631804215789908926}
+  - name: meshTeslaHammer
+    transform: {fileID: 3631804215789908536}
   - name: MuzzleGauntlet
     transform: {fileID: 5443828498100939736}
   - name: Head
     transform: {fileID: 3631804215789908592}
---- !u!114 &7262697912579509710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3631804215789874714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1143142494, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 0}
-  itemDisplayRuleSet: {fileID: 0}
-  autoPopulateLightInfos: 0
-  baseRendererInfos:
-  - renderer: {fileID: 3631804215778304798}
-    defaultMaterial: {fileID: 2100000, guid: 29e9430b347089d4fb312a52a3462a98, type: 2}
-    defaultShadowCastingMode: 0
-    ignoreOverlays: 0
-  - renderer: {fileID: 3631804215778304796}
-    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
-    defaultShadowCastingMode: 0
-    ignoreOverlays: 0
-  - renderer: {fileID: 3631804215787614424}
-    defaultMaterial: {fileID: 2100000, guid: d242a97c24d67e94bbcb81a5e5fac319, type: 2}
-    defaultShadowCastingMode: 0
-    ignoreOverlays: 0
-  baseLightInfos: []
 --- !u!1 &8494372372967240268
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,15 +177,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2715223
+      value: 1.269
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2715223
+      value: 1.269
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2715223
+      value: 1.269
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2592,9 +2569,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3631804215789775032}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &3631804215787614424 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 3c4a74450714e554b910f996ba672bf9,
+--- !u!4 &3631804215789908536 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 3c4a74450714e554b910f996ba672bf9,
     type: 3}
   m_PrefabInstance: {fileID: 3631804215789775032}
   m_PrefabAsset: {fileID: 0}
@@ -2610,15 +2587,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3631804215789775032}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &3631804215778304796 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 13700004, guid: 3c4a74450714e554b910f996ba672bf9,
+--- !u!4 &3631804215789908926 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400134, guid: 3c4a74450714e554b910f996ba672bf9,
     type: 3}
   m_PrefabInstance: {fileID: 3631804215789775032}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &3631804215778304798 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 13700006, guid: 3c4a74450714e554b910f996ba672bf9,
+--- !u!4 &3631804215789908912 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400136, guid: 3c4a74450714e554b910f996ba672bf9,
     type: 3}
   m_PrefabInstance: {fileID: 3631804215789775032}
   m_PrefabAsset: {fileID: 0}
