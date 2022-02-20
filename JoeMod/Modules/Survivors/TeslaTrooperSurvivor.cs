@@ -36,9 +36,9 @@ namespace HenryMod.Modules.Survivors
             subtitleNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
-                                            
-        internal static Material matTeslaBody = Modules.Assets.CreateMaterialFull("matTeslaBody");
-        internal static Material matTeslaArmor = Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
+
+        internal static Material matTeslaBody = Modules.Assets.CreateHotpooMaterial("matTeslaBody");
+        internal static Material matTeslaArmor = Modules.Assets.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
         //attempt at recursive buildijng
         //Assets.MaterialSetup.GenerateMaterial("matTeslaBody")
         //    .SetEmission(1, new Color(0.28f, 0.70f, 1.0f))
@@ -64,11 +64,11 @@ namespace HenryMod.Modules.Survivors
                 new CustomRendererInfo
                 {
                     childName = "meshTeslaHammer",
-                    material = Assets.CreateMaterial("MatHammer"),
+                    material = Assets.CreateHotpooMaterial("MatHammer"),
                 },
             };
 
-        internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
+        internal override Type characterMainState { get; set; } = typeof(TeslaTrooperMain);
 
         // item display stuffs
         internal override ItemDisplayRuleSet itemDisplayRuleSet { get; set; }
@@ -80,8 +80,9 @@ namespace HenryMod.Modules.Survivors
         internal override void InitializeCharacter() 
         {
             base.InitializeCharacter();
-
+            States.entityStates.Add(typeof(TeslaTrooperMain));
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
+            bodyPrefab.AddComponent<TeslaCoilControllerController>();
         }
 
         internal override void InitializeUnlockables()
@@ -193,7 +194,7 @@ namespace HenryMod.Modules.Survivors
 
         private void InitializeSpecialSkills(string prefix)
         {
-            States.entityStates.Add(typeof(TeslaCoil));
+            States.entityStates.Add(typeof(DeployTeslaCoil));
 
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -201,7 +202,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",
                 skillIcon = Resources.Load<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(TeslaCoil)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaCoil)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 15f,

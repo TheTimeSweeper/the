@@ -31,6 +31,12 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         {
             base.FixedUpdate();
             StartAimMode();
+            
+            if(GetComponent<TeslaCoilControllerController>()?.nearestCoil != null && GetComponent<TotallyOriginalTrackerComponent>()?.GetTrackingTarget() != null) {
+                endpointVisualizerRadiusScale = Tower.TowerBigZap.AttackRadius;
+            } else {
+                endpointVisualizerRadiusScale = BigZap.AttackRadius;
+            }
 
             //todo incombat
             PlayAnimation("Gesture, Override", "HandOut");

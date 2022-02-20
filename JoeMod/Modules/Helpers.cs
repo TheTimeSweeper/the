@@ -5,21 +5,23 @@ namespace HenryMod.Modules
 {
     public enum TeslaVoiceLine
     {
-        attack_2000Volts,
+        attack_2000Volts, //0
         attack_HesFried,
         attack_CompletingCircuit,
         attack_Juice,
-        attack_CommencingShock,
+        attack_CommencingShock, //4
+
         move_GoingToSource,
         move_MovingOut,
         move_YesComrade,
         move_SurgingForward,
         move_Electrician,
-        move_RubberShoes,
+        move_RubberShoes, //10
+
         select_TeslaSuit,
         select_ChargingUp,
         select_Electrodes,
-        select_CheckingConnection
+        select_CheckingConnection //14
     }
 
     internal static class Helpers
@@ -44,8 +46,7 @@ namespace HenryMod.Modules
 
         public static uint PlaySoundVoiceLine(TeslaVoiceLine line, UnityEngine.GameObject gameObject)
         {
-            string voiceLineString = "";
-
+            string voiceLineString;
             switch (line)
             {
                 case TeslaVoiceLine.attack_2000Volts:
@@ -73,7 +74,7 @@ namespace HenryMod.Modules
                     voiceLineString = "Play_itesmoc";
                     break;
                 case TeslaVoiceLine.move_SurgingForward:
-                    voiceLineString = "Play_itesmod";
+                    voiceLineString = "Play_itesmod";                           
                     break;
                 default:
                 case TeslaVoiceLine.move_Electrician:
@@ -95,7 +96,7 @@ namespace HenryMod.Modules
                     voiceLineString = "Play_itesed";
                     break;
             }
-
+            UnityEngine.Debug.LogWarning("uh " + voiceLineString);
             return RoR2.Util.PlaySound(voiceLineString, gameObject);
         }
     }

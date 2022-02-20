@@ -207,37 +207,58 @@ namespace HenryMod.Modules
             return GameObject.Instantiate(Modules.Assets.LoadAsset<GameObject>(modelName));
         }
 
-        internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex)
-        {
-            CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.AddComponent<CharacterModel>();
-            ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
+        internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex) {
+            CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
+            bool preattached = characterModel != null;
+            if (!preattached)
+                characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.AddComponent<CharacterModel>();
+
             characterModel.body = prefab.GetComponent<CharacterBody>();
 
-            if (!childLocator)
-            {
-                Debug.LogError("Failed CharacterModel setup: ChildLocator component does not exist on the model");
+            characterModel.autoPopulateLightInfos = true;
+            characterModel.invisibilityCount = 0;
+            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+
+
+            #region
+            if (!preattached) {
+
+                ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
+                if (!childLocator) {
+                    Debug.LogError("Failed CharacterModel setup: ChildLocator component does not exist on the model");
+                    return;
+                }
+
+                List<CharacterModel.RendererInfo> rendererInfos = GetCustomRendererInfos(customInfos, childLocator);
+                characterModel.baseRendererInfos = rendererInfos.ToArray();
+
+            } else {
+
+                for (int i = 0; i < characterModel.baseRendererInfos.Length; i++) {
+                    characterModel.baseRendererInfos[i].defaultMaterial = customInfos[i].material;
+                }
+            }
+
+            if (mainRendererIndex > characterModel.baseRendererInfos.Length) {
+                Debug.LogError("mainRendererIndex out of range: not setting mainSkinnedMeshRenderer for " + prefab.name);
                 return;
             }
 
+            characterModel.mainSkinnedMeshRenderer = characterModel.baseRendererInfos[mainRendererIndex].renderer.GetComponent<SkinnedMeshRenderer>();
+        }
+
+        private static List<CharacterModel.RendererInfo> GetCustomRendererInfos(CustomRendererInfo[] customInfos, ChildLocator childLocator) {
             List<CharacterModel.RendererInfo> rendererInfos = new List<CharacterModel.RendererInfo>();
 
-            for (int i = 0; i < customInfos.Length; i++)
-            {
-                if (!childLocator.FindChild(customInfos[i].childName))
-                {
+            for (int i = 0; i < customInfos.Length; i++) {
+                if (!childLocator.FindChild(customInfos[i].childName)) {
                     Debug.LogError("Trying to add a RendererInfo for a renderer that does not exist: " + customInfos[i].childName);
-                }
-                else
-                {
-                    Renderer j = childLocator.FindChild(customInfos[i].childName).GetComponent<Renderer>();
-                    if (!j)
-                    {
+                } else {
+                    Renderer rend = childLocator.FindChild(customInfos[i].childName).GetComponent<Renderer>();
+                    if (!rend) {
 
-                    }
-                    else
-                    {
-                        rendererInfos.Add(new CharacterModel.RendererInfo
-                        {
+                    } else {
+                        rendererInfos.Add(new CharacterModel.RendererInfo {
                             renderer = childLocator.FindChild(customInfos[i].childName).GetComponent<Renderer>(),
                             defaultMaterial = customInfos[i].material,
                             ignoreOverlays = customInfos[i].ignoreOverlays,
@@ -247,19 +268,7 @@ namespace HenryMod.Modules
                 }
             }
 
-            characterModel.baseRendererInfos = rendererInfos.ToArray();
-
-            characterModel.autoPopulateLightInfos = true;
-            characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
-
-            if (mainRendererIndex > characterModel.baseRendererInfos.Length)
-            {
-                Debug.LogError("mainRendererIndex out of range: not setting mainSkinnedMeshRenderer for " + prefab.name);
-                return;
-            }
-
-            characterModel.mainSkinnedMeshRenderer = characterModel.baseRendererInfos[mainRendererIndex].renderer.GetComponent<SkinnedMeshRenderer>();
+            return rendererInfos;
         }
         #endregion
 

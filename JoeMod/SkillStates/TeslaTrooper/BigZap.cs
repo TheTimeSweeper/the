@@ -1,9 +1,10 @@
 ﻿using EntityStates;
+using HenryMod.Modules;
 using RoR2;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper
-{
+namespace JoeMod.ModdedEntityStates.TeslaTrooper {
+
     public class BigZap : BaseSkillState
     {
         public static float DamageCoefficient = 6.9f;
@@ -12,13 +13,29 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         public Vector3 aimPoint;
 
-        public GameObject bigZapEffectPrefab = Resources.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
-        public GameObject bigZapEffectPrefabArea = Resources.Load<GameObject>("prefabs/effects/lightningstakenova");
-        public GameObject bigZapEffectFlashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
+        public static GameObject bigZapEffectPrefab = Resources.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
+        public static GameObject bigZapEffectPrefabArea = Resources.Load<GameObject>("prefabs/effects/lightningstakenova");
+        public static GameObject bigZapEffectFlashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
 
         public override void OnEnter()
         {
             base.OnEnter();
+
+            TeslaCoilControllerController controller = GetComponent<TeslaCoilControllerController>();
+
+            if (controller && controller.nearestCoil) {
+                TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
+                if(tracker && tracker.GetTrackingTarget()) {
+                    Debug.LogWarning("tracker");
+
+                    controller.nearestCoil.GetComponent<EntityStateMachine>().SetInterruptState(new Tower.TowerBigZap() {
+                        lightningTarget = tracker.GetTrackingTarget(),
+                    },
+                    InterruptPriority.PrioritySkill);
+
+                    return;
+                }
+            }
 
             //todo anim: incombat
             PlayAnimation("Gesture, Override", "HandOut");
@@ -28,7 +45,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             {
                 attacker = gameObject,
                 inflictor = gameObject,
-                teamIndex = TeamComponent.GetObjectTeam(gameObject),
+                teamIndex = teamComponent.teamIndex,
                 //attackerFiltering = AttackerFiltering.NeverHit
 
                 position = aimPoint,

@@ -132,7 +132,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-SillyItems&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\..\Release&quot;" />
+    <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\..\Release&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;C:\EnforcerBuild\plugins&quot;" />
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

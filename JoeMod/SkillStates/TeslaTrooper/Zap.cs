@@ -76,7 +76,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                     case 1:
                         return LightningOrb.LightningType.Ukulele;
                     case 2:
-                        return LightningOrb.LightningType.MageLightning;
+                        return LightningOrb.LightningType.Ukulele;
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                 isCrit = RollCrit(),
                 bouncesRemaining = 1,
                 damageCoefficientPerBounce = BounceDamageMultplier,
-                damageType = DamageType.SlowOnHit,
+                damageType = DamageType.Generic,
                 teamIndex = teamComponent.teamIndex,
                 attacker = gameObject,
                 procCoefficient = 1f,
@@ -161,6 +161,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                 _lightningOrb.origin = GetOrbOrigin;
                 _lightningOrb.lightningType = GetOrbColor;
                 OrbManager.instance.AddOrb(_lightningOrb);
+                //happens after firing to apply to spreads only
+                _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
             }
         }
 
@@ -169,10 +171,10 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             //muzzle flash on gauntle
             PlayAnimation("Gesture, Additive", "Shock");
 
-
             string sound = "Play_trooper_itesat2a_tesla_trooper_attack";
             if (_lightningOrb.isCrit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
 
+            //sound = EntityStates.Mage.Weapon.FireLaserbolt.attackString;
             //todo sound wwise random sound
                 //oh wait the alt sound was the powered up one I think. 
             //but not random pitch heh

@@ -129,7 +129,7 @@ namespace HenryMod.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "2000 Volts");
-            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"coming up");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", "coming up");
             #endregion
 
             #region Utility

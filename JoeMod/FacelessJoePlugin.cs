@@ -52,6 +52,10 @@ namespace HenryMod {
 
             // survivor initialization
             new JoeSurivor().Initialize();
+
+
+            new TeslaTower().Initialize();
+
             //todo compiler flags when
             new TeslaTrooperSurvivor().Initialize();
 

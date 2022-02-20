@@ -87,8 +87,6 @@ namespace HenryMod.Modules
             TestlaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
-
-
         }
 
         internal static void PopulateHenrysAssetsThatNoLongerExist()
@@ -341,18 +339,25 @@ namespace HenryMod.Modules
             effectDefs.Add(newEffectDef);
         }
 
+        #region materials
+
+        #region babby's first overloads teehee
+        [Obsolete("i'll be real embarrassed if this doesn't work after all")]
         public static Material CreateMaterial(string materialName) 
         {
             return Assets.CreateMaterial(materialName, 0f);
         }
+        [Obsolete("i'll be real embarrassed if this doesn't work after all")]
         public static Material CreateMaterial(string materialName, float emission)
         {
             return Assets.CreateMaterial(materialName, emission, Color.white);
         }
+        [Obsolete("i'll be real embarrassed if this doesn't work after all")]
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor)
         {
             return Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
         }
+        [Obsolete("i'll be real embarrassed if this doesn't work after all")]
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength)
         {
             if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
@@ -376,72 +381,72 @@ namespace HenryMod.Modules
 
             return mat;
         }
+        #endregion
 
-        public static Material CreateMaterialFull(string materialName)
-        {
-            Material mat = Assets.CreateMaterial(materialName, 1, Color.white, 1);
-            mat.SetInt("_Cull", 0);
-            return mat;
+        public static Material CreateHotpooMaterial(string materialName) {
+            //if (!Assets.commandoMat) Assets.commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
+
+            //Material mat = UnityEngine.Object.Instantiate<Material>(Assets.commandoMat);
+            Material tempMat = Assets.LoadAsset<Material>(materialName);
+
+            if (!tempMat) {
+                Debug.LogError("Failed to load material: " + materialName + " - Check to see that the name in your Unity project matches the one in this code");
+                return new Material(hotpoo);
+            }
+
+            return CreateHotpooMaterial(tempMat);
         }
 
-        public class MaterialSetup
-        {
-            Material _mat;
+        private static Material CreateHotpooMaterial(Material tempMat) {
+            tempMat.shader = Assets.hotpoo;
 
-            public MaterialSetup(Material mat)
-            {
-                this._mat = mat;
-            }
+            tempMat.SetColor("_Color", tempMat.GetColor("_Color"));
+            tempMat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
+            tempMat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+            tempMat.SetFloat("_NormalStrength", !tempMat.IsKeywordEnabled("_NORMALMAP") ? 0 : tempMat.GetFloat("_BumpScale"));
+            tempMat.SetColor("_EmColor", tempMat.GetColor("_EmissionColor"));
+            tempMat.SetFloat("_EmPower", tempMat.IsKeywordEnabled("_EMISSION") ? 1 : 0);
 
-            public static MaterialSetup GenerateMaterial(string materialName)
-            {
-                if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
+            return new Material(tempMat);
+        }
 
-                Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
-                Material tempMat = Assets.LoadAsset<Material>(materialName);
+        #endregion
+    }
 
-                if (!tempMat)
-                {
-                    Debug.LogError("Failed to load material: " + materialName + " - Check to see that the name in your Unity project matches the one in this code");
-                    return new MaterialSetup(commandoMat);
-                }
+    public static class MaterialSetup {
 
-                mat.SetColor("_Color", tempMat.GetColor("_Color"));
-                mat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
-                mat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+        private static Material CrateHotpooMaterial(this Material tempMat) {
+            tempMat.shader = Assets.hotpoo;
 
-                return new MaterialSetup(mat);
-            }
+            tempMat.SetColor("_Color", tempMat.GetColor("_Color"));
+            tempMat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
+            tempMat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+            tempMat.SetFloat("_NormalStrength", tempMat.GetFloat("_BumpScale"));
+            tempMat.SetColor("_EmColor", tempMat.GetColor("_EmissionColor"));
+            tempMat.SetFloat("_EmPower", tempMat.IsKeywordEnabled("_EMISSION") ? 1 : 0);
 
-            public MaterialSetup SetNormal(float normalStrength = 1)
-            {
-                _mat.SetFloat("_NormalStrength", normalStrength);
-                return this;
-            }
+            return new Material(tempMat);
+        }
 
-            public MaterialSetup SetEmission()
-            {
-                return SetEmission(1, Color.white);
-            }
-            public MaterialSetup SetEmission(float emission)
-            {
-                return SetEmission(emission, Color.white);
-            }
-            public MaterialSetup SetEmission(float emission, Color emissionColor)
-            {
-                _mat.SetFloat("_EmPower", emission);
-                _mat.SetColor("_EmColor", emissionColor);
-                return this;
-            }
-            public MaterialSetup SetCull (bool cull = false)
-            {
-                _mat.SetInt("_Cull", cull ? 1 : 0);
-                return this;
-            }
-            public Material ReturnMaterial()
-            {
-                return _mat;
-            }
+        public static Material SetNormal(this Material material, float normalStrength = 1) {
+            material.SetFloat("_NormalStrength", normalStrength);
+            return material;
+        }
+
+        public static Material SetEmission(this Material material) {
+            return SetEmission(material, 1, Color.white);
+        }
+        public static Material SetEmission(this Material material, float emission) {
+            return SetEmission(material, emission, Color.white);
+        }
+        public static Material SetEmission(this Material material, float emission, Color emissionColor) {
+            material.SetFloat("_EmPower", emission);
+            material.SetColor("_EmColor", emissionColor);
+            return material;
+        }
+        public static Material SetCull(this Material material, bool cull = false) {
+            material.SetInt("_Cull", cull ? 1 : 0);
+            return material;
         }
     }
 }

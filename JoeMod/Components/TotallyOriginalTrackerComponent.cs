@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterBody))]

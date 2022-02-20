@@ -15,15 +15,6 @@ namespace HenryMod.ModdedEntityStates.BaseStates
         protected bool hasFired;
         protected bool isFiring;
 
-        /// <summary>
-        /// SOC design pattern gods pls calm down, I hate it too
-        /// </summary>
-        protected virtual void PlaySoundAuthority(string sound)
-        {
-            if (isAuthority)
-                RoR2.Util.PlaySound(sound, gameObject);
-        }
-
         protected virtual void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1)
         {
             TimedBaseDuration = baseDuration;
@@ -70,6 +61,14 @@ namespace HenryMod.ModdedEntityStates.BaseStates
             {
                 OnCastUpdate();
             }
+        }
+
+        /// <summary>
+        /// SOC design pattern gods pls calm down, I hate it too
+        /// </summary>
+        protected virtual void PlaySoundAuthority(string sound) {
+            if (isAuthority)
+                RoR2.Util.PlaySound(sound, gameObject);
         }
 
         protected virtual void OnCastEnter() { }

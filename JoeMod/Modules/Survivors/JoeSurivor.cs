@@ -79,7 +79,7 @@ namespace HenryMod.Modules.Survivors
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             List<ChildLocator.NameTransformPair> pairs = new List<ChildLocator.NameTransformPair>(childLocator.transformPairs);
 
-
+            
             for (int i = 0; i < retardedRenderersComponent.Renderers.Count; i++) {
                 Renderer rend = retardedRenderersComponent.Renderers[i];
 
@@ -282,7 +282,7 @@ namespace HenryMod.Modules.Survivors
 
             #region Special
 
-            States.entityStates.Add(typeof(TeslaCoil));
+            States.entityStates.Add(typeof(DeployTeslaCoil));
 
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -290,7 +290,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",
                 skillIcon = null,//Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(TeslaCoil)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaCoil)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
                 baseRechargeInterval = 5f,

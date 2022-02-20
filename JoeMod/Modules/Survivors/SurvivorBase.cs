@@ -8,6 +8,7 @@ namespace HenryMod.Modules.Survivors
 {
     internal abstract class SurvivorBase
     {
+
         internal static SurvivorBase instance;
 
         internal abstract string bodyName { get; set; }
@@ -39,7 +40,11 @@ namespace HenryMod.Modules.Survivors
             InitializeCharacter();
         }
 
-        internal virtual void InitializeCharacter()
+        internal virtual void InitializeCharacter() {
+            InitializeCharacter(true);
+        }
+
+        internal virtual void InitializeCharacter(bool survivor = true)
         {
 
             // this creates a config option to enable the character- feel free to remove if the character is the only thing in your mod
@@ -54,14 +59,18 @@ namespace HenryMod.Modules.Survivors
                 setRetardedRendererInfosAndChildTransforms();
                 Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
 
+            if (survivor)
                 displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
 
+            if (survivor)
                 Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, bodyName.ToUpper(), characterUnlockableDef, sortPosition);
 
                 InitializeHitboxes();
                 InitializeSkills();
                 InitializeSkins();
                 InitializeItemDisplays();
+
+            if (survivor)
                 InitializeDoppelganger();
             //}
         }
