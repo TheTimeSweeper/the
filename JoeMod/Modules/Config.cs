@@ -5,18 +5,24 @@ namespace HenryMod.Modules
 {
     public static class Config
     {
+        public static bool DebugLogs;
+
         public static void ReadConfig()
         {
-
+            DebugLogs = FacelessJoePlugin.instance.Config.Bind(
+                "Debug",
+                "logs",
+                false,
+                "so I don't forget to turn delete them when I push").Value;
         }
 
         // this helper automatically makes config entries for disabling survivors
-        internal static ConfigEntry<bool> CharacterEnableConfig(string characterName)
+        internal static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "")
         {
             return FacelessJoePlugin.instance.Config.Bind<bool>(characterName,
-                                                                "Enabled",
-                                                                true,
-                                                                "Set to false to disable this character\n - jk this will not disable anything");
+                                                                "Enable "+ characterName,
+                                                                enabledDefault,
+                                                                !string.IsNullOrEmpty(description) ? description : "Set to false to disable this character");
         }
 
         internal static ConfigEntry<bool> EnemyEnableConfig(string characterName)

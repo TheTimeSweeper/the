@@ -1,7 +1,9 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using HenryMod.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
@@ -34,11 +36,12 @@ namespace HenryMod {
         internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
 
         public static FacelessJoePlugin instance;
+        public static ManualLogSource Log;
 
         private void Awake()
         {
             instance = this;
-
+            Log = Logger;
             gameObject.AddComponent<TestValueManager>();
 
             // load assets and read config
@@ -53,15 +56,14 @@ namespace HenryMod {
             // survivor initialization
             new JoeSurivor().Initialize();
 
-
-            new TeslaTower().Initialize();
+            //new TeslaTowerNotSurvivor().Initialize();
 
             //todo compiler flags when
             new TeslaTrooperSurvivor().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
-
+            
             RoR2.ContentManagement.ContentManager.onContentPacksAssigned += LateSetup;
 
             Hook();
@@ -70,7 +72,7 @@ namespace HenryMod {
         private void LateSetup(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj)
         {
             // have to set item displays later now because they require direct object references..
-            Modules.Survivors.JoeSurivor.instance.SetItemDisplays();
+            //Modules.Survivors.JoeSurivor.instance.SetItemDisplays();
             //todo compiler flags when
             Modules.Survivors.TeslaTrooperSurvivor.instance.SetItemDisplays();
         }

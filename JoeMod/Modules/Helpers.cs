@@ -44,6 +44,29 @@ namespace HenryMod.Modules
 
         public static Func<T[], T[]> AppendDel<T>(List<T> list) => (r) => Append(ref r, list);
 
+        public static void Log (object message, bool chat = false) {
+
+            if (Modules.Config.DebugLogs) {
+                FacelessJoePlugin.Log.LogMessage(message);
+
+                if (chat) {
+                    RoR2.Chat.AddMessage(message.ToString());
+                }
+            }
+        }
+
+        public static void LogWarning(object message, bool chat = false) {
+
+            if (Modules.Config.DebugLogs) {
+                FacelessJoePlugin.Log.LogWarning(message);
+
+                if (chat) {
+                    RoR2.Chat.AddMessage(message.ToString());
+                }
+            }
+        }
+
+
         public static uint PlaySoundVoiceLine(TeslaVoiceLine line, UnityEngine.GameObject gameObject)
         {
             string voiceLineString;

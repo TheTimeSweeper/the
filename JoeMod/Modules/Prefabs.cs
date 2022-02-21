@@ -7,6 +7,7 @@ namespace HenryMod.Modules
 {
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to
+    // oh boy do I need to
 
     internal static class Prefabs
     {
@@ -45,7 +46,7 @@ namespace HenryMod.Modules
 
         internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, UnlockableDef unlockableDef) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, unlockableDef, 100f); }
 
-        internal static GameObject CreateDisplayPrefab(string modelName, GameObject prefab, BodyInfo bodyInfo)
+        internal static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
             if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
@@ -53,19 +54,20 @@ namespace HenryMod.Modules
                 return null;
             }
 
-            GameObject newPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), modelName + "Prefab");
+            GameObject model = Assets.LoadSurvivorModel(displayModelName);
 
-            GameObject model = CreateModel(newPrefab, modelName);
-            Transform modelBaseTransform = SetupModel(newPrefab, model.transform, bodyInfo);
-
-            model.AddComponent<CharacterModel>().baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
+            CharacterModel characterModel = model.GetComponent<CharacterModel>();
+            if (!characterModel) {
+                characterModel = model.AddComponent<CharacterModel>();
+            }
+            characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
             Modules.Assets.ConvertAllRenderersToHopooShader(model);
 
             return model.gameObject;
         }
 
-        internal static GameObject CreatePrefab(string bodyName, string modelName, BodyInfo bodyInfo)
+        internal static GameObject CreateBodyPrefab(string bodyName, string modelName, BodyInfo bodyInfo)
         {
             if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
@@ -79,9 +81,9 @@ namespace HenryMod.Modules
             GameObject model = null;
             if (modelName != "mdl")
             {
-                model = CreateModel(newPrefab, modelName);
+                model = Assets.LoadSurvivorModel(modelName);
                 if (model == null) model = newPrefab.GetComponentInChildren<CharacterModel>().gameObject;
-                modelBaseTransform = SetupModel(newPrefab, model.transform, bodyInfo);
+                modelBaseTransform = AddBodyCharacterModel(newPrefab, model.transform, bodyInfo);
             }
 
             #region CharacterBody
@@ -164,50 +166,33 @@ namespace HenryMod.Modules
         }
 
         #region ModelSetup
-        private static Transform SetupModel(GameObject prefab, Transform modelTransform, BodyInfo bodyInfo)
+        private static Transform AddBodyCharacterModel(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) 
         {
+
+            Object.DestroyImmediate(bodyPrefab.transform.Find("ModelBase").gameObject);
+
             GameObject modelBase = new GameObject("ModelBase");
-            modelBase.transform.parent = prefab.transform;
+            modelBase.transform.parent = bodyPrefab.transform;
             modelBase.transform.localPosition = bodyInfo.modelBasePosition;
             modelBase.transform.localRotation = Quaternion.identity;
             modelBase.transform.localScale = new Vector3(1f, 1f, 1f);
-
-            GameObject cameraPivot = new GameObject("CameraPivot");
-            cameraPivot.transform.parent = modelBase.transform;
-            cameraPivot.transform.localPosition = bodyInfo.cameraPivotPosition;
-            cameraPivot.transform.localRotation = Quaternion.identity;
-            cameraPivot.transform.localScale = Vector3.one;
-
-            GameObject aimOrigin = new GameObject("AimOrigin");
-            aimOrigin.transform.parent = modelBase.transform;
-            aimOrigin.transform.localPosition = bodyInfo.aimOriginPosition;
-            aimOrigin.transform.localRotation = Quaternion.identity;
-            aimOrigin.transform.localScale = Vector3.one;
-            prefab.GetComponent<CharacterBody>().aimOriginTransform = aimOrigin.transform;
 
             modelTransform.parent = modelBase.transform;
             modelTransform.localPosition = Vector3.zero;
             modelTransform.localRotation = Quaternion.identity;
 
+            Transform cameraPivot = bodyPrefab.transform.Find("CameraPivot");
+            cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
+
+            Transform aimOrigin = bodyPrefab.transform.Find("AimOrigin");
+            aimOrigin.localPosition = bodyInfo.aimOriginPosition;
+
+
             return modelBase.transform;
         }
+        internal static CharacterModel SetupCharacterModel(GameObject prefab, int mainRendererIndex) => SetupCharacterModel(prefab, null, mainRendererIndex);
+        internal static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex) {
 
-        private static GameObject CreateModel(GameObject main, string modelName)
-        {
-            FacelessJoePlugin.DestroyImmediate(main.transform.Find("ModelBase").gameObject);
-            FacelessJoePlugin.DestroyImmediate(main.transform.Find("CameraPivot").gameObject);
-            FacelessJoePlugin.DestroyImmediate(main.transform.Find("AimOrigin").gameObject);
-
-            if (Modules.Assets.LoadAsset<GameObject>(modelName) == null)
-            {
-                Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
-                return null;
-            }
-
-            return GameObject.Instantiate(Modules.Assets.LoadAsset<GameObject>(modelName));
-        }
-
-        internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex) {
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
             bool preattached = characterModel != null;
             if (!preattached)
@@ -219,35 +204,37 @@ namespace HenryMod.Modules
             characterModel.invisibilityCount = 0;
             characterModel.temporaryOverlays = new List<TemporaryOverlay>();
 
-
-            #region
             if (!preattached) {
-
-                ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
-                if (!childLocator) {
-                    Debug.LogError("Failed CharacterModel setup: ChildLocator component does not exist on the model");
-                    return;
-                }
-
-                List<CharacterModel.RendererInfo> rendererInfos = GetCustomRendererInfos(customInfos, childLocator);
-                characterModel.baseRendererInfos = rendererInfos.ToArray();
-
-            } else {
-
-                for (int i = 0; i < characterModel.baseRendererInfos.Length; i++) {
-                    characterModel.baseRendererInfos[i].defaultMaterial = customInfos[i].material;
-                }
+                SetupCustomRendererInfos(characterModel, customInfos);
+            }
+            else {
+                SetupPreAttachedRendererInfos(characterModel);
             }
 
             if (mainRendererIndex > characterModel.baseRendererInfos.Length) {
                 Debug.LogError("mainRendererIndex out of range: not setting mainSkinnedMeshRenderer for " + prefab.name);
-                return;
+                return characterModel;
             }
 
             characterModel.mainSkinnedMeshRenderer = characterModel.baseRendererInfos[mainRendererIndex].renderer.GetComponent<SkinnedMeshRenderer>();
+
+            return characterModel;
         }
 
-        private static List<CharacterModel.RendererInfo> GetCustomRendererInfos(CustomRendererInfo[] customInfos, ChildLocator childLocator) {
+        internal static void SetupPreAttachedRendererInfos(CharacterModel characterModel) {
+            for (int i = 0; i < characterModel.baseRendererInfos.Length; i++) {
+                characterModel.baseRendererInfos[i].defaultMaterial.SetHotpooMaterial();
+            }
+        }
+
+        internal static void SetupCustomRendererInfos(CharacterModel characterModel, CustomRendererInfo[] customInfos) {
+
+            ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
+            if (!childLocator) {
+                Debug.LogError("Failed CharacterModel setup: ChildLocator component does not exist on the model");
+                return;
+            }
+
             List<CharacterModel.RendererInfo> rendererInfos = new List<CharacterModel.RendererInfo>();
 
             for (int i = 0; i < customInfos.Length; i++) {
@@ -268,7 +255,7 @@ namespace HenryMod.Modules
                 }
             }
 
-            return rendererInfos;
+            characterModel.baseRendererInfos = rendererInfos.ToArray();
         }
         #endregion
 
@@ -422,7 +409,7 @@ namespace HenryMod.Modules
 
             hitBoxGroup.groupName = hitboxName;
         }
-        #endregion
+        #endregion ComponentSetup
     }
 }
 
@@ -432,8 +419,10 @@ internal class BodyInfo
     internal string bodyName = "";
     internal string bodyNameToken = "";
     internal string subtitleNameToken = "";
-
-    internal string bodyNameToClone = "Commando";// body prefab you're cloning for your character- commando is the safest
+    /// <summary>
+    /// body prefab you're cloning for your character- commando is the safest
+    /// </summary>
+    internal string bodyNameToClone = "Commando";
 
     internal Texture characterPortrait = null;
 
@@ -444,8 +433,10 @@ internal class BodyInfo
     internal float healthGrowth = 2f;
 
     internal float healthRegen = 0f;
-
-    internal float shield = 0f;// base shield is a thing apparently. neat
+    /// <summary>
+    /// base shield is a thing apparently. neat
+    /// </summary>
+    internal float shield = 0f;
     internal float shieldGrowth = 0f;
 
     internal float moveSpeed = 7f;

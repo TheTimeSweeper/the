@@ -175,6 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3549626842574388413}
   - component: {fileID: 3892043211721670372}
+  - component: {fileID: 4091235401673053554}
   m_Layer: 11
   m_Name: Capsule Collider
   m_TagString: Untagged
@@ -210,6 +211,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4091235401673053554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2214245672391474105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -202159943, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthComponent: {fileID: 0}
+  isBullseye: 1
+  damageModifier: 3
+  hurtBoxGroup: {fileID: 0}
+  indexInGroup: 0
 --- !u!1 &2258802437565229089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1534,7 @@ GameObject:
   - component: {fileID: 2057558289680614616}
   - component: {fileID: 5999801803282224626}
   - component: {fileID: 6110914415616163341}
+  - component: {fileID: 4127045971693777966}
   m_Layer: 11
   m_Name: mdlTeslaTower
   m_TagString: Untagged
@@ -1584,8 +1603,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformPairs:
+  - name: MainHurtbox
+    transform: {fileID: 3549626842574388413}
   - name: Orb
     transform: {fileID: 4610156693697244116}
+  - name: Head
+    transform: {fileID: 6273651562879444799}
 --- !u!114 &5999801803282224626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,8 +1621,9 @@ MonoBehaviour:
   m_Script: {fileID: -1792105662, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtBoxes: []
-  mainHurtBox: {fileID: 0}
+  hurtBoxes:
+  - {fileID: 4091235401673053554}
+  mainHurtBox: {fileID: 4091235401673053554}
   bullseyeCount: 0
 --- !u!114 &6110914415616163341
 MonoBehaviour:
@@ -1616,5 +1640,74 @@ MonoBehaviour:
   body: {fileID: 0}
   itemDisplayRuleSet: {fileID: 0}
   autoPopulateLightInfos: 0
-  baseRendererInfos: []
+  baseRendererInfos:
+  - renderer: {fileID: 1872143020347914416}
+    defaultMaterial: {fileID: 2100000, guid: aa8e884c8b638824dabd510277ab725e, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 5666575543382836699}
+    defaultMaterial: {fileID: 2100000, guid: f42b5d99192a6bb4cab6c1c044549b74, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 9209475377290176793}
+    defaultMaterial: {fileID: 2100000, guid: f42b5d99192a6bb4cab6c1c044549b74, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 6613966166577679268}
+    defaultMaterial: {fileID: 2100000, guid: f42b5d99192a6bb4cab6c1c044549b74, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 2911822621023124884}
+    defaultMaterial: {fileID: 2100000, guid: f42b5d99192a6bb4cab6c1c044549b74, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 6126118165415487579}
+    defaultMaterial: {fileID: 2100000, guid: 289c2fd5f0ca1294b9f5a2f3c5ad1677, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 6732440790701291537}
+    defaultMaterial: {fileID: 2100000, guid: 289c2fd5f0ca1294b9f5a2f3c5ad1677, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 4414125161061862822}
+    defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 1950729427768421510}
+    defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 7797390116167174607}
+    defaultMaterial: {fileID: 2100000, guid: 55457e50fa0061843bb55c4a003577f9, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 3145294070424978607}
+    defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 4312609101974796777}
+    defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 5343368217602540380}
+    defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 8205121029334518273}
+    defaultMaterial: {fileID: 2100000, guid: e55f3642b8fb710439763f554bb49a8d, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
   baseLightInfos: []
+--- !u!114 &4127045971693777966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985761471291330172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408d441d8e135954bb8285ad8fa25454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objeys: []

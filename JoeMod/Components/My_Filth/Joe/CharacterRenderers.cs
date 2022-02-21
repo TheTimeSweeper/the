@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HenryMod.Modules;
+using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
@@ -21,10 +22,8 @@ namespace FacelessJoe {
 
         public void setHoopooShaders() {
 
-            Shader hotpoo = Resources.Load<Shader>("Shaders/Deferred/hgstandard");
-
             for (int i = 0; i < renderers.Count; i++) {
-                renderers[i].material.shader = hotpoo;
+                renderers[i].material.SetHotpooMaterial();
             }
         }
     }

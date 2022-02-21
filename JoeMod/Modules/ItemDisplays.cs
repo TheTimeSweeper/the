@@ -10,14 +10,19 @@ namespace HenryMod.Modules
 
         internal static void PopulateDisplays()
         {
-            PopulateFromBody("Commando");
-            PopulateFromBody("Croco");
-            PopulateFromBody("Mage");
+            PopulateFromBody("CommandoBody");
+            PopulateFromBody("CrocoBody");
+            PopulateFromBody("MageBody");
+            PopulateFromBody("LunarExploderBody");
         }
 
         private static void PopulateFromBody(string bodyName)
         {
-            ItemDisplayRuleSet itemDisplayRuleSet = Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyName + "Body").GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>().itemDisplayRuleSet;
+            ItemDisplayRuleSet itemDisplayRuleSet = Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyName)?.GetComponent<ModelLocator>()?.modelTransform.GetComponent<CharacterModel>()?.itemDisplayRuleSet;
+            if(itemDisplayRuleSet == null) {
+                Debug.LogError("couldn't load ItemDisplayRuleSet from " + bodyName + ". Check if name was entered correctly");
+                return;
+            }
 
             ItemDisplayRuleSet.KeyAssetRuleGroup[] item = itemDisplayRuleSet.keyAssetRuleGroups;
 
