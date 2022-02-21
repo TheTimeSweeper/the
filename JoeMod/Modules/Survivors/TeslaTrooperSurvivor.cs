@@ -33,7 +33,7 @@ namespace HenryMod.Modules.Survivors
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal override ConfigEntry<bool> characterEnabled => null;
+        internal override ConfigEntry<bool> characterEnabledConfig => null;
 
         internal static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
         internal static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
@@ -69,12 +69,16 @@ namespace HenryMod.Modules.Survivors
 
         private static UnlockableDef masterySkinUnlockableDef;
 
-        internal override void InitializeCharacter() 
-        {
-            base.InitializeCharacter();
-            States.entityStates.Add(typeof(TeslaTrooperMain));
+        protected override void InitializeCharacterBody() {
+            base.InitializeCharacterBody();
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
             bodyPrefab.AddComponent<TeslaCoilControllerController>();
+        }
+
+        protected override void InitializeEntityStateMachine() {
+            base.InitializeEntityStateMachine();
+
+            States.entityStates.Add(typeof(TeslaTrooperMain));
         }
 
         internal override void InitializeUnlockables()

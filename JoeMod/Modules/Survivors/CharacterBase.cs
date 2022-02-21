@@ -15,7 +15,7 @@ namespace HenryMod.Modules.Characters {
         internal abstract int mainRendererIndex { get; }
         internal abstract CustomRendererInfo[] customRendererInfos { get; set; }
 
-        internal abstract Type characterMainState { get; }
+        internal abstract Type characterMainState { get; } 
 
         internal abstract ItemDisplaysBase itemDisplays { get; }
 
@@ -34,10 +34,11 @@ namespace HenryMod.Modules.Characters {
             InitializeCharacterMaster();
             InitializeCharacterModel();
 
+            InitializeEntityStateMachine();
+            InitializeSkills();
+
             InitializeHitboxes();
             InitializeHurtboxes();
-
-            InitializeSkills();
 
             InitializeSkins();
             InitializeItemDisplays();
@@ -48,14 +49,15 @@ namespace HenryMod.Modules.Characters {
 
         protected virtual void InitializeCharacterBody() {
             bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
-            bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
         }
-
         protected virtual void InitializeCharacterMaster() {
         }
-
         protected virtual void InitializeCharacterModel() {
             characterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
+        }
+
+        protected virtual void InitializeEntityStateMachine() {
+            bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
         }
 
         internal abstract void InitializeSkills();

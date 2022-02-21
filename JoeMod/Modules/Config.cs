@@ -13,7 +13,7 @@ namespace HenryMod.Modules
                 "Debug",
                 "logs",
                 false,
-                "so I don't forget to turn delete them when I push").Value;
+                "in case I forget to delete them when I upload").Value;
         }
 
         // this helper automatically makes config entries for disabling survivors

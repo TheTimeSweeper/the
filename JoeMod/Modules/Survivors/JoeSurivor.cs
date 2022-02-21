@@ -46,14 +46,14 @@ namespace HenryMod.Modules.Survivors
         internal override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
 
         internal override UnlockableDef characterUnlockableDef { get; }
-        internal override ConfigEntry<bool> characterEnabled => Modules.Config.CharacterEnableConfig(bodyName, false, "Very in-dev test character that was used as a basis for tesla trooper. Enable for fun");
+
+        internal override ConfigEntry<bool> characterEnabledConfig => Modules.Config.CharacterEnableConfig(bodyName, false, "Very in-dev test character that was used as a basis for tesla trooper. Enable for fun");
 
         private static UnlockableDef masterySkinUnlockableDef;
 
-        internal override void InitializeCharacter() 
-        {
-            base.InitializeCharacter();
-            Helpers.LogWarning(characterEnabled.Value);
+        protected override void InitializeCharacterBody() {
+            base.InitializeCharacterBody();
+
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
         }
 

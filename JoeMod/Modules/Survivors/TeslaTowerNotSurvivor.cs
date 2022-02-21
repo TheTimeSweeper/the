@@ -6,14 +6,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using JoeMod.ModdedEntityStates.TeslaTrooper;
 using HenryMod.Modules.Characters;
+using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
 
 namespace HenryMod.Modules.Survivors {
-    internal class TeslaTowerNotSurvivor : SurvivorBase {
-        internal override string bodyName { get; } = "TeslaTrooper";
-
-        internal override float sortPosition { get; } = 69f;
-
-        internal override ConfigEntry<bool> characterEnabled { get; } = null;
+    internal class TeslaTowerNotSurvivor : CharacterBase {
+        internal override string bodyName => "TeslaTower";
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             armor = 10f,
@@ -32,35 +29,11 @@ namespace HenryMod.Modules.Survivors {
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
-        internal static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
-
-        internal override int mainRendererIndex { get => customRendererInfos.Length - 1; }
+        internal override int mainRendererIndex => 13;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; }
 
-            = new CustomRendererInfo[]
-            {
-                new CustomRendererInfo
-                {
-                    childName = "meshTeslaBody",
-                    material = matTeslaBody,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "meshTeslaArmor",
-                    material = matTeslaArmor,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "meshTeslaHammer",
-                    material = Materials.CreateHotpooMaterial("MatHammer"),
-                },
-            };
-
-        internal override Type characterMainState { get; } = typeof(TeslaTrooperMain);
-
-        internal override UnlockableDef characterUnlockableDef { get; }
+        internal override Type characterMainState => typeof(TowerIdleSearch);
 
         internal override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
@@ -68,13 +41,8 @@ namespace HenryMod.Modules.Survivors {
 
         internal override void InitializeCharacter() {
             base.InitializeCharacter();
-            States.entityStates.Add(typeof(TeslaTrooperMain));
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
             bodyPrefab.AddComponent<TeslaCoilControllerController>();
-        }
-
-        internal override void InitializeUnlockables() {
-            //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
         }
 
         internal override void InitializeDoppelganger() {

@@ -12,17 +12,19 @@ namespace HenryMod.Modules.Survivors {
 
         internal abstract UnlockableDef characterUnlockableDef { get; }
 
-        internal abstract ConfigEntry<bool> characterEnabled { get; }
+        internal abstract ConfigEntry<bool> characterEnabledConfig { get; }
+
         internal virtual GameObject displayPrefab { get; set; }
 
         internal override void InitializeCharacter() {
-            Helpers.LogWarning($"{characterEnabled != null} | {!(characterEnabled != null && characterEnabled.Value)}");
-            if (!(characterEnabled != null && characterEnabled.Value)) {
-                base.InitializeCharacter();
 
-                InitializeSurvivor();
-                InitializeUnlockables();
-            }
+            if (characterEnabledConfig != null && !characterEnabledConfig.Value)
+                return;
+
+            base.InitializeCharacter();
+
+            InitializeSurvivor();
+            InitializeUnlockables();
         }
 
         protected virtual void InitializeSurvivor() {

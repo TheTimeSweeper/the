@@ -83,6 +83,7 @@ namespace HenryMod.Modules
             {
                 model = Assets.LoadSurvivorModel(modelName);
                 if (model == null) model = newPrefab.GetComponentInChildren<CharacterModel>().gameObject;
+
                 modelBaseTransform = AddBodyCharacterModel(newPrefab, model.transform, bodyInfo);
             }
 
@@ -183,7 +184,7 @@ namespace HenryMod.Modules
 
             Transform cameraPivot = bodyPrefab.transform.Find("CameraPivot");
             cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
-
+            
             Transform aimOrigin = bodyPrefab.transform.Find("AimOrigin");
             aimOrigin.localPosition = bodyInfo.aimOriginPosition;
 
