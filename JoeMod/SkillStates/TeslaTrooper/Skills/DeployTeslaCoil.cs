@@ -30,7 +30,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         private bool ConstructionComplete;
 
         private BlueprintController blueprints;
-        
+        private GameObject coilMasterPrefab = HenryMod.Modules.Survivors.TeslaTowerNotSurvivor.masterPrefab;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -86,6 +87,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
                             constructCoil();
 
+                            //I am fucking exploding right now
+                            Util.PlaySound("Play_buliding_uplace", gameObject);
+
                             //base.PlayAnimation("Gesture, Override", "HandOut");
                             ConstructionComplete = true;
 
@@ -96,8 +100,6 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
                                 }
                             }
                         }
-                        //I am fucking exploding right now
-                        Util.PlaySound("Play_buliding_uplace", gameObject);
                         DestroyBlueprints();
                         exitPending = true;
                     }
@@ -112,27 +114,10 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         private void constructCoil() {
 
-            //base.characterBody.SendConstructTurret(base.characterBody, 
-            //                                       this.currentPlacementInfo.position, 
-            //                                       this.currentPlacementInfo.rotation, 
-            //                                       MasterCatalog.FindMasterIndex(this.turretMasterPrefab));
-            //GameObject coil = R2API.PrefabAPI.InstantiateClone(teslacoilPrefab, "TestlaCoil", true);
-            R2API.PrefabAPI.RegisterNetworkPrefab(teslacoilPrefab);
-            GameObject coil = Object.Instantiate(teslacoilPrefab);
-            UnityEngine.Networking.NetworkServer.Spawn(coil);
-            coil.transform.position = currentPlacementInfo.position;
-            coil.transform.rotation = currentPlacementInfo.rotation;
-            coil.GetComponent<TeamFilter>().teamIndex = teamComponent.teamIndex; //todo: coil character teamcomponent
-            coil.GetComponent<GenericOwnership>().ownerObject = gameObject;
-
-            EntityStateMachine machine = coil.GetComponent<EntityStateMachine>();
-            machine.customName = "Coil";
-
-            SerializableEntityStateType idleState = new SerializableEntityStateType(typeof(Tower.TowerIdleSearch));
-            machine.initialStateType = idleState;
-            machine.mainStateType = idleState;
-
-            GetComponent<TeslaCoilControllerController>().addCoil(coil);
+            base.characterBody.SendConstructTurret(base.characterBody, 
+                                                   currentPlacementInfo.position, 
+                                                   currentPlacementInfo.rotation, 
+                                                   MasterCatalog.FindMasterIndex(coilMasterPrefab));
         }
 
         public override void OnExit()

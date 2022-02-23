@@ -27,7 +27,7 @@ namespace HenryMod {
     public class FacelessJoePlugin : BaseUnityPlugin
     {
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
-        public const string MODNAME = "FacelessJoe";
+        public const string MODNAME = "Tesla Trooper";
         public const string MODVERSION = "0.1.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -47,6 +47,7 @@ namespace HenryMod {
             // load assets and read config
             Modules.Assets.Initialize();
             Modules.Config.ReadConfig();
+            Modules.Compat.Initialize();
             Modules.States.RegisterStates(); // register states for networking
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
             Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
@@ -56,7 +57,7 @@ namespace HenryMod {
             // survivor initialization
             new JoeSurivor().Initialize();
 
-            //new TeslaTowerNotSurvivor().Initialize();
+            new TeslaTowerNotSurvivor().Initialize();
 
             //todo compiler flags when
             new TeslaTrooperSurvivor().Initialize();
@@ -82,7 +83,7 @@ namespace HenryMod {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
 
-            On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation; ;
+            On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
         }
 
         private void ThrowGrenade_PlayAnimation(On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.orig_PlayAnimation orig, global::EntityStates.Commando.CommandoWeapon.ThrowGrenade self, float duration) {

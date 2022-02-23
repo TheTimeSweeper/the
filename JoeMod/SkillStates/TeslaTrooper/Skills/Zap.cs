@@ -5,22 +5,22 @@ using RoR2.Orbs;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
     public class Zap : BaseTimedSkillState
     {
-
         //todo less damage on allies
         //and more bounce range
         #region Gameplay Values
-        public static float DamageCoefficient = 1.2f;
+        public static float DamageCoefficient = 1f;
         public static float BounceDamageMultplier = 0.69f;
         public static float ProcCoefficient = 1f;
         public static int OrbCasts = 3;
         public static float BounceDistance = 20;
 
-        public static float BaseDuration = 1.2f;
+        public static float BaseDuration = 1f;
         public static float BaseCastTime = 0.05f;//todo anim
         #endregion
 
@@ -64,7 +64,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             }
         }
 
-        private LightningOrb.LightningType GetOrbColor
+        private LightningOrb.LightningType GetOrbType
         {
             get
             {
@@ -147,10 +147,11 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         {
             base.OnCastFixedUpdate();
 
-            while (_currentCasts < OrbCasts && fixedAge > nextCastTime)
-            {
-                FireZap();
-                _currentCasts++;
+            if (isAuthority) {
+                while (_currentCasts < OrbCasts && fixedAge > nextCastTime) {
+                    FireZap();
+                    _currentCasts++;
+                }
             }
         }
 
@@ -159,7 +160,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             if (_targetHurtbox)
             {
                 _lightningOrb.origin = GetOrbOrigin;
-                _lightningOrb.lightningType = GetOrbColor;
+                _lightningOrb.lightningType = GetOrbType;
                 OrbManager.instance.AddOrb(_lightningOrb);
                 //happens after firing to apply to spreads only
                 _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
@@ -171,9 +172,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             //muzzle flash on gauntle
             PlayAnimation("Gesture, Additive", "Shock");
 
-            string sound = "Play_trooper_itesat2a_tesla_trooper_attack";
+            string sound = "Play_itesatta";
             if (_lightningOrb.isCrit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
-            sound = "Play_itesmof";
             //sound = EntityStates.Mage.Weapon.FireLaserbolt.attackString;
             //todo sound wwise random sound
                 //oh wait the alt sound was the powered up one I think. 

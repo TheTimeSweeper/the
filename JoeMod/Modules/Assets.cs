@@ -353,5 +353,50 @@ namespace HenryMod.Modules {
                             .SetNormal(normalStrength);
         }
         #endregion materials(old)
+
+        #region materials new (simple)
+        //public static Material CreateHotpooMaterial(string materialName) {
+
+        //    //Material mat = UnityEngine.Object.Instantiate<Material>(Assets.commandoMat);
+        //    Material tempMat = Assets.LoadAsset<Material>(materialName);
+
+        //    if (!tempMat) {
+        //        Debug.LogError("Failed to load material: " + materialName + " - Check to see that the name in your Unity project matches the one in this code");
+        //        return new Material(Assets.hotpoo);
+        //    }
+
+        //    return new Material(tempMat).SetHotpooMaterial;
+        //}
+
+        //public static Material SetHotpooMaterial(this Material tempMat) {
+
+        //    float? bumpScale = null;
+        //    Color? emissionColor = null;
+
+        //    //grab values before the shader changes
+        //    if (tempMat.IsKeywordEnabled("_NORMALMAP")) {
+        //        bumpScale = tempMat.GetFloat("_BumpScale");
+        //    }
+        //    if (tempMat.IsKeywordEnabled("_EMISSION")) {
+        //        emissionColor = tempMat.GetColor("_EmissionColor");
+        //    }
+
+        //    tempMat.shader = Assets.hotpoo;
+
+        //    tempMat.SetColor("_Color", tempMat.GetColor("_Color"));
+        //    tempMat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
+        //    tempMat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+
+        //    if (bumpScale != null) {
+        //        tempMat.SetFloat("_NormalStrength", (float)bumpScale);
+        //    }
+        //    if (emissionColor != null) {
+        //        tempMat.SetColor("_EmColor", (Color)emissionColor);
+        //        tempMat.SetFloat("_EmPower", 1);
+        //    }
+
+        //    return tempMat;
+        //}
+        #endregion materials new (simple)
     }
 }

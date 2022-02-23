@@ -9,7 +9,7 @@ public class ArrayTransferTool : MonoBehaviour
     [SerializeField]
     private Renderer[] objeys;
 
-    [ContextMenu("send")]
+    [ContextMenu("send to rendererinfos")]
     public void sendObjects() {
 
         CharacterModel charaModel = GetComponent<CharacterModel>();
@@ -29,6 +29,7 @@ public class ArrayTransferTool : MonoBehaviour
             charaModel.baseRendererInfos[i] = new CharacterModel.RendererInfo {
                 renderer = objeys[i],
                 defaultMaterial = objeys[i].sharedMaterial,
+                defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
             };
         }
 

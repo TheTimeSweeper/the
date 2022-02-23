@@ -4,35 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace HenryMod.Modules.Characters {
-    internal abstract class CharacterBase {
+    public abstract class CharacterBase {
 
-        internal static CharacterBase instance;
+        public static CharacterBase instance;
 
-        internal abstract string bodyName { get; }
+        public abstract string bodyName { get; }
 
-        internal abstract BodyInfo bodyInfo { get; set; }
+        public abstract BodyInfo bodyInfo { get; set; }
 
-        internal abstract int mainRendererIndex { get; }
-        internal abstract CustomRendererInfo[] customRendererInfos { get; set; }
+        public abstract int mainRendererIndex { get; }
+        public abstract CustomRendererInfo[] customRendererInfos { get; set; }
 
-        internal abstract Type characterMainState { get; } 
+        public abstract Type characterMainState { get; }
+        public virtual Type characterSpawnState { get; }
 
-        internal abstract ItemDisplaysBase itemDisplays { get; }
+        public abstract ItemDisplaysBase itemDisplays { get; }
 
-        internal virtual GameObject bodyPrefab { get; set; }
-        internal virtual CharacterModel characterModel { get; set; }
-        internal string fullBodyName => bodyName + "Body";
+        public virtual GameObject bodyPrefab { get; set; }
+        public virtual CharacterModel characterModel { get; set; }
+        public string fullBodyName => bodyName + "Body";
 
-        internal virtual void Initialize() {
+        public virtual void Initialize() {
             instance = this;
             InitializeCharacter();
         }
 
-        internal virtual void InitializeCharacter() {
+        public virtual void InitializeCharacter() {
 
-            InitializeCharacterBody();
-            InitializeCharacterMaster();
+            InitializeCharacterBodyAndModel();
             InitializeCharacterModel();
+            InitializeCharacterMaster();
 
             InitializeEntityStateMachine();
             InitializeSkills();
@@ -47,35 +48,38 @@ namespace HenryMod.Modules.Characters {
             InitializeDoppelganger();
         }
 
-        protected virtual void InitializeCharacterBody() {
+        protected virtual void InitializeCharacterBodyAndModel() {
             bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
-        }
-        protected virtual void InitializeCharacterMaster() {
         }
         protected virtual void InitializeCharacterModel() {
             characterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
         }
 
+        protected virtual void InitializeCharacterMaster() { }
         protected virtual void InitializeEntityStateMachine() {
             bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
+            States.entityStates.Add(characterMainState);
+            if (characterSpawnState != null) {
+                bodyPrefab.GetComponent<EntityStateMachine>().initialStateType = new EntityStates.SerializableEntityStateType(characterSpawnState);
+                States.entityStates.Add(characterSpawnState);
+            }
         }
 
-        internal abstract void InitializeSkills();
+        public abstract void InitializeSkills();
 
-        internal virtual void InitializeHitboxes() {
+        public virtual void InitializeHitboxes() { }
+
+        public virtual void InitializeHurtboxes() {
+            Modules.Prefabs.SetupHurtBoxes(bodyPrefab);
         }
 
-        internal virtual void InitializeHurtboxes() {
-        }
+        public virtual void InitializeSkins() { }
 
-        internal virtual void InitializeSkins() {
-        }
-
-        internal virtual void InitializeDoppelganger() {
+        public virtual void InitializeDoppelganger() {
             Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", "Merc");
         }
 
-        internal virtual void InitializeItemDisplays() {
+        public virtual void InitializeItemDisplays() {
 
             ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
             itemDisplayRuleSet.name = "idrs" + bodyName;
@@ -83,7 +87,7 @@ namespace HenryMod.Modules.Characters {
             characterModel.itemDisplayRuleSet = itemDisplayRuleSet;
         }
 
-        internal void SetItemDisplays() {
+        public void SetItemDisplays() {
             itemDisplays.SetItemDIsplays(characterModel.itemDisplayRuleSet);
         }
 

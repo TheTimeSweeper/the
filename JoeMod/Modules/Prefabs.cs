@@ -19,6 +19,12 @@ namespace HenryMod.Modules
         internal static List<GameObject> masterPrefabs = new List<GameObject>();
         internal static List<GameObject> projectilePrefabs = new List<GameObject>();
 
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, null, 100f); }
+
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, float sortPosition) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, null, sortPosition); }
+
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, UnlockableDef unlockableDef) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, unlockableDef, 100f); }
+
         internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, UnlockableDef unlockableDef, float sortPosition)
         {
             string fullNameString = FacelessJoePlugin.developerPrefix + "_" + namePrefix + "_BODY_NAME";
@@ -39,12 +45,6 @@ namespace HenryMod.Modules
 
             survivorDefinitions.Add(survivorDef);
         }
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, null, 100f); }
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, float sortPosition) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, null, sortPosition); }
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, UnlockableDef unlockableDef) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, namePrefix, unlockableDef, 100f); }
 
         internal static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
@@ -84,7 +84,7 @@ namespace HenryMod.Modules
                 model = Assets.LoadSurvivorModel(modelName);
                 if (model == null) model = newPrefab.GetComponentInChildren<CharacterModel>().gameObject;
 
-                modelBaseTransform = AddBodyCharacterModel(newPrefab, model.transform, bodyInfo);
+                    modelBaseTransform = AddCharacterModelToSurvivorBody(newPrefab, model.transform, bodyInfo);
             }
 
             #region CharacterBody
@@ -143,15 +143,19 @@ namespace HenryMod.Modules
             bodyComponent.bodyColor = bodyInfo.bodyColor;
             #endregion
 
-            if (modelBaseTransform != null) SetupCharacterDirection(newPrefab, modelBaseTransform, model.transform);
-            SetupCameraTargetParams(newPrefab);
-            if (modelBaseTransform != null) SetupModelLocator(newPrefab, modelBaseTransform, model.transform);
-            SetupRigidbody(newPrefab);
+            SetupCameraTargetParams(newPrefab, bodyInfo);
+            SetupModelLocator(newPrefab, modelBaseTransform, model.transform);
+            //SetupRigidbody(newPrefab);
             SetupCapsuleCollider(newPrefab);
             SetupMainHurtbox(newPrefab, model);
-            SetupFootstepController(model);
-            SetupRagdoll(model);
+
             SetupAimAnimator(newPrefab, model);
+
+            if (bodyInfo.bodyNameToClone != "EngiTurret") {
+                if (modelBaseTransform != null) SetupCharacterDirection(newPrefab, modelBaseTransform, model.transform);
+                    SetupFootstepController(model);
+                    SetupRagdoll(model);
+            }
 
             bodyPrefabs.Add(newPrefab);
 
@@ -167,31 +171,63 @@ namespace HenryMod.Modules
         }
 
         #region ModelSetup
-        private static Transform AddBodyCharacterModel(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) 
-        {
 
-            Object.DestroyImmediate(bodyPrefab.transform.Find("ModelBase").gameObject);
+        private static Transform AddCharacterModelToTurretBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) {
 
-            GameObject modelBase = new GameObject("ModelBase");
-            modelBase.transform.parent = bodyPrefab.transform;
-            modelBase.transform.localPosition = bodyInfo.modelBasePosition;
-            modelBase.transform.localRotation = Quaternion.identity;
-            modelBase.transform.localScale = new Vector3(1f, 1f, 1f);
+            Object.DestroyImmediate(bodyPrefab.transform.Find("Model Base").gameObject);
+
+            Transform modelBase = new GameObject("ModelBase").transform;
+            modelBase.parent = bodyPrefab.transform;
+            modelBase.localPosition = bodyInfo.modelBasePosition;
 
             modelTransform.parent = modelBase.transform;
             modelTransform.localPosition = Vector3.zero;
             modelTransform.localRotation = Quaternion.identity;
 
-            Transform cameraPivot = bodyPrefab.transform.Find("CameraPivot");
+            Transform cameraPivot = new GameObject("CameraPivot").transform;
+            cameraPivot.parent = modelBase.transform;
             cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
-            
-            Transform aimOrigin = bodyPrefab.transform.Find("AimOrigin");
-            aimOrigin.localPosition = bodyInfo.aimOriginPosition;
+            cameraPivot.localRotation = Quaternion.identity;
 
+            Transform aimOrigin = new GameObject("AimOrigin").transform;
+            aimOrigin.parent = modelTransform;
+            aimOrigin.localPosition = bodyInfo.aimOriginPosition;
+            aimOrigin.localRotation = Quaternion.identity;
+
+            return modelBase.transform;
+        }
+
+        private static Transform AddCharacterModelToSurvivorBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) 
+        {
+            for (int i = bodyPrefab.transform.childCount - 1; i >= 0; i--) {
+
+                Object.DestroyImmediate(bodyPrefab.transform.GetChild(i).gameObject);
+            }
+
+            Transform modelBase = new GameObject("ModelBase").transform;
+            modelBase.parent = bodyPrefab.transform;
+            modelBase.localPosition = bodyInfo.modelBasePosition;
+            modelBase.localRotation = Quaternion.identity;
+
+            modelTransform.parent = modelBase.transform;
+            modelTransform.localPosition = Vector3.zero;
+            modelTransform.localRotation = Quaternion.identity;
+
+            GameObject cameraPivot = new GameObject("CameraPivot");
+            cameraPivot.transform.parent = bodyPrefab.transform;
+            cameraPivot.transform.localPosition = bodyInfo.cameraPivotPosition;
+            cameraPivot.transform.localRotation = Quaternion.identity;
+
+            GameObject aimOrigin = new GameObject("AimOrigin");
+            aimOrigin.transform.parent = bodyPrefab.transform;
+            aimOrigin.transform.localPosition = bodyInfo.aimOriginPosition;
+            aimOrigin.transform.localRotation = Quaternion.identity;
+            bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform = aimOrigin.transform;
 
             return modelBase.transform;
         }
         internal static CharacterModel SetupCharacterModel(GameObject prefab, int mainRendererIndex) => SetupCharacterModel(prefab, null, mainRendererIndex);
+        
         internal static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex) {
 
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
@@ -263,6 +299,9 @@ namespace HenryMod.Modules
         #region ComponentSetup
         private static void SetupCharacterDirection(GameObject prefab, Transform modelBaseTransform, Transform modelTransform)
         {
+            if (!prefab.GetComponent<CharacterDirection>())
+                return;
+
             CharacterDirection characterDirection = prefab.GetComponent<CharacterDirection>();
             characterDirection.targetTransform = modelBaseTransform;
             characterDirection.overrideAnimatorForwardTransform = null;
@@ -272,15 +311,12 @@ namespace HenryMod.Modules
             characterDirection.turnSpeed = 720f;
         }
 
-        private static void SetupCameraTargetParams(GameObject prefab)
+        private static void SetupCameraTargetParams(GameObject prefab, BodyInfo bodyInfo)
         {
             CameraTargetParams cameraTargetParams = prefab.GetComponent<CameraTargetParams>();
-            cameraTargetParams.cameraParams = Resources.Load<GameObject>("Prefabs/CharacterBodies/LoaderBody").GetComponent<CameraTargetParams>().cameraParams;
-            cameraTargetParams.cameraPivotTransform = prefab.transform.Find("ModelBase").Find("CameraPivot");
+            cameraTargetParams.cameraParams = bodyInfo.cameraParams;
+            cameraTargetParams.cameraPivotTransform = prefab.transform.Find("CameraPivot");
             cameraTargetParams.aimMode = CameraTargetParams.AimType.Standard;
-            cameraTargetParams.recoil = Vector2.zero;
-            cameraTargetParams.idealLocalCameraPos = Vector3.zero;
-            cameraTargetParams.dontRaycastToPivot = false;
         }
 
         private static void SetupModelLocator(GameObject prefab, Transform modelBaseTransform, Transform modelTransform)
@@ -290,14 +326,13 @@ namespace HenryMod.Modules
             modelLocator.modelBaseTransform = modelBaseTransform;
         }
 
-        private static void SetupRigidbody(GameObject prefab)
-        {
-            Rigidbody rigidbody = prefab.GetComponent<Rigidbody>();
-            rigidbody.mass = 100f;
-        }
+        //private static void SetupRigidbody(GameObject prefab)
+        //{
+        //    Rigidbody rigidbody = prefab.GetComponent<Rigidbody>();
+        //    rigidbody.mass = 100f;
+        //}
 
-        private static void SetupCapsuleCollider(GameObject prefab)
-        {
+        private static void SetupCapsuleCollider(GameObject prefab) {
             CapsuleCollider capsuleCollider = prefab.GetComponent<CapsuleCollider>();
             capsuleCollider.center = new Vector3(0f, 0f, 0f);
             capsuleCollider.radius = 0.5f;
@@ -311,7 +346,7 @@ namespace HenryMod.Modules
 
             if (!childLocator.FindChild("MainHurtbox"))
             {
-                Debug.LogError("Could not set up main hurtbox: make sure you have a transform pair in your prefab's ChildLocator component called 'MainHurtbox'");
+                Helpers.LogWarning("Could not set up main hurtbox: make sure you have a transform pair in your prefab's ChildLocator component called 'MainHurtbox'");
                 return;
             }
 
@@ -331,6 +366,18 @@ namespace HenryMod.Modules
 
             hurtBoxGroup.mainHurtBox = mainHurtbox;
             hurtBoxGroup.bullseyeCount = 1;
+        }
+
+        internal static void SetupHurtBoxes(GameObject bodyPrefab) {
+
+            HealthComponent healthComponent = bodyPrefab.GetComponent<HealthComponent>();
+
+            foreach (HurtBoxGroup hurtboxGroup in bodyPrefab.GetComponentsInChildren<HurtBoxGroup>()) {
+                hurtboxGroup.mainHurtBox.healthComponent = healthComponent;
+                for (int i = 0; i < hurtboxGroup.hurtBoxes.Length; i++) {
+                    hurtboxGroup.hurtBoxes[i].healthComponent = healthComponent;
+                }
+            }
         }
 
         private static void SetupFootstepController(GameObject model)
@@ -410,68 +457,95 @@ namespace HenryMod.Modules
 
             hitBoxGroup.groupName = hitboxName;
         }
+
         #endregion ComponentSetup
     }
 }
 
 // for simplifying characterbody creation
-internal class BodyInfo
+public class BodyInfo
 {
-    internal string bodyName = "";
-    internal string bodyNameToken = "";
-    internal string subtitleNameToken = "";
+    public string bodyName = "";
+    public string bodyNameToken = "";
+    public string subtitleNameToken = "";
     /// <summary>
     /// body prefab you're cloning for your character- commando is the safest
     /// </summary>
-    internal string bodyNameToClone = "Commando";
+    public string bodyNameToClone = "Commando";
 
-    internal Texture characterPortrait = null;
+    public Texture characterPortrait = null;
 
-    internal GameObject crosshair = null;
-    internal GameObject podPrefab = null;
+    public GameObject crosshair = null;
+    public GameObject podPrefab = null;
 
-    internal float maxHealth = 100f;
-    internal float healthGrowth = 2f;
+    public float maxHealth = 100f;
+    public float healthGrowth = 2f;
 
-    internal float healthRegen = 0f;
+    public float healthRegen = 0f;
     /// <summary>
     /// base shield is a thing apparently. neat
     /// </summary>
-    internal float shield = 0f;
-    internal float shieldGrowth = 0f;
+    public float shield = 0f;
+    public float shieldGrowth = 0f;
 
-    internal float moveSpeed = 7f;
-    internal float moveSpeedGrowth = 0f;
+    public float moveSpeed = 7f;
+    public float moveSpeedGrowth = 0f;
+    
+    public float acceleration = 80f;
 
-    internal float acceleration = 80f;
+    public float jumpPower = 15f;
+    public float jumpPowerGrowth = 0f;// jump power per level exists for some reason
 
-    internal float jumpPower = 15f;
-    internal float jumpPowerGrowth = 0f;// jump power per level exists for some reason
+    public float damage = 12f;
 
-    internal float damage = 12f;
+    public float attackSpeed = 1f;
+    public float attackSpeedGrowth = 0f;
 
-    internal float attackSpeed = 1f;
-    internal float attackSpeedGrowth = 0f;
+    public float armor = 0f;
+    public float armorGrowth = 0f;
 
-    internal float armor = 0f;
-    internal float armorGrowth = 0f;
+    public float crit = 1f;
+    public float critGrowth = 0f;
 
-    internal float crit = 1f;
-    internal float critGrowth = 0f;
+    public int jumpCount = 1;
 
-    internal int jumpCount = 1;
+    public Color bodyColor = Color.grey;
 
-    internal Color bodyColor = Color.grey;
+    public Vector3 modelBasePosition = new Vector3(0f, -0.92f, 0f);
+    public Vector3 cameraPivotPosition = new Vector3(0f, 1.6f, 0f);
+    public Vector3 aimOriginPosition = new Vector3(0f, 2.5f, 0f);
 
-    internal Vector3 aimOriginPosition = new Vector3(0f, 1.8f, 0f);
-    internal Vector3 modelBasePosition = new Vector3(0f, -0.92f, 0f);
-    internal Vector3 cameraPivotPosition = new Vector3(0f, 1.6f, 0f);
+    public float cameraParamsVerticalOffset = 0.5f;
+    public float cameraParamsDepth = -12;
+
+    private CharacterCameraParams _cameraParams;
+    public CharacterCameraParams cameraParams {
+        get {
+            if (_cameraParams == null) {
+                _cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
+                _cameraParams.minPitch = -70;
+                _cameraParams.maxPitch = 70;
+                _cameraParams.wallCushion = 0.1f;
+                _cameraParams.pivotVerticalOffset = cameraParamsVerticalOffset;
+                _cameraParams.standardLocalCameraPos = new Vector3(0, 0, cameraParamsDepth);
+            }
+            return _cameraParams;
+        }
+        set => _cameraParams = value;
+    }
+    
+    public float SurvivorHeightToSet {
+        //todo dynamically set good camera params based on a height that you want
+        set {
+            float height = value;
+        }
+    }
 }
 
 // for simplifying rendererinfo creation
-internal class CustomRendererInfo
+public class CustomRendererInfo
 {
-    internal string childName;
-    internal Material material;
-    internal bool ignoreOverlays;
+    public string childName;
+    public Material material;
+    public bool ignoreOverlays;
 }

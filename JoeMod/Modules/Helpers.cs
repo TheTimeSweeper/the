@@ -46,7 +46,7 @@ namespace HenryMod.Modules
 
         public static void Log (object message, bool chat = false) {
 
-            if (Modules.Config.DebugLogs) {
+            if (Modules.Config.Debug) {
                 FacelessJoePlugin.Log.LogMessage(message);
 
                 if (chat) {
@@ -57,7 +57,7 @@ namespace HenryMod.Modules
 
         public static void LogWarning(object message, bool chat = false) {
 
-            if (Modules.Config.DebugLogs) {
+            if (Modules.Config.Debug) {
                 FacelessJoePlugin.Log.LogWarning(message);
 
                 if (chat) {
@@ -120,7 +120,8 @@ namespace HenryMod.Modules
                     break;
             }
             UnityEngine.Debug.LogWarning("uh " + voiceLineString);
-            return RoR2.Util.PlaySound(voiceLineString, gameObject);
+
+            return RoR2.Util.PlaySound(voiceLineString, gameObject, "Volume_TeslaVoice", 100);
         }
     }
 

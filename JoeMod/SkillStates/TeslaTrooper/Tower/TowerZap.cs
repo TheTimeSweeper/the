@@ -24,19 +24,19 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
         protected string zapSound = ZapSound;
         protected string zapSoundCrit = ZapSoundCrit;
 
-        protected float ownerDamage {
+        //protected float ownerDamage {
             
-            get {
-                float damage = 1;
+        //    get {
+        //        float damage = 1;
 
-                CharacterBody body = GetComponent<GenericOwnership>()?.ownerObject.GetComponent<CharacterBody>();
-                if (body) {
-                    damage = body.damage;
-                }
+        //        CharacterBody body = GetComponent<GenericOwnership>()?.ownerObject.GetComponent<CharacterBody>();
+        //        if (body) {
+        //            damage = body.damage;
+        //        }
 
-                return damage;
-            }
-        }
+        //        return damage;
+        //    }
+        //}
 
         public override void OnEnter()
         {
@@ -46,13 +46,13 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
             InitDurationValues(BaseDuration, BaseStartCastTime);
 
             lightningOrb = new LightningOrb {
-                origin = GetComponent<ChildLocator>().FindChild("Orb").position,//todo coil master base.GetModelChildLocator().FindChild("Orb").position,
-                damageValue = DamageCoefficient * ownerDamage,
+                origin = base.GetModelChildLocator().FindChild("Orb").position,
+                damageValue = DamageCoefficient * damageStat,
                 isCrit = RollCrit(),
                 //bouncesRemaining = 1,
                 //damageCoefficientPerBounce = BounceDamageMultplier,
                 //damageType = DamageType.SlowOnHit,
-                teamIndex = GetComponent<TeamFilter>().teamIndex,//teamComponent.teamIndex, //todo coil character teamcomponent
+                teamIndex = teamComponent.teamIndex,
                 attacker = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
@@ -65,8 +65,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
 
             lightningOrb.target = lightningTarget;
             
-            PlaySoundAuthority(PrepSound);
-            PlayAnimationOnAnimator(gameObject.GetComponentInChildren<Animator>(), "weapon", "PrepZap", "prep.playbackRate", base.duration);
+            Util.PlaySound(PrepSound, gameObject);
+            PlayAnimation("weapon", "PrepZap", "prep.playbackRate", base.duration);
             //playanimation or however I'm going to do the glow going up the pole
                 //and the orb glowing
         }
@@ -81,7 +81,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
             string sound = ZapSound;
             if (lightningOrb.isCrit) sound = ZapSoundCrit;
 
-            PlaySoundAuthority(sound);
+            Util.PlaySound(sound, gameObject);
+
+            //PlaySoundAuthority(sound);
             //playsound zap
         }
 

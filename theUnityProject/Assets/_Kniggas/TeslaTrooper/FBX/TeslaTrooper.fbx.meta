@@ -94,6 +94,8 @@ ModelImporter:
     100176: thumb.03.R_end
     100178: toe.L_end
     100180: toe.R_end
+    100182: forearm.Gauntlet.R
+    100184: meshTeslaArmor_Gauntlet
     400000: hammor
     400002: //RootNode
     400004: TeslaTrooperJumpsuit
@@ -185,6 +187,8 @@ ModelImporter:
     400176: thumb.03.R_end
     400178: toe.L_end
     400180: toe.R_end
+    400182: forearm.Gauntlet.R
+    400184: meshTeslaArmor_Gauntlet
     2100000: No Name
     2100002: Material.002
     2100004: Material.001
@@ -201,6 +205,7 @@ ModelImporter:
     4300004: TeslaTropperArmor
     4300006: meshTeslaBody
     4300008: meshTeslaArmor
+    4300010: meshTeslaArmor_Gauntlet
     7400000: Armature|DefaultPose
     7400002: Armature|GreatJobKomrade
     7400004: Armature|Idle
@@ -215,11 +220,15 @@ ModelImporter:
     7400022: Armature|HeadYaw
     7400024: Armature|CastShield
     7400026: Armature|AimYaw
+    7400028: Armature|WalkL
+    7400030: Armature|WalkR
+    7400032: Armature|WalkB
     9500000: //RootNode
     13700000: TeslaTrooperJumpsuit
     13700002: TeslaTropperArmor
     13700004: meshTeslaArmor
     13700006: meshTeslaBody
+    13700008: meshTeslaArmor_Gauntlet
     2186277476908879412: ImportLogs
   externalObjects:
   - first:
@@ -523,6 +532,90 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 1
       loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.5
+    - serializedVersion: 16
+      name: Armature|WalkL
+      takeName: Armature|WalkL
+      firstFrame: 0
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 1
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.5
+    - serializedVersion: 16
+      name: Armature|WalkR
+      takeName: Armature|WalkR
+      firstFrame: 0
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 1
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.5
+    - serializedVersion: 16
+      name: Armature|WalkB
+      takeName: Armature|WalkB
+      firstFrame: 0
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 1
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

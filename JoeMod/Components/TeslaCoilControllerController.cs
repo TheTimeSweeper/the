@@ -33,10 +33,10 @@ public class TeslaCoilControllerController : MonoBehaviour {
 
     public void addCoil(GameObject gameObject) {
         teslaCoils.Add(gameObject);
+    }
 
-        while (teslaCoils.Count > maxCoils) {
-            destroyCoil();
-        }
+    public void removeCoil(GameObject gameObject) {
+        teslaCoils.Remove(gameObject);
     }
 
     public void destroyCoil() {

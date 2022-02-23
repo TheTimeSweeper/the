@@ -12,46 +12,49 @@ namespace HenryMod.Modules
         internal static List<SkillFamily> skillFamilies = new List<SkillFamily>();
         internal static List<SkillDef> skillDefs = new List<SkillDef>();
 
-        internal static void CreateSkillFamilies(GameObject targetPrefab)
-        {
-            foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>())
-            {
+        internal static void CreateSkillFamilies(GameObject targetPrefab, int i = 4) {
+            foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>()) {
                 FacelessJoePlugin.DestroyImmediate(obj);
             }
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
-            skillLocator.primary = targetPrefab.AddComponent<GenericSkill>();
-            SkillFamily primaryFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            (primaryFamily as ScriptableObject).name = targetPrefab.name + "PrimaryFamily";
-            primaryFamily.variants = new SkillFamily.Variant[0];
-            skillLocator.primary._skillFamily = primaryFamily;
 
-            skillLocator.secondary = targetPrefab.AddComponent<GenericSkill>();
-            SkillFamily secondaryFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            (secondaryFamily as ScriptableObject).name = targetPrefab.name + "SecondaryFamily";
-            secondaryFamily.variants = new SkillFamily.Variant[0];
-            skillLocator.secondary._skillFamily = secondaryFamily;
 
-            skillLocator.utility = targetPrefab.AddComponent<GenericSkill>();
-            SkillFamily utilityFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            (utilityFamily as ScriptableObject).name = targetPrefab.name + "UtilityFamily";
-            utilityFamily.variants = new SkillFamily.Variant[0];
-            skillLocator.utility._skillFamily = utilityFamily;
+            if (i < 1)
+                return;
+            skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
 
-            skillLocator.special = targetPrefab.AddComponent<GenericSkill>();
-            SkillFamily specialFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            (specialFamily as ScriptableObject).name = targetPrefab.name + "SpecialFamily";
-            specialFamily.variants = new SkillFamily.Variant[0];
-            skillLocator.special._skillFamily = specialFamily;
+            if (i < 2)
+                return;
+            skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
 
-            skillFamilies.Add(primaryFamily);
-            skillFamilies.Add(secondaryFamily);
-            skillFamilies.Add(utilityFamily);
-            skillFamilies.Add(specialFamily);
+            if (i < 3)
+                return;
+            skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
+
+            if (i < 4)
+                return;
+            skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
+        }
+
+        private static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName) {
+
+            GenericSkill skill = targetPrefab.AddComponent<GenericSkill>();
+            skill.skillName = targetPrefab.name + familyName;
+
+            SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            (newFamily as ScriptableObject).name = targetPrefab.name + familyName + "Family";
+            newFamily.variants = new SkillFamily.Variant[0];
+
+            skill._skillFamily = newFamily;
+
+            skillFamilies.Add(newFamily);
+            return skill;
         }
 
         // this could all be a lot cleaner but at least it's simple and easy to work with
+        // todo: this could all be a lot cleaner but at least it's simple and easy to work with
         internal static void AddPrimarySkill(GameObject targetPrefab, SkillDef skillDef) {
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
@@ -125,15 +128,12 @@ namespace HenryMod.Modules
             };
         }
 
-        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile) {
-            return CreatePrimarySkillDef(state, stateMachine, skillNameToken, skillDescriptionToken, skillIcon, agile, false);
-        }
-
-        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile, bool keypress)
+        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillName, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile)
         {
             SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
 
-            skillDef.skillName = skillNameToken;
+            skillDef.skillName = skillName;
+            (skillDef as ScriptableObject).name = skillName;
             skillDef.skillNameToken = skillNameToken;
             skillDef.skillDescriptionToken = skillDescriptionToken;
             skillDef.icon = skillIcon;
@@ -149,7 +149,7 @@ namespace HenryMod.Modules
             skillDef.interruptPriority = InterruptPriority.Any;
             skillDef.resetCooldownTimerOnUse = false;
             skillDef.isCombatSkill = true;
-            skillDef.mustKeyPress = keypress;
+            skillDef.mustKeyPress = false;
             skillDef.cancelSprintingOnActivation = !agile;
             skillDef.rechargeStock = 1;
             skillDef.requiredStock = 0;
@@ -167,6 +167,7 @@ namespace HenryMod.Modules
             SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
 
             skillDef.skillName = skillDefInfo.skillName;
+            (skillDef as ScriptableObject).name = skillDefInfo.skillName;
             skillDef.skillNameToken = skillDefInfo.skillNameToken;
             skillDef.skillDescriptionToken = skillDefInfo.skillDescriptionToken;
             skillDef.icon = skillDefInfo.skillIcon;

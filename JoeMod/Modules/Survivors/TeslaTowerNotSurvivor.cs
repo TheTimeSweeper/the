@@ -7,91 +7,134 @@ using UnityEngine;
 using JoeMod.ModdedEntityStates.TeslaTrooper;
 using HenryMod.Modules.Characters;
 using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
+using EntityStates;
+using R2API;
+using RoR2.CharacterAI;
 
 namespace HenryMod.Modules.Survivors {
-    internal class TeslaTowerNotSurvivor : CharacterBase {
-        internal override string bodyName => "TeslaTower";
+    public class TeslaTowerNotSurvivor : CharacterBase {
+        public override string bodyName => "TeslaTower";
 
-        internal override BodyInfo bodyInfo { get; set; } = new BodyInfo {
-            armor = 10f,
+        public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
+            armor = 1200f,
             armorGrowth = 0f,
-            bodyName = "TeslaTrooperBody",
-            bodyNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_NAME",
+            bodyName = "TeslaTowerBody",
+            bodyNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_NAME",
+            bodyNameToClone = "EngiTurret",
             bodyColor = new Color(0.8f, 2, 2),
-            characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTower"),
             crosshair = Modules.Assets.LoadCrosshair("TiltedBracket"),
-            damage = 13f,
+            damage = 24f,
             healthGrowth = 33f,
             healthRegen = 1.5f,
-            jumpCount = 1,
-            maxHealth = 150f,
-            subtitleNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_SUBTITLE",
-            podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
+            jumpCount = 0,
+            maxHealth = 200f,
+            subtitleNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_SUBTITLE",
+            podPrefab = null,
+            moveSpeed = 0,
+            
+            aimOriginPosition = new Vector3( 0, 10, 0),
+            cameraPivotPosition = new Vector3(0, 9, 0),
+            cameraParamsVerticalOffset = 20,
+            cameraParamsDepth= -20
         };
+        
+        public override int mainRendererIndex => 13;
 
-        internal override int mainRendererIndex => 13;
+        public override CustomRendererInfo[] customRendererInfos { get; set; }
 
-        internal override CustomRendererInfo[] customRendererInfos { get; set; }
+        public override Type characterMainState => typeof(TowerIdleSearch);
+        public override Type characterSpawnState => typeof(TowerSpawnState);
 
-        internal override Type characterMainState => typeof(TowerIdleSearch);
+        public override ItemDisplaysBase itemDisplays => new TeslaTowerItemDisplays();
 
-        internal override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
-        private static UnlockableDef masterySkinUnlockableDef;
+        public static GameObject masterPrefab;
 
-        internal override void InitializeCharacter() {
+        public override void InitializeCharacter() {
             base.InitializeCharacter();
-            bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
-            bodyPrefab.AddComponent<TeslaCoilControllerController>();
+            //bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
+            //bodyPrefab.AddComponent<TeslaCoilControllerController>();
+
         }
 
-        internal override void InitializeDoppelganger() {
-            base.InitializeDoppelganger();
+        protected override void InitializeCharacterBodyAndModel() {
+            base.InitializeCharacterBodyAndModel();
+
+            bodyPrefab.GetComponent<SfxLocator>().deathSound = "Play_building_uselbuil";
+            bodyPrefab.GetComponent<SfxLocator>().aliveLoopStart = ""; //todo sfx
+
+            UnityEngine.Object.Destroy(bodyPrefab.GetComponent<SetStateOnHurt>());
+            UnityEngine.Object.Destroy(bodyPrefab.GetComponent<AkEvent>());
+
         }
 
-        internal override void InitializeHitboxes() {
-            base.InitializeHitboxes();
+        protected override void InitializeEntityStateMachine() {
+            base.InitializeEntityStateMachine();
+
+            UnityEngine.Object.Destroy(EntityStateMachine.FindByCustomName(bodyPrefab, "Weapon"));
+            Array.Resize(ref bodyPrefab.GetComponent<NetworkStateMachine>().stateMachines, 1);
+            Array.Resize(ref bodyPrefab.GetComponent<CharacterDeathBehavior>().idleStateMachine, 0);
+
+            bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new SerializableEntityStateType(typeof(TowerSell));
+            States.entityStates.Add(typeof(TowerSell));
         }
 
-        internal override void InitializeSkills() {
-            Modules.Skills.CreateSkillFamilies(bodyPrefab);
+        protected override void InitializeCharacterMaster() {
+            base.InitializeCharacterMaster();
 
-            string prefix = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_";
+            masterPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/EngiTurretMaster"), "TeslaTowerMaster", true);
+            masterPrefab.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
+
+            foreach (AISkillDriver aiSkillDriver in masterPrefab.GetComponents<AISkillDriver>()) {
+                UnityEngine.Object.Destroy(aiSkillDriver);
+                //todo: proper ai?
+            }
+            masterPrefab.GetComponent<BaseAI>().skillDrivers = new AISkillDriver[0];
+
+            Modules.Prefabs.masterPrefabs.Add(masterPrefab);
+        }
+
+        #region skills
+
+        public override void InitializeSkills() {          //maybe least elegant of my solutions but came with a DRY fix so half and half
+            Modules.Skills.CreateSkillFamilies(bodyPrefab, 2);
+
+            string prefix = FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_";
 
             InitializePrimarySkills(prefix);
 
             InitializeSecondarySkills(prefix);
 
-            InitializeUtilitySkills(prefix);
+            //InitializeUtilitySkills(prefix);
 
-            InitializeSpecialSkills(prefix);
+            //InitializeSpecialSkills(prefix);
         }
 
         private void InitializePrimarySkills(string prefix) {
-            States.entityStates.Add(typeof(Zap));
-            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(Zap)),
+            States.entityStates.Add(typeof(TowerZap));
+            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(TowerZap)),
                                                                             "Weapon",
+                                                                            "Tower_Primary_Zap",
                                                                             prefix + "PRIMARY_ZAP_NAME",
                                                                             prefix + "PRIMARY_ZAP_DESCRIPTION",
-                                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                                            false,
+                                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaTowerSkillPrimary"),
                                                                             false);
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }
 
         private void InitializeSecondarySkills(string prefix) {
-            States.entityStates.Add(typeof(AimBigZap));
-            States.entityStates.Add(typeof(BigZap));
+            States.entityStates.Add(typeof(TowerBigZap));
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = prefix + "SECONDARY_BIGZAP_NAME",
+                skillName = "Tower_Secondary_BigZap",
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
                 skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
-                activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4.5f,
+                baseRechargeInterval = 9f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -109,66 +152,9 @@ namespace HenryMod.Modules.Survivors {
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
         }
+#endregion skills
 
-        private void InitializeUtilitySkills(string prefix) {
-
-            States.entityStates.Add(typeof(ShieldZap));
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = prefix + "UTILITY_BARRIER_NAME",
-                skillNameToken = prefix + "UTILITY_BARRIER_NAME",
-                skillDescriptionToken = prefix + "UTILITY_BARRIER_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZap)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 10f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = true,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            Modules.Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
-        }
-
-        private void InitializeSpecialSkills(string prefix) {
-            States.entityStates.Add(typeof(DeployTeslaCoil));
-
-            SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = prefix + "SPECIAL_TOWER_NAME",
-                skillNameToken = prefix + "SPECIAL_TOWER_NAME",
-                skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",
-                skillIcon = Resources.Load<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaCoil)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 15f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = true,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 0
-            });
-
-            Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
-        }
-
-        internal override void InitializeSkins() {
+        public override void InitializeSkins() {
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
@@ -183,7 +169,7 @@ namespace HenryMod.Modules.Survivors {
 
             #region DefaultSkin
 
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_TESLA_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 mainRenderer,
@@ -231,17 +217,6 @@ namespace HenryMod.Modules.Survivors {
             #endregion
 
             skinController.skins = skins.ToArray();
-        }
-
-        private static CharacterModel.RendererInfo[] SkinRendererInfos(CharacterModel.RendererInfo[] defaultRenderers, Material[] materials) {
-            CharacterModel.RendererInfo[] newRendererInfos = new CharacterModel.RendererInfo[defaultRenderers.Length];
-            defaultRenderers.CopyTo(newRendererInfos, 0);
-
-            newRendererInfos[0].defaultMaterial = materials[0];
-            newRendererInfos[1].defaultMaterial = materials[1];
-            newRendererInfos[instance.mainRendererIndex].defaultMaterial = materials[2];
-
-            return newRendererInfos;
         }
     }
 }

@@ -19,8 +19,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
                 }
 
                 Helpers.PlaySoundVoiceLine((TeslaVoiceLine)rand, gameObject);
-
-                //Util.PlaySound("Play_prism_vpriatta_prism_tank_attack", gameObject);
+                
+                //Util.PlaySound("Play_itesatd", gameObject);
             }
         }
 

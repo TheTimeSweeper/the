@@ -14,6 +14,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3403258099	Play_itessed			\Default Work Unit\Play_itessed	
 	3403258100	Play_itessec			\Default Work Unit\Play_itessec	
 	3403258102	Play_itessea			\Default Work Unit\Play_itessea	
+	3473271386	Play_building_uselbuil			\Default Work Unit\Play_building_uselbuil	
 	3681068577	Play_trooper_itesat2b_tesla_trooper_attack			\Default Work Unit\Play_trooper_itesat2b_tesla_trooper_attack	
 	3713853527	Play_tank_vtesatta_tesla_tank_attack			\Default Work Unit\Play_tank_vtesatta_tesla_tank_attack	
 	3719663962	Play_itesatd			\Default Work Unit\Play_itesatd	
@@ -37,44 +38,45 @@ Event	ID	Name			Wwise Object Path	Notes
 	3871501119	Play_itesdic			\Default Work Unit\Play_itesdic	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
+	2975726391	Volume_TeslaVoice			\Default Work Unit\Volume_TeslaVoice	
 	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
-	3676256460	Volume_Voice			\Default Work Unit\Volume_Voice	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	30965453	itesmod	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesmod_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmod		10656
-	44427184	trooper_itesat2b tesla trooper attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\trooper_itesat2b tesla trooper attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\trooper_itesat2b tesla trooper attack		7507
-	59822645	itesdic	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesdic_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdic		5380
-	132641799	itesdib	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesdib_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdib		3652
-	223813293	iteschaa	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\iteschaa_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\iteschaa		7012
-	234033318	prism_vpriatta prism tank attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\prism_vpriatta prism tank attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\prism_vpriatta prism tank attack		9107
-	283509260	tower_bparatta they fucking turned eiffel tower to a tesla tower	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\tower_bparatta they fucking turned eiffel tower to a tesla tower_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\tower_bparatta they fucking turned eiffel tower to a tesla tower		7623
-	291863990	itesfea	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesfea_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesfea		12078
-	401928348	itesdid	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesdid_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdid		5823
-	516379293	itessea	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itessea_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessea		10561
-	561910568	itesatta	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesatta_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\itesatta		7632
-	594747931	tower_btesat1a tesla tower attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\tower_btesat1a tesla tower attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\tower_btesat1a tesla tower attack		10310
-	599669330	itessec	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itessec_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessec		7545
-	638174944	tower_btespow tesla tower prep	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\tower_btespow tesla tower prep_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\tower_btespow tesla tower prep		8579
-	647934280	tank_vtesatta tesla tank attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\tank_vtesatta tesla tank attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\tank_vtesatta tesla tank attack		8729
-	649308765	itessee	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itessee_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessee		8550
-	653386136	itesmoc	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesmoc_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmoc		10488
-	653401900	itesate	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesate_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesate		20024
-	659843373	itesmof	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesmof_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmof		13632
-	702992641	itesata	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesata_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesata		17279
-	713328082	itesmob	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesmob_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmob		7933
-	730375976	itesatb	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesatb_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesatb		8622
-	779542685	buliding_uplace	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\buliding_uplace_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\buliding_uplace		9647
-	805480428	tank_vtesattb tesla tank attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\tank_vtesattb tesla tank attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\tank_vtesattb tesla tank attack		9709
-	808685419	itessed	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itessed_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessed		11962
-	810700654	itesmoe	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesmoe_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmoe		12725
-	813394182	itesfec	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesfec_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesfec		6913
-	817529503	itesfeb	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesfeb_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesfeb		11743
-	837907739	prism_bpripow prism tower prep	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\prism_bpripow prism tower prep_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\prism_bpripow prism tower prep		6836
-	872893787	prism_bpriat1a prism tower attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\prism_bpriat1a prism tower attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\prism_bpriat1a prism tower attack		10869
-	894505461	itesatc	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesatc_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesatc		11844
-	915646748	tower_btesat2a tesla tower attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\tower_btesat2a tesla tower attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\tower_btesat2a tesla tower attack		11404
-	979624947	itesmoa	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesmoa_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmoa		9379
-	987186596	trooper_itesat2a tesla trooper attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\trooper_itesat2a tesla trooper attack_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\trooper_itesat2a tesla trooper attack		9518
-	990781575	itesdia	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesdia_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdia		8076
-	1068644922	itesatd	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\Voices\English(US)\Voice Lines\itesatd_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesatd		15541
+	30965453	itesmod	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesmod_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmod		10656
+	44427184	trooper_itesat2b tesla trooper attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\trooper_itesat2b tesla trooper attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\trooper_itesat2b tesla trooper attack		7507
+	59822645	itesdic	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesdic_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdic		5380
+	132641799	itesdib	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesdib_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdib		3652
+	234033318	prism_vpriatta prism tank attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\prism_vpriatta prism tank attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\prism_vpriatta prism tank attack		9107
+	283509260	tower_bparatta they fucking turned eiffel tower to a tesla tower	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\tower_bparatta they fucking turned eiffel tower to a tesla tower_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\tower_bparatta they fucking turned eiffel tower to a tesla tower		7623
+	291863990	itesfea	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesfea_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesfea		12078
+	401928348	itesdid	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesdid_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdid		5823
+	419643387	iteschaa	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\iteschaa_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\iteschaa		7012
+	516379293	itessea	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itessea_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessea		10561
+	594747931	tower_btesat1a tesla tower attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\tower_btesat1a tesla tower attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\tower_btesat1a tesla tower attack		10310
+	599669330	itessec	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itessec_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessec		7545
+	638174944	tower_btespow tesla tower prep	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\tower_btespow tesla tower prep_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\tower_btespow tesla tower prep		8579
+	647934280	tank_vtesatta tesla tank attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\tank_vtesatta tesla tank attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\tank_vtesatta tesla tank attack		8729
+	649308765	itessee	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itessee_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessee		8550
+	653386136	itesmoc	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesmoc_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmoc		10488
+	653401900	itesate	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesate_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesate		20024
+	659843373	itesmof	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesmof_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmof		13632
+	686800937	itesatta	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesatta_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\itesatta		7632
+	702992641	itesata	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesata_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesata		17279
+	713328082	itesmob	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesmob_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmob		7933
+	730375976	itesatb	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesatb_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesatb		8622
+	779542685	buliding_uplace	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\buliding_uplace_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\buliding_uplace		9647
+	795510991	building_uselbuil	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\building_uselbuil_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\building_uselbuil		14659
+	805480428	tank_vtesattb tesla tank attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\tank_vtesattb tesla tank attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\tank_vtesattb tesla tank attack		9709
+	808685419	itessed	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itessed_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itessed		11962
+	810700654	itesmoe	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesmoe_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmoe		12725
+	813394182	itesfec	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesfec_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesfec		6913
+	817529503	itesfeb	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesfeb_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesfeb		11743
+	837907739	prism_bpripow prism tower prep	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\prism_bpripow prism tower prep_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\prism_bpripow prism tower prep		6836
+	872893787	prism_bpriat1a prism tower attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\prism_bpriat1a prism tower attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\prism_bpriat1a prism tower attack		10869
+	894505461	itesatc	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesatc_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesatc		11844
+	915646748	tower_btesat2a tesla tower attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\tower_btesat2a tesla tower attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\tower_btesat2a tesla tower attack		11404
+	979624947	itesmoa	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesmoa_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesmoa		9379
+	987186596	trooper_itesat2a tesla trooper attack	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\trooper_itesat2a tesla trooper attack_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Sound Fx\trooper_itesat2a tesla trooper attack		9518
+	990781575	itesdia	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesdia_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesdia		8076
+	1068644922	itesatd	C:\Users\Lucas\Documents\WwiseProjects\Tesla Trooper\.cache\Windows\SFX\itesatd_01_46BD80C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Voice\itesatd		15541
 

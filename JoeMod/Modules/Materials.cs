@@ -9,7 +9,7 @@ namespace HenryMod.Modules {
         public static Material CreateHotpooMaterial(string materialName) {
             Material tempMat = cachedMaterials.Find(mat => { return mat.name == materialName; });
             if (tempMat) {
-                Helpers.LogWarning("returning cached material for " + materialName);
+                Helpers.Log("returning cached material for " + materialName);
                 return tempMat;
             }
 
@@ -21,26 +21,26 @@ namespace HenryMod.Modules {
                 return new Material(Assets.hotpoo);
             }
 
-            return CreateHotpooMaterial(tempMat);
+            return tempMat.SetHotpooMaterial();
         }
 
         private static Material CreateHotpooMaterial(Material tempMat) {
             if (cachedMaterials.Contains(tempMat)) {
 
-                Helpers.LogWarning("returning cached material for " + tempMat);
+                Helpers.Log("returning cached material for " + tempMat);
                 return tempMat;
-            }
-            return new Material(tempMat).SetHotpooMaterial();
+            }           
+            return tempMat.SetHotpooMaterial();
         }
 
         public static Material SetHotpooMaterial(this Material tempMat) {
             if (cachedMaterials.Contains(tempMat)) {
 
-                Helpers.LogWarning("returning cached material for " + tempMat);
+                Helpers.Log("returning cached material for " + tempMat);
                 return tempMat;
             }
 
-            Helpers.LogWarning("creating hotpoo material with " + tempMat);
+            Helpers.Log("creating hotpoo material with " + tempMat);
 
             float? bumpScale = null;
             Color? emissionColor = null;
@@ -67,6 +67,9 @@ namespace HenryMod.Modules {
                 tempMat.SetFloat("_EmPower", 1);
             }
 
+            if(tempMat.IsKeywordEnabled("_CULL")) {
+                tempMat.SetInt("_Cull", 0);
+            }
 
             cachedMaterials.Add(tempMat);
             return tempMat;

@@ -10,13 +10,13 @@ using HenryMod.Modules.Characters;
 
 namespace HenryMod.Modules.Survivors
 {
-    internal class JoeSurivor : SurvivorBase
+    public class JoeSurivor : SurvivorBase
     {
-        internal override string bodyName => "Joe";
+        public override string bodyName => "Joe";
 
-        internal override float sortPosition => 69f;
+        public override float sortPosition => 69f;
 
-        internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
+        public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
             armor = 20f,
             armorGrowth = 0f,
@@ -34,25 +34,25 @@ namespace HenryMod.Modules.Survivors
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material joeMat => Modules.Materials.CreateHotpooMaterial("0fdsa - Default");
+        public static Material joeMat => Modules.Materials.CreateHotpooMaterial("0fdsa - Default");
         private int _mainRendererIndex;
-        internal override int mainRendererIndex => _mainRendererIndex;
+        public override int mainRendererIndex => _mainRendererIndex;
 
-        internal override CustomRendererInfo[] customRendererInfos { get; set; }
+        public override CustomRendererInfo[] customRendererInfos { get; set; }
 
-        internal override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
+        public override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
 
         // item display stuffs
-        internal override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
 
-        internal override UnlockableDef characterUnlockableDef { get; }
+        public override UnlockableDef characterUnlockableDef { get; }
 
-        internal override ConfigEntry<bool> characterEnabledConfig => Modules.Config.CharacterEnableConfig(bodyName, false, "Very in-dev test character that was used as a basis for tesla trooper. Enable for fun");
+        public override ConfigEntry<bool> characterEnabledConfig => Modules.Config.CharacterEnableConfig(bodyName, false, "Very in-dev test character that was used as a basis for tesla trooper. Enable for fun");
 
         private static UnlockableDef masterySkinUnlockableDef;
 
-        protected override void InitializeCharacterBody() {
-            base.InitializeCharacterBody();
+        protected override void InitializeCharacterBodyAndModel() {
+            base.InitializeCharacterBodyAndModel();
 
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
         }
@@ -105,17 +105,17 @@ namespace HenryMod.Modules.Survivors
             customRendererInfos = customInfos.ToArray();
         }
 
-        internal override void InitializeUnlockables()
+        public override void InitializeUnlockables()
         {
             //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
         }
 
-        internal override void InitializeDoppelganger()
+        public override void InitializeDoppelganger()
         {
             base.InitializeDoppelganger();
         }
 
-        internal override void InitializeHitboxes()
+        public override void InitializeHitboxes()
         {
             //hitboxes already set up baybee
             return;
@@ -127,7 +127,7 @@ namespace HenryMod.Modules.Survivors
             //Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
         }
 
-        internal override void InitializeSkills()
+        public override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
@@ -141,46 +141,47 @@ namespace HenryMod.Modules.Survivors
             States.entityStates.Add(typeof(Primary1JumpSwingLand));
             SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1Swing)),
                                                                             "Weapon",
+                                                                            "JoeSwing",
                                                                             prefix + "PRIMARY_SWING_NAME",
                                                                             prefix + "PRIMARY_SWING_DESCRIPTION",
                                                                             Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            true, 
-                                                                            false);
+                                                                            true);
 
             States.entityStates.Add(typeof(PrimaryStupidSwing));
             SkillDef primarySkillDefSilly = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryStupidSwing)),
                                                                             "Weapon",
+                                                                            "JoeSwingClassic",
                                                                             prefix + "PRIMARY_SWING_NAME_CLASSIC",
                                                                             prefix + "PRIMARY_SWING_DESCRIPTION",
                                                                             Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            true,
                                                                             true);
+            primarySkillDefSilly.mustKeyPress = true;
 
             States.entityStates.Add(typeof(ThrowBoom));
             SkillDef primarySkillDefBomeb = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.ThrowBoom)),
                                                                             "Weapon",
+                                                                            "joeBomb",
                                                                             prefix + "PRIMARY_BOMB_NAME",
                                                                             prefix + "PRIMARY_BOMB_DESCRIPTION",
                                                                             null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            false,
                                                                             false);
 
             States.entityStates.Add(typeof(ThroBoomButCoolerQuestionMaark));
             SkillDef primarySkillDefBomebe = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.ThroBoomButCoolerQuestionMaark)),
                                                                             "Weapon",
+                                                                            "joeBomb2",
                                                                             prefix + "PRIMARY_BOMB_NAME",
                                                                             prefix + "PRIMARY_BOMB_DESCRIPTION",
                                                                             null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            false,
                                                                             false);
 
             States.entityStates.Add(typeof(Zap));
             SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                             "Weapon",
+                                                                            "joeZap",
                                                                             prefix + "PRIMARY_ZAP_NAME",
                                                                             prefix + "PRIMARY_ZAP_DESCRIPTION",
                                                                             null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            false,
                                                                             false);
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe, primarySkillDef, primarySkillDefSilly, primarySkillDefZap);
@@ -329,7 +330,7 @@ namespace HenryMod.Modules.Survivors
             #endregion
         }
 
-        internal override void InitializeSkins()
+        public override void InitializeSkins()
         {
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
@@ -392,18 +393,6 @@ namespace HenryMod.Modules.Survivors
             #endregion
 
             skinController.skins = skins.ToArray();
-        }
-
-        private static CharacterModel.RendererInfo[] SkinRendererInfos(CharacterModel.RendererInfo[] defaultRenderers, Material[] materials)
-        {
-            CharacterModel.RendererInfo[] newRendererInfos = new CharacterModel.RendererInfo[defaultRenderers.Length];
-            defaultRenderers.CopyTo(newRendererInfos, 0);
-
-            newRendererInfos[0].defaultMaterial = materials[0];
-            newRendererInfos[1].defaultMaterial = materials[1];
-            newRendererInfos[instance.mainRendererIndex].defaultMaterial = materials[2];
-
-            return newRendererInfos;
         }
     }
 }

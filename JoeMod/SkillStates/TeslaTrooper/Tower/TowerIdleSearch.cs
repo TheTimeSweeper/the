@@ -17,21 +17,21 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
         private float currentZapInterval { get => BaseZapInterval / attackSpeedStat; }
 
         private float _cooldownTimer;
-
+        
         public override void OnEnter() {
             base.OnEnter();
 
             //_weaponStateMachine = EntityStateMachine.FindByCustomName(gameObject, "weapon");
 
             _lightningOrb = new LightningOrb {
-                //origin = GetComponent<ChildLocator>().FindChild("Orb").position,//todo coil master base.GetModelChildLocator().FindChild("Orb").position,
+                //origin = base.GetModelChildLocator().FindChild("Orb").position,
                 //damageValue = damageStat,
                 //isCrit = RollCrit(),
                 //bouncesRemaining = 1,
                 //damageCoefficientPerBounce = BounceDamageMultplier,
                 //damageType = DamageType.SlowOnHit,
                 //procCoefficient = 1f,
-                teamIndex = GetComponent<TeamFilter>().teamIndex,//teamComponent.teamIndex, //todo: coil character teamcomponent
+                teamIndex = teamComponent.teamIndex,
                 attacker = gameObject,
                 bouncedObjects = new List<HealthComponent>(),
                 //lightningType = LightningOrb.LightningType.Loader,

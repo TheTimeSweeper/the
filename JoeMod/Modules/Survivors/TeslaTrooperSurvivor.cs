@@ -9,13 +9,13 @@ using HenryMod.Modules.Characters;
 
 namespace HenryMod.Modules.Survivors
 {
-    internal class TeslaTrooperSurvivor : SurvivorBase
+    public class TeslaTrooperSurvivor : SurvivorBase
     {
-        internal override string bodyName => "TeslaTrooper";
+        public override string bodyName => "TeslaTrooper";
 
-        internal override float sortPosition => 69f;
+        public override float sortPosition => 69f;
 
-        internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
+        public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
             armor = 10f,
             armorGrowth = 0f,
@@ -33,14 +33,14 @@ namespace HenryMod.Modules.Survivors
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal override ConfigEntry<bool> characterEnabledConfig => null;
+        public override ConfigEntry<bool> characterEnabledConfig => null;
 
-        internal static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
-        internal static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
+        public static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
+        public static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
 
-        internal override int mainRendererIndex => customRendererInfos.Length - 1; 
+        public override int mainRendererIndex => customRendererInfos.Length - 1; 
 
-        internal override CustomRendererInfo[] customRendererInfos { get; set; }
+        public override CustomRendererInfo[] customRendererInfos { get; set; }
 
             = new CustomRendererInfo[]
             {
@@ -61,16 +61,16 @@ namespace HenryMod.Modules.Survivors
                 },
             };
 
-        internal override Type characterMainState => typeof(TeslaTrooperMain);
+        public override Type characterMainState => typeof(TeslaTrooperMain);
 
-        internal override UnlockableDef characterUnlockableDef => null;
+        public override UnlockableDef characterUnlockableDef => null;
 
-        internal override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
 
-        protected override void InitializeCharacterBody() {
-            base.InitializeCharacterBody();
+        protected override void InitializeCharacterBodyAndModel() {
+            base.InitializeCharacterBodyAndModel();
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
             bodyPrefab.AddComponent<TeslaCoilControllerController>();
         }
@@ -81,22 +81,22 @@ namespace HenryMod.Modules.Survivors
             States.entityStates.Add(typeof(TeslaTrooperMain));
         }
 
-        internal override void InitializeUnlockables()
+        public override void InitializeUnlockables()
         {
             //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
         }
 
-        internal override void InitializeDoppelganger()
+        public override void InitializeDoppelganger()
         {
             base.InitializeDoppelganger();
         }
 
-        internal override void InitializeHitboxes()
+        public override void InitializeHitboxes()
         {
             base.InitializeHitboxes();
         }
 
-        internal override void InitializeSkills()
+        public override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
@@ -116,10 +116,10 @@ namespace HenryMod.Modules.Survivors
             States.entityStates.Add(typeof(Zap));
             SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                             "Weapon",
+                                                                            "Tesla_Primary_Zap",
                                                                             prefix + "PRIMARY_ZAP_NAME",
                                                                             prefix + "PRIMARY_ZAP_DESCRIPTION",
                                                                             Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                                            false,
                                                                             false);
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
@@ -131,7 +131,7 @@ namespace HenryMod.Modules.Survivors
             States.entityStates.Add(typeof(BigZap));
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "SECONDARY_BIGZAP_NAME",
+                skillName = "Tesla_Secondary_BigZap",
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
                 skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
@@ -163,7 +163,7 @@ namespace HenryMod.Modules.Survivors
             States.entityStates.Add(typeof(ShieldZap));
             SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "UTILITY_BARRIER_NAME",
+                skillName = "Tesla_Utility_ShieldZap",
                 skillNameToken = prefix + "UTILITY_BARRIER_NAME",
                 skillDescriptionToken = prefix + "UTILITY_BARRIER_DESCRIPTION",
                 skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
@@ -194,7 +194,7 @@ namespace HenryMod.Modules.Survivors
 
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "SPECIAL_TOWER_NAME",
+                skillName = "Tesla_Special_Tower",
                 skillNameToken = prefix + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",
                 skillIcon = Resources.Load<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
@@ -219,7 +219,7 @@ namespace HenryMod.Modules.Survivors
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
         }
 
-        internal override void InitializeSkins()
+        public override void InitializeSkins()
         {
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
@@ -283,18 +283,6 @@ namespace HenryMod.Modules.Survivors
             #endregion
 
             skinController.skins = skins.ToArray();
-        }
-
-        private static CharacterModel.RendererInfo[] SkinRendererInfos(CharacterModel.RendererInfo[] defaultRenderers, Material[] materials)
-        {
-            CharacterModel.RendererInfo[] newRendererInfos = new CharacterModel.RendererInfo[defaultRenderers.Length];
-            defaultRenderers.CopyTo(newRendererInfos, 0);
-
-            newRendererInfos[0].defaultMaterial = materials[0];
-            newRendererInfos[1].defaultMaterial = materials[1];
-            newRendererInfos[instance.mainRendererIndex].defaultMaterial = materials[2];
-
-            return newRendererInfos;
         }
     }
 }

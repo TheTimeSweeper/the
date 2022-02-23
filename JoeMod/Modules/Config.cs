@@ -5,13 +5,13 @@ namespace HenryMod.Modules
 {
     public static class Config
     {
-        public static bool DebugLogs;
+        public static bool Debug;
 
         public static void ReadConfig()
         {
-            DebugLogs = FacelessJoePlugin.instance.Config.Bind(
+            Debug = FacelessJoePlugin.instance.Config.Bind(
                 "Debug",
-                "logs",
+                "Debug",
                 false,
                 "in case I forget to delete them when I upload").Value;
         }

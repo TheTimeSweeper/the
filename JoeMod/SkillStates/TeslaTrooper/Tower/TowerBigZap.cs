@@ -24,14 +24,14 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
             new BlastAttack {
                 attacker = gameObject,
                 inflictor = gameObject,
-                teamIndex = GetComponent<TeamFilter>().teamIndex, //todo coil character team
+                teamIndex = teamComponent.teamIndex,
                 //attackerFiltering = AttackerFiltering.NeverHit
 
                 position = targetPoint,
                 radius = AttackRadius,
                 falloffModel = BlastAttack.FalloffModel.None,
 
-                baseDamage = ownerDamage * DamageCoefficient,
+                baseDamage = damageStat * DamageCoefficient,
                 crit = RollCrit(),
                 damageType = DamageType.Shock5s,
                 damageColorIndex = DamageColorIndex.WeakPoint,
