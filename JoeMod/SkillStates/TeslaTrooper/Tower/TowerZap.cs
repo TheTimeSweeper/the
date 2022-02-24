@@ -71,6 +71,16 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
                 //and the orb glowing
         }
 
+        public override void FixedUpdate() {
+            base.FixedUpdate();
+            if (lightningTarget == null && !hasFired) {
+                TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
+                if (tracker) {
+                    lightningTarget = tracker.GetTrackingTarget();
+                }
+            }
+        }
+
         protected override void OnCastEnter() {
             //todo: custom lightningorb
             if (lightningTarget == null)

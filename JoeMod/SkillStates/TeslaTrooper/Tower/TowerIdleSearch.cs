@@ -9,12 +9,14 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerIdleSearch : BaseSkillState {
         public static float SearchRange = 60;
         public static float BaseZapInterval = 4;
+        public static float SpawnedBaseZapInterval = 2;
 
         //private EntityStateMachine _weaponStateMachine;
         private LightningOrb _lightningOrb;
         private HurtBox _lightningTarget;
 
-        private float currentZapInterval { get => BaseZapInterval / attackSpeedStat; }
+        private float currentZapInterval { get => (justSpawned ? SpawnedBaseZapInterval : BaseZapInterval) / attackSpeedStat; }
+        public bool justSpawned;
 
         private float _cooldownTimer;
         

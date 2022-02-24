@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using HenryMod;
+using HenryMod.Modules;
 
-namespace HenryMod.Modules
-{
     public enum TeslaVoiceLine
     {
         attack_2000Volts, //0
@@ -46,7 +46,7 @@ namespace HenryMod.Modules
 
         public static void Log (object message, bool chat = false) {
 
-            if (Modules.Config.Debug) {
+            if (Config.Debug) {
                 FacelessJoePlugin.Log.LogMessage(message);
 
                 if (chat) {
@@ -57,7 +57,7 @@ namespace HenryMod.Modules
 
         public static void LogWarning(object message, bool chat = false) {
 
-            if (Modules.Config.Debug) {
+            if (Config.Debug) {
                 FacelessJoePlugin.Log.LogWarning(message);
 
                 if (chat) {
@@ -138,4 +138,3 @@ namespace HenryMod.Modules
 
         public static Func<T[], T[]> AppendDel<T>(List<T> list) => (r) => Append(ref r, list);
     }
-}

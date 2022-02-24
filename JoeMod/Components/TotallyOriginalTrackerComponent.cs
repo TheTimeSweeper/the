@@ -8,7 +8,7 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
 {
     public float maxTrackingDistance = 35f;
     //public float maxTrackingAngle = 15f;
-    public float trackingRadius = 1f;
+    public float trackingRadius = 1.5f;
     public float trackerUpdateFrequency = 16f;
 
     private float trackerUpdateStopwatch;

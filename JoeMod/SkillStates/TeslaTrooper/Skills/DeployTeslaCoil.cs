@@ -23,9 +23,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         private float exitCountdown = 0;//0.25f;
         private bool exitPending = false;
 
-        private const float _deployMaxUp = 1f;
+        private const float _deployMaxUp = 3f;
         private const float _deployMaxDown = 4f;
-        private const float deployForwardDistance = 6f;
+        private const float _baseDeployForwardDistance = 6f;
 
         private bool ConstructionComplete;
 
@@ -148,26 +148,44 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
 
         private TotallyOriginalPlacementInfo GetPlacementInfo()
         {
+
+            RaycastHit raycastHit;
             Ray aimRay = GetAimRay();
+
+            //quick direct raycast to check if we closer ground
+            float deployForwardDistance;
+            if (Physics.Raycast(aimRay, out raycastHit, 10, LayerIndex.world.mask)) {
+                Vector3 diff = raycastHit.point - aimRay.origin;
+                diff.y = 0;
+                deployForwardDistance = Mathf.Min(diff.magnitude, _baseDeployForwardDistance);
+            } else {
+                deployForwardDistance = _baseDeployForwardDistance;
+            }
+
+            //get aim ray directly forward
             Vector3 aimDirection = aimRay.direction;
             aimDirection.y = 0f;
             aimDirection.Normalize();
             aimRay.direction = aimDirection;
 
+            //init placement info with our direction
             TotallyOriginalPlacementInfo placementInfo = default;
             placementInfo.ok = false;
             placementInfo.rotation = Util.QuaternionSafeLookRotation(-aimDirection);
 
+            //prepare the point we want to check
             Ray deployRay = new Ray(aimRay.GetPoint(deployForwardDistance) + Vector3.up * _deployMaxUp, Vector3.down);
             float deployLookDown = _deployMaxUp + _deployMaxDown;
             float deployHeightDelta = deployLookDown;
-            RaycastHit raycastHit;
+
+            //check, at a set distance in front, a certain range up and down
             if (Physics.SphereCast(deployRay, 0.5f, out raycastHit, deployLookDown, LayerIndex.world.mask) && raycastHit.normal.y > 0.5f)
             {
                 deployHeightDelta = raycastHit.distance;
                 placementInfo.ok = true;
             }
 
+            //get our result
             Vector3 deployPoint = deployRay.GetPoint(deployHeightDelta + 0.5f);
             placementInfo.position = deployPoint;
             if (placementInfo.ok)

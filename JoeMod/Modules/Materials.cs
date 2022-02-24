@@ -7,7 +7,10 @@ namespace HenryMod.Modules {
         private static List<Material> cachedMaterials = new List<Material>();
 
         public static Material CreateHotpooMaterial(string materialName) {
-            Material tempMat = cachedMaterials.Find(mat => { return mat.name == materialName; });
+            Material tempMat = cachedMaterials.Find(mat => {
+                materialName.Replace(" (Instance)", "");
+                return mat.name.Contains(materialName); 
+            });
             if (tempMat) {
                 Helpers.Log("returning cached material for " + materialName);
                 return tempMat;

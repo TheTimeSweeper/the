@@ -19,8 +19,6 @@ namespace HenryMod.Modules
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
-
-
             if (i < 1)
                 return;
             skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
@@ -38,10 +36,11 @@ namespace HenryMod.Modules
             skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
         }
 
-        private static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName) {
+        public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName, bool hidden = false) {
 
             GenericSkill skill = targetPrefab.AddComponent<GenericSkill>();
             skill.skillName = targetPrefab.name + familyName;
+            skill.hideInCharacterSelect = hidden;
 
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
             (newFamily as ScriptableObject).name = targetPrefab.name + familyName + "Family";
@@ -60,7 +59,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.primary.skillFamily;
 
-            AddSkillToFamily(skillDef, skillFamily);
+            AddSkillToFamily(skillFamily, skillDef);
         }
 
         internal static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
@@ -75,7 +74,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.secondary.skillFamily;
 
-            AddSkillToFamily(skillDef, skillFamily);
+            AddSkillToFamily(skillFamily, skillDef);
         }
 
         internal static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
@@ -92,7 +91,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.utility.skillFamily;
 
-            AddSkillToFamily(skillDef, skillFamily);
+            AddSkillToFamily(skillFamily, skillDef);
         }
 
         internal static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
@@ -109,7 +108,7 @@ namespace HenryMod.Modules
 
             SkillFamily skillFamily = skillLocator.special.skillFamily;
 
-            AddSkillToFamily(skillDef, skillFamily);
+            AddSkillToFamily(skillFamily, skillDef);
         }
 
         internal static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
@@ -120,10 +119,11 @@ namespace HenryMod.Modules
             }
         }
 
-        private static void AddSkillToFamily(SkillDef skillDef, SkillFamily skillFamily) {
+        internal static void AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef, UnlockableDef unlockableDef = null) {
             Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
             skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant {
                 skillDef = skillDef,
+                unlockableDef = unlockableDef,
                 viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
             };
         }
@@ -223,4 +223,6 @@ internal class SkillDefInfo
     public int stockToConsume;
 
     public string[] keywordTokens;
+
+    public UnlockableDef unlockableDef;
 }

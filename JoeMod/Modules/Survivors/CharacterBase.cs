@@ -12,7 +12,6 @@ namespace HenryMod.Modules.Characters {
 
         public abstract BodyInfo bodyInfo { get; set; }
 
-        public abstract int mainRendererIndex { get; }
         public abstract CustomRendererInfo[] customRendererInfos { get; set; }
 
         public abstract Type characterMainState { get; }
@@ -52,7 +51,7 @@ namespace HenryMod.Modules.Characters {
             bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
         }
         protected virtual void InitializeCharacterModel() {
-            characterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos, mainRendererIndex);
+            characterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
         }
 
         protected virtual void InitializeCharacterMaster() { }

@@ -1098,6 +1098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9020769169706174397}
+  - component: {fileID: 6167856161782953659}
   m_Layer: 11
   m_Name: OrbTop
   m_TagString: Untagged
@@ -1113,12 +1114,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5187964745139377138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.182}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.172}
+  m_LocalScale: {x: 0.26700485, y: 0.26700485, z: 0.26700485}
   m_Children: []
   m_Father: {fileID: 6273651562879444799}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6167856161782953659
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5187964745139377138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5903922760042122810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,10 +1871,6 @@ MonoBehaviour:
     ignoreOverlays: 0
   - renderer: {fileID: 5343368217602540380}
     defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
-    defaultShadowCastingMode: 1
-    ignoreOverlays: 0
-  - renderer: {fileID: 8205121029334518273}
-    defaultMaterial: {fileID: 2100000, guid: e55f3642b8fb710439763f554bb49a8d, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   baseLightInfos: []

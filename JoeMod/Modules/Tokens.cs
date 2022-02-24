@@ -90,7 +90,7 @@ namespace HenryMod.Modules
         private static void AddTeslaTokens()
         {
             #region not henry 2
-            string prefix = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_";
+            string prefix = Modules.Survivors.TeslaTrooperSurvivor.teslaPrefix;
 
             string desc = "Tesla Trooper Ready.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Charging Up." + Environment.NewLine + Environment.NewLine;
@@ -142,10 +142,25 @@ namespace HenryMod.Modules
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", "Construction Complete (does nothing yet but has colliders)");
             #endregion
 
+            #region Special
+            LanguageAPI.Add(prefix + "RECOLOR_RED_NAME", "Red");
+            LanguageAPI.Add(prefix + "RECOLOR_GREEN_NAME", "Green");
+            LanguageAPI.Add(prefix + "RECOLOR_YELLOW_NAME", "Yellow");
+            LanguageAPI.Add(prefix + "RECOLOR_ORANGE_NAME", "Orange");
+            LanguageAPI.Add(prefix + "RECOLOR_CYAN_NAME", "Cyan");
+            LanguageAPI.Add(prefix + "RECOLOR_PURPLE_NAME", "Purple");
+            LanguageAPI.Add(prefix + "RECOLOR_PINK_NAME", "Pink");
+            #endregion
+
             #region Achievements
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
+
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"some unlock");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"hopefully not something boring like grab tesla coil and royal capacitor... ok repair a tesla coil with a tesla coil that would be pretty cool, but also shiny hunting kinda.");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"some unlock");
+
             #endregion
             #endregion not henry 2
         }

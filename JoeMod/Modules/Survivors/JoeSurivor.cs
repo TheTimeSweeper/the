@@ -35,9 +35,7 @@ namespace HenryMod.Modules.Survivors
         };
 
         public static Material joeMat => Modules.Materials.CreateHotpooMaterial("0fdsa - Default");
-        private int _mainRendererIndex;
-        public override int mainRendererIndex => _mainRendererIndex;
-
+        
         public override CustomRendererInfo[] customRendererInfos { get; set; }
 
         public override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
@@ -87,8 +85,6 @@ namespace HenryMod.Modules.Survivors
                     childName = rend.name,
                     material = rend.material,
                 });
-
-                _mainRendererIndex = i + 1;
             }
 
             pairs.Add(new ChildLocator.NameTransformPair { 

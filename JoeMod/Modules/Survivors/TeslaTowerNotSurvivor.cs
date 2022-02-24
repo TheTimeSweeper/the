@@ -38,22 +38,19 @@ namespace HenryMod.Modules.Survivors {
             cameraParamsVerticalOffset = 20,
             cameraParamsDepth= -20
         };
-        
-        public override int mainRendererIndex => 13;
 
         public override CustomRendererInfo[] customRendererInfos { get; set; }
-
+        
         public override Type characterMainState => typeof(TowerIdleSearch);
         public override Type characterSpawnState => typeof(TowerSpawnState);
 
         public override ItemDisplaysBase itemDisplays => new TeslaTowerItemDisplays();
 
-
         public static GameObject masterPrefab;
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
-            //bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
+            bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
             //bodyPrefab.AddComponent<TeslaCoilControllerController>();
 
         }

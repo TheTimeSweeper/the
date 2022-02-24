@@ -6,7 +6,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
 
         new public static float DamageCoefficient = 12.0f;
         new public static float ProcCoefficient = 1f;
-        new public static float BaseDuration = 0.3f;
+        new public static float BaseDuration = 0.6f;
         public static float AttackRadius = 15;
 
         protected override void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1) {

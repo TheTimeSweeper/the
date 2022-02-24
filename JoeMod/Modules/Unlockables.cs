@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace HenryMod.Modules 
 {
     internal static class Unlockables
     {
@@ -32,7 +32,7 @@ namespace HenryMod.Modules
             return newUnlockableDef;
         }
 
-        public static UnlockableDef AddUnlockable<TUnlockable>(bool serverTracked) where TUnlockable : BaseAchievement, IModdedUnlockableDataProvider, new()
+        public static UnlockableDef AddUnlockable<TUnlockable>(Type serverTrackedAchievement = null) where TUnlockable : BaseAchievement, IModdedUnlockableDataProvider, new()
         {
             TUnlockable instance = new TUnlockable();
 
@@ -49,7 +49,7 @@ namespace HenryMod.Modules
                 descriptionToken = instance.AchievementDescToken,
                 achievedIcon = instance.Sprite,
                 type = instance.GetType(),
-                serverTrackerType = (serverTracked ? instance.GetType() : null),
+                serverTrackerType = serverTrackedAchievement,
             };
 
             UnlockableDef unlockableDef = CreateNewUnlockable(new UnlockableInfo
@@ -139,7 +139,7 @@ where TDelegate : Delegate
         Func<string> GetUnlocked { get; }
     }
 
-    internal abstract class ModdedUnlockable : BaseAchievement, IModdedUnlockableDataProvider
+    public abstract class ModdedUnlockable : BaseAchievement, IModdedUnlockableDataProvider
     {
         #region Implementation
         public void Revoke()

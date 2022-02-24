@@ -96,6 +96,9 @@ ModelImporter:
     100180: toe.R_end
     100182: forearm.Gauntlet.R
     100184: meshTeslaArmor_Gauntlet
+    100186: meshTeslaArmor_GauntletColor
+    100188: meshTeslaArmorColor
+    100190: meshTeslaBodyColor
     400000: hammor
     400002: //RootNode
     400004: TeslaTrooperJumpsuit
@@ -189,6 +192,9 @@ ModelImporter:
     400180: toe.R_end
     400182: forearm.Gauntlet.R
     400184: meshTeslaArmor_Gauntlet
+    400186: meshTeslaArmor_GauntletColor
+    400188: meshTeslaArmorColor
+    400190: meshTeslaBodyColor
     2100000: No Name
     2100002: Material.002
     2100004: Material.001
@@ -206,6 +212,9 @@ ModelImporter:
     4300006: meshTeslaBody
     4300008: meshTeslaArmor
     4300010: meshTeslaArmor_Gauntlet
+    4300012: meshTeslaBodyColor
+    4300014: meshTeslaArmorColor
+    4300016: meshTeslaArmor_GauntletColor
     7400000: Armature|DefaultPose
     7400002: Armature|GreatJobKomrade
     7400004: Armature|Idle
@@ -223,12 +232,18 @@ ModelImporter:
     7400028: Armature|WalkL
     7400030: Armature|WalkR
     7400032: Armature|WalkB
+    7400034: Armature|Emote.GreatJobKomrade
+    7400036: Armature|WalkLRecover
+    7400038: Armature|WalkBRecover
     9500000: //RootNode
     13700000: TeslaTrooperJumpsuit
     13700002: TeslaTropperArmor
     13700004: meshTeslaArmor
     13700006: meshTeslaBody
     13700008: meshTeslaArmor_Gauntlet
+    13700010: meshTeslaArmor_GauntletColor
+    13700012: meshTeslaArmorColor
+    13700014: meshTeslaBodyColor
     2186277476908879412: ImportLogs
   externalObjects:
   - first:
@@ -549,8 +564,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 9.5
     - serializedVersion: 16
-      name: Armature|WalkL
-      takeName: Armature|WalkL
+      name: Armature|WalkLRecover
+      takeName: Armature|WalkLRecover
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -605,8 +620,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 9.5
     - serializedVersion: 16
-      name: Armature|WalkB
-      takeName: Armature|WalkB
+      name: Armature|WalkBRecover
+      takeName: Armature|WalkBRecover
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -616,6 +631,34 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 1
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.5
+    - serializedVersion: 16
+      name: Armature|Emote.GreatJobKomrade
+      takeName: Armature|Emote.GreatJobKomrade
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

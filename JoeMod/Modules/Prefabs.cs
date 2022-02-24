@@ -226,9 +226,9 @@ namespace HenryMod.Modules
 
             return modelBase.transform;
         }
-        internal static CharacterModel SetupCharacterModel(GameObject prefab, int mainRendererIndex) => SetupCharacterModel(prefab, null, mainRendererIndex);
+        internal static CharacterModel SetupCharacterModel(GameObject prefab) => SetupCharacterModel(prefab, null);
         
-        internal static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos, int mainRendererIndex) {
+        internal static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos) {
 
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
             bool preattached = characterModel != null;
@@ -247,19 +247,13 @@ namespace HenryMod.Modules
             else {
                 SetupPreAttachedRendererInfos(characterModel);
             }
-
-            if (mainRendererIndex > characterModel.baseRendererInfos.Length) {
-                Debug.LogError("mainRendererIndex out of range: not setting mainSkinnedMeshRenderer for " + prefab.name);
-                return characterModel;
-            }
-
-            characterModel.mainSkinnedMeshRenderer = characterModel.baseRendererInfos[mainRendererIndex].renderer.GetComponent<SkinnedMeshRenderer>();
-
             return characterModel;
         }
 
         internal static void SetupPreAttachedRendererInfos(CharacterModel characterModel) {
             for (int i = 0; i < characterModel.baseRendererInfos.Length; i++) {
+                if (characterModel.baseRendererInfos[i].defaultMaterial == null)
+                    characterModel.baseRendererInfos[i].defaultMaterial = characterModel.baseRendererInfos[i].renderer.sharedMaterial;
                 characterModel.baseRendererInfos[i].defaultMaterial.SetHotpooMaterial();
             }
         }

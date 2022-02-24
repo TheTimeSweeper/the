@@ -23,7 +23,7 @@ namespace FacelessJoe {
         public void setHoopooShaders() {
 
             for (int i = 0; i < renderers.Count; i++) {
-                renderers[i].material.SetHotpooMaterial();
+                renderers[i].sharedMaterial.SetHotpooMaterial();
             }
         }
     }

@@ -32,7 +32,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             base.FixedUpdate();
             StartAimMode();
             
-            if(GetComponent<TeslaCoilControllerController>()?.nearestCoil != null && GetComponent<TotallyOriginalTrackerComponent>()?.GetTrackingTarget() != null) {
+            if(GetComponent<TeslaCoilControllerController>()?.nearestCoil && GetComponent<TotallyOriginalTrackerComponent>()?.GetTrackingTarget() != null) {
                 endpointVisualizerRadiusScale = Tower.TowerBigZap.AttackRadius;
             } else {
                 endpointVisualizerRadiusScale = BigZap.AttackRadius;

@@ -221,14 +221,14 @@ namespace HenryMod.Modules {
             if (!objectToConvert) return;
 
             foreach (MeshRenderer i in objectToConvert.GetComponentsInChildren<MeshRenderer>()) {
-                if (i?.material != null) {
-                    i.material.SetHotpooMaterial();
+                if (i?.sharedMaterial != null) {
+                    i.sharedMaterial.SetHotpooMaterial();
                 }
             }
 
             foreach (SkinnedMeshRenderer i in objectToConvert.GetComponentsInChildren<SkinnedMeshRenderer>()) {
-                if (i?.material != null) {
-                    i.material.SetHotpooMaterial();
+                if (i?.sharedMaterial != null) {
+                    i.sharedMaterial.SetHotpooMaterial();
                 }
             }
         }

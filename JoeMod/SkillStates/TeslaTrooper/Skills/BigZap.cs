@@ -26,12 +26,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
             if (controller && controller.nearestCoil) {
                 TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
                 if(tracker && tracker.GetTrackingTarget()) {
-                    Debug.LogWarning("tracker");
 
-                    controller.nearestCoil.GetComponent<EntityStateMachine>().SetInterruptState(new Tower.TowerBigZap() {
-                        lightningTarget = tracker.GetTrackingTarget(),
-                    },
-                    InterruptPriority.PrioritySkill);
+                    controller.commandCoils(tracker.GetTrackingTarget());
 
                     return;
                 }

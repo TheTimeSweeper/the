@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HenryMod.Modules.Achievements
 {
-    internal class MasteryAchievement : ModdedUnlockable
+    internal class HenryMasteryAchievement : ModdedUnlockable
     {
         public override string AchievementIdentifier { get; } = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_ID";
         public override string UnlockableIdentifier { get; } = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERYUNLOCKABLE_REWARD_ID";
