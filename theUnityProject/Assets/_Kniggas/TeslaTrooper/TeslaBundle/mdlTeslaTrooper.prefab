@@ -30,6 +30,55 @@ Transform:
   m_Father: {fileID: 3631804215789908602}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -102.10999, y: -90, z: -180}
+--- !u!114 &1246808802331805064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631804215789874714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4d7c23ed2af8246815101ae1afb7aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRecolor:
+    renderers:
+    - {fileID: 3631804215778304786}
+    - {fileID: 3631804215778304788}
+  offRecolor:
+    renderers:
+    - {fileID: 3631804215778304790}
+  recolors:
+  - recolorName: red
+    mainColor: {r: 0.70980394, g: 0.27450982, b: 0.27058825, a: 1}
+    offColor: {r: 0.5294118, g: 0.3647059, b: 0.34901962, a: 1}
+  - recolorName: blue
+    mainColor: {r: 0.31764707, g: 0.5058824, b: 0.7921569, a: 1}
+    offColor: {r: 0.38431373, g: 0.47058824, b: 0.69803923, a: 1}
+  - recolorName: green
+    mainColor: {r: 0.30980393, g: 0.7294118, b: 0.28627452, a: 1}
+    offColor: {r: 0.3529412, g: 0.43529412, b: 0.3254902, a: 1}
+  - recolorName: yellow
+    mainColor: {r: 1, g: 0.9411765, b: 0.3372549, a: 1}
+    offColor: {r: 0.5568628, g: 0.52156866, b: 0.3372549, a: 1}
+  - recolorName: orange
+    mainColor: {r: 0.9254902, g: 0.5058824, b: 0.29411766, a: 1}
+    offColor: {r: 0.59607846, g: 0.3882353, b: 0.24705882, a: 1}
+  - recolorName: cyan
+    mainColor: {r: 0.20392157, g: 0.8235294, b: 0.8862745, a: 1}
+    offColor: {r: 0.38039216, g: 0.56078434, b: 0.6509804, a: 1}
+  - recolorName: purple
+    mainColor: {r: 0.85490197, g: 0.29411766, b: 0.9529412, a: 1}
+    offColor: {r: 0.49019608, g: 0.32156864, b: 0.50980395, a: 1}
+  - recolorName: pink
+    mainColor: {r: 1, g: 0.627451, b: 0.9607843, a: 1}
+    offColor: {r: 0.6901961, g: 0.47843137, b: 0.6392157, a: 1}
+  recolorInt: 5
+  recolorString: cyan
+  updateColor: 0
+  mainColor: {r: 0.9339623, g: 0.030838395, b: 0.030838395, a: 1}
+  offColor: {r: 0.46226418, g: 0.04579032, b: 0.04579032, a: 1}
 --- !u!114 &3283662337946319613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +139,149 @@ MonoBehaviour:
     transform: {fileID: 5443828498100939736}
   - name: Head
     transform: {fileID: 3631804215789908592}
+--- !u!114 &7822151256222784601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631804215789874714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -179576646, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 0}
+  skillChangeResponses:
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1246808802331805064}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  skinChangeResponses: []
 --- !u!1 &8494372372967240268
 GameObject:
   m_ObjectHideFlags: 0

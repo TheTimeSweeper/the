@@ -100,6 +100,10 @@ namespace HenryMod.Modules.Survivors
             InitializeUtilitySkills();
 
             InitializeSpecialSkills();
+        }
+
+        protected override void InitializeSurvivor() {
+            base.InitializeSurvivor();
 
             InitializeRecolorSkills();
         }
@@ -124,17 +128,30 @@ namespace HenryMod.Modules.Survivors
             for (int i = 0; i < skilldefs.Length; i++) {
                 Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
             }
+
+            CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
+            CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse[] skillChangeResponses = CSSPreviewDisplayConroller.skillChangeResponses;
+
+            for (int i = 0; i < skillChangeResponses.Length; i++) {
+
+                CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse response = skillChangeResponses[i];
+                response.triggerSkillFamily = recolorFamily;
+                response.triggerSkill = i == 0 ? red : skilldefs[i-1];
+            }
         }
 
-        private SkillDef recolorSkillDef(string name, Color iconColor){//, Color mainColor, Color offColor) {
+        private SkillDef recolorSkillDef(string name, Color iconColor){
+
+            var thing = characterBodyModel
+
             return Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = name,
-                skillNameToken = $"{teslaPrefix}_RECOLOR_{name.ToUpper()}_NAME",
-                skillDescriptionToken = $"{teslaPrefix}_RECOLOR_{name.ToUpper()}_DESCRIPTION",
-                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(iconColor, iconColor, iconColor, iconColor, iconColor),
+                skillNameToken = $"{teslaPrefix}RECOLOR_{name.ToUpper()}_NAME",
+                skillDescriptionToken = "",
+                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(iconColor, iconColor, iconColor, iconColor),
             });
         }
-
+        
         private void InitializePrimarySkills()
         {
             States.entityStates.Add(typeof(Zap));

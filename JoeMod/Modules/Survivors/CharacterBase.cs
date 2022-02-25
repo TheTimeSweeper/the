@@ -20,7 +20,7 @@ namespace HenryMod.Modules.Characters {
         public abstract ItemDisplaysBase itemDisplays { get; }
 
         public virtual GameObject bodyPrefab { get; set; }
-        public virtual CharacterModel characterModel { get; set; }
+        public virtual CharacterModel characterBodyModel { get; set; }
         public string fullBodyName => bodyName + "Body";
 
         public virtual void Initialize() {
@@ -51,7 +51,7 @@ namespace HenryMod.Modules.Characters {
             bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
         }
         protected virtual void InitializeCharacterModel() {
-            characterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
+            characterBodyModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
         }
 
         protected virtual void InitializeCharacterMaster() { }
@@ -83,11 +83,11 @@ namespace HenryMod.Modules.Characters {
             ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
             itemDisplayRuleSet.name = "idrs" + bodyName;
 
-            characterModel.itemDisplayRuleSet = itemDisplayRuleSet;
+            characterBodyModel.itemDisplayRuleSet = itemDisplayRuleSet;
         }
 
         public void SetItemDisplays() {
-            itemDisplays.SetItemDIsplays(characterModel.itemDisplayRuleSet);
+            itemDisplays.SetItemDIsplays(characterBodyModel.itemDisplayRuleSet);
         }
 
     }
