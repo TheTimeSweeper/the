@@ -1745,6 +1745,7 @@ GameObject:
   - component: {fileID: 8378301074119102837}
   - component: {fileID: 2057558289680614616}
   - component: {fileID: 6110914415616163341}
+  - component: {fileID: 3072634537170636396}
   m_Layer: 11
   m_Name: mdlTeslaTower
   m_TagString: Untagged
@@ -1874,3 +1875,53 @@ MonoBehaviour:
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   baseLightInfos: []
+--- !u!114 &3072634537170636396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985761471291330172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4d7c23ed2af8246815101ae1afb7aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRecolor:
+    renderers:
+    - {fileID: 5666575543382836699}
+    - {fileID: 9209475377290176793}
+    - {fileID: 6613966166577679268}
+    - {fileID: 2911822621023124884}
+  offRecolor:
+    renderers: []
+  recolors:
+  - recolorName: red
+    mainColor: {r: 1, g: 0, b: 0, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: blue
+    mainColor: {r: 0, g: 0.167027, b: 1, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: green
+    mainColor: {r: 0, g: 1, b: 0.075618744, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: yellow
+    mainColor: {r: 1, g: 0.96559095, b: 0, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: orange
+    mainColor: {r: 1, g: 0.52566326, b: 0, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: cyan
+    mainColor: {r: 0, g: 0.9482002, b: 1, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: purple
+    mainColor: {r: 0.57410204, g: 0, b: 0.9339623, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: pink
+    mainColor: {r: 1, g: 0.3726415, b: 0.8718765, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
+  recolorInt: 0
+  recolorString: cyan
+  updateColor: 0
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  offColor: {r: 1, g: 1, b: 1, a: 1}

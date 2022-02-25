@@ -27,7 +27,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
                 TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
                 if(tracker && tracker.GetTrackingTarget()) {
 
-                    controller.commandCoils(tracker.GetTrackingTarget());
+                    controller.commandTowers(tracker.GetTrackingTarget());
 
                     return;
                 }

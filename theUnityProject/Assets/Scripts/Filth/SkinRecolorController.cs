@@ -49,6 +49,8 @@ public class SkinRecolorController : MonoBehaviour {
     [Space, SerializeField]
     private Recolor[] recolors;
 
+    public int currentColor { get; private set; } = -1;
+
     void Awake() {
         mainRecolor.fillPropertieBlocks();
         offRecolor.fillPropertieBlocks();
@@ -65,6 +67,7 @@ public class SkinRecolorController : MonoBehaviour {
 
     public void SetRecolor(int i) {
         SetRecolor(recolors[i].mainColor, recolors[i].offColor);
+        currentColor = i;
     }
 
     public void SetRecolor(string name) {

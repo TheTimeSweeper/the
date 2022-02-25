@@ -34,29 +34,29 @@ namespace HenryMod.Modules.Survivors
         public override ConfigEntry<bool> characterEnabledConfig => null;
 
         public const string teslaPrefix = FacelessJoePlugin.developerPrefix + "_TESLA_BODY_";
-        public static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
-        public static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
+
+        //public static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
+        //public static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
 
         public override CustomRendererInfo[] customRendererInfos { get; set; }
-
-            = new CustomRendererInfo[]
-            {
-                new CustomRendererInfo
-                {
-                    childName = "meshTeslaBody",
-                    material = matTeslaBody,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "meshTeslaArmor",
-                    material = matTeslaArmor,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "meshTeslaHammer",
-                    material = Materials.CreateHotpooMaterial("MatHammer"),
-                },
-            };
+            //= new CustomRendererInfo[]
+            //{
+            //    new CustomRendererInfo
+            //    {
+            //        childName = "meshTeslaBody",
+            //        material = matTeslaBody,
+            //    },
+            //    new CustomRendererInfo
+            //    {
+            //        childName = "meshTeslaArmor",
+            //        material = matTeslaArmor,
+            //    },
+            //    new CustomRendererInfo
+            //    {
+            //        childName = "meshTeslaHammer",
+            //        material = Materials.CreateHotpooMaterial("MatHammer"),
+            //    },
+            //};
 
         public override Type characterMainState => typeof(TeslaTrooperMain);
 
@@ -109,7 +109,7 @@ namespace HenryMod.Modules.Survivors
         }
 
         private void InitializeRecolorSkills() {
-            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Color", true).skillFamily;
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
 
             SkillDef red = recolorSkillDef("Red", Color.red);
 
@@ -128,27 +128,34 @@ namespace HenryMod.Modules.Survivors
             for (int i = 0; i < skilldefs.Length; i++) {
                 Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
             }
-
+            
             CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
-            CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse[] skillChangeResponses = CSSPreviewDisplayConroller.skillChangeResponses;
-
-            for (int i = 0; i < skillChangeResponses.Length; i++) {
-
-                CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse response = skillChangeResponses[i];
-                response.triggerSkillFamily = recolorFamily;
-                response.triggerSkill = i == 0 ? red : skilldefs[i-1];
+            CSSPreviewDisplayConroller.bodyPrefab = bodyPrefab;
+            for (int i = 0; i < CSSPreviewDisplayConroller.skillChangeResponses.Length; i++) {
+                CSSPreviewDisplayConroller.skillChangeResponses[i].triggerSkillFamily = recolorFamily;
+                CSSPreviewDisplayConroller.skillChangeResponses[i].triggerSkill = i == 0 ? red : skilldefs[i-1];
             }
         }
 
         private SkillDef recolorSkillDef(string name, Color iconColor){
 
-            var thing = characterBodyModel
+            Color color1 = Color.white;
+            Color color2 = Color.white;
+
+            Recolor[] thing = characterBodyModel.GetComponent<SkinRecolorController>().Recolors;
+            for (int i = 0; i < thing.Length; i++) {
+                Recolor recolor = thing[i];
+                if (recolor.recolorName == name.ToLower()) {
+                    color1 = recolor.mainColor*0.69f;
+                    color2 = recolor.offColor;
+                }
+            }
 
             return Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = name,
                 skillNameToken = $"{teslaPrefix}RECOLOR_{name.ToUpper()}_NAME",
                 skillDescriptionToken = "",
-                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(iconColor, iconColor, iconColor, iconColor),
+                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
             });
         }
         

@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using HenryMod.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
+using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using System.Security;
@@ -89,6 +90,20 @@ namespace HenryMod {
             On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
+
+            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+        }
+
+        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
+            orig(self, skinIndex);
+
+            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
+            if (skinRecolorController) {
+
+                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("TeslaTrooperBodyRecolor")?.skillDef;
+                if (color)
+                    skinRecolorController.SetRecolor(color.skillName.ToLower());
+            }
         }
 
         #region tower hacks

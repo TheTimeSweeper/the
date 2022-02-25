@@ -8,24 +8,24 @@ using UnityEngine;
 
 public class TeslaCoilControllerController : MonoBehaviour {
 
-    private List<GameObject> teslaCoils = new List<GameObject>();
+    private List<GameObject> teslaTowers = new List<GameObject>();
 
-    private float nearCoilRange = 60f;
+    private float nearTowerRange = 60f;
 
-    public List<GameObject> nearbyCoils {
+    public List<GameObject> nearbyTowers {
         get {
 
             List<GameObject> coils = new List<GameObject>();
 
-            for (int i = 0; i < teslaCoils.Count; i++) {
-                GameObject coil = teslaCoils[i];
+            for (int i = 0; i < teslaTowers.Count; i++) {
+                GameObject coil = teslaTowers[i];
                 if (coil == null) {
                     Helpers.LogWarning("uh");
                     continue;
                 }
 
                 float dist = Vector3.Distance(coil.transform.position, transform.position);
-                if (dist < nearCoilRange) {
+                if (dist < nearTowerRange) {
                     coils.Add(coil);
                 }
             }
@@ -37,32 +37,32 @@ public class TeslaCoilControllerController : MonoBehaviour {
     public GameObject nearestCoil {
 
         get {
-            float nearest = nearCoilRange * 2;
-            GameObject nearestCoil = null;
+            float nearest = nearTowerRange * 2;
+            GameObject nearestTower = null;
 
-            for (int i = 0; i < teslaCoils.Count; i++) {
-                GameObject coil = teslaCoils[i];
+            for (int i = 0; i < teslaTowers.Count; i++) {
+                GameObject coil = teslaTowers[i];
                 if (coil == null) {
                     Helpers.LogWarning("uh command");
                     continue;
                 }
 
                 float dist = Vector3.Distance(coil.transform.position, transform.position);
-                if (dist < nearCoilRange && dist < nearest) {
+                if (dist < nearTowerRange && dist < nearest) {
                     nearest = dist;
-                    nearestCoil = coil;
+                    nearestTower = coil;
                 }
             }
 
             //Helpers.LogWarning($"{nearestCoil != null} | {teslaCoils.Count}");
 
-            return nearestCoil;
+            return nearestTower;
         }
     }
 
-    internal void commandCoils(HurtBox target) {
-        for (int i = 0; i < nearbyCoils.Count; i++) {
-            GameObject coil = nearbyCoils[i];
+    internal void commandTowers(HurtBox target) {
+        for (int i = 0; i < nearbyTowers.Count; i++) {
+            GameObject coil = nearbyTowers[i];
             if (coil == null) {
                 Helpers.LogWarning("uh command");
                 continue;
@@ -73,19 +73,28 @@ public class TeslaCoilControllerController : MonoBehaviour {
         }
     }
 
-    public void addCoil(GameObject gameObject) {
-        teslaCoils.Add(gameObject);
+    public void addTower(GameObject towerObject) {
+        teslaTowers.Add(towerObject);
+
+        SkinRecolorController trooperRecolor = this.gameObject.GetComponent<CharacterBody>().modelLocator.modelTransform.GetComponent<SkinRecolorController>();
+        if (trooperRecolor) {
+                                                            //pass in characterbody instead of gameobject?
+            SkinRecolorController towerRecolor = towerObject.GetComponent<CharacterBody>().modelLocator.modelTransform.GetComponent<SkinRecolorController>();
+            if (towerRecolor) {
+                towerRecolor.SetRecolor(trooperRecolor.currentColor);
+            }
+        }
     }
 
-    public void removeCoil(GameObject gameObject) {
-        teslaCoils.Remove(gameObject);
+    public void removeTower(GameObject towerObject) {
+        teslaTowers.Remove(towerObject);
     }
 
-    public void destroyCoil() {
+    public void destroyTower() {
 
-        if(teslaCoils[0] != null)
-            Destroy(teslaCoils[0]);
+        if(teslaTowers[0] != null)
+            Destroy(teslaTowers[0]);
 
-        teslaCoils.RemoveAt(0);
+        teslaTowers.RemoveAt(0);
     }
 }

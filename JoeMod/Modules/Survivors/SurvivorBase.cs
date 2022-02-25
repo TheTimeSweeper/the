@@ -21,10 +21,11 @@ namespace HenryMod.Modules.Survivors {
             if (characterEnabledConfig != null && !characterEnabledConfig.Value)
                 return;
 
+            InitializeUnlockables();
+
             base.InitializeCharacter();
 
             InitializeSurvivor();
-            InitializeUnlockables();
         }
 
         protected virtual void InitializeSurvivor() {

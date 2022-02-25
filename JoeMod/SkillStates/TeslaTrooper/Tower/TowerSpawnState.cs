@@ -19,10 +19,10 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower
             TeslaCoilControllerController controller = characterBody.masterObject.GetComponent<MinionOwnership>()?.ownerMaster.GetBodyObject()?.GetComponent<TeslaCoilControllerController>();
 
             if (controller) {
-                controller.addCoil(gameObject);
+                controller.addTower(gameObject);
 
                 characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
-                    controller.removeCoil(gameObject);
+                    controller.removeTower(gameObject);
                 });
             }
 

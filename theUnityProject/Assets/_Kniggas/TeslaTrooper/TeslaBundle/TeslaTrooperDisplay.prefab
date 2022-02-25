@@ -1,5 +1,148 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3846574806630168800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6098845047639091475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -179576646, guid: 906a6844efc0cc6438018e411df537c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 0}
+  skillChangeResponses:
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613200323115680385}
+          m_MethodName: SetRecolor
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  skinChangeResponses: []
 --- !u!1001 &7405520810175514377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3022,6 +3165,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.017999953
       objectReference: {fileID: 0}
+    - target: {fileID: 7822151256222784601, guid: 39f04075b1004864d95f20a2a0e79367,
+        type: 3}
+      propertyPath: skillChangeResponses.Array.data[0].response.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822151256222784601, guid: 39f04075b1004864d95f20a2a0e79367,
+        type: 3}
+      propertyPath: skillChangeResponses.Array.data[1].response.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8759506892152418555, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -3044,3 +3197,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
+--- !u!1 &6098845047639091475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3631804215789874714, guid: 39f04075b1004864d95f20a2a0e79367,
+    type: 3}
+  m_PrefabInstance: {fileID: 7405520810175514377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8613200323115680385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1246808802331805064, guid: 39f04075b1004864d95f20a2a0e79367,
+    type: 3}
+  m_PrefabInstance: {fileID: 7405520810175514377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6098845047639091475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4d7c23ed2af8246815101ae1afb7aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
