@@ -32,7 +32,7 @@ namespace HenryMod {
         public const string MODVERSION = "0.1.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
-        public const string developerPrefix = "HABIBI";
+        public const string DEV_PREFIX = "HABIBI";
 
         internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
 

@@ -82,23 +82,16 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
         }
 
         protected override void OnCastEnter() {
+
+            string sound = ZapSound;
+            if (lightningOrb.isCrit) sound = ZapSoundCrit;
+            Util.PlaySound(sound, gameObject);
+
             //todo: custom lightningorb
             if (lightningTarget == null)
                 return;
 
             fireOrb();
-
-            string sound = ZapSound;
-            if (lightningOrb.isCrit) sound = ZapSoundCrit;
-
-            Util.PlaySound(sound, gameObject);
-
-            //PlaySoundAuthority(sound);
-            //playsound zap
-        }
-
-        protected virtual void fireSound() {
-
         }
 
         protected virtual void fireOrb() {

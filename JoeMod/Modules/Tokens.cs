@@ -1,6 +1,8 @@
 ﻿using R2API;
 using System;
 using HenryMod.ModdedEntityStates.Joe;
+using JoeMod.ModdedEntityStates.TeslaTrooper;
+using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
 
 namespace HenryMod.Modules
 {
@@ -10,12 +12,13 @@ namespace HenryMod.Modules
         {
             AddJoeTokens();
             AddTeslaTokens();
+            AddTeslaTowerTokens();
         }
 
         private static void AddJoeTokens()
         {
             #region not henry
-            string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
+            string prefix = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_";
 
             string desc = "joe has a funny vertex on his face that's painted wrong.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > goddammit jerry." + Environment.NewLine + Environment.NewLine;
@@ -90,7 +93,7 @@ namespace HenryMod.Modules
         private static void AddTeslaTokens()
         {
             #region not henry 2
-            string prefix = Modules.Survivors.TeslaTrooperSurvivor.teslaPrefix;
+            string prefix = Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX;
 
             string desc = "Tesla Trooper Ready.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Charging Up." + Environment.NewLine + Environment.NewLine;
@@ -103,8 +106,7 @@ namespace HenryMod.Modules
 
             string fullName = "Tesla Trooper";
             LanguageAPI.Add(prefix + "NAME", fullName);
-            //todo what the fuck is it teslatrooper when my prefix is tesla
-            LanguageAPI.Add("HABIBI_TESLATROOPER_BODY_NAME", fullName);
+            LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Electrician In the Field");
             LanguageAPI.Add(prefix + "LORE", ".");
@@ -150,6 +152,7 @@ namespace HenryMod.Modules
             LanguageAPI.Add(prefix + "RECOLOR_CYAN_NAME", "Cyan");
             LanguageAPI.Add(prefix + "RECOLOR_PURPLE_NAME", "Purple");
             LanguageAPI.Add(prefix + "RECOLOR_PINK_NAME", "Pink");
+            LanguageAPI.Add(prefix + "RECOLOR_BLACK_NAME", "Black");
             #endregion
 
             #region Achievements
@@ -165,10 +168,42 @@ namespace HenryMod.Modules
             #endregion not henry 2
         }
 
+        private static void AddTeslaTowerTokens() {
+            #region not henry 3
+            string prefix = Modules.Survivors.TeslaTowerNotSurvivor.TOWER_PREFIX;
+
+            string outro = "..and so it left, construction still complete.";
+            string outroFailure = "..and so it vanished, never becoming the eiffel tower.";
+
+            string fullName = "Tesla Tower";
+            LanguageAPI.Add(prefix + "NAME", fullName);
+            //LanguageAPI.Add(prefix + "DESCRIPTION", desc);
+            LanguageAPI.Add(prefix + "SUBTITLE", "Power of the Union");
+            LanguageAPI.Add(prefix + "LORE", ".");
+            LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
+            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+
+            #region Skins
+            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
+            #endregion
+
+            #region Primary
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Tower");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Occasionally zaps nearby units for {Helpers.DamageValueText(TowerZap.DamageCoefficient)}.");
+            #endregion
+
+            #region Secondary
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "2000 Volts (Tower)");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"{Helpers.UtilityText("Shocking")}. Performs an ${Helpers.DamageText("empowered")} blast at Tesla Trooper's target for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}");
+            #endregion
+
+            #endregion not henry 3
+        }
+
         internal static void AddHenryTokens()
         {
             #region Henry
-            string prefix = FacelessJoePlugin.developerPrefix + "_HENRY_BODY_";
+            string prefix = FacelessJoePlugin.DEV_PREFIX + "_HENRY_BODY_";
 
             string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine;

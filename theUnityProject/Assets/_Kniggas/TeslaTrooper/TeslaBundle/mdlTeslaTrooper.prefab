@@ -74,6 +74,9 @@ MonoBehaviour:
   - recolorName: pink
     mainColor: {r: 1, g: 0.627451, b: 0.9607843, a: 1}
     offColor: {r: 0.6901961, g: 0.47843137, b: 0.6392157, a: 1}
+  - recolorName: black
+    mainColor: {r: 0, g: 0, b: 0, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 1}
   recolorInt: 5
   recolorString: cyan
   updateColor: 0

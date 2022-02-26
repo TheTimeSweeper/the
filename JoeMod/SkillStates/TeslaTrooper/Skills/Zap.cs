@@ -24,7 +24,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         public static float BaseCastTime = 0.05f;//todo anim
         #endregion
 
-        private LightningOrb _lightningOrb;
+        private List<HealthComponent> _bouncedObjectsList = new List<HealthComponent>();
+        private bool _crit;
+
         private TotallyOriginalTrackerComponent _tracker;
         private HurtBox _targetHurtbox;
 
@@ -82,8 +84,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         }
         #endregion
 
-        public override void OnEnter()
-        {
+        public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
 
@@ -97,42 +98,42 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             //base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
 
             //todo incombat
-            PlayAnimation("Gesture, Override", "HandOut");
-            if (_tracker)
-            {
-                _targetHurtbox = _tracker.GetTrackingTarget();
-            }
-            else
-            {
-                _targetHurtbox = _lightningOrb.PickNextTarget(transform.position);
+            //PlayAnimation("Gesture, Override", "HandOut");
+            if (isAuthority) {
+                if (_tracker) {
+                    _targetHurtbox = _tracker.GetTrackingTarget();
+                } else {
+                    _targetHurtbox = createOrb().PickNextTarget(transform.position);
+                }
             }
 
-            if (!_targetHurtbox)
-            {
-                duration = 0.1f;
-                //base.outer.SetNextStateToMain();
-                return;
-            }
-            _lightningOrb = new LightningOrb
-            {
+            _crit = RollCrit();
+
+            //if (!_targetHurtbox) {
+            //    duration = 0.1f;
+            //    //base.outer.SetNextStateToMain();
+            //    return;
+            //}
+        }
+
+        private LightningOrb createOrb() {
+            return new LightningOrb {
                 origin = transform.position,
                 damageValue = DamageCoefficient * damageStat,
-                isCrit = RollCrit(),
+                isCrit = _crit,
                 bouncesRemaining = 1,
                 damageCoefficientPerBounce = BounceDamageMultplier,
                 damageType = DamageType.Generic,
                 teamIndex = teamComponent.teamIndex,
                 attacker = gameObject,
                 procCoefficient = 1f,
-                bouncedObjects = new List<HealthComponent>(),
+                bouncedObjects = _bouncedObjectsList,
                 lightningType = LightningOrb.LightningType.Ukulele,
                 damageColorIndex = DamageColorIndex.Default,
                 range = BounceDistance,
                 speed = 690,
             };
-
-            _lightningOrb.target = _targetHurtbox;
-        }
+        } 
 
         protected override void OnCastEnter()
         {
@@ -146,8 +147,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         protected override void OnCastFixedUpdate()
         {
             base.OnCastFixedUpdate();
-
-            if (NetworkServer.active) {
+            
+            if (NetworkServer.active && _targetHurtbox) {
                 while (_currentCasts < OrbCasts && fixedAge > nextCastTime) {
                     FireZap();
                     _currentCasts++;
@@ -155,16 +156,14 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             }
         }
 
-        private void FireZap()
-        {
-            if (_targetHurtbox)
-            {
-                _lightningOrb.origin = GetOrbOrigin;
-                _lightningOrb.lightningType = GetOrbType;
-                OrbManager.instance.AddOrb(_lightningOrb);
-                //happens after firing to apply to spreads only
-                _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
-            }
+        private void FireZap() {
+            LightningOrb _lightningOrb = createOrb();
+            _lightningOrb.origin = GetOrbOrigin;
+            _lightningOrb.lightningType = GetOrbType;
+            _lightningOrb.target = _targetHurtbox;
+            OrbManager.instance.AddOrb(_lightningOrb);
+            //happens after firing to apply to bounces only
+            _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
         }
 
         private void PlayZap()
@@ -173,11 +172,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             PlayAnimation("Gesture, Additive", "Shock");
 
             string sound = "Play_itesatta";
-            if (_lightningOrb.isCrit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
+            if (_crit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
             //sound = EntityStates.Mage.Weapon.FireLaserbolt.attackString;
-            //todo sound wwise random sound
-                //oh wait the alt sound was the powered up one I think. 
-            //but not random pitch heh
+
             PlaySoundAuthority(sound);
 
             //god that was beautiful to my heart
@@ -188,6 +185,16 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.Skill;
+        }
+
+        // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
+        public override void OnSerialize(NetworkWriter writer) {
+            writer.Write(HurtBoxReference.FromHurtBox(this._targetHurtbox));
+        }
+
+        // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
+        public override void OnDeserialize(NetworkReader reader) {
+            this._targetHurtbox = reader.ReadHurtBoxReference().ResolveHurtBox();
         }
     }
 }

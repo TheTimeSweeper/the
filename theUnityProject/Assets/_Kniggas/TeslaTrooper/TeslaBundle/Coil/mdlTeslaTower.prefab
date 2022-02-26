@@ -1920,6 +1920,9 @@ MonoBehaviour:
   - recolorName: pink
     mainColor: {r: 1, g: 0.3726415, b: 0.8718765, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
+  - recolorName: black
+    mainColor: {r: 0, g: 0, b: 0, a: 1}
+    offColor: {r: 0, g: 0, b: 0, a: 0}
   recolorInt: 0
   recolorString: cyan
   updateColor: 0

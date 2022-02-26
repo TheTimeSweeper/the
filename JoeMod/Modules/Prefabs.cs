@@ -27,10 +27,10 @@ namespace HenryMod.Modules
 
         internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, UnlockableDef unlockableDef, float sortPosition)
         {
-            string fullNameString = FacelessJoePlugin.developerPrefix + "_" + namePrefix + "_BODY_NAME";
-            string fullDescString = FacelessJoePlugin.developerPrefix + "_" + namePrefix + "_BODY_DESCRIPTION";
-            string fullOutroString = FacelessJoePlugin.developerPrefix + "_" + namePrefix + "_BODY_OUTRO_FLAVOR";
-            string fullFailureString = FacelessJoePlugin.developerPrefix + "_" + namePrefix + "_BODY_OUTRO_FAILURE";
+            string fullNameString = FacelessJoePlugin.DEV_PREFIX + "_" + namePrefix + "_BODY_NAME";
+            string fullDescString = FacelessJoePlugin.DEV_PREFIX + "_" + namePrefix + "_BODY_DESCRIPTION";
+            string fullOutroString = FacelessJoePlugin.DEV_PREFIX + "_" + namePrefix + "_BODY_OUTRO_FLAVOR";
+            string fullFailureString = FacelessJoePlugin.DEV_PREFIX + "_" + namePrefix + "_BODY_OUTRO_FAILURE";
 
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = bodyPrefab;

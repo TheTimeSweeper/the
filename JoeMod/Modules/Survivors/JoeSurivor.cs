@@ -21,7 +21,7 @@ namespace HenryMod.Modules.Survivors
             armor = 20f,
             armorGrowth = 0f,
             bodyName = "JoeBody",
-            bodyNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_NAME",
+            bodyNameToken = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_NAME",
             bodyColor = Color.magenta,
             characterPortrait = Modules.Assets.LoadCharacterIcon("joe_icon"),
             crosshair = Modules.Assets.LoadCrosshair("Merc"),
@@ -30,7 +30,7 @@ namespace HenryMod.Modules.Survivors
             healthRegen = 1.5f,
             jumpCount = 2,
             maxHealth = 110f,
-            subtitleNameToken = FacelessJoePlugin.developerPrefix + "_JOE_BODY_SUBTITLE",
+            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
@@ -127,7 +127,7 @@ namespace HenryMod.Modules.Survivors
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = FacelessJoePlugin.developerPrefix + "_JOE_BODY_";
+            string prefix = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_";
 
 
             #region Primary
@@ -341,7 +341,7 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_JOE_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,

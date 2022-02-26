@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
-{
+namespace HenryMod.Modules {
+
     internal static class Skills
     {
         internal static List<SkillFamily> skillFamilies = new List<SkillFamily>();
@@ -128,10 +128,33 @@ namespace HenryMod.Modules
             };
         }
 
-        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillName, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile)
-        {
+        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType state, string stateMachine, string skillName, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile) {
             SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
+            
+            populatePrimarySKillDef(state, stateMachine, skillName, skillNameToken, skillDescriptionToken, skillIcon, agile, skillDef);
 
+            skillDefs.Add(skillDef);
+
+            return skillDef;
+        }
+
+        internal static T CreatePrimarySkillDef<T>(SerializableEntityStateType state, 
+                                                string stateMachine, 
+                                                string skillName, 
+                                                string skillNameToken, 
+                                                string skillDescriptionToken, 
+                                                Sprite skillIcon, 
+                                                bool agile) where T : SkillDef{
+            T skillDef = ScriptableObject.CreateInstance<T>();
+
+            populatePrimarySKillDef(state, stateMachine, skillName, skillNameToken, skillDescriptionToken, skillIcon, agile, skillDef);
+
+            skillDefs.Add(skillDef);
+
+            return skillDef;
+        }
+        //todo eugh
+        private static void populatePrimarySKillDef(SerializableEntityStateType state, string stateMachine, string skillName, string skillNameToken, string skillDescriptionToken, Sprite skillIcon, bool agile, SkillDef skillDef) {
             skillDef.skillName = skillName;
             (skillDef as ScriptableObject).name = skillName;
             skillDef.skillNameToken = skillNameToken;
@@ -156,16 +179,29 @@ namespace HenryMod.Modules
             skillDef.stockToConsume = 0;
 
             if (agile) skillDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
+        }
+
+        internal static SkillDef CreateSkillDef(SkillDefInfo skillDefInfo) {
+            SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
+
+            popuplateSKillDef(skillDefInfo, skillDef);
 
             skillDefs.Add(skillDef);
 
             return skillDef;
         }
 
-        internal static SkillDef CreateSkillDef(SkillDefInfo skillDefInfo)
-        {
-            SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
+        internal static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T: SkillDef {
+            T skillDef = ScriptableObject.CreateInstance<T>();
 
+            popuplateSKillDef(skillDefInfo, skillDef);
+
+            skillDefs.Add(skillDef);
+
+            return skillDef;
+        }
+        //todo eugh but also add unlockable
+        private static void popuplateSKillDef(SkillDefInfo skillDefInfo, SkillDef skillDef) {
             skillDef.skillName = skillDefInfo.skillName;
             (skillDef as ScriptableObject).name = skillDefInfo.skillName;
             skillDef.skillNameToken = skillDefInfo.skillNameToken;
@@ -190,10 +226,6 @@ namespace HenryMod.Modules
             skillDef.stockToConsume = skillDefInfo.stockToConsume;
 
             skillDef.keywordTokens = skillDefInfo.keywordTokens;
-
-            skillDefs.Add(skillDef);
-
-            return skillDef;
         }
     }
 }

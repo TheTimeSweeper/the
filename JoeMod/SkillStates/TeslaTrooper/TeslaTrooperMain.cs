@@ -8,20 +8,32 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
 
         private int lastVoice = -1;
 
+        private Animator cachedAnimator;
+
+        public override void OnEnter() {
+            base.OnEnter();
+            cachedAnimator = GetModelAnimator();
+        }
+
         public override void Update() {
             base.Update();
 
+            cachedAnimator.SetBool("inCombat", !characterBody.outOfCombat);
+
             if (Input.GetKeyDown(KeyCode.CapsLock)) {
 
-                int rand = getRandomVoiceLine();
-                while(rand == lastVoice) {
-                    rand = getRandomVoiceLine();
-                }
-
-                Helpers.PlaySoundVoiceLine((TeslaVoiceLine)rand, gameObject);
-                
+                playRandomvoiceLine();
                 //Util.PlaySound("Play_itesatd", gameObject);
             }
+        }
+
+        private void playRandomvoiceLine() {
+            int rand = getRandomVoiceLine();
+            while (rand == lastVoice) {
+                rand = getRandomVoiceLine();
+            }
+
+            Helpers.PlaySoundVoiceLine((TeslaVoiceLine)rand, gameObject);
         }
 
         private int getRandomVoiceLine() {

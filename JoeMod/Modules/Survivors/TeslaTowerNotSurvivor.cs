@@ -13,13 +13,16 @@ using RoR2.CharacterAI;
 
 namespace HenryMod.Modules.Survivors {
     public class TeslaTowerNotSurvivor : CharacterBase {
+
         public override string bodyName => "TeslaTower";
+
+        public const string TOWER_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_";
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             armor = 1200f,
             armorGrowth = 0f,
             bodyName = "TeslaTowerBody",
-            bodyNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_NAME",
+            bodyNameToken = TOWER_PREFIX + "NAME",
             bodyNameToClone = "EngiTurret",
             bodyColor = new Color(0.8f, 2, 2),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTower"),
@@ -29,7 +32,7 @@ namespace HenryMod.Modules.Survivors {
             healthRegen = 1.5f,
             jumpCount = 0,
             maxHealth = 200f,
-            subtitleNameToken = FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_SUBTITLE",
+            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_SUBTITLE",
             podPrefab = null,
             moveSpeed = 0,
             
@@ -97,36 +100,30 @@ namespace HenryMod.Modules.Survivors {
         public override void InitializeSkills() {          //maybe least elegant of my solutions but came with a DRY fix so half and half
             Modules.Skills.CreateSkillFamilies(bodyPrefab, 2);
 
-            string prefix = FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_";
+            InitializePrimarySkills();
 
-            InitializePrimarySkills(prefix);
-
-            InitializeSecondarySkills(prefix);
-
-            //InitializeUtilitySkills(prefix);
-
-            //InitializeSpecialSkills(prefix);
+            InitializeSecondarySkills();
         }
 
-        private void InitializePrimarySkills(string prefix) {
+        private void InitializePrimarySkills() {
             States.entityStates.Add(typeof(TowerZap));
             SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(TowerZap)),
                                                                             "Weapon",
                                                                             "Tower_Primary_Zap",
-                                                                            prefix + "PRIMARY_ZAP_NAME",
-                                                                            prefix + "PRIMARY_ZAP_DESCRIPTION",
+                                                                            TOWER_PREFIX + "PRIMARY_ZAP_NAME",
+                                                                            TOWER_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
                                                                             Modules.Assets.LoadAsset<Sprite>("texTeslaTowerSkillPrimary"),
                                                                             false);
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }
 
-        private void InitializeSecondarySkills(string prefix) {
+        private void InitializeSecondarySkills() {
             States.entityStates.Add(typeof(TowerBigZap));
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tower_Secondary_BigZap",
-                skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
-                skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
+                skillNameToken = TOWER_PREFIX + "SECONDARY_BIGZAP_NAME",
+                skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
                 skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
                 activationStateMachineName = "Weapon",
@@ -166,7 +163,7 @@ namespace HenryMod.Modules.Survivors {
 
             #region DefaultSkin
 
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_TESLA_TOWER_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 mainRenderer,

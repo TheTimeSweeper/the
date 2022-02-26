@@ -7,6 +7,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
     {
         public static string EnterSoundString = EntityStates.Treebot.Weapon.AimMortar.enterSoundString;
         public static string ExitSoundString = EntityStates.Treebot.Weapon.AimMortar.exitSoundString;
+        public float skillsPlusMulti;
 
         public override void OnEnter()
         {
@@ -17,7 +18,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             //this.arcVisualizerPrefab = goodState.arcVisualizerPrefab;
             projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
             endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
-            endpointVisualizerRadiusScale = BigZap.AttackRadius;
+            endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
@@ -33,13 +34,14 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             StartAimMode();
             
             if(GetComponent<TeslaCoilControllerController>()?.nearestCoil && GetComponent<TotallyOriginalTrackerComponent>()?.GetTrackingTarget() != null) {
-                endpointVisualizerRadiusScale = Tower.TowerBigZap.AttackRadius;
+                endpointVisualizerRadiusScale = Tower.TowerBigZap.BaseAttackRadius;
             } else {
-                endpointVisualizerRadiusScale = BigZap.AttackRadius;
+                endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
             }
+            endpointVisualizerRadiusScale *= skillsPlusMulti;
 
             //todo incombat
-            PlayAnimation("Gesture, Override", "HandOut");
+            //PlayAnimation("Gesture, Override", "HandOut");
         }
 
         // Token: 0x06003B19 RID: 15129 RVA: 0x0002B5A9 File Offset: 0x000297A9

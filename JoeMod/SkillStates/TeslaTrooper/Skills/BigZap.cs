@@ -1,55 +1,76 @@
 ﻿using EntityStates;
+using HenryMod.ModdedEntityStates.BaseStates;
 using HenryMod.Modules;
 using RoR2;
 using UnityEngine;
 
 namespace JoeMod.ModdedEntityStates.TeslaTrooper {
-
-    public class BigZap : BaseSkillState
+    
+    public class BigZap : BaseTimedSkillState
     {
         public static float DamageCoefficient = 6.9f;
         public static float ProcCoefficient = 1f;
-        public static float AttackRadius = 10;
+        public static float BaseAttackRadius = 10;
+        public static float BaseDuration = 1;
+        public static float BaseCastTime = 0;//0.2f //todo windup sound, windup vfx, and zapping ground
 
+        public float skillsPlusMulti = 1f;
+        public float attackRadius;
         public Vector3 aimPoint;
+
+        protected string zapSound = "Play_tank_vtesatta_tesla_tank_attack";
+        protected string zapSoundCrit = "Play_tank_vtesattb_tesla_tank_attack";
 
         public static GameObject bigZapEffectPrefab = Resources.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
         public static GameObject bigZapEffectPrefabArea = Resources.Load<GameObject>("prefabs/effects/lightningstakenova");
         public static GameObject bigZapEffectFlashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
 
-        public override void OnEnter()
-        {
-            base.OnEnter();
+        private bool commandTowers;
 
+        public override void OnEnter() {
+            base.OnEnter();
+            
+            InitDurationValues(BaseDuration, BaseCastTime);
+            
             TeslaCoilControllerController controller = GetComponent<TeslaCoilControllerController>();
 
             if (controller && controller.nearestCoil) {
                 TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
-                if(tracker && tracker.GetTrackingTarget()) {
+                if (tracker && tracker.GetTrackingTarget()) {
 
                     controller.commandTowers(tracker.GetTrackingTarget());
 
-                    return;
+                    commandTowers = true;
                 }
             }
+            attackRadius = BaseAttackRadius * skillsPlusMulti;
+
 
             //todo anim: incombat
-            PlayAnimation("Gesture, Override", "HandOut");
+            //PlayAnimation("Gesture, Override", "HandOut");
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+        }
 
-            new BlastAttack
-            {
+        protected override void OnCastEnter() {
+            base.OnCastEnter();
+
+            if (commandTowers)
+                return;
+
+            bool isCrit = RollCrit();
+
+            new BlastAttack {
                 attacker = gameObject,
                 inflictor = gameObject,
                 teamIndex = teamComponent.teamIndex,
                 //attackerFiltering = AttackerFiltering.NeverHit
 
                 position = aimPoint,
-                radius = AttackRadius,
+                radius = attackRadius,
                 falloffModel = BlastAttack.FalloffModel.None,
 
                 baseDamage = damageStat * DamageCoefficient,
-                crit = RollCrit(),
+                crit = isCrit,
                 damageType = DamageType.Stun1s,
                 //damageColorIndex = DamageColorIndex.Default,
 
@@ -63,15 +84,15 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
                 //impactEffect = EffectIndex.uh;
             }.Fire();
 
+            PlaySoundAuthority(isCrit ? zapSound : zapSoundCrit);
+
             #region effects
-            EffectData fect = new EffectData
-            {
+            EffectData fect = new EffectData {
                 origin = aimPoint,
-                scale = AttackRadius,
+                scale = attackRadius,
             };
 
-            if (Input.GetKey(KeyCode.LeftAlt))
-            {
+            if (Input.GetKey(KeyCode.LeftAlt)) {
                 tryEffects(fect);
                 return;
             }
@@ -81,16 +102,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
             if (!Input.GetKey(KeyCode.G))
                 EffectManager.SpawnEffect(bigZapEffectPrefab, fect, false);
 
-            if (Input.GetKey(KeyCode.H))
-            {
+            if (Input.GetKey(KeyCode.H)) {
                 fect.scale /= 2f;
                 EffectManager.SpawnEffect(bigZapEffectFlashPrefab, fect, false);
-            }
-
-            if (isAuthority)
-            {
-                //todo sound wwise random sound
-                //Util.PlaySound("Play_tank_vtesattb_tesla_tank_attack", gameObject);
             }
             #endregion effects
         }
@@ -132,5 +146,9 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
             }
         }
         #endregion testeffects
+
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            return InterruptPriority.Skill;
+        }
     }
 }

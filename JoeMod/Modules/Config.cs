@@ -7,6 +7,8 @@ namespace HenryMod.Modules
     {
         public static bool Debug;
 
+        public static bool NewColor;
+
         public static void ReadConfig()
         {
             Debug = FacelessJoePlugin.instance.Config.Bind(
@@ -14,12 +16,18 @@ namespace HenryMod.Modules
                 "Debug",
                 false,
                 "in case I forget to delete them when I upload").Value;
+
+            NewColor = FacelessJoePlugin.instance.Config.Bind(
+                "General",
+                "New Color (s?)",
+                false,
+                "add black for the wife").Value;
         }
 
         // this helper automatically makes config entries for disabling survivors
         internal static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "")
         {
-            return FacelessJoePlugin.instance.Config.Bind<bool>(characterName,
+            return FacelessJoePlugin.instance.Config.Bind<bool>("General",
                                                                 "Enable "+ characterName,
                                                                 enabledDefault,
                                                                 !string.IsNullOrEmpty(description) ? description : "Set to false to disable this character");

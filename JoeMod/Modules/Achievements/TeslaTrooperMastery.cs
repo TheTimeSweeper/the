@@ -7,10 +7,10 @@ namespace HenryMod.Modules.Achievements {
 
         public override float RequiredDifficultyCoefficient => 3;
 
-        public override string AchievementTokenPrefix => Modules.Survivors.TeslaTrooperSurvivor.teslaPrefix + "MASTERY";
+        public override string AchievementTokenPrefix => Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "MASTERY";
 
         public override string AchievementSpriteName => "texIconTeslaSkinDefault";
 
-        public override string PrerequisiteUnlockableIdentifier => Modules.Survivors.TeslaTrooperSurvivor.teslaPrefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_ID"; //todo oh shit unlockable
+        public override string PrerequisiteUnlockableIdentifier => Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "CHARACTERUNLOCKABLE_ACHIEVEMENT_ID"; //todo oh shit unlockable
     }
 }
