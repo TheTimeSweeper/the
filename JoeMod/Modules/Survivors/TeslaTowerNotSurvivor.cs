@@ -98,7 +98,7 @@ namespace HenryMod.Modules.Survivors {
         #region skills
 
         public override void InitializeSkills() {          //maybe least elegant of my solutions but came with a DRY fix so half and half
-            Modules.Skills.CreateSkillFamilies(bodyPrefab, 2);
+            Modules.Skills.CreateSkillFamilies(bodyPrefab, 3);
 
             InitializePrimarySkills();
 
@@ -126,7 +126,7 @@ namespace HenryMod.Modules.Survivors {
                 skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
                 skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 9f,
                 beginSkillCooldownOnSkillEnd = true,
@@ -141,7 +141,7 @@ namespace HenryMod.Modules.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { }
+                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);

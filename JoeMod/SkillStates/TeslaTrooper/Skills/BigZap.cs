@@ -8,7 +8,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
     
     public class BigZap : BaseTimedSkillState
     {
-        public static float DamageCoefficient = 6.9f;
+        public static float DamageCoefficient = 5.0f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
         public static float BaseDuration = 1;
@@ -34,7 +34,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
             
             TeslaCoilControllerController controller = GetComponent<TeslaCoilControllerController>();
 
-            if (controller && controller.nearestCoil) {
+            if (controller && controller.coilReady) {
                 TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
                 if (tracker && tracker.GetTrackingTarget()) {
 

@@ -11,8 +11,12 @@ using HenryMod.Modules.Characters;
 namespace HenryMod.Modules.Survivors
 {
     public class TeslaTrooperSurvivor : SurvivorBase {
+
         public override string bodyName => "TeslaTrooper";
+
         public const string TESLA_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_";
+
+        public override string survivorTokenPrefix => TESLA_PREFIX;
 
         public override float sortPosition => 69f;
 
@@ -104,10 +108,72 @@ namespace HenryMod.Modules.Survivors
         
         protected override void InitializeSurvivor() {
             base.InitializeSurvivor();
-
+            
             InitializeRecolorSkills();
+
+            Hooks();
         }
 
+        #region hooks
+        private void Hooks() {
+
+            On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
+            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
+            //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
+            //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
+
+            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+        }
+
+        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
+            orig(self, skinIndex);
+
+            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
+            if (skinRecolorController) {
+
+                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
+                if (color)
+                    skinRecolorController.SetRecolor(color.skillName.ToLower());
+            }
+        }
+
+        #region tower hacks
+        private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
+            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                Helpers.LogWarning("copyitemsfrom true");
+                filter = TeslaTowerCopyFilter;
+            }
+            orig(self, other, filter);
+        }
+        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
+            if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                Helpers.LogWarning("adddeployable true");
+                slot = DeployableSlot.PowerWard;
+            }
+
+            orig(self, deployable, slot);
+        }
+
+        private CharacterMaster MasterSummon_Perform(On.RoR2.MasterSummon.orig_Perform orig, MasterSummon self) {
+
+            if (MasterCatalog.FindMasterIndex(self.masterPrefab) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                Helpers.LogWarning("mastersummon true");
+                self.inventoryItemCopyFilter = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
+            }
+            return orig(self);
+        }
+
+        private static bool TeslaTowerCopyFilter(ItemIndex itemIndex) {
+            return !ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.CannotCopy) &&
+                (ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage) ||
+                ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
+            //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
+        }
+        #endregion tower hacks
+        private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg) {
+            orig(netMsg);
+        }
+        #endregion hooks
         private void InitializeRecolorSkills() {
             SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
 
@@ -204,7 +270,7 @@ namespace HenryMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { }
+                keywordTokens = new string[] { "KEYWORD_STUNNING" }
             });
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
@@ -266,7 +332,9 @@ namespace HenryMod.Modules.Survivors
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 0
+                stockToConsume = 0,
+
+                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);

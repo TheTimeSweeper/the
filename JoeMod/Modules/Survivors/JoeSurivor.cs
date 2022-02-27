@@ -14,6 +14,10 @@ namespace HenryMod.Modules.Survivors
     {
         public override string bodyName => "Joe";
 
+        public const string JOE_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_";
+
+        public override string survivorTokenPrefix => JOE_PREFIX;
+
         public override float sortPosition => 69f;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
@@ -21,10 +25,10 @@ namespace HenryMod.Modules.Survivors
             armor = 20f,
             armorGrowth = 0f,
             bodyName = "JoeBody",
-            bodyNameToken = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_NAME",
+            bodyNameToken = JOE_PREFIX + "NAME",
             bodyColor = Color.magenta,
             characterPortrait = Modules.Assets.LoadCharacterIcon("joe_icon"),
-            crosshair = Modules.Assets.LoadCrosshair("Merc"),
+            crosshair = Modules.Assets.LoadCrosshair("SimpleDot"),
             damage = 12f,
             healthGrowth = 33f,
             healthRegen = 1.5f,
@@ -40,7 +44,6 @@ namespace HenryMod.Modules.Survivors
 
         public override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
 
-        // item display stuffs
         public override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
 
         public override UnlockableDef characterUnlockableDef { get; }

@@ -1,5 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 [RequireComponent(typeof(CharacterBody))]
 [RequireComponent(typeof(InputBankTest))]
@@ -16,15 +18,19 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
     private CharacterBody characterBody;
     private TeamComponent teamComponent;
     private InputBankTest inputBank;
-    private Indicator indicator;
+    private TeslaIndicator indicator;
 
     // Token: 0x04000FAB RID: 4011
     //private readonly BullseyeSearch search = new BullseyeSearch();
 
+    public void setIndicatorEmpowered(bool empowered) {
+        indicator.empowered = true;
+    }
 
     void Awake()
     {
-        indicator = new Indicator(base.gameObject, Resources.Load<GameObject>("Prefabs/LightningIndicator"));
+        indicator = new TeslaIndicator(base.gameObject, Resources.Load<GameObject>("Prefabs/LightningIndicator"));
+        indicator.owner = gameObject;
     }
 
     void Start()
@@ -148,4 +154,17 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
         bulletAttack.Fire();
     }
 
+    public class TeslaIndicator : Indicator {
+        internal bool empowered;
+
+        public TeslaIndicator(GameObject owner, GameObject visualizerPrefab) : base(owner, visualizerPrefab) { }
+
+        //public override void UpdateVisualizer() {
+        //    base.UpdateVisualizer();
+
+        //    if (visualizerTransform) {
+        //        visualizerTransform.GetComponentInChildren<Image>().color = empowered ? Color.red : Color.white;
+        //    }
+        //}
+    }
 }

@@ -79,68 +79,11 @@ namespace HenryMod {
             Modules.Survivors.TeslaTrooperSurvivor.instance.SetItemDisplays();
         }
 
-        private void Hook()
-        {
+        private void Hook() {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
 
             On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
-
-            On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
-            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
-            //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
-            //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
-
-            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
-        }
-
-        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
-            orig(self, skinIndex);
-
-            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
-            if (skinRecolorController) {
-
-                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("TeslaTrooperBodyRecolor")?.skillDef;
-                if (color)
-                    skinRecolorController.SetRecolor(color.skillName.ToLower());
-            }
-        }
-
-        #region tower hacks
-        private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
-            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("copyitemsfrom true");
-                filter = TeslaTowerCopyFilter;
-            }
-            orig(self, other, filter);
-        }
-        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
-            if(MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("adddeployable true");
-                slot = DeployableSlot.PowerWard;
-            }
-
-            orig(self, deployable, slot);
-        }
-
-        private CharacterMaster MasterSummon_Perform(On.RoR2.MasterSummon.orig_Perform orig, MasterSummon self) {
-
-            if(MasterCatalog.FindMasterIndex(self.masterPrefab) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("mastersummon true");
-                self.inventoryItemCopyFilter = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
-            }
-            return orig(self);
-        }
-
-        private static bool TeslaTowerCopyFilter(ItemIndex itemIndex) {
-            return !ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.CannotCopy) && 
-                (ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage) || 
-                ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
-            //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
-        }
-#endregion tower hacks
-        private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg) {
-            orig(netMsg);
         }
 
         private void ThrowGrenade_PlayAnimation(On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.orig_PlayAnimation orig, global::EntityStates.Commando.CommandoWeapon.ThrowGrenade self, float duration) {

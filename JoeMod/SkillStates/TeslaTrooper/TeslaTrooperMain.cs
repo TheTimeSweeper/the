@@ -17,9 +17,10 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper {
 
         public override void Update() {
             base.Update();
+            bool combat = !characterBody.outOfCombat;
 
-            cachedAnimator.SetBool("inCombat", !characterBody.outOfCombat);
-
+            cachedAnimator.SetBool("inCombat", combat);
+            
             if (Input.GetKeyDown(KeyCode.CapsLock)) {
 
                 playRandomvoiceLine();

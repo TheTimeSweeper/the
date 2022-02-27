@@ -8,9 +8,10 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerZap: BaseTimedSkillState
     {
-        public static float DamageCoefficient = 2.2f;
+        public static float DamageCoefficient = 2.3f;
+        public static float TotalDamageCoefficient => DamageCoefficient * 3;
         public static float ProcCoefficient = 1f;
-
+        
         public static float BaseDuration = 1f;
         public static float BaseStartCastTime = 1;
 
@@ -47,7 +48,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
 
             lightningOrb = new LightningOrb {
                 origin = base.GetModelChildLocator().FindChild("Orb").position,
-                damageValue = DamageCoefficient * damageStat,
+                damageValue = DamageCoefficient / 3 * damageStat,
                 isCrit = RollCrit(),
                 //bouncesRemaining = 1,
                 //damageCoefficientPerBounce = BounceDamageMultplier,
@@ -66,7 +67,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
             lightningOrb.target = lightningTarget;
             
             Util.PlaySound(PrepSound, gameObject);
-            PlayAnimation("weapon", "PrepZap", "prep.playbackRate", base.duration);
+            PlayCrossfade("weapon", "PrepZap", "prep.playbackRate", base.duration, 0.1f);
             //playanimation or however I'm going to do the glow going up the pole
                 //and the orb glowing
         }

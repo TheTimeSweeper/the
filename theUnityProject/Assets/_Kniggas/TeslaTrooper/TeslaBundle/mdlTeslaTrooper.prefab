@@ -54,20 +54,20 @@ MonoBehaviour:
     mainColor: {r: 0.70980394, g: 0.27450982, b: 0.27058825, a: 1}
     offColor: {r: 0.5294118, g: 0.3647059, b: 0.34901962, a: 1}
   - recolorName: blue
-    mainColor: {r: 0.31764707, g: 0.5058824, b: 0.7921569, a: 1}
-    offColor: {r: 0.38431373, g: 0.47058824, b: 0.69803923, a: 1}
+    mainColor: {r: 0.3724635, g: 0.5615252, b: 0.8490566, a: 1}
+    offColor: {r: 0.3436276, g: 0.45148852, b: 0.735849, a: 1}
   - recolorName: green
     mainColor: {r: 0.30980393, g: 0.7294118, b: 0.28627452, a: 1}
-    offColor: {r: 0.3529412, g: 0.43529412, b: 0.3254902, a: 1}
+    offColor: {r: 0.39186543, g: 0.5283019, b: 0.34638664, a: 1}
   - recolorName: yellow
-    mainColor: {r: 1, g: 0.9411765, b: 0.3372549, a: 1}
-    offColor: {r: 0.5568628, g: 0.52156866, b: 0.3372549, a: 1}
+    mainColor: {r: 1, g: 0.94264257, b: 0.3537736, a: 1}
+    offColor: {r: 0.6698113, g: 0.6195416, b: 0.35702205, a: 1}
   - recolorName: orange
-    mainColor: {r: 0.9254902, g: 0.5058824, b: 0.29411766, a: 1}
-    offColor: {r: 0.59607846, g: 0.3882353, b: 0.24705882, a: 1}
+    mainColor: {r: 0.990566, g: 0.54650617, b: 0.3224012, a: 1}
+    offColor: {r: 0.6792453, g: 0.4483782, b: 0.29156286, a: 1}
   - recolorName: cyan
-    mainColor: {r: 0.20392157, g: 0.8235294, b: 0.8862745, a: 1}
-    offColor: {r: 0.38039216, g: 0.56078434, b: 0.6509804, a: 1}
+    mainColor: {r: 0.254539, g: 0.914319, b: 0.9811321, a: 1}
+    offColor: {r: 0.39044145, g: 0.64587057, b: 0.7735849, a: 1}
   - recolorName: purple
     mainColor: {r: 0.85490197, g: 0.29411766, b: 0.9529412, a: 1}
     offColor: {r: 0.49019608, g: 0.32156864, b: 0.50980395, a: 1}
@@ -75,8 +75,8 @@ MonoBehaviour:
     mainColor: {r: 1, g: 0.627451, b: 0.9607843, a: 1}
     offColor: {r: 0.6901961, g: 0.47843137, b: 0.6392157, a: 1}
   - recolorName: black
-    mainColor: {r: 0, g: 0, b: 0, a: 1}
-    offColor: {r: 0, g: 0, b: 0, a: 1}
+    mainColor: {r: 0.20754719, g: 0.19677822, b: 0.19677822, a: 1}
+    offColor: {r: 0.16037738, g: 0.15054291, b: 0.15054291, a: 1}
   recolorInt: 5
   recolorString: cyan
   updateColor: 0

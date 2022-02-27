@@ -1874,6 +1874,10 @@ MonoBehaviour:
     defaultMaterial: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+  - renderer: {fileID: 8205121029334518273}
+    defaultMaterial: {fileID: 2100000, guid: e55f3642b8fb710439763f554bb49a8d, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
   baseLightInfos: []
 --- !u!114 &3072634537170636396
 MonoBehaviour:
@@ -1900,19 +1904,19 @@ MonoBehaviour:
     mainColor: {r: 1, g: 0, b: 0, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: blue
-    mainColor: {r: 0, g: 0.167027, b: 1, a: 1}
+    mainColor: {r: 0.08503916, g: 0.23669657, b: 0.8584906, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: green
-    mainColor: {r: 0, g: 1, b: 0.075618744, a: 1}
+    mainColor: {r: 0.13830544, g: 0.7924528, b: 0.15049051, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: yellow
-    mainColor: {r: 1, g: 0.96559095, b: 0, a: 1}
+    mainColor: {r: 0.9056604, g: 0.84923136, b: 0.08116765, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: orange
-    mainColor: {r: 1, g: 0.52566326, b: 0, a: 1}
+    mainColor: {r: 0.9433962, g: 0.5105264, b: 0.031149892, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: cyan
-    mainColor: {r: 0, g: 0.9482002, b: 1, a: 1}
+    mainColor: {r: 0.06407974, g: 0.851259, b: 0.9056604, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: purple
     mainColor: {r: 0.57410204, g: 0, b: 0.9339623, a: 1}

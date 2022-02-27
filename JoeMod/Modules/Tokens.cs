@@ -95,17 +95,16 @@ namespace HenryMod.Modules
             #region not henry 2
             string prefix = Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX;
 
-            string desc = "Tesla Trooper Ready.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Charging Up." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Let the Juice Flow" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Electrodes Ready" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Construction Complete." + Environment.NewLine + Environment.NewLine;
+            string desc = "Tesla Trooper is a mid-range bruiser, who can construct towers to empower his combat.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Zap provides consistent damage to enemies and spreads." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Use 2000 Volts for damage, and to control crowds with its stun" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > The Tesla Tower inherits your items, but doesn't take damage, mainly taking advantage of damage items." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Use the Tesla Tower to empower your secondary, but its empowered attack has a separate, longer cooldown." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, rubber shoes in motion.";
             string outroFailure = "..and so he vanished, unit lost.";
 
             string fullName = "Tesla Trooper";
-            LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Electrician In the Field");
@@ -126,22 +125,22 @@ namespace HenryMod.Modules
             //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", "it is happening");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeteted units for {Helpers.DamageText($"{Zap.OrbCasts}x{Zap.DamageCoefficient*100}% damage")}. Spreads to {Helpers.UtilityText($"up to {Zap.OrbCasts}")} nearby enemies");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "2000 Volts");
-            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", "coming up");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"{Helpers.UtilityText("Stunning.")} Create an electric blast in a large area for {Helpers.DamageValueText(BigZap.DamageCoefficient)}.");
             #endregion
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", "Electrodes Ready");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"Protect yourself from {Helpers.UtilityText("all incoming damage")} for {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", "Construction Complete (does nothing yet but has colliders)");
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower that occasionally zaps nearby units for {Helpers.DamageValueText(TowerZap.TotalDamageCoefficient)}. Use {Helpers.UtilityText("secondary")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
             #endregion
 
             #region Special
@@ -189,9 +188,9 @@ namespace HenryMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Occasionally zaps nearby units for {Helpers.DamageValueText(TowerZap.DamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Occasionally zap nearby units for {Helpers.DamageValueText(TowerZap.TotalDamageCoefficient)}.");
             #endregion
-
+            
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "2000 Volts (Tower)");
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"{Helpers.UtilityText("Shocking")}. Performs an ${Helpers.DamageText("empowered")} blast at Tesla Trooper's target for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}");

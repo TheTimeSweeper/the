@@ -10,6 +10,8 @@ namespace HenryMod.Modules.Survivors {
     {
         public abstract float sortPosition { get;}
 
+        public abstract string survivorTokenPrefix { get; }
+
         public abstract UnlockableDef characterUnlockableDef { get; }
 
         public abstract ConfigEntry<bool> characterEnabledConfig { get; }
@@ -30,7 +32,7 @@ namespace HenryMod.Modules.Survivors {
 
         protected virtual void InitializeSurvivor() {
             displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
-            Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, bodyName.ToUpper(), characterUnlockableDef, sortPosition);
+            Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, sortPosition);
         }
 
         public virtual void InitializeUnlockables()

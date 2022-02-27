@@ -12,28 +12,6 @@ public class TeslaCoilControllerController : MonoBehaviour {
 
     private float nearTowerRange = 60f;
 
-    public List<GameObject> nearbyTowers {
-        get {
-
-            List<GameObject> coils = new List<GameObject>();
-
-            for (int i = 0; i < teslaTowers.Count; i++) {
-                GameObject coil = teslaTowers[i];
-                if (coil == null) {
-                    Helpers.LogWarning("uh");
-                    continue;
-                }
-
-                float dist = Vector3.Distance(coil.transform.position, transform.position);
-                if (dist < nearTowerRange) {
-                    coils.Add(coil);
-                }
-            }
-
-            return coils;
-        }
-    }
-
     public GameObject nearestCoil {
 
         get {
@@ -43,7 +21,6 @@ public class TeslaCoilControllerController : MonoBehaviour {
             for (int i = 0; i < teslaTowers.Count; i++) {
                 GameObject coil = teslaTowers[i];
                 if (coil == null) {
-                    Helpers.LogWarning("uh command");
                     continue;
                 }
 
@@ -60,17 +37,53 @@ public class TeslaCoilControllerController : MonoBehaviour {
         }
     }
 
+    public bool coilReady {
+        get {
+            List<GameObject> towers = GetNearbyTowers();
+            for (int i = 0; i < towers.Count; i++) {
+
+                bool skillReady = towers[i].GetComponent<SkillLocator>().FindSkill("Secondary").IsReady();
+                if (skillReady)
+                    return true;
+            }
+            return false;
+        }
+    }
+
     internal void commandTowers(HurtBox target) {
+
+        List<GameObject> nearbyTowers = GetNearbyTowers();
+
         for (int i = 0; i < nearbyTowers.Count; i++) {
             GameObject coil = nearbyTowers[i];
             if (coil == null) {
-                Helpers.LogWarning("uh command");
                 continue;
             }
+
+            coil.GetComponent<SkillLocator>().secondary.DeductStock(1);
             coil.GetComponent<EntityStateMachine>().SetInterruptState(new TowerBigZap() {
                 lightningTarget = target,
             }, InterruptPriority.PrioritySkill);
         }
+    }
+
+
+    public List<GameObject> GetNearbyTowers() {
+        List<GameObject> coils = new List<GameObject>();
+
+        for (int i = 0; i < teslaTowers.Count; i++) {
+            GameObject coil = teslaTowers[i];
+            if (coil == null) {
+                continue;
+            }
+
+            float dist = Vector3.Distance(coil.transform.position, transform.position);
+            if (dist < nearTowerRange) {
+                coils.Add(coil);
+            }
+        }
+
+        return coils;
     }
 
     public void addTower(GameObject towerObject) {

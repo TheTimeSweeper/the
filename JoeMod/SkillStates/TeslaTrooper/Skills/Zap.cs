@@ -14,7 +14,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         //todo less damage on allies
         //and more bounce range
         #region Gameplay Values
-        public static float DamageCoefficient = 0.9f;
+        public static float DamageCoefficient = 1f;
         public static float BounceDamageMultplier = 0.69f;
         public static float ProcCoefficient = 1f;
         public static int OrbCasts = 3;

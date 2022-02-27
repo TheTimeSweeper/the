@@ -12,34 +12,31 @@ namespace HenryMod.Modules {
         internal static List<SkillFamily> skillFamilies = new List<SkillFamily>();
         internal static List<SkillDef> skillDefs = new List<SkillDef>();
 
-        internal static void CreateSkillFamilies(GameObject targetPrefab, int i = 4) {
+        internal static void CreateSkillFamilies(GameObject targetPrefab, int families = 15) {
             foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>()) {
                 FacelessJoePlugin.DestroyImmediate(obj);
             }
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
-            if (i < 1)
-                return;
-            skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
-
-            if (i < 2)
-                return;
-            skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
-
-            if (i < 3)
-                return;
-            skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
-
-            if (i < 4)
-                return;
-            skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
+            if ((families & (1 << 0)) != 0) {
+                skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
+            }
+            if ((families & (1 << 1)) != 0) {
+                skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
+            }
+            if ((families & (1 << 2)) != 0) {
+                skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
+            }
+            if ((families & (1 << 3)) != 0) {
+                skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
+            }
         }
 
         public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName, bool hidden = false) {
 
             GenericSkill skill = targetPrefab.AddComponent<GenericSkill>();
-            skill.skillName = targetPrefab.name + familyName;
+            skill.skillName = familyName;
             skill.hideInCharacterSelect = hidden;
 
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();

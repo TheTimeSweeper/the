@@ -1,5 +1,7 @@
 ﻿using EntityStates;
 using RoR2;
+using System;
+using UnityEngine;
 
 namespace JoeMod.ModdedEntityStates.TeslaTrooper
 {
@@ -9,10 +11,17 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         public static string ExitSoundString = EntityStates.Treebot.Weapon.AimMortar.exitSoundString;
         public float skillsPlusMulti;
 
-        public override void OnEnter()
-        {
-            EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
+        private TeslaCoilControllerController coilController;
+        private TotallyOriginalTrackerComponent tracker;
 
+        private Sprite originalSprite;
+        private bool skillSwapped;
+
+        public override void OnEnter() {
+            coilController = GetComponent<TeslaCoilControllerController>();
+            tracker = GetComponent<TotallyOriginalTrackerComponent>();
+
+            EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
             maxDistance = 30;
             rayRadius = 1.6f;
             //this.arcVisualizerPrefab = goodState.arcVisualizerPrefab;
@@ -28,13 +37,43 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             Util.PlaySound(EnterSoundString, gameObject);
         }
 
+        private void SwapSkill() {
+            skillSwapped = true;
+
+            //originalSpecial = skillLocator.special;
+            skillLocator.special = coilController.nearestCoil.GetComponent<SkillLocator>().secondary;
+            if (originalSprite == null)
+                originalSprite = skillLocator.secondary.skillDef.icon;
+            skillLocator.secondary.skillDef.icon = skillLocator.special.icon;
+
+            tracker?.setIndicatorEmpowered(true);
+        }
+
+        private void unswapSkill() {
+            skillSwapped = false;
+
+            skillLocator.special = skillLocator.FindSkill("Special");
+            skillLocator.secondary.skillDef.icon = originalSprite;
+
+            tracker?.setIndicatorEmpowered(false);
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
             StartAimMode();
-            
-            if(GetComponent<TeslaCoilControllerController>()?.nearestCoil && GetComponent<TotallyOriginalTrackerComponent>()?.GetTrackingTarget() != null) {
+            if (coilController && coilController.nearestCoil) {
+
+                SwapSkill();
+            } else {
+                if (skillSwapped)
+                    unswapSkill();
+            }
+
+            if (coilController && coilController.coilReady && tracker?.GetTrackingTarget() != null) {
+
                 endpointVisualizerRadiusScale = Tower.TowerBigZap.BaseAttackRadius;
+
             } else {
                 endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
             }
@@ -48,11 +87,15 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         public override void OnExit()
         {
             base.OnExit();
+
             outer.SetNextState(new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint });
             if (!outer.destroying)
             {
                 Util.PlaySound(ExitSoundString, gameObject);
             }
+
+            if (skillSwapped)
+                unswapSkill();
         }
 
         public override void FireProjectile()
