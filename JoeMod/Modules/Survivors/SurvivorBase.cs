@@ -32,11 +32,32 @@ namespace HenryMod.Modules.Survivors {
 
         protected virtual void InitializeSurvivor() {
             displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
-            Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, sortPosition);
+            RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, sortPosition);
         }
 
         public virtual void InitializeUnlockables()
         {
+        }
+
+
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, 100f); }
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, float sortPosition) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, sortPosition); }
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, UnlockableDef unlockableDef) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, unlockableDef, 100f); }
+        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, UnlockableDef unlockableDef, float sortPosition) {
+            SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
+            survivorDef.bodyPrefab = bodyPrefab;
+            survivorDef.displayPrefab = displayPrefab;
+            survivorDef.primaryColor = charColor;
+
+            survivorDef.displayNameToken = tokenPrefix + "NAME";
+            survivorDef.descriptionToken = tokenPrefix + "DESCRIPTION";
+            survivorDef.outroFlavorToken = tokenPrefix + "OUTRO_FLAVOR";
+            survivorDef.mainEndingEscapeFailureFlavorToken = tokenPrefix + "OUTRO_FAILURE";
+
+            survivorDef.desiredSortPosition = sortPosition;
+            survivorDef.unlockableDef = unlockableDef;
+
+            Modules.Content.AddSurvivorDef(survivorDef);
         }
     }
 }

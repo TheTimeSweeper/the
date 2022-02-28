@@ -8,7 +8,7 @@ namespace HenryMod.Modules
 {
     public static class States
     {
-        internal static List<Type> entityStates = new List<Type>();
+        internal static List<Type> entityStates => ContentPacks.entityStates;
 
         internal static void RegisterStates()
         {

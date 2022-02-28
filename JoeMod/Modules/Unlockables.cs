@@ -12,8 +12,6 @@ namespace HenryMod.Modules
     internal static class Unlockables
     {
         private static readonly HashSet<string> usedRewardIds = new HashSet<string>();
-        internal static List<AchievementDef> achievementDefs = new List<AchievementDef>();
-        internal static List<UnlockableDef> unlockableDefs = new List<UnlockableDef>();
         private static readonly List<(AchievementDef achDef, UnlockableDef unlockableDef, String unlockableName)> moddedUnlocks = new List<(AchievementDef achDef, UnlockableDef unlockableDef, string unlockableName)>();
 
         private static bool addingUnlockables;
@@ -60,8 +58,7 @@ namespace HenryMod.Modules
                 SortScore = 200
             });
 
-            unlockableDefs.Add(unlockableDef);
-            achievementDefs.Add(achievementDef);
+            Modules.Content.AddUnlockableDef(unlockableDef);
 
             moddedUnlocks.Add((achievementDef, unlockableDef, instance.UnlockableIdentifier));
 
@@ -86,7 +83,7 @@ where TDelegate : Delegate
 
         private static void Init_Il(ILContext il) => new ILCursor(il)
     .GotoNext(MoveType.AfterLabel, x => x.MatchCallOrCallvirt(typeof(UnlockableCatalog), nameof(UnlockableCatalog.SetUnlockableDefs)))
-    .CallDel_(ArrayHelper.AppendDel(unlockableDefs));
+    .CallDel_(ArrayHelper.AppendDel(Modules.ContentPacks.unlockableDefs));
 
         private static void CollectAchievementDefs(ILContext il)
         {

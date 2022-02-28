@@ -95,8 +95,8 @@ namespace HenryMod.Modules
             #region not henry 2
             string prefix = Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX;
 
-            string desc = "Tesla Trooper is a mid-range bruiser, who can construct towers to empower his combat.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Zap provides consistent damage to enemies and spreads." + Environment.NewLine + Environment.NewLine;
+            string desc = "The Tesla Trooper is a mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Tesla Gauntlet provides consistent damage to enemies and spreads." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Use 2000 Volts for damage, and to control crowds with its stun" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > The Tesla Tower inherits your items, but doesn't take damage, mainly taking advantage of damage items." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Use the Tesla Tower to empower your secondary, but its empowered attack has a separate, longer cooldown." + Environment.NewLine + Environment.NewLine;

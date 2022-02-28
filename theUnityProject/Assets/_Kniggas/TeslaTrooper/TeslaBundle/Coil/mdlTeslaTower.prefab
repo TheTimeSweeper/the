@@ -1801,11 +1801,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformPairs:
   - name: MainHurtbox
-    transform: {fileID: 0}
+    transform: {fileID: 8262418146180316687}
   - name: Orb
     transform: {fileID: 9020769169706174397}
   - name: Head
     transform: {fileID: 6273651562879444799}
+  - name: Base Pillar 1
+    transform: {fileID: 1887232490177197565}
+  - name: Base Pillar 2
+    transform: {fileID: 4941776525152399168}
+  - name: Base Pillar 3
+    transform: {fileID: 2180853137569062412}
+  - name: Base Pillars 4
+    transform: {fileID: 815943714113353497}
+  - name: Center Orb
+    transform: {fileID: 6441958813153132158}
+  - name: tower pole
+    transform: {fileID: 7051210329548495255}
+  - name: tower circle 1
+    transform: {fileID: 3142364872839782334}
+  - name: tower circle 2
+    transform: {fileID: 2974744024803849088}
+  - name: tower circle 3
+    transform: {fileID: 285094742721265506}
 --- !u!114 &6110914415616163341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1907,16 +1925,16 @@ MonoBehaviour:
     mainColor: {r: 0.08503916, g: 0.23669657, b: 0.8584906, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: green
-    mainColor: {r: 0.13830544, g: 0.7924528, b: 0.15049051, a: 1}
+    mainColor: {r: 0.09122462, g: 0.7735849, b: 0.10348263, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: yellow
-    mainColor: {r: 0.9056604, g: 0.84923136, b: 0.08116765, a: 1}
+    mainColor: {r: 0.8396226, g: 0.78813636, b: 0.06732824, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: orange
-    mainColor: {r: 0.9433962, g: 0.5105264, b: 0.031149892, a: 1}
+    mainColor: {r: 0.764151, g: 0.4306441, b: 0.06127627, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: cyan
-    mainColor: {r: 0.06407974, g: 0.851259, b: 0.9056604, a: 1}
+    mainColor: {r: 0.059407253, g: 0.788818, b: 0.8396226, a: 1}
     offColor: {r: 0, g: 0, b: 0, a: 0}
   - recolorName: purple
     mainColor: {r: 0.57410204, g: 0, b: 0.9339623, a: 1}

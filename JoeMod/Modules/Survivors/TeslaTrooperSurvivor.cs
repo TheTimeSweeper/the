@@ -21,46 +21,26 @@ namespace HenryMod.Modules.Survivors
         public override float sortPosition => 69f;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
-            armor = 10f,
-            armorGrowth = 0f,
             bodyName = "TeslaTrooperBody",
             bodyNameToken = TESLA_PREFIX + "NAME",
+            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
             bodyColor = new Color(0.8f, 2, 2),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
-            crosshair = Modules.Assets.LoadCrosshair("StraightBracket"),
-            damage = 13f,
-            healthGrowth = 33f,
+
+            crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+
+            maxHealth = 140f,
             healthRegen = 1.5f,
+            armor = 10f,
+
+            damage = 12f,
             jumpCount = 1,
-            maxHealth = 150f,
-            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
-            podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
         public override ConfigEntry<bool> characterEnabledConfig => null;
 
-        //public static Material matTeslaBody = Modules.Materials.CreateHotpooMaterial("matTeslaBody");
-        //public static Material matTeslaArmor = Modules.Materials.CreateHotpooMaterial("matTeslaArmor").SetCull(false);// Modules.Assets.CreateMaterial("matTeslaArmor", 1, new Color(0.28f, 0.70f, 1.0f));
-
         public override CustomRendererInfo[] customRendererInfos { get; set; }
-            //= new CustomRendererInfo[]
-            //{
-            //    new CustomRendererInfo
-            //    {
-            //        childName = "meshTeslaBody",
-            //        material = matTeslaBody,
-            //    },
-            //    new CustomRendererInfo
-            //    {
-            //        childName = "meshTeslaArmor",
-            //        material = matTeslaArmor,
-            //    },
-            //    new CustomRendererInfo
-            //    {
-            //        childName = "meshTeslaHammer",
-            //        material = Materials.CreateHotpooMaterial("MatHammer"),
-            //    },
-            //};
 
         public override Type characterMainState => typeof(TeslaTrooperMain);
 
@@ -228,18 +208,16 @@ namespace HenryMod.Modules.Survivors
                 skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
             });
         }
-        
-        private void InitializePrimarySkills()
-        {
+
+        private void InitializePrimarySkills() {
             States.entityStates.Add(typeof(Zap));
-            TeslaTrackingSkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef<TeslaTrackingSkillDef>(
-                new EntityStates.SerializableEntityStateType(typeof(Zap)),
-                "Weapon",
-                "Tesla_Primary_Zap",
-                TESLA_PREFIX + "PRIMARY_ZAP_NAME",
-                TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
-                Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                false);
+            TeslaTrackingSkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
+                                                                                                            TESLA_PREFIX + "PRIMARY_ZAP_NAME",
+                                                                                                            TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
+                                                                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                                                                            new EntityStates.SerializableEntityStateType(typeof(Zap)),
+                                                                                                            "Weapon",
+                                                                                                            false));
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }
@@ -309,7 +287,7 @@ namespace HenryMod.Modules.Survivors
 
         private void InitializeSpecialSkills()
         {
-            States.entityStates.Add(typeof(DeployTeslaCoil));
+            States.entityStates.Add(typeof(DeployTeslaTower));
 
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -317,7 +295,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
                 skillIcon = Resources.Load<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaCoil)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 15f,
@@ -366,6 +344,7 @@ namespace HenryMod.Modules.Survivors
             {
             };
 
+            skins.Add(defaultSkin);
             skins.Add(defaultSkin);
             #endregion
 

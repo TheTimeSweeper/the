@@ -14,35 +14,6 @@ namespace HenryMod.Modules
         // cache this just to give our ragdolls the same physic material as vanilla stuff
         private static PhysicMaterial ragdollMaterial;
 
-        internal static List<SurvivorDef> survivorDefinitions = new List<SurvivorDef>();
-        internal static List<GameObject> bodyPrefabs = new List<GameObject>();
-        internal static List<GameObject> masterPrefabs = new List<GameObject>();
-        internal static List<GameObject> projectilePrefabs = new List<GameObject>();
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, 100f); }
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, float sortPosition) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, sortPosition); }
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, UnlockableDef unlockableDef) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, unlockableDef, 100f); }
-
-        internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, UnlockableDef unlockableDef, float sortPosition)
-        {
-            SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
-            survivorDef.bodyPrefab = bodyPrefab;
-            survivorDef.displayPrefab = displayPrefab;
-            survivorDef.primaryColor = charColor;
-
-            survivorDef.displayNameToken = tokenPrefix + "NAME";
-            survivorDef.descriptionToken = tokenPrefix + "DESCRIPTION";
-            survivorDef.outroFlavorToken = tokenPrefix + "OUTRO_FLAVOR";
-            survivorDef.mainEndingEscapeFailureFlavorToken = tokenPrefix + "OUTRO_FAILURE";
-
-            survivorDef.desiredSortPosition = sortPosition;
-            survivorDef.unlockableDef = unlockableDef;
-
-            survivorDefinitions.Add(survivorDef);
-        }
-
         internal static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
             if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
@@ -86,58 +57,59 @@ namespace HenryMod.Modules
 
             #region CharacterBody
             CharacterBody bodyComponent = newPrefab.GetComponent<CharacterBody>();
-
+            //identity
             bodyComponent.name = bodyInfo.bodyName;
             bodyComponent.baseNameToken = bodyInfo.bodyNameToken;
             bodyComponent.subtitleNameToken = bodyInfo.subtitleNameToken;
             bodyComponent.portraitIcon = bodyInfo.characterPortrait;
+            bodyComponent.bodyColor = bodyInfo.bodyColor;
+
             bodyComponent.crosshairPrefab = bodyInfo.crosshair;
+            bodyComponent.hideCrosshair = false;
+            bodyComponent.preferredPodPrefab = bodyInfo.podPrefab;
 
-            bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
-            bodyComponent.rootMotionInMainState = false;
-
+            //stats
             bodyComponent.baseMaxHealth = bodyInfo.maxHealth;
-            bodyComponent.levelMaxHealth = bodyInfo.healthGrowth;
-
             bodyComponent.baseRegen = bodyInfo.healthRegen;
-            bodyComponent.levelRegen = bodyComponent.baseRegen * 0.2f;
-
+            bodyComponent.levelArmor = bodyInfo.armorGrowth;
             bodyComponent.baseMaxShield = bodyInfo.shield;
-            bodyComponent.levelMaxShield = bodyInfo.shieldGrowth;
-
-            bodyComponent.baseMoveSpeed = bodyInfo.moveSpeed;
-            bodyComponent.levelMoveSpeed = bodyInfo.moveSpeedGrowth;
-
-            bodyComponent.baseAcceleration = bodyInfo.acceleration;
-
-            bodyComponent.baseJumpPower = bodyInfo.jumpPower;
-            bodyComponent.levelJumpPower = bodyInfo.jumpPowerGrowth;
 
             bodyComponent.baseDamage = bodyInfo.damage;
-            bodyComponent.levelDamage = bodyComponent.baseDamage * 0.2f;
-
             bodyComponent.baseAttackSpeed = bodyInfo.attackSpeed;
-            bodyComponent.levelAttackSpeed = bodyInfo.attackSpeedGrowth;
-
-            bodyComponent.baseArmor = bodyInfo.armor;
-            bodyComponent.levelArmor = bodyInfo.armorGrowth;
-
             bodyComponent.baseCrit = bodyInfo.crit;
+
+            bodyComponent.baseMoveSpeed = bodyInfo.moveSpeed;
+            bodyComponent.baseJumpPower = bodyInfo.jumpPower;
+
+            //level stats
+            bodyComponent.autoCalculateLevelStats = bodyInfo.autoCalculateLevelStats;
+
+            bodyComponent.levelDamage = bodyInfo.damageGrowth;
+            bodyComponent.levelAttackSpeed = bodyInfo.attackSpeedGrowth;
             bodyComponent.levelCrit = bodyInfo.critGrowth;
+
+            bodyComponent.levelMaxHealth = bodyInfo.healthGrowth;
+            bodyComponent.levelRegen = bodyInfo.regenGrowth;
+            bodyComponent.baseArmor = bodyInfo.armor;
+            bodyComponent.levelMaxShield = bodyInfo.shieldGrowth;
+
+            bodyComponent.levelMoveSpeed = bodyInfo.moveSpeedGrowth;
+            bodyComponent.levelJumpPower = bodyInfo.jumpPowerGrowth;
+
+            //other
+            bodyComponent.baseAcceleration = bodyInfo.acceleration;
 
             bodyComponent.baseJumpCount = bodyInfo.jumpCount;
 
             bodyComponent.sprintingSpeedMultiplier = 1.45f;
 
-            bodyComponent.hideCrosshair = false;
+            bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
+            bodyComponent.rootMotionInMainState = false;
+
             bodyComponent.aimOriginTransform = modelBaseTransform.Find("AimOrigin");
             bodyComponent.hullClassification = HullClassification.Human;
 
-            bodyComponent.preferredPodPrefab = bodyInfo.podPrefab;
-
             bodyComponent.isChampion = false;
-
-            bodyComponent.bodyColor = bodyInfo.bodyColor;
             #endregion
 
             SetupCameraTargetParams(newPrefab, bodyInfo);
@@ -154,7 +126,7 @@ namespace HenryMod.Modules
                     SetupRagdoll(model);
             }
 
-            bodyPrefabs.Add(newPrefab);
+            Modules.Content.AddCharacterBodyPrefab(newPrefab);
 
             return newPrefab;
         }
@@ -164,35 +136,10 @@ namespace HenryMod.Modules
             GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster"), masterName, true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
-            masterPrefabs.Add(newMaster);
+            Modules.Content.AddMasterPrefab(newMaster);
         }
 
         #region ModelSetup
-
-        private static Transform AddCharacterModelToTurretBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) {
-
-            Object.DestroyImmediate(bodyPrefab.transform.Find("Model Base").gameObject);
-
-            Transform modelBase = new GameObject("ModelBase").transform;
-            modelBase.parent = bodyPrefab.transform;
-            modelBase.localPosition = bodyInfo.modelBasePosition;
-
-            modelTransform.parent = modelBase.transform;
-            modelTransform.localPosition = Vector3.zero;
-            modelTransform.localRotation = Quaternion.identity;
-
-            Transform cameraPivot = new GameObject("CameraPivot").transform;
-            cameraPivot.parent = modelBase.transform;
-            cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
-            cameraPivot.localRotation = Quaternion.identity;
-
-            Transform aimOrigin = new GameObject("AimOrigin").transform;
-            aimOrigin.parent = modelTransform;
-            aimOrigin.localPosition = bodyInfo.aimOriginPosition;
-            aimOrigin.localRotation = Quaternion.identity;
-
-            return modelBase.transform;
-        }
 
         private static Transform AddCharacterModelToSurvivorBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) 
         {
@@ -224,7 +171,6 @@ namespace HenryMod.Modules
             return modelBase.transform;
         }
         internal static CharacterModel SetupCharacterModel(GameObject prefab) => SetupCharacterModel(prefab, null);
-        
         internal static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos) {
 
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
@@ -388,16 +334,16 @@ namespace HenryMod.Modules
 
             if (ragdollMaterial == null) ragdollMaterial = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
 
-            foreach (Transform i in ragdollController.bones)
+            foreach (Transform boneTransform in ragdollController.bones)
             {
-                if (i)
+                if (boneTransform)
                 {
-                    i.gameObject.layer = LayerIndex.ragdoll.intVal;
-                    Collider j = i.GetComponent<Collider>();
-                    if (j)
+                    boneTransform.gameObject.layer = LayerIndex.ragdoll.intVal;
+                    Collider boneCollider = boneTransform.GetComponent<Collider>();
+                    if (boneCollider)
                     {
-                        j.material = ragdollMaterial;
-                        j.sharedMaterial = ragdollMaterial;
+                        boneCollider.material = ragdollMaterial;
+                        boneCollider.sharedMaterial = ragdollMaterial;
                     }
                 }
             }
@@ -464,49 +410,54 @@ public class BodyInfo
     /// </summary>
     public string bodyNameToClone = "Commando";
 
+    public Color bodyColor = Color.grey;
+
     public Texture characterPortrait = null;
 
     public GameObject crosshair = null;
     public GameObject podPrefab = null;
 
+    //stats
     public float maxHealth = 100f;
-    public float healthGrowth = 2f;
-
-    public float healthRegen = 0f;
+    public float healthRegen = 1f;
+    public float armor = 0f;
     /// <summary>
     /// base shield is a thing apparently. neat
     /// </summary>
     public float shield = 0f;
-    public float shieldGrowth = 0f;
-
-    public float moveSpeed = 7f;
-    public float moveSpeedGrowth = 0f;
-    
-    public float acceleration = 80f;
-
-    public float jumpPower = 15f;
-    public float jumpPowerGrowth = 0f;// jump power per level exists for some reason
 
     public float damage = 12f;
-
     public float attackSpeed = 1f;
-    public float attackSpeedGrowth = 0f;
+    public float crit = 1f;
 
-    public float armor = 0f;
+    public float moveSpeed = 7f;
+    public float jumpPower = 15f;
+
+    //growth
+    public bool autoCalculateLevelStats = true;
+
+    public float healthGrowth = 30f;
+    public float regenGrowth = 0.2f;
+    public float shieldGrowth = 0f;
     public float armorGrowth = 0f;
 
-    public float crit = 1f;
+    public float damageGrowth = 2.4f;
+    public float attackSpeedGrowth = 0f;
     public float critGrowth = 0f;
 
+    public float moveSpeedGrowth = 0f;
+    public float jumpPowerGrowth = 0f;// jump power per level exists for some reason
+    
+    //other
+    public float acceleration = 80f;
     public int jumpCount = 1;
 
-    public Color bodyColor = Color.grey;
-
+    //camera
     public Vector3 modelBasePosition = new Vector3(0f, -0.92f, 0f);
     public Vector3 cameraPivotPosition = new Vector3(0f, 1.6f, 0f);
     public Vector3 aimOriginPosition = new Vector3(0f, 2.5f, 0f);
 
-    public float cameraParamsVerticalOffset = 0.5f;
+    public float cameraParamsVerticalOffset = 1f;
     public float cameraParamsDepth = -12;
 
     private CharacterCameraParams _cameraParams;

@@ -138,50 +138,52 @@ namespace HenryMod.Modules.Survivors
             States.entityStates.Add(typeof(Primary1Swing));
             States.entityStates.Add(typeof(Primary1JumpSwingFall));
             States.entityStates.Add(typeof(Primary1JumpSwingLand));
-            SkillDef primarySkillDef = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1Swing)),
-                                                                            "Weapon",
-                                                                            "JoeSwing",
-                                                                            prefix + "PRIMARY_SWING_NAME",
-                                                                            prefix + "PRIMARY_SWING_DESCRIPTION",
-                                                                            Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            true);
+            
+            SkillDef primarySkillDef = Modules.Skills.CreateSkillDef( new SkillDefInfo("JoeSwing",
+                                                                prefix + "PRIMARY_SWING_NAME",
+                                                                prefix + "PRIMARY_SWING_DESCRIPTION",
+                                                                Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                                                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1Swing)),
+                                                                "Weapon",
+                                                                true));
 
             States.entityStates.Add(typeof(PrimaryStupidSwing));
-            SkillDef primarySkillDefSilly = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryStupidSwing)),
-                                                                            "Weapon",
-                                                                            "JoeSwingClassic",
-                                                                            prefix + "PRIMARY_SWING_NAME_CLASSIC",
-                                                                            prefix + "PRIMARY_SWING_DESCRIPTION",
-                                                                            Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            true);
-            primarySkillDefSilly.mustKeyPress = true;
+            SkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef(new SkillDefInfo("JoeSwingClassic",
+                                                                     prefix + "PRIMARY_SWING_NAME_CLASSIC",
+                                                                     prefix + "PRIMARY_SWING_DESCRIPTION",
+                                                                     Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                                                     new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryStupidSwing)),
+                                                                     "Weapon",
+                                                                     true) { 
+                mustKeyPress = true 
+            });
 
             States.entityStates.Add(typeof(ThrowBoom));
-            SkillDef primarySkillDefBomeb = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.ThrowBoom)),
-                                                                            "Weapon",
-                                                                            "joeBomb",
-                                                                            prefix + "PRIMARY_BOMB_NAME",
-                                                                            prefix + "PRIMARY_BOMB_DESCRIPTION",
-                                                                            null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            false);
+            SkillDef primarySkillDefBomeb = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeBomb",
+                                                                     prefix + "PRIMARY_BOMB_NAME",
+                                                                     prefix + "PRIMARY_BOMB_DESCRIPTION",
+                                                                     null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                                                     new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.ThrowBoom)),
+                                                                     "Weapon",
+                                                                     false));
 
             States.entityStates.Add(typeof(ThroBoomButCoolerQuestionMaark));
-            SkillDef primarySkillDefBomebe = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.ThroBoomButCoolerQuestionMaark)),
-                                                                            "Weapon",
-                                                                            "joeBomb2",
-                                                                            prefix + "PRIMARY_BOMB_NAME",
-                                                                            prefix + "PRIMARY_BOMB_DESCRIPTION",
-                                                                            null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            false);
+            SkillDef primarySkillDefBomebe = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeBomb2",
+                                                                      prefix + "PRIMARY_BOMB_NAME",
+                                                                      prefix + "PRIMARY_BOMB_DESCRIPTION",
+                                                                      null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                                                      new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.ThroBoomButCoolerQuestionMaark)),
+                                                                      "Weapon",
+                                                                      false));
 
             States.entityStates.Add(typeof(Zap));
-            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(Zap)),
-                                                                            "Weapon",
-                                                                            "joeZap",
-                                                                            prefix + "PRIMARY_ZAP_NAME",
-                                                                            prefix + "PRIMARY_ZAP_DESCRIPTION",
-                                                                            null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
-                                                                            false);
+            SkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeZap",
+                                                                   prefix + "PRIMARY_ZAP_NAME",
+                                                                   prefix + "PRIMARY_ZAP_DESCRIPTION",
+                                                                   null, //Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                                                   new EntityStates.SerializableEntityStateType(typeof(Zap)),
+                                                                   "Weapon",
+                                                                   false));
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe, primarySkillDef, primarySkillDefSilly, primarySkillDefZap);
             #endregion
@@ -216,8 +218,7 @@ namespace HenryMod.Modules.Survivors
 
             States.entityStates.Add(typeof(AimBigZap));
             States.entityStates.Add(typeof(BigZap));
-            SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo { 
                 skillName = prefix + "SECONDARY_BIGZAP_NAME",
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = prefix + "SECONDARY_BIGZAP_DESCRIPTION",
@@ -276,7 +277,7 @@ namespace HenryMod.Modules.Survivors
 
             #region Special
 
-            States.entityStates.Add(typeof(DeployTeslaCoil));
+            States.entityStates.Add(typeof(DeployTeslaTower));
 
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -284,7 +285,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",
                 skillIcon = null,//Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaCoil)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
                 baseRechargeInterval = 5f,

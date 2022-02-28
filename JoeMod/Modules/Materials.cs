@@ -36,7 +36,25 @@ namespace HenryMod.Modules {
             return tempMat.SetHotpooMaterial();
         }
 
-        public static Material SetHotpooMaterial(this Material tempMat) {
+        static Material commandoMat;
+
+        public static Material SetHotpooMaterial(this Material fuckingCommandoMat) {
+
+            if (!commandoMat) 
+                commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RoR2.CharacterModel>().baseRendererInfos[0].defaultMaterial;
+            
+            Material uh = UnityEngine.Object.Instantiate<Material>(fuckingCommandoMat);
+
+            fuckingCommandoMat = UnityEngine.Object.Instantiate<Material>(commandoMat);
+
+            fuckingCommandoMat.SetColor("_Color", uh.GetColor("_Color"));
+            fuckingCommandoMat.SetTexture("_MainTex", uh.GetTexture("_MainTex"));
+            fuckingCommandoMat.SetTexture("_EmTex", uh.GetTexture("_EmissionMap"));
+
+            return fuckingCommandoMat;
+        }
+
+        public static Material SetHotpotMaterial(this Material tempMat) {
             if (cachedMaterials.Contains(tempMat)) {
 
                 Helpers.Log("returning cached material for " + tempMat);
@@ -58,9 +76,15 @@ namespace HenryMod.Modules {
 
             tempMat.shader = Assets.hotpoo;
 
+            //apply values after shader is set
             tempMat.SetColor("_Color", tempMat.GetColor("_Color"));
             tempMat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
             tempMat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+            tempMat.EnableKeyword("DITHER");
+
+            tempMat.EnableKeyword("LIMBREMOVAL");
+            tempMat.SetFloat("_LimbPrimeMask", 1);
+            tempMat.SetInt("_LimbRemovalOn", 1);
 
             if (bumpScale != null) {
                 tempMat.SetFloat("_NormalStrength", (float)bumpScale);

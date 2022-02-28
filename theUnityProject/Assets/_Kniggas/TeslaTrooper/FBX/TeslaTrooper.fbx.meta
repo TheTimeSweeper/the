@@ -99,6 +99,15 @@ ModelImporter:
     100186: meshTeslaArmor_GauntletColor
     100188: meshTeslaArmorColor
     100190: meshTeslaBodyColor
+    100192: hammer
+    100194: hammer.hand
+    100196: hammer.hip
+    100198: hand.R.001
+    100200: meshTeslaHammer
+    100202: ROOT
+    100204: rot
+    100206: BASE
+    100208: bas
     400000: hammor
     400002: //RootNode
     400004: TeslaTrooperJumpsuit
@@ -195,6 +204,15 @@ ModelImporter:
     400186: meshTeslaArmor_GauntletColor
     400188: meshTeslaArmorColor
     400190: meshTeslaBodyColor
+    400192: hammer
+    400194: hammer.hand
+    400196: hammer.hip
+    400198: hand.R.001
+    400200: meshTeslaHammer
+    400202: ROOT
+    400204: rot
+    400206: BASE
+    400208: bas
     2100000: No Name
     2100002: Material.002
     2100004: Material.001
@@ -216,6 +234,7 @@ ModelImporter:
     4300012: meshTeslaBodyColor
     4300014: meshTeslaArmorColor
     4300016: meshTeslaArmor_GauntletColor
+    4300018: meshTeslaHammer
     7400000: Armature|DefaultPose
     7400002: Armature|GreatJobKomrade
     7400004: Armature|Idle
@@ -247,6 +266,8 @@ ModelImporter:
     13700010: meshTeslaArmor_GauntletColor
     13700012: meshTeslaArmorColor
     13700014: meshTeslaBodyColor
+    13700016: hammor
+    13700018: meshTeslaHammer
     2186277476908879412: ImportLogs
   externalObjects:
   - first:

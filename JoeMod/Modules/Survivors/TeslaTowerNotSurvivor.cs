@@ -92,7 +92,7 @@ namespace HenryMod.Modules.Survivors {
             }
             masterPrefab.GetComponent<BaseAI>().skillDrivers = new AISkillDriver[0];
 
-            Modules.Prefabs.masterPrefabs.Add(masterPrefab);
+            Modules.Content.AddMasterPrefab(masterPrefab);
         }
 
         #region skills
@@ -107,13 +107,13 @@ namespace HenryMod.Modules.Survivors {
 
         private void InitializePrimarySkills() {
             States.entityStates.Add(typeof(TowerZap));
-            SkillDef primarySkillDefZap = Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(TowerZap)),
-                                                                            "Weapon",
-                                                                            "Tower_Primary_Zap",
-                                                                            TOWER_PREFIX + "PRIMARY_ZAP_NAME",
-                                                                            TOWER_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
-                                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaTowerSkillPrimary"),
-                                                                            false);
+            SkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef(new SkillDefInfo("Tower_Primary_Zap",
+                                                                                         TOWER_PREFIX + "PRIMARY_ZAP_NAME",
+                                                                                         TOWER_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
+                                                                                         Modules.Assets.LoadAsset<Sprite>("texTeslaTowerSkillPrimary"),
+                                                                                         new EntityStates.SerializableEntityStateType(typeof(TowerZap)),
+                                                                                         "Weapon",
+                                                                                         false));
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }

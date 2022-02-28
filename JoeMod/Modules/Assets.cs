@@ -20,8 +20,6 @@ namespace HenryMod.Modules {
         //HENRY: indev
         #region indev
         // lists of assets to add to contentpack
-        internal static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
-        internal static List<EffectDef> effectDefs = new List<EffectDef>();
 
         // cache these and use to create our own materials
         internal static Shader hotpoo = Resources.Load<Shader>("Shaders/Deferred/HGStandard");
@@ -212,7 +210,7 @@ namespace HenryMod.Modules {
             networkSoundEventDef.akId = AkSoundEngine.GetIDFromString(eventName);
             networkSoundEventDef.eventName = eventName;
 
-            networkSoundEventDefs.Add(networkSoundEventDef);
+            Modules.Content.AddNetworkSoundEventDef(networkSoundEventDef);
 
             return networkSoundEventDef;
         }
@@ -260,7 +258,10 @@ namespace HenryMod.Modules {
         internal static Texture LoadCharacterIcon(string name) {
             return LoadAsset<Texture>(name);
         }
-
+        /// <summary>
+        /// search for crosshair prefabs here. plug in the character or crosshair name
+        /// </summary>
+        /// <para>https://xiaoxiao921.github.io/GithubActionCacheTest/assetPathsDump.html</para>
         internal static GameObject LoadCrosshair(string crosshairName)
         {
             if (Resources.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return Resources.Load<GameObject>("Prefabs/Crosshair/StandardCrosshair");
@@ -333,7 +334,7 @@ namespace HenryMod.Modules {
             newEffectDef.prefabVfxAttributes = effectPrefab.GetComponent<VFXAttributes>();
             newEffectDef.spawnSoundEventName = soundName;
 
-            effectDefs.Add(newEffectDef);
+            Modules.Content.AddEffectDef(newEffectDef);
         }
 
         #region materials(old)
@@ -354,7 +355,7 @@ namespace HenryMod.Modules {
         }
         #endregion materials(old)
 
-        #region materials new (simple)
+        #region materials new (simple)(example)
         //public static Material CreateHotpooMaterial(string materialName) {
 
         //    //Material mat = UnityEngine.Object.Instantiate<Material>(Assets.commandoMat);
@@ -397,6 +398,6 @@ namespace HenryMod.Modules {
 
         //    return tempMat;
         //}
-        #endregion materials new (simple)
+        #endregion materials new (simple)(example)
     }
 }
