@@ -49,45 +49,8 @@ namespace Modules {
         #endregion
 
         #region skillfamilies
-        public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
 
-            SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().primary.skillFamily;
-
-            foreach (SkillDef skillDef in skillDefs) {
-                AddSkillToFamily(skillFamily, skillDef);
-            }
-        }
-
-        public static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
-        {
-            SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().secondary.skillFamily;
-
-            foreach (SkillDef i in skillDefs)
-            {
-                AddSkillToFamily(skillFamily, i);
-            }
-        }
-
-        public static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
-        {
-            SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().utility.skillFamily;
-
-            foreach (SkillDef skillDef in skillDefs)
-            {
-                AddSkillToFamily(skillFamily, skillDef);
-            }
-        }
-
-        public static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
-        {
-            SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().special.skillFamily;
-
-            foreach (SkillDef skillDef in skillDefs)
-            {
-                AddSkillToFamily(skillFamily, skillDef);
-            }
-        }
-
+        //everything calls this
         public static void AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef, UnlockableDef unlockableDef = null) {
 
             Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
@@ -97,6 +60,25 @@ namespace Modules {
                 unlockableDef = unlockableDef,
                 viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
             };
+        }
+
+        public static void AddSkillsToFamily (SkillFamily skillFamily, params SkillDef[] skillDefs) {
+
+            foreach (SkillDef skillDef in skillDefs) {
+                AddSkillToFamily(skillFamily, skillDef);
+            }
+        }
+        public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+            AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().primary.skillFamily, skillDefs);
+        }
+        public static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+            AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().secondary.skillFamily, skillDefs);
+        }
+        public static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+            AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().utility.skillFamily, skillDefs);
+        }
+        public static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+            AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().special.skillFamily, skillDefs);
         }
 
         /// <summary>

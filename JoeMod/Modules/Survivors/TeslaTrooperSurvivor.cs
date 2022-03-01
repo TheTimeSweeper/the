@@ -38,8 +38,6 @@ namespace Modules.Survivors
             jumpCount = 1,
         };
 
-        public override ConfigEntry<bool> characterEnabledConfig => null;
-
         public override CustomRendererInfo[] customRendererInfos { get; set; }
 
         public override Type characterMainState => typeof(TeslaTrooperMain);

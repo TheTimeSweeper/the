@@ -70,6 +70,7 @@ namespace Modules
                     //capacitor is hardcoded to track your "UpperArmR", "LowerArmR", and "HandR" bones.
                     //this is for having the lightning on custom bones in your childlocator
                     if (name == "DisplayLightningArmCustom") {
+                        Helpers.LogWarning(itemDisplayPrefabs["DisplayLightningArmRight"] != null);
                         display = R2API.PrefabAPI.InstantiateClone(itemDisplayPrefabs["DisplayLightningArmRight"], "DisplayLightningCustom", false);
 
                         LimbMatcher limbMatcher = display.GetComponent<LimbMatcher>();
