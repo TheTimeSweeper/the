@@ -35,22 +35,17 @@ namespace Modules {
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
         #endregion
-
+        
         // CHANGE THIS
         private const string assetbundleName = "joe";
-
+        
         //jerry don't you know
         public static GameObject JoeFireball = null;
         public static GameObject JoeImpactEffect = null;
         public static GameObject JoeJumpSwingEffect = null;
-
+        
         public static GameObject TestlaCoil = null;
         public static GameObject TestlaCoilBlueprint = null;
-
-        // icons
-        public static Texture JoePortrait = null;
-        public static Sprite Skill1Icon = null;
-        public static Sprite Skill2Icon = null;
 
         internal static void Initialize()
         {
@@ -69,10 +64,6 @@ namespace Modules {
         }
 
         private static void PopulateAss() {
-
-            JoePortrait = mainAssetBundle.LoadAsset<Sprite>("joe_icon").texture;
-            Skill1Icon = mainAssetBundle.LoadAsset<Sprite>("skill1_icon");
-            Skill2Icon = mainAssetBundle.LoadAsset<Sprite>("skill2_icon");
 
             JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
 

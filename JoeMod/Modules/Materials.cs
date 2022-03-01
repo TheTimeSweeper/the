@@ -12,7 +12,7 @@ namespace Modules {
                 return mat.name.Contains(materialName); 
             });
             if (tempMat) {
-                Helpers.Log("returning cached material for " + materialName);
+                Helpers.LogVerbose("returning cached material for " + materialName);
                 return tempMat;
             }
 
@@ -30,20 +30,28 @@ namespace Modules {
         private static Material CreateHotpooMaterial(Material tempMat) {
             if (cachedMaterials.Contains(tempMat)) {
 
-                Helpers.Log("returning cached material for " + tempMat);
+                Helpers.LogVerbose("returning cached material for " + tempMat); 
                 return tempMat;
             }           
             return tempMat.SetHotpooMaterial();
         }
-
+        
         public static Material SetHotpooMaterial(this Material tempMat) {
+            #region checks
             if (cachedMaterials.Contains(tempMat)) {
 
-                Helpers.Log("returning cached material for " + tempMat);
+                Helpers.LogVerbose("returning cached material for " + tempMat);
                 return tempMat;
             }
 
-            Helpers.Log("creating hotpoo material with " + tempMat);
+            Helpers.LogVerbose("creating hotpoo material with " + tempMat);
+
+            if(tempMat.shader.name == "StubbedShader/deferred/hgstandard") {
+                tempMat.shader = Assets.hotpoo;
+                Helpers.LogWarning("hi");
+                return tempMat;
+            }
+            #endregion
 
             float? bumpScale = null;
             Color? emissionColor = null;
@@ -62,11 +70,6 @@ namespace Modules {
             tempMat.SetColor("_Color", tempMat.GetColor("_Color"));
             tempMat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
             tempMat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
-            tempMat.EnableKeyword("DITHER");
-
-            tempMat.EnableKeyword("LIMBREMOVAL");
-            tempMat.SetFloat("_LimbPrimeMask", 1);
-            tempMat.SetInt("_LimbRemovalOn", 1);
 
             if (bumpScale != null) {
                 tempMat.SetFloat("_NormalStrength", (float)bumpScale);
@@ -79,6 +82,11 @@ namespace Modules {
             if(tempMat.IsKeywordEnabled("_CULL")) {
                 tempMat.SetInt("_Cull", 0);
             }
+
+            tempMat.EnableKeyword("DITHER");
+
+            tempMat.EnableKeyword("LIMBREMOVAL");
+            tempMat.SetInt("_LimbRemovalOn", 1);
 
             cachedMaterials.Add(tempMat);
             return tempMat;

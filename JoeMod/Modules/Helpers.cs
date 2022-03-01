@@ -56,7 +56,7 @@ public static class Helpers {
     public static Func<T[], T[]> AppendDel<T>(List<T> list) => (r) => Append(ref r, list);
 
     public static bool verbose = false;
-    public static void Log(object message, bool chat = false) {
+    public static void LogVerbose(object message, bool chat = false) {
 
         if (Config.Debug && verbose) {
             FacelessJoePlugin.Log.LogMessage(message);

@@ -141,31 +141,35 @@ MonoBehaviour:
   autoPopulateLightInfos: 0
   baseRendererInfos:
   - renderer: {fileID: 3631804215778304786}
-    defaultMaterial: {fileID: 0}
+    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 3631804215778304796}
-    defaultMaterial: {fileID: 0}
+    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 3631804215778304784}
-    defaultMaterial: {fileID: 0}
+    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 3631804215778304786}
+    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 3631804215778304798}
-    defaultMaterial: {fileID: 0}
+    defaultMaterial: {fileID: 2100000, guid: 29e9430b347089d4fb312a52a3462a98, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 3631804215778304788}
-    defaultMaterial: {fileID: 0}
-    defaultShadowCastingMode: 1
-    ignoreOverlays: 0
-  - renderer: {fileID: 3631804215778304790}
-    defaultMaterial: {fileID: 0}
+    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 3631804215778304778}
-    defaultMaterial: {fileID: 0}
+    defaultMaterial: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
+    defaultShadowCastingMode: 1
+    ignoreOverlays: 0
+  - renderer: {fileID: 3631804215778304790}
+    defaultMaterial: {fileID: 2100000, guid: 29e9430b347089d4fb312a52a3462a98, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   baseLightInfos: []
@@ -3004,6 +3008,34 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 1237b2c27b810a243ab304e77474f9f7, type: 2}
+    - target: {fileID: 13700004, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
+    - target: {fileID: 13700006, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
+    - target: {fileID: 13700008, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
+    - target: {fileID: 13700010, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
+    - target: {fileID: 13700012, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
+    - target: {fileID: 13700014, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
+    - target: {fileID: 13700018, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4001f982d516f2b4780973c989127efd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4a74450714e554b910f996ba672bf9, type: 3}
 --- !u!4 &3631804215789908572 stripped
