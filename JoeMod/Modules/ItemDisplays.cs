@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Modules
 {
-    internal static class ItemDisplays
+    public static class ItemDisplays
     {
         private static Dictionary<string, GameObject> itemDisplayPrefabs = new Dictionary<string, GameObject>();
         
         public static Dictionary<string, int> itemDisplayCheckCount = new Dictionary<string, int>();
         private static bool recording = false;
 
-        internal static void PopulateDisplays()
+        public static void PopulateDisplays()
         {
             //PopulateFromBody("CommandoBody");
             //PopulateFromBody("CrocoBody");
@@ -51,7 +51,7 @@ namespace Modules
             }
         }
 
-        internal static GameObject LoadDisplay(string name) {
+        public static GameObject LoadDisplay(string name) {
 
             if (itemDisplayPrefabs.ContainsKey(name.ToLower())) {
 

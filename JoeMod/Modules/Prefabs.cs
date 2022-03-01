@@ -9,12 +9,12 @@ namespace Modules
     // recommended to simply avoid touching this unless you REALLY need to
     // oh boy do I need to
 
-    internal static class Prefabs
+    public static class Prefabs
     {
         // cache this just to give our ragdolls the same physic material as vanilla stuff
         private static PhysicMaterial ragdollMaterial;
 
-        internal static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
+        public static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
             if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
@@ -35,7 +35,7 @@ namespace Modules
             return model.gameObject;
         }
 
-        internal static GameObject CreateBodyPrefab(string bodyName, string modelName, BodyInfo bodyInfo)
+        public static GameObject CreateBodyPrefab(string bodyName, string modelName, BodyInfo bodyInfo)
         {
             if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
@@ -131,7 +131,7 @@ namespace Modules
             return newPrefab;
         }
 
-        internal static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy)
+        public static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy)
         {
             GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster"), masterName, true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
@@ -170,8 +170,8 @@ namespace Modules
 
             return modelBase.transform;
         }
-        internal static CharacterModel SetupCharacterModel(GameObject prefab) => SetupCharacterModel(prefab, null);
-        internal static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos) {
+        public static CharacterModel SetupCharacterModel(GameObject prefab) => SetupCharacterModel(prefab, null);
+        public static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos) {
 
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
             bool preattached = characterModel != null;
@@ -193,7 +193,7 @@ namespace Modules
             return characterModel;
         }
 
-        internal static void SetupPreAttachedRendererInfos(CharacterModel characterModel) {
+        public static void SetupPreAttachedRendererInfos(CharacterModel characterModel) {
             for (int i = 0; i < characterModel.baseRendererInfos.Length; i++) {
                 if (characterModel.baseRendererInfos[i].defaultMaterial == null)
                     characterModel.baseRendererInfos[i].defaultMaterial = characterModel.baseRendererInfos[i].renderer.sharedMaterial;
@@ -201,7 +201,7 @@ namespace Modules
             }
         }
 
-        internal static void SetupCustomRendererInfos(CharacterModel characterModel, CustomRendererInfo[] customInfos) {
+        public static void SetupCustomRendererInfos(CharacterModel characterModel, CustomRendererInfo[] customInfos) {
 
             ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
             if (!childLocator) {
@@ -305,7 +305,7 @@ namespace Modules
             hurtBoxGroup.bullseyeCount = 1;
         }
 
-        internal static void SetupHurtBoxes(GameObject bodyPrefab) {
+        public static void SetupHurtBoxes(GameObject bodyPrefab) {
 
             HealthComponent healthComponent = bodyPrefab.GetComponent<HealthComponent>();
 
@@ -363,7 +363,7 @@ namespace Modules
             aimAnimator.inputBank = prefab.GetComponent<InputBankTest>();
         }
 
-        internal static void SetupHitbox(GameObject prefab, Transform hitboxTransform, string hitboxName)
+        public static void SetupHitbox(GameObject prefab, Transform hitboxTransform, string hitboxName)
         {
             HitBoxGroup hitBoxGroup = prefab.AddComponent<HitBoxGroup>();
 
@@ -378,7 +378,7 @@ namespace Modules
             hitBoxGroup.groupName = hitboxName;
         }
 
-        internal static void SetupHitbox(GameObject prefab, string hitboxName, params Transform[] hitboxTransforms)
+        public static void SetupHitbox(GameObject prefab, string hitboxName, params Transform[] hitboxTransforms)
         {
             HitBoxGroup hitBoxGroup = prefab.AddComponent<HitBoxGroup>();
             List<HitBox> hitBoxes = new List<HitBox>();

@@ -13,8 +13,8 @@ namespace ModdedEntityStates.TeslaTrooper
             public Quaternion rotation;
         }
 
-        public GameObject blueprintPrefab = Modules.Assets.TestlaCoilBlueprint;
-        public GameObject teslacoilPrefab = Modules.Assets.TestlaCoil;
+        public GameObject blueprintPrefab = Modules.Assets.TeslaCoilBlueprint;
+        public GameObject teslacoilPrefab = Modules.Assets.TeslaCoil;
 
         private float _minTowerHeight = 3;
         private TotallyOriginalPlacementInfo currentPlacementInfo;

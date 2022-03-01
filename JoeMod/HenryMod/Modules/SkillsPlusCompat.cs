@@ -10,11 +10,11 @@ using EntityStates;
 
 namespace Modules {
 
-    internal class SkillsPlusCompat {
+    public class SkillsPlusCompat {
 
         public static int TeslaZap_InitialCasts;
 
-        internal static void init() {
+        public static void init() {
             TeslaZap_InitialCasts = Zap.OrbCasts;
 
             doLanguage();

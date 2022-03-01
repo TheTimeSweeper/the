@@ -155,7 +155,7 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
     }
 
     public class TeslaIndicator : Indicator {
-        internal bool empowered;
+        public bool empowered;
 
         public TeslaIndicator(GameObject owner, GameObject visualizerPrefab) : base(owner, visualizerPrefab) { }
 

@@ -87,7 +87,7 @@ MonoBehaviour:
     mainColor: {r: 0.3724635, g: 0.5615252, b: 0.8490566, a: 1}
     offColor: {r: 0.3436276, g: 0.45148852, b: 0.735849, a: 1}
   - recolorName: green
-    mainColor: {r: 0.30980393, g: 0.7294118, b: 0.28627452, a: 1}
+    mainColor: {r: 0.37379846, g: 0.754717, b: 0.35243857, a: 1}
     offColor: {r: 0.3956555, g: 0.6132076, b: 0.32106623, a: 1}
   - recolorName: yellow
     mainColor: {r: 1, g: 0.94264257, b: 0.3537736, a: 1}
@@ -99,7 +99,7 @@ MonoBehaviour:
     mainColor: {r: 0.254539, g: 0.914319, b: 0.9811321, a: 1}
     offColor: {r: 0.39044145, g: 0.64587057, b: 0.7735849, a: 1}
   - recolorName: purple
-    mainColor: {r: 0.73696864, g: 0.2941177, b: 0.9529412, a: 1}
+    mainColor: {r: 0.62969816, g: 0.374466, b: 0.9339623, a: 1}
     offColor: {r: 0.5407891, g: 0.38768244, b: 0.6792453, a: 1}
   - recolorName: pink
     mainColor: {r: 1, g: 0.627451, b: 0.9607843, a: 1}

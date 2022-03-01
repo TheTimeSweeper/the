@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Modules
 {
-    internal static class Skins
+    public static class Skins
     {
-        internal static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root)
+        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root)
         {
             return CreateSkinDef(skinName, skinIcon, rendererInfos, mainRenderer, root, null);
         }
 
-        internal static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root, UnlockableDef unlockableDef)
+        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root, UnlockableDef unlockableDef)
         {
             SkinDefInfo skinDefInfo = new SkinDefInfo
             {
@@ -54,19 +54,19 @@ namespace Modules
         {
         }
 
-        internal struct SkinDefInfo
+        public struct SkinDefInfo
         {
-            internal SkinDef[] BaseSkins;
-            internal Sprite Icon;
-            internal string NameToken;
-            internal UnlockableDef UnlockableDef;
-            internal GameObject RootObject;
-            internal CharacterModel.RendererInfo[] RendererInfos;
-            internal SkinDef.MeshReplacement[] MeshReplacements;
-            internal SkinDef.GameObjectActivation[] GameObjectActivations;
-            internal SkinDef.ProjectileGhostReplacement[] ProjectileGhostReplacements;
-            internal SkinDef.MinionSkinReplacement[] MinionSkinReplacements;
-            internal string Name;
+            public SkinDef[] BaseSkins;
+            public Sprite Icon;
+            public string NameToken;
+            public UnlockableDef UnlockableDef;
+            public GameObject RootObject;
+            public CharacterModel.RendererInfo[] RendererInfos;
+            public SkinDef.MeshReplacement[] MeshReplacements;
+            public SkinDef.GameObjectActivation[] GameObjectActivations;
+            public SkinDef.ProjectileGhostReplacement[] ProjectileGhostReplacements;
+            public SkinDef.MinionSkinReplacement[] MinionSkinReplacements;
+            public string Name;
         }
     }
 }

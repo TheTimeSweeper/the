@@ -8,9 +8,9 @@ namespace Modules
     public static class Buffs
     {
         // armor buff gained during roll
-        internal static BuffDef armorBuff;
+        public static BuffDef armorBuff;
 
-        internal static void RegisterBuffs()
+        public static void RegisterBuffs()
         {
             armorBuff = AddNewBuff("HenryArmorBuff", 
                                    Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), 
@@ -20,7 +20,7 @@ namespace Modules
         }
 
 
-        internal static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {
+        public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {
             BuffDef buffDef = ScriptableObject.CreateInstance<BuffDef>();
             buffDef.name = buffName;
             buffDef.iconSprite = buffIcon;

@@ -10,30 +10,30 @@ using System;
 using System.Linq;
 
 namespace Modules {
-    internal static class Assets
+    public static class Assets
     {
         // the assetbundle to load assets from
         // survivor todo: separate assets between survivors
-        internal static AssetBundle mainAssetBundle;
-        internal static AssetBundle teslaAssetBundle;
+        public static AssetBundle mainAssetBundle;
+        public static AssetBundle teslaAssetBundle;
 
         //HENRY: indev
         #region indev
         // lists of assets to add to contentpack
 
         // cache these and use to create our own materials
-        internal static Shader hotpoo = Resources.Load<Shader>("Shaders/Deferred/HGStandard");
+        public static Shader hotpoo = Resources.Load<Shader>("Shaders/Deferred/HGStandard");
         private static string[] assetNames = new string[0];
         #endregion
 
         #region MY NAME'S NOT HENRY
         // particle effects
-        internal static GameObject swordSwingEffect;
-        internal static GameObject swordHitImpactEffect;
+        public static GameObject swordSwingEffect;
+        public static GameObject swordHitImpactEffect;
 
-        internal static GameObject bombExplosionEffect;
+        public static GameObject bombExplosionEffect;
         // networked hit sounds
-        internal static NetworkSoundEventDef swordHitSoundEvent;
+        public static NetworkSoundEventDef swordHitSoundEvent;
         #endregion
         
         // CHANGE THIS
@@ -44,10 +44,10 @@ namespace Modules {
         public static GameObject JoeImpactEffect = null;
         public static GameObject JoeJumpSwingEffect = null;
         
-        public static GameObject TestlaCoil = null;
-        public static GameObject TestlaCoilBlueprint = null;
+        public static GameObject TeslaCoil = null;
+        public static GameObject TeslaCoilBlueprint = null;
 
-        internal static void Initialize()
+        public static void Initialize()
         {
             //HENRY: check this somewhere else secretly
             if (assetbundleName == "myassetbundle")
@@ -70,13 +70,13 @@ namespace Modules {
             JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
             JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
 
-            TestlaCoil = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoil");
-            TestlaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
+            TeslaCoil = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoil");
+            TeslaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
         }
 
-        internal static void PopulateHenrysAssetsThatNoLongerExist()
+        public static void PopulateHenrysAssetsThatNoLongerExist()
         {
             if (!mainAssetBundle)
             {
@@ -111,7 +111,7 @@ namespace Modules {
             swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
         }
 
-        internal static void LoadAssetBundle()
+        public static void LoadAssetBundle()
         {
             if (mainAssetBundle == null)
             {
@@ -133,7 +133,7 @@ namespace Modules {
             assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
         }
         
-        internal static T LoadAsset<T>(string assString) where T : UnityEngine.Object
+        public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
             T loadedAss = mainAssetBundle.LoadAsset<T>(assString);
 
@@ -150,7 +150,7 @@ namespace Modules {
             return loadedAss;
         }
 
-        internal static GameObject LoadSurvivorModel(string modelName) {
+        public static GameObject LoadSurvivorModel(string modelName) {
             GameObject model = Modules.Assets.LoadAsset<GameObject>(modelName);
             if (model == null) {
                 Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
@@ -160,7 +160,7 @@ namespace Modules {
             return PrefabAPI.InstantiateClone(model, model.name, false);
         }
 
-        internal static void LoadSoundbank()
+        public static void LoadSoundbank()
         {
             using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
             {
@@ -195,7 +195,7 @@ namespace Modules {
             return newTracer;
         }
 
-        internal static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
+        public static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
         {
             NetworkSoundEventDef networkSoundEventDef = ScriptableObject.CreateInstance<NetworkSoundEventDef>();
             networkSoundEventDef.akId = AkSoundEngine.GetIDFromString(eventName);
@@ -206,7 +206,7 @@ namespace Modules {
             return networkSoundEventDef;
         }
 
-        internal static void ConvertAllRenderersToHopooShader(GameObject objectToConvert) {
+        public static void ConvertAllRenderersToHopooShader(GameObject objectToConvert) {
             if (!objectToConvert) return;
 
             foreach (MeshRenderer i in objectToConvert.GetComponentsInChildren<MeshRenderer>()) {
@@ -222,7 +222,7 @@ namespace Modules {
             }
         }
 
-        internal static CharacterModel.RendererInfo[] SetupRendererInfos(GameObject obj)
+        public static CharacterModel.RendererInfo[] SetupRendererInfos(GameObject obj)
         {
             MeshRenderer[] meshes = obj.GetComponentsInChildren<MeshRenderer>();
             CharacterModel.RendererInfo[] rendererInfos = new CharacterModel.RendererInfo[meshes.Length];
@@ -241,19 +241,19 @@ namespace Modules {
             return rendererInfos;
         }
 
-        internal static Texture LoadCharacterIconGeneric(string characterName)
+        public static Texture LoadCharacterIconGeneric(string characterName)
         {
             return LoadAsset<Texture>("tex" + characterName + "Icon");
         }
 
-        internal static Texture LoadCharacterIcon(string name) {
+        public static Texture LoadCharacterIcon(string name) {
             return LoadAsset<Texture>(name);
         }
         /// <summary>
         /// search for crosshair prefabs here. plug in the character or crosshair name
         /// </summary>
         /// <para>https://xiaoxiao921.github.io/GithubActionCacheTest/assetPathsDump.html</para>
-        internal static GameObject LoadCrosshair(string crosshairName)
+        public static GameObject LoadCrosshair(string crosshairName)
         {
             if (Resources.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return Resources.Load<GameObject>("Prefabs/Crosshair/StandardCrosshair");
             return Resources.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");

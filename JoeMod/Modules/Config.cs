@@ -25,7 +25,7 @@ namespace Modules
         }
 
         // this helper automatically makes config entries for disabling survivors
-        internal static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "")
+        public static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "")
         {
             return FacelessJoePlugin.instance.Config.Bind<bool>("General",
                                                                 "Enable "+ characterName,
@@ -33,7 +33,7 @@ namespace Modules
                                                                 !string.IsNullOrEmpty(description) ? description : "Set to false to disable this character");
         }
 
-        internal static ConfigEntry<bool> EnemyEnableConfig(string characterName)
+        public static ConfigEntry<bool> EnemyEnableConfig(string characterName)
         {
             return FacelessJoePlugin.instance.Config.Bind<bool>(new ConfigDefinition(characterName, "Enabled"), true, new ConfigDescription("Set to false to disable this enemy"));
         }

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Modules 
 {
-    internal static class Unlockables
+    public static class Unlockables
     {
         private static readonly HashSet<string> usedRewardIds = new HashSet<string>();
         private static readonly List<(AchievementDef achDef, UnlockableDef unlockableDef, String unlockableName)> moddedUnlocks = new List<(AchievementDef achDef, UnlockableDef unlockableDef, string unlockableName)>();
@@ -17,7 +17,7 @@ namespace Modules
         private static bool addingUnlockables;
         public static bool ableToAdd { get; private set; } = false;
 
-        internal static UnlockableDef CreateNewUnlockable(UnlockableInfo unlockableInfo)
+        public static UnlockableDef CreateNewUnlockable(UnlockableInfo unlockableInfo)
         {
             UnlockableDef newUnlockableDef = ScriptableObject.CreateInstance<UnlockableDef>();
 
@@ -114,16 +114,16 @@ where TDelegate : Delegate
             _ = cursor.Emit(OpCodes.Ldloc_1);
         }
 
-        internal struct UnlockableInfo
+        public struct UnlockableInfo
         {
-            internal string Name;
-            internal Func<string> HowToUnlockString;
-            internal Func<string> UnlockedString;
-            internal int SortScore;
+            public string Name;
+            public Func<string> HowToUnlockString;
+            public Func<string> UnlockedString;
+            public int SortScore;
         }
     }
 
-    internal interface IModdedUnlockableDataProvider
+    public interface IModdedUnlockableDataProvider
     {
         string AchievementIdentifier { get; }
         string UnlockableIdentifier { get; }

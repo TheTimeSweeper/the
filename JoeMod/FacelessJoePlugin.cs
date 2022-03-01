@@ -32,7 +32,7 @@ using System.Security.Permissions;
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEV_PREFIX = "HABIBI";
 
-        internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
+        public List<SurvivorBase> Survivors = new List<SurvivorBase>();
 
         public static FacelessJoePlugin instance;
         public static ManualLogSource Log;

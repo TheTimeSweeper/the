@@ -8,9 +8,9 @@ namespace Modules
 {
     public static class States
     {
-        internal static List<Type> entityStates => ContentPacks.entityStates;
+        public static List<Type> entityStates => ContentPacks.entityStates;
 
-        internal static void RegisterStates()
+        public static void RegisterStates()
         {
             #region henry
             entityStates.Add(typeof(SlashCombo));

@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace Modules {
 
-    internal static class Skills
+    public static class Skills
     {
         #region genericskills
-        internal static void CreateSkillFamilies(GameObject targetPrefab, int families = 15) {
+        public static void CreateSkillFamilies(GameObject targetPrefab, int families = 15) {
             foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>()) {
                 FacelessJoePlugin.DestroyImmediate(obj);
             }
@@ -49,7 +49,7 @@ namespace Modules {
         #endregion
 
         #region skillfamilies
-        internal static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+        public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
 
             SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().primary.skillFamily;
 
@@ -58,7 +58,7 @@ namespace Modules {
             }
         }
 
-        internal static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        public static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
         {
             SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().secondary.skillFamily;
 
@@ -68,7 +68,7 @@ namespace Modules {
             }
         }
 
-        internal static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        public static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
         {
             SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().utility.skillFamily;
 
@@ -78,7 +78,7 @@ namespace Modules {
             }
         }
 
-        internal static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        public static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
         {
             SkillFamily skillFamily = targetPrefab.GetComponent<SkillLocator>().special.skillFamily;
 
@@ -88,7 +88,7 @@ namespace Modules {
             }
         }
 
-        internal static void AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef, UnlockableDef unlockableDef = null) {
+        public static void AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef, UnlockableDef unlockableDef = null) {
 
             Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
 
@@ -105,7 +105,7 @@ namespace Modules {
         /// AddUnlockablesToFamily(skillLocator.primary, null, skill2UnlockableDef, null, skill4UnlockableDef);
         /// </code>
         /// </summary>
-        internal static void AddUnlockablesToFamily(SkillFamily skillFamily, UnlockableDef[] unlockableDefs) {
+        public static void AddUnlockablesToFamily(SkillFamily skillFamily, UnlockableDef[] unlockableDefs) {
 
             for (int i = 0; i < unlockableDefs.Length; i++) {
                 SkillFamily.Variant variant = skillFamily.variants[i];

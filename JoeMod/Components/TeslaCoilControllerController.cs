@@ -50,7 +50,7 @@ public class TeslaCoilControllerController : MonoBehaviour {
         }
     }
 
-    internal void commandTowers(HurtBox target) {
+    public void commandTowers(HurtBox target) {
 
         List<GameObject> nearbyTowers = GetNearbyTowers();
 

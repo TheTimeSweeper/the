@@ -5,78 +5,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Modules
-{
-    public class Content {
-        public static void AddCharacterBodyPrefab(GameObject bprefab) {
+namespace Modules {
 
-            ContentPacks.bodyPrefabs.Add(bprefab);
-        }
-        public static void AddMasterPrefab(GameObject prefab) {
-
-            ContentPacks.masterPrefabs.Add(prefab);
-        }
-        public static void AddProjectilePrefab(GameObject prefab) {
-
-            ContentPacks.projectilePrefabs.Add(prefab);
-        }
-
-        public static void AddSurvivorDef(SurvivorDef survivorDef) {
-
-            ContentPacks.survivorDefs.Add(survivorDef);
-        }
-        public static void AddUnlockableDef(UnlockableDef unlockableDef) {
-
-            ContentPacks.unlockableDefs.Add(unlockableDef);
-        }
-        public static void AddSkillDef(SkillDef skillDef) {
-
-            ContentPacks.skillDefs.Add(skillDef);
-        }
-        public static void AddSkillFamily(SkillFamily skillFamily) {
-
-            ContentPacks.skillFamilies.Add(skillFamily);
-        }
-        public static void AddEntityState(Type entityState) {
-
-            ContentPacks.entityStates.Add(entityState);
-        }
-
-        public static void AddBuffDef(BuffDef buffDef) {
-
-            ContentPacks.buffDefs.Add(buffDef);
-        }
-        public static void AddEffectDef(EffectDef effectDef) {
-
-            ContentPacks.effectDefs.Add(effectDef);
-        }
-
-        public static void AddNetworkSoundEventDef(NetworkSoundEventDef networkSoundEventDef) {
-
-            ContentPacks.networkSoundEventDefs.Add(networkSoundEventDef);
-        }
-    }
-
-    internal class ContentPacks : IContentPackProvider
+    public class ContentPacks : IContentPackProvider
     {
-        internal ContentPack contentPack = new ContentPack();
+        public ContentPack contentPack = new ContentPack();
         public string identifier => FacelessJoePlugin.MODUID;
 
-        internal static List<GameObject> bodyPrefabs = new List<GameObject>();
-        internal static List<GameObject> masterPrefabs = new List<GameObject>();
-        internal static List<GameObject> projectilePrefabs = new List<GameObject>();
+        public static List<GameObject> bodyPrefabs = new List<GameObject>();
+        public static List<GameObject> masterPrefabs = new List<GameObject>();
+        public static List<GameObject> projectilePrefabs = new List<GameObject>();
 
-        internal static List<SurvivorDef> survivorDefs = new List<SurvivorDef>();
-        internal static List<UnlockableDef> unlockableDefs = new List<UnlockableDef>();
+        public static List<SurvivorDef> survivorDefs = new List<SurvivorDef>();
+        public static List<UnlockableDef> unlockableDefs = new List<UnlockableDef>();
 
-        internal static List<SkillFamily> skillFamilies = new List<SkillFamily>();
-        internal static List<SkillDef> skillDefs = new List<SkillDef>();
-        internal static List<Type> entityStates = new List<Type>();
+        public static List<SkillFamily> skillFamilies = new List<SkillFamily>();
+        public static List<SkillDef> skillDefs = new List<SkillDef>();
+        public static List<Type> entityStates = new List<Type>();
 
-        internal static List<BuffDef> buffDefs = new List<BuffDef>();
-        internal static List<EffectDef> effectDefs = new List<EffectDef>();
+        public static List<BuffDef> buffDefs = new List<BuffDef>();
+        public static List<EffectDef> effectDefs = new List<EffectDef>();
 
-        internal static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
+        public static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
 
         public void Initialize()
         {

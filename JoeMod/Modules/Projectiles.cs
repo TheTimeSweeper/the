@@ -7,12 +7,12 @@ using UnityEngine.Networking;
 
 namespace Modules
 {
-    internal static class Projectiles
+    public static class Projectiles
     {
-        internal static GameObject bombPrefab;
-        internal static GameObject totallyNewBombPrefab;
+        public static GameObject bombPrefab;
+        public static GameObject totallyNewBombPrefab;
 
-        internal static void RegisterProjectiles()
+        public static void RegisterProjectiles()
         {
             // only separating into separate methods for my sanity
             CreateBomb();
@@ -23,7 +23,7 @@ namespace Modules
             AddProjectile(totallyNewBombPrefab);
         }
 
-        internal static void AddProjectile(GameObject projectileToAdd)
+        public static void AddProjectile(GameObject projectileToAdd)
         {
             Modules.Content.AddProjectilePrefab(projectileToAdd);
         }

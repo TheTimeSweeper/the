@@ -6,9 +6,9 @@ using ModdedEntityStates.TeslaTrooper.Tower;
 
 namespace Modules
 {
-    internal static class Tokens {
+    public static class Tokens {
 
-        internal static void AddTokens()
+        public static void AddTokens()
         {
             AddJoeTokens();
             AddTeslaTokens();
@@ -199,7 +199,7 @@ namespace Modules
             #endregion not henry 3
         }
 
-        internal static void AddHenryTokens()
+        public static void AddHenryTokens()
         {
             #region Henry
             string prefix = FacelessJoePlugin.DEV_PREFIX + "_HENRY_BODY_";
