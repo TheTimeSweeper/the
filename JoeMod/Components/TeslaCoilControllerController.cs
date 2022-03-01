@@ -1,5 +1,5 @@
 ﻿using EntityStates;
-using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
+using ModdedEntityStates.TeslaTrooper.Tower;
 using RoR2;
 using System;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     internal static class Projectiles
     {

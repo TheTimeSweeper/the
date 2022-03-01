@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     public class Content {
         public static void AddCharacterBodyPrefab(GameObject bprefab) {

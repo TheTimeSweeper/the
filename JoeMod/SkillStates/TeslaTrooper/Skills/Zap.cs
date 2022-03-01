@@ -1,5 +1,5 @@
 ﻿using EntityStates;
-using HenryMod.ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
+using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
 using RoR2;
 using RoR2.Orbs;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper
+namespace ModdedEntityStates.TeslaTrooper
 {
     public class Zap : BaseTimedSkillState
     {

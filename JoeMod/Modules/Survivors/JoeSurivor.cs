@@ -3,12 +3,12 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using HenryMod.ModdedEntityStates.Joe;
+using ModdedEntityStates.Joe;
 using UnityEngine;
-using JoeMod.ModdedEntityStates.TeslaTrooper;
-using HenryMod.Modules.Characters;
+using ModdedEntityStates.TeslaTrooper;
+using Modules.Characters;
 
-namespace HenryMod.Modules.Survivors
+namespace Modules.Survivors
 {
     public class JoeSurivor : SurvivorBase
     {

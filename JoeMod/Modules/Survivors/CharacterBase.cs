@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules.Characters {
+namespace Modules.Characters {
     public abstract class CharacterBase {
 
         public static CharacterBase instance;

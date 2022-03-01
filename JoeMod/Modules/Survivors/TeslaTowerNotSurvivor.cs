@@ -4,14 +4,14 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using JoeMod.ModdedEntityStates.TeslaTrooper;
-using HenryMod.Modules.Characters;
-using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
+using ModdedEntityStates.TeslaTrooper;
+using Modules.Characters;
+using ModdedEntityStates.TeslaTrooper.Tower;
 using EntityStates;
 using R2API;
 using RoR2.CharacterAI;
 
-namespace HenryMod.Modules.Survivors {
+namespace Modules.Survivors {
     public class TeslaTowerNotSurvivor : CharacterBase {
 
         public override string bodyName => "TeslaTower";

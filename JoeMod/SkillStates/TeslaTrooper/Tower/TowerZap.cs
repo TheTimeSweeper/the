@@ -1,10 +1,10 @@
-﻿using HenryMod.ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
+﻿using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
 using RoR2;                                 
 using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
+namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerZap: BaseTimedSkillState
     {

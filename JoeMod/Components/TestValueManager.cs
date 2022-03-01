@@ -1,4 +1,4 @@
-﻿using JoeMod.ModdedEntityStates.TeslaTrooper;
+﻿using ModdedEntityStates.TeslaTrooper;
 using UnityEngine;
 
 public class TestValueManager : MonoBehaviour {
@@ -12,7 +12,7 @@ public class TestValueManager : MonoBehaviour {
     private float _holdTime = 0.4f;    
 
     //compiler flags when
-    private bool _testingEnabled => HenryMod.Modules.Config.Debug;
+    private bool _testingEnabled => Modules.Config.Debug;
 
 
 
@@ -28,8 +28,8 @@ public class TestValueManager : MonoBehaviour {
         if (!Input.GetKey(KeyCode.LeftAlt))
             return;
 
-        //manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.lowGravMultiplier, "bomb Grav", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
-        //manageTestValue(ref HenryMod.EntityStates.Joe.ThrowBoom.smallhopVelocity, "bomb hop", KeyCode.Keypad8, KeyCode.Keypad5, 0.05f);
+        //manageTestValue(ref EntityStates.Joe.ThrowBoom.lowGravMultiplier, "bomb Grav", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
+        //manageTestValue(ref EntityStates.Joe.ThrowBoom.smallhopVelocity, "bomb hop", KeyCode.Keypad8, KeyCode.Keypad5, 0.05f);
         manageTestValue(ref BigZap.keep_bigsexyeffect, "effect", KeyCode.Alpha2, KeyCode.Alpha1, 1f);
 
         manageTestValue(ref vertOff, "verticaloffset", KeyCode.Keypad7, KeyCode.Keypad4, 1f);

@@ -1,14 +1,14 @@
 ﻿using System;
 using RoR2;
 using RoR2.Skills;
-using JoeMod.ModdedEntityStates.TeslaTrooper;
-using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
+using ModdedEntityStates.TeslaTrooper;
+using ModdedEntityStates.TeslaTrooper.Tower;
 using R2API;
 using SkillsPlusPlus;
 using SkillsPlusPlus.Modifiers;
 using EntityStates;
 
-namespace HenryMod.Modules {
+namespace Modules {
 
     internal class SkillsPlusCompat {
 

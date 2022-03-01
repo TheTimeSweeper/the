@@ -1,10 +1,10 @@
-﻿using HenryMod.ModdedEntityStates.Henry;
-using HenryMod.ModdedEntityStates.Joe;
-using HenryMod.ModdedEntityStates.BaseStates;
+﻿using ModdedEntityStates.Henry;
+using ModdedEntityStates.Joe;
+using ModdedEntityStates.BaseStates;
 using System.Collections.Generic;
 using System;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     public static class States
     {

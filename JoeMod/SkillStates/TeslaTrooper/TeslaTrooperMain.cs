@@ -1,9 +1,9 @@
 ﻿using EntityStates;
-using HenryMod.Modules;
+using Modules;
 using RoR2;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper {
+namespace ModdedEntityStates.TeslaTrooper {
     public class TeslaTrooperMain : GenericCharacterMain {
 
         private int lastVoice = -1;

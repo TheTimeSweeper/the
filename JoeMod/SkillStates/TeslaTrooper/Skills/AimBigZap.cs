@@ -3,7 +3,7 @@ using RoR2;
 using System;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper
+namespace ModdedEntityStates.TeslaTrooper
 {
     public class AimBigZap : AimThrowableBase //AimMortar
     {

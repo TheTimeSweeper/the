@@ -1,10 +1,10 @@
 ﻿using BepInEx.Configuration;
 using RoR2;
 using System;
-using HenryMod.Modules.Characters;
+using Modules.Characters;
 using UnityEngine;
 
-namespace HenryMod.Modules.Survivors {
+namespace Modules.Survivors {
 
     public abstract class SurvivorBase : CharacterBase
     {

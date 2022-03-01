@@ -2,7 +2,7 @@
 using RoR2;
 using RoR2.Skills;
 
-namespace HenryMod.Modules {
+namespace Modules {
     public class TeslaTrackingSkillDef : SkillDef {
 
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {

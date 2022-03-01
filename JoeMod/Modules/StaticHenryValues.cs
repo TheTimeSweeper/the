@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     internal static class StaticHenryValues
     {

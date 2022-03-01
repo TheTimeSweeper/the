@@ -4,7 +4,7 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
+namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerIdleSearch : BaseSkillState {
         public static float SearchRange = 60;

@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace HenryMod.Modules {
+namespace Modules {
 
     public abstract class GenericModdedUnlockable : ModdedUnlockable {
         public abstract string AchievementTokenPrefix { get; }

@@ -1,10 +1,10 @@
 ﻿using R2API;
 using System;
-using HenryMod.ModdedEntityStates.Joe;
-using JoeMod.ModdedEntityStates.TeslaTrooper;
-using JoeMod.ModdedEntityStates.TeslaTrooper.Tower;
+using ModdedEntityStates.Joe;
+using ModdedEntityStates.TeslaTrooper;
+using ModdedEntityStates.TeslaTrooper.Tower;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     internal static class Tokens {
 

@@ -9,7 +9,7 @@ using RoR2.UI;
 using System;
 using System.Linq;
 
-namespace HenryMod.Modules {
+namespace Modules {
     internal static class Assets
     {
         // the assetbundle to load assets from
@@ -150,7 +150,7 @@ namespace HenryMod.Modules {
             {
                 loadedAss = teslaAssetBundle.LoadAsset<T>(assString);
             }
-
+            
             if(loadedAss == null)
             {
                 Debug.LogError($"Null asset: {assString}.\nAttempt to load asset '{assString}' from assetbundles returned null");

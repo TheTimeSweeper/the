@@ -1,7 +1,7 @@
 ﻿using BepInEx.Configuration;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     public static class Config
     {

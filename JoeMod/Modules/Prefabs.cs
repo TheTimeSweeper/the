@@ -3,7 +3,7 @@ using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace Modules
 {
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to

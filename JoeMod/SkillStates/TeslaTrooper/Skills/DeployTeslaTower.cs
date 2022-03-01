@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper
+namespace ModdedEntityStates.TeslaTrooper
 {
     public class DeployTeslaTower : BaseSkillState
     {
@@ -13,8 +13,8 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
             public Quaternion rotation;
         }
 
-        public GameObject blueprintPrefab = HenryMod.Modules.Assets.TestlaCoilBlueprint;
-        public GameObject teslacoilPrefab = HenryMod.Modules.Assets.TestlaCoil;
+        public GameObject blueprintPrefab = Modules.Assets.TestlaCoilBlueprint;
+        public GameObject teslacoilPrefab = Modules.Assets.TestlaCoil;
 
         private float _minTowerHeight = 3;
         private TotallyOriginalPlacementInfo currentPlacementInfo;
@@ -30,7 +30,7 @@ namespace JoeMod.ModdedEntityStates.TeslaTrooper
         private bool ConstructionComplete;
 
         private BlueprintController blueprints;
-        private GameObject coilMasterPrefab = HenryMod.Modules.Survivors.TeslaTowerNotSurvivor.masterPrefab;
+        private GameObject coilMasterPrefab = Modules.Survivors.TeslaTowerNotSurvivor.masterPrefab;
 
         public override void OnEnter()
         {

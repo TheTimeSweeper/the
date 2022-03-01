@@ -5,10 +5,10 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using JoeMod.ModdedEntityStates.TeslaTrooper;
-using HenryMod.Modules.Characters;
+using ModdedEntityStates.TeslaTrooper;
+using Modules.Characters;
 
-namespace HenryMod.Modules.Survivors
+namespace Modules.Survivors
 {
     public class TeslaTrooperSurvivor : SurvivorBase {
 

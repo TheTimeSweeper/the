@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules.Characters {
+namespace Modules.Characters {
     public class TeslaItemDisplays : ItemDisplaysBase {
 
         public override bool printUnused => true;

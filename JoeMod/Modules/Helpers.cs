@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HenryMod;
-using HenryMod.Modules;
+using Modules;
 
 public enum TeslaVoiceLine {
     attack_2000Volts, //0

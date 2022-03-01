@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using RoR2;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower
+namespace ModdedEntityStates.TeslaTrooper.Tower
 {
     public class TowerSpawnState : BaseState
     {

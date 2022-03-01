@@ -1,10 +1,10 @@
 ﻿using EntityStates;
-using HenryMod.ModdedEntityStates.BaseStates;
-using HenryMod.Modules;
+using ModdedEntityStates.BaseStates;
+using Modules;
 using RoR2;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper {
+namespace ModdedEntityStates.TeslaTrooper {
     
     public class BigZap : BaseTimedSkillState
     {

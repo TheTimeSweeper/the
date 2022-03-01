@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules {
+namespace Modules {
     public static class Materials {
 
         private static List<Material> cachedMaterials = new List<Material>();
@@ -36,25 +36,7 @@ namespace HenryMod.Modules {
             return tempMat.SetHotpooMaterial();
         }
 
-        static Material commandoMat;
-
-        public static Material SetHotpooMaterial(this Material fuckingCommandoMat) {
-
-            if (!commandoMat) 
-                commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RoR2.CharacterModel>().baseRendererInfos[0].defaultMaterial;
-            
-            Material uh = UnityEngine.Object.Instantiate<Material>(fuckingCommandoMat);
-
-            fuckingCommandoMat = UnityEngine.Object.Instantiate<Material>(commandoMat);
-
-            fuckingCommandoMat.SetColor("_Color", uh.GetColor("_Color"));
-            fuckingCommandoMat.SetTexture("_MainTex", uh.GetTexture("_MainTex"));
-            fuckingCommandoMat.SetTexture("_EmTex", uh.GetTexture("_EmissionMap"));
-
-            return fuckingCommandoMat;
-        }
-
-        public static Material SetHotpotMaterial(this Material tempMat) {
+        public static Material SetHotpooMaterial(this Material tempMat) {
             if (cachedMaterials.Contains(tempMat)) {
 
                 Helpers.Log("returning cached material for " + tempMat);

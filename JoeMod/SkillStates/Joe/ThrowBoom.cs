@@ -3,7 +3,7 @@ using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 
-namespace HenryMod.ModdedEntityStates.Joe {
+namespace ModdedEntityStates.Joe {
 
     public class ThroBoomButCoolerQuestionMaark : GenericProjectileBaseState {
 

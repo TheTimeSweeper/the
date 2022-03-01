@@ -1,10 +1,10 @@
 ﻿using EntityStates;
-using HenryMod.ModdedEntityStates.BaseStates;
+using ModdedEntityStates.BaseStates;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper
+namespace ModdedEntityStates.TeslaTrooper
 {
     public class ShieldZap : BaseTimedSkillState
     {

@@ -1,7 +1,6 @@
-﻿using HenryMod.Modules;
-using HenryMod;
+﻿using Modules;
 
-namespace HenryMod.Modules.Achievements {
+namespace Modules.Achievements {
     public class TeslaTrooperMastery : BaseMasteryUnlockable {
         public override string RequiredCharacterBody => "TeslaTrooperBody";
 

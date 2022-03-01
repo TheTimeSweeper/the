@@ -1,4 +1,4 @@
-﻿using HenryMod.Modules;
+﻿using Modules;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;

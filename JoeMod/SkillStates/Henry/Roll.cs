@@ -3,7 +3,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HenryMod.ModdedEntityStates.Henry
+namespace ModdedEntityStates.Henry
 {
     public class Roll : BaseSkillState
     {

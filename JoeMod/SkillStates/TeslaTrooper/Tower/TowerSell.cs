@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
+namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerSell : GenericCharacterDeath {
 
 		private float deathDuration;

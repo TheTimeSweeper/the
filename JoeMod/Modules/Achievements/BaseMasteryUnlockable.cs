@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace HenryMod.Modules {
+namespace Modules {
 
     public abstract class BaseMasteryUnlockable : GenericModdedUnlockable {
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HenryMod.Modules {
+namespace Modules {
     public class Compat {
 
         public static bool skillsPlusInstalled;

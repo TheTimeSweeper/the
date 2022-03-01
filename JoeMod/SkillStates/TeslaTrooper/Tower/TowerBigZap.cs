@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace JoeMod.ModdedEntityStates.TeslaTrooper.Tower {
+namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
 
         new public static float DamageCoefficient = 10.0f;

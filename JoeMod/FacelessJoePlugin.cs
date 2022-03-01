@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using HenryMod.Modules.Survivors;
+using Modules.Survivors;
 using R2API.Utils;
 using RoR2;
 using RoR2.Skills;
@@ -11,8 +11,6 @@ using System.Security.Permissions;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-
-namespace HenryMod {
 
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
@@ -108,4 +106,3 @@ namespace HenryMod {
             }
         }
     }
-}
