@@ -2,6 +2,7 @@
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
+using Modules.Characters;
 
 namespace Modules {
     // module for creating body prefabs and whatnot
