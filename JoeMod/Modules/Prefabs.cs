@@ -64,7 +64,7 @@ namespace Modules {
             bodyComponent.portraitIcon = bodyInfo.characterPortrait;
             bodyComponent.bodyColor = bodyInfo.bodyColor;
 
-            bodyComponent.crosshairPrefab = bodyInfo.crosshair;
+            bodyComponent._defaultCrosshairPrefab = bodyInfo.crosshair;
             bodyComponent.hideCrosshair = false;
             bodyComponent.preferredPodPrefab = bodyInfo.podPrefab;
 
@@ -253,7 +253,7 @@ namespace Modules {
             CameraTargetParams cameraTargetParams = prefab.GetComponent<CameraTargetParams>();
             cameraTargetParams.cameraParams = bodyInfo.cameraParams;
             cameraTargetParams.cameraPivotTransform = prefab.transform.Find("CameraPivot");
-            cameraTargetParams.aimMode = CameraTargetParams.AimType.Standard;
+            //cameraTargetParams.aimMode = CameraTargetParams.AimType.Standard;
         }
 
         private static void SetupModelLocator(GameObject prefab, Transform modelBaseTransform, Transform modelTransform)

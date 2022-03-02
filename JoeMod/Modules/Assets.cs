@@ -132,11 +132,16 @@ namespace Modules {
             assetNames = mainAssetBundle.GetAllAssetNames();
             assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
         }
-        
+
+        public static T Load<T>(string assString) where T : UnityEngine.Object => LoadAsset<T>(assString);
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
-            T loadedAss = mainAssetBundle.LoadAsset<T>(assString);
+            T loadedAss = RoR2.LegacyResourcesAPI.Load<T>(assString);
 
+
+            if (loadedAss == null) {
+                loadedAss = mainAssetBundle.LoadAsset<T>(assString);
+            }
             if(loadedAss == null)
             {
                 loadedAss = teslaAssetBundle.LoadAsset<T>(assString);

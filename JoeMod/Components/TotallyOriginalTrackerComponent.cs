@@ -30,7 +30,6 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
     void Awake()
     {
         indicator = new TeslaIndicator(base.gameObject, Resources.Load<GameObject>("Prefabs/LightningIndicator"));
-        indicator.owner = gameObject;
     }
 
     void Start()
@@ -72,7 +71,6 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
 
     private bool SearchForTarget(Ray aimRay)
     {
-
         bool found = SearchForTargetPoint(aimRay);
         if (!found) 
             found = SearchForTargetSphere(aimRay);
@@ -99,60 +97,61 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
         return trackingTarget;
     }
 
-    private void SearchForTargetBullet(Ray aimRay)
-    {
-        //well I already reinvented the wheel a bit so I guess I don't need this anymore
-            //also didn't work for some reason :c
-        BulletAttack bulletAttack = new BulletAttack
-        {
-            aimVector = aimRay.direction,
-            origin = aimRay.origin,
-            owner = base.gameObject,
-            weapon = null,
-            bulletCount = 1,
-            damage = 0,
-            damageColorIndex = DamageColorIndex.Default,
-            damageType = DamageType.Generic,
-            //falloffModel = BulletAttack.FalloffModel.Buckshot,
-            force = 0,
-            HitEffectNormal = false,
-            procChainMask = default(ProcChainMask),
-            procCoefficient = 0,
-            maxDistance = maxTrackingDistance,
-            radius = trackingRadius,
-            isCrit = false,
-            //muzzleName = muzzleName,
-            //minSpread = minSpread,
-            //maxSpread = maxSpread + num,
-            hitEffectPrefab = null,// hitEffectPrefab,
-            smartCollision = true,
-            sniper = false,
-            //spreadPitchScale = spreadPitchScale,
-            //spreadYawScale = spreadYawScale,
-            //tracerEffectPrefab = tracerEffectPrefab
-        };
+    //wasn't being used anyway
+    //private void SearchForTargetBullet(Ray aimRay)
+    //{
+    //    //well I already reinvented the wheel a bit so I guess I don't need this anymore
+    //        //also didn't work for some reason :c
+    //    BulletAttack bulletAttack = new BulletAttack
+    //    {
+    //        aimVector = aimRay.direction,
+    //        origin = aimRay.origin,
+    //        owner = base.gameObject,
+    //        weapon = null,
+    //        bulletCount = 1,
+    //        damage = 0,
+    //        damageColorIndex = DamageColorIndex.Default,
+    //        damageType = DamageType.Generic,
+    //        //falloffModel = BulletAttack.FalloffModel.Buckshot,
+    //        force = 0,
+    //        HitEffectNormal = false,
+    //        procChainMask = default(ProcChainMask),
+    //        procCoefficient = 0,
+    //        maxDistance = maxTrackingDistance,
+    //        radius = trackingRadius,
+    //        isCrit = false,
+    //        //muzzleName = muzzleName,
+    //        //minSpread = minSpread,
+    //        //maxSpread = maxSpread + num,
+    //        hitEffectPrefab = null,// hitEffectPrefab,
+    //        smartCollision = true,
+    //        sniper = false,
+    //        //spreadPitchScale = spreadPitchScale,
+    //        //spreadYawScale = spreadYawScale,
+    //        //tracerEffectPrefab = tracerEffectPrefab
+    //    };
 
-        bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit info)
-        {
-            bool hitBullet = bulletAttack.DefaultHitCallback(ref info);
-            if (hitBullet)
-            {
-                trackingTarget = info.hitHurtBox;
-                //HealthComponent healthComponent = info.hitHurtBox ? info.hitHurtBox.healthComponent : null;
-                //if (healthComponent && healthComponent.alive && info.hitHurtBox.teamIndex != teamIndex)
-                //{
-                //    hitBullet = false;
-                //}
-            }
-            return hitBullet;
-        };
-        bulletAttack.filterCallback = delegate (ref BulletAttack.BulletHit info)
-        {
-            return (!info.entityObject || info.entityObject != bulletAttack.owner) && bulletAttack.DefaultFilterCallback(ref info);
-        };
+    //    bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit info)
+    //    {
+    //        bool hitBullet = bulletAttack.DefaultHitCallback(ref info);
+    //        if (hitBullet)
+    //        {
+    //            trackingTarget = info.hitHurtBox;
+    //            //HealthComponent healthComponent = info.hitHurtBox ? info.hitHurtBox.healthComponent : null;
+    //            //if (healthComponent && healthComponent.alive && info.hitHurtBox.teamIndex != teamIndex)
+    //            //{
+    //            //    hitBullet = false;
+    //            //}
+    //        }
+    //        return hitBullet;
+    //    };
+    //    bulletAttack.filterCallback = delegate (ref BulletAttack.BulletHit info)
+    //    {
+    //        return (!info.entityObject || info.entityObject != bulletAttack.owner) && bulletAttack.DefaultFilterCallback(ref info);
+    //    };
 
-        bulletAttack.Fire();
-    }
+    //    bulletAttack.Fire();
+    //}
 
     public class TeslaIndicator : Indicator {
         public bool empowered;

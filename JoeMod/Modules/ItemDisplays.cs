@@ -179,9 +179,14 @@ namespace Modules
         }
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(string itemName, string prefabName, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
+            ItemDef keyAsset = Resources.Load<ItemDef>("ItemDefs/" + itemName);
+            return CreateGenericDisplayRule(keyAsset, prefabName, childName, position, rotation, scale);
+        }
+
+        public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(ItemDef keyAsset, string prefabName, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
            
             ItemDisplayRuleSet.KeyAssetRuleGroup displayRule = new ItemDisplayRuleSet.KeyAssetRuleGroup {
-                keyAsset = Resources.Load<ItemDef>("ItemDefs/" + itemName),
+                keyAsset = keyAsset,
                 displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {

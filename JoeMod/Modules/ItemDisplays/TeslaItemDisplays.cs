@@ -138,20 +138,22 @@ namespace Modules.Characters {
                                                                        new Vector3(-0.09701F, 0.08195F, -0.29808F),
                                                                        new Vector3(30.95269F, 91.83294F, 82.90043F),
                                                                        new Vector3(0.6574F, 0.62401F, 0.63394F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule("Clover", "DisplayClover",
+                                                                        //yo that's way better
+                                                                        //the fucking one I copypasted cause it was nicer to work with is the one that's gonna break cause resources.load, fuck
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.Clover, "DisplayClover",
                                                                        "Chest",
                                                                        new Vector3(0.12598F, 0.48287F, 0.09201F),
                                                                        new Vector3(323.631F, 197.1626F, 30.83308F),
                                                                        new Vector3(0.38572F, 0.38572F, 0.38572F)));
 
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules("CooldownOnCrit",
-                ItemDisplays.CreateDisplayRule("DisplaySkull",
-                                               "Head",
-                                               new Vector3(-0.00806F, 0.14284F, -0.00987F),
-                                               new Vector3(290.1801F, 179.7206F, 183.4566F),
-                                               new Vector3(0.34358F, 0.43777F, 0.31126F)),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.Head)
-                ));
+            //itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules("CooldownOnCrit",
+            //    ItemDisplays.CreateDisplayRule("DisplaySkull",
+            //                                   "Head",
+            //                                   new Vector3(-0.00806F, 0.14284F, -0.00987F),
+            //                                   new Vector3(290.1801F, 179.7206F, 183.4566F),
+            //                                   new Vector3(0.34358F, 0.43777F, 0.31126F)),
+            //    ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.Head)
+            //    ));
             //CritGlasses: see example above
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule("Crowbar", "DisplayCrowbar",
                                                                        "Head",

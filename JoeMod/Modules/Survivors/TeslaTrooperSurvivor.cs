@@ -44,7 +44,7 @@ namespace Modules.Survivors
 
         public override UnlockableDef characterUnlockableDef => null;
 
-        public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
+        public override ItemDisplaysBase itemDisplays => null;// new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
 

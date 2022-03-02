@@ -164,62 +164,62 @@ namespace ModdedEntityStates.BaseStates
         {
             base.FixedUpdate();
 
-            this.hitPauseTimer -= Time.fixedDeltaTime;
+            //this.hitPauseTimer -= Time.fixedDeltaTime;
 
-            if (this.hitPauseTimer <= 0f && this.inHitPause)
-            {
-                base.ConsumeHitStopCachedState(this.hitStopCachedState, base.characterMotor, this.animator);
-                this.inHitPause = false;
-                base.characterMotor.velocity = this.storedVelocity;
-            }
+            //if (this.hitPauseTimer <= 0f && this.inHitPause)
+            //{
+            //    base.ConsumeHitStopCachedState(this.hitStopCachedState, base.characterMotor, this.animator);
+            //    this.inHitPause = false;
+            //    base.characterMotor.velocity = this.storedVelocity;
+            //}
 
-            if (!this.inHitPause)
-            {
-                this.stopwatch += Time.fixedDeltaTime;
-            }
-            else
-            {
-                if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
-                if (this.animator) this.animator.SetFloat("Swing.playbackRate", 0f);
-            }
+            //if (!this.inHitPause)
+            //{
+            //    this.stopwatch += Time.fixedDeltaTime;
+            //}
+            //else
+            //{
+            //    if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
+            //    if (this.animator) this.animator.SetFloat("Swing.playbackRate", 0f);
+            //}
 
-            if (this.stopwatch >= (this.duration * this.attackStartTime) && this.stopwatch <= (this.duration * this.attackEndTime))
-            {
-                this.FireAttack();
-            }
+            //if (this.stopwatch >= (this.duration * this.attackStartTime) && this.stopwatch <= (this.duration * this.attackEndTime))
+            //{
+            //    this.FireAttack();
+            //}
 
-            if (this.stopwatch >= (this.earlyExitTime) && base.isAuthority)
-            {
-                if (keypress? base.inputBank.skill1.justPressed : base.inputBank.skill1.down)
-                {
-                    if (!this.hasFired) this.FireAttack();
-                    this.SetNextState();
-                    return;
-                }
-            }
+            //if (this.stopwatch >= (this.earlyExitTime) && base.isAuthority)
+            //{
+            //    if (keypress? base.inputBank.skill1.justPressed : base.inputBank.skill1.down)
+            //    {
+            //        if (!this.hasFired) this.FireAttack();
+            //        this.SetNextState();
+            //        return;
+            //    }
+            //}
 
-            if (this.stopwatch >= this.duration && base.isAuthority)
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
+            //if (this.stopwatch >= this.duration && base.isAuthority)
+            //{
+            //    this.outer.SetNextStateToMain();
+            //    return;
+            //}
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.Skill;
-        }
+        //public override InterruptPriority GetMinimumInterruptPriority()
+        //{
+        //    return InterruptPriority.Skill;
+        //}
 
-        public override void OnSerialize(NetworkWriter writer)
-        {
-            base.OnSerialize(writer);
-            writer.Write(this.swingIndex);
-        }
+        //public override void OnSerialize(NetworkWriter writer)
+        //{
+        //    base.OnSerialize(writer);
+        //    writer.Write(this.swingIndex);
+        //}
 
-        public override void OnDeserialize(NetworkReader reader)
-        {
-            base.OnDeserialize(reader);
-            this.swingIndex = reader.ReadInt32();
-        }
+        //public override void OnDeserialize(NetworkReader reader)
+        //{
+        //    base.OnDeserialize(reader);
+        //    this.swingIndex = reader.ReadInt32();
+        //}
     }
 }
