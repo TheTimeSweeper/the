@@ -60,19 +60,22 @@ namespace Modules.Characters {
         public Vector3 cameraPivotPosition = new Vector3(0f, 1.6f, 0f);
         public Vector3 aimOriginPosition = new Vector3(0f, 2.5f, 0f);
 
-        public float cameraParamsVerticalOffset = 1f;
+        public float cameraParamsVerticalOffset = 0f;
         public float cameraParamsDepth = -12;
 
         private CharacterCameraParams _cameraParams;
+        /// <summary>
+        /// taken care of by the fields, cameraParamsVerticalOffset, and cameraParamsDepth. If you create a new CharacterCameraParams for this field, those two fields will be ignored
+        /// </summary>
         public CharacterCameraParams cameraParams {
             get {
                 if (_cameraParams == null) {
                     _cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
-                    _cameraParams.minPitch = -70;
-                    _cameraParams.maxPitch = 70;
-                    _cameraParams.wallCushion = 0.1f;
-                    _cameraParams.pivotVerticalOffset = cameraParamsVerticalOffset;
-                    _cameraParams.standardLocalCameraPos = new Vector3(0, 0, cameraParamsDepth);
+                    _cameraParams.data.minPitch = -70;
+                    _cameraParams.data.maxPitch = 70;
+                    _cameraParams.data.wallCushion = 0.1f;
+                    _cameraParams.data.pivotVerticalOffset = cameraParamsVerticalOffset;
+                    _cameraParams.data.idealLocalCameraPos = new Vector3(0, 0, cameraParamsDepth);
                 }
                 return _cameraParams;
             }

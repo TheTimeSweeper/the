@@ -16,7 +16,7 @@ namespace Modules {
 
         public static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
-            if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
+            if (!Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
                 Debug.LogError(bodyInfo.bodyNameToClone + "Body is not a valid body, character creation failed");
                 return null;
@@ -37,13 +37,13 @@ namespace Modules {
 
         public static GameObject CreateBodyPrefab(string bodyName, string modelName, BodyInfo bodyInfo)
         {
-            if (!Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
+            if (!Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
                 Debug.LogError(bodyInfo.bodyNameToClone + "Body is not a valid body, character creation failed");
                 return null;
             }
 
-            GameObject newPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), bodyName);
+            GameObject newPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), bodyName);
 
             Transform modelBaseTransform = null;
             GameObject model = null;
@@ -133,7 +133,7 @@ namespace Modules {
 
         public static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy)
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster"), masterName, true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster"), masterName, true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
             Modules.Content.AddMasterPrefab(newMaster);
@@ -323,7 +323,7 @@ namespace Modules {
             footstepHandler.baseFootstepString = "Play_player_footstep";
             footstepHandler.sprintFootstepOverrideString = "";
             footstepHandler.enableFootstepDust = true;
-            footstepHandler.footstepDustPrefab = Resources.Load<GameObject>("Prefabs/GenericFootstepDust");
+            footstepHandler.footstepDustPrefab = Assets.LoadAsset<GameObject>("Prefabs/GenericFootstepDust");
         }
 
         private static void SetupRagdoll(GameObject model)
@@ -332,7 +332,7 @@ namespace Modules {
 
             if (!ragdollController) return;
 
-            if (ragdollMaterial == null) ragdollMaterial = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
+            if (ragdollMaterial == null) ragdollMaterial = Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
 
             foreach (Transform boneTransform in ragdollController.bones)
             {

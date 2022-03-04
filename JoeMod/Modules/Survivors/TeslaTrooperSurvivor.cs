@@ -28,7 +28,7 @@ namespace Modules.Survivors
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
 
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 140f,
             healthRegen = 1.5f,
@@ -47,6 +47,11 @@ namespace Modules.Survivors
         public override ItemDisplaysBase itemDisplays => null;// new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
+
+        public override void Initialize() {
+            base.Initialize();
+            Hooks();
+        }
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
@@ -71,6 +76,14 @@ namespace Modules.Survivors
         public override void InitializeHitboxes() {
             base.InitializeHitboxes();
         }
+        
+        protected override void InitializeSurvivor() {
+            base.InitializeSurvivor();
+            
+            InitializeRecolorSkills();
+            //todo make this happen after skills and skins
+            InitializeCSSPrviewDisplayController();
+        }
 
         public override void InitializeSkills() {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
@@ -82,129 +95,6 @@ namespace Modules.Survivors
             InitializeUtilitySkills();
 
             InitializeSpecialSkills();
-        }
-        
-        protected override void InitializeSurvivor() {
-            base.InitializeSurvivor();
-            
-            InitializeRecolorSkills();
-
-            Hooks();
-        }
-
-        #region hooks
-        private void Hooks() {
-
-            On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
-            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
-            //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
-            //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
-
-            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
-        }
-
-        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
-            orig(self, skinIndex);
-
-            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
-            if (skinRecolorController) {
-
-                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
-                if (color)
-                    skinRecolorController.SetRecolor(color.skillName.ToLower());
-            }
-        }
-
-        #region tower hacks
-        private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
-            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("copyitemsfrom true");
-                filter = TeslaTowerCopyFilter;
-            }
-            orig(self, other, filter);
-        }
-        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
-            if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("adddeployable true");
-                slot = DeployableSlot.PowerWard;
-            }
-
-            orig(self, deployable, slot);
-        }
-
-        private CharacterMaster MasterSummon_Perform(On.RoR2.MasterSummon.orig_Perform orig, MasterSummon self) {
-
-            if (MasterCatalog.FindMasterIndex(self.masterPrefab) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("mastersummon true");
-                self.inventoryItemCopyFilter = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
-            }
-            return orig(self);
-        }
-
-        private static bool TeslaTowerCopyFilter(ItemIndex itemIndex) {
-            return !ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.CannotCopy) &&
-                (ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage) ||
-                ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
-            //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
-        }
-        #endregion tower hacks
-        private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg) {
-            orig(netMsg);
-        }
-        #endregion hooks
-        private void InitializeRecolorSkills() {
-            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
-
-            SkillDef red = recolorSkillDef("Red", Color.red);
-
-            List<SkillDef> skilldefs = new List<SkillDef> {
-                recolorSkillDef("Blue", Color.blue),
-                recolorSkillDef("Green", Color.green),
-                recolorSkillDef("Yellow", Color.yellow),
-                recolorSkillDef("Orange", new Color(255f/255f, 156f/255f, 0f)),
-                recolorSkillDef("Cyan", Color.cyan),
-                recolorSkillDef("Purple", new Color(145f/255f, 0, 200f/255f)),
-                recolorSkillDef("Pink", new Color(255f/255f, 132f/255f, 235f/255f)),
-            };
-
-            if (Modules.Config.NewColor) {
-                skilldefs.Add(recolorSkillDef("Black", Color.black));
-            }
-
-            Modules.Skills.AddSkillToFamily(recolorFamily, red);
-
-            for (int i = 0; i < skilldefs.Count; i++) {
-                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
-            }
-            
-            CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
-            CSSPreviewDisplayConroller.bodyPrefab = bodyPrefab;
-            for (int i = 0; i < CSSPreviewDisplayConroller.skillChangeResponses.Length; i++) {
-                CSSPreviewDisplayConroller.skillChangeResponses[i].triggerSkillFamily = recolorFamily;
-                CSSPreviewDisplayConroller.skillChangeResponses[i].triggerSkill = i == 0 ? red : skilldefs[i-1];
-            }
-        }
-
-        private SkillDef recolorSkillDef(string name, Color iconColor){
-
-            Color color1 = Color.white;
-            Color color2 = Color.white;
-
-            Recolor[] thing = characterBodyModel.GetComponent<SkinRecolorController>().Recolors;
-            for (int i = 0; i < thing.Length; i++) {
-                Recolor recolor = thing[i];
-                if (recolor.recolorName == name.ToLower()) {
-                    color1 = recolor.mainColor*0.69f;
-                    color2 = recolor.offColor;
-                }
-            }
-
-            return Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = name,
-                skillNameToken = $"{TESLA_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
-                skillDescriptionToken = "",
-                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
-            });
         }
 
         private void InitializePrimarySkills() {
@@ -229,7 +119,7 @@ namespace Modules.Survivors
                 skillName = "Tesla_Secondary_BigZap",
                 skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
-                skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                skillIcon = Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -292,7 +182,7 @@ namespace Modules.Survivors
                 skillName = "Tesla_Special_Tower",
                 skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
-                skillIcon = Resources.Load<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Assets.LoadAsset<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -316,8 +206,60 @@ namespace Modules.Survivors
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
         }
 
-        public override void InitializeSkins()
-        {
+        private void InitializeRecolorSkills() {
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
+
+            List<SkillDef> skilldefs = new List<SkillDef> {
+                null,
+                createRecolorSkillDef("Blue", Color.blue),
+                createRecolorSkillDef("Green", Color.green),
+                createRecolorSkillDef("Yellow", Color.yellow),
+                createRecolorSkillDef("Orange", new Color(255f/255f, 156f/255f, 0f)),
+                createRecolorSkillDef("Cyan", Color.cyan),
+                createRecolorSkillDef("Purple", new Color(145f/255f, 0, 200f/255f)),
+                createRecolorSkillDef("Pink", new Color(255f/255f, 132f/255f, 235f/255f)),
+            };
+
+            skilldefs[0] = createRecolorSkillDef("Red", Color.red);
+
+            if (Modules.Config.NewColor) {
+                skilldefs.Add(createRecolorSkillDef("Black", Color.black));
+            }
+
+            for (int i = 0; i < skilldefs.Count; i++) {
+                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
+                Helpers.LogWarning(i);
+                AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
+            }
+        }
+
+        private SkillDef createRecolorSkillDef(string name, Color iconColor) {
+
+            Color color1 = Color.white;
+            Color color2 = Color.white;
+
+            Recolor[] thing = characterBodyModel.GetComponent<SkinRecolorController>().Recolors;
+
+            for (int i = 0; i < thing.Length; i++) {
+
+                Recolor recolor = thing[i];
+
+                if (recolor.recolorName == name.ToLower()) {
+
+                    color1 = recolor.mainColor * 0.69f;
+                    color2 = recolor.offColor;
+                }
+            }
+
+            return Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = name,
+                skillNameToken = $"{TESLA_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
+                skillDescriptionToken = "",
+                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
+            });
+        }
+
+        public override void InitializeSkins() {
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
@@ -382,5 +324,66 @@ namespace Modules.Survivors
 
             skinController.skins = skins.ToArray();
         }
+
+        #region hooks
+        protected void Hooks() {
+
+            On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
+            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
+            //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
+            //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
+
+            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+        }
+
+        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
+            orig(self, skinIndex);
+
+            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
+            if (skinRecolorController) {
+
+                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
+                if (color)
+                    skinRecolorController.SetRecolor(color.skillName.ToLower());
+            }
+        }
+
+        #region tower hacks
+        private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
+            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                //Helpers.LogWarning("copyitemsfrom true");
+                filter = TeslaTowerCopyFilter;
+            }
+            orig(self, other, filter);
+        }
+        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
+            if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                //Helpers.LogWarning("adddeployable true");
+                slot = DeployableSlot.PowerWard;
+            }
+
+            orig(self, deployable, slot);
+        }
+
+        private CharacterMaster MasterSummon_Perform(On.RoR2.MasterSummon.orig_Perform orig, MasterSummon self) {
+
+            if (MasterCatalog.FindMasterIndex(self.masterPrefab) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                //Helpers.LogWarning("mastersummon true");
+                self.inventoryItemCopyFilter = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
+            }
+            return orig(self);
+        }
+
+        private static bool TeslaTowerCopyFilter(ItemIndex itemIndex) {
+            return !ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.CannotCopy) &&
+                (ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage) ||
+                ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
+            //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
+        }
+        #endregion tower hacks
+        private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg) {
+            orig(netMsg);
+        }
+        #endregion hooks
     }
 }

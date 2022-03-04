@@ -35,7 +35,7 @@ namespace Modules.Survivors
             jumpCount = 2,
             maxHealth = 110f,
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_SUBTITLE",
-            podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
+            podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
         public static Material joeMat => Modules.Materials.CreateHotpooMaterial("0fdsa - Default");

@@ -3,6 +3,8 @@ using RoR2;
 using System;
 using Modules.Characters;
 using UnityEngine;
+using System.Collections.Generic;
+using RoR2.Skills;
 
 namespace Modules.Survivors {
 
@@ -59,5 +61,55 @@ namespace Modules.Survivors {
 
             Modules.Content.AddSurvivorDef(survivorDef);
         }
+
+        #region CharacterSelectSurvivorPreviewDisplayController
+        protected virtual void AddCssPreviewSkill(int indexFromEditor, SkillFamily skillFamily, SkillDef skillDef) {
+
+            CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
+            if (!CSSPreviewDisplayConroller) {
+                Debug.LogError("trying to add skillChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created one on your Display prefab in editor");
+                return;
+            }
+            Helpers.LogWarning(indexFromEditor + " " + CSSPreviewDisplayConroller.skillChangeResponses.Length);
+            CSSPreviewDisplayConroller.skillChangeResponses[indexFromEditor].triggerSkillFamily = skillFamily;
+            CSSPreviewDisplayConroller.skillChangeResponses[indexFromEditor].triggerSkill = skillDef;
+        }
+
+        protected virtual void AddCssPreviewSkin(int indexFromEditor, SkinDef skinDef) {
+
+            CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
+            if (!CSSPreviewDisplayConroller) {
+                Debug.LogError("trying to add skinChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created one on your Display prefab in editor");
+                return;
+            }
+
+            CSSPreviewDisplayConroller.skinChangeResponses[indexFromEditor].triggerSkin = skinDef;
+
+        }
+
+        protected virtual void InitializeCSSPrviewDisplayController() {
+
+            if (!displayPrefab)
+                return;
+
+            CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
+            if (!CSSPreviewDisplayConroller)
+                return;
+            
+            //set body prefab
+            CSSPreviewDisplayConroller.bodyPrefab = bodyPrefab;
+
+            //clear list of null entries
+            List<CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse> newlist = new List<CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse>();
+
+            for (int i = 0; i < CSSPreviewDisplayConroller.skillChangeResponses.Length; i++) {
+                if(CSSPreviewDisplayConroller.skillChangeResponses[i].triggerSkillFamily != null) {
+                    newlist.Add(CSSPreviewDisplayConroller.skillChangeResponses[i]);
+                }
+            }
+
+            CSSPreviewDisplayConroller.skillChangeResponses = newlist.ToArray();
+        }
+        #endregion
     }
 }

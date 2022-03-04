@@ -29,7 +29,7 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
 
     void Awake()
     {
-        indicator = new TeslaIndicator(base.gameObject, Resources.Load<GameObject>("Prefabs/LightningIndicator"));
+        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.LoadAsset<GameObject>("Prefabs/LightningIndicator"));
     }
 
     void Start()

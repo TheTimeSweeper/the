@@ -34,7 +34,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 rand = getRandomVoiceLine();
             }
 
-            Helpers.PlaySoundVoiceLine((TeslaVoiceLine)rand, gameObject);
+            RoR2.Util.PlaySound(Helpers.GetVoiceLineString((TeslaVoiceLine)rand), gameObject, "Volume_TeslaVoice", 100);
         }
 
         private int getRandomVoiceLine() {

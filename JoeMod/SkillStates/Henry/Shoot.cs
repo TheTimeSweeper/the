@@ -12,7 +12,7 @@ namespace ModdedEntityStates.Henry
         public static float force = 800f;
         public static float recoil = 3f;
         public static float range = 256f;
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
+        public static GameObject tracerEffectPrefab = Modules.Assets.LoadAsset<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
         private float duration;
         private float fireTime;

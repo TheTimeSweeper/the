@@ -21,9 +21,9 @@ namespace ModdedEntityStates.TeslaTrooper {
         protected string zapSound = "Play_tank_vtesatta_tesla_tank_attack";
         protected string zapSoundCrit = "Play_tank_vtesattb_tesla_tank_attack";
 
-        public static GameObject bigZapEffectPrefab = Resources.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
-        public static GameObject bigZapEffectPrefabArea = Resources.Load<GameObject>("prefabs/effects/lightningstakenova");
-        public static GameObject bigZapEffectFlashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
+        public static GameObject bigZapEffectPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/magelightningbombexplosion");
+        public static GameObject bigZapEffectPrefabArea = Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova");
+        public static GameObject bigZapEffectFlashPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
 
         private bool commandTowers;
 
@@ -114,21 +114,21 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public static GameObject[] effects =
             {
-                Resources.Load<GameObject>("prefabs/effects/magelightningbombexplosion"), //oke
-                Resources.Load<GameObject>("prefabs/effects/lightningstakenova"), //decent, simple, probably best but boring
+                Assets.LoadAsset<GameObject>("prefabs/effects/magelightningbombexplosion"), //oke
+                Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova"), //decent, simple, probably best but boring
 
-                Resources.Load<GameObject>("prefabs/effects/impacteffects/impactlightning"), //2 //teeny         //gauntlet? too blue, not cyan, mabye that's fine
-                Resources.Load<GameObject>("prefabs/effects/impacteffects/lightningflash"),// teeny              //looks like purity lol
-                Resources.Load<GameObject>("prefabs/effects/impacteffects/lightningstrikeimpact"), //NOT TEENY
-                Resources.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact"), //small lightning, doesn't scale, probably still don't want lightning tho
+                Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/impactlightning"), //2 //teeny         //gauntlet? too blue, not cyan, mabye that's fine
+                Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/lightningflash"),// teeny              //looks like purity lol
+                Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/lightningstrikeimpact"), //NOT TEENY
+                Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact"), //small lightning, doesn't scale, probably still don't want lightning tho
 
-                Resources.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightning"), //6              // teeny      //gauntlet? way too small. what's this even for anyway?  
-                Resources.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglarge"),             // teeny      //cool but too arti again  
-                Resources.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglargewithtrail"),    // teeny      //same as last. when parented to gauntlet must be cool
+                Assets.LoadAsset<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightning"), //6              // teeny      //gauntlet? way too small. what's this even for anyway?  
+                Assets.LoadAsset<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglarge"),             // teeny      //cool but too arti again  
+                Assets.LoadAsset<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglargewithtrail"),    // teeny      //same as last. when parented to gauntlet must be cool
 
-                Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"), //9  //p good, scale too high, no sound            //also p good gauntlet
-                Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightningmage"), //probably favorite, but too blatantly arti. also doesn't scale I think, outer radius blast too far (misleading (but i can just increase my range to match lol)
-                Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning"), //same as 10 but yellow
+                Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"), //9  //p good, scale too high, no sound            //also p good gauntlet
+                Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightningmage"), //probably favorite, but too blatantly arti. also doesn't scale I think, outer radius blast too far (misleading (but i can just increase my range to match lol)
+                Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning"), //same as 10 but yellow
             };
 
 

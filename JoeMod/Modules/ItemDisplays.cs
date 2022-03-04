@@ -21,7 +21,7 @@ namespace Modules
 
         private static void PopulateFromBody(string bodyName)
         {
-            ItemDisplayRuleSet itemDisplayRuleSet = Resources.Load<GameObject>("Prefabs/CharacterBodies/" + bodyName)?.GetComponent<ModelLocator>()?.modelTransform.GetComponent<CharacterModel>()?.itemDisplayRuleSet;
+            ItemDisplayRuleSet itemDisplayRuleSet = Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyName)?.GetComponent<ModelLocator>()?.modelTransform.GetComponent<CharacterModel>()?.itemDisplayRuleSet;
             if(itemDisplayRuleSet == null) {
                 Debug.LogError("couldn't load ItemDisplayRuleSet from " + bodyName + ". Check if name was entered correctly");
                 return;
@@ -161,11 +161,11 @@ namespace Modules
         }
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(string itemName, params ItemDisplayRule[] rules) {
-            return CreateDisplayRuleGroupWithRules(Resources.Load<ItemDef>("ItemDefs/" + itemName), rules);
+            return CreateDisplayRuleGroupWithRules(Assets.LoadAsset<ItemDef>("ItemDefs/" + itemName), rules);
         }
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRulesE(string itemName, params ItemDisplayRule[] rules) {
-            return CreateDisplayRuleGroupWithRules(Resources.Load<EquipmentDef>("EquipmentDefs/" + itemName), rules);
+            return CreateDisplayRuleGroupWithRules(Assets.LoadAsset<EquipmentDef>("EquipmentDefs/" + itemName), rules);
         }
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(Object keyAsset_, params ItemDisplayRule[] rules) {
@@ -179,7 +179,7 @@ namespace Modules
         }
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(string itemName, string prefabName, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
-            ItemDef keyAsset = Resources.Load<ItemDef>("ItemDefs/" + itemName);
+            ItemDef keyAsset = Assets.LoadAsset<ItemDef>("ItemDefs/" + itemName);
             return CreateGenericDisplayRule(keyAsset, prefabName, childName, position, rotation, scale);
         }
 
@@ -209,7 +209,7 @@ namespace Modules
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRuleE(string itemName, string prefabName, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
             ItemDisplayRuleSet.KeyAssetRuleGroup displayRule = new ItemDisplayRuleSet.KeyAssetRuleGroup {
-                keyAsset = Resources.Load<EquipmentDef>("EquipmentDefs/" + itemName),
+                keyAsset = Assets.LoadAsset<EquipmentDef>("EquipmentDefs/" + itemName),
                 displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
@@ -232,7 +232,7 @@ namespace Modules
 
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(string itemName, GameObject itemPrefab, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
             ItemDisplayRuleSet.KeyAssetRuleGroup displayRule = new ItemDisplayRuleSet.KeyAssetRuleGroup {
-                keyAsset = Resources.Load<ItemDef>("ItemDefs/" + itemName),
+                keyAsset = Assets.LoadAsset<ItemDef>("ItemDefs/" + itemName),
                 displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {

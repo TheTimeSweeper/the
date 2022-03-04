@@ -143,8 +143,9 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower that occasionally zaps nearby units for {Helpers.DamageValueText(TowerZap.TotalDamageCoefficient)}. Use {Helpers.UtilityText("secondary")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
             #endregion
 
-            #region Special
+            #region recolor
             LanguageAPI.Add(prefix + "RECOLOR_RED_NAME", "Red");
+            LanguageAPI.Add(prefix + "RECOLOR_BLUE_NAME", "Blue");
             LanguageAPI.Add(prefix + "RECOLOR_GREEN_NAME", "Green");
             LanguageAPI.Add(prefix + "RECOLOR_YELLOW_NAME", "Yellow");
             LanguageAPI.Add(prefix + "RECOLOR_ORANGE_NAME", "Orange");

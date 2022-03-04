@@ -83,7 +83,7 @@ namespace Modules.Survivors {
         protected override void InitializeCharacterMaster() {
             base.InitializeCharacterMaster();
 
-            masterPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/EngiTurretMaster"), "TeslaTowerMaster", true);
+            masterPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterMasters/EngiTurretMaster"), "TeslaTowerMaster", true);
             masterPrefab.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
             foreach (AISkillDriver aiSkillDriver in masterPrefab.GetComponents<AISkillDriver>()) {
@@ -124,7 +124,7 @@ namespace Modules.Survivors {
                 skillName = "Tower_Secondary_BigZap",
                 skillNameToken = TOWER_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
-                skillIcon = Resources.Load<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                skillIcon = Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,

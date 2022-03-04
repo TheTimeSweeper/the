@@ -79,7 +79,7 @@ public static class Helpers {
     }
 
 
-    public static uint PlaySoundVoiceLine(TeslaVoiceLine line, UnityEngine.GameObject gameObject) {
+    public static string GetVoiceLineString(TeslaVoiceLine line) {
         string voiceLineString;
         switch (line) {
             case TeslaVoiceLine.attack_2000Volts:
@@ -129,9 +129,8 @@ public static class Helpers {
                 voiceLineString = "Play_itesed";
                 break;
         }
-        UnityEngine.Debug.LogWarning("uh " + voiceLineString);
 
-        return RoR2.Util.PlaySound(voiceLineString, gameObject, "Volume_TeslaVoice", 100);
+        return voiceLineString;
     }
 }
 

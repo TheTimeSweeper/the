@@ -9,13 +9,19 @@ namespace Modules
     {
         // armor buff gained during roll
         public static BuffDef armorBuff;
+        public static BuffDef zapShieldBuff;
 
         public static void RegisterBuffs()
         {
             armorBuff = AddNewBuff("HenryArmorBuff", 
-                                   Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), 
+                                   Assets.LoadAsset<Sprite>("Textures/BuffIcons/texBuffGenericShield"), 
                                    Color.white, 
                                    false, 
+                                   false);
+            zapShieldBuff = AddNewBuff("TeslaShieldBuff",
+                                   Assets.LoadAsset<Sprite>("Textures/BuffIcons/texBuffGenericShield"),
+                                   Color.cyan,
+                                   false,
                                    false);
         }
 
