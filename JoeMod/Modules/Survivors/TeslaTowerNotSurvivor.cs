@@ -27,6 +27,7 @@ namespace Modules.Survivors {
             bodyColor = new Color(0.8f, 2, 2),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTower"),
             crosshair = Modules.Assets.LoadCrosshair("TiltedBracket"),
+
             damage = 24f,
             healthGrowth = 33f,
             healthRegen = 1.5f,
@@ -123,7 +124,7 @@ namespace Modules.Survivors {
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tower_Secondary_BigZap",
                 skillNameToken = TOWER_PREFIX + "SECONDARY_BIGZAP_NAME",
-                skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION" + Environment.NewLine,
+                skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
                 activationStateMachineName = "Body",

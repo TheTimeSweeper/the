@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using ModdedEntityStates.BaseStates;
 using Modules;
+using R2API;
 using RoR2;
 using UnityEngine;
 
@@ -59,7 +60,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             bool isCrit = RollCrit();
 
-            new BlastAttack {
+            BlastAttack blast = new BlastAttack {
                 attacker = gameObject,
                 inflictor = gameObject,
                 teamIndex = teamComponent.teamIndex,
@@ -82,7 +83,10 @@ namespace ModdedEntityStates.TeslaTrooper {
                 //bonusForce = ;
 
                 //impactEffect = EffectIndex.uh;
-            }.Fire();
+            };
+
+            blast.AddModdedDamageType(DamageTypes.consumeConductive);
+            blast.Fire();
 
             PlaySoundAuthority(isCrit ? zapSound : zapSoundCrit);
 

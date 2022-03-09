@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using R2API;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
@@ -33,7 +34,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
             Util.PlaySound(crit ? zapSound : zapSoundCrit, gameObject);
 
-            new BlastAttack {
+            BlastAttack blast = new BlastAttack {
                 attacker = gameObject,
                 inflictor = gameObject,
                 teamIndex = teamComponent.teamIndex,
@@ -56,8 +57,9 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 //bonusForce = ;
 
                 //impactEffect = EffectIndex.uh;
-            }.Fire();
-
+            };
+            blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
+            blast.Fire();
             #region effects
             EffectData fect = new EffectData {
                 origin = targetPoint,

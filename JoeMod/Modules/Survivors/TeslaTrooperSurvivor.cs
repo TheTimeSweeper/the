@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ModdedEntityStates.TeslaTrooper;
 using Modules.Characters;
+using R2API;
 
 namespace Modules.Survivors
 {
@@ -17,8 +18,6 @@ namespace Modules.Survivors
         public const string TESLA_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_";
 
         public override string survivorTokenPrefix => TESLA_PREFIX;
-
-        public override float sortPosition => 69f;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             bodyName = "TeslaTrooperBody",
@@ -48,6 +47,8 @@ namespace Modules.Survivors
 
         private static UnlockableDef masterySkinUnlockableDef;
 
+        public static DeployableSlot teslaTowerDeployableSlot;
+
         public override void Initialize() {
             base.Initialize();
             Hooks();
@@ -57,20 +58,39 @@ namespace Modules.Survivors
             base.InitializeCharacterBodyAndModel();
             bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
             bodyPrefab.AddComponent<TeslaCoilControllerController>();
+
+            RegisterTowerDeployable();
         }
+
+        public DeployableAPI.GetDeployableSameSlotLimit GetTeslaTowerSlotLimit;
+
+        private void RegisterTowerDeployable() {
+
+            GetTeslaTowerSlotLimit += onGetTeslaTowerSlotLimit;
+
+            teslaTowerDeployableSlot = DeployableAPI.RegisterDeployableSlot(onGetTeslaTowerSlotLimit);
+        }
+
+        private int onGetTeslaTowerSlotLimit(CharacterMaster self, int deployableCountMultiplier) {
+            int result = 1;
+            if (self.bodyInstanceObject) {
+                result = self.bodyInstanceObject.GetComponent<SkillLocator>().special.maxStock;
+            }
+
+            return result;
+        }
+
 
         protected override void InitializeEntityStateMachine() {
             base.InitializeEntityStateMachine();
-
-            States.entityStates.Add(typeof(TeslaTrooperMain));
         }
 
         public override void InitializeUnlockables() {
             masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.TeslaTrooperMastery>();
         }
 
-        public override void InitializeDoppelganger() {
-            base.InitializeDoppelganger();
+        public override void InitializeDoppelganger(string clone) {
+            base.InitializeDoppelganger("Engi");
         }
 
         public override void InitializeHitboxes() {
@@ -79,12 +99,14 @@ namespace Modules.Survivors
         
         protected override void InitializeSurvivor() {
             base.InitializeSurvivor();
-            
-            InitializeRecolorSkills();
-            //todo make this happen after skills and skins
-            InitializeCSSPrviewDisplayController();
         }
 
+        protected override void InitializeDisplayPrefab() {
+            base.InitializeDisplayPrefab();
+        }
+
+
+        #region skills
         public override void InitializeSkills() {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
@@ -95,6 +117,10 @@ namespace Modules.Survivors
             InitializeUtilitySkills();
 
             InitializeSpecialSkills();
+
+            InitializeRecolorSkills();
+
+            FinalizeCSSPreviewDisplayController();
         }
 
         private void InitializePrimarySkills() {
@@ -106,6 +132,7 @@ namespace Modules.Survivors
                                                                                                             new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                                                             "Weapon",
                                                                                                             false));
+            primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }
@@ -173,12 +200,10 @@ namespace Modules.Survivors
             Modules.Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
         }
 
-        private void InitializeSpecialSkills()
-        {
+        private void InitializeSpecialSkills() {
             States.entityStates.Add(typeof(DeployTeslaTower));
 
-            SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Special_Tower",
                 skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
@@ -228,7 +253,7 @@ namespace Modules.Survivors
 
             for (int i = 0; i < skilldefs.Count; i++) {
                 Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
-                Helpers.LogWarning(i);
+
                 AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
         }
@@ -258,6 +283,7 @@ namespace Modules.Survivors
                 skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
             });
         }
+        #endregion skills
 
         public override void InitializeSkins() {
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
@@ -284,7 +310,6 @@ namespace Modules.Survivors
             {
             };
 
-            skins.Add(defaultSkin);
             skins.Add(defaultSkin);
             #endregion
 
@@ -334,6 +359,8 @@ namespace Modules.Survivors
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
 
             On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+            
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
@@ -359,19 +386,10 @@ namespace Modules.Survivors
         private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
             if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
                 //Helpers.LogWarning("adddeployable true");
-                slot = DeployableSlot.PowerWard;
+                slot = teslaTowerDeployableSlot;
             }
 
             orig(self, deployable, slot);
-        }
-
-        private CharacterMaster MasterSummon_Perform(On.RoR2.MasterSummon.orig_Perform orig, MasterSummon self) {
-
-            if (MasterCatalog.FindMasterIndex(self.masterPrefab) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                //Helpers.LogWarning("mastersummon true");
-                self.inventoryItemCopyFilter = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
-            }
-            return orig(self);
         }
 
         private static bool TeslaTowerCopyFilter(ItemIndex itemIndex) {
@@ -380,10 +398,66 @@ namespace Modules.Survivors
                 ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
             //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
         }
-        #endregion tower hacks
         private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg) {
             orig(netMsg);
         }
+        #endregion tower hacks
+
+        #region conductive
+        private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
+
+            if (FacelessJoePlugin.conductivePassive) {
+                Conductive(self, damageInfo);
+            }
+
+            orig(self, damageInfo);
+        }
+
+        private static void Conductive(HealthComponent self, DamageInfo damageInfo) {
+
+            //mark enemies (or allies) conductive
+            bool attackConductive = damageInfo.HasModdedDamageType(DamageTypes.conductive);
+            if (attackConductive) {
+                if (damageInfo.attacker.GetComponent<TeamComponent>()?.teamIndex == self.body.teamComponent.teamIndex) {
+                    if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 3) {
+                        self.body.AddBuff(Buffs.conductiveBuffTeam);
+                    }
+                } else {
+                    self.body.AddBuff(Buffs.conductiveBuff);
+                }
+            }
+
+            //consume conductive stacks for damage and shock
+            bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
+            if (attackConsuming) {
+                int conductiveCount = self.body.GetBuffCount(Buffs.conductiveBuff);
+
+                for (int i = 0; i < conductiveCount; i++) {
+
+                    self.body.RemoveBuff(Buffs.conductiveBuff);
+                }
+
+                if (conductiveCount > 0) {
+
+                    damageInfo.AddModdedDamageType(DamageTypes.shockXs);
+                    damageInfo.damage *= 1f + (0.2f * conductiveCount);
+                }
+            }
+
+            //consume allied charged stacks for damage boost
+            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            bool teamCharged = attackerBody && attackerBody.HasBuff(Buffs.conductiveBuffTeam);
+            if (teamCharged) {
+
+                int buffCount = attackerBody.GetBuffCount(Buffs.conductiveBuffTeam);
+                for (int i = 0; i < buffCount; i++) {
+                    self.body.RemoveBuff(Buffs.conductiveBuff);
+                }
+
+                damageInfo.damage *= 1f + (0.1f * buffCount);
+            }
+        }
+        #endregion
         #endregion hooks
     }
 }

@@ -125,7 +125,10 @@ namespace Modules
             //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeteted units for {Helpers.DamageText($"{Zap.OrbCasts}x{Zap.DamageCoefficient*100}% damage")}. Spreads to {Helpers.UtilityText($"up to {Zap.OrbCasts}")} nearby enemies");
+            string conductive = FacelessJoePlugin.conductivePassive ? $"Use on allies to {Helpers.DamageText("charge")} them" : "";
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeteted units for {Helpers.DamageText($"{Zap.OrbCasts}x{Zap.DamageCoefficient * 100}% damage")}. Spreads to {Helpers.UtilityText($"up to {Zap.OrbCasts}")} nearby enemies.");
+
+            LanguageAPI.Add("KEYWORD_CHARGED", "Charge an ally up to 3 times to boost the damage of their next attack");
             #endregion
 
             #region Secondary
@@ -140,7 +143,7 @@ namespace Modules
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower that occasionally zaps nearby units for {Helpers.DamageValueText(TowerZap.TotalDamageCoefficient)}. Use {Helpers.UtilityText("secondary")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower that occasionally zaps nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient}")}. Use {Helpers.UtilityText("secondary")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
             #endregion
 
             #region recolor
@@ -189,7 +192,7 @@ namespace Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Occasionally zap nearby units for {Helpers.DamageValueText(TowerZap.TotalDamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Occasionally zap nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient}")}.");
             #endregion
             
             #region Secondary

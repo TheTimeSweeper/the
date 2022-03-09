@@ -31,7 +31,6 @@ namespace Modules.Characters {
         public virtual void InitializeCharacter() {
 
             InitializeCharacterBodyAndModel();
-            InitializeCharacterModel();
             InitializeCharacterMaster();
 
             InitializeEntityStateMachine();
@@ -44,11 +43,12 @@ namespace Modules.Characters {
             InitializeItemDisplays();
 
             //survivor?
-            InitializeDoppelganger();
+            InitializeDoppelganger("Merc");
         }
-
+        
         protected virtual void InitializeCharacterBodyAndModel() {
             bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
+            InitializeCharacterModel();
         }
         protected virtual void InitializeCharacterModel() {
             characterBodyModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
@@ -74,8 +74,8 @@ namespace Modules.Characters {
 
         public virtual void InitializeSkins() { }
 
-        public virtual void InitializeDoppelganger() {
-            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", "Merc");
+        public virtual void InitializeDoppelganger(string clone) {
+            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", clone);
         }
 
         public virtual void InitializeItemDisplays() {

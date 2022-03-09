@@ -16,12 +16,6 @@ namespace Modules {
 
         public static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
-            if (!Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
-            {
-                Debug.LogError(bodyInfo.bodyNameToClone + "Body is not a valid body, character creation failed");
-                return null;
-            }
-
             GameObject model = Assets.LoadSurvivorModel(displayModelName);
 
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
@@ -43,20 +37,20 @@ namespace Modules {
                 return null;
             }
 
-            GameObject newPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), bodyName);
+            GameObject newBodyPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), bodyName);
 
             Transform modelBaseTransform = null;
             GameObject model = null;
             if (modelName != "mdl")
             {
                 model = Assets.LoadSurvivorModel(modelName);
-                if (model == null) model = newPrefab.GetComponentInChildren<CharacterModel>().gameObject;
+                if (model == null) model = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
 
-                    modelBaseTransform = AddCharacterModelToSurvivorBody(newPrefab, model.transform, bodyInfo);
+                    modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, model.transform, bodyInfo);
             }
 
             #region CharacterBody
-            CharacterBody bodyComponent = newPrefab.GetComponent<CharacterBody>();
+            CharacterBody bodyComponent = newBodyPrefab.GetComponent<CharacterBody>();
             //identity
             bodyComponent.name = bodyInfo.bodyName;
             bodyComponent.baseNameToken = bodyInfo.bodyNameToken;
@@ -106,29 +100,28 @@ namespace Modules {
             bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
             bodyComponent.rootMotionInMainState = false;
 
-            bodyComponent.aimOriginTransform = modelBaseTransform.Find("AimOrigin");
             bodyComponent.hullClassification = HullClassification.Human;
 
             bodyComponent.isChampion = false;
             #endregion
 
-            SetupCameraTargetParams(newPrefab, bodyInfo);
-            SetupModelLocator(newPrefab, modelBaseTransform, model.transform);
+            SetupCameraTargetParams(newBodyPrefab, bodyInfo);
+            SetupModelLocator(newBodyPrefab, modelBaseTransform, model.transform);
             //SetupRigidbody(newPrefab);
-            SetupCapsuleCollider(newPrefab);
-            SetupMainHurtbox(newPrefab, model);
+            SetupCapsuleCollider(newBodyPrefab);
+            SetupMainHurtbox(newBodyPrefab, model);
 
-            SetupAimAnimator(newPrefab, model);
+            SetupAimAnimator(newBodyPrefab, model);
 
             if (bodyInfo.bodyNameToClone != "EngiTurret") {
-                if (modelBaseTransform != null) SetupCharacterDirection(newPrefab, modelBaseTransform, model.transform);
+                if (modelBaseTransform != null) SetupCharacterDirection(newBodyPrefab, modelBaseTransform, model.transform);
                     SetupFootstepController(model);
                     SetupRagdoll(model);
             }
 
-            Modules.Content.AddCharacterBodyPrefab(newPrefab);
+            Modules.Content.AddCharacterBodyPrefab(newBodyPrefab);
 
-            return newPrefab;
+            return newBodyPrefab;
         }
 
         public static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy)

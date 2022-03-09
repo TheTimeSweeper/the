@@ -10,8 +10,6 @@ namespace Modules.Survivors {
 
     public abstract class SurvivorBase : CharacterBase
     {
-        public abstract float sortPosition { get;}
-
         public abstract string survivorTokenPrefix { get; }
 
         public abstract UnlockableDef characterUnlockableDef { get; }
@@ -24,19 +22,26 @@ namespace Modules.Survivors {
 
             if (characterEnabledConfig != null && !characterEnabledConfig.Value)
                 return;
-
+            
             InitializeUnlockables();
-
+            
             base.InitializeCharacter();
 
             InitializeSurvivor();
         }
 
-        protected virtual void InitializeSurvivor() {
-            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
-            RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, sortPosition);
+        protected override void InitializeCharacterBodyAndModel() {
+            base.InitializeCharacterBodyAndModel();
+            InitializeDisplayPrefab();
         }
 
+        protected virtual void InitializeSurvivor() {
+            RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, bodyInfo.sortPosition);
+        }
+
+        protected virtual void InitializeDisplayPrefab() {
+            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
+        }
         public virtual void InitializeUnlockables()
         {
         }
@@ -70,7 +75,7 @@ namespace Modules.Survivors {
                 Debug.LogError("trying to add skillChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created one on your Display prefab in editor");
                 return;
             }
-            Helpers.LogWarning(indexFromEditor + " " + CSSPreviewDisplayConroller.skillChangeResponses.Length);
+
             CSSPreviewDisplayConroller.skillChangeResponses[indexFromEditor].triggerSkillFamily = skillFamily;
             CSSPreviewDisplayConroller.skillChangeResponses[indexFromEditor].triggerSkill = skillDef;
         }
@@ -87,7 +92,7 @@ namespace Modules.Survivors {
 
         }
 
-        protected virtual void InitializeCSSPrviewDisplayController() {
+        protected virtual void FinalizeCSSPreviewDisplayController() {
 
             if (!displayPrefab)
                 return;

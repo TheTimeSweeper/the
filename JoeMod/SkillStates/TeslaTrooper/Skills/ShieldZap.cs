@@ -29,7 +29,7 @@ namespace ModdedEntityStates.TeslaTrooper
             if (NetworkServer.active)
             {                                 //todo: custom buff, movesped, shieldy visual effect
                                               //todo: damage return     
-                base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, ShieldBuffDuration);
+                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration);
             }
 
             //todo: lingering gesture, interruptible legs

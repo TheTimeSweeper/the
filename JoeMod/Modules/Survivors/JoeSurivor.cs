@@ -18,8 +18,6 @@ namespace Modules.Survivors
 
         public override string survivorTokenPrefix => JOE_PREFIX;
 
-        public override float sortPosition => 69f;
-
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
             armor = 20f,
@@ -28,6 +26,8 @@ namespace Modules.Survivors
             bodyNameToken = JOE_PREFIX + "NAME",
             bodyColor = Color.magenta,
             characterPortrait = Modules.Assets.LoadCharacterIcon("joe_icon"),
+            sortPosition = 69f,
+
             crosshair = Modules.Assets.LoadCrosshair("SimpleDot"),
             damage = 12f,
             healthGrowth = 33f,
@@ -107,11 +107,6 @@ namespace Modules.Survivors
         public override void InitializeUnlockables()
         {
             //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
-        }
-
-        public override void InitializeDoppelganger()
-        {
-            base.InitializeDoppelganger();
         }
 
         public override void InitializeHitboxes()

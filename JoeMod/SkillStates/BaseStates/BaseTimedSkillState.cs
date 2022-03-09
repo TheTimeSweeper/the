@@ -69,6 +69,8 @@ namespace ModdedEntityStates.BaseStates
         protected virtual void PlaySoundAuthority(string sound) {
             if (isAuthority)
                 RoR2.Util.PlaySound(sound, gameObject);
+
+                Helpers.LogWarning(sound + ": " + AkSoundEngine.GetIDFromString(sound));
         }
 
         protected virtual void OnCastEnter() { }

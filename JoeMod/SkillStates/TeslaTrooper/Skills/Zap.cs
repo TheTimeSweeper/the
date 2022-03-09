@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
+using R2API;
 using RoR2;
 using RoR2.Orbs;
 using System;
@@ -29,6 +30,7 @@ namespace ModdedEntityStates.TeslaTrooper
 
         private TotallyOriginalTrackerComponent _tracker;
         private HurtBox _targetHurtbox;
+        private bool _attackingTeammate;
 
         private float _baseCastInterval = 0.05f;
 
@@ -107,6 +109,9 @@ namespace ModdedEntityStates.TeslaTrooper
                 }
             }
 
+            if (_targetHurtbox.teamIndex == teamComponent.teamIndex)
+                _attackingTeammate = true;
+
             _crit = RollCrit();
 
             //if (!_targetHurtbox) {
@@ -161,9 +166,23 @@ namespace ModdedEntityStates.TeslaTrooper
             _lightningOrb.origin = GetOrbOrigin;
             _lightningOrb.lightningType = GetOrbType;
             _lightningOrb.target = _targetHurtbox;
+            //apply conduct on first cast only
+            if (_currentCasts < 1) {
+                _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
+            }
+            ModifyTeamLightningOrb(_lightningOrb);
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing to apply to bounces only
             _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
+        }
+
+        private void ModifyTeamLightningOrb(LightningOrb lightningOrb) {
+            if (_attackingTeammate) {
+                lightningOrb.range = BounceDistance * 2;
+                lightningOrb.damageCoefficientPerBounce = 3f;
+
+                lightningOrb.damageValue *= 0.3f;
+            }
         }
 
         private void PlayZap()

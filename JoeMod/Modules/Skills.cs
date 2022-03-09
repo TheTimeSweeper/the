@@ -10,9 +10,12 @@ namespace Modules {
     public static class Skills
     {
         #region genericskills
-        public static void CreateSkillFamilies(GameObject targetPrefab, int families = 15) {
-            foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>()) {
-                FacelessJoePlugin.DestroyImmediate(obj);
+        public static void CreateSkillFamilies(GameObject targetPrefab, int families = 15, bool destroyExisting = true) {
+
+            if (destroyExisting) {
+                foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>()) {
+                    UnityEngine.Object.DestroyImmediate(obj);
+                }
             }
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
@@ -87,7 +90,7 @@ namespace Modules {
         /// AddUnlockablesToFamily(skillLocator.primary, null, skill2UnlockableDef, null, skill4UnlockableDef);
         /// </code>
         /// </summary>
-        public static void AddUnlockablesToFamily(SkillFamily skillFamily, UnlockableDef[] unlockableDefs) {
+        public static void AddUnlockablesToFamily(SkillFamily skillFamily, params UnlockableDef[] unlockableDefs) {
 
             for (int i = 0; i < unlockableDefs.Length; i++) {
                 SkillFamily.Variant variant = skillFamily.variants[i];

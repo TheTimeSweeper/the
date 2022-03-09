@@ -34,20 +34,26 @@ namespace ModdedEntityStates.TeslaTrooper {
                 rand = getRandomVoiceLine();
             }
 
-            RoR2.Util.PlaySound(Helpers.GetVoiceLineString((TeslaVoiceLine)rand), gameObject, "Volume_TeslaVoice", 100);
+            RoR2.Util.PlaySound(Helpers.GetVoiceLineString((TeslaVoiceLine)rand), gameObject);
         }
 
         private int getRandomVoiceLine() {
             int rand;
             if (!characterBody.outOfCombat) {
                 rand = Random.Range(0, 5);
+                Debug.LogWarning("speak combat");
             } else {
                 if (inputBank.moveVector != Vector3.zero) {
                     rand = Random.Range(5, 11);
+
+                    Debug.LogWarning("speak out combat moving " + inputBank.moveVector);
                 } else {
                     rand = Random.Range(11, 15);
+
+                    Debug.LogWarning("speak out combat not moving");
                 }
             }
+
 
             return rand;
         }

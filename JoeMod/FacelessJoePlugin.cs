@@ -12,15 +12,18 @@ using System.Security.Permissions;
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
-//[BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
-//[NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
+[BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
+[NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]
-//[R2APISubmoduleDependency(new string[]
-//{
-//    "PrefabAPI",
-//    "LanguageAPI",
-//    "SoundAPI",
-//})]
+[R2APISubmoduleDependency(new string[]
+{
+    "PrefabAPI",
+    "LanguageAPI",
+    "SoundAPI",
+    "LoadoutAPI",
+    "DeployableAPI",
+    "DamageAPI"
+})]
 
 //todo: separatable plugin
 public class FacelessJoePlugin : BaseUnityPlugin {
@@ -36,10 +39,14 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
+    public static bool conductivePassive;
+
     private void Start() {
+
+        Logger.LogInfo("Initializing Tesla Trooper");
+
         instance = this;
 
-        R2API.LanguageAPI.LanguageAwake();
         Log = Logger;
 
         gameObject.AddComponent<TestValueManager>();
@@ -53,6 +60,9 @@ public class FacelessJoePlugin : BaseUnityPlugin {
                                          //Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
         Modules.Tokens.AddTokens(); // register name tokens
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
+
+        Modules.DamageTypes.RegisterDamageTypes();
+        Modules.Buffs.RegisterBuffs();
 
         // survivor initialization
         new JoeSurivor().Initialize();
