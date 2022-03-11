@@ -41,7 +41,7 @@ namespace ModdedEntityStates.TeslaTrooper
             skillSwapped = true;
 
             //originalSpecial = skillLocator.special;
-            skillLocator.special = coilController.nearestCoil.GetComponent<SkillLocator>().secondary;
+            skillLocator.special = coilController.GetNearestTower().GetComponent<SkillLocator>().secondary;
             if (originalSprite == null)
                 originalSprite = skillLocator.secondary.skillDef.icon;
             skillLocator.secondary.skillDef.icon = skillLocator.special.icon;
@@ -62,7 +62,7 @@ namespace ModdedEntityStates.TeslaTrooper
         {
             base.FixedUpdate();
             StartAimMode();
-            if (coilController && coilController.nearestCoil) {
+            if (coilController && coilController.GetNearestTower()) {
 
                 SwapSkill();
             } else {

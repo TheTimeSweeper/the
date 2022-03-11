@@ -39,7 +39,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool conductivePassive;
+    public static bool conductiveMechanic;
 
     private void Start() {
 

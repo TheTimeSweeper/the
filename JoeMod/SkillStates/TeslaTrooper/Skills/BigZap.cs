@@ -85,11 +85,13 @@ namespace ModdedEntityStates.TeslaTrooper {
                 //impactEffect = EffectIndex.uh;
             };
 
-            blast.AddModdedDamageType(DamageTypes.consumeConductive);
+            if (FacelessJoePlugin.conductiveMechanic) {
+                blast.AddModdedDamageType(DamageTypes.consumeConductive);
+            }
             blast.Fire();
 
             PlaySoundAuthority(isCrit ? zapSound : zapSoundCrit);
-
+            
             #region effects
             EffectData fect = new EffectData {
                 origin = aimPoint,

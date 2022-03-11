@@ -16,7 +16,7 @@ namespace Modules {
 
         public static void RegisterDamageTypes() {
 
-            if (FacelessJoePlugin.conductivePassive) {
+            if (FacelessJoePlugin.conductiveMechanic) {
 
                 stunXs = DamageAPI.ReserveDamageType();
                 shockXs = DamageAPI.ReserveDamageType();

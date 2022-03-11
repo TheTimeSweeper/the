@@ -58,7 +58,10 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
                 //impactEffect = EffectIndex.uh;
             };
-            blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
+
+            if (FacelessJoePlugin.conductiveMechanic) {
+                blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
+            }
             blast.Fire();
             #region effects
             EffectData fect = new EffectData {

@@ -406,7 +406,7 @@ namespace Modules.Survivors
         #region conductive
         private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
-            if (FacelessJoePlugin.conductivePassive) {
+            if (FacelessJoePlugin.conductiveMechanic) {
                 Conductive(self, damageInfo);
             }
 

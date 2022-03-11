@@ -29,7 +29,7 @@ namespace Modules {
                            false,
                            false);
 
-            if (FacelessJoePlugin.conductivePassive) {
+            if (FacelessJoePlugin.conductiveMechanic) {
                 conductiveBuff =
                     AddNewBuff("Conductive",
                                Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"),

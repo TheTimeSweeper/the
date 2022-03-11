@@ -12,9 +12,8 @@ public class TeslaCoilControllerController : MonoBehaviour {
 
     private float nearTowerRange = 60f;
 
-    public GameObject nearestCoil {
+    public GameObject GetNearestTower () { 
 
-        get {
             float nearest = nearTowerRange * 2;
             GameObject nearestTower = null;
 
@@ -34,7 +33,6 @@ public class TeslaCoilControllerController : MonoBehaviour {
             //Helpers.LogWarning($"{nearestCoil != null} | {teslaCoils.Count}");
 
             return nearestTower;
-        }
     }
 
     public bool coilReady {
@@ -48,6 +46,10 @@ public class TeslaCoilControllerController : MonoBehaviour {
             }
             return false;
         }
+    }
+
+    public void commandPrismTowers(HurtBox target) {
+
     }
 
     public void commandTowers(HurtBox target) {
@@ -68,7 +70,11 @@ public class TeslaCoilControllerController : MonoBehaviour {
     }
 
 
-    public List<GameObject> GetNearbyTowers() {
+    public List<GameObject> GetNearbyTowers(GameObject nearObject = null) {
+
+        if (nearObject == null)
+            nearObject = gameObject;
+
         List<GameObject> coils = new List<GameObject>();
 
         for (int i = 0; i < teslaTowers.Count; i++) {
@@ -77,7 +83,7 @@ public class TeslaCoilControllerController : MonoBehaviour {
                 continue;
             }
 
-            float dist = Vector3.Distance(coil.transform.position, transform.position);
+            float dist = Vector3.Distance(coil.transform.position, nearObject.transform.position);
             if (dist < nearTowerRange) {
                 coils.Add(coil);
             }

@@ -125,7 +125,7 @@ namespace Modules
             //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
-            string conductive = FacelessJoePlugin.conductivePassive ? $"Use on allies to {Helpers.DamageText("charge")} them" : "";
+            string conductive = FacelessJoePlugin.conductiveMechanic ? $"Use on allies to {Helpers.DamageText("charge")} them" : "";
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeteted units for {Helpers.DamageText($"{Zap.OrbCasts}x{Zap.DamageCoefficient * 100}% damage")}. Spreads to {Helpers.UtilityText($"up to {Zap.OrbCasts}")} nearby enemies.");
 
             LanguageAPI.Add("KEYWORD_CHARGED", "Charge an ally up to 3 times to boost the damage of their next attack");

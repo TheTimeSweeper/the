@@ -162,12 +162,13 @@ namespace ModdedEntityStates.TeslaTrooper
         }
 
         private void FireZap() {
+
             LightningOrb _lightningOrb = createOrb();
             _lightningOrb.origin = GetOrbOrigin;
             _lightningOrb.lightningType = GetOrbType;
             _lightningOrb.target = _targetHurtbox;
             //apply conduct on first cast only
-            if (_currentCasts < 1) {
+            if (_currentCasts < 1 && FacelessJoePlugin.conductiveMechanic) {
                 _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
             }
             ModifyTeamLightningOrb(_lightningOrb);

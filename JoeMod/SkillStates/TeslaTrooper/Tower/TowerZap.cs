@@ -6,6 +6,14 @@ using UnityEngine;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
 
+    public class TeamZap : TowerZap {
+
+    }
+
+    public class TeamCharge : TowerZap {
+
+    }
+
     public class TowerZap: BaseTimedSkillState
     {
         public static float DamageCoefficient = 2.3f;
