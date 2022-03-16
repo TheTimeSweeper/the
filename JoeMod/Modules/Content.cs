@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 namespace Modules {
-    public class Content {
+    internal class Content {
         public static void AddCharacterBodyPrefab(GameObject bprefab) {
 
             ContentPacks.bodyPrefabs.Add(bprefab);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Modules
 {
-    public static class Skins
+    internal static class Skins
     {
         public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root)
         {

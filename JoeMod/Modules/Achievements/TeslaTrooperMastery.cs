@@ -8,7 +8,7 @@ namespace Modules.Achievements {
 
         public override string AchievementTokenPrefix => Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "MASTERY";
 
-        public override string AchievementSpriteName => "texIconTeslaSkinDefault";
+        public override string AchievementSpriteName => "texTeslaSkinDefault";
 
         public override string PrerequisiteUnlockableIdentifier => Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "CHARACTERUNLOCKABLE_ACHIEVEMENT_ID"; //todo oh shit unlockable
     }

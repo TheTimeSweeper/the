@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Modules {
-    public static class Materials {
+    internal static class Materials {
 
         private static List<Material> cachedMaterials = new List<Material>();
 

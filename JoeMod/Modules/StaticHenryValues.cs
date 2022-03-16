@@ -2,7 +2,7 @@
 
 namespace Modules
 {
-    public static class StaticHenryValues
+    internal static class StaticHenryValues
     {
         public const float swordDamageCoefficient = 2.8f;
 

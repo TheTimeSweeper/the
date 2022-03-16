@@ -12,7 +12,7 @@ using R2API;
 using RoR2.CharacterAI;
 
 namespace Modules.Survivors {
-    public class TeslaTowerNotSurvivor : CharacterBase {
+    internal class TeslaTowerNotSurvivor : CharacterBase {
 
         public override string bodyName => "TeslaTower";
 
@@ -48,7 +48,7 @@ namespace Modules.Survivors {
         public override Type characterMainState => typeof(TowerIdleSearch);
         public override Type characterSpawnState => typeof(TowerSpawnState);
 
-        public override ItemDisplaysBase itemDisplays => new TeslaTowerItemDisplays();
+        public override ItemDisplaysBase itemDisplays => null;// new TeslaTowerItemDisplays();
 
         public static GameObject masterPrefab;
 

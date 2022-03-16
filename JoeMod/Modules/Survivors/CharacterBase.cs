@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Modules.Characters {
-    public abstract class CharacterBase {
+    internal abstract class CharacterBase {
 
         public static CharacterBase instance;
 
@@ -26,6 +26,8 @@ namespace Modules.Characters {
         public virtual void Initialize() {
             instance = this;
             InitializeCharacter();
+
+            RoR2.RoR2Application.onLoad += SetItemDisplays;
         }
 
         public virtual void InitializeCharacter() {
@@ -87,7 +89,9 @@ namespace Modules.Characters {
         }
 
         public void SetItemDisplays() {
-            itemDisplays.SetItemDIsplays(characterBodyModel.itemDisplayRuleSet);
+            if (itemDisplays != null) {
+                itemDisplays.SetItemDIsplays(characterBodyModel.itemDisplayRuleSet);
+            }
         }
 
     }

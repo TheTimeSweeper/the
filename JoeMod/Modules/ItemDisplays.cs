@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Modules
 {
-    public static class ItemDisplays
+    internal static class ItemDisplays
     {
         private static Dictionary<string, GameObject> itemDisplayPrefabs = new Dictionary<string, GameObject>();
         

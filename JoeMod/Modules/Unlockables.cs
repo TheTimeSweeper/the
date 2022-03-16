@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Modules 
 {
-    public static class Unlockables
+    internal static class Unlockables
     {
         private static readonly HashSet<string> usedRewardIds = new HashSet<string>();
         private static readonly List<(AchievementDef achDef, UnlockableDef unlockableDef, String unlockableName)> moddedUnlocks = new List<(AchievementDef achDef, UnlockableDef unlockableDef, string unlockableName)>();

@@ -10,7 +10,7 @@ using System;
 using System.Linq;
 
 namespace Modules {
-    public static class Assets
+    internal static class Assets
     {
         // the assetbundle to load assets from
         // survivor todo: separate assets between survivors

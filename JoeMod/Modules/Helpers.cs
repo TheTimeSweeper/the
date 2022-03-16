@@ -22,7 +22,7 @@ public enum TeslaVoiceLine {
     select_CheckingConnection //14
 }
 
-public static class Helpers {
+internal static class Helpers {
     public const string agilePrefix = "<style=cIsUtility>Agile.</style> ";
 
     public static string DamageText(string text) {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Modules {
 
-    public class ContentPacks : IContentPackProvider
+    internal class ContentPacks : IContentPackProvider
     {
         public ContentPack contentPack = new ContentPack();
         public string identifier => FacelessJoePlugin.MODUID;

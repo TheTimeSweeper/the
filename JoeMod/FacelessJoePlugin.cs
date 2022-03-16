@@ -34,7 +34,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
 
-    public List<SurvivorBase> Survivors = new List<SurvivorBase>();
+    internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
 
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
@@ -43,7 +43,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
     private void Start() {
 
-        Logger.LogInfo("Initializing Tesla Trooper");
+        Logger.LogInfo("[Initializing Tesla Trooper]");
 
         instance = this;
 
@@ -68,23 +68,14 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         new JoeSurivor().Initialize();
 
         new TeslaTowerNotSurvivor().Initialize();
-
+        
         //todo compiler flags when
         new TeslaTrooperSurvivor().Initialize();
 
         // now make a content pack and add it- this part will change with the next update
         new Modules.ContentPacks().Initialize();
 
-        //RoR2.ContentManagement.ContentManager.onContentPacksAssigned += LateSetup;
-
         Hook();
-    }
-
-    private void LateSetup(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj) {
-        // have to set item displays later now because they require direct object references..
-        //Modules.Survivors.JoeSurivor.instance.SetItemDisplays();
-        //todo compiler flags when
-        Modules.Survivors.TeslaTrooperSurvivor.instance.SetItemDisplays();
     }
 
     private void Hook() {

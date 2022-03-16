@@ -8,7 +8,7 @@ using RoR2.Skills;
 
 namespace Modules.Survivors {
 
-    public abstract class SurvivorBase : CharacterBase
+    internal abstract class SurvivorBase : CharacterBase
     {
         public abstract string survivorTokenPrefix { get; }
 

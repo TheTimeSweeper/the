@@ -6,7 +6,7 @@ using System;
 
 namespace Modules
 {
-    public static class States
+    internal static class States
     {
         public static List<Type> entityStates => ContentPacks.entityStates;
 

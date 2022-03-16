@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Modules
 {
-    public static class Config
+    internal static class Config
     {
         public static bool Debug;
 

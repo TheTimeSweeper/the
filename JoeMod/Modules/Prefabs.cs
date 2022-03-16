@@ -9,7 +9,7 @@ namespace Modules {
     // recommended to simply avoid touching this unless you REALLY need to
     // oh boy do I need to
 
-    public static class Prefabs
+    internal static class Prefabs
     {
         // cache this just to give our ragdolls the same physic material as vanilla stuff
         private static PhysicMaterial ragdollMaterial;

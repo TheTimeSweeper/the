@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace Modules
 {
-    public static class Projectiles
+    internal static class Projectiles
     {
         public static GameObject bombPrefab;
         public static GameObject totallyNewBombPrefab;

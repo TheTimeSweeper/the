@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Modules {
 
-    public static class Skills
+    internal static class Skills
     {
         #region genericskills
         public static void CreateSkillFamilies(GameObject targetPrefab, int families = 15, bool destroyExisting = true) {
@@ -85,7 +85,7 @@ namespace Modules {
         }
 
         /// <summary>
-        /// pass in an amount of unlockables equal to or less than skill variants
+        /// pass in an amount of unlockables equal to or less than skill variants, null for skills that aren't locked
         /// <code>
         /// AddUnlockablesToFamily(skillLocator.primary, null, skill2UnlockableDef, null, skill4UnlockableDef);
         /// </code>
@@ -95,6 +95,7 @@ namespace Modules {
             for (int i = 0; i < unlockableDefs.Length; i++) {
                 SkillFamily.Variant variant = skillFamily.variants[i];
                 variant.unlockableDef = unlockableDefs[i];
+                skillFamily.variants[i] = variant;
             }
         }
         #endregion
@@ -155,7 +156,7 @@ namespace Modules {
 /// <summary>
 /// class for easily creating skilldefs with default values, and with a field for UnlockableDef
 /// </summary>
-public class SkillDefInfo { 
+internal class SkillDefInfo { 
 
     public string skillName;
     public string skillNameToken;

@@ -11,7 +11,7 @@ using R2API;
 
 namespace Modules.Survivors
 {
-    public class TeslaTrooperSurvivor : SurvivorBase {
+    internal class TeslaTrooperSurvivor : SurvivorBase {
 
         public override string bodyName => "TeslaTrooper";
 
@@ -254,7 +254,7 @@ namespace Modules.Survivors
             for (int i = 0; i < skilldefs.Count; i++) {
                 Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
 
-                AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
+                //AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
         }
 

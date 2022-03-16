@@ -6,7 +6,7 @@ using ModdedEntityStates.TeslaTrooper.Tower;
 
 namespace Modules
 {
-    public static class Tokens {
+    internal static class Tokens {
 
         public static void AddTokens()
         {

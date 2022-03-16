@@ -10,7 +10,7 @@ using Modules.Characters;
 
 namespace Modules.Survivors
 {
-    public class JoeSurivor : SurvivorBase
+    internal class JoeSurivor : SurvivorBase
     {
         public override string bodyName => "Joe";
 
@@ -44,7 +44,7 @@ namespace Modules.Survivors
 
         public override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
 
-        public override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
+        public override ItemDisplaysBase itemDisplays => null;// new JoeItemDisplays();
 
         public override UnlockableDef characterUnlockableDef { get; }
 

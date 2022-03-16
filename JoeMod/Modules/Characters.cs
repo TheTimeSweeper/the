@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Modules.Characters {
 
     // for simplifying characterbody creation
-    public class BodyInfo {
+    internal class BodyInfo {
         public string bodyName = "";
         public string bodyNameToken = "";
         public string subtitleNameToken = "";
