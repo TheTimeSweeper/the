@@ -4,8 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrayTransferTool : MonoBehaviour
-{
+public class ArrayTransferTool : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] objeys;

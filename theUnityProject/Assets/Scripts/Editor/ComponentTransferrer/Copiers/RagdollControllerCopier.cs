@@ -7,7 +7,7 @@ using UnityEditor;
 public class RagdollControllerCopier : ComponentCopier<RagdollController> {
 
     protected override void PasteStoredComponent(GameObject selected) {
-
+        
         RagdollController newController = GetOrAddPastedComponent<RagdollController>(selected);
 
         List<Transform> selectedChildren = selected.GetComponentsInChildren<Transform>(true).ToList();
@@ -38,7 +38,7 @@ public class RagdollControllerCopier : ComponentCopier<RagdollController> {
                 pasteReport += $"\n found collider for {newBone.name}. Trasnferring ragdoll bone: {componentCopier.pasteReport}";
             }
         }
-
+        
         //todod: componentstodisableonragdoll
     }
 }

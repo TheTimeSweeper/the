@@ -617,17 +617,17 @@ PlayerSettings:
     1: thunderkit;riskofrain2
     7: thunderkit;riskofrain2
     13: thunderkit;riskofrain2
-    14: thunderkit
+    14: thunderkit;riskofrain2
     19: thunderkit;riskofrain2
     21: thunderkit;riskofrain2
     25: thunderkit;riskofrain2
     26: thunderkit;riskofrain2
     27: thunderkit;riskofrain2
     28: thunderkit;riskofrain2
-    29: thunderkit
-    30: thunderkit
-    32: thunderkit
-    33: thunderkit
+    29: thunderkit;riskofrain2
+    30: thunderkit;riskofrain2
+    32: thunderkit;riskofrain2
+    33: thunderkit;riskofrain2
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

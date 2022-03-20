@@ -6,7 +6,7 @@ using UnityEngine;
 public class ChildLocatorCopier : ComponentCopier<ChildLocator> {
 
     protected override void PasteStoredComponent(GameObject selected) {
-
+        
         #region comment out this region if you're in thunderkit
         //in order to use this power, you must
         //  find your ror2 Assembly-Csharp.dll you're referencing in editor
@@ -43,6 +43,7 @@ public class ChildLocatorCopier : ComponentCopier<ChildLocator> {
             newLocator.transformPairs[i] = newPair;
         }
         #endregion
+    
     }
 }
 
