@@ -62,6 +62,8 @@ namespace Modules.Survivors {
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
 
+            bodyPrefab.GetComponent<CharacterBody>().overrideCoreTransform = characterBodyModel.transform;
+
             bodyPrefab.GetComponent<SfxLocator>().deathSound = "Play_building_uselbuil";
             bodyPrefab.GetComponent<SfxLocator>().aliveLoopStart = ""; //todo sfx
 

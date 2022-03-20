@@ -103,13 +103,7 @@ namespace Modules {
         #region skilldefs
         public static SkillDef CreateSkillDef (SkillDefInfo skillDefInfo){
 
-            SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
-
-            popuplateSKillDef(skillDefInfo, skillDef);
-
-            Modules.Content.AddSkillDef(skillDef);
-
-            return skillDef;
+            return CreateSkillDef<SkillDef>(skillDefInfo);
         }
 
         public static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T: SkillDef {
@@ -238,6 +232,8 @@ internal class SkillDefInfo {
         this.stockToConsume = 0;
 
         this.cancelSprintingOnActivation = !agile;
+
+        if (agile) this.keywordTokens = new string[] { "KEYWORD_AGILE" };
     }
     #endregion construction complete
 }

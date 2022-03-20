@@ -22,7 +22,7 @@ namespace Modules {
         // lists of assets to add to contentpack
 
         // cache these and use to create our own materials
-        public static Shader hotpoo = Assets.LoadAsset<Shader>("Shaders/Deferred/HGStandard");
+        public static Shader hotpoo = RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
         private static string[] assetNames = new string[0];
         #endregion
 
@@ -184,9 +184,9 @@ namespace Modules {
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)
         {
-            if (Assets.LoadAsset<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) return null;
+            if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) return null;
 
-            GameObject newTracer = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName), newTracerName, true);
+            GameObject newTracer = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName), newTracerName, true);
 
             if (!newTracer.GetComponent<EffectComponent>()) newTracer.AddComponent<EffectComponent>();
             if (!newTracer.GetComponent<VFXAttributes>()) newTracer.AddComponent<VFXAttributes>();
@@ -260,8 +260,8 @@ namespace Modules {
         /// <para>https://xiaoxiao921.github.io/GithubActionCacheTest/assetPathsDump.html</para>
         public static GameObject LoadCrosshair(string crosshairName)
         {
-            if (Assets.LoadAsset<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return Assets.LoadAsset<GameObject>("Prefabs/Crosshair/StandardCrosshair");
-            return Assets.LoadAsset<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
+            if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return Assets.LoadAsset<GameObject>("Prefabs/Crosshair/StandardCrosshair");
+            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
         }
 
         private static GameObject LoadEffect(string resourceName)

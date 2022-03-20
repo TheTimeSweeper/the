@@ -23,7 +23,13 @@ namespace ModdedEntityStates.TeslaTrooper
 
         public static float BaseDuration = 1f;
         public static float BaseCastTime = 0.05f;//todo anim
+
+        public static float nearDist1 = 0.3f;
+        public static float nearDist2 = 0.6f;
         #endregion
+
+        public int skillsPlusCasts = 0;
+
 
         private List<HealthComponent> _bouncedObjectsList = new List<HealthComponent>();
         private bool _crit;
@@ -35,9 +41,12 @@ namespace ModdedEntityStates.TeslaTrooper
         private float _baseCastInterval = 0.05f;
 
         private Transform _muzzleTransform;
-        private float _originSpacing = 0.069f;
+        private float _originSpacing = 0.1f;
 
         private int _currentCasts;
+        private int _distCastsPenalty;
+
+        private int totalOrbCasts => OrbCasts + skillsPlusCasts - distCastsPenalty;
 
         private float nextCastTime
         {
@@ -54,16 +63,19 @@ namespace ModdedEntityStates.TeslaTrooper
                 }
                 else
                 {
-                    switch (_currentCasts)
-                    {
-                        case 0:
-                            return _muzzleTransform.position + _muzzleTransform.forward * _originSpacing;
-                        case 1:
-                            return _muzzleTransform.position - _muzzleTransform.forward * _originSpacing;
-                        default:
-                        case 2:
-                            return _muzzleTransform.position;
-                    }
+
+                    return _muzzleTransform.position + _muzzleTransform.forward * (-_originSpacing * (_currentCasts % 3));
+
+                    //switch (_currentCasts)
+                    //{
+                    //    case 0:
+                    //        return _muzzleTransform.position + _muzzleTransform.forward * _originSpacing;
+                    //    case 1:
+                    //        return _muzzleTransform.position - _muzzleTransform.forward * _originSpacing;
+                    //    default:
+                    //    case 2:
+                    //        return _muzzleTransform.position;
+                    //}
                 }
             }
         }
@@ -154,7 +166,7 @@ namespace ModdedEntityStates.TeslaTrooper
             base.OnCastFixedUpdate();
             
             if (NetworkServer.active && _targetHurtbox) {
-                while (_currentCasts < OrbCasts && fixedAge > nextCastTime) {
+                while (_currentCasts < totalOrbCasts && fixedAge > nextCastTime) {
                     FireZap();
                     _currentCasts++;
                 }
@@ -168,7 +180,7 @@ namespace ModdedEntityStates.TeslaTrooper
             _lightningOrb.lightningType = GetOrbType;
             _lightningOrb.target = _targetHurtbox;
             //apply conduct on first cast only
-            if (_currentCasts < 1 && FacelessJoePlugin.conductiveMechanic) {
+            if (FacelessJoePlugin.conductiveMechanic) {
                 _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
             }
             ModifyTeamLightningOrb(_lightningOrb);

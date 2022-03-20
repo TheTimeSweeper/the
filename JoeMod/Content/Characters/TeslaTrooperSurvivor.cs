@@ -17,14 +17,16 @@ namespace Modules.Survivors
 
         public const string TESLA_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_";
 
+        //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => TESLA_PREFIX;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             bodyName = "TeslaTrooperBody",
             bodyNameToken = TESLA_PREFIX + "NAME",
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
-            bodyColor = new Color(0.8f, 2, 2),
+
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
+            bodyColor = new Color(0.8f, 1, 1),
 
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -33,7 +35,6 @@ namespace Modules.Survivors
             healthRegen = 1.5f,
             armor = 10f,
 
-            damage = 12f,
             jumpCount = 1,
         };
 
@@ -43,7 +44,7 @@ namespace Modules.Survivors
 
         public override UnlockableDef characterUnlockableDef => null;
 
-        public override ItemDisplaysBase itemDisplays => null;// new TeslaItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
 
@@ -132,7 +133,9 @@ namespace Modules.Survivors
                                                                                                             new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                                                             "Weapon",
                                                                                                             false));
-            primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
+            if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveAlly) {
+                primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
+            }
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }
@@ -406,30 +409,34 @@ namespace Modules.Survivors
         #region conductive
         private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
-            if (FacelessJoePlugin.conductiveMechanic) {
-                Conductive(self, damageInfo);
+            if (FacelessJoePlugin.conductiveMechanic || FacelessJoePlugin.conductiveAlly) {
+                CheckConductive(self, damageInfo);
             }
 
             orig(self, damageInfo);
         }
 
-        private static void Conductive(HealthComponent self, DamageInfo damageInfo) {
+        private static void CheckConductive(HealthComponent self, DamageInfo damageInfo) {
 
             //mark enemies (or allies) conductive
             bool attackConductive = damageInfo.HasModdedDamageType(DamageTypes.conductive);
             if (attackConductive) {
-                if (damageInfo.attacker.GetComponent<TeamComponent>()?.teamIndex == self.body.teamComponent.teamIndex) {
-                    if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 3) {
-                        self.body.AddBuff(Buffs.conductiveBuffTeam);
+                if (damageInfo.attacker?.GetComponent<TeamComponent>()?.teamIndex == self.body.teamComponent.teamIndex) {
+                    if (FacelessJoePlugin.conductiveAlly) {
+                        if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 3) {
+                            self.body.AddBuff(Buffs.conductiveBuffTeam);
+                        }
                     }
                 } else {
-                    self.body.AddBuff(Buffs.conductiveBuff);
+                    if (FacelessJoePlugin.conductiveEnemy) {
+                        self.body.AddBuff(Buffs.conductiveBuff);
+                    }
                 }
             }
 
             //consume conductive stacks for damage and shock
             bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
-            if (attackConsuming) {
+            if (attackConsuming && FacelessJoePlugin.conductiveEnemy) {
                 int conductiveCount = self.body.GetBuffCount(Buffs.conductiveBuff);
 
                 for (int i = 0; i < conductiveCount; i++) {
@@ -454,6 +461,7 @@ namespace Modules.Survivors
                     self.body.RemoveBuff(Buffs.conductiveBuff);
                 }
 
+                damageInfo.AddModdedDamageType(DamageTypes.shockXs2);
                 damageInfo.damage *= 1f + (0.1f * buffCount);
             }
         }

@@ -30,12 +30,13 @@ public class TestValueManager : MonoBehaviour {
 
         //manageTestValue(ref EntityStates.Joe.ThrowBoom.lowGravMultiplier, "bomb Grav", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
         //manageTestValue(ref EntityStates.Joe.ThrowBoom.smallhopVelocity, "bomb hop", KeyCode.Keypad8, KeyCode.Keypad5, 0.05f);
-        manageTestValue(ref BigZap.keep_bigsexyeffect, "effect", KeyCode.Alpha2, KeyCode.Alpha1, 1f);
 
-        manageTestValue(ref vertOff, "verticaloffset", KeyCode.Keypad7, KeyCode.Keypad4, 1f);
-        manageTestValue(ref aimorigin, "aimorigin", KeyCode.Keypad8, KeyCode.Keypad5, 1f);
-        manageTestValue(ref camerapivot, "aimorigin", KeyCode.Keypad9, KeyCode.Keypad6, 1f);
-        manageTestValue(ref bak, "aimorigin", KeyCode.Keypad3, KeyCode.KeypadPeriod, 1f);
+        //manageTestValue(ref BigZap.keep_bigsexyeffect, "effect", KeyCode.Alpha2, KeyCode.Alpha1, 1f);
+
+        //manageTestValue(ref vertOff, "verticaloffset", KeyCode.Keypad7, KeyCode.Keypad4, 1f);
+        //manageTestValue(ref aimorigin, "aimorigin", KeyCode.Keypad8, KeyCode.Keypad5, 1f);
+        //manageTestValue(ref camerapivot, "aimorigin", KeyCode.Keypad9, KeyCode.Keypad6, 1f);
+        //manageTestValue(ref bak, "aimorigin", KeyCode.Keypad3, KeyCode.KeypadPeriod, 1f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {

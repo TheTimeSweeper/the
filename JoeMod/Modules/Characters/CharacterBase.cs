@@ -26,8 +26,6 @@ namespace Modules.Characters {
         public virtual void Initialize() {
             instance = this;
             InitializeCharacter();
-
-            RoR2.RoR2Application.onLoad += SetItemDisplays;
         }
 
         public virtual void InitializeCharacter() {
@@ -82,16 +80,18 @@ namespace Modules.Characters {
 
         public virtual void InitializeItemDisplays() {
 
-            ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
-            itemDisplayRuleSet.name = "idrs" + bodyName;
+                ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
+                itemDisplayRuleSet.name = "idrs" + bodyName;
 
-            characterBodyModel.itemDisplayRuleSet = itemDisplayRuleSet;
+                characterBodyModel.itemDisplayRuleSet = itemDisplayRuleSet;
+
+            if (itemDisplays != null) {
+                RoR2.RoR2Application.onLoad += SetItemDisplays;
+            }
         }
 
         public void SetItemDisplays() {
-            if (itemDisplays != null) {
                 itemDisplays.SetItemDIsplays(characterBodyModel.itemDisplayRuleSet);
-            }
         }
 
     }

@@ -12,10 +12,20 @@
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="BepInEx.Core" Version="5.4.19" />
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.1-r.1" />
+		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
+	</ItemGroup>
+	
   <ItemGroup>
     <None Remove="HenryBank.bnk" />
     <None Remove="joe" />
-    <None Remove="Modules\Survivors\Henry.cs~RF6221a098.TMP" />
+    <None Remove="Modules\Characters\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
     <None Remove="teslatrooper" />
     <None Remove="Tesla_Trooper.bnk" />
@@ -30,131 +40,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="AncientScepter">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\AncientScepter.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Harmony">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\BepInEx.Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.MonoMod.Loader">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\BepInEx.MonoMod.Loader.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Preloader">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\BepInEx.Preloader.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Facepunch.Steamworks">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Facepunch.Steamworks.dll</HintPath>
-    </Reference>
-    <Reference Include="HGCSharpUtils">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\HGCSharpUtils.dll</HintPath>
-    </Reference>
-    <Reference Include="HGUnityUtils">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\HGUnityUtils.dll</HintPath>
-    </Reference>
-    <Reference Include="KinematicCharacterController">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\KinematicCharacterController.dll</HintPath>
-    </Reference>
-    <Reference Include="LegacyResourcesAPI">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\LegacyResourcesAPI.dll</HintPath>
-    </Reference>
     <Reference Include="MMHOOK_RoR2">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\MMHOOK_RoR2.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\MonoMod.exe</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\libs\MMHOOK_RoR2.dll</HintPath>
     </Reference>
     <Reference Include="R2API">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\R2API.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_Core">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Rewired_Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rewired_CSharp">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Rewired_CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="RoR2">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\RoR2.dll</HintPath>
+      <HintPath>..\libs\R2API.dll</HintPath>
     </Reference>
     <Reference Include="Skills">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Skills.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Addressables">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Unity.Addressables.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.AnimationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.AssetBundleModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.InputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.ParticleSystemModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.UIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UNETModule">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\UnityEngine.UNETModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Wwise">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Wwise.dll</HintPath>
-    </Reference>
-    <Reference Include="Zio">
-      <HintPath>..\..\..\..\..\..\..\Abbasses stuff IIX\_thundersweeper\the\libs\Zio.dll</HintPath>
+      <HintPath>..\libs\Skills.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -14,6 +14,7 @@ namespace ModdedEntityStates.BaseStates
         protected float castEndTime;
         protected bool hasFired;
         protected bool isFiring;
+        protected bool hasExited;
 
         protected virtual void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1)
         {
@@ -47,7 +48,13 @@ namespace ModdedEntityStates.BaseStates
                 OnCastFixedUpdate();
             }
 
-            if(fixedAge > duration)
+            if (fireEnded && !hasExited)
+            {
+                hasExited = true;
+                OnCastExit();
+            }
+
+            if (fixedAge > duration)
             {
                 outer.SetNextStateToMain();
                 return;
@@ -76,5 +83,6 @@ namespace ModdedEntityStates.BaseStates
         protected virtual void OnCastEnter() { }
         protected virtual void OnCastFixedUpdate() { }
         protected virtual void OnCastUpdate() { }
+        protected virtual void OnCastExit() { }
     }
 }

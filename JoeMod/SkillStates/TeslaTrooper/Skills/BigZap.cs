@@ -85,7 +85,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 //impactEffect = EffectIndex.uh;
             };
 
-            if (FacelessJoePlugin.conductiveMechanic) {
+            if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
                 blast.AddModdedDamageType(DamageTypes.consumeConductive);
             }
             blast.Fire();

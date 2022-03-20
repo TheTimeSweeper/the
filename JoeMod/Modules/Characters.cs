@@ -20,7 +20,7 @@ namespace Modules.Characters {
         public float sortPosition = 69f;
 
         public GameObject crosshair = null;
-        public GameObject podPrefab = null;
+        public GameObject podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod");
 
         //stats
         public float maxHealth = 100f;

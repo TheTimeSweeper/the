@@ -27,7 +27,7 @@ using System.Security.Permissions;
 
 //todo: separatable plugin
 public class FacelessJoePlugin : BaseUnityPlugin {
-    public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
+    public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
     public const string MODVERSION = "0.1.0";
 
@@ -39,7 +39,9 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool conductiveMechanic;
+    public static bool conductiveMechanic => conductiveAlly || conductiveEnemy;
+    public static bool conductiveEnemy = false;
+    public static bool conductiveAlly = true;
 
     private void Start() {
 
@@ -56,8 +58,8 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         Modules.Config.ReadConfig();
         Modules.Compat.Initialize();
         Modules.States.RegisterStates(); // register states for networking
-                                         //Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
-                                         //Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
+        Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
+        //Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
         Modules.Tokens.AddTokens(); // register name tokens
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 

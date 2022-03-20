@@ -7,9 +7,11 @@ namespace Modules {
 
         public static float stunTime = 2.5f;
         public static float shockTime = 2.5f;
+        public static float shockTime2 = 1f;
 
         public static DamageAPI.ModdedDamageType stunXs;
         public static DamageAPI.ModdedDamageType shockXs;
+        public static DamageAPI.ModdedDamageType shockXs2;
 
         public static DamageAPI.ModdedDamageType conductive;
         public static DamageAPI.ModdedDamageType consumeConductive;
@@ -20,6 +22,8 @@ namespace Modules {
 
                 stunXs = DamageAPI.ReserveDamageType();
                 shockXs = DamageAPI.ReserveDamageType();
+                shockXs2 = DamageAPI.ReserveDamageType();
+
                 conductive = DamageAPI.ReserveDamageType();
                 consumeConductive = DamageAPI.ReserveDamageType();
 
@@ -42,14 +46,18 @@ namespace Modules {
 
             if (!victim.isInFrozenState) {
 
+                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(stunXs)) {
+                    self.SetStun(stunTime);
+                    return;
+                }
 
                 if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockXs)) {
                     self.SetShock(shockTime);
                     return;
                 }
-
-                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(stunXs)) {
-                    self.SetStun(stunTime);
+                //how scuffed is this?
+                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockXs2)) {
+                    self.SetShock(shockTime2);
                     return;
                 }
             }

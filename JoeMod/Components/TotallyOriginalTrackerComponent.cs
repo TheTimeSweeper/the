@@ -29,7 +29,7 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
 
     void Awake()
     {
-        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.LoadAsset<GameObject>("Prefabs/LightningIndicator"));
+        indicator = new TeslaIndicator(base.gameObject, RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"));
     }
 
     void Start()
@@ -42,6 +42,10 @@ public class TotallyOriginalTrackerComponent : MonoBehaviour
     public HurtBox GetTrackingTarget()
     {
         return trackingTarget;
+    }
+
+    public float GetTrackingTargetDistance() {
+        return Vector3.Distance(trackingTarget.transform.position, transform.position);
     }
 
     private void OnEnable()

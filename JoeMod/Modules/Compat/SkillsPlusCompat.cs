@@ -24,20 +24,17 @@ namespace Modules {
 
         private static void doLanguage() {
 
-            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+1</style> Orb Cast ( <style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
+            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Orb Cast ( <style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
             LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+15%</style> Area");
         }
 
         [SkillLevelModifier("Tesla_Primary_Zap", typeof(Zap))]
-        public class TeslaZapModifier : SimpleSkillModifier<Zap> {
+        public class TeslaZapModifier : BaseSkillModifier {
 
-
-            public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef) {
-                base.OnSkillLeveledUp(level, characterBody, skillDef);
-
-                Zap.OrbCasts = AdditiveScaling(SkillsPlusCompat.TeslaZap_InitialCasts, 1, level);
+            public override void OnSkillEnter(BaseState skillState, int level) {
+                base.OnSkillEnter(skillState, level);
+                (skillState as Zap).skillsPlusCasts = AdditiveScaling(SkillsPlusCompat.TeslaZap_InitialCasts, 0, level/2);
             }
-
         }
 
         [SkillLevelModifier("Tesla_Secondary_BigZap", typeof (AimBigZap), typeof(BigZap), typeof(TowerBigZap))]
