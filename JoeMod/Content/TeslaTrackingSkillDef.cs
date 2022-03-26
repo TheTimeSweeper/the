@@ -7,12 +7,12 @@ namespace Modules {
 
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {
             return new TeslaTrackingSkillDef.InstanceData {
-                teslaTracker = skillSlot.GetComponent<TotallyOriginalTrackerComponent>()
+                teslaTracker = skillSlot.GetComponent<TeslaTrackerComponent>()
             };
         }
 
         private static bool HasTarget([NotNull] GenericSkill skillSlot) {
-            TotallyOriginalTrackerComponent teslaTracker = ((TeslaTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).teslaTracker;
+            TeslaTrackerComponent teslaTracker = ((TeslaTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).teslaTracker;
             return (teslaTracker != null) ? teslaTracker.GetTrackingTarget() : null;
         }
 
@@ -26,7 +26,7 @@ namespace Modules {
 
         protected class InstanceData : SkillDef.BaseSkillInstanceData {
 
-            public TotallyOriginalTrackerComponent teslaTracker;
+            public TeslaTrackerComponent teslaTracker;
         }
     }
 }

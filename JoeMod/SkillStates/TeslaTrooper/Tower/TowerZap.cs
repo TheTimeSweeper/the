@@ -16,7 +16,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerZap: BaseTimedSkillState
     {
-        public static float DamageCoefficient = 2.3f;
+        public static float DamageCoefficient = 1.0f;
         public static float ProcCoefficient = 1f;
         
         public static float BaseDuration = 1f;
@@ -32,20 +32,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         protected string zapSound = ZapSound;
         protected string zapSoundCrit = ZapSoundCrit;
 
-        //protected float ownerDamage {
-            
-        //    get {
-        //        float damage = 1;
-
-        //        CharacterBody body = GetComponent<GenericOwnership>()?.ownerObject.GetComponent<CharacterBody>();
-        //        if (body) {
-        //            damage = body.damage;
-        //        }
-
-        //        return damage;
-        //    }
-        //}
-
         public override void OnEnter()
         {
             base.OnEnter();
@@ -53,9 +39,11 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
             InitDurationValues(BaseDuration, BaseStartCastTime);
 
+            bool tesla = GetComponent<TeslaWeaponComponent>().hasTeslaCoil;
+
             lightningOrb = new LightningOrb {
                 origin = base.GetModelChildLocator().FindChild("Orb").position,
-                damageValue = DamageCoefficient / 3 * damageStat,
+                damageValue = DamageCoefficient * damageStat,
                 isCrit = RollCrit(),
                 //bouncesRemaining = 1,
                 //damageCoefficientPerBounce = BounceDamageMultplier,
@@ -64,7 +52,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 attacker = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
-                lightningType = LightningOrb.LightningType.Loader,
+                lightningType = tesla? LightningOrb.LightningType.Tesla : LightningOrb.LightningType.Loader,
                 damageColorIndex = DamageColorIndex.Default,
                 //range = SearchRange,
                 canBounceOnSameTarget = true,
@@ -82,9 +70,12 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void FixedUpdate() {
             base.FixedUpdate();
             if (lightningTarget == null && !hasFired) {
-                TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
+                TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
                 if (tracker) {
                     lightningTarget = tracker.GetTrackingTarget();
+                }
+                if(lightningTarget == null) {
+                    base.outer.SetNextStateToMain();
                 }
             }
         }
@@ -108,6 +99,15 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             for (int i = 0; i < 3; i++) {
 
                 OrbManager.instance.AddOrb(lightningOrb);
+            }
+        }
+
+        public override void OnExit() {
+            base.OnExit();
+
+            if (!hasFired) {
+                fireOrb();
+                hasFired = true;
             }
         }
     }

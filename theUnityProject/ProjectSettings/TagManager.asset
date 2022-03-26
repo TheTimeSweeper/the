@@ -13,16 +13,16 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - FakeActor
+  - NoCollision
+  - Pickups
+  - World
+  - EntityPrecise
   - 
+  - Projectile
+  - Background
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ragdoll
   - 
   - 
   - 

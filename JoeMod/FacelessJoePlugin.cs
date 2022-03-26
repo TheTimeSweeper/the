@@ -74,7 +74,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         //todo compiler flags when
         new TeslaTrooperSurvivor().Initialize();
 
-        // now make a content pack and add it- this part will change with the next update
         new Modules.ContentPacks().Initialize();
 
         Hook();
@@ -82,7 +81,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
     private void Hook() {
         // run hooks here, disabling one is as simple as commenting out the line
-        On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
         On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
@@ -94,6 +92,12 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         if (self && self.body && self.body.HasBuff(Modules.Buffs.zapShieldBuff) && !flag) {
             damageInfo.rejected = true;
+
+            //yes basically copied from the old barrier code
+            IBarrier bar = self.GetComponent<IBarrier>();
+            if (bar!= null) {
+                bar.BlockedDamage(damageInfo, damageInfo.damage); //I guess I would need IL for this
+            }
         }
         orig(self, damageInfo);
     }
@@ -101,19 +105,5 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     private void ThrowGrenade_PlayAnimation(On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.orig_PlayAnimation orig, global::EntityStates.Commando.CommandoWeapon.ThrowGrenade self, float duration) {
         orig(self, duration);
         Chat.AddMessage(self.projectilePitchBonus.ToString());
-    }
-
-    private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self) {
-        orig(self);
-
-        // a simple stat hook, adds armor after stats are recalculated
-        // todo recalculatestatsapi
-        // this is getting messy
-        // but if it workssss
-        if (self) {
-            if (self.HasBuff(Modules.Buffs.armorBuff)) {
-                self.armor += 300f;
-            }
-        }
     }
 }

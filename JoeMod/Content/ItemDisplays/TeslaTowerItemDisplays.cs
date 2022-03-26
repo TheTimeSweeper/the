@@ -1264,24 +1264,24 @@ localScale = new Vector3(0.2866F, 0.2866F, 0.2866F),
                 }
             });
 
-            itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
-                keyAsset = RoR2Content.Items.NovaOnLowHealth,
-                displayRuleGroup = new DisplayRuleGroup {
-                    rules = new ItemDisplayRule[]
-                    {
-                        new ItemDisplayRule
-                        {
-                            ruleType = ItemDisplayRuleType.ParentedPrefab,
-                            followerPrefab = ItemDisplays.LoadDisplay("DisplayJellyGuts"),
-childName = "Head",
-localPos = new Vector3(-0.0484F, -0.0116F, 0.0283F),
-localAngles = new Vector3(316.2306F, 45.1087F, 303.6165F),
-localScale = new Vector3(0.1035F, 0.1035F, 0.1035F),
-                            limbMask = LimbFlags.None
-                        }
-                    }
-                }
-            });
+//            itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
+//                keyAsset = RoR2Content.Items.NovaOnLowHealth,
+//                displayRuleGroup = new DisplayRuleGroup {
+//                    rules = new ItemDisplayRule[]
+//                    {
+//                        new ItemDisplayRule
+//                        {
+//                            ruleType = ItemDisplayRuleType.ParentedPrefab,
+//                            followerPrefab = ItemDisplays.LoadDisplay("DisplayJellyGuts"),
+//childName = "Head",
+//localPos = new Vector3(-0.0484F, -0.0116F, 0.0283F),
+//localAngles = new Vector3(316.2306F, 45.1087F, 303.6165F),
+//localScale = new Vector3(0.1035F, 0.1035F, 0.1035F),
+//                            limbMask = LimbFlags.None
+//                        }
+//                    }
+//                }
+//            });
 
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.LunarTrinket,

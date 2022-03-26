@@ -4,8 +4,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.TeslaTrooper
-{
+namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZap : BaseTimedSkillState
     {
 
@@ -54,6 +53,12 @@ namespace ModdedEntityStates.TeslaTrooper
             {
                 base.characterMotor.moveDirection = Vector3.zero;
             }
+        }
+
+        public override void OnExit() {
+            base.OnExit();
+
+            EntityStateMachine.FindByCustomName(gameObject, "Slide").SetNextState(new ShieldZapCollectDamage());
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

@@ -8,7 +8,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerIdleSearch : BaseSkillState {
         public static float SearchRange = 60;
-        public static float BaseZapInterval = 4;
+        public static float BaseZapInterval = 3;
         public static float SpawnedBaseZapInterval = 2;
 
         //private EntityStateMachine _weaponStateMachine;

@@ -13,18 +13,13 @@ namespace Modules {
 
         public static BuffDef conductiveBuff;
         public static BuffDef conductiveBuffTeam;
+        public static BuffDef conductiveBuffTeamGrace;
 
         public static void RegisterBuffs()
         {
-            armorBuff = 
-                AddNewBuff("HenryArmorBuff", 
-                           Assets.LoadAsset<Sprite>("Textures/BuffIcons/texBuffGenericShield"), 
-                           Color.white, 
-                           false, 
-                           false);
             zapShieldBuff = 
                 AddNewBuff("Tesla Barrier",
-                           Assets.LoadAsset<Sprite>("Textures/BuffIcons/texBuffGenericShield"),
+                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
                            Color.cyan,
                            false,
                            false);
@@ -32,16 +27,22 @@ namespace Modules {
             if (FacelessJoePlugin.conductiveMechanic) {
                 conductiveBuff =
                     AddNewBuff("Conductive",
-                               Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"),
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite,
                                Color.blue,
                                true,
                                true);
                 conductiveBuffTeam =
                     AddNewBuff("Charged",
-                               Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"),
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite,
                                Color.cyan,
                                false,
-                               true);
+                               false);
+                conductiveBuffTeamGrace =
+                    AddNewBuff("Charged2",
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite,
+                               Color.blue,
+                               false,
+                               false);
             }
 
         }

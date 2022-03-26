@@ -17,6 +17,8 @@ namespace Modules
             //PopulateFromBody("CrocoBody");
             PopulateDisplaysFromBody("MageBody");
             PopulateDisplaysFromBody("LunarExploderBody");
+
+            AddCustomLightningArm();
         }
 
         private static void PopulateDisplaysFromBody(string bodyName)
@@ -39,7 +41,7 @@ namespace Modules
                     if (followerPrefab)
                     {
                         string name = followerPrefab.name;
-                        string key = name?.ToLower();
+                        string key = name?.ToLowerInvariant();
                         if (!itemDisplayPrefabs.ContainsKey(key))
                         {
                             itemDisplayPrefabs[key] = followerPrefab;
@@ -51,35 +53,37 @@ namespace Modules
             }
         }
 
+        private static void AddCustomLightningArm() {
+            #region IgnoreThisAndRunAway
+            //seriously you don't need this
+            //I see you're still here, well if you do need this here's what you do
+            //but again you don't need this
+            //capacitor is hardcoded to track your "UpperArmR", "LowerArmR", and "HandR" bones.
+            //this is for having the lightning on custom bones in your childlocator
+
+            GameObject display = R2API.PrefabAPI.InstantiateClone(itemDisplayPrefabs["DisplayLightningArmRight".ToLowerInvariant()], "DisplayLightningArmCustom", false);
+
+            LimbMatcher limbMatcher = display.GetComponent<LimbMatcher>();
+
+            limbMatcher.limbPairs[0].targetChildLimb = "LightningArm1";
+            limbMatcher.limbPairs[1].targetChildLimb = "LightningArm2";
+            limbMatcher.limbPairs[2].targetChildLimb = "LightningArmEnd";
+
+            itemDisplayPrefabs["DisplayLightningArmCustom".ToLowerInvariant()] = display;
+            #endregion
+        }
+
         public static GameObject LoadDisplay(string name) {
 
-            if (itemDisplayPrefabs.ContainsKey(name.ToLower())) {
+            if (itemDisplayPrefabs.ContainsKey(name.ToLowerInvariant())) {
 
-                if (itemDisplayPrefabs[name.ToLower()]) {
+                if (itemDisplayPrefabs[name.ToLowerInvariant()]) {
 
                     if (recording) {
-                        itemDisplayCheckCount[name.ToLower()]++;
+                        itemDisplayCheckCount[name.ToLowerInvariant()]++;
                     }
 
-                    GameObject display = itemDisplayPrefabs[name.ToLower()];
-
-                    #region IgnoreThisAndRunAway
-                    //seriously you don't need this
-                    //I see you're still here, well if you do need this here's what you do
-                    //but again you don't need this
-                    //capacitor is hardcoded to track your "UpperArmR", "LowerArmR", and "HandR" bones.
-                    //this is for having the lightning on custom bones in your childlocator
-                    if (name == "DisplayLightningArmCustom") {
-                        Helpers.LogWarning(itemDisplayPrefabs["DisplayLightningArmRight"] != null);
-                        display = R2API.PrefabAPI.InstantiateClone(itemDisplayPrefabs["DisplayLightningArmRight"], "DisplayLightningCustom", false);
-
-                        LimbMatcher limbMatcher = display.GetComponent<LimbMatcher>();
-
-                        limbMatcher.limbPairs[0].targetChildLimb = "LightningArm1";
-                        limbMatcher.limbPairs[1].targetChildLimb = "LightningArm2";
-                        limbMatcher.limbPairs[2].targetChildLimb = "LightningArmEnd";
-                    }
-                    #endregion
+                    GameObject display = itemDisplayPrefabs[name.ToLowerInvariant()];
 
                     return display;
                 }
@@ -192,6 +196,9 @@ namespace Modules
         }
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenereicDisplayRule(Object itemDef, GameObject displayPrefab, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
 
+            if(displayPrefab == null) {
+                Helpers.LogWarning("could not find display prefab for " + itemDef);
+            }
 
             return new ItemDisplayRuleSet.KeyAssetRuleGroup {
 

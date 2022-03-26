@@ -62,7 +62,7 @@ public class TeslaCoilControllerController : MonoBehaviour {
                 continue;
             }
 
-            coil.GetComponent<SkillLocator>().secondary.DeductStock(1);
+            //coil.GetComponent<SkillLocator>().secondary.DeductStock(1);
             coil.GetComponent<EntityStateMachine>().SetInterruptState(new TowerBigZap() {
                 lightningTarget = target,
             }, InterruptPriority.PrioritySkill);

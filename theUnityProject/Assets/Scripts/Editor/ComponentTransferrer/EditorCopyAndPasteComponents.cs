@@ -12,7 +12,7 @@ public class EditorCopyAndPasteComponents {
         new UnhandledComponentsReporter(),
     };
 
-    [MenuItem("Edit/record certain components #c")]
+    [MenuItem("Tools/Component Record #c")]
     public static void copyComponents() {
         string copyReport = "";
 
@@ -35,7 +35,7 @@ public class EditorCopyAndPasteComponents {
 
     }
 
-    [MenuItem("Edit/transfer recorded components #v")]
+    [MenuItem("Tools/Component Transfer #v")]
     public static void pasteComponents() {
 
         string bigLog = "";

@@ -3,6 +3,7 @@ using System;
 using ModdedEntityStates.Joe;
 using ModdedEntityStates.TeslaTrooper;
 using ModdedEntityStates.TeslaTrooper.Tower;
+using Modules.Survivors;
 
 namespace Modules
 {
@@ -93,13 +94,13 @@ namespace Modules
         private static void AddTeslaTokens()
         {
             #region not henry 2
-            string prefix = Modules.Survivors.TeslaTrooperSurvivor.TESLA_PREFIX;
+            string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
 
-            string desc = "The Tesla Trooper is a mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            string desc = "The Tesla Trooper is a close-mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Tesla Gauntlet provides consistent damage to enemies and spreads." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Use 2000 Volts for damage, and to control crowds with its stun" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > The Tesla Tower inherits your items, but doesn't take damage, mainly taking advantage of damage items." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Use the Tesla Tower to empower your secondary, but its empowered attack has a separate, longer cooldown." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Use 2000 Volts for damage, and to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > You benefit from being closer to enemies, use his Utility to assist with this." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > The Tesla Tower inherits your items, but mainly benefits from damage items." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, rubber shoes in motion.";
             string outroFailure = "..and so he vanished, unit lost.";
@@ -125,10 +126,10 @@ namespace Modules
             //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
-            string conductive = FacelessJoePlugin.conductiveMechanic ? $"Use on allies to {Helpers.DamageText("charge")} them" : "";
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeteted units for {Helpers.DamageText($"{Zap.OrbCasts}x{Zap.DamageCoefficient * 100}% damage")}. Spreads to {Helpers.UtilityText($"up to {Zap.OrbCasts}")} nearby enemies.");
+            string conductive = FacelessJoePlugin.conductiveAlly ? $" Use on allies to {Helpers.DamageText("charge")} them" : "";
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Shoots {Helpers.UtilityText($"more bolts")} at {Helpers.UtilityText($"close range")}.{conductive}");
 
-            LanguageAPI.Add("KEYWORD_CHARGED", "Charge an ally up to 3 times to boost the damage of their next attack");
+            LanguageAPI.Add("KEYWORD_CHARGED", $"A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             #endregion
 
             #region Secondary
@@ -138,12 +139,12 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"Protect yourself from {Helpers.UtilityText("all incoming damage")} for {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}, after which, {Helpers.DamageText("explode")} in a wide area based on damage absorbed");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower that occasionally zaps nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient}")}. Use {Helpers.UtilityText("secondary")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient*200}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient*2)}.");
             #endregion
 
             #region recolor

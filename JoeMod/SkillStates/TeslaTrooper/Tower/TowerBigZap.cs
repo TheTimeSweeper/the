@@ -5,7 +5,7 @@ using R2API;
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
 
-        new public static float DamageCoefficient = 10.0f;
+        new public static float DamageCoefficient = 5.0f;
         new public static float ProcCoefficient = 1f;
         new public static float BaseDuration = 0.6f;
         public static float BaseAttackRadius = 15;

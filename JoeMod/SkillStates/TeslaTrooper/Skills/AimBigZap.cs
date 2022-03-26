@@ -12,14 +12,14 @@ namespace ModdedEntityStates.TeslaTrooper
         public float skillsPlusMulti;
 
         private TeslaCoilControllerController coilController;
-        private TotallyOriginalTrackerComponent tracker;
+        private TeslaTrackerComponent tracker;
 
         private Sprite originalSprite;
-        private bool skillSwapped;
+        private bool showingEmpowered;
 
         public override void OnEnter() {
             coilController = GetComponent<TeslaCoilControllerController>();
-            tracker = GetComponent<TotallyOriginalTrackerComponent>();
+            tracker = GetComponent<TeslaTrackerComponent>();
 
             EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
             maxDistance = 30;
@@ -37,44 +37,29 @@ namespace ModdedEntityStates.TeslaTrooper
             Util.PlaySound(EnterSoundString, gameObject);
         }
 
-        private void SwapSkill() {
-            skillSwapped = true;
-
-            //originalSpecial = skillLocator.special;
-            skillLocator.special = coilController.GetNearestTower().GetComponent<SkillLocator>().secondary;
-            if (originalSprite == null)
-                originalSprite = skillLocator.secondary.skillDef.icon;
-            skillLocator.secondary.skillDef.icon = skillLocator.special.icon;
-
-            tracker?.setIndicatorEmpowered(true);
-        }
-
-        private void unswapSkill() {
-            skillSwapped = false;
-
-            skillLocator.special = skillLocator.FindSkill("Special");
-            skillLocator.secondary.skillDef.icon = originalSprite;
-
-            tracker?.setIndicatorEmpowered(false);
-        }
-
         public override void FixedUpdate()
         {
             base.FixedUpdate();
             StartAimMode();
+
+            //scrapping this cooldown setup
             if (coilController && coilController.GetNearestTower()) {
 
-                SwapSkill();
+                EnterEmpowered();
             } else {
-                if (skillSwapped)
-                    unswapSkill();
+                if (showingEmpowered)
+                    ExitEmpowered();
             }
 
             if (coilController && coilController.coilReady && tracker?.GetTrackingTarget() != null) {
 
                 endpointVisualizerRadiusScale = Tower.TowerBigZap.BaseAttackRadius;
 
+                maxDistance = TeslaTrackerComponent.maxTrackingDistance;
+
             } else {
+
+                maxDistance = 30;
                 endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
             }
             endpointVisualizerRadiusScale *= skillsPlusMulti;
@@ -94,19 +79,38 @@ namespace ModdedEntityStates.TeslaTrooper
                 Util.PlaySound(ExitSoundString, gameObject);
             }
 
-            if (skillSwapped)
-                unswapSkill();
+            if (showingEmpowered)
+                ExitEmpowered();
         }
 
-        public override void FireProjectile()
-        {
-
-        }
+        public override void FireProjectile() { }
 
         // Token: 0x06003B1A RID: 15130 RVA: 0x000150E1 File Offset: 0x000132E1
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;
+        }
+
+        private void EnterEmpowered() {
+            showingEmpowered = true;
+
+            //scrapping this cooldown system. it was novel though
+            //originalSpecial = skillLocator.special;
+            //skillLocator.special = coilController.GetNearestTower().GetComponent<SkillLocator>().secondary;
+            //if (originalSprite == null)
+            //    originalSprite = skillLocator.secondary.skillDef.icon;
+            //skillLocator.secondary.skillDef.icon = skillLocator.special.icon;
+
+            tracker?.setIndicatorEmpowered(true);
+        }
+
+        private void ExitEmpowered() {
+            showingEmpowered = false;
+
+            //skillLocator.special = skillLocator.FindSkill("Special");
+            //skillLocator.secondary.skillDef.icon = originalSprite;
+
+            tracker?.setIndicatorEmpowered(false);
         }
     }
 }

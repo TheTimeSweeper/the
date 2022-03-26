@@ -40,13 +40,15 @@ namespace Modules {
             GameObject newBodyPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), bodyName);
 
             Transform modelBaseTransform = null;
-            GameObject model = null;
+            GameObject newModel = null;
             if (modelName != "mdl")
             {
-                model = Assets.LoadSurvivorModel(modelName);
-                if (model == null) model = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
+                newModel = Assets.LoadSurvivorModel(modelName);
+                //if load fails, just use body from the clone
+                if (newModel == null) 
+                    newModel = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
 
-                    modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, model.transform, bodyInfo);
+                    modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, newModel.transform, bodyInfo);
             }
 
             #region CharacterBody
@@ -106,17 +108,17 @@ namespace Modules {
             #endregion
 
             SetupCameraTargetParams(newBodyPrefab, bodyInfo);
-            SetupModelLocator(newBodyPrefab, modelBaseTransform, model.transform);
+            SetupModelLocator(newBodyPrefab, modelBaseTransform, newModel.transform);
             //SetupRigidbody(newPrefab);
             SetupCapsuleCollider(newBodyPrefab);
-            SetupMainHurtbox(newBodyPrefab, model);
+            SetupHurtBoxGroup(newBodyPrefab, newModel);
 
-            SetupAimAnimator(newBodyPrefab, model);
+            SetupAimAnimator(newBodyPrefab, newModel);
 
             if (bodyInfo.bodyNameToClone != "EngiTurret") {
-                if (modelBaseTransform != null) SetupCharacterDirection(newBodyPrefab, modelBaseTransform, model.transform);
-                    SetupFootstepController(model);
-                    SetupRagdoll(model);
+                if (modelBaseTransform != null) SetupCharacterDirection(newBodyPrefab, modelBaseTransform, newModel.transform);
+                    SetupFootstepController(newModel);
+                    SetupRagdoll(newModel);
             }
 
             Modules.Content.AddCharacterBodyPrefab(newBodyPrefab);
@@ -270,7 +272,7 @@ namespace Modules {
             capsuleCollider.direction = 1;
         }
 
-        private static void SetupMainHurtbox(GameObject prefab, GameObject model)
+        private static void SetupMainHurtboxFromChildLocator(GameObject prefab, GameObject model)
         {
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
@@ -298,16 +300,20 @@ namespace Modules {
             hurtBoxGroup.bullseyeCount = 1;
         }
 
-        public static void SetupHurtBoxes(GameObject bodyPrefab) {
+        public static void SetupHurtBoxGroup(GameObject bodyPrefab, GameObject bodyModel) {
 
             HealthComponent healthComponent = bodyPrefab.GetComponent<HealthComponent>();
+            HurtBoxGroup hurtboxGroup = bodyModel.GetComponent<HurtBoxGroup>();
 
-            foreach (HurtBoxGroup hurtboxGroup in bodyPrefab.GetComponentsInChildren<HurtBoxGroup>()) {
+            if (hurtboxGroup != null) {
                 hurtboxGroup.mainHurtBox.healthComponent = healthComponent;
                 for (int i = 0; i < hurtboxGroup.hurtBoxes.Length; i++) {
                     hurtboxGroup.hurtBoxes[i].healthComponent = healthComponent;
                 }
+            } else {
+                SetupMainHurtboxFromChildLocator(bodyPrefab, bodyModel);
             }
+
         }
 
         private static void SetupFootstepController(GameObject model)

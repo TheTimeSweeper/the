@@ -23,18 +23,18 @@ namespace Modules.Survivors {
             armorGrowth = 0f,
             bodyName = "TeslaTowerBody",
             bodyNameToken = TOWER_PREFIX + "NAME",
+            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_SUBTITLE",
             bodyNameToClone = "EngiTurret",
-            bodyColor = new Color(0.8f, 2, 2),
+
+            bodyColor = new Color(0.27f, 0.676f, 0.787f),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTower"),
             crosshair = Modules.Assets.LoadCrosshair("TiltedBracket"),
-
+            podPrefab = null,
+            
             damage = 24f,
-            healthGrowth = 33f,
-            healthRegen = 1.5f,
+            healthRegen = 0f,
             jumpCount = 0,
             maxHealth = 200f,
-            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_SUBTITLE",
-            podPrefab = null,
             moveSpeed = 0,
             
             aimOriginPosition = new Vector3( 0, 10, 0),
@@ -54,15 +54,15 @@ namespace Modules.Survivors {
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
-            bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
-            //bodyPrefab.AddComponent<TeslaCoilControllerController>();
+            //bodyPrefab.AddComponent<TeslaTrackerComponent>();
+            bodyPrefab.AddComponent<TeslaWeaponComponent>();
 
         }
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
 
-            bodyPrefab.GetComponent<CharacterBody>().overrideCoreTransform = characterBodyModel.transform;
+            bodyPrefab.GetComponent<CharacterBody>().overrideCoreTransform = bodyCharacterModel.GetComponent<ChildLocator>().FindChild("Head");
 
             bodyPrefab.GetComponent<SfxLocator>().deathSound = "Play_building_uselbuil";
             bodyPrefab.GetComponent<SfxLocator>().aliveLoopStart = ""; //todo sfx
@@ -75,9 +75,12 @@ namespace Modules.Survivors {
         protected override void InitializeEntityStateMachine() {
             base.InitializeEntityStateMachine();
 
-            UnityEngine.Object.Destroy(EntityStateMachine.FindByCustomName(bodyPrefab, "Weapon"));
-            Array.Resize(ref bodyPrefab.GetComponent<NetworkStateMachine>().stateMachines, 1);
-            Array.Resize(ref bodyPrefab.GetComponent<CharacterDeathBehavior>().idleStateMachine, 0);
+            //UnityEngine.Object.Destroy(EntityStateMachine.FindByCustomName(bodyPrefab, "Weapon"));
+            //Array.Resize(ref bodyPrefab.GetComponent<NetworkStateMachine>().stateMachines, 1);
+            //Array.Resize(ref bodyPrefab.GetComponent<CharacterDeathBehavior>().idleStateMachine, 0);
+            EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(bodyPrefab, "Weapon");
+            entityStateMachine.initialStateType = new SerializableEntityStateType(typeof(TowerLifetime));
+            entityStateMachine.mainStateType = new SerializableEntityStateType(typeof(TowerLifetime));
 
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new SerializableEntityStateType(typeof(TowerSell));
             States.entityStates.Add(typeof(TowerSell));
@@ -100,7 +103,7 @@ namespace Modules.Survivors {
 
         #region skills
 
-        public override void InitializeSkills() {          //maybe least elegant of my solutions but came with a DRY fix so half and half
+        public override void InitializeSkills() {          //maybe least elegant of my solutions but it's a DRY fix so half and half
             Modules.Skills.CreateSkillFamilies(bodyPrefab, 3);
 
             InitializePrimarySkills();
@@ -115,7 +118,7 @@ namespace Modules.Survivors {
                                                                                          TOWER_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
                                                                                          Modules.Assets.LoadAsset<Sprite>("texTeslaTowerSkillPrimary"),
                                                                                          new EntityStates.SerializableEntityStateType(typeof(TowerZap)),
-                                                                                         "Weapon",
+                                                                                         "Body",
                                                                                          false));
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
@@ -127,7 +130,7 @@ namespace Modules.Survivors {
                 skillName = "Tower_Secondary_BigZap",
                 skillNameToken = TOWER_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                skillIcon = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite, //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,

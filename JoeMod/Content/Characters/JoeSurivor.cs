@@ -55,7 +55,7 @@ namespace Modules.Survivors
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
 
-            bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
+            bodyPrefab.AddComponent<TeslaTrackerComponent>();
         }
 
         protected override void InitializeCharacterModel() {

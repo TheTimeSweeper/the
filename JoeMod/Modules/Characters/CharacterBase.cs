@@ -20,7 +20,7 @@ namespace Modules.Characters {
         public abstract ItemDisplaysBase itemDisplays { get; }
 
         public virtual GameObject bodyPrefab { get; set; }
-        public virtual CharacterModel characterBodyModel { get; set; }
+        public virtual CharacterModel bodyCharacterModel { get; set; }
         public string fullBodyName => bodyName + "Body";
 
         public virtual void Initialize() {
@@ -37,7 +37,6 @@ namespace Modules.Characters {
             InitializeSkills();
 
             InitializeHitboxes();
-            InitializeHurtboxes();
 
             InitializeSkins();
             InitializeItemDisplays();
@@ -51,7 +50,7 @@ namespace Modules.Characters {
             InitializeCharacterModel();
         }
         protected virtual void InitializeCharacterModel() {
-            characterBodyModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
+            bodyCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
         }
 
         protected virtual void InitializeCharacterMaster() { }
@@ -68,10 +67,6 @@ namespace Modules.Characters {
 
         public virtual void InitializeHitboxes() { }
 
-        public virtual void InitializeHurtboxes() {
-            Modules.Prefabs.SetupHurtBoxes(bodyPrefab);
-        }
-
         public virtual void InitializeSkins() { }
 
         public virtual void InitializeDoppelganger(string clone) {
@@ -83,7 +78,7 @@ namespace Modules.Characters {
                 ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
                 itemDisplayRuleSet.name = "idrs" + bodyName;
 
-                characterBodyModel.itemDisplayRuleSet = itemDisplayRuleSet;
+                bodyCharacterModel.itemDisplayRuleSet = itemDisplayRuleSet;
 
             if (itemDisplays != null) {
                 RoR2.RoR2Application.onLoad += SetItemDisplays;
@@ -91,7 +86,7 @@ namespace Modules.Characters {
         }
 
         public void SetItemDisplays() {
-                itemDisplays.SetItemDIsplays(characterBodyModel.itemDisplayRuleSet);
+                itemDisplays.SetItemDIsplays(bodyCharacterModel.itemDisplayRuleSet);
         }
 
     }

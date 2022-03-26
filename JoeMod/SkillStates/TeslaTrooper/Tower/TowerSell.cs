@@ -20,11 +20,16 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 		public override void FixedUpdate() {
 			base.FixedUpdate();
 			if (base.fixedAge > this.deathDuration) {
-				EntityState.Destroy(base.gameObject);
-			}
-		}
+                DestroySelf();
+                return;
+            }
+        }
 
-		public override bool shouldAutoDestroy {
+        protected virtual void DestroySelf() {
+            EntityState.Destroy(base.gameObject);
+        }
+
+        public override bool shouldAutoDestroy {
 			get {
 				return false;
 			}

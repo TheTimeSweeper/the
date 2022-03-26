@@ -12,7 +12,7 @@ using R2API;
 namespace Modules.Survivors
 {
     internal class TeslaTrooperSurvivor : SurvivorBase {
-
+        #region survivor stuff
         public override string bodyName => "TeslaTrooper";
 
         public const string TESLA_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_";
@@ -31,9 +31,9 @@ namespace Modules.Survivors
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 140f,
-            healthRegen = 1.5f,
-            armor = 10f,
+            maxHealth = 120f,
+            healthRegen = 1f,
+            armor = 5f,
 
             jumpCount = 1,
         };
@@ -47,8 +47,14 @@ namespace Modules.Survivors
         public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
+        #endregion
+
+        #region cool stuff
+        public static float conductiveAllyBoost = 1.3f;
 
         public static DeployableSlot teslaTowerDeployableSlot;
+        public DeployableAPI.GetDeployableSameSlotLimit GetTeslaTowerSlotLimit;
+        #endregion
 
         public override void Initialize() {
             base.Initialize();
@@ -57,13 +63,13 @@ namespace Modules.Survivors
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
-            bodyPrefab.AddComponent<TotallyOriginalTrackerComponent>();
+            bodyPrefab.AddComponent<TeslaTrackerComponent>();
             bodyPrefab.AddComponent<TeslaCoilControllerController>();
+            bodyPrefab.AddComponent<TeslaWeaponComponent>();
+            bodyPrefab.AddComponent<ZapBarrierController>();
 
             RegisterTowerDeployable();
         }
-
-        public DeployableAPI.GetDeployableSameSlotLimit GetTeslaTowerSlotLimit;
 
         private void RegisterTowerDeployable() {
 
@@ -149,7 +155,7 @@ namespace Modules.Survivors
                 skillName = "Tesla_Secondary_BigZap",
                 skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("textures/bufficons/texbuffteslaicon"), //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                skillIcon = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite, //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -214,7 +220,7 @@ namespace Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 15f,
+                baseRechargeInterval = 24f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -257,7 +263,7 @@ namespace Modules.Survivors
             for (int i = 0; i < skilldefs.Count; i++) {
                 Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
 
-                //AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
+                AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
         }
 
@@ -266,13 +272,13 @@ namespace Modules.Survivors
             Color color1 = Color.white;
             Color color2 = Color.white;
 
-            Recolor[] thing = characterBodyModel.GetComponent<SkinRecolorController>().Recolors;
+            Recolor[] thing = bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors;
 
             for (int i = 0; i < thing.Length; i++) {
 
                 Recolor recolor = thing[i];
 
-                if (recolor.recolorName == name.ToLower()) {
+                if (recolor.recolorName == name.ToLowerInvariant()) {
 
                     color1 = recolor.mainColor * 0.69f;
                     color2 = recolor.offColor;
@@ -364,6 +370,25 @@ namespace Modules.Survivors
             On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
             
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
+        }
+
+        private void BaseAI_OnBodyDamaged(On.RoR2.CharacterAI.BaseAI.orig_OnBodyDamaged orig, RoR2.CharacterAI.BaseAI self, DamageReport damageReport) {
+
+            if (damageReport.attackerBodyIndex == BodyCatalog.FindBodyIndex("TeslaTowerBody")) {
+                damageReport.damageInfo.attacker = null;
+            }
+
+            bool neverRetaliate = self.neverRetaliateFriendlies;
+
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.conductive)) {
+                self.neverRetaliateFriendlies = true;
+            }
+
+            orig(self, damageReport);
+
+            self.neverRetaliateFriendlies = neverRetaliate;
+
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
@@ -374,7 +399,7 @@ namespace Modules.Survivors
 
                 SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
                 if (color)
-                    skinRecolorController.SetRecolor(color.skillName.ToLower());
+                    skinRecolorController.SetRecolor(color.skillName.ToLowerInvariant());
             }
         }
 
@@ -409,21 +434,34 @@ namespace Modules.Survivors
         #region conductive
         private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
-            if (FacelessJoePlugin.conductiveMechanic || FacelessJoePlugin.conductiveAlly) {
-                CheckConductive(self, damageInfo);
-            }
+            CheckConductive(self, damageInfo);
 
             orig(self, damageInfo);
         }
 
         private static void CheckConductive(HealthComponent self, DamageInfo damageInfo) {
 
+            if (FacelessJoePlugin.conductiveMechanic) {
+                ApplyConductive(self, damageInfo);
+            }
+
+            if (FacelessJoePlugin.conductiveEnemy) {
+                ConsumeConductive(self, damageInfo);
+            }
+
+            if (FacelessJoePlugin.conductiveAlly) {
+                ConsumeConductiveAlly(self, damageInfo);
+            }
+        }
+
+        private static void ApplyConductive(HealthComponent self, DamageInfo damageInfo) {
+
             //mark enemies (or allies) conductive
             bool attackConductive = damageInfo.HasModdedDamageType(DamageTypes.conductive);
             if (attackConductive) {
                 if (damageInfo.attacker?.GetComponent<TeamComponent>()?.teamIndex == self.body.teamComponent.teamIndex) {
                     if (FacelessJoePlugin.conductiveAlly) {
-                        if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 3) {
+                        if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 1) {
                             self.body.AddBuff(Buffs.conductiveBuffTeam);
                         }
                     }
@@ -433,10 +471,13 @@ namespace Modules.Survivors
                     }
                 }
             }
+        }
+
+        private static void ConsumeConductive(HealthComponent self, DamageInfo damageInfo) {
 
             //consume conductive stacks for damage and shock
             bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
-            if (attackConsuming && FacelessJoePlugin.conductiveEnemy) {
+            if (attackConsuming) {
                 int conductiveCount = self.body.GetBuffCount(Buffs.conductiveBuff);
 
                 for (int i = 0; i < conductiveCount; i++) {
@@ -446,26 +487,40 @@ namespace Modules.Survivors
 
                 if (conductiveCount > 0) {
 
-                    damageInfo.AddModdedDamageType(DamageTypes.shockXs);
+                    damageInfo.AddModdedDamageType(DamageTypes.shockMed);
                     damageInfo.damage *= 1f + (0.2f * conductiveCount);
                 }
             }
+        }
 
+        private static void ConsumeConductiveAlly(HealthComponent self, DamageInfo damageInfo) {
+            
             //consume allied charged stacks for damage boost
-            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-            bool teamCharged = attackerBody && attackerBody.HasBuff(Buffs.conductiveBuffTeam);
-            if (teamCharged) {
+            CharacterBody attackerBody = damageInfo.attacker?.GetComponent<CharacterBody>();
+            if (attackerBody) {
+                bool teamCharged = attackerBody.HasBuff(Buffs.conductiveBuffTeam) || attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace);
+                if (teamCharged) {
 
-                int buffCount = attackerBody.GetBuffCount(Buffs.conductiveBuffTeam);
-                for (int i = 0; i < buffCount; i++) {
-                    self.body.RemoveBuff(Buffs.conductiveBuff);
+                    int buffCount = attackerBody.GetBuffCount(Buffs.conductiveBuffTeam);
+                    for (int i = 0; i < buffCount; i++) {
+                        Helpers.LogWarning("fuck " + buffCount);
+
+                        attackerBody.RemoveBuff(Buffs.conductiveBuffTeam);
+                        if (!attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace)) {
+                            attackerBody.AddTimedBuff(Buffs.conductiveBuffTeamGrace, 0.1f);
+                        }
+                        Helpers.LogWarning("team " + attackerBody.HasBuff(Buffs.conductiveBuffTeam));
+                        Helpers.LogWarning("team " + buffCount);
+                        Helpers.LogWarning("grace " + attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace));
+                        Helpers.LogWarning("grace " + buffCount);
+                    }
+
+                    damageInfo.AddModdedDamageType(DamageTypes.shockShort);
+                    damageInfo.damage *= conductiveAllyBoost;// 1f + (0.1f * buffCount);
                 }
-
-                damageInfo.AddModdedDamageType(DamageTypes.shockXs2);
-                damageInfo.damage *= 1f + (0.1f * buffCount);
             }
         }
-        #endregion
+        #endregion conductive
         #endregion hooks
     }
 }

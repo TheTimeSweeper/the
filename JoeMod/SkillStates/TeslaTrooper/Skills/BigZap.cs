@@ -36,7 +36,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             TeslaCoilControllerController controller = GetComponent<TeslaCoilControllerController>();
 
             if (controller && controller.coilReady) {
-                TotallyOriginalTrackerComponent tracker = GetComponent<TotallyOriginalTrackerComponent>();
+                TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
                 if (tracker && tracker.GetTrackingTarget()) {
 
                     controller.commandTowers(tracker.GetTrackingTarget());
@@ -90,7 +90,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
             blast.Fire();
 
-            PlaySoundAuthority(isCrit ? zapSound : zapSoundCrit);
+            Util.PlaySound(isCrit ? zapSound : zapSoundCrit, gameObject);
             
             #region effects
             EffectData fect = new EffectData {
@@ -103,14 +103,14 @@ namespace ModdedEntityStates.TeslaTrooper {
                 return;
             }
 
-            EffectManager.SpawnEffect(bigZapEffectPrefabArea, fect, false);
+            EffectManager.SpawnEffect(bigZapEffectPrefabArea, fect, true);
 
             if (!Input.GetKey(KeyCode.G))
-                EffectManager.SpawnEffect(bigZapEffectPrefab, fect, false);
+                EffectManager.SpawnEffect(bigZapEffectPrefab, fect, true);
 
             if (Input.GetKey(KeyCode.H)) {
                 fect.scale /= 2f;
-                EffectManager.SpawnEffect(bigZapEffectFlashPrefab, fect, false);
+                EffectManager.SpawnEffect(bigZapEffectFlashPrefab, fect, true);
             }
             #endregion effects
         }

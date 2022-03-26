@@ -7,6 +7,7 @@ using R2API;
 using SkillsPlusPlus;
 using SkillsPlusPlus.Modifiers;
 using EntityStates;
+using UnityEngine;
 
 namespace Modules {
 
@@ -24,7 +25,7 @@ namespace Modules {
 
         private static void doLanguage() {
 
-            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Orb Cast ( <style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
+            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Near Orb Cast (<style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
             LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+15%</style> Area");
         }
 
@@ -33,7 +34,7 @@ namespace Modules {
 
             public override void OnSkillEnter(BaseState skillState, int level) {
                 base.OnSkillEnter(skillState, level);
-                (skillState as Zap).skillsPlusCasts = AdditiveScaling(SkillsPlusCompat.TeslaZap_InitialCasts, 0, level/2);
+                (skillState as Zap).skillsPlusCasts = Mathf.FloorToInt(AdditiveScaling(0.0f, 0.5f, level));
             }
         }
 

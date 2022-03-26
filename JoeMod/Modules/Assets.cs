@@ -36,16 +36,20 @@ namespace Modules {
         public static NetworkSoundEventDef swordHitSoundEvent;
         #endregion
         
-        // CHANGE THIS
         private const string assetbundleName = "joe";
-        
+        #region joe
         //jerry don't you know
-        public static GameObject JoeFireball = null;
-        public static GameObject JoeImpactEffect = null;
-        public static GameObject JoeJumpSwingEffect = null;
-        
-        public static GameObject TeslaCoil = null;
-        public static GameObject TeslaCoilBlueprint = null;
+        public static GameObject JoeFireball;
+        public static GameObject JoeImpactEffect;
+        public static GameObject JoeJumpSwingEffect;
+        #endregion
+
+        #region tesla
+        public static GameObject TeslaCoil;
+        public static GameObject TeslaCoilBlueprint;
+
+        public static GameObject IndicatorPrefab;
+        #endregion
 
         public static void Initialize()
         {
@@ -61,54 +65,6 @@ namespace Modules {
             LoadSoundbank();
             //PopulateHenrysAssetsThatNoLongerExist();
             PopulateAss();
-        }
-
-        private static void PopulateAss() {
-
-            JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
-
-            JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
-            JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
-
-            TeslaCoil = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoil");
-            TeslaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
-
-            //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
-        }
-
-        public static void PopulateHenrysAssetsThatNoLongerExist()
-        {
-            if (!mainAssetBundle)
-            {
-                Debug.LogError("There is no AssetBundle to load assets from.");
-                return;
-            }
-            
-            // feel free to delete everything in here and load in your own assets instead
-            // it should work fine even if left as is- even if the assets aren't in the bundle
-
-            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
-
-            bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
-
-            if (bombExplosionEffect)
-            {
-                ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
-                shakeEmitter.amplitudeTimeDecay = true;
-                shakeEmitter.duration = 0.5f;
-                shakeEmitter.radius = 200f;
-                shakeEmitter.scaleShakeRadiusWithLocalScale = false;
-
-                shakeEmitter.wave = new Wave
-                {
-                    amplitude = 1f,
-                    frequency = 40f,
-                    cycleOffset = 0f
-                };
-            }
-
-            swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
-            swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
         }
 
         public static void LoadAssetBundle()
@@ -131,6 +87,72 @@ namespace Modules {
 
             assetNames = mainAssetBundle.GetAllAssetNames();
             assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
+        }
+
+        public static void PopulateHenrysAssetsThatNoLongerExist() {
+            if (!mainAssetBundle) {
+                Debug.LogError("There is no AssetBundle to load assets from.");
+                return;
+            }
+
+            // feel free to delete everything in here and load in your own assets instead
+            // it should work fine even if left as is- even if the assets aren't in the bundle
+
+            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
+
+            bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
+
+            if (bombExplosionEffect) {
+                ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
+                shakeEmitter.amplitudeTimeDecay = true;
+                shakeEmitter.duration = 0.5f;
+                shakeEmitter.radius = 200f;
+                shakeEmitter.scaleShakeRadiusWithLocalScale = false;
+
+                shakeEmitter.wave = new Wave {
+                    amplitude = 1f,
+                    frequency = 40f,
+                    cycleOffset = 0f
+                };
+            }
+
+            swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
+            swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+        }
+
+        private static void PopulateAss() {
+
+            JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
+
+            JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
+            JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
+
+            TeslaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
+
+            IndicatorPrefab = CreateTrackingIndicator();
+
+            //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
+        }
+
+        private static GameObject CreateTrackingIndicator() {
+
+            GameObject indicatorPrefab = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"), "TeslaIndicator", false);
+
+            UnityEngine.Object.DestroyImmediate(indicatorPrefab.transform.Find("TextMeshPro").gameObject);
+            UnityEngine.Object.DestroyImmediate(indicatorPrefab.transform.Find("Holder/Brackets").gameObject);
+
+            indicatorPrefab.transform.localScale = Vector3.one * .15f;
+            indicatorPrefab.transform.localPosition = Vector3.zero;
+            indicatorPrefab.transform.Find("Holder").rotation = Quaternion.identity;
+            indicatorPrefab.transform.Find("Holder/Brackets").rotation = Quaternion.identity;
+
+            SpriteRenderer spriteRenderer = indicatorPrefab.GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = Modules.Assets.LoadAsset<Sprite>("texIndicator1Close");
+            spriteRenderer.color = Color.cyan;
+            spriteRenderer.transform.localRotation = Quaternion.identity;
+            spriteRenderer.transform.localPosition = Vector3.zero;
+
+            return indicatorPrefab;
         }
 
         public static T Load<T>(string assString) where T : UnityEngine.Object => LoadAsset<T>(assString);
@@ -167,12 +189,12 @@ namespace Modules {
 
         public static void LoadSoundbank()
         {
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
-            {
-                byte[] array = new byte[manifestResourceStream2.Length];
-                manifestResourceStream2.Read(array, 0, array.Length);
-                SoundAPI.SoundBanks.Add(array);
-            }
+            //using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
+            //{
+            //    byte[] array = new byte[manifestResourceStream2.Length];
+            //    manifestResourceStream2.Read(array, 0, array.Length);
+            //    SoundAPI.SoundBanks.Add(array);
+            //}
 
             using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.Tesla_Trooper.bnk"))
             {
@@ -284,7 +306,7 @@ namespace Modules {
             bool assetExists = false;
             for (int i = 0; i < assetNames.Length; i++)
             {
-                if (assetNames[i].Contains(resourceName.ToLower()))
+                if (assetNames[i].Contains(resourceName.ToLowerInvariant()))
                 {
                     assetExists = true;
                     i = assetNames.Length;

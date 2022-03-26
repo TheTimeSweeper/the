@@ -495,11 +495,14 @@ namespace Modules.Characters {
                                                                 new Vector3(-0.00001F, 0.41146F, 0F),
                                                                 new Vector3(270F, 5F, 0F),
                                                                 new Vector3(0.2F, 0.2F, 0.2F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ShockNearby, "DisplayTeslaCoil",
-                                                                "Chest",
-                                                                new Vector3(0.24164F, 0.43981F, -0.14097F),
-                                                                new Vector3(345.9214F, 350.8688F, 334.1028F),
-                                                                new Vector3(0.35104F, 0.3523F, 0.3523F)));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.ShockNearby,
+                ItemDisplays.CreateDisplayRule("DisplayTeslaCoil",
+                                               "Gauntlet",
+                                               new Vector3(0.01605F, 0.19069F, 0.07331F),
+                                               new Vector3(76.7001F, 0F, 0F),
+                                               new Vector3(0.51375F, 0.46564F, 0.51375F)),
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftLeg)
+                ));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.SiphonOnLowHealth, "DisplaySiphonOnLowHealth",
                                                                 "Pelvis",
                                                                 new Vector3(-0.2131F, 0.15274F, 0.2284F),
@@ -725,7 +728,7 @@ namespace Modules.Characters {
                                                "LightningArm1",
                                                new Vector3(0, 0, 0),
                                                new Vector3(0, 0, 0),
-                                               new Vector3(1, 1, 1)),
+                                               new Vector3(0.8752531f, 0.8752531f, 0.8752531f)),
                 ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightArm)
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Equipment.BurnNearby, "DisplayPotion",

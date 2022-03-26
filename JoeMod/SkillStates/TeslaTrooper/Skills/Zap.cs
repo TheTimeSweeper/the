@@ -17,24 +17,24 @@ namespace ModdedEntityStates.TeslaTrooper
         #region Gameplay Values
         public static float DamageCoefficient = 1f;
         public static float BounceDamageMultplier = 0.69f;
-        public static float ProcCoefficient = 1f;
+        public static float ProcCoefficient = 0.8f;
         public static int OrbCasts = 3;
         public static float BounceDistance = 20;
 
         public static float BaseDuration = 1f;
         public static float BaseCastTime = 0.05f;//todo anim
 
-        public static float nearDist1 = 0.3f;
-        public static float nearDist2 = 0.6f;
+        public static float nearDist1 = 0.4f;
+        public static float nearDist2 = 0.7f;
         #endregion
 
         public int skillsPlusCasts = 0;
 
-
         private List<HealthComponent> _bouncedObjectsList = new List<HealthComponent>();
         private bool _crit;
 
-        private TotallyOriginalTrackerComponent _tracker;
+        private TeslaWeaponComponent _weaponComponent;
+        private TeslaTrackerComponent _tracker;
         private HurtBox _targetHurtbox;
         private bool _attackingTeammate;
 
@@ -44,9 +44,8 @@ namespace ModdedEntityStates.TeslaTrooper
         private float _originSpacing = 0.1f;
 
         private int _currentCasts;
-        private int _distCastsPenalty;
 
-        private int totalOrbCasts => OrbCasts + skillsPlusCasts - distCastsPenalty;
+        private int totalOrbCasts;
 
         private float nextCastTime
         {
@@ -65,17 +64,6 @@ namespace ModdedEntityStates.TeslaTrooper
                 {
 
                     return _muzzleTransform.position + _muzzleTransform.forward * (-_originSpacing * (_currentCasts % 3));
-
-                    //switch (_currentCasts)
-                    //{
-                    //    case 0:
-                    //        return _muzzleTransform.position + _muzzleTransform.forward * _originSpacing;
-                    //    case 1:
-                    //        return _muzzleTransform.position - _muzzleTransform.forward * _originSpacing;
-                    //    default:
-                    //    case 2:
-                    //        return _muzzleTransform.position;
-                    //}
                 }
             }
         }
@@ -84,14 +72,20 @@ namespace ModdedEntityStates.TeslaTrooper
         {
             get
             {
+                if (_weaponComponent && _weaponComponent.hasTeslaCoil) {
+                    return LightningOrb.LightningType.Tesla;
+                }
+
                 switch (_currentCasts)
                 {
-                    default:
                     case 0:
                         return LightningOrb.LightningType.Ukulele;
                     case 1:
                         return LightningOrb.LightningType.Ukulele;
                     case 2:
+                        return LightningOrb.LightningType.Ukulele;
+                    default:
+                    case 3:
                         return LightningOrb.LightningType.Ukulele;
                 }
             }
@@ -102,9 +96,13 @@ namespace ModdedEntityStates.TeslaTrooper
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
 
-            _tracker = GetComponent<TotallyOriginalTrackerComponent>();
+            _weaponComponent = GetComponent<TeslaWeaponComponent>();
+
+            _tracker = GetComponent<TeslaTrackerComponent>();
 
             _muzzleTransform = GetModelChildLocator().FindChild("MuzzleGauntlet");
+            if (_muzzleTransform == null)
+                _muzzleTransform = transform;
 
             StartAimMode(2);
 
@@ -116,21 +114,31 @@ namespace ModdedEntityStates.TeslaTrooper
             if (isAuthority) {
                 if (_tracker) {
                     _targetHurtbox = _tracker.GetTrackingTarget();
+
+                        _attackingTeammate = _tracker.GetIsTargetingTeammate();
+
+                    switch (_tracker.GetTrackingTargetDistance()) {
+                        default:
+                        case TeslaTrackerComponent.RangeTier.FURTHEST:
+                            totalOrbCasts = OrbCasts - 2 + Mathf.FloorToInt(skillsPlusCasts * 0.334f);
+                            break;
+                        case TeslaTrackerComponent.RangeTier.MIDDLE:
+                            totalOrbCasts = OrbCasts - 1 + Mathf.FloorToInt(skillsPlusCasts * 0.667f);
+                            break;
+                        case TeslaTrackerComponent.RangeTier.CLOSEST:
+                            totalOrbCasts = OrbCasts + skillsPlusCasts;
+                            break;
+                    }
+
+                    totalOrbCasts += skillsPlusCasts;
+
                 } else {
                     _targetHurtbox = createOrb().PickNextTarget(transform.position);
+                    totalOrbCasts = OrbCasts;
                 }
             }
 
-            if (_targetHurtbox.teamIndex == teamComponent.teamIndex)
-                _attackingTeammate = true;
-
             _crit = RollCrit();
-
-            //if (!_targetHurtbox) {
-            //    duration = 0.1f;
-            //    //base.outer.SetNextStateToMain();
-            //    return;
-            //}
         }
 
         private LightningOrb createOrb() {
@@ -194,24 +202,23 @@ namespace ModdedEntityStates.TeslaTrooper
                 lightningOrb.range = BounceDistance * 2;
                 lightningOrb.damageCoefficientPerBounce = 3f;
 
-                lightningOrb.damageValue *= 0.3f;
+                lightningOrb.damageValue *= 0.1f;
             }
         }
 
         private void PlayZap()
         {
-            //muzzle flash on gauntle
+            //EffectManager.SimpleMuzzleFlash(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+            //                                gameObject,
+            //                                "MuzzleGauntlet",
+            //                                true);
             PlayAnimation("Gesture, Additive", "Shock");
 
             string sound = "Play_itesatta";
             if (_crit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
             //sound = EntityStates.Mage.Weapon.FireLaserbolt.attackString;
 
-            PlaySoundAuthority(sound);
-
-            //god that was beautiful to my heart
-            //but hurtful my brain
-            //todo sound: actual audio engineering. too much high frequency there
+            Util.PlaySound(sound, gameObject);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
@@ -221,12 +228,18 @@ namespace ModdedEntityStates.TeslaTrooper
 
         // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
         public override void OnSerialize(NetworkWriter writer) {
+
             writer.Write(HurtBoxReference.FromHurtBox(this._targetHurtbox));
+            writer.Write(_attackingTeammate);
+            writer.Write(totalOrbCasts);
         }
 
         // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
         public override void OnDeserialize(NetworkReader reader) {
+
             this._targetHurtbox = reader.ReadHurtBoxReference().ResolveHurtBox();
+            this._attackingTeammate = reader.ReadBoolean();
+            this.totalOrbCasts = reader.ReadInt32();
         }
     }
 }

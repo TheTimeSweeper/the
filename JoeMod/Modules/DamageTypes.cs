@@ -6,12 +6,12 @@ namespace Modules {
     internal static class DamageTypes {
 
         public static float stunTime = 2.5f;
-        public static float shockTime = 2.5f;
-        public static float shockTime2 = 1f;
+        public static float shockTimeMed = 2.5f;
+        public static float shockTimeShort = 1f;
 
-        public static DamageAPI.ModdedDamageType stunXs;
-        public static DamageAPI.ModdedDamageType shockXs;
-        public static DamageAPI.ModdedDamageType shockXs2;
+        public static DamageAPI.ModdedDamageType stunLong;
+        public static DamageAPI.ModdedDamageType shockMed;
+        public static DamageAPI.ModdedDamageType shockShort;
 
         public static DamageAPI.ModdedDamageType conductive;
         public static DamageAPI.ModdedDamageType consumeConductive;
@@ -20,9 +20,9 @@ namespace Modules {
 
             if (FacelessJoePlugin.conductiveMechanic) {
 
-                stunXs = DamageAPI.ReserveDamageType();
-                shockXs = DamageAPI.ReserveDamageType();
-                shockXs2 = DamageAPI.ReserveDamageType();
+                stunLong = DamageAPI.ReserveDamageType();
+                shockMed = DamageAPI.ReserveDamageType();
+                shockShort = DamageAPI.ReserveDamageType();
 
                 conductive = DamageAPI.ReserveDamageType();
                 consumeConductive = DamageAPI.ReserveDamageType();
@@ -46,19 +46,22 @@ namespace Modules {
 
             if (!victim.isInFrozenState) {
 
-                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(stunXs)) {
+                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(stunLong)) {
                     self.SetStun(stunTime);
                     return;
                 }
 
-                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockXs)) {
-                    self.SetShock(shockTime);
-                    return;
-                }
-                //how scuffed is this?
-                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockXs2)) {
-                    self.SetShock(shockTime2);
-                    return;
+                if ((damageInfo.damageType & DamageType.Shock5s) == damageInfo.damageType) {
+
+                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockMed)) {
+                        self.SetShock(shockTimeMed);
+                        return;
+                    }
+                    //how scuffed is this?
+                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockShort)) {
+                        self.SetShock(shockTimeShort);
+                        return;
+                    }
                 }
             }
         }
