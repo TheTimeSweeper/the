@@ -250,33 +250,33 @@ namespace Modules.Survivors
             SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
 
             List<SkillDef> skilldefs = new List<SkillDef> {
-                null,
-                createRecolorSkillDef("Blue", Color.blue),
-                createRecolorSkillDef("Green", Color.green),
-                createRecolorSkillDef("Yellow", Color.yellow),
-                createRecolorSkillDef("Orange", new Color(255f/255f, 156f/255f, 0f)),
-                createRecolorSkillDef("Cyan", Color.cyan),
-                createRecolorSkillDef("Purple", new Color(145f/255f, 0, 200f/255f)),
-                createRecolorSkillDef("Pink", new Color(255f/255f, 132f/255f, 235f/255f)),
+                createRecolorSkillDef("Red"),
+                createRecolorSkillDef("Blue"),
+                createRecolorSkillDef("Green"),
+                createRecolorSkillDef("Yellow"),
+                createRecolorSkillDef("Orange"),
+                createRecolorSkillDef("Cyan"),
+                createRecolorSkillDef("Purple"),
+                createRecolorSkillDef("Pink"),
             };
-
-            skilldefs[0] = createRecolorSkillDef("Red", Color.red);
+            //why'd I do this separately again?
+            //skilldefs[0] = createRecolorSkillDef("Red");
 
             if (Modules.Config.NewColor) {
-                skilldefs.Add(createRecolorSkillDef("Black", Color.black));
+                skilldefs.Add(createRecolorSkillDef("Black"));
             }
 
             for (int i = 0; i < skilldefs.Count; i++) {
-                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], masterySkinUnlockableDef);
+
+                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0? null : masterySkinUnlockableDef);
 
                 AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
         }
 
-        private SkillDef createRecolorSkillDef(string name, Color iconColor) {
+        private SkillDef createRecolorSkillDef(string name) {
 
             Color color1 = Color.white;
-            Color color2 = Color.white;
 
             Recolor[] thing = bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors;
 
@@ -286,8 +286,7 @@ namespace Modules.Survivors
 
                 if (recolor.recolorName == name.ToLowerInvariant()) {
 
-                    color1 = recolor.mainColor * 0.69f;
-                    color2 = recolor.offColor;
+                    color1 = recolor.colors[0] * 0.69f;
                 }
             }
 

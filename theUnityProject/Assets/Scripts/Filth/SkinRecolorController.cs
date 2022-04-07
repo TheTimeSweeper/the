@@ -8,10 +8,6 @@ public class Recolor {
     public string recolorName;
 
     public Color[] colors = new Color[] { Color.red };
-
-    [Space]
-    public Color mainColor = Color.red;
-    public Color offColor = Color.red / 2;
 }
 
     [System.Serializable]
