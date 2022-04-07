@@ -28,7 +28,7 @@ namespace Modules.Survivors
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
             bodyColor = new Color(0.8f, 1, 1),
 
-            crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            crosshair = Assets.LoadAsset<GameObject>("TeslaCrosshair"),
             podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 120f,
@@ -64,9 +64,12 @@ namespace Modules.Survivors
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
             bodyPrefab.AddComponent<TeslaTrackerComponent>();
-            bodyPrefab.AddComponent<TeslaCoilControllerController>();
+            bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
             bodyPrefab.AddComponent<ZapBarrierController>();
+
+            bodyCharacterModel.baseRendererInfos[0].defaultMaterial.SetEmission(2);
+            bodyCharacterModel.baseRendererInfos[8].defaultMaterial.SetEmission(2);
 
             RegisterTowerDeployable();
         }
@@ -112,7 +115,7 @@ namespace Modules.Survivors
             base.InitializeDisplayPrefab();
         }
 
-
+        
         #region skills
         public override void InitializeSkills() {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
@@ -145,7 +148,7 @@ namespace Modules.Survivors
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
         }
-
+        
         private void InitializeSecondarySkills()
         {
             States.entityStates.Add(typeof(AimBigZap));
@@ -155,11 +158,11 @@ namespace Modules.Survivors
                 skillName = "Tesla_Secondary_BigZap",
                 skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
-                skillIcon = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite, //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4.5f,
+                baseRechargeInterval = 5.5f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -178,12 +181,10 @@ namespace Modules.Survivors
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
         }
 
-        private void InitializeUtilitySkills()
-        {
+        private void InitializeUtilitySkills() {
 
             States.entityStates.Add(typeof(ShieldZap));
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Utility_ShieldZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BARRIER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
@@ -206,17 +207,17 @@ namespace Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
+            Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef);
         }
 
         private void InitializeSpecialSkills() {
-            States.entityStates.Add(typeof(DeployTeslaTower));
 
+            States.entityStates.Add(typeof(DeployTeslaTower));
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Special_Tower",
                 skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("textures/itemicons/texteslacoilicon"), //Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -227,7 +228,7 @@ namespace Modules.Survivors
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
@@ -241,6 +242,11 @@ namespace Modules.Survivors
         }
 
         private void InitializeRecolorSkills() {
+
+            if (bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors == null) {
+                FacelessJoePlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+            }
+
             SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
 
             List<SkillDef> skilldefs = new List<SkillDef> {
@@ -362,15 +368,33 @@ namespace Modules.Survivors
         #region hooks
         protected void Hooks() {
 
+
+            if (bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors == null) {
+                FacelessJoePlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+            } else {
+                On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+            }
+
+            On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
+
             On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
             On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
-
-            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
             
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
+        }
+
+        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
+            orig(self, skinIndex);
+
+            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
+            if (skinRecolorController) {
+
+                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
+                if (color)
+                    skinRecolorController.SetRecolor(color.skillName.ToLowerInvariant());
+            }
         }
 
         private void BaseAI_OnBodyDamaged(On.RoR2.CharacterAI.BaseAI.orig_OnBodyDamaged orig, RoR2.CharacterAI.BaseAI self, DamageReport damageReport) {
@@ -389,18 +413,6 @@ namespace Modules.Survivors
 
             self.neverRetaliateFriendlies = neverRetaliate;
 
-        }
-
-        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
-            orig(self, skinIndex);
-
-            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
-            if (skinRecolorController) {
-
-                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
-                if (color)
-                    skinRecolorController.SetRecolor(color.skillName.ToLowerInvariant());
-            }
         }
 
         #region tower hacks
@@ -475,9 +487,10 @@ namespace Modules.Survivors
 
         private static void ConsumeConductive(HealthComponent self, DamageInfo damageInfo) {
 
-            //consume conductive stacks for damage and shock
             bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
             if (attackConsuming) {
+                //consume conductive stacks for damage and shock
+
                 int conductiveCount = self.body.GetBuffCount(Buffs.conductiveBuff);
 
                 for (int i = 0; i < conductiveCount; i++) {
@@ -494,25 +507,23 @@ namespace Modules.Survivors
         }
 
         private static void ConsumeConductiveAlly(HealthComponent self, DamageInfo damageInfo) {
-            
-            //consume allied charged stacks for damage boost
-            CharacterBody attackerBody = damageInfo.attacker?.GetComponent<CharacterBody>();
+
+            if (!damageInfo.attacker)
+                return;
+
+            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
             if (attackerBody) {
                 bool teamCharged = attackerBody.HasBuff(Buffs.conductiveBuffTeam) || attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace);
                 if (teamCharged) {
+                    //consume allied charged stacks for damage boost and shock
 
                     int buffCount = attackerBody.GetBuffCount(Buffs.conductiveBuffTeam);
                     for (int i = 0; i < buffCount; i++) {
-                        Helpers.LogWarning("fuck " + buffCount);
 
                         attackerBody.RemoveBuff(Buffs.conductiveBuffTeam);
                         if (!attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace)) {
                             attackerBody.AddTimedBuff(Buffs.conductiveBuffTeamGrace, 0.1f);
                         }
-                        Helpers.LogWarning("team " + attackerBody.HasBuff(Buffs.conductiveBuffTeam));
-                        Helpers.LogWarning("team " + buffCount);
-                        Helpers.LogWarning("grace " + attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace));
-                        Helpers.LogWarning("grace " + buffCount);
                     }
 
                     damageInfo.AddModdedDamageType(DamageTypes.shockShort);

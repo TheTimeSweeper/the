@@ -31,12 +31,13 @@ namespace Modules.Survivors {
             crosshair = Modules.Assets.LoadCrosshair("TiltedBracket"),
             podPrefab = null,
             
-            damage = 24f,
-            healthRegen = 0f,
-            jumpCount = 0,
             maxHealth = 200f,
+            healthRegen = 0f,
+            damage = 12f,
             moveSpeed = 0,
+            jumpCount = 0,
             
+            //todo camera stuck in tower when you play as it
             aimOriginPosition = new Vector3( 0, 10, 0),
             cameraPivotPosition = new Vector3(0, 9, 0),
             cameraParamsVerticalOffset = 20,
@@ -81,6 +82,7 @@ namespace Modules.Survivors {
             EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(bodyPrefab, "Weapon");
             entityStateMachine.initialStateType = new SerializableEntityStateType(typeof(TowerLifetime));
             entityStateMachine.mainStateType = new SerializableEntityStateType(typeof(TowerLifetime));
+            States.entityStates.Add(typeof(TowerLifetime));
 
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new SerializableEntityStateType(typeof(TowerSell));
             States.entityStates.Add(typeof(TowerSell));
@@ -116,7 +118,7 @@ namespace Modules.Survivors {
             SkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef(new SkillDefInfo("Tower_Primary_Zap",
                                                                                          TOWER_PREFIX + "PRIMARY_ZAP_NAME",
                                                                                          TOWER_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
-                                                                                         Modules.Assets.LoadAsset<Sprite>("texTeslaTowerSkillPrimary"),
+                                                                                         Modules.Assets.LoadAsset<Sprite>("texIconTeslaTower"),
                                                                                          new EntityStates.SerializableEntityStateType(typeof(TowerZap)),
                                                                                          "Body",
                                                                                          false));
@@ -130,7 +132,7 @@ namespace Modules.Survivors {
                 skillName = "Tower_Secondary_BigZap",
                 skillNameToken = TOWER_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TOWER_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
-                skillIcon = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite, //Modules.Assets.LoadAsset<Sprite>("skill2_icon"),              //todo .TeslaTrooper
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillSecondaryThunderclap"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(TowerBigZap)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,

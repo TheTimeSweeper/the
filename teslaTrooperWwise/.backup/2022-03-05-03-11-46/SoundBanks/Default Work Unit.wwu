@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{421A87F1-3971-4989-9B8B-843703D41DA2}" SchemaVersion="89">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{421A87F1-3971-4989-9B8B-843703D41DA2}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Tesla_Trooper" ID="{A5F99518-1799-484C-A035-35254139AD87}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_prism_bpripow_prism_tower_prep" ID="{FE098812-43A9-4048-8E8E-9DC73B19038E}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itessee" ID="{04D328E2-4AF7-4091-9A28-5AFDE28ADD2B}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesmof" ID="{F10FB05B-3C20-4092-A178-535E918A60BB}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_tower_btespow_tesla_tower_prep" ID="{FD5E8698-228D-40AC-B966-EACE670FC56D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesdic" ID="{D8C5EA51-F69C-40EA-8AFF-0C9CD0578762}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesatb" ID="{5E3E8976-0810-40FD-A74A-58AE490CE6BD}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesatc" ID="{1D4BB684-C6A5-4111-A283-4E87D703EBF2}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesdib" ID="{390ABE9D-F7F2-4193-B113-B6286689AA56}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_tower_btesat2a_tesla_tower_attack" ID="{E69E3105-AD88-4198-AB1E-541516B1DA56}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_iteschaa" ID="{28069552-2788-4230-B60B-9381DEFD4630}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_tower_btesat1a_tesla_tower_attack" ID="{29F73725-6010-43AC-909B-2AEBFB7F6B34}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower" ID="{67E79CCF-1984-43C3-AD83-5A4727A6FA8B}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itessec" ID="{196A2E9F-9A4E-43CD-835E-882757676EEE}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itessed" ID="{9CF8C7FC-7FF4-43DE-81B7-65B80B7DD1C8}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itessea" ID="{FEF50992-FCA5-4510-B458-A1E52C355EA4}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_trooper_itesat2b_tesla_trooper_attack" ID="{FC319D99-D373-4687-92A3-33436FFF3A39}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_prism_vpriatta_prism_tank_attack" ID="{CC2FD52E-5A8D-46DF-95DE-45D1D0D316F4}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_building_uselbuil" ID="{8FB88700-6B1A-46F3-AF6A-F63598E4E062}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesmoc" ID="{6E3C8FC3-D2A4-48BB-AC4C-C4C9F5BD6B2C}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_trooper_itesat2a_tesla_trooper_attack" ID="{00B0A16A-FFFE-48DC-9331-8451C68CFC95}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesfec" ID="{0743DF5C-0B54-497A-9903-0883E77759BF}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesmod" ID="{EF967A82-0A57-498A-9FD7-A7466F35B766}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesmoa" ID="{4C5F907E-C56E-499D-9490-E4CE2149A8BB}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesdia" ID="{F46975A8-533E-49DA-90FF-92F8B33C3EB1}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesfeb" ID="{6F38D61D-C08F-4A02-A672-665F35F3F9A2}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesfea" ID="{24537C38-25B4-4A77-9CF2-44293E4750DC}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_tank_vtesattb_tesla_tank_attack" ID="{2F87B4FA-0FCD-4A7B-930A-75278AE765D1}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesata" ID="{C1F9D1EB-9B83-4BAB-846D-0E3B590CC771}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_buliding_uplace" ID="{27949F9A-3FF2-4C9D-A87B-A988F1C8B415}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesmob" ID="{8EAD54EE-DE98-4CE4-88B9-D5C73B811889}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesdid" ID="{52869ED8-DE72-4D61-90D8-A952B13C4886}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_prism_bpriat1a_prism_tower_attack" ID="{949E8CFF-D9A1-4E6E-B58E-B2C8FE6789BF}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_tank_vtesatta_tesla_tank_attack" ID="{8788E9F9-A3B7-4EDC-8CD2-81C7C6DF27A9}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesatd" ID="{3EF0B6C1-869E-4EF2-BF7B-98AC5D12764C}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesate" ID="{901D3466-682D-4F95-A7AB-E810563E9FF1}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Play_itesmoe" ID="{1390DA25-6350-4FE2-8ACA-7C3B52EEA967}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

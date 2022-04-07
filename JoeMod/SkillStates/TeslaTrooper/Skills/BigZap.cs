@@ -7,88 +7,92 @@ using UnityEngine;
 
 namespace ModdedEntityStates.TeslaTrooper {
     
-    public class BigZap : BaseTimedSkillState
-    {
+    public class BigZap : BaseTimedSkillState {
+        public static GameObject bigZapEffectPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/magelightningbombexplosion");
+        public static GameObject bigZapEffectPrefabArea = Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova");
+        public static GameObject bigZapEffectFlashPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
+
         public static float DamageCoefficient = 5.0f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
         public static float BaseDuration = 1;
         public static float BaseCastTime = 0;//0.2f //todo windup sound, windup vfx, and zapping ground
 
-        public float skillsPlusMulti = 1f;
+        public float skillsPlusAreaMulti = 1f;
+        public float skillsPlusDamageMulti = 1f;
         public float attackRadius;
         public Vector3 aimPoint;
 
-        protected string zapSound = "Play_tank_vtesatta_tesla_tank_attack";
-        protected string zapSoundCrit = "Play_tank_vtesattb_tesla_tank_attack";
+        private string zapSound = "Play_tank_vtesatta_tesla_tank_attack";
+        private string zapSoundCrit = "Play_tank_vtesattb_tesla_tank_attack";
 
-        public static GameObject bigZapEffectPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/magelightningbombexplosion");
-        public static GameObject bigZapEffectPrefabArea = Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova");
-        public static GameObject bigZapEffectFlashPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
-
-        private bool commandTowers;
+        private bool commandedTowers;
 
         public override void OnEnter() {
             base.OnEnter();
             
             InitDurationValues(BaseDuration, BaseCastTime);
             
-            TeslaCoilControllerController controller = GetComponent<TeslaCoilControllerController>();
+            TeslaTowerControllerController controller = GetComponent<TeslaTowerControllerController>();
 
-            if (controller && controller.coilReady) {
+            if (base.isAuthority && controller && controller.coilReady) {
                 TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
                 if (tracker && tracker.GetTrackingTarget()) {
 
                     controller.commandTowers(tracker.GetTrackingTarget());
 
-                    commandTowers = true;
+                    commandedTowers = true;
                 }
             }
-            attackRadius = BaseAttackRadius * skillsPlusMulti;
-
-
+            attackRadius = BaseAttackRadius * skillsPlusAreaMulti;
+            
             //todo anim: incombat
             //PlayAnimation("Gesture, Override", "HandOut");
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+
+            base.characterBody.AddSpreadBloom(1);
         }
 
         protected override void OnCastEnter() {
             base.OnCastEnter();
 
-            if (commandTowers)
+            if (commandedTowers)
                 return;
 
             bool isCrit = RollCrit();
 
-            BlastAttack blast = new BlastAttack {
-                attacker = gameObject,
-                inflictor = gameObject,
-                teamIndex = teamComponent.teamIndex,
-                //attackerFiltering = AttackerFiltering.NeverHit
+            if (base.isAuthority) {
 
-                position = aimPoint,
-                radius = attackRadius,
-                falloffModel = BlastAttack.FalloffModel.None,
+                BlastAttack blast = new BlastAttack {
+                    attacker = gameObject,
+                    inflictor = gameObject,
+                    teamIndex = teamComponent.teamIndex,
+                    //attackerFiltering = AttackerFiltering.NeverHit
 
-                baseDamage = damageStat * DamageCoefficient,
-                crit = isCrit,
-                damageType = DamageType.Stun1s,
-                //damageColorIndex = DamageColorIndex.Default,
+                    position = aimPoint,
+                    radius = attackRadius,
+                    falloffModel = BlastAttack.FalloffModel.None,
 
-                procCoefficient = 1,
-                //procChainMask = 
-                //losType = BlastAttack.LoSType.NearestHit,
+                    baseDamage = damageStat * DamageCoefficient * skillsPlusDamageMulti,
+                    crit = isCrit,
+                    damageType = DamageType.Stun1s,
+                    //damageColorIndex = DamageColorIndex.Default,
 
-                baseForce = -5, //enfucker void grenade here we go
-                //bonusForce = ;
+                    procCoefficient = 1,
+                    //procChainMask = 
+                    //losType = BlastAttack.LoSType.NearestHit,
 
-                //impactEffect = EffectIndex.uh;
-            };
+                    baseForce = -5, //enfucker void grenade here we go
+                                    //bonusForce = ;
 
-            if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
-                blast.AddModdedDamageType(DamageTypes.consumeConductive);
+                    //impactEffect = EffectIndex.uh;
+                };
+
+                if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
+                    blast.AddModdedDamageType(DamageTypes.consumeConductive);
+                }
+                blast.Fire();
             }
-            blast.Fire();
 
             Util.PlaySound(isCrit ? zapSound : zapSoundCrit, gameObject);
             
@@ -102,7 +106,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 tryEffects(fect);
                 return;
             }
-
+            
             EffectManager.SpawnEffect(bigZapEffectPrefabArea, fect, true);
 
             if (!Input.GetKey(KeyCode.G))
@@ -136,7 +140,6 @@ namespace ModdedEntityStates.TeslaTrooper {
                 Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightningmage"), //probably favorite, but too blatantly arti. also doesn't scale I think, outer radius blast too far (misleading (but i can just increase my range to match lol)
                 Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning"), //same as 10 but yellow
             };
-
 
         private static void tryEffects(EffectData fect)
         {

@@ -7,9 +7,11 @@ public class Recolor {
 
     public string recolorName;
 
-    public Color mainColor = Color.red;
+    public Color[] colors = new Color[] { Color.red };
 
-    public Color offColor = Color.red/2;
+    [Space]
+    public Color mainColor = Color.red;
+    public Color offColor = Color.red / 2;
 }
 
     [System.Serializable]
@@ -41,10 +43,7 @@ public class RecolorGroup {
 public class SkinRecolorController : MonoBehaviour { 
 
     [SerializeField]
-    private RecolorGroup mainRecolor;
-
-    [SerializeField]
-    private RecolorGroup offRecolor;
+    private RecolorGroup[] recolorGroups;
 
     [Space, SerializeField]
     private Recolor[] recolors;
@@ -52,21 +51,30 @@ public class SkinRecolorController : MonoBehaviour {
     public int currentColor { get; private set; } = -1;
 
     void Awake() {
-        mainRecolor.fillPropertieBlocks();
-        offRecolor.fillPropertieBlocks();
+
+        for (int i = 0; i < recolorGroups.Length; i++) {
+            recolorGroups[i].fillPropertieBlocks();
+        }
     }
 
-    public void SetRecolor(Color mainColor) => SetRecolor(mainColor, mainColor / 2);
-    public void SetRecolor (Color mainColor, Color offColor) {
-        if (offColor == Color.black)
-            offColor = mainColor / 2;
+    public void SetRecolor (Color[] colors) {
 
-        mainRecolor.setColors(mainColor);
-        offRecolor.setColors(offColor);
+        for (int i = 0; i < recolorGroups.Length; i++) {
+
+            if (i >= colors.Length) {
+                continue;
+            }
+
+            recolorGroups[i].setColors(colors[i]);
+        }
     }
 
     public void SetRecolor(int i) {
-        SetRecolor(recolors[i].mainColor, recolors[i].offColor);
+
+        if (recolors[i].colors.Length < recolorGroups.Length) {
+            Debug.LogError("not enough colors for this recolor");
+        }
+        SetRecolor(recolors[i].colors);
         currentColor = i;
     }
 
@@ -92,9 +100,7 @@ public class SkinRecolorController : MonoBehaviour {
     private bool updateColor = false;
 
     [SerializeField]
-    private Color mainColor = Color.white;
-    [SerializeField]
-    private Color offColor = Color.white;
+    private Color[] testColors;
 
     [ContextMenu("SetColors")]
     private void Start() {
@@ -102,7 +108,7 @@ public class SkinRecolorController : MonoBehaviour {
     }
     private void Update() {
         if (updateColor) {
-            SetRecolor(mainColor, offColor);
+            SetRecolor(testColors);
         }
     }
 

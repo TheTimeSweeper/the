@@ -10,7 +10,7 @@ namespace Modules {
         // armor buff gained during roll
         public static BuffDef armorBuff;
         public static BuffDef zapShieldBuff;
-
+        
         public static BuffDef conductiveBuff;
         public static BuffDef conductiveBuffTeam;
         public static BuffDef conductiveBuffTeamGrace;
@@ -25,21 +25,24 @@ namespace Modules {
                            false);
 
             if (FacelessJoePlugin.conductiveMechanic) {
+
+                Sprite teslaIcon = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite;
+
                 conductiveBuff =
                     AddNewBuff("Conductive",
-                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite,
+                               teslaIcon,
                                Color.blue,
                                true,
                                true);
                 conductiveBuffTeam =
                     AddNewBuff("Charged",
-                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite,
+                               teslaIcon,
                                Color.cyan,
                                false,
                                false);
                 conductiveBuffTeamGrace =
                     AddNewBuff("Charged2",
-                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/TeslaField").iconSprite,
+                               teslaIcon,
                                Color.blue,
                                false,
                                false);

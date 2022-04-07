@@ -44,7 +44,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
     //private readonly BullseyeSearch search = new BullseyeSearch();
 
     void Awake() {
-        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.IndicatorPrefab);// RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"));
+        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);// RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"));
         teamComponent = GetComponent<TeamComponent>();
     }
 
@@ -89,14 +89,14 @@ public class TeslaTrackerComponent : MonoBehaviour {
         return range;
     }
 
-    public void setIndicatorRamge(RangeTier tier) {
-        indicator.currentRange = tier;
-    }
-    public void setIndicatorEmpowered(bool empowered) {
+    public void SetIndicatorEmpowered(bool empowered) {
         _empowered = empowered;
         indicator.empowered = _empowered;
     }
 
+    private void setIndicatorRamge(RangeTier tier) {
+        indicator.currentRange = tier;
+    }
     private void setIndicatorAlly() {
         indicator.targetingAlly = _targetingAlly;
     }
@@ -166,9 +166,10 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
     public class TeslaIndicator : Indicator {
 
-        public static Sprite[] sprites = new Sprite[] { Modules.Assets.LoadAsset<Sprite>("texIndicator1Close"),
-                                                        Modules.Assets.LoadAsset<Sprite>("texIndicator2Med"),
-                                                        Modules.Assets.LoadAsset<Sprite>("texIndicator3Far")
+        public static Sprite allySprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorAlly");
+        public static Sprite[] rangeSprites = new Sprite[] { Modules.Assets.LoadAsset<Sprite>("texIndicator1Close"),
+                                                             Modules.Assets.LoadAsset<Sprite>("texIndicator2Med"),
+                                                             Modules.Assets.LoadAsset<Sprite>("texIndicator3Far")
         };
 
         public static Color[] targetcolors = new Color[] { Color.cyan,
@@ -190,6 +191,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
                 SpriteRenderer rend = visualizerTransform.GetComponentInChildren<SpriteRenderer>();
 
+                //color
                 TargetType currentTarget = TargetType.DEFAULT;
 
                 if (empowered) {
@@ -200,15 +202,20 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
                 rend.color = targetcolors[(int)currentTarget];
 
-                RangeTier overrideTier = currentRange;
+                //sprite
+                switch (currentTarget) {
 
-                if (currentTarget == TargetType.ALLY) {
-                    overrideTier = RangeTier.FURTHEST;
+                    default:
+                    case TargetType.DEFAULT:
+                        rend.sprite = rangeSprites[(int)currentRange];
+                        break;
+                    case TargetType.EMPOWERED:
+                        rend.sprite = rangeSprites[(int)RangeTier.CLOSEST];
+                        break;
+                    case TargetType.ALLY:
+                        rend.sprite = allySprite;
+                        break;
                 }
-                if (currentTarget == TargetType.EMPOWERED) {
-                    overrideTier = RangeTier.CLOSEST;
-                }
-                rend.sprite = sprites[(int)overrideTier];
             }
         }
     }

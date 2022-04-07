@@ -1,14 +1,21 @@
 ﻿using EntityStates;
 using RoR2;
+using ModdedEntityStates.BaseStates;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
 
-    internal class TowerUndeploy : EntityState {
+    internal class TowerUndeploy : BaseTimedSkillState {
+
 
         public override void OnEnter() {
             base.OnEnter();
+            InitDurationValues(0.5f, 1);
+        }
 
-            Deployable deployable = characterBody.masterObject?.GetComponent<Deployable>();;
+        protected override void OnCastEnter () {
+            base.OnCastEnter();
+
+            Deployable deployable = characterBody.masterObject?.GetComponent<Deployable>();
 
             if (deployable) {
 

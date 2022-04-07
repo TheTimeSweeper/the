@@ -16,10 +16,12 @@ public class TestValueManager : MonoBehaviour {
 
 
 
-    public static float vertOff = 1.37f;
-    public static float aimorigin = 2.5f;
-    public static float camerapivot = 2.5f;
-    public static float bak = -12;
+    //public static float vertOff = 1.37f;
+    //public static float aimorigin = 2.5f;
+    //public static float camerapivot = 2.5f;
+    //public static float bak = -12;
+
+    public static float value1 = 0.5f;
 
     void Update() {
         if (!_testingEnabled)
@@ -37,6 +39,7 @@ public class TestValueManager : MonoBehaviour {
         //manageTestValue(ref aimorigin, "aimorigin", KeyCode.Keypad8, KeyCode.Keypad5, 1f);
         //manageTestValue(ref camerapivot, "aimorigin", KeyCode.Keypad9, KeyCode.Keypad6, 1f);
         //manageTestValue(ref bak, "aimorigin", KeyCode.Keypad3, KeyCode.KeypadPeriod, 1f);
+        manageTestValue(ref value1, "test value 1", KeyCode.Keypad7, KeyCode.Keypad4, 0.1f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {

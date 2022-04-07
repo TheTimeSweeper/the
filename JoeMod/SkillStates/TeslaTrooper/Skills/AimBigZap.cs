@@ -9,16 +9,16 @@ namespace ModdedEntityStates.TeslaTrooper
     {
         public static string EnterSoundString = EntityStates.Treebot.Weapon.AimMortar.enterSoundString;
         public static string ExitSoundString = EntityStates.Treebot.Weapon.AimMortar.exitSoundString;
-        public float skillsPlusMulti;
+        public float skillsPlusMulti = 1;
 
-        private TeslaCoilControllerController coilController;
+        private TeslaTowerControllerController coilController;
         private TeslaTrackerComponent tracker;
 
         private Sprite originalSprite;
         private bool showingEmpowered;
 
         public override void OnEnter() {
-            coilController = GetComponent<TeslaCoilControllerController>();
+            coilController = GetComponent<TeslaTowerControllerController>();
             tracker = GetComponent<TeslaTrackerComponent>();
 
             EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
@@ -35,6 +35,8 @@ namespace ModdedEntityStates.TeslaTrooper
 
             base.OnEnter();
             Util.PlaySound(EnterSoundString, gameObject);
+
+            GetModelAnimator().SetBool("isHandOut", true);
         }
 
         public override void FixedUpdate()
@@ -51,19 +53,18 @@ namespace ModdedEntityStates.TeslaTrooper
                     ExitEmpowered();
             }
 
-            if (coilController && coilController.coilReady && tracker?.GetTrackingTarget() != null) {
-
+            if (coilController && coilController.GetNearestTower() && tracker?.GetTrackingTarget() != null) {
                 endpointVisualizerRadiusScale = Tower.TowerBigZap.BaseAttackRadius;
 
                 maxDistance = TeslaTrackerComponent.maxTrackingDistance;
 
             } else {
 
-                maxDistance = 30;
                 endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
+
+                maxDistance = 30;
             }
             endpointVisualizerRadiusScale *= skillsPlusMulti;
-
             //todo incombat
             //PlayAnimation("Gesture, Override", "HandOut");
         }
@@ -81,6 +82,8 @@ namespace ModdedEntityStates.TeslaTrooper
 
             if (showingEmpowered)
                 ExitEmpowered();
+
+            GetModelAnimator().SetBool("isHandOut", false);
         }
 
         public override void FireProjectile() { }
@@ -101,7 +104,7 @@ namespace ModdedEntityStates.TeslaTrooper
             //    originalSprite = skillLocator.secondary.skillDef.icon;
             //skillLocator.secondary.skillDef.icon = skillLocator.special.icon;
 
-            tracker?.setIndicatorEmpowered(true);
+            tracker?.SetIndicatorEmpowered(true);
         }
 
         private void ExitEmpowered() {
@@ -110,7 +113,7 @@ namespace ModdedEntityStates.TeslaTrooper
             //skillLocator.special = skillLocator.FindSkill("Special");
             //skillLocator.secondary.skillDef.icon = originalSprite;
 
-            tracker?.setIndicatorEmpowered(false);
+            tracker?.SetIndicatorEmpowered(false);
         }
     }
 }

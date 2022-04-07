@@ -25,8 +25,8 @@ namespace Modules {
 
         private static void doLanguage() {
 
-            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Near Orb Cast (<style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
-            LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+15%</style> Area");
+            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Close-Range Bolt\n(<style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
+            LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+10%</style> Area, <style=cIsDamage>+5%</style> Damage");
         }
 
         [SkillLevelModifier("Tesla_Primary_Zap", typeof(Zap))]
@@ -45,15 +45,17 @@ namespace Modules {
                 
                 if (skillState is AimBigZap aimBigZapState) {
 
-                    aimBigZapState.skillsPlusMulti = MultScaling(1, .15f, level);
-
+                    aimBigZapState.skillsPlusMulti = MultScaling(1, .1f, level);
+                    
                 } else if (skillState is BigZap bigZapState) {
 
-                    bigZapState.skillsPlusMulti = MultScaling(1, .15f, level);
+                    bigZapState.skillsPlusAreaMulti = MultScaling(1, .1f, level);
+                    bigZapState.skillsPlusDamageMulti = MultScaling(1f, 0.2f, level);
 
                 } else if (skillState is TowerBigZap towerBigZapState) {
 
-                    towerBigZapState.skillsPlusMulti = MultScaling(1, .15f, level);
+                    towerBigZapState.secondarySkillsPlusAreaMulti = MultScaling(1, .15f, level);
+                    towerBigZapState.secondarySkillsPlusDamageMulti = MultScaling(1f, 0.05f, level);
                 }
             }
         }

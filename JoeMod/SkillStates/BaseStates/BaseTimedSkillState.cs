@@ -70,16 +70,6 @@ namespace ModdedEntityStates.BaseStates
             }
         }
 
-        /// <summary>
-        /// SOC design pattern gods pls calm down, I hate it too
-        /// </summary>
-        protected virtual void PlaySoundAuthority(string sound) {
-            if (isAuthority)
-                RoR2.Util.PlaySound(sound, gameObject);
-
-                Helpers.LogWarning(sound + ": " + AkSoundEngine.GetIDFromString(sound));
-        }
-
         protected virtual void OnCastEnter() { }
         protected virtual void OnCastFixedUpdate() { }
         protected virtual void OnCastUpdate() { }

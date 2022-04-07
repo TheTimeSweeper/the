@@ -5,22 +5,25 @@ using R2API;
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
 
-        new public static float DamageCoefficient = 5.0f;
+        new public static float DamageCoefficient = 10.0f;
         new public static float ProcCoefficient = 1f;
         new public static float BaseDuration = 0.6f;
         public static float BaseAttackRadius = 15;
 
-        public float skillsPlusMulti = 1f;
+        public float secondarySkillsPlusAreaMulti = 1f;
+        public float secondarySkillsPlusDamageMulti = 1f;
         public float attackRadius;
+
+        private string towerZapSound = "Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower";
 
         protected override void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1) {
 
             base.InitDurationValues(BaseDuration, BaseStartCastTime);
 
-            attackRadius = BaseAttackRadius * skillsPlusMulti;
-            
-            zapSound = "Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower";
-            zapSoundCrit = "Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower";
+            attackRadius = BaseAttackRadius * secondarySkillsPlusAreaMulti;
+
+            zapSound = towerZapSound;
+            zapSoundCrit =towerZapSound;
         }
         protected override void fireOrb() {
 
@@ -33,36 +36,38 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             bool crit = RollCrit();
 
             Util.PlaySound(crit ? zapSound : zapSoundCrit, gameObject);
+            if (base.isAuthority) {
+                BlastAttack blast = new BlastAttack {
+                    attacker = gameObject,
+                    inflictor = gameObject,
+                    teamIndex = teamComponent.teamIndex,
+                    //attackerFiltering = AttackerFiltering.NeverHit
 
-            BlastAttack blast = new BlastAttack {
-                attacker = gameObject,
-                inflictor = gameObject,
-                teamIndex = teamComponent.teamIndex,
-                //attackerFiltering = AttackerFiltering.NeverHit
+                    position = targetPoint,
+                    radius = attackRadius,
+                    falloffModel = BlastAttack.FalloffModel.None,
 
-                position = targetPoint,
-                radius = attackRadius,
-                falloffModel = BlastAttack.FalloffModel.None,
+                    baseDamage = damageStat * DamageCoefficient * secondarySkillsPlusDamageMulti,
+                    crit = crit,
+                    damageType = DamageType.Shock5s,
+                    damageColorIndex = DamageColorIndex.WeakPoint,
 
-                baseDamage = damageStat * DamageCoefficient,
-                crit = crit,
-                damageType = DamageType.Shock5s,
-                damageColorIndex = DamageColorIndex.WeakPoint,
+                    procCoefficient = ProcCoefficient,
+                    //procChainMask = 
+                    //losType = BlastAttack.LoSType.NearestHit,
 
-                procCoefficient = ProcCoefficient,
-                //procChainMask = 
-                //losType = BlastAttack.LoSType.NearestHit,
+                    baseForce = -5, //enfucker void grenade here we go
+                                    //bonusForce = ;
 
-                baseForce = -5, //enfucker void grenade here we go
-                //bonusForce = ;
+                    //impactEffect = EffectIndex.uh;
+                };
 
-                //impactEffect = EffectIndex.uh;
-            };
-
-            if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
-                blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
+                if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
+                    blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
+                }
+                blast.Fire();
             }
-            blast.Fire();
+
             #region effects
             EffectData fect = new EffectData {
                 origin = targetPoint,

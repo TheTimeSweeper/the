@@ -28,6 +28,8 @@ namespace ModdedEntityStates.TeslaTrooper
         public static float nearDist2 = 0.7f;
         #endregion
 
+        private float shotSpread = 3;
+
         public int skillsPlusCasts = 0;
 
         private List<HealthComponent> _bouncedObjectsList = new List<HealthComponent>();
@@ -108,14 +110,10 @@ namespace ModdedEntityStates.TeslaTrooper
 
             //todo: joe crosscompat
             //base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
-
-            //todo incombat
-            //PlayAnimation("Gesture, Override", "HandOut");
+            GetModelAnimator().SetBool("isHandOut", true);
             if (isAuthority) {
                 if (_tracker) {
                     _targetHurtbox = _tracker.GetTrackingTarget();
-
-                        _attackingTeammate = _tracker.GetIsTargetingTeammate();
 
                     switch (_tracker.GetTrackingTargetDistance()) {
                         default:
@@ -130,7 +128,10 @@ namespace ModdedEntityStates.TeslaTrooper
                             break;
                     }
 
-                    totalOrbCasts += skillsPlusCasts;
+                    _attackingTeammate = _tracker.GetIsTargetingTeammate();
+                    //if(_attackingTeammate) {
+                    //    totalOrbCasts = 3;
+                    //}
 
                 } else {
                     _targetHurtbox = createOrb().PickNextTarget(transform.position);
@@ -139,6 +140,12 @@ namespace ModdedEntityStates.TeslaTrooper
             }
 
             _crit = RollCrit();
+        }
+
+        public override void OnExit() {
+            base.OnExit();
+
+            GetModelAnimator().SetBool("isHandOut", false);
         }
 
         private LightningOrb createOrb() {
@@ -195,23 +202,27 @@ namespace ModdedEntityStates.TeslaTrooper
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing to apply to bounces only
             _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
+
+            base.characterBody.AddSpreadBloom(TestValueManager.value1);
         }
 
         private void ModifyTeamLightningOrb(LightningOrb lightningOrb) {
             if (_attackingTeammate) {
-                lightningOrb.range = BounceDistance * 2;
-                lightningOrb.damageCoefficientPerBounce = 3f;
+                //lightningOrb.range = BounceDistance * 2;
+                //lightningOrb.damageCoefficientPerBounce = 3f;
+                lightningOrb.bouncesRemaining = 0;
 
                 lightningOrb.damageValue *= 0.1f;
+                lightningOrb.procCoefficient = 0;
             }
         }
 
         private void PlayZap()
         {
-            //EffectManager.SimpleMuzzleFlash(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
-            //                                gameObject,
-            //                                "MuzzleGauntlet",
-            //                                true);
+            EffectManager.SimpleMuzzleFlash(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+                                            gameObject,
+                                            "MuzzleGauntlet",
+                                            true);
             PlayAnimation("Gesture, Additive", "Shock");
 
             string sound = "Play_itesatta";

@@ -12,9 +12,11 @@ using System.Security.Permissions;
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
-[BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
+[BepInDependency("com.cwmlolzlz.skills", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("com.xoxfaby.BetterUI", BepInDependency.DependencyFlags.SoftDependency)]
+
 [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-[BepInPlugin(MODUID, MODNAME, MODVERSION)]
+[BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
 [R2APISubmoduleDependency(new string[]
 {
     "PrefabAPI",
@@ -24,6 +26,8 @@ using System.Security.Permissions;
     "DeployableAPI",
     "DamageAPI"
 })]
+
+[BepInPlugin(MODUID, MODNAME, MODVERSION)]
 
 //todo: separatable plugin
 public class FacelessJoePlugin : BaseUnityPlugin {
@@ -67,16 +71,16 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         Modules.Buffs.RegisterBuffs();
 
         // survivor initialization
-        new JoeSurivor().Initialize();
+        //new JoeSurivor().Initialize();
 
-        new TeslaTowerNotSurvivor().Initialize();
-        
-        //todo compiler flags when
+        new TeslaTowerNotSurvivor().Initialize();       
         new TeslaTrooperSurvivor().Initialize();
 
         new Modules.ContentPacks().Initialize();
 
         Hook();
+
+        Logger.LogInfo("[Initialized]");
     }
 
     private void Hook() {

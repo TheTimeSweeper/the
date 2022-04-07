@@ -20,6 +20,8 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public GameObject ShieldEffect = Modules.Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
 
+        RoR2.CameraTargetParams.AimRequest aimRequest;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -31,10 +33,16 @@ namespace ModdedEntityStates.TeslaTrooper {
                 base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration);
             }
 
+            ZapBarrierController controller = GetComponent<ZapBarrierController>();
+            if (controller) {
+                controller.StartRecordingDamage();
+            }
+
             //todo: lingering gesture, interruptible legs
-            base.PlayCrossfade("FullBody, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f*duration);
+            base.PlayCrossfade("FullBody, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
+            base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
 
-
+            aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
             //todo: blastattack on start?
         }
 
@@ -58,7 +66,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void OnExit() {
             base.OnExit();
 
-            EntityStateMachine.FindByCustomName(gameObject, "Slide").SetNextState(new ShieldZapCollectDamage());
+            EntityStateMachine.FindByCustomName(gameObject, "Slide").SetNextState(new ShieldZapCollectDamage() { aimRequest = this.aimRequest });
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

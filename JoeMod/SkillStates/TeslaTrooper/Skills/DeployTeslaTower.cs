@@ -40,12 +40,12 @@ namespace ModdedEntityStates.TeslaTrooper
                 currentPlacementInfo = GetPlacementInfo();
                 blueprints = Object.Instantiate(blueprintPrefab, currentPlacementInfo.position, currentPlacementInfo.rotation).GetComponent<BlueprintController>();
             }
-
-            //todo:anim
-            //base.PlayAnimation("Gesture, Override", "HandOut");
+;
             entryCountdown = 0.1f;
             exitCountdown = 0.25f;
             exitPending = false;
+
+            PlayCrossfade("Gesture, Override", "Placing", 0.3f);
         }
 
         public override void Update()
@@ -63,8 +63,6 @@ namespace ModdedEntityStates.TeslaTrooper
             base.FixedUpdate();
 
             StartAimMode();
-
-            PlayAnimation("Gesture, Override", "HandOut");
 
             if (isAuthority)
             {
@@ -90,7 +88,8 @@ namespace ModdedEntityStates.TeslaTrooper
                             //I am fucking exploding right now
                             Util.PlaySound("Play_buliding_uplace", gameObject);
 
-                            //base.PlayAnimation("Gesture, Override", "HandOut");
+                            PlayCrossfade("Gesture, Override", "DoPlace", 0.2f);
+
                             ConstructionComplete = true;
 
                             if (skillLocator) {

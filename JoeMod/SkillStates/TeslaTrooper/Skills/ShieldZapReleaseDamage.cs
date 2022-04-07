@@ -7,18 +7,20 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapReleaseDamage : BaseTimedSkillState {
 
         public static float multiplier = 1;
-        public static float range = 30;
+        public static float range = 15;
 
         public static float BaseDuration = 2;
         public static float BaseCastTime = 0.5f;
 
-        internal CameraTargetParams.AimRequest aimRequest;
+        public CameraTargetParams.AimRequest aimRequest;
 
         public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
 
-            base.PlayCrossfade("FullBody, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
+            characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 1);
+
+            base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
         }
 
         protected override void OnCastEnter() {
@@ -31,35 +33,39 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
-                damage = controller.redeemDamage();
+                damage = controller.RedeemDamage();
             }
 
-            BlastAttack blast = new BlastAttack {
-                attacker = gameObject,
-                inflictor = gameObject,
-                teamIndex = teamComponent.teamIndex,
-                //attackerFiltering = AttackerFiltering.NeverHit
+            if (base.isAuthority) {
+                BlastAttack blast = new BlastAttack {
+                    attacker = gameObject,
+                    inflictor = gameObject,
+                    teamIndex = teamComponent.teamIndex,
+                    //attackerFiltering = AttackerFiltering.NeverHit
 
-                position = transform.position,
-                radius = range,
-                falloffModel = BlastAttack.FalloffModel.None,
+                    position = transform.position,
+                    radius = range,
+                    falloffModel = BlastAttack.FalloffModel.None,
 
-                baseDamage = damage * multiplier,
-                crit = RollCrit(),
-                damageType = DamageType.Stun1s,
-                //damageColorIndex = DamageColorIndex.Default,
+                    baseDamage = damage * multiplier,
+                    crit = RollCrit(),
+                    damageType = DamageType.Stun1s,
+                    //damageColorIndex = DamageColorIndex.Default,
 
-                procCoefficient = 1,
-                //procChainMask = 
-                //losType = BlastAttack.LoSType.NearestHit,
+                    procCoefficient = 1,
+                    //procChainMask = 
+                    //losType = BlastAttack.LoSType.NearestHit,
 
-                baseForce = -5, //enfucker void grenade here we go
-                //bonusForce = ;
+                    baseForce = -5, //enfucker void grenade here we go
+                                    //bonusForce = ;
 
-                //impactEffect = EffectIndex.uh;
-            };
+                    //impactEffect = EffectIndex.uh;
+                };
 
-            blast.Fire();
+                blast.Fire();
+            }
+
+            Util.PlaySound("Play_tank_vtesatta_tesla_tank_attack", gameObject);
 
             #region effects
 
@@ -90,6 +96,10 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.OnExit();
 
             aimRequest.Dispose();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" SchemaVersion="89">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_itesata" ID="{C1F9D1EB-9B83-4BAB-846D-0E3B590CC771}">
+					<ChildrenList>
+						<Action Name="" ID="{3E6561DC-C9AC-4289-B554-ABF0623873AD}" ShortID="1003029914">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesata" ID="{4900A722-3DC9-4BE3-ADD4-56AAE3A681C4}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesatb" ID="{5E3E8976-0810-40FD-A74A-58AE490CE6BD}">
+					<ChildrenList>
+						<Action Name="" ID="{C89C6E24-8694-45F8-9A71-E609B1CEF850}" ShortID="622604369">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesatb" ID="{B9042F8C-14C7-4D82-9912-022FFA628C40}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesatc" ID="{1D4BB684-C6A5-4111-A283-4E87D703EBF2}">
+					<ChildrenList>
+						<Action Name="" ID="{59D010BC-CA80-4846-8A24-804F723F42C1}" ShortID="2571924">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesatc" ID="{CD40A5A1-7E70-4637-9EE8-B931ADBBD882}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesatd" ID="{3EF0B6C1-869E-4EF2-BF7B-98AC5D12764C}">
+					<ChildrenList>
+						<Action Name="" ID="{899644FB-AEA1-453C-A598-16136F3B5EDC}" ShortID="26439175">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesatd" ID="{7F5E4403-4FA2-4921-A4FE-8FEC6BD531A7}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesate" ID="{901D3466-682D-4F95-A7AB-E810563E9FF1}">
+					<ChildrenList>
+						<Action Name="" ID="{2874A586-4968-4C7E-B806-185AA9743DB6}" ShortID="555707962">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesate" ID="{084559F3-CFD3-4E01-8905-BD17CCEA3744}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesdia" ID="{F46975A8-533E-49DA-90FF-92F8B33C3EB1}">
+					<ChildrenList>
+						<Action Name="" ID="{BB8E82F6-0FB2-4555-8E1B-7C3C0C4C7A4B}" ShortID="804631329">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesdia" ID="{A72EA4D9-414E-4031-B81E-6B3753AF2B04}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesdib" ID="{390ABE9D-F7F2-4193-B113-B6286689AA56}">
+					<ChildrenList>
+						<Action Name="" ID="{63D911C4-69ED-4F26-97E0-C38EF6CB8F7B}" ShortID="327005720">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesdib" ID="{7D2AD72C-7EE2-4726-A2F4-2A1BCE726A0B}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesdic" ID="{D8C5EA51-F69C-40EA-8AFF-0C9CD0578762}">
+					<ChildrenList>
+						<Action Name="" ID="{718A8116-2D5A-42D6-AD6C-7F77F62990D6}" ShortID="422470326">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesdic" ID="{2E13FC75-01C1-4943-8313-F7982C236BD3}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesdid" ID="{52869ED8-DE72-4D61-90D8-A952B13C4886}">
+					<ChildrenList>
+						<Action Name="" ID="{7DA30708-8185-4258-AE94-212FAC1E1E4A}" ShortID="25071753">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesdid" ID="{8D37C35B-5518-443A-8575-F5F14453692A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesfea" ID="{24537C38-25B4-4A77-9CF2-44293E4750DC}">
+					<ChildrenList>
+						<Action Name="" ID="{457116BA-6B23-4CFE-9199-3568B9E35CE2}" ShortID="1029089215">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesfea" ID="{17D5D3AB-F45C-42E2-A2F4-4DE6AE96BA8C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesfeb" ID="{6F38D61D-C08F-4A02-A672-665F35F3F9A2}">
+					<ChildrenList>
+						<Action Name="" ID="{652AD93B-6947-40B8-B1F6-48453A51E591}" ShortID="353162800">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesfeb" ID="{5D3345A6-0D3B-406E-AB0D-F3C6386D41C8}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesfec" ID="{0743DF5C-0B54-497A-9903-0883E77759BF}">
+					<ChildrenList>
+						<Action Name="" ID="{4713B069-61B2-43AA-8DC6-57940FB5DFD2}" ShortID="820111305">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesfec" ID="{BC5B8DA2-A860-4618-B5F4-1C33F3B5D7E9}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesmoa" ID="{4C5F907E-C56E-499D-9490-E4CE2149A8BB}">
+					<ChildrenList>
+						<Action Name="" ID="{720CF7C8-73B6-4FC0-B733-DE66A79F2581}" ShortID="638471478">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesmoa" ID="{6F033E49-0E69-40C6-A8A5-CA53E5FD0198}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesmob" ID="{8EAD54EE-DE98-4CE4-88B9-D5C73B811889}">
+					<ChildrenList>
+						<Action Name="" ID="{627CFC1C-A017-41DD-9724-5D9863D69B0E}" ShortID="701597311">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesmob" ID="{001D3AC3-554A-4091-95A8-55741D64EF56}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesmoc" ID="{6E3C8FC3-D2A4-48BB-AC4C-C4C9F5BD6B2C}">
+					<ChildrenList>
+						<Action Name="" ID="{CDC10D9F-40D5-4BEC-91A8-F50FA08EC32F}" ShortID="314176616">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesmoc" ID="{88DAA393-B61F-4B31-8D67-DB5EC8236EF1}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesmod" ID="{EF967A82-0A57-498A-9FD7-A7466F35B766}">
+					<ChildrenList>
+						<Action Name="" ID="{E777473E-0AE7-4D3D-8B91-A10FD5AC4702}" ShortID="1011344439">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesmod" ID="{A08C1B45-A858-404B-B65C-BCB1A5089F30}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesmoe" ID="{1390DA25-6350-4FE2-8ACA-7C3B52EEA967}">
+					<ChildrenList>
+						<Action Name="" ID="{97477DE6-8DDB-43DB-B0B8-3F8CD9B01C14}" ShortID="114301553">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesmoe" ID="{EEB1A9A7-0775-46E9-9BFF-96B7798E24FC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesmof" ID="{F10FB05B-3C20-4092-A178-535E918A60BB}">
+					<ChildrenList>
+						<Action Name="" ID="{E3AA78AD-12E8-4A2F-9D0A-402C614C1A53}" ShortID="692188616">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesmof" ID="{D53F8379-CC49-47FF-B9E7-E08C2AC11179}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itessea" ID="{FEF50992-FCA5-4510-B458-A1E52C355EA4}">
+					<ChildrenList>
+						<Action Name="" ID="{BC5776EE-44DC-4AC9-A2FA-305A8FB93D84}" ShortID="406295988">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itessea" ID="{D59C4995-D8E4-4ECE-970E-66FB0204F1AF}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itessec" ID="{196A2E9F-9A4E-43CD-835E-882757676EEE}">
+					<ChildrenList>
+						<Action Name="" ID="{366D9BDB-DB0E-4879-A970-88BDD7741573}" ShortID="502857131">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itessec" ID="{510A8716-5550-4D87-B23D-C81C07F6445D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itessed" ID="{9CF8C7FC-7FF4-43DE-81B7-65B80B7DD1C8}">
+					<ChildrenList>
+						<Action Name="" ID="{B8F4A451-D0C6-444E-8284-FE4118B21C7C}" ShortID="770379151">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itessed" ID="{59F31439-0BC2-4E62-B23C-583812B9FE8D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itessee" ID="{04D328E2-4AF7-4091-9A28-5AFDE28ADD2B}">
+					<ChildrenList>
+						<Action Name="" ID="{C1E626A5-3BD1-4C9E-B1E3-FBA613E80AC3}" ShortID="97596501">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itessee" ID="{FFF04AC1-251C-4210-9FDE-8C09ACA62F21}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_buliding_uplace" ID="{27949F9A-3FF2-4C9D-A87B-A988F1C8B415}">
+					<ChildrenList>
+						<Action Name="" ID="{2608758F-8568-4991-BD66-33713167EAB7}" ShortID="865721758">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="buliding_uplace" ID="{4F483978-F45B-4FE6-82FB-3E644777E11A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_prism_bpriat1a_prism_tower_attack" ID="{949E8CFF-D9A1-4E6E-B58E-B2C8FE6789BF}">
+					<ChildrenList>
+						<Action Name="" ID="{CEB3E728-4D28-4DAA-B7F7-E16AE682D40B}" ShortID="591367778">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="prism_bpriat1a prism tower attack" ID="{0238972C-4CAF-4B91-8753-598899BBBF3C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_prism_bpripow_prism_tower_prep" ID="{FE098812-43A9-4048-8E8E-9DC73B19038E}">
+					<ChildrenList>
+						<Action Name="" ID="{ACEF2450-42B1-4746-9260-0FDE1D2F3A01}" ShortID="551531933">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="prism_bpripow prism tower prep" ID="{2916C551-26DF-4439-8716-7A37EAC62A73}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_prism_vpriatta_prism_tank_attack" ID="{CC2FD52E-5A8D-46DF-95DE-45D1D0D316F4}">
+					<ChildrenList>
+						<Action Name="" ID="{5A165D86-CDCB-411A-AD4A-62C8EE6FE46E}" ShortID="277091635">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="prism_vpriatta prism tank attack" ID="{86B02F1B-DA4D-4B38-BB77-C3C271CCDC31}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tank_vtesatta_tesla_tank_attack" ID="{8788E9F9-A3B7-4EDC-8CD2-81C7C6DF27A9}">
+					<ChildrenList>
+						<Action Name="" ID="{692A5A2A-B971-4CB1-B337-636212F9F9F2}" ShortID="438929391">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tank_vtesatta tesla tank attack" ID="{E1E3F839-8F17-4C79-9477-26878D05300C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tank_vtesattb_tesla_tank_attack" ID="{2F87B4FA-0FCD-4A7B-930A-75278AE765D1}">
+					<ChildrenList>
+						<Action Name="" ID="{0F636CBA-6AFA-4DA3-BE13-D5CA73FEBBEB}" ShortID="260397727">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tank_vtesattb tesla tank attack" ID="{F01484F2-6D5C-4508-9B48-61934A0C9EC6}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower" ID="{67E79CCF-1984-43C3-AD83-5A4727A6FA8B}">
+					<ChildrenList>
+						<Action Name="" ID="{2DAE0AA4-626D-4D3F-833E-5E6F0D260323}" ShortID="602441384">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tower_bparatta they fucking turned eiffel tower to a tesla tower" ID="{A7B973F4-8CF8-4DE2-BEE6-CED4CD194051}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tower_btesat1a_tesla_tower_attack" ID="{29F73725-6010-43AC-909B-2AEBFB7F6B34}">
+					<ChildrenList>
+						<Action Name="" ID="{060319E2-DA6C-4549-BD2D-34A60068858B}" ShortID="525124809">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tower_btesat1a tesla tower attack" ID="{79B25811-2730-477E-93CC-DCCF226BC488}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tower_btesat2a_tesla_tower_attack" ID="{E69E3105-AD88-4198-AB1E-541516B1DA56}">
+					<ChildrenList>
+						<Action Name="" ID="{28E1240C-DC61-4849-885A-86CB7439B727}" ShortID="92937866">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tower_btesat2a tesla tower attack" ID="{5FADD23D-EF7C-4A59-B6E3-0CF1C2940017}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tower_btespow_tesla_tower_prep" ID="{FD5E8698-228D-40AC-B966-EACE670FC56D}">
+					<ChildrenList>
+						<Action Name="" ID="{85E0D28E-D52F-432F-96FA-467D5ED8F8F1}" ShortID="645766465">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tower_btespow tesla tower prep" ID="{9DA388E5-2284-4444-A35B-E69AD2C06BE7}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_trooper_itesat2a_tesla_trooper_attack" ID="{00B0A16A-FFFE-48DC-9331-8451C68CFC95}">
+					<ChildrenList>
+						<Action Name="" ID="{DCB0247F-2090-48C4-A269-F3705BCB17A2}" ShortID="50042421">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="trooper_itesat2a tesla trooper attack" ID="{EDFCE96D-9CAB-412B-B97E-4A58F06D3132}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_trooper_itesat2b_tesla_trooper_attack" ID="{FC319D99-D373-4687-92A3-33436FFF3A39}">
+					<ChildrenList>
+						<Action Name="" ID="{A4E49C75-0BF4-4564-A487-7B69631CB3B0}" ShortID="718543469">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="trooper_itesat2b tesla trooper attack" ID="{0504CB6D-23C2-4981-A424-3541A778490B}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_building_uselbuil" ID="{8FB88700-6B1A-46F3-AF6A-F63598E4E062}">
+					<ChildrenList>
+						<Action Name="" ID="{576415A8-0058-4E13-8DB2-1BE05B3C2004}" ShortID="104710326">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="building_uselbuil" ID="{7971E188-3EF1-44D9-AB66-32E62B10E135}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}">
+					<ChildrenList>
+						<Action Name="" ID="{947A11A8-4F02-4E33-A596-6A66700B1257}" ShortID="479911369">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="itesatta" ID="{DD7582AB-C889-4852-A507-D67182527CC1}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_iteschaa" ID="{28069552-2788-4230-B60B-9381DEFD4630}">
+					<ChildrenList>
+						<Action Name="" ID="{051602FF-7BC3-45DC-9CD4-3EB404DA4EF2}" ShortID="546377391">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="iteschaa" ID="{44F9795F-69DE-4509-B25B-B2C0AF606D62}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

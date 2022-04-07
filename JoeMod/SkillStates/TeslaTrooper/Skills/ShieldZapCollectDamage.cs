@@ -1,21 +1,17 @@
 ﻿using EntityStates;
+using RoR2;
 
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapCollectDamage : BaseSkillState {
 
-        RoR2.CameraTargetParams.AimRequest aimRequest;
-
-        public override void OnEnter() {
-            base.OnEnter();
-
-            aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
-        }
+        public RoR2.CameraTargetParams.AimRequest aimRequest;
 
         public override void FixedUpdate() {
             base.FixedUpdate();
 
             if(!characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
-                outer.SetNextState(new ShieldZapReleaseDamage() { aimRequest = this.aimRequest });
+                EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new ShieldZapReleaseDamage() { aimRequest = this.aimRequest });
+                base.outer.SetNextStateToMain();
             }
         }
     }

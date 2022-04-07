@@ -78,7 +78,6 @@ internal static class Helpers {
         }
     }
 
-
     public static string GetVoiceLineString(TeslaVoiceLine line) {
         string voiceLineString;
         switch (line) {
