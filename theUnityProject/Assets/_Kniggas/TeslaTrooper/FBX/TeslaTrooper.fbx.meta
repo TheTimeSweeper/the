@@ -807,6 +807,15 @@ ModelImporter:
   - first:
       74: 1079665108409675491
     second: Armature|Jump
+  - first:
+      74: 2016551237921944054
+    second: Armature|LightImpact
+  - first:
+      74: -4281082018218880012
+    second: Armature|IdleIn
+  - first:
+      74: 5963261098088877888
+    second: Armature|LightImpact (1)
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -1092,16 +1101,14 @@ ModelImporter:
       - time: 0.0058479533
         functionName: Footstep
         data: ToeR
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.50877196
         functionName: Footstep
         data: ToeL
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1195,16 +1202,14 @@ ModelImporter:
       - time: 0
         functionName: Footstep
         data: ToeR
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.50877196
         functionName: Footstep
         data: ToeL
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1240,16 +1245,14 @@ ModelImporter:
       - time: 0
         functionName: Footstep
         data: ToeR
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5146199
         functionName: Footstep
         data: ToeL
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1285,16 +1288,14 @@ ModelImporter:
       - time: 0.12280702
         functionName: Footstep
         data: ToeR
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6023392
         functionName: Footstep
         data: ToeL
-        objectReferenceParameter: {fileID: 100002, guid: 3c4a74450714e554b910f996ba672bf9,
-          type: 3}
+        objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1400,8 +1401,66 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 1
+      hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|LightImpact
+      takeName: Armature|LightImpact
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|IdleIn
+      takeName: Armature|IdleIn
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1429,7 +1488,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 1
+      hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0

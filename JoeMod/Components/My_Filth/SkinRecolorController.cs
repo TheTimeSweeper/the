@@ -47,6 +47,9 @@ public class SkinRecolorController : MonoBehaviour {
 
     void Awake() {
 
+        if (recolorGroups == null)
+            return;
+
         for (int i = 0; i < recolorGroups.Length; i++) {
             recolorGroups[i].fillPropertieBlocks();
         }

@@ -28,9 +28,31 @@ public class EditorAddRagdoll {
 
         Undo.RecordObject(bone, "getting boned");
 
-        CreateRigidBody(bone);
         CreateCollider(bone);
+        CreateRigidBody(bone);
         CreateJoint(bone);
+    }
+
+    private static void CreateCollider(Transform bone) {
+
+        if (bone.GetComponent<Collider>()) {
+            Debug.Log($"{bone.name} already has collider. aborting", bone);
+            return;
+        }
+
+        CapsuleCollider collider = bone.gameObject.AddComponent<CapsuleCollider>();
+        Undo.RegisterCreatedObjectUndo(collider, "getting boned");
+
+        collider.radius = 0.1f;
+
+        if (bone.childCount < 1) {
+            collider.height = 0.2f;
+            return;
+        }
+
+        Transform child = bone.GetChild(0);
+        collider.height = child.localPosition.y * 0.9f;
+        collider.center = new Vector3(0, child.localPosition.y * 0.5f);
     }
     
     private static void CreateRigidBody(Transform bone) {
@@ -60,27 +82,5 @@ public class EditorAddRagdoll {
         if(joint.connectedBody == null) {
             Debug.Log($"Didn't find connectedbody for {joint}.\nAdd your connectedbody, or remove the CharacterJoint component if it is a root bone.", joint);
         }
-    }
-
-    private static void CreateCollider(Transform bone) {
-
-        if (bone.GetComponent<Collider>()) {
-            Debug.Log($"{bone.name} already has collider. aborting", bone);
-            return;
-        }
-
-        CapsuleCollider collider = bone.gameObject.AddComponent<CapsuleCollider>();
-        Undo.RegisterCreatedObjectUndo(collider, "getting boned");
-
-        collider.radius = 0.1f;
-
-        if (bone.childCount < 1) {
-            collider.height = 0.2f;
-            return;
-        }
-
-        Transform child = bone.GetChild(0);
-        collider.height = child.localPosition.y * 0.9f;
-        collider.center = new Vector3(0, child.localPosition.y * 0.5f);
     }
 }

@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 2047872893996369974}
   - component: {fileID: 198068338998706080}
   - component: {fileID: 2009558321360229975}
-  - component: {fileID: 1381455754223861386}
   m_Layer: 5
   m_Name: TeslaCrosshair
   m_TagString: Untagged
@@ -382,21 +381,7 @@ MonoBehaviour:
   remapSprites: []
   minSpreadAlpha: 0
   maxSpreadAlpha: 0
-  maxSpreadAngle: 6
---- !u!114 &1381455754223861386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4276864414949331109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f579ea250f5067b478e544ce6e5f9b92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stonkGrid: {fileID: 8296964605314253138}
-  crosshairController: {fileID: 2009558321360229975}
+  maxSpreadAngle: 8
 --- !u!1 &7371187595520037871
 GameObject:
   m_ObjectHideFlags: 0
