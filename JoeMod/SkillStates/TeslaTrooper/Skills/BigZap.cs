@@ -46,8 +46,6 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
             attackRadius = BaseAttackRadius * skillsPlusAreaMulti;
             
-            //todo anim: incombat
-            //PlayAnimation("Gesture, Override", "HandOut");
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
 
             base.characterBody.AddSpreadBloom(1);

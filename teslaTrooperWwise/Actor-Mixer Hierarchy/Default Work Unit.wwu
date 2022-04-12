@@ -54,34 +54,6 @@
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
-								<Property Name="Volume" Type="Real64">
-									<RTPCList>
-										<RTPC Name="" ID="{E2B92E46-467F-4B80-BF02-D0DF93171306}" ShortID="396149983">
-											<ReferenceList>
-												<Reference Name="ControlInput">
-													<ObjectRef Name="Volume_TeslaVoice" ID="{BDD5C5C0-9F08-4EDB-BB44-2C45DA0E7809}" WorkUnitID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}"/>
-												</Reference>
-											</ReferenceList>
-											<Curve Name="" ID="{3198ACC5-BF89-4A3F-8AAF-F7915C9C69BB}">
-												<PropertyList>
-													<Property Name="Flags" Type="int32" Value="3"/>
-												</PropertyList>
-												<PointList>
-													<Point>
-														<XPos>0</XPos>
-														<YPos>-200</YPos>
-														<Flags>5</Flags>
-													</Point>
-													<Point>
-														<XPos>100</XPos>
-														<YPos>0</YPos>
-														<Flags>37</Flags>
-													</Point>
-												</PointList>
-											</Curve>
-										</RTPC>
-									</RTPCList>
-								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
@@ -649,6 +621,13 @@
 								<Sound Name="iteschaa" ID="{44F9795F-69DE-4509-B25B-B2C0AF606D62}" ShortID="447131737">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{BA59754A-785E-47C2-B776-E9866A1D3B3E}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -677,6 +656,24 @@
 								<Sound Name="itesatta" ID="{DD7582AB-C889-4852-A507-D67182527CC1}" ShortID="612647330">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D23C02A9-F453-4C5D-B19C-68DF3EDF6A53}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="50"/>
+															<Property Name="Min" Type="Real64" Value="-50"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -733,6 +730,13 @@
 								<Sound Name="prism_bpriat1a prism tower attack" ID="{0238972C-4CAF-4B91-8753-598899BBBF3C}" ShortID="741029206">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D1AED80F-2725-49F0-9462-692E74D55EDE}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -789,6 +793,13 @@
 								<Sound Name="tower_btesat2a tesla tower attack" ID="{5FADD23D-EF7C-4A59-B6E3-0CF1C2940017}" ShortID="1003284214">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8210C828-641B-4C36-9740-6EEBA577B6EF}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -817,6 +828,13 @@
 								<Sound Name="tank_vtesatta tesla tank attack" ID="{E1E3F839-8F17-4C79-9477-26878D05300C}" ShortID="339305585">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C39957B1-4214-4B8B-AF43-2DFD8695801C}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -845,6 +863,13 @@
 								<Sound Name="tower_bparatta they fucking turned eiffel tower to a tesla tower" ID="{A7B973F4-8CF8-4DE2-BEE6-CED4CD194051}" ShortID="867576954">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{BEE60B86-6FBD-471C-89FE-F0867BD7739C}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -873,6 +898,13 @@
 								<Sound Name="tower_btesat1a tesla tower attack" ID="{79B25811-2730-477E-93CC-DCCF226BC488}" ShortID="22127219">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{9BC000D0-72B7-4DB6-95CD-B411740E2523}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -901,6 +933,13 @@
 								<Sound Name="tower_btespow tesla tower prep" ID="{9DA388E5-2284-4444-A35B-E69AD2C06BE7}" ShortID="737802288">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8864F3E5-D690-4AA3-B758-E406F1428583}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -929,6 +968,18 @@
 								<Sound Name="tank_vtesattb tesla tank attack" ID="{F01484F2-6D5C-4508-9B48-61934A0C9EC6}" ShortID="233860396">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{46E95CD1-06C9-4B9F-845D-3B1DE9875B88}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -957,6 +1008,18 @@
 								<Sound Name="trooper_itesat2a tesla trooper attack" ID="{EDFCE96D-9CAB-412B-B97E-4A58F06D3132}" ShortID="536805483">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C68DE13B-0B89-4E64-8997-8DC7DF117A0A}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -1013,6 +1076,18 @@
 								<Sound Name="trooper_itesat2b tesla trooper attack" ID="{0504CB6D-23C2-4981-A424-3541A778490B}" ShortID="11440959">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{CA85FFBB-B525-4752-B909-1748DDB44DF2}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">

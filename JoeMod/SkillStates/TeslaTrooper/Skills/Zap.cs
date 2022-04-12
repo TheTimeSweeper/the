@@ -12,8 +12,6 @@ namespace ModdedEntityStates.TeslaTrooper
 {
     public class Zap : BaseTimedSkillState
     {
-        //todo less damage on allies
-        //and more bounce range
         #region Gameplay Values
         public static float DamageCoefficient = 1f;
         public static float BounceDamageMultplier = 0.69f;
@@ -22,7 +20,7 @@ namespace ModdedEntityStates.TeslaTrooper
         public static float BounceDistance = 20;
 
         public static float BaseDuration = 1f;
-        public static float BaseCastTime = 0.05f;//todo anim
+        public static float BaseCastTime = 0.05f;
 
         public static float nearDist1 = 0.4f;
         public static float nearDist2 = 0.7f;

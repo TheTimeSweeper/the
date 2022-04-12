@@ -12,8 +12,6 @@ using System.Linq;
 namespace Modules {
     internal static class Assets
     {
-        // the assetbundle to load assets from
-        // survivor todo: separate assets between survivors
         public static AssetBundle mainAssetBundle;
         public static AssetBundle teslaAssetBundle;
 

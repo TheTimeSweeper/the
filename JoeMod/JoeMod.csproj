@@ -32,9 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="HenryBank.bnk" />
     <EmbeddedResource Include="joe" />
-    <EmbeddedResource Include="myassetbundle" />
     <EmbeddedResource Include="teslatrooper" />
     <EmbeddedResource Include="Tesla_Trooper.bnk" />
   </ItemGroup>
@@ -59,7 +57,7 @@
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\teslatrooper&quot; &quot;$(ProjectDir)&quot;" />
+    <Exec Command="copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\teslatrooper&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\teslaTrooperWwise\GeneratedSoundBanks\Windows\Tesla_Trooper.bnk&quot; &quot;$(ProjectDir)&quot;" />
   </Target>
 
 </Project>

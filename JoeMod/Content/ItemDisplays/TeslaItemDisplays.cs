@@ -715,7 +715,6 @@ namespace Modules.Characters {
                                                                 new Vector3(0.208f, 0.208f, 0),
                                                                 new Vector3(0, 270, 0),
                                                                 new Vector3(0.25f, 0.25f, 0.25f)));
-            //todo: you know what to do
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Equipment.GoldGat, "DisplayGoldGat",
                                                                 "ShoulderR",
                                                                 new Vector3(0.09687F, 0.32573F, 0.22415F),

@@ -7,10 +7,8 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZap : BaseTimedSkillState
     {
-
         public static float ShieldBuffDuration = 4;
-        //todo: damage return
-        public static float ReturnDamageCoefficient = 1; //todo: base damage or total damage?
+        public static float ReturnDamageCoefficient = 1; 
         public static float ReturnDamageProcCoefficient = 0.2f;
 
         public static float BaseDuration = 1;
@@ -22,16 +20,9 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         RoR2.CameraTargetParams.AimRequest aimRequest;
 
-        public override void OnEnter()
-        {
+        public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastStartTime, MoveSlowEndTime);
-
-            if (NetworkServer.active)
-            {                                 //todo: custom buff, movesped, shieldy visual effect
-                                              //todo: damage return     
-                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration);
-            }
 
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
@@ -39,11 +30,25 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
 
             //todo: lingering gesture, interruptible legs
+                //he's running in place what
             base.PlayCrossfade("FullBody, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
             base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
 
             aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
-            //todo: blastattack on start?
+
+            if (!base.characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
+                CharacterModel component = base.GetModelTransform().GetComponent<CharacterModel>();
+
+                TemporaryOverlay temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay.duration = ShieldBuffDuration + 1;
+                temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
+                temporaryOverlay.AddToCharacerModel(component);
+            }
+
+            if (NetworkServer.active) {
+
+                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration);
+            }
         }
 
         protected override void OnCastEnter()

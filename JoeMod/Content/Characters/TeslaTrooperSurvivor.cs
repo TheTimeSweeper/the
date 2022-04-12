@@ -26,7 +26,7 @@ namespace Modules.Survivors
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
 
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
-            bodyColor = new Color(0.8f, 1, 1),
+            bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
 
             crosshair = Assets.LoadAsset<GameObject>("TeslaCrosshair"),
             podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -245,6 +245,7 @@ namespace Modules.Survivors
 
             if (bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors == null) {
                 FacelessJoePlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+                return;
             }
 
             SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;

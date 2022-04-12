@@ -171,7 +171,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
                                                              Modules.Assets.LoadAsset<Sprite>("texIndicator2Med"),
                                                              Modules.Assets.LoadAsset<Sprite>("texIndicator3Far")
         };
-
+        
         public static Color[] targetcolors = new Color[] { Color.cyan,
                                                            Color.red,
                                                            Color.green
@@ -201,7 +201,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
                 }
 
                 rend.color = targetcolors[(int)currentTarget];
-
+                
                 //sprite
                 switch (currentTarget) {
 

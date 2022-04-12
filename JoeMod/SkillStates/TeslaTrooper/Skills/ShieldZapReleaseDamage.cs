@@ -35,7 +35,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (controller) {
                 damage = controller.RedeemDamage();
             }
-
+            //range and/or no blast if no damage is absorbed
             if (base.isAuthority) {
                 BlastAttack blast = new BlastAttack {
                     attacker = gameObject,
@@ -65,7 +65,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 blast.Fire();
             }
 
-            Util.PlaySound("Play_tank_vtesatta_tesla_tank_attack", gameObject);
+            Util.PlaySound(EntityStates.VagrantMonster.FireMegaNova.novaSoundString, gameObject);
 
             #region effects
 
@@ -96,6 +96,11 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.OnExit();
 
             aimRequest.Dispose();
+
+            TemporaryOverlay overlay = GetComponent<TemporaryOverlay>();
+            if (overlay) {
+                Destroy(overlay);
+            }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority() {

@@ -29,7 +29,6 @@ using System.Security.Permissions;
 
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]
 
-//todo: separatable plugin
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";

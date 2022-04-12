@@ -65,8 +65,6 @@ namespace ModdedEntityStates.TeslaTrooper
                 maxDistance = 30;
             }
             endpointVisualizerRadiusScale *= skillsPlusMulti;
-            //todo incombat
-            //PlayAnimation("Gesture, Override", "HandOut");
         }
 
         // Token: 0x06003B19 RID: 15129 RVA: 0x0002B5A9 File Offset: 0x000297A9

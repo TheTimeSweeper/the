@@ -126,10 +126,10 @@ namespace Modules
             //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
-            string conductive = FacelessJoePlugin.conductiveAlly ? $" Use on allies to {Helpers.DamageText("charge")} them" : "";
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Shoots {Helpers.UtilityText($"more bolts")} at {Helpers.UtilityText($"close range")}.{conductive}");
+            string conductiveText = FacelessJoePlugin.conductiveAlly ? $" Use on allies to {Helpers.DamageText("charge")} them" : "";
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Shoots {Helpers.UtilityText($"more bolts")} at {Helpers.UtilityText($"close range")}.{conductiveText}");
 
-            LanguageAPI.Add("KEYWORD_CHARGED", $"A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
+            LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charged</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             #endregion
 
             #region Secondary

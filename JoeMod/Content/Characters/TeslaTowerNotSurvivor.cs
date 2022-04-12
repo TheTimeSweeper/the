@@ -25,8 +25,7 @@ namespace Modules.Survivors {
             bodyNameToken = TOWER_PREFIX + "NAME",
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_SUBTITLE",
             bodyNameToClone = "EngiTurret",
-
-            bodyColor = new Color(0.27f, 0.676f, 0.787f),
+            bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTower"),
             crosshair = Modules.Assets.LoadCrosshair("TiltedBracket"),
             podPrefab = null,
