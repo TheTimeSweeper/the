@@ -17,7 +17,7 @@ public class EditorAddRagdoll {
     [MenuItem("CONTEXT/RagdollController/Make bones on the bones")]
     public static void createRagdoll() {
 
-        RagdollController ragdollController =Selection.activeGameObject.GetComponent<RagdollController>();
+        RagdollController ragdollController = Selection.activeGameObject.GetComponent<RagdollController>();
 
         for (int i = 0; i < ragdollController.bones.Length; i++) {
             SetupBone(ragdollController.bones[i]);
@@ -28,9 +28,22 @@ public class EditorAddRagdoll {
 
         Undo.RecordObject(bone, "getting boned");
 
-        CreateCollider(bone);
         CreateRigidBody(bone);
+        CreateCollider(bone);
         CreateJoint(bone);
+    }
+    
+    private static void CreateRigidBody(Transform bone) {
+
+        if (bone.GetComponent<Rigidbody>()) {
+            Debug.Log($"{bone.name} already has Rigidbody. aborting", bone);
+            return;
+        }
+
+        Rigidbody rig = bone.gameObject.AddComponent<Rigidbody>();
+        Undo.RegisterCreatedObjectUndo(rig, "getting boned");
+
+        rig.isKinematic = true;
     }
 
     private static void CreateJoint(Transform bone) {
@@ -42,19 +55,11 @@ public class EditorAddRagdoll {
         CharacterJoint joint = bone.gameObject.AddComponent<CharacterJoint>();
         Undo.RegisterCreatedObjectUndo(joint, "getting boned");
 
-        joint.connectedBody = bone.GetComponentInParent<Rigidbody>();
-    }
+        joint.connectedBody = joint.transform.parent.GetComponent<Rigidbody>();
 
-    private static void CreateRigidBody(Transform bone) {
-
-        if (bone.GetComponent<Rigidbody>()) {
-            Debug.Log($"{bone.name} already has Rigidbody. aborting", bone);
-            return;
+        if(joint.connectedBody == null) {
+            Debug.Log($"Didn't find connectedbody for {joint}.\nAdd your connectedbody, or remove the CharacterJoint component if it is a root bone.", joint);
         }
-
-        Rigidbody rig = bone.gameObject.AddComponent<Rigidbody>();
-        rig.isKinematic = true;
-        Undo.RegisterCreatedObjectUndo(rig, "getting boned");
     }
 
     private static void CreateCollider(Transform bone) {
