@@ -30,21 +30,11 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             //_weaponStateMachine = EntityStateMachine.FindByCustomName(gameObject, "weapon");
 
             _lightningOrb = new LightningOrb {
-                //origin = base.GetModelChildLocator().FindChild("Orb").position,
-                //damageValue = damageStat,
-                //isCrit = RollCrit(),
-                //bouncesRemaining = 1,
-                //damageCoefficientPerBounce = BounceDamageMultplier,
-                //damageType = DamageType.SlowOnHit,
-                //procCoefficient = 1f,
                 teamIndex = teamComponent.teamIndex,
                 attacker = gameObject,
                 bouncedObjects = new List<HealthComponent>(),
-                //lightningType = LightningOrb.LightningType.Loader,
-                //damageColorIndex = DamageColorIndex.Default,
                 range = SearchRange,
                 canBounceOnSameTarget = true,
-                //speed = 1000
             };
 
             _cooldownTimer = 0;
@@ -52,11 +42,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         public override void FixedUpdate() {
             base.FixedUpdate();
-
-            if (ownerTrackerComponent) {
-                bool towerNear = Vector3.Distance(transform.position, ownerTrackerComponent.transform.position) < TeslaTowerControllerController.NearTowerRange;
-                ownerTrackerComponent.SetTowerNear(towerNear);
-            }
 
             _cooldownTimer += Time.deltaTime;
             if (_cooldownTimer >= currentZapInterval) {
@@ -68,6 +53,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
             if(ownerTrackerComponent) {
                 _lightningTarget = ownerTrackerComponent.GetTowerTrackingTarget();
+                ownerTrackerComponent.SetTowerLockedTarget(_lightningTarget?.healthComponent);
             }
 
             if (_lightningTarget == null) {
@@ -85,7 +71,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         public override void OnExit() {
             base.OnExit();
-            ownerTrackerComponent?.SetTowerNear(false);
         }
     }
 

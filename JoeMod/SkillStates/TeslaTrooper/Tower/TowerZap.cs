@@ -109,6 +109,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 fireOrb();
                 hasFired = true;
             }
+
+            GetComponent<TowerOwnerTrackerComponent>()?.OwnerTrackerComponent?.SetTowerLockedTarget(null);
         }
     }
 

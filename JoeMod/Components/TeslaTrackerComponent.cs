@@ -34,18 +34,21 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private CharacterBody characterBody;
     private TeamComponent teamComponent;
     private InputBankTest inputBank;
+    private TeslaTowerControllerController towerControllerComponent;
 
     private TeslaIndicator indicator;
 
     private float trackerUpdateStopwatch;
 
+    private HealthComponent _towerTargetHealthComponent;
     private HurtBox _trackingTarget;
     private bool _targetingAlly;
-    private bool _hasTower;
+    private bool _hasTowerNear;
 
     void Awake() {
         indicator = new TeslaIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);
         teamComponent = GetComponent<TeamComponent>();
+        towerControllerComponent = GetComponent<TeslaTowerControllerController>();
     }
 
     void Start() {
@@ -59,7 +62,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
     public HurtBox GetTowerTrackingTarget() {
         if (_targetingAlly)
             return null;
-        if (!_hasTower)
+        if (!_hasTowerNear)
             return null;
 
         return _trackingTarget;
@@ -95,9 +98,9 @@ public class TeslaTrackerComponent : MonoBehaviour {
     #endregion access
 
     #region indicator
-    public void SetTowerNear(bool hasTower) {
-        _hasTower = hasTower;
-        setHasTower(_hasTower);
+
+    public void SetTowerLockedTarget(HealthComponent healthComponent) {
+        _towerTargetHealthComponent = healthComponent;
     }
 
     public void SetIndicatorEmpowered(bool empowered) {
@@ -111,8 +114,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
         indicator.targetingAlly = _targetingAlly;
     }
 
-    public void setHasTower(bool hasTower) {
-        indicator.hasTower = _hasTower;
+    private void setIndicatorTower(bool hasTower) {
+        indicator.hasTower = hasTower;
     }
 
     private void OnEnable() {
@@ -121,9 +124,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private void OnDisable() {
         indicator.active = false;
     }
-    #endregion indicator
 
-    #region search
+    #endregion indicator
 
     private void FixedUpdate() {
 
@@ -139,7 +141,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         Ray aimRay = new Ray(inputBank.aimOrigin, inputBank.aimDirection);
 
         FindTrackingTarget(aimRay);
-        SetIsTargetingTeammate();
+        setIsTargetingTeammate();
 
 
         if (_trackingTarget) {
@@ -152,9 +154,24 @@ public class TeslaTrackerComponent : MonoBehaviour {
         }
 
         indicator.targetTransform = (_trackingTarget ? _trackingTarget.transform : null);
+        
+        setIsTowerTargeting();
     }
 
-    private void SetIsTargetingTeammate() {
+    private void setIsTowerTargeting() {
+
+        bool hasTarget = _towerTargetHealthComponent && _trackingTarget && _towerTargetHealthComponent == _trackingTarget.healthComponent;
+
+        if (_towerTargetHealthComponent) {
+            setIndicatorTower(hasTarget);
+            return;
+        }
+
+        _hasTowerNear = towerControllerComponent.GetNearestTower();
+        setIndicatorTower(_hasTowerNear);
+    }
+
+    private void setIsTargetingTeammate() {
         bool team = false;
         if (_trackingTarget) {
             team = _trackingTarget.teamIndex == teamComponent.teamIndex;
@@ -163,6 +180,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
         _targetingAlly = team;
         setIndicatorAlly();
     }
+
+    #region search
 
     private bool FindTrackingTarget(Ray aimRay) {
 
@@ -191,7 +210,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
         _trackingTarget = hitinfo.collider?.GetComponent<HurtBox>();
         return _trackingTarget;
     }
-#endregion search
+
+    #endregion search
 
     public class TeslaIndicator : Indicator {
 
@@ -236,10 +256,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
                         break;
                 }
 
-                //tower
-                if (!targetingAlly) {
-                    indicatorView.setTowerSprite(hasTower);
-                }
+                    indicatorView.setTowerSprite(!targetingAlly && hasTower);
             }
         }
     }

@@ -111,12 +111,4 @@ public class TeslaTowerControllerController : MonoBehaviour {
     public void removeTower(GameObject towerObject) {
         teslaTowers.Remove(towerObject);
     }
-
-    public void destroyTower() {
-
-        if(teslaTowers[0] != null)
-            Destroy(teslaTowers[0]);
-
-        teslaTowers.RemoveAt(0);
-    }
 }
