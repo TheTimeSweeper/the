@@ -39,7 +39,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
             InitDurationValues(BaseDuration, BaseStartCastTime);
 
-            bool tesla = GetComponent<TeslaWeaponComponent>().hasTeslaCoil;
+            bool tesla = GetComponent<TowerWeaponComponent>().hasTeslaCoil;
 
             lightningOrb = new LightningOrb {
                 origin = base.GetModelChildLocator().FindChild("Orb").position,

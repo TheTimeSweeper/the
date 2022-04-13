@@ -25,6 +25,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void OnEnter() {
             base.OnEnter();
 
+            ownerTrackerComponent = GetComponent<TowerOwnerTrackerComponent>()?.OwnerTrackerComponent;
+
             //_weaponStateMachine = EntityStateMachine.FindByCustomName(gameObject, "weapon");
 
             _lightningOrb = new LightningOrb {
@@ -52,8 +54,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             base.FixedUpdate();
 
             if (ownerTrackerComponent) {
-                bool towerNear = Vector3.Distance(transform.position, ownerTrackerComponent.transform.position) > TeslaTowerControllerController.NearTowerRange;
-                ownerTrackerComponent.SetIndicatorTower(towerNear);
+                bool towerNear = Vector3.Distance(transform.position, ownerTrackerComponent.transform.position) < TeslaTowerControllerController.NearTowerRange;
+                ownerTrackerComponent.SetTowerNear(towerNear);
             }
 
             _cooldownTimer += Time.deltaTime;
@@ -64,15 +66,16 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         private void SearchTarget() {
 
-            _lightningTarget = ownerTrackerComponent?.GetTrackingTarget();
+            if(ownerTrackerComponent) {
+                _lightningTarget = ownerTrackerComponent.GetTowerTrackingTarget();
+            }
 
-            if (_lightningTarget == null || ownerTrackerComponent.GetIsTargetingTeammate()) {
-
+            if (_lightningTarget == null) {
                 _lightningTarget = _lightningOrb.PickNextTarget(transform.position);
             }
 
             if (_lightningTarget) {
-                //todo replace with ai?
+
                 outer.SetNextState(new TowerZap {
                     lightningTarget = _lightningTarget,
                 });
@@ -82,7 +85,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         public override void OnExit() {
             base.OnExit();
-            ownerTrackerComponent.SetIndicatorTower(false);
+            ownerTrackerComponent?.SetTowerNear(false);
         }
     }
 

@@ -55,8 +55,7 @@ namespace Modules.Survivors {
         public override void InitializeCharacter() {
             base.InitializeCharacter();
 
-            //todo: tower with unstableteslacoil colors too
-            //bodyPrefab.AddComponent<TeslaWeaponComponent>();
+            bodyPrefab.AddComponent<TowerWeaponComponent>();
             bodyPrefab.AddComponent<TowerOwnerTrackerComponent>();
         }
 

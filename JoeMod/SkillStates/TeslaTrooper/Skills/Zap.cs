@@ -130,9 +130,6 @@ namespace ModdedEntityStates.TeslaTrooper
                     }
 
                     _attackingTeammate = _tracker.GetIsTargetingTeammate();
-                    //if(_attackingTeammate) {
-                    //    totalOrbCasts = 3;
-                    //}
 
                 } else {
                     _targetHurtbox = createOrb().PickNextTarget(transform.position);

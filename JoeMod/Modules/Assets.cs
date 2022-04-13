@@ -158,7 +158,7 @@ namespace Modules {
             towerIndicator.sprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorTowerRedWide");
             towerIndicator.color = Color.white;
 
-            indicatorView.towerIndicator = spriteRenderer.gameObject;
+            indicatorView.towerIndicator = towerIndicator.gameObject;
 
             return indicatorPrefab;
         }
