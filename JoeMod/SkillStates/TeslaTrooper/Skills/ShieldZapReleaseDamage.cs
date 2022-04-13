@@ -7,9 +7,9 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapReleaseDamage : BaseTimedSkillState {
 
         public static float multiplier = 1;
-        public static float range = 15;
+        public static float range = 30;
 
-        public static float BaseDuration = 2;
+        public static float BaseDuration = 1;
         public static float BaseCastTime = 0.5f;
 
         public CameraTargetParams.AimRequest aimRequest;

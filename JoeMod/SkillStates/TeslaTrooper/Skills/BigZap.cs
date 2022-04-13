@@ -12,7 +12,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static GameObject bigZapEffectPrefabArea = Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova");
         public static GameObject bigZapEffectFlashPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
 
-        public static float DamageCoefficient = 5.0f;
+        public static float DamageCoefficient = 6.9f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
         public static float BaseDuration = 1;
@@ -49,6 +49,12 @@ namespace ModdedEntityStates.TeslaTrooper {
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
 
             base.characterBody.AddSpreadBloom(1);
+        }
+
+        public override void OnExit() {
+            base.OnExit();
+
+            GetModelAnimator().SetBool("isHandOut", false);
         }
 
         protected override void OnCastEnter() {

@@ -8,12 +8,14 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerIdleSearch : BaseSkillState {
         public static float SearchRange = 60;
-        public static float BaseZapInterval = 3;
-        public static float SpawnedBaseZapInterval = 2;
+        public static float BaseZapInterval = 2;
+        public static float SpawnedBaseZapInterval = 1;
 
         //private EntityStateMachine _weaponStateMachine;
         private LightningOrb _lightningOrb;
         private HurtBox _lightningTarget;
+
+        private TeslaTrackerComponent ownerTrackerComponent;
 
         private float currentZapInterval { get => (justSpawned ? SpawnedBaseZapInterval : BaseZapInterval) / attackSpeedStat; }
         public bool justSpawned;
@@ -49,6 +51,11 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void FixedUpdate() {
             base.FixedUpdate();
 
+            if (ownerTrackerComponent) {
+                bool towerNear = Vector3.Distance(transform.position, ownerTrackerComponent.transform.position) > TeslaTowerControllerController.NearTowerRange;
+                ownerTrackerComponent.SetIndicatorTower(towerNear);
+            }
+
             _cooldownTimer += Time.deltaTime;
             if (_cooldownTimer >= currentZapInterval) {
                 SearchTarget();
@@ -56,7 +63,13 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         }
 
         private void SearchTarget() {
-            _lightningTarget = _lightningOrb.PickNextTarget(transform.position);
+
+            _lightningTarget = ownerTrackerComponent?.GetTrackingTarget();
+
+            if (_lightningTarget == null || ownerTrackerComponent.GetIsTargetingTeammate()) {
+
+                _lightningTarget = _lightningOrb.PickNextTarget(transform.position);
+            }
 
             if (_lightningTarget) {
                 //todo replace with ai?
@@ -65,6 +78,11 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 });
                 _cooldownTimer = 0;
             }
+        }
+
+        public override void OnExit() {
+            base.OnExit();
+            ownerTrackerComponent.SetIndicatorTower(false);
         }
     }
 

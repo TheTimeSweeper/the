@@ -144,11 +144,21 @@ namespace Modules {
             indicatorPrefab.transform.Find("Holder").rotation = Quaternion.identity;
             indicatorPrefab.transform.Find("Holder/Brackets").rotation = Quaternion.identity;
 
+            TeslaIndicatorView indicatorView = indicatorPrefab.AddComponent<TeslaIndicatorView>();
+
             SpriteRenderer spriteRenderer = indicatorPrefab.GetComponentInChildren<SpriteRenderer>();
             spriteRenderer.sprite = Modules.Assets.LoadAsset<Sprite>("texIndicator1Close");
             spriteRenderer.color = Color.cyan;
             spriteRenderer.transform.localRotation = Quaternion.identity;
             spriteRenderer.transform.localPosition = Vector3.zero;
+
+            indicatorView.indicatorRenderer = spriteRenderer;
+
+            SpriteRenderer towerIndicator = UnityEngine.Object.Instantiate(spriteRenderer, spriteRenderer.transform.parent);
+            towerIndicator.sprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorTowerRedWide");
+            towerIndicator.color = Color.white;
+
+            indicatorView.towerIndicator = spriteRenderer.gameObject;
 
             return indicatorPrefab;
         }

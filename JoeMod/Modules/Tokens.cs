@@ -144,7 +144,7 @@ namespace Modules
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient*100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps targeted units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient*100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
             #endregion
 
             #region recolor
@@ -193,7 +193,7 @@ namespace Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Occasionally zap nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient}")}.");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap nearby units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient}")}.");
             #endregion
             
             #region Secondary

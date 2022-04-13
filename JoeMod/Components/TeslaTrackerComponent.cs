@@ -1,5 +1,6 @@
 ﻿using Modules.Survivors;
 using RoR2;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,9 +22,6 @@ public class TeslaTrackerComponent : MonoBehaviour {
         ALLY
     }
 
-    private bool _empowered;
-    private bool _targetingAlly;
-
     public static float maxTrackingDistance = 40f;
 
     public static float nearDist1 = 0.4f;
@@ -40,11 +38,10 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private InputBankTest inputBank;
     private TeslaIndicator indicator;
 
-    // Token: 0x04000FAB RID: 4011
-    //private readonly BullseyeSearch search = new BullseyeSearch();
+    private bool _targetingAlly;
 
     void Awake() {
-        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);// RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"));
+        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);
         teamComponent = GetComponent<TeamComponent>();
     }
 
@@ -54,6 +51,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         teamComponent = base.GetComponent<TeamComponent>();
     }
 
+    #region access
     public HurtBox GetTrackingTarget() {
         return _trackingTarget;
     }
@@ -69,6 +67,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         return _targetingAlly;
     }
+    #endregion access
 
     public RangeTier GetTrackingTargetDistance() {
 
@@ -89,12 +88,16 @@ public class TeslaTrackerComponent : MonoBehaviour {
         return range;
     }
 
-    public void SetIndicatorEmpowered(bool empowered) {
-        _empowered = empowered;
-        indicator.empowered = _empowered;
+    #region indicator
+    public void SetIndicatorTower(bool hasTower) {
+        indicator.hasTower = hasTower;
     }
 
-    private void setIndicatorRamge(RangeTier tier) {
+    public void SetIndicatorEmpowered(bool empowered) {
+        indicator.empowered = empowered;
+    }
+
+    private void setIndicatorRange(RangeTier tier) {
         indicator.currentRange = tier;
     }
     private void setIndicatorAlly() {
@@ -107,6 +110,9 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private void OnDisable() {
         indicator.active = false;
     }
+    #endregion indicator
+
+    #region search
 
     private void FixedUpdate() {
 
@@ -125,7 +131,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         GetIsTargetingTeammate();
 
         if (_trackingTarget) {
-            setIndicatorRamge(GetTrackingTargetDistance());
+            setIndicatorRange(GetTrackingTargetDistance());
         }
 
         ZappableTower zappableTower;
@@ -163,24 +169,15 @@ public class TeslaTrackerComponent : MonoBehaviour {
         _trackingTarget = hitinfo.collider?.GetComponent<HurtBox>();
         return _trackingTarget;
     }
+#endregion search
 
     public class TeslaIndicator : Indicator {
-
-        public static Sprite allySprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorAlly");
-        public static Sprite[] rangeSprites = new Sprite[] { Modules.Assets.LoadAsset<Sprite>("texIndicator1Close"),
-                                                             Modules.Assets.LoadAsset<Sprite>("texIndicator2Med"),
-                                                             Modules.Assets.LoadAsset<Sprite>("texIndicator3Far")
-        };
-        
-        public static Color[] targetcolors = new Color[] { Color.cyan,
-                                                           Color.red,
-                                                           Color.green
-        };
 
         public RangeTier currentRange = RangeTier.FURTHEST;
 
         public bool empowered;
         public bool targetingAlly;
+        public bool hasTower;
 
         public TeslaIndicator(GameObject owner, GameObject visualizerPrefab) : base(owner, visualizerPrefab) { }
 
@@ -189,33 +186,36 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
             if (visualizerTransform) {
 
-                SpriteRenderer rend = visualizerTransform.GetComponentInChildren<SpriteRenderer>();
+                TeslaIndicatorView indicatorView = visualizerTransform.GetComponent<TeslaIndicatorView>();
 
                 //color
                 TargetType currentTarget = TargetType.DEFAULT;
 
                 if (empowered) {
                     currentTarget = TargetType.EMPOWERED;
-                } else if(targetingAlly) {
+                } else if (targetingAlly) {
                     currentTarget = TargetType.ALLY;
                 }
 
-                rend.color = targetcolors[(int)currentTarget];
-                
+                indicatorView.UpdateColor((int)currentTarget);
+
                 //sprite
                 switch (currentTarget) {
 
                     default:
                     case TargetType.DEFAULT:
-                        rend.sprite = rangeSprites[(int)currentRange];
+                        indicatorView.setSprite((int)currentRange);
                         break;
                     case TargetType.EMPOWERED:
-                        rend.sprite = rangeSprites[(int)RangeTier.CLOSEST];
+                        indicatorView.setSprite((int)RangeTier.CLOSEST);
                         break;
                     case TargetType.ALLY:
-                        rend.sprite = allySprite;
+                        indicatorView.setSpriteAlly();
                         break;
                 }
+
+                //tower
+                indicatorView.setTowerSprite(hasTower);
             }
         }
     }

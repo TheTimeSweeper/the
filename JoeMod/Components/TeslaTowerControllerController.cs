@@ -8,13 +8,13 @@ using UnityEngine;
 
 public class TeslaTowerControllerController : MonoBehaviour {
 
-    private List<GameObject> teslaTowers = new List<GameObject>();
+    public static float NearTowerRange = 60f;
 
-    private float nearTowerRange = 60f;
+    private List<GameObject> teslaTowers = new List<GameObject>();
 
     public GameObject GetNearestTower () { 
 
-            float nearest = nearTowerRange * 2;
+            float nearest = NearTowerRange * 2;
             GameObject nearestTower = null;
 
             for (int i = 0; i < teslaTowers.Count; i++) {
@@ -24,7 +24,7 @@ public class TeslaTowerControllerController : MonoBehaviour {
                 }
 
                 float dist = Vector3.Distance(coil.transform.position, transform.position);
-                if (dist < nearTowerRange && dist < nearest) {
+                if (dist < NearTowerRange && dist < nearest) {
                     nearest = dist;
                     nearestTower = coil;
                 }
@@ -85,7 +85,7 @@ public class TeslaTowerControllerController : MonoBehaviour {
             }
 
             float dist = Vector3.Distance(coil.transform.position, nearObject.transform.position);
-            if (dist < nearTowerRange) {
+            if (dist < NearTowerRange) {
                 coils.Add(coil);
             }
         }
@@ -93,13 +93,15 @@ public class TeslaTowerControllerController : MonoBehaviour {
         return coils;
     }
 
-    public void addTower(GameObject towerObject) {
-        teslaTowers.Add(towerObject);
+    public void addTower(GameObject towerBodyObject) {
+        teslaTowers.Add(towerBodyObject);
+
+        towerBodyObject.GetComponent<TowerOwnerTrackerComponent>().OwnerTrackerComponent = GetComponent<TeslaTrackerComponent>();
 
         SkinRecolorController trooperRecolor = this.gameObject.GetComponent<CharacterBody>().modelLocator.modelTransform.GetComponent<SkinRecolorController>();
         if (trooperRecolor && trooperRecolor.Recolors != null) {
                                                             //pass in characterbody instead of gameobject?
-            SkinRecolorController towerRecolor = towerObject.GetComponent<CharacterBody>().modelLocator.modelTransform.GetComponent<SkinRecolorController>();
+            SkinRecolorController towerRecolor = towerBodyObject.GetComponent<CharacterBody>().modelLocator.modelTransform.GetComponent<SkinRecolorController>();
             if (towerRecolor) {
                 towerRecolor.SetRecolor(trooperRecolor.currentColor);
             }

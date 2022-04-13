@@ -108,6 +108,9 @@ namespace ModdedEntityStates.TeslaTrooper
 
             //todo: joe crosscompat
             //base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
+
+            //todo: ishandout causing old sniper animation issues
+            PlayCrossfade("Gesture, Override", "HandOut", 0.1f);
             GetModelAnimator().SetBool("isHandOut", true);
             if (isAuthority) {
                 if (_tracker) {
@@ -221,7 +224,9 @@ namespace ModdedEntityStates.TeslaTrooper
                                             gameObject,
                                             "MuzzleGauntlet",
                                             true);
+
             PlayAnimation("Gesture, Additive", "Shock");
+            //PlayCrossfade("Gesture, Override", "Shock", 0.1f);
 
             string sound = "Play_itesatta";
             if (_crit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";

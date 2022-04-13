@@ -36,6 +36,7 @@ namespace ModdedEntityStates.TeslaTrooper
             base.OnEnter();
             Util.PlaySound(EnterSoundString, gameObject);
 
+            PlayCrossfade("Gesture, Override", "HandOut", 0.1f);
             GetModelAnimator().SetBool("isHandOut", true);
         }
 
@@ -80,8 +81,6 @@ namespace ModdedEntityStates.TeslaTrooper
 
             if (showingEmpowered)
                 ExitEmpowered();
-
-            GetModelAnimator().SetBool("isHandOut", false);
         }
 
         public override void FireProjectile() { }

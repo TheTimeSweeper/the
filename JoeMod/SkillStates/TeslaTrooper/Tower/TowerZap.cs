@@ -16,7 +16,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     public class TowerZap: BaseTimedSkillState
     {
-        public static float DamageCoefficient = 2.0f;
+        public static float DamageCoefficient = 2.3f;
         public static float ProcCoefficient = 1f;
         
         public static float BaseDuration = 1f;

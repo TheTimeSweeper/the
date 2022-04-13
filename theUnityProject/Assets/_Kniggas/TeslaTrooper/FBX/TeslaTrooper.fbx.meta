@@ -816,6 +816,12 @@ ModelImporter:
   - first:
       74: 5963261098088877888
     second: Armature|LightImpact (1)
+  - first:
+      74: 2359987417653977901
+    second: Armature|FuckingJUMP
+  - first:
+      74: 8475707625400296174
+    second: Armature|CloseHand
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -1478,11 +1484,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 9.5
     - serializedVersion: 16
-      name: Armature|Jump
-      takeName: Armature|Jump
+      name: Armature|FuckingJUMP
+      takeName: Armature|FuckingJUMP
       internalID: 0
       firstFrame: 0
       lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.5
+    - serializedVersion: 16
+      name: Armature|CloseHand
+      takeName: Armature|CloseHand
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 4
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

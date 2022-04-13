@@ -45,7 +45,8 @@ namespace ModdedEntityStates.TeslaTrooper
             exitCountdown = 0.25f;
             exitPending = false;
 
-            PlayCrossfade("Gesture, Override", "Placing", 0.3f);
+            //PlayCrossfade("Gesture, Override", "Placing", 0.3f);
+            PlayAnimation("Gesture, Override", "Placing");
         }
 
         public override void Update()
@@ -88,7 +89,7 @@ namespace ModdedEntityStates.TeslaTrooper
                             //I am fucking exploding right now
                             Util.PlaySound("Play_buliding_uplace", gameObject);
 
-                            PlayCrossfade("Gesture, Override", "DoPlace", 0.2f);
+                            PlayCrossfade("Gesture, Override", "DoPlace", 0.1f);
 
                             ConstructionComplete = true;
 
