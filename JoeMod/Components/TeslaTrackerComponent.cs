@@ -142,7 +142,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         FindTrackingTarget(aimRay);
         setIsTargetingTeammate();
-
+        
 
         if (_trackingTarget) {
             setIndicatorRange(GetTrackingTargetDistance());
@@ -239,24 +239,25 @@ public class TeslaTrackerComponent : MonoBehaviour {
                     currentTarget = TargetType.ALLY;
                 }
 
-                indicatorView.UpdateColor((int)currentTarget);
+                indicatorView.SetColor((int)currentTarget);
 
                 //sprite
                 switch (currentTarget) {
 
                     default:
                     case TargetType.DEFAULT:
-                        indicatorView.setSprite((int)currentRange);
+                        indicatorView.SetSprite((int)currentRange);
                         break;
                     case TargetType.EMPOWERED:
-                        indicatorView.setSprite((int)RangeTier.CLOSEST);
+                        indicatorView.SetSprite((int)RangeTier.CLOSEST);
                         break;
                     case TargetType.ALLY:
-                        indicatorView.setSpriteAlly();
+                        indicatorView.SetSpriteAlly();
                         break;
                 }
 
-                    indicatorView.setTowerSprite(!targetingAlly && hasTower);
+                //tower indicator
+                indicatorView.SetTowerSprite(!targetingAlly && hasTower);
             }
         }
     }

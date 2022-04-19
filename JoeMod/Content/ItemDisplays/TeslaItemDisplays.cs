@@ -63,7 +63,7 @@ namespace Modules.Characters {
                                                new Vector3(-0.00422F, 0.31156F, 0.00071F),
                                                new Vector3(270F, 97.21723F, 0F),
                                                new Vector3(0.14997F, 0.14997F, 0.14997F)),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftArm)));
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftArm)));//hammer
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.AttackSpeedOnCrit, "DisplayWolfPelt",
                                                                        "Gauntlet",
                                                                        new Vector3(-0.11492F, 0.16431F, -0.0027F),
@@ -112,7 +112,7 @@ namespace Modules.Characters {
                                                new Vector3(-0.00328F, 0.06594F, -0.11691F),
                                                new Vector3(270.0626F, 179.5512F, 0F),
                                                new Vector3(0.0707F, 0.06064F, 0.0707F)),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftLeg)
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftLeg)//gauntlet coil
                 ));
 
             //again, don't have to do this 
@@ -529,7 +529,7 @@ namespace Modules.Characters {
                                                new Vector3(0.01605F, 0.19069F, 0.07331F),
                                                new Vector3(76.7001F, 0F, 0F),
                                                new Vector3(0.51375F, 0.46564F, 0.51375F)),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftLeg)
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftLeg)//gauntlet coil
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.SiphonOnLowHealth, "DisplaySiphonOnLowHealth",
                                                                 "Pelvis",
@@ -770,8 +770,8 @@ namespace Modules.Characters {
                                                "LightningArm1",
                                                new Vector3(0, 0, 0),
                                                new Vector3(0, 0, 0),
-                                               new Vector3(0.8752531f, 0.8752531f, 0.8752531f)),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightArm)
+                                               new Vector3(0.8752531f, 0.8752531f, 0.8752531f)), 
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightArm)//shoulder coil
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Equipment.GainArmor, "DisplayElephantFigure",
                                                                 "CalfL",

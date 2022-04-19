@@ -36,6 +36,8 @@ namespace Modules.Survivors
             armor = 5f,
 
             jumpCount = 1,
+
+            aimOriginPosition = new Vector3(0, 2.8f, 0),
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; }
@@ -70,6 +72,10 @@ namespace Modules.Survivors
 
             bodyCharacterModel.baseRendererInfos[0].defaultMaterial.SetEmission(2);
             bodyCharacterModel.baseRendererInfos[8].defaultMaterial.SetEmission(2);
+
+            bodyPrefab.GetComponent<CharacterBody>().spreadBloomCurve = AnimationCurve.EaseInOut(0, 0, 0.5f, 1);
+
+            bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
 
             RegisterTowerDeployable();
         }
@@ -378,11 +384,14 @@ namespace Modules.Survivors
             On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
 
             On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
-            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2; ;
+            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2;
+
+            On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
             
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
@@ -418,11 +427,26 @@ namespace Modules.Survivors
         #region tower hacks
         private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
             if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                //Helpers.LogWarning("copyitemsfrom true");
-                filter = TeslaTowerCopyFilter;
+                Helpers.LogWarning("copyitemsfrom true");
+                filter = TeslaTowerCopyFilterDelegate;
             }
             orig(self, other, filter);
         }
+
+        private void Inventory_AddItemsFrom_Int32Array_Func2(On.RoR2.Inventory.orig_AddItemsFrom_Int32Array_Func2 orig, Inventory self, int[] otherItemStacks, Func<ItemIndex, bool> filter) {
+            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                Helpers.LogWarning("additemsfrom true");
+
+                for (ItemIndex itemIndex = (ItemIndex)0; itemIndex < (ItemIndex)self.itemStacks.Length; itemIndex++) {
+                    int itemstack = otherItemStacks[(int)itemIndex];
+                    if (itemstack > 0) {
+                        Helpers.LogWarning($"{filter(itemIndex)} filtered for: {ItemCatalog.GetItemDef(itemIndex)}");
+                    }
+                }
+            }
+            orig(self, otherItemStacks, filter);
+        }
+
         private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
             if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
                 //Helpers.LogWarning("adddeployable true");
@@ -431,6 +455,8 @@ namespace Modules.Survivors
 
             orig(self, deployable, slot);
         }
+
+        private Func<ItemIndex, bool> TeslaTowerCopyFilterDelegate = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
 
         private static bool TeslaTowerCopyFilter(ItemIndex itemIndex) {
             return !ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.CannotCopy) &&

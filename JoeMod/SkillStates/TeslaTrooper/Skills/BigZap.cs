@@ -3,6 +3,7 @@ using ModdedEntityStates.BaseStates;
 using Modules;
 using R2API;
 using RoR2;
+using UnityEngine.Networking;
 using UnityEngine;
 
 namespace ModdedEntityStates.TeslaTrooper {
@@ -11,7 +12,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static GameObject bigZapEffectPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/magelightningbombexplosion");
         public static GameObject bigZapEffectPrefabArea = Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova");
         public static GameObject bigZapEffectFlashPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
-
+        
         public static float DamageCoefficient = 6.9f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
@@ -30,20 +31,24 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public override void OnEnter() {
             base.OnEnter();
-            
+            Helpers.LogWarning("onenter bigzap, network:" + NetworkServer.active);
             InitDurationValues(BaseDuration, BaseCastTime);
             
             TeslaTowerControllerController controller = GetComponent<TeslaTowerControllerController>();
-
-            if (base.isAuthority && controller && controller.coilReady) {
+            
+            if (controller && controller.coilReady) {
                 TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
                 if (tracker && tracker.GetTrackingTarget()) {
 
-                    controller.commandTowers(tracker.GetTrackingTarget());
+                    if (NetworkServer.active) {
+                        Helpers.LogWarning("runcommandtowers");
+                        controller.commandTowers(tracker.GetTrackingTarget());
+                    }
 
                     commandedTowers = true;
                 }
             }
+
             attackRadius = BaseAttackRadius * skillsPlusAreaMulti;
             
             PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
@@ -162,6 +167,19 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public override InterruptPriority GetMinimumInterruptPriority() {
             return InterruptPriority.Skill;
+        }
+
+
+        // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
+        public override void OnSerialize(NetworkWriter writer) {
+
+            writer.Write(commandedTowers);
+        }
+
+        // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
+        public override void OnDeserialize(NetworkReader reader) {
+
+            this.commandedTowers = reader.ReadBoolean();
         }
     }
 }

@@ -39,7 +39,7 @@ public class TestValueManager : MonoBehaviour {
         //manageTestValue(ref aimorigin, "aimorigin", KeyCode.Keypad8, KeyCode.Keypad5, 1f);
         //manageTestValue(ref camerapivot, "aimorigin", KeyCode.Keypad9, KeyCode.Keypad6, 1f);
         //manageTestValue(ref bak, "aimorigin", KeyCode.Keypad3, KeyCode.KeypadPeriod, 1f);
-        manageTestValue(ref value1, "test value 1", KeyCode.Keypad7, KeyCode.Keypad4, 0.1f);
+        //manageTestValue(ref value1, "test value 1", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {
@@ -62,7 +62,7 @@ public class TestValueManager : MonoBehaviour {
             _tim += Time.deltaTime;
 
             if (_tim > _holdTime) {
-
+                _tim = _holdTime - 0.05f; 
                 value = setTestValue(value + amount, valueName);
             }
         }
@@ -75,7 +75,7 @@ public class TestValueManager : MonoBehaviour {
     }
 
     private float setTestValue(float value, string print) {
-        Debug.LogWarning($"{print}: {value.ToString("0.000")}");
+        Helpers.LogWarning($"{print}: {value.ToString("0.000")}");
         return value;
     }
 }

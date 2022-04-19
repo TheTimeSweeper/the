@@ -61,7 +61,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             }
 
             if (_lightningTarget) {
-
+                Helpers.LogWarning("setting new course: zap");
                 outer.SetNextState(new TowerZap {
                     lightningTarget = _lightningTarget,
                 });

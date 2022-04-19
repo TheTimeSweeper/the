@@ -3,6 +3,7 @@ using RoR2;
 using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
 
@@ -25,9 +26,9 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public LightningOrb lightningOrb;
         public HurtBox lightningTarget;
 
-        public static string PrepSound = "Play_prism_bpripow_prism_tower_prep";
+        public static string PrepSound = "Play_tower_btespow_tesla_tower_prep";
         public static string ZapSound = "Play_tower_btesat1a_tesla_tower_attack";
-        public static string ZapSoundCrit = "Play_tower_btesat1b_tesla_tower_attack";
+        public static string ZapSoundCrit = "Play_tower_btesat2a_tesla_tower_attack";
 
         protected string zapSound = ZapSound;
         protected string zapSoundCrit = ZapSoundCrit;
@@ -35,7 +36,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void OnEnter()
         {
             base.OnEnter();
-
+            Helpers.LogWarning(this.GetType().ToString() + " onenter");
             // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
             InitDurationValues(BaseDuration, BaseStartCastTime);
 
@@ -82,14 +83,17 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         protected override void OnCastEnter() {
 
+            if (!NetworkServer.active)
+                return;
+
             string sound = ZapSound;
             if (lightningOrb.isCrit) sound = ZapSoundCrit;
             Util.PlaySound(sound, gameObject);
 
-            //todo: custom lightningorb
             if (lightningTarget == null)
                 return;
 
+            //todo: custom lightningorb
             fireOrb();
         }
 

@@ -16,6 +16,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float BaseCastStartTime = 0.0f; //todo: anim: 0.13 when legs are separated
         public static float MoveSlowEndTime = 0.8f;
 
+        public float skillsPlusSeconds = 0;
+
         public GameObject ShieldEffect = Modules.Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
 
         RoR2.CameraTargetParams.AimRequest aimRequest;
@@ -47,7 +49,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             if (NetworkServer.active) {
 
-                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration);
+                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration + skillsPlusSeconds);
             }
         }
 

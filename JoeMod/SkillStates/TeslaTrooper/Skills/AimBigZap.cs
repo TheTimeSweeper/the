@@ -17,6 +17,8 @@ namespace ModdedEntityStates.TeslaTrooper
         private Sprite originalSprite;
         private bool showingEmpowered;
 
+        private float viewRadius;
+
         public override void OnEnter() {
             coilController = GetComponent<TeslaTowerControllerController>();
             tracker = GetComponent<TeslaTrackerComponent>();
@@ -48,24 +50,26 @@ namespace ModdedEntityStates.TeslaTrooper
             //scrapping this cooldown setup
             if (coilController && coilController.GetNearestTower()) {
 
-                EnterEmpowered();
+                ShowEmpowered();
             } else {
                 if (showingEmpowered)
-                    ExitEmpowered();
+                    RemoveEmpowered();
             }
 
             if (coilController && coilController.GetNearestTower() && tracker?.GetTrackingTarget() != null) {
-                endpointVisualizerRadiusScale = Tower.TowerBigZap.BaseAttackRadius;
+                viewRadius = Tower.TowerBigZap.BaseAttackRadius;
 
                 maxDistance = TeslaTrackerComponent.maxTrackingDistance;
 
             } else {
 
-                endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
+                viewRadius = BigZap.BaseAttackRadius;
 
                 maxDistance = 30;
             }
-            endpointVisualizerRadiusScale *= skillsPlusMulti;
+            viewRadius *= skillsPlusMulti;
+
+            endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);
         }
 
         // Token: 0x06003B19 RID: 15129 RVA: 0x0002B5A9 File Offset: 0x000297A9
@@ -80,7 +84,7 @@ namespace ModdedEntityStates.TeslaTrooper
             }
 
             if (showingEmpowered)
-                ExitEmpowered();
+                RemoveEmpowered();
         }
 
         public override void FireProjectile() { }
@@ -91,7 +95,7 @@ namespace ModdedEntityStates.TeslaTrooper
             return InterruptPriority.PrioritySkill;
         }
 
-        private void EnterEmpowered() {
+        private void ShowEmpowered() {
             showingEmpowered = true;
 
             //scrapping this cooldown system. it was novel though
@@ -104,7 +108,7 @@ namespace ModdedEntityStates.TeslaTrooper
             tracker?.SetIndicatorEmpowered(true);
         }
 
-        private void ExitEmpowered() {
+        private void RemoveEmpowered() {
             showingEmpowered = false;
 
             //skillLocator.special = skillLocator.FindSkill("Special");

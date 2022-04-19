@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class TeslaTowerControllerController : MonoBehaviour {
 
@@ -54,6 +55,11 @@ public class TeslaTowerControllerController : MonoBehaviour {
     }
 
     public void commandTowers(HurtBox target) {
+
+        if (!NetworkServer.active)
+            return;
+
+        Helpers.LogWarning("commanding towers");
 
         List<GameObject> nearbyTowers = GetNearbyTowers();
 

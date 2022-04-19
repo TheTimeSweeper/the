@@ -48,7 +48,7 @@ namespace Modules.Survivors {
         public override Type characterMainState => typeof(TowerIdleSearch);
         public override Type characterSpawnState => typeof(TowerSpawnState);
 
-        public override ItemDisplaysBase itemDisplays => null;// new TeslaTowerItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new TeslaTowerItemDisplays();
 
         public static GameObject masterPrefab;
 

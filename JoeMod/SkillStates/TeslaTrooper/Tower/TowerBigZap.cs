@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
@@ -25,18 +26,23 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             zapSound = towerZapSound;
             zapSoundCrit =towerZapSound;
         }
+
         protected override void fireOrb() {
+
+            if (lightningTarget == null)
+                return;
 
             lightningOrb.damageValue = 0;
             lightningOrb.damageType = DamageType.Silent;
             base.fireOrb();
-            
-            Vector3 targetPoint = lightningTarget.transform.position;
 
             bool crit = RollCrit();
 
             Util.PlaySound(crit ? zapSound : zapSoundCrit, gameObject);
-            if (base.isAuthority) {
+            if (NetworkServer.active) {
+
+                Vector3 targetPoint = lightningTarget.transform.position;
+
                 BlastAttack blast = new BlastAttack {
                     attacker = gameObject,
                     inflictor = gameObject,
@@ -51,7 +57,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     crit = crit,
                     damageType = DamageType.Shock5s,
                     damageColorIndex = DamageColorIndex.WeakPoint,
-
+                    
                     procCoefficient = ProcCoefficient,
                     //procChainMask = 
                     //losType = BlastAttack.LoSType.NearestHit,
@@ -66,21 +72,21 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
                 }
                 blast.Fire();
+
+                #region effects
+                EffectData fect = new EffectData {
+                    origin = targetPoint,
+                    scale = attackRadius,
+                };
+
+                EffectManager.SpawnEffect(BigZap.bigZapEffectPrefabArea, fect, true);
+
+                EffectManager.SpawnEffect(BigZap.bigZapEffectPrefab, fect, true);
+
+                fect.scale /= 2f;
+                EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
+                #endregion effects
             }
-
-            #region effects
-            EffectData fect = new EffectData {
-                origin = targetPoint,
-                scale = attackRadius,
-            };
-
-            EffectManager.SpawnEffect(BigZap.bigZapEffectPrefabArea, fect, true);
-
-            EffectManager.SpawnEffect(BigZap.bigZapEffectPrefab, fect, true);
-
-            fect.scale /= 2f;
-            EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
-            #endregion effects
         }
     }
 

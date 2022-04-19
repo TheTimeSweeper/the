@@ -127,9 +127,9 @@ namespace Modules
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
             string conductiveText = FacelessJoePlugin.conductiveAlly ? $" Use on allies to {Helpers.DamageText("charge")} them" : "";
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Shoots {Helpers.UtilityText($"more bolts")} at {Helpers.UtilityText($"close range")}.{conductiveText}");
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"{Helpers.UtilityText("Charging.")} Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Casts {Helpers.UtilityText($"up to 3 bolts")} at {Helpers.UtilityText($"close range")}.");
 
-            LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charged</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
+            LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             #endregion
 
             #region Secondary

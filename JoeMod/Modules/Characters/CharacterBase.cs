@@ -40,9 +40,6 @@ namespace Modules.Characters {
 
             InitializeSkins();
             InitializeItemDisplays();
-
-            //survivor?
-            InitializeDoppelganger("Merc");
         }
         
         protected virtual void InitializeCharacterBodyAndModel() {
@@ -68,10 +65,6 @@ namespace Modules.Characters {
         public virtual void InitializeHitboxes() { }
 
         public virtual void InitializeSkins() { }
-
-        public virtual void InitializeDoppelganger(string clone) {
-            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", clone);
-        }
 
         public virtual void InitializeItemDisplays() {
 

@@ -456,7 +456,7 @@ MonoBehaviour:
   remapSprites: []
   minSpreadAlpha: 0
   maxSpreadAlpha: 0
-  maxSpreadAngle: 8
+  maxSpreadAngle: 5
 --- !u!1 &5506580435769187133
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ namespace Modules.Characters {
                 ItemDisplays.recordUnused();
 
             SetItemDisplayRules(itemDisplayRules);
-
+            
             if(printUnused)
                 ItemDisplays.printUnused();
 

@@ -8,27 +8,26 @@ public class TeslaIndicatorView : MonoBehaviour {
                                                          Modules.Assets.LoadAsset<Sprite>("texIndicator3Far") };
     public static Sprite allySprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorAlly");
 
-    public static Color[] targetcolors = new Color[] { Color.cyan,
+    public static Color[] targetColors = new Color[] { Color.cyan,
                                                        Color.red,
                                                        Color.green };
 
     public SpriteRenderer indicatorRenderer;
     public GameObject towerIndicator;
 
-    internal void UpdateColor(int currentTarget) {
+    public void SetColor(int currentTarget) {
 
-        indicatorRenderer.color = targetcolors[currentTarget];
+        indicatorRenderer.color = targetColors[currentTarget];
     }
 
-    internal void setSprite(int currentRange) {
+    public void SetSprite(int currentRange) {
         indicatorRenderer.sprite = rangeSprites[currentRange];
     }
-
-    internal void setSpriteAlly() {
+    public void SetSpriteAlly() {
         indicatorRenderer.sprite = allySprite;
     }
 
-    internal void setTowerSprite(bool hasTower) {
+    public void SetTowerSprite(bool hasTower) {
         towerIndicator.SetActive(hasTower);
     }
 }

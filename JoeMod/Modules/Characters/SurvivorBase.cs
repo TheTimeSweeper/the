@@ -27,16 +27,14 @@ namespace Modules.Survivors {
             
             base.InitializeCharacter();
 
+            InitializeDoppelganger("Merc");
+
             InitializeSurvivor();
         }
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
             InitializeDisplayPrefab();
-        }
-
-        protected virtual void InitializeSurvivor() {
-            RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, bodyInfo.sortPosition);
         }
 
         protected virtual void InitializeDisplayPrefab() {
@@ -46,6 +44,13 @@ namespace Modules.Survivors {
         {
         }
 
+        public virtual void InitializeDoppelganger(string clone) {
+            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", clone);
+        }
+
+        protected virtual void InitializeSurvivor() {
+            RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, bodyInfo.sortPosition);
+        }
 
         public static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, 100f); }
         public static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, float sortPosition) { RegisterNewSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, sortPosition); }
@@ -72,7 +77,7 @@ namespace Modules.Survivors {
 
             CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
             if (!CSSPreviewDisplayConroller) {
-                Debug.LogError("trying to add skillChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created one on your Display prefab in editor");
+                Debug.LogError("trying to add skillChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created a CharacterSelectSurvivorPreviewDisplayController on your Display prefab in editor");
                 return;
             }
 
@@ -84,12 +89,12 @@ namespace Modules.Survivors {
 
             CharacterSelectSurvivorPreviewDisplayController CSSPreviewDisplayConroller = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
             if (!CSSPreviewDisplayConroller) {
-                Debug.LogError("trying to add skinChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created one on your Display prefab in editor");
+                Debug.LogError("trying to add skinChangeResponse to null CharacterSelectSurvivorPreviewDisplayController.\nMake sure you created a CharacterSelectSurvivorPreviewDisplayController on your Display prefab in editor");
                 return;
             }
 
             CSSPreviewDisplayConroller.skinChangeResponses[indexFromEditor].triggerSkin = skinDef;
-
+            
         }
 
         protected virtual void FinalizeCSSPreviewDisplayController() {

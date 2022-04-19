@@ -96,6 +96,7 @@ internal static class Helpers {
             case TeslaVoiceLine.attack_CommencingShock:
                 voiceLineString = "Play_itesate";
                 break;
+
             case TeslaVoiceLine.move_GoingToSource:
                 voiceLineString = "Play_itesmoa";
                 break;
@@ -115,17 +116,18 @@ internal static class Helpers {
             case TeslaVoiceLine.move_RubberShoes:
                 voiceLineString = "Play_itesmof";
                 break;
+
             case TeslaVoiceLine.select_TeslaSuit:
-                voiceLineString = "Play_itesea";
+                voiceLineString = "Play_itessea";
                 break;
             case TeslaVoiceLine.select_ChargingUp:
-                voiceLineString = "Play_iteseb";
+                voiceLineString = "Play_itesseb";
                 break;
             case TeslaVoiceLine.select_Electrodes:
-                voiceLineString = "Play_itesec";
+                voiceLineString = "Play_itessec";
                 break;
             case TeslaVoiceLine.select_CheckingConnection:
-                voiceLineString = "Play_itesed";
+                voiceLineString = "Play_itessed";
                 break;
         }
 

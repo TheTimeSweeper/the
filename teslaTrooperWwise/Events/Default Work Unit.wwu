@@ -521,6 +521,62 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_VoiceLine" ID="{15E6FE52-0A44-4E4F-A9BC-83F94B3302EF}">
+					<ChildrenList>
+						<Action Name="" ID="{096C9535-0535-43BF-A0A4-A9DB1CC91253}" ShortID="371432114">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Random Voice" ID="{C9B361C9-DF3E-43FD-84D2-712C50D65653}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Voiceline_Move" ID="{614EAF26-0099-462D-8594-C1D7800870B2}">
+					<ChildrenList>
+						<Action Name="" ID="{CC7D0304-D2E9-4C76-80D1-DA6EEEDC759D}" ShortID="681969542">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Move Voice" ID="{58ED1D5C-E54E-426A-A530-8B2ECC904525}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Voiceline_Attack" ID="{5C2EDC96-331C-4BC4-B2D0-6841F6F828A7}">
+					<ChildrenList>
+						<Action Name="" ID="{279B72F5-3970-4D3C-BB65-E620632F2D68}" ShortID="836077812">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Attack Voice" ID="{B96B3495-940E-4C3B-9D84-DF8150C50811}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Voiceline_Select" ID="{034C56D9-69FB-4D80-8DDE-B7C4ADCD357F}">
+					<ChildrenList>
+						<Action Name="" ID="{41E8BE3C-2063-4C4E-8DD5-F95173D0B20A}" ShortID="7196291">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Select Voice" ID="{62747883-ED4F-445A-9BED-83BF645612B8}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

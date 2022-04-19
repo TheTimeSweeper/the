@@ -119,10 +119,10 @@ namespace ModdedEntityStates.TeslaTrooper
                     switch (_tracker.GetTrackingTargetDistance()) {
                         default:
                         case TeslaTrackerComponent.RangeTier.FURTHEST:
-                            totalOrbCasts = OrbCasts - 2 + Mathf.FloorToInt(skillsPlusCasts * 0.334f);
+                            totalOrbCasts = OrbCasts - 2 + Mathf.RoundToInt(skillsPlusCasts * 0.334f);
                             break;
                         case TeslaTrackerComponent.RangeTier.MIDDLE:
-                            totalOrbCasts = OrbCasts - 1 + Mathf.FloorToInt(skillsPlusCasts * 0.667f);
+                            totalOrbCasts = OrbCasts - 1 + Mathf.RoundToInt(skillsPlusCasts * 0.667f);
                             break;
                         case TeslaTrackerComponent.RangeTier.CLOSEST:
                             totalOrbCasts = OrbCasts + skillsPlusCasts;
@@ -201,7 +201,7 @@ namespace ModdedEntityStates.TeslaTrooper
             //happens after firing to apply to bounces only
             _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
 
-            base.characterBody.AddSpreadBloom(TestValueManager.value1);
+            base.characterBody.AddSpreadBloom(0.32f);
         }
 
         private void ModifyTeamLightningOrb(LightningOrb lightningOrb) {
