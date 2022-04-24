@@ -14,22 +14,25 @@ namespace ModdedEntityStates.TeslaTrooper
         private TeslaTowerControllerController coilController;
         private TeslaTrackerComponent tracker;
 
-        private Sprite originalSprite;
         private bool showingEmpowered;
 
         private float viewRadius;
 
         public override void OnEnter() {
+
+            Debug.Log("enter aimbigzap");
+
             coilController = GetComponent<TeslaTowerControllerController>();
             tracker = GetComponent<TeslaTrackerComponent>();
 
-            EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
-            maxDistance = 30;
-            rayRadius = 1.6f;
+            //excuse old enforcer code
+            EntityStates.Treebot.Weapon.AimMortar2 goodState = new EntityStates.Treebot.Weapon.AimMortar2();
             //this.arcVisualizerPrefab = goodState.arcVisualizerPrefab;
             projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
             endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
             endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
+            maxDistance = 30;
+            rayRadius = 1.6f;
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
@@ -47,7 +50,7 @@ namespace ModdedEntityStates.TeslaTrooper
             base.FixedUpdate();
             StartAimMode();
 
-            //scrapping this cooldown setup
+            //scrapping the cooldown setup
             if (coilController && coilController.GetNearestTower()) {
 
                 ShowEmpowered();
@@ -77,6 +80,8 @@ namespace ModdedEntityStates.TeslaTrooper
         {
             base.OnExit();
 
+            Debug.Log("exit aimbigzap");
+
             outer.SetNextState(new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint });
             if (!outer.destroying)
             {
@@ -87,6 +92,8 @@ namespace ModdedEntityStates.TeslaTrooper
                 RemoveEmpowered();
         }
 
+        //todo rework this to a simple projectile
+        //instead of using a fake one in OnEnter and then not even using it actually
         public override void FireProjectile() { }
 
         // Token: 0x06003B1A RID: 15130 RVA: 0x000150E1 File Offset: 0x000132E1

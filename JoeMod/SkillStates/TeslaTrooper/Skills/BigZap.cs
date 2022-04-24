@@ -28,38 +28,44 @@ namespace ModdedEntityStates.TeslaTrooper {
         private string zapSoundCrit = "Play_tank_vtesattb_tesla_tank_attack";
 
         private bool commandedTowers;
+        private HurtBox commandTarget;
 
         public override void OnEnter() {
             base.OnEnter();
-            Helpers.LogWarning("onenter bigzap, network:" + NetworkServer.active);
+            Helpers.LogWarning("onenter bigzap, network active:" + NetworkServer.active + " | authority:" + base.isAuthority);
             InitDurationValues(BaseDuration, BaseCastTime);
             
             TeslaTowerControllerController controller = GetComponent<TeslaTowerControllerController>();
-            
-            if (controller && controller.coilReady) {
-                TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
-                if (tracker && tracker.GetTrackingTarget()) {
-
-                    if (NetworkServer.active) {
-                        Helpers.LogWarning("runcommandtowers");
-                        controller.commandTowers(tracker.GetTrackingTarget());
-                    }
-
-                    commandedTowers = true;
-                }
+                                                      
+            if (controller && controller.coilReady && base.isAuthority) {
+                //client will find the commandtarget and serialize it
+                commandTarget = GetComponent<TeslaTrackerComponent>()?.GetTrackingTarget();
             }
 
-            attackRadius = BaseAttackRadius * skillsPlusAreaMulti;
-            
-            PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+            //server will deserialize a commandTarget from the client's serializing
+            if (commandTarget) {
 
-            base.characterBody.AddSpreadBloom(1);
-        }
+                if (NetworkServer.active) {
+                    Helpers.LogWarning("runcommandtowers");
+                    controller.commandTowers(commandTarget);
+                }
 
-        public override void OnExit() {
-            base.OnExit();
+                commandedTowers = true;
+            }
 
-            GetModelAnimator().SetBool("isHandOut", false);
+            if (commandedTowers) {
+
+                //todo anim tower
+                PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+
+            } else {
+
+                attackRadius = BaseAttackRadius * skillsPlusAreaMulti;
+
+                PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+
+                base.characterBody.AddSpreadBloom(1);
+            }
         }
 
         protected override void OnCastEnter() {
@@ -165,21 +171,29 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
         #endregion testeffects
 
+        public override void OnExit() {
+            base.OnExit();
+
+            GetModelAnimator().SetBool("isHandOut", false);
+        }
+
         public override InterruptPriority GetMinimumInterruptPriority() {
             return InterruptPriority.Skill;
         }
 
-
         // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
         public override void OnSerialize(NetworkWriter writer) {
 
-            writer.Write(commandedTowers);
+            writer.Write(HurtBoxReference.FromHurtBox(commandTarget));
+            //not needed here, as both server and authority will set this value in onenter
+            //writer.Write(commandedTowers);
         }
 
         // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
         public override void OnDeserialize(NetworkReader reader) {
 
-            this.commandedTowers = reader.ReadBoolean();
+            this.commandTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
+            //this.commandedTowers = reader.ReadBoolean();
         }
     }
 }

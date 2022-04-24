@@ -21,9 +21,6 @@ namespace ModdedEntityStates.TeslaTrooper
 
         public static float BaseDuration = 1f;
         public static float BaseCastTime = 0.05f;
-
-        public static float nearDist1 = 0.4f;
-        public static float nearDist2 = 0.7f;
         #endregion
 
         private float shotSpread = 3;
@@ -198,7 +195,7 @@ namespace ModdedEntityStates.TeslaTrooper
             }
             ModifyTeamLightningOrb(_lightningOrb);
             OrbManager.instance.AddOrb(_lightningOrb);
-            //happens after firing to apply to bounces only
+            //happens after firing each orb to apply to their bounces only
             _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
 
             base.characterBody.AddSpreadBloom(0.32f);

@@ -11,7 +11,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
     }
 
-    public class TeamCharge : TowerZap {
+    public class TeamZapCharge : TowerZap {
 
     }
 
@@ -93,7 +93,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             if (lightningTarget == null)
                 return;
 
-            //todo: custom lightningorb
             fireOrb();
         }
 
@@ -115,6 +114,18 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             }
 
             GetComponent<TowerOwnerTrackerComponent>()?.OwnerTrackerComponent?.SetTowerLockedTarget(null);
+        }
+
+        // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
+        public override void OnSerialize(NetworkWriter writer) {
+
+            writer.Write(HurtBoxReference.FromHurtBox(lightningTarget));
+        }
+
+        // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
+        public override void OnDeserialize(NetworkReader reader) {
+
+            this.lightningTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
         }
     }
 

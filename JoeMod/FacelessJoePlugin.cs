@@ -24,7 +24,8 @@ using System.Security.Permissions;
     "SoundAPI",
     "LoadoutAPI",
     "DeployableAPI",
-    "DamageAPI"
+    "DamageAPI",
+    "UnlockableAPI"
 })]
 
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]

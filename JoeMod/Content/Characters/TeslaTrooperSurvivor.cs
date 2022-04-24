@@ -102,7 +102,7 @@ namespace Modules.Survivors
         }
 
         public override void InitializeUnlockables() {
-            masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.TeslaTrooperMastery>();
+            masterySkinUnlockableDef = UnlockableAPI.AddUnlockable<Achievements.TeslaTrooperMastery>();
         }
 
         public override void InitializeDoppelganger(string clone) {
