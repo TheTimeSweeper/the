@@ -27,7 +27,7 @@ namespace ModdedEntityStates.TeslaTrooper
 
             //excuse old enforcer code
             EntityStates.Treebot.Weapon.AimMortar2 goodState = new EntityStates.Treebot.Weapon.AimMortar2();
-            //this.arcVisualizerPrefab = goodState.arcVisualizerPrefab;
+            arcVisualizerPrefab = null;//goodState.arcVisualizerPrefab;
             projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
             endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
             endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
@@ -80,14 +80,6 @@ namespace ModdedEntityStates.TeslaTrooper
         {
             base.OnExit();
 
-            Debug.Log("exit aimbigzap");
-
-            outer.SetNextState(new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint });
-            if (!outer.destroying)
-            {
-                Util.PlaySound(ExitSoundString, gameObject);
-            }
-
             if (showingEmpowered)
                 RemoveEmpowered();
         }
@@ -95,6 +87,10 @@ namespace ModdedEntityStates.TeslaTrooper
         //todo rework this to a simple projectile
         //instead of using a fake one in OnEnter and then not even using it actually
         public override void FireProjectile() { }
+
+        public override EntityState PickNextState() {
+            return new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint };
+        }
 
         // Token: 0x06003B1A RID: 15130 RVA: 0x000150E1 File Offset: 0x000132E1
         public override InterruptPriority GetMinimumInterruptPriority()
