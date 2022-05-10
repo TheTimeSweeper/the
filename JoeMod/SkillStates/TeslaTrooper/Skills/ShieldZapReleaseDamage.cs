@@ -2,6 +2,7 @@
 using ModdedEntityStates.BaseStates;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapReleaseDamage : BaseTimedSkillState {
@@ -13,12 +14,13 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float BaseCastTime = 0.5f;
 
         public CameraTargetParams.AimRequest aimRequest;
+        public float collectedDamage;
 
         public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
 
-            characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 1);
+            characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
 
             base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
         }
@@ -29,14 +31,22 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private void Blast() {
 
-            float damage = damageStat * 3f;
-
+            //probably doesn't even get to here on anyone but tesla trooper, but hey if you do
+            float redeemedDamage = damageStat * 3f;
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
-                damage = controller.RedeemDamage();
+                redeemedDamage = controller.RedeemDamage();
             }
+
+            //Helpers.LogWarning(NetworkServer.active + " | " + "redeemed damage: " + damage);
+            //Helpers.LogWarning(NetworkServer.active + " | " + "damage from events: " + collectedDamage);
+
+            //give it a minimum damage to justify the explosion
+            float blastDamage = Mathf.Max(redeemedDamage, damageStat * 1f);
+
             //range and/or no blast if no damage is absorbed
-            if (base.isAuthority) {
+            if (NetworkServer.active) {
+                
                 BlastAttack blast = new BlastAttack {
                     attacker = gameObject,
                     inflictor = gameObject,
@@ -47,7 +57,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                     radius = range,
                     falloffModel = BlastAttack.FalloffModel.None,
 
-                    baseDamage = damage * multiplier,
+                    baseDamage = blastDamage * multiplier,
                     crit = RollCrit(),
                     damageType = DamageType.Stun1s,
                     //damageColorIndex = DamageColorIndex.Default,

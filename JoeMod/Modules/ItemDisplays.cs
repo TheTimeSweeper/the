@@ -8,8 +8,9 @@ namespace Modules
     {
         private static Dictionary<string, GameObject> itemDisplayPrefabs = new Dictionary<string, GameObject>();
         
-        public static Dictionary<string, int> itemDisplayCheckCount = new Dictionary<string, int>();
         private static bool recording = false;
+        public static Dictionary<string, int> itemDisplayCheckCount = new Dictionary<string, int>();
+        public static Dictionary<string, Object> itemDisplayCheckAsset = new Dictionary<string, Object>();
 
         public static void PopulateDisplays()
         {
@@ -47,6 +48,7 @@ namespace Modules
                             itemDisplayPrefabs[key] = followerPrefab;
 
                             itemDisplayCheckCount[key] = 0;
+                            itemDisplayCheckAsset[key] = itemRuleGroups[i].keyAsset;
                         }
                     }
                 }
@@ -69,7 +71,8 @@ namespace Modules
             limbMatcher.limbPairs[1].targetChildLimb = "LightningArm2";
             limbMatcher.limbPairs[2].targetChildLimb = "LightningArmEnd";
 
-            itemDisplayPrefabs["DisplayLightningArmCustom".ToLowerInvariant()] = display;
+            string key = "DisplayLightningArmCustom".ToLowerInvariant();
+            itemDisplayPrefabs[key] = display;
             #endregion
         }
 
@@ -80,7 +83,9 @@ namespace Modules
                 if (itemDisplayPrefabs[name.ToLowerInvariant()]) {
 
                     if (recording) {
-                        itemDisplayCheckCount[name.ToLowerInvariant()]++;
+                        if (itemDisplayCheckCount.ContainsKey(name.ToLowerInvariant())) {
+                            itemDisplayCheckCount[name.ToLowerInvariant()]++;
+                        }
                     }
 
                     GameObject display = itemDisplayPrefabs[name.ToLowerInvariant()];
@@ -102,7 +107,10 @@ namespace Modules
             string no = "not used:";
 
             foreach (KeyValuePair<string, int> pair in itemDisplayCheckCount) {
-                string thing = $"\n{itemDisplayPrefabs[pair.Key].name} | {itemDisplayPrefabs[pair.Key]} | {pair.Value}";
+
+                string thing = $"\n{itemDisplayCheckAsset[pair.Key]} | {itemDisplayPrefabs[pair.Key].name}";
+
+                thing = SpitOutNewRule(itemDisplayCheckAsset[pair.Key], itemDisplayPrefabs[pair.Key].name);
 
                 if (pair.Value > 0) {
                     yes += thing;
@@ -110,10 +118,19 @@ namespace Modules
                     no += thing;
                 }
             }
-            //Debug.Log(yes);
             Helpers.LogWarning(no);
 
             //resetUnused();
+        }
+
+        private static string SpitOutNewRule(Object asset, string prefabName , string content = "DLC1Content") {
+            string contentType = asset is ItemDef ? "Items" : "Equipment";
+
+            return $"\n            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule({content}.{contentType}.{asset.name}, \"{prefabName}\",\n" +
+                   $"                                                                       \"Chest\",\n" +
+                   $"                                                                       new Vector3(2, 2, 2),\n" +
+                   $"                                                                       new Vector3(0, 0, 0),\n" +
+                   $"                                                                       new Vector3(1, 1, 1)));";
         }
 
         private static void resetUnused() {

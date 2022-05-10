@@ -59,8 +59,6 @@ public class TeslaTowerControllerController : MonoBehaviour {
         if (!NetworkServer.active)
             return;
 
-        Helpers.LogWarning("commanding towers");
-
         List<GameObject> nearbyTowers = GetNearbyTowers();
 
         for (int i = 0; i < nearbyTowers.Count; i++) {

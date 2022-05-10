@@ -36,7 +36,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void OnEnter()
         {
             base.OnEnter();
-            Helpers.LogWarning(this.GetType().ToString() + " onenter");
             // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
             InitDurationValues(BaseDuration, BaseStartCastTime);
 
@@ -50,7 +49,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 //damageCoefficientPerBounce = BounceDamageMultplier,
                 //damageType = DamageType.SlowOnHit,
                 teamIndex = teamComponent.teamIndex,
-                attacker = gameObject,
+                attacker = characterBody.gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
                 lightningType = tesla? LightningOrb.LightningType.Tesla : LightningOrb.LightningType.Loader,
@@ -102,6 +101,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             for (int i = 0; i < 3; i++) {
 
                 OrbManager.instance.AddOrb(lightningOrb);
+
+                //Helpers.LogWarning("orb attacker " + lightningOrb.attacker);
             }
         }
 

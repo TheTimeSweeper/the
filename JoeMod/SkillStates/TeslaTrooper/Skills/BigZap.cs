@@ -32,7 +32,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public override void OnEnter() {
             base.OnEnter();
-            Helpers.LogWarning("onenter bigzap, network active:" + NetworkServer.active + " | authority:" + base.isAuthority);
+
             InitDurationValues(BaseDuration, BaseCastTime);
             
             TeslaTowerControllerController controller = GetComponent<TeslaTowerControllerController>();
@@ -46,7 +46,6 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (commandTarget) {
 
                 if (NetworkServer.active) {
-                    Helpers.LogWarning("runcommandtowers");
                     controller.commandTowers(commandTarget);
                 }
 

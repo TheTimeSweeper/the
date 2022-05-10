@@ -48,7 +48,6 @@ namespace Modules {
 
             if(tempMat.shader.name == "StubbedShader/deferred/hgstandard") {
                 tempMat.shader = Assets.hotpoo;
-                Helpers.LogWarning("hi");
                 return tempMat;
             }
             #endregion

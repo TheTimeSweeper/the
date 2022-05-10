@@ -26,7 +26,7 @@ namespace ModdedEntityStates.TeslaTrooper
             tracker = GetComponent<TeslaTrackerComponent>();
 
             //excuse old enforcer code
-            EntityStates.Treebot.Weapon.AimMortar2 goodState = new EntityStates.Treebot.Weapon.AimMortar2();
+            EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
             arcVisualizerPrefab = null;//goodState.arcVisualizerPrefab;
             projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
             endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
@@ -85,7 +85,7 @@ namespace ModdedEntityStates.TeslaTrooper
         }
 
         //todo rework this to a simple projectile
-        //instead of using a fake one in OnEnter and then not even using it actually
+        //instead of using a fake one in OnEnter and then not using it actually
         public override void FireProjectile() { }
 
         public override EntityState PickNextState() {

@@ -294,6 +294,8 @@ MonoBehaviour:
     transform: {fileID: 7161029811180994041}
   - name: LightningArm2
     transform: {fileID: 444510287489473819}
+  - name: LightningArmEnd
+    transform: {fileID: 2692119684604865763}
 --- !u!54 &5729083852374148764
 Rigidbody:
   m_ObjectHideFlags: 0

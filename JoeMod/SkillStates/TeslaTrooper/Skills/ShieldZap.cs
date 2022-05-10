@@ -21,7 +21,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public GameObject ShieldEffect = Modules.Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
 
         RoR2.CameraTargetParams.AimRequest aimRequest;
-
+        
         public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastStartTime, MoveSlowEndTime);

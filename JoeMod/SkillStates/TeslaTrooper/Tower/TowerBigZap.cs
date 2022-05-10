@@ -24,7 +24,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             attackRadius = BaseAttackRadius * secondarySkillsPlusAreaMulti;
 
             zapSound = towerZapSound;
-            zapSoundCrit =towerZapSound;
+            zapSoundCrit = towerZapSound;
         }
 
         protected override void fireOrb() {
@@ -39,6 +39,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             bool crit = RollCrit();
 
             Util.PlaySound(crit ? zapSound : zapSoundCrit, gameObject);
+
             if (NetworkServer.active) {
 
                 Vector3 targetPoint = lightningTarget.transform.position;
@@ -56,7 +57,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     baseDamage = damageStat * DamageCoefficient * secondarySkillsPlusDamageMulti,
                     crit = crit,
                     damageType = DamageType.Shock5s,
-                    damageColorIndex = DamageColorIndex.WeakPoint,
+                    //damageColorIndex = DamageColorIndex.WeakPoint,
                     
                     procCoefficient = ProcCoefficient,
                     //procChainMask = 
@@ -72,6 +73,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
                 }
                 blast.Fire();
+                //Helpers.LogWarning("blast attacker " + blast.attacker);
 
                 #region effects
                 EffectData fect = new EffectData {

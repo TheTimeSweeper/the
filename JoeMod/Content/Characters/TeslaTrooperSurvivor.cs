@@ -392,6 +392,21 @@ namespace Modules.Survivors
             
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
+            //On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
+
+        }
+
+        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim) {
+            orig(self, damageInfo, victim);
+
+            CharacterBody component2 = damageInfo.attacker?.GetComponent<CharacterBody>();
+
+            Helpers.LogWarning($"damageInfo.attacker {damageInfo.attacker} | component2 {component2 != null}");
+
+            if (!component2)
+                return;
+            
+            Helpers.LogWarning($"damageinfo.damage {damageInfo.damage} | component2.damage {component2.damage} | damage/damage {damageInfo.damage/component2.damage} | >=4 {damageInfo.damage / component2.damage >=4f} | buff {component2.HasBuff(RoR2Content.Buffs.ElementalRingsReady)}");
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
@@ -427,7 +442,6 @@ namespace Modules.Survivors
         #region tower hacks
         private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
             if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("copyitemsfrom true");
                 filter = TeslaTowerCopyFilterDelegate;
             }
             orig(self, other, filter);
@@ -435,12 +449,10 @@ namespace Modules.Survivors
 
         private void Inventory_AddItemsFrom_Int32Array_Func2(On.RoR2.Inventory.orig_AddItemsFrom_Int32Array_Func2 orig, Inventory self, int[] otherItemStacks, Func<ItemIndex, bool> filter) {
             if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                Helpers.LogWarning("additemsfrom true");
 
                 for (ItemIndex itemIndex = (ItemIndex)0; itemIndex < (ItemIndex)self.itemStacks.Length; itemIndex++) {
                     int itemstack = otherItemStacks[(int)itemIndex];
                     if (itemstack > 0) {
-                        Helpers.LogWarning($"{filter(itemIndex)} filtered for: {ItemCatalog.GetItemDef(itemIndex)}");
                     }
                 }
             }
