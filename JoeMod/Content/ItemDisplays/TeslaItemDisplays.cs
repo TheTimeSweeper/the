@@ -476,9 +476,9 @@ namespace Modules.Characters {
                                                new Vector3(-0.42003F, 0.42003F, 0.42003F))
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.NovaOnLowHealth, "DisplayJellyGuts",
-                                                                       "Chest",
-                                                                       new Vector3(0.01615F, 0.37581F, -0.11174F),
-                                                                       new Vector3(356.3561F, 333.6493F, 343.5101F),
+                                                                       "Head",
+                                                                       new Vector3(0.05007F, 0.02095F, -0.18202F),
+                                                                       new Vector3(345.7531F, 325.5393F, 340.7766F),
                                                                        new Vector3(0.10713F, 0.10713F, 0.10713F)));
 
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ParentEgg, "DisplayParentEgg",
@@ -682,9 +682,9 @@ namespace Modules.Characters {
                                                                        new Vector3(75.22794F, 86.33639F, 353.4002F),
                                                                        new Vector3(0.78022F, 0.78022F, 0.78022F)));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.WardOnLevel, "DisplayWarbanner",
-                                                                       "Head",
-                                                                       new Vector3(0.08192F, -0.05716F, -0.21812F),
-                                                                       new Vector3(281.9478F, 155.82F, 91.37282F),
+                                                                       "Chest",
+                                                                       new Vector3(-0.01386F, 0.29193F, -0.16033F),
+                                                                       new Vector3(270F, 270F, 0F),
                                                                        new Vector3(0.3955F, 0.3955F, 0.3955F)));
             #endregion items
 
@@ -785,10 +785,10 @@ namespace Modules.Characters {
                                                                        new Vector3(0.06F, 0.06F, 0.06F)));
 
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Equipment.FireBallDash, "DisplayEgg",
-                                                                       "Pelvis",
-                                                                       new Vector3(-0.24624F, -0.38813F, 0.1367F),
-                                                                       new Vector3(85.43657F, 253.0932F, 313.3587F),
-                                                                       new Vector3(0.26868F, 0.26868F, 0.26868F)));
+                                                                       "Chest",
+                                                                       new Vector3(-0.21262F, 0.07809F, -0.17749F),
+                                                                       new Vector3(273.1251F, 238.5773F, 227.3354F),
+                                                                       new Vector3(0.27985F, 0.27985F, 0.27985F)));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Equipment.Fruit, "DisplayFruit",
                                                                        "Chest",
                                                                        new Vector3(0.09287F, -0.17984F, -0.07355F),
@@ -997,22 +997,24 @@ namespace Modules.Characters {
                                                                        new Vector3(0F, 0.11227F, 0.09264F),
                                                                        new Vector3(33.11541F, 0F, 0F),
                                                                        new Vector3(0.21654F, 0.21654F, 0.21654F)));
+
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(DLC1Content.Equipment.BossHunter,
+                ItemDisplays.CreateDisplayRule("DisplayTricornGhost",
+                                               "Head",
+                                               new Vector3(-0.00001F, 0.25974F, -0.03203F),
+                                               new Vector3(22.75723F, 0F, 0F),
+                                               new Vector3(0.88509F, 0.88509F, 0.88509F)),
+                ItemDisplays.CreateDisplayRule("DisplayBlunderbuss",
+                                               "Chest",
+                                               new Vector3(1.03663F, 0.08362F, -0.12434F),
+                                               new Vector3(84.07404F, 180F, 180F),
+                                               new Vector3(1F, 1F, 1F))));
+
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.BossHunterConsumed, "DisplayTricornUsed",
                                                                        "Head",
                                                                        new Vector3(-0.00001F, 0.25974F, -0.03203F),
                                                                        new Vector3(22.75723F, 0F, 0F),
                                                                        new Vector3(0.88509F, 0.88509F, 0.88509F)));
-
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.BossHunter, "DisplayTricornGhost",
-                                                                       "Head",
-                                                                       new Vector3(-0.00001F, 0.25974F, -0.03203F),
-                                                                       new Vector3(22.75723F, 0F, 0F),
-                                                                       new Vector3(0.88509F, 0.88509F, 0.88509F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.BossHunter, "DisplayBlunderbuss",
-                                                                       "Chest",
-                                                                       new Vector3(1, 1, 1),
-                                                                       new Vector3(1, 1, 1),
-                                                                       new Vector3(1, 1, 1)));
             //itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.Molotov, "DisplayMolotov",
             //                                                           "Chest",
             //                                                           new Vector3(1, 1, 1),

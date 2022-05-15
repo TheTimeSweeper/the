@@ -45,8 +45,7 @@ namespace ModdedEntityStates.TeslaTrooper
             exitCountdown = 0.25f;
             exitPending = false;
 
-            //PlayCrossfade("Gesture, Override", "Placing", 0.3f);
-            PlayAnimation("Gesture, Override", "Placing");
+            PlayCrossfade("Gesture, Override", "Placing", 0.1f);
         }
 
         public override void Update()
@@ -128,7 +127,7 @@ namespace ModdedEntityStates.TeslaTrooper
 
             if (!ConstructionComplete)
             {
-                PlayCrossfade("Gesture, Override", "BufferEmpty", 0.5f);
+                PlayCrossfade("Gesture, Override", "CancelPlace", 0.1f);
             }
         }
 

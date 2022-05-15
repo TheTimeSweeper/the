@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapReleaseDamage : BaseTimedSkillState {
 
-        public static float multiplier = 1;
+        public static float damageMultiplier = 1;
         public static float range = 30;
 
         public static float BaseDuration = 1;
@@ -57,7 +57,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                     radius = range,
                     falloffModel = BlastAttack.FalloffModel.None,
 
-                    baseDamage = blastDamage * multiplier,
+                    baseDamage = blastDamage * damageMultiplier,
                     crit = RollCrit(),
                     damageType = DamageType.Stun1s,
                     //damageColorIndex = DamageColorIndex.Default,

@@ -102,14 +102,24 @@ public class unattachedAnimator : MonoBehaviour
             combatTim = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (!placingCoil) {
 
-            if (!placingCoil) {
+            if (Input.GetKeyDown(KeyCode.R)) {
+
                 teslinator.Play("Placing");
                 placingCoil = true;
                 combatTim = 2;
-            } else {
+            }
+        } else {
+
+            if (Input.GetKeyDown(KeyCode.R)) {
+
                 teslinator.Play("DoPlace");
+                placingCoil = false;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift)) {
+
+                teslinator.Play("CancelPlace");
                 placingCoil = false;
             }
         }

@@ -13,7 +13,7 @@ namespace ModdedEntityStates.TeslaTrooper
     public class Zap : BaseTimedSkillState
     {
         #region Gameplay Values
-        public static float DamageCoefficient = 1f;
+        public static float DamageCoefficient = 1.2f;
         public static float BounceDamageMultplier = 0.69f;
         public static float ProcCoefficient = 0.8f;
         public static int OrbCasts = 3;
