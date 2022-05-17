@@ -63,8 +63,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             
             Util.PlaySound(PrepSound, gameObject);
             PlayCrossfade("weapon", "PrepZap", "prep.playbackRate", base.duration, 0.1f);
-            //playanimation or however I'm going to do the glow going up the pole
-                //and the orb glowing
         }
 
         public override void FixedUpdate() {
@@ -74,12 +72,18 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 if (tracker) {
                     lightningTarget = tracker.GetTrackingTarget();
                 }
-                if(lightningTarget == null) {
+                if (lightningTarget == null) {
+                    lightningTarget = lightningOrb.PickNextTarget(transform.position);
+                }
+                if (lightningTarget == null) {
                     base.outer.SetNextStateToMain();
+                } else {
+                    lightningOrb.target = lightningTarget;
                 }
             }
         }
 
+        //cast time is 1
         protected override void OnCastEnter() {
 
             if (!NetworkServer.active)

@@ -63,7 +63,7 @@ namespace Modules.Characters {
         public abstract void InitializeSkills();
 
         public virtual void InitializeHitboxes() { }
-
+        
         public virtual void InitializeSkins() { }
 
         public virtual void InitializeItemDisplays() {
@@ -74,11 +74,11 @@ namespace Modules.Characters {
                 bodyCharacterModel.itemDisplayRuleSet = itemDisplayRuleSet;
 
             if (itemDisplays != null) {
-                RoR2.RoR2Application.onLoad += SetItemDisplays;
+                RoR2.ContentManagement.ContentManager.onContentPacksAssigned += SetItemDisplays;
             }
         }
 
-        public void SetItemDisplays() {
+        public void SetItemDisplays(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj) {
                 itemDisplays.SetItemDIsplays(bodyCharacterModel.itemDisplayRuleSet);
         }
 

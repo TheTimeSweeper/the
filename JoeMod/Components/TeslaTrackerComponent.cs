@@ -65,7 +65,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         if (!_hasTowerNear)
             return null;
 
-        return _trackingTarget;
+        return _trackingTarget?.hurtBoxGroup.mainHurtBox;
     }
 
     public HurtBox GetTrackingTarget() {
