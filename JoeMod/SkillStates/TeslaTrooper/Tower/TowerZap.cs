@@ -49,7 +49,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 //damageCoefficientPerBounce = BounceDamageMultplier,
                 //damageType = DamageType.SlowOnHit,
                 teamIndex = teamComponent.teamIndex,
-                attacker = characterBody.gameObject,
+                attacker = gameObject,
+                inflictor = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
                 lightningType = tesla? LightningOrb.LightningType.Tesla : LightningOrb.LightningType.Loader,
@@ -100,7 +101,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         }
 
         protected virtual void fireOrb() {
-
             //todo: custom lightningorb
             for (int i = 0; i < 3; i++) {
 

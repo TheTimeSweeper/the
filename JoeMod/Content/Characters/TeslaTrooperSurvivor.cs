@@ -77,6 +77,11 @@ namespace Modules.Survivors
 
             bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
 
+            ChildLocator childLocator = bodyCharacterModel.GetComponent<ChildLocator>();
+
+            childLocator.FindChild("LightningParticles").GetComponent<ParticleSystemRenderer>().trailMaterial = Assets.ChainLightningMaterial;
+            childLocator.FindChild("LightningParticles2").GetComponent<ParticleSystemRenderer>().trailMaterial = Assets.ChainLightningMaterial;
+
             RegisterTowerDeployable();
         }
 
@@ -119,9 +124,15 @@ namespace Modules.Survivors
 
         protected override void InitializeDisplayPrefab() {
             base.InitializeDisplayPrefab();
-        }
 
-        
+            displayPrefab.AddComponent<TeslaMenuSound>();
+
+            ChildLocator childLocator = displayPrefab.GetComponent<ChildLocator>();
+
+            childLocator.FindChild("LightningParticles").GetComponent<ParticleSystemRenderer>().trailMaterial = Assets.ChainLightningMaterial;
+            childLocator.FindChild("LightningParticles2").GetComponent<ParticleSystemRenderer>().trailMaterial = Assets.ChainLightningMaterial;
+        }
+                
         #region skills
         public override void InitializeSkills() {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
@@ -313,18 +324,17 @@ namespace Modules.Survivors
             ModelSkinController skinController = model.AddComponent<ModelSkinController>();
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
-            SkinnedMeshRenderer mainRenderer = characterModel.mainSkinnedMeshRenderer;
-
             CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
+
+            List<GameObject> allGameObjectActivations = Skins.getAllGameObjectActivations(childLocator, "child1", "child2");
 
             #region DefaultSkin
 
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
-                mainRenderer,
                 model);
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
@@ -347,7 +357,6 @@ namespace Modules.Survivors
             //SkinDef masterySkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
             //    Assets.LoadAsset<Sprite>("texMasteryAchievement"),
             //    masteryRendererInfos,
-            //    mainRenderer,
             //    model,
             //    masterySkinUnlockableDef);
 
@@ -390,23 +399,40 @@ namespace Modules.Survivors
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
             
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage2;
 
             //On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
+            //On.RoR2.Orbs.LightningOrb.OnArrival += LightningOrb_OnArrival;
 
         }
 
+        private void LightningOrb_OnArrival(On.RoR2.Orbs.LightningOrb.orig_OnArrival orig, RoR2.Orbs.LightningOrb self) {
+
+            Helpers.LogWarning($"lightningorb - target: {self.target} | attacker: {self.attacker}");
+            orig(self);
+
+
+        }
+
+        private static void HealthComponent_TakeDamage2(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
+
+            Helpers.LogWarning($"TakeDamage pre  - damageInfo.attacker: {damageInfo.attacker}");
+            orig(self, damageInfo);
+            Helpers.LogWarning($"TakeDamage post - damageInfo.attacker: {damageInfo.attacker}");
+        }
+        
         private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim) {
             orig(self, damageInfo, victim);
 
             CharacterBody component2 = damageInfo.attacker?.GetComponent<CharacterBody>();
 
-            Helpers.LogWarning($"damageInfo.attacker {damageInfo.attacker} | component2 {component2 != null}");
+            Helpers.LogWarning($"OnHitEnemy - damageInfo.attacker: {damageInfo.attacker} | attacker CharacterBody: {component2 != null}");
 
             if (!component2)
                 return;
             
-            Helpers.LogWarning($"damageinfo.damage {damageInfo.damage} | component2.damage {component2.damage} | damage/damage {damageInfo.damage/component2.damage} | >=4 {damageInfo.damage / component2.damage >=4f} | buff {component2.HasBuff(RoR2Content.Buffs.ElementalRingsReady)}");
+            Helpers.LogWarning($" - damageinfo.damage {damageInfo.damage} | component2.damage {component2.damage} | damage/damage {damageInfo.damage/component2.damage} | >=4 {damageInfo.damage / component2.damage >=4f} | buff {component2.HasBuff(RoR2Content.Buffs.ElementalRingsReady)}");
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {

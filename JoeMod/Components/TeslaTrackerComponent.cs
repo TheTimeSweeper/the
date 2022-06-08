@@ -37,7 +37,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private TeslaTowerControllerController towerControllerComponent;
 
     private TeslaIndicator indicator;
-
+    
     private float trackerUpdateStopwatch;
 
     private HealthComponent _towerTargetHealthComponent;
@@ -50,7 +50,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         teamComponent = GetComponent<TeamComponent>();
         towerControllerComponent = GetComponent<TeslaTowerControllerController>();
     }
-
+    
     void Start() {
         characterBody = base.GetComponent<CharacterBody>();
         inputBank = base.GetComponent<InputBankTest>();

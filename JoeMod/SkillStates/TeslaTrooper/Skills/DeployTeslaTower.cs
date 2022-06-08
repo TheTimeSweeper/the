@@ -23,8 +23,8 @@ namespace ModdedEntityStates.TeslaTrooper
         private float exitCountdown = 0;//0.25f;
         private bool exitPending = false;
 
-        private const float _deployMaxUp = 3f;
-        private const float _deployMaxDown = 4f;
+        private const float _deployMaxUp = 2f;
+        private const float _deployMaxDown = 7f;
         private const float _baseDeployForwardDistance = 6f;
 
         private bool ConstructionComplete;

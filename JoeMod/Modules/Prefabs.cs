@@ -115,6 +115,8 @@ namespace Modules {
 
             SetupAimAnimator(newBodyPrefab, newModel);
 
+            //funny hack
+            //TODO: properly null check these functions
             if (bodyInfo.bodyNameToClone != "EngiTurret") {
                 if (modelBaseTransform != null) SetupCharacterDirection(newBodyPrefab, modelBaseTransform, newModel.transform);
                     SetupFootstepController(newModel);

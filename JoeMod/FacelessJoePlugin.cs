@@ -87,7 +87,8 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         // run hooks here, disabling one is as simple as commenting out the line
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
-        On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
+        //for figuring out plague knight throw bomb angles
+        //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {

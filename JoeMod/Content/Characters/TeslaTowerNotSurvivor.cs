@@ -70,6 +70,7 @@ namespace Modules.Survivors {
             UnityEngine.Object.Destroy(bodyPrefab.GetComponent<SetStateOnHurt>());
             UnityEngine.Object.Destroy(bodyPrefab.GetComponent<AkEvent>());
 
+            bodyCharacterModel.GetComponent<ChildLocator>().FindChild("LightningParticles").GetComponent<ParticleSystemRenderer>().material = Assets.ChainLightningMaterial;
         }
 
         protected override void InitializeEntityStateMachine() {
@@ -162,8 +163,6 @@ namespace Modules.Survivors {
             ModelSkinController skinController = model.AddComponent<ModelSkinController>();
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
-            SkinnedMeshRenderer mainRenderer = characterModel.mainSkinnedMeshRenderer;
-
             CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
@@ -173,7 +172,6 @@ namespace Modules.Survivors {
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
-                mainRenderer,
                 model);
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]

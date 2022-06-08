@@ -64,7 +64,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     //losType = BlastAttack.LoSType.NearestHit,
 
                     baseForce = -5, //enfucker void grenade here we go
-                                    //bonusForce = ;
+                    //bonusForce = ;
 
                     //impactEffect = EffectIndex.uh;
                 };

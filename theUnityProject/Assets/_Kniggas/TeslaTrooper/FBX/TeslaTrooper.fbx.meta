@@ -855,6 +855,9 @@ ModelImporter:
   - first:
       74: -3112965366749432192
     second: Armature|Sprint
+  - first:
+      74: 2337581520248669239
+    second: Armature|AimPitch
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -1139,14 +1142,14 @@ ModelImporter:
       events:
       - time: 0.0058479533
         functionName: Footstep
-        data: ToeR
+        data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.50877196
         functionName: Footstep
-        data: ToeL
+        data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1240,14 +1243,14 @@ ModelImporter:
       events:
       - time: 0
         functionName: Footstep
-        data: ToeR
+        data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.50877196
         functionName: Footstep
-        data: ToeL
+        data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1283,14 +1286,14 @@ ModelImporter:
       events:
       - time: 0
         functionName: Footstep
-        data: ToeR
+        data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5146199
         functionName: Footstep
-        data: ToeL
+        data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1326,14 +1329,14 @@ ModelImporter:
       events:
       - time: 0.12280702
         functionName: Footstep
-        data: ToeR
+        data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6023392
         functionName: Footstep
-        data: ToeL
+        data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1822,11 +1825,54 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.22527471
+        functionName: Footstep
+        data: FootL
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7087912
+        functionName: Footstep
+        data: FootR
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|AimPitch
+      takeName: Armature|AimPitch
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 1
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.5
     isReadable: 1
   meshes:
     lODScreenPercentages: []

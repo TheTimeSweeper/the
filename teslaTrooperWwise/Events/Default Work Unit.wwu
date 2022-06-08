@@ -507,7 +507,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_iteschaa" ID="{28069552-2788-4230-B60B-9381DEFD4630}">
+				<Event Name="Play_Tesla_Lobby" ID="{28069552-2788-4230-B60B-9381DEFD4630}">
 					<ChildrenList>
 						<Action Name="" ID="{051602FF-7BC3-45DC-9CD4-3EB404DA4EF2}" ShortID="546377391">
 							<PropertyList>

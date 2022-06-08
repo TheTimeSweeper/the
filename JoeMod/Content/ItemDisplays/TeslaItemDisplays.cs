@@ -109,9 +109,9 @@ namespace Modules.Characters {
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.Behemoth,
                 ItemDisplays.CreateDisplayRule("DisplayBehemoth",
                                                "MuzzleGauntlet",
-                                               new Vector3(-0.00328F, 0.06594F, -0.11691F),
+                                               new Vector3(-0.00327F, 0.09583F, -0.11694F),
                                                new Vector3(270.0626F, 179.5512F, 0F),
-                                               new Vector3(0.0707F, 0.06064F, 0.0707F)),
+                                               new Vector3(0.07343F, 0.06298F, 0.07343F)),
                 ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.LeftLeg)//gauntlet coil
                 ));
 
@@ -596,9 +596,9 @@ namespace Modules.Characters {
                                                                        new Vector3(0.21F, 0.21F, 0.21F)));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.StunChanceOnHit, "DisplayStunGrenade",
                                                                        "Pelvis",
-                                                                       new Vector3(-0.14987F, -0.04276F, 0.19991F),
-                                                                       new Vector3(69.53522F, 188.4478F, 279.2932F),
-                                                                       new Vector3(0.7F, 0.7F, 0.7F)));
+                                                                       new Vector3(-0.1332F, -0.04592F, 0.16319F),
+                                                                       new Vector3(69.5353F, 188.4479F, 216.9409F),
+                                                                       new Vector3(0.82778F, 0.82778F, 0.82778F)));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.Syringe, "DisplaySyringeCluster",
                                                                        "Chest",
                                                                        new Vector3(0.25482F, 0.04429F, -0.05188F),

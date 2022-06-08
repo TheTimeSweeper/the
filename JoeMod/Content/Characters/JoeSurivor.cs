@@ -333,8 +333,6 @@ namespace Modules.Survivors
             ModelSkinController skinController = model.AddComponent<ModelSkinController>();
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
-            SkinnedMeshRenderer mainRenderer = characterModel.mainSkinnedMeshRenderer;
-
             CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
@@ -343,7 +341,6 @@ namespace Modules.Survivors
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
-                mainRenderer,
                 model);
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]

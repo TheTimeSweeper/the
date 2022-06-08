@@ -47,6 +47,8 @@ namespace Modules {
         public static GameObject TeslaCoilBlueprint;
 
         public static GameObject TeslaIndicatorPrefab;
+
+        public static Material ChainLightningMaterial;
         #endregion
 
         public static void Initialize()
@@ -129,7 +131,51 @@ namespace Modules {
 
             TeslaIndicatorPrefab = CreateTeslaTrackingIndicator();
 
+            ChainLightningMaterial = findChainLightningMaterial();
+
+            //uhHelp();
+
             //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
+        }
+
+        private static Material findChainLightningMaterial() {
+            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").GetComponentInChildren<LineRenderer>().material;
+        }
+
+        static Queue<Transform> transformQueue = new Queue<Transform>();
+        static List<Transform> loosestChildren = new List<Transform>();
+        private static void uhHelp() {
+            Transform lightningOrbTransform = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").transform;
+
+            transformQueue.Enqueue(lightningOrbTransform);
+
+            while(transformQueue.Count > 0) {
+
+                Transform nextTransform = transformQueue.Dequeue();
+
+                if(nextTransform.childCount == 0) {
+                    loosestChildren.Add(nextTransform);
+                }
+
+                for (int i = 0; i < nextTransform.childCount; i++) {
+                    transformQueue.Enqueue(nextTransform.GetChild(i));
+                }
+            }
+
+            for (int i = 0; i < loosestChildren.Count; i++) {
+                Debug.LogWarning(loosestChildren[i].gameObject.GetFullName());
+                //it's just "ChainLightningOrbEffect/Bezier"
+            }
+        }
+
+        public static string GetFullName(this GameObject go) {
+            string name = go.name;
+            while (go.transform.parent != null) {
+
+                go = go.transform.parent.gameObject;
+                name = go.name + "/" + name;
+            }
+            return name;
         }
 
         private static GameObject CreateTeslaTrackingIndicator() {

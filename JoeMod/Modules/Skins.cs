@@ -2,18 +2,19 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Modules
 {
     internal static class Skins
     {
-        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root)
+        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, GameObject root)
         {
-            return CreateSkinDef(skinName, skinIcon, rendererInfos, mainRenderer, root, null);
+            return CreateSkinDef(skinName, skinIcon, rendererInfos, root, null);
         }
 
-        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, SkinnedMeshRenderer mainRenderer, GameObject root, UnlockableDef unlockableDef)
+        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, GameObject root, UnlockableDef unlockableDef)
         {
             SkinDefInfo skinDefInfo = new SkinDefInfo
             {
@@ -67,6 +68,30 @@ namespace Modules
             public SkinDef.ProjectileGhostReplacement[] ProjectileGhostReplacements;
             public SkinDef.MinionSkinReplacement[] MinionSkinReplacements;
             public string Name;
+        }
+
+        public static List<GameObject> getAllGameObjectActivations(ChildLocator childLocator, params string[] allChildren) {
+            List<GameObject> allObjects = new List<GameObject>();
+
+            for (int i = 0; i < allChildren.Length; i++) {
+                allObjects.Add(childLocator.FindChildGameObject(allChildren[i]));
+            }
+            return allObjects = new List<GameObject>();
+        }
+
+        public static SkinDef.GameObjectActivation[] getActivations(List<GameObject> allObjects, params int[] activatedChildren) {
+
+            SkinDef.GameObjectActivation[] gameObjectActivations = new SkinDef.GameObjectActivation[allObjects.Count];
+            List<GameObject> activatedObjects = new List<GameObject>();
+
+            for (int i = 0; i < allObjects.Count; i++) {
+                gameObjectActivations[0] = new SkinDef.GameObjectActivation {
+                    gameObject = allObjects[i],
+                    shouldActivate = activatedChildren.Contains(i),
+                };
+            }
+
+            return gameObjectActivations;
         }
     }
 }
