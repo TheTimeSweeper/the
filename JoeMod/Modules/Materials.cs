@@ -84,8 +84,10 @@ namespace Modules {
 
             tempMat.EnableKeyword("DITHER");
 
-            tempMat.EnableKeyword("LIMBREMOVAL");
-            tempMat.SetInt("_LimbRemovalOn", 1);
+            //set this keyword in unity if you've set up your model for limb removal item displays (eg. goat hoof) by setting your model's vertex colors
+            if (tempMat.IsKeywordEnabled("LIMBREMOVAL")) {
+                tempMat.SetInt("_LimbRemovalOn", 1);
+            }
 
             cachedMaterials.Add(tempMat);
             return tempMat;

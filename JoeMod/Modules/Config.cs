@@ -6,8 +6,10 @@ namespace Modules
     internal static class Config
     {
         public static bool Debug;
-
         public static bool NewColor;
+        public static bool Cursed;
+
+        public static ConfigEntry<KeyCode> voiceKey;
 
         public static void ReadConfig()
         {
@@ -22,6 +24,18 @@ namespace Modules
                 "New Color (s?)",
                 false,
                 "add black for the wife").Value;
+
+            Cursed = FacelessJoePlugin.instance.Config.Bind(
+                "General",
+                "Cursed",
+                false,
+                "yes there's a fucking minecraft skin").Value;
+
+            voiceKey = FacelessJoePlugin.instance.Config.Bind(
+                "General",
+                "Voice Line Key",
+                KeyCode.CapsLock,
+                "key to play Tesla Trooper voice lines from Red Alert 2");
         }
 
         // this helper automatically makes config entries for disabling survivors

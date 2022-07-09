@@ -19,7 +19,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             cachedAnimator.SetBool("inCombat", combat);
             
-            if (Input.GetKeyDown(KeyCode.CapsLock)) {
+            if (Input.GetKeyDown(Modules.Config.voiceKey.Value)) {
 
                 playRandomvoiceLine();
                 //Util.PlaySound("Play_itesatd", gameObject);

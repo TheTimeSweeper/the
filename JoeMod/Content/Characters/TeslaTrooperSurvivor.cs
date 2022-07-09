@@ -71,7 +71,7 @@ namespace Modules.Survivors
             bodyPrefab.AddComponent<ZapBarrierController>();
 
             bodyCharacterModel.baseRendererInfos[0].defaultMaterial.SetEmission(2);
-            bodyCharacterModel.baseRendererInfos[8].defaultMaterial.SetEmission(2);
+            bodyCharacterModel.baseRendererInfos[5].defaultMaterial.SetEmission(2);
 
             bodyPrefab.GetComponent<CharacterBody>().spreadBloomCurve = AnimationCurve.EaseInOut(0, 0, 0.5f, 1);
 
@@ -337,44 +337,69 @@ namespace Modules.Survivors
                 defaultRenderers,
                 model);
 
-            defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
-            {
+            defaultSkin.meshReplacements = Skins.getMeshReplacements(defaultRenderers,
+                "meshTeslaArmor",
+                "meshTeslaArmor_Fanservice",
+                "meshTeslaBody",
+                "meshTeslaArmorColor",
+                "meshTeslaBodyColor",
+                "meshTeslaHammer");
+
+            defaultSkin.gameObjectActivations = new SkinDef.GameObjectActivation[] {
+                new SkinDef.GameObjectActivation {
+                    gameObject = childLocator.FindChildGameObject("meshTeslaArmor_Fanservice"),
+                    shouldActivate = true
+                }
             };
 
             skins.Add(defaultSkin);
             #endregion
 
             #region MasterySkin
-            //Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
-            //CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
-            //{
-            //    masteryMat,
-            //    masteryMat,
-            //    masteryMat,
-            //    masteryMat
-            //});
-
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
-            //    Assets.LoadAsset<Sprite>("texMasteryAchievement"),
-            //    masteryRendererInfos,
+            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_MASTERY_SKIN_NAME",
+            //    Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
+            //    defaultRenderers,
             //    model,
             //    masterySkinUnlockableDef);
 
-            //masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
-            //{
-            //    //new SkinDef.MeshReplacement
-            //    //{
-            //    //    mesh = Modules.Assets.LoadAsset<Mesh>("meshHenrySwordAlt"),
-            //    //    renderer = defaultRenderers[0].renderer
-            //    //},
-            //    //new SkinDef.MeshReplacement
-            //    //{
-            //    //    mesh = Modules.Assets.LoadAsset<Mesh>("meshHenryAlt"),
-            //    //    renderer = defaultRenderers[instance.mainRendererIndex].renderer
-            //    //}
-            //};
 
             //skins.Add(masterySkin);
+            #endregion
+
+            #region MCSkin
+            SkinDef MCSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_MC_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
+                defaultRenderers,
+                model);
+
+            MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "meshMCArmor",
+                null,
+                "meshMCBody",
+                "meshMCArmorColor",
+                "meshMCBodyColor",
+                "meshMCHammer");
+
+            MCSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
+            MCSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Body");
+            MCSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMC_ArmorColor");
+            MCSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matMC_BodyColor");
+            MCSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Hammer");
+            
+            MCSkin.gameObjectActivations = new SkinDef.GameObjectActivation[] {
+                new SkinDef.GameObjectActivation {
+                    gameObject = childLocator.FindChildGameObject("meshTeslaArmor_Fanservice"),
+                    shouldActivate = false
+                }
+            };            
+
+            MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+                TeslaTowerNotSurvivor.MCMinionSkin
+            };
+
+            if (Modules.Config.Cursed) {
+                skins.Add(MCSkin);
+            }
             #endregion
 
             skinController.skins = skins.ToArray();

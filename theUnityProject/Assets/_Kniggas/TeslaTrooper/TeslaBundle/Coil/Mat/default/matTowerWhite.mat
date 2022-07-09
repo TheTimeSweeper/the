@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bulb
+  m_Name: matTowerWhite
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -61,9 +61,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 1
+    - _Glossiness: 0.294
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 0.596
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.20465466, g: 0.6049058, b: 0.6886792, a: 1}
-    - _EmissionColor: {r: 0.051886797, g: 0.16789787, b: 0.20754719, a: 1}
+    - _Color: {r: 0.56350124, g: 0.5894704, b: 0.5943396, a: 1}
+    - _EmissionColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}

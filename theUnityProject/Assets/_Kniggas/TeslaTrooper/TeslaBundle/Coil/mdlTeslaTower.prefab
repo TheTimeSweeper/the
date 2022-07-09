@@ -831,7 +831,7 @@ Transform:
   m_GameObject: {fileID: 2715980412080663844}
   m_LocalRotation: {x: -0, y: -0, z: 0.19509044, w: 0.9807853}
   m_LocalPosition: {x: 0, y: 0, z: -0.551}
-  m_LocalScale: {x: 0.67855096, y: 0.6785513, z: 0.1663008}
+  m_LocalScale: {x: 0.67855096, y: 0.6785513, z: 0.15472627}
   m_Children: []
   m_Father: {fileID: 6441958813153132158}
   m_RootOrder: 0
@@ -2868,6 +2868,8 @@ MonoBehaviour:
     transform: {fileID: 9020769169706174397}
   - name: Head
     transform: {fileID: 6273651562879444799}
+  - name: Base
+    transform: {fileID: 6094132947282635134}
   - name: Base Pillar 1
     transform: {fileID: 1887232490177197565}
   - name: Base Pillar 2

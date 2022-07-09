@@ -26,7 +26,7 @@ namespace Modules
                 Name = skinName,
                 NameToken = skinName,
                 ProjectileGhostReplacements = new SkinDef.ProjectileGhostReplacement[0],
-                RendererInfos = rendererInfos,
+                RendererInfos = new CharacterModel.RendererInfo[rendererInfos.Length],
                 RootObject = root,
                 UnlockableDef = unlockableDef
             };
@@ -38,6 +38,7 @@ namespace Modules
             skinDef.icon = skinDefInfo.Icon;
             skinDef.unlockableDef = skinDefInfo.UnlockableDef;
             skinDef.rootObject = skinDefInfo.RootObject;
+            rendererInfos.CopyTo(skinDefInfo.RendererInfos, 0);
             skinDef.rendererInfos = skinDefInfo.RendererInfos;
             skinDef.gameObjectActivations = skinDefInfo.GameObjectActivations;
             skinDef.meshReplacements = skinDefInfo.MeshReplacements;
@@ -92,6 +93,24 @@ namespace Modules
             }
 
             return gameObjectActivations;
+        }
+
+        internal static SkinDef.MeshReplacement[] getMeshReplacements(CharacterModel.RendererInfo[] rendererinfos, params string[] meshes) {
+
+            List<SkinDef.MeshReplacement> meshReplacements = new List<SkinDef.MeshReplacement>();
+
+            for (int i = 0; i < rendererinfos.Length; i++) {
+                if (string.IsNullOrEmpty(meshes[i]))
+                    continue;
+
+                meshReplacements.Add(
+                new SkinDef.MeshReplacement {
+                    renderer = rendererinfos[i].renderer,
+                    mesh = Assets.LoadAsset<Mesh>(meshes[i])
+                });
+            }
+
+            return meshReplacements.ToArray();
         }
     }
 }

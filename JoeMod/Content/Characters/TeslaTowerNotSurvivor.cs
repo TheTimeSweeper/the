@@ -51,6 +51,7 @@ namespace Modules.Survivors {
         public override ItemDisplaysBase itemDisplays => new TeslaTowerItemDisplays();
 
         public static GameObject masterPrefab;
+        internal static SkinDef.MinionSkinReplacement MCMinionSkin;
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
@@ -174,45 +175,73 @@ namespace Modules.Survivors {
                 defaultRenderers,
                 model);
 
-            defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
-            {
-            };
+            defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "Base001",
+                "Base Pillar 1",
+                "Base Pillar 2",
+                "Base Pillar 3",
+                "Base Pillars001",
+                "Base Tubes001",
+                "Center Cylinder Wires001",
+                "Center Cylinder001",
+                "Center Orb001",
+                "tower pole001",
+                "tower circle 006",
+                "tower circle 007",
+                "tower circle 008",
+                "tower orb001");
 
             skins.Add(defaultSkin);
             #endregion
 
-            #region MasterySkin
-            //Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
-            //CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
-            //{
-            //    masteryMat,
-            //    masteryMat,
-            //    masteryMat,
-            //    masteryMat
-            //});
+            #region mince
 
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
-            //    Assets.LoadAsset<Sprite>("texMasteryAchievement"),
-            //    masteryRendererInfos,
-            //    mainRenderer,
-            //    model,
-            //    masterySkinUnlockableDef);
+            SkinDef MCSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_MC_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
+                defaultRenderers,
+                model);
 
-            //masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
-            //{
-            //    //new SkinDef.MeshReplacement
-            //    //{
-            //    //    mesh = Modules.Assets.LoadAsset<Mesh>("meshHenrySwordAlt"),
-            //    //    renderer = defaultRenderers[0].renderer
-            //    //},
-            //    //new SkinDef.MeshReplacement
-            //    //{
-            //    //    mesh = Modules.Assets.LoadAsset<Mesh>("meshHenryAlt"),
-            //    //    renderer = defaultRenderers[instance.mainRendererIndex].renderer
-            //    //}
-            //};
+            MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "MCBase001",
+                "MCBase Pillar 1",
+                "MCBase Pillar 2",
+                "MCBase Pillar 3",
+                "MCBase Pillars001",
 
-            //skins.Add(masterySkin);
+                "MCBase Tubes001",
+                "MCCenter Cylinder Wires001",
+                "MCCenter Cylinder001",
+                "MCCenter Orb001",
+
+                "MCtower pole001",
+                "MCtower circle 006",
+                "MCtower circle 007",
+                "MCtower circle 008",
+                "MCtower orb001");
+
+            MCSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            MCSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRedstone");
+            MCSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRedstone");
+            MCSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRedstone");
+            MCSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRedstone");
+
+            MCSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerIron");
+            MCSkin.rendererInfos[6].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            MCSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerIron");
+            MCSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerIron");
+
+            MCSkin.rendererInfos[9].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            MCSkin.rendererInfos[10].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
+            MCSkin.rendererInfos[11].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
+            MCSkin.rendererInfos[12].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
+            MCSkin.rendererInfos[13].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
+
+            skins.Add(MCSkin);
+            MCMinionSkin = new SkinDef.MinionSkinReplacement {
+                minionBodyPrefab = bodyPrefab,
+                minionSkin = MCSkin,
+            };
+
             #endregion
 
             skinController.skins = skins.ToArray();
