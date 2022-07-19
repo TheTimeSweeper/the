@@ -118,7 +118,9 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 hasFired = true;
             }
 
-            GetComponent<TowerOwnerTrackerComponent>()?.OwnerTrackerComponent?.SetTowerLockedTarget(null);
+            if (Modules.Config.TowerTargeting.Value) {
+                GetComponent<TowerOwnerTrackerComponent>()?.OwnerTrackerComponent?.SetTowerLockedTarget(null);
+            }
         }
 
         // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B

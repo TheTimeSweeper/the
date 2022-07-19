@@ -68,22 +68,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: matMCArmor
-    second: {fileID: 2100000, guid: 5394f0a68c9d72d4cb99d53ed558059f, type: 2}
+    second: {fileID: 2100000, guid: 0fcf4ead066b24544b12abbd180350d4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: matMCArmorColor
-    second: {fileID: 2100000, guid: b46166db486c4ed4f8f1d80d91bacb87, type: 2}
+    second: {fileID: 2100000, guid: ef9f6840be56efa48bce0e91e9c7158a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: matMCBody
-    second: {fileID: 2100000, guid: 2532795b3b96fe7498c3395950c35196, type: 2}
+    second: {fileID: 2100000, guid: 82dade6eeee3fc74b8c828944e33f613, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: matMCBodyColor
-    second: {fileID: 2100000, guid: ca313c1b8600a6147a2180efb8b962ef, type: 2}
+    second: {fileID: 2100000, guid: 8be90c6cb8fa1c643b7ddd8d3af39bc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matMCHammer
+    second: {fileID: 2100000, guid: df2f6d21846b1474f98495465b5df234, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

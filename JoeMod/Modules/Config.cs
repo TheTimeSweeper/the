@@ -9,6 +9,8 @@ namespace Modules
         public static bool NewColor;
         public static bool Cursed;
 
+        public static ConfigEntry<bool> TowerTargeting;
+
         public static ConfigEntry<KeyCode> voiceKey;
 
         public static void ReadConfig()
@@ -30,6 +32,12 @@ namespace Modules
                 "Cursed",
                 false,
                 "yes there's a fucking minecraft skin").Value;
+
+            TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
+                "General",
+                "Tower Targets Reticle",
+                false,
+                "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
 
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
                 "General",

@@ -379,7 +379,7 @@ namespace Modules.Survivors
                 "meshMCArmorColor",
                 "meshMCBodyColor",
                 "meshMCHammer");
-
+            
             MCSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
             MCSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Body");
             MCSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMC_ArmorColor");
@@ -474,20 +474,22 @@ namespace Modules.Survivors
 
         private void BaseAI_OnBodyDamaged(On.RoR2.CharacterAI.BaseAI.orig_OnBodyDamaged orig, RoR2.CharacterAI.BaseAI self, DamageReport damageReport) {
 
+            //keep tower from drawing aggro
+            GameObject originalAttacker = damageReport.damageInfo.attacker;
             if (damageReport.attackerBodyIndex == BodyCatalog.FindBodyIndex("TeslaTowerBody")) {
                 damageReport.damageInfo.attacker = null;
             }
 
-            bool neverRetaliate = self.neverRetaliateFriendlies;
-
+            //keep allies from retaliating against trooper charging them
+            bool originalNeverRetaliate = self.neverRetaliateFriendlies;
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.conductive)) {
                 self.neverRetaliateFriendlies = true;
             }
-
+            
             orig(self, damageReport);
 
-            self.neverRetaliateFriendlies = neverRetaliate;
-
+            self.neverRetaliateFriendlies = originalNeverRetaliate;
+            damageReport.damageInfo.attacker = originalAttacker;
         }
 
         #region tower hacks

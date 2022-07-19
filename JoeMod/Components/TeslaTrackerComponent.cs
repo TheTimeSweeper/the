@@ -9,7 +9,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(InputBankTest))]
 [RequireComponent(typeof(TeamComponent))]
 public class TeslaTrackerComponent : MonoBehaviour {
-
+    
     public enum RangeTier {
         CLOSEST,
         MIDDLE,
@@ -155,7 +155,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         indicator.targetTransform = (_trackingTarget ? _trackingTarget.transform : null);
         
-        setIsTowerTargeting();
+        if(Modules.Config.TowerTargeting.Value)
+            setIsTowerTargeting();
     }
 
     private void setIsTowerTargeting() {

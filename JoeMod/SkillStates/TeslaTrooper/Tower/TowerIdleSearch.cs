@@ -51,7 +51,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         private void SearchTarget() {
 
-            if(ownerTrackerComponent) {
+            if(Modules.Config.TowerTargeting.Value && ownerTrackerComponent) {
                 _lightningTarget = ownerTrackerComponent.GetTowerTrackingTarget();
                 ownerTrackerComponent.SetTowerLockedTarget(_lightningTarget?.healthComponent);
             }
