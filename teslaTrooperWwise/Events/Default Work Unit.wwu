@@ -495,13 +495,13 @@
 				</Event>
 				<Event Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}">
 					<ChildrenList>
-						<Action Name="" ID="{947A11A8-4F02-4E33-A596-6A66700B1257}" ShortID="479911369">
+						<Action Name="" ID="{B31162EF-3B48-4212-AF8E-F81E352D1F6A}" ShortID="325990187">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="itesatta" ID="{DD7582AB-C889-4852-A507-D67182527CC1}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+									<ObjectRef Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

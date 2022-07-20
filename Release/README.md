@@ -7,7 +7,7 @@
 - Fully multiplayer compatible
 - Y'all remember Red Alert 2?
 
-[![](https://i.imgur.com/OcvIJnZ.png)]()
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS.png)]()
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/Icons/texIconTeslaTrooper.png)]()
 
@@ -32,6 +32,10 @@ Westwood Studios - sounds, inspiration
 - Achievements
 - Skills++ and vr and all those fun stuffs
 
+___
+for no particular reason I made a cool skin for minecraft check it out   
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
+___
 ## Changelog
 
 `0.0.1`
