@@ -4,6 +4,7 @@ using ModdedEntityStates.Joe;
 using ModdedEntityStates.TeslaTrooper;
 using ModdedEntityStates.TeslaTrooper.Tower;
 using Modules.Survivors;
+using System.Collections.Generic;
 
 namespace Modules
 {
@@ -97,8 +98,8 @@ namespace Modules
             string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
 
             string desc = "The Tesla Trooper is a close-mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Tesla Gauntlet provides consistent damage to enemies and spreads." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Use 2000 Volts for damage, and to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Tesla Gauntlet close range to deal the most damage. The reticle will reflect this" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Use 2000 Volts to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > You benefit from being closer to enemies, use his Utility to assist with this." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > The Tesla Tower inherits your items, but mainly benefits from damage items." + Environment.NewLine + Environment.NewLine;
 
@@ -109,13 +110,31 @@ namespace Modules
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Electrician In the Field");
-            LanguageAPI.Add(prefix + "LORE", ".");
+
+            List<string> lores = new List<string> {
+                "2000 volts coming up.",
+                "Completing circuit",
+                "Let the juice flow.",
+                "Commencing shock therapy.",
+                "Going to source.",
+                "Yes comrade.",
+                "Surging forward.",
+                "Electrician in the field.",
+                "Rubber shoes in motion.",
+                "Tesla Suit Ready",
+                "Charging up.",
+                "Electrodes ready.",
+                "Checking Connection."
+            };
+
+            LanguageAPI.Add(prefix + "LORE", lores[(int)UnityEngine.Random.Range(0, lores.Count)]);
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
+            LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
             #endregion
 
             #region Passive
@@ -139,7 +158,7 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}, after which, {Helpers.DamageText("blast all absorbed damage")} in a wide area.");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}, after which, blast in a wide area {Helpers.DamageText("based on damage absorbed")}.");
             #endregion
 
             #region Special

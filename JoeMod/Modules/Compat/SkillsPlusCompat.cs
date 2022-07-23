@@ -58,7 +58,7 @@ namespace Modules {
 
                 } else if (skillState is TowerBigZap towerBigZapState) {
 
-                    towerBigZapState.secondarySkillsPlusAreaMulti = MultScaling(1, .15f, level);
+                    towerBigZapState.secondarySkillsPlusAreaMulti = MultScaling(1, .1f, level);
                     towerBigZapState.secondarySkillsPlusDamageMulti = MultScaling(1f, 0.05f, level);
                 }
             }

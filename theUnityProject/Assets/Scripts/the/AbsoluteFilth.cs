@@ -6,6 +6,8 @@ public class AbsoluteFilth : MonoBehaviour
 {
     void Start() {
         Invoke("FullofShameAndDisappointment", 1f);
+
+        Debug.Log("rooot".Contains("root"));
     }
 
 

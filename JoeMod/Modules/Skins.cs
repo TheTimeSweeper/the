@@ -71,19 +71,25 @@ namespace Modules
             public string Name;
         }
 
-        public static List<GameObject> getAllGameObjectActivations(ChildLocator childLocator, params string[] allChildren) {
+        /// <summary>
+        /// Plug in the names of all the GameObjects that are going to be activated/deactivated in any of your skins, and store this in a variable
+        /// </summary>
+        /// <returns>An ordered list of gameobjects to activate/deactivate</returns>
+        public static List<GameObject> createAllActivatedGameObjectsList(ChildLocator childLocator, params string[] allChildren) {
             List<GameObject> allObjects = new List<GameObject>();
 
             for (int i = 0; i < allChildren.Length; i++) {
                 allObjects.Add(childLocator.FindChildGameObject(allChildren[i]));
             }
-            return allObjects = new List<GameObject>();
+            return allObjects;
         }
 
-        public static SkinDef.GameObjectActivation[] getActivations(List<GameObject> allObjects, params int[] activatedChildren) {
+        /// <summary>
+        /// Using the ActivatedGameObjects list, pass in the index of each gameobject to activate. Objects not passed in will deactivate.
+        /// </summary>
+        public static SkinDef.GameObjectActivation[] getGameObjectActivationsFromList(List<GameObject> allObjects, params int[] activatedChildren) {
 
             SkinDef.GameObjectActivation[] gameObjectActivations = new SkinDef.GameObjectActivation[allObjects.Count];
-            List<GameObject> activatedObjects = new List<GameObject>();
 
             for (int i = 0; i < allObjects.Count; i++) {
                 gameObjectActivations[0] = new SkinDef.GameObjectActivation {

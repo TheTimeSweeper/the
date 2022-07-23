@@ -49,6 +49,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             if (NetworkServer.active) {
 
+                Util.CleanseBody(base.characterBody, true, false, false, true, true, false);
                 base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration + skillsPlusSeconds);
             }
         }

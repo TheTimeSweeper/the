@@ -27,6 +27,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void FixedUpdate() {
             base.FixedUpdate();
 
+            //todo does hasbuff only work on server?
             if(!characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
                 ShieldZapReleaseDamage newNextState = new ShieldZapReleaseDamage() {
                     aimRequest = this.aimRequest,

@@ -73,7 +73,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
                 }
                 blast.Fire();
-                //Helpers.LogWarning("blast attacker " + blast.attacker);
 
                 #region effects
                 EffectData fect = new EffectData {

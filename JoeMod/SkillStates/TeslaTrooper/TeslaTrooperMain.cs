@@ -22,7 +22,6 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (Input.GetKeyDown(Modules.Config.voiceKey.Value)) {
 
                 playRandomvoiceLine();
-                //Util.PlaySound("Play_itesatd", gameObject);
             }
         }
 

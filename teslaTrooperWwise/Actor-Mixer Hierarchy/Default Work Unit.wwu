@@ -260,6 +260,11 @@
 												<Sound Name="itessee" ID="{FFF04AC1-251C-4210-9FDE-8C09ACA62F21}" ShortID="187938740">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -288,6 +293,11 @@
 												<Sound Name="itessec" ID="{510A8716-5550-4D87-B23D-C81C07F6445D}" ShortID="820122206">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -316,6 +326,11 @@
 												<Sound Name="itessea" ID="{D59C4995-D8E4-4ECE-970E-66FB0204F1AF}" ShortID="683713020">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -344,6 +359,11 @@
 												<Sound Name="itessed" ID="{59F31439-0BC2-4E62-B23C-583812B9FE8D}" ShortID="14286176">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -384,6 +404,11 @@
 												<Sound Name="itesmob" ID="{001D3AC3-554A-4091-95A8-55741D64EF56}" ShortID="823357874">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -412,6 +437,11 @@
 												<Sound Name="itesmoe" ID="{EEB1A9A7-0775-46E9-9BFF-96B7798E24FC}" ShortID="991967657">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -440,6 +470,11 @@
 												<Sound Name="itesmof" ID="{D53F8379-CC49-47FF-B9E7-E08C2AC11179}" ShortID="514933193">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -468,6 +503,11 @@
 												<Sound Name="itesmoc" ID="{88DAA393-B61F-4B31-8D67-DB5EC8236EF1}" ShortID="688393972">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -496,6 +536,11 @@
 												<Sound Name="itesmoa" ID="{6F033E49-0E69-40C6-A8A5-CA53E5FD0198}" ShortID="842294858">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -524,6 +569,11 @@
 												<Sound Name="itesmod" ID="{A08C1B45-A858-404B-B65C-BCB1A5089F30}" ShortID="732828923">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -564,6 +614,11 @@
 												<Sound Name="itesatd" ID="{7F5E4403-4FA2-4921-A4FE-8FEC6BD531A7}" ShortID="877869148">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -592,6 +647,11 @@
 												<Sound Name="itesate" ID="{084559F3-CFD3-4E01-8905-BD17CCEA3744}" ShortID="333399478">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -620,6 +680,11 @@
 												<Sound Name="itesatc" ID="{CD40A5A1-7E70-4637-9EE8-B931ADBBD882}" ShortID="118287057">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -648,6 +713,11 @@
 												<Sound Name="itesata" ID="{4900A722-3DC9-4BE3-ADD4-56AAE3A681C4}" ShortID="501443370">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -676,6 +746,11 @@
 												<Sound Name="itesatb" ID="{B9042F8C-14C7-4D82-9912-022FFA628C40}" ShortID="12193861">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">

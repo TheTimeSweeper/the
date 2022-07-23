@@ -151,7 +151,7 @@ namespace Modules.Survivors
         }
 
         private void InitializePrimarySkills() {
-            States.entityStates.Add(typeof(Zap));
+            States.entityStates.Add(typeof(Zap));                                                           //this constructor creates a skilldef for a typical primary
             TeslaTrackingSkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
                                                                                                             TESLA_PREFIX + "PRIMARY_ZAP_NAME",
                                                                                                             TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
@@ -328,11 +328,12 @@ namespace Modules.Survivors
 
             List<SkinDef> skins = new List<SkinDef>();
 
-            List<GameObject> allGameObjectActivations = Skins.getAllGameObjectActivations(childLocator, "child1", "child2");
+            List<GameObject> activatedGameObjects = Skins.createAllActivatedGameObjectsList(childLocator,
+                "meshTeslaArmor_Fanservice");
 
             #region DefaultSkin
 
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 model);
@@ -345,18 +346,13 @@ namespace Modules.Survivors
                 "meshTeslaBodyColor",
                 "meshTeslaHammer");
 
-            defaultSkin.gameObjectActivations = new SkinDef.GameObjectActivation[] {
-                new SkinDef.GameObjectActivation {
-                    gameObject = childLocator.FindChildGameObject("meshTeslaArmor_Fanservice"),
-                    shouldActivate = true
-                }
-            };
+            defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 0);
 
             skins.Add(defaultSkin);
             #endregion
 
             #region MasterySkin
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_MASTERY_SKIN_NAME",
+            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MASTERY_SKIN_NAME",
             //    Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
             //    defaultRenderers,
             //    model,
@@ -367,8 +363,8 @@ namespace Modules.Survivors
             #endregion
 
             #region MCSkin
-            SkinDef MCSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_MC_SKIN_NAME",
-                Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
+            SkinDef MCSkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MC_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
                 model);
 
@@ -381,20 +377,16 @@ namespace Modules.Survivors
                 "meshMCHammer");
             
             MCSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
+            //MCSkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
             MCSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Body");
             MCSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMC_ArmorColor");
             MCSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matMC_BodyColor");
             MCSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Hammer");
-            
-            MCSkin.gameObjectActivations = new SkinDef.GameObjectActivation[] {
-                new SkinDef.GameObjectActivation {
-                    gameObject = childLocator.FindChildGameObject("meshTeslaArmor_Fanservice"),
-                    shouldActivate = false
-                }
-            };            
+
+            MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects);
 
             MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                TeslaTowerNotSurvivor.MCMinionSkin
+                TeslaTowerNotSurvivor.MCMinionSkinReplacement
             };
 
             if (Modules.Config.Cursed) {
@@ -424,40 +416,7 @@ namespace Modules.Survivors
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
             
-            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage2;
-
-            //On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
-            //On.RoR2.Orbs.LightningOrb.OnArrival += LightningOrb_OnArrival;
-
-        }
-
-        private void LightningOrb_OnArrival(On.RoR2.Orbs.LightningOrb.orig_OnArrival orig, RoR2.Orbs.LightningOrb self) {
-
-            Helpers.LogWarning($"lightningorb - target: {self.target} | attacker: {self.attacker}");
-            orig(self);
-
-
-        }
-
-        private static void HealthComponent_TakeDamage2(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
-
-            Helpers.LogWarning($"TakeDamage pre  - damageInfo.attacker: {damageInfo.attacker}");
-            orig(self, damageInfo);
-            Helpers.LogWarning($"TakeDamage post - damageInfo.attacker: {damageInfo.attacker}");
-        }
-        
-        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim) {
-            orig(self, damageInfo, victim);
-
-            CharacterBody component2 = damageInfo.attacker?.GetComponent<CharacterBody>();
-
-            Helpers.LogWarning($"OnHitEnemy - damageInfo.attacker: {damageInfo.attacker} | attacker CharacterBody: {component2 != null}");
-
-            if (!component2)
-                return;
-            
-            Helpers.LogWarning($" - damageinfo.damage {damageInfo.damage} | component2.damage {component2.damage} | damage/damage {damageInfo.damage/component2.damage} | >=4 {damageInfo.damage / component2.damage >=4f} | buff {component2.HasBuff(RoR2Content.Buffs.ElementalRingsReady)}");
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
@@ -578,9 +537,9 @@ namespace Modules.Survivors
 
         private static void ConsumeConductive(HealthComponent self, DamageInfo damageInfo) {
 
+            //consume conductive stacks for damage and shock
             bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
             if (attackConsuming) {
-                //consume conductive stacks for damage and shock
 
                 int conductiveCount = self.body.GetBuffCount(Buffs.conductiveBuff);
 

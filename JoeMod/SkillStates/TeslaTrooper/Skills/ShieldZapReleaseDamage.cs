@@ -7,11 +7,12 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapReleaseDamage : BaseTimedSkillState {
 
-        public static float damageMultiplier = 1;
         public static float range = 30;
 
         public static float BaseDuration = 1;
         public static float BaseCastTime = 0.5f;
+
+        public static float MaxDamageCoefficient = 15;
 
         public CameraTargetParams.AimRequest aimRequest;
         public float collectedDamage;
@@ -31,20 +32,27 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private void Blast() {
 
-            //probably doesn't even get to here on anyone but tesla trooper, but hey if you do
+                                   //doesn't get to here on anyone but tesla trooper, but hey if you do the skill will still work
             float redeemedDamage = damageStat * 3f;
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
                 redeemedDamage = controller.RedeemDamage();
             }
 
-            //Helpers.LogWarning(NetworkServer.active + " | " + "redeemed damage: " + damage);
-            //Helpers.LogWarning(NetworkServer.active + " | " + "damage from events: " + collectedDamage);
+            float damageMultiplier = damageStat / characterBody.baseDamage;
+
+            float totalRedeemed = redeemedDamage * damageMultiplier * 0.4f;// + redeemedDamage * (damageMultiplier - 1) / 2;
 
             //give it a minimum damage to justify the explosion
-            float blastDamage = Mathf.Max(redeemedDamage, damageStat * 1f);
+            float blastDamage = Mathf.Max(totalRedeemed, damageStat * 1f);
 
-            //range and/or no blast if no damage is absorbed
+            float testPercentDamage = blastDamage / damageStat * 100;                                                                                                                                             //\n {redeemedDamage} + {redeemedDamage} * {(damageMultiplier - 1)}/2 = {blastDamage}
+            Helpers.LogWarning($"blastDamage: - {blastDamage}(%{testPercentDamage}) - \ndamage taken {redeemedDamage}, damageMultiplier {damageMultiplier}({damageMultiplier * 0.4f}), total redeemed {totalRedeemed}");
+
+            if (!Modules.Config.UncappedUtility.Value) {
+                blastDamage = Mathf.Min(blastDamage, damageStat * MaxDamageCoefficient);
+            }
+            
             if (NetworkServer.active) {
                 
                 BlastAttack blast = new BlastAttack {
@@ -57,7 +65,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                     radius = range,
                     falloffModel = BlastAttack.FalloffModel.None,
 
-                    baseDamage = blastDamage * damageMultiplier,
+                    baseDamage = blastDamage,
                     crit = RollCrit(),
                     damageType = DamageType.Stun1s,
                     //damageColorIndex = DamageColorIndex.Default,
@@ -96,8 +104,8 @@ namespace ModdedEntityStates.TeslaTrooper {
                 EffectManager.SpawnEffect(BigZap.bigZapEffectPrefab, fect, false);
 
             //if (Input.GetKey(KeyCode.H)) {
-            fect.scale /= 2f;
-            EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
+            //fect.scale /= 2f;
+            //EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
             //}
             #endregion effects
         }

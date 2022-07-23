@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Modules.Characters {
     public class TeslaItemDisplays : ItemDisplaysBase {
 
-        public override bool printUnused => true;
+        public override bool printUnused => false;
 
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules) {
 
@@ -40,10 +40,6 @@ namespace Modules.Characters {
                                                                        new Vector3(-0.20847F, 0.32423F, 0.14056F),
                                                                        new Vector3(284.718F, 135.7026F, 146.5896F),
                                                                        new Vector3(0.09266F, 0.07507F, 0.09583F)));
-            //press number keys to show/hide weapons (and their displays)
-            //you don't have to do this. just do the default shotGauntlet I'll do the rest
-            //if you do want to i'll kiss ya
-            //just don't skimp out on putting things on weapons because doing them all would be too much
             #endregion
 
             #region items
@@ -992,12 +988,7 @@ namespace Modules.Characters {
                                                                        new Vector3(89.08871F, 180F, 180F),
                                                                        new Vector3(0.12255F, 0.12255F, 0.12255F)));
 
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.EliteVoidEquipment, "DisplayAffixVoid",
-                                                                       "Head",
-                                                                       new Vector3(0F, 0.11227F, 0.09264F),
-                                                                       new Vector3(33.11541F, 0F, 0F),
-                                                                       new Vector3(0.21654F, 0.21654F, 0.21654F)));
-
+            //quips
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(DLC1Content.Equipment.BossHunter,
                 ItemDisplays.CreateDisplayRule("DisplayTricornGhost",
                                                "Head",
@@ -1015,43 +1006,48 @@ namespace Modules.Characters {
                                                                        new Vector3(-0.00001F, 0.25974F, -0.03203F),
                                                                        new Vector3(22.75723F, 0F, 0F),
                                                                        new Vector3(0.88509F, 0.88509F, 0.88509F)));
-            //itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.Molotov, "DisplayMolotov",
-            //                                                           "Chest",
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1)));
-            //                                                           //wat
-            //itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule("AffixYellow", "DisplayEliteMendingAntlers",
-            //                                                           "Chest",
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.VendingMachine, "DisplayVendingMachine",
-                                                                       "Chest",
-                                                                       new Vector3(1, 1, 1),
-                                                                       new Vector3(1, 1, 1),
-                                                                       new Vector3(1, 1, 1)));
-            //itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.LunarPortalOnUse, "DisplayLunarPortalOnUse",
-            //                                                           "Chest",
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.EliteVoidEquipment, "DisplayAffixVoid",
+                                                                       "Head",
+                                                                       new Vector3(0F, 0.11227F, 0.09264F),
+                                                                       new Vector3(33.11541F, 0F, 0F),
+                                                                       new Vector3(0.21654F, 0.21654F, 0.21654F)));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.GummyClone, "DisplayGummyClone",
                                                                        "Chest",
-                                                                       new Vector3(-0.19473F, 0.18492F, -0.1854F),
+                                                                       new Vector3(-0.19897F, 0.18497F, -0.18384F),
                                                                        new Vector3(5.06793F, 52.68151F, 9.01866F),
-                                                                       new Vector3(0.18973F, 0.18973F, 0.18973F)));
+                                                                       new Vector3(0.21042F, 0.21042F, 0.21042F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule("IrradiatingLaser", "DisplayIrradiatingLaser",
+                                                                       "Chest",
+                                                                       new Vector3(-0.27719F, 0.23919F, 0.02543F),
+                                                                       new Vector3(352.0599F, 356.6538F, 35.57267F),
+                                                                       new Vector3(0.1573F, 0.1573F, 0.1573F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.LunarPortalOnUse, "DisplayLunarPortalOnUse",
+                                                                        "Chest",
+                                                                       new Vector3(-0.94044F, 0.25836F, -0.24732F),
+                                                                       new Vector3(1F, 1F, 1F),
+                                                                       new Vector3(0.85193F, 0.85193F, 0.85193F)));
 
-            //itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule("IrradiatingLaser", "DisplayIrradiatingLaser",
-            //                                                           "Chest",
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1)));
-            //itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.MultiShopCard, "DisplayExecutiveCard",
-            //                                                           "Chest",
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1),
-            //                                                           new Vector3(1, 1, 1)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.Molotov, "DisplayMolotov",
+                                                                       "Chest",
+                                                                       new Vector3(-0.19325F, 0.04825F, -0.17724F),
+                                                                       new Vector3(5.14973F, 2.45011F, 13.37755F),
+                                                                       new Vector3(0.23692F, 0.23692F, 0.23692F)));
+
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.MultiShopCard, "DisplayExecutiveCard",
+                                                                       "Chest",
+                                                                       new Vector3(-0.2229F, 0.12508F, -0.17122F),
+                                                                       new Vector3(342.1718F, 88.47185F, 276.5112F),
+                                                                       new Vector3(0.77511F, 0.79219F, 0.81654F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Equipment.VendingMachine, "DisplayVendingMachine",
+                                                                       "Chest",
+                                                                       new Vector3(-0.2022F, 0.15268F, -0.14575F),
+                                                                       new Vector3(17.56048F, 229.9249F, 358.521F),
+                                                                       new Vector3(0.17147F, 0.17147F, 0.17147F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Elites.Earth.eliteEquipmentDef, "DisplayEliteMendingAntlers",
+                                                                       "Head",
+                                                                       new Vector3(-0.00526F, 0.1283F, 0.01021F),
+                                                                       new Vector3(347.7208F, 355.6827F, 359.5909F),
+                                                                       new Vector3(0.82375F, 0.82375F, 0.82375F)));
 
             #endregion
         }

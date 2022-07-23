@@ -189,10 +189,11 @@ namespace ModdedEntityStates.TeslaTrooper
             _lightningOrb.origin = GetOrbOrigin;
             _lightningOrb.lightningType = GetOrbType;
             _lightningOrb.target = _targetHurtbox;
-            //apply conduct on first cast only
+
             if (FacelessJoePlugin.conductiveMechanic) {
                 _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
             }
+
             ModifyTeamLightningOrb(_lightningOrb);
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing each orb to apply to their bounces only

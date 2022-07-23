@@ -10,6 +10,8 @@ namespace Modules
         public static bool Cursed;
 
         public static ConfigEntry<bool> TowerTargeting;
+        public static ConfigEntry<bool> UncappedUtility;
+        public static ConfigEntry<bool> VoiceInLobby;
 
         public static ConfigEntry<KeyCode> voiceKey;
 
@@ -33,17 +35,31 @@ namespace Modules
                 false,
                 "yes there's a fucking minecraft skin").Value;
 
-            TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
-                "General",
-                "Tower Targets Reticle",
-                false,
-                "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
-
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
                 "General",
                 "Voice Line Key",
                 KeyCode.CapsLock,
                 "key to play Tesla Trooper voice lines from Red Alert 2");
+
+            VoiceInLobby = FacelessJoePlugin.instance.Config.Bind(
+                "General",
+                "Voice Line In Lobby",
+                false,
+                "For the Red Alert 2 fans out there");
+
+            TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
+                "Gameplay",
+                "Tower Targets Reticle",
+                false,
+                "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
+
+            UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
+                "Gameplay",
+                "Uncapped utility damage",
+                false,
+                "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");
+            
+
         }
 
         // this helper automatically makes config entries for disabling survivors

@@ -115,7 +115,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
     }
 
     private void setIndicatorTower(bool hasTower) {
-        indicator.hasTower = hasTower;
+        indicator.towerIsTargeting = hasTower;
     }
 
     private void OnEnable() {
@@ -158,7 +158,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         if(Modules.Config.TowerTargeting.Value)
             setIsTowerTargeting();
     }
-
+    
     private void setIsTowerTargeting() {
 
         bool hasTarget = _towerTargetHealthComponent && _trackingTarget && _towerTargetHealthComponent == _trackingTarget.healthComponent;
@@ -220,7 +220,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         public bool empowered;
         public bool targetingAlly;
-        public bool hasTower;
+        public bool towerIsTargeting;
 
         public TeslaIndicator(GameObject owner, GameObject visualizerPrefab) : base(owner, visualizerPrefab) { }
 
@@ -247,10 +247,10 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
                     default:
                     case TargetType.DEFAULT:
-                        indicatorView.SetSprite((int)currentRange);
+                        indicatorView.SetSpriteRange((int)currentRange);
                         break;
                     case TargetType.EMPOWERED:
-                        indicatorView.SetSprite((int)RangeTier.CLOSEST);
+                        indicatorView.SetSpriteTower();
                         break;
                     case TargetType.ALLY:
                         indicatorView.SetSpriteAlly();
@@ -258,7 +258,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
                 }
 
                 //tower indicator
-                indicatorView.SetTowerSprite(!targetingAlly && hasTower);
+                indicatorView.SetTowerSprite(!targetingAlly && towerIsTargeting);
             }
         }
     }

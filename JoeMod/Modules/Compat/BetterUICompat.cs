@@ -7,9 +7,9 @@ namespace Modules {
 
         public static void init() {
             
-            AddSkill(Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_ZAP_NAME", "Bolts", Zap.ProcCoefficient);
-            AddSkill(Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "SECONDARY_BIGZAP_NAME", "Blast", BigZap.ProcCoefficient);
-            AddSkill(Survivors.TeslaTrooperSurvivor.TESLA_PREFIX + "UTILITY_BARRIER_NAME", "Blast", 1);
+            AddSkill("Tesla_Primary_Zap", "Bolts", Zap.ProcCoefficient);
+            AddSkill("Tesla_Secondary_BigZap", "Blast", BigZap.ProcCoefficient);
+            AddSkill("Tesla_Utility_ShieldZap", "Blast", 1);
         }
     }
 }
