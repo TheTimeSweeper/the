@@ -577,6 +577,20 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_zap_crit" ID="{35D0D632-A999-4860-AC43-E4A39B3C5D00}">
+					<ChildrenList>
+						<Action Name="" ID="{B45747A2-8D84-4EEB-A4BE-152BCD7DD925}" ShortID="62256358">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="zap crit" ID="{31C349ED-9888-4195-83B4-8B37F4D6AC31}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

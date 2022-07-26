@@ -4,7 +4,7 @@ using RoR2;
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerLifetime : BaseSkillState {
         public static float LifeDuration = 12;
-        public float skillsPlusSeconds = 0;
+        public static float skillsPlusSeconds = 0;
 
         public override void OnEnter() {
             base.OnEnter();

@@ -158,12 +158,13 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}, after which, blast in a wide area {Helpers.DamageText("based on damage absorbed")}.");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}. After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage absorbed")}.");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
-            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps targeted units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient*100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
+            string target = Modules.Config.TowerTargeting.Value ? "targeted" : "nearby";
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps {target} units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient*100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
             #endregion
 
             #region recolor

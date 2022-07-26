@@ -48,14 +48,14 @@ namespace ModdedEntityStates.TeslaTrooper {
                 if (NetworkServer.active) {
                     controller.commandTowers(commandTarget);
                 }
-
+                
                 commandedTowers = true;
             }
 
             if (commandedTowers) {
 
                 //todo anim tower
-                PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+                PlayAnimation("Gesture, Additive", "Shock_bak", "Shock.playbackRate", 0.3f);
 
             } else {
 

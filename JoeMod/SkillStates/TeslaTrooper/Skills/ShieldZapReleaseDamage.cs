@@ -12,15 +12,15 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float BaseDuration = 1;
         public static float BaseCastTime = 0.5f;
 
-        public static float MaxDamageCoefficient = 15;
-
+        public static float MaxDamageCoefficient = 18;
+        
         public CameraTargetParams.AimRequest aimRequest;
         public float collectedDamage;
-
+        
         public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
-
+        
             characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
 
             base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
@@ -31,23 +31,23 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
         private void Blast() {
-
-                                   //doesn't get to here on anyone but tesla trooper, but hey if you do the skill will still work
-            float redeemedDamage = damageStat * 3f;
+            
+                                   //doesn't get to here on anyone but tesla trooper, but hey if you do have fun
+            float redeemedDamage = damageStat * 6.9f;
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
                 redeemedDamage = controller.RedeemDamage();
             }
+            
+            float damageStatMultiplier = damageStat / characterBody.baseDamage;
 
-            float damageMultiplier = damageStat / characterBody.baseDamage;
-
-            float totalRedeemed = redeemedDamage * damageMultiplier * 0.4f;// + redeemedDamage * (damageMultiplier - 1) / 2;
+            float totalRedeemed = redeemedDamage * damageStatMultiplier * 0.5f;// + redeemedDamage * (damageStatMultiplier - 1) / 2;
 
             //give it a minimum damage to justify the explosion
             float blastDamage = Mathf.Max(totalRedeemed, damageStat * 1f);
-
-            float testPercentDamage = blastDamage / damageStat * 100;                                                                                                                                             //\n {redeemedDamage} + {redeemedDamage} * {(damageMultiplier - 1)}/2 = {blastDamage}
-            Helpers.LogWarning($"blastDamage: - {blastDamage}(%{testPercentDamage}) - \ndamage taken {redeemedDamage}, damageMultiplier {damageMultiplier}({damageMultiplier * 0.4f}), total redeemed {totalRedeemed}");
+            
+            //float testPercentDamage = blastDamage / damageStat * 100;                                                                                                                                             //\n {redeemedDamage} + {redeemedDamage} * {(damageStatMultiplier - 1)}/2 = {blastDamage}
+            //Helpers.LogWarning($"blastDamage: - {blastDamage}(%{testPercentDamage}) - \ndamage taken {redeemedDamage}, damageStatMultiplier {damageStatMultiplier}({damageStatMultiplier * 0.4f}), total redeemed {totalRedeemed}");
 
             if (!Modules.Config.UncappedUtility.Value) {
                 blastDamage = Mathf.Min(blastDamage, damageStat * MaxDamageCoefficient);

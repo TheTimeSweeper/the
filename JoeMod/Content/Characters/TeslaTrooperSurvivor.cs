@@ -19,13 +19,13 @@ namespace Modules.Survivors
 
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => TESLA_PREFIX;
-
+        
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             bodyName = "TeslaTrooperBody",
             bodyNameToken = TESLA_PREFIX + "NAME",
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
 
-            characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTrooper"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon(Modules.Config.RA2Icon ? "texIconTeslaTrooper2" : "texIconTeslaTrooper"),
             bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
 
             crosshair = Assets.LoadAsset<GameObject>("TeslaCrosshair"),
@@ -145,6 +145,8 @@ namespace Modules.Survivors
 
             InitializeSpecialSkills();
 
+            InitializeScepterSkills();
+
             InitializeRecolorSkills();
 
             FinalizeCSSPreviewDisplayController();
@@ -256,6 +258,34 @@ namespace Modules.Survivors
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
+        }
+
+        private void InitializeScepterSkills() {
+
+            SkillDef scepterTeslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Tesla_Special_Tower",
+                skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
+                skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecial"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 24f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 0,
+
+                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
+            });
         }
 
         private void InitializeRecolorSkills() {
@@ -529,14 +559,16 @@ namespace Modules.Survivors
                     }
                 } else {
                     if (FacelessJoePlugin.conductiveEnemy) {
-                        self.body.AddBuff(Buffs.conductiveBuff);
+                        if (self.body.GetBuffCount(Buffs.conductiveBuff) < 3) {
+                            self.body.AddBuff(Buffs.conductiveBuff);
+                        }
                     }
                 }
             }
         }
 
         private static void ConsumeConductive(HealthComponent self, DamageInfo damageInfo) {
-
+            
             //consume conductive stacks for damage and shock
             bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
             if (attackConsuming) {

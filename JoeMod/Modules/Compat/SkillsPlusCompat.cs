@@ -25,8 +25,8 @@ namespace Modules {
 
         private static void doLanguage() {
 
-            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Close-Range Bolt\n(<style=cIsUtility>+{Zap.DamageCoefficient*100f}%</style> damage and <style=cIsUtility>+1</style> max enemies bounced)");
-            LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+10%</style> Area, <style=cIsDamage>+5%</style> Damage");
+            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Close-Range Bolt");
+            LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+10%</style> Area, <style=cIsDamage>+10%</style> Damage");
             LanguageAPI.Add("TESLA_UTILITY_SHIELDZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+0.5</style> second buff time");
             LanguageAPI.Add("TESLA_SPECIAL_TOWER_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 4 levels");
         }
@@ -46,7 +46,10 @@ namespace Modules {
         class TeslaSecondaryModifier : BaseSkillModifier {
 
             public override void OnSkillEnter(BaseState skillState, int level) {
-                
+                base.OnSkillEnter(skillState, level);
+
+                //Helpers.LogWarning("running on " + skillState.GetType().ToString());
+
                 if (skillState is AimBigZap aimBigZapState) {
 
                     aimBigZapState.skillsPlusMulti = MultScaling(1, .1f, level);
@@ -54,7 +57,7 @@ namespace Modules {
                 } else if (skillState is BigZap bigZapState) {
 
                     bigZapState.skillsPlusAreaMulti = MultScaling(1, .1f, level);
-                    bigZapState.skillsPlusDamageMulti = MultScaling(1f, 0.2f, level);
+                    bigZapState.skillsPlusDamageMulti = MultScaling(1f, 0.1f, level);
 
                 } else if (skillState is TowerBigZap towerBigZapState) {
 
@@ -78,15 +81,22 @@ namespace Modules {
         [SkillLevelModifier("Tesla_Special_Tower", typeof(DeployTeslaTower), typeof(TowerLifetime))]
         public class TeslaSpecialModifier : BaseSkillModifier {
 
-            public override void OnSkillEnter(BaseState skillState, int level) {
-                base.OnSkillEnter(skillState, level);
+            //public override void OnSkillEnter(BaseState skillState, int level) {
+            //    base.OnSkillEnter(skillState, level);
 
-                Helpers.LogWarning("running on " + skillState.GetType().ToString());
+            //    //Helpers.LogWarning("running on " + skillState.GetType().ToString());
 
-                if (skillState is TowerLifetime lifetimeState) {
-                    lifetimeState.skillsPlusSeconds = AdditiveScaling(0f, 1f, level);
-                }
+            //    if (skillState is TowerLifetime lifetimeState) {
+            //        lifetimeState.skillsPlusSeconds = AdditiveScaling(0f, 1f, level);
+            //    }
+            //}
+
+            public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef) {
+                base.OnSkillLeveledUp(level, characterBody, skillDef);
+                skillDef.baseMaxStock = (int)AdditiveScaling(1, 0.25f, level);
+                TowerLifetime.skillsPlusSeconds = AdditiveScaling(0, 1, level);
             }
+
         }
     }
 }

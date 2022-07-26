@@ -85,8 +85,8 @@ public class unattachedAnimator : MonoBehaviour
     private void Shooting() {
         if (Input.GetMouseButtonDown(0)) {
 
-            teslinator.Play("HandOut");
-            teslinator.Play("Shock");
+            teslinator.Play("HandOut", 2);
+            teslinator.Play("Shock", 2);
             combatTim = 2;
         }
 
@@ -97,7 +97,7 @@ public class unattachedAnimator : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1)) {
 
-            teslinator.Play("Shock");
+            teslinator.Play("Shock", 2);
             teslinator.SetBool("isHandOut", false);
             combatTim = 2;
         }

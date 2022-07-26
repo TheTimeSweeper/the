@@ -8,10 +8,10 @@ namespace Modules
         public static bool Debug;
         public static bool NewColor;
         public static bool Cursed;
-
         public static ConfigEntry<bool> TowerTargeting;
         public static ConfigEntry<bool> UncappedUtility;
         public static ConfigEntry<bool> VoiceInLobby;
+        public static bool RA2Icon;
 
         public static ConfigEntry<KeyCode> voiceKey;
 
@@ -19,42 +19,52 @@ namespace Modules
         {
             Debug = FacelessJoePlugin.instance.Config.Bind(
                 "Debug",
-                "Debug",
+                "Debug Logs",
                 false,
                 "in case I forget to delete them when I upload").Value;
 
+            string sectionGeneral = "General";
+
             NewColor = FacelessJoePlugin.instance.Config.Bind(
-                "General",
+                sectionGeneral,
                 "New Color (s?)",
                 false,
                 "add black for the wife").Value;
 
             Cursed = FacelessJoePlugin.instance.Config.Bind(
-                "General",
+                sectionGeneral,
                 "Cursed",
                 false,
                 "yes there's a fucking minecraft skin").Value;
 
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
-                "General",
+                sectionGeneral,
                 "Voice Line Key",
                 KeyCode.CapsLock,
                 "key to play Tesla Trooper voice lines from Red Alert 2");
 
             VoiceInLobby = FacelessJoePlugin.instance.Config.Bind(
-                "General",
+                sectionGeneral,
                 "Voice Line In Lobby",
                 false,
                 "For the Red Alert 2 fans out there");
 
+            RA2Icon = FacelessJoePlugin.instance.Config.Bind(
+                sectionGeneral,
+                "red alert 2 icon",
+                false,
+                "Changes character icon to the unit icon from Red Alert 2").Value;
+
+            string sectionGameplay= "Gameplay";
+
             TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
-                "Gameplay",
+                sectionGameplay,
                 "Tower Targets Reticle",
                 false,
                 "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
 
             UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
-                "Gameplay",
+                sectionGameplay,
                 "Uncapped utility damage",
                 false,
                 "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");

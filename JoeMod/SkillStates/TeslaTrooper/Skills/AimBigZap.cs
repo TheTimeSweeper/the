@@ -41,8 +41,17 @@ namespace ModdedEntityStates.TeslaTrooper
             base.OnEnter();
             Util.PlaySound(EnterSoundString, gameObject);
 
-            PlayCrossfade("Gesture, Override", "HandOut", 0.1f);
+            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.1f);
             GetModelAnimator().SetBool("isHandOut", true);
+        }
+
+        public override void UpdateTrajectoryInfo(out TrajectoryInfo dest) {
+            base.UpdateTrajectoryInfo(out dest);
+
+            HurtBox target = tracker?.GetTrackingTarget();
+            if (target != null && showingEmpowered) {
+                dest.hitPoint = target.transform.position;
+            }
         }
 
         public override void FixedUpdate()
@@ -68,9 +77,11 @@ namespace ModdedEntityStates.TeslaTrooper
 
                 viewRadius = BigZap.BaseAttackRadius;
 
+                //TODO when it works on tower bring it out of this if
+                viewRadius *= skillsPlusMulti;
+
                 maxDistance = 30;
             }
-            viewRadius *= skillsPlusMulti;
 
             endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);
         }

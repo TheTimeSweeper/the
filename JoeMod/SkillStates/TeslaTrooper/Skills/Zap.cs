@@ -107,7 +107,7 @@ namespace ModdedEntityStates.TeslaTrooper
             //base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
 
             //todo: ishandout causing old sniper animation issues
-            PlayCrossfade("Gesture, Override", "HandOut", 0.1f);
+            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.1f);
             GetModelAnimator().SetBool("isHandOut", true);
             if (isAuthority) {
                 if (_tracker) {
@@ -222,9 +222,9 @@ namespace ModdedEntityStates.TeslaTrooper
 
             PlayAnimation("Gesture, Additive", "Shock");
             //PlayCrossfade("Gesture, Override", "Shock", 0.1f);
-
+            
             string sound = "Play_itesatta";
-            if (_crit) sound = "Play_trooper_itesat2b_tesla_trooper_attack";
+            if (_crit) sound = "Play_zap_crit";// "Play_trooper_itesat2b_tesla_trooper_attack";
             //sound = EntityStates.Mage.Weapon.FireLaserbolt.attackString;
 
             Util.PlaySound(sound, gameObject);

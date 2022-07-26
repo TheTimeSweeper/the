@@ -1,17 +1,15 @@
 # Electrician In the Field
 - Adds the Tesla Trooper, who can construct Tesla Coil Towers to help him fry enemies.
-- Fully fleshed out (IMO)
-  - fully character animations
-  - item displays and ragdoll
-  - custom crosshair :O
+- Fully fleshed out
+  - Item displays and ragdoll
+  - Fully animated (but by me so y'know)
+  - Skills++ support
 - Fully multiplayer compatible
 - Y'all remember Red Alert 2?
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS.png)]()
 
-join the Enforcer discord to share feedback/bugs- https://discord.gg/WQzE983zfs
-
-Ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/csaEQDnMH8) if you have any horrible crashes or other issues I didn't catch. (or to say hi I'm lonely).
+Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/csaEQDnMH8). As a first release, I'll be taking a close look at feedback.
 ___
 ## Overview
 Based on Tesla Trooper from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model him to fit RoR2, and look awesome, and my dong is enormous".  
@@ -30,9 +28,10 @@ Westwood Studios - sounds, inspiration
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
-- proper alt skin(s)
 - Achievements
-- Skills++ and vr and all those fun stuffs
+- custom lightningorb effects (help)
+- improved animations (help)
+- Scepter and vr and all those fun stuffs
 
 ___
 for no particular reason I made a cool skin for minecraft check it out   
