@@ -22,6 +22,8 @@ namespace Modules.Characters {
         public GameObject crosshair = null;
         public GameObject podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod");
 
+        public CharacterBody.BodyFlags bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
+
         //stats
         public float maxHealth = 100f;
         public float healthRegen = 1f;

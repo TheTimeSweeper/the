@@ -49,7 +49,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
 
-            //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_SWING_NAME", "Swing");
             LanguageAPI.Add(prefix + "PRIMARY_SWING_DESCRIPTION", $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n use in the air for a <style=cIsUtility>Falling Jump Attack</style>");
@@ -133,7 +132,7 @@ namespace Modules
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
-            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
             #endregion
 
@@ -142,7 +141,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
 
-            //I get it makes sense to have all the tokens nice and neat in one place but it's kinda asinine to have these separate from the skilldefs
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
             string conductiveText = FacelessJoePlugin.conductiveAlly ? $" Use on allies to {Helpers.DamageText("charge")} them" : "";
@@ -158,13 +156,17 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZap.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}. After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage absorbed")}.");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZapCollectDamage.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}. After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage absorbed")}.");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
             string target = Modules.Config.TowerTargeting.Value ? "targeted" : "nearby";
-            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps {target} units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient*100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
+            string specialDesc = $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps {target} units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient * 100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.";
+            LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", specialDesc);
+
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_TOWER_NAME", "Tesla Network");
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_TOWER_DESCRIPTION", specialDesc + Helpers.ScepterDescription("Lowered Cooldown, Additional Stock"));
             #endregion
 
             #region recolor
@@ -178,7 +180,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "RECOLOR_PINK_NAME", "Pink");
             LanguageAPI.Add(prefix + "RECOLOR_BLACK_NAME", "Black");
             #endregion
-
+            
             #region Achievements
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
@@ -196,7 +198,7 @@ namespace Modules
             #region not henry 3
             string prefix = Modules.Survivors.TeslaTowerNotSurvivor.TOWER_PREFIX;
 
-            string outro = "..and so it left, construction still complete.";
+            string outro = "..and so it left, construction complete.";
             string outroFailure = "..and so it vanished, never becoming the eiffel tower.";
 
             string fullName = "Tesla Tower";
@@ -209,6 +211,8 @@ namespace Modules
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
+            LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Redstone");
             #endregion
 
             #region Primary

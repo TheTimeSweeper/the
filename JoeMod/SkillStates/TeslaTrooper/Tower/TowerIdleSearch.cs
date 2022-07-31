@@ -17,7 +17,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         private TeslaTrackerComponent ownerTrackerComponent;
 
-        private float currentZapInterval { get => (justSpawned ? SpawnedBaseZapInterval : BaseZapInterval) / attackSpeedStat; }
+        private float currentZapInterval;
         public bool justSpawned;
 
         private float _cooldownTimer;
@@ -36,8 +36,9 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 range = SearchRange,
                 canBounceOnSameTarget = true,
             };
-
+            
             _cooldownTimer = 0;
+            currentZapInterval = (justSpawned ? SpawnedBaseZapInterval : BaseZapInterval) / attackSpeedStat;
         }
 
         public override void FixedUpdate() {

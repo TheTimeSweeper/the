@@ -47,11 +47,6 @@ public class TowerWeaponComponent : MonoBehaviour {
     private void CharacterBody_onInventoryChanged() {
 
         hasTeslaCoil = characterBody.inventory.GetItemCount(RoR2Content.Items.ShockNearby) > 0;
-
-        //bool hasHoldingItem = characterBody.inventory.GetItemCount(RoR2Content.Items.ChainLightning) > 0 ||
-        //                      characterBody.inventory.GetItemCount(DLC1Content.Items.ChainLightningVoid) > 0;
-
-        //animator.SetBool("LeftHandClosed", hasHoldingItem);
     }
 }
 

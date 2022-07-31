@@ -1,27 +1,47 @@
 ﻿using EntityStates;
 using RoR2;
+using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapCollectDamage : BaseSkillState {
+
+        public static float ShieldBuffDuration = 4;
+
+        public float skillsPlusSeconds = 0;
 
         public RoR2.CameraTargetParams.AimRequest aimRequest;
 
         private float blockedDamage = 0;
 
-        ZapBarrierController controller;
         private bool completed;
 
         public override void OnEnter() {
             base.OnEnter();
 
-            controller = GetComponent<ZapBarrierController>();
-            if (controller) {
-                controller.onBlockedDamage += onBlockedDamage;
-            }
-        }
+            EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new ShieldZapStart());
 
-        private void onBlockedDamage(float damageBlocked) {
-            blockedDamage += damageBlocked;
+            ZapBarrierController controller = GetComponent<ZapBarrierController>();
+            if (controller) {
+                controller.StartRecordingDamage();
+            }
+
+            aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
+
+            if (!base.characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
+                CharacterModel component = base.GetModelTransform().GetComponent<CharacterModel>();
+
+                TemporaryOverlay temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay.duration = ShieldBuffDuration + 1;
+                temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
+                temporaryOverlay.AddToCharacerModel(component);
+            }
+
+            if (NetworkServer.active) {
+
+                Util.CleanseBody(base.characterBody, true, false, false, true, true, false);
+                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration + skillsPlusSeconds);
+            }
         }
 
         public override void FixedUpdate() {
@@ -41,10 +61,6 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public override void OnExit() {
             base.OnExit();
-
-            if (controller) {
-                controller.onBlockedDamage -= onBlockedDamage;
-            }
 
             if (!completed) {
                 aimRequest.Dispose();

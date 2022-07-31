@@ -14,9 +14,12 @@ public class RecolorGroup {
     [SerializeField]
     private Renderer[] renderers;
 
+    [SerializeField]
+    private bool emission;
+
     private MaterialPropertyBlock[] _matProperties;
 
-    public void fillPropertieBlocks() {
+    public void fillPropertyBlocks() {
 
         _matProperties = new MaterialPropertyBlock[renderers.Length];
         for (int i = 0; i < renderers.Length; i++) {
@@ -29,6 +32,10 @@ public class RecolorGroup {
 
         for (int i = 0; i < _matProperties.Length; i++) {
             _matProperties[i].SetColor("_Color", color);
+
+            if (emission)
+                _matProperties[i].SetColor("_EmColor", color);
+
             renderers[i].SetPropertyBlock(_matProperties[i]);
         }
     }
@@ -51,7 +58,7 @@ public class SkinRecolorController : MonoBehaviour {
             return;
 
         for (int i = 0; i < recolorGroups.Length; i++) {
-            recolorGroups[i].fillPropertieBlocks();
+            recolorGroups[i].fillPropertyBlocks();
         }
     }
 

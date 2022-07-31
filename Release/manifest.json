@@ -1,8 +1,8 @@
 {
     "name": "Tesla_Trooper",
-    "version_number": "1.0.0",
+    "version_number": "1.0.2",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Electrician In the Field. Adds a new Survivor, Tesla Trooper, based on Red Alert 2, themed around RoR2.",
+    "description": "Rubber Shoes in motion. Adds a new Survivor, Tesla Trooper, based on Red Alert 2, themed around RoR2.",
     "dependencies": [
         "bbepis-BepInExPack-5.4.1905",
         "tristanmcpherson-R2API-4.4.1",

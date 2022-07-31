@@ -34,14 +34,14 @@ namespace ModdedEntityStates.TeslaTrooper
         private TeslaTrackerComponent _tracker;
         private HurtBox _targetHurtbox;
         private bool _attackingTeammate;
-
+        
         private float _baseCastInterval = 0.05f;
 
         private Transform _muzzleTransform;
-        private float _originSpacing = 0.1f;
-
+        private float _originSpacing = 0.18f;
+        
         private int _currentCasts;
-
+        
         private int totalOrbCasts;
 
         private float nextCastTime
@@ -60,7 +60,7 @@ namespace ModdedEntityStates.TeslaTrooper
                 else
                 {
 
-                    return _muzzleTransform.position + _muzzleTransform.forward * (-_originSpacing * (_currentCasts % 3));
+                    return _muzzleTransform.position + (_muzzleTransform.right + _muzzleTransform.up - _muzzleTransform.forward) * (_originSpacing * (_currentCasts));
                 }
             }
         }
@@ -73,18 +73,20 @@ namespace ModdedEntityStates.TeslaTrooper
                     return LightningOrb.LightningType.Tesla;
                 }
 
-                switch (_currentCasts)
-                {
-                    case 0:
-                        return LightningOrb.LightningType.Ukulele;
-                    case 1:
-                        return LightningOrb.LightningType.Ukulele;
-                    case 2:
-                        return LightningOrb.LightningType.Ukulele;
-                    default:
-                    case 3:
-                        return LightningOrb.LightningType.Ukulele;
-                }
+                return LightningOrb.LightningType.Ukulele;
+
+                //switch (_currentCasts)
+                //{
+                //    case 0:
+                //        return LightningOrb.LightningType.Ukulele;
+                //    case 1:
+                //        return LightningOrb.LightningType.Ukulele;
+                //    case 2:
+                //        return LightningOrb.LightningType.Ukulele;
+                //    default:
+                //    case 3:
+                //        return LightningOrb.LightningType.Ukulele;
+                //}
             }
         }
         #endregion

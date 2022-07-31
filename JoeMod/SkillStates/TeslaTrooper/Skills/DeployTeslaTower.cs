@@ -2,8 +2,8 @@
 using RoR2;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper
-{
+namespace ModdedEntityStates.TeslaTrooper {
+
     public class DeployTeslaTower : BaseSkillState
     {
         private struct TotallyOriginalPlacementInfo
@@ -81,26 +81,7 @@ namespace ModdedEntityStates.TeslaTrooper
                 {
                     if ((inputBank.skill1.down || inputBank.skill4.justPressed) && currentPlacementInfo.ok)
                     {
-                        if (characterBody) {
-
-                            constructCoil();
-
-                            //I am fucking exploding right now
-                            Util.PlaySound("Play_buliding_uplace", gameObject);
-
-                            PlayCrossfade("Gesture, Override", "DoPlace", 0.1f);
-
-                            ConstructionComplete = true;
-
-                            if (skillLocator) {
-                                GenericSkill skill = skillLocator.GetSkill(SkillSlot.Special);
-                                if (skill) {
-                                    skill.DeductStock(1);
-                                }
-                            }
-                        }
-                        DestroyBlueprints();
-                        exitPending = true;
+                        HandleConstructCoil();
                     }
                     if (inputBank.skill2.justPressed || inputBank.sprint.justPressed)
                     {
@@ -111,12 +92,36 @@ namespace ModdedEntityStates.TeslaTrooper
             }
         }
 
-        private void constructCoil() {
+        protected virtual void HandleConstructCoil() {
+            if (characterBody) {
+
+                constructCoil();
+
+                PlayCrossfade("Gesture, Override", "DoPlace", 0.1f);
+
+                ConstructionComplete = true;
+
+                if (skillLocator) {
+                    GenericSkill skill = skillLocator.GetSkill(SkillSlot.Special);
+                    if (skill) {
+                        skill.DeductStock(1);
+                    }
+                }
+            }
+            DestroyBlueprints();
+            exitPending = true;
+        }
+
+        protected void constructCoil() {
 
             base.characterBody.SendConstructTurret(base.characterBody, 
                                                    currentPlacementInfo.position, 
                                                    currentPlacementInfo.rotation, 
                                                    MasterCatalog.FindMasterIndex(coilMasterPrefab));
+
+
+            //I am fucking exploding right now
+            Util.PlaySound("Play_buliding_uplace", gameObject);
         }
 
         public override void OnExit()

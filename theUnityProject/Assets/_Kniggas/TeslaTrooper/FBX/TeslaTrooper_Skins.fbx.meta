@@ -89,6 +89,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: matMCHammer
     second: {fileID: 2100000, guid: df2f6d21846b1474f98495465b5df234, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matMastery
+    second: {fileID: 2100000, guid: 80cea346874da93469eb5ff60a1cf4d3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

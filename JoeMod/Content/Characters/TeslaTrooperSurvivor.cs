@@ -8,6 +8,7 @@ using UnityEngine;
 using ModdedEntityStates.TeslaTrooper;
 using Modules.Characters;
 using R2API;
+using System.Runtime.CompilerServices;
 
 namespace Modules.Survivors
 {
@@ -49,6 +50,7 @@ namespace Modules.Survivors
         public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
+        private static UnlockableDef recolorsUnlockableDef = null;
         #endregion
 
         #region cool stuff
@@ -93,14 +95,24 @@ namespace Modules.Survivors
         }
 
         private int onGetTeslaTowerSlotLimit(CharacterMaster self, int deployableCountMultiplier) {
+
             int result = 1;
             if (self.bodyInstanceObject) {
-                result = self.bodyInstanceObject.GetComponent<SkillLocator>().special.maxStock;
+
+                if (Modules.Config.LysateLimit == -1) {
+                    return self.bodyInstanceObject.GetComponent<SkillLocator>().special.maxStock;
+                }
+
+                int lysateCount = self.inventory.GetItemCount(DLC1Content.Items.EquipmentMagazineVoid);
+                result += Mathf.Min(lysateCount, Modules.Config.LysateLimit);                
+
+                result += SkillsPlusCompat.SkillsPlusAdditionalTowers;
+                
+                result += Modules.Compat.TryGetScepterCount(self.inventory);
             }
 
             return result;
         }
-
 
         protected override void InitializeEntityStateMachine() {
             base.InitializeEntityStateMachine();
@@ -145,7 +157,9 @@ namespace Modules.Survivors
 
             InitializeSpecialSkills();
 
-            InitializeScepterSkills();
+            if (Modules.Compat.ScepterInstalled) {
+                InitializeScepterSkills();
+            }
 
             InitializeRecolorSkills();
 
@@ -202,16 +216,16 @@ namespace Modules.Survivors
 
         private void InitializeUtilitySkills() {
 
-            States.entityStates.Add(typeof(ShieldZap));
+            States.entityStates.Add(typeof(ShieldZapStart));
             SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Utility_ShieldZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BARRIER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
                 skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZap)),
-                activationStateMachineName = "Weapon",
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZapCollectDamage)),
+                activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -260,17 +274,20 @@ namespace Modules.Survivors
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
         }
 
+        //todo this is just lysate cell
+        //make it not lysate cell
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
 
             SkillDef scepterTeslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = "Tesla_Special_Tower",
-                skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecial"),
+                skillName = "Tesla_Special_Scepter_Tower",
+                skillNameToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_NAME",
+                skillDescriptionToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecialScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 24f,
+                baseMaxStock = 2,
+                baseRechargeInterval = 18f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -286,6 +303,8 @@ namespace Modules.Survivors
 
                 keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterTeslaCoilSkillDef, "TeslaTrooperBody", SkillSlot.Special, 0);
         }
 
         private void InitializeRecolorSkills() {
@@ -316,7 +335,7 @@ namespace Modules.Survivors
 
             for (int i = 0; i < skilldefs.Count; i++) {
 
-                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0? null : masterySkinUnlockableDef);
+                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0? null : recolorsUnlockableDef);
 
                 AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
@@ -359,7 +378,8 @@ namespace Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             List<GameObject> activatedGameObjects = Skins.createAllActivatedGameObjectsList(childLocator,
-                "meshTeslaArmor_Fanservice");
+                "meshTeslaArmor_Fanservice",
+                "meshTeslaEmission");
 
             #region DefaultSkin
 
@@ -367,29 +387,53 @@ namespace Modules.Survivors
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 model);
+                                                                                                             //probably better to use strings for childnames instead of ints
+            defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 0);
 
             defaultSkin.meshReplacements = Skins.getMeshReplacements(defaultRenderers,
                 "meshTeslaArmor",
                 "meshTeslaArmor_Fanservice",
+                null,//"meshTeslaEmission",
                 "meshTeslaBody",
                 "meshTeslaArmorColor",
                 "meshTeslaBodyColor",
                 "meshTeslaHammer");
-
-            defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 0);
-
+            
             skins.Add(defaultSkin);
             #endregion
 
             #region MasterySkin
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MASTERY_SKIN_NAME",
-            //    Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
-            //    defaultRenderers,
-            //    model,
-            //    masterySkinUnlockableDef);
 
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MASTERY_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
+                defaultRenderers,
+                model,
+                masterySkinUnlockableDef);
 
-            //skins.Add(masterySkin);
+            masterySkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
+
+            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "meshMasteryArmor",
+                null,//"meshMasteryArmor_Fanservice",
+                "meshMasteryEmission",
+                "meshMasteryBody",
+                "meshMasteryArmorColor",
+                "meshMasteryBodyColor",
+                "meshMasteryHammer");
+            
+            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            //masterySkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+
+            masterySkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+                TeslaTowerNotSurvivor.MasteryMinionSkinReplacement
+            };
+
+            skins.Add(masterySkin);
             #endregion
 
             #region MCSkin
@@ -398,22 +442,24 @@ namespace Modules.Survivors
                 defaultRenderers,
                 model);
 
+            MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects);
+
             MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "meshMCArmor",
+                null,
                 null,
                 "meshMCBody",
                 "meshMCArmorColor",
                 "meshMCBodyColor",
                 "meshMCHammer");
-            
+
             MCSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
             //MCSkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
-            MCSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Body");
-            MCSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMC_ArmorColor");
-            MCSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matMC_BodyColor");
-            MCSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Hammer");
-
-            MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects);
+            //MCSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Armor");
+            MCSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Body");
+            MCSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matMC_ArmorColor");
+            MCSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matMC_BodyColor");
+            MCSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Hammer");
 
             MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
                 TeslaTowerNotSurvivor.MCMinionSkinReplacement
@@ -422,7 +468,7 @@ namespace Modules.Survivors
             if (Modules.Config.Cursed) {
                 skins.Add(MCSkin);
             }
-            #endregion
+            #endregion MCSkin
 
             skinController.skins = skins.ToArray();
         }

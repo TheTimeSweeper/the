@@ -6,14 +6,19 @@ namespace Modules
     internal static class Config
     {
         public static bool Debug;
+
         public static bool NewColor;
         public static bool Cursed;
-        public static ConfigEntry<bool> TowerTargeting;
-        public static ConfigEntry<bool> UncappedUtility;
+        public static bool TowerItemDisplays;
+        public static ConfigEntry<KeyCode> voiceKey;
         public static ConfigEntry<bool> VoiceInLobby;
         public static bool RA2Icon;
 
-        public static ConfigEntry<KeyCode> voiceKey;
+        public static ConfigEntry<bool> TowerTargeting;
+        public static int LysateLimit;
+        public static ConfigEntry<bool> UncappedUtility;
+
+
 
         public static void ReadConfig()
         {
@@ -36,6 +41,12 @@ namespace Modules
                 "Cursed",
                 false,
                 "yes there's a fucking minecraft skin").Value;
+
+            TowerItemDisplays = FacelessJoePlugin.instance.Config.Bind(
+                sectionGeneral,
+                "Tower Item Displays",
+                true,
+                "Set false to disable tower item displays if you find them too silly").Value;
 
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,
@@ -62,6 +73,12 @@ namespace Modules
                 "Tower Targets Reticle",
                 false,
                 "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
+
+            LysateLimit = FacelessJoePlugin.instance.Config.Bind(
+                sectionGameplay,
+                "Lysate Cell Additional Tower Limit",
+                1,
+                "With additional towers, lysate cell is way too strong for a green item. Default is 1, but for proper balance I would suggest 0\n-1 for unlimited. have fun").Value;
 
             UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
                 sectionGameplay,

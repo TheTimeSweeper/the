@@ -22,10 +22,9 @@ public class TeslaTrackerComponent : MonoBehaviour {
         ALLY
     }
 
-    public static float maxTrackingDistance = 40f;
-
-    public static float nearDist1 = 0.4f;
-    public static float nearDist2 = 0.7f;
+    public static float maxTrackingDistance = 50f;
+    public static float nearTrackingDistance = 16;
+    public static float mediumTrackingDistance = 28f;
 
     //public float maxTrackingAngle = 15f;
     public float trackingRadius = 1f;
@@ -82,13 +81,13 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         float dist = Vector3.Distance(_trackingTarget.transform.position, transform.position);
 
-        if (dist > maxTrackingDistance * nearDist2) {
+        if (dist > mediumTrackingDistance) {
             range = RangeTier.FURTHEST;
         }
-        if (dist < maxTrackingDistance * nearDist2) {
+        if (dist < mediumTrackingDistance) {
             range = RangeTier.MIDDLE;
         }
-        if (dist < maxTrackingDistance * nearDist1) {
+        if (dist < nearTrackingDistance) {
             range = RangeTier.CLOSEST;
         }
 

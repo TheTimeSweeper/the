@@ -206,12 +206,12 @@ namespace Modules
             return CreateGenericDisplayRule(GetKeyAssetFromString(itemName), prefabName, childName, position, rotation, scale);
         }
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(Object itemDef, string prefabName, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
-            return CreateGenereicDisplayRule(itemDef, LoadDisplay(prefabName), childName, position, rotation, scale);
+            return CreateGenericDisplayRule(itemDef, LoadDisplay(prefabName), childName, position, rotation, scale);
         }
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(string itemName, GameObject displayPrefab, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
-            return CreateGenereicDisplayRule(GetKeyAssetFromString(itemName), displayPrefab, childName, position, rotation, scale);
+            return CreateGenericDisplayRule(GetKeyAssetFromString(itemName), displayPrefab, childName, position, rotation, scale);
         }
-        public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenereicDisplayRule(Object itemDef, GameObject displayPrefab, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
+        public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(Object itemDef, GameObject displayPrefab, string childName, Vector3 position, Vector3 rotation, Vector3 scale) {
 
             if(displayPrefab == null) {
                 Helpers.LogWarning("could not find display prefab for " + itemDef);

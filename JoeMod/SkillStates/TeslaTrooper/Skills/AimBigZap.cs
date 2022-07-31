@@ -15,12 +15,10 @@ namespace ModdedEntityStates.TeslaTrooper
         private TeslaTrackerComponent tracker;
 
         private bool showingEmpowered;
-
+        
         private float viewRadius;
 
         public override void OnEnter() {
-
-            Debug.Log("enter aimbigzap");
 
             coilController = GetComponent<TeslaTowerControllerController>();
             tracker = GetComponent<TeslaTrackerComponent>();
@@ -77,11 +75,10 @@ namespace ModdedEntityStates.TeslaTrooper
 
                 viewRadius = BigZap.BaseAttackRadius;
 
-                //TODO when it works on tower bring it out of this if
-                viewRadius *= skillsPlusMulti;
-
                 maxDistance = 30;
             }
+
+            viewRadius *= skillsPlusMulti;
 
             endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);
         }

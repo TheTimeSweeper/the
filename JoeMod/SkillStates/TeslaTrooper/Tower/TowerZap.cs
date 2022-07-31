@@ -63,7 +63,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             lightningOrb.target = lightningTarget;
             
             Util.PlaySound(PrepSound, gameObject);
-            PlayCrossfade("weapon", "PrepZap", "prep.playbackRate", base.duration, 0.1f);
+            PlayAnimation("weapon", "PrepZap", "prep.playbackRate", base.duration);
         }
 
         public override void FixedUpdate() {

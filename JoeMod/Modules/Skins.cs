@@ -92,7 +92,7 @@ namespace Modules
             SkinDef.GameObjectActivation[] gameObjectActivations = new SkinDef.GameObjectActivation[allObjects.Count];
 
             for (int i = 0; i < allObjects.Count; i++) {
-                gameObjectActivations[0] = new SkinDef.GameObjectActivation {
+                gameObjectActivations[i] = new SkinDef.GameObjectActivation {
                     gameObject = allObjects[i],
                     shouldActivate = activatedChildren.Contains(i),
                 };

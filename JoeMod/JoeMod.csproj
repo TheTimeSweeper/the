@@ -38,6 +38,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Aetherium">
+      <HintPath>..\libs\Aetherium.dll</HintPath>
+    </Reference>
+    <Reference Include="AncientScepter">
+      <HintPath>..\libs\AncientScepter.dll</HintPath>
+    </Reference>
     <Reference Include="BetterUI">
       <HintPath>..\libs\BetterUI.dll</HintPath>
     </Reference>
@@ -49,6 +55,12 @@
     </Reference>
     <Reference Include="Skills">
       <HintPath>..\libs\Skills.dll</HintPath>
+    </Reference>
+    <Reference Include="TILER2">
+      <HintPath>..\libs\TILER2.dll</HintPath>
+    </Reference>
+    <Reference Include="TinkersSatchel">
+      <HintPath>..\libs\TinkersSatchel.dll</HintPath>
     </Reference>
   </ItemGroup>
 

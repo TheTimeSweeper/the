@@ -14,6 +14,9 @@ using System.Security.Permissions;
 
 [BepInDependency("com.cwmlolzlz.skills", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("com.xoxfaby.BetterUI", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("com.KomradeSpectre.Aetherium", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("com.ThinkInvisible.TinkersSatchel", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
 
 [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
@@ -33,7 +36,7 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.0.0";
+    public const string MODVERSION = "1.0.2";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -55,11 +58,12 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         Log = Logger;
 
-        gameObject.AddComponent<TestValueManager>();
-
         // load assets and read config
         Modules.Assets.Initialize();
         Modules.Config.ReadConfig();
+        if (Modules.Config.Debug)
+            gameObject.AddComponent<TestValueManager>();
+
         Modules.Compat.Initialize();
         Modules.States.RegisterStates(); // register states for networking
         Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs

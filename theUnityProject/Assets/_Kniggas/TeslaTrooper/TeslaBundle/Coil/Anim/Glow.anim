@@ -22,7 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6084906
+        value: 0.5990566
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -31,7 +31,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.76666665
-        value: 0
+        value: 0.0518868
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -42,15 +42,15 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.r
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.90027595
+        value: 0.8997642
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -59,7 +59,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.76666665
-        value: 0.31132072
+        value: 0.1678979
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -70,8 +70,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.g
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
@@ -87,7 +87,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.76666665
-        value: 0.41509432
+        value: 0.2075472
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -98,8 +98,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.b
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
@@ -126,8 +126,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.a
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 30
@@ -138,31 +138,31 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 4251978128
+      path: 1686485801
       attribute: 1218664834
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4251978128
+      path: 1686485801
       attribute: 1487100290
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4251978128
+      path: 1686485801
       attribute: 1755535746
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4251978128
+      path: 1686485801
       attribute: 2023971202
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
     pptrCurveMapping: []
@@ -192,7 +192,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6084906
+        value: 0.5990566
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -201,7 +201,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.76666665
-        value: 0
+        value: 0.0518868
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -212,15 +212,15 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.r
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.90027595
+        value: 0.8997642
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -229,7 +229,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.76666665
-        value: 0.31132072
+        value: 0.1678979
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -240,8 +240,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.g
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
@@ -257,7 +257,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.76666665
-        value: 0.41509432
+        value: 0.2075472
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -268,8 +268,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.b
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
@@ -296,8 +296,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmColor.a
-    path: tower orb001
-    classID: 23
+    path: Tower_Orb
+    classID: 137
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

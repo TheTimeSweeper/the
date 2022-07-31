@@ -99,7 +99,7 @@ namespace Modules {
 
             bodyComponent.sprintingSpeedMultiplier = 1.45f;
 
-            bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
+            bodyComponent.bodyFlags = bodyInfo.bodyFlags;
             bodyComponent.rootMotionInMainState = false;
 
             bodyComponent.hullClassification = HullClassification.Human;
