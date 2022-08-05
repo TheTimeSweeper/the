@@ -9,6 +9,7 @@ using ModdedEntityStates.TeslaTrooper;
 using Modules.Characters;
 using R2API;
 using System.Runtime.CompilerServices;
+using Content;
 
 namespace Modules.Survivors
 {
@@ -128,6 +129,8 @@ namespace Modules.Survivors
 
         public override void InitializeHitboxes() {
             base.InitializeHitboxes();
+
+            Modules.Prefabs.SetupHitbox(bodyCharacterModel.gameObject, "PunchHitbox", "PunchHitbox");
         }
         
         protected override void InitializeSurvivor() {
@@ -180,6 +183,19 @@ namespace Modules.Survivors
             }
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
+
+            if (Config.Cursed) {
+                States.entityStates.Add(typeof(ZapPunch));
+                SkillDef primarySkillDefPunch = Modules.Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
+                                                                             TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
+                                                                             TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
+                                                                             Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                                             new EntityStates.SerializableEntityStateType(typeof(ZapPunch)),
+                                                                             "Weapon",
+                                                                             false));
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
+            }
+
         }
         
         private void InitializeSecondarySkills()
@@ -217,6 +233,8 @@ namespace Modules.Survivors
         private void InitializeUtilitySkills() {
 
             States.entityStates.Add(typeof(ShieldZapStart));
+            States.entityStates.Add(typeof(ShieldZapCollectDamage));
+            States.entityStates.Add(typeof(ShieldZapReleaseDamage));
             SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Utility_ShieldZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BARRIER_NAME",
@@ -405,7 +423,7 @@ namespace Modules.Survivors
             #region MasterySkin
 
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MASTERY_SKIN_NAME",
-                Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
+                Assets.LoadAsset<Sprite>("texTeslaSkinMastery"),
                 defaultRenderers,
                 model,
                 masterySkinUnlockableDef);

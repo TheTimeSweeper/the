@@ -364,30 +364,32 @@ namespace Modules {
             aimAnimator.inputBank = prefab.GetComponent<InputBankTest>();
         }
 
-        public static void SetupHitbox(GameObject prefab, Transform hitboxTransform, string hitboxName)
-        {
-            HitBoxGroup hitBoxGroup = prefab.AddComponent<HitBoxGroup>();
+        public static void SetupHitbox(GameObject modelPrefab, string groupName, params string[] hitboxChildNames) {
 
-            HitBox hitBox = hitboxTransform.gameObject.AddComponent<HitBox>();
-            hitboxTransform.gameObject.layer = LayerIndex.projectile.intVal;
+            ChildLocator childLocator = modelPrefab.GetComponent<ChildLocator>();
 
-            hitBoxGroup.hitBoxes = new HitBox[]
-            {
-                hitBox
-            };
+            Transform[] hitboxTransforms = new Transform[hitboxChildNames.Length];
+            for (int i = 0; i < hitboxChildNames.Length; i++) {
+                hitboxTransforms[i] = childLocator.FindChild(hitboxChildNames[i]);
 
-            hitBoxGroup.groupName = hitboxName;
+                if (hitboxTransforms[i] == null) {
+                    FacelessJoePlugin.Log.LogError("missing hitbox for " + hitboxChildNames[i]);
+                }
+            }
+            SetupHitbox(modelPrefab, groupName, hitboxTransforms);
         }
 
-        public static void SetupHitbox(GameObject prefab, string hitboxName, params Transform[] hitboxTransforms)
+        //backward compat
+        public static void SetupHitbox(GameObject modelPrefab, Transform hitboxTransform, string hitboxName) => SetupHitbox(modelPrefab, hitboxName, hitboxTransform);
+        public static void SetupHitbox(GameObject modelPrefab, string hitboxName, params Transform[] hitboxTransforms)
         {
-            HitBoxGroup hitBoxGroup = prefab.AddComponent<HitBoxGroup>();
+            HitBoxGroup hitBoxGroup = modelPrefab.AddComponent<HitBoxGroup>();
             List<HitBox> hitBoxes = new List<HitBox>();
 
-            foreach (Transform i in hitboxTransforms)
+            foreach (Transform hitboxTransform in hitboxTransforms)
             {
-                HitBox hitBox = i.gameObject.AddComponent<HitBox>();
-                i.gameObject.layer = LayerIndex.projectile.intVal;
+                HitBox hitBox = hitboxTransform.gameObject.AddComponent<HitBox>();
+                hitboxTransform.gameObject.layer = LayerIndex.projectile.intVal;
                 hitBoxes.Add(hitBox);
             }
 

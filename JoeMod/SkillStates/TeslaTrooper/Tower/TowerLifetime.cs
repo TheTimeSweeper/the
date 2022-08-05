@@ -6,11 +6,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public static float LifeDuration = 12;
         public static float skillsPlusSeconds = 0;
 
-        public override void OnEnter() {
-            base.OnEnter();
-            Helpers.LogWarning(skillsPlusSeconds);
-        }
-
         public override void FixedUpdate() {
             base.FixedUpdate();
 

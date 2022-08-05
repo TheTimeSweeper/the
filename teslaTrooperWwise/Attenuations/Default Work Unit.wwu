@@ -4,6 +4,9 @@
 		<WorkUnit Name="Default Work Unit" ID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}" PersistMode="Standalone">
 			<ChildrenList>
 				<Attenuation Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" ShortID="528486891">
+					<PropertyList>
+						<Property Name="RadiusMax" Type="Real64" Value="200"/>
+					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
 							<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
@@ -18,17 +21,17 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>14.73355</XPos>
+											<XPos>29.4671</XPos>
 											<YPos>0</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>40.43888</XPos>
+											<XPos>80.87776</XPos>
 											<YPos>-1.66046</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>100</XPos>
+											<XPos>200</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -58,7 +61,7 @@
 				</Attenuation>
 				<Attenuation Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" ShortID="534298689">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="300"/>
+						<Property Name="RadiusMax" Type="Real64" Value="200"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -74,12 +77,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>40</XPos>
+											<XPos>26.6666666666667</XPos>
 											<YPos>-0.5</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>300</XPos>
+											<XPos>200</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>

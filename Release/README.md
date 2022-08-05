@@ -5,6 +5,7 @@
   - Fully animated (but by me so y'know)
 - Fully multiplayer compatible
 - Mod Support
+  - Ancient Scepter
   - Skills++
   - Aetherium Item Displays
 - Y'all remember Red Alert 2?
@@ -24,6 +25,7 @@ Tesla Trooper is a mid-range bruiser on his own, and an all-range monster when h
 SkeletorChampion - Made the character model, which kicked off the mod. Without him, the mod wouldn't exist.  
 Violet Chaolan - wwise sound help  
 SweeperSecret - icons,  <3  
+Mr.Bones - Mastery skin  
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
@@ -40,6 +42,21 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+
+`1.1.0`
+- Added proper Mastery skin, complete with a unique tower
+  - *thanks Mr.Bones!*
+- Added Scepter Upgrade
+  - *but by accident I did exactly lysate cell, so I'm open to any better ideas*
+- Limited lysate cell to 1 additional tower, similar to engi
+  - *stacking simultaneous towers turned out way too strong for a green rarity item*  
+  - *truthfully it should be 0 but I want the opportunity for multiple towers in some capacity*  
+  - *unlimited stacking behavior can be reverted in config*
+- Fixed Utility's cooldown to start after the move is done
+- Fixed missing tower sounds in multiplayer
+- lowered sound distance so they don't dominate the battlefield
+  - *let me know if they're too quiet now*
+- Removed dependency on FixPluginTypesSerialization
 
 `1.0.2`
 - accidentally cranked up m1 distance way too high woops

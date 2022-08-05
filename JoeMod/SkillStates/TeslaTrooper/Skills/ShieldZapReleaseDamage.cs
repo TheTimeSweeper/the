@@ -20,10 +20,12 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
-        
-            characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
 
+            if (NetworkServer.active) {
+                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
+            }
             base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
+
         }
 
         protected override void OnCastEnter() {
@@ -110,14 +112,19 @@ namespace ModdedEntityStates.TeslaTrooper {
             #endregion effects
         }
 
+        public override void FixedUpdate() {
+            base.FixedUpdate();
+
+        }
         public override void OnExit() {
             base.OnExit();
 
-            aimRequest.Dispose();
+            if(aimRequest != null)
+                aimRequest.Dispose();
 
             TemporaryOverlay overlay = GetComponent<TemporaryOverlay>();
             if (overlay) {
-                Destroy(overlay);
+                UnityEngine.Object.DestroyImmediate(overlay);
             }
         }
 

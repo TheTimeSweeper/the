@@ -22,9 +22,14 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             base.InitDurationValues(BaseDuration, BaseStartCastTime);
 
             attackRadius = BaseAttackRadius * secondarySkillsPlusAreaMulti;
+        }
+        
+        protected override void OnCastEnter() {
 
             zapSound = towerZapSound;
             zapSoundCrit = towerZapSound;
+
+            base.OnCastEnter();
         }
 
         protected override void fireOrb() {
@@ -35,10 +40,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             lightningOrb.damageValue = 0;
             lightningOrb.damageType = DamageType.Silent;
             base.fireOrb();
-
+            
             bool crit = RollCrit();
-
-            Util.PlaySound(crit ? zapSound : zapSoundCrit, gameObject);
 
             if (NetworkServer.active) {
 

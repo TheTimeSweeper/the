@@ -24,6 +24,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: MatNodBlack
+    second: {fileID: 2100000, guid: 3b3823b6b2bfc9e42ab2dc92347bfedb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MatNodEmission
+    second: {fileID: 2100000, guid: 25d528dcc8fc6374cb9baa5ef8498979, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Redstone
     second: {fileID: 2100000, guid: 4ed8efed5e0267e40aacbb09abd3f0c5, type: 2}
   - first:

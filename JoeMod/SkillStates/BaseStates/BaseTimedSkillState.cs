@@ -31,12 +31,6 @@ namespace ModdedEntityStates.BaseStates
         {
             base.FixedUpdate();
 
-            if(!hasFired && fixedAge > castStartTime)
-            {
-                OnCastEnter();
-                hasFired = true;
-            }
-
             bool fireStarted = fixedAge >= castStartTime;
             bool fireEnded = fixedAge >= castEndTime;
             isFiring = false;
@@ -44,6 +38,10 @@ namespace ModdedEntityStates.BaseStates
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
             if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired))
             {
+                if (!hasFired) {
+                    OnCastEnter();
+                    hasFired = true;
+                }
                 isFiring = true;
                 OnCastFixedUpdate();
             }

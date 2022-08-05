@@ -117,8 +117,8 @@ namespace Modules.Survivors
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
 
-            //Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
-            //Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
+            Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
+            Modules.Prefabs.SetupHitbox(model, "Sword", hitboxTransform);
         }
 
         public override void InitializeSkills()

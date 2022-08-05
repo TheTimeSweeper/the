@@ -42,7 +42,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             bool tesla = GetComponent<TowerWeaponComponent>().hasTeslaCoil;
 
             lightningOrb = new LightningOrb {
-                origin = base.GetModelChildLocator().FindChild("Orb").position,
+                origin = base.FindModelChild("Orb").position,
                 damageValue = DamageCoefficient * damageStat,
                 isCrit = RollCrit(),
                 //bouncesRemaining = 1,
@@ -87,12 +87,10 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         //cast time is 1
         protected override void OnCastEnter() {
 
+            Util.PlaySound(lightningOrb.isCrit? zapSoundCrit : zapSound , gameObject);
+
             if (!NetworkServer.active)
                 return;
-
-            string sound = ZapSound;
-            if (lightningOrb.isCrit) sound = ZapSoundCrit;
-            Util.PlaySound(sound, gameObject);
 
             if (lightningTarget == null)
                 return;

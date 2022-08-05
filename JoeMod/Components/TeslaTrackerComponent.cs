@@ -28,7 +28,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
     //public float maxTrackingAngle = 15f;
     public float trackingRadius = 1f;
-    public float trackerUpdateFrequency = 16f;
+    public float trackerUpdateFrequency = 10f;
 
     private CharacterBody characterBody;
     private TeamComponent teamComponent;
@@ -43,6 +43,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private HurtBox _trackingTarget;
     private bool _targetingAlly;
     private bool _hasTowerNear;
+    private bool _empowered;
+    private bool _isMelee;
 
     void Awake() {
         indicator = new TeslaIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);
@@ -54,6 +56,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
         characterBody = base.GetComponent<CharacterBody>();
         inputBank = base.GetComponent<InputBankTest>();
         teamComponent = base.GetComponent<TeamComponent>();
+
+        _isMelee = characterBody.skillLocator.primary.skillDef.skillNameToken == TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_PUNCH_NAME";
     }
 
     #region access
@@ -104,6 +108,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
     public void SetIndicatorEmpowered(bool empowered) {
         indicator.empowered = empowered;
+        _empowered = empowered;
     }
 
     private void setIndicatorRange(RangeTier tier) {
@@ -127,6 +132,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
     #endregion indicator
 
     private void FixedUpdate() {
+
+        indicator.active = !(_isMelee && !_empowered);
 
         trackerUpdateStopwatch += Time.fixedDeltaTime;
         if (trackerUpdateStopwatch >= 1f / trackerUpdateFrequency) {
@@ -174,7 +181,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
     private void setIsTargetingTeammate() {
         bool team = false;
         if (_trackingTarget) {
-            team = _trackingTarget.teamIndex == teamComponent.teamIndex;
+            team = !FriendlyFireManager.ShouldDirectHitProceed(_trackingTarget.healthComponent, teamComponent.teamIndex);// _trackingTarget.teamIndex == teamComponent.teamIndex;
         }
 
         _targetingAlly = team;

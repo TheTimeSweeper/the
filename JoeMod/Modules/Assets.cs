@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using RoR2.UI;
 using System;
 using System.Linq;
+using RoR2.Projectile;
 
 namespace Modules {
     internal static class Assets
@@ -47,6 +48,9 @@ namespace Modules {
         public static GameObject TeslaCoilBlueprint;
 
         public static GameObject TeslaIndicatorPrefab;
+
+        public static GameObject TeslaLoaderZapConeProjectile;
+        public static GameObject TeslaZapConeEffect;
 
         public static Material ChainLightningMaterial;
         #endregion
@@ -131,51 +135,54 @@ namespace Modules {
 
             TeslaIndicatorPrefab = CreateTeslaTrackingIndicator();
 
-            ChainLightningMaterial = findChainLightningMaterial();
+            ChainLightningMaterial = FindChainLightningMaterial();
 
-            //uhHelp();
+            TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
 
             //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
         }
 
-        private static Material findChainLightningMaterial() {
-            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").GetComponentInChildren<LineRenderer>().material;
+        private static GameObject CreateZapConeProjectile() {
+            GameObject zapConeProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/LoaderZapCone"), "TeslaLoaderZapCone");
+            
+            ProjectileProximityBeamController beamController = zapConeProjectile.GetComponent<ProjectileProximityBeamController>();
+            beamController.attackFireCount = ModdedEntityStates.TeslaTrooper.ZapPunch.OrbCasts;
+            beamController.attackRange = ModdedEntityStates.TeslaTrooper.ZapPunch.OrbDistance;
+            beamController.maxAngleFilter = 50;
+            beamController.procCoefficient = ModdedEntityStates.TeslaTrooper.ZapPunch.ProcCoefficient;
+            beamController.damageCoefficient = ModdedEntityStates.TeslaTrooper.ZapPunch.OrbDamageCoefficient;
+            beamController.lightningType = RoR2.Orbs.LightningOrb.LightningType.MageLightning;
+
+            UnityEngine.Object.DestroyImmediate(zapConeProjectile.transform.Find("Effect").GetComponent<ShakeEmitter>());
+
+            TeslaZapConeEffect = CreateTeslaZapConeEffect(zapConeProjectile);
+
+            UnityEngine.Object.Destroy(zapConeProjectile.transform.Find("Effect/Distortion, 3D").gameObject);
+            UnityEngine.Object.Destroy(zapConeProjectile.transform.Find("Effect/RadialMesh").gameObject);
+            UnityEngine.Object.Destroy(zapConeProjectile.transform.Find("Effect/Flash").gameObject);
+
+            return zapConeProjectile;
         }
 
-        static Queue<Transform> transformQueue = new Queue<Transform>();
-        static List<Transform> loosestChildren = new List<Transform>();
-        private static void uhHelp() {
-            Transform lightningOrbTransform = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").transform;
+        private static GameObject CreateTeslaZapConeEffect(GameObject zapConeProjectile) {
+            GameObject zapConeEffect = PrefabAPI.InstantiateClone(zapConeProjectile.transform.Find("Effect").gameObject, "TeslaPunchConeEffect", false);
+            zapConeEffect.SetActive(true);
 
-            transformQueue.Enqueue(lightningOrbTransform);
+            UnityEngine.Object.Destroy(zapConeEffect.transform.Find("Sparks, Single").gameObject);
+            UnityEngine.Object.Destroy(zapConeEffect.transform.Find("Lines").gameObject);
+            UnityEngine.Object.Destroy(zapConeEffect.transform.Find("Point Light").gameObject);
+            UnityEngine.Object.Destroy(zapConeEffect.transform.Find("Impact Shockwave").gameObject);
 
-            while(transformQueue.Count > 0) {
+            ParticleSystem shockwaveParticle = zapConeEffect.transform.Find("RadialMesh").GetComponent<ParticleSystem>();
+            ParticleSystem.MainModule mainModule = shockwaveParticle.main;
+            mainModule.startSpeed = 0.5f;
+            zapConeEffect.transform.Find("RadialMesh").localScale = new Vector3( 0.5f, 0.5f, 1);
 
-                Transform nextTransform = transformQueue.Dequeue();
+            shockwaveParticle.GetComponent<ParticleSystemRenderer>().material.color = Color.cyan;
 
-                if(nextTransform.childCount == 0) {
-                    loosestChildren.Add(nextTransform);
-                }
+            CreateEffectFromObject(zapConeEffect, "", false);
 
-                for (int i = 0; i < nextTransform.childCount; i++) {
-                    transformQueue.Enqueue(nextTransform.GetChild(i));
-                }
-            }
-
-            for (int i = 0; i < loosestChildren.Count; i++) {
-                Debug.LogWarning(loosestChildren[i].gameObject.GetFullName());
-                //it's just "ChainLightningOrbEffect/Bezier"
-            }
-        }
-
-        public static string GetFullName(this GameObject go) {
-            string name = go.name;
-            while (go.transform.parent != null) {
-
-                go = go.transform.parent.gameObject;
-                name = go.name + "/" + name;
-            }
-            return name;
+            return zapConeEffect;
         }
 
         private static GameObject CreateTeslaTrackingIndicator() {
@@ -228,6 +235,10 @@ namespace Modules {
             }
 
             return loadedAss;
+        }
+
+        private static Material FindChainLightningMaterial() {
+            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").GetComponentInChildren<LineRenderer>().material;
         }
 
         public static GameObject LoadSurvivorModel(string modelName) {
@@ -339,44 +350,35 @@ namespace Modules {
             return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
         }
 
-        private static GameObject LoadEffect(string resourceName)
-        {
-            return LoadEffect(resourceName, "", false);
-        }
-
-        private static GameObject LoadEffect(string resourceName, string soundName)
-        {
-            return LoadEffect(resourceName, soundName, false);
-        }
-
-        private static GameObject LoadEffect(string resourceName, bool parentToTransform)
-        {
-            return LoadEffect(resourceName, "", parentToTransform);
-        }
-
-        private static GameObject LoadEffect(string resourceName, string soundName, bool parentToTransform)
-        {
+        private static GameObject LoadEffect(string resourceName) => LoadEffect(resourceName, "", false);
+        private static GameObject LoadEffect(string resourceName, string soundName) => LoadEffect(resourceName, soundName, false);
+        private static GameObject LoadEffect(string resourceName, bool parentToTransform) => LoadEffect(resourceName, "", parentToTransform);
+        private static GameObject LoadEffect(string resourceName, string soundName, bool parentToTransform) {
             bool assetExists = false;
-            for (int i = 0; i < assetNames.Length; i++)
-            {
-                if (assetNames[i].Contains(resourceName.ToLowerInvariant()))
-                {
+            for (int i = 0; i < assetNames.Length; i++) {
+                if (assetNames[i].Contains(resourceName.ToLowerInvariant())) {
                     assetExists = true;
-                    i = assetNames.Length;
+                    break;
                 }
             }
 
-            if (!assetExists)
-            {
+            if (!assetExists) {
                 Debug.LogError("Failed to load effect: " + resourceName + " because it does not exist in the AssetBundle");
                 return null;
             }
 
             GameObject newEffect = LoadAsset<GameObject>(resourceName);
+            CreateEffectFromObject(newEffect, soundName, parentToTransform);
 
-            newEffect.AddComponent<DestroyOnTimer>().duration = 12;
+            return newEffect;
+        }
+
+        private static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform) {
+            newEffect.AddComponent<DestroyOnTimer>().duration = 6;
             newEffect.AddComponent<NetworkIdentity>();
-            newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+            if (!newEffect.GetComponent<VFXAttributes>()) {
+                newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+            }
 
             EffectComponent effect = newEffect.GetComponent<EffectComponent>();
             if (!effect) effect = newEffect.AddComponent<EffectComponent>();
@@ -387,8 +389,6 @@ namespace Modules {
             effect.soundName = soundName;
 
             AddNewEffectDef(newEffect, soundName);
-
-            return newEffect;
         }
 
         private static void AddNewEffectDef(GameObject effectPrefab)

@@ -18,16 +18,15 @@ namespace ModdedEntityStates.TeslaTrooper.Tower
 
             characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
-            TeslaTowerControllerController controller = characterBody.master.minionOwnership?.ownerMaster.GetBodyObject()?.GetComponent<TeslaTowerControllerController>();
+            TeslaTowerControllerController towerController = characterBody.master.minionOwnership?.ownerMaster.GetBodyObject()?.GetComponent<TeslaTowerControllerController>();
 
-            if (controller) {
-                controller.addTower(gameObject);
+            if (towerController) {
+                towerController.addTower(gameObject);
 
                 characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
-                    controller.removeTower(gameObject);
+                    towerController.removeTower(gameObject);
                 });
             }
-
         }
 
         public override void FixedUpdate() {

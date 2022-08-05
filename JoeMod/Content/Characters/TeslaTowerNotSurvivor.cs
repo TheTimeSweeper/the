@@ -39,8 +39,8 @@ namespace Modules.Survivors {
             
             //todo camera stuck in tower when you play as it
             aimOriginPosition = new Vector3( 0, 10, 0),
-            cameraPivotPosition = new Vector3(0, 9, 0),
-            cameraParamsVerticalOffset = 20,
+            cameraPivotPosition = new Vector3(0, 5, 0),
+            cameraParamsVerticalOffset = 10,
             cameraParamsDepth= -20
         };
 
@@ -52,8 +52,9 @@ namespace Modules.Survivors {
         public override ItemDisplaysBase itemDisplays => Modules.Config.TowerItemDisplays ? new TeslaTowerItemDisplays() : null;
 
         public static GameObject masterPrefab;
-        internal static SkinDef.MinionSkinReplacement MCMinionSkinReplacement;
         internal static SkinDef.MinionSkinReplacement MasteryMinionSkinReplacement;
+        internal static SkinDef.MinionSkinReplacement MCMinionSkinReplacement;
+        internal static SkinDef.MinionSkinReplacement NodMinionSkinReplacement;
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
@@ -171,9 +172,16 @@ namespace Modules.Survivors {
             List<SkinDef> skins = new List<SkinDef>();
 
             List<GameObject> activatedGameObjects = Skins.createAllActivatedGameObjectsList(childLocator,
+                "Tower_Base_Pillars_Color",
+                "Tower_Base_Platform",
+                "Tower_Base_Center",
                 "Tower_Base_Tubes",
+                 
+                "Tower_Circles",//4
+                "Tower_Pole",
                 "Tower_Pole_Tracer",
-                "Tower_Emission");
+                "Tower_Emission",
+                "Tower_Orb");
 
             #region DefaultSkin
 
@@ -182,7 +190,16 @@ namespace Modules.Survivors {
                 defaultRenderers,
                 model);
 
-            defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 0, 1);
+            defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
+                0, 
+                1,
+                2,
+                3, 
+                4, 
+                5, 
+                6, 
+                //7,
+                8);
 
             skins.Add(defaultSkin);
             #endregion
@@ -194,7 +211,16 @@ namespace Modules.Survivors {
                 defaultRenderers,
                 model);
 
-            masterySkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 2);
+            masterySkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
+                0,
+                1,
+                2,
+                //3,
+                4,
+                5,
+                //6,
+                7,
+                8);
 
             masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "Mastery_Base_Pillars_Color",
@@ -234,7 +260,17 @@ namespace Modules.Survivors {
                 defaultRenderers,
                 model);
 
-            MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
+            MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
+                0,
+                1,
+                2,
+                //3,
+                4,
+                5,
+                6,
+                7,
+                //8,
+                9);
 
             MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "MC_Base_Pillars_Colors",
@@ -263,6 +299,55 @@ namespace Modules.Survivors {
             MCMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
                 minionBodyPrefab = bodyPrefab,
                 minionSkin = MCSkin,
+            };
+
+            #endregion
+
+            #region nod
+
+            SkinDef NodSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "NOD_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
+                defaultRenderers,
+                model);
+
+            NodSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
+                //0,
+                //1,
+                2,
+                3,
+                //4,
+                //5,
+                //6,
+                7);
+                //8);
+
+            NodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                null,//"Nod_Base_Pillars_Colors",
+                null,//"Nod_Base_Platform",
+                "Nod_Base_Center",
+                "Nod_Base_Tubes",
+
+                null,//"Nod_Circles",
+                null,//"Nod_Pole",
+                null,//"Nod_Pole_Tracer",
+                "Nod_Emission",
+                null);//"Nod_Orb");
+
+            //NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRedstone");
+            //NodSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
+            NodSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
+
+            //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
+            //NodSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            //NodSkin.rendererInfos[6].defaultMaterial = Modules.Materials.CreateHotpooMaterial("WHITE");
+            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("WHITE");
+            //NodSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
+
+            skins.Add(NodSkin);
+            NodMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
+                minionBodyPrefab = bodyPrefab,
+                minionSkin = NodSkin,
             };
 
             #endregion

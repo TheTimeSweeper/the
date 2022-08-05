@@ -2,6 +2,7 @@
 using RoR2;
 using RoR2.Audio;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -18,10 +19,12 @@ namespace ModdedEntityStates.BaseStates
         protected float procCoefficient = 1f;
         protected float pushForce = 300f;
         protected Vector3 bonusForce = Vector3.zero;
+
         protected float baseDuration = 1f;
         protected float attackStartTime = 0.2f;
         protected float attackEndTime = 0.4f;
         protected float baseEarlyExitTime = 0.4f;
+
         protected float hitStopDuration = 0.012f;
         protected float attackRecoil = 0.75f;
         protected float hitHopVelocity = 4f;
@@ -31,6 +34,7 @@ namespace ModdedEntityStates.BaseStates
         protected string swingSoundString = "";
         protected string hitSoundString = "";
         protected string muzzleString = "SwingCenter";
+        protected string hitstopAnimationParameter;
         protected GameObject swingEffectPrefab;
         protected GameObject hitEffectPrefab;
         protected NetworkSoundEventIndex impactSound;
@@ -46,17 +50,19 @@ namespace ModdedEntityStates.BaseStates
         protected Animator animator;
         private BaseState.HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
+        protected bool rolledCrit;
 
         public override void OnEnter()
         {
             base.OnEnter();
             this.duration = this.baseDuration / this.attackSpeedStat;
-            this.earlyExitTime = this.baseEarlyExitTime / this.attackSpeedStat;
+            this.earlyExitTime = this.baseEarlyExitTime  * this.duration;
             this.hasFired = false;
             this.animator = base.GetModelAnimator();
             base.StartAimMode(0.5f + this.duration, false);
             base.characterBody.outOfCombatStopwatch = 0f;
             this.animator.SetBool("attacking", true);
+            this.rolledCrit = base.RollCrit();
 
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
@@ -65,6 +71,7 @@ namespace ModdedEntityStates.BaseStates
             {
                 hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
             }
+
 
             this.PlayAttackAnimation();
 
@@ -79,7 +86,7 @@ namespace ModdedEntityStates.BaseStates
             this.attack.forceVector = this.bonusForce;
             this.attack.pushAwayForce = this.pushForce;
             this.attack.hitBoxGroup = hitBoxGroup;
-            this.attack.isCrit = base.RollCrit();
+            this.attack.isCrit = rolledCrit;
             this.attack.impactSound = this.impactSound;
         }
 
@@ -90,8 +97,6 @@ namespace ModdedEntityStates.BaseStates
 
         public override void OnExit()
         {
-            if (!this.hasFired && !this.cancelled) this.FireAttack();
-
             base.OnExit();
 
             this.animator.SetBool("attacking", false);
@@ -100,9 +105,17 @@ namespace ModdedEntityStates.BaseStates
         protected virtual void PlaySwingEffect()
         {
             EffectManager.SimpleMuzzleFlash(this.swingEffectPrefab, base.gameObject, this.muzzleString, true);
+            
+            //Transform MuzzleTransform = FindModelChild(muzzleString);
+            //EffectData effectData = new EffectData {
+            //    origin = MuzzleTransform.position,
+            //    rotation = MuzzleTransform.rotation,
+            //};
+            //EffectManager.SpawnEffect(this.swingEffectPrefab, effectData, true);
         }
 
-        protected virtual void OnHitEnemyAuthority()
+        protected virtual void OnHitEnemyAuthority() => OnHitEnemyAuthority(null);
+        protected virtual void OnHitEnemyAuthority(List<HurtBox> hits)
         {
             Util.PlaySound(this.hitSoundString, base.gameObject);
 
@@ -119,13 +132,13 @@ namespace ModdedEntityStates.BaseStates
             if (!this.inHitPause && this.hitStopDuration > 0f)
             {
                 this.storedVelocity = base.characterMotor.velocity;
-                this.hitStopCachedState = base.CreateHitStopCachedState(base.characterMotor, this.animator, "Slash.playbackRate");
+                this.hitStopCachedState = base.CreateHitStopCachedState(base.characterMotor, this.animator, this.hitstopAnimationParameter);
                 this.hitPauseTimer = this.hitStopDuration / this.attackSpeedStat;
                 this.inHitPause = true;
             }
         }
 
-        private void FireAttack()
+        protected virtual void FireAttack()
         {
             if (!this.hasFired)
             {
@@ -139,8 +152,8 @@ namespace ModdedEntityStates.BaseStates
                 }
             }
 
-            if (base.isAuthority)
-            {
+            if (base.isAuthority) {
+
                 if (this.attack.Fire())
                 {
                     this.OnHitEnemyAuthority();
@@ -164,62 +177,69 @@ namespace ModdedEntityStates.BaseStates
         {
             base.FixedUpdate();
 
-            //this.hitPauseTimer -= Time.fixedDeltaTime;
+            this.hitPauseTimer -= Time.fixedDeltaTime;
 
-            //if (this.hitPauseTimer <= 0f && this.inHitPause)
-            //{
-            //    base.ConsumeHitStopCachedState(this.hitStopCachedState, base.characterMotor, this.animator);
-            //    this.inHitPause = false;
-            //    base.characterMotor.velocity = this.storedVelocity;
-            //}
+            if (this.hitPauseTimer <= 0f && this.inHitPause)
+            {
+                base.ConsumeHitStopCachedState(this.hitStopCachedState, base.characterMotor, this.animator);
+                this.inHitPause = false;
+                base.characterMotor.velocity = this.storedVelocity;
+            }
 
-            //if (!this.inHitPause)
-            //{
-            //    this.stopwatch += Time.fixedDeltaTime;
-            //}
-            //else
-            //{
-            //    if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
-            //    if (this.animator) this.animator.SetFloat("Swing.playbackRate", 0f);
-            //}
+            if (!this.inHitPause)
+            {
+                this.stopwatch += Time.fixedDeltaTime;
+            }
+            else
+            {
+                if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
+                if (this.animator) this.animator.SetFloat("Swing.playbackRate", 0f);
+            }
 
-            //if (this.stopwatch >= (this.duration * this.attackStartTime) && this.stopwatch <= (this.duration * this.attackEndTime))
-            //{
-            //    this.FireAttack();
-            //}
 
-            //if (this.stopwatch >= (this.earlyExitTime) && base.isAuthority)
+            bool fireStarted = stopwatch >= this.duration * attackStartTime;
+            bool fireEnded = stopwatch >= this.duration * attackEndTime;
+
+            //to guarantee attack comes out if at high attack speed the stopwatch skips past the firing duration between frames
+            if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired)) {
+
+                if (!hasFired) {
+                    OnFireAttackEnter();
+                }
+
+                FireAttack();
+            }
+
+            //if (this.stopwatch >= this.earlyExitTime && base.isAuthority)
             //{
-            //    if (keypress? base.inputBank.skill1.justPressed : base.inputBank.skill1.down)
+            //    if (base.inputBank.skill1.down)
             //    {
-            //        if (!this.hasFired) this.FireAttack();
             //        this.SetNextState();
             //        return;
             //    }
             //}
 
-            //if (this.stopwatch >= this.duration && base.isAuthority)
-            //{
-            //    this.outer.SetNextStateToMain();
-            //    return;
-            //}
+            if (this.stopwatch >= this.duration && base.isAuthority)
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
         }
 
-        //public override InterruptPriority GetMinimumInterruptPriority()
-        //{
-        //    return InterruptPriority.Skill;
-        //}
+        protected virtual void OnFireAttackEnter() { }
 
-        //public override void OnSerialize(NetworkWriter writer)
-        //{
-        //    base.OnSerialize(writer);
-        //    writer.Write(this.swingIndex);
-        //}
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            return fixedAge > earlyExitTime? InterruptPriority.Any: InterruptPriority.Skill;
+        }
 
-        //public override void OnDeserialize(NetworkReader reader)
-        //{
-        //    base.OnDeserialize(reader);
-        //    this.swingIndex = reader.ReadInt32();
-        //}
+        public override void OnSerialize(NetworkWriter writer) {
+            base.OnSerialize(writer);
+            writer.Write(this.swingIndex);
+        }
+
+        public override void OnDeserialize(NetworkReader reader) {
+            base.OnDeserialize(reader);
+            this.swingIndex = reader.ReadInt32();
+        }
     }
 }

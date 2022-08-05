@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using Content;
+using EntityStates;
 using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
 using R2API;
 using RoR2;
@@ -8,8 +9,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.TeslaTrooper
-{
+namespace ModdedEntityStates.TeslaTrooper {
+
     public class Zap : BaseTimedSkillState
     {
         #region Gameplay Values
@@ -22,8 +23,6 @@ namespace ModdedEntityStates.TeslaTrooper
         public static float BaseDuration = 1f;
         public static float BaseCastTime = 0.05f;
         #endregion
-
-        private float shotSpread = 3;
 
         public int skillsPlusCasts = 0;
 
@@ -147,7 +146,7 @@ namespace ModdedEntityStates.TeslaTrooper
 
         private LightningOrb createOrb() {
             return new LightningOrb {
-                origin = transform.position,
+                origin = GetOrbOrigin,
                 damageValue = DamageCoefficient * damageStat,
                 isCrit = _crit,
                 bouncesRemaining = 1,
@@ -157,16 +156,16 @@ namespace ModdedEntityStates.TeslaTrooper
                 attacker = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = _bouncedObjectsList,
-                lightningType = LightningOrb.LightningType.Ukulele,
+                lightningType = GetOrbType,
                 damageColorIndex = DamageColorIndex.Default,
                 range = BounceDistance,
                 speed = 690,
+                target = _targetHurtbox
             };
         } 
 
         protected override void OnCastEnter()
         {
-            base.OnCastEnter();
             if (_targetHurtbox)
             {
                 PlayZap();
@@ -175,9 +174,8 @@ namespace ModdedEntityStates.TeslaTrooper
 
         protected override void OnCastFixedUpdate()
         {
-            base.OnCastFixedUpdate();
-            
             if (NetworkServer.active && _targetHurtbox) {
+
                 while (_currentCasts < totalOrbCasts && fixedAge > nextCastTime) {
                     FireZap();
                     _currentCasts++;
@@ -187,16 +185,16 @@ namespace ModdedEntityStates.TeslaTrooper
 
         private void FireZap() {
 
+            if (_attackingTeammate) {
+                FireZapTeammate();
+                return;
+            }
+
             LightningOrb _lightningOrb = createOrb();
-            _lightningOrb.origin = GetOrbOrigin;
-            _lightningOrb.lightningType = GetOrbType;
-            _lightningOrb.target = _targetHurtbox;
 
             if (FacelessJoePlugin.conductiveMechanic) {
                 _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
             }
-
-            ModifyTeamLightningOrb(_lightningOrb);
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing each orb to apply to their bounces only
             _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
@@ -204,6 +202,17 @@ namespace ModdedEntityStates.TeslaTrooper
             base.characterBody.AddSpreadBloom(0.32f);
         }
 
+        private void FireZapTeammate() {
+
+            HarmlessBuffOrb orb = new HarmlessBuffOrb { 
+                buffToApply = Modules.Buffs.conductiveBuffTeam 
+            };
+            OrbManager.instance.AddOrb(orb);
+
+            _currentCasts = totalOrbCasts;
+        }
+
+        //friendly fire scrapped
         private void ModifyTeamLightningOrb(LightningOrb lightningOrb) {
             if (_attackingTeammate) {
                 //lightningOrb.range = BounceDistance * 2;

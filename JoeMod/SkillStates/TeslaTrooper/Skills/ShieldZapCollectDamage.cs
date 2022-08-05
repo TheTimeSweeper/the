@@ -18,8 +18,10 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public override void OnEnter() {
             base.OnEnter();
+            Helpers.LogWarning(EntityStateMachine.FindByCustomName(gameObject, "Weapon"));
 
             EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new ShieldZapStart());
+            Helpers.LogWarning("set state");
 
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
@@ -28,6 +30,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
 
+            Helpers.LogWarning("onenter " + base.characterBody.HasBuff(Modules.Buffs.zapShieldBuff));
             if (!base.characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
                 CharacterModel component = base.GetModelTransform().GetComponent<CharacterModel>();
 
@@ -47,8 +50,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void FixedUpdate() {
             base.FixedUpdate();
 
-            //todo does hasbuff only work on server?
-            if(!characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
+            //UGLY HACK: client takes a sec to realize host has given the body a buff up in onEnter
+            if (fixedAge > 1 && !characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
                 ShieldZapReleaseDamage newNextState = new ShieldZapReleaseDamage() {
                     aimRequest = this.aimRequest,
                     collectedDamage = blockedDamage,
@@ -63,7 +66,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.OnExit();
 
             if (!completed) {
-                aimRequest.Dispose();
+                if (aimRequest != null)
+                    aimRequest.Dispose();
             }
         }
     }

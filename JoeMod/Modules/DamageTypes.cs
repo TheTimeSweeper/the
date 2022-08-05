@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Modules {
     internal static class DamageTypes {
 
-        public static float stunTime = 2.5f;
+        public static float stunLongTime = 2.5f;
         public static float shockTimeMed = 2.5f;
         public static float shockTimeShort = 1f;
 
@@ -47,7 +47,7 @@ namespace Modules {
             if (!victim.isInFrozenState) {
 
                 if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(stunLong)) {
-                    self.SetStun(stunTime);
+                    self.SetStun(stunLongTime);
                     return;
                 }
 
@@ -65,5 +65,7 @@ namespace Modules {
                 }
             }
         }
+
+
     }
 }
