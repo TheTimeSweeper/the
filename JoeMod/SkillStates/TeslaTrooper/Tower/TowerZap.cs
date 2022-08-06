@@ -4,6 +4,7 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using JoeMod;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
 
@@ -41,7 +42,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
             bool tesla = GetComponent<TowerWeaponComponent>().hasTeslaCoil;
 
-            lightningOrb = new LightningOrb {
+            lightningOrb = new PseudoLightningOrb {
                 origin = base.FindModelChild("Orb").position,
                 damageValue = DamageCoefficient * damageStat,
                 isCrit = RollCrit(),

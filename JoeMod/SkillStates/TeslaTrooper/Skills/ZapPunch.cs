@@ -20,9 +20,11 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float OrbDistance = 20;
 
         public static float DeflectRadius = 6f;
+
+        float animationDuration = 0.46f;
         #endregion
 
-        public static NetworkSoundEventDef loaderZapFistSoundEvent = RoR2.LegacyResourcesAPI.Load<NetworkSoundEventDef>("EntityStateConfigurations/EntityStates.Loader.SwingZapFist");
+        public static NetworkSoundEventDef loaderZapFistSoundEvent = RoR2.LegacyResourcesAPI.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseLoaderM1Impact");
 
         private Transform deflectMuzzleTransform;
         private float deflectEndTime;
@@ -32,12 +34,13 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.hitboxName = "PunchHitbox";
             base.damageCoefficient = DamageCoefficient;
             base.procCoefficient = ProcCoefficient;
+            base.pushForce = 1000f;
 
             base.baseDuration = 1.0f;
-            base.attackStartTime = 0.42f;
-            base.attackEndTime = 0.71f;
+            base.attackStartTime = 0.42f * animationDuration;
+            base.attackEndTime = 0.71f * animationDuration;
             base.baseEarlyExitTime = 0.8f;
-            this.deflectEndTime = 0.55f;
+            this.deflectEndTime = 0.55f * animationDuration;
 
             base.hitStopDuration = 0.12f;
             base.swingSoundString = "";
@@ -45,22 +48,22 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.muzzleString = "PunchHitboxAnchor"; // swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             base.hitstopAnimationParameter = "Shock.playbackRate";
             base.swingEffectPrefab = Modules.Assets.TeslaZapConeEffect;
-            base.hitEffectPrefab = null; // Modules.Assets.swordHitImpactEffect;
+            base.hitEffectPrefab = Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloader"); // Modules.Assets.swordHitImpactEffect;
 
             deflectMuzzleTransform = FindModelChild("PunchHitbox");
 
-            //base.impactSound = loaderZapFistSoundEvent.index;
+            base.impactSound = RoR2.Audio.NetworkSoundEventIndex.Invalid;
             base.OnEnter();
         }
         
         protected override void PlayAttackAnimation() {
-            base.PlayAnimation("Gesture, Override", "ShockPunch", "Punch.playbackRate", duration);
+            base.PlayAnimation("Gesture, Override", "ShockPunch", "Punch.playbackRate", duration* animationDuration);
         }
 
         protected override void OnFireAttackEnter() {
 
             Vector3 direction = GetAimRay().direction;
-            direction.y = Mathf.Max(direction.y, 0);
+            direction.y = Mathf.Max(direction.y, direction.y * 0.5f);
             FindModelChild("PunchHitboxAnchor").rotation = Util.QuaternionSafeLookRotation(direction);
 
             if (base.FindModelChild(base.muzzleString)) {
@@ -100,10 +103,10 @@ namespace ModdedEntityStates.TeslaTrooper {
 
                     FireProjectileInfo info = new FireProjectileInfo() {
                         projectilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MageLightningboltBasic"),
-                        position = deflectMuzzleTransform.position + dist * 0.5f,
+                        position = deflectMuzzleTransform.position + dist * 0.3f,
                         rotation = deflectMuzzleTransform.rotation,
                         owner = base.characterBody.gameObject,
-                        damage = base.characterBody.damage * 10f,
+                        damage = base.characterBody.damage * 2f,
                         force = 200f,
                         crit = rolledCrit,
                         damageColorIndex = DamageColorIndex.Default,
@@ -112,6 +115,12 @@ namespace ModdedEntityStates.TeslaTrooper {
                         fuseOverride = -1f
                     };
                     ProjectileManager.instance.FireProjectile(info);
+
+                    EffectManager.SimpleEffect(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+                                               projectileController.gameObject.transform.position,
+                                               Quaternion.identity,
+                                               true);
+                    ApplyHitstop();
 
                     EntityState.Destroy(projectileController.gameObject);
                 }

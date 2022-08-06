@@ -57,7 +57,14 @@ public class TeslaTrackerComponent : MonoBehaviour {
         inputBank = base.GetComponent<InputBankTest>();
         teamComponent = base.GetComponent<TeamComponent>();
 
-        _isMelee = characterBody.skillLocator.primary.skillDef.skillNameToken == TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_PUNCH_NAME";
+        characterBody.skillLocator.primary.onSkillChanged += Primary_onSkillChanged;
+
+        Primary_onSkillChanged(characterBody.skillLocator.primary);
+    }
+
+    private void Primary_onSkillChanged(GenericSkill genericSkill) {
+
+        _isMelee = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_PUNCH_NAME";
     }
 
     #region access

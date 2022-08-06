@@ -115,22 +115,23 @@ namespace ModdedEntityStates.BaseStates
         }
 
         protected virtual void OnHitEnemyAuthority() => OnHitEnemyAuthority(null);
-        protected virtual void OnHitEnemyAuthority(List<HurtBox> hits)
-        {
+        protected virtual void OnHitEnemyAuthority(List<HurtBox> hits) {
             Util.PlaySound(this.hitSoundString, base.gameObject);
 
-            if (!this.hasHopped)
-            {
-                if (base.characterMotor && !base.characterMotor.isGrounded && this.hitHopVelocity > 0f)
-                {
+            if (!this.hasHopped) {
+                if (base.characterMotor && !base.characterMotor.isGrounded && this.hitHopVelocity > 0f) {
                     base.SmallHop(base.characterMotor, this.hitHopVelocity);
                 }
 
                 this.hasHopped = true;
             }
 
-            if (!this.inHitPause && this.hitStopDuration > 0f)
-            {
+            ApplyHitstop();
+        }
+
+        protected void ApplyHitstop() {
+
+            if (!this.inHitPause && this.hitStopDuration > 0f) {
                 this.storedVelocity = base.characterMotor.velocity;
                 this.hitStopCachedState = base.CreateHitStopCachedState(base.characterMotor, this.animator, this.hitstopAnimationParameter);
                 this.hitPauseTimer = this.hitStopDuration / this.attackSpeedStat;

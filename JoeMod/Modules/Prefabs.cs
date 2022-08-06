@@ -7,7 +7,6 @@ using Modules.Characters;
 namespace Modules {
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to
-    // oh boy do I need to
 
     internal static class Prefabs
     {

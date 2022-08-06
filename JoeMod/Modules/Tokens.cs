@@ -150,7 +150,7 @@ namespace Modules
 
 
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Fist");
-            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DamageCoefficient)} and hopefully be worth sacrificing range");
+            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.OrbDamageCoefficient)}. Punching projectiles sends them back, electrically charged");
 
             #endregion
 

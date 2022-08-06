@@ -1,4 +1,4 @@
-﻿using Content;
+﻿using JoeMod;
 using EntityStates;
 using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
 using R2API;
@@ -34,10 +34,10 @@ namespace ModdedEntityStates.TeslaTrooper {
         private HurtBox _targetHurtbox;
         private bool _attackingTeammate;
         
-        private float _baseCastInterval = 0.05f;
+        private float _baseCastInterval = 0.00f;
 
         private Transform _muzzleTransform;
-        private float _originSpacing = 0.18f;
+        private float _originSpacing = 0.22f;
         
         private int _currentCasts;
         
@@ -58,7 +58,6 @@ namespace ModdedEntityStates.TeslaTrooper {
                 }
                 else
                 {
-
                     return _muzzleTransform.position + (_muzzleTransform.right + _muzzleTransform.up - _muzzleTransform.forward) * (_originSpacing * (_currentCasts));
                 }
             }
@@ -108,12 +107,12 @@ namespace ModdedEntityStates.TeslaTrooper {
             //base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
 
             //todo: ishandout causing old sniper animation issues
-            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.1f);
+            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.05f);
             GetModelAnimator().SetBool("isHandOut", true);
             if (isAuthority) {
                 if (_tracker) {
                     _targetHurtbox = _tracker.GetTrackingTarget();
-
+                    
                     switch (_tracker.GetTrackingTargetDistance()) {
                         default:
                         case TeslaTrackerComponent.RangeTier.FURTHEST:
@@ -144,8 +143,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             GetModelAnimator().SetBool("isHandOut", false);
         }
 
-        private LightningOrb createOrb() {
-            return new LightningOrb {
+        private PseudoLightningOrb createOrb() {
+            return new PseudoLightningOrb {
                 origin = GetOrbOrigin,
                 damageValue = DamageCoefficient * damageStat,
                 isCrit = _crit,
@@ -190,7 +189,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 return;
             }
 
-            LightningOrb _lightningOrb = createOrb();
+            PseudoLightningOrb _lightningOrb = createOrb();
 
             if (FacelessJoePlugin.conductiveMechanic) {
                 _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
@@ -205,11 +204,15 @@ namespace ModdedEntityStates.TeslaTrooper {
         private void FireZapTeammate() {
 
             HarmlessBuffOrb orb = new HarmlessBuffOrb { 
-                buffToApply = Modules.Buffs.conductiveBuffTeam 
+                buffToApply = Modules.Buffs.conductiveBuffTeam,
+                target = _targetHurtbox,
+                origin = GetOrbOrigin,
             };
             OrbManager.instance.AddOrb(orb);
-
+            //cancel additional casts
             _currentCasts = totalOrbCasts;
+            //end move early
+            duration *= 0.7f;
         }
 
         //friendly fire scrapped

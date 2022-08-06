@@ -16,7 +16,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float DamageCoefficient = 6.9f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
-        public static float BaseDuration = 1;
+
+        public static float BaseDuration = 0.6f;
         public static float BaseCastTime = 0;//0.2f //todo windup sound, windup vfx, and zapping ground
 
         public float skillsPlusAreaMulti = 1f;
@@ -42,7 +43,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 commandTarget = GetComponent<TeslaTrackerComponent>()?.GetTrackingTarget();
             }
 
-            //server will deserialize a commandTarget from the client's serializing
+            //server will deserialize a commandTarget from the client
             if (commandTarget) {
 
                 if (NetworkServer.active) {

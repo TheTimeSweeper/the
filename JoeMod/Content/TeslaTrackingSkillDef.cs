@@ -2,7 +2,7 @@
 using RoR2;
 using RoR2.Skills;
 
-namespace Content {
+namespace JoeMod {
 
     public class TeslaTrackingSkillDef : SkillDef {
 

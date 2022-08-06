@@ -12,7 +12,7 @@
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS.png)]()
 
-Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/csaEQDnMH8). I'll be taking a close look at feedback.
+Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7). I'll be taking a close look at feedback.
 ___
 ## Overview
 Based on Tesla Trooper from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model him to fit RoR2, and look awesome, and my dong is enormous".  
@@ -25,7 +25,7 @@ Tesla Trooper is a mid-range bruiser on his own, and an all-range monster when h
 SkeletorChampion - Made the character model, which kicked off the mod. Without him, the mod wouldn't exist.  
 Violet Chaolan - wwise sound help  
 SweeperSecret - icons,  <3  
-Mr.Bones - Mastery skin  
+Mr.Bones - mastery skin  
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
@@ -42,6 +42,16 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+
+`1.1.1` buncha tweaks
+- ally zap no longer does damage, fixing pennies exploit
+- m1 zap now travels instantly
+- m1's up to 3 bolts now all happen at once
+  - *these make the move feel nice and snappier, but they may have taken away some of its impact. as always, feedback is appreciated*
+- zapping allies with m1 now ends the move earlier
+  - *so accidentally hitting allies doesn't eat up a full duration m1*
+- lowered lingering m2 cast time
+- added very WIP alt m1 under cursed config
 
 `1.1.0`
 - Added proper Mastery skin, complete with a unique tower

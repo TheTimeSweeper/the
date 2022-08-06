@@ -268,9 +268,8 @@ namespace Modules.Survivors {
                 4,
                 5,
                 6,
-                7,
-                //8,
-                9);
+                //7,
+                8);
 
             MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "MC_Base_Pillars_Colors",
@@ -311,10 +310,10 @@ namespace Modules.Survivors {
                 model);
 
             NodSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
-                //0,
+                0,
                 //1,
                 2,
-                3,
+                //3,
                 //4,
                 //5,
                 //6,
@@ -322,10 +321,10 @@ namespace Modules.Survivors {
                 //8);
 
             NodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-                null,//"Nod_Base_Pillars_Colors",
+                "Nod_Base_Tubes", //"Nod_Base_Pillars_Colors",
                 null,//"Nod_Base_Platform",
                 "Nod_Base_Center",
-                "Nod_Base_Tubes",
+                null,//"Nod_Base_Tubes",
 
                 null,//"Nod_Circles",
                 null,//"Nod_Pole",
@@ -333,10 +332,10 @@ namespace Modules.Survivors {
                 "Nod_Emission",
                 null);//"Nod_Orb");
 
-            //NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRedstone");
+            NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRed");
             //NodSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
             NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
-            NodSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
+            //NodSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
 
             //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
             //NodSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");

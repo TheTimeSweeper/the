@@ -38,12 +38,12 @@ namespace ModdedEntityStates.BaseStates
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
             if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired))
             {
+                isFiring = true;
+                OnCastFixedUpdate();
                 if (!hasFired) {
                     OnCastEnter();
                     hasFired = true;
                 }
-                isFiring = true;
-                OnCastFixedUpdate();
             }
 
             if (fireEnded && !hasExited)

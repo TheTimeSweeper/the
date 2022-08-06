@@ -9,7 +9,7 @@ using ModdedEntityStates.TeslaTrooper;
 using Modules.Characters;
 using R2API;
 using System.Runtime.CompilerServices;
-using Content;
+using JoeMod;
 
 namespace Modules.Survivors
 {
@@ -439,7 +439,7 @@ namespace Modules.Survivors
                 "meshMasteryBodyColor",
                 "meshMasteryHammer");
             
-            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMastery").SetEmission(2);
             //masterySkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
             masterySkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
             masterySkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
