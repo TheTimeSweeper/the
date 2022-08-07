@@ -29,6 +29,8 @@ Mr.Bones - mastery skin
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
+  
+Thanks to the lovely reception from the community, including all the great feedback and ideas c:
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
@@ -45,13 +47,14 @@ ___
 
 `1.1.1` buncha tweaks
 - ally zap no longer does damage, fixing pennies exploit
-- m1 zap now travels instantly
-- m1's up to 3 bolts now all happen at once
-  - *these make the move feel nice and snappier, but they may have taken away some of its impact. as always, feedback is appreciated*
 - zapping allies with m1 now ends the move earlier
   - *so accidentally hitting allies doesn't eat up a full duration m1*
+- m1 zap now travels instantly
+- slightly lowered m1 attack duration
+  - *not enough to affect any balance concerns, just to hopefully feel a little smoother*
+- fixed m1 not blooming crosshair for clients
 - lowered lingering m2 cast time
-- added very WIP alt m1 under cursed config
+- added very WIP m1 alt skill under cursed config
 
 `1.1.0`
 - Added proper Mastery skin, complete with a unique tower

@@ -161,6 +161,8 @@ namespace Modules {
             UnityEngine.Object.Destroy(zapConeProjectile.transform.Find("Effect/RadialMesh").gameObject);
             UnityEngine.Object.Destroy(zapConeProjectile.transform.Find("Effect/Flash").gameObject);
 
+            Content.AddProjectilePrefab(zapConeProjectile);
+
             return zapConeProjectile;
         }
 

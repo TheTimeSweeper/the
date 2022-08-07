@@ -15,6 +15,7 @@ namespace ModdedEntityStates.TeslaTrooper
         private TeslaTrackerComponent tracker;
 
         private bool showingEmpowered;
+        private bool castSuccessful;
         
         private float viewRadius;
 
@@ -88,8 +89,15 @@ namespace ModdedEntityStates.TeslaTrooper
         {
             base.OnExit();
 
+            if (!castSuccessful)
+                RefundStock();
+
             if (showingEmpowered)
                 RemoveEmpowered();
+        }
+
+        private void RefundStock() {
+            base.activatorSkillSlot.AddOneStock();
         }
 
         //todo rework this to a simple projectile
@@ -97,6 +105,7 @@ namespace ModdedEntityStates.TeslaTrooper
         public override void FireProjectile() { }
 
         public override EntityState PickNextState() {
+            castSuccessful = true;
             return new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint };
         }
 

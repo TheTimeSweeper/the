@@ -28,7 +28,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
     //public float maxTrackingAngle = 15f;
     public float trackingRadius = 1f;
-    public float trackerUpdateFrequency = 10f;
+    public float trackerUpdateFrequency = 16f;
 
     private CharacterBody characterBody;
     private TeamComponent teamComponent;
@@ -186,12 +186,12 @@ public class TeslaTrackerComponent : MonoBehaviour {
     }
 
     private void setIsTargetingTeammate() {
-        bool team = false;
+        bool targetingFriendlyFire = false;
         if (_trackingTarget) {
-            team = !FriendlyFireManager.ShouldDirectHitProceed(_trackingTarget.healthComponent, teamComponent.teamIndex);// _trackingTarget.teamIndex == teamComponent.teamIndex;
+            targetingFriendlyFire = !FriendlyFireManager.ShouldDirectHitProceed(_trackingTarget.healthComponent, teamComponent.teamIndex);// _trackingTarget.teamIndex == teamComponent.teamIndex;
         }
 
-        _targetingAlly = team;
+        _targetingAlly = targetingFriendlyFire;
         setIndicatorAlly();
     }
 

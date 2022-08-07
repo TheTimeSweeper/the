@@ -93,20 +93,18 @@ namespace ModdedEntityStates.TeslaTrooper {
             float deflectRadiusSquared = DeflectRadius * DeflectRadius;
 
             for (int i = 0; i < instancesList.Count; i++) {
-                ProjectileController projectileController = instancesList[i];
+                ProjectileController deflectedProjectile = instancesList[i];
 
-                if (!projectileController.cannotBeDeleted && projectileController.teamFilter.teamIndex != teamComponent.teamIndex && (projectileController.transform.position - deflectMuzzleTransform.position).sqrMagnitude < deflectRadiusSquared) {
+                if (!deflectedProjectile.cannotBeDeleted && deflectedProjectile.teamFilter.teamIndex != teamComponent.teamIndex && (deflectedProjectile.transform.position - deflectMuzzleTransform.position).sqrMagnitude < deflectRadiusSquared) {
 
-                    projectileController.owner = gameObject;
-
-                    Vector3 dist = projectileController.gameObject.transform.position - deflectMuzzleTransform.position;
+                    Vector3 dist = deflectedProjectile.gameObject.transform.position - deflectMuzzleTransform.position;
 
                     FireProjectileInfo info = new FireProjectileInfo() {
                         projectilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MageLightningboltBasic"),
                         position = deflectMuzzleTransform.position + dist * 0.3f,
                         rotation = deflectMuzzleTransform.rotation,
                         owner = base.characterBody.gameObject,
-                        damage = base.characterBody.damage * 2f,
+                        damage = base.characterBody.damage * 3f,
                         force = 200f,
                         crit = rolledCrit,
                         damageColorIndex = DamageColorIndex.Default,
@@ -117,12 +115,12 @@ namespace ModdedEntityStates.TeslaTrooper {
                     ProjectileManager.instance.FireProjectile(info);
 
                     EffectManager.SimpleEffect(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
-                                               projectileController.gameObject.transform.position,
+                                               deflectedProjectile.gameObject.transform.position,
                                                Quaternion.identity,
                                                true);
                     ApplyHitstop();
 
-                    EntityState.Destroy(projectileController.gameObject);
+                    EntityState.Destroy(deflectedProjectile.gameObject);
                 }
 
             }

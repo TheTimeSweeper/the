@@ -334,7 +334,7 @@ namespace Modules.Survivors {
 
             NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerRed");
             //NodSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
-            NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
+            NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlacker");
             //NodSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
 
             //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");

@@ -20,7 +20,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static int OrbCasts = 3;
         public static float BounceDistance = 20;
 
-        public static float BaseDuration = 1f;
+        public static float BaseDuration = 0.9f;
         public static float BaseCastTime = 0.05f;
         #endregion
 
@@ -34,7 +34,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         private HurtBox _targetHurtbox;
         private bool _attackingTeammate;
         
-        private float _baseCastInterval = 0.00f;
+        private float _baseCastInterval = 0.04f;
 
         private Transform _muzzleTransform;
         private float _originSpacing = 0.22f;
@@ -58,8 +58,29 @@ namespace ModdedEntityStates.TeslaTrooper {
                 }
                 else
                 {
-                    return _muzzleTransform.position + (_muzzleTransform.right + _muzzleTransform.up - _muzzleTransform.forward) * (_originSpacing * (_currentCasts));
+                    return muzzlePosition + muzzleDirection * (_originSpacing * (_currentCasts));
                 }
+            }
+        }
+
+
+        private Vector3? originalMuzzlePosition = null;
+        private Vector3 muzzlePosition {
+            get {
+                if (originalMuzzlePosition == null) {
+                    originalMuzzlePosition = _muzzleTransform.position;
+                }
+                return originalMuzzlePosition.Value;
+            }
+        }
+
+        private Vector3? originalMuzzleDirection= null;
+        private Vector3 muzzleDirection{
+            get {
+                if (originalMuzzleDirection == null) {
+                    originalMuzzleDirection = _muzzleTransform.right + _muzzleTransform.up - _muzzleTransform.forward;
+                }
+                return originalMuzzleDirection.Value;
             }
         }
 
@@ -173,11 +194,14 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         protected override void OnCastFixedUpdate()
         {
-            if (NetworkServer.active && _targetHurtbox) {
+            if (_targetHurtbox) {
 
                 while (_currentCasts < totalOrbCasts && fixedAge > nextCastTime) {
-                    FireZap();
+                    if (NetworkServer.active) {
+                        FireZap();
+                    }
                     _currentCasts++;
+                    base.characterBody.AddSpreadBloom(0.32f);
                 }
             }
         }
@@ -197,8 +221,6 @@ namespace ModdedEntityStates.TeslaTrooper {
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing each orb to apply to their bounces only
             _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
-
-            base.characterBody.AddSpreadBloom(0.32f);
         }
 
         private void FireZapTeammate() {
