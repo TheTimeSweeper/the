@@ -5,24 +5,27 @@ using UnityEngine;
 namespace JoeMod {
     public class PseudoLightningOrb : LightningOrb {
 
+		public ModdedLightningType lightningType;
+
+
 		// Token: 0x060040C4 RID: 16580 RVA: 0x0010BF94 File Offset: 0x0010A194
 		public override void Begin() {
 			base.duration = 0.0001f;
 			string path = null;
 			switch (this.lightningType) {
-				case LightningOrb.LightningType.Ukulele:
+				case ModdedLightningType.Ukulele:
 					path = "Prefabs/Effects/OrbEffects/LightningOrbEffect";
 					break;
-				case LightningOrb.LightningType.Tesla:
+				case ModdedLightningType.Tesla:
 					path = "Prefabs/Effects/OrbEffects/TeslaOrbEffect";
 					break;
-				case LightningOrb.LightningType.BFG:
+				case ModdedLightningType.BFG:
 					path = "Prefabs/Effects/OrbEffects/BeamSphereOrbEffect";
 					break;
-				case LightningOrb.LightningType.Loader:
+				case ModdedLightningType.Loader:
 					path = "Prefabs/Effects/OrbEffects/LoaderLightningOrbEffect";
 					break;
-				case LightningOrb.LightningType.MageLightning:
+				case ModdedLightningType.MageLightning:
 					path = "Prefabs/Effects/OrbEffects/MageLightningOrbEffect";
 					break;
 			}
@@ -33,5 +36,13 @@ namespace JoeMod {
 			effectData.SetHurtBoxReference(this.target);
 			EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>(path), effectData, true);
 		}
+	}
+
+	public enum ModdedLightningType {
+		Ukulele,
+		Tesla,
+		BFG,
+		Loader,
+		MageLightning
 	}
 }

@@ -84,27 +84,27 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        private LightningOrb.LightningType GetOrbType
+        private ModdedLightningType GetOrbType
         {
             get
             {
                 if (_weaponComponent && _weaponComponent.hasTeslaCoil) {
-                    return LightningOrb.LightningType.Tesla;
+                    return ModdedLightningType.Tesla;
                 }
 
-                return LightningOrb.LightningType.Ukulele;
+                return ModdedLightningType.Ukulele;
 
                 //switch (_currentCasts)
                 //{
                 //    case 0:
-                //        return LightningOrb.LightningType.Ukulele;
+                //        return ModdedLightningType.Ukulele;
                 //    case 1:
-                //        return LightningOrb.LightningType.Ukulele;
+                //        return ModdedLightningType.Ukulele;
                 //    case 2:
-                //        return LightningOrb.LightningType.Ukulele;
+                //        return ModdedLightningType.Ukulele;
                 //    default:
                 //    case 3:
-                //        return LightningOrb.LightningType.Ukulele;
+                //        return ModdedLightningType.Ukulele;
                 //}
             }
         }
@@ -220,7 +220,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing each orb to apply to their bounces only
-            _lightningOrb.lightningType = LightningOrb.LightningType.MageLightning;
+            _lightningOrb.lightningType = ModdedLightningType.MageLightning;
         }
 
         private void FireZapTeammate() {
