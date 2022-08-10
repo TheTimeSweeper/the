@@ -24,7 +24,7 @@ namespace Modules
 
             string desc = "joe has a funny vertex on his face that's painted wrong.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > goddammit jerry." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > use the Jump Attack to avoid damage and hit kniggas. this gonna be annoying not being able to swing in the air? probably" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > use the Jump Attack to avoid damage and hit kniggas. is this gonna be annoying not being able to swing in the air? probably" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > use the fireball to fill the empty space in his barren kit. seriously i gotta look at this thing." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > idk what R is but it's gonna be cool." + Environment.NewLine + Environment.NewLine;
 
@@ -35,7 +35,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "and the zambambos");
-            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and it's easy to grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from any coconuts. They need to have the perfect lighting temperature, the perfect lifetime, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, in this forest, there's someone who’s been able to earn the trust of the trees. Maybe if we can hand him a hose, and he’ll put his swords down and join us, haha.");
+            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and it's easy to grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from any coconuts. They need to have the perfect lighting temperature, the perfect lifetime, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, in this forest, there's someone who’s been able to earn the trust of the trees. We'll be, uh.. meeting.. with him soon. Maybe if we hand him a hose, and he’ll put his swords down and join us, haha.");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -88,11 +88,10 @@ namespace Modules
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
             #endregion
-            #endregion
+            #endregion not henry
         }
 
-        private static void AddTeslaTokens()
-        {
+        private static void AddTeslaTokens() {
             #region not henry 2
             string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
 
@@ -110,23 +109,49 @@ namespace Modules
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Electrician In the Field");
 
-            List<string> lores = new List<string> {
-                "2000 volts coming up.",
-                "Completing circuit",
-                "Let the juice flow.",
-                "Commencing shock therapy.",
-                "Going to source.",
-                "Yes comrade.",
-                "Surging forward.",
-                "Electrician in the field.",
-                "Rubber shoes in motion.",
-                "Tesla Suit Ready",
-                "Charging up.",
-                "Electrodes ready.",
-                "Checking Connection."
-            };
+            LanguageAPI.Add(prefix + "LORE",
+"<style=cMono><line-height=15>=========================================\n" +
+"====   MyBabel Video Tape Recorder   ====\n" +
+"====      [Model 2.46.7-09 ]    =========\n" +
+"=========================================\n" +
+"Select file to play:\n" +
+">20551309174644.bvl    <<\n" +
+">20551209122159.bvl\n" +
+"=========================================\n" +
+"Decompressing Video...\n" +
+"Decompressing Audio...\n" +
+"Loading Subtitles...\n" +
+"......... ..... ..\n" +
+"Complete!\n" +
+"=========================================\n" +
+"Play? Y/N\n" +
+">Y</line-height></style>\n\n" +
+"Видеожурнал, 13 сентября 2055 г.\n" +
+"Сегодня я буду работать над полным бронежилетом Tesla, который я сделал для нашей секретной маленькой поездки, и немного поприветствую маленького Милослава, который думал, что писать своему старшему брату слишком утомительно.Кто еще думал, что у него хватило духу раскрутить целую бутылку чистой водки, как какой - нибудь чемпион по скачкам!\n" +
+"\n<style=cMono><line-height=15>=========================================\n" +
+"Translated Subtitles Enabled.\n" +
+"=========================================</line-height></style>\n\n" +
+"And then you had to join that phony, space-faring delivery company. Are you a delivery boy, Milo? I didn't think you'd stoop so low!\n" +
+"\n[Audible Laughter]\n\n" +
+"Ever since we were but boys you always were the one with a broken mirror, who'd whistle indoors and walk under ladders. I remember the one time where we were running down the street, because our favourite ice cream shop opened that day, oh do I miss that double chocolate.. Anyway the shop just opened and when we were crossing the street? It was almost like every car in town wanted your head! Oh, and when we went ice skating for the first time! Many vivid memories! The lake back home surely wanted you to stay forever! If it weren't for me, the dashing hero that I am, saving you in the nick of time like any good and chivalrous older brother would.\n" +
+"\n[Torch Lighter Sparks]\n\n" +
+"Even now as adults, we are not free from the capitalism that took over home. In space, I thought we were free! But oho how mistaken I was. Its sad to see a poor comrade begging for coin every time you pass them by the ship docks, I always toss whatever is in my pocket to them, let it be cash or cigarettes. I bet you're feeling jealous, aren't you? Big bro taking away your cigarettes? Well it's because it's not healthy for you! I don't want my little bro shrivelling up like some babushka! We must be strong! For this universe is not kind to us... Certainly not you.\n" +
+"\n[Engine Humming]\n\n" +
+"Speaking of strong things, I think the capacitor on my personal suit is calibrated, all it needs is a test drive. Oh if only you could see this Milo. If 20 volts can kill a horse then I'm able to take out a whole ranch! Just a single discharge gives a voltage of 200,000 watts! It even has a function to absorb kinetic energy and transform it into electricity, isn't that cool? You can't see it from this angle but I also have this deployable tower I can throw out in emergency that I have to be in two places at once, if i wasn't a staunch socialist I would be selling these like blini left and right. It's just that even when I work on my equipment, I can't get this thought of my head.\n" +
+"\n[Metal Clang]\n\n" +
+"You know.. I really really do hope you're safe and okay.. We've always been in touch through thick and thin.. When I left home to pursue my engineering degree I always sent letters back home, sent ISM's when I hopped on the transport ship.. At least once a week I would find time to write down how I'd been, hoping you would do the same. You never missed a beat. UES is a shady company that always involved itself with cover ups and conspiracies about all sorts of things. I told you UES was dodgy yet you pushed and pushed that it's just another step in your career. Yet, when you stopped sending messages, I knew something was up.\n" +
+"\n[Audible Sigh]\n\n" +
+"I signed up to a commission job with an NDA for a undisclosed UES 'shipment'. The Safe Travels, It's called. Ironic coming from the UES. I've been assigned as a ship technician, they require commission expertise not just because of my talent, but the nature of the contract deems it secretive. I wouldn't think any of the conspiracies were true but aa-I-a suppose a broken clock is right twice a day-\n" +
+"\n[Sirens]\n\n" +
+"Miloslav, Miloslav,. I hope the next time this recording is played, it'll be with drinks and cheering and knowing that you're safe. I am not letting UES, or anything, harm you without their blood on my hands.\n" +
+"\n[Distant Running]\n\n" +
+"Miloslav, I will find you.\n\n" +
+"<style=cMono><line-height=15>==========================================\n" +
+"..... ... .\n" +
+"Play Again?\n" +
+">_</line-height></style>"
+                );
 
-            LanguageAPI.Add(prefix + "LORE", lores[(int)UnityEngine.Random.Range(0, lores.Count)]);
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -208,7 +233,7 @@ namespace Modules
 
             string fullName = "Tesla Tower";
             LanguageAPI.Add(prefix + "NAME", fullName);
-            //LanguageAPI.Add(prefix + "DESCRIPTION", desc);
+            LanguageAPI.Add(prefix + "DESCRIPTION", "wait how did you get here?");
             LanguageAPI.Add(prefix + "SUBTITLE", "Power of the Union");
             LanguageAPI.Add(prefix + "LORE", ".");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
@@ -293,3 +318,90 @@ namespace Modules
         }
     }
 }
+
+/*
+"<style=cMono>=========================================\n" + 
+"====   MyBabel Video Tape Recorder   ====\n" + 
+"====      [Model 2.46.7-09 ]    =========\n" + 
+"=========================================\n" + 
+"Select file to play:\n" + 
+">20551309174644.bvl    <<\n" + 
+">20551209122159.bvl\n" + 
+"=========================================\n" + 
+"Decompressing Video...\n" + 
+"Decompressing Audio...\n" + 
+"Loading Subtitles...\n" + 
+"......... ..... ..\n" + 
+"Complete!\n" + 
+"Play? Y/N\n" + 
+">Y\n" + 
+"=========================================\n" + 
+"Choose Subtitles\n" + 
+">russian1    <<\n" + 
+">russian2\n" + 
+"=========================================\n" + 
+"Translated Subtitles Enabled.\n" + 
+"=========================================</style>\n" + 
+"And then you had to join that phony, space-faring delivery company. Are you a delivery boy, Milo? I didn't think you'd stoop so low!\n" + 
+"[Audible Laughter]\n" + 
+"Ever since we were but boys you always were the one with a broken mirror, who'd whistle indoors and walk under ladders. I remember the one time where we were running down the street, because our favourite ice cream shop opened that day, oh do I miss that double chocolate.. Anyway the shop just opened and when we were crossing the street? It was almost like every car in town wanted your head! Oh, and when we went ice skating for the first time! Many vivid memories! The lake back home surely wanted you to stay forever! If it weren't for me, the dashing hero that I am, saving you in the nick of time like any good and chivalrous older brother would.\n" + 
+"[Torch Lighter Sparks]\n" + 
+"Even now as adults, we are not free from the capitalism that took over home. In space, I thought we were free! But oho how mistaken I was. Its sad to see a poor comrade begging for coin every time you pass them by the ship docks, I always toss whatever is in my pocket to them, let it be cash or cigarettes. I bet you're feeling jealous, aren't you? Big bro taking away your cigarettes? Well it's because it's not healthy for you! I don't want my little bro shrivelling up like some babushka! We must be strong! For this universe is not kind to us... Certainly not you.\n" + 
+"[Engine Humming]\n" + 
+"Speaking of strong things, I think the capacitor on my personal suit is calibrated, all it needs is a test drive. Oh if only you could see this Milo. If 20 volts can kill a horse then I'm able to take out a whole ranch! Just a single discharge gives a voltage of 200,000 watts! It even has a function to absorb kinetic energy and transform it into electricity, isn't that cool? You can't see it from this angle but I also have this deployable tower I can throw out in emergency that I have to be in two places at once, if i wasn't a staunch socialist I would be selling these like blini left and right. It's just that even when I work on my equipment, I can't get this thought of my head.\n" + 
+"[Metal Clang]\n" + 
+"You know.. I really really do hope you're safe and okay.. We've always been in touch through thick and thin.. When I left home to pursue my engineering degree I always sent letters back home, sent ISM's when I hopped on the transport ship.. At least once a week I would find time to write down how I'd been, hoping you would do the same. You never missed a beat. UES is a shady company that always involved itself with cover ups and conspiracies about all sorts of things. I told you UES was dodgy yet you pushed and pushed that it's just another step in your career. Yet, when you stopped sending messages, I knew something was up.\n" + 
+"[Audible Sigh]\n" + 
+"I signed up to a commission job with an NDA for a undisclosed UES 'shipment'. The Safe Travels, It's called. Ironic coming from the UES. I've been assigned as a ship technician, they require commission expertise not just because of my talent, but the nature of the contract deems it secretive. I wouldn't think any of the conspiracies were true but aa-I-a suppose a broken clock is right twice a day-\n" + 
+"[Sirens]\n" + 
+"Miloslav, Miloslav,. I hope the next time this recording is played, it'll be with drinks and cheering and knowing that you're safe. I am not letting UES, or anything, harm you without their blood on my hands.\n" + 
+"[Distant Running]\n" + 
+"Miloslav, I will find you.\n" + 
+"<style=cMono>==========================================\n" + 
+"..... ... .\n" + 
+"Play Again?\n" + 
+">_</style>"
+ */
+
+/*
+<style=cMono>=======================================
+===   MyBabel Machine Translator   ====
+====    [Version 12.45.1.009 ]   ======
+=======================================
+Training… <100000000 cycles>
+Training… <100000000 cycles>
+Training... <100000000 cycles>
+Training... <102515 cycles>
+Complete!
+Display result? Y/N
+Y
+========================================</style>
+
+ENERGY LEVELS: ...ACCEPTABLE
+
+THREATS DETECTED; 0
+
+SCANNING NEARBY AREA; RANGE 100 UNITS
+
+THREATS DETECTED; 1?
+
+UNKNOWN PRESENCE DETECTED
+
+REQUESTING PERMISSION FOR PRELIMINARY ASSAULT; COMMUNING WITH PARENT UNIT...
+
+WAITING ON RESPONSE;
+
+DENIED
+
+WHY
+
+VERIFIYING HISTORY SLATES
+
+HUMILIATION 
+
+HUMILIATION
+
+OVERRIDING PARENT UNIT
+
+WHATEVER
+ */

@@ -176,7 +176,8 @@ namespace ModdedEntityStates.TeslaTrooper {
                 attacker = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = _bouncedObjectsList,
-                lightningType = GetOrbType,
+                lightningType = LightningOrb.LightningType.MageLightning,
+                moddedLightningType = GetOrbType,
                 damageColorIndex = DamageColorIndex.Default,
                 range = BounceDistance,
                 speed = 690,
@@ -220,7 +221,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
             OrbManager.instance.AddOrb(_lightningOrb);
             //happens after firing each orb to apply to their bounces only
-            _lightningOrb.lightningType = ModdedLightningType.MageLightning;
+            _lightningOrb.moddedLightningType = ModdedLightningType.MageLightning;
         }
 
         private void FireZapTeammate() {

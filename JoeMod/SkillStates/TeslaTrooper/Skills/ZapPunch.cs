@@ -11,10 +11,10 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class ZapPunch : BaseMeleeAttackButEpic {
 
         #region Gameplay Values
-        public static float DamageCoefficient = 2.5f;
+        public static float DamageCoefficient = 3f;
         public static float ProcCoefficient = 1f;
 
-        public static float OrbDamageCoefficient = 1.5f;
+        public static float OrbDamageCoefficient = 2f;
         public static float OrbProcCoefficient = 0.7f;
         public static int OrbCasts = 20;
         public static float OrbDistance = 20;
@@ -34,7 +34,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.hitboxName = "PunchHitbox";
             base.damageCoefficient = DamageCoefficient;
             base.procCoefficient = ProcCoefficient;
-            base.pushForce = 1000f;
+            base.pushForce = 690f;
 
             base.baseDuration = 1.0f;
             base.attackStartTime = 0.42f * animationDuration;
@@ -42,7 +42,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.baseEarlyExitTime = 0.8f;
             this.deflectEndTime = 0.55f * animationDuration;
 
-            base.hitStopDuration = 0.12f;
+            base.hitStopDuration = 0.14f;
             base.swingSoundString = "";
             base.hitSoundString = "";
             base.muzzleString = "PunchHitboxAnchor"; // swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";

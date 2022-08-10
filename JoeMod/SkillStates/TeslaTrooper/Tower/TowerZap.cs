@@ -54,7 +54,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 inflictor = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
-                lightningType = tesla? ModdedLightningType.Tesla : ModdedLightningType.Loader,
+                moddedLightningType = tesla? ModdedLightningType.Tesla : ModdedLightningType.Loader,
                 damageColorIndex = DamageColorIndex.Default,
                 //range = SearchRange,
                 canBounceOnSameTarget = true,

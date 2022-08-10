@@ -84,6 +84,10 @@ namespace ModdedEntityStates.TeslaTrooper
             endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);
         }
 
+        public override bool KeyIsDown() {
+            return base.KeyIsDown() && !characterBody.isSprinting;
+        }
+
         // Token: 0x06003B19 RID: 15129 RVA: 0x0002B5A9 File Offset: 0x000297A9
         public override void OnExit()
         {

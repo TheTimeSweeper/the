@@ -5,14 +5,14 @@ using UnityEngine;
 namespace JoeMod {
     public class PseudoLightningOrb : LightningOrb {
 
-		public ModdedLightningType lightningType;
+		public ModdedLightningType moddedLightningType;
 
 
 		// Token: 0x060040C4 RID: 16580 RVA: 0x0010BF94 File Offset: 0x0010A194
 		public override void Begin() {
 			base.duration = 0.0001f;
 			string path = null;
-			switch (this.lightningType) {
+			switch (this.moddedLightningType) {
 				case ModdedLightningType.Ukulele:
 					path = "Prefabs/Effects/OrbEffects/LightningOrbEffect";
 					break;

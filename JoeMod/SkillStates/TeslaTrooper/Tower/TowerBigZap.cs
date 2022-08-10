@@ -38,6 +38,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 return;
 
             lightningOrb.damageValue = 0;
+            lightningOrb.procCoefficient = 0;
             lightningOrb.damageType = DamageType.Silent;
             base.fireOrb();
             
@@ -66,8 +67,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     //procChainMask = 
                     //losType = BlastAttack.LoSType.NearestHit,
 
-                    baseForce = -5, //enfucker void grenade here we go
-                    //bonusForce = ;
+                    baseForce = -5, //enfucker void grenade here we gos
+                    //bonusForce = ;a
 
                     //impactEffect = EffectIndex.uh;
                 };

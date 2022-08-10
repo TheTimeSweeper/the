@@ -190,7 +190,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         if (_trackingTarget) {
             targetingFriendlyFire = !FriendlyFireManager.ShouldDirectHitProceed(_trackingTarget.healthComponent, teamComponent.teamIndex);// _trackingTarget.teamIndex == teamComponent.teamIndex;
         }
-
+        
         _targetingAlly = targetingFriendlyFire;
         setIndicatorAlly();
     }
