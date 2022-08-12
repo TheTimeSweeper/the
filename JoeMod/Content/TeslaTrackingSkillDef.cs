@@ -49,4 +49,21 @@ namespace JoeMod {
             return base.IsReady(skillSlot) && TeslaConductiveTrackingSkillDef.HasTarget(skillSlot);
         }
     }
+
+    public class TeslaSkillTrackingSKillDef: TeslaTrackingSkillDef {
+
+
+        private static bool HasTarget([NotNull] GenericSkill skillSlot) {
+            TeslaTrackerComponent teslaTracker = ((TeslaTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).teslaTracker;
+            return teslaTracker != null && teslaTracker.GetTrackingTarget() && teslaTracker.GetTrackingTarget().healthComponent.GetComponent<SkillTracker>() != null;
+        }
+
+        public override bool CanExecute([NotNull] GenericSkill skillSlot) {
+            return TeslaSkillTrackingSKillDef.HasTarget(skillSlot) && base.CanExecute(skillSlot);
+        }
+
+        public override bool IsReady([NotNull] GenericSkill skillSlot) {
+            return base.IsReady(skillSlot) && TeslaSkillTrackingSKillDef.HasTarget(skillSlot);
+        }
+    }
 }

@@ -9,6 +9,7 @@ using RoR2.UI;
 using System;
 using System.Linq;
 using RoR2.Projectile;
+using RoR2.Orbs;
 
 namespace Modules {
     internal static class Assets
@@ -53,6 +54,12 @@ namespace Modules {
         public static GameObject TeslaZapConeEffect;
 
         public static Material ChainLightningMaterial;
+        #endregion
+
+        #region test
+
+        public static GameObject SkillTakenOrbEffect;
+
         #endregion
 
         public static void Initialize()
@@ -140,6 +147,26 @@ namespace Modules {
             TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
 
             //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
+
+            SkillTakenOrbEffect = stealItemStealOrb();
+        }
+
+        private static GameObject stealItemStealOrb() {
+            GameObject skillOrbEffectObject = R2API.PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/ItemTransferOrbEffect"), "SkillTransferOrbEfect", false);
+
+            ItemTakenOrbEffect itemOrbEffect = skillOrbEffectObject.GetComponent<ItemTakenOrbEffect>();
+            SkillTakenOrbEffect skillOrbEffect = skillOrbEffectObject.AddComponent<SkillTakenOrbEffect>();
+
+            skillOrbEffect.trailToColor = itemOrbEffect.trailToColor;
+            skillOrbEffect.particlesToColor = itemOrbEffect.particlesToColor;
+            skillOrbEffect.spritesToColor = itemOrbEffect.spritesToColor;
+            skillOrbEffect.iconSpriteRenderer = itemOrbEffect.iconSpriteRenderer;
+
+            UnityEngine.Object.Destroy(itemOrbEffect);
+
+            CreateEffectFromObject(skillOrbEffectObject,"", false);
+            
+            return skillOrbEffectObject;
         }
 
         private static GameObject CreateZapConeProjectile() {

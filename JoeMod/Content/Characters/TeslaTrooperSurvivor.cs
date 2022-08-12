@@ -54,7 +54,7 @@ namespace Modules.Survivors
         private static UnlockableDef recolorsUnlockableDef = null;
         #endregion
 
-        #region cool stuff
+        #region cool gameplay stuff
         public static float conductiveAllyBoost = 1.3f;
 
         public static DeployableSlot teslaTowerDeployableSlot;
@@ -72,6 +72,8 @@ namespace Modules.Survivors
             bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
             bodyPrefab.AddComponent<ZapBarrierController>();
+
+            bodyPrefab.AddComponent<SkillStealController>();
 
             bodyCharacterModel.baseRendererInfos[0].defaultMaterial.SetEmission(2);
             bodyCharacterModel.baseRendererInfos[5].defaultMaterial.SetEmission(2);
@@ -289,7 +291,32 @@ namespace Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
+            TeslaSkillTrackingSKillDef rubickSkillDef = Modules.Skills.CreateSkillDef<TeslaSkillTrackingSKillDef>(new SkillDefInfo {
+                skillName = "Rubick_special_steal",
+                skillNameToken = "Steal spell",
+                skillDescriptionToken = "does it work?",
+                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Test.SkillSteal)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 1,
+                baseRechargeInterval = 2f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
+            });
+
+            Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef, rubickSkillDef);
         }
 
         //todo this is just lysate cell
@@ -344,8 +371,6 @@ namespace Modules.Survivors
                 createRecolorSkillDef("Purple"),
                 createRecolorSkillDef("Pink"),
             };
-            //why'd I do this separately again?
-            //skilldefs[0] = createRecolorSkillDef("Red");
 
             if (Modules.Config.NewColor) {
                 skilldefs.Add(createRecolorSkillDef("Black"));

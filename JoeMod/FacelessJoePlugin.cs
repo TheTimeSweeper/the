@@ -93,6 +93,13 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
+
+        On.RoR2.CharacterBody.Awake += CharacterBody_Awake;
+    }
+
+    private void CharacterBody_Awake(On.RoR2.CharacterBody.orig_Awake orig, CharacterBody self) {
+        orig(self);
+        self.gameObject.AddComponent<SkillTracker>().Init(self);
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {

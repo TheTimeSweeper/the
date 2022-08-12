@@ -1,8 +1,42 @@
 ﻿using RoR2;
 using RoR2.Orbs;
+using RoR2.Skills;
 using UnityEngine;
 
 namespace JoeMod {
+
+	public class SkillOrb : Orb {
+
+		public GenericSkill stealerSkillSlot;
+		public GameObject stolenSkillLocatorObject;
+		public int skillIndex;
+
+		public override void Begin() {
+
+			base.duration = 0.5f;//this.travelDuration;
+
+			if (this.stolenSkillLocatorObject) {
+				EffectData effectData = new EffectData {
+					origin = this.origin,
+					genericFloat = base.duration,
+					genericUInt = Util.IntToUintPlusOne((int)this.skillIndex)
+				};
+				effectData.SetNetworkedObjectReference(this.stolenSkillLocatorObject);
+
+				EffectManager.SpawnEffect(Modules.Assets.SkillTakenOrbEffect, effectData, true);
+			}
+		}
+
+        public override void OnArrival() {
+
+            SkillDef stolenSkill = stolenSkillLocatorObject.GetComponent<SkillLocator>().GetSkillAtIndex(skillIndex).skillDef;
+			stealerSkillSlot.SetSkillOverride(stealerSkillSlot, stolenSkill, GenericSkill.SkillOverridePriority.Replacement);
+
+
+		}
+    }
+
+
     public class PseudoLightningOrb : LightningOrb {
 
 		public ModdedLightningType moddedLightningType;
