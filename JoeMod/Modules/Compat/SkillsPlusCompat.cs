@@ -81,16 +81,6 @@ namespace Modules {
         [SkillLevelModifier("Tesla_Special_Tower", new Type[0])]//, typeof(DeployTeslaTower), typeof(TowerLifetime))]
         public class TeslaSpecialModifier : BaseSkillModifier {
 
-            //public override void OnSkillEnter(BaseState skillState, int level) {
-            //    base.OnSkillEnter(skillState, level);
-
-            //    //Helpers.LogWarning("running on " + skillState.GetType().ToString());
-
-            //    if (skillState is TowerLifetime lifetimeState) {
-            //        lifetimeState.skillsPlusSeconds = AdditiveScaling(0f, 1f, level);
-            //    }
-            //}
-
             public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef) {
                 base.OnSkillLeveledUp(level, characterBody, skillDef);
 

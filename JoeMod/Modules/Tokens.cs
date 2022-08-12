@@ -158,6 +158,7 @@ namespace Modules
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
+            LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
             #endregion
 
@@ -242,6 +243,7 @@ namespace Modules
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
+            LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Nod");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Redstone");
             #endregion
 

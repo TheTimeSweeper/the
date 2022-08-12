@@ -252,87 +252,97 @@ namespace Modules.Characters {
                                                                        new Vector3(0.06265F, 0.08072F, 0.23106F),
                                                                        new Vector3(47.08094F, 246.5786F, 1.93198F),
                                                                        new Vector3(1.01515F, 1.01515F, -1.01515F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.DeathMark, "DisplayDeathMark",
+                                                                       "Base Pillar Items 2",
+                                                                       new Vector3(0F, 2.24824F, -0.13345F),
+                                                                       new Vector3(280.6515F, 183.2082F, 174.8475F),
+                                                                       new Vector3(0.05481F, 0.05481F, 0.05481F)));
+
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.EnergizedOnEquipmentUse, "DisplayWarHorn",
+                                                                       "Base Pillar Items 4",
+                                                                       new Vector3(-0.22347F, 1.059F, 0.16087F),
+                                                                       new Vector3(2.13955F, 265.6363F, 339.9073F),
+                                                                       new Vector3(0.4F, 0.4F, 0.4F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.EquipmentMagazine, "DisplayBattery",
+                                                                       "Base Pillar Items 3",
+                                                                       new Vector3(-0.0533F, 1.70262F, 0.07699F),
+                                                                       new Vector3(0F, 90F, 0F),
+                                                                       new Vector3(0.21F, 0.21F, 0.21F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.EquipmentMagazineVoid, "DisplayFuelCellVoid",
+                                                                       "Base Pillar Items 3",
+                                                                       new Vector3(-0.0533F, 1.70262F, 0.07699F),
+                                                                       new Vector3(0F, 90F, 0F),
+                                                                       new Vector3(0.21F, 0.21F, 0.21F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ExecuteLowHealthElite, "DisplayGuillotine",
+                                                                       "Tower Circle Items 2",
+                                                                       new Vector3(-0.03041F, 0.02747F, -0.61301F),
+                                                                       new Vector3(280.7616F, 349.6049F, 195.709F),
+                                                                       new Vector3(0.15428F, 0.15428F, 0.15252F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ExplodeOnDeath, "DisplayWilloWisp",
+                                                                       "Tower Circle Items 3",
+                                                                       new Vector3(0.56232F, -0.01616F, -0.10021F),
+                                                                       new Vector3(355.1682F, 91.66299F, 356.5107F),
+                                                                       new Vector3(0.0642F, 0.0642F, 0.0642F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ExtraLife, "DisplayHippo",
+                                                                       "Base Pillar Items 1",
+                                                                       new Vector3(0F, 0.84776F, 0.09658F),
+                                                                       new Vector3(347.9707F, 3.47827F, 11.20283F),
+                                                                       new Vector3(0.2131F, 0.21936F, 0.21936F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.ExtraLifeVoid, "DisplayHippoVoid",
+                                                                       "Base Pillar Items 1",
+                                                                       new Vector3(0F, 0.84776F, 0.09658F),
+                                                                       new Vector3(347.9707F, 3.47827F, 11.20283F),
+                                                                       new Vector3(0.2131F, 0.21936F, 0.21936F)));
+            //itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.FallBoots,
+            //    ItemDisplays.CreateDisplayRule("DisplayGravBoots",
+            //                                   "Tower Pole Items",
+            //                                   new Vector3(-0.00251F, 0.37538F, -0.00142F),
+            //                                   new Vector3(356.3479F, 168.6573F, 171.8978F),
+            //                                   new Vector3(0.32954F, 0.32954F, 0.32954F)),
+            //    ItemDisplays.CreateDisplayRule("DisplayGravBoots",
+            //                                   "Tower Pole Items",
+            //                                   new Vector3(0.00199F, 0.37549F, 0.01848F),
+            //                                   new Vector3(6.25589F, 22.00069F, 174.1347F),
+            //                                   new Vector3(0.32954F, 0.32954F, 0.32954F)
+            //    )));
+            ////itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.Feather,
+            ////    ItemDisplays.CreateDisplayRule("DisplayFeather",
+            ////                                   "Base Pillar Items 3",
+            ////                                   new Vector3(0.02972F, 0.22344F, 0.04502F),
+            ////                                   new Vector3(0.47761F, 233.9261F, 304.7706F),
+            ////                                   new Vector3(-0.04399F, 0.02643F, 0.02588F))
+            //    ));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.FireballsOnHit, "DisplayFireballsOnHit",
+                                                                       "Tower Circle Items 1",
+                                                                       new Vector3(0.69881F, -0.12813F, -0.12348F),
+                                                                       new Vector3(86.52419F, 86.43851F, 347.906F),
+                                                                       new Vector3(0.08588F, 0.08588F, 0.08588F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.Firework, "DisplayFirework",
+                                                                       "Base Pillar Items 2",
+                                                                       new Vector3(0.27019F, 0.36856F, 0.05241F),
+                                                                       new Vector3(299.2795F, 347.5153F, 329.2786F),
+                                                                       new Vector3(0.24082F, 0.24082F, 0.24082F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.FlatHealth, "DisplaySteakCurved",
+                                                                       "Base Pillar Items 4",
+                                                                       new Vector3(-0.09571F, 2.09672F, 0.00897F),
+                                                                       new Vector3(357.0212F, 351.2194F, 180.0431F),
+                                                                       new Vector3(0.12057F, 0.12057F, 0.12057F)));
+
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.GhostOnKill, "DisplayMask",
+                                                                       "Head",
+                                                                       new Vector3(0.47888F, -0.02005F, 0.03394F),
+                                                                       new Vector3(0F, 95.8286F, 90.00001F),
+                                                                       new Vector3(1.48088F, 1.48088F, 1.1422F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.GoldOnHit, "DisplayBoneCrown",
+                                                                       "Base Pillar Items 3",
+                                                                       new Vector3(-0.0891F, 2.23077F, -0.32324F),
+                                                                       new Vector3(351.5005F, 354.2409F, 21.81469F),
+                                                                       new Vector3(0.83876F, 0.83197F, 0.71985F)));
 
             //man there are a lot of these
             #endregion done
             #region not done            
             /*
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.DeathMark, "DisplayDeathMark",
-                                                                       "Base Pillar Items 4",
-                                                                       new Vector3(0.05266F, 0.08043F, 0.006F),
-                                                                       new Vector3(33.41785F, 88.12914F, 182.5425F),
-                                                                       new Vector3(0.02281F, 0.02281F, 0.02281F)));
-
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.EnergizedOnEquipmentUse, "DisplayWarHorn",
-                                                                       "Center Cylinder Items",
-                                                                       new Vector3(0.27233F, -0.06941F, 0.16087F),
-                                                                       new Vector3(16.42447F, 94.45877F, 169.1269F),
-                                                                       new Vector3(0.4F, 0.4F, 0.4F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.EquipmentMagazine, "DisplayBattery",
-                                                                       "Center Cylinder Items",
-                                                                       new Vector3(-0.0533F, -0.14259F, 0.17139F),
-                                                                       new Vector3(0F, 90F, 0F),
-                                                                       new Vector3(0.21F, 0.21F, 0.21F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ExecuteLowHealthElite, "DisplayGuillotine",
-                                                                       "Base Pillar Items 1",
-                                                           new Vector3(-0.03041F, 0.2141F, -0.11377F),
-                                                           new Vector3(355.1272F, 79.21696F, 103.286F),
-                                                           new Vector3(0.15428F, 0.15428F, 0.15252F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ExplodeOnDeath, "DisplayWilloWisp",
-                                                                       "Center Cylinder Items",
-                                                                       new Vector3(0.22248F, -0.01608F, -0.10021F),
-                                                                       new Vector3(0.76501F, 29.54675F, 174.773F),
-                                                                       new Vector3(0.0642F, 0.0642F, 0.0642F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.ExtraLife, "DisplayHippo",
-                                                                       "Center Cylinder Items",
-                                                                       new Vector3(-0.07243F, 0.36143F, -0.2244F),
-                                                                       new Vector3(320.8498F, 194.0099F, 9.15483F),
-                                                                       new Vector3(0.2131F, 0.21936F, 0.21936F)));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.FallBoots,
-                ItemDisplays.CreateDisplayRule("DisplayGravBoots",
-                                               "Tower Pole Items",
-                                               new Vector3(-0.00251F, 0.37538F, -0.00142F),
-                                               new Vector3(356.3479F, 168.6573F, 171.8978F),
-                                               new Vector3(0.32954F, 0.32954F, 0.32954F)),
-                ItemDisplays.CreateDisplayRule("DisplayGravBoots",
-                                               "Tower Pole Items",
-                                               new Vector3(0.00199F, 0.37549F, 0.01848F),
-                                               new Vector3(6.25589F, 22.00069F, 174.1347F),
-                                               new Vector3(0.32954F, 0.32954F, 0.32954F)
-                )));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.Feather,
-                ItemDisplays.CreateDisplayRule("DisplayFeather",
-                                               "Base Pillar Items 3",
-                                               new Vector3(0.02972F, 0.22344F, 0.04502F),
-                                               new Vector3(0.47761F, 233.9261F, 304.7706F),
-                                               new Vector3(-0.04399F, 0.02643F, 0.02588F))
-                ));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.FireballsOnHit, "DisplayFireballsOnHit",
-                                                                       "Base Pillar Items 1",
-                                                                       new Vector3(-0.12971F, 0.39333F, 0.05068F),
-                                                                       new Vector3(285.9243F, 174.6441F, 314.6451F),
-                                                                       new Vector3(0.06613F, 0.06613F, 0.06613F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.Firework, "DisplayFirework",
-                                                                       "Center Cylinder Items",
-                                                                       new Vector3(0.00546F, 0.33392F, -0.28351F),
-                                                                       new Vector3(277.4717F, 197.2654F, 126.2112F),
-                                                                       new Vector3(0.24082F, 0.24082F, 0.24082F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.FlatHealth, "DisplaySteakCurved",
-                                                                       "Center Cylinder Items",
-                                                                       new Vector3(0.04689F, 0.01979F, 0.37003F),
-                                                                       new Vector3(45.04784F, 40.97579F, 189.787F),
-                                                                       new Vector3(0.12057F, 0.12057F, 0.12057F)));
-
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.GhostOnKill, "DisplayMask",
-                                                                       "Head",
-                                                                       new Vector3(0.00195F, 0.12905F, 0.14157F),
-                                                                       new Vector3(347.9811F, 0.00722F, 0.51603F),
-                                                                       new Vector3(0.57599F, 0.57599F, 0.44426F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.GoldOnHit, "DisplayBoneCrown",
-                                                                       "Head",
-                                                                       new Vector3(-0.00059F, 0.14425F, -0.00858F),
-                                                                       new Vector3(0F, 0F, 0F),
-                                                                       new Vector3(0.83876F, 0.83197F, 0.71985F)));
 
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.HeadHunter, "DisplaySkullCrown",
                                                                        "Center Cylinder Items",
