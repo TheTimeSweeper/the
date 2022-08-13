@@ -92,11 +92,9 @@ namespace Modules
 
             UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
                 sectionGameplay,
-                "Uncapped Utility Damage",
+                "Uncapped utility damage",
                 false,
                 "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");
-            
-
         }
 
         // this helper automatically makes config entries for disabling survivors
