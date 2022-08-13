@@ -36,7 +36,7 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.1.2";
+    public const string MODVERSION = "1.1.3";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -100,12 +100,19 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
 
         if (self && self.body && self.body.HasBuff(Modules.Buffs.zapShieldBuff) && !flag) {
-            damageInfo.rejected = true;
+            if (Modules.Config.UtilityDamageAbsorption >= 1.0f) {
+                damageInfo.rejected = true;
+            }
 
             //yes basically copied from the old barrier code
             IBarrier bar = self.GetComponent<IBarrier>();
-            if (bar!= null) {
+            if (bar != null) {
                 bar.BlockedDamage(damageInfo, damageInfo.damage); //I guess I would need IL for this
+            }
+
+            // Doing this after the other check just in case there is some weird event triggers from the above behavior.
+            if (!damageInfo.rejected) {
+                damageInfo.damage = (1.0f - Modules.Config.UtilityDamageAbsorption) * damageInfo.damage;
             }
         }
         orig(self, damageInfo);

@@ -1,4 +1,5 @@
-﻿using BepInEx.Configuration;
+﻿using System;
+using BepInEx.Configuration;
 using UnityEngine;
 
 namespace Modules
@@ -16,9 +17,8 @@ namespace Modules
 
         public static ConfigEntry<bool> TowerTargeting;
         public static int LysateLimit;
+        public static float UtilityDamageAbsorption;
         public static ConfigEntry<bool> UncappedUtility;
-
-
 
         public static void ReadConfig()
         {
@@ -79,10 +79,20 @@ namespace Modules
                 "Lysate Cell Additional Tower Limit",
                 1,
                 "With additional towers, lysate cell is way too strong for a green item. Default is 1, but for proper balance I would suggest 0\n-1 for unlimited. have fun").Value;
+            
+            UtilityDamageAbsorption = Clamp(
+                FacelessJoePlugin.instance.Config.Bind(
+                    sectionGameplay,
+                    "Utility Damage Absorption Cap",
+                    1.0f,
+                    "How much damage (as a percentage) is completely blocked while charging up. If set to 0, no damage would be blocked." +
+                    "\nNote that this does not affect how much damage is reflected after the buff expires.").Value,
+                0.0f,
+                1.0f);
 
             UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
                 sectionGameplay,
-                "Uncapped utility damage",
+                "Uncapped Utility Damage",
                 false,
                 "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");
             
@@ -101,6 +111,16 @@ namespace Modules
         public static ConfigEntry<bool> EnemyEnableConfig(string characterName)
         {
             return FacelessJoePlugin.instance.Config.Bind<bool>(new ConfigDefinition(characterName, "Enabled"), true, new ConfigDescription("Set to false to disable this enemy"));
+        }
+        
+        public static T Clamp<T>(T val, T min, T max)
+            where T : IComparable<T>
+        {
+            if (val.CompareTo(min) < 0)
+                return min;
+            if(val.CompareTo(max) > 0)
+                return max;
+            return val;
         }
     }
 }

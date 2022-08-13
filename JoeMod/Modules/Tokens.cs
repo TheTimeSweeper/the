@@ -187,7 +187,12 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
-            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION", $"For {Helpers.UtilityText($"{ShieldZapCollectDamage.ShieldBuffDuration} seconds")}, {Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("absorbed")}. After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage absorbed")}.");
+            LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION",
+                $"For {Helpers.UtilityText($"{ShieldZapCollectDamage.ShieldBuffDuration} seconds")}, " +
+                $"{Helpers.UtilityText("all incoming damage")} taken is {Helpers.UtilityText("stored")}, " +
+                $"and {Helpers.UtilityText(Config.UtilityDamageAbsorption * 100 + "% of that damage")} is negated completely. " +
+                $"After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage stored")}.");
+
             #endregion
 
             #region Special
