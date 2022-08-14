@@ -100,19 +100,18 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
 
         if (self && self.body && self.body.HasBuff(Modules.Buffs.zapShieldBuff) && !flag) {
+            float mitigatedDamage = damageInfo.damage;
+            
             if (Modules.Config.UtilityDamageAbsorption >= 1.0f) {
                 damageInfo.rejected = true;
+            } else {
+                mitigatedDamage = (1.0f - Modules.Config.UtilityDamageAbsorption) * damageInfo.damage;
             }
 
-            //yes basically copied from the old barrier code
-            IBarrier bar = self.GetComponent<IBarrier>();
+            IReflectionBarrier bar = self.GetComponent<IReflectionBarrier>();
             if (bar != null) {
-                bar.BlockedDamage(damageInfo, damageInfo.damage); //I guess I would need IL for this
-            }
-
-            // Doing this after the other check just in case there is some weird event triggers from the above behavior.
-            if (!damageInfo.rejected) {
-                damageInfo.damage = (1.0f - Modules.Config.UtilityDamageAbsorption) * damageInfo.damage;
+                bar.StoreDamage(damageInfo, damageInfo.damage);
+                damageInfo.damage = mitigatedDamage;
             }
         }
         orig(self, damageInfo);

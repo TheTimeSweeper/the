@@ -38,7 +38,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             float redeemedDamage = damageStat * 6.9f;
             ZapBarrierController controller = GetComponent<ZapBarrierController>();
             if (controller) {
-                redeemedDamage = controller.RedeemDamage();
+                redeemedDamage = controller.GetReflectedDamage();
             }
             
             float damageStatMultiplier = damageStat / characterBody.baseDamage;

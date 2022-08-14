@@ -80,7 +80,7 @@ namespace Modules
                 1,
                 "With additional towers, lysate cell is way too strong for a green item. Default is 1, but for proper balance I would suggest 0\n-1 for unlimited. have fun").Value;
             
-            UtilityDamageAbsorption = Clamp(
+            UtilityDamageAbsorption = Mathf.Clamp(
                 FacelessJoePlugin.instance.Config.Bind(
                     sectionGameplay,
                     "Utility Damage Absorption Cap",
@@ -109,16 +109,6 @@ namespace Modules
         public static ConfigEntry<bool> EnemyEnableConfig(string characterName)
         {
             return FacelessJoePlugin.instance.Config.Bind<bool>(new ConfigDefinition(characterName, "Enabled"), true, new ConfigDescription("Set to false to disable this enemy"));
-        }
-        
-        public static T Clamp<T>(T val, T min, T max)
-            where T : IComparable<T>
-        {
-            if (val.CompareTo(min) < 0)
-                return min;
-            if(val.CompareTo(max) > 0)
-                return max;
-            return val;
         }
     }
 }
