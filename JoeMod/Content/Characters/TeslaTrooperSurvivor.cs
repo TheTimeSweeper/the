@@ -51,6 +51,7 @@ namespace Modules.Survivors
         public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
 
         private static UnlockableDef masterySkinUnlockableDef;
+        private static UnlockableDef grandMasterySkinUnlockableDef;
         private static UnlockableDef recolorsUnlockableDef = null;
         #endregion
 
@@ -121,6 +122,7 @@ namespace Modules.Survivors
 
         public override void InitializeUnlockables() {
             masterySkinUnlockableDef = UnlockableAPI.AddUnlockable<Achievements.TeslaTrooperMastery>();
+            grandMasterySkinUnlockableDef = UnlockableAPI.AddUnlockable<Achievements.TeslaTrooperGrandMastery>();
         }
 
         public override void InitializeDoppelganger(string clone) {
@@ -439,9 +441,9 @@ namespace Modules.Survivors
                 "meshMasteryBodyColor",
                 "meshMasteryHammer");
             
-            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMastery").SetEmission(2);
+            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
             //masterySkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
-            masterySkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
+            masterySkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matMastery").SetEmission(2);
             masterySkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
             masterySkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
             masterySkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
@@ -452,6 +454,40 @@ namespace Modules.Survivors
             };
 
             skins.Add(masterySkin);
+            #endregion
+
+            #region NodSkin
+
+            SkinDef nodSkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "NOD_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
+                defaultRenderers,
+                model,
+                grandMasterySkinUnlockableDef);
+
+            nodSkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
+
+            nodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "meshNodArmor",
+                null,//"meshNodArmor_Fanservice",
+                "meshNodEmission",
+                "meshNodBody",
+                "meshNodArmorColor",
+                "meshNodBodyColor",
+                null);// "meshNodHammer");
+
+            nodSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Armor");
+            //nodSkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
+            nodSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Emission").SetEmission(2);
+            nodSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Body");
+            nodSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matNod_ArmorColor");
+            nodSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Body");
+            //nodSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
+
+            nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+                TeslaTowerNotSurvivor.NodMinionSkinReplacement
+            };
+
+            skins.Add(nodSkin);
             #endregion
 
             #region MCSkin

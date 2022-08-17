@@ -115,6 +115,14 @@ public class SkinRecolorController : MonoBehaviour {
         }
     }
 
+    [ContextMenu("Cycle Colors Int")]
+    private void CycleColorsInt() {
+        recolorInt++;
+        if (recolorInt >= recolors.Length)
+            recolorInt = 0;
+        SetRecolor(recolorInt);
+    }
+
     [ContextMenu("SetRecolor int")]
     private void SetRecolorInt() {
         SetRecolor(recolorInt);

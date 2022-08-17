@@ -67,6 +67,21 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: MatNodArmor
+    second: {fileID: 2100000, guid: f5d19008b77b3ec408d17d51115b5538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MatNodArmorColor
+    second: {fileID: 2100000, guid: 85a09ad67445e314b86c8f88f9b9e521, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MatNodBody
+    second: {fileID: 2100000, guid: cbd1ec22aaea6d040a2c4fec2632bd81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: matMCArmor
     second: {fileID: 2100000, guid: 0fcf4ead066b24544b12abbd180350d4, type: 2}
   - first:

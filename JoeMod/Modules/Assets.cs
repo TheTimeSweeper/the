@@ -138,8 +138,6 @@ namespace Modules {
             ChainLightningMaterial = FindChainLightningMaterial();
 
             TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
-
-            //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
         }
 
         private static GameObject CreateZapConeProjectile() {

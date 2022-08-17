@@ -25,8 +25,8 @@ public class TestValueManager : MonoBehaviour {
         if (!Input.GetKey(KeyCode.LeftAlt))
             return;
 
-        manageTestValue(ref value1, "fist time", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
-        manageTestValue(ref value2, "deflect damage", KeyCode.Keypad8, KeyCode.Keypad5, 0.1f);
+        //manageTestValue(ref value1, "fist time", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
+        //manageTestValue(ref value2, "deflect damage", KeyCode.Keypad8, KeyCode.Keypad5, 0.1f);
         //manageTestValue(ref value3, "end time", KeyCode.Keypad9, KeyCode.Keypad6, 0.01f);
     }
 

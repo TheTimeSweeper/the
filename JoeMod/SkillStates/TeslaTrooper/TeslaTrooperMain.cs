@@ -28,7 +28,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         private void playRandomvoiceLine() {
             string sound;
             if (characterBody.outOfCombat) {
-                if (inputBank.moveVector != Vector3.zero) {
+                if (characterBody.isSprinting) {
                     sound = "Play_Voiceline_Move";
                 } else {
                     sound = "Play_Voiceline_Select";

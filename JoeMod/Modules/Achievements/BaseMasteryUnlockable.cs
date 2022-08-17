@@ -16,9 +16,15 @@ namespace Modules {
             base.OnBodyRequirementBroken();
         }
         private void OnClientGameOverGlobal(Run run, RunReport runReport) {
+
             if ((bool)runReport.gameEnding && runReport.gameEnding.isWin) {
+
+                DifficultyIndex difficultyIndex = runReport.ruleBook.FindDifficulty();
                 DifficultyDef runDifficulty = DifficultyCatalog.GetDifficultyDef(runReport.ruleBook.FindDifficulty());
-                if (runDifficulty.countsAsHardMode && runDifficulty.scalingValue >= RequiredDifficultyCoefficient) {
+
+                if ((runDifficulty.countsAsHardMode && runDifficulty.scalingValue >= RequiredDifficultyCoefficient) ||
+                    (difficultyIndex >= DifficultyIndex.Eclipse1 && difficultyIndex <= DifficultyIndex.Eclipse8) ||
+                    (runDifficulty.nameToken == "INFERNO_NAME")) {
                     Grant();
                 }
             }
