@@ -1,6 +1,6 @@
 ﻿namespace ModdedEntityStates.TeslaTrooper {
 
-    public class DeployTeslaTowerScepter : DeployTeslaTower {
+    public class DeployDoubleTeslaTowerScepter : DeployTeslaTower {
         private int towersLeft = 2;
 
         protected override void HandleConstructCoil() {

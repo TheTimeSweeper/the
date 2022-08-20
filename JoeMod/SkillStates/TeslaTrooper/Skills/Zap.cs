@@ -118,7 +118,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             _tracker = GetComponent<TeslaTrackerComponent>();
 
-            _muzzleTransform = GetModelChildLocator().FindChild("MuzzleGauntlet");
+            _muzzleTransform = Modules.VRCompat.GetModelChildLocator(this).FindChild("MuzzleGauntlet");
             if (_muzzleTransform == null)
                 _muzzleTransform = transform;
 

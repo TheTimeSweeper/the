@@ -9,7 +9,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public static float range = 30;
 
-        public static float BaseDuration = 1;
+        public static float BaseDuration = 0.5f;
         public static float BaseCastTime = 0.5f;
 
         public static float MaxDamageCoefficient = 18;
@@ -89,7 +89,8 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             #region effects
 
-            Vector3 pos = GetModelChildLocator() ? GetModelChildLocator().FindChild("Chest").position : transform.position;
+            Transform chest = GetModelChildLocator()?.FindChild("Chest");
+            Vector3 pos = chest ? chest.position : transform.position;
 
             EffectData fect = new EffectData {
                 origin = pos,

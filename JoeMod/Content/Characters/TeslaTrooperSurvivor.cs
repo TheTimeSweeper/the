@@ -73,6 +73,9 @@ namespace Modules.Survivors
             bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
             bodyPrefab.AddComponent<ZapBarrierController>();
+            if (Compat.VRInstalled) {
+                bodyPrefab.AddComponent<TeslaVRComponent>();
+            }
 
             bodyCharacterModel.baseRendererInfos[0].defaultMaterial.SetEmission(2);
             bodyCharacterModel.baseRendererInfos[5].defaultMaterial.SetEmission(2);
@@ -172,14 +175,15 @@ namespace Modules.Survivors
         }
 
         private void InitializePrimarySkills() {
-            States.entityStates.Add(typeof(Zap));                                                           //this constructor creates a skilldef for a typical primary
-            TeslaTrackingSkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
-                                                                                                            TESLA_PREFIX + "PRIMARY_ZAP_NAME",
-                                                                                                            TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
-                                                                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                                                                            new EntityStates.SerializableEntityStateType(typeof(Zap)),
-                                                                                                            "Weapon",
-                                                                                                            false));
+            States.entityStates.Add(typeof(Zap));                  
+            TeslaTrackingSkillDef primarySkillDefZap =           //this constructor creates a skilldef for a typical primary
+                Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
+                                                                              TESLA_PREFIX + "PRIMARY_ZAP_NAME",
+                                                                              TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
+                                                                              Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                                              new EntityStates.SerializableEntityStateType(typeof(Zap)),
+                                                                              "Weapon",
+                                                                              false));
             if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveAlly) {
                 primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
             }
@@ -188,13 +192,14 @@ namespace Modules.Survivors
 
             if (Config.Cursed) {
                 States.entityStates.Add(typeof(ZapPunch));
-                SkillDef primarySkillDefPunch = Modules.Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
-                                                                             TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
-                                                                             TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
-                                                                             Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                                             new EntityStates.SerializableEntityStateType(typeof(ZapPunch)),
-                                                                             "Weapon",
-                                                                             false));
+                SkillDef primarySkillDefPunch = 
+                    Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
+                                                           TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
+                                                           TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
+                                                           Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                           new EntityStates.SerializableEntityStateType(typeof(ZapPunch)),
+                                                           "Weapon",
+                                                           false));
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
             }
 
@@ -245,7 +250,7 @@ namespace Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZapCollectDamage)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 6f,
+                baseRechargeInterval = 7f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

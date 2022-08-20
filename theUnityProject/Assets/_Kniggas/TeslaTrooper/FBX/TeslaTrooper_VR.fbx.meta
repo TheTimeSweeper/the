@@ -3,7 +3,42 @@ guid: dca0393abfba11d40b854d952e17d2c0
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MatNodArmor
+    second: {fileID: 2100000, guid: cded71691106efb4ebdfc68c260ca464, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MatNodArmorColor
+    second: {fileID: 2100000, guid: 749bc60153b7ce54c89af6e994eb7728, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matMCArmor
+    second: {fileID: 2100000, guid: 0fcf4ead066b24544b12abbd180350d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matMCArmorColor
+    second: {fileID: 2100000, guid: ef9f6840be56efa48bce0e91e9c7158a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matMCHammer
+    second: {fileID: 2100000, guid: df2f6d21846b1474f98495465b5df234, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matMastery
+    second: {fileID: 2100000, guid: 80cea346874da93469eb5ff60a1cf4d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matTeslaArmor
+    second: {fileID: 2100000, guid: 38afce492bce1274c97f8bbe94bc5dd5, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

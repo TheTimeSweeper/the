@@ -387,25 +387,25 @@ namespace Modules {
             effect.parentToReferencedTransform = parentToTransform;
             effect.positionAtReferencedTransform = true;
             effect.soundName = soundName;
-
+            
             AddNewEffectDef(newEffect, soundName);
         }
 
-        private static void AddNewEffectDef(GameObject effectPrefab)
+        private static void AddNewEffectDef(GameObject effectPrefab, string soundName = "")
         {
-            AddNewEffectDef(effectPrefab, "");
-        }
-
-        private static void AddNewEffectDef(GameObject effectPrefab, string soundName)
-        {
-            EffectDef newEffectDef = new EffectDef();
-            newEffectDef.prefab = effectPrefab;
-            newEffectDef.prefabEffectComponent = effectPrefab.GetComponent<EffectComponent>();
-            newEffectDef.prefabName = effectPrefab.name;
-            newEffectDef.prefabVfxAttributes = effectPrefab.GetComponent<VFXAttributes>();
-            newEffectDef.spawnSoundEventName = soundName;
+            EffectDef newEffectDef = new EffectDef(effectPrefab);
+            //newEffectDef.prefab = effectPrefab;
+            //newEffectDef.prefabEffectComponent = effectPrefab.GetComponent<EffectComponent>();
+            //newEffectDef.prefabName = effectPrefab.name;
+            //newEffectDef.prefabVfxAttributes = effectPrefab.GetComponent<VFXAttributes>();
+            //newEffectDef.spawnSoundEventName = soundName;
 
             Modules.Content.AddEffectDef(newEffectDef);
+        }
+
+        public static void SetVRMaterials(GameObject vrHand) {
+
+            ConvertAllRenderersToHopooShader(vrHand);
         }
 
         #region materials(old)

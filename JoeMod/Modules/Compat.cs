@@ -8,6 +8,7 @@ namespace Modules {
         public static bool TinkersSatchelInstalled;
         public static bool AetheriumInstalled;
         public static bool ScepterInstalled;
+        public static bool VRInstalled;
 
         public static void Initialize() {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.cwmlolzlz.skills")) {
@@ -24,6 +25,10 @@ namespace Modules {
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter")) {
                 ScepterInstalled = true;
+            }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DrBibop.VRAPI")) {
+                VRInstalled = true;
+                VRCompat.init();
             }
         }
 

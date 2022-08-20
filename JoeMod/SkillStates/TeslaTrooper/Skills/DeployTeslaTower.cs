@@ -79,7 +79,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 }
                 else if (inputBank && entryCountdown <= 0f)
                 {
-                    if ((inputBank.skill1.down || inputBank.skill4.justPressed) && currentPlacementInfo.ok)
+                    if (currentPlacementInfo.ok && (inputBank.skill1.down || inputBank.skill4.justPressed || (Modules.VRCompat.IsLocalVRPlayer(characterBody) && inputBank.skill4.justReleased)))
                     {
                         HandleConstructCoil();
                     }
@@ -152,9 +152,8 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private TotallyOriginalPlacementInfo GetPlacementInfo()
         {
-
             RaycastHit raycastHit;
-            Ray aimRay = GetAimRay();
+            Ray aimRay = Modules.VRCompat.GetAimRay(this, false);
 
             //quick direct raycast to check if we closer ground
             float deployForwardDistance;

@@ -88,6 +88,11 @@ namespace ModdedEntityStates.BaseStates
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = rolledCrit;
             this.attack.impactSound = this.impactSound;
+
+            if (Modules.VRCompat.IsLocalVRPlayer(base.characterBody)) {
+                attackEndTime -= attackStartTime * 0.5f;
+                attackStartTime = 0;
+            }
         }
 
         protected virtual void PlayAttackAnimation()

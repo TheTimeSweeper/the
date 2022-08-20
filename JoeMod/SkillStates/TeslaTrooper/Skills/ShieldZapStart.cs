@@ -28,7 +28,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         {
             EffectManager.SpawnEffect(CastShieldEffect, new EffectData
             {
-                origin = base.GetModelChildLocator().FindChild("MuzzleGauntlet").position,
+                origin =  Modules.VRCompat.GetModelChildLocator(this).FindChild("MuzzleGauntlet").position,
             }, false);
         }
 

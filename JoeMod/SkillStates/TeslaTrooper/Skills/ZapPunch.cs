@@ -19,6 +19,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static int OrbCasts = 20;
         public static float OrbDistance = 20;
 
+        public static float DeflectDamageCoefficient = 3f;
         public static float DeflectRadius = 6f;
 
         float animationDuration = 0.46f;
@@ -62,10 +63,10 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         protected override void OnFireAttackEnter() {
 
-            Vector3 direction = GetAimRay().direction;
+            Vector3 direction = Modules.VRCompat.GetAimRay(this).direction;
             direction.y = Mathf.Max(direction.y, direction.y * 0.5f);
             FindModelChild("PunchHitboxAnchor").rotation = Util.QuaternionSafeLookRotation(direction);
-
+            
             if (base.FindModelChild(base.muzzleString)) {
                 FireProjectileInfo fireProjectileInfo = default(FireProjectileInfo);
                 fireProjectileInfo.position = base.FindModelChild(this.muzzleString).position;
@@ -104,7 +105,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                         position = deflectMuzzleTransform.position + dist * 0.3f,
                         rotation = deflectMuzzleTransform.rotation,
                         owner = base.characterBody.gameObject,
-                        damage = base.characterBody.damage * 3f,
+                        damage = base.characterBody.damage * DeflectDamageCoefficient,
                         force = 200f,
                         crit = rolledCrit,
                         damageColorIndex = DamageColorIndex.Default,

@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapCollectDamage : BaseSkillState {
 
-        public static float ShieldBuffDuration = 4;
+        public static float ShieldBuffDuration = 3;
 
         public float skillsPlusSeconds = 0;
 

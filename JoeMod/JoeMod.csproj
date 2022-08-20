@@ -62,6 +62,9 @@
     <Reference Include="TinkersSatchel">
       <HintPath>..\libs\TinkersSatchel.dll</HintPath>
     </Reference>
+    <Reference Include="VRAPI">
+      <HintPath>..\libs\VRAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
