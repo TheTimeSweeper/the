@@ -78,6 +78,7 @@ MonoBehaviour:
   handType: 1
   muzzles:
   - {fileID: 6238573388354568627}
+  - {fileID: 4246407922008327771}
   bodyName: TeslaTrooperBody
   useRay: 1
   rendererInfos:
@@ -184,6 +185,52 @@ MonoBehaviour:
     transform: {fileID: 5313031304117173877}
   - name: MeshEmission
     transform: {fileID: 8454458938691405729}
+--- !u!1 &4594659672995138579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2748924207551941273}
+  - component: {fileID: 4246407922008327771}
+  m_Layer: 0
+  m_Name: Gauntlet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2748924207551941273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4594659672995138579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5372541409222895078}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4246407922008327771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4594659672995138579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2038423122, guid: ff42e2aba31e95c4a8a574e41169a593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entriesToReplaceIfDominant:
+  - Gauntlet
+  entriesToReplaceIfNonDominant: []
 --- !u!1001 &5320289474923010389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,7 +316,7 @@ PrefabInstance:
     - target: {fileID: -2705447030549292380, guid: d2c534b96a18a944ba5a2bd87345894b,
         type: 3}
       propertyPath: m_Name
-      value: VRRightHandPrefab
+      value: VRRightHand
       objectReference: {fileID: 0}
     - target: {fileID: -1315012335668377728, guid: d2c534b96a18a944ba5a2bd87345894b,
         type: 3}

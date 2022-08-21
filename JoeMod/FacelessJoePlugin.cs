@@ -78,7 +78,9 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         // survivor initialization
         //new JoeSurivor().Initialize();
 
-        new TeslaTowerNotSurvivor().Initialize();       
+        TeslaTowerNotSurvivor baseTower = new TeslaTowerNotSurvivor();
+        baseTower.Initialize();
+        new TeslaTowerScepter().Initialize(baseTower);
         new TeslaTrooperSurvivor().Initialize();
 
         new Modules.ContentPacks().Initialize();

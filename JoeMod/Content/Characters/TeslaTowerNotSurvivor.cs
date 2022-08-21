@@ -12,6 +12,7 @@ using R2API;
 using RoR2.CharacterAI;
 
 namespace Modules.Survivors {
+
     internal class TeslaTowerNotSurvivor : CharacterBase {
 
         public override string bodyName => "TeslaTower";
@@ -161,13 +162,11 @@ namespace Modules.Survivors {
 #endregion skills
 
         public override void InitializeSkins() {
-            GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
-            CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
-            ModelSkinController skinController = model.AddComponent<ModelSkinController>();
-            ChildLocator childLocator = model.GetComponent<ChildLocator>();
+            ModelSkinController skinController = bodyCharacterModel.gameObject.AddComponent<ModelSkinController>();
+            ChildLocator childLocator = bodyCharacterModel.gameObject.GetComponent<ChildLocator>();
 
-            CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
+            CharacterModel.RendererInfo[] defaultRenderers = bodyCharacterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
 
@@ -188,7 +187,7 @@ namespace Modules.Survivors {
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
-                model);
+                bodyCharacterModel.gameObject);
 
             defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
                 0, 
@@ -209,7 +208,7 @@ namespace Modules.Survivors {
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "MASTERY_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
-                model);
+                bodyCharacterModel.gameObject);
 
             masterySkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
                 0,
@@ -253,12 +252,61 @@ namespace Modules.Survivors {
 
             #endregion mastery
 
+            #region nod
+
+            SkinDef NodSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "NOD_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
+                defaultRenderers,
+                bodyCharacterModel.gameObject);
+
+            NodSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
+                0,
+                //1,
+                2,
+                //3,
+                //4,
+                //5,
+                //6,
+                7);
+                //8);
+
+            NodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "Nod_Base_Pillars_Colors",
+                null,//"Nod_Base_Platform",
+                "Nod_Tower",//"Nod_Base_Center",
+                null,//"Nod_Base_Tubes",
+
+                null,//"Nod_Circles",
+                null,//"Nod_Pole",
+                null,//"Nod_Pole_Tracer",
+                "Nod_Emission",
+                null);//"Nod_Orb");
+
+            NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
+            //NodSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
+            //NodSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
+
+            //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
+            //NodSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
+            //NodSkin.rendererInfos[6].defaultMaterial = Modules.Materials.CreateHotpooMaterial("WHITE");
+            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
+            //NodSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
+
+            skins.Add(NodSkin);
+            NodMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
+                minionBodyPrefab = bodyPrefab,
+                minionSkin = NodSkin,
+            };
+
+            #endregion
+            
             #region mince
 
             SkinDef MCSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "MC_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
-                model);
+                bodyCharacterModel.gameObject);
 
             MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
                 0,
@@ -302,54 +350,6 @@ namespace Modules.Survivors {
 
             #endregion
 
-            #region nod
-
-            SkinDef NodSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "NOD_SKIN_NAME",
-                Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
-                defaultRenderers,
-                model);
-
-            NodSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects,
-                0,
-                //1,
-                2,
-                //3,
-                //4,
-                //5,
-                //6,
-                7);
-                //8);
-
-            NodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-                "Nod_Base_Pillars_Colors",
-                null,//"Nod_Base_Platform",
-                "Nod_Tower",//"Nod_Base_Center",
-                null,//"Nod_Base_Tubes",
-
-                null,//"Nod_Circles",
-                null,//"Nod_Pole",
-                null,//"Nod_Pole_Tracer",
-                "Nod_Emission",
-                null);//"Nod_Orb");
-
-            NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
-            //NodSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
-            NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
-            //NodSkin.rendererInfos[3].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerBlack");
-
-            //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
-            //NodSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
-            //NodSkin.rendererInfos[6].defaultMaterial = Modules.Materials.CreateHotpooMaterial("WHITE");
-            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
-            //NodSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
-
-            skins.Add(NodSkin);
-            NodMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
-                minionBodyPrefab = bodyPrefab,
-                minionSkin = NodSkin,
-            };
-
-            #endregion
 
             skinController.skins = skins.ToArray();
         }

@@ -34,6 +34,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: NodTeslaTower.001
+    second: {fileID: 2100000, guid: e35ad104668e1e04fbf15ec139bf7d1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Redstone
     second: {fileID: 2100000, guid: 4ed8efed5e0267e40aacbb09abd3f0c5, type: 2}
   - first:

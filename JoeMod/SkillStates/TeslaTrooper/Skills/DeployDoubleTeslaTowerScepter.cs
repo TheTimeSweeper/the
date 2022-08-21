@@ -5,11 +5,12 @@
 
         protected override void HandleConstructCoil() {
 
-            //doesn't work
-            if (towersLeft >= 2) {
+            //doesn't work. spams towers because we're checking skill.down instead of justpressed
+            //scrapped anyways
+            if (towersLeft > 0) {
                 if (characterBody) {
 
-                    constructCoil();
+                    constructCoil(currentPlacementInfo);
 
                     PlayCrossfade("Gesture, Override", "DoPlaceScepter", 0.1f);
 

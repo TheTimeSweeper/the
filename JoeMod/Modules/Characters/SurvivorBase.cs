@@ -45,9 +45,9 @@ namespace Modules.Survivors {
         }
 
         public virtual void InitializeDoppelganger(string clone) {
-            Modules.Prefabs.CreateGenericDoppelganger(instance.bodyPrefab, bodyName + "MonsterMaster", clone);
+            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, bodyName + "MonsterMaster", clone);
         }
-
+        
         protected virtual void InitializeSurvivor() {
             RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, survivorTokenPrefix, characterUnlockableDef, bodyInfo.sortPosition);
         }

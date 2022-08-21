@@ -6,7 +6,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
     public class DeployTeslaTower : BaseSkillState
     {
-        private struct TotallyOriginalPlacementInfo
+        protected struct TotallyOriginalPlacementInfo
         {
             public bool ok;
             public Vector3 position;
@@ -16,8 +16,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         public GameObject blueprintPrefab = Modules.Assets.TeslaCoilBlueprint;
         public GameObject teslacoilPrefab = Modules.Assets.TeslaCoil;
 
+        protected TotallyOriginalPlacementInfo currentPlacementInfo;
         private float _minTowerHeight = 3;
-        private TotallyOriginalPlacementInfo currentPlacementInfo;
 
         private float entryCountdown = 0;//0.1f;
         private float exitCountdown = 0;//0.25f;
@@ -95,7 +95,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         protected virtual void HandleConstructCoil() {
             if (characterBody) {
 
-                constructCoil();
+                constructCoil(currentPlacementInfo);
 
                 PlayCrossfade("Gesture, Override", "DoPlace", 0.1f);
 
@@ -112,13 +112,11 @@ namespace ModdedEntityStates.TeslaTrooper {
             exitPending = true;
         }
 
-        protected void constructCoil() {
-
+        protected virtual void constructCoil(TotallyOriginalPlacementInfo placementInfo) {
             base.characterBody.SendConstructTurret(base.characterBody, 
-                                                   currentPlacementInfo.position, 
-                                                   currentPlacementInfo.rotation, 
+                                                   placementInfo.position, 
+                                                   placementInfo.rotation, 
                                                    MasterCatalog.FindMasterIndex(coilMasterPrefab));
-
 
             //I am fucking exploding right now
             Util.PlaySound("Play_buliding_uplace", gameObject);
@@ -150,7 +148,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             return InterruptPriority.PrioritySkill;
         }
 
-        private TotallyOriginalPlacementInfo GetPlacementInfo()
+        protected TotallyOriginalPlacementInfo GetPlacementInfo()
         {
             RaycastHit raycastHit;
             Ray aimRay = Modules.VRCompat.GetAimRay(this, false);

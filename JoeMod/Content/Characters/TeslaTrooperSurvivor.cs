@@ -309,7 +309,7 @@ namespace Modules.Survivors
                 skillNameToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecialScepter"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTowerScepter)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = 18f,
@@ -455,7 +455,8 @@ namespace Modules.Survivors
             masterySkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matMastery");
 
             masterySkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                TeslaTowerNotSurvivor.MasteryMinionSkinReplacement
+                TeslaTowerNotSurvivor.MasteryMinionSkinReplacement,
+                TeslaTowerScepter.MasteryMinionSkinReplacement
             };
 
             skins.Add(masterySkin);
@@ -489,7 +490,8 @@ namespace Modules.Survivors
             //nodSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
 
             nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                TeslaTowerNotSurvivor.NodMinionSkinReplacement
+                TeslaTowerNotSurvivor.NodMinionSkinReplacement,
+                TeslaTowerScepter.NodMinionSkinReplacement
             };
 
             skins.Add(nodSkin);
@@ -521,7 +523,8 @@ namespace Modules.Survivors
             MCSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matMC_Hammer");
 
             MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                TeslaTowerNotSurvivor.MCMinionSkinReplacement
+                TeslaTowerNotSurvivor.MCMinionSkinReplacement,
+                TeslaTowerScepter.MCMinionSkinReplacement
             };
 
             if (Modules.Config.Cursed) {

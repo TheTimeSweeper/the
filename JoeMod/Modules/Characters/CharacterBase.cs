@@ -6,8 +6,6 @@ using UnityEngine;
 namespace Modules.Characters {
     internal abstract class CharacterBase {
 
-        public static CharacterBase instance;
-
         public abstract string bodyName { get; }
 
         public abstract BodyInfo bodyInfo { get; set; }
@@ -24,7 +22,6 @@ namespace Modules.Characters {
         public string fullBodyName => bodyName + "Body";
 
         public virtual void Initialize() {
-            instance = this;
             InitializeCharacter();
         }
 
@@ -60,7 +57,7 @@ namespace Modules.Characters {
             }
         }
 
-        public abstract void InitializeSkills();
+        public virtual void InitializeSkills() { }
 
         public virtual void InitializeHitboxes() { }
         

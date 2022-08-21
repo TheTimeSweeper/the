@@ -52,6 +52,34 @@ namespace Modules
             return skinDef;
         }
 
+        /// <summary>
+        /// creates a new skindef that has the original skindef in its baseSkins
+        /// </summary>
+        /// <param name="originalSkinDef"></param>
+        /// <returns></returns>
+        public static SkinDef DuplicateScepterSkinDef(SkinDef originalSkinDef, string newName = "_SCEPTER") {
+
+            //why do we need to do this again?
+            On.RoR2.SkinDef.Awake += DoNothing;
+
+            SkinDef newSkinDef = ScriptableObject.CreateInstance<RoR2.SkinDef>();
+            newSkinDef.baseSkins = new SkinDef[] { originalSkinDef };
+            newSkinDef.icon = originalSkinDef.icon;
+            newSkinDef.unlockableDef = originalSkinDef.unlockableDef;
+            newSkinDef.rootObject = originalSkinDef.rootObject;
+            newSkinDef.rendererInfos = originalSkinDef.rendererInfos;
+            newSkinDef.gameObjectActivations = originalSkinDef.gameObjectActivations;
+            newSkinDef.meshReplacements = originalSkinDef.meshReplacements;
+            newSkinDef.projectileGhostReplacements = originalSkinDef.projectileGhostReplacements;
+            newSkinDef.minionSkinReplacements = originalSkinDef.minionSkinReplacements;
+            newSkinDef.nameToken = originalSkinDef.nameToken + newName;
+            newSkinDef.name = originalSkinDef.name + newName;
+
+            On.RoR2.SkinDef.Awake -= DoNothing;
+
+            return newSkinDef;
+        }
+
         private static void DoNothing(On.RoR2.SkinDef.orig_Awake orig, RoR2.SkinDef self)
         {
         }
