@@ -150,6 +150,12 @@ namespace Modules {
             beamController.procCoefficient = ModdedEntityStates.TeslaTrooper.ZapPunch.ProcCoefficient;
             beamController.damageCoefficient = ModdedEntityStates.TeslaTrooper.ZapPunch.OrbDamageCoefficient;
             beamController.lightningType = RoR2.Orbs.LightningOrb.LightningType.MageLightning;
+            //beamController.inheritDamageType = true;
+
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = zapConeProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.conductive);
+
+            //DamageAPI.AddModdedDamageType(zapConeProjectile.GetComponent<ProjectileDamage>(), Modules.DamageTypes.conductive);
 
             UnityEngine.Object.DestroyImmediate(zapConeProjectile.transform.Find("Effect").GetComponent<ShakeEmitter>());
 

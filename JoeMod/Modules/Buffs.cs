@@ -7,13 +7,13 @@ namespace Modules {
 
     internal static class Buffs
     {
-        // armor buff gained during roll
-        public static BuffDef armorBuff;
         public static BuffDef zapShieldBuff;
         
         public static BuffDef conductiveBuff;
         public static BuffDef conductiveBuffTeam;
         public static BuffDef conductiveBuffTeamGrace;
+
+        public static BuffDef blinkCooldownBuff;
 
         public static void RegisterBuffs()
         {
@@ -45,6 +45,12 @@ namespace Modules {
                                teslaIcon,
                                Color.blue,
                                false,
+                               false);
+                blinkCooldownBuff =
+                    AddNewBuff("BlinkCooldown",
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Cloak").iconSprite,
+                               Color.blue,
+                               true,
                                false);
             }
 

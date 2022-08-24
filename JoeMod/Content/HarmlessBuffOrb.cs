@@ -7,13 +7,17 @@ namespace JoeMod {
     public class HarmlessBuffOrb : Orb{
 
         public BuffDef buffToApply;
+        public float speed = -1;
 
         public override void Begin() {
             base.Begin();
 
-            base.duration = 0.001f;
-
-			EffectData effectData = new EffectData {
+            if (speed <= 0) {
+                base.duration = 0.0001f;
+            } else {
+                base.duration = base.distanceToTarget / this.speed;
+            }
+            EffectData effectData = new EffectData {
 				origin = this.origin,
 				genericFloat = base.duration
 			};
@@ -22,7 +26,7 @@ namespace JoeMod {
 		}
 
         public override void OnArrival() {
-            if (target) {
+            if (target && buffToApply) {
                 target.healthComponent.body.AddBuff(buffToApply);
             }
         }

@@ -39,7 +39,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             base.OnEnter();
             // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
             InitDurationValues(BaseDuration, BaseStartCastTime);
-
+            
             bool tesla = GetComponent<TowerWeaponComponent>().hasTeslaCoil;
 
             lightningOrb = new PseudoLightningOrb {
@@ -58,7 +58,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 damageColorIndex = DamageColorIndex.Default,
                 //range = SearchRange,
                 canBounceOnSameTarget = true,
-                speed = 1000
+                speed = -1
             };
 
             lightningOrb.target = lightningTarget;
@@ -112,8 +112,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void OnExit() {
             base.OnExit();
 
-            if (!hasFired) {
-                fireOrb();
+            if (!hasFired && fixedAge > duration * 0.8f) {
+                OnCastEnter();
                 hasFired = true;
             }
 

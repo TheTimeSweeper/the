@@ -79,16 +79,17 @@ namespace Modules
                 "Lysate Cell Additional Tower Limit",
                 1,
                 "With additional towers, lysate cell is way too strong for a green item. Default is 1, but for proper balance I would suggest 0\n-1 for unlimited. have fun").Value;
-            
-            UtilityDamageAbsorption = Mathf.Clamp(
-                FacelessJoePlugin.instance.Config.Bind(
-                    sectionGameplay,
-                    "Utility Damage Absorption Cap",
-                    1.0f,
-                    "How much damage (as a percentage) is completely blocked while charging up. If set to 0, no damage would be blocked." +
-                    "\nNote that this does not affect how much damage is reflected after the buff expires.").Value,
-                0.0f,
-                1.0f);
+
+            UtilityDamageAbsorption = 1;
+                //Mathf.Clamp(
+                //FacelessJoePlugin.instance.Config.Bind(
+                //    sectionGameplay,
+                //    "Utility Damage Absorption Cap",
+                //    1.0f,
+                //    "How much damage (as a percentage) is completely blocked while charging up. If set to 0, no damage would be blocked." +
+                //    "\nNote that this does not affect how much damage is reflected after the buff expires.").Value,
+                //0.0f,
+                //1.0f);
 
             UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
                 sectionGameplay,

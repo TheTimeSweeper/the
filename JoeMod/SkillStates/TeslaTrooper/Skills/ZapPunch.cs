@@ -14,10 +14,10 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float DamageCoefficient = 3f;
         public static float ProcCoefficient = 1f;
 
-        public static float OrbDamageCoefficient = 2f;
+        public static float OrbDamageCoefficient = 1.5f;
         public static float OrbProcCoefficient = 0.7f;
         public static int OrbCasts = 20;
-        public static float OrbDistance = 20;
+        public static float OrbDistance = 25;
 
         public static float DeflectDamageCoefficient = 3f;
         public static float DeflectRadius = 6f;
@@ -103,7 +103,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                     FireProjectileInfo info = new FireProjectileInfo() {
                         projectilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MageLightningboltBasic"),
                         position = deflectMuzzleTransform.position + dist * 0.3f,
-                        rotation = deflectMuzzleTransform.rotation,
+                        rotation = Util.QuaternionSafeLookRotation(GetAimRay().direction, Vector3.up),
                         owner = base.characterBody.gameObject,
                         damage = base.characterBody.damage * DeflectDamageCoefficient,
                         force = 200f,

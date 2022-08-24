@@ -169,35 +169,48 @@ namespace Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
-            string conductiveText = FacelessJoePlugin.conductiveAlly ? $" Use on allies to {Helpers.DamageText("charge")} them" : "";
-            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Casts {Helpers.UtilityText($"up to 3 bolts")} at {Helpers.UtilityText($"close range")}. {Helpers.UtilityText("Charges")} allies.");
-
+            string conductiveText = FacelessJoePlugin.conductiveEnemy ? $"{Helpers.HealthText("Conductive")}. " : "";
+            LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"{conductiveText}{Helpers.UtilityText("Charging")}. Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Casts {Helpers.UtilityText($"up to 3 bolts")} at {Helpers.UtilityText($"close range")}.");
+            
+            LanguageAPI.Add("KEYWORD_CONDUCTIVE", $"Enemies marked as conductive will take extra damage from {Helpers.HealthText("Reactive")} attacks. Max 3 stacks");
             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
-
-
+            
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Fist");
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.OrbDamageCoefficient)}. Punching projectiles sends them back, electrically charged");
-
+            
             #endregion
-
+            
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_NAME", "2000 Volts");
-            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", $"{Helpers.UtilityText("Stunning.")} Create an electric blast in a large area for {Helpers.DamageValueText(BigZap.DamageCoefficient)}.");
+
+            string reactiveText = FacelessJoePlugin.conductiveEnemy ? $"{Helpers.HealthText("Reactive")}. " : "";
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", 
+                $"{reactiveText}{Helpers.UtilityText("Stunning.")} Create an electric blast in a large area for {Helpers.DamageValueText(BigZap.DamageCoefficient)}. " + 
+                $"While near a {Helpers.UtilityText("Tesla Tower")}, perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
             #endregion
+
+            LanguageAPI.Add("KEYWORD_REACTIVE", $"Reacts with Conductive Enemies, Dealing an additional {Helpers.DamageText("0.1x damage")} per stack of Conductive");
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_NAME", "Charging Up");
             LanguageAPI.Add(prefix + "UTILITY_BARRIER_DESCRIPTION",
                 $"For {Helpers.UtilityText($"{ShieldZapCollectDamage.ShieldBuffDuration} seconds")}, " +
-                $"{Helpers.UtilityText(Config.UtilityDamageAbsorption * 100 + "% of that damage")} is negated, and {Helpers.UtilityText("absorbed")}, " +
+                $"{Helpers.UtilityText(Config.UtilityDamageAbsorption * 100 + "% of damage")} is negated, and {Helpers.UtilityText("absorbed")}, " +
                 $"After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage absorbed")}.");
+
+            LanguageAPI.Add(prefix + "UTILITY_BLINK_NAME", "Surging Forward");
+            LanguageAPI.Add(prefix + "UTILITY_BLINK_DESCRIPTION", 
+                $"Become a bolt of electricity and surge toward a targeted Enemy, dealing {Helpers.DamageValueText(BlinkZap.DamageCoefficient)}. " +
+                $"If the enemy was {Helpers.UtilityText($"Conductive")}, can be recasted within a short window.");
 
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_NAME", "Tesla Tower");
             string target = Modules.Config.TowerTargeting.Value ? "targeted" : "nearby";
-            string specialDesc = $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps {target} units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient * 100}% damage")}. Use {Helpers.UtilityText("2000 Volts")} while near a tower to perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.";
+            string specialDesc = 
+                $"Construct a Tesla Tower for {Helpers.UtilityText($"{TowerLifetime.LifeDuration} seconds")} that zaps {target} units for {Helpers.DamageText($"3x{TowerZap.DamageCoefficient * 100}% damage")}. " +
+                $"Enhances Secondary skill.";
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_TOWER_NAME", "Tesla Network");

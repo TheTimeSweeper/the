@@ -51,7 +51,7 @@ namespace ModdedEntityStates.Henry
 
             if (NetworkServer.active)
             {
-                base.characterBody.AddTimedBuff(Modules.Buffs.armorBuff, 3f * Roll.duration);
+                //base.characterBody.AddTimedBuff(Modules.Buffs.armorBuff, 3f * Roll.duration);
                 base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f * Roll.duration);
             }
         }

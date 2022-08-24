@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
 
-        new public static float DamageCoefficient = 12.0f;
+        new public static float DamageCoefficient = FacelessJoePlugin.conductiveEnemy ? 10.0f : 12.0f;
         new public static float ProcCoefficient = 1f;
         new public static float BaseDuration = 0.6f;
-        public static float BaseAttackRadius = 15;
-
+        public static float BaseAttackRadius = 16;
+        
         public float secondarySkillsPlusAreaMulti = 1f;
         public float secondarySkillsPlusDamageMulti = 1f;
         public float attackRadius;
@@ -61,7 +61,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     baseDamage = damageStat * DamageCoefficient * secondarySkillsPlusDamageMulti,
                     crit = crit,
                     damageType = DamageType.Shock5s,
-                    //damageColorIndex = DamageColorIndex.WeakPoint,
+                    damageColorIndex = DamageColorIndex.WeakPoint,
                     
                     procCoefficient = ProcCoefficient,
                     //procChainMask = 
@@ -91,6 +91,19 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 fect.scale /= 2f;
                 EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
                 #endregion effects
+            }
+        }
+
+        public override void OnExit() {
+            base.OnExit();
+
+            if (!hasFired) {
+                OnCastEnter();
+                hasFired = true;
+            }
+
+            if (Modules.Config.TowerTargeting.Value) {
+                GetComponent<TowerOwnerTrackerComponent>()?.OwnerTrackerComponent?.SetTowerLockedTarget(null);
             }
         }
     }

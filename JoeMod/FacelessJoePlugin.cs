@@ -48,8 +48,10 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static ManualLogSource Log;
 
     public static bool conductiveMechanic => conductiveAlly || conductiveEnemy;
-    public static bool conductiveEnemy = false;
+    public static bool conductiveEnemy = true;
     public static bool conductiveAlly = true;
+
+    public static bool holdonasec = false;
 
     private void Start() {
 
@@ -80,7 +82,9 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         TeslaTowerNotSurvivor baseTower = new TeslaTowerNotSurvivor();
         baseTower.Initialize();
-        new TeslaTowerScepter().Initialize(baseTower);
+        if (!holdonasec) {
+            new TeslaTowerScepter().Initialize(baseTower);
+        }
         new TeslaTrooperSurvivor().Initialize();
 
         new Modules.ContentPacks().Initialize();

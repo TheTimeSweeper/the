@@ -30,23 +30,4 @@ namespace JoeMod {
             public TeslaTrackerComponent teslaTracker;
         }
     }
-
-    public class TeslaConductiveTrackingSkillDef : TeslaTrackingSkillDef {
-
-        private static bool HasTarget([NotNull] GenericSkill skillSlot) {
-
-            TeslaTrackerComponent teslaTracker = ((TeslaConductiveTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).teslaTracker;
-            HurtBox trackingTarget = teslaTracker?.GetTrackingTarget();
-
-            return trackingTarget != null && trackingTarget.healthComponent.body.HasBuff(Modules.Buffs.conductiveBuff);
-        }
-
-        public override bool CanExecute([NotNull] GenericSkill skillSlot) {
-            return TeslaConductiveTrackingSkillDef.HasTarget(skillSlot) && base.CanExecute(skillSlot);
-        }
-
-        public override bool IsReady([NotNull] GenericSkill skillSlot) {
-            return base.IsReady(skillSlot) && TeslaConductiveTrackingSkillDef.HasTarget(skillSlot);
-        }
-    }
 }

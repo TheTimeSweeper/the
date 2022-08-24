@@ -14,9 +14,7 @@ public class TestValueManager : MonoBehaviour {
     //compiler flags when
     private bool _testingEnabled => Modules.Config.Debug;
 
-    public static float value1 = 0.54f;
-    public static float value2 = 2.0f;
-    public static float value3 = 0.2f;
+    public static float value1 = 25f;
 
     void Update() {
         if (!_testingEnabled)
@@ -25,7 +23,7 @@ public class TestValueManager : MonoBehaviour {
         if (!Input.GetKey(KeyCode.LeftAlt))
             return;
 
-        //manageTestValue(ref value1, "fist time", KeyCode.Keypad7, KeyCode.Keypad4, 0.02f);
+        manageTestValue(ref value1, "sped", KeyCode.Keypad7, KeyCode.Keypad4, 5f);
         //manageTestValue(ref value2, "deflect damage", KeyCode.Keypad8, KeyCode.Keypad5, 0.1f);
         //manageTestValue(ref value3, "end time", KeyCode.Keypad9, KeyCode.Keypad6, 0.01f);
     }

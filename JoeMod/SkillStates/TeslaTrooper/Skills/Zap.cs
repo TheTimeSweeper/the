@@ -180,7 +180,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 moddedLightningType = GetOrbType,
                 damageColorIndex = DamageColorIndex.Default,
                 range = BounceDistance,
-                speed = 690,
+                speed = -1,
                 target = _targetHurtbox
             };
         } 
@@ -220,8 +220,8 @@ namespace ModdedEntityStates.TeslaTrooper {
                 _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
             }
             OrbManager.instance.AddOrb(_lightningOrb);
-            //happens after firing each orb to apply to their bounces only
-            _lightningOrb.moddedLightningType = ModdedLightningType.MageLightning;
+            ////happens after firing each orb to apply to their bounces only
+            //_lightningOrb.moddedLightningType = ModdedLightningType.MageLightning;
         }
 
         private void FireZapTeammate() {

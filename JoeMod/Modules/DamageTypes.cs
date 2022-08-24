@@ -15,6 +15,7 @@ namespace Modules {
 
         public static DamageAPI.ModdedDamageType conductive;
         public static DamageAPI.ModdedDamageType consumeConductive;
+        public static DamageAPI.ModdedDamageType applyBlinkCooldown;
 
         public static void RegisterDamageTypes() {
 
@@ -26,6 +27,7 @@ namespace Modules {
 
                 conductive = DamageAPI.ReserveDamageType();
                 consumeConductive = DamageAPI.ReserveDamageType();
+                applyBlinkCooldown = DamageAPI.ReserveDamageType();
 
                 SetHooks();
             }
