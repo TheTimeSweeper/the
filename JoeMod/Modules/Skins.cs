@@ -86,12 +86,12 @@ namespace Modules
         /// </summary>
         /// <param name="originalSkinDef"></param>
         /// <returns></returns>
-        public static SkinDef DuplicateScepterSkinDef(SkinDef originalSkinDef, string newName = "_SCEPTER") {
+        public static T DuplicateScepterSkinDef<T>(T originalSkinDef, string newName = "_SCEPTER") where T: SkinDef{
 
             //why do we need to do this again?
             On.RoR2.SkinDef.Awake += DoNothing;
 
-            SkinDef newSkinDef = ScriptableObject.CreateInstance<RoR2.SkinDef>();
+            T newSkinDef = ScriptableObject.CreateInstance<T>();
             newSkinDef.baseSkins = new SkinDef[] { originalSkinDef };
             newSkinDef.icon = originalSkinDef.icon;
             newSkinDef.unlockableDef = originalSkinDef.unlockableDef;

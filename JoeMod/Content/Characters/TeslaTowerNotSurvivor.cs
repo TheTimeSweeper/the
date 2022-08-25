@@ -276,13 +276,13 @@ namespace Modules.Survivors {
                 null,//"Nod_Base_Platform",
                 "Nod_Tower",//"Nod_Base_Center",
                 null,//"Nod_Base_Tubes",
-
+                
                 null,//"Nod_Circles",
                 null,//"Nod_Pole",
                 null,//"Nod_Pole_Tracer",
                 "Nod_Emission",
                 null);//"Nod_Orb");
-
+            
             NodSkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
             //NodSkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
             NodSkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
@@ -291,9 +291,9 @@ namespace Modules.Survivors {
             //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
             //NodSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
             //NodSkin.rendererInfos[6].defaultMaterial = Modules.Materials.CreateHotpooMaterial("WHITE");
-            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
+            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod").SetEmission(2);
             //NodSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
-
+            
             NodSkin.ZapLightningType = ModdedLightningType.NodMageThick;
 
             skins.Add(NodSkin);

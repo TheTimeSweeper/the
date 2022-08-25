@@ -62,7 +62,7 @@ public class SkinRecolorController : MonoBehaviour {
 #if UNITY_EDITOR
 
         SetRecolor(recolorInt);
-
+        
 #endif
     }
 

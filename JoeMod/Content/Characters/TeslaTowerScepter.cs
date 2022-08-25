@@ -3,6 +3,7 @@ using System;
 using Modules.Characters;
 using R2API;
 using UnityEngine;
+using JoeMod;
 
 namespace Modules.Survivors {
     internal class TeslaTowerScepter : CharacterBase {
@@ -71,7 +72,7 @@ namespace Modules.Survivors {
             ModelSkinController skinController = bodyCharacterModel.gameObject.GetComponent<ModelSkinController>();
 
             #region Default
-            SkinDef scepterDefault = Skins.DuplicateScepterSkinDef(skinController.skins[0]);
+            TowerSkinDef scepterDefault = Skins.DuplicateScepterSkinDef(skinController.skins[0] as TowerSkinDef);
 
             scepterDefault.meshReplacements = Modules.Skins.getMeshReplacements(scepterDefault.rendererInfos,
                 "Tower_Base_Pillars_Color_Scepter",
@@ -89,7 +90,7 @@ namespace Modules.Survivors {
             #endregion Default
 
             #region Mastery
-            SkinDef scepterMastery = Skins.DuplicateScepterSkinDef(skinController.skins[1]);
+            TowerSkinDef scepterMastery = Skins.DuplicateScepterSkinDef(skinController.skins[1] as TowerSkinDef);
 
             scepterMastery.meshReplacements = Modules.Skins.getMeshReplacements(scepterMastery.rendererInfos,
                 "Mastery_Base_Pillars_Color_Scepter",
@@ -103,7 +104,6 @@ namespace Modules.Survivors {
                 null,//"Mastery_Emission",
                 null);//"Mastery_Orb");
 
-
             skinController.skins[1] = scepterMastery;
 
             MasteryMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
@@ -114,7 +114,7 @@ namespace Modules.Survivors {
             #endregion Mastery
 
             #region Nod
-            SkinDef scepterNod = Skins.DuplicateScepterSkinDef(skinController.skins[2]);
+            TowerSkinDef scepterNod = Skins.DuplicateScepterSkinDef(skinController.skins[2] as TowerSkinDef);
 
             scepterNod.meshReplacements = Modules.Skins.getMeshReplacements(scepterNod.rendererInfos,
                 null,//"Nod_Base_Pillars_Color_Scepter",
@@ -139,7 +139,7 @@ namespace Modules.Survivors {
             #endregion Nod
 
             #region MC
-            SkinDef scepterMC = Skins.DuplicateScepterSkinDef(skinController.skins[3]);
+            TowerSkinDef scepterMC = Skins.DuplicateScepterSkinDef(skinController.skins[3] as TowerSkinDef);
 
             scepterMC.meshReplacements = Modules.Skins.getMeshReplacements(scepterMC.rendererInfos,
                 null,//"MC_Base_Pillars_Color_Scepter",

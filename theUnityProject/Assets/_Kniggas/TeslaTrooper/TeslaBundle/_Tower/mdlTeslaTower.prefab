@@ -4979,7 +4979,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 55457e50fa0061843bb55c4a003577f9, type: 2}
+  - {fileID: 2100000, guid: 25d528dcc8fc6374cb9baa5ef8498979, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5558,7 +5558,7 @@ MonoBehaviour:
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 4153607555809003547}
-    defaultMaterial: {fileID: 2100000, guid: e55f3642b8fb710439763f554bb49a8d, type: 2}
+    defaultMaterial: {fileID: 2100000, guid: 7e1a45623e1720b4ba2fc427b787be61, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
   - renderer: {fileID: 6726856292671079503}
