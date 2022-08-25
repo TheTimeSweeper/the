@@ -58,6 +58,12 @@ public class SkinRecolorController : MonoBehaviour {
         for (int i = 0; i < recolorGroups.Length; i++) {
             recolorGroups[i].fillPropertyBlocks();
         }
+
+#if UNITY_EDITOR
+
+        SetRecolor(recolorInt);
+
+#endif
     }
 
     public void SetRecolor (Color[] colors) {
@@ -107,7 +113,7 @@ public class SkinRecolorController : MonoBehaviour {
 
     [ContextMenu("SetColors")]
     private void Start() {
-        SetRecolor(0);
+        SetRecolor(recolorInt);
     }
     private void Update() {
         if (updateColor) {

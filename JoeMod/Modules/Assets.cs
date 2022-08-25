@@ -52,6 +52,10 @@ namespace Modules {
         public static GameObject TeslaLoaderZapConeProjectile;
         public static GameObject TeslaZapConeEffect;
 
+        public static GameObject TeslaLightningOrbEffectRed;
+        public static GameObject TeslaMageLightningOrbEffectRed;
+        public static GameObject TeslaMageLightningOrbEffectRedThick;
+
         public static Material ChainLightningMaterial;
         #endregion
 
@@ -134,8 +138,26 @@ namespace Modules {
             TeslaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             TeslaIndicatorPrefab = CreateTeslaTrackingIndicator();
-
+            
             ChainLightningMaterial = FindChainLightningMaterial();
+            TeslaLightningOrbEffectRed = 
+                CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/LightningOrbEffect", 
+                                        "NodLightningOrbEffect",
+                                        new Color(255f / 255f, 2f / 255f, 1f / 255f),
+                                        Color.white,
+                                        1.2f);
+            TeslaMageLightningOrbEffectRed = 
+                CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/MageLightningOrbEffect",
+                                        "NodMageLightningOrbEffect",
+                                        Color.white,
+                                        new Color(255f / 255f, 2f / 255f, 1f / 255f));
+            TeslaMageLightningOrbEffectRedThick = 
+                CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/MageLightningOrbEffect",
+                                        "NodMageThickLightningOrbEffect",
+                                        Color.white,
+                                        new Color(255f / 255f, 2f / 255f, 1f / 255f),
+                                        2);
+            TeslaMageLightningOrbEffectRedThick.GetComponentInChildren<AnimateShaderAlpha>().timeMax = 0.5f;
 
             TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
         }
@@ -245,6 +267,27 @@ namespace Modules {
 
         private static Material FindChainLightningMaterial() {
             return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").GetComponentInChildren<LineRenderer>().material;
+        }
+
+        private static GameObject CloneLightningOrbEffect(string path, string name, Color beamColor, Color? lineColor = null, float width = 1) {
+            GameObject newEffect = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>(path), name, false);
+
+            foreach (LineRenderer rend in newEffect.GetComponentsInChildren<LineRenderer>()) {
+                if (rend) {
+                    Material mat = UnityEngine.Object.Instantiate<Material>(rend.material);
+                    mat.SetColor("_TintColor", beamColor);
+                    rend.material = mat;
+
+                    if (lineColor != null) {
+                        rend.startColor = lineColor.Value;
+                        rend.endColor = lineColor.Value;
+                    }
+                    rend.widthMultiplier = width;
+                }
+            }
+            AddNewEffectDef(newEffect);
+
+            return newEffect;
         }
 
         public static GameObject LoadSurvivorModel(string modelName) {
@@ -387,12 +430,14 @@ namespace Modules {
             }
 
             EffectComponent effect = newEffect.GetComponent<EffectComponent>();
-            if (!effect) effect = newEffect.AddComponent<EffectComponent>();
-            effect.applyScale = true;
-            effect.effectIndex = EffectIndex.Invalid;
-            effect.parentToReferencedTransform = parentToTransform;
-            effect.positionAtReferencedTransform = true;
-            effect.soundName = soundName;
+            if (!effect) {
+                effect = newEffect.AddComponent<EffectComponent>();
+                effect.applyScale = true;
+                effect.effectIndex = EffectIndex.Invalid;
+                effect.parentToReferencedTransform = parentToTransform;
+                effect.positionAtReferencedTransform = true;
+                effect.soundName = soundName;
+            }
             
             AddNewEffectDef(newEffect, soundName);
         }

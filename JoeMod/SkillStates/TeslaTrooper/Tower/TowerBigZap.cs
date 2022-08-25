@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
 
-        new public static float DamageCoefficient = FacelessJoePlugin.conductiveEnemy ? 10.0f : 12.0f;
+        new public static float DamageCoefficient = 12.0f;
         new public static float ProcCoefficient = 1f;
         new public static float BaseDuration = 0.6f;
         public static float BaseAttackRadius = 16;
@@ -72,10 +72,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
                     //impactEffect = EffectIndex.uh;
                 };
-
-                if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
-                    blast.AddModdedDamageType(Modules.DamageTypes.consumeConductive);
-                }
                 blast.Fire();
 
                 #region effects

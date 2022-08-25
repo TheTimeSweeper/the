@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using JoeMod;
+using R2API;
 using RoR2;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,8 @@ namespace Modules
 {
     internal static class Skins
     {
-        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, GameObject root)
-        {
-            return CreateSkinDef(skinName, skinIcon, rendererInfos, root, null);
-        }
-
-        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] rendererInfos, GameObject root, UnlockableDef unlockableDef)
-        {
-            SkinDefInfo skinDefInfo = new SkinDefInfo
-            {
+        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null) {
+            SkinDefInfo skinDefInfo = new SkinDefInfo {
                 BaseSkins = Array.Empty<SkinDef>(),
                 GameObjectActivations = new SkinDef.GameObjectActivation[0],
                 Icon = skinIcon,
@@ -26,7 +20,7 @@ namespace Modules
                 Name = skinName,
                 NameToken = skinName,
                 ProjectileGhostReplacements = new SkinDef.ProjectileGhostReplacement[0],
-                RendererInfos = new CharacterModel.RendererInfo[rendererInfos.Length],
+                RendererInfos = new CharacterModel.RendererInfo[defaultRendererInfos.Length],
                 RootObject = root,
                 UnlockableDef = unlockableDef
             };
@@ -34,6 +28,45 @@ namespace Modules
             On.RoR2.SkinDef.Awake += DoNothing;
 
             SkinDef skinDef = ScriptableObject.CreateInstance<RoR2.SkinDef>();
+
+            PopulateSkinDef(defaultRendererInfos, skinDefInfo, skinDef);
+
+            On.RoR2.SkinDef.Awake -= DoNothing;
+
+            return skinDef;
+        }
+
+        internal static SkinDef GetCurrentSkinDef(CharacterBody characterBody) {
+            return SkinCatalog.GetBodySkinDef(characterBody.bodyIndex, (int)characterBody.skinIndex);
+        }
+
+        public static T CreateSkinDef<T>(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null) where T:SkinDef {
+            SkinDefInfo skinDefInfo = new SkinDefInfo {
+                BaseSkins = Array.Empty<SkinDef>(),
+                GameObjectActivations = new SkinDef.GameObjectActivation[0],
+                Icon = skinIcon,
+                MeshReplacements = new SkinDef.MeshReplacement[0],
+                MinionSkinReplacements = new SkinDef.MinionSkinReplacement[0],
+                Name = skinName,
+                NameToken = skinName,
+                ProjectileGhostReplacements = new SkinDef.ProjectileGhostReplacement[0],
+                RendererInfos = new CharacterModel.RendererInfo[defaultRendererInfos.Length],
+                RootObject = root,
+                UnlockableDef = unlockableDef
+            };
+
+            On.RoR2.SkinDef.Awake += DoNothing;
+
+            T skinDef = ScriptableObject.CreateInstance<T>();
+
+            PopulateSkinDef(defaultRendererInfos, skinDefInfo, skinDef);
+
+            On.RoR2.SkinDef.Awake -= DoNothing;
+
+            return skinDef;
+        }
+
+        private static void PopulateSkinDef(CharacterModel.RendererInfo[] rendererInfos, SkinDefInfo skinDefInfo, SkinDef skinDef) {
             skinDef.baseSkins = skinDefInfo.BaseSkins;
             skinDef.icon = skinDefInfo.Icon;
             skinDef.unlockableDef = skinDefInfo.UnlockableDef;
@@ -46,10 +79,6 @@ namespace Modules
             skinDef.minionSkinReplacements = skinDefInfo.MinionSkinReplacements;
             skinDef.nameToken = skinDefInfo.NameToken;
             skinDef.name = skinDefInfo.Name;
-
-            On.RoR2.SkinDef.Awake -= DoNothing;
-
-            return skinDef;
         }
 
         /// <summary>

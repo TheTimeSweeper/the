@@ -10,6 +10,7 @@ using ModdedEntityStates.TeslaTrooper.Tower;
 using EntityStates;
 using R2API;
 using RoR2.CharacterAI;
+using JoeMod;
 
 namespace Modules.Survivors {
 
@@ -184,7 +185,7 @@ namespace Modules.Survivors {
 
             #region DefaultSkin
 
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "DEFAULT_SKIN_NAME",
+            TowerSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TowerSkinDef>(TOWER_PREFIX + "DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 bodyCharacterModel.gameObject);
@@ -205,7 +206,7 @@ namespace Modules.Survivors {
 
             #region mastery
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "MASTERY_SKIN_NAME",
+            TowerSkinDef masterySkin = Modules.Skins.CreateSkinDef<TowerSkinDef>(TOWER_PREFIX + "MASTERY_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 bodyCharacterModel.gameObject);
@@ -254,7 +255,7 @@ namespace Modules.Survivors {
 
             #region nod
 
-            SkinDef NodSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "NOD_SKIN_NAME",
+            TowerSkinDef NodSkin = Modules.Skins.CreateSkinDef<TowerSkinDef>(TOWER_PREFIX + "NOD_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
                 defaultRenderers,
                 bodyCharacterModel.gameObject);
@@ -293,6 +294,8 @@ namespace Modules.Survivors {
             NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
             //NodSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
 
+            NodSkin.ZapLightningType = ModdedLightningType.NodMageThick;
+
             skins.Add(NodSkin);
             NodMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
                 minionBodyPrefab = bodyPrefab,
@@ -303,7 +306,7 @@ namespace Modules.Survivors {
             
             #region mince
 
-            SkinDef MCSkin = Modules.Skins.CreateSkinDef(TOWER_PREFIX + "MC_SKIN_NAME",
+            TowerSkinDef MCSkin = Modules.Skins.CreateSkinDef<TowerSkinDef>(TOWER_PREFIX + "MC_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
                 bodyCharacterModel.gameObject);

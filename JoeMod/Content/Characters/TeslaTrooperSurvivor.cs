@@ -10,6 +10,7 @@ using Modules.Characters;
 using R2API;
 using System.Runtime.CompilerServices;
 using JoeMod;
+using RoR2.Orbs;
 
 namespace Modules.Survivors
 {
@@ -56,7 +57,7 @@ namespace Modules.Survivors
         #endregion
 
         #region cool stuff
-        public static float conductiveAllyBoost = FacelessJoePlugin.conductiveEnemy ? 1.2f : 1.3f;
+        public static float conductiveAllyBoost = 1.3f;
 
         public static DeployableSlot teslaTowerDeployableSlot;
         public DeployableAPI.GetDeployableSameSlotLimit GetTeslaTowerSlotLimit;
@@ -184,9 +185,8 @@ namespace Modules.Survivors
                                                                               new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                               "Weapon",
                                                                               false));
-            if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveAlly) {
+
                 primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
-            }
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
 
@@ -292,7 +292,7 @@ namespace Modules.Survivors
             blinkZapSkillDef.timeoutDuration = 3;
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef);
-            if (!FacelessJoePlugin.holdonasec && FacelessJoePlugin.conductiveEnemy) {
+            if (!FacelessJoePlugin.holdonasec) {
                 Modules.Skills.AddUtilitySkills(bodyPrefab, blinkZapSkillDef);
             }
         }
@@ -429,7 +429,7 @@ namespace Modules.Survivors
 
             CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
 
-            List<SkinDef> skins = new List<SkinDef>();
+            List<TeslaSkinDef> skins = new List<TeslaSkinDef>();
 
             List<GameObject> activatedGameObjects = Skins.createAllActivatedGameObjectsList(childLocator,
                 "meshTeslaArmor_Fanservice",
@@ -437,7 +437,7 @@ namespace Modules.Survivors
 
             #region DefaultSkin
 
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "DEFAULT_SKIN_NAME",
+            TeslaSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 model);
@@ -458,7 +458,7 @@ namespace Modules.Survivors
 
             #region MasterySkin
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MASTERY_SKIN_NAME",
+            TeslaSkinDef masterySkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MASTERY_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMastery"),
                 defaultRenderers,
                 model,
@@ -493,7 +493,7 @@ namespace Modules.Survivors
             if (!FacelessJoePlugin.holdonasec) {
                 #region NodSkin
 
-                SkinDef nodSkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "NOD_SKIN_NAME",
+                TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "NOD_SKIN_NAME",
                     Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
                     defaultRenderers,
                     model,
@@ -519,16 +519,19 @@ namespace Modules.Survivors
                 //nodSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
 
                 nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                TeslaTowerNotSurvivor.NodMinionSkinReplacement,
-                TeslaTowerScepter.NodMinionSkinReplacement
-            };
+                    TeslaTowerNotSurvivor.NodMinionSkinReplacement,
+                    TeslaTowerScepter.NodMinionSkinReplacement
+                };
 
                 skins.Add(nodSkin);
+
+                nodSkin.ZapLightningType = ModdedLightningType.Nod;
+                nodSkin.ZapBounceLightningType = LightningOrb.LightningType.Count + 10;
                 #endregion
             }
 
             #region MCSkin
-            SkinDef MCSkin = Modules.Skins.CreateSkinDef(TESLA_PREFIX + "MC_SKIN_NAME",
+            TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
                 model);
@@ -585,6 +588,24 @@ namespace Modules.Survivors
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
             
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+
+            On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
+        }
+
+        private void LightningOrb_Begin(On.RoR2.Orbs.LightningOrb.orig_Begin orig, LightningOrb self) {
+
+            if (self.lightningType == LightningOrb.LightningType.Count + 10) {
+                self.duration = 0.01f;
+
+                EffectData effectData = new EffectData {
+                    origin = self.origin,
+                    genericFloat = self.duration
+                };
+                effectData.SetHurtBoxReference(self.target);
+                EffectManager.SpawnEffect(Modules.Assets.TeslaMageLightningOrbEffectRed, effectData, true);
+            } else {
+                orig(self);
+            }
         }
 
         private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex) {
@@ -675,17 +696,9 @@ namespace Modules.Survivors
 
         private static void CheckConductive(HealthComponent self, DamageInfo damageInfo) {
 
-            if (FacelessJoePlugin.conductiveMechanic) {
-                ApplyConductive(self, damageInfo);
-            }
+            ApplyConductive(self, damageInfo);
 
-            if (FacelessJoePlugin.conductiveEnemy) {
-                ConsumeConductive(self, damageInfo);
-            }
-
-            if (FacelessJoePlugin.conductiveAlly) {
-                ConsumeConductiveAlly(self, damageInfo);
-            }
+            ConsumeConductiveAlly(self, damageInfo);
         }
 
         private static void ApplyConductive(HealthComponent self, DamageInfo damageInfo) {
@@ -694,38 +707,9 @@ namespace Modules.Survivors
             bool attackConductive = damageInfo.HasModdedDamageType(DamageTypes.conductive);
             if (attackConductive) {
                 if (damageInfo.attacker?.GetComponent<TeamComponent>()?.teamIndex == self.body.teamComponent.teamIndex) {
-                    if (FacelessJoePlugin.conductiveAlly) {
-                        if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 1) {
-                            self.body.AddBuff(Buffs.conductiveBuffTeam);
-                        }
+                    if (self.body.GetBuffCount(Buffs.conductiveBuffTeam) < 1) {
+                        self.body.AddBuff(Buffs.conductiveBuffTeam);
                     }
-                } else {
-                    if (FacelessJoePlugin.conductiveEnemy) {
-                        if (self.body.GetBuffCount(Buffs.conductiveBuff) < 3) {
-                            self.body.AddBuff(Buffs.conductiveBuff);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static void ConsumeConductive(HealthComponent self, DamageInfo damageInfo) {
-            
-            //consume conductive stacks for damage and shock
-            bool attackConsuming = damageInfo.HasModdedDamageType(DamageTypes.consumeConductive);
-            if (attackConsuming) {
-
-                int conductiveCount = self.body.GetBuffCount(Buffs.conductiveBuff);
-
-                for (int i = 0; i < conductiveCount; i++) {
-
-                    self.body.RemoveBuff(Buffs.conductiveBuff);
-                }
-
-                if (conductiveCount > 0) {
-
-                    damageInfo.AddModdedDamageType(DamageTypes.shockMed);
-                    damageInfo.damage *= 1f + (0.1f * conductiveCount);
                 }
             }
         }

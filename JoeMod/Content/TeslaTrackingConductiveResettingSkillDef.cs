@@ -28,7 +28,7 @@ namespace JoeMod {
             TeslaTrackerComponent teslaTracker = ((InstanceData)skillSlot.skillInstanceData).teslaTracker;
             HurtBox trackingTarget = teslaTracker?.GetTrackingTarget();
 
-            return trackingTarget != null && !trackingTarget.healthComponent.body.HasBuff(Modules.Buffs.blinkCooldownBuff);
+            return trackingTarget != null;
         }
 
         public override bool CanExecute([NotNull] GenericSkill skillSlot) {
@@ -39,19 +39,19 @@ namespace JoeMod {
             return base.IsReady(skillSlot) && HasTarget(skillSlot);
         }
 
-        private static bool IsTargetConductive([NotNull] GenericSkill skillSlot) {
+        private static bool IsTargetCooldown([NotNull] GenericSkill skillSlot) {
 
             TeslaTrackerComponent teslaTracker = ((InstanceData)skillSlot.skillInstanceData).teslaTracker;
             HurtBox trackingTarget = teslaTracker?.GetTrackingTarget();
 
-            return trackingTarget != null && trackingTarget.healthComponent.body.HasBuff(Modules.Buffs.conductiveBuff);
+            return trackingTarget != null && trackingTarget.healthComponent.body.HasBuff(Modules.Buffs.blinkCooldownBuff);
         }
 
         public override void OnExecute([NotNull] GenericSkill skillSlot) {
             base.OnExecute(skillSlot);
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
-            if (IsTargetConductive(skillSlot)) {
+            if (!IsTargetCooldown(skillSlot)) {
                 skillSlot.stock++;
                 instanceData.hasExtraStock = true;
                 instanceData.timeoutTimer = timeoutDuration;

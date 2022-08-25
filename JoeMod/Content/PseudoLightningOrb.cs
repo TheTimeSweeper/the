@@ -16,30 +16,40 @@ namespace JoeMod {
 				base.duration = base.distanceToTarget / this.speed;
             }
 
-			string path = null;
+			GameObject effect = null;
 			switch (this.moddedLightningType) {
 				case ModdedLightningType.Ukulele:
-					path = "Prefabs/Effects/OrbEffects/LightningOrbEffect";
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect");
 					break;
 				case ModdedLightningType.Tesla:
-					path = "Prefabs/Effects/OrbEffects/TeslaOrbEffect";
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/TeslaOrbEffect");
 					break;
 				case ModdedLightningType.BFG:
-					path = "Prefabs/Effects/OrbEffects/BeamSphereOrbEffect";
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/BeamSphereOrbEffect");
 					break;
 				case ModdedLightningType.Loader:
-					path = "Prefabs/Effects/OrbEffects/LoaderLightningOrbEffect";
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LoaderLightningOrbEffect");
 					break;
 				case ModdedLightningType.MageLightning:
-					path = "Prefabs/Effects/OrbEffects/MageLightningOrbEffect";
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/MageLightningOrbEffect");
 					break;
+				case ModdedLightningType.Nod:
+					effect = Modules.Assets.TeslaLightningOrbEffectRed;
+					break;
+				case ModdedLightningType.NodMage:
+					effect = Modules.Assets.TeslaMageLightningOrbEffectRed;
+					break;
+				case ModdedLightningType.NodMageThick:
+					effect = Modules.Assets.TeslaMageLightningOrbEffectRedThick;
+					break;
+
 			}
 			EffectData effectData = new EffectData {
 				origin = this.origin,
 				genericFloat = base.duration
 			};
 			effectData.SetHurtBoxReference(this.target);
-			EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>(path), effectData, true);
+			EffectManager.SpawnEffect(effect, effectData, true);
 		}
 	}
 
@@ -49,6 +59,8 @@ namespace JoeMod {
 		BFG,
 		Loader,
 		MageLightning,
-		Nod
-	}
+		Nod,
+		NodMage,
+        NodMageThick
+    }
 }

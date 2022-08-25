@@ -34,13 +34,29 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         protected string zapSound = ZapSound;
         protected string zapSoundCrit = ZapSoundCrit;
 
+        TowerWeaponComponent towerWeaponComponent;
+
+        public ModdedLightningType GetOrbType {
+            get {
+
+                if(towerWeaponComponent) {
+                    if (towerWeaponComponent.hasTeslaCoil)
+                        return ModdedLightningType.Tesla;
+
+                    return towerWeaponComponent.towerSkinDef.ZapLightningType;
+                }
+
+                return ModdedLightningType.Loader;
+            }
+        }
+
         public override void OnEnter()
         {
             base.OnEnter();
             // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
             InitDurationValues(BaseDuration, BaseStartCastTime);
-            
-            bool tesla = GetComponent<TowerWeaponComponent>().hasTeslaCoil;
+
+            towerWeaponComponent = GetComponent<TowerWeaponComponent>();
 
             lightningOrb = new PseudoLightningOrb {
                 origin = base.FindModelChild("Orb").position,
@@ -54,7 +70,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 inflictor = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = new List<HealthComponent>(),
-                moddedLightningType = tesla? ModdedLightningType.Tesla : ModdedLightningType.Loader,
+                moddedLightningType = GetOrbType,
                 damageColorIndex = DamageColorIndex.Default,
                 //range = SearchRange,
                 canBounceOnSameTarget = true,
@@ -70,6 +86,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void FixedUpdate() {
             base.FixedUpdate();
             if (lightningTarget == null && !hasFired) {
+                //attaching a tracker to the tower for playing as the tower
+                //or for future proper ai
                 TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
                 if (tracker) {
                     lightningTarget = tracker.GetTrackingTarget();

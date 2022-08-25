@@ -47,10 +47,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool conductiveMechanic => conductiveAlly || conductiveEnemy;
-    public static bool conductiveEnemy = true;
-    public static bool conductiveAlly = true;
-
     public static bool holdonasec = false;
 
     private void Start() {

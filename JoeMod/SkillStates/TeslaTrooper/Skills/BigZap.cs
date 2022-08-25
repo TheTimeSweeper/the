@@ -13,7 +13,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static GameObject bigZapEffectPrefabArea = Assets.LoadAsset<GameObject>("prefabs/effects/lightningstakenova");
         public static GameObject bigZapEffectFlashPrefab = Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
         
-        public static float DamageCoefficient = FacelessJoePlugin.conductiveEnemy ? 5.5f: 6.9f;
+        public static float DamageCoefficient = 6.9f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
 
@@ -102,10 +102,6 @@ namespace ModdedEntityStates.TeslaTrooper {
 
                     //impactEffect = EffectIndex.uh;
                 };
-
-                if (FacelessJoePlugin.conductiveMechanic && FacelessJoePlugin.conductiveEnemy) {
-                    blast.AddModdedDamageType(DamageTypes.consumeConductive);
-                }
                 blast.Fire();
             }
 

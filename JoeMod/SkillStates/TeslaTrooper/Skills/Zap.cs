@@ -84,28 +84,28 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        private ModdedLightningType GetOrbType
+        private ModdedLightningType GetModdedOrbType
         {
             get
             {
-                if (_weaponComponent && _weaponComponent.hasTeslaCoil) {
-                    return ModdedLightningType.Tesla;
+                if (_weaponComponent) {
+                    if (_weaponComponent.hasTeslaCoil) {
+                        return ModdedLightningType.Tesla;
+                    }
+                    return _weaponComponent.teslaSkinDef.ZapLightningType;
                 }
 
                 return ModdedLightningType.Ukulele;
+            }
+        }
 
-                //switch (_currentCasts)
-                //{
-                //    case 0:
-                //        return ModdedLightningType.Ukulele;
-                //    case 1:
-                //        return ModdedLightningType.Ukulele;
-                //    case 2:
-                //        return ModdedLightningType.Ukulele;
-                //    default:
-                //    case 3:
-                //        return ModdedLightningType.Ukulele;
-                //}
+        public LightningOrb.LightningType GetBounceOrbType {
+            get {
+                if (_weaponComponent) {
+                    return _weaponComponent.teslaSkinDef.ZapBounceLightningType;
+                }
+
+                return LightningOrb.LightningType.MageLightning;
             }
         }
         #endregion
@@ -176,8 +176,8 @@ namespace ModdedEntityStates.TeslaTrooper {
                 attacker = gameObject,
                 procCoefficient = 1f,
                 bouncedObjects = _bouncedObjectsList,
-                lightningType = LightningOrb.LightningType.MageLightning,
-                moddedLightningType = GetOrbType,
+                lightningType = GetBounceOrbType,
+                moddedLightningType = GetModdedOrbType,
                 damageColorIndex = DamageColorIndex.Default,
                 range = BounceDistance,
                 speed = -1,
@@ -216,9 +216,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             PseudoLightningOrb _lightningOrb = createOrb();
 
-            if (FacelessJoePlugin.conductiveMechanic) {
-                _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
-            }
+            _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
             OrbManager.instance.AddOrb(_lightningOrb);
             ////happens after firing each orb to apply to their bounces only
             //_lightningOrb.moddedLightningType = ModdedLightningType.MageLightning;
@@ -226,10 +224,11 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private void FireZapTeammate() {
 
-            HarmlessBuffOrb orb = new HarmlessBuffOrb { 
+            HarmlessBuffOrb orb = new HarmlessBuffOrb {
                 buffToApply = Modules.Buffs.conductiveBuffTeam,
                 target = _targetHurtbox,
                 origin = GetOrbOrigin,
+                moddedLightningType = GetModdedOrbType,
             };
             OrbManager.instance.AddOrb(orb);
             //cancel additional casts

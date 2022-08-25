@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class unattachedAnimator : MonoBehaviour
+public class UnattachedAnimator : MonoBehaviour
 {
-
     [SerializeField]
     private Animator teslinator;
 

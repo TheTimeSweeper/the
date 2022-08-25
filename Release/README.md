@@ -44,6 +44,7 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`1.2.0`
 
 `1.1.1` buncha tweaks
 - ally zap no longer does damage, fixing pennies exploit

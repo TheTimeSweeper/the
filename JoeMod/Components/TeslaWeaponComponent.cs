@@ -1,18 +1,27 @@
 ﻿using UnityEngine;
 using RoR2;
+using JoeMod;
 
 public class TeslaWeaponComponent : MonoBehaviour {
 
     public bool hasTeslaCoil;
+    public TeslaSkinDef teslaSkinDef;
 
     private CharacterBody characterBody;
-    private Inventory inventory;
     private Animator animator;
 
     void Awake() {
+
         characterBody = GetComponent<CharacterBody>();
+
         animator = characterBody.modelLocator.modelTransform.GetComponent<Animator>();
+
         characterBody.onInventoryChanged += CharacterBody_onInventoryChanged;
+    }
+
+    void Start() {
+
+        teslaSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TeslaSkinDef;
     }
 
     private void CharacterBody_onInventoryChanged() {
@@ -31,17 +40,21 @@ public class TeslaWeaponComponent : MonoBehaviour {
 public class TowerWeaponComponent : MonoBehaviour {
 
     public bool hasTeslaCoil;
+    public TowerSkinDef towerSkinDef;
 
     private CharacterBody characterBody;
-    private Inventory inventory;
-    //private Animator animator;
 
     void Awake() {
-        //animator = characterBody.modelLocator.modelTransform.GetComponent<Animator>();
 
         characterBody = GetComponent<CharacterBody>();
-        inventory = characterBody.inventory;
+
         characterBody.onInventoryChanged += CharacterBody_onInventoryChanged;
+    }
+
+
+    void Start() {
+
+        towerSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TowerSkinDef;
     }
 
     private void CharacterBody_onInventoryChanged() {

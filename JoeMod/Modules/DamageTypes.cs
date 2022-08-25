@@ -14,23 +14,18 @@ namespace Modules {
         public static DamageAPI.ModdedDamageType shockShort;
 
         public static DamageAPI.ModdedDamageType conductive;
-        public static DamageAPI.ModdedDamageType consumeConductive;
         public static DamageAPI.ModdedDamageType applyBlinkCooldown;
 
         public static void RegisterDamageTypes() {
 
-            if (FacelessJoePlugin.conductiveMechanic) {
+            stunLong = DamageAPI.ReserveDamageType();
+            shockMed = DamageAPI.ReserveDamageType();
+            shockShort = DamageAPI.ReserveDamageType();
 
-                stunLong = DamageAPI.ReserveDamageType();
-                shockMed = DamageAPI.ReserveDamageType();
-                shockShort = DamageAPI.ReserveDamageType();
+            conductive = DamageAPI.ReserveDamageType();
+            applyBlinkCooldown = DamageAPI.ReserveDamageType();
 
-                conductive = DamageAPI.ReserveDamageType();
-                consumeConductive = DamageAPI.ReserveDamageType();
-                applyBlinkCooldown = DamageAPI.ReserveDamageType();
-
-                SetHooks();
-            }
+            SetHooks();
         }
 
         private static void SetHooks() {

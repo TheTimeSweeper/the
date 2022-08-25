@@ -7,6 +7,7 @@ namespace JoeMod {
     public class HarmlessBuffOrb : Orb{
 
         public BuffDef buffToApply;
+		public ModdedLightningType moddedLightningType = ModdedLightningType.Ukulele;
         public float speed = -1;
 
         public override void Begin() {
@@ -17,12 +18,43 @@ namespace JoeMod {
             } else {
                 base.duration = base.distanceToTarget / this.speed;
             }
-            EffectData effectData = new EffectData {
+
+			GameObject effect = null;
+			switch (this.moddedLightningType) {
+				case ModdedLightningType.Ukulele:
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect");
+					break;
+				case ModdedLightningType.Tesla:
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/TeslaOrbEffect");
+					break;
+				case ModdedLightningType.BFG:
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/BeamSphereOrbEffect");
+					break;
+				case ModdedLightningType.Loader:
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LoaderLightningOrbEffect");
+					break;
+				case ModdedLightningType.MageLightning:
+					effect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/MageLightningOrbEffect");
+					break;
+				case ModdedLightningType.Nod:
+					effect = Modules.Assets.TeslaLightningOrbEffectRed;
+					break;
+				case ModdedLightningType.NodMage:
+					effect = Modules.Assets.TeslaMageLightningOrbEffectRed;
+					break;
+				case ModdedLightningType.NodMageThick:
+					effect = Modules.Assets.TeslaMageLightningOrbEffectRedThick;
+					break;
+
+			}
+
+			EffectData effectData = new EffectData {
 				origin = this.origin,
 				genericFloat = base.duration
 			};
-			effectData.SetHurtBoxReference(base.target);					//todo: custom effect
-			EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect"), effectData, true);
+			effectData.SetHurtBoxReference(base.target);
+
+			EffectManager.SpawnEffect(effect, effectData, true);
 		}
 
         public override void OnArrival() {

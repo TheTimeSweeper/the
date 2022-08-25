@@ -33,7 +33,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (_targetHurtbox) {
 
                 float distance = Vector3.Distance(_targetHurtbox.transform.position, transform.position);
-                duration = distance * 0.9f / (speedCoefficient * moveSpeedStat);
+                duration = distance * 0.8f / (speedCoefficient * moveSpeedStat);
 
                 _cameraOverrideHandle = cameraTargetParams.AddParamsOverride(new CameraTargetParams.CameraParamsOverrideRequest {
                     cameraParamsData = GetBlinkCameraParams(distance*0.5f),
@@ -92,8 +92,8 @@ namespace ModdedEntityStates.TeslaTrooper {
                     target = _targetHurtbox
                 };
 
-                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.consumeConductive);
                 DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.applyBlinkCooldown);
+                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.shockMed);
 
                 OrbManager.instance.AddOrb(orb);
             }
