@@ -196,8 +196,8 @@ namespace Modules
                 $"After which, {Helpers.DamageText("blast")} in a wide area {Helpers.DamageText("based on damage absorbed")}.");
 
             LanguageAPI.Add(prefix + "UTILITY_BLINK_NAME", "Surging Forward");
-            LanguageAPI.Add(prefix + "UTILITY_BLINK_DESCRIPTION", 
-                $"Become a bolt of electricity and surge toward a targeted Enemy, dealing {Helpers.DamageValueText(BlinkZap.DamageCoefficient)}, and doing something really cool");
+            LanguageAPI.Add(prefix + "UTILITY_BLINK_DESCRIPTION",
+                $"Become a bolt of electricity and surge toward a targeted Enemy, dealing {Helpers.DamageValueText(BlinkZap.DamageCoefficient)}. Can be casted again within a short window. Cannot target the same enemy twice.");
 
             #endregion
 

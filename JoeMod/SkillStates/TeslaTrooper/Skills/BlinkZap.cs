@@ -10,7 +10,7 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class BlinkZap : EntityStates.Huntress.BlinkState {
 
         #region Gameplay Values
-        public static float DamageCoefficient = 5f;
+        public static float DamageCoefficient = 6f;
         public static float ProcCoefficient = 1f;
         #endregion
 

@@ -181,7 +181,9 @@ namespace Modules.Survivors {
                 "Tower_Pole",
                 "Tower_Pole_Tracer",
                 "Tower_Emission",
-                "Tower_Orb");
+                "Tower_Orb",
+                
+                "LightningParticles");//9
 
             #region DefaultSkin
 
@@ -199,7 +201,8 @@ namespace Modules.Survivors {
                 5, 
                 6, 
                 //7,
-                8);
+                8,
+                9);
 
             skins.Add(defaultSkin);
             #endregion
@@ -220,7 +223,8 @@ namespace Modules.Survivors {
                 5,
                 //6,
                 7,
-                8);
+                8,
+                9);
 
             masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "Mastery_Base_Pillars_Color",
@@ -269,7 +273,8 @@ namespace Modules.Survivors {
                 //5,
                 //6,
                 7);
-                //8);
+                //8
+                //9);
 
             NodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "Nod_Base_Pillars_Colors",
@@ -291,7 +296,7 @@ namespace Modules.Survivors {
             //NodSkin.rendererInfos[4].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerQuartz");
             //NodSkin.rendererInfos[5].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerCobblestone");
             //NodSkin.rendererInfos[6].defaultMaterial = Modules.Materials.CreateHotpooMaterial("WHITE");
-            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod").SetEmission(2);
+            NodSkin.rendererInfos[7].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerNod");
             //NodSkin.rendererInfos[8].defaultMaterial = Modules.Materials.CreateHotpooMaterial("matTowerDiamond");
             
             NodSkin.ZapLightningType = ModdedLightningType.NodMageThick;
@@ -320,7 +325,8 @@ namespace Modules.Survivors {
                 5,
                 6,
                 //7,
-                8);
+                8,
+                9);
 
             MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
                 "MC_Base_Pillars_Colors",

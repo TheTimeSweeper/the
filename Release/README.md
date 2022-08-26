@@ -7,7 +7,8 @@
 - Mod Support
   - Ancient Scepter
   - Skills++
-  - Aetherium Item Displays
+  - Aetherium (Item Displays)
+  - VRAPI
 - Y'all remember Red Alert 2?
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS.png)]()
@@ -26,6 +27,7 @@ SkeletorChampion - Made the character model, which kicked off the mod. Without h
 Violet Chaolan - wwise sound help  
 SweeperSecret - icons,  <3  
 Mr.Bones - mastery skin  
+Jaysian - Lore
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
@@ -37,7 +39,8 @@ Thanks to the lovely reception from the community, including all the great feedb
 - Achievements
 - custom lightningorb effects (help)
 - improved animations (help)
-- Scepter and vr and all those fun stuffs
+- ~~Scepter and vr and all those fun stuffs~~
+- Desolator Alt Character
 
 ___
 for no particular reason I made a cool skin for minecraft check it out   
@@ -45,6 +48,18 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 `1.2.0`
+ - new Grand Mastery skin! Thanks as always to the lovely SkeletorChampion
+   - comes with a unique tower
+   - comes with a few custom effects
+ - holy shit VR
+   - zaps with right hand, build tower with left hand
+   - all skins supported
+ - Added Lore by Jaysian, thanks!
+ - bumped up damage of cursed config alt primary
+   - *if it's not gonna make sense may as well be strong*
+ - Added new heavy WIP Alt Utility in cursed config: Surging Forward
+   - *not really sure where I was going with this one but turned out kinda fun so y not*
+ - fixed tower blocking its own projectiles, mainly ATG missiles
 
 `1.1.1` buncha tweaks
 - ally zap no longer does damage, fixing pennies exploit

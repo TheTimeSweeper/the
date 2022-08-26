@@ -55,7 +55,7 @@ namespace Modules.Survivors
         private static UnlockableDef grandMasterySkinUnlockableDef;
         private static UnlockableDef recolorsUnlockableDef = null;
         #endregion
-
+        
         #region cool stuff
         public static float conductiveAllyBoost = 1.3f;
 
@@ -266,7 +266,7 @@ namespace Modules.Survivors
             });
 
             States.entityStates.Add(typeof(BlinkZap));
-            TeslaTrackingConductiveResettingSkillDef blinkZapSkillDef = Modules.Skills.CreateSkillDef<TeslaTrackingConductiveResettingSkillDef>(new SkillDefInfo {
+            TeslaTrackingResettingSkillDef blinkZapSkillDef = Modules.Skills.CreateSkillDef<TeslaTrackingResettingSkillDef>(new SkillDefInfo {
                 skillName = "Tesla_Utility_BlinkZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BLINK_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "UTILITY_BLINK_DESCRIPTION",
@@ -292,7 +292,7 @@ namespace Modules.Survivors
             blinkZapSkillDef.timeoutDuration = 3;
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef);
-            if (!FacelessJoePlugin.holdonasec) {
+            if (Config.Cursed) {
                 Modules.Skills.AddUtilitySkills(bodyPrefab, blinkZapSkillDef);
             }
         }
@@ -332,6 +332,8 @@ namespace Modules.Survivors
         //make it not lysate cell
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
+
+            Modules.Content.AddEntityState(typeof(DeployTeslaTowerScepter));
 
             SkillDef scepterTeslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Special_Scepter_Tower",
@@ -490,45 +492,45 @@ namespace Modules.Survivors
 
             skins.Add(masterySkin);
             #endregion
-            if (!FacelessJoePlugin.holdonasec) {
-                #region NodSkin
 
-                TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "NOD_SKIN_NAME",
-                    Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
-                    defaultRenderers,
-                    model,
-                    grandMasterySkinUnlockableDef);
+            #region NodSkin
 
-                nodSkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
+            TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "NOD_SKIN_NAME",
+                Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
+                defaultRenderers,
+                model,
+                grandMasterySkinUnlockableDef);
 
-                nodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-                    "meshNodArmor",
-                    null,//"meshNodArmor_Fanservice",
-                    "meshNodEmission",
-                    "meshNodBody",
-                    "meshNodArmorColor",
-                    "meshNodBodyColor",
-                    null);// "meshNodHammer");
+            nodSkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
 
-                nodSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Armor");
-                //nodSkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
-                nodSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Emission").SetEmission(2);
-                nodSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Body");
-                nodSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matNod_ArmorColor");
-                nodSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Body");
-                //nodSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
+            nodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+                "meshNodArmor",
+                null,//"meshNodArmor_Fanservice",
+                "meshNodEmission",
+                "meshNodBody",
+                "meshNodArmorColor",
+                "meshNodBodyColor",
+                null);// "meshNodHammer");
 
-                nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                    TeslaTowerNotSurvivor.NodMinionSkinReplacement,
-                    TeslaTowerScepter.NodMinionSkinReplacement
-                };
+            nodSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Armor");
+            //nodSkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
+            nodSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Emission").SetEmission(2);
+            nodSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Body");
+            nodSkin.rendererInfos[4].defaultMaterial = Materials.CreateHotpooMaterial("matNod_ArmorColor");
+            nodSkin.rendererInfos[5].defaultMaterial = Materials.CreateHotpooMaterial("matNod_Body");
+            //nodSkin.rendererInfos[6].defaultMaterial = Materials.CreateHotpooMaterial("matNod");
 
-                skins.Add(nodSkin);
+            nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+                TeslaTowerNotSurvivor.NodMinionSkinReplacement,
+                TeslaTowerScepter.NodMinionSkinReplacement
+            };
 
-                nodSkin.ZapLightningType = ModdedLightningType.Nod;
-                nodSkin.ZapBounceLightningType = LightningOrb.LightningType.Count + 10;
-                #endregion
-            }
+            skins.Add(nodSkin);
+
+            nodSkin.ZapLightningType = ModdedLightningType.Nod;
+            nodSkin.ZapBounceLightningType = LightningOrb.LightningType.Count + 10;
+            #endregion
+            
 
             #region MCSkin
             TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
@@ -628,19 +630,30 @@ namespace Modules.Survivors
                 damageReport.damageInfo.attacker = null;
             }
 
-            //keep allies from retaliating against trooper charging them
-            bool originalNeverRetaliate = self.neverRetaliateFriendlies;
-            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.conductive)) {
-                self.neverRetaliateFriendlies = true;
-            }
+            //no longer needed as ally zap orb is new custom harmless buff orb
+            ////keep allies from retaliating against trooper charging them
+            //bool originalNeverRetaliate = self.neverRetaliateFriendlies;
+            //if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.conductive)) {
+            //    self.neverRetaliateFriendlies = true;
+            //}
             
             orig(self, damageReport);
 
-            self.neverRetaliateFriendlies = originalNeverRetaliate;
+            //self.neverRetaliateFriendlies = originalNeverRetaliate;
             damageReport.damageInfo.attacker = originalAttacker;
         }
 
         #region tower hacks
+
+        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
+            if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+                //Helpers.LogWarning("adddeployable true");
+                slot = teslaTowerDeployableSlot;
+            }
+
+            orig(self, deployable, slot);
+        }
+
         private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
             if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
                 filter = TeslaTowerCopyFilterDelegate;
@@ -658,15 +671,6 @@ namespace Modules.Survivors
                 }
             }
             orig(self, otherItemStacks, filter);
-        }
-
-        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
-            if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                //Helpers.LogWarning("adddeployable true");
-                slot = teslaTowerDeployableSlot;
-            }
-
-            orig(self, deployable, slot);
         }
 
         private Func<ItemIndex, bool> TeslaTowerCopyFilterDelegate = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
@@ -688,7 +692,7 @@ namespace Modules.Survivors
             CheckConductive(self, damageInfo);
 
             if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.applyBlinkCooldown)) {
-                    self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 2f);
+                    self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
             }
 
             orig(self, damageInfo);

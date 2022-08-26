@@ -40,7 +40,7 @@ namespace Modules {
                 AddNewBuff("BlinkCooldown",
                            LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Cloak").iconSprite,
                            Color.gray,
-                           true,
+                           false,
                            false);
         }
 

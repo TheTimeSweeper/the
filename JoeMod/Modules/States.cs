@@ -25,6 +25,8 @@ namespace Modules
             //okay, I said I this for tokens, and now I know that makes more sense for translatoin
             // but for here it's definitely asinine to have these so randomly separate from the skills
             //oh i guess it's for organization of registering all the shit to the contentpack, however
+            //now in practice ,there's also a lot of other entitystates that aren't just with skills and it's confusing to know where to put them
+            //todo put them back here
             #region joe
             ////prim
             //entityStates.Add(typeof(Primary1Swing));

@@ -40,7 +40,7 @@ namespace Modules
                 sectionGeneral,
                 "Cursed",
                 false,
-                "yes there's a fucking minecraft skin").Value;
+                "Enables extra/wip content\nyes there's a fucking minecraft skin").Value;
 
             TowerItemDisplays = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,

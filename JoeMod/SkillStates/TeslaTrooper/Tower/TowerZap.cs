@@ -85,6 +85,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         public override void FixedUpdate() {
             base.FixedUpdate();
+
             if (lightningTarget == null && !hasFired) {
                 //attaching a tracker to the tower for playing as the tower
                 //or for future proper ai

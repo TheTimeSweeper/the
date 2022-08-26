@@ -47,7 +47,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool holdonasec = false;
+    public static bool holdonasec = true;
 
     private void Start() {
 
