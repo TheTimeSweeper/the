@@ -15,7 +15,10 @@ using RoR2.Orbs;
 namespace Modules.Survivors
 {
     internal class TeslaTrooperSurvivor : SurvivorBase {
+
         #region survivor stuff
+        public static TeslaTrooperSurvivor instance;
+
         public override string bodyName => "TeslaTrooper";
 
         public const string TESLA_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_";
@@ -64,6 +67,7 @@ namespace Modules.Survivors
         #endregion
 
         public override void Initialize() {
+            instance = this;
             base.Initialize();
             Hooks();
         }
@@ -74,7 +78,7 @@ namespace Modules.Survivors
             bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
             bodyPrefab.AddComponent<ZapBarrierController>();
-            if (Compat.VRInstalled) {
+            if (Compat.VREnabled) {
                 bodyPrefab.AddComponent<TeslaVRComponent>();
             }
 
@@ -203,6 +207,19 @@ namespace Modules.Survivors
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
             }
 
+            if(FacelessJoePlugin.Desolator) {
+
+                States.entityStates.Add(typeof(RadBeam));
+                SkillDef primarySkillDefPunch =
+                    Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
+                                                           TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
+                                                           TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
+                                                           Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                           new EntityStates.SerializableEntityStateType(typeof(RadBeam)),
+                                                           "Weapon",
+                                                           false));
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
+            }
         }
         
         private void InitializeSecondarySkills()
@@ -596,16 +613,24 @@ namespace Modules.Survivors
 
         private void LightningOrb_Begin(On.RoR2.Orbs.LightningOrb.orig_Begin orig, LightningOrb self) {
 
-            if (self.lightningType == LightningOrb.LightningType.Count + 10) {
-                self.duration = 0.01f;
+            GameObject effect = null;
+            switch(self.lightningType) {
+                case LightningOrb.LightningType.Count + 10:
+                    effect = Modules.Assets.TeslaMageLightningOrbEffectRed;
+                    self.duration = 0.01f;
+                    break;
+            }
+
+            if (effect != null) {
 
                 EffectData effectData = new EffectData {
                     origin = self.origin,
                     genericFloat = self.duration
                 };
                 effectData.SetHurtBoxReference(self.target);
-                EffectManager.SpawnEffect(Modules.Assets.TeslaMageLightningOrbEffectRed, effectData, true);
-            } else {
+                EffectManager.SpawnEffect(effect, effectData, true);
+            }else {
+
                 orig(self);
             }
         }

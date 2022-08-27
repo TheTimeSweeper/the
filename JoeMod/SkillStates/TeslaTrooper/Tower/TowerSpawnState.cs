@@ -1,12 +1,12 @@
 ﻿using EntityStates;
 using RoR2;
 
-namespace ModdedEntityStates.TeslaTrooper.Tower
-{
+namespace ModdedEntityStates.TeslaTrooper.Tower {
+
     public class TowerSpawnState : BaseState
     {
         public static float TowerSpawnDuration = 1.5f;
-        private float duration;
+        protected float duration;
 
         public override void OnEnter()
         {
@@ -32,6 +32,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower
         public override void FixedUpdate() {
             base.FixedUpdate();
             if (base.fixedAge >= this.duration && base.isAuthority) {
+
                 this.outer.SetNextState(new TowerIdleSearch {
                     justSpawned = true
                 });

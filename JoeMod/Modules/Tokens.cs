@@ -35,7 +35,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "and the zambambos");
-            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and it's easy to grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from any coconuts. They need to have the perfect lighting temperature, the perfect lifetime, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, in this forest, there's someone who’s been able to earn the trust of the trees. We'll be, uh.. meeting.. with him soon. Maybe if we hand him a hose, and he’ll put his swords down and join us, haha.");
+            LanguageAPI.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and it's easy to grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from any coconuts. They need to have the perfect lighting temperature, the perfect lifetime, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, in this forest, there's someone who’s been able to earn the trust of the trees. Maybe if we hand him a hose, and he’ll put his swords down and join us, haha.");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -95,11 +95,11 @@ namespace Modules
             #region not henry 2
             string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
 
-            string desc = "The Tesla Trooper is a close-mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Tesla Gauntlet close range to deal the most damage. The reticle will reflect this" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Use 2000 Volts to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > You benefit from being closer to enemies, use his Utility to assist with this." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > The Tesla Tower inherits your items, but mainly benefits from damage items." + Environment.NewLine + Environment.NewLine;
+            string desc = "The Tesla Trooper is a close-mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Use Tesla Gauntlet close range to deal the most damage. The reticle will reflect this" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Use 2000 Volts to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine
+                        + "< ! > You benefit from being closer to enemies, use Charging Up to assist with this." + Environment.NewLine + Environment.NewLine
+                        + "< ! > The Tesla Tower inherits your items, mainly benefitting from damage items." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, rubber shoes in motion.";
             string outroFailure = "..and so he vanished, unit lost.";
@@ -176,7 +176,7 @@ namespace Modules
             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Fist");
-            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.OrbDamageCoefficient)}. Punching projectiles sends them back, electrically charged");
+            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.OrbDamageCoefficient)}. Punching projectiles sends them back, electrically charged");
             
             #endregion
             

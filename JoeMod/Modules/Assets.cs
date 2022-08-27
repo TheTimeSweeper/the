@@ -59,6 +59,10 @@ namespace Modules {
         public static Material ChainLightningMaterial;
         #endregion
 
+        #region deso 
+        public static GameObject DesolatorTracer;
+        #endregion
+
         public static void Initialize()
         {
             //HENRY: check this somewhere else secretly
@@ -160,6 +164,8 @@ namespace Modules {
             TeslaMageLightningOrbEffectRedThick.GetComponentInChildren<AnimateShaderAlpha>().timeMax = 0.5f;
 
             TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
+
+            DesolatorTracer = CreateTracer("TracerToolbotRebar", "TracerDeslotorRebar", null, null, Color.green);
         }
 
         private static GameObject CreateZapConeProjectile() {
@@ -317,7 +323,7 @@ namespace Modules {
             }
         }
 
-        private static GameObject CreateTracer(string originalTracerName, string newTracerName)
+        private static GameObject CreateTracer(string originalTracerName, string newTracerName, float? speed = null, float? length = null, Color? color = null)
         {
             if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) return null;
 
@@ -327,8 +333,14 @@ namespace Modules {
             if (!newTracer.GetComponent<VFXAttributes>()) newTracer.AddComponent<VFXAttributes>();
             if (!newTracer.GetComponent<NetworkIdentity>()) newTracer.AddComponent<NetworkIdentity>();
 
-            newTracer.GetComponent<Tracer>().speed = 250f;
-            newTracer.GetComponent<Tracer>().length = 50f;
+            newTracer.GetComponent<Tracer>().speed = speed.HasValue? speed.Value : newTracer.GetComponent<Tracer>().speed;
+            newTracer.GetComponent<Tracer>().length = length.HasValue ? length.Value : newTracer.GetComponent<Tracer>().length;
+
+            if (color.HasValue) {
+                foreach (var child in newTracer.GetComponentsInChildren<ParticleSystemRenderer>()) {
+                    child.material.SetColor("_TintColor", color.Value);
+                }
+            }
 
             AddNewEffectDef(newTracer);
 

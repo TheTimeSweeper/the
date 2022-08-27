@@ -9,6 +9,7 @@
   - Skills++
   - Aetherium (Item Displays)
   - VRAPI
+  - CustomEmotesAPI
 - Y'all remember Red Alert 2?
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS.png)]()
@@ -27,7 +28,7 @@ SkeletorChampion - Made the character model, which kicked off the mod. Without h
 Violet Chaolan - wwise sound help  
 SweeperSecret - icons,  <3  
 Mr.Bones - mastery skin  
-Jaysian - Lore
+Jaysian - Lore  
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
@@ -47,6 +48,9 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`1.2.1`
+ - fixed conflict with ttgl mod and vrapi
+
 `1.2.0`
  - new Grand Mastery skin! Thanks as always to the lovely SkeletorChampion
    - comes with a unique tower

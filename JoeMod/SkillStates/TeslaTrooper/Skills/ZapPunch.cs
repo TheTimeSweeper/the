@@ -11,7 +11,7 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class ZapPunch : BaseMeleeAttackButEpic {
 
         #region Gameplay Values
-        public static float DamageCoefficient = 3f;
+        public static float DefaultDamageCoefficient = 3f;
         public static float ProcCoefficient = 1f;
 
         public static float OrbDamageCoefficient = 1.5f;
@@ -25,6 +25,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         float animationDuration = 0.46f;
         #endregion
 
+        public float? ChargedDamageCoefficient = null;
+
         public static NetworkSoundEventDef loaderZapFistSoundEvent = RoR2.LegacyResourcesAPI.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseLoaderM1Impact");
 
         private Transform deflectMuzzleTransform;
@@ -33,7 +35,13 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void OnEnter() {
             
             base.hitboxName = "PunchHitbox";
-            base.damageCoefficient = DamageCoefficient;
+
+            if(ChargedDamageCoefficient == null) {
+                base.damageCoefficient = DefaultDamageCoefficient;
+            } else {
+                base.damageCoefficient = ChargedDamageCoefficient.Value;
+            }
+
             base.procCoefficient = ProcCoefficient;
             base.pushForce = 690f;
 

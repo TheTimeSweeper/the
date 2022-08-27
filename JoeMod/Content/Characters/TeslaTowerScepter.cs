@@ -4,6 +4,7 @@ using Modules.Characters;
 using R2API;
 using UnityEngine;
 using JoeMod;
+using ModdedEntityStates.TeslaTrooper.Tower;
 
 namespace Modules.Survivors {
     internal class TeslaTowerScepter : CharacterBase {
@@ -18,7 +19,8 @@ namespace Modules.Survivors {
         public override CustomRendererInfo[] customRendererInfos { get; set ; }
 
         //todo scepter: TowerIdleSearchButForMultipleTargets
-        public override Type characterMainState => baseTower.characterMainState;
+        public override Type characterMainState => typeof(TowerIdleSearchScepter);
+        public override Type characterSpawnState => typeof(TowerSpawnStateScepter);
 
         public override ItemDisplaysBase itemDisplays => baseTower.itemDisplays;
 
@@ -33,6 +35,8 @@ namespace Modules.Survivors {
 
             baseTower = baseTower_;
             InitializeCharacter();
+
+            Modules.Content.AddEntityState(typeof(TowerIdleSearchScepter));
         }
 
         public override void InitializeCharacter() {

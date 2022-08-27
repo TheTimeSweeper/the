@@ -18,6 +18,7 @@ using System.Security.Permissions;
 [BepInDependency("com.ThinkInvisible.TinkersSatchel", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("com.DrBibop.VRAPI", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
 
 [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
@@ -47,7 +48,8 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool holdonasec = true;
+    public static bool holdonasec = false;
+    public static bool Desolator = true;
 
     private void Start() {
 

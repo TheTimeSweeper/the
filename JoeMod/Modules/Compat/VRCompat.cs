@@ -4,7 +4,6 @@ using RoR2;
 using System;
 using UnityEngine;
 using VRAPI;
-using Modules.Survivors;
 using System.Runtime.CompilerServices;
 
 namespace Modules {
@@ -13,20 +12,24 @@ namespace Modules {
 
         public static void init() {
 
+            if (!VRAPI.VR.enabled || !VRAPI.MotionControls.enabled)
+                return;
+
+            Compat.VREnabled = true;
+
             RoR2Application.onLoad += LoadCustomHands;
         }
 
         private static void LoadCustomHands() {
 
-            if(VR.enabled && MotionControls.enabled) {
-                GameObject domHandPrefab = Assets.LoadAsset<GameObject>("VRRightHandPrefab");
-                GameObject subHandPrefab = Assets.LoadAsset<GameObject>("VRLeftHandPrefab");
+            GameObject domHandPrefab = Assets.LoadAsset<GameObject>("VRRightHandPrefab");
+            GameObject subHandPrefab = Assets.LoadAsset<GameObject>("VRLeftHandPrefab");
 
-                MotionControls.AddHandPrefab(domHandPrefab);
-                MotionControls.AddHandPrefab(subHandPrefab);
-                
-                MotionControls.AddSkillBindingOverride("TeslaTrooperBody", SkillSlot.Primary, SkillSlot.Utility, SkillSlot.Special, SkillSlot.Secondary);
-            }
+            MotionControls.AddHandPrefab(domHandPrefab);
+            MotionControls.AddHandPrefab(subHandPrefab);
+
+            MotionControls.AddSkillBindingOverride("TeslaTrooperBody", SkillSlot.Primary, SkillSlot.Utility, SkillSlot.Special, SkillSlot.Secondary);
+
         }
 
         #region helpers
@@ -69,7 +72,7 @@ namespace Modules {
         }
 
         public static bool IsLocalVRPlayer(CharacterBody body) {
-            return Compat.VRInstalled && body == LocalUserManager.GetFirstLocalUser().cachedBody;
+            return Compat.VREnabled && body == LocalUserManager.GetFirstLocalUser().cachedBody;
         }
         #endregion helpers
     }

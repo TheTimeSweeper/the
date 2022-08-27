@@ -8,7 +8,7 @@ namespace Modules {
         public static bool TinkersSatchelInstalled;
         public static bool AetheriumInstalled;
         public static bool ScepterInstalled;
-        public static bool VRInstalled;
+        public static bool VREnabled;
 
         public static void Initialize() {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.cwmlolzlz.skills")) {
@@ -27,8 +27,10 @@ namespace Modules {
                 ScepterInstalled = true;
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DrBibop.VRAPI")) {
-                VRInstalled = true;
                 VRCompat.init();
+            }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI") ) {
+                MemeCompat.init();
             }
         }
 

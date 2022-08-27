@@ -47,6 +47,9 @@
     <Reference Include="BetterUI">
       <HintPath>..\libs\BetterUI.dll</HintPath>
     </Reference>
+    <Reference Include="CustomEmotesAPI">
+      <HintPath>..\libs\CustomEmotesAPI.dll</HintPath>
+    </Reference>
     <Reference Include="MMHOOK_RoR2">
       <HintPath>..\libs\MMHOOK_RoR2.dll</HintPath>
     </Reference>

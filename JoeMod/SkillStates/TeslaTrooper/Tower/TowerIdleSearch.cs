@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using RoR2;
 using RoR2.Orbs;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,12 +63,15 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             }
 
             if (_lightningTarget) {
-
-                outer.SetNextState(new TowerZap {
-                    lightningTarget = _lightningTarget,
-                });
+                TowerZap towerZapState = GetNextStateType();
+                towerZapState.lightningTarget = _lightningTarget;
+                outer.SetNextState(towerZapState);
                 _cooldownTimer = 0;
             }
+        }
+
+        protected virtual TowerZap GetNextStateType() {
+            return new TowerZap();
         }
 
         public override void OnExit() {

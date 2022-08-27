@@ -1,5 +1,5 @@
 ﻿using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
-using RoR2;                                 
+using RoR2;
 using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +7,6 @@ using UnityEngine.Networking;
 using JoeMod;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
-
-    public class TeamZap : TowerZap {
-
-    }
-
-    public class TeamZapCharge : TowerZap {
-
-    }
 
     public class TowerZap: BaseTimedSkillState
     {
@@ -72,7 +64,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                 bouncedObjects = new List<HealthComponent>(),
                 moddedLightningType = GetOrbType,
                 damageColorIndex = DamageColorIndex.Default,
-                //range = SearchRange,
+                range = TowerIdleSearch.SearchRange,
                 canBounceOnSameTarget = true,
                 speed = -1
             };
@@ -124,6 +116,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
                 OrbManager.instance.AddOrb(lightningOrb);
 
+                Helpers.LogWarning(lightningOrb.damageValue);
                 //Helpers.LogWarning("orb attacker " + lightningOrb.attacker);
             }
         }

@@ -3,8 +3,7 @@ using RoR2;
 using System;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper
-{
+namespace ModdedEntityStates.TeslaTrooper {
     public class AimBigZap : AimThrowableBase //AimMortar
     {
         public static string EnterSoundString = EntityStates.Treebot.Weapon.AimMortar.enterSoundString;
