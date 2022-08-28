@@ -1,24 +1,23 @@
 ﻿using EntityStates;
 using RoR2;
-using UnityEngine;
+using RoR2.Projectile;
 
-namespace ModdedEntityStates.TeslaTrooper {
-
-    public class AimBigRadBeam : AimBigZap {
-
-    }
+namespace ModdedEntityStates.Desolator {
 
     public class RadBeam : GenericBulletBaseState {
+
+        public static float DamageCoefficient = 1.4f;
+
         public override void OnEnter() {
 
             EntityStates.Toolbot.FireSpear goodstate = new EntityStates.Toolbot.FireSpear();
 
-            baseDuration = 0.6f;
+            baseDuration = 1f;
             bulletCount = 1;
             maxDistance = goodstate.maxDistance;
             bulletRadius = goodstate.bulletRadius;
             useSmartCollision = goodstate.useSmartCollision;
-            damageCoefficient = 2f;
+            damageCoefficient = DamageCoefficient;
             procCoefficient = 1f;
             force = 100f;
             minSpread = 0;
@@ -29,9 +28,9 @@ namespace ModdedEntityStates.TeslaTrooper {
             recoilAmplitudeY = 1;
             recoilAmplitudeX = 1;
             muzzleName = "MuzzleGauntlet";
-            fireSoundString = "desolatorFire";
-            //muzzleFlashPrefab = goodstate.muzzleFlashPrefab;
-            tracerEffectPrefab = Modules.Assets.DesolatorTracer;
+            fireSoundString = "Play_Desolator_Beam_Short";
+            muzzleFlashPrefab = goodstate.muzzleFlashPrefab;
+            tracerEffectPrefab = Modules.Assets.DesolatorTracerSnipe;
             //hitEffectPrefab;
             base.OnEnter();
         }

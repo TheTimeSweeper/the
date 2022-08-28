@@ -14,7 +14,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         private TeslaTrackerComponent tracker;
 
         private bool showingEmpowered;
-        private bool castSuccessful;
+        protected bool castSuccessful;
         
         private float viewRadius;
 
@@ -25,7 +25,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             //excuse old enforcer code
             EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
-            arcVisualizerPrefab = null;//goodState.arcVisualizerPrefab;
+            arcVisualizerPrefab = goodState.arcVisualizerPrefab;
             projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
             endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
             endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;

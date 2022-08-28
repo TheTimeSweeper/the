@@ -11,9 +11,10 @@ using R2API;
 using System.Runtime.CompilerServices;
 using JoeMod;
 using RoR2.Orbs;
+using ModdedEntityStates.Desolator;
 
-namespace Modules.Survivors
-{
+namespace Modules.Survivors {
+
     internal class TeslaTrooperSurvivor : SurvivorBase {
 
         #region survivor stuff
@@ -56,7 +57,7 @@ namespace Modules.Survivors
 
         private static UnlockableDef masterySkinUnlockableDef;
         private static UnlockableDef grandMasterySkinUnlockableDef;
-        private static UnlockableDef recolorsUnlockableDef = null;
+        public static UnlockableDef recolorsUnlockableDef = null;
         #endregion
         
         #region cool stuff
@@ -206,20 +207,6 @@ namespace Modules.Survivors
                                                            false));
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
             }
-
-            if(FacelessJoePlugin.Desolator) {
-
-                States.entityStates.Add(typeof(RadBeam));
-                SkillDef primarySkillDefPunch =
-                    Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
-                                                           TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
-                                                           TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
-                                                           Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                           new EntityStates.SerializableEntityStateType(typeof(RadBeam)),
-                                                           "Weapon",
-                                                           false));
-                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
-            }
         }
         
         private void InitializeSecondarySkills()
@@ -248,7 +235,7 @@ namespace Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_STUNNING" }
+                keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SHOCKING" }
             });
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
@@ -338,8 +325,6 @@ namespace Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 0,
-
-                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
@@ -357,7 +342,7 @@ namespace Modules.Survivors
                 skillNameToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecialScepter"),
-                activationState = new EntityStates.SerializableEntityStateType(FacelessJoePlugin.holdonasec ? typeof(DeployTeslaTower) : typeof(DeployTeslaTowerScepter)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTowerScepter)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = 18f,
@@ -440,13 +425,11 @@ namespace Modules.Survivors
         #endregion skills
 
         public override void InitializeSkins() {
-            GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
-            CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
-            ModelSkinController skinController = model.AddComponent<ModelSkinController>();
-            ChildLocator childLocator = model.GetComponent<ChildLocator>();
+            ModelSkinController skinController = bodyCharacterModel.gameObject.AddComponent<ModelSkinController>();
+            ChildLocator childLocator = bodyCharacterModel.GetComponent<ChildLocator>();
 
-            CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
+            CharacterModel.RendererInfo[] defaultRenderers = bodyCharacterModel.baseRendererInfos;
 
             List<TeslaSkinDef> skins = new List<TeslaSkinDef>();
 
@@ -459,7 +442,7 @@ namespace Modules.Survivors
             TeslaSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
-                model);
+                bodyCharacterModel.gameObject);
                                                                                                              //probably better to use strings for childnames instead of ints
             defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 0);
 
@@ -480,7 +463,7 @@ namespace Modules.Survivors
             TeslaSkinDef masterySkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MASTERY_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMastery"),
                 defaultRenderers,
-                model,
+                bodyCharacterModel.gameObject,
                 masterySkinUnlockableDef);
 
             masterySkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
@@ -515,7 +498,7 @@ namespace Modules.Survivors
             TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "NOD_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
                 defaultRenderers,
-                model,
+                bodyCharacterModel.gameObject,
                 grandMasterySkinUnlockableDef);
 
             nodSkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
@@ -553,7 +536,7 @@ namespace Modules.Survivors
             TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
-                model);
+                bodyCharacterModel.gameObject);
 
             MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects);
 

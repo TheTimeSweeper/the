@@ -25,6 +25,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         protected string zapSound = ZapSound;
         protected string zapSoundCrit = ZapSoundCrit;
+        protected bool crit;
 
         TowerWeaponComponent towerWeaponComponent;
 
@@ -50,10 +51,11 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
             towerWeaponComponent = GetComponent<TowerWeaponComponent>();
 
+            crit = RollCrit();
             lightningOrb = new PseudoLightningOrb {
                 origin = base.FindModelChild("Orb").position,
                 damageValue = DamageCoefficient * damageStat,
-                isCrit = RollCrit(),
+                isCrit = crit,
                 //bouncesRemaining = 1,
                 //damageCoefficientPerBounce = BounceDamageMultplier,
                 //damageType = DamageType.SlowOnHit,
@@ -115,9 +117,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             for (int i = 0; i < 3; i++) {
 
                 OrbManager.instance.AddOrb(lightningOrb);
-
-                Helpers.LogWarning(lightningOrb.damageValue);
-                //Helpers.LogWarning("orb attacker " + lightningOrb.attacker);
             }
         }
 

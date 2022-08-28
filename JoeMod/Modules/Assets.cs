@@ -9,6 +9,7 @@ using RoR2.UI;
 using System;
 using System.Linq;
 using RoR2.Projectile;
+using ThreeEyedGames;
 
 namespace Modules {
     internal static class Assets
@@ -60,7 +61,11 @@ namespace Modules {
         #endregion
 
         #region deso 
-        public static GameObject DesolatorTracer;
+        public static GameObject DesolatorTracerRebar;
+        public static GameObject DesolatorTracerSnipe;
+        public static GameObject DesolatorCrocoLeapProjectile;
+
+        public static GameObject DesolatorIrradiatorProjectile;
         #endregion
 
         public static void Initialize()
@@ -142,20 +147,20 @@ namespace Modules {
             TeslaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             TeslaIndicatorPrefab = CreateTeslaTrackingIndicator();
-            
+
             ChainLightningMaterial = FindChainLightningMaterial();
-            TeslaLightningOrbEffectRed = 
-                CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/LightningOrbEffect", 
+            TeslaLightningOrbEffectRed =
+                CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/LightningOrbEffect",
                                         "NodLightningOrbEffect",
                                         new Color(255f / 255f, 2f / 255f, 1f / 255f),
                                         Color.white,
                                         1.2f);
-            TeslaMageLightningOrbEffectRed = 
+            TeslaMageLightningOrbEffectRed =
                 CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/MageLightningOrbEffect",
                                         "NodMageLightningOrbEffect",
                                         Color.white,
                                         new Color(255f / 255f, 2f / 255f, 1f / 255f));
-            TeslaMageLightningOrbEffectRedThick = 
+            TeslaMageLightningOrbEffectRedThick =
                 CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/MageLightningOrbEffect",
                                         "NodMageThickLightningOrbEffect",
                                         Color.white,
@@ -165,7 +170,48 @@ namespace Modules {
 
             TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
 
-            DesolatorTracer = CreateTracer("TracerToolbotRebar", "TracerDeslotorRebar", null, null, Color.green);
+            DesolatorTracerRebar = CreateDesolatorTracerRebar();
+            DesolatorTracerSnipe = CreateDesolatorTracerSnipe();
+            DesolatorCrocoLeapProjectile = CreateDesolatorCrocoLeapProjectile();
+
+            DesolatorIrradiatorProjectile = CreateIrradiatorProjectile();
+        }
+
+        private static GameObject CreateIrradiatorProjectile() {
+
+            GameObject projectile = teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile");
+            //insert gameplay values here
+
+            Content.AddProjectilePrefab(projectile);
+
+            return projectile;
+        }
+
+        private static GameObject CreateDesolatorTracerRebar() {
+            GameObject tracer = CreateTracer("TracerToolbotRebar", "TracerDeslotorRebar", Color.green, 3);
+
+            UnityEngine.Object.Destroy(tracer.transform.Find("StickEffect").gameObject);
+
+            return tracer;
+        }
+
+        private static GameObject CreateDesolatorTracerSnipe() {
+            GameObject tracer = CreateTracer("TracerHuntressSnipe", "TracerDeslotorHuntressSnipe", Color.green, 3);
+
+            UnityEngine.Object.Destroy(tracer.transform.Find("TracerHead").gameObject);
+
+            return tracer;
+        }
+
+        private static GameObject CreateDesolatorCrocoLeapProjectile() {
+            GameObject crocoProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
+            crocoProjectile.transform.Find("FX").transform.localScale = Vector3.one * ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius * 2f;
+            crocoProjectile.transform.Find("FX/Decal").transform.localScale = new Vector3(1.5f, 0.85f, 1.5f);
+            crocoProjectile.transform.Find("FX/Decal").GetComponent<Decal>().Material.SetTexture("_MainTexture", LoadAsset<Texture2D>("texDesolatorDecal"));
+
+            Content.AddProjectilePrefab(crocoProjectile);
+            
+            return crocoProjectile;
         }
 
         private static GameObject CreateZapConeProjectile() {
@@ -323,7 +369,7 @@ namespace Modules {
             }
         }
 
-        private static GameObject CreateTracer(string originalTracerName, string newTracerName, float? speed = null, float? length = null, Color? color = null)
+        private static GameObject CreateTracer(string originalTracerName, string newTracerName, Color? color = null, float widthMultiplierMultiplier = 1, float? speed = null, float? length = null)
         {
             if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) return null;
 
@@ -336,9 +382,52 @@ namespace Modules {
             newTracer.GetComponent<Tracer>().speed = speed.HasValue? speed.Value : newTracer.GetComponent<Tracer>().speed;
             newTracer.GetComponent<Tracer>().length = length.HasValue ? length.Value : newTracer.GetComponent<Tracer>().length;
 
+            if (color.HasValue || widthMultiplierMultiplier != 1) {
+                foreach (var lineREnderer in newTracer.GetComponentsInChildren<LineRenderer>()) {
+                    if (color.HasValue) {
+                        lineREnderer.startColor = color.Value;
+                        lineREnderer.endColor = color.Value;
+                    }
+                    if(widthMultiplierMultiplier != 1){
+                        lineREnderer.widthMultiplier *= widthMultiplierMultiplier;
+                    }
+                }
+
+                foreach (ParticleSystem particles in newTracer.GetComponentsInChildren<ParticleSystem>()) {
+                    ParticleSystem.MainModule mainModule = particles.main;
+                    mainModule.startSize = new ParticleSystem.MinMaxCurve(mainModule.startSize.constant * widthMultiplierMultiplier);
+                    mainModule.startColor = new ParticleSystem.MinMaxGradient(color.Value);
+
+                    ParticleSystem.TrailModule trailModule = particles.trails;
+                    if (trailModule.enabled) {
+
+                        //Gradient gradient = trailModule.colorOverLifetime.gradientMin;
+                        //gradient.colorKeys[0].color = Color.green;
+                        Gradient gradient = new Gradient();
+                        GradientColorKey[] colorKey = new GradientColorKey[2];
+                        colorKey[0].color = Color.green;
+                        colorKey[0].time = 0.0f;
+                        colorKey[1].color = Color.green;
+                        colorKey[1].time = 1.0f;
+
+                        GradientAlphaKey[] alphaKey = new GradientAlphaKey[2];
+                        alphaKey[0].alpha = 1.0f;
+                        alphaKey[0].time = 0.0f;
+                        alphaKey[1].alpha = 0.0f;
+                        alphaKey[1].time = 1.0f;
+
+                        gradient.SetKeys(colorKey, alphaKey);
+
+                        trailModule.colorOverLifetime = new ParticleSystem.MinMaxGradient(gradient);
+                    }
+                }
+            }
+            
             if (color.HasValue) {
-                foreach (var child in newTracer.GetComponentsInChildren<ParticleSystemRenderer>()) {
-                    child.material.SetColor("_TintColor", color.Value);
+                foreach(var rend in newTracer.GetComponentsInChildren<ParticleSystemRenderer>()) {
+                    rend.material.SetColor("_MainColor", color.Value);
+                    rend.material.SetColor("_Color", color.Value);
+                    rend.material.SetColor("_TintColor", color.Value);
                 }
             }
 

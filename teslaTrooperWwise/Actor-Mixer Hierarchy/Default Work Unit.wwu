@@ -74,174 +74,9 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="itesdia" ID="{A72EA4D9-414E-4031-B81E-6B3753AF2B04}" ShortID="368518754">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
+								<Folder Name="Trooper" ID="{485B73C1-7074-46D5-9369-6947EF6A4CD9}" ShortID="259485964">
 									<ChildrenList>
-										<AudioFileSource Name="itesdia_01" ID="{DD925207-19D5-4FF6-9A68-DB789E30FAED}">
-											<Language>SFX</Language>
-											<AudioFile>itesdia_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="990781575"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesdia_01" ID="{DD925207-19D5-4FF6-9A68-DB789E30FAED}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesdib" ID="{7D2AD72C-7EE2-4726-A2F4-2A1BCE726A0B}" ShortID="284171906">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesdib_01" ID="{5DA475B4-DD00-47E9-A98F-8016A01442C0}">
-											<Language>SFX</Language>
-											<AudioFile>itesdib_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="132641799"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesdib_01" ID="{5DA475B4-DD00-47E9-A98F-8016A01442C0}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesdic" ID="{2E13FC75-01C1-4943-8313-F7982C236BD3}" ShortID="771358296">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesdic_01" ID="{FB07854B-E332-45B2-BB00-3CFBA4CEDB7E}">
-											<Language>SFX</Language>
-											<AudioFile>itesdic_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="59822645"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesdic_01" ID="{FB07854B-E332-45B2-BB00-3CFBA4CEDB7E}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesfeb" ID="{5D3345A6-0D3B-406E-AB0D-F3C6386D41C8}" ShortID="228728276">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesfeb_01" ID="{403F86F8-42CB-41B0-880B-9E13CF05A8A2}">
-											<Language>SFX</Language>
-											<AudioFile>itesfeb_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="817529503"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesfeb_01" ID="{403F86F8-42CB-41B0-880B-9E13CF05A8A2}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesfec" ID="{BC5B8DA2-A860-4618-B5F4-1C33F3B5D7E9}" ShortID="838146660">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesfec_01" ID="{69B4379D-3A7E-47C3-B5DF-05A8B17DE2F0}">
-											<Language>SFX</Language>
-											<AudioFile>itesfec_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="813394182"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesfec_01" ID="{69B4379D-3A7E-47C3-B5DF-05A8B17DE2F0}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesfea" ID="{17D5D3AB-F45C-42E2-A2F4-4DE6AE96BA8C}" ShortID="385753225">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesfea_01" ID="{ACED66F6-22EE-4A5F-BB4D-C9727831D565}">
-											<Language>SFX</Language>
-											<AudioFile>itesfea_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="291863990"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesfea_01" ID="{ACED66F6-22EE-4A5F-BB4D-C9727831D565}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesdid" ID="{8D37C35B-5518-443A-8575-F5F14453692A}" ShortID="231672049">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesdid_01" ID="{503143A3-D28D-4DE1-B402-0AC8881A0CBE}">
-											<Language>SFX</Language>
-											<AudioFile>itesdid_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="401928348"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesdid_01" ID="{503143A3-D28D-4DE1-B402-0AC8881A0CBE}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<RandomSequenceContainer Name="Random Voice" ID="{C9B361C9-DF3E-43FD-84D2-712C50D65653}" ShortID="1009815631">
-									<PropertyList>
-										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<RandomSequenceContainer Name="Select Voice" ID="{62747883-ED4F-445A-9BED-83BF645612B8}" ShortID="818241363">
+										<Sound Name="itesdia" ID="{A72EA4D9-414E-4031-B81E-6B3753AF2B04}" ShortID="368518754">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 											</PropertyList>
@@ -257,14 +92,179 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="itessee" ID="{FFF04AC1-251C-4210-9FDE-8C09ACA62F21}" ShortID="187938740">
+												<AudioFileSource Name="itesdia_01" ID="{DD925207-19D5-4FF6-9A68-DB789E30FAED}">
+													<Language>SFX</Language>
+													<AudioFile>itesdia_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="990781575"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesdia_01" ID="{DD925207-19D5-4FF6-9A68-DB789E30FAED}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesdic" ID="{2E13FC75-01C1-4943-8313-F7982C236BD3}" ShortID="771358296">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesdic_01" ID="{FB07854B-E332-45B2-BB00-3CFBA4CEDB7E}">
+													<Language>SFX</Language>
+													<AudioFile>itesdic_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="59822645"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesdic_01" ID="{FB07854B-E332-45B2-BB00-3CFBA4CEDB7E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesfeb" ID="{5D3345A6-0D3B-406E-AB0D-F3C6386D41C8}" ShortID="228728276">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesfeb_01" ID="{403F86F8-42CB-41B0-880B-9E13CF05A8A2}">
+													<Language>SFX</Language>
+													<AudioFile>itesfeb_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="817529503"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesfeb_01" ID="{403F86F8-42CB-41B0-880B-9E13CF05A8A2}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesdib" ID="{7D2AD72C-7EE2-4726-A2F4-2A1BCE726A0B}" ShortID="284171906">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesdib_01" ID="{5DA475B4-DD00-47E9-A98F-8016A01442C0}">
+													<Language>SFX</Language>
+													<AudioFile>itesdib_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="132641799"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesdib_01" ID="{5DA475B4-DD00-47E9-A98F-8016A01442C0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesfec" ID="{BC5B8DA2-A860-4618-B5F4-1C33F3B5D7E9}" ShortID="838146660">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesfec_01" ID="{69B4379D-3A7E-47C3-B5DF-05A8B17DE2F0}">
+													<Language>SFX</Language>
+													<AudioFile>itesfec_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="813394182"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesfec_01" ID="{69B4379D-3A7E-47C3-B5DF-05A8B17DE2F0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesfea" ID="{17D5D3AB-F45C-42E2-A2F4-4DE6AE96BA8C}" ShortID="385753225">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesfea_01" ID="{ACED66F6-22EE-4A5F-BB4D-C9727831D565}">
+													<Language>SFX</Language>
+													<AudioFile>itesfea_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="291863990"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesfea_01" ID="{ACED66F6-22EE-4A5F-BB4D-C9727831D565}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="Random Voice" ID="{C9B361C9-DF3E-43FD-84D2-712C50D65653}" ShortID="1009815631">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<RandomSequenceContainer Name="Select Voice" ID="{62747883-ED4F-445A-9BED-83BF645612B8}" ShortID="818241363">
 													<PropertyList>
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -278,31 +278,145 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itessee_01" ID="{329D12CB-6E44-48BE-B786-1876707D9991}">
-															<Language>SFX</Language>
-															<AudioFile>itessee_01.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="649308765"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="itessee" ID="{FFF04AC1-251C-4210-9FDE-8C09ACA62F21}" ShortID="187938740">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itessee_01" ID="{329D12CB-6E44-48BE-B786-1876707D9991}">
+																	<Language>SFX</Language>
+																	<AudioFile>itessee_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="649308765"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itessee_01" ID="{329D12CB-6E44-48BE-B786-1876707D9991}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itessec" ID="{510A8716-5550-4D87-B23D-C81C07F6445D}" ShortID="820122206">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itessec_01" ID="{0F76D37D-AB76-4B5A-8083-47E64AF557A1}">
+																	<Language>SFX</Language>
+																	<AudioFile>itessec_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="599669330"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itessec_01" ID="{0F76D37D-AB76-4B5A-8083-47E64AF557A1}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itessea" ID="{D59C4995-D8E4-4ECE-970E-66FB0204F1AF}" ShortID="683713020">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itessea_01" ID="{275D5B4E-4766-4B88-A2B1-A7DA948A2E5D}">
+																	<Language>SFX</Language>
+																	<AudioFile>itessea_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="516379293"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itessea_01" ID="{275D5B4E-4766-4B88-A2B1-A7DA948A2E5D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itessed" ID="{59F31439-0BC2-4E62-B23C-583812B9FE8D}" ShortID="14286176">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itessed_01" ID="{DFC54211-7774-4A89-B06E-847CFFED4530}">
+																	<Language>SFX</Language>
+																	<AudioFile>itessed_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="808685419"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itessed_01" ID="{DFC54211-7774-4A89-B06E-847CFFED4530}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="itessee_01" ID="{329D12CB-6E44-48BE-B786-1876707D9991}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="itessec" ID="{510A8716-5550-4D87-B23D-C81C07F6445D}" ShortID="820122206">
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Move Voice" ID="{58ED1D5C-E54E-426A-A530-8B2ECC904525}" ShortID="680429535">
 													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 													</PropertyList>
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -311,31 +425,211 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itessec_01" ID="{0F76D37D-AB76-4B5A-8083-47E64AF557A1}">
-															<Language>SFX</Language>
-															<AudioFile>itessec_01.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="599669330"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="itesmob" ID="{001D3AC3-554A-4091-95A8-55741D64EF56}" ShortID="823357874">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesmob_01" ID="{3C0D139D-34F9-440F-96A6-1873B99A7C9A}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesmob_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="713328082"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesmob_01" ID="{3C0D139D-34F9-440F-96A6-1873B99A7C9A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesmoe" ID="{EEB1A9A7-0775-46E9-9BFF-96B7798E24FC}" ShortID="991967657">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesmoe_01" ID="{392FA51C-00B4-4673-B054-1667C82EBF1B}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesmoe_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="810700654"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesmoe_01" ID="{392FA51C-00B4-4673-B054-1667C82EBF1B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesmof" ID="{D53F8379-CC49-47FF-B9E7-E08C2AC11179}" ShortID="514933193">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesmof_01" ID="{0C6F688B-86DB-4E83-9EB5-B4028CBD74DC}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesmof_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="659843373"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesmof_01" ID="{0C6F688B-86DB-4E83-9EB5-B4028CBD74DC}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesmoc" ID="{88DAA393-B61F-4B31-8D67-DB5EC8236EF1}" ShortID="688393972">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesmoc_01" ID="{B1B59844-A749-4400-938E-AB02B36D2C34}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesmoc_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="653386136"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesmoc_01" ID="{B1B59844-A749-4400-938E-AB02B36D2C34}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesmoa" ID="{6F033E49-0E69-40C6-A8A5-CA53E5FD0198}" ShortID="842294858">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesmoa_01" ID="{412597EF-8A50-4C0B-A0B6-3EEF39BB0CBA}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesmoa_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="979624947"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesmoa_01" ID="{412597EF-8A50-4C0B-A0B6-3EEF39BB0CBA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesmod" ID="{A08C1B45-A858-404B-B65C-BCB1A5089F30}" ShortID="732828923">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesmod_01" ID="{B6204A13-0929-459F-B41C-E65BD4E6073F}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesmod_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="30965453"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesmod_01" ID="{B6204A13-0929-459F-B41C-E65BD4E6073F}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="itessec_01" ID="{0F76D37D-AB76-4B5A-8083-47E64AF557A1}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="itessea" ID="{D59C4995-D8E4-4ECE-970E-66FB0204F1AF}" ShortID="683713020">
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Attack Voice" ID="{B96B3495-940E-4C3B-9D84-DF8150C50811}" ShortID="1053704439">
 													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
 													</PropertyList>
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -344,54 +638,216 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itessea_01" ID="{275D5B4E-4766-4B88-A2B1-A7DA948A2E5D}">
-															<Language>SFX</Language>
-															<AudioFile>itessea_01.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="516379293"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="itesatd" ID="{7F5E4403-4FA2-4921-A4FE-8FEC6BD531A7}" ShortID="877869148">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesatd_01" ID="{BE52F54E-9F02-4E9F-9D5E-BC4E43783F95}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesatd_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1068644922"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesatd_01" ID="{BE52F54E-9F02-4E9F-9D5E-BC4E43783F95}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesate" ID="{084559F3-CFD3-4E01-8905-BD17CCEA3744}" ShortID="333399478">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesate_01" ID="{8452130F-B327-4A4D-AC69-99E64A86E751}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesate_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="653401900"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesate_01" ID="{8452130F-B327-4A4D-AC69-99E64A86E751}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesatc" ID="{CD40A5A1-7E70-4637-9EE8-B931ADBBD882}" ShortID="118287057">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesatc_01" ID="{FCE82681-0DC0-425D-A464-C4FC40BC7C30}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesatc_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="894505461"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesatc_01" ID="{FCE82681-0DC0-425D-A464-C4FC40BC7C30}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesata" ID="{4900A722-3DC9-4BE3-ADD4-56AAE3A681C4}" ShortID="501443370">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesata_01" ID="{80B134E4-A637-4384-AA29-866DEA6CA62E}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesata_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="702992641"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesata_01" ID="{80B134E4-A637-4384-AA29-866DEA6CA62E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="itesatb" ID="{B9042F8C-14C7-4D82-9912-022FFA628C40}" ShortID="12193861">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="itesatb_01" ID="{68DEDAD4-AEF4-420E-BA65-E308AB4150BD}">
+																	<Language>SFX</Language>
+																	<AudioFile>itesatb_01.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="730375976"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="itesatb_01" ID="{68DEDAD4-AEF4-420E-BA65-E308AB4150BD}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="itessea_01" ID="{275D5B4E-4766-4B88-A2B1-A7DA948A2E5D}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="itessed" ID="{59F31439-0BC2-4E62-B23C-583812B9FE8D}" ShortID="14286176">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="itessed_01" ID="{DFC54211-7774-4A89-B06E-847CFFED4530}">
-															<Language>SFX</Language>
-															<AudioFile>itessed_01.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="808685419"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="itessed_01" ID="{DFC54211-7774-4A89-B06E-847CFFED4530}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
+												</RandomSequenceContainer>
 											</ChildrenList>
 										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="Move Voice" ID="{58ED1D5C-E54E-426A-A530-8B2ECC904525}" ShortID="680429535">
+										<Sound Name="itesdid" ID="{8D37C35B-5518-443A-8575-F5F14453692A}" ShortID="231672049">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesdid_01" ID="{503143A3-D28D-4DE1-B402-0AC8881A0CBE}">
+													<Language>SFX</Language>
+													<AudioFile>itesdid_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="401928348"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesdid_01" ID="{503143A3-D28D-4DE1-B402-0AC8881A0CBE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="Desolator" ID="{0B947372-6C24-4732-8D85-F0D3880B52DF}" ShortID="357867120">
+									<ChildrenList>
+										<RandomSequenceContainer Name="Attack Voice" ID="{AF488118-7BD2-4058-8CAF-A882751E9E54}" ShortID="582263524">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
@@ -401,19 +857,8 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="itesmob" ID="{001D3AC3-554A-4091-95A8-55741D64EF56}" ShortID="823357874">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesata" ID="{230F5307-79CF-4BCF-9DE3-E01BA6BDEDD5}" ShortID="1011558409">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -422,31 +867,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesmob_01" ID="{3C0D139D-34F9-440F-96A6-1873B99A7C9A}">
+														<AudioFileSource Name="idesata" ID="{A1F12578-F075-49A6-AE08-0EFECA31FC81}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesmob_01.wav</AudioFile>
+															<AudioFile>idesata.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="713328082"/>
+																<MediaID ID="517536459"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesmob_01" ID="{3C0D139D-34F9-440F-96A6-1873B99A7C9A}" Platform="Linked"/>
+														<ActiveSource Name="idesata" ID="{A1F12578-F075-49A6-AE08-0EFECA31FC81}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesmoe" ID="{EEB1A9A7-0775-46E9-9BFF-96B7798E24FC}" ShortID="991967657">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesatb" ID="{304311AB-21FC-4BE9-B9B7-64CD8F576C9F}" ShortID="50086302">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -455,31 +895,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesmoe_01" ID="{392FA51C-00B4-4673-B054-1667C82EBF1B}">
+														<AudioFileSource Name="idesatb" ID="{3F94197C-462D-4D50-9675-E231B0E8BC9A}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesmoe_01.wav</AudioFile>
+															<AudioFile>idesatb.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="810700654"/>
+																<MediaID ID="785716805"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesmoe_01" ID="{392FA51C-00B4-4673-B054-1667C82EBF1B}" Platform="Linked"/>
+														<ActiveSource Name="idesatb" ID="{3F94197C-462D-4D50-9675-E231B0E8BC9A}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesmof" ID="{D53F8379-CC49-47FF-B9E7-E08C2AC11179}" ShortID="514933193">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesatc" ID="{F0C64721-D112-482A-9D1F-AC266160F426}" ShortID="609307561">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -488,31 +923,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesmof_01" ID="{0C6F688B-86DB-4E83-9EB5-B4028CBD74DC}">
+														<AudioFileSource Name="idesatc" ID="{B5EA6E65-26BF-4205-969A-DCE3277662BE}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesmof_01.wav</AudioFile>
+															<AudioFile>idesatc.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="659843373"/>
+																<MediaID ID="1067532979"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesmof_01" ID="{0C6F688B-86DB-4E83-9EB5-B4028CBD74DC}" Platform="Linked"/>
+														<ActiveSource Name="idesatc" ID="{B5EA6E65-26BF-4205-969A-DCE3277662BE}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesmoc" ID="{88DAA393-B61F-4B31-8D67-DB5EC8236EF1}" ShortID="688393972">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesatd" ID="{26E6738B-7BB4-4936-9B6B-90C1127F7672}" ShortID="470537032">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -521,31 +951,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesmoc_01" ID="{B1B59844-A749-4400-938E-AB02B36D2C34}">
+														<AudioFileSource Name="idesatd" ID="{56F45C5B-CF10-4C62-BCE0-BCB86A7F3A2B}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesmoc_01.wav</AudioFile>
+															<AudioFile>idesatd.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="653386136"/>
+																<MediaID ID="978550594"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesmoc_01" ID="{B1B59844-A749-4400-938E-AB02B36D2C34}" Platform="Linked"/>
+														<ActiveSource Name="idesatd" ID="{56F45C5B-CF10-4C62-BCE0-BCB86A7F3A2B}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesmoa" ID="{6F033E49-0E69-40C6-A8A5-CA53E5FD0198}" ShortID="842294858">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesate" ID="{E48A87CC-ED14-4264-9839-67649EB5FB37}" ShortID="633474025">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -554,31 +979,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesmoa_01" ID="{412597EF-8A50-4C0B-A0B6-3EEF39BB0CBA}">
+														<AudioFileSource Name="idesate" ID="{81F13FF7-5BFC-4D67-9E3B-313A27EB1C18}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesmoa_01.wav</AudioFile>
+															<AudioFile>idesate.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="979624947"/>
+																<MediaID ID="733573731"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesmoa_01" ID="{412597EF-8A50-4C0B-A0B6-3EEF39BB0CBA}" Platform="Linked"/>
+														<ActiveSource Name="idesate" ID="{81F13FF7-5BFC-4D67-9E3B-313A27EB1C18}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesmod" ID="{A08C1B45-A858-404B-B65C-BCB1A5089F30}" ShortID="732828923">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesatf" ID="{E366D83E-0A60-41D1-9EB1-900CFAEB0265}" ShortID="258007754">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -587,21 +1007,35 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesmod_01" ID="{B6204A13-0929-459F-B41C-E65BD4E6073F}">
+														<AudioFileSource Name="idesatf" ID="{5A3FD144-BF71-40B6-A9B2-19B872F0398C}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesmod_01.wav</AudioFile>
+															<AudioFile>idesatf.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="30965453"/>
+																<MediaID ID="1004977995"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesmod_01" ID="{B6204A13-0929-459F-B41C-E65BD4E6073F}" Platform="Linked"/>
+														<ActiveSource Name="idesatf" ID="{5A3FD144-BF71-40B6-A9B2-19B872F0398C}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
 										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="Attack Voice" ID="{B96B3495-940E-4C3B-9D84-DF8150C50811}" ShortID="1053704439">
+										<RandomSequenceContainer Name="Move Voice" ID="{69215CB3-DDBE-4B65-B551-1E4CEC957F7C}" ShortID="227643532">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
@@ -611,19 +1045,8 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="itesatd" ID="{7F5E4403-4FA2-4921-A4FE-8FEC6BD531A7}" ShortID="877869148">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesmoa" ID="{2D599C83-1F07-4A51-B122-D2CFC1EC190E}" ShortID="356585583">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -632,31 +1055,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesatd_01" ID="{BE52F54E-9F02-4E9F-9D5E-BC4E43783F95}">
+														<AudioFileSource Name="idesmoa" ID="{84194309-4EAC-46F4-966C-21FB062852B1}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesatd_01.wav</AudioFile>
+															<AudioFile>idesmoa.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="1068644922"/>
+																<MediaID ID="115648114"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesatd_01" ID="{BE52F54E-9F02-4E9F-9D5E-BC4E43783F95}" Platform="Linked"/>
+														<ActiveSource Name="idesmoa" ID="{84194309-4EAC-46F4-966C-21FB062852B1}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesate" ID="{084559F3-CFD3-4E01-8905-BD17CCEA3744}" ShortID="333399478">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesmob" ID="{B01C44FB-4370-4A16-BE02-923624CC0D97}" ShortID="147022922">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -665,31 +1083,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesate_01" ID="{8452130F-B327-4A4D-AC69-99E64A86E751}">
+														<AudioFileSource Name="idesmob" ID="{8B69A8E2-8574-46BB-A341-791C6C6A79E0}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesate_01.wav</AudioFile>
+															<AudioFile>idesmob.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="653401900"/>
+																<MediaID ID="908295835"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesate_01" ID="{8452130F-B327-4A4D-AC69-99E64A86E751}" Platform="Linked"/>
+														<ActiveSource Name="idesmob" ID="{8B69A8E2-8574-46BB-A341-791C6C6A79E0}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesatc" ID="{CD40A5A1-7E70-4637-9EE8-B931ADBBD882}" ShortID="118287057">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesmoc" ID="{6375800E-7B83-4160-BDEF-02E37C141F1A}" ShortID="551931563">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -698,31 +1111,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesatc_01" ID="{FCE82681-0DC0-425D-A464-C4FC40BC7C30}">
+														<AudioFileSource Name="idesmoc" ID="{43E250F8-DBFE-4693-A1E7-CAE376153262}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesatc_01.wav</AudioFile>
+															<AudioFile>idesmoc.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="894505461"/>
+																<MediaID ID="189152507"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesatc_01" ID="{FCE82681-0DC0-425D-A464-C4FC40BC7C30}" Platform="Linked"/>
+														<ActiveSource Name="idesmoc" ID="{43E250F8-DBFE-4693-A1E7-CAE376153262}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesata" ID="{4900A722-3DC9-4BE3-ADD4-56AAE3A681C4}" ShortID="501443370">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesmod" ID="{109E36A6-8933-48F5-A6D9-50865E381917}" ShortID="857988348">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -731,31 +1139,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesata_01" ID="{80B134E4-A637-4384-AA29-866DEA6CA62E}">
+														<AudioFileSource Name="idesmod" ID="{1148F1A2-3949-453F-8EEE-6DA8B710ECD5}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesata_01.wav</AudioFile>
+															<AudioFile>idesmod.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="702992641"/>
+																<MediaID ID="546244822"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesata_01" ID="{80B134E4-A637-4384-AA29-866DEA6CA62E}" Platform="Linked"/>
+														<ActiveSource Name="idesmod" ID="{1148F1A2-3949-453F-8EEE-6DA8B710ECD5}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="itesatb" ID="{B9042F8C-14C7-4D82-9912-022FFA628C40}" ShortID="12193861">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>3</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
+												<Sound Name="idesmoe" ID="{985B05AA-C825-4DC4-A136-F0063AD41612}" ShortID="44657887">
 													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -764,22 +1167,188 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="itesatb_01" ID="{68DEDAD4-AEF4-420E-BA65-E308AB4150BD}">
+														<AudioFileSource Name="idesmoe" ID="{DCE01435-AD94-4932-8037-4848705C65CF}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
 															<Language>SFX</Language>
-															<AudioFile>itesatb_01.wav</AudioFile>
+															<AudioFile>idesmoe.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="730375976"/>
+																<MediaID ID="982396180"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
-														<ActiveSource Name="itesatb_01" ID="{68DEDAD4-AEF4-420E-BA65-E308AB4150BD}" Platform="Linked"/>
+														<ActiveSource Name="idesmoe" ID="{DCE01435-AD94-4932-8037-4848705C65CF}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="Select Voice" ID="{1C88F122-7783-4DDC-A62F-C08A332AF199}" ShortID="442273306">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="idessea" ID="{EAB0C585-1D88-45B8-AAD2-1B78301EC491}" ShortID="544991610">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idessea" ID="{E55A52D4-2BFD-4F61-B20F-3693C82D860E}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idessea.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="747499958"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idessea" ID="{E55A52D4-2BFD-4F61-B20F-3693C82D860E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesseb" ID="{A4435BCB-10AE-4320-B581-E71EB61D55E8}" ShortID="607358732">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesseb" ID="{F858BE89-1931-4BB0-A2A5-B078245F9D01}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesseb.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="236680481"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesseb" ID="{F858BE89-1931-4BB0-A2A5-B078245F9D01}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idessec" ID="{B806D93F-92F1-49FF-B29A-9751E2CF2199}" ShortID="482575424">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idessec" ID="{AC60C830-DF63-47C0-AE2B-DA23B246D3A9}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idessec.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="690250939"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idessec" ID="{AC60C830-DF63-47C0-AE2B-DA23B246D3A9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idessed" ID="{2886636F-62A7-41E2-B80E-B8344F7ADC82}" ShortID="219634521">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idessed" ID="{01FAF3AA-0283-4A2B-9D9E-1326D562FEB8}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idessed.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="128018462"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idessed" ID="{01FAF3AA-0283-4A2B-9D9E-1326D562FEB8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idessee" ID="{7A9567D9-01A2-4429-878E-F23E1AFFCA4A}" ShortID="428079017">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idessee" ID="{6060F434-CDE2-4E45-8EDA-11FE9ACCF324}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idessee.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="405467073"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idessee" ID="{6060F434-CDE2-4E45-8EDA-11FE9ACCF324}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
 										</RandomSequenceContainer>
 									</ChildrenList>
-								</RandomSequenceContainer>
+								</Folder>
 							</ChildrenList>
 						</ActorMixer>
 						<ActorMixer Name="Sound Fx" ID="{0DEFFF43-4617-4710-A72A-EAE03874B47E}" ShortID="578444892">
@@ -807,539 +1376,84 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="building_uselbuil" ID="{7971E188-3EF1-44D9-AB66-32E62B10E135}" ShortID="463927031">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{EC9801DE-7B8B-40EC-9B8E-6150B2505217}">
-														<PropertyList>
-															<Property Name="Max" Type="Real64" Value="75"/>
-															<Property Name="Min" Type="Real64" Value="-75"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-4</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
+								<Folder Name="Trooper" ID="{4CFD44C0-4CC0-47FB-AFB5-68DE678013D7}" ShortID="838378391">
 									<ChildrenList>
-										<AudioFileSource Name="building_uselbuil" ID="{B24C627D-9CDF-40CA-9CE7-FD7917375A57}">
-											<Language>SFX</Language>
-											<AudioFile>building_uselbuil.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="795510991"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="building_uselbuil" ID="{B24C627D-9CDF-40CA-9CE7-FD7917375A57}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="iteschaa" ID="{44F9795F-69DE-4509-B25B-B2C0AF606D62}" ShortID="447131737">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{BA59754A-785E-47C2-B776-E9866A1D3B3E}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="iteschaa" ID="{34D0E8EC-326A-4B66-8AC2-2F924B8A283E}">
-											<Language>SFX</Language>
-											<AudioFile>iteschaa.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="419643387"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="iteschaa" ID="{34D0E8EC-326A-4B66-8AC2-2F924B8A283E}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesatta" ID="{DD7582AB-C889-4852-A507-D67182527CC1}" ShortID="612647330">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{D23C02A9-F453-4C5D-B19C-68DF3EDF6A53}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="202"/>
-															<Property Name="Min" Type="Real64" Value="-177"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-2</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesatta" ID="{8DC6A40A-4D06-4BB4-AE3E-98AEBB496CE1}">
-											<Language>SFX</Language>
-											<AudioFile>itesatta.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="686800937"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesatta" ID="{8DC6A40A-4D06-4BB4-AE3E-98AEBB496CE1}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="buliding_uplace" ID="{4F483978-F45B-4FE6-82FB-3E644777E11A}" ShortID="508032181">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="buliding_uplace_01" ID="{0C6856D9-70C1-4FDF-9C20-16655AA6D5DC}">
-											<Language>SFX</Language>
-											<AudioFile>buliding_uplace_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="779542685"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="buliding_uplace_01" ID="{0C6856D9-70C1-4FDF-9C20-16655AA6D5DC}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="prism_bpriat1a prism tower attack" ID="{0238972C-4CAF-4B91-8753-598899BBBF3C}" ShortID="741029206">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{D1AED80F-2725-49F0-9462-692E74D55EDE}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="prism_bpriat1a prism tower attack_01" ID="{E73551B1-6CDE-49D9-ADD2-59D0434FD230}">
-											<Language>SFX</Language>
-											<AudioFile>prism_bpriat1a prism tower attack_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="872893787"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="prism_bpriat1a prism tower attack_01" ID="{E73551B1-6CDE-49D9-ADD2-59D0434FD230}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="prism_bpripow prism tower prep" ID="{2916C551-26DF-4439-8716-7A37EAC62A73}" ShortID="314597981">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="prism_bpripow prism tower prep_01" ID="{7BAAA661-8FEF-4787-A0B4-5D198F0AD0EB}">
-											<Language>SFX</Language>
-											<AudioFile>prism_bpripow prism tower prep_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="837907739"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="prism_bpripow prism tower prep_01" ID="{7BAAA661-8FEF-4787-A0B4-5D198F0AD0EB}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="tower_btesat2a tesla tower attack" ID="{5FADD23D-EF7C-4A59-B6E3-0CF1C2940017}" ShortID="1003284214">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{8210C828-641B-4C36-9740-6EEBA577B6EF}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>3</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="tower_btesat2a tesla tower attack_01" ID="{1AC01147-28FA-400B-8C75-B6A3A855852D}">
-											<Language>SFX</Language>
-											<AudioFile>tower_btesat2a tesla tower attack_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="915646748"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="tower_btesat2a tesla tower attack_01" ID="{1AC01147-28FA-400B-8C75-B6A3A855852D}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="tank_vtesatta tesla tank attack" ID="{E1E3F839-8F17-4C79-9477-26878D05300C}" ShortID="339305585">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{C39957B1-4214-4B8B-AF43-2DFD8695801C}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="tank_vtesatta tesla tank attack_01" ID="{DD02CC11-B277-441F-861A-233BE3AC76CB}">
-											<Language>SFX</Language>
-											<AudioFile>tank_vtesatta tesla tank attack_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="647934280"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="tank_vtesatta tesla tank attack_01" ID="{DD02CC11-B277-441F-861A-233BE3AC76CB}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="tower_bparatta they fucking turned eiffel tower to a tesla tower" ID="{A7B973F4-8CF8-4DE2-BEE6-CED4CD194051}" ShortID="867576954">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{BEE60B86-6FBD-471C-89FE-F0867BD7739C}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="tower_bparatta they fucking turned eiffel tower to a tesla tower_01" ID="{017024C3-6504-41D8-93A5-2A8CE4D09407}">
-											<Language>SFX</Language>
-											<AudioFile>tower_bparatta they fucking turned eiffel tower to a tesla tower_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="283509260"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="tower_bparatta they fucking turned eiffel tower to a tesla tower_01" ID="{017024C3-6504-41D8-93A5-2A8CE4D09407}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="tower_btesat1a tesla tower attack" ID="{79B25811-2730-477E-93CC-DCCF226BC488}" ShortID="22127219">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{9BC000D0-72B7-4DB6-95CD-B411740E2523}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="tower_btesat1a tesla tower attack_01" ID="{845FA1C4-0E85-4B51-A238-C86DC238E193}">
-											<Language>SFX</Language>
-											<AudioFile>tower_btesat1a tesla tower attack_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="594747931"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="tower_btesat1a tesla tower attack_01" ID="{845FA1C4-0E85-4B51-A238-C86DC238E193}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="tower_btespow tesla tower prep" ID="{9DA388E5-2284-4444-A35B-E69AD2C06BE7}" ShortID="737802288">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{8864F3E5-D690-4AA3-B758-E406F1428583}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="tower_btespow tesla tower prep_01" ID="{A628A7F9-F2C1-491B-A0F5-C5A25B9C1D2B}">
-											<Language>SFX</Language>
-											<AudioFile>tower_btespow tesla tower prep_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="638174944"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="tower_btespow tesla tower prep_01" ID="{A628A7F9-F2C1-491B-A0F5-C5A25B9C1D2B}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="tank_vtesattb tesla tank attack" ID="{F01484F2-6D5C-4508-9B48-61934A0C9EC6}" ShortID="233860396">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{46E95CD1-06C9-4B9F-845D-3B1DE9875B88}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-1</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="tank_vtesattb tesla tank attack_01" ID="{C176449E-D1D8-4A17-A1FE-CAFBD8EA6F55}">
-											<Language>SFX</Language>
-											<AudioFile>tank_vtesattb tesla tank attack_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="805480428"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="tank_vtesattb tesla tank attack_01" ID="{C176449E-D1D8-4A17-A1FE-CAFBD8EA6F55}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="prism_vpriatta prism tank attack" ID="{86B02F1B-DA4D-4B38-BB77-C3C271CCDC31}" ShortID="584334641">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="prism_vpriatta prism tank attack_01" ID="{1A018B36-BC8D-4518-9FEE-107712825744}">
-											<Language>SFX</Language>
-											<AudioFile>prism_vpriatta prism tank attack_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="234033318"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="prism_vpriatta prism tank attack_01" ID="{1A018B36-BC8D-4518-9FEE-107712825744}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" ShortID="503402827">
-									<PropertyList>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{44D31E1E-DFDD-408E-A58C-8BBA97817E1D}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="202"/>
-															<Property Name="Min" Type="Real64" Value="-177"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-2</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="itesatta_01" ID="{C1A69381-E1D2-489D-AF24-F99C6EF3EC39}">
+										<Sound Name="buliding_uplace" ID="{4F483978-F45B-4FE6-82FB-3E644777E11A}" ShortID="508032181">
 											<PropertyList>
-												<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-												<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-												<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-												<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 											</PropertyList>
-											<Language>SFX</Language>
-											<AudioFile>itesatta_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="645019309"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="itesatta_01" ID="{C1A69381-E1D2-489D-AF24-F99C6EF3EC39}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<RandomSequenceContainer Name="zap crit" ID="{31C349ED-9888-4195-83B4-8B37F4D6AC31}" ShortID="702169697">
-									<PropertyList>
-										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="trooper_itesat2b tesla trooper attack" ID="{0504CB6D-23C2-4981-A424-3541A778490B}" ShortID="11440959">
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="buliding_uplace_01" ID="{0C6856D9-70C1-4FDF-9C20-16655AA6D5DC}">
+													<Language>SFX</Language>
+													<AudioFile>buliding_uplace_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="779542685"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="buliding_uplace_01" ID="{0C6856D9-70C1-4FDF-9C20-16655AA6D5DC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="prism_bpriat1a prism tower attack" ID="{0238972C-4CAF-4B91-8753-598899BBBF3C}" ShortID="741029206">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 												<Property Name="Pitch" Type="int32">
 													<ModifierList>
 														<ModifierInfo>
-															<Modifier Name="" ID="{CA85FFBB-B525-4752-B909-1748DDB44DF2}"/>
+															<Modifier Name="" ID="{D1AED80F-2725-49F0-9462-692E74D55EDE}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="prism_bpriat1a prism tower attack_01" ID="{E73551B1-6CDE-49D9-ADD2-59D0434FD230}">
+													<Language>SFX</Language>
+													<AudioFile>prism_bpriat1a prism tower attack_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="872893787"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="prism_bpriat1a prism tower attack_01" ID="{E73551B1-6CDE-49D9-ADD2-59D0434FD230}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesatta" ID="{DD7582AB-C889-4852-A507-D67182527CC1}" ShortID="612647330">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{D23C02A9-F453-4C5D-B19C-68DF3EDF6A53}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="202"/>
+																	<Property Name="Min" Type="Real64" Value="-177"/>
+																</PropertyList>
+															</Modifier>
 														</ModifierInfo>
 													</ModifierList>
 												</Property>
@@ -1361,25 +1475,486 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="trooper_itesat2b tesla trooper attack_01" ID="{2DD690FB-967B-4140-BFA2-C54FD45CCA4C}">
+												<AudioFileSource Name="itesatta" ID="{8DC6A40A-4D06-4BB4-AE3E-98AEBB496CE1}">
 													<Language>SFX</Language>
-													<AudioFile>trooper_itesat2b tesla trooper attack_01.wav</AudioFile>
+													<AudioFile>itesatta.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="44427184"/>
+														<MediaID ID="686800937"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="trooper_itesat2b tesla trooper attack_01" ID="{2DD690FB-967B-4140-BFA2-C54FD45CCA4C}" Platform="Linked"/>
+												<ActiveSource Name="itesatta" ID="{8DC6A40A-4D06-4BB4-AE3E-98AEBB496CE1}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="trooper_itesat2a tesla trooper attack" ID="{EDFCE96D-9CAB-412B-B97E-4A58F06D3132}" ShortID="536805483">
+										<Sound Name="prism_bpripow prism tower prep" ID="{2916C551-26DF-4439-8716-7A37EAC62A73}" ShortID="314597981">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="prism_bpripow prism tower prep_01" ID="{7BAAA661-8FEF-4787-A0B4-5D198F0AD0EB}">
+													<Language>SFX</Language>
+													<AudioFile>prism_bpripow prism tower prep_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="837907739"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="prism_bpripow prism tower prep_01" ID="{7BAAA661-8FEF-4787-A0B4-5D198F0AD0EB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="building_uselbuil" ID="{7971E188-3EF1-44D9-AB66-32E62B10E135}" ShortID="463927031">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 												<Property Name="Pitch" Type="int32">
 													<ModifierList>
 														<ModifierInfo>
-															<Modifier Name="" ID="{C68DE13B-0B89-4E64-8997-8DC7DF117A0A}"/>
+															<Modifier Name="" ID="{EC9801DE-7B8B-40EC-9B8E-6150B2505217}">
+																<PropertyList>
+																	<Property Name="Max" Type="Real64" Value="75"/>
+																	<Property Name="Min" Type="Real64" Value="-75"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="building_uselbuil" ID="{B24C627D-9CDF-40CA-9CE7-FD7917375A57}">
+													<Language>SFX</Language>
+													<AudioFile>building_uselbuil.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="795510991"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="building_uselbuil" ID="{B24C627D-9CDF-40CA-9CE7-FD7917375A57}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="iteschaa" ID="{44F9795F-69DE-4509-B25B-B2C0AF606D62}" ShortID="447131737">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{BA59754A-785E-47C2-B776-E9866A1D3B3E}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="iteschaa" ID="{34D0E8EC-326A-4B66-8AC2-2F924B8A283E}">
+													<Language>SFX</Language>
+													<AudioFile>iteschaa.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="419643387"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="iteschaa" ID="{34D0E8EC-326A-4B66-8AC2-2F924B8A283E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="tower_bparatta they fucking turned eiffel tower to a tesla tower" ID="{A7B973F4-8CF8-4DE2-BEE6-CED4CD194051}" ShortID="867576954">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{BEE60B86-6FBD-471C-89FE-F0867BD7739C}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="tower_bparatta they fucking turned eiffel tower to a tesla tower_01" ID="{017024C3-6504-41D8-93A5-2A8CE4D09407}">
+													<Language>SFX</Language>
+													<AudioFile>tower_bparatta they fucking turned eiffel tower to a tesla tower_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="283509260"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="tower_bparatta they fucking turned eiffel tower to a tesla tower_01" ID="{017024C3-6504-41D8-93A5-2A8CE4D09407}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="prism_vpriatta prism tank attack" ID="{86B02F1B-DA4D-4B38-BB77-C3C271CCDC31}" ShortID="584334641">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="prism_vpriatta prism tank attack_01" ID="{1A018B36-BC8D-4518-9FEE-107712825744}">
+													<Language>SFX</Language>
+													<AudioFile>prism_vpriatta prism tank attack_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="234033318"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="prism_vpriatta prism tank attack_01" ID="{1A018B36-BC8D-4518-9FEE-107712825744}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="tower_btesat1a tesla tower attack" ID="{79B25811-2730-477E-93CC-DCCF226BC488}" ShortID="22127219">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{9BC000D0-72B7-4DB6-95CD-B411740E2523}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="tower_btesat1a tesla tower attack_01" ID="{845FA1C4-0E85-4B51-A238-C86DC238E193}">
+													<Language>SFX</Language>
+													<AudioFile>tower_btesat1a tesla tower attack_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="594747931"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="tower_btesat1a tesla tower attack_01" ID="{845FA1C4-0E85-4B51-A238-C86DC238E193}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="tower_btespow tesla tower prep" ID="{9DA388E5-2284-4444-A35B-E69AD2C06BE7}" ShortID="737802288">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{8864F3E5-D690-4AA3-B758-E406F1428583}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="tower_btespow tesla tower prep_01" ID="{A628A7F9-F2C1-491B-A0F5-C5A25B9C1D2B}">
+													<Language>SFX</Language>
+													<AudioFile>tower_btespow tesla tower prep_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="638174944"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="tower_btespow tesla tower prep_01" ID="{A628A7F9-F2C1-491B-A0F5-C5A25B9C1D2B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="tank_vtesatta tesla tank attack" ID="{E1E3F839-8F17-4C79-9477-26878D05300C}" ShortID="339305585">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{C39957B1-4214-4B8B-AF43-2DFD8695801C}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="tank_vtesatta tesla tank attack_01" ID="{DD02CC11-B277-441F-861A-233BE3AC76CB}">
+													<Language>SFX</Language>
+													<AudioFile>tank_vtesatta tesla tank attack_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="647934280"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="tank_vtesatta tesla tank attack_01" ID="{DD02CC11-B277-441F-861A-233BE3AC76CB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="zap crit" ID="{31C349ED-9888-4195-83B4-8B37F4D6AC31}" ShortID="702169697">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="trooper_itesat2b tesla trooper attack" ID="{0504CB6D-23C2-4981-A424-3541A778490B}" ShortID="11440959">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Pitch" Type="int32">
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{CA85FFBB-B525-4752-B909-1748DDB44DF2}"/>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-2</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="trooper_itesat2b tesla trooper attack_01" ID="{2DD690FB-967B-4140-BFA2-C54FD45CCA4C}">
+															<Language>SFX</Language>
+															<AudioFile>trooper_itesat2b tesla trooper attack_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="44427184"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="trooper_itesat2b tesla trooper attack_01" ID="{2DD690FB-967B-4140-BFA2-C54FD45CCA4C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="trooper_itesat2a tesla trooper attack" ID="{EDFCE96D-9CAB-412B-B97E-4A58F06D3132}" ShortID="536805483">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Pitch" Type="int32">
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{C68DE13B-0B89-4E64-8997-8DC7DF117A0A}"/>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-2</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="trooper_itesat2a tesla trooper attack_01" ID="{CFC66CDC-80E1-433D-B448-BBEF416B9D6F}">
+															<Language>SFX</Language>
+															<AudioFile>trooper_itesat2a tesla trooper attack_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="987186596"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="trooper_itesat2a tesla trooper attack_01" ID="{CFC66CDC-80E1-433D-B448-BBEF416B9D6F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="tank_vtesattb tesla tank attack" ID="{F01484F2-6D5C-4508-9B48-61934A0C9EC6}" ShortID="233860396">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{46E95CD1-06C9-4B9F-845D-3B1DE9875B88}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-1</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="tank_vtesattb tesla tank attack_01" ID="{C176449E-D1D8-4A17-A1FE-CAFBD8EA6F55}">
+													<Language>SFX</Language>
+													<AudioFile>tank_vtesattb tesla tank attack_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="805480428"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="tank_vtesattb tesla tank attack_01" ID="{C176449E-D1D8-4A17-A1FE-CAFBD8EA6F55}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="tower_btesat2a tesla tower attack" ID="{5FADD23D-EF7C-4A59-B6E3-0CF1C2940017}" ShortID="1003284214">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{8210C828-641B-4C36-9740-6EEBA577B6EF}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="tower_btesat2a tesla tower attack_01" ID="{1AC01147-28FA-400B-8C75-B6A3A855852D}">
+													<Language>SFX</Language>
+													<AudioFile>tower_btesat2a tesla tower attack_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="915646748"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="tower_btesat2a tesla tower attack_01" ID="{1AC01147-28FA-400B-8C75-B6A3A855852D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" ShortID="503402827">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{44D31E1E-DFDD-408E-A58C-8BBA97817E1D}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="202"/>
+																	<Property Name="Min" Type="Real64" Value="-177"/>
+																</PropertyList>
+															</Modifier>
 														</ModifierInfo>
 													</ModifierList>
 												</Property>
@@ -1401,20 +1976,284 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="trooper_itesat2a tesla trooper attack_01" ID="{CFC66CDC-80E1-433D-B448-BBEF416B9D6F}">
+												<AudioFileSource Name="itesatta_01" ID="{C1A69381-E1D2-489D-AF24-F99C6EF3EC39}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
 													<Language>SFX</Language>
-													<AudioFile>trooper_itesat2a tesla trooper attack_01.wav</AudioFile>
+													<AudioFile>itesatta_01.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="987186596"/>
+														<MediaID ID="645019309"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="trooper_itesat2a tesla trooper attack_01" ID="{CFC66CDC-80E1-433D-B448-BBEF416B9D6F}" Platform="Linked"/>
+												<ActiveSource Name="itesatta_01" ID="{C1A69381-E1D2-489D-AF24-F99C6EF3EC39}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
-								</RandomSequenceContainer>
+								</Folder>
+								<Folder Name="Desolator" ID="{1F6C6A0E-A229-4A2A-8509-1828B055350F}" ShortID="1065647325">
+									<ChildrenList>
+										<Sound Name="idesat1a_attack" ID="{7A9F5E43-77C3-40D0-81C8-C2EA24762C4B}" ShortID="1045430109">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="idesat1a_attack" ID="{A643FD67-3B42-4474-BA58-C7DD93448DA4}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>idesat1a_attack.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="660682721"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="idesat1a_attack" ID="{A643FD67-3B42-4474-BA58-C7DD93448DA4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="idesat2a_deploy" ID="{CA92D3CC-EACA-47CA-981C-2175D42E528A}" ShortID="466376344">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="idesat2a_deploy" ID="{E4803997-6C81-41CD-8402-A5CADBD4D986}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>idesat2a_deploy.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="327612978"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="idesat2a_deploy" ID="{E4803997-6C81-41CD-8402-A5CADBD4D986}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="AttackShort" ID="{EE6831DD-AA94-4AA3-8443-D1B525F2B842}" ShortID="96373074">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="idesat1a_attack_short2" ID="{8784B079-188A-4E48-A6BF-5CB458CAE13A}" ShortID="410257243">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack_short2" ID="{8E096839-06C5-482A-BDE1-70CCB264A501}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack_short2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="176162194"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack_short2" ID="{8E096839-06C5-482A-BDE1-70CCB264A501}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesat1a_attack_short3" ID="{BCB82395-5F7A-487A-986D-5FB43B160147}" ShortID="165913667">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack_short3" ID="{F73D571B-2F15-4B9D-89B4-EFC04992664F}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack_short3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="211424573"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack_short3" ID="{F73D571B-2F15-4B9D-89B4-EFC04992664F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesat1a_attack_short4" ID="{D9D633DD-6411-4C88-94DA-1C68C3B29A9F}" ShortID="312020432">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack_short4" ID="{0405D77B-88AE-4A30-92CB-60DE920BB409}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack_short4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="50171806"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack_short4" ID="{0405D77B-88AE-4A30-92CB-60DE920BB409}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesat1a_attack_short" ID="{CB71D6B9-3A43-4414-91EE-346EF74A0568}" ShortID="949120337">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack_short" ID="{0C30D2AE-D9B3-480D-ABC6-475204434BED}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack_short.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="68343954"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack_short" ID="{0C30D2AE-D9B3-480D-ABC6-475204434BED}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="idesat1a_attack_deep_short" ID="{2E6FE9F8-0590-499D-AA61-839FE6C651F6}" ShortID="497598062">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>130</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="idesat1a_attack_deep_short" ID="{C5BE6A7C-7113-4B4D-8D73-80681A655E2B}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>idesat1a_attack_deep_short.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1016931564"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="idesat1a_attack_deep_short" ID="{C5BE6A7C-7113-4B4D-8D73-80681A655E2B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="idesat1a_attack_shift" ID="{C855C0EE-294D-4C2E-89E8-25C3907AAFEB}" ShortID="771185901">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-130</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="idesat1a_attack" ID="{A340E0D9-57FC-41EC-92F4-BE2FF3B6C324}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>idesat1a_attack.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="660682721"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="idesat1a_attack" ID="{A340E0D9-57FC-41EC-92F4-BE2FF3B6C324}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>

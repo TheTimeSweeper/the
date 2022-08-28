@@ -48,8 +48,8 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool holdonasec = false;
     public static bool Desolator = true;
+    public static bool holdonasec;
 
     private void Start() {
 
@@ -76,14 +76,20 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         Modules.Buffs.RegisterBuffs();
 
         // survivor initialization
+
+        //someday
         //new JoeSurivor().Initialize();
 
+        //init towers first
         TeslaTowerNotSurvivor baseTower = new TeslaTowerNotSurvivor();
         baseTower.Initialize();
-        if (!holdonasec) {
             new TeslaTowerScepter().Initialize(baseTower);
-        }
+        //the guy
         new TeslaTrooperSurvivor().Initialize();
+
+        if (Desolator) {
+            new DesolatorSurvivor().Initialize();
+        }
 
         new Modules.ContentPacks().Initialize();
 
@@ -96,8 +102,22 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         // run hooks here, disabling one is as simple as commenting out the line
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
+        On.RoR2.EventFunctions.DestroyGameObject += EventFunctions_DestroyGameObject;
+        On.RoR2.EventFunctions.DestroySelf += EventFunctions_DestroySelf;
+
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
+    }
+
+    private void EventFunctions_DestroySelf(On.RoR2.EventFunctions.orig_DestroySelf orig, EventFunctions self) {
+        orig(self);
+        Helpers.LogWarning("suh");
+    }
+
+    private void EventFunctions_DestroyGameObject(On.RoR2.EventFunctions.orig_DestroyGameObject orig, EventFunctions self, UnityEngine.GameObject obj) {
+        orig(self, obj);
+        Helpers.LogWarning("guh");
+
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {

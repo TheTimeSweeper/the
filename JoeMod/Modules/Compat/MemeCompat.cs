@@ -10,7 +10,7 @@ namespace Modules {
         private static void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig) {
 
             GameObject skele = Assets.LoadAsset<GameObject>("TeslaTrooper_meme");
-            EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele);
+            EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele, true);
             //skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
             orig();
         }

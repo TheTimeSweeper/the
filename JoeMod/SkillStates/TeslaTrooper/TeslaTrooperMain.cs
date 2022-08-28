@@ -4,6 +4,7 @@ using RoR2;
 using UnityEngine;
 
 namespace ModdedEntityStates.TeslaTrooper {
+
     public class TeslaTrooperMain : GenericCharacterMain {
         
         private Animator cachedAnimator;
@@ -25,16 +26,16 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        private void playRandomvoiceLine() {
+        protected virtual void playRandomvoiceLine(string prefix = "Play_") {
             string sound;
             if (characterBody.outOfCombat) {
                 if (characterBody.isSprinting) {
-                    sound = "Play_Voiceline_Move";
+                    sound = $"{prefix}Voiceline_Move";
                 } else {
-                    sound = "Play_Voiceline_Select";
+                    sound = $"{prefix}Voiceline_Select";
                 }
             } else {
-                sound = "Play_Voiceline_Attack";
+                sound = $"{prefix}Voiceline_Attack";
             }
 
             RoR2.Util.PlaySound(sound, gameObject);
