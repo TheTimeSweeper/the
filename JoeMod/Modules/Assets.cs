@@ -63,9 +63,16 @@ namespace Modules {
         #region deso 
         public static GameObject DesolatorTracerRebar;
         public static GameObject DesolatorTracerSnipe;
-        public static GameObject DesolatorCrocoLeapProjectile;
+
+        public static TeamAreaIndicator DesolatorTeamAreaIndicatorPrefab;
 
         public static GameObject DesolatorIrradiatorProjectile;
+        public static GameObject IrradiatedImpactEffect;
+
+        public static GameObject DesolatorCrocoLeapProjectile;
+
+        public static GameObject DesolatorAuraPrefab;
+
         #endregion
 
         public static void Initialize()
@@ -81,7 +88,12 @@ namespace Modules {
 
             LoadSoundbank();
             //PopulateHenrysAssetsThatNoLongerExist();
-            PopulateAss();
+
+            PopulateJoeAss();
+            PopulateTeslaAss();
+            if (FacelessJoePlugin.Desolator) {
+                PopulateDesolatorAss();
+            }
         }
 
         public static void LoadAssetBundle()
@@ -104,6 +116,23 @@ namespace Modules {
 
             assetNames = mainAssetBundle.GetAllAssetNames();
             assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
+        }
+
+        public static void LoadSoundbank()
+        {
+            //using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
+            //{
+            //    byte[] array = new byte[manifestResourceStream2.Length];
+            //    manifestResourceStream2.Read(array, 0, array.Length);
+            //    SoundAPI.SoundBanks.Add(array);
+            //}
+
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.Tesla_Trooper.bnk"))
+            {
+                byte[] array = new byte[manifestResourceStream2.Length];
+                manifestResourceStream2.Read(array, 0, array.Length);
+                SoundAPI.SoundBanks.Add(array);
+            }
         }
 
         public static void PopulateHenrysAssetsThatNoLongerExist() {
@@ -137,18 +166,20 @@ namespace Modules {
             swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
         }
 
-        private static void PopulateAss() {
-
+        private static void PopulateJoeAss() {
             JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
 
             JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
             JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
+        }
+
+        private static void PopulateTeslaAss() {
 
             TeslaCoilBlueprint = teslaAssetBundle.LoadAsset<GameObject>("TeslaCoilBlueprint");
 
             TeslaIndicatorPrefab = CreateTeslaTrackingIndicator();
 
-            ChainLightningMaterial = FindChainLightningMaterial();
+            ChainLightningMaterial = GetChainLightningMaterial();
             TeslaLightningOrbEffectRed =
                 CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/LightningOrbEffect",
                                         "NodLightningOrbEffect",
@@ -169,51 +200,26 @@ namespace Modules {
             TeslaMageLightningOrbEffectRedThick.GetComponentInChildren<AnimateShaderAlpha>().timeMax = 0.5f;
 
             TeslaLoaderZapConeProjectile = CreateZapConeProjectile();
+        }
+
+        private static void PopulateDesolatorAss() {
 
             DesolatorTracerRebar = CreateDesolatorTracerRebar();
             DesolatorTracerSnipe = CreateDesolatorTracerSnipe();
-            DesolatorCrocoLeapProjectile = CreateDesolatorCrocoLeapProjectile();
+
+            DesolatorTeamAreaIndicatorPrefab = CreateDesolatorTeamAreaIndicator();
 
             DesolatorIrradiatorProjectile = CreateIrradiatorProjectile();
+
+            DesolatorCrocoLeapProjectile = CreateDesolatorCrocoLeapProjectile();
+
+            IrradiatedImpactEffect = DesolatorIrradiatorProjectile.GetComponent<ProjectileDotZone>().impactEffect;
+            CreateEffectFromObject(IrradiatedImpactEffect, "", false);
+
+            DesolatorAuraPrefab = CreateDesolatorAura();
         }
 
-        private static GameObject CreateIrradiatorProjectile() {
-
-            GameObject projectile = teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile");
-            //insert gameplay values here
-
-            Content.AddProjectilePrefab(projectile);
-
-            return projectile;
-        }
-
-        private static GameObject CreateDesolatorTracerRebar() {
-            GameObject tracer = CreateTracer("TracerToolbotRebar", "TracerDeslotorRebar", Color.green, 3);
-
-            UnityEngine.Object.Destroy(tracer.transform.Find("StickEffect").gameObject);
-
-            return tracer;
-        }
-
-        private static GameObject CreateDesolatorTracerSnipe() {
-            GameObject tracer = CreateTracer("TracerHuntressSnipe", "TracerDeslotorHuntressSnipe", Color.green, 3);
-
-            UnityEngine.Object.Destroy(tracer.transform.Find("TracerHead").gameObject);
-
-            return tracer;
-        }
-
-        private static GameObject CreateDesolatorCrocoLeapProjectile() {
-            GameObject crocoProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
-            crocoProjectile.transform.Find("FX").transform.localScale = Vector3.one * ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius * 2f;
-            crocoProjectile.transform.Find("FX/Decal").transform.localScale = new Vector3(1.5f, 0.85f, 1.5f);
-            crocoProjectile.transform.Find("FX/Decal").GetComponent<Decal>().Material.SetTexture("_MainTexture", LoadAsset<Texture2D>("texDesolatorDecal"));
-
-            Content.AddProjectilePrefab(crocoProjectile);
-            
-            return crocoProjectile;
-        }
-
+        #region tesla stuff
         private static GameObject CreateZapConeProjectile() {
             GameObject zapConeProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/LoaderZapCone"), "TeslaLoaderZapCone");
             
@@ -296,6 +302,124 @@ namespace Modules {
             return indicatorPrefab;
         }
 
+        private static Material GetChainLightningMaterial() {
+            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").GetComponentInChildren<LineRenderer>().material;
+        }
+        #endregion tesla stuff
+
+        #region desolator stuff
+
+        private static GameObject CreateDesolatorTracerRebar() {
+            GameObject tracer = CloneTracer("TracerToolbotRebar", "TracerDeslotorRebar", Color.green, 3);
+
+            UnityEngine.Object.Destroy(tracer.transform.Find("StickEffect").gameObject);
+
+            return tracer;
+        }
+
+        private static GameObject CreateDesolatorTracerSnipe() {
+            GameObject tracer = CloneTracer("TracerHuntressSnipe", "TracerDeslotorHuntressSnipe", Color.green, 3);
+
+            UnityEngine.Object.Destroy(tracer.transform.Find("TracerHead").gameObject);
+
+            return tracer;
+        }
+
+        private static TeamAreaIndicator CreateDesolatorTeamAreaIndicator() {
+            GameObject impvoidspike = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/ImpVoidspikeProjectile");
+
+            TeamAreaIndicator teamAreaIndicator = PrefabAPI.InstantiateClone(impvoidspike.transform.Find("ImpactEffect/TeamAreaIndicator, FullSphere").gameObject, "DesolatorTeamAreaIndicator", false).GetComponent<TeamAreaIndicator>();
+
+            teamAreaIndicator.teamMaterialPairs[1].sharedMaterial = new Material(teamAreaIndicator.teamMaterialPairs[1].sharedMaterial);
+            teamAreaIndicator.teamMaterialPairs[1].sharedMaterial.SetColor("_TintColor", Color.green);
+
+            return teamAreaIndicator;
+        }
+
+        private static GameObject CreateIrradiatorProjectile() {
+
+            GameObject irradiatorProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile"), "IrradiatorProjectile", false);
+            //insert gameplay values here
+
+            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
+            areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
+            areaIndicator.transform.localScale = Vector3.one * 24;
+
+            Content.AddProjectilePrefab(irradiatorProjectile);
+
+            return irradiatorProjectile;
+        }
+
+        private static GameObject CreateDesolatorCrocoLeapProjectile() {
+
+            GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
+
+            ProjectileDotZone projectileDotZone = leapAcidProjectile.GetComponent<ProjectileDotZone>();
+            projectileDotZone.impactEffect = IrradiatedImpactEffect;
+            projectileDotZone.lifetime = ModdedEntityStates.Desolator.AimBigRadBeam.DotZoneLifetime;
+            projectileDotZone.damageCoefficient = 1;
+            projectileDotZone.overlapProcCoefficient = 0.1f;
+            projectileDotZone.resetFrequency = 1;
+
+            Transform transformFindFX = leapAcidProjectile.transform.Find("FX");
+            transformFindFX.transform.localScale = Vector3.one * ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius * 1.8f;
+            UnityEngine.Object.Destroy(transformFindFX.GetComponent<AlignToNormal>());
+
+            Transform transformFindDecal = leapAcidProjectile.transform.Find("FX/Decal");
+            transformFindDecal.localScale = new Vector3(1.5f, 0.85f, 1.5f);
+            transformFindDecal.GetComponent<Decal>().Material.SetTexture("_MainTexture", LoadAsset<Texture2D>("texDesolatorDecal"));
+
+            AlignToNormal alignComponent = transformFindDecal.gameObject.AddComponent<AlignToNormal>();
+            alignComponent.maxDistance = ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius;
+            alignComponent.offsetDistance = 1.5f;
+
+            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, leapAcidProjectile.transform);
+            areaIndicator.teamFilter = leapAcidProjectile.GetComponent<TeamFilter>();
+            areaIndicator.transform.localScale = Vector3.one * ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius;
+            areaIndicator.transform.parent = transformFindFX;
+
+            leapAcidProjectile.transform.Find("FX/Hitbox (1)").localScale = Vector3.one;
+
+
+
+            Content.AddProjectilePrefab(leapAcidProjectile);
+
+            return leapAcidProjectile;
+        }
+
+        private static GameObject CreateDesolatorAura() {
+            GameObject aura = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/IcicleAura"), "DesolatorAura", true);
+
+
+            UnityEngine.Object.Destroy(aura.GetComponent<IcicleAuraController>());
+            aura.AddComponent<DesolatorAuraController>();
+
+            UnityEngine.Object.Destroy(aura.transform.Find("Particles/Chunks").gameObject);
+            UnityEngine.Object.Destroy(aura.transform.Find("Particles/SpinningSharpChunks").gameObject);
+            UnityEngine.Object.Destroy(aura.transform.Find("Particles/Ring, Procced").gameObject);
+            UnityEngine.Object.Destroy(aura.GetComponent<AkGameObj>());
+
+            BuffWard buffWard = aura.GetComponent<BuffWard>();
+            buffWard.buffDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Weak");
+            buffWard.radius = DesolatorAuraController.Radius;
+
+            greenify(aura.transform.Find("Particles/Ring, Outer").GetComponent<ParticleSystem>());
+            greenify(aura.transform.Find("Particles/Ring, Core").GetComponent<ParticleSystem>());
+
+            aura.transform.Find("Particles/Area").GetComponent<ParticleSystemRenderer>().material = DesolatorTeamAreaIndicatorPrefab.teamMaterialPairs[1].sharedMaterial;
+
+
+            return aura;
+        }
+
+        private static void greenify(ParticleSystem particleSystem) {
+            ParticleSystem.MainModule main = particleSystem.main;
+            main.startColor = Color.green;
+        }
+
+        #endregion desolator stuff
+
+
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
             T loadedAss = RoR2.LegacyResourcesAPI.Load<T>(assString);
@@ -317,8 +441,48 @@ namespace Modules {
             return loadedAss;
         }
 
-        private static Material FindChainLightningMaterial() {
-            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OrbEffects/LightningOrbEffect").GetComponentInChildren<LineRenderer>().material;
+        public static GameObject LoadSurvivorModel(string modelName) {
+            GameObject model = Modules.Assets.LoadAsset<GameObject>(modelName);
+            if (model == null) {
+                Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
+                return null;
+            }
+
+            return PrefabAPI.InstantiateClone(model, model.name, false);
+        }
+
+        public static void ConvertAllRenderersToHopooShader(GameObject objectToConvert) {
+            if (!objectToConvert) return;
+
+            foreach (MeshRenderer i in objectToConvert.GetComponentsInChildren<MeshRenderer>()) {
+                if (i?.sharedMaterial != null) {
+                    i.sharedMaterial.SetHotpooMaterial();
+                }
+            }
+
+            foreach (SkinnedMeshRenderer i in objectToConvert.GetComponentsInChildren<SkinnedMeshRenderer>()) {
+                if (i?.sharedMaterial != null) {
+                    i.sharedMaterial.SetHotpooMaterial();
+                }
+            }
+        }
+
+        public static Texture LoadCharacterIconGeneric(string characterName)
+        {
+            return LoadAsset<Texture>("tex" + characterName + "Icon");
+        }
+        public static Texture LoadCharacterIcon(string name) {
+            return LoadAsset<Texture>(name);
+        }
+        public static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
+        {
+            NetworkSoundEventDef networkSoundEventDef = ScriptableObject.CreateInstance<NetworkSoundEventDef>();
+            networkSoundEventDef.akId = AkSoundEngine.GetIDFromString(eventName);
+            networkSoundEventDef.eventName = eventName;
+
+            Modules.Content.AddNetworkSoundEventDef(networkSoundEventDef);
+
+            return networkSoundEventDef;
         }
 
         private static GameObject CloneLightningOrbEffect(string path, string name, Color beamColor, Color? lineColor = null, float width = 1) {
@@ -342,34 +506,7 @@ namespace Modules {
             return newEffect;
         }
 
-        public static GameObject LoadSurvivorModel(string modelName) {
-            GameObject model = Modules.Assets.LoadAsset<GameObject>(modelName);
-            if (model == null) {
-                Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
-                return null;
-            }
-
-            return PrefabAPI.InstantiateClone(model, model.name, false);
-        }
-
-        public static void LoadSoundbank()
-        {
-            //using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
-            //{
-            //    byte[] array = new byte[manifestResourceStream2.Length];
-            //    manifestResourceStream2.Read(array, 0, array.Length);
-            //    SoundAPI.SoundBanks.Add(array);
-            //}
-
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.Tesla_Trooper.bnk"))
-            {
-                byte[] array = new byte[manifestResourceStream2.Length];
-                manifestResourceStream2.Read(array, 0, array.Length);
-                SoundAPI.SoundBanks.Add(array);
-            }
-        }
-
-        private static GameObject CreateTracer(string originalTracerName, string newTracerName, Color? color = null, float widthMultiplierMultiplier = 1, float? speed = null, float? length = null)
+        private static GameObject CloneTracer(string originalTracerName, string newTracerName, Color? color = null, float widthMultiplierMultiplier = 1, float? speed = null, float? length = null)
         {
             if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) return null;
 
@@ -436,60 +573,6 @@ namespace Modules {
             return newTracer;
         }
 
-        public static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
-        {
-            NetworkSoundEventDef networkSoundEventDef = ScriptableObject.CreateInstance<NetworkSoundEventDef>();
-            networkSoundEventDef.akId = AkSoundEngine.GetIDFromString(eventName);
-            networkSoundEventDef.eventName = eventName;
-
-            Modules.Content.AddNetworkSoundEventDef(networkSoundEventDef);
-
-            return networkSoundEventDef;
-        }
-
-        public static void ConvertAllRenderersToHopooShader(GameObject objectToConvert) {
-            if (!objectToConvert) return;
-
-            foreach (MeshRenderer i in objectToConvert.GetComponentsInChildren<MeshRenderer>()) {
-                if (i?.sharedMaterial != null) {
-                    i.sharedMaterial.SetHotpooMaterial();
-                }
-            }
-
-            foreach (SkinnedMeshRenderer i in objectToConvert.GetComponentsInChildren<SkinnedMeshRenderer>()) {
-                if (i?.sharedMaterial != null) {
-                    i.sharedMaterial.SetHotpooMaterial();
-                }
-            }
-        }
-
-        public static CharacterModel.RendererInfo[] SetupRendererInfos(GameObject obj)
-        {
-            MeshRenderer[] meshes = obj.GetComponentsInChildren<MeshRenderer>();
-            CharacterModel.RendererInfo[] rendererInfos = new CharacterModel.RendererInfo[meshes.Length];
-
-            for (int i = 0; i < meshes.Length; i++)
-            {
-                rendererInfos[i] = new CharacterModel.RendererInfo
-                {
-                    defaultMaterial = meshes[i].material,
-                    renderer = meshes[i],
-                    defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
-                    ignoreOverlays = false
-                };
-            }
-
-            return rendererInfos;
-        }
-
-        public static Texture LoadCharacterIconGeneric(string characterName)
-        {
-            return LoadAsset<Texture>("tex" + characterName + "Icon");
-        }
-
-        public static Texture LoadCharacterIcon(string name) {
-            return LoadAsset<Texture>(name);
-        }
         /// <summary>
         /// search for crosshair prefabs here. plug in the character or crosshair name
         /// </summary>
@@ -553,11 +636,6 @@ namespace Modules {
             //newEffectDef.spawnSoundEventName = soundName;
 
             Modules.Content.AddEffectDef(newEffectDef);
-        }
-
-        public static void SetVRMaterials(GameObject vrHand) {
-
-            ConvertAllRenderersToHopooShader(vrHand);
         }
 
         #region materials(old)

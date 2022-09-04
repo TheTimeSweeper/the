@@ -37,6 +37,7 @@ namespace Modules.Survivors {
             InitializeCharacter();
 
             Modules.Content.AddEntityState(typeof(TowerIdleSearchScepter));
+            Modules.Content.AddEntityState(typeof(TowerZapMulti));
         }
 
         public override void InitializeCharacter() {
@@ -53,7 +54,6 @@ namespace Modules.Survivors {
         }
 
         private void StealCharacterBodyAndModel() {
-            Helpers.LogWarning(baseTower != null);
             bodyPrefab = PrefabAPI.InstantiateClone(baseTower.bodyPrefab, "TeslaTowerScepterBody");
             CharacterBody characterBody = bodyPrefab.GetComponent<CharacterBody>();
             characterBody.baseNameToken = TOWER_SCEPTER_PREFIX + "NAME";

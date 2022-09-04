@@ -14,6 +14,8 @@ namespace Modules {
 
         public static BuffDef blinkCooldownBuff;
 
+        public static BuffDef desolatorArmorBuff;
+
         public static void RegisterBuffs() {
             zapShieldBuff =
                 AddNewBuff("Tesla Barrier",
@@ -40,6 +42,13 @@ namespace Modules {
                 AddNewBuff("BlinkCooldown",
                            LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Cloak").iconSprite,
                            Color.gray,
+                           false,
+                           false);
+
+            desolatorArmorBuff =
+                AddNewBuff("DesolatorShield",
+                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
+                           Color.green,
                            false,
                            false);
         }

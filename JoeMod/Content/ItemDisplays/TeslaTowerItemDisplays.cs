@@ -441,12 +441,6 @@ namespace Modules.Characters {
                 new Vector3(20.5769F, 16.05076F, 24.0392F),
                 new Vector3(1.1023F, 1.1023F, 1.1023F)));
 
-            //man there are a lot of these
-            #endregion done
-
-            #region not done            
-            /*
-
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.Medkit, "DisplayMedkit",
                                                                        "Center Cylinder Items",
                                                                        new Vector3(0.23334F, 0.11768F, 0.08936F),
@@ -483,7 +477,6 @@ namespace Modules.Characters {
                                                                        new Vector3(0.12542F, 0.21772F, -0.01903F),
                                                                        new Vector3(0.76041F, 2.61635F, 16.98922F),
                                                                        new Vector3(0.0996F, 0.0996F, 0.0996F)));
-            //hello
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.NovaOnHeal,
                 ItemDisplays.CreateDisplayRule("DisplayDevilHorns",
                                                "Head",
@@ -496,6 +489,7 @@ namespace Modules.Characters {
                                                new Vector3(1.60112F, 352.6636F, 350.5993F),
                                                new Vector3(-0.42003F, 0.42003F, 0.42003F))
                 ));
+
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.NovaOnLowHealth, "DisplayJellyGuts",
                                                                        "Center Cylinder Items",
                                                                        new Vector3(0.01615F, 0.37581F, -0.11174F),
@@ -612,6 +606,12 @@ namespace Modules.Characters {
                                                                        new Vector3(0.25482F, 0.04429F, -0.05188F),
                                                                        new Vector3(325.976F, 201.993F, 122.6787F),
                                                                        new Vector3(0.15369F, 0.15369F, 0.15369F)));
+
+            //man there are a lot of these
+            #endregion done
+
+            #region not done            
+            /*
 
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(RoR2Content.Items.TPHealingNova, "DisplayGlowFlower",
                                                                 "Center Cylinder Items",

@@ -6,7 +6,7 @@ namespace ModdedEntityStates.Desolator {
 
     public class RadBeam : GenericBulletBaseState {
 
-        public static float DamageCoefficient = 1.4f;
+        public static float DamageCoefficient = 1.2f;
 
         public override void OnEnter() {
 
@@ -33,6 +33,10 @@ namespace ModdedEntityStates.Desolator {
             tracerEffectPrefab = Modules.Assets.DesolatorTracerSnipe;
             //hitEffectPrefab;
             base.OnEnter();
+
+            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.05f);
+            GetModelAnimator().SetBool("isHandOut", true);
+            PlayAnimation("Gesture, Additive", "Shock");
         }
         public override void ModifyBullet(BulletAttack bulletAttack) {
             bulletAttack.damageType = DamageType.BlightOnHit;

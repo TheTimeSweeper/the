@@ -22,7 +22,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new ShieldZapStart());
 
-            ZapBarrierController controller = GetComponent<ZapBarrierController>();
+            TeslaZapBarrierController controller = GetComponent<TeslaZapBarrierController>();
             if (controller) {
                 controller.StartRecordingDamage();
             }

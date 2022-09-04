@@ -65,6 +65,12 @@ namespace Modules.Survivors {
 
             //todo deso
             RegisterIrradiatorDeployable();
+            bodyPrefab.AddComponent<TeslaZapBarrierController>();
+            bodyPrefab.AddComponent<DesolatorAuraHolder>();
+        }
+
+        public override void InitializeDoppelganger(string clone) {
+            base.InitializeDoppelganger("Engi");
         }
 
         private void RegisterIrradiatorDeployable() {
@@ -102,6 +108,8 @@ namespace Modules.Survivors {
 
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
+            InitializePassive();
+
             InitializePrimarySkills();
 
             InitializeSecondarySkills();
@@ -115,14 +123,22 @@ namespace Modules.Survivors {
             FinalizeCSSPreviewDisplayController();
         }
 
+        private void InitializePassive() {
+            bodyPrefab.GetComponent<SkillLocator>().passiveSkill = new SkillLocator.PassiveSkill {
+                enabled = true,
+                skillNameToken = DESOLATOR_PREFIX + "PASSIVE_NAME",
+                skillDescriptionToken = DESOLATOR_PREFIX + "PASSIVE_DESCRIPTION",
+                icon = Assets.LoadAsset<Sprite>("texDesolatorSkillPrimary"),
+            };
+        }
 
         private void InitializePrimarySkills() {
             States.entityStates.Add(typeof(RadBeam));
             SkillDef primarySkillDefPunch =
                 Skills.CreateSkillDef(new SkillDefInfo("Desolator_Primary_Beam",
-                                                       DESOLATOR_PREFIX + "bem",
-                                                       DESOLATOR_PREFIX + "shoot a beam",
-                                                       Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                       DESOLATOR_PREFIX + "PRIMARY_BEAM_NAME",
+                                                       DESOLATOR_PREFIX + "PRIMARY_BEAM_DESCRIPTION",
+                                                       Modules.Assets.LoadAsset<Sprite>("texDesolatorSkillPrimary"),
                                                        new EntityStates.SerializableEntityStateType(typeof(RadBeam)),
                                                        "Weapon",
                                                        false));
@@ -134,14 +150,14 @@ namespace Modules.Survivors {
             States.entityStates.Add(typeof(AimBigRadBeam));
             SkillDef bigRadBeamSkillDef =
                 Skills.CreateSkillDef(new SkillDefInfo {
-                    skillName = "Desolator_Secondary_BigZap",
+                    skillName = "Desolator_Secondary_BigBeam",
                     skillNameToken = DESOLATOR_PREFIX + "SECONDARY_BIGBEAM_NAME",
                     skillDescriptionToken = DESOLATOR_PREFIX + "SECONDARY_BIGBEAM_DESCRIPTION",
-                    skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillSecondary"),
+                    skillIcon = Modules.Assets.LoadAsset<Sprite>("texDesolatorSkillSecondary"),
                     activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigRadBeam)),
                     activationStateMachineName = "Weapon",
                     baseMaxStock = 1,
-                    baseRechargeInterval = 5.5f,
+                    baseRechargeInterval = 7f,
                     beginSkillCooldownOnSkillEnd = true,
                     canceledFromSprinting = false,
                     forceSprintDuringState = false,
@@ -161,16 +177,31 @@ namespace Modules.Survivors {
 
         private void InitializeUtilitySkills() {
 
-            States.entityStates.Add(typeof(AimBigRadBeam));
-            SkillDef primarySkillDefPunch =
-                Skills.CreateSkillDef(new SkillDefInfo("Desolator_Primary_Beam",
-                                                       DESOLATOR_PREFIX + " bem",
-                                                       DESOLATOR_PREFIX + " shoot a big bem",
-                                                       Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                       new EntityStates.SerializableEntityStateType(typeof(AimBigRadBeam)),
-                                                       "Weapon",
-                                                       false));
-            Modules.Skills.AddUtilitySkills(bodyPrefab, primarySkillDefPunch);
+            States.entityStates.Add(typeof(RadiationAura));
+            SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Desolator_Utility_Aura",
+                skillNameToken = DESOLATOR_PREFIX + "UTILITY_AURA_NAME",
+                skillDescriptionToken = DESOLATOR_PREFIX + "UTILITY_AURA_DESCRIPTION",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texDesolatorSkillUtility"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(RadiationAura)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 1,
+                baseRechargeInterval = 7f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_WEAK" }
+            });
+            Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef);
         }
 
         private void InitializeSpecialSkills() {
@@ -180,16 +211,16 @@ namespace Modules.Survivors {
                 skillName = "Desolator_Special_Tower",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME",
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillSpecial"),
+                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowIrradiator)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 3,
-                baseRechargeInterval = 9f,
+                baseMaxStock = 2,
+                baseRechargeInterval = 14f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = true,
@@ -197,6 +228,7 @@ namespace Modules.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_WEAK"}
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, irradiatorSkillDef);
@@ -256,7 +288,7 @@ namespace Modules.Survivors {
 
             return Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = name,
-                skillNameToken = $"{DESOLATOR_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
+                skillNameToken = $"{TeslaTrooperSurvivor.TESLA_PREFIX}RECOLOR_{name.ToUpperInvariant()}_NAME",
                 skillDescriptionToken = "",
                 skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
             });

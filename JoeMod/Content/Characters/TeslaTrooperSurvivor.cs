@@ -78,7 +78,7 @@ namespace Modules.Survivors {
             bodyPrefab.AddComponent<TeslaTrackerComponent>();
             bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
-            bodyPrefab.AddComponent<ZapBarrierController>();
+            bodyPrefab.AddComponent<TeslaZapBarrierController>();
             if (Compat.VREnabled) {
                 bodyPrefab.AddComponent<TeslaVRComponent>();
             }
@@ -290,7 +290,8 @@ namespace Modules.Survivors {
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
             blinkZapSkillDef.refreshedIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtilityBak");
             blinkZapSkillDef.timeoutDuration = 3;

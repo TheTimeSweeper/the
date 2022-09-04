@@ -30,7 +30,8 @@ using System.Security.Permissions;
     "LoadoutAPI",
     "DeployableAPI",
     "DamageAPI",
-    "UnlockableAPI"
+    "UnlockableAPI",
+    "RecalculateStatsAPI"
 })]
 
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]
@@ -38,7 +39,7 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.2.0";
+    public const string MODVERSION = "1.2.2";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -102,26 +103,21 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         // run hooks here, disabling one is as simple as commenting out the line
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
-        On.RoR2.EventFunctions.DestroyGameObject += EventFunctions_DestroyGameObject;
-        On.RoR2.EventFunctions.DestroySelf += EventFunctions_DestroySelf;
-
+        R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
     }
 
-    private void EventFunctions_DestroySelf(On.RoR2.EventFunctions.orig_DestroySelf orig, EventFunctions self) {
-        orig(self);
-        Helpers.LogWarning("suh");
-    }
+    private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
 
-    private void EventFunctions_DestroyGameObject(On.RoR2.EventFunctions.orig_DestroyGameObject orig, EventFunctions self, UnityEngine.GameObject obj) {
-        orig(self, obj);
-        Helpers.LogWarning("guh");
-
+        if (sender.HasBuff(Modules.Buffs.desolatorArmorBuff)) {
+            args.armorAdd += 100f;
+            args.moveSpeedMultAdd += 0.4f;
+        }        
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
-
+        
         bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
 
         if (self && self.body && self.body.HasBuff(Modules.Buffs.zapShieldBuff) && !flag) {

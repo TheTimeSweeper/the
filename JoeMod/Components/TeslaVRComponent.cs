@@ -28,9 +28,6 @@ public class TeslaVRComponent : MonoBehaviour {
         }
 
         //ghetto gameobjectactivations
-        Helpers.LogWarning($"looking for children {MotionControls.dominantHand.transform.GetComponentInChildren<ChildLocator>()}");
-        Helpers.LogWarning($"found child {MotionControls.dominantHand.transform.GetComponentInChildren<ChildLocator>().FindChildGameObject("MeshEmission")}");
-        Helpers.LogWarning($"skin {body.skinIndex}");
         ChildLocator handChildLocator = MotionControls.dominantHand.transform.GetComponentInChildren<ChildLocator>();
 
         switch (body.skinIndex) {

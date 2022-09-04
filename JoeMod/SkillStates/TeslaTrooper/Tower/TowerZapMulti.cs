@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerZapMulti : TowerZap {
 
-        int extraZaps = 10;
+        public static int extraZaps = 10;
 
         List<HealthComponent> bouncedObjectsList = new List<HealthComponent>();
 

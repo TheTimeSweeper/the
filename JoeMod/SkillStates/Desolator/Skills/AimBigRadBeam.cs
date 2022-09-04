@@ -8,8 +8,12 @@ namespace ModdedEntityStates.Desolator {
 
     public class AimBigRadBeam : AimThrowableBase {
 
-        public static float DamageCoefficient = 1f;
+        public static float BlastDamageCoefficient = 4f;
+        public static float PoolDamageCoefficient = 0.2f;
+        public static float DotZoneLifetime = 4;
         public static float BaseAttackRadius = 10;
+
+        private bool _crit;
 
         public override void OnEnter() {
 
@@ -22,8 +26,10 @@ namespace ModdedEntityStates.Desolator {
             maxDistance = 40;
             rayRadius = 1.6f;
             setFuse = false;
-            damageCoefficient = DamageCoefficient;
+            damageCoefficient = PoolDamageCoefficient;
             baseMinimumDuration = 0.2f;
+
+            _crit = RollCrit();
             //this.projectileBaseSpeed = 80;
             base.OnEnter();
 
@@ -39,19 +45,59 @@ namespace ModdedEntityStates.Desolator {
             fireProjectileInfo.rotation = Quaternion.identity;
             fireProjectileInfo.speedOverride = 0f;
             fireProjectileInfo.damageTypeOverride = DamageType.BlightOnHit;
+            fireProjectileInfo.crit = _crit;
         }
 
         public override void FireProjectile() {
             base.FireProjectile();
-            
-            Util.PlaySound("Play_Desolator_Beam_Deep2", gameObject);
 
+            Util.PlaySound("Play_Desolator_Beam_Deep2", gameObject);
+            PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+
+            //show tracer beam
             EffectData effectData = new EffectData {
                 origin = currentTrajectoryInfo.hitPoint,
                 start = FindModelChild("MuzzleGauntlet").position
             };
             effectData.SetChildLocatorTransformReference(gameObject, GetModelChildLocator().FindChildIndex("MuzzleGauntlet"));
             EffectManager.SpawnEffect(Modules.Assets.DesolatorTracerRebar, effectData, false);
+
+            if (base.isAuthority) {
+
+                BlastAttack blast = new BlastAttack {
+                    attacker = gameObject,
+                    inflictor = gameObject,
+                    teamIndex = teamComponent.teamIndex,
+                    //attackerFiltering = AttackerFiltering.NeverHit
+
+                    position = currentTrajectoryInfo.hitPoint,
+                    radius = BaseAttackRadius,
+                    falloffModel = BlastAttack.FalloffModel.None,
+
+                    baseDamage = damageStat * BlastDamageCoefficient,
+                    crit = _crit,
+                    damageType = DamageType.BlightOnHit,
+                    //damageColorIndex = DamageColorIndex.Default,
+
+                    procCoefficient = 1,
+                    //procChainMask = 
+                    //losType = BlastAttack.LoSType.NearestHit,
+
+                    baseForce = -5, //enfucker void grenade here we go
+                                    //bonusForce = ;
+
+                    //impactEffect = EffectIndex.uh;
+                };
+                blast.Fire();
+
+                EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CrocoLeapExplosion"), new EffectData {
+                    origin = currentTrajectoryInfo.hitPoint,
+                    scale = BaseAttackRadius
+                }, true);
+            }
+        }
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

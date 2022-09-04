@@ -3,6 +3,7 @@ using System;
 using ModdedEntityStates.Joe;
 using ModdedEntityStates.TeslaTrooper;
 using ModdedEntityStates.TeslaTrooper.Tower;
+using ModdedEntityStates.Desolator;
 using Modules.Survivors;
 using System.Collections.Generic;
 
@@ -15,6 +16,7 @@ namespace Modules
             AddJoeTokens();
             AddTeslaTokens();
             AddTeslaTowerTokens();
+            AddDesolatorTokens();
         }
 
         private static void AddJoeTokens()
@@ -172,8 +174,7 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"{Helpers.UtilityText("Charging")}. Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Casts {Helpers.UtilityText($"up to 3 bolts")} at {Helpers.UtilityText($"close range")}.");
             
-            LanguageAPI.Add("KEYWORD_CONDUCTIVE", $"Enemies marked as conductive will take extra damage from {Helpers.HealthText("Reactive")} attacks. Max 3 stacks");
-            LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
+             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Fist");
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.OrbDamageCoefficient)}. Punching projectiles sends them back, electrically charged");
@@ -210,7 +211,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_TOWER_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_TOWER_NAME", "Tesla Network");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_TOWER_DESCRIPTION", specialDesc + Helpers.ScepterDescription("Lowered Cooldown, Additional Stock"));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_TOWER_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Lowered Cooldown, Additional Stock, Tower Zaps up to {TowerZapMulti.extraZaps} simultaneous targets"));
             #endregion
 
             #region recolor
@@ -275,6 +276,118 @@ namespace Modules
             #endregion
 
             #endregion not henry 3
+        }
+
+        private static void AddDesolatorTokens() {
+            #region not henry 2
+            string prefix = DesolatorSurvivor.DESOLATOR_PREFIX;
+
+            string desc = "The Desolator is a walking powerhouse of radiation.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Focus fire on an enemy with Rad-Cannon to melt them down" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Use 2000 Volts to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine
+                        + "< ! > You benefit from being closer to enemies, use Charging Up to assist with this." + Environment.NewLine + Environment.NewLine
+                        + "< ! > The Tesla Tower inherits your items, mainly benefitting from damage items." + Environment.NewLine + Environment.NewLine;
+
+            string outro = "..and so he left, rubber shoes in motion.";
+            string outroFailure = "..and so he vanished, unit lost.";
+
+            string fullName = "Desolator";
+            LanguageAPI.Add(prefix + "NAME", fullName);
+            LanguageAPI.Add(prefix + "DESCRIPTION", desc);
+            LanguageAPI.Add(prefix + "SUBTITLE", "Here Comes the Sun");
+
+            #region lore
+
+            List<string> lores = new List<string> {
+                "Tagged for Extinction.",
+                "Make it glow",
+                "Let's heat 'em up.",
+                "Here comes the sun.",
+                "The end is near.",
+                "Let's make an oasis of death.",
+                "Find a hot spot.",
+                "Scorched Earth.",
+                "Spread the Doom.",
+                "There goes the neighborhood",
+                "It will be a Silent Spring.",
+                "Desolator ready.",
+                "HEAVY BREATHING.",
+                "Ready for melt-down.",
+                "Reactor ready.",
+                "Mercury rising.",
+            };
+
+            LanguageAPI.Add(prefix + "LORE", lores[(int)UnityEngine.Random.Range(0, lores.Count)]);
+            #endregion lore
+            LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
+            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+            
+            #region Skins
+            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
+            LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
+            LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
+            #endregion
+
+            #region Passive
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Radiation");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", $"Attacks inflict blight atm.");
+            #endregion
+
+            #region Primary
+            LanguageAPI.Add(prefix + "PRIMARY_BEAM_NAME", "Rad-Cannon");
+            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}.");
+            #endregion
+
+            #region Secondary
+            LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_NAME", "Scorched Earth");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_DESCRIPTION",
+                $"Blast an area for {Helpers.DamageValueText(AimBigRadBeam.BlastDamageCoefficient)}, and cover the area in radiation for {Helpers.UtilityText($"{AimBigRadBeam.DotZoneLifetime} seconds")}. " +
+                $"Enemies in contact take {Helpers.DamageValueText(AimBigRadBeam.PoolDamageCoefficient)} per second");
+            #endregion
+
+            #region Utility
+            LanguageAPI.Add(prefix + "UTILITY_AURA_NAME", "Reactor");
+            LanguageAPI.Add(prefix + "UTILITY_AURA_DESCRIPTION", $"For {Helpers.UtilityText($"{RadiationAura.BuffDuration} seconds")}, {Helpers.UtilityText("weaken")} all nearby enemies, and gain a boost to {Helpers.UtilityText("move speed")} and {Helpers.UtilityText("armor")}");
+            #endregion
+
+            #region Special
+            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME", "Irradiator");
+            string specialDesc =
+                $"Deploy an Irradiator, covering a large area in radiation for {Helpers.UtilityText($"20 seconds")}, weakening all enemies and dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage")} per second.";
+            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
+
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Lowered Cooldown, Additional Stock, Tower Zaps up to {TowerZapMulti.extraZaps} simultaneous targets"));
+            #endregion
+
+            #region recolor
+            LanguageAPI.Add(prefix + "RECOLOR_RED_NAME", "Red");
+            LanguageAPI.Add(prefix + "RECOLOR_BLUE_NAME", "Blue");
+            LanguageAPI.Add(prefix + "RECOLOR_GREEN_NAME", "Green");
+            LanguageAPI.Add(prefix + "RECOLOR_YELLOW_NAME", "Yellow");
+            LanguageAPI.Add(prefix + "RECOLOR_ORANGE_NAME", "Orange");
+            LanguageAPI.Add(prefix + "RECOLOR_CYAN_NAME", "Cyan");
+            LanguageAPI.Add(prefix + "RECOLOR_PURPLE_NAME", "Purple");
+            LanguageAPI.Add(prefix + "RECOLOR_PINK_NAME", "Pink");
+            LanguageAPI.Add(prefix + "RECOLOR_BLACK_NAME", "Black");
+            #endregion
+
+            #region Achievements
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
+
+            LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Grand Mastery");
+            LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Typhoon or Eclipse.\n<color=#8888>(Counts any difficulty Typhoon or higher)</color>");
+            LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Grand Mastery");
+
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"some unlock");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"hopefully not something boring like grab tesla coil and royal capacitor... ok repair a tesla coil with a tesla coil that would be pretty cool, but also shiny hunting kinda.");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"some unlock");
+
+            #endregion
+            #endregion not henry 2
         }
 
         public static void AddHenryTokens()
