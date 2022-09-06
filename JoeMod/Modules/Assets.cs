@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using RoR2.Projectile;
 using ThreeEyedGames;
+using ModdedEntityStates.Desolator;
 
 namespace Modules {
     internal static class Assets
@@ -66,9 +67,10 @@ namespace Modules {
 
         public static TeamAreaIndicator DesolatorTeamAreaIndicatorPrefab;
 
-        public static GameObject DesolatorIrradiatorProjectile;
         public static GameObject IrradiatedImpactEffect;
 
+        public static GameObject DesolatorIrradiatorProjectile;
+        public static GameObject DesolatorDeployProjectile;
         public static GameObject DesolatorCrocoLeapProjectile;
 
         public static GameObject DesolatorAuraPrefab;
@@ -211,12 +213,14 @@ namespace Modules {
 
             DesolatorIrradiatorProjectile = CreateIrradiatorProjectile();
 
-            DesolatorCrocoLeapProjectile = CreateDesolatorCrocoLeapProjectile();
-
             IrradiatedImpactEffect = DesolatorIrradiatorProjectile.GetComponent<ProjectileDotZone>().impactEffect;
+
+            DesolatorCrocoLeapProjectile = CreateDesolatorCrocoLeapProjectile();
             CreateEffectFromObject(IrradiatedImpactEffect, "", false);
 
             DesolatorAuraPrefab = CreateDesolatorAura();
+
+            DesolatorDeployProjectile = CreateDesolatorDeployProjectile();
         }
 
         #region tesla stuff
@@ -232,10 +236,10 @@ namespace Modules {
             beamController.lightningType = RoR2.Orbs.LightningOrb.LightningType.MageLightning;
             //beamController.inheritDamageType = true;
 
+            //DamageAPI.AddModdedDamageType(zapConeProjectile.GetComponent<ProjectileDamage>(), Modules.DamageTypes.conductive);
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = zapConeProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             damageTypeComponent.Add(DamageTypes.conductive);
 
-            //DamageAPI.AddModdedDamageType(zapConeProjectile.GetComponent<ProjectileDamage>(), Modules.DamageTypes.conductive);
 
             UnityEngine.Object.DestroyImmediate(zapConeProjectile.transform.Find("Effect").GetComponent<ShakeEmitter>());
 
@@ -337,22 +341,49 @@ namespace Modules {
         }
 
         private static GameObject CreateIrradiatorProjectile() {
+            
+            GameObject irradiatorProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile"), "IrradiatorProjectile", true);
 
-            GameObject irradiatorProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile"), "IrradiatorProjectile", false);
-            //insert gameplay values here
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.desolatorDot);
 
             TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
             areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
-            areaIndicator.transform.localScale = Vector3.one * 24;
+            areaIndicator.transform.localScale = Vector3.one * ThrowIrradiator.Range;
+
+            irradiatorProjectile.transform.Find("Hitboxes").localScale = Vector3.one * ThrowIrradiator.Range;
 
             Content.AddProjectilePrefab(irradiatorProjectile);
 
             return irradiatorProjectile;
         }
 
+        private static GameObject CreateDesolatorDeployProjectile() {
+
+            GameObject DeployProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("DeployProjectile"), "DeployProjectile", true);
+
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = DeployProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.desolatorDot);
+
+            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, DeployProjectile.transform);
+            areaIndicator.teamFilter = DeployProjectile.GetComponent<TeamFilter>();
+            areaIndicator.transform.localScale = Vector3.one * DeployIrradiate.Range;
+
+            DeployProjectile.transform.Find("Hitboxes").localScale = Vector3.one * DeployIrradiate.Range;
+
+            DeployProjectile.GetComponentInChildren<LightRadiusScale>().sizeMultiplier = ThrowIrradiator.Range;
+
+            Content.AddProjectilePrefab(DeployProjectile);
+
+            return DeployProjectile;
+        }
+
         private static GameObject CreateDesolatorCrocoLeapProjectile() {
 
             GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
+
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = leapAcidProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.desolatorDot);
 
             ProjectileDotZone projectileDotZone = leapAcidProjectile.GetComponent<ProjectileDotZone>();
             projectileDotZone.impactEffect = IrradiatedImpactEffect;
@@ -360,6 +391,8 @@ namespace Modules {
             projectileDotZone.damageCoefficient = 1;
             projectileDotZone.overlapProcCoefficient = 0.1f;
             projectileDotZone.resetFrequency = 1;
+
+            leapAcidProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
 
             Transform transformFindFX = leapAcidProjectile.transform.Find("FX");
             transformFindFX.transform.localScale = Vector3.one * ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius * 1.8f;
@@ -380,8 +413,6 @@ namespace Modules {
 
             leapAcidProjectile.transform.Find("FX/Hitbox (1)").localScale = Vector3.one;
 
-
-
             Content.AddProjectilePrefab(leapAcidProjectile);
 
             return leapAcidProjectile;
@@ -390,7 +421,6 @@ namespace Modules {
         private static GameObject CreateDesolatorAura() {
             GameObject aura = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/IcicleAura"), "DesolatorAura", true);
 
-
             UnityEngine.Object.Destroy(aura.GetComponent<IcicleAuraController>());
             aura.AddComponent<DesolatorAuraController>();
 
@@ -398,16 +428,15 @@ namespace Modules {
             UnityEngine.Object.Destroy(aura.transform.Find("Particles/SpinningSharpChunks").gameObject);
             UnityEngine.Object.Destroy(aura.transform.Find("Particles/Ring, Procced").gameObject);
             UnityEngine.Object.Destroy(aura.GetComponent<AkGameObj>());
-
+            
             BuffWard buffWard = aura.GetComponent<BuffWard>();
             buffWard.buffDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Weak");
-            buffWard.radius = DesolatorAuraController.Radius;
+            buffWard.radius = RadiationAura.Radius;
 
             greenify(aura.transform.Find("Particles/Ring, Outer").GetComponent<ParticleSystem>());
             greenify(aura.transform.Find("Particles/Ring, Core").GetComponent<ParticleSystem>());
 
             aura.transform.Find("Particles/Area").GetComponent<ParticleSystemRenderer>().material = DesolatorTeamAreaIndicatorPrefab.teamMaterialPairs[1].sharedMaterial;
-
 
             return aura;
         }

@@ -6,7 +6,8 @@ using ModdedEntityStates.BaseStates;
 namespace ModdedEntityStates.Desolator {
     public class ThrowIrradiator : BaseTimedSkillState {
 
-        public static float DamageCoefficient = 0.2f; // * 2 ticks per second * 20 duration
+        public static float DamageCoefficient = 0.2f;
+        public static float Range = 30;
 
         public static float BaseDuration = 1f;
         public static float StartTime = 0.0f;

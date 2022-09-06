@@ -6,8 +6,22 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
 		private float deathDuration;
 
-		// Token: 0x06004324 RID: 17188 RVA: 0x0011196C File Offset: 0x0010FB6C
-		public override void PlayDeathAnimation(float crossfadeDuration = 0.1f) {
+        public override void OnEnter() {
+            base.OnEnter();
+
+			TeslaTowerControllerController towerController = characterBody.master.minionOwnership?.ownerMaster.GetBodyObject()?.GetComponent<TeslaTowerControllerController>();
+
+			if (towerController) {
+				towerController.removeTower(gameObject);
+
+				//characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
+				//    towerController.removeTower(gameObject);
+				//});
+			}
+		}
+
+        // Token: 0x06004324 RID: 17188 RVA: 0x0011196C File Offset: 0x0010FB6C
+        public override void PlayDeathAnimation(float crossfadeDuration = 0.1f) {
 			Animator modelAnimator = base.GetModelAnimator();
 			if (modelAnimator) {
 				int layerIndex = modelAnimator.GetLayerIndex("Body");

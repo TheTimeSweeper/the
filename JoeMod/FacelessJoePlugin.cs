@@ -31,7 +31,8 @@ using System.Security.Permissions;
     "DeployableAPI",
     "DamageAPI",
     "UnlockableAPI",
-    "RecalculateStatsAPI"
+    "RecalculateStatsAPI",
+    "DotAPI"
 })]
 
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]
@@ -67,14 +68,15 @@ public class FacelessJoePlugin : BaseUnityPlugin {
             gameObject.AddComponent<TestValueManager>();
 
         Modules.Compat.Initialize();
-        Modules.States.RegisterStates(); // register states for networking
-        Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
         //Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
         Modules.Tokens.AddTokens(); // register name tokens
+        Modules.States.RegisterStates(); // register states for networking
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
+        Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
+        Modules.Dots.RegisterDots();
         Modules.DamageTypes.RegisterDamageTypes();
-        Modules.Buffs.RegisterBuffs();
+
 
         // survivor initialization
 
@@ -113,7 +115,15 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         if (sender.HasBuff(Modules.Buffs.desolatorArmorBuff)) {
             args.armorAdd += 100f;
             args.moveSpeedMultAdd += 0.4f;
-        }        
+        }
+
+        if (sender.HasBuff(Modules.Buffs.desolatorArmorMiniBuff)) {
+            args.armorAdd += 30f;
+        }
+
+        if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
+            args.armorAdd -= 5f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+        }
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {

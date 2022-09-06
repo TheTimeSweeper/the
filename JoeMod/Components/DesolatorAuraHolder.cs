@@ -5,7 +5,6 @@ public class DesolatorAuraHolder : NetworkBehaviour {
 
     [SyncVar]
     private GameObject _spawnedAuraObject = null;
-
     private DesolatorAuraController _spawnedAura = null;
 
     public void ActivateAura() {
@@ -27,12 +26,12 @@ public class DesolatorAuraHolder : NetworkBehaviour {
 
         if (NetworkServer.active) {
             GameObject spawnedAuraObject = Instantiate(Modules.Assets.DesolatorAuraPrefab, base.transform.position, Quaternion.identity);
+            _spawnedAura = spawnedAuraObject.GetComponent<DesolatorAuraController>();
+            _spawnedAura.Owner = gameObject;
             NetworkServer.Spawn(spawnedAuraObject);
             _spawnedAuraObject = spawnedAuraObject;
+            _spawnedAura.Init();
         }
-        _spawnedAura = _spawnedAuraObject.GetComponent<DesolatorAuraController>();
-        _spawnedAura.Owner = gameObject;
-        _spawnedAura.Init();
     }
     
     void OnDestroy() {

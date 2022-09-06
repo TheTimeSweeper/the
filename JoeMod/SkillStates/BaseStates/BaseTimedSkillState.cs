@@ -54,9 +54,18 @@ namespace ModdedEntityStates.BaseStates
 
             if (fixedAge > duration)
             {
-                outer.SetNextStateToMain();
+                EntityState state = ChooseNextState();
+                if (state == null) {
+                    outer.SetNextStateToMain();
+                } else {
+                    outer.SetNextState(state);
+                }
                 return;
             }
+        }
+
+        protected virtual EntityState ChooseNextState() {
+            return null;
         }
 
         public override void Update()

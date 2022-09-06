@@ -59,6 +59,8 @@ namespace Modules.Survivors {
         public static DeployableSlot irradiatorDeployableSlot;
         public DeployableAPI.GetDeployableSameSlotLimit GetIrradiatorSlotLimit;
 
+        public static SkillDef cancelDeploySkillDef;
+
         public override void Initialize() {
             instance = this;
             base.Initialize();
@@ -67,6 +69,10 @@ namespace Modules.Survivors {
             RegisterIrradiatorDeployable();
             bodyPrefab.AddComponent<TeslaZapBarrierController>();
             bodyPrefab.AddComponent<DesolatorAuraHolder>();
+
+            bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
+
+            Hook();
         }
 
         public override void InitializeDoppelganger(string clone) {
@@ -205,6 +211,57 @@ namespace Modules.Survivors {
         }
 
         private void InitializeSpecialSkills() {
+            
+            States.entityStates.Add(typeof(DeployEnter));
+            States.entityStates.Add(typeof(DeployIrradiate));
+            SkillDef deploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Desolator_Special_Deploy",
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_NAME",
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecial"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployEnter)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 8f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                //keywordTokens = new string[] { "KEYWORD_WEAK" }
+            });
+
+            States.entityStates.Add(typeof(DeployCancel));
+            cancelDeploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+
+                skillName = "Desolator_Special_Deploy_Cancel",
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_NAME",
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillUtilityEpic"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployCancel)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 0,
+                requiredStock = 0,
+                stockToConsume = 0,
+            });
 
             States.entityStates.Add(typeof(ThrowIrradiator));
             SkillDef irradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
@@ -231,7 +288,7 @@ namespace Modules.Survivors {
                 keywordTokens = new string[] { "KEYWORD_WEAK"}
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, irradiatorSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, deploySkillDef, irradiatorSkillDef);
         }
 
         //todo deso
@@ -296,6 +353,8 @@ namespace Modules.Survivors {
 
         #endregion skills
 
+        #region skins
+
         public override void InitializeSkins() {
             ModelSkinController skinController = bodyCharacterModel.gameObject.AddComponent<ModelSkinController>();
             ChildLocator childLocator = bodyCharacterModel.GetComponent<ChildLocator>();
@@ -321,5 +380,31 @@ namespace Modules.Survivors {
 
             skinController.skins = skins.ToArray();
         }
+
+        #endregion skins
+
+        #region hook
+
+        private void Hook() {
+            GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
+            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+        }
+
+        private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
+
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.desolatorArmorShred)) {
+                if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 5) {
+                    damageReport.victimBody.AddBuff(Buffs.desolatorArmorShredDeBuff);
+                }
+            }
+
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.desolatorDot)) {
+                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Modules.Dots.DesolatorDot, 4);
+            }
+        }
+
+        #endregion hook
+
+
     }
 }

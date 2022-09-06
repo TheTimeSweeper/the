@@ -34,6 +34,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         protected override void fireOrb() {
 
+            Helpers.LogWarning("firing orb bigzap");
+
             if (lightningTarget == null)
                 return;
 

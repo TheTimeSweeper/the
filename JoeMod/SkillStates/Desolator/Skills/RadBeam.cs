@@ -1,18 +1,19 @@
 ﻿using EntityStates;
+using R2API;
 using RoR2;
-using RoR2.Projectile;
 
 namespace ModdedEntityStates.Desolator {
 
     public class RadBeam : GenericBulletBaseState {
 
-        public static float DamageCoefficient = 1.2f;
+        public static float DamageCoefficient = 1.0f;
 
         public override void OnEnter() {
 
             EntityStates.Toolbot.FireSpear goodstate = new EntityStates.Toolbot.FireSpear();
 
-            baseDuration = 1f;
+            baseDuration = 1.0f;
+
             bulletCount = 1;
             maxDistance = goodstate.maxDistance;
             bulletRadius = goodstate.bulletRadius;
@@ -34,13 +35,16 @@ namespace ModdedEntityStates.Desolator {
             //hitEffectPrefab;
             base.OnEnter();
 
-            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.05f);
-            GetModelAnimator().SetBool("isHandOut", true);
-            PlayAnimation("Gesture, Additive", "Shock");
+            //PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.05f);
+            //GetModelAnimator().SetBool("isHandOut", true);
+            //PlayAnimation("Gesture, Additive", "Shock");
+            PlayAnimation("Desolator, Override", "DesolatorShoot");
         }
         public override void ModifyBullet(BulletAttack bulletAttack) {
-            bulletAttack.damageType = DamageType.BlightOnHit;
+            //bulletAttack.damageType = DamageType.BlightOnHit;
             bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+            DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.desolatorArmorShred);
+            DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.desolatorDot);
         }
     }
 }

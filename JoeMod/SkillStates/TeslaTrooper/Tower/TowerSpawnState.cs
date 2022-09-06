@@ -23,9 +23,9 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             if (towerController) {
                 towerController.addTower(gameObject);
 
-                characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
-                    towerController.removeTower(gameObject);
-                });
+                //characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
+                //    towerController.removeTower(gameObject);
+                //});
             }
         }
 

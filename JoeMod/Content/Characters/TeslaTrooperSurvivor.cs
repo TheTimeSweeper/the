@@ -589,8 +589,8 @@ namespace Modules.Survivors {
             On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
-            
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+
+            GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
 
             On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
         }
@@ -696,15 +696,14 @@ namespace Modules.Survivors {
         #endregion tower hacks
 
         #region conductive
-        private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
-            CheckConductive(self, damageInfo);
+        private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
 
-            if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.applyBlinkCooldown)) {
-                    self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
+            CheckConductive(damageReport.victim, damageReport.damageInfo);
+
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.applyBlinkCooldown)) {
+                damageReport.victimBody.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
             }
-
-            orig(self, damageInfo);
         }
 
         private static void CheckConductive(HealthComponent self, DamageInfo damageInfo) {
@@ -731,15 +730,25 @@ namespace Modules.Survivors {
 
             if (!damageInfo.attacker)
                 return;
+            Helpers.LogWarning("1");
 
             CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
             if (attackerBody) {
+                Helpers.LogWarning("2");
+
                 bool teamCharged = attackerBody.HasBuff(Buffs.conductiveBuffTeam) || attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace);
+
+                Helpers.LogWarning("3");
+
                 if (teamCharged) {
                     //consume allied charged stacks for damage boost and shock
 
+                    Helpers.LogWarning("4");
+
                     int buffCount = attackerBody.GetBuffCount(Buffs.conductiveBuffTeam);
                     for (int i = 0; i < buffCount; i++) {
+
+                        Helpers.LogWarning("5");
 
                         attackerBody.RemoveBuff(Buffs.conductiveBuffTeam);
                         if (!attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace)) {

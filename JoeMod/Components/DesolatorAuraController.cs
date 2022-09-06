@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using RoR2;
 using UnityEngine.Networking;
+using ModdedEntityStates.Desolator;
 
 public class DesolatorAuraController : NetworkBehaviour {
-
-    public static float Radius = 40;
 
     [SyncVar]
     public GameObject Owner;
@@ -14,7 +13,7 @@ public class DesolatorAuraController : NetworkBehaviour {
     private bool _active;
 
     private float currentRadius {
-        get => _active ? Radius : 0;
+        get => _active ? RadiationAura.Radius : 0;
     }
 
     private BuffWard buffward;
@@ -47,10 +46,12 @@ public class DesolatorAuraController : NetworkBehaviour {
 
     void Update() {
 
-        this.transform.position = cachedOwnerBody.corePosition;
-        
-        _currentScale = Mathf.SmoothDamp(this.transform.localScale.x, currentRadius, ref _scaleVelocity, 0.5f);
-        this.transform.localScale = new Vector3(_currentScale, _currentScale, _currentScale);
+        if (cachedOwnerBody) {
+            this.transform.position = cachedOwnerBody.corePosition;
+
+            _currentScale = Mathf.SmoothDamp(this.transform.localScale.x, currentRadius, ref _scaleVelocity, 0.5f);
+            this.transform.localScale = new Vector3(_currentScale, _currentScale, _currentScale);
+        }
     }
 
     private void OnIciclesActivated() {

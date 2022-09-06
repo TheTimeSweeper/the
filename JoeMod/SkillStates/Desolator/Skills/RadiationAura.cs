@@ -7,6 +7,7 @@ namespace ModdedEntityStates.Desolator {
     public class RadiationAura : BaseSkillState {
 
         public static float BuffDuration = 4f;
+        public static float Radius = 40;
 
         public RoR2.CameraTargetParams.AimRequest aimRequest;
 

@@ -3,6 +3,7 @@ using RoR2;
 using UnityEngine;
 
 namespace Modules {
+
     internal static class DamageTypes {
 
         public static float stunLongTime = 2.5f;
@@ -16,6 +17,9 @@ namespace Modules {
         public static DamageAPI.ModdedDamageType conductive;
         public static DamageAPI.ModdedDamageType applyBlinkCooldown;
 
+        public static DamageAPI.ModdedDamageType desolatorArmorShred;
+        public static DamageAPI.ModdedDamageType desolatorDot;
+
         public static void RegisterDamageTypes() {
 
             stunLong = DamageAPI.ReserveDamageType();
@@ -24,6 +28,9 @@ namespace Modules {
 
             conductive = DamageAPI.ReserveDamageType();
             applyBlinkCooldown = DamageAPI.ReserveDamageType();
+
+            desolatorArmorShred = DamageAPI.ReserveDamageType();
+            desolatorDot = DamageAPI.ReserveDamageType();
 
             SetHooks();
         }

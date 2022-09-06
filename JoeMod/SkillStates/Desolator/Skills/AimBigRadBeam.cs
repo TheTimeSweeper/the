@@ -34,8 +34,8 @@ namespace ModdedEntityStates.Desolator {
             base.OnEnter();
 
             //todo bod
-            PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.1f);
-            GetModelAnimator().SetBool("isHandOut", true);
+            //PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.1f);
+            //GetModelAnimator().SetBool("isHandOut", true);
         }
 
         // Token: 0x060006AD RID: 1709 RVA: 0x0001CDF3 File Offset: 0x0001AFF3
@@ -44,7 +44,7 @@ namespace ModdedEntityStates.Desolator {
             fireProjectileInfo.position = currentTrajectoryInfo.hitPoint;
             fireProjectileInfo.rotation = Quaternion.identity;
             fireProjectileInfo.speedOverride = 0f;
-            fireProjectileInfo.damageTypeOverride = DamageType.BlightOnHit;
+            //fireProjectileInfo.damageTypeOverride = DamageType.BlightOnHit;
             fireProjectileInfo.crit = _crit;
         }
 
@@ -52,7 +52,8 @@ namespace ModdedEntityStates.Desolator {
             base.FireProjectile();
 
             Util.PlaySound("Play_Desolator_Beam_Deep2", gameObject);
-            PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+            //PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
+            PlayAnimation("Desolator, Override", "DesolatorShoot");
 
             //show tracer beam
             EffectData effectData = new EffectData {
@@ -76,7 +77,7 @@ namespace ModdedEntityStates.Desolator {
 
                     baseDamage = damageStat * BlastDamageCoefficient,
                     crit = _crit,
-                    damageType = DamageType.BlightOnHit,
+                    damageType = DamageType.Generic,
                     //damageColorIndex = DamageColorIndex.Default,
 
                     procCoefficient = 1,
@@ -88,6 +89,7 @@ namespace ModdedEntityStates.Desolator {
 
                     //impactEffect = EffectIndex.uh;
                 };
+                R2API.DamageAPI.AddModdedDamageType(blast, Modules.DamageTypes.desolatorDot);
                 blast.Fire();
 
                 EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CrocoLeapExplosion"), new EffectData {

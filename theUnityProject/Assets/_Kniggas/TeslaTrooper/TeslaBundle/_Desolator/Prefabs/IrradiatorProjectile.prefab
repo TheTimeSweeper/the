@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 1367022257695261821}
   m_LocalRotation: {x: -0, y: -0.3826837, z: -0, w: 0.9238795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3255178, y: 1.3255178, z: 1.3255178}
   m_Children: []
   m_Father: {fileID: 1367022258136526145}
   m_RootOrder: 0
@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 1367022257893727406}
   m_LocalRotation: {x: -0, y: -0, z: 0.38268322, w: 0.9238797}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3255178, y: 1.3255178, z: 1.3255178}
   m_Children: []
   m_Father: {fileID: 1367022258136526145}
   m_RootOrder: 1
@@ -203,7 +203,7 @@ Transform:
   m_GameObject: {fileID: 1367022258136526144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1367022257695261822}
   - {fileID: 1367022257893727407}
@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 886606442412600386}
   - component: {fileID: 997618184794938658}
   - component: {fileID: 8385059295226504373}
+  - component: {fileID: 1710861754445201685}
   m_Layer: 14
   m_Name: IrradiatorProjectile
   m_TagString: Untagged
@@ -327,7 +328,7 @@ MonoBehaviour:
   cannotBeDeleted: 0
   flightSoundLoop: {fileID: 0}
   canImpactOnTrigger: 0
-  allowPrediction: 1
+  allowPrediction: 0
   owner: {fileID: 0}
   procCoefficient: 1
 --- !u!114 &1367022258176961600
@@ -357,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: -1819008361, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 21
+  lifetime: 23
   lifetimeExpiredEffect: {fileID: 0}
   desiredForwardSpeed: 120
   updateAfterFiring: 0
@@ -389,7 +390,7 @@ MonoBehaviour:
   damageColorIndex: 0
   damageType: 1048576
   useDotMaxStacksFromAttacker: 1
-  dotMaxStacksFromAttacker: 1
+  dotMaxStacksFromAttacker: 3
 --- !u!114 &1367022258176961613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +536,7 @@ MonoBehaviour:
     type: 3}
   forceVector: {x: 0, y: 0, z: 0}
   overlapProcCoefficient: 0.3
-  fireFrequency: 6
+  fireFrequency: 4
   resetFrequency: 1
   lifetime: 20
   onBegin:
@@ -543,7 +544,18 @@ MonoBehaviour:
       m_Calls: []
   onEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1710861754445201685}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   soundLoopString: 
   soundLoopStopString: 
 --- !u!114 &5182994034342319054
@@ -611,6 +623,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localTorque: {x: 2000, y: 0, z: 0}
   randomize: 0
+--- !u!114 &1710861754445201685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367022258176961621}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 488236779, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useOverallCurveOnly: 1
+  curveX:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveY:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveZ:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  overallCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  timeMax: 1
 --- !u!1 &1367022258444251471
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +705,7 @@ Transform:
   m_GameObject: {fileID: 1367022258444251471}
   m_LocalRotation: {x: -0.2705975, y: -0.6532806, z: 0.2705983, w: 0.6532826}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3255178, y: 1.3255178, z: 1.3255178}
   m_Children: []
   m_Father: {fileID: 1367022258136526145}
   m_RootOrder: 2
@@ -680,7 +748,7 @@ Transform:
   m_GameObject: {fileID: 2804324795029848059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3255178, y: 1.3255178, z: 1.3255178}
   m_Children: []
   m_Father: {fileID: 1367022258136526145}
   m_RootOrder: 3

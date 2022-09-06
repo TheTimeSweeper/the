@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Modules;
+using RoR2;
 
 public enum TeslaVoiceLine {
     attack_2000Volts, //0
@@ -132,6 +134,24 @@ internal static class Helpers {
         }
 
         return voiceLineString;
+    }
+
+    //credit to tiler2 https://github.com/ThinkInvis/RoR2-TILER2/blob/3e2a6d4105417de06abb3ef3f85da844170abf8a/StaticModules/MiscUtil.cs#L455
+    /// <summary>
+    /// Returns a list of enemy TeamComponents given an ally team (to ignore while friendly fire is off) and a list of ignored teams (to ignore under all circumstances).
+    /// </summary>
+    /// <param name="allyIndex">The team to ignore if friendly fire is off.</param>
+    /// <param name="ignore">Additional teams to always ignore.</param>
+    /// <returns>A list of all TeamComponents that match the provided team constraints.</returns>
+    public static List<TeamComponent> GatherEnemies(TeamIndex allyIndex, params TeamIndex[] ignore) {
+        var retv = new List<TeamComponent>();
+        bool isFF = FriendlyFireManager.friendlyFireMode != FriendlyFireManager.FriendlyFireMode.Off;
+        var scan = ((TeamIndex[])Enum.GetValues(typeof(TeamIndex))).Except(ignore);
+        foreach (var ind in scan) {
+            if (isFF || allyIndex != ind)
+                retv.AddRange(TeamComponent.GetTeamMembers(ind));
+        }
+        return retv;
     }
 }
 

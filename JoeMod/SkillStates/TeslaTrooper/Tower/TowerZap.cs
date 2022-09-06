@@ -123,7 +123,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void OnExit() {
             base.OnExit();
 
-            if (!hasFired && fixedAge > duration * 0.8f) {
+            if (!hasFired && fixedAge > duration * 0.5f) {
                 OnCastEnter();
                 hasFired = true;
             }

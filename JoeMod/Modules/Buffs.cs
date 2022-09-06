@@ -15,6 +15,10 @@ namespace Modules {
         public static BuffDef blinkCooldownBuff;
 
         public static BuffDef desolatorArmorBuff;
+        public static BuffDef desolatorArmorMiniBuff;
+
+        public static BuffDef desolatorArmorShredDeBuff;
+        public static BuffDef desolatorDotDeBuff;
 
         public static void RegisterBuffs() {
             zapShieldBuff =
@@ -45,12 +49,35 @@ namespace Modules {
                            false,
                            false);
 
+            Color lime = new Color(0.486f, 1, 0);
+
             desolatorArmorBuff =
-                AddNewBuff("DesolatorShield",
+                AddNewBuff("DesolatorArmor",
                            LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
-                           Color.green,
+                           lime,
                            false,
                            false);
+
+            desolatorArmorMiniBuff =
+                AddNewBuff("DesolatorArmorMini",
+                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
+                           lime,
+                           false,
+                           false);
+
+            desolatorArmorShredDeBuff =
+                AddNewBuff("DesolatorArmorShred",
+                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Pulverized").iconSprite,
+                           lime,
+                           true,
+                           true);
+
+            desolatorDotDeBuff =
+                AddNewBuff("DesolatorIrradiated",
+                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
+                           lime,
+                           true,
+                           true);
         }
 
         public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {
