@@ -343,7 +343,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_NAME", "Scorched Earth");
             LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_DESCRIPTION",
                 $"Blast an area for {Helpers.DamageValueText(AimBigRadBeam.BlastDamageCoefficient)}, and cover the area in radiation for {Helpers.UtilityText($"{AimBigRadBeam.DotZoneLifetime} seconds")}. " +
-                $"Enemies in contact take {Helpers.DamageValueText(AimBigRadBeam.PoolDamageCoefficient)} per second");
+                $"Enemies in contact take {Helpers.DamageValueText(AimBigRadBeam.PoolDamageCoefficient * 2)} per second");
             #endregion
 
             #region Utility
@@ -359,6 +359,14 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Lowered Cooldown, Additional Stock, Tower Zaps up to {TowerZapMulti.extraZaps} simultaneous targets"));
+
+            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_NAME", "Irradiator");
+            specialDesc =
+                $"Deploy your Rad-Cannon into the ground, pumping radiation in a large area, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
+            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", specialDesc);
+
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "Irradiatorinator");
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Lowered Cooldown, Additional Stock, Tower Zaps up to {TowerZapMulti.extraZaps} simultaneous targets"));
             #endregion
 
             #region recolor

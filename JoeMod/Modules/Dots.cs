@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using Modules.Survivors;
+using R2API;
 using RoR2;
 
 namespace Modules {
@@ -7,8 +8,8 @@ namespace Modules {
 
         public static void RegisterDots() {
             DesolatorDot = DotAPI.RegisterDotDef(new DotController.DotDef {
-                interval = 0.5f,
-                damageCoefficient = 0.2f,
+                interval = DesolatorSurvivor.DotInterval,
+                damageCoefficient = DesolatorSurvivor.DotDamage,
                 damageColorIndex = DamageColorIndex.Poison,
                 associatedBuff = Modules.Buffs.desolatorDotDeBuff
             });

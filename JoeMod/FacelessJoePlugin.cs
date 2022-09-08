@@ -61,6 +61,8 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         Log = Logger;
 
+        Modules.DamageTypes.RegisterDamageTypes();
+
         // load assets and read config
         Modules.Assets.Initialize();
         Modules.Config.ReadConfig();
@@ -75,7 +77,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
         Modules.Dots.RegisterDots();
-        Modules.DamageTypes.RegisterDamageTypes();
 
 
         // survivor initialization
@@ -122,7 +123,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         }
 
         if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
-            args.armorAdd -= 5f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+            args.armorAdd -= 10f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
         }
     }
 

@@ -10,8 +10,6 @@ namespace ModdedEntityStates.Desolator {
         public override void OnEnter() {
             base.OnEnter();
 
-            Helpers.LogWarning("fucking2");
-
             InitDurationValues(BaseDuration, StartTime);
 
             PlayCrossfade("FullBody, Override", "UnDeploy", "Deploy.playbackRate", duration, 0.05f);

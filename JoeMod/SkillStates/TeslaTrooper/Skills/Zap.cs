@@ -216,7 +216,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             PseudoLightningOrb _lightningOrb = createOrb();
 
-            _lightningOrb.AddModdedDamageType(Modules.DamageTypes.conductive);
+            _lightningOrb.AddModdedDamageType(Modules.DamageTypes.Conductive);
             OrbManager.instance.AddOrb(_lightningOrb);
             ////happens after firing each orb to apply to their bounces only
             //_lightningOrb.moddedLightningType = ModdedLightningType.MageLightning;

@@ -12,13 +12,13 @@ namespace ModdedEntityStates.Desolator {
     public class DeployIrradiate : BaseTimedSkillState {
 
         #region gameplay Values
-        public static float DamageCoefficient = 2f;
+        public static float DamageCoefficient = 0.8f;
         public static float BarrierPercentPerEnemy = 0.1f;
         public static float MaxBarrierPercent = 0.5f;
         public static float Range = 60;
         public const float SqrRange = 1600;
 
-        public static float BaseDuration = 4f;
+        public static float BaseDuration = 3f;
         public static float StartTime = 1f;
         #endregion
 
@@ -69,7 +69,7 @@ namespace ModdedEntityStates.Desolator {
                 owner = base.gameObject,
                 rotation = Quaternion.identity,
                 position = base.characterBody.corePosition,
-                damageTypeOverride = DamageType.WeakOnHit
+                //damageTypeOverride = DamageType.WeakOnHit
             };
             ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
@@ -89,15 +89,16 @@ namespace ModdedEntityStates.Desolator {
 
         public override void OnExit() {
             base.OnExit();
+
+            if (NetworkServer.active) {
+
+                characterBody.RemoveBuff(Modules.Buffs.desolatorArmorMiniBuff);
+            }
+
             if (!_complete) {
                 aimRequest.Dispose();
 
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
-
-                if (NetworkServer.active) {
-
-                    characterBody.RemoveBuff(Modules.Buffs.desolatorArmorMiniBuff);
-                }
 
                 PlayCrossfade("FullBody, Override", "BufferEmpty", 0.5f);
             }

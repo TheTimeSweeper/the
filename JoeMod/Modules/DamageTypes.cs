@@ -6,31 +6,31 @@ namespace Modules {
 
     internal static class DamageTypes {
 
-        public static float stunLongTime = 2.5f;
-        public static float shockTimeMed = 2.5f;
-        public static float shockTimeShort = 1f;
+        public static float StunLongTime = 2.5f;
+        public static float ShockTimeMed = 2.5f;
+        public static float ShockTimeShort = 1f;
 
-        public static DamageAPI.ModdedDamageType stunLong;
-        public static DamageAPI.ModdedDamageType shockMed;
-        public static DamageAPI.ModdedDamageType shockShort;
+        public static DamageAPI.ModdedDamageType StunLong;
+        public static DamageAPI.ModdedDamageType ShockMed;
+        public static DamageAPI.ModdedDamageType ShockShort;
 
-        public static DamageAPI.ModdedDamageType conductive;
-        public static DamageAPI.ModdedDamageType applyBlinkCooldown;
+        public static DamageAPI.ModdedDamageType Conductive;
+        public static DamageAPI.ModdedDamageType ApplyBlinkCooldown;
 
-        public static DamageAPI.ModdedDamageType desolatorArmorShred;
-        public static DamageAPI.ModdedDamageType desolatorDot;
+        public static DamageAPI.ModdedDamageType DesolatorArmorShred;
+        public static DamageAPI.ModdedDamageType DesolatorDot;
 
         public static void RegisterDamageTypes() {
 
-            stunLong = DamageAPI.ReserveDamageType();
-            shockMed = DamageAPI.ReserveDamageType();
-            shockShort = DamageAPI.ReserveDamageType();
+            StunLong = DamageAPI.ReserveDamageType();
+            ShockMed = DamageAPI.ReserveDamageType();
+            ShockShort = DamageAPI.ReserveDamageType();
 
-            conductive = DamageAPI.ReserveDamageType();
-            applyBlinkCooldown = DamageAPI.ReserveDamageType();
+            Conductive = DamageAPI.ReserveDamageType();
+            ApplyBlinkCooldown = DamageAPI.ReserveDamageType();
 
-            desolatorArmorShred = DamageAPI.ReserveDamageType();
-            desolatorDot = DamageAPI.ReserveDamageType();
+            DesolatorArmorShred = DamageAPI.ReserveDamageType();
+            DesolatorDot = DamageAPI.ReserveDamageType();
 
             SetHooks();
         }
@@ -50,20 +50,20 @@ namespace Modules {
 
             if (!victim.isInFrozenState) {
 
-                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(stunLong)) {
-                    self.SetStun(stunLongTime);
+                if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(StunLong)) {
+                    self.SetStun(StunLongTime);
                     return;
                 }
 
                 if ((damageInfo.damageType & DamageType.Shock5s) == damageInfo.damageType) {
 
-                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockMed)) {
-                        self.SetShock(shockTimeMed);
+                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(ShockMed)) {
+                        self.SetShock(ShockTimeMed);
                         return;
                     }
                     //how scuffed is this?
-                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(shockShort)) {
-                        self.SetShock(shockTimeShort);
+                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(ShockShort)) {
+                        self.SetShock(ShockTimeShort);
                         return;
                     }
                 }

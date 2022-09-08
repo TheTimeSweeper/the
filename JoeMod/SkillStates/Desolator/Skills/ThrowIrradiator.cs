@@ -8,10 +8,10 @@ namespace ModdedEntityStates.Desolator {
 
         public static float DamageCoefficient = 0.2f;
         public static float Range = 30;
-
+        
         public static float BaseDuration = 1f;
         public static float StartTime = 0.0f;
-
+        
         public override void OnEnter() {
             base.OnEnter();
 
@@ -25,7 +25,7 @@ namespace ModdedEntityStates.Desolator {
                     crit = base.RollCrit(),
                     damage = this.damageStat * DamageCoefficient,
                     damageColorIndex = DamageColorIndex.Default,
-                    damageTypeOverride = DamageType.BlightOnHit | DamageType.WeakOnHit,
+                    //damageTypeOverride = DamageType.WeakOnHit,
                     force = 0f,
                     owner = base.gameObject,
                     position = aimRay.origin,

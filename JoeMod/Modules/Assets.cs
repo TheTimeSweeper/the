@@ -238,7 +238,7 @@ namespace Modules {
 
             //DamageAPI.AddModdedDamageType(zapConeProjectile.GetComponent<ProjectileDamage>(), Modules.DamageTypes.conductive);
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = zapConeProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            damageTypeComponent.Add(DamageTypes.conductive);
+            damageTypeComponent.Add(DamageTypes.Conductive);
 
 
             UnityEngine.Object.DestroyImmediate(zapConeProjectile.transform.Find("Effect").GetComponent<ShakeEmitter>());
@@ -345,7 +345,7 @@ namespace Modules {
             GameObject irradiatorProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile"), "IrradiatorProjectile", true);
 
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            damageTypeComponent.Add(DamageTypes.desolatorDot);
+            damageTypeComponent.Add(DamageTypes.DesolatorDot);
 
             TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
             areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
@@ -363,7 +363,7 @@ namespace Modules {
             GameObject DeployProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("DeployProjectile"), "DeployProjectile", true);
 
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = DeployProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            damageTypeComponent.Add(DamageTypes.desolatorDot);
+            damageTypeComponent.Add(DamageTypes.DesolatorDot);
 
             TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, DeployProjectile.transform);
             areaIndicator.teamFilter = DeployProjectile.GetComponent<TeamFilter>();
@@ -383,17 +383,17 @@ namespace Modules {
             GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
 
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = leapAcidProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            damageTypeComponent.Add(DamageTypes.desolatorDot);
+            damageTypeComponent.Add(DamageTypes.DesolatorDot);
 
             ProjectileDotZone projectileDotZone = leapAcidProjectile.GetComponent<ProjectileDotZone>();
             projectileDotZone.impactEffect = IrradiatedImpactEffect;
-            projectileDotZone.lifetime = ModdedEntityStates.Desolator.AimBigRadBeam.DotZoneLifetime;
+            projectileDotZone.lifetime = AimBigRadBeam.DotZoneLifetime;
             projectileDotZone.damageCoefficient = 1;
             projectileDotZone.overlapProcCoefficient = 0.1f;
-            projectileDotZone.resetFrequency = 1;
+            projectileDotZone.resetFrequency = 2F;
 
             leapAcidProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
-
+            
             Transform transformFindFX = leapAcidProjectile.transform.Find("FX");
             transformFindFX.transform.localScale = Vector3.one * ModdedEntityStates.Desolator.AimBigRadBeam.BaseAttackRadius * 1.8f;
             UnityEngine.Object.Destroy(transformFindFX.GetComponent<AlignToNormal>());

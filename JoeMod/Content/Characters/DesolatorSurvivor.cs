@@ -61,6 +61,10 @@ namespace Modules.Survivors {
 
         public static SkillDef cancelDeploySkillDef;
 
+        public static float DotDamage = 0.2f;
+        public static float DotInterval = 0.5f;
+        public static float DotDuration= 8f;
+
         public override void Initialize() {
             instance = this;
             base.Initialize();
@@ -69,7 +73,7 @@ namespace Modules.Survivors {
             RegisterIrradiatorDeployable();
             bodyPrefab.AddComponent<TeslaZapBarrierController>();
             bodyPrefab.AddComponent<DesolatorAuraHolder>();
-
+            
             bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
 
             Hook();
@@ -85,6 +89,8 @@ namespace Modules.Survivors {
 
             irradiatorDeployableSlot = DeployableAPI.RegisterDeployableSlot(onGetIrradiatorSlotLimit);
             Assets.DesolatorIrradiatorProjectile.GetComponent<ProjectileDeployToOwner>().deployableSlot = irradiatorDeployableSlot;
+
+            Content.AddEntityState(typeof(DesolatorMain));
         }
 
         private int onGetIrradiatorSlotLimit(CharacterMaster self, int deployableCountMultiplier) {
@@ -107,7 +113,7 @@ namespace Modules.Survivors {
 
             return result;
         }
-
+        
         #region skills
 
         public override void InitializeSkills() {
@@ -163,7 +169,7 @@ namespace Modules.Survivors {
                     activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigRadBeam)),
                     activationStateMachineName = "Weapon",
                     baseMaxStock = 1,
-                    baseRechargeInterval = 7f,
+                    baseRechargeInterval = 6f,
                     beginSkillCooldownOnSkillEnd = true,
                     canceledFromSprinting = false,
                     forceSprintDuringState = false,
@@ -192,7 +198,7 @@ namespace Modules.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(RadiationAura)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 7f,
+                baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -222,7 +228,7 @@ namespace Modules.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployEnter)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -272,7 +278,7 @@ namespace Modules.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowIrradiator)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
-                baseRechargeInterval = 14f,
+                baseRechargeInterval = 7f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -392,19 +398,17 @@ namespace Modules.Survivors {
 
         private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
 
-            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.desolatorArmorShred)) {
-                if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 5) {
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorArmorShred)) {
+                if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 10) {
                     damageReport.victimBody.AddBuff(Buffs.desolatorArmorShredDeBuff);
                 }
             }
 
-            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.desolatorDot)) {
-                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Modules.Dots.DesolatorDot, 4);
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot)) {
+                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * Mathf.Min(damageReport.damageInfo.procCoefficient * 2, 1));
             }
         }
 
         #endregion hook
-
-
     }
 }

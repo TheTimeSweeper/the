@@ -92,8 +92,8 @@ namespace ModdedEntityStates.TeslaTrooper {
                     target = _targetHurtbox
                 };
 
-                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.applyBlinkCooldown);
-                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.shockMed);
+                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.ApplyBlinkCooldown);
+                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.ShockMed);
 
                 OrbManager.instance.AddOrb(orb);
             }

@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: -1819008361, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 23
+  lifetime: 13
   lifetimeExpiredEffect: {fileID: 0}
   desiredForwardSpeed: 120
   updateAfterFiring: 0
@@ -388,9 +388,9 @@ MonoBehaviour:
   crit: 0
   force: 0
   damageColorIndex: 0
-  damageType: 1048576
-  useDotMaxStacksFromAttacker: 1
-  dotMaxStacksFromAttacker: 3
+  damageType: 0
+  useDotMaxStacksFromAttacker: 0
+  dotMaxStacksFromAttacker: 0
 --- !u!114 &1367022258176961613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,10 +535,10 @@ MonoBehaviour:
   impactEffect: {fileID: 997780759937662335, guid: a2b45fab77e6d8a4ca52387fa2293e3c,
     type: 3}
   forceVector: {x: 0, y: 0, z: 0}
-  overlapProcCoefficient: 0.3
+  overlapProcCoefficient: 0.2
   fireFrequency: 4
   resetFrequency: 1
-  lifetime: 20
+  lifetime: 10
   onBegin:
     m_PersistentCalls:
       m_Calls: []

@@ -89,7 +89,7 @@ namespace ModdedEntityStates.Desolator {
 
                     //impactEffect = EffectIndex.uh;
                 };
-                R2API.DamageAPI.AddModdedDamageType(blast, Modules.DamageTypes.desolatorDot);
+                R2API.DamageAPI.AddModdedDamageType(blast, Modules.DamageTypes.DesolatorDot);
                 blast.Fire();
 
                 EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CrocoLeapExplosion"), new EffectData {
