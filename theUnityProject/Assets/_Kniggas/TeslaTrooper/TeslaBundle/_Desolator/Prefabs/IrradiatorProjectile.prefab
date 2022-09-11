@@ -535,7 +535,7 @@ MonoBehaviour:
   impactEffect: {fileID: 997780759937662335, guid: a2b45fab77e6d8a4ca52387fa2293e3c,
     type: 3}
   forceVector: {x: 0, y: 0, z: 0}
-  overlapProcCoefficient: 0.2
+  overlapProcCoefficient: 0.4
   fireFrequency: 4
   resetFrequency: 1
   lifetime: 10

@@ -20,7 +20,7 @@ namespace Modules.Survivors {
         public static DesolatorSurvivor instance;
 
         public const string DESOLATOR_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_DESOLATOR_BODY_";
-
+        
         public override string survivorTokenPrefix => DESOLATOR_PREFIX;
 
         public override string bodyName => "Desolator";
@@ -34,13 +34,12 @@ namespace Modules.Survivors {
             bodyColor = new Color(160f / 255f, 238f / 255f, 0f / 255f),
             sortPosition = 69.1f,
 
-            //todo deso
-            crosshair = Assets.LoadAsset<GameObject>("TeslaCrosshair"),
+            crosshair = Assets.LoadAsset<GameObject>("DesolatorCrosshair"),
             podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 120f,
-            healthRegen = 1f,
-            armor = 5f,
+            maxHealth = 110f,
+            healthRegen = 1.5f,
+            armor = 10f,
 
             jumpCount = 1,
 
@@ -61,9 +60,9 @@ namespace Modules.Survivors {
 
         public static SkillDef cancelDeploySkillDef;
 
-        public static float DotDamage = 0.2f;
+        public static float DotDamage = 0.12f;
         public static float DotInterval = 0.5f;
-        public static float DotDuration= 8f;
+        public static float DotDuration = 6f;
 
         public override void Initialize() {
             instance = this;
@@ -75,6 +74,8 @@ namespace Modules.Survivors {
             bodyPrefab.AddComponent<DesolatorAuraHolder>();
             
             bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
+
+            bodyPrefab.GetComponent<CharacterBody>().spreadBloomCurve = AnimationCurve.EaseInOut(0, 0, 0.5f, 1);
 
             Hook();
         }
@@ -120,7 +121,7 @@ namespace Modules.Survivors {
 
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            InitializePassive();
+            //InitializePassive();
 
             InitializePrimarySkills();
 
@@ -154,6 +155,7 @@ namespace Modules.Survivors {
                                                        new EntityStates.SerializableEntityStateType(typeof(RadBeam)),
                                                        "Weapon",
                                                        false));
+            primarySkillDefPunch.keywordTokens = new string[] { "KEYWORD_RADIATION_PRIMARY" };
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
         }
 
@@ -181,7 +183,8 @@ namespace Modules.Survivors {
                     cancelSprintingOnActivation = true,
                     rechargeStock = 1,
                     requiredStock = 1,
-                    stockToConsume = 1
+                    stockToConsume = 1,
+                    keywordTokens = new string[] { "KEYWORD_RADIATION_SECONDARY", "KEYWORD_RADIATION_SECONDARY2" }
                 });
             bigRadBeamSkillDef.interruptPriority = EntityStates.InterruptPriority.Skill;
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigRadBeamSkillDef);
@@ -226,7 +229,7 @@ namespace Modules.Survivors {
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployEnter)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = true,
@@ -241,7 +244,7 @@ namespace Modules.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                //keywordTokens = new string[] { "KEYWORD_WEAK" }
+                keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
             });
 
             States.entityStates.Add(typeof(DeployCancel));
@@ -252,14 +255,14 @@ namespace Modules.Survivors {
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillUtilityEpic"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployCancel)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                interruptPriority = EntityStates.InterruptPriority.Frozen,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = true,
@@ -278,7 +281,7 @@ namespace Modules.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowIrradiator)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
-                baseRechargeInterval = 7f,
+                baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -291,7 +294,7 @@ namespace Modules.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_WEAK"}
+                keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, deploySkillDef, irradiatorSkillDef);
@@ -399,13 +402,13 @@ namespace Modules.Survivors {
         private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
 
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorArmorShred)) {
-                if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 10) {
+                if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 3) {
                     damageReport.victimBody.AddBuff(Buffs.desolatorArmorShredDeBuff);
                 }
             }
 
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot)) {
-                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * Mathf.Min(damageReport.damageInfo.procCoefficient * 2, 1));
+                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient);
             }
         }
 

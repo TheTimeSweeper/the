@@ -12,8 +12,8 @@ namespace ModdedEntityStates.Desolator {
     public class DeployIrradiate : BaseTimedSkillState {
 
         #region gameplay Values
-        public static float DamageCoefficient = 0.8f;
-        public static float BarrierPercentPerEnemy = 0.1f;
+        public static float DamageCoefficient = 1f;
+        public static float BarrierPercentPerEnemy = 0.05f;
         public static float MaxBarrierPercent = 0.5f;
         public static float Range = 60;
         public const float SqrRange = 1600;
@@ -40,6 +40,19 @@ namespace ModdedEntityStates.Desolator {
 
             if (NetworkServer.active) {
                 characterBody.AddBuff(Modules.Buffs.desolatorArmorMiniBuff);
+            }
+        }
+
+        public override void FixedUpdate() {
+            base.FixedUpdate();
+
+            //bit of a hack to get around Body ESM not being in GenericCharacterMain
+            if (isAuthority && base.inputBank.skill4.justPressed) {
+                skillLocator.special.ExecuteIfReady();
+            }
+
+            if (isAuthority && inputBank.skill3.down) {
+                skillLocator.utility.ExecuteIfReady();
             }
         }
 
@@ -77,14 +90,6 @@ namespace ModdedEntityStates.Desolator {
         protected override EntityState ChooseNextState() {
             _complete = true;
             return new DeployIrradiate { aimRequest = this.aimRequest };
-        }
-
-        public override void FixedUpdate() {
-            base.FixedUpdate();
-
-            if (base.characterMotor) {
-                base.characterMotor.moveDirection = Vector3.zero;
-            }
         }
 
         public override void OnExit() {

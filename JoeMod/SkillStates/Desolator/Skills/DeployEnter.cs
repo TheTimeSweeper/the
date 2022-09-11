@@ -28,18 +28,18 @@ namespace ModdedEntityStates.Desolator {
 
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
-            }
+            }            
 
             skillLocator.special.SetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
         }
 
-        public override void FixedUpdate() {
-            base.FixedUpdate();
+        //public override void FixedUpdate() {
+        //    base.FixedUpdate();
 
-            if (base.characterMotor) {
-                base.characterMotor.moveDirection = Vector3.zero;
-            }
-        }
+        //    if (base.characterMotor) {
+        //        base.characterMotor.moveDirection = Vector3.zero;
+        //    }
+        //}
 
         protected override EntityState ChooseNextState() {
             _complete = true;

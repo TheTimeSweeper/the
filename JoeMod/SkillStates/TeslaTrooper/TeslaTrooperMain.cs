@@ -20,7 +20,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             cachedAnimator.SetBool("inCombat", combat);
             
-            if (Input.GetKeyDown(Modules.Config.voiceKey.Value)) {
+            if (isAuthority && Input.GetKeyDown(Modules.Config.voiceKey.Value)) {
 
                 playRandomvoiceLine();
             }

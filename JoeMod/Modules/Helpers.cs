@@ -43,6 +43,10 @@ internal static class Helpers {
         return $"<style=cIsHealth>{text}</style>";
     }
 
+    internal static string KeywordText(string keyword, string sub) {
+        return $"<style=cKeywordName>{keyword}</style><style=cSub>{sub}</style>";
+    }
+
     public static string ScepterDescription(string desc) {
         return "\n<color=#d299ff>SCEPTER: " + desc + "</color>";
     }

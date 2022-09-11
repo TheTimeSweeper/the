@@ -208,7 +208,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
         private void FireZap() {
-
+            
             if (_attackingTeammate) {
                 FireZapTeammate();
                 return;

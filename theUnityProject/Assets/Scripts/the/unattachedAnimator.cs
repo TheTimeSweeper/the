@@ -35,6 +35,9 @@ public class UnattachedAnimator : MonoBehaviour
     private void Moob() {
         //man it's been so long since I've written a moob function
 
+
+        Debug.DrawLine(Vector3.zero, Vector3.one * 100);
+
         float hori = Input.GetAxis("Horizontal");
         float veri = Input.GetAxis("Vertical");
 

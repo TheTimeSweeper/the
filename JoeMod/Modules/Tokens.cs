@@ -336,37 +336,50 @@ namespace Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_BEAM_NAME", "Rad-Cannon");
-            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"<style=cIsHealing>Irradiating</style>. Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}. Reduces armor by 10, stacking up to 3 times.");
+
+            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2} damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_NAME", "Scorched Earth");
             LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_DESCRIPTION",
-                $"Blast an area for {Helpers.DamageValueText(AimBigRadBeam.BlastDamageCoefficient)}, and cover the area in radiation for {Helpers.UtilityText($"{AimBigRadBeam.DotZoneLifetime} seconds")}. " +
-                $"Enemies in contact take {Helpers.DamageValueText(AimBigRadBeam.PoolDamageCoefficient * 2)} per second");
+                $"<style=cIsHealing>Irradiating</style>. Blast an area for {Helpers.DamageValueText(AimBigRadBeam.BlastDamageCoefficient)}, and cover the area in radiation for {Helpers.UtilityText($"{AimBigRadBeam.DotZoneLifetime} seconds")}. " +
+                $"Enemies in contact take {Helpers.DamageText($"{AimBigRadBeam.PoolDamageCoefficient * 100}% damage twice per second")}");
+
+            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY", Helpers.KeywordText("Irradiating", $"Initial Blast: Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY2", Helpers.KeywordText("Irradiating", $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.2f} seconds")}"));
             #endregion
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_AURA_NAME", "Reactor");
-            LanguageAPI.Add(prefix + "UTILITY_AURA_DESCRIPTION", $"For {Helpers.UtilityText($"{RadiationAura.BuffDuration} seconds")}, {Helpers.UtilityText("weaken")} all nearby enemies, and gain a boost to {Helpers.UtilityText("move speed")} and {Helpers.UtilityText("armor")}");
+            LanguageAPI.Add(prefix + "UTILITY_AURA_DESCRIPTION", $"For {Helpers.UtilityText($"{RadiationAura.BuffDuration} seconds")}, {Helpers.DamageText("Weaken")} all nearby enemies, and gain a boost to {Helpers.UtilityText("move speed")} and {Helpers.UtilityText("armor")}");
             #endregion
 
             #region Special
-            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME", "Irradiator");
+            //default
+            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_NAME", "Spread the Doom");
             string specialDesc =
-                $"Deploy an Irradiator, covering a large area in radiation for {Helpers.UtilityText($"20 seconds")}, weakening all enemies and dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage")} per second.";
+                $"<style=cIsHealing>Irradiating</style>. Deploy your Rad-Cannon into the ground. {Helpers.UtilityText($"Every 3 seconds")}, pump a pool of radiation that lasts for {Helpers.UtilityText($"7 seconds")}, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
+            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", specialDesc);
+
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "Here Comes the Sun");
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Larger Area. Faster ticks per second"));
+
+            //cancel
+            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_CANCEL_NAME", "Cancel");
+            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION", "Stop Spreading the Doom");
+
+            //alt
+            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME", "Irradiator");
+            specialDesc =
+                $"<style=cIsHealing>Irradiating</style>. Throw {Helpers.UtilityText("up to 2")} Irradiators which cover a large area in radiation for {Helpers.UtilityText($"10 seconds")}, dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage per second")}.";
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Lowered Cooldown, Additional Stock, Tower Zaps up to {TowerZapMulti.extraZaps} simultaneous targets"));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Larger Area. Faster ticks per second"));
 
-            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_NAME", "Irradiator");
-            specialDesc =
-                $"Deploy your Rad-Cannon into the ground, pumping radiation in a large area, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
-            LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", specialDesc);
-
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "Irradiatorinator");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Lowered Cooldown, Additional Stock, Tower Zaps up to {TowerZapMulti.extraZaps} simultaneous targets"));
+            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.4f} seconds")}"));
             #endregion
 
             #region recolor

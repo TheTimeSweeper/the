@@ -125,6 +125,10 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
             args.armorAdd -= 10f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
         }
+
+        //if (sender.HasBuff(Modules.Buffs.DesolatorDot)) {
+        //    args.armorAdd -= 2f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+        //}
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
