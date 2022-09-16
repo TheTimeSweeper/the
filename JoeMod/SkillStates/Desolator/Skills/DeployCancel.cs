@@ -14,6 +14,9 @@ namespace ModdedEntityStates.Desolator {
             //todo deso anim legs
             PlayCrossfade("FullBody, Override", "UnDeploy", "Deploy.playbackRate", 0.3f, 0.05f);
 
+            PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
+            PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
+
             skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
             base.outer.SetNextStateToMain();

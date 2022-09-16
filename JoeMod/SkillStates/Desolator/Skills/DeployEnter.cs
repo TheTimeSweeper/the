@@ -23,14 +23,17 @@ namespace ModdedEntityStates.Desolator {
             aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
 
             PlayCrossfade("FullBody, Override", "Deploy", "Deploy.playbackRate", duration, 0.05f);
+            GetModelAnimator().SetFloat("CannonBarCharge", 1);
+            PlayAnimation("RadCannonBar", "CannonCharge");
+
+            GetModelAnimator().SetFloat("CannonSpin", 1);
+            PlayCrossfade("RadCannonSpin", "CannonSpin", 0.1f);
 
             //addbuff, something
 
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
-            }            
-
-            skillLocator.special.SetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            }
         }
 
         //public override void FixedUpdate() {
@@ -48,10 +51,15 @@ namespace ModdedEntityStates.Desolator {
 
         public override void OnExit() {
             base.OnExit();
-            if (!_complete) {
+            if (_complete) {
+                skillLocator.special.SetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            } else {
                 aimRequest.Dispose();
 
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
+
+                PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
+                PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
             }
         }
 

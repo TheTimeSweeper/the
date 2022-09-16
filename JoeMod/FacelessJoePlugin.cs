@@ -45,8 +45,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
 
-    internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
-
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
@@ -110,6 +108,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
     }
+
 
     private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
 

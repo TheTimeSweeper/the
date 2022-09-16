@@ -24,11 +24,14 @@ namespace ModdedEntityStates.Desolator {
 
         public RoR2.CameraTargetParams.AimRequest aimRequest;
         private bool _complete;
+        private Animator _animator;
+        private float _cannonSpin;
 
         public override void OnEnter() {
             base.OnEnter();
 
             InitDurationValues(BaseDuration, StartTime);
+            _animator = base.GetModelAnimator();
 
             Util.PlaySound("Play_Desolator_Deploy", base.gameObject);
             PlayCrossfade("FullBody, Override", "DeployPump",/* "DeployPump.playbackRate", duration,*/ 0.05f);
@@ -50,10 +53,17 @@ namespace ModdedEntityStates.Desolator {
             if (isAuthority && base.inputBank.skill4.justPressed) {
                 skillLocator.special.ExecuteIfReady();
             }
-
+            
             if (isAuthority && inputBank.skill3.down) {
                 skillLocator.utility.ExecuteIfReady();
             }
+        }
+
+        public override void Update() {
+            base.Update();
+            _cannonSpin = Mathf.Lerp(0, 2.2f, fixedAge/duration);
+            _animator.SetFloat("CannonSpin", _cannonSpin, 0.1f, Time.deltaTime);
+            _animator.SetFloat("CannonBarCharge", fixedAge / duration, 0.1f, Time.deltaTime);
         }
 
         private void GiveBarrierPerEnemy() {
@@ -106,6 +116,9 @@ namespace ModdedEntityStates.Desolator {
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
                 PlayCrossfade("FullBody, Override", "BufferEmpty", 0.5f);
+
+                PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
+                PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
             }
         }
 

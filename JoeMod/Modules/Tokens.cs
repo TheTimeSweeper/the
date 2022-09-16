@@ -328,7 +328,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
             #endregion
-
+            
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Radiation");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", $"Attacks inflict blight atm.");
@@ -340,7 +340,7 @@ namespace Modules
 
             LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2} damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
             #endregion
-
+            
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_NAME", "Scorched Earth");
             LanguageAPI.Add(prefix + "SECONDARY_BIGBEAM_DESCRIPTION",
