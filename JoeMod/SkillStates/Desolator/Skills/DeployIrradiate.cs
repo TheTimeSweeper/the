@@ -45,7 +45,7 @@ namespace ModdedEntityStates.Desolator {
                 characterBody.AddBuff(Modules.Buffs.desolatorArmorMiniBuff);
             }
         }
-
+        
         public override void FixedUpdate() {
             base.FixedUpdate();
 
@@ -58,12 +58,12 @@ namespace ModdedEntityStates.Desolator {
                 skillLocator.utility.ExecuteIfReady();
             }
         }
-
+        
         public override void Update() {
             base.Update();
             _cannonSpin = Mathf.Lerp(0, 2.2f, fixedAge/duration);
-            _animator.SetFloat("CannonSpin", _cannonSpin, 0.1f, Time.deltaTime);
-            _animator.SetFloat("CannonBarCharge", fixedAge / duration, 0.1f, Time.deltaTime);
+            _animator.SetFloat("CannonSpin", _cannonSpin, 0.1f, Time.deltaTime);  //bit of a magic number because animation for some reason resets at 1.0
+            _animator.SetFloat("CannonBarCharge", Mathf.Min(fixedAge / duration, 0.99f), 0.1f, Time.deltaTime);
         }
 
         private void GiveBarrierPerEnemy() {
