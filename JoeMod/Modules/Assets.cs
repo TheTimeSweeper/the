@@ -50,6 +50,7 @@ namespace Modules {
         public static GameObject TeslaCoilBlueprint;
 
         public static GameObject TeslaIndicatorPrefab;
+        public static GameObject TeslaIndicatorPrefabDash;
 
         public static GameObject TeslaLoaderZapConeProjectile;
         public static GameObject TeslaZapConeEffect;
@@ -181,6 +182,8 @@ namespace Modules {
 
             TeslaIndicatorPrefab = CreateTeslaTrackingIndicator();
 
+            TeslaIndicatorPrefabDash = CreateTeslaDashTrackingIndicator();
+
             ChainLightningMaterial = GetChainLightningMaterial();
             TeslaLightningOrbEffectRed =
                 CloneLightningOrbEffect("Prefabs/Effects/OrbEffects/LightningOrbEffect",
@@ -302,6 +305,37 @@ namespace Modules {
             towerIndicator.color = Color.red;
 
             indicatorViewComponent.towerIndicator = towerIndicator.gameObject;
+
+            return indicatorPrefab;
+        }
+
+        private static GameObject CreateTeslaDashTrackingIndicator() {
+
+            GameObject indicatorPrefab = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"), "TeslaIndicator", false);
+
+            UnityEngine.Object.DestroyImmediate(indicatorPrefab.transform.Find("TextMeshPro").gameObject);
+            UnityEngine.Object.DestroyImmediate(indicatorPrefab.transform.Find("Holder/Brackets").gameObject);
+
+            indicatorPrefab.transform.localScale = Vector3.one * .15f;
+            indicatorPrefab.transform.localPosition = Vector3.zero;
+            indicatorPrefab.transform.Find("Holder").rotation = Quaternion.identity;
+            indicatorPrefab.transform.Find("Holder/Brackets").rotation = Quaternion.identity;
+
+            TeslaIndicatorView indicatorViewComponent = indicatorPrefab.AddComponent<TeslaIndicatorView>();
+
+            SpriteRenderer spriteRenderer = indicatorPrefab.GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorDash3");
+            spriteRenderer.color = Color.white;
+            spriteRenderer.transform.localRotation = Quaternion.identity;
+            spriteRenderer.transform.localPosition = Vector3.zero;
+
+            indicatorViewComponent.indicatorRenderer = spriteRenderer;
+
+            //SpriteRenderer towerIndicator = UnityEngine.Object.Instantiate(spriteRenderer, spriteRenderer.transform.parent);
+            //towerIndicator.sprite = Modules.Assets.LoadAsset<Sprite>("texIndicatorDash");
+            //towerIndicator.color = Color.white;
+
+            //indicatorViewComponent.towerIndicator = towerIndicator.gameObject;
 
             return indicatorPrefab;
         }
@@ -437,7 +471,7 @@ namespace Modules {
             greenify(aura.transform.Find("Particles/Ring, Core").GetComponent<ParticleSystem>());
 
             aura.transform.Find("Particles/Area").GetComponent<ParticleSystemRenderer>().material = DesolatorTeamAreaIndicatorPrefab.teamMaterialPairs[1].sharedMaterial;
-
+            
             return aura;
         }
 

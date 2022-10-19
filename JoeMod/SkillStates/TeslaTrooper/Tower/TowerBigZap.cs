@@ -2,9 +2,12 @@
 using UnityEngine;
 using R2API;
 using UnityEngine.Networking;
+using System;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZap: TowerZap {
+
+        public static Action<GameObject> onTowerBigZapMultiHit;
 
         new public static float DamageCoefficient = 12.0f;
         new public static float ProcCoefficient = 1f;
@@ -33,8 +36,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         }
 
         protected override void fireOrb() {
-
-            Helpers.LogWarning("firing orb bigzap");
 
             if (lightningTarget == null)
                 return;
@@ -74,7 +75,10 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
                     //impactEffect = EffectIndex.uh;
                 };
-                blast.Fire();
+                BlastAttack.Result blastResult = blast.Fire();
+                if (blastResult.hitCount >= 10) {
+                    onTowerBigZapMultiHit?.Invoke(gameObject);
+                }
 
                 #region effects
                 EffectData fect = new EffectData {

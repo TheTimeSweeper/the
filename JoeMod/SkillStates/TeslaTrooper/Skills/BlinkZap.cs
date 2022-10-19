@@ -1,4 +1,5 @@
-﻿using JoeMod;
+﻿using EntityStates;
+using JoeMod;
 using R2API;
 using RoR2;
 using RoR2.Orbs;
@@ -10,17 +11,33 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class BlinkZap : EntityStates.Huntress.BlinkState {
 
         #region Gameplay Values
-        public static float DamageCoefficient = 6f;
+        public static float DamageCoefficient = 3f;
         public static float ProcCoefficient = 1f;
         #endregion
 
-        private TeslaTrackerComponent _tracker;
+        private TeslaWeaponComponent _weaponComponent;
+        private TeslaTrackerComponentDash _tracker;
         private HurtBox _targetHurtbox;
         private CameraTargetParams.CameraParamsOverrideHandle _cameraOverrideHandle;
 
+        private ModdedLightningType GetModdedOrbType {
+            get {
+                if (_weaponComponent) {
+                    if (_weaponComponent.hasTeslaCoil) {
+                        return ModdedLightningType.Tesla;
+                    }
+                    return _weaponComponent.teslaSkinDef.ZapLightningType;
+                }
+
+                return ModdedLightningType.Ukulele;
+            }
+        }
+
         public override void OnEnter() {
 
-            _tracker = GetComponent<TeslaTrackerComponent>();
+            _weaponComponent = GetComponent<TeslaWeaponComponent>();
+
+            _tracker = GetComponent<TeslaTrackerComponentDash>();
             _targetHurtbox = _tracker?.GetTrackingTarget();
             beginSoundString = "";
             endSoundString = "";
@@ -44,8 +61,10 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
 
             if (NetworkServer.active) {
-                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration + 1.5f);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration + 1.0f);
             }
+
+            Util.PlaySound("Play_trooper_blink", gameObject);
         }
         public override Vector3 GetBlinkVector() {
             if (!_targetHurtbox) {
@@ -59,6 +78,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.OnExit();
 
             cameraTargetParams.RemoveParamsOverride(_cameraOverrideHandle, 0.1f);
+
+            EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new WindDownState(0.2f));
         }
 
         private CharacterCameraParamsData GetBlinkCameraParams(float distance) {
@@ -79,21 +100,20 @@ namespace ModdedEntityStates.TeslaTrooper {
                     isCrit = base.RollCrit(),
                     bouncesRemaining = 0,
                     //damageCoefficientPerBounce = BounceDamageMultplier,
-                    damageType = DamageType.Generic,
+                    damageType = DamageType.Stun1s,
                     teamIndex = teamComponent.teamIndex,
                     attacker = gameObject,
                     procCoefficient = 1f,
                     bouncedObjects = new List<HealthComponent>(),
                     //lightningType = LightningOrb.LightningType.MageLightning,
-                    moddedLightningType = ModdedLightningType.Ukulele,
+                    moddedLightningType = GetModdedOrbType,
                     damageColorIndex = DamageColorIndex.Default,
                     //range = BounceDistance,
                     speed = speedCoefficient * moveSpeedStat,
                     target = _targetHurtbox
                 };
 
-                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.ApplyBlinkCooldown);
-                DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.ShockMed);
+                //DamageAPI.AddModdedDamageType(orb, Modules.DamageTypes.ShockMed);
 
                 OrbManager.instance.AddOrb(orb);
             }
@@ -101,7 +121,10 @@ namespace ModdedEntityStates.TeslaTrooper {
             HarmlessBuffOrb orb2 = new HarmlessBuffOrb {
                 target = _targetHurtbox,
                 origin = transform.position,
-                speed = speedCoefficient * moveSpeedStat
+                speed = speedCoefficient * moveSpeedStat,
+                moddedLightningType = GetModdedOrbType,
+                buffToApply = Modules.Buffs.blinkCooldownBuff,
+                bufftime = 4f
             };
             for (int i = 0; i < 2; i++) {
                 OrbManager.instance.AddOrb(orb2);

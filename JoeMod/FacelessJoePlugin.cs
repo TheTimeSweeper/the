@@ -40,7 +40,7 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.2.2";
+    public const string MODVERSION = "1.3.0";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -48,7 +48,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
-    public static bool Desolator = true;
+    public static bool Desolator;
     public static bool holdonasec;
 
     private void Start() {
@@ -62,8 +62,10 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         Modules.DamageTypes.RegisterDamageTypes();
 
         // load assets and read config
-        Modules.Assets.Initialize();
         Modules.Config.ReadConfig();
+
+        Modules.Assets.Initialize();
+
         if (Modules.Config.Debug)
             gameObject.AddComponent<TestValueManager>();
 
@@ -105,10 +107,27 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
         R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+
+        //On.RoR2.CharacterModel.UpdatePoisonAffix += CharacterModel_UpdatePoisonAffix;
+        On.RoR2.JitterBones.RebuildBones += JitterBones_RebuildBones;
+
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
     }
 
+    private void JitterBones_RebuildBones(On.RoR2.JitterBones.orig_RebuildBones orig, JitterBones self) {
+        if (self._skinnedMeshRenderer && self._skinnedMeshRenderer.name == "Tower_Base_Pillars_Color")
+            return;
+        orig(self);
+    }
+
+    //private void CharacterModel_UpdatePoisonAffix(On.RoR2.CharacterModel.orig_UpdatePoisonAffix orig, CharacterModel self) {
+    //    if(self.body.baseNameToken == TeslaTowerNotSurvivor.TOWER_PREFIX + "NAME" || 
+    //       self.body.baseNameToken == TeslaTowerScepter.TOWER_SCEPTER_PREFIX + "NAME") {
+    //        return;
+    //    }
+    //    orig(self);
+    //}
 
     private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
 
@@ -122,11 +141,11 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         }
 
         if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
-            args.armorAdd -= 10f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+            args.armorAdd -= 8f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
         }
 
-        //if (sender.HasBuff(Modules.Buffs.DesolatorDot)) {
-        //    args.armorAdd -= 2f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+        //if (sender.HasBuff(Modules.Buffs.desolatorDotDeBuff)) {
+        //    args.armorAdd -= 3f * sender.GetBuffCount(Modules.Buffs.desolatorDotDeBuff);
         //}
     }
 

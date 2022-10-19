@@ -100,7 +100,7 @@ public class TeslaTowerControllerController : MonoBehaviour {
     public void addTower(GameObject towerBodyObject) {
         teslaTowers.Add(towerBodyObject);
 
-        towerBodyObject.GetComponent<TowerOwnerTrackerComponent>().OwnerTrackerComponent = GetComponent<TeslaTrackerComponent>();
+        towerBodyObject.GetComponent<TowerOwnerTrackerComponent>().OwnerTrackerComponent = GetComponent<TeslaTrackerComponentZap>();
 
         SkinRecolorController trooperRecolor = this.gameObject.GetComponent<CharacterBody>().modelLocator.modelTransform.GetComponent<SkinRecolorController>();
         if (trooperRecolor && trooperRecolor.Recolors != null) {

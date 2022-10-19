@@ -1994,6 +1994,53 @@
 												<ActiveSource Name="itesatta_01" ID="{C1A69381-E1D2-489D-AF24-F99C6EF3EC39}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="itesatta_02" ID="{D0858A84-2DED-472E-857F-E764C610556E}" ShortID="117671486">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{76FFDD17-5AD3-423B-9380-5D7A0EFB224C}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="202"/>
+																	<Property Name="Min" Type="Real64" Value="-177"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="itesatta_02" ID="{F06B16CA-00B9-4583-B55B-A9C3BC778A19}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>itesatta_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="993273243"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="itesatta_02" ID="{F06B16CA-00B9-4583-B55B-A9C3BC778A19}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</Folder>
 								<Folder Name="Desolator" ID="{1F6C6A0E-A229-4A2A-8509-1828B055350F}" ShortID="1065647325">

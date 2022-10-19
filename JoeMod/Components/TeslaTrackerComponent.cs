@@ -1,146 +1,31 @@
-﻿using Modules.Survivors;
-using RoR2;
-using System;
+﻿using RoR2;
 using UnityEngine;
-using UnityEngine.UI;
 
 
-[RequireComponent(typeof(CharacterBody))]
 [RequireComponent(typeof(InputBankTest))]
-[RequireComponent(typeof(TeamComponent))]
 public class TeslaTrackerComponent : MonoBehaviour {
-    
-    public enum RangeTier {
-        CLOSEST,
-        MIDDLE,
-        FURTHEST
-    }
 
-    public enum TargetType {
-        DEFAULT,
-        EMPOWERED,
-        ALLY
-    }
+    public delegate void OnSearchEvent();
+    public OnSearchEvent SearchEvent;
 
     public static float maxTrackingDistance = 50f;
-    public static float nearTrackingDistance = 16;
-    public static float mediumTrackingDistance = 28f;
-
     //public float maxTrackingAngle = 15f;
-    public float trackingRadius = 1f;
+    public float trackingRadiusZap = 1f;
+    public float trackingRadiusDash = 3f;
     public float trackerUpdateFrequency = 16f;
 
-    private CharacterBody characterBody;
-    private TeamComponent teamComponent;
+    public HurtBox trackingTargetZap;
+    public HurtBox trackingTargetDash;
+
     private InputBankTest inputBank;
-    private TeslaTowerControllerController towerControllerComponent;
 
-    private TeslaIndicator indicator;
-    
     private float trackerUpdateStopwatch;
-
-    private HealthComponent _towerTargetHealthComponent;
-    private HurtBox _trackingTarget;
-    private bool _targetingAlly;
-    private bool _hasTowerNear;
-    private bool _empowered;
-    private bool _isMelee;
-
-    void Awake() {
-        indicator = new TeslaIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);
-        teamComponent = GetComponent<TeamComponent>();
-        towerControllerComponent = GetComponent<TeslaTowerControllerController>();
-    }
     
     void Start() {
-        characterBody = base.GetComponent<CharacterBody>();
         inputBank = base.GetComponent<InputBankTest>();
-        teamComponent = base.GetComponent<TeamComponent>();
-
-        characterBody.skillLocator.primary.onSkillChanged += Primary_onSkillChanged;
-
-        Primary_onSkillChanged(characterBody.skillLocator.primary);
     }
-
-    private void Primary_onSkillChanged(GenericSkill genericSkill) {
-
-        _isMelee = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_PUNCH_NAME";
-    }
-
-    #region access
-
-    public HurtBox GetTowerTrackingTarget() {
-        if (_targetingAlly)
-            return null;
-        if (!_hasTowerNear)
-            return null;
-
-        return _trackingTarget?.hurtBoxGroup.mainHurtBox;
-    }
-
-    public HurtBox GetTrackingTarget() {
-        return _trackingTarget;
-    }
-
-    public bool GetIsTargetingTeammate() {
-        return _targetingAlly;
-    }
-
-    public RangeTier GetTrackingTargetDistance() {
-
-        RangeTier range = RangeTier.FURTHEST;
-
-        float dist = Vector3.Distance(_trackingTarget.transform.position, transform.position);
-
-        if (dist > mediumTrackingDistance) {
-            range = RangeTier.FURTHEST;
-        }
-        if (dist < mediumTrackingDistance) {
-            range = RangeTier.MIDDLE;
-        }
-        if (dist < nearTrackingDistance) {
-            range = RangeTier.CLOSEST;
-        }
-
-        return range;
-    }
-
-    #endregion access
-
-    #region indicator
-
-    public void SetTowerLockedTarget(HealthComponent healthComponent) {
-        _towerTargetHealthComponent = healthComponent;
-    }
-
-    public void SetIndicatorEmpowered(bool empowered) {
-        indicator.empowered = empowered;
-        _empowered = empowered;
-    }
-
-    private void setIndicatorRange(RangeTier tier) {
-        indicator.currentRange = tier;
-    }
-    private void setIndicatorAlly() {
-        indicator.targetingAlly = _targetingAlly;
-    }
-
-    private void setIndicatorTower(bool hasTower) {
-        indicator.towerIsTargeting = hasTower;
-    }
-
-    private void OnEnable() {
-        indicator.active = true;
-    }
-    private void OnDisable() {
-        indicator.active = false;
-    }
-
-    #endregion indicator
 
     private void FixedUpdate() {
-
-        indicator.active = !(_isMelee && !_empowered);
 
         trackerUpdateStopwatch += Time.fixedDeltaTime;
         if (trackerUpdateStopwatch >= 1f / trackerUpdateFrequency) {
@@ -154,45 +39,13 @@ public class TeslaTrackerComponent : MonoBehaviour {
         Ray aimRay = new Ray(inputBank.aimOrigin, inputBank.aimDirection);
 
         FindTrackingTarget(aimRay);
-        setIsTargetingTeammate();
-        
-
-        if (_trackingTarget) {
-            setIndicatorRange(GetTrackingTargetDistance());
-        }
 
         ZappableTower zappableTower;
-        if (_trackingTarget && _trackingTarget.hurtBoxGroup.TryGetComponent<ZappableTower>(out zappableTower)) {
-            _trackingTarget = zappableTower.MainHurtbox;
+        if (trackingTargetZap && trackingTargetZap.hurtBoxGroup.TryGetComponent<ZappableTower>(out zappableTower)) {
+            trackingTargetZap = zappableTower.MainHurtbox;
         }
 
-        indicator.targetTransform = (_trackingTarget ? _trackingTarget.transform : null);
-        
-        if(Modules.Config.TowerTargeting.Value)
-            setIsTowerTargeting();
-    }
-    
-    private void setIsTowerTargeting() {
-
-        bool hasTarget = _towerTargetHealthComponent && _trackingTarget && _towerTargetHealthComponent == _trackingTarget.healthComponent;
-
-        if (_towerTargetHealthComponent) {
-            setIndicatorTower(hasTarget);
-            return;
-        }
-
-        _hasTowerNear = towerControllerComponent.GetNearestTower();
-        setIndicatorTower(_hasTowerNear);
-    }
-
-    private void setIsTargetingTeammate() {
-        bool targetingFriendlyFire = false;
-        if (_trackingTarget) {
-            targetingFriendlyFire = !FriendlyFireManager.ShouldDirectHitProceed(_trackingTarget.healthComponent, teamComponent.teamIndex);// _trackingTarget.teamIndex == teamComponent.teamIndex;
-        }
-        
-        _targetingAlly = targetingFriendlyFire;
-        setIndicatorAlly();
+        SearchEvent?.Invoke();
     }
 
     #region search
@@ -201,78 +54,103 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         bool found = SearchForTargetPoint(aimRay);
         if (!found)
-            found = SearchForTargetSphere(aimRay);
+            found = SearchForTargetSphere(aimRay, trackingRadiusZap);
+
+        if (!trackingTargetDash) {
+            SearchForDashTarget(aimRay, trackingRadiusDash);
+        }
         //if(!found) searchfortargetbiggersphereinthedistance(aimray)
         return found;
     }
 
     private bool SearchForTargetPoint(Ray aimRay) {
 
-        RaycastHit hitinfo;
-        Util.CharacterRaycast(gameObject, aimRay, out hitinfo, maxTrackingDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal);
-
-        _trackingTarget = hitinfo.collider?.GetComponent<HurtBox>();
-
-        return _trackingTarget;
+        return CharacterRaycast(gameObject, aimRay, out trackingTargetZap, out trackingTargetDash, maxTrackingDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal);
     }
 
-    private bool SearchForTargetSphere(Ray aimRay) {
+    private bool SearchForTargetSphere(Ray aimRay, float radius) {
 
-        RaycastHit hitinfo;
-        Util.CharacterSpherecast(gameObject, aimRay, trackingRadius, out hitinfo, maxTrackingDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal);
+        return CharacterSpherecast(gameObject, aimRay, radius, out trackingTargetZap, out trackingTargetDash, maxTrackingDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal);
+    }
 
-        _trackingTarget = hitinfo.collider?.GetComponent<HurtBox>();
-        return _trackingTarget;
+    private bool SearchForDashTarget(Ray aimRay, float radius) {
+
+        return CharacterSpherecast(gameObject, aimRay, radius, out _, out trackingTargetDash, maxTrackingDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal);
     }
 
     #endregion search
 
-    public class TeslaIndicator : Indicator {
+    #region hurtbox raycast
 
-        public RangeTier currentRange = RangeTier.FURTHEST;
+    // Token: 0x06003E56 RID: 15958 RVA: 0x00101B5C File Offset: 0x000FFD5C
+    public static bool CharacterRaycast(GameObject bodyObject, Ray ray, out HurtBox zapHit, out HurtBox dashHit, float maxDistance, LayerMask layerMask, QueryTriggerInteraction queryTriggerInteraction) {
+        RaycastHit[] hits = Physics.RaycastAll(ray, maxDistance, layerMask, queryTriggerInteraction);
+        return HandleCharacterPhysicsCastResults(bodyObject, ray, queryTriggerInteraction, hits, out zapHit, out dashHit);
+    }
 
-        public bool empowered;
-        public bool targetingAlly;
-        public bool towerIsTargeting;
+    // Token: 0x06003E57 RID: 15959 RVA: 0x00101B84 File Offset: 0x000FFD84
+    public static bool CharacterSpherecast(GameObject bodyObject, Ray ray, float radius, out HurtBox zapHit, out HurtBox dashHit, float maxDistance, LayerMask layerMask, QueryTriggerInteraction queryTriggerInteraction) {
+        RaycastHit[] hits = Physics.SphereCastAll(ray, radius, maxDistance, layerMask, queryTriggerInteraction);
+        return HandleCharacterPhysicsCastResults(bodyObject, ray, queryTriggerInteraction, hits, out zapHit, out dashHit);
+    }
 
-        public TeslaIndicator(GameObject owner, GameObject visualizerPrefab) : base(owner, visualizerPrefab) { }
+    // Token: 0x06003E55 RID: 15957 RVA: 0x00101AA8 File Offset: 0x000FFCA8
+    private static bool HandleCharacterPhysicsCastResults(GameObject bodyObject, Ray ray, QueryTriggerInteraction queryTriggerInteraction, RaycastHit[] hits, out HurtBox zapHit, out HurtBox dashHit) {
 
-        public override void UpdateVisualizer() {
-            base.UpdateVisualizer();
+        zapHit = null;
+        dashHit = null;
 
-            if (visualizerTransform) {
+        float shortestDashDistance = float.PositiveInfinity;
+        float shortestZapDistance = float.PositiveInfinity;
 
-                TeslaIndicatorView indicatorView = visualizerTransform.GetComponent<TeslaIndicatorView>();
+        for (int i = 0; i < hits.Length; i++) {
 
-                //color
-                TargetType currentTarget = TargetType.DEFAULT;
+            HurtBox hurtBox = hits[i].collider.GetComponent<HurtBox>();
+            if (hurtBox) {
 
-                if (empowered) {
-                    currentTarget = TargetType.EMPOWERED;
-                } else if (targetingAlly) {
-                    currentTarget = TargetType.ALLY;
+                bool isTower = hurtBox.hurtBoxGroup.GetComponent<ZappableTower>();
+
+                //cast a line to see if it is interrupted by world
+                //however the tesla tower is also world so exclude that
+                if (!isTower) {
+                    bool lineOfSightBlocked = Physics.Linecast(ray.origin, hits[i].point, LayerIndex.world.mask, queryTriggerInteraction);
+                    if (lineOfSightBlocked)
+                        continue;
                 }
 
-                indicatorView.SetColor((int)currentTarget);
+                float distance = hits[i].distance;
+                if (distance < shortestDashDistance || distance < shortestZapDistance) {
 
-                //sprite
-                switch (currentTarget) {
+                    HealthComponent healthComponent = hurtBox.healthComponent;
+                    if (healthComponent && healthComponent.gameObject == bodyObject) {
+                        continue;
+                    }
 
-                    default:
-                    case TargetType.DEFAULT:
-                        indicatorView.SetSpriteRange((int)currentRange);
-                        break;
-                    case TargetType.EMPOWERED:
-                        indicatorView.SetSpriteTower();
-                        break;
-                    case TargetType.ALLY:
-                        indicatorView.SetSpriteAlly();
-                        break;
+                    if (distance < shortestZapDistance) {
+                        zapHit = hurtBox;
+                        shortestZapDistance = distance;
+                    }
+
+                    if (distance < shortestDashDistance) {
+                        if (!hurtBox.healthComponent.body.HasBuff(Modules.Buffs.blinkCooldownBuff)) {
+                            dashHit = hurtBox;
+                            shortestDashDistance = distance;
+                        }
+                    }
+
+                } else {
+                    continue;
                 }
-
-                //tower indicator
-                indicatorView.SetTowerSprite(!targetingAlly && towerIsTargeting);
             }
         }
+
+        if (zapHit == null && dashHit == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
+
+    #endregion hurtbox raycast
+
 }

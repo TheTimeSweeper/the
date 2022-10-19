@@ -5,10 +5,9 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Desolator {
 
-
     public class AimBigRadBeam : AimThrowableBase {
 
-        public static float BlastDamageCoefficient = 4f;
+        public static float BlastDamageCoefficient = 3.2f;
         public static float PoolDamageCoefficient = 0.2f;
         public static float DotZoneLifetime = 4;
         public static float BaseAttackRadius = 10;
@@ -100,6 +99,10 @@ namespace ModdedEntityStates.Desolator {
         }
         public override InterruptPriority GetMinimumInterruptPriority() {
             return InterruptPriority.PrioritySkill;
+        }
+
+        public override EntityState PickNextState() {
+            return new WindDownState(0.8f);
         }
     }
 }

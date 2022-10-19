@@ -48,6 +48,20 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`1.3.0`
+ - added rig for EmoteAPI. happy now?
+ - freed alt Util from cursed config and added as a proper skill variant
+   - improved reticle targeting, separate from m1 targeting
+   - icon and sound
+   - unlockable by achievement
+   - *haven't tested much in multiplayer but I'm pretty sure it should work fine?*
+ - added additional property for scepter: tower now zaps multiple enemies at once
+   - *kept multiple towers by the rule of cool*
+   - *it's probably way overtuned now, so I'll maybe dial it back in the future. for now, have fun c:*
+ - finally fixed malachite aspect destroying his and his towers' bones
+ - adjusted m1 reticle to help more clearly read the 3 different tiers of range
+ - added secret beta config
+
 `1.2.1`
  - fixed conflict with ttgl mod and vrapi
 
@@ -80,7 +94,7 @@ ___
 - Added proper Mastery skin, complete with a unique tower
   - *thanks Mr.Bones!*
 - Added Scepter Upgrade
-  - *but by accident I did exactly lysate cell, so I'm open to any better ideas*
+  - ~~*but by accident I did exactly lysate cell, so I'm open to any better ideas*~~
 - Limited lysate cell to 1 additional tower, similar to engi
   - *stacking simultaneous towers turned out way too strong for a green rarity item*  
   - *truthfully it should be 0 but I want the opportunity for multiple towers in some capacity*  

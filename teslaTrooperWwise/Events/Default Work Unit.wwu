@@ -329,20 +329,6 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}">
-									<ChildrenList>
-										<Action Name="" ID="{B31162EF-3B48-4212-AF8E-F81E352D1F6A}" ShortID="325990187">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
 								<Event Name="Play_itesfeb" ID="{6F38D61D-C08F-4A02-A672-665F35F3F9A2}">
 									<ChildrenList>
 										<Action Name="" ID="{652AD93B-6947-40B8-B1F6-48453A51E591}" ShortID="353162800">
@@ -597,6 +583,34 @@
 								</Event>
 							</ChildrenList>
 						</Folder>
+						<Event Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}">
+							<ChildrenList>
+								<Action Name="" ID="{B31162EF-3B48-4212-AF8E-F81E352D1F6A}" ShortID="325990187">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_trooper_blink" ID="{55A35621-870F-4C7A-B18A-41F1403C14DC}">
+							<ChildrenList>
+								<Action Name="" ID="{E0515A56-AC3E-4C48-A726-D12B0791BF00}" ShortID="712370215">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="itesatta_02" ID="{D0858A84-2DED-472E-857F-E764C610556E}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Desolator" ID="{5F9071F2-7074-4763-B291-CBD1D0BF2C19}" ShortID="582821650">

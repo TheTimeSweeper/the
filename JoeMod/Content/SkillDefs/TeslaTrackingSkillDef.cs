@@ -8,12 +8,12 @@ namespace JoeMod {
 
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {
             return new TeslaTrackingSkillDef.InstanceData {
-                teslaTracker = skillSlot.GetComponent<TeslaTrackerComponent>()
+                teslaTracker = skillSlot.GetComponent<TeslaTrackerComponentZap>()
             };
         }
 
         private static bool HasTarget([NotNull] GenericSkill skillSlot) {
-            TeslaTrackerComponent teslaTracker = ((TeslaTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).teslaTracker;
+            TeslaTrackerComponentZap teslaTracker = ((TeslaTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).teslaTracker;
             return teslaTracker != null && teslaTracker.GetTrackingTarget();
         }
 
@@ -27,7 +27,7 @@ namespace JoeMod {
 
         protected class InstanceData : SkillDef.BaseSkillInstanceData {
 
-            public TeslaTrackerComponent teslaTracker;
+            public TeslaTrackerComponentZap teslaTracker;
         }
     }
 }

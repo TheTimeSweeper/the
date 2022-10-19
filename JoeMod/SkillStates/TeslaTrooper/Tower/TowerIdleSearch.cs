@@ -16,7 +16,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         private LightningOrb _lightningOrb;
         private HurtBox _lightningTarget;
 
-        private TeslaTrackerComponent ownerTrackerComponent;
+        private TeslaTrackerComponentZap ownerTrackerComponent;
 
         private float currentZapInterval;
         public bool justSpawned;

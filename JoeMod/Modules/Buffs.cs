@@ -20,6 +20,9 @@ namespace Modules {
         public static BuffDef desolatorArmorShredDeBuff;
         public static BuffDef desolatorDotDeBuff;
 
+        //Aliem
+        public static BuffDef riddenBuff;
+
         public static void RegisterBuffs() {
             zapShieldBuff =
                 AddNewBuff("Tesla Barrier",
@@ -77,6 +80,14 @@ namespace Modules {
                            LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
                            lime,
                            true,
+                           true);
+
+            //Aliem
+            riddenBuff =
+                AddNewBuff("RiddenByAliem",
+                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
+                           Color.red,
+                           false,
                            true);
         }
 

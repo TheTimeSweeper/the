@@ -8,6 +8,7 @@ namespace JoeMod {
     public class HarmlessBuffOrb : Orb{
 
         public BuffDef buffToApply;
+		public float bufftime = -1;
 		public ModdedLightningType moddedLightningType = ModdedLightningType.Ukulele;
         public float speed = -1;
 
@@ -60,7 +61,12 @@ namespace JoeMod {
 
         public override void OnArrival() {
             if (target && buffToApply) {
-                target.healthComponent.body.AddBuff(buffToApply);
+				if (bufftime == -1) {
+					target.healthComponent.body.AddBuff(buffToApply);
+				}
+				else {
+					target.healthComponent.body.AddTimedBuff(buffToApply, bufftime);
+				}
             }
         }
     }

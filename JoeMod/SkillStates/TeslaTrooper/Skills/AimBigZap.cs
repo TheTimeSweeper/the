@@ -11,7 +11,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public float skillsPlusMulti = 1;
 
         private TeslaTowerControllerController coilController;
-        private TeslaTrackerComponent tracker;
+        private TeslaTrackerComponentZap tracker;
 
         private bool showingEmpowered;
         protected bool castSuccessful;
@@ -21,11 +21,11 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void OnEnter() {
 
             coilController = GetComponent<TeslaTowerControllerController>();
-            tracker = GetComponent<TeslaTrackerComponent>();
+            tracker = GetComponent<TeslaTrackerComponentZap>();
 
             //excuse old enforcer code
             EntityStates.Toolbot.AimStunDrone goodState = new EntityStates.Toolbot.AimStunDrone();
-            arcVisualizerPrefab = goodState.arcVisualizerPrefab;
+            //arcVisualizerPrefab = goodState.arcVisualizerPrefab;
             projectilePrefab = goodState.projectilePrefab;// EnforcerPlugin.EnforcerModPlugin.tearGasProjectilePrefab;
             endpointVisualizerPrefab = goodState.endpointVisualizerPrefab;
             endpointVisualizerRadiusScale = BigZap.BaseAttackRadius;
@@ -35,7 +35,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
             //this.projectileBaseSpeed = 80;
-
+            
             base.OnEnter();
             Util.PlaySound(EnterSoundString, gameObject);
 

@@ -20,6 +20,9 @@ namespace Modules {
         public static DamageAPI.ModdedDamageType DesolatorArmorShred;
         public static DamageAPI.ModdedDamageType DesolatorDot;
 
+        //Aliem
+        public static DamageAPI.ModdedDamageType ApplyAliemRiddenBuff;
+
         public static void RegisterDamageTypes() {
 
             StunLong = DamageAPI.ReserveDamageType();
@@ -31,6 +34,9 @@ namespace Modules {
 
             DesolatorArmorShred = DamageAPI.ReserveDamageType();
             DesolatorDot = DamageAPI.ReserveDamageType();
+
+            //Aliem
+            ApplyAliemRiddenBuff = DamageAPI.ReserveDamageType();
 
             SetHooks();
         }

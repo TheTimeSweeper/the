@@ -1,6 +1,4 @@
-﻿using Modules;
-
-namespace Modules.Achievements {
+﻿namespace Modules.Achievements {
 
     public class TeslaTrooperMastery : BaseMasteryUnlockable {
         public override string RequiredCharacterBody => "TeslaTrooperBody";

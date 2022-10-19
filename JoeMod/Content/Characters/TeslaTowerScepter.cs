@@ -119,6 +119,7 @@ namespace Modules.Survivors {
 
             #region Nod
             TowerSkinDef scepterNod = Skins.DuplicateScepterSkinDef(skinController.skins[2] as TowerSkinDef);
+            scepterNod.ZapLightningType = (skinController.skins[2] as TowerSkinDef).ZapLightningType;
 
             scepterNod.meshReplacements = Modules.Skins.getMeshReplacements(scepterNod.rendererInfos,
                 null,//"Nod_Base_Pillars_Color_Scepter",

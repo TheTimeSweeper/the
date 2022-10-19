@@ -9,7 +9,7 @@ namespace JoeMod {
 
         protected class InstanceData : SkillDef.BaseSkillInstanceData {
 
-            public TeslaTrackerComponent teslaTracker;
+            public TeslaTrackerComponentDash teslaTracker;
 
             public float timeoutTimer;
             public bool hasExtraStock;
@@ -20,13 +20,13 @@ namespace JoeMod {
 
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {
             return new TeslaTrackingResettingSkillDef.InstanceData {
-                teslaTracker = skillSlot.GetComponent<TeslaTrackerComponent>()
+                teslaTracker = skillSlot.GetComponent<TeslaTrackerComponentDash>()
             };
         }
 
         private static bool HasTarget([NotNull] GenericSkill skillSlot) {
 
-            TeslaTrackerComponent teslaTracker = ((InstanceData)skillSlot.skillInstanceData).teslaTracker;
+            TeslaTrackerComponentDash teslaTracker = ((InstanceData)skillSlot.skillInstanceData).teslaTracker;
             HurtBox trackingTarget = teslaTracker?.GetTrackingTarget();
 
             return trackingTarget != null;
@@ -42,7 +42,7 @@ namespace JoeMod {
 
         private static bool IsTargetCooldown([NotNull] GenericSkill skillSlot) {
 
-            TeslaTrackerComponent teslaTracker = ((InstanceData)skillSlot.skillInstanceData).teslaTracker;
+            TeslaTrackerComponentDash teslaTracker = ((InstanceData)skillSlot.skillInstanceData).teslaTracker;
             HurtBox trackingTarget = teslaTracker?.GetTrackingTarget();
 
             return trackingTarget != null && trackingTarget.healthComponent.body.HasBuff(Modules.Buffs.blinkCooldownBuff);
@@ -65,6 +65,8 @@ namespace JoeMod {
         public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {
             base.OnFixedUpdate(skillSlot);
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
+
+            ((InstanceData)skillSlot.skillInstanceData).teslaTracker.SetIsReady(IsReady(skillSlot));
 
             instanceData.timeoutTimer -= Time.fixedDeltaTime;
             if (instanceData.timeoutTimer <= 0f && instanceData.hasExtraStock) {

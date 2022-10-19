@@ -12,6 +12,8 @@ using System.Runtime.CompilerServices;
 using JoeMod;
 using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
+using ModdedEntityStates.Aliem;
+using Modules.Achievements;
 
 namespace Modules.Survivors {
 
@@ -54,12 +56,16 @@ namespace Modules.Survivors {
         public override UnlockableDef characterUnlockableDef => null;
 
         public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
-
+        #region unlock
         private static UnlockableDef masterySkinUnlockableDef;
         private static UnlockableDef grandMasterySkinUnlockableDef;
+
+        private static UnlockableDef utilityUnlockableDef;
+
         public static UnlockableDef recolorsUnlockableDef = null;
+        #endregion unlock
         #endregion
-        
+
         #region cool stuff
         public static float conductiveAllyBoost = 1.3f;
 
@@ -76,6 +82,9 @@ namespace Modules.Survivors {
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
             bodyPrefab.AddComponent<TeslaTrackerComponent>();
+            bodyPrefab.AddComponent<TeslaTrackerComponentZap>();
+            bodyPrefab.AddComponent<TeslaTrackerComponentDash>();
+
             bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
             bodyPrefab.AddComponent<TeslaZapBarrierController>();
@@ -130,8 +139,9 @@ namespace Modules.Survivors {
         }
 
         public override void InitializeUnlockables() {
-            masterySkinUnlockableDef = UnlockableAPI.AddUnlockable<Achievements.TeslaTrooperMastery>();
-            grandMasterySkinUnlockableDef = UnlockableAPI.AddUnlockable<Achievements.TeslaTrooperGrandMastery>();
+            masterySkinUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperMastery>();
+            grandMasterySkinUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperGrandMastery>();
+            utilityUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperTowerBigZapAchievement>(typeof(TeslaTrooperTowerBigZapAchievement.TeslaTrooperTowerBigZapServerAchievement));
         }
 
         public override void InitializeDoppelganger(string clone) {
@@ -274,7 +284,7 @@ namespace Modules.Survivors {
                 skillName = "Tesla_Utility_BlinkZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BLINK_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "UTILITY_BLINK_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtilityAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(BlinkZap)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -291,15 +301,43 @@ namespace Modules.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
+                keywordTokens = new string[] { "KEYWORD_STUNNING" }
             });
-            blinkZapSkillDef.refreshedIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtilityBak");
+            blinkZapSkillDef.refreshedIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtilityAltRecast");
             blinkZapSkillDef.timeoutDuration = 3;
 
-            Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef);
-            if (Config.Cursed) {
-                Modules.Skills.AddUtilitySkills(bodyPrefab, blinkZapSkillDef);
-            }
+            Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef, blinkZapSkillDef);
+            Modules.Skills.AddUnlockablesToFamily(bodyPrefab.GetComponent<SkillLocator>().utility.skillFamily, null, utilityUnlockableDef);
+
+            //aliem
+            States.entityStates.Add(typeof(AliemCharacterMain));
+            States.entityStates.Add(typeof(AliemLeap));
+            States.entityStates.Add(typeof(AliemRidingChomp));
+            States.entityStates.Add(typeof(AliemRidingState));
+            SkillDef leapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Tesla_Utility_ShieldZap",
+                skillNameToken = TESLA_PREFIX + "Aliem Leap",
+                skillDescriptionToken = TESLA_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AliemLeap)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
+            //Modules.Skills.AddUtilitySkills(bodyPrefab, leapSkillDef);
         }
 
         private void InitializeSpecialSkills() {

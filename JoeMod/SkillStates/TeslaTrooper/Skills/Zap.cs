@@ -30,7 +30,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         private bool _crit;
 
         private TeslaWeaponComponent _weaponComponent;
-        private TeslaTrackerComponent _tracker;
+        private TeslaTrackerComponentZap _tracker;
         private HurtBox _targetHurtbox;
         private bool _attackingTeammate;
         
@@ -116,7 +116,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             _weaponComponent = GetComponent<TeslaWeaponComponent>();
 
-            _tracker = GetComponent<TeslaTrackerComponent>();
+            _tracker = GetComponent<TeslaTrackerComponentZap>();
 
             _muzzleTransform = Modules.VRCompat.GetModelChildLocator(this).FindChild("MuzzleGauntlet");
             if (_muzzleTransform == null)
@@ -136,13 +136,13 @@ namespace ModdedEntityStates.TeslaTrooper {
                     
                     switch (_tracker.GetTrackingTargetDistance()) {
                         default:
-                        case TeslaTrackerComponent.RangeTier.FURTHEST:
+                        case TeslaTrackerComponentZap.RangeTier.FURTHEST:
                             totalOrbCasts = OrbCasts - 2 + Mathf.RoundToInt(skillsPlusCasts * 0.334f);
                             break;
-                        case TeslaTrackerComponent.RangeTier.MIDDLE:
+                        case TeslaTrackerComponentZap.RangeTier.MIDDLE:
                             totalOrbCasts = OrbCasts - 1 + Mathf.RoundToInt(skillsPlusCasts * 0.667f);
                             break;
-                        case TeslaTrackerComponent.RangeTier.CLOSEST:
+                        case TeslaTrackerComponentZap.RangeTier.CLOSEST:
                             totalOrbCasts = OrbCasts + skillsPlusCasts;
                             break;
                     }

@@ -18,18 +18,18 @@ TagManager:
   - Pickups
   - World
   - EntityPrecise
-  - Debirs
+  - Debris
   - Projectile
   - CollideWithCharacterHullOnly
-  - 
+  - ManualRender
   - Ragdoll
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NoDraw
+  - PrefabBrush
+  - PostProcess
+  - UI, WorldSpace
+  - PlayerBody
+  - EnemyBody
+  - TriggerZone
   - 
   - 
   - 

@@ -40,7 +40,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                                                       
             if (controller && controller.coilReady && base.isAuthority) {
                 //client will find the commandtarget and serialize it
-                commandTarget = GetComponent<TeslaTrackerComponent>()?.GetTrackingTarget();
+                commandTarget = GetComponent<TeslaTrackerComponentZap>()?.GetTrackingTarget();
             }
 
             //server will deserialize a commandTarget from the client

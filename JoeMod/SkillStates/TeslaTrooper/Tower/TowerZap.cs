@@ -74,7 +74,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             lightningOrb.target = lightningTarget;
             
             Util.PlaySound(PrepSound, gameObject);
-            PlayAnimation("weapon", "PrepZap", "prep.playbackRate", base.duration);
+            PlayCrossfade("weapon", "PrepZap", "prep.playbackRate", base.duration, 0.1f);
         }
 
         public override void FixedUpdate() {
@@ -83,7 +83,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             if (lightningTarget == null && !hasFired) {
                 //attaching a tracker to the tower for playing as the tower
                 //or for future proper ai
-                TeslaTrackerComponent tracker = GetComponent<TeslaTrackerComponent>();
+                TeslaTrackerComponentZap tracker = GetComponent<TeslaTrackerComponentZap>();
                 if (tracker) {
                     lightningTarget = tracker.GetTrackingTarget();
                 }

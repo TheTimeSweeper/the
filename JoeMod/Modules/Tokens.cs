@@ -168,7 +168,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Joe passive");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
-
+            
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_NAME", "Tesla Gauntlet");
 
@@ -198,7 +198,7 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "UTILITY_BLINK_NAME", "Surging Forward");
             LanguageAPI.Add(prefix + "UTILITY_BLINK_DESCRIPTION",
-                $"Become a bolt of electricity and surge toward a targeted Enemy, dealing {Helpers.DamageValueText(BlinkZap.DamageCoefficient)}. Can be casted again within a short window. Cannot target the same enemy twice.");
+                $"{Helpers.UtilityText("Stunning.")} Become a {Helpers.UtilityText("bolt of electricity")} and surge toward a targeted enemy, dealing {Helpers.DamageValueText(BlinkZap.DamageCoefficient)}. {Helpers.DamageText("Can be casted again")} within a short window. Cannot target the same enemy twice.");
 
             #endregion
 
@@ -234,6 +234,10 @@ namespace Modules
             LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Grand Mastery");
             LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Typhoon or Eclipse.\n<color=#8888>(Counts any difficulty Typhoon or higher)</color>");
             LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Grand Mastery");
+
+            LanguageAPI.Add(prefix + "BIGZAPUNLOCKABLE_ACHIEVEMENT_NAME", $"Big Zap");
+            LanguageAPI.Add(prefix + "BIGZAPUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, command your Tesla Tower to use 2000 Volts on 10 enemies at once");
+            LanguageAPI.Add(prefix + "BIGZAPUNLOCKABLE_UNLOCKABLE_NAME", $"Big Zap");
 
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"some unlock");
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"hopefully not something boring like grab tesla coil and royal capacitor... ok repair a tesla coil with a tesla coil that would be pretty cool, but also shiny hunting kinda.");
@@ -360,7 +364,7 @@ namespace Modules
             //default
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_NAME", "Spread the Doom");
             string specialDesc =
-                $"<style=cIsHealing>Irradiating</style>. Deploy your Rad-Cannon into the ground. {Helpers.UtilityText($"Every 3 seconds")}, pump a pool of radiation that lasts for {Helpers.UtilityText($"7 seconds")}, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
+                $"<style=cIsHealing>Irradiating</style>. Deploy your Rad-Cannon into the ground. Gain {Helpers.UtilityText($"barrier")} for each enemy nearby. {Helpers.UtilityText($"Every 3 seconds")}, pump a pool of radiation that lasts for {Helpers.UtilityText($"7 seconds")}, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "Here Comes the Sun");

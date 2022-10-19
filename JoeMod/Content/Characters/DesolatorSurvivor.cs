@@ -50,7 +50,7 @@ namespace Modules.Survivors {
 
         public override Type characterMainState => typeof(DesolatorMain);
 
-        public override ItemDisplaysBase itemDisplays => TeslaTrooperSurvivor.instance.itemDisplays;
+        public override ItemDisplaysBase itemDisplays => new DesolatorItemDisplays();
 
         public override UnlockableDef characterUnlockableDef => null;
         private static UnlockableDef masterySkinUnlockableDef;
@@ -60,9 +60,9 @@ namespace Modules.Survivors {
 
         public static SkillDef cancelDeploySkillDef;
 
-        public static float DotDamage = 0.12f;
+        public static float DotDamage = 0.10f;
         public static float DotInterval = 0.5f;
-        public static float DotDuration = 6f;
+        public static float DotDuration = 8f;
 
         public override void Initialize() {
             instance = this;
@@ -171,7 +171,7 @@ namespace Modules.Survivors {
                     activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigRadBeam)),
                     activationStateMachineName = "Weapon",
                     baseMaxStock = 1,
-                    baseRechargeInterval = 6f,
+                    baseRechargeInterval = 8f,
                     beginSkillCooldownOnSkillEnd = true,
                     canceledFromSprinting = false,
                     forceSprintDuringState = false,
@@ -402,9 +402,10 @@ namespace Modules.Survivors {
         private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
 
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorArmorShred)) {
-                if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 3) {
-                    damageReport.victimBody.AddBuff(Buffs.desolatorArmorShredDeBuff);
-                }
+            //    if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 3) {
+            //        damageReport.victimBody.AddBuff(Buffs.desolatorArmorShredDeBuff);
+            //    }
+                damageReport.victimBody.AddTimedBuff(Buffs.desolatorArmorShredDeBuff, DotDuration);
             }
 
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot)) {
