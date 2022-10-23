@@ -48,6 +48,9 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`1.3.1`
+ - fixed emoteapi rig
+
 `1.3.0`
  - added rig for EmoteAPI. happy now?
  - freed alt Util from cursed config and added as a proper skill variant

@@ -1,5 +1,4 @@
 ﻿using EntityStates;
-using ModdedEntityStates.BaseStates;
 using RoR2;
 
 namespace ModdedEntityStates.Aliem {

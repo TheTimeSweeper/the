@@ -12,7 +12,6 @@ using System.Runtime.CompilerServices;
 using JoeMod;
 using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
-using ModdedEntityStates.Aliem;
 using Modules.Achievements;
 
 namespace Modules.Survivors {
@@ -308,36 +307,6 @@ namespace Modules.Survivors {
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef, blinkZapSkillDef);
             Modules.Skills.AddUnlockablesToFamily(bodyPrefab.GetComponent<SkillLocator>().utility.skillFamily, null, utilityUnlockableDef);
-
-            //aliem
-            States.entityStates.Add(typeof(AliemCharacterMain));
-            States.entityStates.Add(typeof(AliemLeap));
-            States.entityStates.Add(typeof(AliemRidingChomp));
-            States.entityStates.Add(typeof(AliemRidingState));
-            SkillDef leapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = "Tesla_Utility_ShieldZap",
-                skillNameToken = TESLA_PREFIX + "Aliem Leap",
-                skillDescriptionToken = TESLA_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillUtility"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(AliemLeap)),
-                activationStateMachineName = "Body",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            //Modules.Skills.AddUtilitySkills(bodyPrefab, leapSkillDef);
         }
 
         private void InitializeSpecialSkills() {

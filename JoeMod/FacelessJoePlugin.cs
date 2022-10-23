@@ -40,11 +40,11 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.3.0";
+    public const string MODVERSION = "1.3.1";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
-
+    
     public static FacelessJoePlugin instance;
     public static ManualLogSource Log;
 
@@ -56,7 +56,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         Logger.LogInfo("[Initializing Tesla Trooper]");
 
         instance = this;
-
+        
         Log = Logger;
 
         Modules.DamageTypes.RegisterDamageTypes();

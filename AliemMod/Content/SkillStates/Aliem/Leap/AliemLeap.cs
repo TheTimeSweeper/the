@@ -7,85 +7,6 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Aliem {
 
-	public class AliemCharacterMain : GenericCharacterMain {
-
-		public bool wasRiding = false;
-
-        public override void OnEnter() {
-            base.OnEnter();
-
-			if (wasRiding && base.isAuthority) {
-
-				GenericCharacterMain.ApplyJumpVelocity(base.characterMotor, base.characterBody, 1, 1, false);
-			}
-        }
-    }
-
-	public class AliemRidingState : BaseRidingState {
-
-		public override void FixedUpdate() {
-			base.FixedUpdate();
-
-			if (inputBank.jump.justPressed) {
-				//todo jump off
-				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
-				base.outer.SetState(new AliemCharacterMain { wasRiding = true });
-				return;
-			}
-
-			if (inputBank.skill1.justPressed) {
-				//todo chomp
-				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
-
-				AliemRidingChomp chompState = new AliemRidingChomp();
-				chompState.riddenBody = this.riddenBody;
-
-				base.outer.SetState(chompState);
-				return;
-			}
-		}
-	}
-
-    public class BaseRidingState : BaseCharacterMain {
-
-		public CharacterBody riddenBody;
-
-		public CapsuleCollider motorCollider;
-
-        public override void OnEnter() {
-            base.OnEnter();
-			riddenBody.AddBuff(Modules.Buffs.riddenBuff);
-
-            if (riddenBody.characterMotor) {
-				motorCollider = riddenBody.characterMotor.capsuleCollider;
-            }
-        }
-
-        public override void FixedUpdate() {
-            base.FixedUpdate();
-
-			if (riddenBody.healthComponent.alive) {
-
-				if (base.isAuthority && base.characterMotor) {
-
-					characterMotor.moveDirection = Vector3.zero;
-					characterMotor.velocity = Vector3.zero;
-					characterMotor.rootMotion = Vector3.zero;
-
-					Vector3 pos = riddenBody.corePosition;
-                    if (motorCollider) {
-						pos = motorCollider.transform.position + Vector3.up * motorCollider.height * 0.6f;
-                    }
-
-					characterMotor.Motor.SetPosition(pos);
-				}
-			}else {
-				base.outer.SetNextStateToMain();
-				return;
-            }
-		}
-    }
-
     public class AliemLeap : BaseCharacterMain {
 
 		public float DamageCoefficient = 2;
@@ -104,7 +25,7 @@ namespace ModdedEntityStates.Aliem {
 			HitBoxGroup hitBoxGroup = null;
 			Transform modelTransform = base.GetModelTransform();
 			if (modelTransform) {
-				hitBoxGroup = Array.Find(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "PunchHitbox");
+				hitBoxGroup = Array.Find(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup hitboxGroup) => hitboxGroup.groupName == "Leap");
 			}
 
 			overlapAttack = new OverlapAttack {
