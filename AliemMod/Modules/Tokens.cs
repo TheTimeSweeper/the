@@ -15,8 +15,7 @@ namespace Modules
 
         private static void AddAliemTokens()
         {
-            #region not henry
-            string prefix = AliemPlugin.DEV_PREFIX + "_ALIEM_BODY_";
+            string prefix = AliemMod.Content.Survivors.AliemSurvivor.ALIEM_PREFIX;
 
             string desc = "he gonna zap ya.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             //desc = desc + "< ! > goddammit jerry." + Environment.NewLine + Environment.NewLine;
@@ -37,7 +36,7 @@ namespace Modules
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
-            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
+            //LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
             #endregion
 
             #region Passive
@@ -46,31 +45,33 @@ namespace Modules
             #endregion
 
             #region Primary
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_NAME", "Ray gun");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Shoot your ray gun for X damage");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_NAME", "Ray Gun");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGun.DamageCoefficient)}");
+
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_NAME", "Ray Gun (chargeable)");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGun.DamageCoefficient)}.\nHold to charge up and fire a large blast for up to {Helpers.DamageValueText(ChargeRayGunBig.MaxDamageCoefficient)}");
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_BIGGUN_NAME", "Big gun");
-            LanguageAPI.Add(prefix + "SECONDARY_BIGGUN_DESCRIPTION", $"Shoot a charged blast from your raygun for X damage");
+            LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Ray Gun Big");
+            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Shoot a charged blast from your raygun for {Helpers.DamageValueText(RayGunBig.BaseDamage)}");
             #endregion
 
-            //#region Utility
-            //LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
-            //LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", "Leap forward, mounting on to the first hit enemy. While riding, chomp for X damage");
-            //#endregion
+            #region Utility
+            LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
+            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", $"Dive forward at hihg speed. If landing on the ground, hold to burrow, also at hihg speed. If an enemy is hit, ride them. While riding, chomp for {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}.");
+            #endregion
 
-            //#region Special
-            //LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Something Cool, I'm Sure");
-            //LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticHenryValues.bombDamageCoefficient}% damage</style>.");
-            //#endregion
+            #region Special
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_NAME", "Grenade");
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_DESCRIPTION", $"Throw a grenade for {Helpers.DamageValueText(ThrowGrenade.DamageCoefficient)}.");
+            #endregion
 
             #region Achievements
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
             #endregion
-            #endregion not henry
         }
     }
 }

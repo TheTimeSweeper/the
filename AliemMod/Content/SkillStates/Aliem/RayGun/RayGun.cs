@@ -8,14 +8,13 @@ namespace ModdedEntityStates.Aliem {
 		public static float BaseDuration = 0.3f;
 		public static float BaseDelayDuration = 0.00f;
 
-		public static float DamageCoefficient = 1f;
+		public static float DamageCoefficient = 1.6f;
 		//needs to be set in the projectilecontroller component
 		//public static float procCoefficient = 1f;
 
 		public static float ProjectilePitch = 0f;
 		
-		public static float ThrowForce = 80f;
-		public static float BoomForce = 100f;
+		public static float ProjectileForce = 80f;
 
 		public override void OnEnter() {
 
@@ -26,14 +25,14 @@ namespace ModdedEntityStates.Aliem {
 			base.baseDelayBeforeFiringProjectile = BaseDelayDuration;
 			
 			base.damageCoefficient = DamageCoefficient;
-			base.force = ThrowForce;
+			base.force = ProjectileForce;
 			//base.projectilePitchBonus = 0;
 			//min/maxSpread
 			base.recoilAmplitude = 0.1f;
 			base.bloom = 10;
 
 			//targetmuzzle
-			base.attackSoundString = "HenryBombThrow";
+			base.attackSoundString = "Play_RayGun";
 
 			ModifyState();
 
@@ -45,7 +44,7 @@ namespace ModdedEntityStates.Aliem {
         public override void FixedUpdate() {
 			base.FixedUpdate();
 		}
-
+		
 		public override InterruptPriority GetMinimumInterruptPriority() {
 			return InterruptPriority.Skill;
 		}
@@ -53,7 +52,7 @@ namespace ModdedEntityStates.Aliem {
 		public override void PlayAnimation(float duration) {
 
 			if (base.GetModelAnimator()) {
-				base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", duration);
+				base.PlayAnimation("Gesture, Override", "ShootGun", "ShootGun.playbackRate", duration);
 			}
 		}
 	}

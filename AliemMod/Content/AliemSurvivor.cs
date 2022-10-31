@@ -22,10 +22,10 @@ namespace AliemMod.Content.Survivors {
             bodyNameToken = ALIEM_PREFIX + "NAME",
             subtitleNameToken = ALIEM_PREFIX + "SUBTITLE",
 
-            characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texHenryIcon"),
+            characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texIconAliem"),
             bodyColor = Color.yellow,
 
-            crosshair = Assets.LoadCrosshair("Standard"),
+            crosshair = Assets.LoadCrosshair("Default"),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 110f,
@@ -34,23 +34,25 @@ namespace AliemMod.Content.Survivors {
 
             jumpCount = 1,
 
-            aimOriginPosition = new Vector3(0, 1.3f, 0)
+            aimOriginPosition = new Vector3(0, 0.3f, 0),
+            cameraPivotPosition = new Vector3(0, 0.8f, 0),
+
+            cameraParamsDepth = -7,
+            cameraParamsVerticalOffset = 0.6f,
+
+
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[]
         {
                 new CustomRendererInfo
                 {
-                    childName = "SwordModel",
+                    childName = "MeshBlaster",
                 },
                 new CustomRendererInfo
                 {
-                    childName = "GunModel",
+                    childName = "MeshBody",
                 },
-                new CustomRendererInfo
-                {
-                    childName = "Model",
-                }
         };
 
         public override UnlockableDef characterUnlockableDef => null;
@@ -66,53 +68,163 @@ namespace AliemMod.Content.Survivors {
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
+
+            CreateBurrowEffect();
+        }
+
+        private void CreateBurrowEffect() {
+            GameObject treebot = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/TreebotBody");
+            Transform treebotburrow = treebot.GetComponent<ModelLocator>().modelTransform.Find("BurrowCenter");
+
+            Transform aliemBurrow = bodyCharacterModel.GetComponent<ChildLocator>().FindChild("Burrow");
+
+            ParticleSystem.MainModule debrisParticles = UnityEngine.Object.Instantiate(treebotburrow.Find("ParticleLoop/Debris").gameObject, aliemBurrow, false).GetComponent<ParticleSystem>().main;
+            debrisParticles.loop = true;
+            debrisParticles.playOnAwake = true;
+
+            ParticleSystem.MainModule dustParticles = UnityEngine.Object.Instantiate(treebotburrow.Find("ParticleLoop/Dust").gameObject, aliemBurrow, false).GetComponent<ParticleSystem>().main;
+            dustParticles.loop = true;
+            dustParticles.playOnAwake = true;
+
+            aliemBurrow.gameObject.SetActive(false);
         }
 
         public override void InitializeUnlockables() {
             //uncomment this when you have a mastery skin. when you do, make sure you have an icon too
-            //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Modules.Achievements.MasteryAchievement>();
+            masterySkinUnlockableDef = R2API.UnlockableAPI.AddUnlockable<Content.Achievements.AliemMasteryAchievement>();
         }
 
         public override void InitializeHitboxes() {
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
-
+            
             //example of how to create a hitbox
-            Transform swordHitbox = childLocator.FindChild("SwordHitbox");
-            Prefabs.SetupHitbox(model, swordHitbox, "Sword");
+            //Transform swordHitbox = childLocator.FindChild("SwordHitbox");
+            //Prefabs.SetupHitbox(model, swordHitbox, "Sword");
 
             Transform leapHitbox = childLocator.FindChild("LeapHitbox");
-            Prefabs.SetupHitbox(model, swordHitbox, "Leap");
+            Prefabs.SetupHitbox(model, leapHitbox, "Leap");
         }
     
 
         public override void InitializeSkills() {
-            Skills.CreateSkillFamilies(bodyPrefab, 3);
+            Skills.CreateSkillFamilies(bodyPrefab);
 
             #region Primary
-            //Creates a skilldef for a typical primary 
-            SkillDef primarySkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun",
+            SkillDef primarySimpleGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_DESCRIPTION",
-                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGun)),
+                                                                              "Weapon",
+                                                                              true));
+
+            SkillDef primaryInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun",
+                                                                              ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
+                                                                              ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInputs)),
                                                                               "Slide",
                                                                               true));
-            Skills.AddPrimarySkills(bodyPrefab, primarySkillDef);
+
+            Skills.AddPrimarySkills(bodyPrefab, primarySimpleGunSkillDef);
+            if (Modules.Config.Cursed) {
+                Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef);
+            }
             #endregion
 
             #region Secondary
-            
-            SkillDef leapSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+            SkillDef SecondaryGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "aliem_secondary_gun",
+                skillNameToken = ALIEM_PREFIX + "SECONDARY_GUN_NAME",
+                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_GUN_DESCRIPTION",
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSecondary"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunBig)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { }
+            });
+
+            SkillDef SecondaryLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "aliem_secondary_leap",
-                skillNameToken = ALIEM_PREFIX + "SECONDARY_LEAP_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_LEAP_DESCRIPTION",
+                skillNameToken = ALIEM_PREFIX + "UTILITY_LEAP_NAME",
+                skillDescriptionToken = ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeap)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM2)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { }
+            });
+
+            Skills.AddSecondarySkills(bodyPrefab, SecondaryGunSkillDef/*, SecondaryLeapSkillDef*/);
+            #endregion
+
+            #region Utility
+
+            SkillDef UtilityLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "aliem_utility_leap",
+                skillNameToken = ALIEM_PREFIX + "UTILITY_LEAP_NAME",
+                skillDescriptionToken = ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconUtility"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM3)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 8f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] {  }
+            });
+
+            Skills.AddUtilitySkills(bodyPrefab, UtilityLeapSkillDef);
+            #endregion
+
+            #region Special
+            SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "aliem_special_grenade",
+                skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_NAME",
+                skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecial"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenade)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 10f,
+                beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
@@ -120,68 +232,13 @@ namespace AliemMod.Content.Survivors {
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = false,
+                cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
+                stockToConsume = 1
             });
-
-            Skills.AddSecondarySkills(bodyPrefab, leapSkillDef);
-            #endregion
-
-            #region Utility
-            //SkillDef rollSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
-            //    skillName = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-            //    skillNameToken = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-            //    skillDescriptionToken = prefix + "_HENRY_BODY_UTILITY_ROLL_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-            //    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
-            //    activationStateMachineName = "Body",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 4f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = true,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = false,
-            //    mustKeyPress = false,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1
-            //});
-
-            //Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
-            #endregion
-
-            #region Special
-            //SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
-            //    skillName = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-            //    skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-            //    skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-            //    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
-            //    activationStateMachineName = "Slide",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 10f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = EntityStates.InterruptPriority.Skill,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = false,
-            //    cancelSprintingOnActivation = true,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1
-            //});
-
-            //Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
+            
+            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
             #endregion
         }
 
@@ -199,10 +256,10 @@ namespace AliemMod.Content.Survivors {
             #region DefaultSkin
             //this creates a SkinDef with all default fields
             SkinDef defaultSkin = Skins.CreateSkinDef(ALIEM_PREFIX + "DEFAULT_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
                 defaultRendererinfos,
                 model);
-
+            
             //these are your Mesh Replacements. The order here is based on your CustomRendererInfos from earlier
             //pass in meshes as they are named in your assetbundle
             //defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
@@ -251,8 +308,36 @@ namespace AliemMod.Content.Survivors {
             skins.Add(masterySkin);
             */
             #endregion
+            
+            skins.Add(CreateRecolorSkin(defaultSkin, "Red"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Green"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Blue"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Orange"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Brown"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Cyan"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Purple"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Magenta"));
+            skins.Add(CreateRecolorSkin(defaultSkin, "Black"));
 
             skinController.skins = skins.ToArray();
+        }
+
+        private SkinDef CreateRecolorSkin(SkinDef defaultSkin, string skinColor) {
+
+            Material material = Materials.CreateHotpooMaterial($"matAliemRecolor_{skinColor}");
+            Color color = material.GetColor("_Color");
+
+            string token = $"{ALIEM_PREFIX}SKIN_{skinColor.ToUpperInvariant()}";
+
+            SkinDef skinDef = Skins.CreateSkinDef(skinColor,
+                                                  R2API.LoadoutAPI.CreateSkinIcon(color, color, color, color, color),
+                                                  defaultSkin.rendererInfos,
+                                                  defaultSkin.rootObject,
+                                                  masterySkinUnlockableDef);
+            skinDef.rendererInfos[1].defaultMaterial = material;
+
+            R2API.LanguageAPI.Add(token, skinColor);
+            return skinDef;
         }
     }
 }

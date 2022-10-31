@@ -13,7 +13,7 @@ namespace Modules {
             //Aliem
             ApplyAliemRiddenBuff = DamageAPI.ReserveDamageType();
 
-            SetHooks();
+            //SetHooks();
         }
 
         private static void SetHooks() {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Aliem {
     public class MashAndHoldInputs : BaseSkillState {
-
+		
 		protected virtual string StateMachineName => "Weapon";
 
 		protected virtual EntityState initialMashState => null;
@@ -17,7 +17,7 @@ namespace ModdedEntityStates.Aliem {
 		protected virtual bool RepeatHoldState => true;
 
 		private EntityStateMachine outputESM;
-		private float minHoldTime = 1f;
+		private float minHoldTime = 0.5f;
 		private float minMashTime = 0.35f;
 
 		private bool _holding;

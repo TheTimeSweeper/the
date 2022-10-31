@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{F8699E99-EC2F-4EA2-919F-F24E32C788B0}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{F8699E99-EC2F-4EA2-919F-F24E32C788B0}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Chomp" ID="{0AEE11D5-489A-4A2E-9708-13005099278F}">
+					<ChildrenList>
+						<Action Name="" ID="{A1B13804-AC3C-4EDB-B143-2A458CFAFF54}" ShortID="861280584">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Chomp" ID="{A0B0D4F1-E626-47F2-9761-D9B2EBA7A35A}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RayGun" ID="{1FF45694-0BCD-4626-9262-ECC9E3E0AD17}">
+					<ChildrenList>
+						<Action Name="" ID="{C588DD8D-B8F2-48C1-9C50-E3AD7B0DA95A}" ShortID="656545268">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="RayGun" ID="{A2ED02D2-8CD2-49CA-BE2C-18C1B3B74C8B}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RayGunBigClassic" ID="{E207FA25-522E-45E2-8F43-AD2F52C8466F}">
+					<ChildrenList>
+						<Action Name="" ID="{C6381611-F02A-4317-8B41-288CB38A8EDA}" ShortID="946280185">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="RayGunBigClassic" ID="{5D5896A0-DFF2-4713-A7A0-C6DAD08166D5}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RayGunChargeLoop" ID="{8B717C7A-DD85-4984-8EA3-04055AA83E43}">
+					<ChildrenList>
+						<Action Name="" ID="{7EE21D29-2E8D-4D94-99D7-EFBC93900390}" ShortID="658271075">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="GunChargeLoop" ID="{6C519C3A-D8C1-4E5F-8202-D1288E9E5030}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RayGunChargeUp" ID="{1125CAA2-A27E-45EA-9833-BDDED39FAD2B}">
+					<ChildrenList>
+						<Action Name="" ID="{09DA776E-7FA0-43FE-B214-93709375323B}" ShortID="60427497">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="GunChargeUp" ID="{9815DB07-8BD4-47FB-A13D-AA7048F39F1F}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RayGunChargeLoopHigh" ID="{6A9435FD-13C1-4879-A333-A5F2E07BBA65}">
+					<ChildrenList>
+						<Action Name="" ID="{B857889D-9AEF-4873-ABDA-4A9A1BF8FAA2}" ShortID="588054397">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="GunChargeLoopHigh" ID="{4E5CA2CE-94D4-42EE-9AE0-633EE7F4670B}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_INV_RayGun" ID="{7BD76FB6-5652-4CF9-9339-EA4CCA422D44}">
+					<ChildrenList>
+						<Action Name="" ID="{F45CF6BA-3F66-4CF2-B7BC-F40A132B7189}" ShortID="122533857">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="INV_RayGun" ID="{DA091BA8-0541-48B5-8122-48FC69A6A903}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_INV_DigPopOut" ID="{775E1DD8-B078-4E65-95D7-6C8A82233441}">
+					<ChildrenList>
+						<Action Name="" ID="{CE5FB1F9-1F4F-48B9-96AE-3118F049DC56}" ShortID="572208990">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="INV_DigPopOut2" ID="{146969B4-1C11-4230-9A37-4DB47417A9E2}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ThrowBomb" ID="{50FA48C6-5144-4727-AE69-BCE0D8BFADE3}">
+					<ChildrenList>
+						<Action Name="" ID="{A51C838A-588D-45A7-811C-68846FCFBA10}" ShortID="703916420">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HenryBombThrow" ID="{601BEF13-C571-40A9-ACF9-D3FF394B890C}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

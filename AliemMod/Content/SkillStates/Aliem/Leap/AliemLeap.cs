@@ -7,19 +7,45 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Aliem {
 
-    public class AliemLeap : BaseCharacterMain {
+	public class AliemLeapM2 : AliemLeap {
+        //is this jank?
+        protected override int inputButton => 2;
+	}
 
+	public class AliemLeapM3 : AliemLeap {
+		//is this jank?
+		protected override int inputButton => 3;
+	}
+
+	public class AliemLeap : BaseCharacterMain {
+
+		protected virtual int inputButton => 2;
+		private InputBankTest.ButtonState inputButtonState {
+			get {
+				switch (inputButton) {
+					case 1:
+						return inputBank.skill1;
+					default:
+					case 2:
+						return inputBank.skill2;
+					case 3:
+						return inputBank.skill3;
+					case 4:
+						return inputBank.skill4;
+				}
+			}
+		}
 		public float DamageCoefficient = 2;
-
 
 		private OverlapAttack overlapAttack;
 		private List<HurtBox> overlapAttackHits = new List<HurtBox>();
 
 		private bool hitSomething;
+		private int hitSomethingFrames;
 
 		private float previousAirControl;
 
-		public override void OnEnter() {
+        public override void OnEnter() {
 			base.OnEnter();
 
 			HitBoxGroup hitBoxGroup = null;
@@ -38,8 +64,11 @@ namespace ModdedEntityStates.Aliem {
 				//damageType = DamageType.Stun1s,
 			};
 
+			//handled in riding state
 			//R2API.DamageAPI.AddModdedDamageType(overlapAttack, Modules.DamageTypes.ApplyAliemRiddenBuff);
 
+			GetModelAnimator().SetFloat("aimYawCycle", 0.5f);
+			GetModelAnimator().SetFloat("aimPitchCycle", 0.5f);
 
 			this.previousAirControl = base.characterMotor.airControl;
 			base.characterMotor.airControl = BaseLeap.airControl;
@@ -55,7 +84,7 @@ namespace ModdedEntityStates.Aliem {
 			}
 			base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 			//base.GetModelTransform().GetComponent<AimAnimator>().enabled = true;
-			//base.PlayCrossfade("Gesture, Override", "Leap", 0.1f);
+			base.PlayCrossfade("FullBody, Override", "Dive", 0.1f);
 			//base.PlayCrossfade("Gesture, AdditiveHigh", "Leap", 0.1f);
 			//base.PlayCrossfade("Gesture, Override", "Leap", 0.1f);
 			Util.PlaySound(BaseLeap.leapSoundString, base.gameObject);
@@ -87,14 +116,23 @@ namespace ModdedEntityStates.Aliem {
                 }
 
 				//hit ground
-				if (base.fixedAge >= BaseLeap.minimumDuration && (base.characterMotor.Motor.GroundingStatus.IsStableOnGround && !base.characterMotor.Motor.LastGroundingStatus.IsStableOnGround)) {
-					//TODO: burrow state
-					this.outer.SetNextStateToMain();
+				if ((base.characterMotor.Motor.GroundingStatus.IsStableOnGround && !base.characterMotor.Motor.LastGroundingStatus.IsStableOnGround)) {
+										
+					if (inputButtonState.down) {
+						outer.SetState(new AliemBurrow(inputButton));
+
+					} else {
+						this.outer.SetNextStateToMain();
+					}
 					return;
 				}
 
+				if (hitSomething)
+					hitSomethingFrames++;
+
 				//hit wall or somethin
-				if (base.fixedAge >= BaseLeap.minimumDuration && this.hitSomething) {
+				if (base.fixedAge >= BaseLeap.minimumDuration && this.hitSomethingFrames > 1) {
+
 					this.outer.SetNextStateToMain();
 					return;
 				}

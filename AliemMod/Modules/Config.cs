@@ -8,7 +8,7 @@ namespace Modules
     {
         public static bool Debug;
 
-        public static bool NewColor;
+        public static bool Cursed;
 
         public static void ReadConfig()
         {
@@ -20,11 +20,11 @@ namespace Modules
 
             string sectionGeneral = "General";
 
-            NewColor = AliemPlugin.instance.Config.Bind(
+            Cursed = AliemPlugin.instance.Config.Bind(
                 sectionGeneral,
-                "New Color (s?)",
+                "Cursed",
                 false,
-                "add black for the wife").Value;
+                "Enable wip/unused content").Value;
         }
 
         // this helper automatically makes config entries for disabling survivors

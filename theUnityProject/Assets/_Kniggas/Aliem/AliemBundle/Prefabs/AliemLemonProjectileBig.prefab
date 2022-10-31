@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   falloffModel: 0
-  blastRadius: 2
+  blastRadius: 7
   blastDamageCoefficient: 1
   blastProcCoefficient: 1
   blastAttackerFiltering: 0
@@ -34,8 +34,8 @@ MonoBehaviour:
   rangePitchDegrees: 0
   useLocalSpaceForChildren: 0
   applyDot: 0
-  dotIndex: -1
-  dotDuration: 0
+  dotIndex: 1
+  dotDuration: 1
   dotDamageMultiplier: 1
   applyMaxStacksFromAttacker: 0
   maxStacksFromAttacker: 4294967295
@@ -51,7 +51,7 @@ MonoBehaviour:
   lifetime: 10
   lifetimeAfterImpact: 0
   lifetimeRandomOffset: 0
-  transformSpace: 0
+  transformSpace: 1
 --- !u!1001 &1725019224841928292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,6 +64,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AliemLemonProjectileBig
       objectReference: {fileID: 0}
+    - target: {fileID: 2220918672866445434, guid: 6658e13b94b72c744b6766dd272ab4bd,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 4186879966619110937, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}
       propertyPath: m_RootOrder
@@ -72,17 +77,17 @@ PrefabInstance:
     - target: {fileID: 4186879966619110937, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.248676
+      value: 3.1521943
       objectReference: {fileID: 0}
     - target: {fileID: 4186879966619110937, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.248676
+      value: 3.1521943
       objectReference: {fileID: 0}
     - target: {fileID: 4186879966619110937, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.248676
+      value: 3.1521943
       objectReference: {fileID: 0}
     - target: {fileID: 4186879966619110937, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}

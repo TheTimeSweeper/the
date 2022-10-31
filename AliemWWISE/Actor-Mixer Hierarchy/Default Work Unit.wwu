@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="SFX" ID="{0C5D27AD-DF1D-45CD-99C8-94EE20A51053}" ShortID="1000852176">
+					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+						<Property Name="Volume" Type="Real64">
+							<RTPCList>
+								<RTPC Name="" ID="{098F005D-A72F-4538-9E2B-259530B428BD}" ShortID="209643698">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Volume_SFX" ID="{5919F527-9588-4EC7-80AA-DF73FD37968A}" WorkUnitID="{9DC89BA2-CA97-4035-A928-AD8C7A0CAEC1}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{ECED143C-D6F6-48D0-B690-8E56636A6348}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+						</Reference>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<ActorMixer Name="Aliem Sounds" ID="{1432591F-A4BD-4741-A096-8E501C17FD77}" ShortID="620368013">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="RayGunBigClassic" ID="{5D5896A0-DFF2-4713-A7A0-C6DAD08166D5}" ShortID="900525969">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{BA2941C8-35D8-45BB-BD87-A7A5EFE3EF1C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="152"/>
+															<Property Name="Min" Type="Real64" Value="-152"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="BigRayGunClassic" ID="{C8314764-4E9C-4E45-9BE7-4CBC69C09091}">
+											<Language>SFX</Language>
+											<AudioFile>BigRayGunClassic.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="88717859"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="BigRayGunClassic" ID="{C8314764-4E9C-4E45-9BE7-4CBC69C09091}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Chomp" ID="{A0B0D4F1-E626-47F2-9761-D9B2EBA7A35A}" ShortID="455795760">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="chomp" ID="{E8E1C8E3-61AB-43DA-ACD6-E25AEBD93B35}">
+											<Language>SFX</Language>
+											<AudioFile>chomp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="246871242"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="chomp" ID="{E8E1C8E3-61AB-43DA-ACD6-E25AEBD93B35}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="GunChargeLoop" ID="{6C519C3A-D8C1-4E5F-8202-D1288E9E5030}" ShortID="287614804">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="GunChargeLoop" ID="{90799793-DF34-4924-A20D-A0D835DFD029}">
+											<Language>SFX</Language>
+											<AudioFile>GunChargeLoop.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="67742513"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="GunChargeLoop" ID="{90799793-DF34-4924-A20D-A0D835DFD029}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="GunChargeUp" ID="{9815DB07-8BD4-47FB-A13D-AA7048F39F1F}" ShortID="29600350">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="GunChargeUp" ID="{0831EE62-5182-4A44-91EC-88AE1E048C29}">
+											<Language>SFX</Language>
+											<AudioFile>GunChargeUp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="947682086"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="GunChargeUp" ID="{0831EE62-5182-4A44-91EC-88AE1E048C29}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="RayGun" ID="{A2ED02D2-8CD2-49CA-BE2C-18C1B3B74C8B}" ShortID="388364141">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D5C3F5C5-1A41-4B9F-B2D6-F1D114FE5FB4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="152"/>
+															<Property Name="Min" Type="Real64" Value="-152"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="raygun" ID="{31B0063C-E879-469E-94AE-90C925098F82}">
+											<Language>SFX</Language>
+											<AudioFile>raygun.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="899207982"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="raygun" ID="{31B0063C-E879-469E-94AE-90C925098F82}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="GunChargeLoopHigh" ID="{4E5CA2CE-94D4-42EE-9AE0-633EE7F4670B}" ShortID="516619757">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>130</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="GunChargeLoop" ID="{6592DFB8-8A92-4C5E-A351-3C19A00F0C22}">
+											<Language>SFX</Language>
+											<AudioFile>GunChargeLoop.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="67742513"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="GunChargeLoop" ID="{6592DFB8-8A92-4C5E-A351-3C19A00F0C22}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="INV_DigPopOut" ID="{4E6B7839-790B-4C36-841E-A50742631DAF}" ShortID="491455270">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="INV_DigPopOut" ID="{A8B4E3DF-772E-43B4-8945-80B94975E016}">
+											<Language>SFX</Language>
+											<AudioFile>INV_DigPopOut.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="435369935"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="INV_DigPopOut" ID="{A8B4E3DF-772E-43B4-8945-80B94975E016}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="INV_DigPopOut2" ID="{146969B4-1C11-4230-9A37-4DB47417A9E2}" ShortID="12517746">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="INV_DigPopOut2" ID="{67C734A0-83E4-46BE-90E1-4770AE030E15}">
+											<Language>SFX</Language>
+											<AudioFile>INV_DigPopOut2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="477911471"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="INV_DigPopOut2" ID="{67C734A0-83E4-46BE-90E1-4770AE030E15}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="INV_RayGun" ID="{DA091BA8-0541-48B5-8122-48FC69A6A903}" ShortID="608783398">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="INV_RayGun" ID="{2CEF430D-8389-41BB-9E91-7DE122923235}">
+											<Language>SFX</Language>
+											<AudioFile>INV_RayGun.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="143282573"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="INV_RayGun" ID="{2CEF430D-8389-41BB-9E91-7DE122923235}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="HenryBombThrow" ID="{601BEF13-C571-40A9-ACF9-D3FF394B890C}" ShortID="848146959">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="HenryBombThrow" ID="{EA0A819F-0F06-4CF2-9FCB-278667D78665}">
+											<Language>SFX</Language>
+											<AudioFile>HenryBombThrow.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1061544124"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="HenryBombThrow" ID="{EA0A819F-0F06-4CF2-9FCB-278667D78665}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

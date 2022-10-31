@@ -2,13 +2,21 @@
 
     public class AliemRidingState : BaseRidingState {
 
-		public override void FixedUpdate() {
+        public override void OnEnter() {
+            base.OnEnter();
+
+			PlayAnimation("Fullbody, Override", "Riding");
+        }
+
+        public override void FixedUpdate() {
 			base.FixedUpdate();
 
 			if (inputBank.jump.justPressed) {
 				//todo jump off
 				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
 				base.outer.SetState(new AliemCharacterMain { wasRiding = true });
+
+				PlayAnimation("Fullbody, Override", "BufferEmpty");
 				return;
 			}
 
@@ -23,5 +31,5 @@
 				return;
 			}
 		}
-	}
+    }
 }

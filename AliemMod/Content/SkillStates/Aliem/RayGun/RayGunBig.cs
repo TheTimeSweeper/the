@@ -4,14 +4,19 @@ namespace ModdedEntityStates.Aliem {
 
     public class RayGunBig : RayGun {
         
-		new public static float BaseDuration = 1f;
-		new public static float DamageCoefficient = 5;
+		new public static float BaseDuration = 0.5f;
+        
+        public static float BaseDamage = 6;
+		new public float DamageCoefficient = BaseDamage;
+        
+        private string _shootSound = "Play_RayGunBigClassic";
 
         public RayGunBig() {
         }
 
-        public RayGunBig(float dam_) {
+        public RayGunBig(float dam_, string shootSound_) {
             DamageCoefficient = dam_;
+            _shootSound = shootSound_;
         }
 
         protected override void ModifyState() {
@@ -20,11 +25,11 @@ namespace ModdedEntityStates.Aliem {
 
 			base.baseDuration = BaseDuration;
 			base.damageCoefficient = DamageCoefficient;
+            base.attackSoundString = _shootSound;
 		}
 
         public override void PlayAnimation(float duration) {
-            //todo "ShootGunBig"
-            base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", duration);
+            base.PlayAnimation("Gesture, Override", "ShootGunBig", "ShootGun.playbackRate", duration);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority() {

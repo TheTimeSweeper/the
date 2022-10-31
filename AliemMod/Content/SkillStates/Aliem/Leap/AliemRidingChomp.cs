@@ -5,41 +5,49 @@ namespace ModdedEntityStates.Aliem {
 
     internal class AliemRidingChomp : BaseRidingState {
 
-		public float ChompDamageCoefficient = 6;
+		public static float ChompDamageCoefficient = 8;
+
+		public float baseDuration = 0.3f;
+		public float chompTime = 1f;
+
+		private float duration;
 
 		private bool hasCasted;
 
         public override void OnEnter() {
             base.OnEnter();
 
-			//todo play animation chomp
-        }
+			duration = baseDuration / attackSpeedStat;
+            PlayCrossfade("FullBody, Override", "RidingChomp", "Chomp.playbackRate", duration*2, 0.1f);
+		}
 
         public override void FixedUpdate() {
             base.FixedUpdate();
 
-			if(base.fixedAge > 0.4f / base.attackSpeedStat && !hasCasted) {
+			if(base.fixedAge > duration * chompTime && !hasCasted) {
 				hasCasted = true;
 				OnCastEnter();
-
-				base.outer.SetNextState(ChooseNextState());
             }
-        }
+
+			if (base.fixedAge > duration) {
+				base.outer.SetNextState(ChooseNextState());
+			}
+		}
 
         protected void OnCastEnter() {
 
-			Util.PlayAttackSpeedSound(EntityStates.LemurianMonster.Bite.attackString, base.gameObject, this.attackSpeedStat);
-
+			Util.PlayAttackSpeedSound("Play_Chomp", base.gameObject, this.attackSpeedStat);
+			
 			new BlastAttack {
 				attacker = base.gameObject,
-				baseDamage = this.damageStat * this.ChompDamageCoefficient,
+				baseDamage = this.damageStat * ChompDamageCoefficient,
 				//baseForce = this.blastForce,
 				//bonusForce = this.blastBonusForce,
 				crit = this.RollCrit(),
 				//damageType = this.GetBlastDamageType(),
 				falloffModel = BlastAttack.FalloffModel.None,
 				procCoefficient = 1,
-				radius = 3,
+				radius = 2,
 				position = transform.position,
 				attackerFiltering = AttackerFiltering.NeverHitSelf,
 				//impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
