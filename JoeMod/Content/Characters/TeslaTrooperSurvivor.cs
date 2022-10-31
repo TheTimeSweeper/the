@@ -392,8 +392,6 @@ namespace Modules.Survivors {
                 createRecolorSkillDef("Purple"),
                 createRecolorSkillDef("Pink"),
             };
-            //why'd I do this separately again?
-            //skilldefs[0] = createRecolorSkillDef("Red");
 
             if (Modules.Config.NewColor) {
                 skilldefs.Add(createRecolorSkillDef("Black"));
