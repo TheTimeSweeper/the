@@ -16,7 +16,7 @@
 				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
 				base.outer.SetState(new AliemCharacterMain { wasRiding = true });
 
-				PlayAnimation("Fullbody, Override", "BufferEmpty");
+				PlayAnimation("FullBody, Override", "BufferEmpty");
 				return;
 			}
 

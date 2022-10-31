@@ -133,6 +133,7 @@ namespace ModdedEntityStates.Aliem {
 				//hit wall or somethin
 				if (base.fixedAge >= BaseLeap.minimumDuration && this.hitSomethingFrames > 1) {
 
+					PlayAnimation("FullBody, Override", "BufferEmpty");
 					this.outer.SetNextStateToMain();
 					return;
 				}
