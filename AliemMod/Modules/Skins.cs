@@ -34,6 +34,13 @@ namespace Modules
             return skinDef;
         }
 
+        public static SkinDef CreateRecolorSkinDef(string skinName, Sprite skinIcon, SkinDef baseSkin, UnlockableDef unlockableDef) {
+            SkinDef skindef = CreateSkinDef(skinName, skinIcon, baseSkin.rendererInfos, baseSkin.rootObject, unlockableDef);
+            skindef.baseSkins = new SkinDef[] { baseSkin };
+
+            return skindef;
+        }
+
         internal static SkinDef GetCurrentSkinDef(CharacterBody characterBody) {
             return SkinCatalog.GetBodySkinDef(characterBody.bodyIndex, (int)characterBody.skinIndex);
         }

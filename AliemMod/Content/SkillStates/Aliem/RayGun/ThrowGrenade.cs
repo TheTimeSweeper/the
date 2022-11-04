@@ -13,7 +13,7 @@ namespace ModdedEntityStates.Aliem {
 		//needs to be set in the projectilecontroller component
 		//public static float procCoefficient = 1f;
 
-		public static float ProjectilePitch = -60;
+		public static float ProjectilePitch = -70;
 		
 		public static float ProjectileForce = 80f;
 

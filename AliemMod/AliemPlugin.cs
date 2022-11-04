@@ -34,7 +34,7 @@ using System.Security.Permissions;
 public class AliemPlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.Aliem";
     public const string MODNAME = "Aliem";
-    public const string MODVERSION = "0.1.0";
+    public const string MODVERSION = "0.3.0";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -68,7 +68,7 @@ public class AliemPlugin : BaseUnityPlugin {
         //if (Modules.Config.Debug)
         //    gameObject.AddComponent<TestValueManager>();
 
-        //Modules.Compat.Initialize();
+        Modules.Compat.Initialize();
         Modules.Tokens.AddTokens(); // register name tokens
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
@@ -98,9 +98,9 @@ public class AliemPlugin : BaseUnityPlugin {
     }
 
     private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
-
+        
         if (sender.HasBuff(Modules.Buffs.riddenBuff)) {
-            args.moveSpeedMultAdd += 1.0f;
+            args.moveSpeedMultAdd += 1.3f;
         }
     }
 }

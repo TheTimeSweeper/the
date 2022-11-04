@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class TestValueManager : MonoBehaviour {
 
     //how do doing attributes
     //[debugfloat("valuename", KeyCode.U, KeyCode.J, 5)] on any static value elsewhere
     //would be neat
-    //public static float bloob = 0.7f;
 
     private float _tim;
     private float _holdTime = 0.4f;    

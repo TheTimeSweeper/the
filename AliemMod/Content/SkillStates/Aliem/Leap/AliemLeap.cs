@@ -3,7 +3,9 @@ using EntityStates.Croco;
 using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static RoR2.LayerIndex;
 
 namespace ModdedEntityStates.Aliem {
 
@@ -35,7 +37,7 @@ namespace ModdedEntityStates.Aliem {
 				}
 			}
 		}
-		public float DamageCoefficient = 2;
+		public float DamageCoefficient = 0;
 
 		private OverlapAttack overlapAttack;
 		private List<HurtBox> overlapAttackHits = new List<HurtBox>();
@@ -45,9 +47,11 @@ namespace ModdedEntityStates.Aliem {
 
 		private float previousAirControl;
 
+		private BullseyeSearch bullseyeSearch;
+
         public override void OnEnter() {
 			base.OnEnter();
-
+			bullseyeSearch = new BullseyeSearch();
 			HitBoxGroup hitBoxGroup = null;
 			Transform modelTransform = base.GetModelTransform();
 			if (modelTransform) {
@@ -107,7 +111,7 @@ namespace ModdedEntityStates.Aliem {
 			if (base.isAuthority && base.characterMotor) {
 				base.characterMotor.moveDirection = base.inputBank.moveVector;
 
-                CharacterBody foundEnemy = FireOverlap();
+                CharacterBody foundEnemy = FindBodyToRide(); //FireOverlap();
 				if(foundEnemy != null) {
 					base.outer.SetNextState(new AliemRidingState {
 						riddenBody = foundEnemy
@@ -140,6 +144,17 @@ namespace ModdedEntityStates.Aliem {
 			}
 		}
 
+        private CharacterBody FindBodyToRide() {
+
+            Ray mond = new Ray(characterBody.corePosition, Vector3.forward);
+
+			if (Util.CharacterSpherecast(gameObject, mond, 2.69f, out RaycastHit HitInfo, 0, LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal)) {
+
+				return HitInfo.collider.GetComponent<HurtBox>().healthComponent.body;
+			}
+			return null;
+        }
+		
         private CharacterBody FireOverlap() {
 
 			CharacterBody closestBody = null;

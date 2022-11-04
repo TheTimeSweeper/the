@@ -25,6 +25,11 @@ namespace Modules {
 
         private const string assetbundleName = "aliem";
 
+        public static GameObject bloodEffect;
+
+        public static GameObject m1EffectPrefab;
+        public static GameObject m2EffectPrefab;
+
         public static void Initialize()
         {
             //HENRY: check this somewhere else secretly
@@ -61,9 +66,29 @@ namespace Modules {
                 SoundAPI.SoundBanks.Add(array);
             }
         }
-
+        
         private static void PopulateAss() {
+            bloodEffect = LoadEffect("BloodParticle", true);
 
+            m1EffectPrefab = CreateM1Effect();
+            m2EffectPrefab = CreateM2Effect();
+        }
+
+        private static GameObject CreateM2Effect() {
+
+            GameObject gunBigImpact = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "AliemM2OmniExplosionVFX", false);
+            gunBigImpact.GetComponent<EffectComponent>().soundName = "Play_engi_M2_explo";
+
+            CreateEffectFromObject(gunBigImpact);
+            return gunBigImpact;
+        }
+
+        private static GameObject CreateM1Effect() {
+            GameObject gunImpact = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "AliemM1OmniExplosionVFX", false);
+            gunImpact.GetComponent<EffectComponent>().soundName = "Play_engi_M1_explo";
+
+            CreateEffectFromObject(gunImpact);
+            return gunImpact;
         }
 
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
@@ -241,6 +266,8 @@ namespace Modules {
 
             return newEffect;
         }
+
+        private static void CreateEffectFromObject(GameObject newEffect) => CreateEffectFromObject(newEffect, "", false);
 
         private static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform) {
             newEffect.AddComponent<DestroyOnTimer>().duration = 6;

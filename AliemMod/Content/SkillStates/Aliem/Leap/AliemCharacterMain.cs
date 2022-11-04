@@ -8,7 +8,7 @@ namespace ModdedEntityStates.Aliem {
         public override void OnEnter() {
             base.OnEnter();
 
-			if (wasRiding && base.isAuthority) {
+            if (wasRiding && base.isAuthority) {
 
 				GenericCharacterMain.ApplyJumpVelocity(base.characterMotor, base.characterBody, 1, 1, false);
 			}

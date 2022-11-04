@@ -17,6 +17,7 @@ namespace Modules {
             Content.AddEntityState(typeof(AliemLeapM3));
             Content.AddEntityState(typeof(AliemRidingChomp));
             Content.AddEntityState(typeof(AliemRidingState));
+            Content.AddEntityState(typeof(EndRidingState));
             Content.AddEntityState(typeof(AliemBurrow));
             
             Content.AddEntityState(typeof(ThrowGrenade));

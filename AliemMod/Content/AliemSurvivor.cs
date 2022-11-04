@@ -1,7 +1,10 @@
-﻿using BepInEx.Configuration;
+﻿using AliemMod.Components;
+using BepInEx.Configuration;
+using KinematicCharacterController;
 using Modules;
 using Modules.Characters;
 using Modules.Survivors;
+using R2API;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -34,8 +37,9 @@ namespace AliemMod.Content.Survivors {
 
             jumpCount = 1,
 
-            aimOriginPosition = new Vector3(0, 0.3f, 0),
+            aimOriginPosition = new Vector3(0, 0.5f, 0),
             cameraPivotPosition = new Vector3(0, 0.8f, 0),
+            modelBasePosition = new Vector3(0, -0.52f, 0),
 
             cameraParamsDepth = -7,
             cameraParamsVerticalOffset = 0.6f,
@@ -59,17 +63,58 @@ namespace AliemMod.Content.Survivors {
 
         public override Type characterMainState => typeof(ModdedEntityStates.Aliem.AliemCharacterMain);
 
-        public override ItemDisplaysBase itemDisplays => null;// new AliemItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new AliemItemDisplays();
 
         //if you have more than one character, easily create a config to enable/disable them like this
         public override ConfigEntry<bool> characterEnabledConfig => null; //Modules.Config.CharacterEnableConfig(bodyName);
 
         private static UnlockableDef masterySkinUnlockableDef;
 
+        public static AliemSurvivor instance;
+
         public override void InitializeCharacter() {
             base.InitializeCharacter();
 
+            instance = this;
+
+            Hooks();
+        }
+
+        protected override void InitializeCharacterBodyAndModel() {
+            base.InitializeCharacterBodyAndModel();
+
             CreateBurrowEffect();
+
+            FixMotorCollider();
+
+            //todo animate popping out of the ground for css
+            //displayPrefab.AddComponent<AliemMenuSound>();
+        }
+
+        private void FixMotorCollider() {
+            CapsuleCollider characterCollider = bodyPrefab.GetComponent<CapsuleCollider>();
+            //characterCollider.center = new Vector3(0, 0.51f, 0);
+            characterCollider.radius = 0.302f;
+            characterCollider.height = 1.021f;
+
+            KinematicCharacterMotor motor = bodyPrefab.GetComponent<KinematicCharacterMotor>();
+            motor.CapsuleRadius = 0.302f;
+            motor.CapsuleHeight = 1.021f;
+        }
+
+        private void Hooks() {
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+        }
+
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
+
+            if(DamageAPI.HasModdedDamageType(damageInfo, Modules.DamageTypes.Decapitating)) {
+
+                if(self.gameObject.GetComponent<ChompedComponent>() == null) {
+                    self.gameObject.AddComponent<ChompedComponent>().init(self.body);
+                }
+            }
+            orig(self, damageInfo);
         }
 
         private void CreateBurrowEffect() {
@@ -228,7 +273,7 @@ namespace AliemMod.Content.Survivors {
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,

@@ -38,12 +38,12 @@ PrefabInstance:
     - target: {fileID: 658147991387944478, guid: 1f0ac2082a9b51b4a9589d6e780fd02c,
         type: 3}
       propertyPath: m_Radius
-      value: 1.1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1345832500431898967, guid: 1f0ac2082a9b51b4a9589d6e780fd02c,
         type: 3}
       propertyPath: blastRadius
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1734637788282318777, guid: 1f0ac2082a9b51b4a9589d6e780fd02c,
         type: 3}

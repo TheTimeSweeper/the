@@ -11,18 +11,14 @@
         public override void FixedUpdate() {
 			base.FixedUpdate();
 
-			if (inputBank.jump.justPressed) {
-				//todo jump off
-				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
-				base.outer.SetState(new AliemCharacterMain { wasRiding = true });
+			if (isAuthority && inputBank.jump.justPressed) {
 
-				PlayAnimation("FullBody, Override", "BufferEmpty");
+				base.outer.SetState(new EndRidingState());
+				
 				return;
 			}
 
-			if (inputBank.skill1.justPressed) {
-				//todo chomp
-				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
+			if (isAuthority && inputBank.skill1.justPressed) {
 
 				AliemRidingChomp chompState = new AliemRidingChomp();
 				chompState.riddenBody = this.riddenBody;

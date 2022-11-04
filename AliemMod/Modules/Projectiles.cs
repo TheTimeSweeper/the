@@ -1,4 +1,6 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
+using RoR2.Projectile;
 using UnityEngine;
 
 namespace Modules {
@@ -9,20 +11,24 @@ namespace Modules {
 
         public static void Init() {
 
-            RayGunProjectilePrefab = Assets.LoadAsset<GameObject>("AliemLemonProjectile");
-            RayGunProjectilePrefab.GetComponent<RoR2.Projectile.ProjectileSingleTargetImpact>().impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+            RayGunProjectilePrefab = JankyLoadAliemPrefab("AliemLemonProjectile");
+            RayGunProjectilePrefab.GetComponent<ProjectileSingleTargetImpact>().impactEffect = Assets.m1EffectPrefab;
 
-            Content.AddProjectilePrefab(RayGunProjectilePrefab);
-            
-            RayGunProjectilePrefabBig = Assets.LoadAsset<GameObject>("AliemLemonProjectileBig");
-            RayGunProjectilePrefabBig.GetComponent<RoR2.Projectile.ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+            RayGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemLemonProjectileBig");
+            RayGunProjectilePrefabBig.GetComponent<ProjectileImpactExplosion>().impactEffect = Assets.m2EffectPrefab;
 
-            Content.AddProjectilePrefab(RayGunProjectilePrefabBig);
+            GrenadeProjectile = JankyLoadAliemPrefab("AliemGrenadeProjectile");
+            GrenadeProjectile.GetComponent<ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXToolbotQuick");
+        }
 
-            GrenadeProjectile = Assets.LoadAsset<GameObject>("AliemGrenadeProjectile");
-            GrenadeProjectile.GetComponent<RoR2.Projectile.ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+        public static GameObject JankyLoadAliemPrefab(string assName) {
 
-            Content.AddProjectilePrefab(GrenadeProjectile);
+            GameObject prefab = Assets.LoadAsset<GameObject>(assName);
+            R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
+
+            Content.AddProjectilePrefab(prefab);
+
+            return prefab;
         }
     }
 }

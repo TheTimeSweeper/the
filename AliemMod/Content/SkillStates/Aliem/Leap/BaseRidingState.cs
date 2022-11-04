@@ -2,6 +2,7 @@
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem {
     public class BaseRidingState : BaseCharacterMain {
@@ -12,8 +13,10 @@ namespace ModdedEntityStates.Aliem {
 
         public override void OnEnter() {
             base.OnEnter();
-			riddenBody.AddBuff(Modules.Buffs.riddenBuff);
 
+			if (riddenBody && NetworkServer.active) {
+				riddenBody.AddBuff(Modules.Buffs.riddenBuff);
+			}
 			riddenCollider = findHighestHurtbox();
 
 			gameObject.layer = RoR2.LayerIndex.fakeActor.intVal;
@@ -45,12 +48,15 @@ namespace ModdedEntityStates.Aliem {
 					characterMotor.velocity = Vector3.zero;
 					characterMotor.rootMotion = Vector3.zero;
 
-					Vector3 pos = riddenBody.corePosition;
                     if (riddenCollider) {
-						pos = riddenCollider.bounds.center + Vector3.up * (riddenCollider.bounds.max.y - riddenCollider.bounds.center.y);
-					}
+						Vector3 pos = riddenCollider.bounds.center + Vector3.up * (riddenCollider.bounds.max.y - riddenCollider.bounds.center.y);
+						characterMotor.Motor.SetPosition(pos);
+					} else {
 
-					characterMotor.Motor.SetPosition(pos);
+						base.outer.SetNextStateToMain();
+						PlayAnimation("FullBody, Override", "BufferEmpty");
+						return;
+					}
 				}
 			}else {
 				base.outer.SetNextStateToMain();
@@ -62,8 +68,19 @@ namespace ModdedEntityStates.Aliem {
 
 		public override void OnExit() {
 			base.OnExit();
-			riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
+			if (riddenBody && NetworkServer.active) {
+				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
+			}
 			gameObject.layer = RoR2.LayerIndex.defaultLayer.intVal;
 		}
-	}
+
+        public override void OnSerialize(NetworkWriter writer) {
+            base.OnSerialize(writer);
+			writer.Write(riddenBody.gameObject);
+        }
+        public override void OnDeserialize(NetworkReader reader) {
+            base.OnDeserialize(reader);
+			riddenBody = reader.ReadGameObject().GetComponent<CharacterBody>();
+        }
+    }
 }

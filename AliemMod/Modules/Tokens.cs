@@ -59,7 +59,8 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
-            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", $"Dive forward at hihg speed. If landing on the ground, hold to burrow into the ground. If an enemy is hit, ride them. While riding, chomp for {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}.");
+            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", $"Dive forward at hihg speed. If landing on the ground, hold to {Helpers.UtilityText("burrow")} into the ground. " +
+                $"If an enemy is hit, ride them. While riding, chomp for {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, and </style=cIsHealing>heal for 10% of maximum health</style>.");
             #endregion
 
             #region Special

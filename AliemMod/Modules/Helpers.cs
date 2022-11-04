@@ -41,7 +41,7 @@ internal static class Helpers {
 
     public static Func<T[], T[]> AppendDel<T>(List<T> list) => (r) => Append(ref r, list);
 
-    public static bool verbose = true;
+    public static bool verbose = false;
     public static void LogVerbose(object message, bool chat = false) {
 
         if (Config.Debug && verbose) {
