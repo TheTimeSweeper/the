@@ -40,7 +40,7 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.3.1";
+    public const string MODVERSION = "1.3.2";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
