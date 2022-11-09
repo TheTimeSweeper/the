@@ -54,8 +54,6 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
     private bool FindTrackingTarget(Ray aimRay) {
 
-        linecasts.Clear();
-
         bool found = SearchForTargetPoint(aimRay);
         if (!found)
             found = SearchForTargetSphere(aimRay, trackingRadiusZap);
@@ -64,7 +62,6 @@ public class TeslaTrackerComponent : MonoBehaviour {
             SearchForDashTarget(aimRay, trackingRadiusDash);
         }
 
-        ShowLineCasts();
         //if(!found) searchfortargetbiggersphereinthedistance(aimray)
         return found;
     }
@@ -119,16 +116,9 @@ public class TeslaTrackerComponent : MonoBehaviour {
                 //cast a line to see if it is interrupted by world
                 //however the tesla tower is also world so exclude that
                 if (!isTower) {
-                    //RaycastHit losHit;
                     bool lineOfSightBlocked = Physics.Linecast(hits[i].point, ray.origin, LayerIndex.world.mask, queryTriggerInteraction);
-
-                    linecasts.Add(new linecast(hits[i].point, ray.origin));
-
-                    if (lineOfSightBlocked) {
-
-                        //linecasts.Add(new linecast(losHit.point, losHit.point + Vector3.up));
+                    if (lineOfSightBlocked)
                         continue;
-                    }
                 }
                 
                 float distance = hits[i].distance;
@@ -164,46 +154,6 @@ public class TeslaTrackerComponent : MonoBehaviour {
         }
     }
 
-    static List<linecast> linecasts = new List<linecast>();
-    static List<GameObject> linecastShowers = new List<GameObject>();
-    private static void ShowLineCasts() {
-
-        for (int i = linecastShowers.Count - 1; i >= 0; i--) {
-            if (linecastShowers[i] == null)
-                linecastShowers.RemoveAt(i);
-        }
-
-        for (int i = 0; i < linecastShowers.Count || i < linecasts.Count; i++) {
-
-            if (i >= linecasts.Count) {
-                linecastShowers[i].SetActive(false);
-                //Helpers.LogWarning($"hiding linecastShower {i}");
-                continue;
-            }
-
-            while(i >= linecastShowers.Count) {
-                linecastShowers.Add(Instantiate(Modules.Assets.LoadAsset<GameObject>("LineCastShower")));
-            }
-
-            linecastShowers[i].SetActive(true);
-            linecasts[i].positionShower(linecastShowers[i]);
-        }
-    }
-
     #endregion hurtbox raycast
-    class linecast {
-        public Vector3 start;
-        public Vector3 end;
-
-        public linecast(Vector3 start, Vector3 end) {
-            this.start = start;
-            this.end = end;
-        }
-        public void positionShower(GameObject shower) {
-            shower.transform.position = start;
-            shower.transform.LookAt(end);
-            shower.transform.localScale = new Vector3(1, 1, (end - start).magnitude);
-        }
-    }
 
 }

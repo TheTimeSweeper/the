@@ -50,6 +50,7 @@ ___
 ## Changelog
 `1.3.2`
  - fixed eclipse not saving progress
+ - attempt fix to targeting just not wanting to target sometimes
 
 `1.3.1`
  - fixed emoteapi rig
