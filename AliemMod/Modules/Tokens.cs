@@ -35,7 +35,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
             #region Skins
-            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             //LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
             #endregion
 
@@ -50,6 +49,9 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_NAME", "Ray Gun (chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGun.DamageCoefficient)}.\nHold to charge up and fire a large blast for up to {Helpers.DamageValueText(ChargeRayGunBig.MaxDamageCoefficient)}");
+
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.maxCharge)}.");
             #endregion
 
             #region Secondary

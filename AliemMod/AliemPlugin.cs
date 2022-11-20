@@ -87,14 +87,6 @@ public class AliemPlugin : BaseUnityPlugin {
     private void Hook() {
 
         R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-
-        On.EntityStates.Mage.Weapon.BaseChargeBombState.OnEnter += BaseChargeBombState_OnEnter;
-    }
-
-    private void BaseChargeBombState_OnEnter(On.EntityStates.Mage.Weapon.BaseChargeBombState.orig_OnEnter orig, EntityStates.Mage.Weapon.BaseChargeBombState self) {
-        orig(self);
-        Helpers.LogWarning(self.minBloomRadius);
-        Helpers.LogWarning(self.maxBloomRadius);
     }
 
     private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {

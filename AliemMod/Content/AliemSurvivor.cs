@@ -27,6 +27,7 @@ namespace AliemMod.Content.Survivors {
 
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texIconAliem"),
             bodyColor = Color.yellow,
+            sortPosition = 69.2f,
 
             crosshair = Assets.LoadCrosshair("Default"),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -78,6 +79,8 @@ namespace AliemMod.Content.Survivors {
             instance = this;
 
             Hooks();
+
+            bodyPrefab.AddComponent<RayGunChargeComponent>();
         }
 
         protected override void InitializeCharacterBodyAndModel() {
@@ -164,7 +167,7 @@ namespace AliemMod.Content.Survivors {
                                                                               "Weapon",
                                                                               true));
 
-            SkillDef primaryInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun",
+            SkillDef primaryInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_inputs",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
                                                                               Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
@@ -172,9 +175,18 @@ namespace AliemMod.Content.Survivors {
                                                                               "Slide",
                                                                               true));
 
+            SkillDef primaryInstantSkillDef= Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_instant",
+                                                                              ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_NAME",
+                                                                              ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_DESCRIPTION",
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInstant)),
+                                                                              "Weapon",
+                                                                              true));
+            primaryInstantSkillDef.mustKeyPress = true;
+
             Skills.AddPrimarySkills(bodyPrefab, primarySimpleGunSkillDef);
             if (Modules.Config.Cursed) {
-                Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef);
+                Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef, primaryInstantSkillDef);
             }
             #endregion
 
@@ -300,7 +312,7 @@ namespace AliemMod.Content.Survivors {
 
             #region DefaultSkin
             //this creates a SkinDef with all default fields
-            SkinDef defaultSkin = Skins.CreateSkinDef(ALIEM_PREFIX + "DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Skins.CreateSkinDef("DEFAULT_SKIN",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
                 defaultRendererinfos,
                 model);
