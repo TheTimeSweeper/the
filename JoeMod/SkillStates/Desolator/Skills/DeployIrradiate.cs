@@ -50,7 +50,7 @@ namespace ModdedEntityStates.Desolator {
             base.FixedUpdate();
 
             //bit of a hack to get around Body ESM not being in GenericCharacterMain
-            if (isAuthority && base.inputBank.skill4.justPressed) {
+            if (isAuthority && base.inputBank.skill4.justReleased) {
                 skillLocator.special.ExecuteIfReady();
             }
             

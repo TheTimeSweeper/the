@@ -90,8 +90,6 @@ namespace Modules.Survivors {
 
             irradiatorDeployableSlot = DeployableAPI.RegisterDeployableSlot(onGetIrradiatorSlotLimit);
             Assets.DesolatorIrradiatorProjectile.GetComponent<ProjectileDeployToOwner>().deployableSlot = irradiatorDeployableSlot;
-
-            Content.AddEntityState(typeof(DesolatorMain));
         }
 
         private int onGetIrradiatorSlotLimit(CharacterMaster self, int deployableCountMultiplier) {
@@ -146,7 +144,7 @@ namespace Modules.Survivors {
         }
 
         private void InitializePrimarySkills() {
-            States.entityStates.Add(typeof(RadBeam));
+
             SkillDef primarySkillDefPunch =
                 Skills.CreateSkillDef(new SkillDefInfo("Desolator_Primary_Beam",
                                                        DESOLATOR_PREFIX + "PRIMARY_BEAM_NAME",
@@ -161,7 +159,6 @@ namespace Modules.Survivors {
 
         private void InitializeSecondarySkills() {
 
-            States.entityStates.Add(typeof(AimBigRadBeam));
             SkillDef bigRadBeamSkillDef =
                 Skills.CreateSkillDef(new SkillDefInfo {
                     skillName = "Desolator_Secondary_BigBeam",
@@ -192,7 +189,6 @@ namespace Modules.Survivors {
 
         private void InitializeUtilitySkills() {
 
-            States.entityStates.Add(typeof(RadiationAura));
             SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Utility_Aura",
                 skillNameToken = DESOLATOR_PREFIX + "UTILITY_AURA_NAME",
@@ -221,8 +217,6 @@ namespace Modules.Survivors {
 
         private void InitializeSpecialSkills() {
             
-            States.entityStates.Add(typeof(DeployEnter));
-            States.entityStates.Add(typeof(DeployIrradiate));
             SkillDef deploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Deploy",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_NAME",
@@ -247,7 +241,6 @@ namespace Modules.Survivors {
                 keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
             });
 
-            States.entityStates.Add(typeof(DeployCancel));
             cancelDeploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
 
                 skillName = "Desolator_Special_Deploy_Cancel",
@@ -257,7 +250,7 @@ namespace Modules.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployCancel)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = 0f,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -272,7 +265,6 @@ namespace Modules.Survivors {
                 stockToConsume = 0,
             });
 
-            States.entityStates.Add(typeof(ThrowIrradiator));
             SkillDef irradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME",
@@ -374,7 +366,7 @@ namespace Modules.Survivors {
 
             #region DefaultSkin
 
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(DESOLATOR_PREFIX + "DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);

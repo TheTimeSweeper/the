@@ -13,6 +13,7 @@ using JoeMod;
 using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using Modules.Achievements;
+using EntityStates;
 
 namespace Modules.Survivors {
 
@@ -32,6 +33,7 @@ namespace Modules.Survivors {
             bodyName = "TeslaTrooperBody",
             bodyNameToken = TESLA_PREFIX + "NAME",
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
+            sortPosition = 69,
 
             characterPortrait = Modules.Assets.LoadCharacterIcon(Modules.Config.RA2Icon ? "texIconTeslaTrooper2" : "texIconTeslaTrooper"),
             bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
@@ -190,7 +192,6 @@ namespace Modules.Survivors {
         }
 
         private void InitializePrimarySkills() {
-            States.entityStates.Add(typeof(Zap));                  
             TeslaTrackingSkillDef primarySkillDefZap =           //this constructor creates a skilldef for a typical primary
                 Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
                                                                               TESLA_PREFIX + "PRIMARY_ZAP_NAME",
@@ -205,8 +206,7 @@ namespace Modules.Survivors {
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
 
             if (Config.Cursed) {
-                States.entityStates.Add(typeof(ZapPunch));
-                SkillDef primarySkillDefPunch = 
+                SkillDef primarySkillDefPunch =
                     Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
                                                            TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
                                                            TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
@@ -220,10 +220,7 @@ namespace Modules.Survivors {
         
         private void InitializeSecondarySkills()
         {
-            States.entityStates.Add(typeof(AimBigZap));
-            States.entityStates.Add(typeof(BigZap));
-            SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Secondary_BigZap",
                 skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAP_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
@@ -247,14 +244,35 @@ namespace Modules.Survivors {
                 keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SHOCKING" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
+            SkillDef bigZapPunchSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Tesla_Secondary_BigZapPunch",
+                skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAPPUNCH_NAME",
+                skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAPPUNCH_DESCRIPTION",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ChargeZapPunch)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 5.0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SHOCKING" }
+            });
+
+            Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef, bigZapPunchSkillDef);
         }
 
         private void InitializeUtilitySkills() {
 
-            States.entityStates.Add(typeof(ShieldZapStart));
-            States.entityStates.Add(typeof(ShieldZapCollectDamage));
-            States.entityStates.Add(typeof(ShieldZapReleaseDamage));
             SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Utility_ShieldZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BARRIER_NAME",
@@ -278,7 +296,6 @@ namespace Modules.Survivors {
                 stockToConsume = 1
             });
 
-            States.entityStates.Add(typeof(BlinkZap));
             TeslaTrackingResettingSkillDef blinkZapSkillDef = Modules.Skills.CreateSkillDef<TeslaTrackingResettingSkillDef>(new SkillDefInfo {
                 skillName = "Tesla_Utility_BlinkZap",
                 skillNameToken = TESLA_PREFIX + "UTILITY_BLINK_NAME",
@@ -311,7 +328,6 @@ namespace Modules.Survivors {
 
         private void InitializeSpecialSkills() {
 
-            States.entityStates.Add(typeof(DeployTeslaTower));
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Special_Tower",
                 skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
@@ -342,8 +358,6 @@ namespace Modules.Survivors {
         //make it not lysate cell
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
-
-            Modules.Content.AddEntityState(typeof(DeployTeslaTowerScepter));
 
             SkillDef scepterTeslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tesla_Special_Scepter_Tower",
@@ -445,7 +459,7 @@ namespace Modules.Survivors {
 
             #region DefaultSkin
 
-            TeslaSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "DEFAULT_SKIN_NAME",
+            TeslaSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>("DEFAULT_SKIN",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 bodyCharacterModel.gameObject);

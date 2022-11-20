@@ -171,7 +171,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         orig(self, damageInfo);
     }
 
-    private void ThrowGrenade_PlayAnimation(On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.orig_PlayAnimation orig, global::EntityStates.Commando.CommandoWeapon.ThrowGrenade self, float duration) {
+    private void ThrowGrenade_PlayAnimation(On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.orig_PlayAnimation orig, EntityStates.Commando.CommandoWeapon.ThrowGrenade self, float duration) {
         orig(self, duration);
         Chat.AddMessage(self.projectilePitchBonus.ToString());
     }

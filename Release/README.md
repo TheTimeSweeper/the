@@ -48,6 +48,10 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`1.4.0`
+ - added head hitbox proper
+ - desolator: fixed R being forced to use all lysate cell stacks
+
 `1.3.2`
  - fixed eclipse not saving progress
  - attempt fix to targeting just not wanting to target sometimes

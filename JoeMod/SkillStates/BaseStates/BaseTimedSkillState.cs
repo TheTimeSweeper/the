@@ -5,9 +5,9 @@ namespace ModdedEntityStates.BaseStates
 {
     public class BaseTimedSkillState : BaseSkillState
     {
-        public static float TimedBaseDuration;
-        public static float TimedBaseCastStartTime;
-        public static float TimedBaseCastEndTime;
+        public float TimedBaseDuration;
+        public float TimedBaseCastStartTime;
+        public float TimedBaseCastEndTime;
 
         protected float duration;
         protected float castStartTime;

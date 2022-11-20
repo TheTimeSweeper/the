@@ -79,7 +79,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             cameraTargetParams.RemoveParamsOverride(_cameraOverrideHandle, 0.1f);
 
-            EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new WindDownState(0.2f));
+            EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetInterruptState(new WindDownState(0.2f), InterruptPriority.Any);
         }
 
         private CharacterCameraParamsData GetBlinkCameraParams(float distance) {

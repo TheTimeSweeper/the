@@ -50,10 +50,8 @@ namespace Modules.Characters {
         protected virtual void InitializeCharacterMaster() { }
         protected virtual void InitializeEntityStateMachine() {
             bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
-            States.entityStates.Add(characterMainState);
             if (characterSpawnState != null) {
                 bodyPrefab.GetComponent<EntityStateMachine>().initialStateType = new EntityStates.SerializableEntityStateType(characterSpawnState);
-                States.entityStates.Add(characterSpawnState);
             }
         }
 

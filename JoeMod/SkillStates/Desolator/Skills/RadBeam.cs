@@ -25,7 +25,7 @@ namespace ModdedEntityStates.Desolator {
             maxSpread = 0;
             spreadPitchScale = 1f;
             spreadYawScale = 1f;
-            spreadBloomValue = TestValueManager.value1;
+            spreadBloomValue = TestValueManager.value3;
             recoilAmplitudeY = 1;
             recoilAmplitudeX = 1;
             muzzleName = "MuzzleGauntlet";

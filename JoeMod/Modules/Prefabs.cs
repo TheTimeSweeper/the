@@ -300,7 +300,7 @@ namespace Modules {
             hurtBoxGroup.mainHurtBox = mainHurtbox;
             hurtBoxGroup.bullseyeCount = 1;
         }
-
+        
         public static void SetupHurtBoxGroup(GameObject bodyPrefab, GameObject bodyModel) {
 
             HealthComponent healthComponent = bodyPrefab.GetComponent<HealthComponent>();
@@ -310,6 +310,7 @@ namespace Modules {
                 hurtboxGroup.mainHurtBox.healthComponent = healthComponent;
                 for (int i = 0; i < hurtboxGroup.hurtBoxes.Length; i++) {
                     hurtboxGroup.hurtBoxes[i].healthComponent = healthComponent;
+                    hurtboxGroup.hurtBoxes[i].gameObject.layer = LayerIndex.entityPrecise.intVal;
                 }
             } else {
                 SetupMainHurtboxFromChildLocator(bodyPrefab, bodyModel);

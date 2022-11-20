@@ -67,13 +67,31 @@ public class TeslaTowerControllerController : MonoBehaviour {
                 continue;
             }
 
-            //coil.GetComponent<SkillLocator>().secondary.DeductStock(1);
             coil.GetComponent<EntityStateMachine>().SetInterruptState(new TowerBigZap() {
                 lightningTarget = target,
             }, InterruptPriority.PrioritySkill);
         }
     }
 
+    //so DRY it's dehydrated
+    public void commandTowersGauntlet(HurtBox target) {
+
+        if (!NetworkServer.active)
+            return;
+
+        List<GameObject> nearbyTowers = GetNearbyTowers();
+
+        for (int i = 0; i < nearbyTowers.Count; i++) {
+            GameObject coil = nearbyTowers[i];
+            if (coil == null) {
+                continue;
+            }
+
+            coil.GetComponent<EntityStateMachine>().SetInterruptState(new TowerBigZapGauntlet() {
+                lightningTarget = target,
+            }, InterruptPriority.PrioritySkill);
+        }
+    }
 
     public List<GameObject> GetNearbyTowers(GameObject nearObject = null) {
 

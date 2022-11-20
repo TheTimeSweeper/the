@@ -39,7 +39,7 @@ namespace ModdedEntityStates.Desolator {
             _complete = true;
             return new DeployIrradiate { aimRequest = this.aimRequest };
         }
-
+        
         public override void OnExit() {
             base.OnExit();
             if (_complete) {

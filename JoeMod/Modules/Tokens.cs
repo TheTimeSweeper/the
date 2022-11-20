@@ -42,7 +42,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
             #region Skins
-            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
             #endregion
 
@@ -158,7 +157,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
             #region Skins
-            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
             LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
@@ -177,7 +175,7 @@ namespace Modules
              LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Fist");
-            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.OrbDamageCoefficient)}. Punching projectiles sends them back, electrically charged");
+            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient * ZapPunch.OrbDamageMultiplier)}. ");
             
             #endregion
             
@@ -263,7 +261,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
             #region Skins
-            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
             LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Nod");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Redstone");
@@ -327,7 +324,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
             
             #region Skins
-            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
             LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
             LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");

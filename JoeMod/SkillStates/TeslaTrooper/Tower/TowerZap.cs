@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using JoeMod;
+using System;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
 
@@ -14,7 +15,6 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public static float ProcCoefficient = 1f;
         
         public static float BaseDuration = 1f;
-        public static float BaseStartCastTime = 1;
 
         public LightningOrb lightningOrb;
         public HurtBox lightningTarget;
@@ -43,11 +43,10 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             }
         }
 
-        public override void OnEnter()
-        {
+        public override void OnEnter() {
             base.OnEnter();
-            // is this redundant cause the cast time is the end and I could just do an onexit kinda thing?
-            InitDurationValues(BaseDuration, BaseStartCastTime);
+
+            base.InitDurationValues(GetBaseDuration(), 1);
 
             towerWeaponComponent = GetComponent<TowerWeaponComponent>();
 
@@ -72,7 +71,15 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             };
 
             lightningOrb.target = lightningTarget;
-            
+
+            PlayPrep();
+        }
+
+        protected virtual float GetBaseDuration() {
+            return BaseDuration;
+        }
+
+        protected virtual void PlayPrep() {
             Util.PlaySound(PrepSound, gameObject);
             PlayCrossfade("weapon", "PrepZap", "prep.playbackRate", base.duration, 0.1f);
         }
@@ -101,6 +108,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         //cast time is 1
         protected override void OnCastEnter() {
 
+            ModifySound();
+
             Util.PlaySound(lightningOrb.isCrit? zapSoundCrit : zapSound , gameObject);
 
             if (!NetworkServer.active)
@@ -111,6 +120,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
             fireOrb();
         }
+
+        protected virtual void ModifySound() { }
 
         protected virtual void fireOrb() {
             //todo: custom lightningorb

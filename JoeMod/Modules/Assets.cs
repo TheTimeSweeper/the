@@ -235,7 +235,7 @@ namespace Modules {
             beamController.attackRange = ModdedEntityStates.TeslaTrooper.ZapPunch.OrbDistance;
             beamController.maxAngleFilter = 50;
             beamController.procCoefficient = ModdedEntityStates.TeslaTrooper.ZapPunch.ProcCoefficient;
-            beamController.damageCoefficient = ModdedEntityStates.TeslaTrooper.ZapPunch.OrbDamageCoefficient;
+            beamController.damageCoefficient = 1;
             beamController.lightningType = RoR2.Orbs.LightningOrb.LightningType.MageLightning;
             //beamController.inheritDamageType = true;
 

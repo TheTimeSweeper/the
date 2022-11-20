@@ -130,10 +130,6 @@ namespace Modules.Survivors
 
             #region Primary
 
-            States.entityStates.Add(typeof(Primary1Swing));
-            States.entityStates.Add(typeof(Primary1JumpSwingFall));
-            States.entityStates.Add(typeof(Primary1JumpSwingLand));
-            
             SkillDef primarySkillDef = Modules.Skills.CreateSkillDef( new SkillDefInfo("JoeSwing",
                                                                 prefix + "PRIMARY_SWING_NAME",
                                                                 prefix + "PRIMARY_SWING_DESCRIPTION",
@@ -142,7 +138,6 @@ namespace Modules.Survivors
                                                                 "Weapon",
                                                                 true));
 
-            States.entityStates.Add(typeof(PrimaryStupidSwing));
             SkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef(new SkillDefInfo("JoeSwingClassic",
                                                                      prefix + "PRIMARY_SWING_NAME_CLASSIC",
                                                                      prefix + "PRIMARY_SWING_DESCRIPTION",
@@ -153,7 +148,6 @@ namespace Modules.Survivors
                 mustKeyPress = true 
             });
 
-            States.entityStates.Add(typeof(ThrowBoom));
             SkillDef primarySkillDefBomeb = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeBomb",
                                                                      prefix + "PRIMARY_BOMB_NAME",
                                                                      prefix + "PRIMARY_BOMB_DESCRIPTION",
@@ -162,7 +156,6 @@ namespace Modules.Survivors
                                                                      "Weapon",
                                                                      false));
 
-            States.entityStates.Add(typeof(ThroBoomButCoolerQuestionMaark));
             SkillDef primarySkillDefBomebe = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeBomb2",
                                                                       prefix + "PRIMARY_BOMB_NAME",
                                                                       prefix + "PRIMARY_BOMB_DESCRIPTION",
@@ -171,7 +164,6 @@ namespace Modules.Survivors
                                                                       "Weapon",
                                                                       false));
 
-            States.entityStates.Add(typeof(Zap));
             SkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeZap",
                                                                    prefix + "PRIMARY_ZAP_NAME",
                                                                    prefix + "PRIMARY_ZAP_DESCRIPTION",
@@ -185,7 +177,6 @@ namespace Modules.Survivors
             
             #region Secondary
 
-            States.entityStates.Add(typeof(ThrowBoom));
             SkillDef fireballSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = prefix + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = prefix + "SECONDARY_FIREBALL_NAME",
@@ -210,9 +201,6 @@ namespace Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-
-            States.entityStates.Add(typeof(AimBigZap));
-            States.entityStates.Add(typeof(BigZap));
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo { 
                 skillName = prefix + "SECONDARY_BIGZAP_NAME",
                 skillNameToken = prefix + "SECONDARY_BIGZAP_NAME",
@@ -272,10 +260,7 @@ namespace Modules.Survivors
 
             #region Special
 
-            States.entityStates.Add(typeof(DeployTeslaTower));
-
-            SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = prefix + "SPECIAL_TOWER_NAME",
                 skillNameToken = prefix + "SPECIAL_TOWER_NAME",
                 skillDescriptionToken = prefix + "SPECIAL_TOWER_DESCRIPTION",

@@ -88,10 +88,8 @@ namespace Modules.Survivors {
             EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(bodyPrefab, "Weapon");
             entityStateMachine.initialStateType = new SerializableEntityStateType(typeof(TowerLifetime));
             entityStateMachine.mainStateType = new SerializableEntityStateType(typeof(TowerLifetime));
-            States.entityStates.Add(typeof(TowerLifetime));
 
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new SerializableEntityStateType(typeof(TowerSell));
-            States.entityStates.Add(typeof(TowerSell));
         }
 
         protected override void InitializeCharacterMaster() {
@@ -120,7 +118,6 @@ namespace Modules.Survivors {
         }
 
         private void InitializePrimarySkills() {
-            States.entityStates.Add(typeof(TowerZap));
             SkillDef primarySkillDefZap = Modules.Skills.CreateSkillDef(new SkillDefInfo("Tower_Primary_Zap",
                                                                                          TOWER_PREFIX + "PRIMARY_ZAP_NAME",
                                                                                          TOWER_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
@@ -133,7 +130,6 @@ namespace Modules.Survivors {
         }
 
         private void InitializeSecondarySkills() {
-            States.entityStates.Add(typeof(TowerBigZap));
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Tower_Secondary_BigZap",
                 skillNameToken = TOWER_PREFIX + "SECONDARY_BIGZAP_NAME",
@@ -187,7 +183,7 @@ namespace Modules.Survivors {
 
             #region DefaultSkin
 
-            TowerSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TowerSkinDef>(TOWER_PREFIX + "DEFAULT_SKIN_NAME",
+            TowerSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TowerSkinDef>("DEFAULT_SKIN",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 bodyCharacterModel.gameObject);

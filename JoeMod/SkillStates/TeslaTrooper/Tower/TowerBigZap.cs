@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using System;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {
+
     public class TowerBigZap: TowerZap {
 
         public static Action<GameObject> onTowerBigZapMultiHit;
@@ -16,23 +17,27 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         
         public float secondarySkillsPlusAreaMulti = 1f;
         public float secondarySkillsPlusDamageMulti = 1f;
+        public float damageCoefficient;
         public float attackRadius;
 
         private string towerZapSound = "Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower";
 
-        protected override void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1) {
+        public override void OnEnter() {
 
-            base.InitDurationValues(BaseDuration, BaseStartCastTime);
+            base.OnEnter();
 
+            damageCoefficient = DamageCoefficient;
             attackRadius = BaseAttackRadius * secondarySkillsPlusAreaMulti;
         }
-        
-        protected override void OnCastEnter() {
+
+        protected override float GetBaseDuration() {
+            return BaseDuration;
+        }
+
+        protected override void ModifySound() {
 
             zapSound = towerZapSound;
             zapSoundCrit = towerZapSound;
-
-            base.OnCastEnter();
         }
 
         protected override void fireOrb() {
@@ -61,11 +66,11 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     radius = attackRadius,
                     falloffModel = BlastAttack.FalloffModel.None,
 
-                    baseDamage = damageStat * DamageCoefficient * secondarySkillsPlusDamageMulti,
+                    baseDamage = damageStat * damageCoefficient * secondarySkillsPlusDamageMulti,
                     crit = crit,
                     damageType = DamageType.Shock5s,
                     damageColorIndex = DamageColorIndex.WeakPoint,
-                    
+
                     procCoefficient = ProcCoefficient,
                     //procChainMask = 
                     //losType = BlastAttack.LoSType.NearestHit,
@@ -86,14 +91,18 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
                     scale = attackRadius,
                 };
 
-                EffectManager.SpawnEffect(BigZap.bigZapEffectPrefabArea, fect, true);
-
-                EffectManager.SpawnEffect(BigZap.bigZapEffectPrefab, fect, true);
-
-                fect.scale /= 2f;
-                EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
+                PlayBlastEffect(fect);
                 #endregion effects
             }
+        }
+
+        protected virtual void PlayBlastEffect(EffectData fect) {
+            EffectManager.SpawnEffect(BigZap.bigZapEffectPrefabArea, fect, true);
+
+            EffectManager.SpawnEffect(BigZap.bigZapEffectPrefab, fect, true);
+
+            fect.scale /= 2f;
+            EffectManager.SpawnEffect(BigZap.bigZapEffectFlashPrefab, fect, true);
         }
 
         public override void OnExit() {

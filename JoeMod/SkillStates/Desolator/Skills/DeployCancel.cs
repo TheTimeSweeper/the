@@ -1,12 +1,11 @@
 ﻿using EntityStates;
 using ModdedEntityStates.BaseStates;
 using Modules.Survivors;
+using RoR2;
 
 namespace ModdedEntityStates.Desolator {
-    public class DeployCancel : BaseState {
 
-        public static float BaseDuration = 0.3f;
-        public static float StartTime = 1f;
+    public class DeployCancel : BaseTimedSkillState {
 
         public override void OnEnter() {
             base.OnEnter();
@@ -17,9 +16,10 @@ namespace ModdedEntityStates.Desolator {
             PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
             PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
 
+            base.outer.SetNextStateToMain();
+
             skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
-            base.outer.SetNextStateToMain();
         }
 
         //public override void FixedUpdate() {
@@ -28,10 +28,7 @@ namespace ModdedEntityStates.Desolator {
         //    if (base.isAuthority && base.inputBank.sprint.down) {
         //        base.characterBody.isSprinting = true;
         //    }
-        //}
 
-        //public override void OnExit() {
-        //    base.outer.SetNextStateToMain();
         //}
     }
 }

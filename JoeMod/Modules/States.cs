@@ -3,43 +3,102 @@ using ModdedEntityStates.Joe;
 using ModdedEntityStates.BaseStates;
 using System.Collections.Generic;
 using System;
+using ModdedEntityStates;
+using ModdedEntityStates.TeslaTrooper.Tower;
+using ModdedEntityStates.TeslaTrooper;
+using ModdedEntityStates.Desolator;
 
 namespace Modules
 {
     internal static class States
     {
-        public static List<Type> entityStates => ContentPacks.entityStates;
-
-        public static void RegisterStates()
-        {
+        public static void RegisterStates() {
             #region henry
-            entityStates.Add(typeof(SlashCombo));
+            Content.AddEntityState(typeof(SlashCombo));
 
-            entityStates.Add(typeof(Shoot));
+            Content.AddEntityState(typeof(Shoot));
 
-            entityStates.Add(typeof(Roll));
+            Content.AddEntityState(typeof(Roll));
 
-            entityStates.Add(typeof(ThrowBomb));
+            Content.AddEntityState(typeof(ThrowBomb));
             #endregion
 
-            //okay, I said I this for tokens, and now I know that makes more sense for translatoin
-            // but for here it's definitely asinine to have these so randomly separate from the skills
-            //oh i guess it's for organization of registering all the shit to the contentpack, however
-            //now in practice ,there's also a lot of other entitystates that aren't just with skills and it's confusing to know where to put them
-            //todo put them back here
             #region joe
-            ////prim
-            //entityStates.Add(typeof(Primary1Swing));
-            //entityStates.Add(typeof(Primary1JumpSwingFall));
-            //entityStates.Add(typeof(Primary1JumpSwingLand));
+            //prim
+            Content.AddEntityState(typeof(JoeMain));
 
-            //entityStates.Add(typeof(PrimaryStupidSwing));
+            Content.AddEntityState(typeof(Primary1Swing));
+            Content.AddEntityState(typeof(Primary1JumpSwingFall));
+            Content.AddEntityState(typeof(Primary1JumpSwingLand));
 
-            //entityStates.Add(typeof(ThrowBoom));
+            Content.AddEntityState(typeof(PrimaryStupidSwing));
 
-            ////sec
-            //entityStates.Add(typeof(Secondary1Fireball));
+            Content.AddEntityState(typeof(ThrowBoom));
+            Content.AddEntityState(typeof(ThroBoomButCoolerQuestionMaark));
+
+            //sec
+            Content.AddEntityState(typeof(Secondary1Fireball));
             #endregion
+
+            Content.AddEntityState(typeof(WindDownState));
+            
+            #region tesla trooper
+            Content.AddEntityState(typeof(TeslaTrooperMain));
+
+            Content.AddEntityState(typeof(Zap));
+
+            Content.AddEntityState(typeof(ZapPunch));
+            Content.AddEntityState(typeof(ZapPunchWithDeflect));
+            Content.AddEntityState(typeof(ChargeZapPunch));
+            Content.AddEntityState(typeof(FireChargedZapPunch));
+
+            Content.AddEntityState(typeof(AimBigZap));
+            Content.AddEntityState(typeof(BigZap));
+
+            Content.AddEntityState(typeof(ShieldZapStart));
+            Content.AddEntityState(typeof(ShieldZapCollectDamage));
+            Content.AddEntityState(typeof(ShieldZapReleaseDamage));
+
+            Content.AddEntityState(typeof(BlinkZap));
+
+            Content.AddEntityState(typeof(DeployTeslaTower)); 
+            Content.AddEntityState(typeof(DeployTeslaTowerScepter));
+            #endregion tesla trooper
+
+            #region tesla tower
+
+            Content.AddEntityState(typeof(TowerSpawnState));
+            Content.AddEntityState(typeof(TowerIdleSearch));
+
+            Content.AddEntityState(typeof(TowerLifetime));
+            Content.AddEntityState(typeof(TowerUndeploy));
+            Content.AddEntityState(typeof(TowerSell));
+
+            Content.AddEntityState(typeof(TowerZap));
+            Content.AddEntityState(typeof(TowerBigZap));
+            Content.AddEntityState(typeof(TowerBigZapGauntlet));
+
+            //scepter
+            Content.AddEntityState(typeof(TowerSpawnStateScepter));
+            Content.AddEntityState(typeof(TowerIdleSearchScepter));
+
+            Content.AddEntityState(typeof(TowerZapMulti));
+            #endregion tesla tower
+
+            #region desolator
+            Content.AddEntityState(typeof(DesolatorMain));
+
+            Content.AddEntityState(typeof(RadBeam));
+            Content.AddEntityState(typeof(AimBigRadBeam));
+
+            Content.AddEntityState(typeof(RadiationAura));
+
+            Content.AddEntityState(typeof(DeployEnter));
+            Content.AddEntityState(typeof(DeployIrradiate));
+            Content.AddEntityState(typeof(DeployCancel));
+
+            Content.AddEntityState(typeof(ThrowIrradiator));
+            #endregion desolator
         }
     }
 }

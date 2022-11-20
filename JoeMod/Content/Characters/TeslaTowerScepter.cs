@@ -35,9 +35,6 @@ namespace Modules.Survivors {
 
             baseTower = baseTower_;
             InitializeCharacter();
-
-            Modules.Content.AddEntityState(typeof(TowerIdleSearchScepter));
-            Modules.Content.AddEntityState(typeof(TowerZapMulti));
         }
 
         public override void InitializeCharacter() {
