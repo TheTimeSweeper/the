@@ -34,7 +34,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.damageCoefficient = GetDamageCoefficient();
 
             base.procCoefficient = ProcCoefficient;
-            base.pushForce = 690f;
+            base.pushForce = 930;
 
             base.baseDuration = BasePunchDuration;
             base.attackStartTime = baseAttackStartTime * animationDuration;
@@ -42,7 +42,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.baseEarlyExitTime = 0.8f;
 
             base.hitStopDuration = 0.14f;
-            base.swingSoundString = "";
+            base.swingSoundString = "Play_PunchWoosh";
             base.hitSoundString = "";
             base.muzzleString = "PunchHitboxAnchor"; // swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             base.hitstopAnimationParameter = "Shock.playbackRate";

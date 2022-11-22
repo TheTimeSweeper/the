@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Desolator {
+
     public class DeployEnter : BaseTimedSkillState {
 
         #region gameplay Values
@@ -13,7 +14,7 @@ namespace ModdedEntityStates.Desolator {
         #endregion
 
         public RoR2.CameraTargetParams.AimRequest aimRequest;
-        private bool _complete;
+        protected bool _complete;
 
         public override void OnEnter() {
             base.OnEnter();

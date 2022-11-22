@@ -15,13 +15,10 @@ namespace Modules {
         public static DamageAPI.ModdedDamageType ShockShort;
 
         public static DamageAPI.ModdedDamageType Conductive;
-        public static DamageAPI.ModdedDamageType ApplyBlinkCooldown;
+        //public static DamageAPI.ModdedDamageType ApplyBlinkCooldown;
 
         public static DamageAPI.ModdedDamageType DesolatorArmorShred;
         public static DamageAPI.ModdedDamageType DesolatorDot;
-
-        //Aliem
-        public static DamageAPI.ModdedDamageType ApplyAliemRiddenBuff;
 
         public static void RegisterDamageTypes() {
 
@@ -30,13 +27,10 @@ namespace Modules {
             ShockShort = DamageAPI.ReserveDamageType();
 
             Conductive = DamageAPI.ReserveDamageType();
-            ApplyBlinkCooldown = DamageAPI.ReserveDamageType();
+            //ApplyBlinkCooldown = DamageAPI.ReserveDamageType();
 
             DesolatorArmorShred = DamageAPI.ReserveDamageType();
             DesolatorDot = DamageAPI.ReserveDamageType();
-
-            //Aliem
-            ApplyAliemRiddenBuff = DamageAPI.ReserveDamageType();
 
             SetHooks();
         }

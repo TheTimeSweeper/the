@@ -2,16 +2,17 @@
 using RoR2.Projectile;
 using UnityEngine;
 using ModdedEntityStates.BaseStates;
+using System;
 
 namespace ModdedEntityStates.Desolator {
-    public class ThrowIrradiator : BaseTimedSkillState {
 
+    public class ThrowIrradiator : BaseTimedSkillState {
         public static float DamageCoefficient = 0.3f;
         public static float Range = 30;
         
         public static float BaseDuration = 1f;
         public static float StartTime = 0.0f;
-        
+
         public override void OnEnter() {
             base.OnEnter();
 
@@ -21,6 +22,7 @@ namespace ModdedEntityStates.Desolator {
 
             if (base.isAuthority) {
                 Ray aimRay = base.GetAimRay();
+
                 FireProjectileInfo fireProjectileInfo = new FireProjectileInfo {
                     crit = base.RollCrit(),
                     damage = this.damageStat * DamageCoefficient,
@@ -34,9 +36,12 @@ namespace ModdedEntityStates.Desolator {
                     rotation = Quaternion.LookRotation(aimRay.direction),
                     target = null
                 };
+                ModifyProjectile(ref fireProjectileInfo);
                 ProjectileManager.instance.FireProjectile(fireProjectileInfo);
             }
             Util.PlaySound("Play_Desolator_Deploy", base.gameObject);
         }
+
+        protected virtual void ModifyProjectile(ref FireProjectileInfo fireProjectileInfo) { }
     }
 }

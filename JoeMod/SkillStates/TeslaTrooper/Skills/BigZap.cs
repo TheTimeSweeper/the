@@ -104,7 +104,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 };
                 blast.Fire();
             }
-
+            
             Util.PlaySound(isCrit ? zapSound : zapSoundCrit, gameObject);
             
             #region effects

@@ -307,7 +307,7 @@ namespace AliemMod.Content.Survivors {
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
             CharacterModel.RendererInfo[] defaultRendererinfos = characterModel.baseRendererInfos;
-
+            
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin

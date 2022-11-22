@@ -611,6 +611,90 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_TeslaChargingUp" ID="{D1EFA5F2-FD61-456F-959C-FB966CC774C4}">
+							<ChildrenList>
+								<Action Name="" ID="{7ED3E9B4-19F3-4ABB-964F-42934D1BB234}" ShortID="801998620">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingUp" ID="{DF63301E-A667-47D6-AC9F-E0DF16A897E6}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingLoop" ID="{988A1990-B2FB-4470-BE39-0F98A968ECEA}">
+							<ChildrenList>
+								<Action Name="" ID="{9814E6CF-9856-4035-8717-53F2FD30D210}" ShortID="293909176">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingLoop" ID="{0D8E05F5-720D-4D55-BADA-D3A7F8E08F40}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingComplete" ID="{244896EA-BACB-48AC-98A1-60F63EB69148}">
+							<ChildrenList>
+								<Action Name="" ID="{32AF918E-F03B-43B7-A477-ACE327B2408F}" ShortID="300807743">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingComplete" ID="{6D89A082-796B-4D39-A916-D265A0219D30}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingLoopHigh" ID="{1BB5E305-F9F7-4AD0-A92D-69FB297EAEE6}">
+							<ChildrenList>
+								<Action Name="" ID="{35192D23-A46E-4BB5-946D-AA9629627516}" ShortID="1025042613">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingLoopHigh" ID="{B9E0A08A-83EF-4EF6-A6E9-7938265596B2}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_PunchWoosh" ID="{60259A5F-D2E2-4728-BF4F-BC7421D70780}">
+							<ChildrenList>
+								<Action Name="" ID="{AD648F67-BF08-471A-A916-FB548763EDE4}" ShortID="774265637">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PunchWoosh" ID="{7CDE8B54-A568-4804-BE9D-8B9E8D7C7C1E}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_PunchWoosh2" ID="{42954D0F-859A-435B-89B8-0B2C197173F6}">
+							<ChildrenList>
+								<Action Name="" ID="{404B3817-7D26-4A08-B404-FC4CCF91517E}" ShortID="789318850">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PunchWoosh2" ID="{3C1D32E7-F323-48D9-83A5-840F764DA3AC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Desolator" ID="{5F9071F2-7074-4763-B291-CBD1D0BF2C19}" ShortID="582821650">

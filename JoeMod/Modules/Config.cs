@@ -20,8 +20,9 @@ namespace Modules
         public static float UtilityDamageAbsorption;
         public static ConfigEntry<bool> UncappedUtility;
 
-        public static void ReadConfig()
-        {
+        public static bool DesolatorForceUnlock;
+
+        public static void ReadConfig() {
             Debug = FacelessJoePlugin.instance.Config.Bind(
                 "Debug",
                 "Debug Logs",
@@ -66,7 +67,7 @@ namespace Modules
                 false,
                 "Changes character icon to the unit icon from Red Alert 2").Value;
 
-            string sectionGameplay= "Gameplay";
+            string sectionGameplay = "Gameplay";
 
             TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
                 sectionGameplay,
@@ -97,14 +98,23 @@ namespace Modules
                 false,
                 "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");
 
-           FacelessJoePlugin.Desolator = Modules.Config.CharacterEnableConfig("Desolator BETA", false, "There goes the neighborhood").Value;
+            string sectionDesolator = "Desolator";
+
+            FacelessJoePlugin.Desolator = Modules.Config.CharacterEnableConfig("Desolator BETA", false, "There goes the neighborhood"/*, sectionDesolator*/).Value;
+
+            //DesolatorForceUnlock = FacelessJoePlugin.instance.Config.Bind(
+            //    sectionDesolator,
+            //    "Force unlock",
+            //    false,
+            //    "Unlock character by default").Value;
+
 
         }
 
         // this helper automatically makes config entries for disabling survivors
-        public static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "")
+        public static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "", string section = "General")
         {
-            return FacelessJoePlugin.instance.Config.Bind<bool>("General",
+            return FacelessJoePlugin.instance.Config.Bind<bool>(section,
                                                                 "Enable "+ characterName,
                                                                 enabledDefault,
                                                                 !string.IsNullOrEmpty(description) ? description : "Set to false to disable this character");

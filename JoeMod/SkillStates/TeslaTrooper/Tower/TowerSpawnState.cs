@@ -12,7 +12,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         {
             duration = TowerSpawnDuration / attackSpeedStat;
 
-            Util.PlaySound("Play_building_bplace", base.gameObject);
+            //I am still fucking exploding
+            Util.PlaySound("Play_buliding_uplace", gameObject);
             base.PlayAnimation("Body", "ConstructionComplete", "construct.playbackRate", this.duration);
             base.OnEnter();
 

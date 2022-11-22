@@ -21,7 +21,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         public static string PrepSound = "Play_tower_btespow_tesla_tower_prep";
         public static string ZapSound = "Play_tower_btesat1a_tesla_tower_attack";
-        public static string ZapSoundCrit = "Play_tower_btesat2a_tesla_tower_attack";
+        public static string ZapSoundCrit = "Play_tower_btesat1a_tesla_tower_attack";//"Play_tower_btesat2a_tesla_tower_attack"; taken for alt m2
 
         protected string zapSound = ZapSound;
         protected string zapSoundCrit = ZapSoundCrit;

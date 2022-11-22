@@ -102,7 +102,9 @@ namespace ModdedEntityStates.Desolator {
         }
 
         public override EntityState PickNextState() {
-            return new WindDownState(0.8f);
+            WindDownState windDownState = new WindDownState();
+            windDownState.windDownTime = 0.8f;
+            return windDownState;
         }
     }
 }

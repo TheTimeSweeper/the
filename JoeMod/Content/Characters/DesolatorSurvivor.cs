@@ -80,6 +80,10 @@ namespace Modules.Survivors {
             Hook();
         }
 
+        public override void InitializeUnlockables() {
+            masterySkinUnlockableDef = R2API.UnlockableAPI.AddUnlockable(typeof(Modules.Achievements.DesolatorMastery));
+        }
+
         public override void InitializeDoppelganger(string clone) {
             base.InitializeDoppelganger("Engi");
         }
@@ -128,6 +132,10 @@ namespace Modules.Survivors {
             InitializeUtilitySkills();
 
             InitializeSpecialSkills();
+
+            if (Modules.Compat.ScepterInstalled) {
+                InitializeScepterSkills();
+            }
 
             InitializeRecolorSkills();
 
@@ -246,7 +254,7 @@ namespace Modules.Survivors {
                 skillName = "Desolator_Special_Deploy_Cancel",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_NAME",
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("texTeslaSkillUtilityEpic"),
+                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialCancel"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployCancel)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -269,7 +277,7 @@ namespace Modules.Survivors {
                 skillName = "Desolator_Special_Tower",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME",
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecial"),
+                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowIrradiator)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
@@ -290,6 +298,63 @@ namespace Modules.Survivors {
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, deploySkillDef, irradiatorSkillDef);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void InitializeScepterSkills() {
+
+            SkillDef scepterDeploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Desolator_Special_Deploy_Scepter",
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_DEPLOY_NAME",
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialScepter"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ScepterDeployEnter)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 12f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
+            });
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterDeploySkillDef, "DesolatorBody", SkillSlot.Special, 0);
+
+            SkillDef scepterIrradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "Desolator_Special_Tower_Scepter",
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_NAME",
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialAltScepter"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ScepterThrowIrradiator)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 2,
+                baseRechargeInterval = 8f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
+            });
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterIrradiatorSkillDef, "DesolatorBody", SkillSlot.Special, 1);
         }
 
         //todo deso
@@ -313,8 +378,6 @@ namespace Modules.Survivors {
                 createRecolorSkillDef("Purple"),
                 createRecolorSkillDef("Pink"),
             };
-            //why'd I do this separately again?
-            //skilldefs[0] = createRecolorSkillDef("Red");
 
             if (Modules.Config.NewColor) {
                 skilldefs.Add(createRecolorSkillDef("Black"));
@@ -322,7 +385,7 @@ namespace Modules.Survivors {
 
             for (int i = 0; i < skilldefs.Count; i++) {
 
-                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0 ? null : TeslaTrooperSurvivor.recolorsUnlockableDef);
+                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0 ? null : masterySkinUnlockableDef);
 
                 AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
@@ -367,7 +430,7 @@ namespace Modules.Survivors {
             #region DefaultSkin
 
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDesolatorDefault"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);
 

@@ -117,9 +117,6 @@ namespace ModdedEntityStates.TeslaTrooper {
                                                    placementInfo.position, 
                                                    placementInfo.rotation, 
                                                    MasterCatalog.FindMasterIndex(coilMasterPrefab));
-
-            //I am fucking exploding right now
-            Util.PlaySound("Play_buliding_uplace", gameObject);
         }
 
         public override void OnExit()

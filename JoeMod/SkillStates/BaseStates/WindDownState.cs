@@ -7,10 +7,6 @@ namespace ModdedEntityStates {
         public float windDownTime = 0.5f;
         private float _windDownTime;
 
-        public WindDownState(float windDownTime_) {
-            windDownTime = windDownTime_;
-        }
-
         public override void OnEnter() {
             base.OnEnter();
             _windDownTime = windDownTime / attackSpeedStat;

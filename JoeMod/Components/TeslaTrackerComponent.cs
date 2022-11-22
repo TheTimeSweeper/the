@@ -19,6 +19,9 @@ public class TeslaTrackerComponent : MonoBehaviour {
     public HurtBox trackingTargetZap;
     public HurtBox trackingTargetDash;
 
+    public List<HealthComponent> dashCooldownTargets = new List<HealthComponent>();
+    public List<float> dashCooldownTimers = new List<float>();
+    
     private InputBankTest inputBank;
 
     private float trackerUpdateStopwatch;
@@ -33,6 +36,34 @@ public class TeslaTrackerComponent : MonoBehaviour {
         if (trackerUpdateStopwatch >= 1f / trackerUpdateFrequency) {
             OnSearch();
         }
+
+        UpdateCooldownTimers();
+    }
+
+    private void UpdateCooldownTimers() {
+        for (int i = dashCooldownTimers.Count - 1; i >= 0; i--) {
+
+            if(dashCooldownTargets[i] == null) {
+                dashCooldownTargets.RemoveAt(i);
+                dashCooldownTimers.RemoveAt(i);
+                continue;
+            }
+
+            dashCooldownTimers[i] -= Time.fixedDeltaTime;
+            if(dashCooldownTimers[i] < 0) {
+                dashCooldownTargets.RemoveAt(i);
+                dashCooldownTimers.RemoveAt(i);
+            }
+        }
+    }
+
+    public void AddCooldownTarget(HealthComponent healthComponent) {
+
+        if (dashCooldownTargets.Contains(healthComponent))
+            return;
+
+        dashCooldownTargets.Add(healthComponent);
+        dashCooldownTimers.Add(4);
     }
 
     private void OnSearch() {
@@ -86,19 +117,19 @@ public class TeslaTrackerComponent : MonoBehaviour {
     #region hurtbox raycast
 
     // Token: 0x06003E56 RID: 15958 RVA: 0x00101B5C File Offset: 0x000FFD5C
-    public static bool CharacterRaycast(GameObject bodyObject, Ray ray, out HurtBox zapHit, out HurtBox dashHit, float maxDistance, LayerMask layerMask, QueryTriggerInteraction queryTriggerInteraction) {
+    public bool CharacterRaycast(GameObject bodyObject, Ray ray, out HurtBox zapHit, out HurtBox dashHit, float maxDistance, LayerMask layerMask, QueryTriggerInteraction queryTriggerInteraction) {
         RaycastHit[] hits = Physics.RaycastAll(ray, maxDistance, layerMask, queryTriggerInteraction);
         return HandleCharacterPhysicsCastResults(bodyObject, ray, queryTriggerInteraction, hits, out zapHit, out dashHit);
     }
 
     // Token: 0x06003E57 RID: 15959 RVA: 0x00101B84 File Offset: 0x000FFD84
-    public static bool CharacterSpherecast(GameObject bodyObject, Ray ray, float radius, out HurtBox zapHit, out HurtBox dashHit, float maxDistance, LayerMask layerMask, QueryTriggerInteraction queryTriggerInteraction) {
+    public bool CharacterSpherecast(GameObject bodyObject, Ray ray, float radius, out HurtBox zapHit, out HurtBox dashHit, float maxDistance, LayerMask layerMask, QueryTriggerInteraction queryTriggerInteraction) {
         RaycastHit[] hits = Physics.SphereCastAll(ray, radius, maxDistance, layerMask, queryTriggerInteraction);
         return HandleCharacterPhysicsCastResults(bodyObject, ray, queryTriggerInteraction, hits, out zapHit, out dashHit);
     }
 
     // Token: 0x06003E55 RID: 15957 RVA: 0x00101AA8 File Offset: 0x000FFCA8
-    private static bool HandleCharacterPhysicsCastResults(GameObject bodyObject, Ray ray, QueryTriggerInteraction queryTriggerInteraction, RaycastHit[] hits, out HurtBox zapHit, out HurtBox dashHit) {
+    private bool HandleCharacterPhysicsCastResults(GameObject bodyObject, Ray ray, QueryTriggerInteraction queryTriggerInteraction, RaycastHit[] hits, out HurtBox zapHit, out HurtBox dashHit) {
 
         zapHit = null;
         dashHit = null;
@@ -135,7 +166,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
                     }
 
                     if (distance < shortestDashDistance) {
-                        if (!hurtBox.healthComponent.body.HasBuff(Modules.Buffs.blinkCooldownBuff)) {
+                        if (!dashCooldownTargets.Contains(hurtBox.healthComponent)) {
                             dashHit = hurtBox;
                             shortestDashDistance = distance;
                         }

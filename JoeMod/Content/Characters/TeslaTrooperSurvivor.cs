@@ -211,7 +211,7 @@ namespace Modules.Survivors {
                                                            TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
                                                            TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
                                                            Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
-                                                           new EntityStates.SerializableEntityStateType(typeof(ZapPunch)),
+                                                           new EntityStates.SerializableEntityStateType(typeof(ZapPunchWithDeflect)),
                                                            "Weapon",
                                                            false));
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
@@ -354,8 +354,6 @@ namespace Modules.Survivors {
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
         }
 
-        //todo this is just lysate cell
-        //make it not lysate cell
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
 
@@ -719,9 +717,10 @@ namespace Modules.Survivors {
 
             CheckConductive(self, damageInfo);
 
-            if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.ApplyBlinkCooldown)) {
-                    self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
-            }
+            //handled by harmlessbufforb
+            //if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.ApplyBlinkCooldown)) {
+            //        self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
+            //}
 
             orig(self, damageInfo);
         }

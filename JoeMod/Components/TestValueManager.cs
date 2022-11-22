@@ -15,8 +15,8 @@ public class TestValueManager : MonoBehaviour {
     private bool _testingEnabled => Modules.Config.Debug;
 
     public static float value1 = 2.5f;
-    public static float value2 = 100f;
-    public static float value3 = 1000f;
+    public static float value2 = 690f;
+    public static float value3 = 2000f;
 
     void Update() {
         if (!_testingEnabled)

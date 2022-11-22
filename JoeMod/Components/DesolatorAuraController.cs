@@ -19,7 +19,7 @@ public class DesolatorAuraController : NetworkBehaviour {
     private BuffWard buffward;
     private CharacterBody cachedOwnerBody;
     private float _scaleVelocity;
-    private float _currentScale;
+    private float _localScale;
 
     public void Init() {
         cachedOwnerBody = Owner.GetComponent<CharacterBody>();
@@ -49,8 +49,8 @@ public class DesolatorAuraController : NetworkBehaviour {
         if (cachedOwnerBody) {
             this.transform.position = cachedOwnerBody.corePosition;
 
-            _currentScale = Mathf.SmoothDamp(this.transform.localScale.x, currentRadius, ref _scaleVelocity, 0.5f);
-            this.transform.localScale = new Vector3(_currentScale, _currentScale, _currentScale);
+            _localScale = Mathf.SmoothDamp(this.transform.localScale.x, currentRadius, ref _scaleVelocity, 0.5f);
+            this.transform.localScale = new Vector3(_localScale, _localScale, _localScale);
         }
     }
 

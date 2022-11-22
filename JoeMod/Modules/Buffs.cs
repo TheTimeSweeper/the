@@ -12,7 +12,7 @@ namespace Modules {
         public static BuffDef conductiveBuffTeam;
         public static BuffDef conductiveBuffTeamGrace;
 
-        public static BuffDef blinkCooldownBuff;
+        //public static BuffDef blinkCooldownBuff;
 
         public static BuffDef desolatorArmorBuff;
         public static BuffDef desolatorArmorMiniBuff;
@@ -45,12 +45,12 @@ namespace Modules {
                            Color.blue,
                            false,
                            false);
-            blinkCooldownBuff =
-                AddNewBuff("BlinkCooldown",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Cloak").iconSprite,
-                           Color.gray,
-                           false,
-                           false);
+            //blinkCooldownBuff =
+            //    AddNewBuff("BlinkCooldown",
+            //               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Cloak").iconSprite,
+            //               Color.gray,
+            //               false,
+            //               false);
 
             Color lime = new Color(0.486f, 1, 0);
 
@@ -80,14 +80,6 @@ namespace Modules {
                            LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
                            lime,
                            true,
-                           true);
-
-            //Aliem
-            riddenBuff =
-                AddNewBuff("RiddenByAliem",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
-                           Color.red,
-                           false,
                            true);
         }
 

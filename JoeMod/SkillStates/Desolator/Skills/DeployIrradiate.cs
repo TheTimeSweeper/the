@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Desolator {
+
     public class DeployIrradiate : BaseTimedSkillState {
 
         #region gameplay Values
@@ -23,9 +24,11 @@ namespace ModdedEntityStates.Desolator {
         #endregion
 
         public RoR2.CameraTargetParams.AimRequest aimRequest;
-        private bool _complete;
+        protected bool _complete;
         private Animator _animator;
         private float _cannonSpin;
+
+        protected virtual GameObject deployProjectilePrefab => Modules.Assets.DesolatorDeployProjectile;
 
         public override void OnEnter() {
             base.OnEnter();
@@ -85,7 +88,7 @@ namespace ModdedEntityStates.Desolator {
 
         protected void DropRadiationProjectile() {
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo {
-                projectilePrefab = Modules.Assets.DesolatorDeployProjectile,
+                projectilePrefab = deployProjectilePrefab,
                 crit = base.RollCrit(),
                 force = 0f,
                 damage = this.damageStat * DamageCoefficient,
@@ -94,8 +97,13 @@ namespace ModdedEntityStates.Desolator {
                 position = base.characterBody.corePosition,
                 //damageTypeOverride = DamageType.WeakOnHit
             };
+
+            ModifyProjectile(ref fireProjectileInfo);
+
             ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
+
+        protected virtual void ModifyProjectile(ref FireProjectileInfo fireProjectileInfo) { }
 
         protected override EntityState ChooseNextState() {
             _complete = true;
@@ -111,7 +119,7 @@ namespace ModdedEntityStates.Desolator {
             }
 
             if (!_complete) {
-                aimRequest.Dispose();
+                aimRequest?.Dispose();
 
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 

@@ -185,6 +185,11 @@ namespace Modules
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAP_DESCRIPTION", 
                 $"{Helpers.UtilityText("Stunning.")} Create an electric blast in a large area for {Helpers.DamageValueText(BigZap.DamageCoefficient)}. " + 
                 $"While near a {Helpers.UtilityText("Tesla Tower")}, perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
+
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_NAME", "Tesla Fist");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_DESCRIPTION", $"Hold to charge a punch for {Helpers.DamageText("70%-700% damage")}, and zap enemies in a cone for {Helpers.DamageText("35%-350% damage")}. " +
+                $"While near a {Helpers.UtilityText("Tesla Tower")}, replace zap with a long-range beam for {Helpers.DamageText("100%-1000% damage")}");
+
             #endregion
 
             #region Utility
@@ -363,8 +368,8 @@ namespace Modules
                 $"<style=cIsHealing>Irradiating</style>. Deploy your Rad-Cannon into the ground. Gain {Helpers.UtilityText($"barrier")} for each enemy nearby. {Helpers.UtilityText($"Every 3 seconds")}, pump a pool of radiation that lasts for {Helpers.UtilityText($"7 seconds")}, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", specialDesc);
 
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "Here Comes the Sun");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Larger Area. Faster ticks per second"));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "There Goes the Neighborhood");
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Double Area. 1.5 Faster ticks per second"));
 
             //cancel
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_CANCEL_NAME", "Cancel");
@@ -377,7 +382,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Larger Area. Faster ticks per second"));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.ImpactDamageCoefficient)}"));
 
             LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.4f} seconds")}"));
             #endregion

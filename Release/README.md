@@ -49,6 +49,7 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 `1.4.0`
+ - fixed level growth stats not being to the vanilla standard
  - added head hitbox proper
  - desolator: fixed R being forced to use all lysate cell stacks
 

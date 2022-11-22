@@ -79,7 +79,9 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             cameraTargetParams.RemoveParamsOverride(_cameraOverrideHandle, 0.1f);
 
-            EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetInterruptState(new WindDownState(0.2f), InterruptPriority.Any);
+            WindDownState windDownState = new WindDownState();
+            windDownState.windDownTime = 0.2f;
+            EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetInterruptState(windDownState, InterruptPriority.Any);
         }
 
         private CharacterCameraParamsData GetBlinkCameraParams(float distance) {
@@ -118,13 +120,12 @@ namespace ModdedEntityStates.TeslaTrooper {
                 OrbManager.instance.AddOrb(orb);
             }
 
-            HarmlessBuffOrb orb2 = new HarmlessBuffOrb {
+            HarmlessBlinkCooldownOrb orb2 = new HarmlessBlinkCooldownOrb {
                 target = _targetHurtbox,
                 origin = transform.position,
+                ownerGameObject = gameObject,
                 speed = speedCoefficient * moveSpeedStat,
                 moddedLightningType = GetModdedOrbType,
-                buffToApply = Modules.Buffs.blinkCooldownBuff,
-                bufftime = 4f
             };
             for (int i = 0; i < 2; i++) {
                 OrbManager.instance.AddOrb(orb2);

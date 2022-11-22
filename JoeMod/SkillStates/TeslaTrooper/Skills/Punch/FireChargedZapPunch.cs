@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace ModdedEntityStates.TeslaTrooper {
-
-    public class FireChargedZapPunch : ZapPunchWithDeflect {
+    
+    public class FireChargedZapPunch : ZapPunch {
 
         public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerRailgunCryo");
-        public static float MaxChargeDamageCoefficient = 10;
-        public static float MaxBeamDamageCoefficient = 20;
+        public static float MaxChargeDamageCoefficient = 7;
+        public static float MaxBeamDamageCoefficient = 10;
         public static float MaxDistance = 50;
+
+        public static float minPushForce = 930;
+        public static float maxPushForce = 2690;
 
         public static float RecoilAmplitude = 1;
 
@@ -31,7 +34,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             //server will deserialize a commandTarget from the client
             if (commandTarget) {
-
+                
                 if (NetworkServer.active) {
                     controller.commandTowersGauntlet(commandTarget);
                 }
@@ -49,6 +52,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (commandedTowers) {
                 attack.damageColorIndex = DamageColorIndex.WeakPoint;
             }
+
+            base.attack.pushAwayForce = Mathf.Lerp(minPushForce, maxPushForce, chargeMultiplier);
         }
 
         protected override float GetDamageCoefficient() {
@@ -58,12 +63,12 @@ namespace ModdedEntityStates.TeslaTrooper {
         private void SetDurations() {
             if (commandedTowers) {
                 BasePunchDuration = 1; 
-                animationDuration = 0.4f;
+                animationDuration = 1.0f;
                 baseAttackStartTime = 0.29f;
                 baseAttackEndTime = 0.58f;
             } else {
                 BasePunchDuration = 1;
-                animationDuration = 0.9f;
+                animationDuration = 0.4f;
                 baseAttackStartTime = 0.214f;
                 baseAttackEndTime = 0.58f;
             }
@@ -86,16 +91,18 @@ namespace ModdedEntityStates.TeslaTrooper {
                 base.FireConeProjectile();
             }
         }
-
+        
         protected override void OnFireAttackEnter() {
             base.OnFireAttackEnter();
 
             if (!commandedTowers)
                 return;
 
-            Ray aimRay = base.GetAimRay();
-
             base.AddRecoil(-3f * RecoilAmplitude, -5f * RecoilAmplitude, -0.5f * RecoilAmplitude, 0.5f * RecoilAmplitude);
+
+            Util.PlaySound("Play_tower_btesat2a_tesla_tower_attack", gameObject);
+
+            Ray aimRay = base.GetAimRay();
 
             if (base.isAuthority) {
                 BulletAttack bulletAttack = new BulletAttack();
@@ -122,6 +129,19 @@ namespace ModdedEntityStates.TeslaTrooper {
                 bulletAttack.stopperMask = 0;// LayerIndex.world.collisionMask;
                 bulletAttack.Fire();
             }
+        }
+
+
+        // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
+        public override void OnSerialize(NetworkWriter writer) {
+
+            writer.Write(HurtBoxReference.FromHurtBox(commandTarget));
+        }
+
+        // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
+        public override void OnDeserialize(NetworkReader reader) {
+            
+            this.commandTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1172451000177472604}
   - component: {fileID: 1328791715330071256}
   - component: {fileID: 7443027553046411646}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HeadHurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,6 +406,24 @@ MonoBehaviour:
   - {r: 0.70980394, g: 0.27450982, b: 0.27058825, a: 1}
   - {r: 0.5294118, g: 0.3647059, b: 0.34901962, a: 1}
   - {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+--- !u!114 &1940082038682342929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631804215789874714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1792105662, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurtBoxes:
+  - {fileID: 3390807633542507969}
+  - {fileID: 7443027553046411646}
+  - {fileID: 3224675420917487422}
+  mainHurtBox: {fileID: 3390807633542507969}
+  bullseyeCount: 1
 --- !u!114 &2535522744691462868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,24 +593,6 @@ MonoBehaviour:
     transform: {fileID: 3486824218636367191}
   - name: meshTeslaEmission
     transform: {fileID: 5153639130750502284}
---- !u!114 &1940082038682342929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3631804215789874714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1792105662, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurtBoxes:
-  - {fileID: 3390807633542507969}
-  - {fileID: 7443027553046411646}
-  - {fileID: 3224675420917487422}
-  mainHurtBox: {fileID: 3390807633542507969}
-  bullseyeCount: 1
 --- !u!54 &5729083852374148764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1293,7 +1293,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000017508866, y: 0.38304117, z: 0.00000017881396}
+  m_ConnectedAnchor: {x: -0.00000014156105, y: 0.38304114, z: 0.00000023841858}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1443,7 +1443,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000011920917, y: 0.38304123, z: -0.00000022351742}
+  m_ConnectedAnchor: {x: -0.000000119209155, y: 0.38304126, z: -0.00000022351745}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1519,7 +1519,7 @@ GameObject:
   - component: {fileID: 5031634948824986655}
   - component: {fileID: 7814801133597316039}
   - component: {fileID: 3224675420917487422}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GauntletHurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 8759506892152418555}
   - component: {fileID: 3406573241392913190}
   - component: {fileID: 3390807633542507969}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MainHurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
