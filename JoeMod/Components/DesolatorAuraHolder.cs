@@ -7,31 +7,37 @@ public class DesolatorAuraHolder : NetworkBehaviour {
     private GameObject _spawnedAuraObject = null;
     private DesolatorAuraController _spawnedAura = null;
 
-    public void ActivateAura() {
-        if (_spawnedAuraObject == null) {
-            SpawnAura();
-        }
-
-        if (_spawnedAura == null) {
-            Helpers.LogWarning("fuck");
-        }
-        _spawnedAura?.Activate(true);
-    }
-
-    public void DeactivateAura() {
-        _spawnedAura?.Activate(false);
+    void Awake() {
+        SpawnAura();
     }
 
     public void SpawnAura() {
 
         if (NetworkServer.active) {
             GameObject spawnedAuraObject = Instantiate(Modules.Assets.DesolatorAuraPrefab, base.transform.position, Quaternion.identity);
-            _spawnedAura = spawnedAuraObject.GetComponent<DesolatorAuraController>();
-            _spawnedAura.Owner = gameObject;
             NetworkServer.Spawn(spawnedAuraObject);
             _spawnedAuraObject = spawnedAuraObject;
-            _spawnedAura.Init();
+            //_spawnedAura = _spawnedAuraObject.GetComponent<DesolatorAuraController>();
         }
+    }
+
+    public void ActivateAura() {
+
+        if (_spawnedAura == null) {
+            _spawnedAura = _spawnedAuraObject.GetComponent<DesolatorAuraController>();
+            if (NetworkServer.active) {
+                _spawnedAura.RpcSetOwner(gameObject);
+            }
+        }
+
+        if (_spawnedAura == null) {
+            Helpers.LogWarning("fuck2");
+        }
+        _spawnedAura?.Activate(true);
+    }
+
+    public void DeactivateAura() {
+        _spawnedAura?.Activate(false);
     }
     
     void OnDestroy() {

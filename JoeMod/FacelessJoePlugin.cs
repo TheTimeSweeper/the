@@ -105,7 +105,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     private void Hook() {
         // run hooks here, disabling one is as simple as commenting out the line
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-        On.RoR2.CharacterBody.OnValidate += CharacterBody_OnValidate;
 
         R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
@@ -114,11 +113,6 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
-    }
-
-    private void CharacterBody_OnValidate(On.RoR2.CharacterBody.orig_OnValidate orig, CharacterBody self) {
-        orig(self);
-        Helpers.LogWarning("oh god please tell me this isn't completely fucked up");
     }
 
     private void JitterBones_RebuildBones(On.RoR2.JitterBones.orig_RebuildBones orig, JitterBones self) {

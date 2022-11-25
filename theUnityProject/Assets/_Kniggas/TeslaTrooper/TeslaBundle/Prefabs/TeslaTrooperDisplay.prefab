@@ -3674,12 +3674,12 @@ PrefabInstance:
     - target: {fileID: 6917986751025386133, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.38304088
+      value: 0.38304085
       objectReference: {fileID: 0}
     - target: {fileID: 6917986751025386133, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.000000029802326
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 7161029811180994041, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
@@ -3714,17 +3714,17 @@ PrefabInstance:
     - target: {fileID: 7291836757569786521, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.00000016391263
+      value: -0.00000011175861
       objectReference: {fileID: 0}
     - target: {fileID: 7291836757569786521, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.3830411
+      value: 0.38304123
       objectReference: {fileID: 0}
     - target: {fileID: 7291836757569786521, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.00000010058278
+      value: -0.00000013411038
       objectReference: {fileID: 0}
     - target: {fileID: 7443027553046411646, guid: 39f04075b1004864d95f20a2a0e79367,
         type: 3}
@@ -3809,6 +3809,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3224675420917487422, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
     - {fileID: 7814801133597316039, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
+    - {fileID: 3390807633542507969, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
+    - {fileID: 7443027553046411646, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
     - {fileID: 1940082038682342929, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 39f04075b1004864d95f20a2a0e79367, type: 3}
 --- !u!1 &6098845047639091475 stripped

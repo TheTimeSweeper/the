@@ -27,6 +27,8 @@ namespace ModdedEntityStates.Desolator {
         protected bool _complete;
         private Animator _animator;
         private float _cannonSpin;
+        private bool _heldTooLongYaDoofus;
+        private bool _inputDown;
 
         protected virtual GameObject deployProjectilePrefab => Modules.Assets.DesolatorDeployProjectile;
 
@@ -47,13 +49,26 @@ namespace ModdedEntityStates.Desolator {
             if (NetworkServer.active) {
                 characterBody.AddBuff(Modules.Buffs.desolatorArmorMiniBuff);
             }
+
+            if (isAuthority && base.inputBank.skill4.down) {
+                _heldTooLongYaDoofus = true;
+            }
+
+            characterBody.hideCrosshair = true;
         }
         
         public override void FixedUpdate() {
             base.FixedUpdate();
 
+            if (_heldTooLongYaDoofus && isAuthority && base.inputBank.skill4.justReleased) {
+                _heldTooLongYaDoofus = false;
+            }
+            if (!_heldTooLongYaDoofus && isAuthority && base.inputBank.skill4.justPressed) {
+                _inputDown = true;
+            }
+
             //bit of a hack to get around Body ESM not being in GenericCharacterMain
-            if (isAuthority && base.inputBank.skill4.justReleased) {
+            if (isAuthority && base.inputBank.skill4.justReleased && _inputDown) {
                 skillLocator.special.ExecuteIfReady();
             }
             
@@ -112,6 +127,8 @@ namespace ModdedEntityStates.Desolator {
 
         public override void OnExit() {
             base.OnExit();
+
+            characterBody.hideCrosshair = false;
 
             if (NetworkServer.active) {
 

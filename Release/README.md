@@ -49,9 +49,12 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 `1.4.0`
+ - added new alt secondary skill, expanding on melee m1
+   - melee m1 still in cursed for now
+ - added new character Desolator!
+ - finished tower item displays for sotv
  - fixed level growth stats not being to the vanilla standard
- - added head hitbox proper
- - desolator: fixed R being forced to use all lysate cell stacks
+ - added head hurtbox proper
 
 `1.3.2`
  - fixed eclipse not saving progress

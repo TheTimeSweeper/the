@@ -252,7 +252,7 @@ namespace Modules.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ChargeZapPunch)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 5.0f,
+                baseRechargeInterval = 6.0f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -268,7 +268,11 @@ namespace Modules.Survivors {
                 keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SHOCKING" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef, bigZapPunchSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
+            if (Config.Cursed) {
+
+                Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapPunchSkillDef);
+            }
         }
 
         private void InitializeUtilitySkills() {

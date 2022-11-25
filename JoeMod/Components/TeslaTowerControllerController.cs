@@ -93,6 +93,10 @@ public class TeslaTowerControllerController : MonoBehaviour {
         }
     }
 
+    public int NearbyTowers() {
+        return GetNearbyTowers().Count;
+    }
+
     public List<GameObject> GetNearbyTowers(GameObject nearObject = null) {
 
         if (nearObject == null)

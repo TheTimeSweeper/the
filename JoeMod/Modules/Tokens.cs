@@ -174,7 +174,7 @@ namespace Modules
             
              LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             
-            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Fist");
+            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Knuckles");
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient * ZapPunch.OrbDamageMultiplier)}. ");
             
             #endregion
@@ -186,7 +186,7 @@ namespace Modules
                 $"{Helpers.UtilityText("Stunning.")} Create an electric blast in a large area for {Helpers.DamageValueText(BigZap.DamageCoefficient)}. " + 
                 $"While near a {Helpers.UtilityText("Tesla Tower")}, perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
 
-            LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_NAME", "Tesla Fist");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_NAME", "Charged Fist");
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_DESCRIPTION", $"Hold to charge a punch for {Helpers.DamageText("70%-700% damage")}, and zap enemies in a cone for {Helpers.DamageText("35%-350% damage")}. " +
                 $"While near a {Helpers.UtilityText("Tesla Tower")}, replace zap with a long-range beam for {Helpers.DamageText("100%-1000% damage")}");
 

@@ -8,8 +8,8 @@ namespace ModdedEntityStates.TeslaTrooper {
     public class FireChargedZapPunch : ZapPunch {
 
         public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerRailgunCryo");
-        public static float MaxChargeDamageCoefficient = 7;
-        public static float MaxBeamDamageCoefficient = 10;
+        public static float MaxChargeDamageCoefficient = 8;
+        public static float MaxBeamDamageCoefficient = 12;
         public static float MaxDistance = 50;
 
         public static float minPushForce = 930;
@@ -17,9 +17,9 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public static float RecoilAmplitude = 1;
 
-
         public float chargeMultiplier = 0.5f;
 
+        private int towerMultiplier = 1;
         private bool commandedTowers;
         private HurtBox commandTarget;
 
@@ -34,10 +34,12 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             //server will deserialize a commandTarget from the client
             if (commandTarget) {
-                
+
                 if (NetworkServer.active) {
                     controller.commandTowersGauntlet(commandTarget);
                 }
+
+                towerMultiplier = controller.NearbyTowers();
 
                 commandedTowers = true;
 
@@ -113,13 +115,13 @@ namespace ModdedEntityStates.TeslaTrooper {
                 //bulletAttack.minSpread = this.minSpread;
                 //bulletAttack.maxSpread = this.maxSpread;
                 bulletAttack.bulletCount = 1u;
-                bulletAttack.damage = chargeMultiplier * MaxBeamDamageCoefficient * this.damageStat;
+                bulletAttack.damage = chargeMultiplier * MaxBeamDamageCoefficient * towerMultiplier * this.damageStat;
                 bulletAttack.force = 100f;
                 bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                 bulletAttack.tracerEffectPrefab = tracerEffectPrefab;
                 bulletAttack.muzzleName = "MuzzleGauntlet";
                 bulletAttack.hitEffectPrefab = this.hitEffectPrefab;
-                bulletAttack.isCrit = base.RollCrit();
+                bulletAttack.isCrit = rolledCrit;
                 bulletAttack.HitEffectNormal = false;
                 bulletAttack.radius = 3f;
                 bulletAttack.damageType = DamageType.Shock5s;
@@ -130,7 +132,6 @@ namespace ModdedEntityStates.TeslaTrooper {
                 bulletAttack.Fire();
             }
         }
-
 
         // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
         public override void OnSerialize(NetworkWriter writer) {

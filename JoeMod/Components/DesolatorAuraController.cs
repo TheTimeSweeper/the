@@ -21,15 +21,18 @@ public class DesolatorAuraController : NetworkBehaviour {
     private float _scaleVelocity;
     private float _localScale;
 
-    public void Init() {
-        cachedOwnerBody = Owner.GetComponent<CharacterBody>();
+    public void Awake() {
+        //cachedOwnerBody = Owner.GetComponent<CharacterBody>();
         buffward = GetComponent<BuffWard>();
         auraParticles = GetComponentsInChildren<ParticleSystem>(true);
 
-        Helpers.LogWarning($"Owner {Owner}");
-        Helpers.LogWarning($"cachedOwnerBody {cachedOwnerBody}");
+        Activate(false);
+    }
 
-        Activate(true);
+    [ClientRpc]
+    public void RpcSetOwner(GameObject owner_) {
+        Owner = owner_;
+        cachedOwnerBody = Owner.GetComponent<CharacterBody>();
     }
 
     public void Activate(bool shouldActivate) {

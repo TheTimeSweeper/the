@@ -3,8 +3,8 @@
 namespace ModdedEntityStates.TeslaTrooper.Tower {
     public class TowerBigZapGauntlet : TowerBigZap {
 
-        new public static float DamageCoefficient = 3.5f;
-        new public static float BaseAttackRadius = 2;
+        new public static float DamageCoefficient = 4f;
+        new public static float BaseAttackRadius = 4;
 
         new public static float BaseDuration = 0.0f;
 

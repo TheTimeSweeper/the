@@ -10,9 +10,10 @@ public class DesolatorMenu : MonoBehaviour {
     private Transform deployPoint;
 
     private void Start() {
-        GameObject thing = Instantiate(lightPrefab, deployPoint, true);
+        GameObject thing = Instantiate(lightPrefab, deployPoint, false);
+        thing.transform.localPosition = Vector3.zero;
         thing.transform.parent = null;
-
+        
         RoR2.Util.PlaySound("Play_Desolator_Deploy", gameObject);
     }
 }

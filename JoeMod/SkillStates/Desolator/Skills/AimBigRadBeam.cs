@@ -47,12 +47,15 @@ namespace ModdedEntityStates.Desolator {
             fireProjectileInfo.crit = _crit;
         }
 
-        public override void FireProjectile() {
-            base.FireProjectile();
-
+        public override void OnProjectileFiredLocal() {
             Util.PlaySound("Play_Desolator_Beam_Deep2", gameObject);
+
             //PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
             PlayAnimation("Desolator, Override", "DesolatorShoot");
+        }
+
+        public override void FireProjectile() {
+            base.FireProjectile();
 
             //show tracer beam
             EffectData effectData = new EffectData {
@@ -60,7 +63,7 @@ namespace ModdedEntityStates.Desolator {
                 start = FindModelChild("MuzzleGauntlet").position
             };
             effectData.SetChildLocatorTransformReference(gameObject, GetModelChildLocator().FindChildIndex("MuzzleGauntlet"));
-            EffectManager.SpawnEffect(Modules.Assets.DesolatorTracerRebar, effectData, false);
+            EffectManager.SpawnEffect(Modules.Assets.DesolatorTracerRebar, effectData, true);
 
             if (base.isAuthority) {
 

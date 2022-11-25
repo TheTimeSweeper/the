@@ -715,130 +715,133 @@ namespace Modules.Characters {
             //man there are a lot of these
             #endregion dlc0
 
-            #region dlc1
+            #region dlc1            
 
-            #region not done            
-            /*
-            
-
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.PrimarySkillShuriken, "DisplayShuriken", 
-                                                                       "Base Pillar Items 3",
-                                                                       new Vector3(-0.03456F, 0.46907F, 0.0085F), 
-                                                                       new Vector3(349.3939F, 285.0648F, 44.30583F),
-                                                                       new Vector3(0.50943F, 0.50943F, 0.50943F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.OutOfCombatArmor, "DisplayOddlyShapedOpal",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.25193F, 0.07822F, 0.27566F),
-                                                                       new Vector3(2.93651F, 320.2274F, 359.4729F),
-                                                                       new Vector3(0.26172F, 0.26172F, 0.26396F)));
-            //head
+            //size
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.AttackSpeedAndMoveSpeed, "DisplayCoffee",
+                "Base Pillar Items 4",
+                new Vector3(0.26202F, 0.39386F, 0F),
+                new Vector3(1.72852F, 194.4009F, 352.2361F),
+                new Vector3(0.22904F, 0.22904F, 0.22904F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.CritDamage, "DisplayLaserSight",
+                "Tower Circle Items 2",
+                new Vector3(-0.38904F, -0.00012F, 0.46421F),
+                new Vector3(271.5071F, 257.4642F, 240.6037F),
+                new Vector3(0.14349F, 0.14349F, 0.14349F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.FragileDamageBonus, "DisplayDelicateWatch",
+                "Tower Pole Items",
+                new Vector3(0F, 4.58982F, 0.01893F),
+                new Vector3(89.7651F, 299.088F, 212.606F),
+                new Vector3(2.16166F, 2.49614F, 2.03189F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.FreeChest, "DisplayShippingRequestForm",
+                "Base Pillar Items 3",
+                new Vector3(0.19999F, 1.61878F, -0.13984F),
+                new Vector3(83.14848F, 0.27344F, 278.1145F),
+                new Vector3(0.32389F, 0.5398F, 0.32389F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.GoldOnHurt, "DisplayRollOfPennies",
+                "Base Pillar Items 1",
+                new Vector3(0.24098F, 0.87626F, -0.05947F),
+                new Vector3(1.14704F, 260.3747F, 13.05269F),
+                new Vector3(0.70517F, 0.70517F, 0.70517F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.HalfAttackSpeedHalfCooldowns, "DisplayLunarShoulderNature",
+                "Base Pillar Items 2",
+                new Vector3(0.14997F, 2.25437F, -0.33591F),
+                new Vector3(359.0807F, 178.8851F, 32.22269F),
+                new Vector3(0.76408F, 0.76408F, 0.54522F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.HalfSpeedDoubleHealth, "DisplayLunarShoulderStone",
+                "Base Pillar Items 2",
+                new Vector3(-0.16049F, 2.31049F, -0.36117F),
+                new Vector3(351.0297F, 0F, 0F),
+                new Vector3(0.44941F, 0.44941F, 0.48309F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.HealingPotion, "DisplayHealingPotion",
+                "Base Pillar Items 2",
+                new Vector3(0.2665F, 0.83508F, -0.14448F),
+                new Vector3(356.3516F, 67.53532F, 22.20713F),
+                new Vector3(0.05555F, 0.05555F, 0.05555F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.ImmuneToDebuff, "DisplayRainCoatBelt",
+                "Base Pillar Items 1",
+                new Vector3(-0.0718F, 1.91369F, -0.12838F),
+                new Vector3(1.07281F, 77.79327F, 348.2528F),
+                new Vector3(0.64681F, 0.64681F, 0.64681F)));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(DLC1Content.Items.LunarSun,
                 ItemDisplays.CreateDisplayRule("DisplaySunHead",
-                                               "Head",
-                                               new Vector3(-0.00924F, 0.12266F, -0.00555F),
-                                               new Vector3(0F, 337.0038F, 0F),
-                                               new Vector3(1.02498F, 0.91771F, 1.02498F)),
+                    "Head",
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(87.99718F, 179.9993F, 179.9992F),
+                    new Vector3(3.46806F, 3.46805F, 3.46805F)),
                 ItemDisplays.CreateDisplayRule("DisplaySunHeadNeck",
-                                               "Head",
-                                               new Vector3(0.01731F, -0.00814F, -0.01618F),
-                                               new Vector3(358.2472F, 289.4888F, 7.87784F),
-                                               new Vector3(1.76587F, 0.94832F, -1.97986F)),
+                    "Tower Circle Items 3",
+                    new Vector3(0.09147F, 0.07838F, -0.04999F),
+                    new Vector3(0.00038F, 113.8363F, 6.50182F),
+                    new Vector3(2.69913F, 1.738F, 2.75935F)),
                 ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.Head)));
-            //size
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.MinorConstructOnKill, "DisplayDefenseNucleus",
-                                                                       "Root",
-                                                                       new Vector3(0.87222F, 1.62075F, -0.18692F),
-                                                                       new Vector3(0F, 0F, 0F),
-                                                                       new Vector3(0.42591F, 0.42591F, 0.42591F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.HalfAttackSpeedHalfCooldowns, "DisplayLunarShoulderNature",
-                                                                       "Base Pillar Items 1",
-                                                                       new Vector3(-0.03032F, -0.01502F, 0.15394F),
-                                                                       new Vector3(4.0623F, 223.2026F, 248.9687F),
-                                                                       new Vector3(1F, 1F, 0.71356F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.HalfSpeedDoubleHealth, "DisplayLunarShoulderStone",
-                                                                       "Base Pillar Items 1",
-                                                                       new Vector3(0.05933F, 0.03356F, 0.01257F),
-                                                                       new Vector3(353.7406F, 0.61763F, 203.1131F),
-                                                                       new Vector3(0.70327F, 0.70327F, 0.75598F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.AttackSpeedAndMoveSpeed, "DisplayCoffee",
-                                                                       "Base Pillar Items 4",
-                                                                       new Vector3(0.23219F, -0.09083F, 0F),
-                                                                       new Vector3(0.17195F, 76.1399F, 179.9576F),
-                                                                       new Vector3(0.22904F, 0.22904F, 0.22904F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.GoldOnHurt, "DisplayRollOfPennies",
-                                                                       "Base Pillar Items 1",
-                                                                       new Vector3(-0.07301F, 0.07015F, -0.05946F),
-                                                                       new Vector3(349.0828F, 241.7495F, 260.9872F),
-                                                                       new Vector3(0.70517F, 0.70517F, 0.70517F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.FragileDamageBonus, "DisplayDelicateWatch",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(0.00003F, 0.07762F, -0.11352F),
-                                                                       new Vector3(0F, 0F, 0F),
-                                                                       new Vector3(0.61928F, 0.77737F, 0.63279F)));
-
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.ImmuneToDebuff, "DisplayRainCoatBelt",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.01679F, 0.36864F, -0.00077F),
-                                                                       new Vector3(1.99664F, 57.48078F, 182.9135F),
-                                                                       new Vector3(0.6767F, 0.6767F, 0.6767F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.RandomEquipmentTrigger, "DisplayBottledChaos",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.11559F, 0.05489F, -0.22715F),
-                                                                       new Vector3(0F, 0F, 10.29679F),
-                                                                       new Vector3(0.21247F, 0.21247F, 0.21247F)));
-            
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.StrengthenBurn, "DisplayGasTank",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.08278F, 0.23788F, 0.093F),
-                                                                       new Vector3(0F, 323.1183F, 141.3342F),
-                                                                       new Vector3(0.1444F, 0.1444F, 0.1444F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.VoidMegaCrabItem, "DisplayMegaCrabItem",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.05803F, 0.01915F, 0.37486F),
-                                                                       new Vector3(17.38989F, 271.4439F, 345.5916F),
-                                                                       new Vector3(0.15797F, 0.15797F, 0.15797F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.RegeneratingScrap, "DisplayRegeneratingScrap",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(0.19607F, 0.25288F, -0.19083F),
-                                                                       new Vector3(0F, 312.8683F, 0F),
-                                                                       new Vector3(0.23956F, 0.23956F, 0.23956F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.PermanentDebuffOnHit, "DisplayScorpion",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(0.00002F, 0.34411F, -0.28039F),
-                                                                       new Vector3(69.77431F, 0F, 0F),
-                                                                       new Vector3(0.6956F, 0.6956F, 0.6956F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.CritDamage, "DisplayLaserSight",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(0.02581F, 0.06311F, -0.07445F),
-                                                                       new Vector3(77.06108F, 90F, 0F),
-                                                                       new Vector3(0.11604F, 0.11604F, 0.11604F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.FreeBase Pillar Items 2, "DisplayShippingRequestForm",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.13004F, -0.05604F, 0.30875F),
-                                                                       new Vector3(81.86385F, 157.1635F, 180F),
-                                                                       new Vector3(0.32389F, 0.32476F, 0.32389F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.MoveSpeedOnKill, "DisplayGrappleHook",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.02752F, 0.10228F, -0.03501F),
-                                                                       new Vector3(272.8237F, 180F, 180F),
-                                                                       new Vector3(0.21889F, 0.21889F, 0.21889F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.RandomlyLunar, "DisplayDomino",
-                                                                       "Root",
-                                                                       new Vector3(-0.81447F, 1.5122F, -0.5534F),
-                                                                       new Vector3(283.1516F, 0F, 0F),
-                                                                       new Vector3(1.4558F, 1.4558F, 1.4558F)));
-            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.HealingPotion, "DisplayHealingPotion",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(0.11909F, 0.16047F, 0.05359F),
-                                                                       new Vector3(346.0888F, 101.4104F, 236.5228F),
-                                                                       new Vector3(0.05555F, 0.05555F, 0.05555F)));
+                "Center Orb Items",
+                new Vector3(0.87223F, 0.78232F, 0.2389F),
+                new Vector3(-0.00001F, 20.31543F, 0.00003F),
+                new Vector3(0.42591F, 0.42591F, 0.42591F)));
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.MoreMissile, "DisplayICBM",
-                                                                       "Base Pillar Items 2",
-                                                                       new Vector3(-0.00278F, 0.06494F, 0.06925F),
-                                                                       new Vector3(89.08871F, 180F, 180F),
-                                                                       new Vector3(0.12255F, 0.12255F, 0.12255F)));
-            */
-            #endregion not done
+                "Tower Circle Items 2",
+                new Vector3(0.54369F, -0.00014F, 0.37995F),
+                new Vector3(297.4216F, 235.1873F, 86.46127F),
+                new Vector3(0.16442F, 0.16442F, 0.16442F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.MoveSpeedOnKill, "DisplayGrappleHook",
+                "Base Pillar Items 3",
+                new Vector3(-0.11554F, 1.4008F, -0.03503F),
+                new Vector3(272.8235F, 82.76733F, 179.998F),
+                new Vector3(0.21889F, 0.21889F, 0.21889F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.OutOfCombatArmor, "DisplayOddlyShapedOpal",
+                "Base Pillar Items 2",
+                new Vector3(-0.17964F, 0.619F, 0.17791F),
+                new Vector3(353.2889F, 343.9033F, 356.5015F),
+                new Vector3(0.35097F, 0.35097F, 0.35397F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.PermanentDebuffOnHit, "DisplayScorpion",
+                "Head",
+                new Vector3(0F, 0.45619F, 0.27918F),
+                new Vector3(26.70639F, 180F, 179.9999F),
+                new Vector3(1.80308F, 1.80308F, 1.80308F)));
+
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(DLC1Content.Items.PrimarySkillShuriken,
+                ItemDisplays.CreateDisplayRule("DisplayShuriken",
+                    "Tower Circle Items 1",
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(90F, 9.12265F, 0F),
+                    new Vector3(4.32477F, 4.32477F, 2.71916F)),
+                ItemDisplays.CreateDisplayRule("DisplayShuriken",
+                    "Tower Circle Items 2",
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(90F, 9.12265F, 0F),
+                    new Vector3(3.77506F, 3.77506F, 2.37353F)),
+                ItemDisplays.CreateDisplayRule("DisplayShuriken",
+                    "Tower Circle Items 3",
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(90F, 9.12265F, 0F),
+                    new Vector3(3.31178F, 3.31178F, 2.08225F))));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.RandomEquipmentTrigger, "DisplayBottledChaos",
+                "Base Pillar Items 4",
+                new Vector3(-0.22797F, 1.14629F, -0.22715F),
+                new Vector3(0.00015F, 96.66051F, 10.29673F),
+                new Vector3(0.21247F, 0.21247F, 0.21247F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.RandomlyLunar, "DisplayDomino",
+                "Center Orb Items",
+                new Vector3(-0.02238F, 0.72454F, -0.79059F),
+                new Vector3(283.1516F, 0F, 0F),
+                new Vector3(1.4558F, 1.4558F, 1.4558F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.RegeneratingScrap, "DisplayRegeneratingScrap",
+                "Base Pillar Items 3",
+                new Vector3(0.18009F, 2.2927F, -0.33996F),
+                new Vector3(1.40897F, 253.9884F, 359.4492F),
+                new Vector3(0.23956F, 0.23956F, 0.23956F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.StrengthenBurn, "DisplayGasTank",
+                "Base Pillar Items 2",
+                new Vector3(-0.21246F, 1.90778F, -0.25407F),
+                new Vector3(330.1871F, 215.485F, 340.8301F),
+                new Vector3(0.1444F, 0.1444F, 0.1444F)));
+            itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.VoidMegaCrabItem, "DisplayMegaCrabItem",
+                "Base Pillar Items 3",
+                new Vector3(0.26469F, 0.73444F, -0.02599F),
+                new Vector3(358.8192F, 84.68645F, 347.3702F),
+                new Vector3(0.15797F, 0.15797F, 0.15797F)));
 
             #endregion dlc1
 
