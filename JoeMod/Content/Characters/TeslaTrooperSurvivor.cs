@@ -33,7 +33,7 @@ namespace Modules.Survivors {
             bodyName = "TeslaTrooperBody",
             bodyNameToken = TESLA_PREFIX + "NAME",
             subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
-            sortPosition = 69,
+            sortPosition = 68,
 
             characterPortrait = Modules.Assets.LoadCharacterIcon(Modules.Config.RA2Icon ? "texIconTeslaTrooper2" : "texIconTeslaTrooper"),
             bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
@@ -57,10 +57,13 @@ namespace Modules.Survivors {
         public override UnlockableDef characterUnlockableDef => null;
 
         public override ItemDisplaysBase itemDisplays => new TeslaItemDisplays();
+
         #region unlock
         private static UnlockableDef masterySkinUnlockableDef;
         private static UnlockableDef grandMasterySkinUnlockableDef;
 
+        private static UnlockableDef cursedPrimaryUnlockableDef;
+        private static UnlockableDef secondaryUnlockableDef;
         private static UnlockableDef utilityUnlockableDef;
 
         public static UnlockableDef recolorsUnlockableDef = null;
@@ -142,7 +145,12 @@ namespace Modules.Survivors {
         public override void InitializeUnlockables() {
             masterySkinUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperMastery>();
             grandMasterySkinUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperGrandMastery>();
+            
             utilityUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperTowerBigZapAchievement>(typeof(TeslaTrooperTowerBigZapAchievement.TeslaTrooperTowerBigZapServerAchievement));
+            secondaryUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperShieldZapKillAchievement>(typeof(TeslaTrooperShieldZapKillAchievement.TeslaTrooperShieldZapKillAchievementServer));
+            if (Modules.Config.Cursed) {
+                cursedPrimaryUnlockableDef = UnlockableAPI.AddUnlockable<TeslaTrooperAllyZapAchievement>();
+            }
         }
 
         public override void InitializeDoppelganger(string clone) {
@@ -200,7 +208,7 @@ namespace Modules.Survivors {
                                                                               new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                               "Weapon",
                                                                               false));
-
+            
                 primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
@@ -210,11 +218,12 @@ namespace Modules.Survivors {
                     Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
                                                            TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
                                                            TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
-                                                           Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                                                           Modules.Assets.LoadAsset<Sprite>("texTeslaSkillSecondaryAlt"),
                                                            new EntityStates.SerializableEntityStateType(typeof(ZapPunchWithDeflect)),
                                                            "Weapon",
                                                            false));
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefPunch);
+                Modules.Skills.AddUnlockablesToFamily(bodyPrefab.GetComponent<SkillLocator>().primary.skillFamily, null, cursedPrimaryUnlockableDef);
             }
         }
         
@@ -248,7 +257,7 @@ namespace Modules.Survivors {
                 skillName = "Tesla_Secondary_BigZapPunch",
                 skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAPPUNCH_NAME",
                 skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAPPUNCH_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillPrimary"),
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texTeslaSkillSecondaryAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ChargeZapPunch)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -265,14 +274,11 @@ namespace Modules.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SHOCKING" }
+                keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef);
-            if (Config.Cursed) {
-
-                Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapPunchSkillDef);
-            }
+            Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef, bigZapPunchSkillDef);
+            Modules.Skills.AddUnlockablesToFamily(bodyPrefab.GetComponent<SkillLocator>().secondary.skillFamily, null, secondaryUnlockableDef);
         }
 
         private void InitializeUtilitySkills() {

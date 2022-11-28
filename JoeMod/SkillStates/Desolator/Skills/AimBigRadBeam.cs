@@ -7,7 +7,7 @@ namespace ModdedEntityStates.Desolator {
 
     public class AimBigRadBeam : AimThrowableBase {
 
-        public static float BlastDamageCoefficient = 3.2f;
+        public static float BlastDamageCoefficient = 4.0f;
         public static float PoolDamageCoefficient = 0.2f;
         public static float DotZoneLifetime = 4;
         public static float BaseAttackRadius = 10;

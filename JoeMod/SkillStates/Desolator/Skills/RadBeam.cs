@@ -7,8 +7,8 @@ namespace ModdedEntityStates.Desolator {
     public class RadBeam : GenericBulletBaseState {
 
         public static float BaseDuration = 0.9f;
-        public static float DamageCoefficient = 0.8f;
-
+        public static float DamageCoefficient = 1f;
+        
         public override void OnEnter() {
 
             EntityStates.Toolbot.FireSpear goodstate = new EntityStates.Toolbot.FireSpear();
@@ -45,6 +45,7 @@ namespace ModdedEntityStates.Desolator {
             bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
             DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorArmorShred);
             DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorDot);
+            DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorDot2);
         }
     }
 }

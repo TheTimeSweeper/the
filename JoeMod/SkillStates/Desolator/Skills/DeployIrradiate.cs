@@ -13,9 +13,9 @@ namespace ModdedEntityStates.Desolator {
     public class DeployIrradiate : BaseTimedSkillState {
 
         #region gameplay Values
-        public static float DamageCoefficient = 1f;
+        public static float DamageCoefficient = 0.4f;
         public static float BarrierPercentPerEnemy = 0.05f;
-        public static float MaxBarrierPercent = 0.5f;
+        public static float MaxBarrierPercent = 0.4f;
         public static float Range = 60;
         public const float SqrRange = 1600;
 
@@ -24,6 +24,7 @@ namespace ModdedEntityStates.Desolator {
         #endregion
 
         public RoR2.CameraTargetParams.AimRequest aimRequest;
+        public bool fromEnter;
         protected bool _complete;
         private Animator _animator;
         private float _cannonSpin;
@@ -50,8 +51,11 @@ namespace ModdedEntityStates.Desolator {
                 characterBody.AddBuff(Modules.Buffs.desolatorArmorMiniBuff);
             }
 
-            if (isAuthority && base.inputBank.skill4.down) {
+            //bit of overengineering but input is important
+            if (isAuthority && fromEnter && base.inputBank.skill4.down) {
                 _heldTooLongYaDoofus = true;
+            } else {
+                _inputDown = true;
             }
 
             characterBody.hideCrosshair = true;
@@ -72,7 +76,7 @@ namespace ModdedEntityStates.Desolator {
                 skillLocator.special.ExecuteIfReady();
             }
             
-            if (isAuthority && inputBank.skill3.down) {
+            if (isAuthority && inputBank.skill3.justPressed) {
                 skillLocator.utility.ExecuteIfReady();
             }
         }

@@ -19,9 +19,11 @@ namespace Modules {
 
         public static DamageAPI.ModdedDamageType DesolatorArmorShred;
         public static DamageAPI.ModdedDamageType DesolatorDot;
+        public static DamageAPI.ModdedDamageType DesolatorDot2;
+        public static DamageAPI.ModdedDamageType DesolatorDotLong;
 
         public static void RegisterDamageTypes() {
-
+            
             StunLong = DamageAPI.ReserveDamageType();
             ShockMed = DamageAPI.ReserveDamageType();
             ShockShort = DamageAPI.ReserveDamageType();
@@ -31,6 +33,8 @@ namespace Modules {
 
             DesolatorArmorShred = DamageAPI.ReserveDamageType();
             DesolatorDot = DamageAPI.ReserveDamageType();
+            DesolatorDot2 = DamageAPI.ReserveDamageType();
+            DesolatorDotLong = DamageAPI.ReserveDamageType();
 
             SetHooks();
         }

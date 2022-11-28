@@ -13,6 +13,9 @@ namespace ModdedEntityStates.TeslaTrooper {
 
     public class Zap : BaseTimedSkillState
     {
+        internal static event Action<bool, bool> onZapAuthority;
+        internal static event Action<HurtBox> onZapAllyAuthority;
+
         #region Gameplay Values
         public static float DamageCoefficient = 1.2f;
         public static float BounceDamageMultplier = 0.69f;
@@ -75,6 +78,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
         private Vector3? originalMuzzleDirection= null;
+
         private Vector3 muzzleDirection{
             get {
                 if (originalMuzzleDirection == null) {
@@ -130,11 +134,15 @@ namespace ModdedEntityStates.TeslaTrooper {
             //todo: ishandout causing old sniper animation issues
             PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.05f);
             GetModelAnimator().SetBool("isHandOut", true);
+
             if (isAuthority) {
                 if (_tracker) {
+
+                    TeslaTrackerComponentZap.RangeTier trackingDistance = _tracker.GetTrackingTargetDistance();
+
                     _targetHurtbox = _tracker.GetTrackingTarget();
-                    
-                    switch (_tracker.GetTrackingTargetDistance()) {
+
+                    switch (trackingDistance) {
                         default:
                         case TeslaTrackerComponentZap.RangeTier.FURTHEST:
                             totalOrbCasts = OrbCasts - 2 + Mathf.RoundToInt(skillsPlusCasts * 0.334f);
@@ -149,10 +157,20 @@ namespace ModdedEntityStates.TeslaTrooper {
 
                     _attackingTeammate = _tracker.GetIsTargetingTeammate();
 
+                    onZapAuthority?.Invoke(trackingDistance == TeslaTrackerComponentZap.RangeTier.CLOSEST, _attackingTeammate);
+                    if (_attackingTeammate) {
+                        onZapAllyAuthority?.Invoke(_targetHurtbox);
+                    }
+
                 } else {
                     _targetHurtbox = createOrb().PickNextTarget(transform.position);
                     totalOrbCasts = OrbCasts;
                 }
+            }
+
+            if (_attackingTeammate) {
+                //end move early
+                duration *= 0.7f;
             }
 
             _crit = RollCrit();
@@ -233,8 +251,6 @@ namespace ModdedEntityStates.TeslaTrooper {
             OrbManager.instance.AddOrb(orb);
             //cancel additional casts
             _currentCasts = totalOrbCasts;
-            //end move early
-            duration *= 0.7f;
         }
 
         //friendly fire scrapped

@@ -38,7 +38,7 @@ namespace ModdedEntityStates.Desolator {
 
         protected override EntityState ChooseNextState() {
             _complete = true;
-            return new DeployIrradiate { aimRequest = this.aimRequest };
+            return new DeployIrradiate { aimRequest = this.aimRequest, fromEnter = true };
         }
         
         public override void OnExit() {
@@ -54,7 +54,7 @@ namespace ModdedEntityStates.Desolator {
                 PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
             }
         }
-
+        
         public override InterruptPriority GetMinimumInterruptPriority() {
             return InterruptPriority.Frozen;
         }

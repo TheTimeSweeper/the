@@ -15,5 +15,10 @@ public class DesolatorMenu : MonoBehaviour {
         thing.transform.parent = null;
         
         RoR2.Util.PlaySound("Play_Desolator_Deploy", gameObject);
+
+        if (Modules.Config.VoiceInLobby.Value) {
+
+            RoR2.Util.PlaySound("Play_VoiceLine", gameObject);
+        }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using EntityStates;
 using ModdedEntityStates.BaseStates;
 using RoR2;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace ModdedEntityStates.TeslaTrooper {
     public class ShieldZapReleaseDamage : BaseTimedSkillState {
+
+        public static event Action onShieldZap;
 
         public static float range = 30;
 
@@ -54,6 +57,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (!Modules.Config.UncappedUtility.Value) {
                 blastDamage = Mathf.Min(blastDamage, damageStat * MaxDamageCoefficient);
             }
+
+            onShieldZap?.Invoke();
             
             if (NetworkServer.active) {
                 

@@ -59,7 +59,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                     aimRequest = this.aimRequest,
                     collectedDamage = blockedDamage,
                 };
-                EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(newNextState);
+                /*EntityStateMachine.FindByCustomName(gameObject, "Weapon")*/outer.SetNextState(newNextState);
                 completed = true;
                 base.outer.SetNextStateToMain();
             }

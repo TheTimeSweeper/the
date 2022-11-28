@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 452282882}
   - component: {fileID: 452282883}
+  - component: {fileID: 7046221724106790872}
   m_Layer: 14
   m_Name: Point Light
   m_TagString: Untagged
@@ -43,7 +44,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 1, b: 0.10449934, a: 1}
-  m_Intensity: 5.71
+  m_Intensity: 5
   m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -92,6 +93,20 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &7046221724106790872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452282881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d948a859258adbc4b8008b87d42638e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light: {fileID: 452282883}
+  sizeMultiplier: 0
 --- !u!1 &1367022257695261821
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +399,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1710861754445201685}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1367022258176961612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +442,17 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1367022258176961608}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1710861754445201685}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -488,27 +525,16 @@ MonoBehaviour:
   impactEffect: {fileID: 997780759937662335, guid: a2b45fab77e6d8a4ca52387fa2293e3c,
     type: 3}
   forceVector: {x: 0, y: 0, z: 0}
-  overlapProcCoefficient: 0.4
+  overlapProcCoefficient: 0.7
   fireFrequency: 4
   resetFrequency: 1
-  lifetime: 10
+  lifetime: 11
   onBegin:
     m_PersistentCalls:
       m_Calls: []
   onEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1710861754445201685}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   soundLoopString: 
   soundLoopStopString: 
 --- !u!114 &5182994034342319054
@@ -620,18 +646,27 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2
-      outSlope: -2
+      time: 0.95
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -35.36221
+      outSlope: -35.36221
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.058422074
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeMax: 1
+  timeMax: 11
 --- !u!1 &2804324795029848059
 GameObject:
   m_ObjectHideFlags: 0

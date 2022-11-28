@@ -40,7 +40,7 @@ using System.Security.Permissions;
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "1.3.2";
+    public const string MODVERSION = "2.0.0";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -87,7 +87,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         //init towers first
         TeslaTowerNotSurvivor baseTower = new TeslaTowerNotSurvivor();
         baseTower.Initialize();
-            new TeslaTowerScepter().Initialize(baseTower);
+        new TeslaTowerScepter().Initialize(baseTower);
         //the guy
         new TeslaTrooperSurvivor().Initialize();
 
@@ -141,7 +141,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         }
 
         if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
-            args.armorAdd -= 8f * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+            args.armorAdd -= DesolatorSurvivor.ArmorShredAmount * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
         }
 
         //if (sender.HasBuff(Modules.Buffs.desolatorDotDeBuff)) {

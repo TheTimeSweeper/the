@@ -381,54 +381,6 @@ namespace Modules {
             return teamAreaIndicator;
         }
 
-        private static GameObject CreateIrradiatorProjectile() {
-            
-            GameObject irradiatorProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile"), "IrradiatorProjectile", true);
-
-            Renderer ghostRenderer = irradiatorProjectile.GetComponent<ProjectileController>().ghostPrefab.GetComponentInChildren<Renderer>();
-            ghostRenderer.material = ghostRenderer.material.SetHotpooMaterial();
-
-            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            damageTypeComponent.Add(DamageTypes.DesolatorDot);
-
-            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
-            areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
-            areaIndicator.transform.localScale = Vector3.one * ThrowIrradiator.Range;
-
-            irradiatorProjectile.transform.Find("Hitboxes").localScale = Vector3.one * ThrowIrradiator.Range;
-
-            Content.AddProjectilePrefab(irradiatorProjectile);
-
-            return irradiatorProjectile;
-        }
-        
-        private static GameObject CreateIrradiatorProjectileScepter() {
-            GameObject irradiatorProjectileScepter = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectileScepter"), "IrradiatorProjectileScepter", true);
-
-            Renderer ghostRenderer = irradiatorProjectileScepter.GetComponent<ProjectileController>().ghostPrefab.GetComponentInChildren<Renderer>();
-            ghostRenderer.material = ghostRenderer.material.SetHotpooMaterial();
-            
-            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectileScepter.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            damageTypeComponent.Add(DamageTypes.DesolatorDot);
-
-            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectileScepter.transform);
-            areaIndicator.teamFilter = irradiatorProjectileScepter.GetComponent<TeamFilter>();
-            areaIndicator.transform.localScale = Vector3.one * ThrowIrradiator.Range;
-
-            irradiatorProjectileScepter.transform.Find("Hitboxes").localScale = Vector3.one * ThrowIrradiator.Range;
-
-            ProjectileImpactExplosion impactExplosion = irradiatorProjectileScepter.GetComponent<ProjectileImpactExplosion>();
-            //impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
-            impactExplosion.blastRadius = ThrowIrradiator.Range;
-            impactExplosion.blastDamageCoefficient = ScepterThrowIrradiator.ImpactDamageCoefficient;
-            //impactExplosion.blastAttackerFiltering = AttackerFiltering.NeverHitSelf;
-            impactExplosion.explosionEffect = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXGreaterWisp");
-
-            Content.AddProjectilePrefab(irradiatorProjectileScepter);
-
-            return irradiatorProjectileScepter;
-        }
-
         private static GameObject CreateDesolatorDeployProjectile() {
 
             GameObject DeployProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("DeployProjectile"), "DeployProjectile", true);
@@ -471,6 +423,56 @@ namespace Modules {
             return DeployProjectile;
         }
 
+        private static GameObject CreateIrradiatorProjectile() {
+
+            GameObject irradiatorProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectile"), "IrradiatorProjectile", true);
+
+            Renderer ghostRenderer = irradiatorProjectile.GetComponent<ProjectileController>().ghostPrefab.GetComponentInChildren<Renderer>();
+            ghostRenderer.material = ghostRenderer.material.SetHotpooMaterial();
+
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.DesolatorDot);
+
+            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
+            areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
+            areaIndicator.transform.localScale = Vector3.one * ThrowIrradiator.Range;
+
+            irradiatorProjectile.transform.Find("Hitboxes").localScale = Vector3.one * ThrowIrradiator.Range;
+
+            irradiatorProjectile.GetComponentInChildren<LightRadiusScale>().sizeMultiplier = ThrowIrradiator.Range;
+
+            Content.AddProjectilePrefab(irradiatorProjectile);
+
+            return irradiatorProjectile;
+        }
+
+        private static GameObject CreateIrradiatorProjectileScepter() {
+            GameObject irradiatorProjectileScepter = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("IrradiatorProjectileScepter"), "IrradiatorProjectileScepter", true);
+
+            Renderer ghostRenderer = irradiatorProjectileScepter.GetComponent<ProjectileController>().ghostPrefab.GetComponentInChildren<Renderer>();
+            ghostRenderer.material = ghostRenderer.material.SetHotpooMaterial();
+
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectileScepter.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.DesolatorDot);
+
+            TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectileScepter.transform);
+            areaIndicator.teamFilter = irradiatorProjectileScepter.GetComponent<TeamFilter>();
+            areaIndicator.transform.localScale = Vector3.one * ThrowIrradiator.Range;
+
+            irradiatorProjectileScepter.transform.Find("Hitboxes").localScale = Vector3.one * ThrowIrradiator.Range;
+
+            irradiatorProjectileScepter.GetComponentInChildren<LightRadiusScale>().sizeMultiplier = ThrowIrradiator.Range;
+
+            ProjectileImpactExplosion impactExplosion = irradiatorProjectileScepter.GetComponent<ProjectileImpactExplosion>();
+            impactExplosion.blastRadius = ThrowIrradiator.Range;
+            impactExplosion.blastDamageCoefficient = ScepterThrowIrradiator.ImpactDamageCoefficient;
+            impactExplosion.explosionEffect = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXGreaterWisp");
+
+            Content.AddProjectilePrefab(irradiatorProjectileScepter);
+
+            return irradiatorProjectileScepter;
+        }
+
         private static GameObject CreateDesolatorCrocoLeapProjectile() {
 
             GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
@@ -482,7 +484,7 @@ namespace Modules {
             projectileDotZone.impactEffect = IrradiatedImpactEffect;
             projectileDotZone.lifetime = AimBigRadBeam.DotZoneLifetime;
             projectileDotZone.damageCoefficient = 1;
-            projectileDotZone.overlapProcCoefficient = 0.1f;
+            projectileDotZone.overlapProcCoefficient = 0.5f;
             projectileDotZone.resetFrequency = 2F;
 
             leapAcidProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;

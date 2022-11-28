@@ -187,8 +187,8 @@ namespace Modules
                 $"While near a {Helpers.UtilityText("Tesla Tower")}, perform an {Helpers.UtilityText("empowered, shocking")} version for {Helpers.DamageValueText(TowerBigZap.DamageCoefficient)}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_NAME", "Charged Fist");
-            LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_DESCRIPTION", $"Hold to charge a punch for {Helpers.DamageText("70%-700% damage")}, and zap enemies in a cone for {Helpers.DamageText("35%-350% damage")}. " +
-                $"While near a {Helpers.UtilityText("Tesla Tower")}, replace zap with a long-range beam for {Helpers.DamageText("100%-1000% damage")}");
+            LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_DESCRIPTION", $"Hold to charge a punch for {Helpers.DamageText("80%-800% damage")}, and zap enemies in a cone for {Helpers.DamageText("40%-400% damage")}. " +
+                $"While near a {Helpers.UtilityText("Tesla Tower")}, replace zap with a long-range {Helpers.UtilityText("shocking")} beam for {Helpers.DamageText("120%-1200% damage")}");
 
             #endregion
 
@@ -242,6 +242,18 @@ namespace Modules
             LanguageAPI.Add(prefix + "BIGZAPUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, command your Tesla Tower to use 2000 Volts on 10 enemies at once");
             LanguageAPI.Add(prefix + "BIGZAPUNLOCKABLE_UNLOCKABLE_NAME", $"Big Zap");
 
+            LanguageAPI.Add(prefix + "ZAPALLYUNLOCKABLE_ACHIEVEMENT_NAME", $"Ally Zap");
+            LanguageAPI.Add(prefix + "ZAPALLYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, charge an ally with Tesla Gauntlet 20 times in one run. (ally must attack with the charge in order to be charged again)");
+            LanguageAPI.Add(prefix + "ZAPALLYUNLOCKABLE_UNLOCKABLE_NAME", $"Ally Zap");
+
+            LanguageAPI.Add(prefix + "SHIELDZAPUNLOCKABLE_ACHIEVEMENT_NAME", $"Shield Zap");
+            LanguageAPI.Add(prefix + "SHIELDZAPUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, defeat a boss monster using Charging Up");
+            LanguageAPI.Add(prefix + "SHIELDZAPUNLOCKABLE_UNLOCKABLE_NAME", $"Shield Zap");
+            //scrapped because boring
+            LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_NAME", $"Close Zap");
+            LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, zap an enemy at close range 20 times in a row");
+            LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_UNLOCKABLE_NAME", $"Close Zap");
+
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"some unlock");
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"hopefully not something boring like grab tesla coil and royal capacitor... ok repair a tesla coil with a tesla coil that would be pretty cool, but also shiny hunting kinda.");
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"some unlock");
@@ -252,13 +264,14 @@ namespace Modules
 
         private static void AddTeslaTowerTokens() {
             #region not henry 3
-            string prefix = Modules.Survivors.TeslaTowerNotSurvivor.TOWER_PREFIX;
+            string prefix = TeslaTowerNotSurvivor.TOWER_PREFIX;
 
             string outro = "..and so it left, construction complete.";
             string outroFailure = "..and so it vanished, never becoming the eiffel tower.";
 
             string fullName = "Tesla Tower";
             LanguageAPI.Add(prefix + "NAME", fullName);
+            LanguageAPI.Add(TeslaTowerScepter.TOWER_SCEPTER_PREFIX + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", "wait how did you get here?");
             LanguageAPI.Add(prefix + "SUBTITLE", "Power of the Union");
             LanguageAPI.Add(prefix + "LORE", ".");
@@ -289,13 +302,13 @@ namespace Modules
             string prefix = DesolatorSurvivor.DESOLATOR_PREFIX;
 
             string desc = "The Desolator is a walking powerhouse of radiation.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
-                        + "< ! > Focus fire on an enemy with Rad-Cannon to melt them down" + Environment.NewLine + Environment.NewLine
-                        + "< ! > Use 2000 Volts to control crowds, and to command your tower to wipe crowds" + Environment.NewLine + Environment.NewLine
-                        + "< ! > You benefit from being closer to enemies, use Charging Up to assist with this." + Environment.NewLine + Environment.NewLine
-                        + "< ! > The Tesla Tower inherits your items, mainly benefitting from damage items." + Environment.NewLine + Environment.NewLine;
+                        + "< ! > The armor reduction from Rad-Cannon is one of your most powerful tools to help melt enemies with your other abilities" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Scorched Earth is a simple heavy damage dealer, especially after Rad-Cannon's armor reduction" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Use the movement speed from Reactor to get you out of a pinch, but you can instead use its weakening properties to help deal extra damage." + Environment.NewLine + Environment.NewLine
+                        + "< ! > Spread the Doom leaves you vulnerable to attack, but if you're rewarded for staying deployed longer to deal more damage." + Environment.NewLine + Environment.NewLine;
 
-            string outro = "..and so he left, rubber shoes in motion.";
-            string outroFailure = "..and so he vanished, unit lost.";
+            string outro = "..and so he left, behind him, an oasis of death.";
+            string outroFailure = "..and so he vanished, there goes the neighborhood.";
 
             string fullName = "Desolator";
             LanguageAPI.Add(prefix + "NAME", fullName);
@@ -304,26 +317,34 @@ namespace Modules
 
             #region lore
 
-            List<string> lores = new List<string> {
-                "Tagged for Extinction.",
-                "Make it glow",
-                "Let's heat 'em up.",
-                "Here comes the sun.",
-                "The end is near.",
-                "Let's make an oasis of death.",
-                "Find a hot spot.",
-                "Scorched Earth.",
-                "Spread the Doom.",
-                "There goes the neighborhood",
-                "It will be a Silent Spring.",
-                "Desolator ready.",
-                "HEAVY BREATHING.",
-                "Ready for melt-down.",
-                "Reactor ready.",
-                "Mercury rising.",
-            };
-
-            LanguageAPI.Add(prefix + "LORE", lores[(int)UnityEngine.Random.Range(0, lores.Count)]);
+            LanguageAPI.Add(prefix + "LORE",
+                "<i>In collaboration with [REDACTED], the Ministry of Information presents...</i>\n" +
+                "<i>DESOLATOR: REVOLUTIONARY HERO AGAINST TYRANNY!'</i>\n" +
+                "\n" +
+                "The film sputters, its age showing like rust on metal, but it churns on tape nonetheless. It's played for a ragged bunker in which the blast-door is welded shut and lined to the edge with every available object in the room; books, chairs, the bed. Alone sits a jittery man, watching.\n" +
+                "\n" +
+                "<i>DESOLATOR, once a poor innocent boy from the slums who grew up with nothing but HATE from the tyrannical government! Sought a way to free himself and his comrades from the barbarians! He himself organized our GLORIOUS REVOLUTION! Fighting side by side with the men on the frontlines to ensure that no battle was lost! But eventually, he was GREIVOUSLY WOUNDED and using the power of experimental technology stolen from our OPPRESSORS, he was REBUILT into the hero we know him today!</i>\n" +
+                "\n" +
+                "The bunker trembles, as its only illumination swings back and forth in response. His past had caught up to him, and whose work would come haunt him.\n" +
+                "None know the truth of his actions; his job was to cover it up after all. But such a job required such mental tenacity to endure painting over the facts.\n" +
+                "Screams could be heard outside the bunker, only to be drowned into what sounded like sludge.\n" +
+                "\n" +
+                "<i>DESOLATOR returned to the front of battle! rescuing all his fellow compatriots-</i>\n" +
+                "\"They were massacred.\"\n" +
+                "<i>lest they bear the same burden as him!-</i>\n" +
+                "\"You bared our brothers in arms as much suffering as you did to the enemy.\"\n" +
+                "<i>DESOLATOR AND HIS COMRADE'S REVOLUTION SAVED OUR PLANET, IN WHICH HE BUILT THE SOCIETY WE HAVE TODAY!</i>\n" +
+                "\"All you left was a red river of bodies for a cause you didn't believe, the saviour of the revolution had the perfect excuse.\"\n" +
+                "\n" +
+                "But before he could continue watching the tape, the frantic man felt his skin crawl, and sweat build. He was here.\n" +
+                "Before another thought can be processed, the door glows an iridescent green and begins to melt. Bolts that held the door shut, that could withstand nuclear fallout, melted like butter against a hot knife. The remains of the barricade liquidated across the floor, lumps of metal and furniture; burning, melded into a radioactive soup. It's him, it's-\n" +
+                "\n" +
+                "<i>DESOLATOR!</i>\n" +
+                "\n" +
+                "The film solemnly rings; before sputtering what's left of the record. Eventually dissolving like the door before it.\n" +
+                "Before words could be exchanged, the dying man's melting flesh began to split and slip off his body, akin to slow cooked meat. His eyes became hazy, taking one last look at the radioactive presence as he spoke the last words the man would ever hear.\n" +
+                "\"Shhhh, the end is near.\"\n" +
+                "Brain sloshing, muscle dripping to reveal the skeleton underneat, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.");
             #endregion lore
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
@@ -341,9 +362,9 @@ namespace Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_BEAM_NAME", "Rad-Cannon");
-            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"<style=cIsHealing>Irradiating</style>. Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}. Reduces armor by 10, stacking up to 3 times.");
+            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"<style=cIsHealing>Irradiating</style>. Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}. Reduces armor by {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredAmount}")} for {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredDuration} seconds")}.");
 
-            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2} damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
             #endregion
             
             #region Secondary
@@ -352,8 +373,9 @@ namespace Modules
                 $"<style=cIsHealing>Irradiating</style>. Blast an area for {Helpers.DamageValueText(AimBigRadBeam.BlastDamageCoefficient)}, and cover the area in radiation for {Helpers.UtilityText($"{AimBigRadBeam.DotZoneLifetime} seconds")}. " +
                 $"Enemies in contact take {Helpers.DamageText($"{AimBigRadBeam.PoolDamageCoefficient * 100}% damage twice per second")}");
 
-            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY", Helpers.KeywordText("Irradiating", $"Initial Blast: Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
-            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY2", Helpers.KeywordText("Irradiating", $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.2f} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY", Helpers.KeywordText("Irradiating", $"Initial Blast: Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}\n" +
+                $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.5f} seconds")}"));
+            //LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY2", Helpers.KeywordText("Irradiating", $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.6f} seconds")}"));
             #endregion
 
             #region Utility
@@ -376,15 +398,16 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION", "Stop Spreading the Doom");
 
             //alt
-            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME", "Irradiator");
+            string name = UnityEngine.Random.value <= 0.1f ? "Glow Sticks" : "Irradiators";
+            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME", name);
             specialDesc =
-                $"<style=cIsHealing>Irradiating</style>. Throw {Helpers.UtilityText("up to 2")} Irradiators which cover a large area in radiation for {Helpers.UtilityText($"10 seconds")}, dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage per second")}.";
+                $"<style=cIsHealing>Irradiating</style>. Throw {Helpers.UtilityText("up to 2")} {name} which cover a large area in radiation for {Helpers.UtilityText($"10 seconds")}, dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage per second")}.";
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.ImpactDamageCoefficient)}"));
 
-            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.4f} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.7f} seconds")}"));
             #endregion
 
             #region recolor
@@ -562,4 +585,34 @@ HUMILIATION
 OVERRIDING PARENT UNIT
 
 WHATEVER
+ */
+
+/*
+<i>In collaboration with [REDACTED], the Ministry of Information presents...</i>\n
+<i>DESOLATOR: REVOLUTIONARY HERO AGAINST TYRANNY!'</i>\n
+\n
+The film sputters, its age showing like rust on metal, but it churns on tape nonetheless. It's played for a ragged bunker in which the blast-door is welded shut and lined to the edge with every available object in the room; books, chairs, the bed. Alone sits a jittery man, watching.\n
+\n
+<i>DESOLATOR, once a poor innocent boy from the slums who grew up with nothing but HATE from the tyrannical government! Sought a way to free himself and his comrades from the barbarians! He himself organized our GLORIOUS REVOLUTION! Fighting side by side with the men on the frontlines to ensure that no battle was lost! But eventually, he was GREIVOUSLY WOUNDED and using the power of experimental technology stolen from our OPPRESSORS, he was REBUILT into the hero we know him today!</i>\n
+\n
+The bunker trembles, as its only illumination swings back and forth in response. His past had caught up to him, and whose work would come haunt him.\n
+None know the truth of his actions; his job was to cover it up after all. But such a job required such mental tenacity to endure painting over the facts.\n
+Screams could be heard outside the bunker, only to be drowned into what sounded like sludge.\n
+\n
+<i>DESOLATOR returned to the front of battle! rescuing all his fellow compatriots-</i>\n
+"They were massacred."\n
+<i>lest they bear the same burden as him!-</i>\n
+"You bared our brothers in arms as much suffering as you did to the enemy."\n
+<i>DESOLATOR AND HIS COMRADE'S REVOLUTION SAVED OUR PLANET, IN WHICH HE BUILT THE SOCIETY WE HAVE TODAY!</i>\n
+"All you left was a red river of bodies for a cause you didn't believe, the saviour of the revolution had the perfect excuse."\n
+\n
+But before he could continue watching the tape, the frantic man felt his skin crawl, and sweat build. He was here.\n
+Before another thought can be processed, the door glows an iridescent green and begins to melt. Bolts that held the door shut, that could withstand nuclear fallout, melted like butter against a hot knife. The remains of the barricade liquidated across the floor, lumps of metal and furniture; burning, melded into a radioactive soup. It's him, it's-\n
+\n
+<i>DESOLATOR!</i>\n
+\n
+The film solemnly rings; before sputtering what's left of the record. Eventually dissolving like the door before it.\n
+Before words could be exchanged, the dying man's melting flesh began to split and slip off his body, akin to slow cooked meat. His eyes became hazy, taking one last look at the radioactive presence as he spoke the last words the man would ever hear.\n
+"Shhhh, the end is near."\n
+Brain sloshing, muscle dripping to reveal the skeleton underneat, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.
  */

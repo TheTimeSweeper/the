@@ -15,6 +15,7 @@ namespace Modules
         public static ConfigEntry<bool> VoiceInLobby;
         public static bool RA2Icon;
 
+        public static bool EnableTeslaTrooper;
         public static ConfigEntry<bool> TowerTargeting;
         public static int LysateLimit;
         public static float UtilityDamageAbsorption;
@@ -67,16 +68,18 @@ namespace Modules
                 false,
                 "Changes character icon to the unit icon from Red Alert 2").Value;
 
-            string sectionGameplay = "Gameplay";
+            string sectionTeslaTrooper = "Tesla Trooper";
+
+
 
             TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
-                sectionGameplay,
+                sectionTeslaTrooper,
                 "Tower Targets Reticle",
                 false,
                 "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
 
             LysateLimit = FacelessJoePlugin.instance.Config.Bind(
-                sectionGameplay,
+                sectionTeslaTrooper,
                 "Lysate Cell Additional Tower Limit",
                 1,
                 "With additional towers, lysate cell is way too strong for a green item. Default is 1, but for proper balance I would suggest 0\n-1 for unlimited. have fun").Value;
@@ -93,7 +96,7 @@ namespace Modules
                 //1.0f);
 
             UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
-                sectionGameplay,
+                sectionTeslaTrooper,
                 "Uncapped utility damage",
                 false,
                 "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");
@@ -105,8 +108,8 @@ namespace Modules
             //DesolatorForceUnlock = FacelessJoePlugin.instance.Config.Bind(
             //    sectionDesolator,
             //    "Force unlock",
-            //    false,
-            //    "Unlock character by default").Value;
+            //    true,
+            //    "Unlock character by default\nthere's no unlock yet. by downloading the mod before the achievement you've unlocked him by default").Value;
 
 
         }

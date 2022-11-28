@@ -32,7 +32,7 @@ namespace Modules.Survivors {
 
             characterPortrait = Modules.Assets.LoadCharacterIcon(Modules.Config.RA2Icon ? "texIconDesolator2" : "texIconDesolator"),
             bodyColor = new Color(160f / 255f, 238f / 255f, 0f / 255f),
-            sortPosition = 69.1f,
+            sortPosition = 68.1f,
 
             crosshair = Assets.LoadAsset<GameObject>("DesolatorCrosshair"),
             podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -43,15 +43,15 @@ namespace Modules.Survivors {
 
             jumpCount = 1,
 
-            aimOriginPosition = new Vector3(0, 2.8f, 0),
+            aimOriginPosition = new Vector3(0, 1.8f, 0),
         };
-
+        
         public override CustomRendererInfo[] customRendererInfos { get; set; }
 
         public override Type characterMainState => typeof(DesolatorMain);
 
         public override ItemDisplaysBase itemDisplays => new DesolatorItemDisplays();
-
+        
         public override UnlockableDef characterUnlockableDef => null;
         private static UnlockableDef masterySkinUnlockableDef;
 
@@ -59,11 +59,14 @@ namespace Modules.Survivors {
         public DeployableAPI.GetDeployableSameSlotLimit GetIrradiatorSlotLimit;
 
         public static SkillDef cancelDeploySkillDef;
-
-        public static float DotDamage = 0.10f;
+        
+        public static float DotDamage = 0.07f;
         public static float DotInterval = 0.5f;
         public static float DotDuration = 8f;
 
+        public static float ArmorShredAmount= 8f;
+        public static float ArmorShredDuration = 8f;
+        
         public override void Initialize() {
             instance = this;
             base.Initialize();
@@ -72,7 +75,8 @@ namespace Modules.Survivors {
             RegisterIrradiatorDeployable();
             bodyPrefab.AddComponent<TeslaZapBarrierController>();
             bodyPrefab.AddComponent<DesolatorAuraHolder>();
-            
+            bodyPrefab.AddComponent<DesolatorWeaponComponent>();
+
             bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
 
             bodyPrefab.GetComponent<CharacterBody>().spreadBloomCurve = AnimationCurve.EaseInOut(0, 0, 0.5f, 1);
@@ -189,7 +193,7 @@ namespace Modules.Survivors {
                     rechargeStock = 1,
                     requiredStock = 1,
                     stockToConsume = 1,
-                    keywordTokens = new string[] { "KEYWORD_RADIATION_SECONDARY", "KEYWORD_RADIATION_SECONDARY2" }
+                    keywordTokens = new string[] { "KEYWORD_RADIATION_SECONDARY" }
                 });
             bigRadBeamSkillDef.interruptPriority = EntityStates.InterruptPriority.Skill;
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigRadBeamSkillDef);
@@ -430,7 +434,7 @@ namespace Modules.Survivors {
             #region DefaultSkin
 
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDesolatorDefault"),
+                Assets.LoadAsset<Sprite>("texIconSkinDesolatorDefault"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);
 
@@ -460,11 +464,19 @@ namespace Modules.Survivors {
             //    if (damageReport.victimBody.GetBuffCount(Buffs.desolatorArmorShredDeBuff) < 3) {
             //        damageReport.victimBody.AddBuff(Buffs.desolatorArmorShredDeBuff);
             //    }
-                damageReport.victimBody.AddTimedBuff(Buffs.desolatorArmorShredDeBuff, DotDuration);
+                damageReport.victimBody.AddTimedBuff(Buffs.desolatorArmorShredDeBuff, ArmorShredDuration);
             }
 
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot)) {
                 DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient);
+            }
+            //quick hacky way to get m1 to add two stacks
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot2)) {
+                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient);
+            }
+            //unused
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDotLong)) {
+                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient * 2);
             }
         }
 

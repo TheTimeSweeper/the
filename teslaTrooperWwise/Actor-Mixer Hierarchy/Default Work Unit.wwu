@@ -839,14 +839,9 @@
 								</Folder>
 								<Folder Name="Desolator" ID="{0B947372-6C24-4732-8D85-F0D3880B52DF}" ShortID="357867120">
 									<ChildrenList>
-										<RandomSequenceContainer Name="Attack Voice" ID="{AF488118-7BD2-4058-8CAF-A882751E9E54}" ShortID="582263524">
+										<RandomSequenceContainer Name="Random Voice" ID="{43AE2BB2-856C-48AD-81A0-7F7F358B2B3C}" ShortID="701231257">
 											<PropertyList>
-												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>3</Value>
-													</ValueList>
-												</Property>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -857,8 +852,20 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="idesata" ID="{230F5307-79CF-4BCF-9DE3-E01BA6BDEDD5}" ShortID="1011558409">
+												<RandomSequenceContainer Name="Attack Voice" ID="{AF488118-7BD2-4058-8CAF-A882751E9E54}" ShortID="582263524">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -867,26 +874,190 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="idesata" ID="{A1F12578-F075-49A6-AE08-0EFECA31FC81}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesata.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="517536459"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="idesata" ID="{230F5307-79CF-4BCF-9DE3-E01BA6BDEDD5}" ShortID="1011558409">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesata" ID="{A1F12578-F075-49A6-AE08-0EFECA31FC81}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesata.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="517536459"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesata" ID="{A1F12578-F075-49A6-AE08-0EFECA31FC81}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesatb" ID="{304311AB-21FC-4BE9-B9B7-64CD8F576C9F}" ShortID="50086302">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesatb" ID="{3F94197C-462D-4D50-9675-E231B0E8BC9A}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesatb.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="785716805"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesatb" ID="{3F94197C-462D-4D50-9675-E231B0E8BC9A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesatc" ID="{F0C64721-D112-482A-9D1F-AC266160F426}" ShortID="609307561">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesatc" ID="{B5EA6E65-26BF-4205-969A-DCE3277662BE}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesatc.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1067532979"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesatc" ID="{B5EA6E65-26BF-4205-969A-DCE3277662BE}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesatd" ID="{26E6738B-7BB4-4936-9B6B-90C1127F7672}" ShortID="470537032">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesatd" ID="{56F45C5B-CF10-4C62-BCE0-BCB86A7F3A2B}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesatd.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="978550594"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesatd" ID="{56F45C5B-CF10-4C62-BCE0-BCB86A7F3A2B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesate" ID="{E48A87CC-ED14-4264-9839-67649EB5FB37}" ShortID="633474025">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesate" ID="{81F13FF7-5BFC-4D67-9E3B-313A27EB1C18}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesate.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="733573731"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesate" ID="{81F13FF7-5BFC-4D67-9E3B-313A27EB1C18}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesatf" ID="{E366D83E-0A60-41D1-9EB1-900CFAEB0265}" ShortID="258007754">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesatf" ID="{5A3FD144-BF71-40B6-A9B2-19B872F0398C}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesatf.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1004977995"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesatf" ID="{5A3FD144-BF71-40B6-A9B2-19B872F0398C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesata" ID="{A1F12578-F075-49A6-AE08-0EFECA31FC81}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesatb" ID="{304311AB-21FC-4BE9-B9B7-64CD8F576C9F}" ShortID="50086302">
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Move Voice" ID="{69215CB3-DDBE-4B65-B551-1E4CEC957F7C}" ShortID="227643532">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -895,26 +1066,162 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="idesatb" ID="{3F94197C-462D-4D50-9675-E231B0E8BC9A}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesatb.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="785716805"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="idesmoa" ID="{2D599C83-1F07-4A51-B122-D2CFC1EC190E}" ShortID="356585583">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesmoa" ID="{84194309-4EAC-46F4-966C-21FB062852B1}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesmoa.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="115648114"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesmoa" ID="{84194309-4EAC-46F4-966C-21FB062852B1}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesmob" ID="{B01C44FB-4370-4A16-BE02-923624CC0D97}" ShortID="147022922">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesmob" ID="{8B69A8E2-8574-46BB-A341-791C6C6A79E0}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesmob.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="908295835"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesmob" ID="{8B69A8E2-8574-46BB-A341-791C6C6A79E0}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesmoc" ID="{6375800E-7B83-4160-BDEF-02E37C141F1A}" ShortID="551931563">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesmoc" ID="{43E250F8-DBFE-4693-A1E7-CAE376153262}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesmoc.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="189152507"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesmoc" ID="{43E250F8-DBFE-4693-A1E7-CAE376153262}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesmod" ID="{109E36A6-8933-48F5-A6D9-50865E381917}" ShortID="857988348">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesmod" ID="{1148F1A2-3949-453F-8EEE-6DA8B710ECD5}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesmod.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="546244822"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesmod" ID="{1148F1A2-3949-453F-8EEE-6DA8B710ECD5}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesmoe" ID="{985B05AA-C825-4DC4-A136-F0063AD41612}" ShortID="44657887">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesmoe" ID="{DCE01435-AD94-4932-8037-4848705C65CF}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesmoe.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="982396180"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesmoe" ID="{DCE01435-AD94-4932-8037-4848705C65CF}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesatb" ID="{3F94197C-462D-4D50-9675-E231B0E8BC9A}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesatc" ID="{F0C64721-D112-482A-9D1F-AC266160F426}" ShortID="609307561">
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="Select Voice" ID="{1C88F122-7783-4DDC-A62F-C08A332AF199}" ShortID="442273306">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 														</Reference>
@@ -923,428 +1230,148 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="idesatc" ID="{B5EA6E65-26BF-4205-969A-DCE3277662BE}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesatc.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="1067532979"/>
-															</MediaIDList>
-														</AudioFileSource>
+														<Sound Name="idessea" ID="{EAB0C585-1D88-45B8-AAD2-1B78301EC491}" ShortID="544991610">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idessea" ID="{E55A52D4-2BFD-4F61-B20F-3693C82D860E}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idessea.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="747499958"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idessea" ID="{E55A52D4-2BFD-4F61-B20F-3693C82D860E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesseb" ID="{A4435BCB-10AE-4320-B581-E71EB61D55E8}" ShortID="607358732">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesseb" ID="{F858BE89-1931-4BB0-A2A5-B078245F9D01}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesseb.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="236680481"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesseb" ID="{F858BE89-1931-4BB0-A2A5-B078245F9D01}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idessec" ID="{B806D93F-92F1-49FF-B29A-9751E2CF2199}" ShortID="482575424">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idessec" ID="{AC60C830-DF63-47C0-AE2B-DA23B246D3A9}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idessec.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="690250939"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idessec" ID="{AC60C830-DF63-47C0-AE2B-DA23B246D3A9}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idessed" ID="{2886636F-62A7-41E2-B80E-B8344F7ADC82}" ShortID="219634521">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idessed" ID="{01FAF3AA-0283-4A2B-9D9E-1326D562FEB8}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idessed.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="128018462"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idessed" ID="{01FAF3AA-0283-4A2B-9D9E-1326D562FEB8}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idessee" ID="{7A9567D9-01A2-4429-878E-F23E1AFFCA4A}" ShortID="428079017">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idessee" ID="{6060F434-CDE2-4E45-8EDA-11FE9ACCF324}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idessee.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="405467073"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idessee" ID="{6060F434-CDE2-4E45-8EDA-11FE9ACCF324}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
 													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesatc" ID="{B5EA6E65-26BF-4205-969A-DCE3277662BE}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesatd" ID="{26E6738B-7BB4-4936-9B6B-90C1127F7672}" ShortID="470537032">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesatd" ID="{56F45C5B-CF10-4C62-BCE0-BCB86A7F3A2B}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesatd.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="978550594"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesatd" ID="{56F45C5B-CF10-4C62-BCE0-BCB86A7F3A2B}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesate" ID="{E48A87CC-ED14-4264-9839-67649EB5FB37}" ShortID="633474025">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesate" ID="{81F13FF7-5BFC-4D67-9E3B-313A27EB1C18}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesate.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="733573731"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesate" ID="{81F13FF7-5BFC-4D67-9E3B-313A27EB1C18}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesatf" ID="{E366D83E-0A60-41D1-9EB1-900CFAEB0265}" ShortID="258007754">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesatf" ID="{5A3FD144-BF71-40B6-A9B2-19B872F0398C}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesatf.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="1004977995"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesatf" ID="{5A3FD144-BF71-40B6-A9B2-19B872F0398C}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="Move Voice" ID="{69215CB3-DDBE-4B65-B551-1E4CEC957F7C}" ShortID="227643532">
-											<PropertyList>
-												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>3</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="idesmoa" ID="{2D599C83-1F07-4A51-B122-D2CFC1EC190E}" ShortID="356585583">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesmoa" ID="{84194309-4EAC-46F4-966C-21FB062852B1}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesmoa.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="115648114"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesmoa" ID="{84194309-4EAC-46F4-966C-21FB062852B1}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesmob" ID="{B01C44FB-4370-4A16-BE02-923624CC0D97}" ShortID="147022922">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesmob" ID="{8B69A8E2-8574-46BB-A341-791C6C6A79E0}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesmob.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="908295835"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesmob" ID="{8B69A8E2-8574-46BB-A341-791C6C6A79E0}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesmoc" ID="{6375800E-7B83-4160-BDEF-02E37C141F1A}" ShortID="551931563">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesmoc" ID="{43E250F8-DBFE-4693-A1E7-CAE376153262}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesmoc.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="189152507"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesmoc" ID="{43E250F8-DBFE-4693-A1E7-CAE376153262}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesmod" ID="{109E36A6-8933-48F5-A6D9-50865E381917}" ShortID="857988348">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesmod" ID="{1148F1A2-3949-453F-8EEE-6DA8B710ECD5}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesmod.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="546244822"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesmod" ID="{1148F1A2-3949-453F-8EEE-6DA8B710ECD5}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesmoe" ID="{985B05AA-C825-4DC4-A136-F0063AD41612}" ShortID="44657887">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesmoe" ID="{DCE01435-AD94-4932-8037-4848705C65CF}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesmoe.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="982396180"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesmoe" ID="{DCE01435-AD94-4932-8037-4848705C65CF}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="Select Voice" ID="{1C88F122-7783-4DDC-A62F-C08A332AF199}" ShortID="442273306">
-											<PropertyList>
-												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
-												<Property Name="Volume" Type="Real64">
-													<ValueList>
-														<Value>3</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="idessea" ID="{EAB0C585-1D88-45B8-AAD2-1B78301EC491}" ShortID="544991610">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idessea" ID="{E55A52D4-2BFD-4F61-B20F-3693C82D860E}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idessea.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="747499958"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idessea" ID="{E55A52D4-2BFD-4F61-B20F-3693C82D860E}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesseb" ID="{A4435BCB-10AE-4320-B581-E71EB61D55E8}" ShortID="607358732">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesseb" ID="{F858BE89-1931-4BB0-A2A5-B078245F9D01}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesseb.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="236680481"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesseb" ID="{F858BE89-1931-4BB0-A2A5-B078245F9D01}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idessec" ID="{B806D93F-92F1-49FF-B29A-9751E2CF2199}" ShortID="482575424">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idessec" ID="{AC60C830-DF63-47C0-AE2B-DA23B246D3A9}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idessec.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="690250939"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idessec" ID="{AC60C830-DF63-47C0-AE2B-DA23B246D3A9}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idessed" ID="{2886636F-62A7-41E2-B80E-B8344F7ADC82}" ShortID="219634521">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idessed" ID="{01FAF3AA-0283-4A2B-9D9E-1326D562FEB8}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idessed.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="128018462"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idessed" ID="{01FAF3AA-0283-4A2B-9D9E-1326D562FEB8}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idessee" ID="{7A9567D9-01A2-4429-878E-F23E1AFFCA4A}" ShortID="428079017">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idessee" ID="{6060F434-CDE2-4E45-8EDA-11FE9ACCF324}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idessee.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="405467073"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idessee" ID="{6060F434-CDE2-4E45-8EDA-11FE9ACCF324}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
+												</RandomSequenceContainer>
 											</ChildrenList>
 										</RandomSequenceContainer>
 									</ChildrenList>
