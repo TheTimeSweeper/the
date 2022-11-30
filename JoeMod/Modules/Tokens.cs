@@ -175,7 +175,7 @@ namespace Modules
              LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
             
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Knuckles");
-            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient * ZapPunch.OrbDamageMultiplier)}. ");
+            LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient * ZapPunch.OrbDamageMultiplier)}. {Helpers.UtilityText("Deflects Projectiles")}.");
             
             #endregion
             
@@ -188,7 +188,7 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_NAME", "Charged Fist");
             LanguageAPI.Add(prefix + "SECONDARY_BIGZAPPUNCH_DESCRIPTION", $"Hold to charge a punch for {Helpers.DamageText("80%-800% damage")}, and zap enemies in a cone for {Helpers.DamageText("40%-400% damage")}. " +
-                $"While near a {Helpers.UtilityText("Tesla Tower")}, replace zap with a long-range {Helpers.UtilityText("shocking")} beam for {Helpers.DamageText("120%-1200% damage")}");
+                $"While near a {Helpers.UtilityText("Tesla Tower")}, replace zap cone with a long-range {Helpers.UtilityText("shocking")} beam for {Helpers.DamageText("120%-1200% damage")}");
 
             #endregion
 
@@ -298,7 +298,7 @@ namespace Modules
         }
 
         private static void AddDesolatorTokens() {
-            #region not henry 2
+            #region not henry 22
             string prefix = DesolatorSurvivor.DESOLATOR_PREFIX;
 
             string desc = "The Desolator is a walking powerhouse of radiation.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
@@ -323,9 +323,11 @@ namespace Modules
                 "\n" +
                 "The film sputters, its age showing like rust on metal, but it churns on tape nonetheless. It's played for a ragged bunker in which the blast-door is welded shut and lined to the edge with every available object in the room; books, chairs, the bed. Alone sits a jittery man, watching.\n" +
                 "\n" +
-                "<i>DESOLATOR, once a poor innocent boy from the slums who grew up with nothing but HATE from the tyrannical government! Sought a way to free himself and his comrades from the barbarians! He himself organized our GLORIOUS REVOLUTION! Fighting side by side with the men on the frontlines to ensure that no battle was lost! But eventually, he was GREIVOUSLY WOUNDED and using the power of experimental technology stolen from our OPPRESSORS, he was REBUILT into the hero we know him today!</i>\n" +
+                "<i>DESOLATOR, once a poor innocent boy from the slums who grew up with nothing but HATE from the tyrannical government! Sought a way to free himself and his comrades from the barbarians!\n" +
+                "He himself organized our GLORIOUS REVOLUTION! Fighting side by side with the men on the frontlines to ensure that no battle was lost!\n" +
+                "But eventually, he was GREIVOUSLY WOUNDED and using the power of experimental technology stolen from our OPPRESSORS, he was REBUILT into the hero we know him today!</i>\n" +
                 "\n" +
-                "The bunker trembles, as its only illumination swings back and forth in response. His past had caught up to him, and whose work would come haunt him.\n" +
+                "The bunker trembles, as its only illumination swings back and forth in response. His past had caught up to him, whose work would come haunt him.\n" +
                 "None know the truth of his actions; his job was to cover it up after all. But such a job required such mental tenacity to endure painting over the facts.\n" +
                 "Screams could be heard outside the bunker, only to be drowned into what sounded like sludge.\n" +
                 "\n" +
@@ -343,8 +345,10 @@ namespace Modules
                 "\n" +
                 "The film solemnly rings; before sputtering what's left of the record. Eventually dissolving like the door before it.\n" +
                 "Before words could be exchanged, the dying man's melting flesh began to split and slip off his body, akin to slow cooked meat. His eyes became hazy, taking one last look at the radioactive presence as he spoke the last words the man would ever hear.\n" +
-                "\"Shhhh, the end is near.\"\n" +
-                "Brain sloshing, muscle dripping to reveal the skeleton underneat, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.");
+                "\n" +
+                "\"Shh, the end is near.\"\n" +
+                "\n" +
+                "Brain sloshing, muscle dripping to reveal the skeleton underneath, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.");
             #endregion lore
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
@@ -364,7 +368,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "PRIMARY_BEAM_NAME", "Rad-Cannon");
             LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"<style=cIsHealing>Irradiating</style>. Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}. Reduces armor by {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredAmount}")} for {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredDuration} seconds")}.");
 
-            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
             #endregion
             
             #region Secondary
@@ -373,8 +377,8 @@ namespace Modules
                 $"<style=cIsHealing>Irradiating</style>. Blast an area for {Helpers.DamageValueText(AimBigRadBeam.BlastDamageCoefficient)}, and cover the area in radiation for {Helpers.UtilityText($"{AimBigRadBeam.DotZoneLifetime} seconds")}. " +
                 $"Enemies in contact take {Helpers.DamageText($"{AimBigRadBeam.PoolDamageCoefficient * 100}% damage twice per second")}");
 
-            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY", Helpers.KeywordText("Irradiating", $"Initial Blast: Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}\n" +
-                $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.5f} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY", Helpers.KeywordText("Irradiating", $"Initial Blast: Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}.\n" +
+                $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.5f} seconds")}."));
             //LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY2", Helpers.KeywordText("Irradiating", $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.6f} seconds")}"));
             #endregion
 
@@ -387,11 +391,11 @@ namespace Modules
             //default
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_NAME", "Spread the Doom");
             string specialDesc =
-                $"<style=cIsHealing>Irradiating</style>. Deploy your Rad-Cannon into the ground. Gain {Helpers.UtilityText($"barrier")} for each enemy nearby. {Helpers.UtilityText($"Every 3 seconds")}, pump a pool of radiation that lasts for {Helpers.UtilityText($"7 seconds")}, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage")} per second.";
+                $"<style=cIsHealing>Irradiating</style>. Deploy your Rad-Cannon into the ground. Gain {Helpers.UtilityText($"barrier")} for each enemy nearby. {Helpers.UtilityText($"Every 3 seconds")}, pump a pool of radiation that lasts for {Helpers.UtilityText($"7 seconds")}, dealing {Helpers.DamageText($"{DeployIrradiate.DamageCoefficient * 100}% damage per second")}.";
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_NAME", "There Goes the Neighborhood");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Double Area. 1.5 Faster ticks per second"));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Double Area. 1.5x Faster ticks per second."));
 
             //cancel
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_CANCEL_NAME", "Cancel");
@@ -405,9 +409,9 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.ImpactDamageCoefficient)}"));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.ImpactDamageCoefficient)}."));
 
-            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.7f} seconds")}"));
+            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.7f} seconds")}."));
             #endregion
 
             #region recolor
@@ -614,5 +618,5 @@ Before another thought can be processed, the door glows an iridescent green and 
 The film solemnly rings; before sputtering what's left of the record. Eventually dissolving like the door before it.\n
 Before words could be exchanged, the dying man's melting flesh began to split and slip off his body, akin to slow cooked meat. His eyes became hazy, taking one last look at the radioactive presence as he spoke the last words the man would ever hear.\n
 "Shhhh, the end is near."\n
-Brain sloshing, muscle dripping to reveal the skeleton underneat, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.
+Brain sloshing, muscle dripping to reveal the skeleton underneath, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.
  */

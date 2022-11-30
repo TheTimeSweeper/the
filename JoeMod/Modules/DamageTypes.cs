@@ -30,12 +30,12 @@ namespace Modules {
 
             Conductive = DamageAPI.ReserveDamageType();
             //ApplyBlinkCooldown = DamageAPI.ReserveDamageType();
-
-            DesolatorArmorShred = DamageAPI.ReserveDamageType();
-            DesolatorDot = DamageAPI.ReserveDamageType();
-            DesolatorDot2 = DamageAPI.ReserveDamageType();
-            DesolatorDotLong = DamageAPI.ReserveDamageType();
-
+            if (FacelessJoePlugin.Desolator) {
+                DesolatorArmorShred = DamageAPI.ReserveDamageType();
+                DesolatorDot = DamageAPI.ReserveDamageType();
+                DesolatorDot2 = DamageAPI.ReserveDamageType();
+                DesolatorDotLong = DamageAPI.ReserveDamageType();
+            }
             SetHooks();
         }
 

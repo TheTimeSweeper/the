@@ -15,7 +15,7 @@ namespace Modules {
         //public static BuffDef blinkCooldownBuff;
 
         public static BuffDef desolatorArmorBuff;
-        public static BuffDef desolatorArmorMiniBuff;
+        public static BuffDef desolatorDeployBuff;
 
         public static BuffDef desolatorArmorShredDeBuff;
         public static BuffDef desolatorDotDeBuff;
@@ -52,35 +52,37 @@ namespace Modules {
             //               false,
             //               false);
 
-            Color lime = new Color(0.486f, 1, 0);
+            if (FacelessJoePlugin.Desolator) {
+                Color lime = new Color(0.486f, 1, 0);
 
-            desolatorArmorBuff =
-                AddNewBuff("DesolatorArmor",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
-                           lime,
-                           false,
-                           false);
+                desolatorArmorBuff =
+                    AddNewBuff("DesolatorArmor",
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
+                               lime,
+                               false,
+                               false);
 
-            desolatorArmorMiniBuff =
-                AddNewBuff("DesolatorArmorMini",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
-                           lime,
-                           false,
-                           false);
+                desolatorDeployBuff =
+                    AddNewBuff("DesolatorArmorMini",
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
+                               lime,
+                               false,
+                               false);
 
-            desolatorArmorShredDeBuff =
-                AddNewBuff("DesolatorArmorShred",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Pulverized").iconSprite,
-                           lime,
-                           true,
-                           true);
+                desolatorArmorShredDeBuff =
+                    AddNewBuff("DesolatorArmorShred",
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Pulverized").iconSprite,
+                               lime,
+                               true,
+                               true);
 
-            desolatorDotDeBuff =
-                AddNewBuff("DesolatorIrradiated",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
-                           lime,
-                           true,
-                           true);
+                desolatorDotDeBuff =
+                    AddNewBuff("DesolatorIrradiated",
+                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
+                               lime,
+                               true,
+                               true);
+            }
         }
 
         public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {

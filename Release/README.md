@@ -1,8 +1,7 @@
 # Electrician In the Field
-- Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
-- Fully fleshed out
-  - Item displays and ragdoll
-  - Fully animated (but by me so y'know)
+Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
+- Item displays and ragdoll
+- Alt skills with achievements
 - Fully multiplayer compatible
 - Mod Support
   - Ancient Scepter
@@ -12,18 +11,17 @@
   - CustomEmotesAPI
 - Y'all remember Red Alert 2?
 # SPREAD THE DOOM
-- Adds the Desolator, who spreads large spheres of radiation everywhere in his wake.
-- Fully fleshed out
-  - Item displays and ragdoll
-  - Fully animated (but by me so y'know)
-    - also reusing Tesla Trooper's animations
+Adds the Desolator, who spreads large spheres of radiation everywhere in his wake.  
+- Item displays and ragdoll
 - Fully multiplayer compatible
 - Mod Support
   - Ancient Scepter
+  - Skills++ (partial)
+  - Aetherium (Item Displays)
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS2.png)]()
 
-Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7). I'll be taking a close look at feedback.
+Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7). I'll be taking a close look at feedback.
 ___
 ## Overview
 Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
@@ -31,7 +29,7 @@ Based on their respective units from Red Alert 2, but with SkeletorChampion comi
 Tesla Trooper is a mid-range bruiser on his own, and an all-range monster when he builds his Tesla Tower.  
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/zaps_combined.png)]()
 
-Desolator is a powerhouse of DoT and AoE damage. 
+Desolator is a walking powerhouse of radiation and area damage.  
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/rad.png)]()
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/Icons.png)]()
@@ -62,10 +60,11 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 `2.0.0`
- - added new character Desolator!
- - added new alt secondary skill, expanding on melee m1
- - melee m1 still in cursed for now
- - finished tower item displays for sotv
+ - released new character Desolator!
+ - added new alt secondary skill, expanding on cursed melee m1
+ - added achievement for melee m1. still in cursed for now
+ - config has been reorganized. you should probably just delete existing
+ - finished tower item displays for sotv items
  - fixed level growth stats not being to the vanilla standard
  - added head hurtbox proper
 

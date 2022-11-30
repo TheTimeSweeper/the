@@ -12,6 +12,14 @@ namespace Modules {
             GameObject skele = Assets.LoadAsset<GameObject>("TeslaTrooper_meme");
             EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele, true);
             //skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
+
+            if (FacelessJoePlugin.Desolator) {
+
+                GameObject skele2 = Assets.LoadAsset<GameObject>("Desolator_meme");
+                if (skele2) {
+                    EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele2, true);
+                }
+            }
             orig();
         }
     }

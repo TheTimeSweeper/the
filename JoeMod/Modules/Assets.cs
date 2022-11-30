@@ -472,7 +472,7 @@ namespace Modules {
 
             return irradiatorProjectileScepter;
         }
-
+        
         private static GameObject CreateDesolatorCrocoLeapProjectile() {
 
             GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");

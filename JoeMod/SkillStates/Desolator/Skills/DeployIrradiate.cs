@@ -48,7 +48,7 @@ namespace ModdedEntityStates.Desolator {
             }
 
             if (NetworkServer.active) {
-                characterBody.AddBuff(Modules.Buffs.desolatorArmorMiniBuff);
+                characterBody.AddBuff(Modules.Buffs.desolatorDeployBuff);
             }
 
             //bit of overengineering but input is important
@@ -136,7 +136,7 @@ namespace ModdedEntityStates.Desolator {
 
             if (NetworkServer.active) {
 
-                characterBody.RemoveBuff(Modules.Buffs.desolatorArmorMiniBuff);
+                characterBody.RemoveBuff(Modules.Buffs.desolatorDeployBuff);
             }
 
             if (!_complete) {

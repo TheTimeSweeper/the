@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
+using UnityEngine;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -59,10 +60,11 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         
         Log = Logger;
 
+        Modules.Config.ReadConfig();
+
         Modules.DamageTypes.RegisterDamageTypes();
 
         // load assets and read config
-        Modules.Config.ReadConfig();
 
         Modules.Assets.Initialize();
 
@@ -103,14 +105,12 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     }
 
     private void Hook() {
-        // run hooks here, disabling one is as simple as commenting out the line
         On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
         R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
         //On.RoR2.CharacterModel.UpdatePoisonAffix += CharacterModel_UpdatePoisonAffix;
         On.RoR2.JitterBones.RebuildBones += JitterBones_RebuildBones;
-
         //for figuring out plague knight throw bomb angles
         //On.EntityStates.Commando.CommandoWeapon.ThrowGrenade.PlayAnimation += ThrowGrenade_PlayAnimation;
     }
@@ -130,42 +130,48 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     //}
 
     private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
+        if (Desolator) {
+            if (sender.HasBuff(Modules.Buffs.desolatorArmorBuff)) {
+                args.armorAdd += 100f;
+                args.moveSpeedMultAdd += 0.4f;
+            }
 
-        if (sender.HasBuff(Modules.Buffs.desolatorArmorBuff)) {
-            args.armorAdd += 100f;
-            args.moveSpeedMultAdd += 0.4f;
+            if (sender.HasBuff(Modules.Buffs.desolatorDeployBuff)) {
+                args.armorAdd += 30f;
+            }
+
+            if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
+                args.armorAdd -= DesolatorSurvivor.ArmorShredAmount * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
+            }
+
+            //if (sender.HasBuff(Modules.Buffs.desolatorDotDeBuff)) {
+            //    args.armorAdd -= 3f * sender.GetBuffCount(Modules.Buffs.desolatorDotDeBuff);
+            //}
         }
-
-        if (sender.HasBuff(Modules.Buffs.desolatorArmorMiniBuff)) {
-            args.armorAdd += 30f;
-        }
-
-        if (sender.HasBuff(Modules.Buffs.desolatorArmorShredDeBuff)) {
-            args.armorAdd -= DesolatorSurvivor.ArmorShredAmount * sender.GetBuffCount(Modules.Buffs.desolatorArmorShredDeBuff);
-        }
-
-        //if (sender.HasBuff(Modules.Buffs.desolatorDotDeBuff)) {
-        //    args.armorAdd -= 3f * sender.GetBuffCount(Modules.Buffs.desolatorDotDeBuff);
-        //}
     }
 
     private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
         
-        bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
+        bool bypassArmor = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
+        if (self && self.body) {
+            if (self.body.HasBuff(Modules.Buffs.zapShieldBuff) && !bypassArmor) {
+                float mitigatedDamage = damageInfo.damage;
 
-        if (self && self.body && self.body.HasBuff(Modules.Buffs.zapShieldBuff) && !flag) {
-            float mitigatedDamage = damageInfo.damage;
-            
-            if (Modules.Config.UtilityDamageAbsorption >= 1.0f) {
-                damageInfo.rejected = true;
-            } else {
-                mitigatedDamage = (1.0f - Modules.Config.UtilityDamageAbsorption) * damageInfo.damage;
+                if (Modules.Config.UtilityDamageAbsorption >= 1.0f) {
+                    damageInfo.rejected = true;
+                } else {
+                    mitigatedDamage = (1.0f - Modules.Config.UtilityDamageAbsorption) * damageInfo.damage;
+                }
+
+                IReflectionBarrier bar = self.GetComponent<IReflectionBarrier>();
+                if (bar != null) {
+                    bar.StoreDamage(damageInfo, damageInfo.damage);
+                    damageInfo.damage = mitigatedDamage;
+                }
             }
 
-            IReflectionBarrier bar = self.GetComponent<IReflectionBarrier>();
-            if (bar != null) {
-                bar.StoreDamage(damageInfo, damageInfo.damage);
-                damageInfo.damage = mitigatedDamage;
+            if(Desolator && self.body.HasBuff(Modules.Buffs.desolatorDeployBuff)){
+                damageInfo.force = Vector3.zero;
             }
         }
         orig(self, damageInfo);

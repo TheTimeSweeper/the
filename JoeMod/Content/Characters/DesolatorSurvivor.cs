@@ -39,17 +39,17 @@ namespace Modules.Survivors {
 
             maxHealth = 110f,
             healthRegen = 1.5f,
-            armor = 10f,
+            armor = 0f,
 
             jumpCount = 1,
 
-            aimOriginPosition = new Vector3(0, 1.8f, 0),
+            aimOriginPosition = new Vector3(0, 1.6f, 0),
         };
         
         public override CustomRendererInfo[] customRendererInfos { get; set; }
 
         public override Type characterMainState => typeof(DesolatorMain);
-
+        
         public override ItemDisplaysBase itemDisplays => new DesolatorItemDisplays();
         
         public override UnlockableDef characterUnlockableDef => null;

@@ -6,6 +6,11 @@ namespace Modules
 {
     internal static class Config
     {
+        public enum ReticleType {
+            Hurtbox,
+            Center
+        }
+
         public static bool Debug;
 
         public static bool NewColor;
@@ -17,6 +22,7 @@ namespace Modules
 
         public static bool EnableTeslaTrooper;
         public static ConfigEntry<bool> TowerTargeting;
+        public static ConfigEntry<ReticleType> TargetingReticleType;
         public static int LysateLimit;
         public static float UtilityDamageAbsorption;
         public static ConfigEntry<bool> UncappedUtility;
@@ -25,12 +31,12 @@ namespace Modules
 
         public static void ReadConfig() {
             Debug = FacelessJoePlugin.instance.Config.Bind(
-                "Debug",
+                "0. Debug",
                 "Debug Logs",
                 false,
                 "in case I forget to delete them when I upload").Value;
 
-            string sectionGeneral = "General";
+            string sectionGeneral = "1. General";
 
             NewColor = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,
@@ -43,12 +49,6 @@ namespace Modules
                 "Cursed",
                 false,
                 "Enables extra/wip content\nyes there's a fucking minecraft skin").Value;
-
-            TowerItemDisplays = FacelessJoePlugin.instance.Config.Bind(
-                sectionGeneral,
-                "Tower Item Displays",
-                true,
-                "Set false to disable tower item displays if you find them too silly").Value;
 
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,
@@ -68,9 +68,21 @@ namespace Modules
                 false,
                 "Changes character icon to the unit icon from Red Alert 2").Value;
 
-            string sectionTeslaTrooper = "Tesla Trooper";
+            string sectionTeslaTrooper = "2. Tesla Trooper";
 
+            TowerItemDisplays = FacelessJoePlugin.instance.Config.Bind(
+                sectionTeslaTrooper,
+                "Tower Item Displays",
+                true,
+                "Set false to disable tower item displays if you find them too silly").Value;
 
+            //TargetingReticleType = FacelessJoePlugin.instance.Config.Bind(
+            //    sectionTeslaTrooper,
+            //    "Targeting Reticle Position", 
+            //    ReticleType.Center,
+            //    "Center: reticle will be on the center of the enemy\n" +
+            //    "Hurtbox: reticle will be on the specific hurtbox you're targeting\n" +
+            //    "Distance on m1 is still based on hurtbox, does not change gameplay.");
 
             TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
                 sectionTeslaTrooper,
@@ -101,9 +113,9 @@ namespace Modules
                 false,
                 "Removes the cap on how much damage you can retaliate with.\nIf you want utility to be his main source of damage");
 
-            string sectionDesolator = "Desolator";
+            string sectionDesolator = "3. Desolator";
 
-            FacelessJoePlugin.Desolator = Modules.Config.CharacterEnableConfig("Desolator BETA", false, "There goes the neighborhood"/*, sectionDesolator*/).Value;
+            FacelessJoePlugin.Desolator = Modules.Config.CharacterEnableConfig("Desolator", true, "", sectionDesolator).Value;
 
             //DesolatorForceUnlock = FacelessJoePlugin.instance.Config.Bind(
             //    sectionDesolator,

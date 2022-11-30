@@ -9,7 +9,7 @@ namespace ModdedEntityStates.Desolator {
 
         public static float BlastDamageCoefficient = 4.0f;
         public static float PoolDamageCoefficient = 0.2f;
-        public static float DotZoneLifetime = 4;
+        public static float DotZoneLifetime = 2;
         public static float BaseAttackRadius = 10;
 
         private bool _crit;

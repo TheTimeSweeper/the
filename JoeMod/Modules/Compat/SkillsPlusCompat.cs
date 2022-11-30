@@ -8,6 +8,7 @@ using SkillsPlusPlus;
 using SkillsPlusPlus.Modifiers;
 using EntityStates;
 using UnityEngine;
+using ModdedEntityStates.Desolator;
 
 namespace Modules {
 
@@ -29,6 +30,8 @@ namespace Modules {
             LanguageAPI.Add("TESLA_UTILITY_SHIELDZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+0.5</style> second buff time");
             LanguageAPI.Add("TESLA_SPECIAL_TOWER_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 3 levels");
             LanguageAPI.Add("TESLA_SPECIAL_SCEPTER_TOWER_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 3 levels");
+            
+            LanguageAPI.Add("DESOLATOR_PRIMARY_BEAM_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+10%</style> rate of fire");
         }
 
         [SkillLevelModifier("Tesla_Primary_Zap", typeof(Zap))]
@@ -100,6 +103,18 @@ namespace Modules {
                 skillDef.baseMaxStock = (int)AdditiveScaling(2, 0.334f, level);
                 SkillsPlusAdditionalTowers = (int)AdditiveScaling(0, 0.334f, level);
                 TowerLifetime.skillsPlusSeconds = AdditiveScaling(0, 1, level);
+            }
+        }
+
+
+        [SkillLevelModifier("Desolator_Primary_Beam", typeof(RadBeam))]
+        public class DesolatorPrimaryModifier : BaseSkillModifier {
+
+            public override void OnSkillEnter(BaseState skillState, int level) {
+                base.OnSkillEnter(skillState, level);
+                if (skillState is RadBeam radBeam) {
+                    radBeam.skillsPlusDurationMultiplier = MultScaling(1f, -0.1f, level);
+                }
             }
         }
     }
