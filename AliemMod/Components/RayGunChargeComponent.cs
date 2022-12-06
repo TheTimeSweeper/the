@@ -15,7 +15,11 @@ namespace AliemMod.Components {
         }
 
         void FixedUpdate() {
-            charge += Time.fixedDeltaTime * characterBody.attackSpeed;
+            if (characterBody) {
+                charge += Time.fixedDeltaTime * characterBody.attackSpeed;
+            }else {
+                charge += Time.fixedDeltaTime;
+            }
         }
 
         public float RedeemCharge() {
@@ -23,7 +27,7 @@ namespace AliemMod.Components {
             float redeemedCharge = Mathf.Min(charge, maxCharge);
             charge = minCharge;
 
-            Helpers.LogWarning("redeeming " + redeemedCharge);
+            //Helpers.LogWarning("redeeming " + redeemedCharge);
             return redeemedCharge;
         }
     }

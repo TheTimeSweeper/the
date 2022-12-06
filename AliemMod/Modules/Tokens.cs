@@ -51,7 +51,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGun.DamageCoefficient)}.\nHold to charge up and fire a large blast for up to {Helpers.DamageValueText(ChargeRayGunBig.MaxDamageCoefficient)}");
 
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.maxCharge)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.maxCharge)}.");
             #endregion
 
             #region Secondary
@@ -61,13 +61,20 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
-            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", $"Dive forward at hihg speed. If landing on the ground, hold to {Helpers.UtilityText("burrow")} into the ground. " +
-                $"If an enemy is hit, ride them. While riding, chomp for {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, and </style=cIsHealing>heal for 10% of maximum health</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", $"Dive forward at hihg speed for {Helpers.DamageValueText(AliemLeap.DamageCoefficient)}. If landing on the ground, hold input to {Helpers.UtilityText("burrow")} into the ground. " +
+                $"If an enemy is hit, hold input to {Helpers.UtilityText("ride")} them. While riding, chomp for {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, and </style=cIsHealing>heal for 10% of maximum health</style>.");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_GRENADE_NAME", "Grenade");
-            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_DESCRIPTION", $"Throw a grenade for {Helpers.DamageValueText(ThrowGrenade.DamageCoefficient)}.");
+            string specialDesc = $"Throw a grenade for {Helpers.DamageValueText(ThrowGrenade.DamageCoefficient)}.";
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_DESCRIPTION", specialDesc);
+
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_NAME", "Big Grenade");
+            specialDesc += $"{Helpers.ScepterDescription("Double area, double damage")}";
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION", specialDesc);
+
+
             #endregion
 
             #region Achievements

@@ -9,6 +9,7 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace AliemMod.Content.Survivors {
@@ -27,7 +28,7 @@ namespace AliemMod.Content.Survivors {
 
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texIconAliem"),
             bodyColor = Color.yellow,
-            sortPosition = 69.2f,
+            sortPosition = 70f,
 
             crosshair = Assets.LoadCrosshair("Default"),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -38,7 +39,7 @@ namespace AliemMod.Content.Survivors {
 
             jumpCount = 1,
 
-            aimOriginPosition = new Vector3(0, 0.5f, 0),
+            aimOriginPosition = new Vector3(0, 0.9f, 0),
             cameraPivotPosition = new Vector3(0, 0.8f, 0),
             modelBasePosition = new Vector3(0, -0.52f, 0),
 
@@ -297,8 +298,39 @@ namespace AliemMod.Content.Survivors {
             
             Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
             #endregion
-        }
 
+            if (Modules.Compat.ScepterInstalled) {
+                InitializeScepterSkills();
+            }
+        }
+        
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void InitializeScepterSkills() {
+
+            SkillDef scepterBombSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = "aliem_special_grenade_scepter",
+                skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_NAME",
+                skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecialScepter"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ScepterThrowGrenade)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 10f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterBombSkillDef, "AliemBody", SkillSlot.Special, 0);
+        }
         public override void InitializeSkins() {
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();

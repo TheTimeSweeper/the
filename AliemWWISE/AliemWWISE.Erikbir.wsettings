@@ -3,7 +3,7 @@
 	<UserProjectSettingsInfo>
 		<UserProjectSettings Name="" ID="{71E4BA8A-4922-4E43-A7F9-E264F6FF3BDD}">
 			<PropertyList>
-				<Property Name="AudioFilesImporter\Path" Type="string" Value="E:\Abbasses stuff IIX\_thundersweeper\the\AliemWWISE\Originals\SFX\"/>
+				<Property Name="AudioFilesImporter\Path" Type="string" Value="E:\Abbas's stuff VII I think\1337 haxx\ror2lol\Chikara ga minegitte kuru\EnforcerMod\EnforcerMod_WWISE\Originals\SFX\Heavy Swing\"/>
 				<Property Name="Event Action List\{0AEE11D5-489A-4A2E-9708-13005099278F}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{1125CAA2-A27E-45EA-9833-BDDED39FAD2B}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{1FF45694-0BCD-4626-9262-ECC9E3E0AD17}\x64_Expand States" Type="string" Value=""/>
@@ -13,6 +13,7 @@
 				<Property Name="Event Action List\{7BD76FB6-5652-4CF9-9339-EA4CCA422D44}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{8B717C7A-DD85-4984-8EA3-04055AA83E43}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{E207FA25-522E-45E2-8F43-AD2F52C8466F}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{E99B75B6-8239-47EC-8E8C-B03F737E298A}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="EventView\FilterMode1" Type="int32" Value="1"/>
 				<Property Name="ExternalSourcesInputPath" Type="string">
 					<ValueList>

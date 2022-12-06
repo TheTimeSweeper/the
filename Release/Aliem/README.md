@@ -1,6 +1,6 @@
 # Aliem
 - When will alien hominid invasion come out that shit's gonna be fun
-- happy halloween c:
+- happy halloween modjam 2022 c:
 - multiplayer compatible!
 
 Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/ZZzmFgDbCH).
@@ -31,6 +31,18 @@ The Behemoth - inspiration, sounds
 - ~~Item displays~~
 
 ## Changelog
+`0.3.1`
+- leap now only rides if you're holding the input 
+  - config for always ride
+  - you're welcome, contra c:
+- slightly toned down the range on riding detecting
+- readded hitbox to leap
+- added scepter why not
+- added another silly way to shoot raygun in cursed
+- moved up aim origin so projectiles hit the floor less
+- reordered so he's not in between tesla trooper and desolator
+- fixed stats not being to vanilla standard
+
 `0.3.0`
 - fixed projectiles in multiplayer
 - fixed riding error spam in multiplayer

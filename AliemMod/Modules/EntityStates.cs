@@ -12,6 +12,7 @@ namespace Modules {
             Content.AddEntityState(typeof(RayGun));
             Content.AddEntityState(typeof(RayGunBig));
             Content.AddEntityState(typeof(RayGunInputs));
+            Content.AddEntityState(typeof(RayGunInstant));
 
             Content.AddEntityState(typeof(AliemLeapM2));
             Content.AddEntityState(typeof(AliemLeapM3));
@@ -21,6 +22,7 @@ namespace Modules {
             Content.AddEntityState(typeof(AliemBurrow));
             
             Content.AddEntityState(typeof(ThrowGrenade));
+            Content.AddEntityState(typeof(ScepterThrowGrenade));
         }
     }
 }

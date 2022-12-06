@@ -102,6 +102,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_Leap_Impact" ID="{E99B75B6-8239-47EC-8E8C-B03F737E298A}">
+					<ChildrenList>
+						<Action Name="" ID="{2C491F9A-41A4-483B-979D-6DE05CE8CF33}" ShortID="226013711">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Heavy Swing Hit" ID="{EAE1CDBC-602F-426D-B317-620A55677A97}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

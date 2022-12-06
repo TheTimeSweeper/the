@@ -10,6 +10,8 @@ namespace Modules
 
         public static bool Cursed;
 
+        public static ConfigEntry<bool> AlwaysRide;
+
         public static void ReadConfig()
         {
             Debug = AliemPlugin.instance.Config.Bind(
@@ -25,6 +27,12 @@ namespace Modules
                 "Cursed",
                 false,
                 "Enable wip/unused content").Value;
+
+            AlwaysRide = AliemPlugin.instance.Config.Bind(
+                sectionGeneral,
+                "Always Ride",
+                false,
+                "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
         }
 
         // this helper automatically makes config entries for disabling survivors

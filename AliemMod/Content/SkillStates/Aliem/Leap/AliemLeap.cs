@@ -37,10 +37,10 @@ namespace ModdedEntityStates.Aliem {
 				}
 			}
 		}
-		public float DamageCoefficient = 0;
+		public static float DamageCoefficient = 2;
 
 		private OverlapAttack overlapAttack;
-		private List<HurtBox> overlapAttackHits = new List<HurtBox>();
+		//private List<HurtBox> overlapAttackHits = new List<HurtBox>();
 
 		private bool hitSomething;
 		private int hitSomethingFrames;
@@ -48,6 +48,7 @@ namespace ModdedEntityStates.Aliem {
 		private float previousAirControl;
 
 		private BullseyeSearch bullseyeSearch;
+        private List<HurtBox> overlapAttackHits = new List<HurtBox>();
 
         public override void OnEnter() {
 			base.OnEnter();
@@ -64,7 +65,9 @@ namespace ModdedEntityStates.Aliem {
 				teamIndex = base.GetTeam(),
 				damage = DamageCoefficient * damageStat,
 				isCrit = RollCrit(),
-				hitBoxGroup = hitBoxGroup
+				hitBoxGroup = hitBoxGroup,
+				hitEffectPrefab = Modules.Assets.nemforcerImpactEffect,
+				impactSound = Modules.Assets.nemforcerImpactSound.index,
 				//damageType = DamageType.Stun1s,
 			};
 
@@ -111,10 +114,14 @@ namespace ModdedEntityStates.Aliem {
 			if (base.isAuthority && base.characterMotor) {
 				base.characterMotor.moveDirection = base.inputBank.moveVector;
 
-                CharacterBody foundEnemy = FindBodyToRide(); //FireOverlap();
-				if(foundEnemy != null) {
+				CharacterBody foundBody = FireOverlap();
+				if (!foundBody) {
+					foundBody = FindBodyToRide();
+				}
+				
+				if(foundBody != null && (inputButtonState.down || Modules.Config.AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {
-						riddenBody = foundEnemy
+						riddenBody = foundBody
 					});
 					return;
                 }
@@ -148,31 +155,25 @@ namespace ModdedEntityStates.Aliem {
 
             Ray mond = new Ray(characterBody.corePosition, Vector3.forward);
 
-			if (Util.CharacterSpherecast(gameObject, mond, 2.69f, out RaycastHit HitInfo, 0, LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal)) {
+			if (Util.CharacterSpherecast(gameObject, mond, 1.51f, out RaycastHit HitInfo, 0, LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal)) {
 
-				return HitInfo.collider.GetComponent<HurtBox>().healthComponent.body;
+				if(HitInfo.collider.GetComponent<HurtBox>().healthComponent.body.teamComponent.teamIndex == teamComponent.teamIndex)
+					return HitInfo.collider.GetComponent<HurtBox>().healthComponent.body;
 			}
 			return null;
         }
-		
-        private CharacterBody FireOverlap() {
 
-			CharacterBody closestBody = null;
+		private CharacterBody FireOverlap() {
 
+			overlapAttackHits.Clear();
 			if (overlapAttack.Fire(overlapAttackHits)) {
-
-				float shortestDistance = 100;
-				for (int i = 0; i < overlapAttackHits.Count; i++) {
-
-					float hitDistance = Vector3.Distance(transform.position, overlapAttackHits[i].transform.position);
-					if(hitDistance < shortestDistance) {
-						closestBody = this.overlapAttackHits[i].healthComponent.body;
-					}
+				if (overlapAttackHits.Count > 0) {
+					return overlapAttackHits[0].healthComponent?.body;
 				}
 			}
 
-			return closestBody;
-        }
+			return null;
+		}
 
 		// Token: 0x060011AE RID: 4526 RVA: 0x0004E124 File Offset: 0x0004C324
 		public override void OnExit() {

@@ -26,6 +26,8 @@ namespace Modules {
         private const string assetbundleName = "aliem";
 
         public static GameObject bloodEffect;
+        public static GameObject nemforcerImpactEffect;
+        public static NetworkSoundEventDef nemforcerImpactSound;
 
         public static GameObject m1EffectPrefab;
         public static GameObject m2EffectPrefab;
@@ -69,6 +71,9 @@ namespace Modules {
         
         private static void PopulateAss() {
             bloodEffect = LoadEffect("BloodParticle", true);
+            nemforcerImpactEffect = LoadEffect("ImpactNemforcer", true);
+
+            nemforcerImpactSound = CreateNetworkSoundEventDef("Play_Leap_Impact");
 
             m1EffectPrefab = CreateM1Effect();
             m2EffectPrefab = CreateM2Effect();

@@ -377,6 +377,35 @@
 										<ActiveSource Name="HenryBombThrow" ID="{EA0A819F-0F06-4CF2-9FCB-278667D78665}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="Heavy Swing Hit" ID="{EAE1CDBC-602F-426D-B317-620A55677A97}" ShortID="885355836">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Heavy Swing Hit" ID="{DE5F6BD0-60F3-46BE-9C0F-969BCF7D651E}">
+											<Language>SFX</Language>
+											<AudioFile>Heavy Swing Hit.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="48913826"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Heavy Swing Hit" ID="{DE5F6BD0-60F3-46BE-9C0F-969BCF7D651E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>

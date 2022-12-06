@@ -9,7 +9,7 @@ namespace ModdedEntityStates.Aliem {
 		public static float BaseDuration = 0.3f;
 		public static float BaseDelayDuration = 0.00f;
 		
-		public static float DamageCoefficient = 10f;
+		public static float DamageCoefficient = 12f;
 		//needs to be set in the projectilecontroller component
 		//public static float procCoefficient = 1f;
 
@@ -36,9 +36,14 @@ namespace ModdedEntityStates.Aliem {
 
 			//targetmuzzle
 			base.attackSoundString = "Play_ThrowBomb";
+
+			ModifyState();
 			
 			base.OnEnter();
 		}
+
+        protected virtual void ModifyState() { }
+
         public override Ray ModifyProjectileAimRay(Ray aimRay) {
 
 			Vector3 aimCross = Vector3.Cross(aimRay.direction, Vector3.up).normalized;

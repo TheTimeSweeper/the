@@ -34,7 +34,7 @@ using System.Security.Permissions;
 public class AliemPlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.Aliem";
     public const string MODNAME = "Aliem";
-    public const string MODVERSION = "0.3.2";
+    public const string MODVERSION = "0.3.1";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
