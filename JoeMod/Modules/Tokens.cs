@@ -172,7 +172,7 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"{Helpers.UtilityText("Charging")}. Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Casts {Helpers.UtilityText($"up to 3 bolts")} at {Helpers.UtilityText($"close range")}.");
             
-             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText(TeslaTrooperSurvivor.conductiveAllyBoost.ToString())}x");
+             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText("{TeslaTrooperSurvivor.conductiveAllyBoost}x")}");
             
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Knuckles");
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient * ZapPunch.OrbDamageMultiplier)}. {Helpers.UtilityText("Deflects Projectiles")}.");
@@ -361,14 +361,14 @@ namespace Modules
             
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Radiation");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", $"Attacks inflict blight atm.");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", $"Desolator's attacks deal more damage to <style=cIsHealing>Irradiated</style> targets: {Helpers.DamageText($"+{DesolatorSurvivor.DamageMultiplierPerIrradiatedStack}x")} per stack of <style=cIsHealing>Radiation</style>.");
             #endregion
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_BEAM_NAME", "Rad-Cannon");
-            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"<style=cIsHealing>Irradiating</style>. Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}. Reduces armor by {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredAmount}")} for {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredDuration} seconds")}.");
+            LanguageAPI.Add(prefix + "PRIMARY_BEAM_DESCRIPTION", $"<style=cIsHealing>Irradiating</style>. Shoot an enemy with a beam of radiation for {Helpers.DamageValueText(RadBeam.DamageCoefficient)}.");// Reduces armor by {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredAmount}")} for {Helpers.UtilityText($"{DesolatorSurvivor.ArmorShredDuration} seconds")}.");
 
-            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
+            LanguageAPI.Add("KEYWORD_RADIATION_PRIMARY", Helpers.KeywordText("Irradiating", $"Inflicts 2 stacks of <style=cIsHealing>Radiation</style>, each dealing {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * RadBeam.RadDamageMultiplier * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
             #endregion
             
             #region Secondary
@@ -378,8 +378,7 @@ namespace Modules
                 $"Enemies in contact take {Helpers.DamageText($"{AimBigRadBeam.PoolDamageCoefficient * 100}% damage twice per second")}");
 
             LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY", Helpers.KeywordText("Irradiating", $"Initial Blast: Inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}.\n" +
-                $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.5f} seconds")}."));
-            //LanguageAPI.Add("KEYWORD_RADIATION_SECONDARY2", Helpers.KeywordText("Irradiating", $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.6f} seconds")}"));
+                $"Lingering Area: Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 0.5f * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
             #endregion
 
             #region Utility
@@ -408,10 +407,10 @@ namespace Modules
                 $"<style=cIsHealing>Irradiating</style>. Throw {Helpers.UtilityText("up to 2")} {name} which cover a large area in radiation for {Helpers.UtilityText($"10 seconds")}, dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage per second")}.";
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.explosionDamageCoefficient)}."));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Unstable " + name);
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on expiration for {Helpers.DamageValueText(ScepterThrowIrradiator.explosionDamageCoefficient)}."));
 
-            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.7f} seconds")}."));
+            LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 0.7f * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
             #endregion
 
             #region recolor

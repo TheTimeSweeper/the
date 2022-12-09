@@ -13,10 +13,10 @@ namespace ModdedEntityStates.Desolator {
     public class DeployIrradiate : BaseTimedSkillState {
 
         #region gameplay Values
-        public static float DamageCoefficient = 0.4f;
+        public static float DamageCoefficient = 0.22f;
         public static float BarrierPercentPerEnemy = 0.05f;
         public static float Range = 60;
-        public static float MaxBarrierPercent = 0.4f;
+        public static float MaxBarrierPercent = 0.35f;
         public const float SqrBarrierRange = 1600;
 
         public static float BaseDuration = 3f;

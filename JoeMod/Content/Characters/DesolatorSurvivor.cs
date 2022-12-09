@@ -63,8 +63,10 @@ namespace Modules.Survivors {
         public static float DotDamage = 0.07f;
         public static float DotInterval = 0.5f;
         public static float DotDuration = 8f;
-        public static float DamageMultiplierPerIrradiatedStack = 0.1f;
 
+        public static float DamageMultiplierPerIrradiatedStack = 0.05f;
+
+        //unused
         public static float ArmorShredAmount= 8f;
         public static float ArmorShredDuration = 8f;
         
@@ -128,7 +130,7 @@ namespace Modules.Survivors {
 
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            //InitializePassive();
+            InitializePassive();
 
             InitializePrimarySkills();
 
@@ -152,7 +154,7 @@ namespace Modules.Survivors {
                 enabled = true,
                 skillNameToken = DESOLATOR_PREFIX + "PASSIVE_NAME",
                 skillDescriptionToken = DESOLATOR_PREFIX + "PASSIVE_DESCRIPTION",
-                icon = Assets.LoadAsset<Sprite>("texDesolatorSkillPrimary"),
+                icon = Assets.LoadAsset<Sprite>("texDesolatorSkillPassive"),
             };
         }
 
@@ -461,7 +463,7 @@ namespace Modules.Survivors {
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
-            if (DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.DesolatorDot)) {
+            if (DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.DesolatorDot) || DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.DesolatorDotPrimary)) {
                 int radStacks = self.body ? self.body.GetBuffCount(Modules.Buffs.desolatorDotDeBuff) : 0;
                 damageInfo.damage += DamageMultiplierPerIrradiatedStack * radStacks * damageInfo.damage;
             }
@@ -482,13 +484,10 @@ namespace Modules.Survivors {
 
                 inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient, false);
             }
-            //quick hacky way to get m1 to add two stacks
-            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot2)) {
-                inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient, false);
-            }
-            //unused
-            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDotLong)) {
-                inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient * 2, false);
+            if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDotPrimary)) {
+                for (int i = 0; i < RadBeam.RadStacks; i++) {
+                    inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient * RadBeam.RadDamageMultiplier, false);
+                }
             }
         }
 

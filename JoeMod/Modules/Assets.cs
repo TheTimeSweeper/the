@@ -639,6 +639,7 @@ namespace Modules {
 
             if (!newTracer.GetComponent<EffectComponent>()) newTracer.AddComponent<EffectComponent>();
             if (!newTracer.GetComponent<VFXAttributes>()) newTracer.AddComponent<VFXAttributes>();
+            newTracer.GetComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
             if (!newTracer.GetComponent<NetworkIdentity>()) newTracer.AddComponent<NetworkIdentity>();
 
             newTracer.GetComponent<Tracer>().speed = speed.HasValue? speed.Value : newTracer.GetComponent<Tracer>().speed;

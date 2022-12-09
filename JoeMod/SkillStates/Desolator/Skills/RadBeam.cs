@@ -7,7 +7,10 @@ namespace ModdedEntityStates.Desolator {
     public class RadBeam : GenericBulletBaseState {
 
         public static float BaseDuration = 1.0f;
-        public static float DamageCoefficient = 1.4f;
+        public static float DamageCoefficient = 1.0f;
+
+        public static int RadStacks = 2;
+        public static float RadDamageMultiplier = 0.7f;
 
         public float skillsPlusDurationMultiplier = 1;
 
@@ -45,9 +48,8 @@ namespace ModdedEntityStates.Desolator {
         public override void ModifyBullet(BulletAttack bulletAttack) {
             //bulletAttack.damageType = DamageType.BlightOnHit;
             bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-            DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorArmorShred);
-            DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorDot);
-            //DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorDot2);
+            //DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorArmorShred);
+            DamageAPI.AddModdedDamageType(bulletAttack, Modules.DamageTypes.DesolatorDotPrimary);
         }
     }
 }
