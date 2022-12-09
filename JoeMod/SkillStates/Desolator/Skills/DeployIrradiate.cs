@@ -15,9 +15,9 @@ namespace ModdedEntityStates.Desolator {
         #region gameplay Values
         public static float DamageCoefficient = 0.4f;
         public static float BarrierPercentPerEnemy = 0.05f;
-        public static float MaxBarrierPercent = 0.4f;
         public static float Range = 60;
-        public const float SqrRange = 1600;
+        public static float MaxBarrierPercent = 0.4f;
+        public const float SqrBarrierRange = 1600;
 
         public static float BaseDuration = 3f;
         public static float StartTime = 1f;
@@ -64,6 +64,8 @@ namespace ModdedEntityStates.Desolator {
         public override void FixedUpdate() {
             base.FixedUpdate();
 
+            duration = TimedBaseDuration / characterBody.attackSpeed;
+
             if (_heldTooLongYaDoofus && isAuthority && base.inputBank.skill4.justReleased) {
                 _heldTooLongYaDoofus = false;
             }
@@ -94,7 +96,7 @@ namespace ModdedEntityStates.Desolator {
             int nearbyEnemies = 0;
             for (int i = 0; i < enemies.Count; i++) {
 
-                if (Vector3.SqrMagnitude(enemies[i].transform.position - transform.position) < SqrRange) {
+                if (Vector3.SqrMagnitude(enemies[i].transform.position - transform.position) < SqrBarrierRange) {
                     nearbyEnemies++;
                 }
             }

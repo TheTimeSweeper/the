@@ -10,14 +10,13 @@ public class DesolatorAuraHolder : NetworkBehaviour {
     void Awake() {
         SpawnAura();
     }
-
+    
     public void SpawnAura() {
 
         if (NetworkServer.active) {
             GameObject spawnedAuraObject = Instantiate(Modules.Assets.DesolatorAuraPrefab, base.transform.position, Quaternion.identity);
             NetworkServer.Spawn(spawnedAuraObject);
             _spawnedAuraObject = spawnedAuraObject;
-            //_spawnedAura = _spawnedAuraObject.GetComponent<DesolatorAuraController>();
         }
     }
 

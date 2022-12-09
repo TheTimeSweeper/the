@@ -128,7 +128,7 @@ namespace Modules
 "Play? Y/N\n" +
 ">Y</line-height></style>\n\n" +
 "Видеожурнал, 13 сентября 2055 г.\n" +
-"Сегодня я буду работать над полным бронежилетом Tesla, который я сделал для нашей секретной маленькой поездки, и немного поприветствую маленького Милослава, который думал, что писать своему старшему брату слишком утомительно.Кто еще думал, что у него хватило духу раскрутить целую бутылку чистой водки, как какой - нибудь чемпион по скачкам!\n" +
+"Сегодня я буду работать над полным бронежилетом Теслы, который я сделал для нашей секретной маленькой поездки, и немного поприветствую маленького Милослава, который думал, что писать своему старшему брату слишком утомительно. Кто бы подумал, что у него хватит духу раскрутить целую бутылку чистой водки, как какой - нибудь чемпион по скачкам!\n" +
 "\n<style=cMono><line-height=15>=========================================\n" +
 "Translated Subtitles Enabled.\n" +
 "=========================================</line-height></style>\n\n" +
@@ -303,9 +303,9 @@ namespace Modules
 
             string desc = "The Desolator is a walking powerhouse of radiation.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
                         + "< ! > The armor reduction from Rad-Cannon is one of your most powerful tools to help melt enemies with your other abilities" + Environment.NewLine + Environment.NewLine
-                        + "< ! > Scorched Earth is a simple heavy damage dealer, especially after Rad-Cannon's armor reduction" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Scorched Earth is a simple heavy damage dealer, especially after Rad-Cannon's armor reduction." + Environment.NewLine + Environment.NewLine
                         + "< ! > Use the movement speed from Reactor to get you out of a pinch, but you can instead use its weakening properties to help deal extra damage." + Environment.NewLine + Environment.NewLine
-                        + "< ! > Spread the Doom leaves you vulnerable to attack, but if you're rewarded for staying deployed longer to deal more damage." + Environment.NewLine + Environment.NewLine;
+                        + "< ! > Use Spread the Doom and stay deployed longer to deal more area damage, but for priority targets, use it for a quick pump so you can use your other abilities." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, behind him, an oasis of death.";
             string outroFailure = "..and so he vanished, there goes the neighborhood.";
@@ -409,7 +409,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Irradiatorinator");
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.ImpactDamageCoefficient)}."));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on contact for {Helpers.DamageValueText(ScepterThrowIrradiator.explosionDamageCoefficient)}."));
 
             LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration * 0.7f} seconds")}."));
             #endregion

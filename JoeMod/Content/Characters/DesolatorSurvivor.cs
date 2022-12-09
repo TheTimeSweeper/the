@@ -54,7 +54,7 @@ namespace Modules.Survivors {
         
         public override UnlockableDef characterUnlockableDef => null;
         private static UnlockableDef masterySkinUnlockableDef;
-
+        
         public static DeployableSlot irradiatorDeployableSlot;
         public DeployableAPI.GetDeployableSameSlotLimit GetIrradiatorSlotLimit;
 
@@ -63,6 +63,7 @@ namespace Modules.Survivors {
         public static float DotDamage = 0.07f;
         public static float DotInterval = 0.5f;
         public static float DotDuration = 8f;
+        public static float DamageMultiplierPerIrradiatedStack = 0.1f;
 
         public static float ArmorShredAmount= 8f;
         public static float ArmorShredDuration = 8f;
@@ -244,7 +245,7 @@ namespace Modules.Survivors {
                 fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
+                isCombatSkill = true,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
@@ -292,7 +293,7 @@ namespace Modules.Survivors {
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
+                isCombatSkill = true,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
@@ -322,7 +323,7 @@ namespace Modules.Survivors {
                 fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
+                isCombatSkill = true,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
@@ -349,7 +350,7 @@ namespace Modules.Survivors {
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
+                isCombatSkill = true,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
@@ -455,7 +456,17 @@ namespace Modules.Survivors {
 
         private void Hook() {
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
-            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+        }
+
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
+
+            if (DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.DesolatorDot)) {
+                int radStacks = self.body ? self.body.GetBuffCount(Modules.Buffs.desolatorDotDeBuff) : 0;
+                damageInfo.damage += DamageMultiplierPerIrradiatedStack * radStacks * damageInfo.damage;
+            }
+
+            orig(self, damageInfo);
         }
 
         private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
@@ -468,16 +479,21 @@ namespace Modules.Survivors {
             }
 
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot)) {
-                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient);
+
+                inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient, false);
             }
             //quick hacky way to get m1 to add two stacks
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDot2)) {
-                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient);
+                inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient, false);
             }
             //unused
             if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.DesolatorDotLong)) {
-                DotController.InflictDot(damageReport.victim.gameObject, damageReport.attacker, Dots.DesolatorDot, DotDuration * damageReport.damageInfo.procCoefficient * 2);
+                inflictRadiation(damageReport.victim.gameObject, damageReport.attacker, damageReport.damageInfo.procCoefficient * 2, false);
             }
+        }
+
+        private void inflictRadiation(GameObject victim, GameObject attacker, float proc, bool crit) {
+            DotController.InflictDot(victim, attacker, Dots.DesolatorDot, DotDuration, (crit ? 2 : 1) * proc);
         }
 
         #endregion hook

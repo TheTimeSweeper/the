@@ -5,6 +5,7 @@ Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
 - Fully multiplayer compatible
 - Mod Support
   - Ancient Scepter
+  - BetterUI (proc coefficients)
   - Skills++
   - Aetherium (Item Displays)
   - VRAPI
@@ -16,7 +17,8 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
 - Fully multiplayer compatible
 - Mod Support
   - Ancient Scepter
-  - Skills++ (partial)
+  - BetterUI (proc coefficients)
+  - Skills++ (one skill lol)
   - Aetherium (Item Displays)
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS2.png)]()
@@ -61,12 +63,14 @@ ___
 ## Changelog
 `2.0.0`
  - released new character Desolator!
- - added new alt secondary skill, expanding on cursed melee m1
+ - added new alt secondary skill, expanding on cursed config melee m1
  - added achievement for melee m1. still in cursed for now
  - config has been reorganized. you should probably just delete existing
  - finished tower item displays for sotv items
  - fixed level growth stats not being to the vanilla standard
+ - lowered distance scaling on sounds
  - added head hurtbox proper
+ - small tweaks to the russion section of lore (thanks Damglador)
 
 `1.3.2`
  - fixed eclipse not saving progress

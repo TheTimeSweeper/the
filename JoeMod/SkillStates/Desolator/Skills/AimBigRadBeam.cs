@@ -10,10 +10,10 @@ namespace ModdedEntityStates.Desolator {
         public static float BlastDamageCoefficient = 4.0f;
         public static float PoolDamageCoefficient = 0.2f;
         public static float DotZoneLifetime = 2;
-        public static float BaseAttackRadius = 10;
+        public static float BaseAttackRadius = 15;
 
         private bool _crit;
-
+        
         public override void OnEnter() {
 
             //excuse old enforcer code again
@@ -76,7 +76,7 @@ namespace ModdedEntityStates.Desolator {
                     position = currentTrajectoryInfo.hitPoint,
                     radius = BaseAttackRadius,
                     falloffModel = BlastAttack.FalloffModel.None,
-
+                    
                     baseDamage = damageStat * BlastDamageCoefficient,
                     crit = _crit,
                     damageType = DamageType.Generic,

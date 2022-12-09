@@ -465,7 +465,7 @@ namespace Modules {
 
             ProjectileImpactExplosion impactExplosion = irradiatorProjectileScepter.GetComponent<ProjectileImpactExplosion>();
             impactExplosion.blastRadius = ThrowIrradiator.Range;
-            impactExplosion.blastDamageCoefficient = ScepterThrowIrradiator.ImpactDamageCoefficient;
+            impactExplosion.blastDamageCoefficient = ScepterThrowIrradiator.explosionDamageCoefficient;
             impactExplosion.explosionEffect = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXGreaterWisp");
 
             Content.AddProjectilePrefab(irradiatorProjectileScepter);
@@ -494,7 +494,8 @@ namespace Modules {
             UnityEngine.Object.Destroy(transformFindFX.GetComponent<AlignToNormal>());
 
             Transform transformFindDecal = leapAcidProjectile.transform.Find("FX/Decal");
-            transformFindDecal.localScale = new Vector3(1.5f, 0.85f, 1.5f);
+            float scale = AimBigRadBeam.BaseAttackRadius * 0.10f;
+            transformFindDecal.localScale = new Vector3(scale, 0.85f, scale);
             transformFindDecal.GetComponent<Decal>().Material.SetTexture("_MainTexture", LoadAsset<Texture2D>("texDesolatorDecal"));
 
             AlignToNormal alignComponent = transformFindDecal.gameObject.AddComponent<AlignToNormal>();

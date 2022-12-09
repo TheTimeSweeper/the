@@ -6,8 +6,8 @@ namespace ModdedEntityStates.Desolator {
 
     public class RadBeam : GenericBulletBaseState {
 
-        public static float BaseDuration = 0.9f;
-        public static float DamageCoefficient = 1.2f;
+        public static float BaseDuration = 1.0f;
+        public static float DamageCoefficient = 1.4f;
 
         public float skillsPlusDurationMultiplier = 1;
 

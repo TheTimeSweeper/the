@@ -7,6 +7,7 @@ namespace Modules {
         public static DotController.DotIndex DesolatorDot;
 
         public static void RegisterDots() {
+
             DesolatorDot = DotAPI.RegisterDotDef(new DotController.DotDef {
                 interval = DesolatorSurvivor.DotInterval,
                 damageCoefficient = DesolatorSurvivor.DotDamage,
