@@ -7,13 +7,6 @@ using System;
 
 public class EditorAddRagdoll {
 
-    [MenuItem("CONTEXT/RagdollController/Go")]
-    public static void go() {
-
-        RagdollController ragdollController = Selection.activeGameObject.GetComponent<RagdollController>();
-        ragdollController.BeginRagdoll(Vector3.up);
-    }
-
     [MenuItem("CONTEXT/RagdollController/Make bones on the bones")]
     public static void createRagdoll() {
 

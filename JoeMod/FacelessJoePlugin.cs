@@ -42,7 +42,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
     public const string MODVERSION = "2.0.0";
-
+    
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
     

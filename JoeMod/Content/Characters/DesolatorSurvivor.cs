@@ -63,7 +63,7 @@ namespace Modules.Survivors {
         public static float DotDamage = 0.07f;
         public static float DotInterval = 0.5f;
         public static float DotDuration = 8f;
-
+        
         public static float DamageMultiplierPerIrradiatedStack = 0.05f;
 
         //unused
