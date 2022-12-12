@@ -1,4 +1,4 @@
-﻿using R2API;
+﻿//using R2API;
 using System;
 using ModdedEntityStates.Joe;
 using ModdedEntityStates.TeslaTrooper;
@@ -7,16 +7,38 @@ using ModdedEntityStates.Desolator;
 using Modules.Survivors;
 using System.Collections.Generic;
 
-namespace Modules
-{
+namespace Modules {
+
     internal static class Tokens {
 
-        public static void AddTokens()
+        public static class LanguageAPI {
+
+            public static void Add(string token, string text) {
+
+                Tokens.output += $"\n    \"{token}\" : \"{text.Replace(Environment.NewLine, "\\n").Replace("\n", "\\n")}\",";
+
+                //R2API.LanguageAPI.Add(token, text);
+            }
+        }
+
+        internal static string output = "";
+
+        public static void GenerateTokens()
         {
             AddJoeTokens();
+            PrintOutput("Joe tokens:");
+
             AddTeslaTokens();
             AddTeslaTowerTokens();
+            PrintOutput("Tesla tokens:");
+
             AddDesolatorTokens();
+            PrintOutput("Desolator tokens:");
+        }
+
+        private static void PrintOutput(string preface = "") {
+            Helpers.LogWarning($"{preface}\n{{\n    strings:\n    {{{output}\n    }}\n}}");
+            output = "";
         }
 
         private static void AddJoeTokens()
@@ -172,7 +194,7 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "PRIMARY_ZAP_DESCRIPTION", $"{Helpers.UtilityText("Charging")}. Zap targeted units with a bolt of electricity for {Helpers.DamageText($"{Zap.DamageCoefficient * 100}% damage")}. Casts {Helpers.UtilityText($"up to 3 bolts")} at {Helpers.UtilityText($"close range")}.");
             
-             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText("{TeslaTrooperSurvivor.conductiveAllyBoost}x")}");
+             LanguageAPI.Add("KEYWORD_CHARGED", $"<style=cKeywordName>Charging</style><style=cSub>A charged ally has their next attack {Helpers.UtilityText("shocking")} and damage boosted by {Helpers.DamageText($"{TeslaTrooperSurvivor.conductiveAllyBoost}x")}");
             
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_NAME", "Tesla Knuckles");
             LanguageAPI.Add(prefix + "PRIMARY_PUNCH_DESCRIPTION", $"Punch enemies for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient)}, and zap enemies in a cone for {Helpers.DamageValueText(ZapPunch.DefaultDamageCoefficient * ZapPunch.OrbDamageMultiplier)}. {Helpers.UtilityText("Deflects Projectiles")}.");
@@ -250,13 +272,13 @@ namespace Modules
             LanguageAPI.Add(prefix + "SHIELDZAPUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, defeat a boss monster using Charging Up");
             LanguageAPI.Add(prefix + "SHIELDZAPUNLOCKABLE_UNLOCKABLE_NAME", $"Shield Zap");
             //scrapped because boring
-            LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_NAME", $"Close Zap");
-            LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, zap an enemy at close range 20 times in a row");
-            LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_UNLOCKABLE_NAME", $"Close Zap");
+            //LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_NAME", $"Close Zap");
+            //LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, zap an enemy at close range 20 times in a row");
+            //LanguageAPI.Add(prefix + "ZAPCLOSERANGEUNLOCKABLE_UNLOCKABLE_NAME", $"Close Zap");
 
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"some unlock");
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"hopefully not something boring like grab tesla coil and royal capacitor... ok repair a tesla coil with a tesla coil that would be pretty cool, but also shiny hunting kinda.");
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"some unlock");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"Our Power");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"Repair a tesla coil with any source of power (Fuel Array, Royal Capacitor, Unstable Tesla Coil, Charged Perforator, Ukelele, Genesis Loop, etc).");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"Our Power");
 
             #endregion
             #endregion not henry 2
@@ -302,7 +324,7 @@ namespace Modules
             string prefix = DesolatorSurvivor.DESOLATOR_PREFIX;
 
             string desc = "The Desolator is a walking powerhouse of radiation and area of effect.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
-                        + "< ! > Rad-Cannon applies two stacks of Radiation, helping other abilities deal more damage" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Rad-Cannon applies two stacks of Radiation, helping other abilities deal more damage." + Environment.NewLine + Environment.NewLine
                         + "< ! > Scorched Earth is a simple heavy damage dealer, especially on an enemy with a lot of stacks of Radiation." + Environment.NewLine + Environment.NewLine
                         + "< ! > Use the movement speed from Reactor to get you out of a pinch, but you can instead use its weakening properties to help deal extra damage." + Environment.NewLine + Environment.NewLine
                         + "< ! > Spread the Doom leaves you vulnerable to attack, but you're rewarded for staying deployed longer to ramp up damage and radiation." + Environment.NewLine + Environment.NewLine;
@@ -401,14 +423,27 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION", "Stop Spreading the Doom");
 
             //alt
-            string name = UnityEngine.Random.value <= 0.1f ? "Glow Sticks" : "Irradiators";
+            bool fun = UnityEngine.Random.value <= 0.1f;
+            string name = "Irradiators";
+            string name2 = "Glow Sticks";
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME", name);
+
             specialDesc =
                 $"<style=cIsHealing>Irradiating</style>. Throw {Helpers.UtilityText("up to 2")} {name} which cover a large area in radiation for {Helpers.UtilityText($"11 seconds")}, dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage per second")}.";
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
+            string specialDescScepter = specialDesc + Helpers.ScepterDescription($"Explodes on expiration for {Helpers.DamageValueText(ScepterThrowIrradiator.explosionDamageCoefficient)}.");
+
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Unstable " + name);
-            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDesc + Helpers.ScepterDescription($"Explodes on expiration for {Helpers.DamageValueText(ScepterThrowIrradiator.explosionDamageCoefficient)}."));
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDescScepter);
+
+            //alt fun
+            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_NAME_FUN", name2);
+            LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION_FUN", specialDesc.Replace(name, name2));
+
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME_FUN", "Unstable " + name2);
+            LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION_FUN", specialDescScepter.Replace(name, name2));
+
 
             LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 0.7f * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
             #endregion
@@ -434,9 +469,9 @@ namespace Modules
             LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Typhoon or Eclipse.\n<color=#8888>(Counts any difficulty Typhoon or higher)</color>");
             LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Grand Mastery");
 
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"some unlock");
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"hopefully not something boring like grab tesla coil and royal capacitor... ok repair a tesla coil with a tesla coil that would be pretty cool, but also shiny hunting kinda.");
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"some unlock");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"Irradiators");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"Find and activate the 3 irradiators in stage 3.");
+            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"Irradiators");
 
             #endregion
             #endregion not henry 2

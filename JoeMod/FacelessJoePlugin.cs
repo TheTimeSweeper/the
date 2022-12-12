@@ -26,7 +26,7 @@ using UnityEngine;
 [R2APISubmoduleDependency(new string[]
 {
     "PrefabAPI",
-    "LanguageAPI",
+    //"LanguageAPI",
     "SoundAPI",
     "LoadoutAPI",
     "DeployableAPI",
@@ -51,13 +51,21 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
     public static bool Desolator;
     public static bool holdonasec;
+    public static PluginInfo PluginInfo;
+
+    void Awake() {
+
+        Modules.Language.RegisterLanguageTokens();
+    }
 
     private void Start() {
 
         Logger.LogInfo("[Initializing Tesla Trooper]");
 
+
         instance = this;
-        
+
+        PluginInfo = Info;        
         Log = Logger;
 
         Modules.Config.ReadConfig();
@@ -73,7 +81,10 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         Modules.Compat.Initialize();
         //Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
-        Modules.Tokens.AddTokens(); // register name tokens
+
+        //if (Modules.Config.Debug)
+        //    Modules.Tokens.GenerateTokens();
+
         Modules.States.RegisterStates(); // register states for networking
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 

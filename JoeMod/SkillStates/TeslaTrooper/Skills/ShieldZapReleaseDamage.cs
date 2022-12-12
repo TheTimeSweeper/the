@@ -23,7 +23,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void OnEnter() {
             base.OnEnter();
             InitDurationValues(BaseDuration, BaseCastTime);
-
+            
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
             }

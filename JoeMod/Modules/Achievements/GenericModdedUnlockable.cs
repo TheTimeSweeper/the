@@ -18,18 +18,18 @@ namespace Modules {
         public override Sprite Sprite => Assets.LoadAsset<Sprite>(AchievementSpriteName);
 
         public override Func<string> GetHowToUnlock {
-            get => () => Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]
+            get => () => RoR2.Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]
                             {
-                                Language.GetString(AchievementNameToken),
-                                Language.GetString(AchievementDescToken)
+                                RoR2.Language.GetString(AchievementNameToken),
+                                RoR2.Language.GetString(AchievementDescToken)
                             });
         }
 
         public override Func<string> GetUnlocked {
-            get => () => Language.GetStringFormatted("UNLOCKED_FORMAT", new object[]
+            get => () => RoR2.Language.GetStringFormatted("UNLOCKED_FORMAT", new object[]
                             {
-                                Language.GetString(AchievementNameToken),
-                                Language.GetString(AchievementDescToken)
+                                RoR2.Language.GetString(AchievementNameToken),
+                                RoR2.Language.GetString(AchievementDescToken)
                             });
         }
     }

@@ -69,10 +69,16 @@ namespace Modules.Survivors {
         //unused
         public static float ArmorShredAmount= 8f;
         public static float ArmorShredDuration = 8f;
-        
+
+        public static string fun;
+
         public override void Initialize() {
             instance = this;
+
+            fun = "_FUN"; // UnityEngine.Random.value <= 0.1f ? "_FUN" : "";
+
             base.Initialize();
+            
 
             //todo deso
             RegisterIrradiatorDeployable();
@@ -282,8 +288,8 @@ namespace Modules.Survivors {
 
             SkillDef irradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower",
-                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME",
-                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_DESCRIPTION",
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME" + fun,
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_DESCRIPTION" + fun,
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowIrradiator)),
                 activationStateMachineName = "Weapon",
@@ -339,8 +345,8 @@ namespace Modules.Survivors {
 
             SkillDef scepterIrradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower_Scepter",
-                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_NAME",
-                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION",
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_NAME" + fun,
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION" + fun,
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialAltScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ScepterThrowIrradiator)),
                 activationStateMachineName = "Weapon",
