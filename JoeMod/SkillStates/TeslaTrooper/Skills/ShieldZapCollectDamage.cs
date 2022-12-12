@@ -61,7 +61,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 };
                 /*EntityStateMachine.FindByCustomName(gameObject, "Weapon")*/outer.SetNextState(newNextState);
                 completed = true;
-                base.outer.SetNextStateToMain();
+                //base.outer.SetNextStateToMain();
             }
         }
 

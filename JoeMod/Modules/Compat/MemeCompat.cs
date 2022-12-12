@@ -17,7 +17,7 @@ namespace Modules {
 
                 GameObject skele2 = Assets.LoadAsset<GameObject>("Desolator_meme");
                 if (skele2) {
-                    EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele2, true);
+                    EmotesAPI.CustomEmotesAPI.ImportArmature(DesolatorSurvivor.instance.bodyPrefab, skele2, false);
                 }
             }
             orig();

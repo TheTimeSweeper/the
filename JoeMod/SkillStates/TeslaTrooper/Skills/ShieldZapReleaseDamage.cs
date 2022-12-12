@@ -27,7 +27,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
             }
-            base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
+            base.PlayCrossfade("Gesture, Additive", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
 
         }
 

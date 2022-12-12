@@ -5,7 +5,7 @@ namespace Modules {
     public class MemeCompat {
         public static void init() {
             //actually breaks the fucking game somehow
-            //On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
+            On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
         }
 
         private static void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig) {

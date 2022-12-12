@@ -28,9 +28,10 @@ namespace ModdedEntityStates.Desolator {
             damageCoefficient = PoolDamageCoefficient;
             baseMinimumDuration = 0.2f;
 
-            _crit = RollCrit();
             //this.projectileBaseSpeed = 80;
             base.OnEnter();
+
+            _crit = RollCrit();
 
             //todo bod
             //PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.1f);

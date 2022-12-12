@@ -1,7 +1,7 @@
 # Electrician In the Field
 Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
 - Item displays and ragdoll
-- Alt skills with achievements
+- Alt skills and skins with achievements
 - Fully multiplayer compatible
 - Mod Support
   - Ancient Scepter
@@ -20,10 +20,12 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
   - BetterUI (proc coefficients)
   - Skills++ (one skill lol)
   - Aetherium (Item Displays)
+  - CustomEmotesAPI
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS2.png)]()
 
-Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7). I'll be taking a close look at feedback.
+Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7).  
+I'll be taking a close look at feedback, especially with the release of Desolator, and how he feels in terms of power.
 ___
 ## Overview
 Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
@@ -61,10 +63,13 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`2.0.1`
+ - fixed utility broken
+
 `2.0.0`
  - released new character Desolator!
- - added new alt secondary skill, expanding on cursed config melee m1
- - added achievement for melee m1. still in cursed for now
+ - added new alt secondary skill for tesla trooper, expanding on alt m1 in cursed config 
+ - added achievement for alt m1. still in cursed for now
  - config has been reorganized. you should probably just delete existing
  - finished tower item displays for sotv items
  - fixed level growth stats not being to the vanilla standard

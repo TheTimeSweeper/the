@@ -301,11 +301,11 @@ namespace Modules
             #region not henry 22
             string prefix = DesolatorSurvivor.DESOLATOR_PREFIX;
 
-            string desc = "The Desolator is a walking powerhouse of radiation.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
-                        + "< ! > The armor reduction from Rad-Cannon is one of your most powerful tools to help melt enemies with your other abilities" + Environment.NewLine + Environment.NewLine
-                        + "< ! > Scorched Earth is a simple heavy damage dealer, especially after Rad-Cannon's armor reduction." + Environment.NewLine + Environment.NewLine
+            string desc = "The Desolator is a walking powerhouse of radiation and area of effect.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Rad-Cannon applies two stacks of Radiation, helping other abilities deal more damage" + Environment.NewLine + Environment.NewLine
+                        + "< ! > Scorched Earth is a simple heavy damage dealer, especially on an enemy with a lot of stacks of Radiation." + Environment.NewLine + Environment.NewLine
                         + "< ! > Use the movement speed from Reactor to get you out of a pinch, but you can instead use its weakening properties to help deal extra damage." + Environment.NewLine + Environment.NewLine
-                        + "< ! > Use Spread the Doom and stay deployed longer to deal more area damage, but for priority targets, use it for a quick pump so you can use your other abilities." + Environment.NewLine + Environment.NewLine;
+                        + "< ! > Spread the Doom leaves you vulnerable to attack, but you're rewarded for staying deployed longer to ramp up damage and radiation." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, behind him, an oasis of death.";
             string outroFailure = "..and so he vanished, there goes the neighborhood.";
@@ -413,17 +413,17 @@ namespace Modules
             LanguageAPI.Add("KEYWORD_RADIATION_SPECIAL", Helpers.KeywordText("Irradiating", $"Each tick inflicts {Helpers.DamageText($"{DesolatorSurvivor.DotDamage * 2 * 0.7f * 100}% damage per second")} for {Helpers.UtilityText($"{DesolatorSurvivor.DotDuration} seconds")}."));
             #endregion
 
-            #region recolor
-            LanguageAPI.Add(prefix + "RECOLOR_RED_NAME", "Red");
-            LanguageAPI.Add(prefix + "RECOLOR_BLUE_NAME", "Blue");
-            LanguageAPI.Add(prefix + "RECOLOR_GREEN_NAME", "Green");
-            LanguageAPI.Add(prefix + "RECOLOR_YELLOW_NAME", "Yellow");
-            LanguageAPI.Add(prefix + "RECOLOR_ORANGE_NAME", "Orange");
-            LanguageAPI.Add(prefix + "RECOLOR_CYAN_NAME", "Cyan");
-            LanguageAPI.Add(prefix + "RECOLOR_PURPLE_NAME", "Purple");
-            LanguageAPI.Add(prefix + "RECOLOR_PINK_NAME", "Pink");
-            LanguageAPI.Add(prefix + "RECOLOR_BLACK_NAME", "Black");
-            #endregion
+            //#region recolor
+            //LanguageAPI.Add(prefix + "RECOLOR_RED_NAME", "Red");
+            //LanguageAPI.Add(prefix + "RECOLOR_BLUE_NAME", "Blue");
+            //LanguageAPI.Add(prefix + "RECOLOR_GREEN_NAME", "Green");
+            //LanguageAPI.Add(prefix + "RECOLOR_YELLOW_NAME", "Yellow");
+            //LanguageAPI.Add(prefix + "RECOLOR_ORANGE_NAME", "Orange");
+            //LanguageAPI.Add(prefix + "RECOLOR_CYAN_NAME", "Cyan");
+            //LanguageAPI.Add(prefix + "RECOLOR_PURPLE_NAME", "Purple");
+            //LanguageAPI.Add(prefix + "RECOLOR_PINK_NAME", "Pink");
+            //LanguageAPI.Add(prefix + "RECOLOR_BLACK_NAME", "Black");
+            //#endregion
 
             #region Achievements
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
