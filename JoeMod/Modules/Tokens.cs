@@ -14,7 +14,6 @@ namespace Modules {
         public static class LanguageAPI {
 
             public static void Add(string token, string text) {
-
                 Tokens.output += $"\n    \"{token}\" : \"{text.Replace(Environment.NewLine, "\\n").Replace("\n", "\\n")}\",";
 
                 //R2API.LanguageAPI.Add(token, text);
@@ -341,7 +340,7 @@ namespace Modules {
 
             LanguageAPI.Add(prefix + "LORE",
                 "<i>In collaboration with [REDACTED], the Ministry of Information presents...</i>\n" +
-                "<i>DESOLATOR: REVOLUTIONARY HERO AGAINST TYRANNY!'</i>\n" +
+                "<i>DESOLATOR: REVOLUTIONARY HERO AGAINST TYRANNY!</i>\n" +
                 "\n" +
                 "The film sputters, its age showing like rust on metal, but it churns on tape nonetheless. It's played for a ragged bunker in which the blast-door is welded shut and lined to the edge with every available object in the room; books, chairs, the bed. Alone sits a jittery man, watching.\n" +
                 "\n" +
@@ -354,11 +353,11 @@ namespace Modules {
                 "Screams could be heard outside the bunker, only to be drowned into what sounded like sludge.\n" +
                 "\n" +
                 "<i>DESOLATOR returned to the front of battle! rescuing all his fellow compatriots-</i>\n" +
-                "\"They were massacred.\"\n" +
+                "'They were massacred.'\n" +
                 "<i>lest they bear the same burden as him!-</i>\n" +
-                "\"You bared our brothers in arms as much suffering as you did to the enemy.\"\n" +
+                "'You bared our brothers in arms as much suffering as you did to the enemy.'\n" +
                 "<i>DESOLATOR AND HIS COMRADE'S REVOLUTION SAVED OUR PLANET, IN WHICH HE BUILT THE SOCIETY WE HAVE TODAY!</i>\n" +
-                "\"All you left was a red river of bodies for a cause you didn't believe, the saviour of the revolution had the perfect excuse.\"\n" +
+                "'All you left was a red river of bodies for a cause you didn't believe, the saviour of the revolution had the perfect excuse.'\n" +
                 "\n" +
                 "But before he could continue watching the tape, the frantic man felt his skin crawl, and sweat build. He was here.\n" +
                 "Before another thought can be processed, the door glows an iridescent green and begins to melt. Bolts that held the door shut, that could withstand nuclear fallout, melted like butter against a hot knife. The remains of the barricade liquidated across the floor, lumps of metal and furniture; burning, melded into a radioactive soup. It's him, it's-\n" +
@@ -368,7 +367,7 @@ namespace Modules {
                 "The film solemnly rings; before sputtering what's left of the record. Eventually dissolving like the door before it.\n" +
                 "Before words could be exchanged, the dying man's melting flesh began to split and slip off his body, akin to slow cooked meat. His eyes became hazy, taking one last look at the radioactive presence as he spoke the last words the man would ever hear.\n" +
                 "\n" +
-                "\"Shh, the end is near.\"\n" +
+                "'Shh, the end is near.'\n" +
                 "\n" +
                 "Brain sloshing, muscle dripping to reveal the skeleton underneath, as even the atomic structure of bone started liquifying. Soon, the room itself was becoming unstable; the last things to leave were the heavy, steel-boot footsteps and heavy breathing. His respiration being the only thing human about him.");
             #endregion lore

@@ -42,7 +42,7 @@ namespace Modules.Survivors {
             armor = 0f,
 
             jumpCount = 1,
-
+            
             aimOriginPosition = new Vector3(0, 1.6f, 0),
         };
         

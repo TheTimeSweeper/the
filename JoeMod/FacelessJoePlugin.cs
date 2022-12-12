@@ -81,9 +81,9 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
         Modules.Compat.Initialize();
         //Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
-
-        //if (Modules.Config.Debug)
-        //    Modules.Tokens.GenerateTokens();
+        
+        if (Modules.Config.Debug)
+            Modules.Tokens.GenerateTokens();
 
         Modules.States.RegisterStates(); // register states for networking
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules

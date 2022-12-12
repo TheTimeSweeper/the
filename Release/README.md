@@ -50,6 +50,14 @@ Westwood Studios - sounds, inspiration
   
 Thanks to the lovely reception from the community, including all the great feedback and ideas c:
 
+## Languages
+Looking for translators! If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language).
+
+Supported Languages:
+ - English
+ - Russian (by Damglador)
+
+
 ## Future Plans (that I may or may not get to)
 - Alt skills
 - Achievements
@@ -63,6 +71,10 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+`2.0.2`
+ - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code
+ - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
+
 `2.0.1`
  - fixed utility broken
 

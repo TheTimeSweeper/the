@@ -1,6 +1,6 @@
 {
     "name": "Tesla_Trooper",
-    "version_number": "2.0.1",
+    "version_number": "2.0.2",
     "website_url": "https://github.com/TheTimeSweeper/the",
     "description": "SPREAD THE DOOM. Adds two new survivors, Tesla Trooper and Desolator, based on Red Alert 2, themed around RoR2.",
     "dependencies": [
