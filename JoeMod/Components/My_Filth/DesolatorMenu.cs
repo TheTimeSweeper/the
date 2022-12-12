@@ -18,7 +18,7 @@ public class DesolatorMenu : MonoBehaviour {
 
         if (Modules.Config.VoiceInLobby.Value) {
 
-            RoR2.Util.PlaySound("Play_VoiceLine", gameObject);
+            RoR2.Util.PlaySound("Play_Desolator_Voiceline", gameObject);
         }
     }
 }

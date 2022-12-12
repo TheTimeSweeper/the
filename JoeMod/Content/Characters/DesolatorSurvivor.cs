@@ -75,7 +75,7 @@ namespace Modules.Survivors {
         public override void Initialize() {
             instance = this;
 
-            fun = "_FUN"; // UnityEngine.Random.value <= 0.1f ? "_FUN" : "";
+            fun = UnityEngine.Random.value <= 0.1f ? "_FUN" : "";
 
             base.Initialize();
             

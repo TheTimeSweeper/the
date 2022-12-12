@@ -74,6 +74,7 @@ ___
 `2.0.2`
  - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code
  - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
+ - fixed "voice line in css" config for playing wrong voice lines for desolator
 
 `2.0.1`
  - fixed utility broken

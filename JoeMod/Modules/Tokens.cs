@@ -375,9 +375,9 @@ namespace Modules {
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
             
             #region Skins
-            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
-            LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
-            LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
+            //LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
+            //LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
+            //LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
             #endregion
             
             #region Passive
