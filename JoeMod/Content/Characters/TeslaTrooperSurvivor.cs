@@ -140,6 +140,11 @@ namespace Modules.Survivors {
 
         protected override void InitializeEntityStateMachine() {
             base.InitializeEntityStateMachine();
+
+            EntityStateMachine voiceLineMachine = EntityStateMachine.FindByCustomName(bodyPrefab, "Slide");
+            SerializableEntityStateType voiceLineState = new SerializableEntityStateType(typeof(TeslaVoiceLines));
+            voiceLineMachine.initialStateType = voiceLineState;
+            voiceLineMachine.mainStateType = voiceLineState;
         }
 
         public override void InitializeUnlockables() {

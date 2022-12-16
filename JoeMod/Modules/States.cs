@@ -63,6 +63,10 @@ namespace Modules
 
             Content.AddEntityState(typeof(DeployTeslaTower)); 
             Content.AddEntityState(typeof(DeployTeslaTowerScepter));
+
+            Content.AddEntityState(typeof(Rest));
+
+            Content.AddEntityState(typeof(TeslaVoiceLines));
             #endregion tesla trooper
 
             #region tesla tower
@@ -100,8 +104,8 @@ namespace Modules
             Content.AddEntityState(typeof(ThrowIrradiator));
             
             Content.AddEntityState(typeof(EmoteRadiationProjectile));
-            Content.AddEntityState(typeof(Rest));
 
+            Content.AddEntityState(typeof(DesolatorVoiceLines));
             #endregion desolator
         }
     }

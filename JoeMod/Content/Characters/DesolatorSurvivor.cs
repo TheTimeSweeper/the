@@ -13,6 +13,7 @@ using JoeMod;
 using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using RoR2.Projectile;
+using EntityStates;
 
 namespace Modules.Survivors {
     internal class DesolatorSurvivor : SurvivorBase {
@@ -70,12 +71,12 @@ namespace Modules.Survivors {
         public static float ArmorShredAmount= 8f;
         public static float ArmorShredDuration = 8f;
 
-        public static string fun;
+        public static string funString;
 
         public override void Initialize() {
             instance = this;
 
-            fun = UnityEngine.Random.value <= 0.1f ? "_FUN" : "";
+            funString = UnityEngine.Random.value <= 0.1f ? "_FUN" : "";
 
             base.Initialize();
             
@@ -91,6 +92,15 @@ namespace Modules.Survivors {
             bodyPrefab.GetComponent<CharacterBody>().spreadBloomCurve = AnimationCurve.EaseInOut(0, 0, 0.5f, 1);
 
             Hook();
+        }
+
+        protected override void InitializeEntityStateMachine() {
+            base.InitializeEntityStateMachine();
+
+            EntityStateMachine voiceLineMachine = EntityStateMachine.FindByCustomName(bodyPrefab, "Slide");
+            SerializableEntityStateType voiceLineState = new SerializableEntityStateType(typeof(DesolatorVoiceLines));
+            voiceLineMachine.initialStateType = voiceLineState;
+            voiceLineMachine.mainStateType = voiceLineState;
         }
 
         public override void InitializeUnlockables() {
@@ -288,8 +298,8 @@ namespace Modules.Survivors {
 
             SkillDef irradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower",
-                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME" + fun,
-                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_DESCRIPTION" + fun,
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_NAME" + funString,
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_IRRADIATOR_DESCRIPTION" + funString,
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowIrradiator)),
                 activationStateMachineName = "Weapon",
@@ -345,8 +355,8 @@ namespace Modules.Survivors {
 
             SkillDef scepterIrradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower_Scepter",
-                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_NAME" + fun,
-                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION" + fun,
+                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_NAME" + funString,
+                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION" + funString,
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialAltScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ScepterThrowIrradiator)),
                 activationStateMachineName = "Weapon",
