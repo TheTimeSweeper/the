@@ -39,7 +39,7 @@ namespace Modules.Survivors {
             bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
 
             crosshair = Assets.LoadAsset<GameObject>("TeslaCrosshair"),
-            podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 120f,
             healthRegen = 1f,

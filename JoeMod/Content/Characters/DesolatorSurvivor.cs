@@ -36,7 +36,7 @@ namespace Modules.Survivors {
             sortPosition = 68.1f,
 
             crosshair = Assets.LoadAsset<GameObject>("DesolatorCrosshair"),
-            podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 110f,
             healthRegen = 1.5f,

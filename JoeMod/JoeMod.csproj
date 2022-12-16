@@ -24,17 +24,8 @@
 	
   <ItemGroup>
     <None Remove="HenryBank.bnk" />
-    <None Remove="joe" />
     <None Remove="Modules\Characters\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
-    <None Remove="teslatrooper" />
-    <None Remove="Tesla_Trooper.bnk" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="joe" />
-    <EmbeddedResource Include="teslatrooper" />
-    <EmbeddedResource Include="Tesla_Trooper.bnk" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,11 +68,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="call &quot;$(ProjectDir)weave.bat&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\..\Release\plugins&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Tesla_Trooper&quot;&#xD;&#xA;&#xD;&#xA;REM if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-Tesla_Trooper&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\..\Release\plugins&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-Tesla_Trooper&quot;" />
-  </Target>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\teslatrooper&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\teslaTrooperWwise\GeneratedSoundBanks\Windows\Tesla_Trooper.bnk&quot; &quot;$(ProjectDir)&quot;" />
+    <Exec Command="call &quot;$(ProjectDir)weave.bat&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\..\Release\plugins&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Tesla_Trooper&quot;&#xD;&#xA;&#xD;&#xA;REM copy /Y &quot;$(ProjectDir)..\..\SurvivorUnityProj\AssetBundles\joe&quot; &quot;$(ProjectDir)\..\Release\plugins\AssetBundles&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\teslatrooper&quot; &quot;$(ProjectDir)\..\Release\plugins\AssetBundles&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\desolator&quot; &quot;$(ProjectDir)\..\Release\plugins\AssetBundles&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\teslaTrooperWwise\GeneratedSoundBanks\Windows\Tesla_Trooper.bnk&quot; &quot;$(ProjectDir)\..\Release\plugins\SoundBanks&#xD;&#xA;&#xD;&#xA;REM if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-Tesla_Trooper&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\..\Release\plugins&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\r2modman\BepInEx\plugins\TheTimesweeper-Tesla_Trooper&quot;" />
   </Target>
 
 </Project>

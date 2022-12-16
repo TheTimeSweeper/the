@@ -95,7 +95,7 @@ namespace Modules.Survivors {
         protected override void InitializeCharacterMaster() {
             base.InitializeCharacterMaster();
 
-            masterPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterMasters/EngiTurretMaster"), "TeslaTowerMaster", true);
+            masterPrefab = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/EngiTurretMaster"), "TeslaTowerMaster", true);
             masterPrefab.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
             foreach (AISkillDriver aiSkillDriver in masterPrefab.GetComponents<AISkillDriver>()) {

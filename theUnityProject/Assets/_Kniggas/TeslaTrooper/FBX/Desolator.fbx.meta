@@ -2001,17 +2001,17 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.3067227
+            time: 0.21219102
             value: 0
             inSlope: 0
             outSlope: 0
-            tangentMode: 1
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
             time: 0.5966387
-            value: 1
+            value: 1.6
             inSlope: 0
             outSlope: 0
             tangentMode: 0

@@ -20,7 +20,7 @@ namespace Modules.Characters {
         public float sortPosition = 69f;
 
         public GameObject crosshair = null;
-        public GameObject podPrefab = Assets.LoadAsset<GameObject>("Prefabs/NetworkedObjects/SurvivorPod");
+        public GameObject podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod");
 
         public CharacterBody.BodyFlags bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
 

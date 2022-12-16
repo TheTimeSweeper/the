@@ -51,30 +51,28 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
     public static bool Desolator;
     public static bool holdonasec;
-    public static PluginInfo PluginInfo;
 
     void Awake() {
 
-        Modules.Language.RegisterLanguageTokens();
+        instance = this;
+        Log = Logger;
+
+        Modules.Files.init(Info);
+        Modules.Language.HookRegisterLanguageTokens();
+
+        Modules.Config.ReadConfig();
     }
 
     private void Start() {
 
         Logger.LogInfo("[Initializing Tesla Trooper]");
 
-
-        instance = this;
-
-        PluginInfo = Info;        
-        Log = Logger;
-
-        Modules.Config.ReadConfig();
-
         Modules.DamageTypes.RegisterDamageTypes();
 
         // load assets and read config
 
         Modules.Assets.Initialize();
+        Modules.SoundBank.Init();
 
         if (Modules.Config.Debug)
             gameObject.AddComponent<TestValueManager>();

@@ -67,9 +67,11 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 `2.0.2`
+ - added sit emotes for both men
  - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code
- - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
+   - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
  - fixed "voice line in css" config for playing wrong voice lines for desolator
+ - fixed not being able to play voice lines while using certain abliites
 
 `2.0.1`
  - fixed utility broken
