@@ -47,7 +47,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.muzzleString = "PunchHitboxAnchor"; // swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             base.hitstopAnimationParameter = "Shock.playbackRate";
             base.swingEffectPrefab = Modules.Assets.TeslaZapConeEffect;
-            base.hitEffectPrefab = Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloader"); // Modules.Assets.swordHitImpactEffect;
+            base.hitEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloader"); // Modules.Assets.swordHitImpactEffect;
 
             base.impactSound = RoR2.Audio.NetworkSoundEventIndex.Invalid;
 

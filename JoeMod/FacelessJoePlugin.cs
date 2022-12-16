@@ -27,7 +27,7 @@ using UnityEngine;
 {
     "PrefabAPI",
     //"LanguageAPI",
-    "SoundAPI",
+    //"SoundAPI",
     "LoadoutAPI",
     "DeployableAPI",
     "DamageAPI",
@@ -57,7 +57,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         instance = this;
         Log = Logger;
 
-        Modules.Files.init(Info);
+        Modules.Files.Init(Info);
         Modules.Language.HookRegisterLanguageTokens();
 
         Modules.Config.ReadConfig();
@@ -72,7 +72,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         // load assets and read config
 
         Modules.Assets.Initialize();
-        Modules.SoundBank.Init();
+        Modules.SoundBanks.Init();
 
         if (Modules.Config.Debug)
             gameObject.AddComponent<TestValueManager>();

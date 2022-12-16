@@ -267,7 +267,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private void PlayZap()
         {
-            EffectManager.SimpleMuzzleFlash(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+            EffectManager.SimpleMuzzleFlash(RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
                                             gameObject,
                                             "MuzzleGauntlet",
                                             true);

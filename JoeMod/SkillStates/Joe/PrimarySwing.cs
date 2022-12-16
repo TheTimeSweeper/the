@@ -49,7 +49,7 @@ namespace ModdedEntityStates.Joe {
             base.swingEffectPrefab = null;// Modules.Assets.swordSwingEffect;
             base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
 
-            base.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            //base.impactSound = Modules.Assets.swordHitSoundEvent.index;
         }
 
         public override void FixedUpdate() {
@@ -181,7 +181,7 @@ namespace ModdedEntityStates.Joe {
             base.swingEffectPrefab = Modules.Assets.JoeJumpSwingEffect;// Modules.Assets.swordSwingEffect;
             base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
 
-            base.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            //base.impactSound = Modules.Assets.swordHitSoundEvent.index;
         }
 
         public override void FixedUpdate() {

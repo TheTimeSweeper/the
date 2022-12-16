@@ -58,7 +58,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                     };
                     ProjectileManager.instance.FireProjectile(info);
 
-                    EffectManager.SimpleEffect(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+                    EffectManager.SimpleEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
                                                deflectedProjectile.gameObject.transform.position,
                                                Quaternion.identity,
                                                true);

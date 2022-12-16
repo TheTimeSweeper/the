@@ -10,6 +10,7 @@ using Modules.Characters;
 
 namespace Modules.Survivors
 {
+    //todo joe
     internal class JoeSurivor : SurvivorBase
     {
         public override string bodyName => "Joe";
@@ -236,7 +237,7 @@ namespace Modules.Survivors
                 skillNameToken = prefix + "UTILITY_DASH_NAME",
                 skillDescriptionToken = prefix + "UTILITY_DASH_DESCRIPTION",
                 skillIcon = Modules.Assets.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Henry.Roll)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.CombatDodge)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -283,30 +284,30 @@ namespace Modules.Survivors
                 stockToConsume = 0
             });
 
-            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = prefix + "SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Henry.ThrowBomb)),
-                activationStateMachineName = "Slide",
-                baseMaxStock = 1,
-                baseRechargeInterval = 10f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = true,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
+            //SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+            //    skillName = prefix + "SPECIAL_BOMB_NAME",
+            //    skillNameToken = prefix + "SPECIAL_BOMB_NAME",
+            //    skillDescriptionToken = prefix + "SPECIAL_BOMB_DESCRIPTION",
+            //    skillIcon = Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
+            //    activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Henry.ThrowBomb)),
+            //    activationStateMachineName = "Slide",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 10f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = false,
+            //    fullRestockOnAssign = true,
+            //    interruptPriority = EntityStates.InterruptPriority.Skill,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = true,
+            //    mustKeyPress = false,
+            //    cancelSprintingOnActivation = true,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1
+            //});
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, teslaCoilSkillDef);
+            //Modules.Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, teslaCoilSkillDef);
             #endregion
         }
 

@@ -15,10 +15,10 @@ namespace Modules
         public static void RegisterProjectiles()
         {
             // only separating into separate methods for my sanity
-            CreateBomb();
             totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb"); //CreateTotallyOriginalBomb();
 
             AddProjectile(bombPrefab);
+            //todo joe
             AddProjectile(Assets.JoeFireball);
             AddProjectile(totallyNewBombPrefab);
         }
@@ -28,6 +28,7 @@ namespace Modules
             Modules.Content.AddProjectilePrefab(projectileToAdd);
         }
 
+        //todo plague knight wew lad
         private static void CreateTotallyOriginalBomb() {
 
             totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb");
@@ -38,7 +39,7 @@ namespace Modules
             bombImpactExplosion.blastRadius = 16f;
             bombImpactExplosion.destroyOnEnemy = true;
             bombImpactExplosion.lifetime = 12f;
-            bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
             //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
             bombImpactExplosion.timerAfterImpact = true;
             bombImpactExplosion.lifetimeAfterImpact = 0.1f;
@@ -50,25 +51,6 @@ namespace Modules
 
 
         #region henrybomb
-        private static void CreateBomb()
-        {
-            bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
-
-            ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
-            InitializeImpactExplosion(bombImpactExplosion);
-
-            bombImpactExplosion.blastRadius = 16f;
-            bombImpactExplosion.destroyOnEnemy = true;
-            bombImpactExplosion.lifetime = 12f;
-            bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            bombImpactExplosion.timerAfterImpact = true;
-            bombImpactExplosion.lifetimeAfterImpact = 0.1f;
-
-            ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
-            bombController.startSound = "";
-        }
 
         private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion, bool RemoveThisDisgustingShit = false)
         {

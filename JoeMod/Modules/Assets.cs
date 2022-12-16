@@ -15,32 +15,16 @@ using ModdedEntityStates.Desolator;
 namespace Modules {
     internal static class Assets
     {
-        public static AssetBundle mainAssetBundle;
         public static AssetBundle teslaAssetBundle;
         public static AssetBundle desolatorAssetBundle;
 
-        //HENRY: indev
-        #region indev
-        // lists of assets to add to contentpack
-
-        // cache these and use to create our own materials
         public static Shader hotpoo = RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
-        //private static string[] assetNames = new string[0];
-        #endregion
 
-        #region MY NAME'S NOT HENRY
-        // particle effects
-        public static GameObject swordSwingEffect;
-        public static GameObject swordHitImpactEffect;
-
-        public static GameObject bombExplosionEffect;
-        // networked hit sounds
-        public static NetworkSoundEventDef swordHitSoundEvent;
-        #endregion
-        
         private const string assetbundleName = "joe";
+
         #region joe
         //jerry don't you know
+        //todo joe
         public static GameObject JoeFireball;
         public static GameObject JoeImpactEffect;
         public static GameObject JoeJumpSwingEffect;
@@ -51,6 +35,7 @@ namespace Modules {
         public static GameObject TeslaCoilBlueprint;
 
         public static GameObject TeslaIndicatorPrefab;
+
         public static GameObject TeslaIndicatorPrefabDash;
 
         public static GameObject TeslaLoaderZapConeProjectile;
@@ -93,95 +78,36 @@ namespace Modules {
                 return;
             }
 
-            LoadAssetBundle();
+            LoadAssetBundles();
 
-            //LoadSoundbank();
-            //PopulateHenrysAssetsThatNoLongerExist();
-            
-            //PopulateJoeAss();
             PopulateTeslaAss();
             if (FacelessJoePlugin.Desolator) {
                 PopulateDesolatorAss();
             }
         }
 
-        public static void LoadAssetBundle()
+        public static void LoadAssetBundles()
         {
-            //if (mainAssetBundle == null)
-            //{
-            //    using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod." + assetbundleName))
-            //    {
-            //        mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
-            //    }
-            //}
-
             if (teslaAssetBundle == null)
             {
-                teslaAssetBundle = AssetBundle.LoadFromFile(Files.GetPath("AssetBundles", "teslatrooper"));
+                teslaAssetBundle = AssetBundle.LoadFromFile(Files.GetPathToFile("AssetBundles", "teslatrooper"));
             }
 
             if (FacelessJoePlugin.Desolator) {
-                desolatorAssetBundle = AssetBundle.LoadFromFile(Files.GetPath("AssetBundles", "desolator"));
+                desolatorAssetBundle = AssetBundle.LoadFromFile(Files.GetPathToFile("AssetBundles", "desolator"));
             }
             
             //assetNames = mainAssetBundle.GetAllAssetNames();
             //assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
         }
 
-        //public static void LoadSoundbank()
-        //{
-        //    //using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.HenryBank.bnk"))
-        //    //{
-        //    //    byte[] array = new byte[manifestResourceStream2.Length];
-        //    //    manifestResourceStream2.Read(array, 0, array.Length);
-        //    //    SoundAPI.SoundBanks.Add(array);
-        //    //}
+        //todo joe
+        //private static void PopulateJoeAss() {
+        //    JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
 
-        //    using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("JoeMod.Tesla_Trooper.bnk"))
-        //    {
-        //        byte[] array = new byte[manifestResourceStream2.Length];
-        //        manifestResourceStream2.Read(array, 0, array.Length);
-        //        SoundAPI.SoundBanks.Add(array);
-        //    }
+        //    JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
+        //    JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
         //}
-
-        public static void PopulateHenrysAssetsThatNoLongerExist() {
-            if (!mainAssetBundle) {
-                Debug.LogError("There is no AssetBundle to load assets from.");
-                return;
-            }
-
-            // feel free to delete everything in here and load in your own assets instead
-            // it should work fine even if left as is- even if the assets aren't in the bundle
-
-            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
-
-            bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
-
-            if (bombExplosionEffect) {
-                ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
-                shakeEmitter.amplitudeTimeDecay = true;
-                shakeEmitter.duration = 0.5f;
-                shakeEmitter.radius = 200f;
-                shakeEmitter.scaleShakeRadiusWithLocalScale = false;
-
-                shakeEmitter.wave = new Wave {
-                    amplitude = 1f,
-                    frequency = 40f,
-                    cycleOffset = 0f
-                };
-            }
-
-            swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
-            swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
-        }
-
-        private static void PopulateJoeAss() {
-            JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
-
-            JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
-            JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
-        }
 
         private static void PopulateTeslaAss() {
 
@@ -572,21 +498,13 @@ namespace Modules {
 
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
-            T loadedAss = RoR2.LegacyResourcesAPI.Load<T>(assString);
+            T loadedAss = desolatorAssetBundle.LoadAsset<T>(assString);
 
-
-            //if (loadedAss == null) {
-            //    loadedAss = mainAssetBundle.LoadAsset<T>(assString);
-            //}
             if(loadedAss == null) {
                 loadedAss = teslaAssetBundle.LoadAsset<T>(assString);
             }
-            if (loadedAss == null) {
-                loadedAss = desolatorAssetBundle.LoadAsset<T>(assString);
-            }
 
-            if (loadedAss == null)
-            {
+            if (loadedAss == null) {
                 Debug.LogError($"Null asset: {assString}.\nAttempt to load asset '{assString}' from assetbundles returned null");
             }
 
@@ -619,13 +537,6 @@ namespace Modules {
             }
         }
 
-        public static Texture LoadCharacterIconGeneric(string characterName)
-        {
-            return LoadAsset<Texture>("tex" + characterName + "Icon");
-        }
-        public static Texture LoadCharacterIcon(string name) {
-            return LoadAsset<Texture>(name);
-        }
         public static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
         {
             NetworkSoundEventDef networkSoundEventDef = ScriptableObject.CreateInstance<NetworkSoundEventDef>();
@@ -703,7 +614,7 @@ namespace Modules {
                         GradientAlphaKey[] alphaKey = new GradientAlphaKey[2];
                         alphaKey[0].alpha = 1.0f;
                         alphaKey[0].time = 0.0f;
-                        alphaKey[1].alpha = 0.0f;
+                        alphaKey[1].alpha = 1.0f;
                         alphaKey[1].time = 1.0f;
 
                         gradient.SetKeys(colorKey, alphaKey);
@@ -726,14 +637,8 @@ namespace Modules {
             return newTracer;
         }
 
-        /// <summary>
-        /// search for crosshair prefabs here. plug in the character or crosshair name
-        /// </summary>
-        /// <para>https://xiaoxiao921.github.io/GithubActionCacheTest/assetPathsDump.html</para>
-        public static GameObject LoadCrosshair(string crosshairName)
-        {
-            if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/StandardCrosshair");
-            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
+        public static Texture LoadCharacterIcon(string icon) {
+            return Modules.Assets.LoadAsset<Texture>(icon);
         }
 
         private static GameObject LoadEffect(string resourceName) => LoadEffect(resourceName, "", false);
@@ -789,6 +694,15 @@ namespace Modules {
             //newEffectDef.spawnSoundEventName = soundName;
 
             Modules.Content.AddEffectDef(newEffectDef);
+        }
+
+        /// <summary>
+        /// search for crosshair prefabs here. plug in the character or crosshair name
+        /// </summary>
+        /// <para>https://xiaoxiao921.github.io/GithubActionCacheTest/assetPathsDump.html</para>
+        public static GameObject LoadCrosshair(string crosshairName) {
+            if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/StandardCrosshair");
+            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
         }
 
         #region materials(old)

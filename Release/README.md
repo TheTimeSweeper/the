@@ -72,6 +72,7 @@ ___
    - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
  - fixed "voice line in css" config for playing wrong voice lines for desolator
  - fixed not being able to play voice lines while using certain abliites
+ - finally came out of the past and separated assetbundles and soundbank from dll
 
 `2.0.1`
  - fixed utility broken

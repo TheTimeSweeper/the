@@ -1,5 +1,4 @@
-﻿using ModdedEntityStates.Henry;
-using ModdedEntityStates.Joe;
+﻿using ModdedEntityStates.Joe;
 using ModdedEntityStates.BaseStates;
 using System.Collections.Generic;
 using System;
@@ -13,16 +12,6 @@ namespace Modules
     internal static class States
     {
         public static void RegisterStates() {
-            #region henry
-            Content.AddEntityState(typeof(SlashCombo));
-
-            Content.AddEntityState(typeof(Shoot));
-
-            Content.AddEntityState(typeof(Roll));
-
-            Content.AddEntityState(typeof(ThrowBomb));
-            #endregion
-
             #region joe
             //prim
             Content.AddEntityState(typeof(JoeMain));

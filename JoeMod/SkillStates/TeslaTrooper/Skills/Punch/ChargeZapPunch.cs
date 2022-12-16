@@ -37,7 +37,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (!_reachedMax && fixedAge > _maxChargeTime) {
                 _reachedMax = true;
 
-                EffectManager.SimpleMuzzleFlash(Modules.Assets.LoadAsset<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+                EffectManager.SimpleMuzzleFlash(RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
                                                 gameObject,
                                                 "MuzzleGauntlet",
                                                 true);

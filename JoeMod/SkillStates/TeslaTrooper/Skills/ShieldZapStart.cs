@@ -32,7 +32,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public static float BaseCastStartTime = 0.0f; //todo: anim: 0.13 when legs are separated
         public static float MoveSlowEndTime = 0.6f;
 
-        public GameObject CastShieldEffect = Modules.Assets.LoadAsset<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
+        public GameObject CastShieldEffect = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
         
         public override void OnEnter() {
             base.OnEnter();
