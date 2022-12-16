@@ -98,6 +98,10 @@ namespace Modules
             Content.AddEntityState(typeof(DeployCancel));
 
             Content.AddEntityState(typeof(ThrowIrradiator));
+            
+            Content.AddEntityState(typeof(EmoteRadiationProjectile));
+            Content.AddEntityState(typeof(Rest));
+
             #endregion desolator
         }
     }

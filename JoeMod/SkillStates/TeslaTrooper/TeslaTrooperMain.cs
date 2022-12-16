@@ -1,6 +1,8 @@
-﻿using EntityStates;
+﻿using BepInEx.Configuration;
+using EntityStates;
 using Modules;
 using RoR2;
+using System;
 using UnityEngine;
 
 namespace ModdedEntityStates.TeslaTrooper {
@@ -23,6 +25,19 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (isAuthority && Input.GetKeyDown(Modules.Config.voiceKey.Value)) {
 
                 playRandomvoiceLine();
+            }
+            
+            if (base.isAuthority && base.characterMotor.isGrounded) {
+
+                CheckEmote(Modules.Config.restKeybind.Value, new Rest());
+            }
+        }
+
+        private void CheckEmote(KeyCode keybind, EntityState state) {
+            if (Input.GetKeyDown(keybind)) {
+                if (!LocalUserManager.readOnlyLocalUsersList[0].isUIFocused) {
+                    outer.SetInterruptState(state, InterruptPriority.Any);
+                }
             }
         }
 

@@ -53,11 +53,6 @@ Thanks to the lovely reception from the community, including all the great feedb
 ## Languages
 Looking for translators! If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language).
 
-Supported Languages:
- - English
- - Russian (by Damglador)
-
-
 ## Future Plans (that I may or may not get to)
 - Alt skills
 - Achievements

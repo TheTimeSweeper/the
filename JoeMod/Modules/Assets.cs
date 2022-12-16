@@ -75,6 +75,7 @@ namespace Modules {
 
         public static GameObject DesolatorDeployProjectile;
         public static GameObject DesolatorDeployProjectileScepter;
+        public static GameObject DesolatorDeployProjectileEmote;
 
         public static GameObject DesolatorCrocoLeapProjectile;
 
@@ -231,6 +232,7 @@ namespace Modules {
 
             DesolatorDeployProjectile = CreateDesolatorDeployProjectile();
             DesolatorDeployProjectileScepter = CreateDesolatorDeployProjectileScepter();
+            DesolatorDeployProjectileEmote= CreateDesolatorDeployProjectileEmote();
         }
 
         #region tesla stuff
@@ -395,6 +397,27 @@ namespace Modules {
             DeployProjectile.transform.Find("Hitboxes").localScale = Vector3.one * DeployIrradiate.Range;
 
             DeployProjectile.GetComponentInChildren<LightRadiusScale>().sizeMultiplier = ThrowIrradiator.Range;
+
+            Content.AddProjectilePrefab(DeployProjectile);
+
+            return DeployProjectile;
+        }
+
+
+        private static GameObject CreateDesolatorDeployProjectileEmote() {
+
+            GameObject DeployProjectile = PrefabAPI.InstantiateClone(teslaAssetBundle.LoadAsset<GameObject>("DeployProjectileEmote"), "DeployProjectileEmote", true);
+
+            DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = DeployProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            damageTypeComponent.Add(DamageTypes.DesolatorDot);
+
+            //TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, DeployProjectile.transform);
+            //areaIndicator.teamFilter = DeployProjectile.GetComponent<TeamFilter>();
+            //areaIndicator.transform.localScale = Vector3.one * DeployIrradiate.Range;
+
+            DeployProjectile.transform.Find("Hitboxes").localScale = Vector3.one * EmoteRadiationProjectile.Range;
+
+            DeployProjectile.GetComponentInChildren<LightRadiusScale>().sizeMultiplier = EmoteRadiationProjectile.Range;
 
             Content.AddProjectilePrefab(DeployProjectile);
 
@@ -766,6 +789,7 @@ namespace Modules {
 
         #region materials(old)
         private const string obsolete = "use `Materials.CreateMaterial` instead, or use the extension `Material.SetHotpooMaterial` directly on a material";
+
         [Obsolete(obsolete)]
         public static Material CreateMaterial(string materialName) => Assets.CreateMaterial(materialName, 0f);
         [Obsolete(obsolete)]

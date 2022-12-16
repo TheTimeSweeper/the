@@ -16,6 +16,7 @@ namespace Modules
         public static bool NewColor;
         public static bool Cursed;
         public static bool TowerItemDisplays;
+        public static ConfigEntry<KeyCode> restKeybind;
         public static ConfigEntry<KeyCode> voiceKey;
         public static ConfigEntry<bool> VoiceInLobby;
         public static bool RA2Icon;
@@ -49,6 +50,12 @@ namespace Modules
                 "Cursed",
                 false,
                 "Enables extra/wip content\nyes there's a fucking minecraft skin").Value;
+
+            restKeybind = FacelessJoePlugin.instance.Config.Bind(
+                sectionGeneral,
+                "Rest Key",
+                KeyCode.Alpha1,
+                "key to play Rest emote");
 
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,

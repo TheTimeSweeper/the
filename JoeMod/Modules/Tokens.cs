@@ -278,11 +278,11 @@ namespace Modules {
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"Our Power");
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"Repair a tesla coil with any source of power (Fuel Array, Royal Capacitor, Unstable Tesla Coil, Charged Perforator, Ukelele, Genesis Loop, etc).");
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"Our Power");
-
+            
             #endregion
             #endregion not henry 2
         }
-
+        
         private static void AddTeslaTowerTokens() {
             #region not henry 3
             string prefix = TeslaTowerNotSurvivor.TOWER_PREFIX;
