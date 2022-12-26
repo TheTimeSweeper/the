@@ -79,22 +79,24 @@ namespace Modules
             #endregion tesla tower
 
             #region desolator
-            Content.AddEntityState(typeof(DesolatorMain));
+            if (FacelessJoePlugin.Desolator) {
+                Content.AddEntityState(typeof(DesolatorMain));
 
-            Content.AddEntityState(typeof(RadBeam));
-            Content.AddEntityState(typeof(AimBigRadBeam));
+                Content.AddEntityState(typeof(RadBeam));
+                Content.AddEntityState(typeof(AimBigRadBeam));
 
-            Content.AddEntityState(typeof(RadiationAura));
+                Content.AddEntityState(typeof(RadiationAura));
 
-            Content.AddEntityState(typeof(DeployEnter));
-            Content.AddEntityState(typeof(DeployIrradiate));
-            Content.AddEntityState(typeof(DeployCancel));
+                Content.AddEntityState(typeof(DeployEnter));
+                Content.AddEntityState(typeof(DeployIrradiate));
+                Content.AddEntityState(typeof(DeployCancel));
 
-            Content.AddEntityState(typeof(ThrowIrradiator));
-            
-            Content.AddEntityState(typeof(EmoteRadiationProjectile));
+                Content.AddEntityState(typeof(ThrowIrradiator));
 
-            Content.AddEntityState(typeof(DesolatorVoiceLines));
+                Content.AddEntityState(typeof(EmoteRadiationProjectile));
+
+                Content.AddEntityState(typeof(DesolatorVoiceLines));
+            }
             #endregion desolator
         }
     }

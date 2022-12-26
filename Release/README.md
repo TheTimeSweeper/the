@@ -66,6 +66,11 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+
+`2.1.1`
+ - fixed desolator disable config breaking both characters
+ - fixed desolator irradiator projectile collisions being inconsistent
+
 `2.1.0`
  - added sit emotes for both men
  - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code

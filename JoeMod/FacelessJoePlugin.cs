@@ -37,11 +37,10 @@ using UnityEngine;
 })]
 
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]
-
 public class FacelessJoePlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.TeslaTrooper";
     public const string MODNAME = "Tesla Trooper";
-    public const string MODVERSION = "2.1.0";
+    public const string MODVERSION = "2.1.1";
     
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -51,12 +50,12 @@ public class FacelessJoePlugin : BaseUnityPlugin {
 
     public static bool Desolator;
     public static bool holdonasec;
-
+    
     void Awake() {
 
         instance = this;
         Log = Logger;
-
+        
         Modules.Files.Init(Info);
         Modules.Language.HookRegisterLanguageTokens();
 

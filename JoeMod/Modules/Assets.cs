@@ -498,10 +498,10 @@ namespace Modules {
 
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
-            T loadedAss = desolatorAssetBundle.LoadAsset<T>(assString);
-
+            T loadedAss = teslaAssetBundle.LoadAsset<T>(assString);
+            
             if(loadedAss == null) {
-                loadedAss = teslaAssetBundle.LoadAsset<T>(assString);
+                 loadedAss = desolatorAssetBundle.LoadAsset<T>(assString);
             }
 
             if (loadedAss == null) {
