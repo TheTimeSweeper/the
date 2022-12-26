@@ -16,8 +16,8 @@ namespace Modules
         public static bool NewColor;
         public static bool Cursed;
         public static bool TowerItemDisplays;
-        public static ConfigEntry<KeyCode> restKeybind;
-        public static ConfigEntry<KeyCode> voiceKey;
+        public static ConfigEntry<KeyboardShortcut> restKeybind { get; private set; }
+        public static ConfigEntry<KeyboardShortcut> voiceKey { get; private set; }
         public static ConfigEntry<bool> VoiceInLobby;
         public static bool RA2Icon;
 
@@ -54,14 +54,14 @@ namespace Modules
             restKeybind = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,
                 "Rest Key",
-                KeyCode.Alpha1,
+                new KeyboardShortcut(KeyCode.Alpha1),
                 "key to play Rest emote");
 
             voiceKey = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,
                 "Voice Line Key",
-                KeyCode.CapsLock,
-                "key to play Tesla Trooper voice lines from Red Alert 2");
+                new KeyboardShortcut(KeyCode.CapsLock),
+                "key to play voice lines from Red Alert 2");
 
             VoiceInLobby = FacelessJoePlugin.instance.Config.Bind(
                 sectionGeneral,
@@ -131,6 +131,16 @@ namespace Modules
             //    "Unlock character by default\nthere's no unlock yet. by downloading the mod before the achievement you've unlocked him by default").Value;
 
 
+        }
+
+        //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs
+        public static bool GetKeyPressed(ConfigEntry<KeyboardShortcut> entry) {
+            foreach (var item in entry.Value.Modifiers) {
+                if (!Input.GetKey(item)) {
+                    return false;
+                }
+            }
+            return Input.GetKeyDown(entry.Value.MainKey);
         }
 
         // this helper automatically makes config entries for disabling survivors

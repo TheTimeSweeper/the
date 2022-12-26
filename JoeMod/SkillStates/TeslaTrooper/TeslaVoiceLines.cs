@@ -6,7 +6,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         public override void Update() {
             base.Update();
 
-            if (isAuthority && Input.GetKeyDown(Modules.Config.voiceKey.Value)) {
+            if (isAuthority && Modules.Config.GetKeyPressed(Modules.Config.voiceKey)) {
 
                 playRandomvoiceLine();
             }

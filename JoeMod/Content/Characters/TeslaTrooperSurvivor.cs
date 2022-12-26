@@ -616,9 +616,9 @@ namespace Modules.Survivors {
             On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
 
             On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
-            On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2;
+            //On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2;
 
-            On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
+            //On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
             //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
             
@@ -695,24 +695,24 @@ namespace Modules.Survivors {
             orig(self, deployable, slot);
         }
 
-        private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
-            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
-                filter = TeslaTowerCopyFilterDelegate;
-            }
-            orig(self, other, filter);
-        }
+        //private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
+        //    if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+        //        filter = TeslaTowerCopyFilterDelegate;
+        //    }
+        //    orig(self, other, filter);
+        //}
 
-        private void Inventory_AddItemsFrom_Int32Array_Func2(On.RoR2.Inventory.orig_AddItemsFrom_Int32Array_Func2 orig, Inventory self, int[] otherItemStacks, Func<ItemIndex, bool> filter) {
-            if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+        //private void Inventory_AddItemsFrom_Int32Array_Func2(On.RoR2.Inventory.orig_AddItemsFrom_Int32Array_Func2 orig, Inventory self, int[] otherItemStacks, Func<ItemIndex, bool> filter) {
+        //    if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
 
-                for (ItemIndex itemIndex = (ItemIndex)0; itemIndex < (ItemIndex)self.itemStacks.Length; itemIndex++) {
-                    int itemstack = otherItemStacks[(int)itemIndex];
-                    if (itemstack > 0) {
-                    }
-                }
-            }
-            orig(self, otherItemStacks, filter);
-        }
+        //        for (ItemIndex itemIndex = (ItemIndex)0; itemIndex < (ItemIndex)self.itemStacks.Length; itemIndex++) {
+        //            int itemstack = otherItemStacks[(int)itemIndex];
+        //            if (itemstack > 0) {
+        //            }
+        //        }
+        //    }
+        //    orig(self, otherItemStacks, filter);
+        //}
 
         private Func<ItemIndex, bool> TeslaTowerCopyFilterDelegate = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
 

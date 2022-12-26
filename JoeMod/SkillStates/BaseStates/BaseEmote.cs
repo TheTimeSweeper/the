@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using static RoR2.CameraTargetParams;
 using EntityStates;
+using BepInEx.Configuration;
 
 namespace ModdedEntityStates.TeslaTrooper {
 
@@ -27,7 +28,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             wallCushion = 0.1f,
         };
 
-        public static Vector3 emoteCameraPosition = new Vector3(0, -1.0f, -8.9f);
+        public static Vector3 emoteCameraPosition = new Vector3(0, -0.8f, -10.2f);
 
         private CameraParamsOverrideHandle camOverrideHandle;
 
@@ -35,10 +36,10 @@ namespace ModdedEntityStates.TeslaTrooper {
             base.OnEnter();
             this.animator = base.GetModelAnimator();
             this.childLocator = base.GetModelChildLocator();
-            this.localUser = LocalUserManager.readOnlyLocalUsersList[0];
+            FindLocalUser();
 
             base.characterBody.hideCrosshair = true;
-
+            
             if (base.GetAimAnimator()) base.GetAimAnimator().enabled = false;
             this.animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0);
             this.animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 0);
@@ -59,6 +60,19 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, 0.5f);
 
+        }
+
+        private void FindLocalUser() {
+            if (localUser == null) {
+                if (base.characterBody) {
+                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList) {
+                        if (lu.cachedBody == base.characterBody) {
+                            this.localUser = lu;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         public override void OnExit() {
@@ -99,8 +113,9 @@ namespace ModdedEntityStates.TeslaTrooper {
             //emote cancels
             if (base.isAuthority && base.characterMotor.isGrounded) {
 
-                CheckEmote(Modules.Config.restKeybind.Value, new Rest());
+                CheckEmote<Rest>(Modules.Config.restKeybind);
             }
+
 
             if (this.duration > 0 && base.fixedAge >= this.duration) flag = true;
             
@@ -113,6 +128,17 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (Input.GetKeyDown(keybind)) {
                 if (!localUser.isUIFocused) {
                     outer.SetInterruptState(state, InterruptPriority.Any);
+                }
+            }
+        }
+
+        private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new() {
+            if (Modules.Config.GetKeyPressed(keybind)) {
+
+                FindLocalUser();
+                
+                if (localUser != null && !localUser.isUIFocused) {
+                    outer.SetInterruptState(new T(), InterruptPriority.Any);
                 }
             }
         }

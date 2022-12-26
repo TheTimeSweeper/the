@@ -8,8 +8,8 @@ Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
   - BetterUI (proc coefficients)
   - Skills++
   - Aetherium (Item Displays)
-  - VRAPI
   - CustomEmotesAPI
+  - VRAPI
 - Y'all remember Red Alert 2?
 # SPREAD THE DOOM
 Adds the Desolator, who spreads large spheres of radiation everywhere in his wake.  
@@ -25,7 +25,6 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS2.png)]()
 
 Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7).  
-I'll be taking a close look at feedback, especially with the release of Desolator, and how he feels in terms of power.
 ___
 ## Overview
 Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
@@ -44,6 +43,7 @@ Violet Chaolan - wwise sound help
 SweeperSecret - icons,  <3  
 Mr.Bones - mastery skin  
 Jaysian - Lores  
+SOM - animation help  
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
@@ -66,7 +66,7 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
-`2.0.2`
+`2.1.0`
  - added sit emotes for both men
  - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code
    - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)

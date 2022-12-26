@@ -83,7 +83,7 @@ namespace Modules {
             }
 
             tempMat.EnableKeyword("DITHER");
-
+            Physics.SphereCastAll(Vector3.zero, 5, Vector3.forward, 100, RoR2.LayerIndex.entityPrecise.intVal);
             //set this keyword in unity if you've set up your model for limb removal item displays (eg. goat hoof) by setting your model's vertex colors
             if (tempMat.IsKeywordEnabled("LIMBREMOVAL")) {
                 tempMat.SetInt("_LimbRemovalOn", 1);

@@ -11,6 +11,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         
         private Animator cachedAnimator;
 
+        public LocalUser localUser;
+
         public override void OnEnter() {
             base.OnEnter();
             cachedAnimator = GetModelAnimator();
@@ -24,14 +26,30 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             if (base.isAuthority && base.characterMotor.isGrounded) {
 
-                CheckEmote(Modules.Config.restKeybind.Value, new Rest());
+                CheckEmote<Rest>(Modules.Config.restKeybind);
             }
         }
 
-        private void CheckEmote(KeyCode keybind, EntityState state) {
-            if (Input.GetKeyDown(keybind)) {
-                if (!LocalUserManager.readOnlyLocalUsersList[0].isUIFocused) {
-                    outer.SetInterruptState(state, InterruptPriority.Any);
+        private void FindLocalUser() {
+            if (localUser == null) {
+                if (base.characterBody) {
+                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList) {
+                        if (lu.cachedBody == base.characterBody) {
+                            this.localUser = lu;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new() {
+            if (Modules.Config.GetKeyPressed(keybind)) {
+
+                FindLocalUser();
+                
+                if (localUser != null && !localUser.isUIFocused) {
+                    outer.SetInterruptState(new T(), InterruptPriority.Any);
                 }
             }
         }

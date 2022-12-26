@@ -52,7 +52,7 @@ namespace ModdedEntityStates.Desolator {
             Util.PlaySound("Play_Desolator_Beam_Deep2", gameObject);
 
             //PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
-            PlayAnimation("Desolator, Override", "DesolatorShoot");
+            PlayAnimation("Desolator, Override", "DesolatorShootBig");
         }
 
         public override void FireProjectile() {
