@@ -18,20 +18,7 @@ namespace Modules {
 
         public static void init() {
 
-            doLanguage();
-
             SkillModifierManager.LoadSkillModifiers();
-        }
-
-        private static void doLanguage() {
-
-            LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", $"Every 2 levels, <style=cIsUtility>+1</style> Close-Range Bolt");
-            LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+10%</style> Area, <style=cIsDamage>+10%</style> Damage");
-            LanguageAPI.Add("TESLA_UTILITY_SHIELDZAP_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+0.5</style> second buff time");
-            LanguageAPI.Add("TESLA_SPECIAL_TOWER_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 3 levels");
-            LanguageAPI.Add("TESLA_SPECIAL_SCEPTER_TOWER_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 3 levels");
-            
-            LanguageAPI.Add("DESOLATOR_PRIMARY_BEAM_UPGRADE_DESCRIPTION", $"<style=cIsUtility>+10%</style> rate of fire");
         }
 
         [SkillLevelModifier("Tesla_Primary_Zap", typeof(Zap))]

@@ -131,7 +131,7 @@ namespace ModdedEntityStates.Aliem {
 										
 					if (inputButtonState.down) {
 						outer.SetState(new AliemBurrow(inputButton));
-
+						
 					} else {
 						this.outer.SetNextStateToMain();
 					}

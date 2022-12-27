@@ -23,18 +23,6 @@ using UnityEngine;
 
 [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
-[R2APISubmoduleDependency(new string[]
-{
-    "PrefabAPI",
-    //"LanguageAPI",
-    //"SoundAPI",
-    "LoadoutAPI",
-    "DeployableAPI",
-    "DamageAPI",
-    "UnlockableAPI",
-    "RecalculateStatsAPI",
-    "DotAPI"
-})]
 
 [BepInPlugin(MODUID, MODNAME, MODVERSION)]
 public class FacelessJoePlugin : BaseUnityPlugin {

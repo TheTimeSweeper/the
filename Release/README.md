@@ -72,6 +72,11 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 
+`2.1.2`
+ - r2api split ass(emblies)
+ - added some missing text to language file (sorry translators!)
+ - 
+
 `2.1.1`
  - added Ukrainian translation (thanks Damglador!)
  - added Spanish translation (thanks Juhnter!)

@@ -419,7 +419,7 @@ namespace AliemMod.Content.Survivors {
             string token = $"{ALIEM_PREFIX}SKIN_{skinColor.ToUpperInvariant()}";
 
             SkinDef skinDef = Skins.CreateSkinDef(skinColor,
-                                                  R2API.LoadoutAPI.CreateSkinIcon(color, color, color, color, color),
+                                                  CreateRecolorIcon(color),
                                                   defaultSkin.rendererInfos,
                                                   defaultSkin.rootObject,
                                                   masterySkinUnlockableDef);
@@ -427,6 +427,19 @@ namespace AliemMod.Content.Survivors {
 
             R2API.LanguageAPI.Add(token, skinColor);
             return skinDef;
+        }
+
+
+        internal static Sprite CreateRecolorIcon(Color color) {
+            var tex = new Texture2D(4, 4, TextureFormat.RGBA32, false);
+
+            var fillColorArray = tex.GetPixels();
+            for (int i = 0; i < fillColorArray.Length; i++) {
+                fillColorArray[i] = color;
+            }
+            tex.SetPixels(fillColorArray);
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, 4, 4), new Vector2(0.5f, 0.5f));
         }
     }
 }

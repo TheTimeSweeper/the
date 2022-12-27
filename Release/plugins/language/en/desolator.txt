@@ -44,5 +44,10 @@
     "HABIBI_DESOLATOR_BODY_CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME" : "Irradiators",
     "HABIBI_DESOLATOR_BODY_CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC" : "Find and activate the 3 irradiators in stage 3.",
     "HABIBI_DESOLATOR_BODY_CHARACTERUNLOCKABLE_UNLOCKABLE_NAME" : "Irradiators",
+    "DESOLATOR_PRIMARY_BEAM_UPGRADE_DESCRIPTION" : "<style=cIsUtility>+10%</style> rate of fire",
+    "DESOLATOR_BEAM" : "Beam",
+    "DESOLATOR_TICKS" : "Ticks",
+    "DESOLATOR_INITIAL_BLAST" : "Initial Blast",
+    "DESOLATOR_ENDING_BLAST" : "Ending Blast",
     }
 }

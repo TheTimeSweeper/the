@@ -452,7 +452,7 @@ namespace Modules.Survivors {
                 skillName = name,
                 skillNameToken = $"{TESLA_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
                 skillDescriptionToken = "",
-                skillIcon = R2API.LoadoutAPI.CreateSkinIcon(color1, color1, color1, color1, color1),
+                skillIcon = Modules.Skins.CreateRecolorIcon(color1),
             });
         }
         #endregion skills

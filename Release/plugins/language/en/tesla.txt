@@ -70,5 +70,16 @@
     "HABIBI_TESLA_TOWER_BODY_PRIMARY_ZAP_DESCRIPTION" : "Zap nearby units for <style=cIsDamage>3x2.3</style>.",
     "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_NAME" : "2000 Volts (Tower)",
     "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Shocking</style>. Performs an $<style=cIsDamage>empowered</style> blast at Tesla Trooper's target for <style=cIsDamage>1200% damage</style>",
+    "TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION" : "Every 2 levels, <style=cIsUtility>+1</style> Close-Range Bolt",
+    "TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION" : "<style=cIsUtility>+10%</style> Area, <style=cIsDamage>+10%</style> Damage",
+    "TESLA_UTILITY_SHIELDZAP_UPGRADE_DESCRIPTION" : "<style=cIsUtility>+0.5</style> second buff time",
+    "TESLA_SPECIAL_TOWER_UPGRADE_DESCRIPTION" : "<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 3 levels",
+    "TESLA_SPECIAL_SCEPTER_TOWER_UPGRADE_DESCRIPTION" : "<style=cIsUtility>+1</style> second lifetime, <style=cIsUtility>additional stock</style> every 3 levels",
+    "TESLA_BOLTS" : "Bolts",
+    "TESLA_BOLT" : "Bolt",
+    "TESLA_BLAST" : "Blast",
+    "TESLA_FIST" : "Fist",
+    "TESLA_BEAM" : "Charged Beam",
+    "TESLA_PROJECTILES" : "Deflected Projectiles",
     }
 }
