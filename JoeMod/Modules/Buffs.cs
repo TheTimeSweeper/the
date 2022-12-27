@@ -62,13 +62,14 @@ namespace Modules {
                                false,
                                false);
 
+                Sprite buffIcon = Modules.Config.RA2Icon ? Modules.Assets.LoadAsset<Sprite>("texBuffDesolatorDeployClassic2") : Modules.Assets.LoadAsset<Sprite>("texBuffDesolatorDeploy");
                 desolatorDeployBuff =
                     AddNewBuff("DesolatorArmorMini",
-                               LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
-                               lime,
+                               buffIcon,
+                               Modules.Config.RA2Icon ? Color.white : lime,
                                false,
                                false);
-
+                
                 desolatorArmorShredDeBuff =
                     AddNewBuff("DesolatorArmorShred",
                                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Pulverized").iconSprite,

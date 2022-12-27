@@ -47,11 +47,16 @@ SOM - animation help
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
-  
+
 Thanks to the lovely reception from the community, including all the great feedback and ideas c:
 
 ## Languages
-Looking for translators! If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language).
+If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language).
+
+Currently Supported:
+- English
+- Ukrainian - by Damglador
+- Spanish - by Juhnter
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
@@ -68,13 +73,19 @@ ___
 ## Changelog
 
 `2.1.1`
+ - added Ukrainian translation (thanks Damglador!)
+ - added Spanish translation (thanks Juhnter!)
  - fixed desolator disable config breaking both characters
  - fixed desolator irradiator projectile collisions being inconsistent
+ - added buff icon for desolator deployed state
+ - lowered desolator sounds
+ - adjusted sound for desolator utility
 
 `2.1.0`
  - added sit emotes for both men
  - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code
    - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
+ - made desolator back pack tube thing change color with recolors
  - fixed "voice line in css" config for playing wrong voice lines for desolator
  - fixed not being able to play voice lines while using certain abliites
  - finally came out of the past and separated assetbundles and soundbank from dll

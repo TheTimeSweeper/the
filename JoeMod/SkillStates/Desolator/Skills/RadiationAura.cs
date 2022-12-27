@@ -19,7 +19,7 @@ namespace ModdedEntityStates.Desolator {
             _auraHolder = GetComponent<DesolatorAuraHolder>();
             _auraHolder?.ActivateAura();
 
-            Util.PlaySound("Play_Desolator_Deploy", gameObject);
+            Util.PlaySound("Play_Desolator_Deploy_High", gameObject);
 
             aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
 
@@ -35,7 +35,7 @@ namespace ModdedEntityStates.Desolator {
 
                 if (aimRequest != null)
                     aimRequest.Dispose();
-
+                
                 base.outer.SetNextStateToMain();
             }
         }

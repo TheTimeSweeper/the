@@ -2142,72 +2142,11 @@
 								</Folder>
 								<Folder Name="Desolator" ID="{1F6C6A0E-A229-4A2A-8509-1828B055350F}" ShortID="1065647325">
 									<ChildrenList>
-										<Sound Name="idesat1a_attack" ID="{7A9F5E43-77C3-40D0-81C8-C2EA24762C4B}" ShortID="1045430109">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="idesat1a_attack" ID="{A643FD67-3B42-4474-BA58-C7DD93448DA4}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>idesat1a_attack.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="660682721"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="idesat1a_attack" ID="{A643FD67-3B42-4474-BA58-C7DD93448DA4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="idesat2a_deploy" ID="{CA92D3CC-EACA-47CA-981C-2175D42E528A}" ShortID="466376344">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="idesat2a_deploy" ID="{E4803997-6C81-41CD-8402-A5CADBD4D986}">
-													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>idesat2a_deploy.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="327612978"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="idesat2a_deploy" ID="{E4803997-6C81-41CD-8402-A5CADBD4D986}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<RandomSequenceContainer Name="AttackShort" ID="{EE6831DD-AA94-4AA3-8443-D1B525F2B842}" ShortID="96373074">
+										<ActorMixer Name="DesolatorSoundsQuieter" ID="{4F829394-658D-4ADF-AF14-4F7449B5F082}" ShortID="1031034724">
 											<PropertyList>
-												<Property Name="Lowpass" Type="int16">
-													<ValueList>
-														<Value>26</Value>
-													</ValueList>
-												</Property>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-6</Value>
+														<Value>-1</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -2220,222 +2159,328 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="idesat1a_attack_short2" ID="{8784B079-188A-4E48-A6BF-5CB458CAE13A}" ShortID="410257243">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesat1a_attack_short2" ID="{8E096839-06C5-482A-BDE1-70CCB264A501}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesat1a_attack_short2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="176162194"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesat1a_attack_short2" ID="{8E096839-06C5-482A-BDE1-70CCB264A501}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesat1a_attack_short3" ID="{BCB82395-5F7A-487A-986D-5FB43B160147}" ShortID="165913667">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesat1a_attack_short3" ID="{F73D571B-2F15-4B9D-89B4-EFC04992664F}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesat1a_attack_short3.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="211424573"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesat1a_attack_short3" ID="{F73D571B-2F15-4B9D-89B4-EFC04992664F}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesat1a_attack_short4" ID="{D9D633DD-6411-4C88-94DA-1C68C3B29A9F}" ShortID="312020432">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesat1a_attack_short4" ID="{0405D77B-88AE-4A30-92CB-60DE920BB409}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesat1a_attack_short4.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="50171806"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesat1a_attack_short4" ID="{0405D77B-88AE-4A30-92CB-60DE920BB409}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="idesat1a_attack_short" ID="{CB71D6B9-3A43-4414-91EE-346EF74A0568}" ShortID="949120337">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="idesat1a_attack_short" ID="{0C30D2AE-D9B3-480D-ABC6-475204434BED}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>idesat1a_attack_short.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="68343954"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="idesat1a_attack_short" ID="{0C30D2AE-D9B3-480D-ABC6-475204434BED}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-										<Sound Name="idesat1a_attack_deep_short" ID="{2E6FE9F8-0590-499D-AA61-839FE6C651F6}" ShortID="497598062">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ValueList>
-														<Value>130</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="idesat1a_attack_deep_short" ID="{C5BE6A7C-7113-4B4D-8D73-80681A655E2B}">
+												<Sound Name="idesat1a_attack_deep_short" ID="{2E6FE9F8-0590-499D-AA61-839FE6C651F6}" ShortID="497598062">
 													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>130</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>idesat1a_attack_deep_short.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1016931564"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="idesat1a_attack_deep_short" ID="{C5BE6A7C-7113-4B4D-8D73-80681A655E2B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="idesat1a_attack_shift" ID="{C855C0EE-294D-4C2E-89E8-25C3907AAFEB}" ShortID="771185901">
-											<PropertyList>
-												<Property Name="3DSpatialization" Type="int16" Value="1"/>
-												<Property Name="Pitch" Type="int32">
-													<ValueList>
-														<Value>-130</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Attenuation">
-													<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-												</Reference>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="idesat1a_attack" ID="{A340E0D9-57FC-41EC-92F4-BE2FF3B6C324}">
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack_deep_short" ID="{C5BE6A7C-7113-4B4D-8D73-80681A655E2B}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack_deep_short.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1016931564"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack_deep_short" ID="{C5BE6A7C-7113-4B4D-8D73-80681A655E2B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesat1a_attack" ID="{7A9F5E43-77C3-40D0-81C8-C2EA24762C4B}" ShortID="1045430109">
 													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>idesat1a_attack.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="660682721"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="idesat1a_attack" ID="{A340E0D9-57FC-41EC-92F4-BE2FF3B6C324}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="idesat2a_deploy_high" ID="{81F55BB9-E107-44BE-9DC4-8AB166ABA233}" ShortID="492077977">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="idesat2a_deploy_high" ID="{2EC745D5-8039-414C-A60A-E41FABFF1E07}">
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack" ID="{A643FD67-3B42-4474-BA58-C7DD93448DA4}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="660682721"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack" ID="{A643FD67-3B42-4474-BA58-C7DD93448DA4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesat2a_deploy_high" ID="{81F55BB9-E107-44BE-9DC4-8AB166ABA233}" ShortID="492077977">
 													<PropertyList>
-														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>idesat2a_deploy_high.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1036548716"/>
-													</MediaIDList>
-												</AudioFileSource>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat2a_deploy_high" ID="{2EC745D5-8039-414C-A60A-E41FABFF1E07}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat2a_deploy_high.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1036548716"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat2a_deploy_high" ID="{2EC745D5-8039-414C-A60A-E41FABFF1E07}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="idesat2a_deploy" ID="{CA92D3CC-EACA-47CA-981C-2175D42E528A}" ShortID="466376344">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat2a_deploy" ID="{E4803997-6C81-41CD-8402-A5CADBD4D986}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat2a_deploy.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="327612978"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat2a_deploy" ID="{E4803997-6C81-41CD-8402-A5CADBD4D986}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<RandomSequenceContainer Name="AttackShort" ID="{EE6831DD-AA94-4AA3-8443-D1B525F2B842}" ShortID="96373074">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Lowpass" Type="int16">
+															<ValueList>
+																<Value>26</Value>
+															</ValueList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-4</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="idesat1a_attack_short2" ID="{8784B079-188A-4E48-A6BF-5CB458CAE13A}" ShortID="410257243">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesat1a_attack_short2" ID="{8E096839-06C5-482A-BDE1-70CCB264A501}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesat1a_attack_short2.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="176162194"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesat1a_attack_short2" ID="{8E096839-06C5-482A-BDE1-70CCB264A501}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesat1a_attack_short3" ID="{BCB82395-5F7A-487A-986D-5FB43B160147}" ShortID="165913667">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesat1a_attack_short3" ID="{F73D571B-2F15-4B9D-89B4-EFC04992664F}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesat1a_attack_short3.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="211424573"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesat1a_attack_short3" ID="{F73D571B-2F15-4B9D-89B4-EFC04992664F}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesat1a_attack_short4" ID="{D9D633DD-6411-4C88-94DA-1C68C3B29A9F}" ShortID="312020432">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesat1a_attack_short4" ID="{0405D77B-88AE-4A30-92CB-60DE920BB409}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesat1a_attack_short4.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="50171806"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesat1a_attack_short4" ID="{0405D77B-88AE-4A30-92CB-60DE920BB409}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="idesat1a_attack_short" ID="{CB71D6B9-3A43-4414-91EE-346EF74A0568}" ShortID="949120337">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="idesat1a_attack_short" ID="{0C30D2AE-D9B3-480D-ABC6-475204434BED}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>idesat1a_attack_short.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="68343954"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="idesat1a_attack_short" ID="{0C30D2AE-D9B3-480D-ABC6-475204434BED}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<Sound Name="idesat1a_attack_shift" ID="{C855C0EE-294D-4C2E-89E8-25C3907AAFEB}" ShortID="771185901">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>-130</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="idesat1a_attack" ID="{A340E0D9-57FC-41EC-92F4-BE2FF3B6C324}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>idesat1a_attack.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="660682721"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="idesat1a_attack" ID="{A340E0D9-57FC-41EC-92F4-BE2FF3B6C324}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="idesat2a_deploy_high" ID="{2EC745D5-8039-414C-A60A-E41FABFF1E07}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										</ActorMixer>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>

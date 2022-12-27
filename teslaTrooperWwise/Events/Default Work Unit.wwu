@@ -829,6 +829,20 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_Desolator_Deploy_High" ID="{82445562-3B31-4859-8646-E9FC4DEE522E}">
+							<ChildrenList>
+								<Action Name="" ID="{FDDF9774-A4B1-4372-9098-3A5E1AC4820C}" ShortID="588078698">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="idesat2a_deploy_high" ID="{81F55BB9-E107-44BE-9DC4-8AB166ABA233}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

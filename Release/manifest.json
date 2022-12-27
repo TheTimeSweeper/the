@@ -2,7 +2,7 @@
     "name": "Tesla_Trooper",
     "version_number": "2.1.1",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Checking Connection. Adds two new survivors, Tesla Trooper and Desolator, based on Red Alert 2, themed around RoR2.",
+    "description": "There goes the neighborhood. Adds two new survivors, Tesla Trooper and Desolator, based on Red Alert 2, themed around RoR2.",
     "dependencies": [
         "bbepis-BepInExPack-5.4.2101",
         "tristanmcpherson-R2API-4.4.1"
