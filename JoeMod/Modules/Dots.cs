@@ -3,6 +3,7 @@ using R2API;
 using RoR2;
 
 namespace Modules {
+
     internal static class Dots {
         public static DotController.DotIndex DesolatorDot;
 

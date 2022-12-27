@@ -73,6 +73,7 @@ public class FacelessJoePlugin : BaseUnityPlugin {
         Modules.States.RegisterStates(); // register states for networking
         Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
+        Modules.Colors.Init();
         Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
         Modules.Dots.RegisterDots();
 

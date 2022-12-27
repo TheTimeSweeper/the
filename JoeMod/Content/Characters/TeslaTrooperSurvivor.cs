@@ -773,7 +773,7 @@ namespace Modules.Survivors {
 
                     int buffCount = attackerBody.GetBuffCount(Buffs.conductiveBuffTeam);
                     for (int i = 0; i < buffCount; i++) {
-
+                        
                         attackerBody.RemoveBuff(Buffs.conductiveBuffTeam);
                         if (!attackerBody.HasBuff(Buffs.conductiveBuffTeamGrace)) {
                             attackerBody.AddTimedBuff(Buffs.conductiveBuffTeamGrace, 0.1f);
@@ -782,6 +782,7 @@ namespace Modules.Survivors {
 
                     damageInfo.AddModdedDamageType(DamageTypes.ShockShort);
                     damageInfo.damage *= conductiveAllyBoost;// 1f + (0.1f * buffCount);
+                    damageInfo.damageColorIndex = Colors.ChargedColor;
                 }
             }
         }

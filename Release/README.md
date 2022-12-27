@@ -74,8 +74,8 @@ ___
 
 `2.1.2`
  - r2api split ass(emblies)
- - added some missing text to language file (sorry translators!)
- - 
+ - now that colorsapi is real, added a color to communicate tesla trooper charged ally attacks
+ - added some missing text to language file
 
 `2.1.1`
  - added Ukrainian translation (thanks Damglador!)
