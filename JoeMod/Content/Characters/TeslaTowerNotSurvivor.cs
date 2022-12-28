@@ -10,7 +10,7 @@ using ModdedEntityStates.TeslaTrooper.Tower;
 using EntityStates;
 using R2API;
 using RoR2.CharacterAI;
-using JoeMod;
+using TeslaTrooper;
 
 namespace Modules.Survivors {
 
@@ -18,14 +18,14 @@ namespace Modules.Survivors {
 
         public override string bodyName => "TeslaTower";
 
-        public const string TOWER_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_";
+        public const string TOWER_PREFIX = TeslaTrooperPlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_";
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             armor = 1200f,
             armorGrowth = 0f,
             bodyName = "TeslaTowerBody",
             bodyNameToken = TOWER_PREFIX + "NAME",
-            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_SUBTITLE",
+            subtitleNameToken = TeslaTrooperPlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_SUBTITLE",
             bodyNameToClone = "EngiTurret",
             bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
             characterPortrait = Modules.Assets.LoadCharacterIcon("texIconTeslaTower"),

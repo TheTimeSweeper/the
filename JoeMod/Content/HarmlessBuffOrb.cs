@@ -3,7 +3,7 @@ using RoR2.Orbs;
 using System;
 using UnityEngine;
 
-namespace JoeMod {
+namespace TeslaTrooper {
 
 	public class HarmlessBlinkCooldownOrb : Orb {
 

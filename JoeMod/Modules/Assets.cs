@@ -20,16 +20,6 @@ namespace Modules {
 
         public static Shader hotpoo = RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
 
-        private const string assetbundleName = "joe";
-
-        #region joe
-        //jerry don't you know
-        //todo joe
-        public static GameObject JoeFireball;
-        public static GameObject JoeImpactEffect;
-        public static GameObject JoeJumpSwingEffect;
-        #endregion
-
         #region tesla
         public static GameObject TeslaCoil;
         public static GameObject TeslaCoilBlueprint;
@@ -71,17 +61,10 @@ namespace Modules {
 
         public static void Initialize()
         {
-            //HENRY: check this somewhere else secretly
-            if (assetbundleName == "myassetbundle")
-            {
-                Debug.LogError("AssetBundle name hasn't been changed- not loading any assets to avoid conflicts");
-                return;
-            }
-
             LoadAssetBundles();
 
             PopulateTeslaAss();
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
                 PopulateDesolatorAss();
             }
         }
@@ -93,21 +76,10 @@ namespace Modules {
                 teslaAssetBundle = AssetBundle.LoadFromFile(Files.GetPathToFile("AssetBundles", "teslatrooper"));
             }
 
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
                 desolatorAssetBundle = AssetBundle.LoadFromFile(Files.GetPathToFile("AssetBundles", "desolator"));
             }
-            
-            //assetNames = mainAssetBundle.GetAllAssetNames();
-            //assetNames.Concat(teslaAssetBundle.GetAllAssetNames());
         }
-
-        //todo joe
-        //private static void PopulateJoeAss() {
-        //    JoeFireball = mainAssetBundle.LoadAsset<GameObject>("JoeFireballBasic");
-
-        //    JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
-        //    JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
-        //}
 
         private static void PopulateTeslaAss() {
 

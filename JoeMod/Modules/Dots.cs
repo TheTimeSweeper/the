@@ -8,7 +8,7 @@ namespace Modules {
         public static DotController.DotIndex DesolatorDot;
 
         public static void RegisterDots() {
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
                 DesolatorDot = DotAPI.RegisterDotDef(new DotController.DotDef {
                     interval = DesolatorSurvivor.DotInterval,
                     damageCoefficient = DesolatorSurvivor.DotDamage,

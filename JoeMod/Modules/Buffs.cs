@@ -52,7 +52,7 @@ namespace Modules {
             //               false,
             //               false);
 
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
                 Color lime = new Color(0.486f, 1, 0);
 
                 desolatorArmorBuff =

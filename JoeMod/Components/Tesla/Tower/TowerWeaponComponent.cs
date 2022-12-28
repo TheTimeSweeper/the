@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using RoR2;
-using JoeMod;
+using TeslaTrooper;
 //todo DRY
 public class TowerWeaponComponent : MonoBehaviour {
 

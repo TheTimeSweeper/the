@@ -4,7 +4,7 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using JoeMod;
+using TeslaTrooper;
 using System;
 
 namespace ModdedEntityStates.TeslaTrooper.Tower {

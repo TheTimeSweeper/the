@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class nopejs : MonoBehaviour
-{
-    [SerializeField, Range(-1,1)]
-    private float x;
-    [SerializeField, Range(-1, 1)]
-    private float y = 1;
-    [SerializeField, Range(-1, 1)]
-    private float z;
 
-    [SerializeField]
-    private float mult = 10; 
+namespace FacelessJoe {
+    public class nopejs : MonoBehaviour {
+        [SerializeField]
+        private Vector3 rotation = new Vector3(0, 1, 0);
 
-    void Update()
-    {
-        transform.Rotate(new Vector3(x, y, z) * mult * Time.deltaTime);
+        void FixedUpdate() {
+            transform.Rotate(rotation);
+        }
     }
 }

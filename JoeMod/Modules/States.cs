@@ -1,5 +1,4 @@
-﻿using ModdedEntityStates.Joe;
-using ModdedEntityStates.BaseStates;
+﻿using ModdedEntityStates.BaseStates;
 using System.Collections.Generic;
 using System;
 using ModdedEntityStates;
@@ -12,22 +11,6 @@ namespace Modules
     internal static class States
     {
         public static void RegisterStates() {
-            #region joe
-            //prim
-            Content.AddEntityState(typeof(JoeMain));
-
-            Content.AddEntityState(typeof(Primary1Swing));
-            Content.AddEntityState(typeof(Primary1JumpSwingFall));
-            Content.AddEntityState(typeof(Primary1JumpSwingLand));
-
-            Content.AddEntityState(typeof(PrimaryStupidSwing));
-
-            Content.AddEntityState(typeof(ThrowBoom));
-            Content.AddEntityState(typeof(ThroBoomButCoolerQuestionMaark));
-
-            //sec
-            Content.AddEntityState(typeof(Secondary1Fireball));
-            #endregion
 
             Content.AddEntityState(typeof(WindDownState));
             
@@ -79,7 +62,7 @@ namespace Modules
             #endregion tesla tower
 
             #region desolator
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
                 Content.AddEntityState(typeof(DesolatorMain));
 
                 Content.AddEntityState(typeof(RadBeam));

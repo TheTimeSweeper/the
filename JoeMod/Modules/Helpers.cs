@@ -65,7 +65,7 @@ internal static class Helpers {
     public static void LogVerbose(object message, bool chat = false) {
 
         if (Config.Debug && verbose) {
-            FacelessJoePlugin.Log.LogMessage(message);
+            TeslaTrooperPlugin.Log.LogMessage(message);
 
             if (chat) {
                 RoR2.Chat.AddMessage(message.ToString());
@@ -76,7 +76,7 @@ internal static class Helpers {
     public static void LogWarning(object message, bool chat = false) {
 
         if (Config.Debug) {
-            FacelessJoePlugin.Log.LogWarning(message);
+            TeslaTrooperPlugin.Log.LogWarning(message);
 
             if (chat) {
                 RoR2.Chat.AddMessage(message.ToString());

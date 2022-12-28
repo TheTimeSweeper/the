@@ -19,7 +19,6 @@ namespace Modules
 
             AddProjectile(bombPrefab);
             //todo joe
-            AddProjectile(Assets.JoeFireball);
             AddProjectile(totallyNewBombPrefab);
         }
 
@@ -27,28 +26,6 @@ namespace Modules
         {
             Modules.Content.AddProjectilePrefab(projectileToAdd);
         }
-
-        //todo plague knight wew lad
-        private static void CreateTotallyOriginalBomb() {
-
-            totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb");
-
-            ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
-            InitializeImpactExplosion(bombImpactExplosion, true);
-
-            bombImpactExplosion.blastRadius = 16f;
-            bombImpactExplosion.destroyOnEnemy = true;
-            bombImpactExplosion.lifetime = 12f;
-            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            bombImpactExplosion.timerAfterImpact = true;
-            bombImpactExplosion.lifetimeAfterImpact = 0.1f;
-
-            ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
-            bombController.startSound = "";
-        }
-
 
         #region henrybomb
 

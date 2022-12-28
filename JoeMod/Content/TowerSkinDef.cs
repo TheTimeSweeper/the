@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace JoeMod {
+namespace TeslaTrooper {
     public class TowerSkinDef : SkinDef {
         public ModdedLightningType ZapLightningType = ModdedLightningType.Loader;
     }

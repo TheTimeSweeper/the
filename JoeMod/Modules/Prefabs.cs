@@ -392,7 +392,7 @@ namespace Modules {
                 hitboxTransforms[i] = childLocator.FindChild(hitboxChildNames[i]);
 
                 if (hitboxTransforms[i] == null) {
-                    FacelessJoePlugin.Log.LogError("missing hitbox for " + hitboxChildNames[i]);
+                    TeslaTrooperPlugin.Log.LogError("missing hitbox for " + hitboxChildNames[i]);
                 }
             }
             SetupHitbox(modelPrefab, groupName, hitboxTransforms);

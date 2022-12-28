@@ -9,7 +9,7 @@ using ModdedEntityStates.TeslaTrooper;
 using Modules.Characters;
 using R2API;
 using System.Runtime.CompilerServices;
-using JoeMod;
+using TeslaTrooper;
 using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using Modules.Achievements;
@@ -24,7 +24,7 @@ namespace Modules.Survivors {
 
         public override string bodyName => "TeslaTrooper";
 
-        public const string TESLA_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_";
+        public const string TESLA_PREFIX = TeslaTrooperPlugin.DEV_PREFIX + "_TESLA_BODY_";
 
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => TESLA_PREFIX;
@@ -32,7 +32,7 @@ namespace Modules.Survivors {
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             bodyName = "TeslaTrooperBody",
             bodyNameToken = TESLA_PREFIX + "NAME",
-            subtitleNameToken = FacelessJoePlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
+            subtitleNameToken = TeslaTrooperPlugin.DEV_PREFIX + "_TESLA_BODY_SUBTITLE",
             sortPosition = 68,
 
             characterPortrait = Modules.Assets.LoadCharacterIcon(Modules.Config.RA2Icon ? "texIconTeslaTrooper2" : "texIconTeslaTrooper"),
@@ -403,7 +403,7 @@ namespace Modules.Survivors {
         private void InitializeRecolorSkills() {
 
             if (bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors == null) {
-                FacelessJoePlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+                TeslaTrooperPlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
                 return;
             }
 
@@ -608,7 +608,7 @@ namespace Modules.Survivors {
 
 
             if (bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors == null) {
-                FacelessJoePlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+                TeslaTrooperPlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
             } else {
                 On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
             }

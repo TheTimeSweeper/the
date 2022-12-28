@@ -2,7 +2,7 @@
 using RoR2.Orbs;
 using UnityEngine;
 
-namespace JoeMod {
+namespace TeslaTrooper {
     public class VisualOrbEffect : OrbEffect {
 
 		// Token: 0x060040EB RID: 16619 RVA: 0x0010CA38 File Offset: 0x0010AC38

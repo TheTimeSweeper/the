@@ -1,7 +1,7 @@
 REM original version https://github.com/risk-of-thunder/R2Wiki/wiki/Networking-with-Weaver:-The-Unity-Way
 REM open this in vs it'll be so much nicer
 
-set TargetFileName=JoeMod.dll
+set TargetFileName=TeslaTrooperMod.dll
 set TargetDir=bin\Debug\netstandard2.0
 
 REM robocopy to our weaver folder. idk what the fuck robocopy does but we leave one there for storage

@@ -1,4 +1,4 @@
-﻿using JoeMod;
+﻿using TeslaTrooper;
 using RoR2;
 using RoR2.Orbs;
 using System.Collections.Generic;

@@ -31,7 +31,7 @@ namespace Modules
         public static bool DesolatorForceUnlock;
 
         public static void ReadConfig() {
-            Debug = FacelessJoePlugin.instance.Config.Bind(
+            Debug = TeslaTrooperPlugin.instance.Config.Bind(
                 "0. Debug",
                 "Debug Logs",
                 false,
@@ -39,37 +39,37 @@ namespace Modules
 
             string sectionGeneral = "1. General";
 
-            NewColor = FacelessJoePlugin.instance.Config.Bind(
+            NewColor = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionGeneral,
                 "New Color (s?)",
                 false,
                 "add black for the wife").Value;
 
-            Cursed = FacelessJoePlugin.instance.Config.Bind(
+            Cursed = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionGeneral,
                 "Cursed",
                 false,
                 "Enables extra/wip content\nyes there's a fucking minecraft skin").Value;
 
-            restKeybind = FacelessJoePlugin.instance.Config.Bind(
+            restKeybind = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionGeneral,
                 "Rest Key",
                 new KeyboardShortcut(KeyCode.Alpha1),
                 "key to play Rest emote");
 
-            voiceKey = FacelessJoePlugin.instance.Config.Bind(
+            voiceKey = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionGeneral,
                 "Voice Line Key",
                 new KeyboardShortcut(KeyCode.CapsLock),
                 "key to play voice lines from Red Alert 2");
 
-            VoiceInLobby = FacelessJoePlugin.instance.Config.Bind(
+            VoiceInLobby = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionGeneral,
                 "Voice Line In Lobby",
                 false,
                 "For the Red Alert 2 fans out there");
 
-            RA2Icon = FacelessJoePlugin.instance.Config.Bind(
+            RA2Icon = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionGeneral,
                 "red alert 2 icon",
                 false,
@@ -77,7 +77,7 @@ namespace Modules
 
             string sectionTeslaTrooper = "2. Tesla Trooper";
 
-            TowerItemDisplays = FacelessJoePlugin.instance.Config.Bind(
+            TowerItemDisplays = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionTeslaTrooper,
                 "Tower Item Displays",
                 true,
@@ -91,13 +91,13 @@ namespace Modules
             //    "Hurtbox: reticle will be on the specific hurtbox you're targeting\n" +
             //    "Distance on m1 is still based on hurtbox, does not change gameplay.");
 
-            TowerTargeting = FacelessJoePlugin.instance.Config.Bind(
+            TowerTargeting = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionTeslaTrooper,
                 "Tower Targets Reticle",
                 false,
                 "if false, tower simply targets nearby. If true, tower targets the enemy you're currently targeting.\nWould appreciate feedback on how this feels");
 
-            LysateLimit = FacelessJoePlugin.instance.Config.Bind(
+            LysateLimit = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionTeslaTrooper,
                 "Lysate Cell Additional Tower Limit",
                 1,
@@ -114,7 +114,7 @@ namespace Modules
                 //0.0f,
                 //1.0f);
 
-            UncappedUtility = FacelessJoePlugin.instance.Config.Bind(
+            UncappedUtility = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionTeslaTrooper,
                 "Uncapped utility damage",
                 false,
@@ -122,7 +122,7 @@ namespace Modules
 
             string sectionDesolator = "3. Desolator";
 
-            FacelessJoePlugin.Desolator = Modules.Config.CharacterEnableConfig("Desolator", true, "", sectionDesolator).Value;
+            TeslaTrooperPlugin.Desolator = Modules.Config.CharacterEnableConfig("Desolator", true, "", sectionDesolator).Value;
 
             //DesolatorForceUnlock = FacelessJoePlugin.instance.Config.Bind(
             //    sectionDesolator,
@@ -146,7 +146,7 @@ namespace Modules
         // this helper automatically makes config entries for disabling survivors
         public static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "", string section = "General")
         {
-            return FacelessJoePlugin.instance.Config.Bind<bool>(section,
+            return TeslaTrooperPlugin.instance.Config.Bind<bool>(section,
                                                                 "Enable "+ characterName,
                                                                 enabledDefault,
                                                                 !string.IsNullOrEmpty(description) ? description : "Set to false to disable this character");
@@ -154,7 +154,7 @@ namespace Modules
 
         public static ConfigEntry<bool> EnemyEnableConfig(string characterName)
         {
-            return FacelessJoePlugin.instance.Config.Bind<bool>(new ConfigDefinition(characterName, "Enabled"), true, new ConfigDescription("Set to false to disable this enemy"));
+            return TeslaTrooperPlugin.instance.Config.Bind<bool>(new ConfigDefinition(characterName, "Enabled"), true, new ConfigDescription("Set to false to disable this enemy"));
         }
     }
 }

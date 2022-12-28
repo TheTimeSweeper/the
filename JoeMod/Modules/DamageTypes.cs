@@ -30,7 +30,7 @@ namespace Modules {
 
             Conductive = DamageAPI.ReserveDamageType();
             //ApplyBlinkCooldown = DamageAPI.ReserveDamageType();
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
                 DesolatorArmorShred = DamageAPI.ReserveDamageType();
                 DesolatorDot = DamageAPI.ReserveDamageType();
                 DesolatorDot2 = DamageAPI.ReserveDamageType();

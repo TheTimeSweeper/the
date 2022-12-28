@@ -57,6 +57,7 @@ Currently Supported:
 - English
 - Ukrainian - by Damglador
 - Spanish - by Juhnter
+- Russian - by Nikto0o
 
 ## Future Plans (that I may or may not get to)
 - Alt skills

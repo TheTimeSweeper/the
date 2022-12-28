@@ -33,7 +33,7 @@ public class EditorAddRagdoll {
             return;
         }
 
-        CapsuleCollider collider = bone.gameObject.AddComponent<CapsuleCollider>();
+        CapsuleCollider collider = Undo.AddComponent<CapsuleCollider>(bone.gameObject);
         Undo.RegisterCreatedObjectUndo(collider, "getting boned");
 
         collider.radius = 0.1f;
@@ -55,7 +55,7 @@ public class EditorAddRagdoll {
             return;
         }
 
-        Rigidbody rig = bone.gameObject.AddComponent<Rigidbody>();
+        Rigidbody rig = Undo.AddComponent<Rigidbody>(bone.gameObject);
         Undo.RegisterCreatedObjectUndo(rig, "getting boned");
 
         rig.isKinematic = true;
@@ -67,10 +67,10 @@ public class EditorAddRagdoll {
             Debug.Log($"{bone.name} already has CharacterJoint. aborting", bone);
             return;
         }
-        CharacterJoint joint = bone.gameObject.AddComponent<CharacterJoint>();
+        CharacterJoint joint = Undo.AddComponent<CharacterJoint>(bone.gameObject);
         Undo.RegisterCreatedObjectUndo(joint, "getting boned");
 
-        joint.connectedBody = joint.transform.parent.GetComponent<Rigidbody>();
+        joint.connectedBody = joint.transform.parent.GetComponentInParent<Rigidbody>();
 
         if(joint.connectedBody == null) {
             Debug.Log($"Didn't find connectedbody for {joint}.\nAdd your connectedbody, or remove the CharacterJoint component if it is a root bone.", joint);

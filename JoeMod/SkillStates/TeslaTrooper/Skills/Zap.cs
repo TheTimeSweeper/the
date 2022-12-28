@@ -1,4 +1,4 @@
-﻿using JoeMod;
+﻿using TeslaTrooper;
 using EntityStates;
 using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
 using R2API;

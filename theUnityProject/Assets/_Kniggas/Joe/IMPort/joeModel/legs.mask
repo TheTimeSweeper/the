@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: legs
+  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: _-0 bodFrnt
+    m_Weight: 0
+  - m_Path: 3-1 bicep001
+    m_Weight: 0
+  - m_Path: 3-1 bicep001/gauntlet001
+    m_Weight: 0
+  - m_Path: Char1_pelivs
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2/Char1_LLeg_Ankle
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2/Char1_LLeg_Ankle/Char1_LLeg_Digit_1
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2/Char1_LLeg_Ankle/Char1_LLeg_Digit_1/Char1_LLeg_Digit_2
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_LLeg_thigh/2-2 ganon patella
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_Spine_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_thumb_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_thumb_1/Char1_LArm_thumb_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_thumb_1/Char1_LArm_thumb_2/Char1_LArm_thumb_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_index_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_index_1/Char1_LArm_index_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_index_1/Char1_LArm_index_2/Char1_LArm_index_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1/Char1_LArm_middle_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1/Char1_LArm_middle_2/Char1_LArm_middle_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+      1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+      1/Char1_LArm_middle_2 1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+      1/Char1_LArm_middle_2 1/Char1_LArm_middle_3 1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_pinky_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_pinky_1/Char1_LArm_pinky_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_pinky_1/Char1_LArm_pinky_2/Char1_LArm_pinky_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002/bled001
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002/cres
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002/hendl002
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/gauntlet002
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3/Char1_Neck_4
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3/Char1_Neck_4/Char1_Neck_5
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3/Char1_Neck_4/Char1_Neck_5/Char1_Head
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_thumb_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_thumb_1/Char1_RArm_thumb_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_thumb_1/Char1_RArm_thumb_2/Char1_RArm_thumb_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_index_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_index_1/Char1_RArm_index_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_index_1/Char1_RArm_index_2/Char1_RArm_index_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1/Char1_RArm_middle_2
+      1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1/Char1_RArm_middle_2
+      1/Char1_RArm_middle_3 1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+      1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+      1/Char1_RArm_middle_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+      1/Char1_RArm_middle_2/Char1_RArm_middle_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_pinky_1
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_pinky_1/Char1_RArm_pinky_2
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_pinky_1/Char1_RArm_pinky_2/Char1_RArm_pinky_3
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/gauntlet003
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/1-0-2
+      sternum0101
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_LLeg_UpVectorNode
+    m_Weight: 1
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2/Char1_RLeg_Ankle
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2/Char1_RLeg_Ankle/Char1_RLeg_Digit_1
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2/Char1_RLeg_Ankle/Char1_RLeg_Digit_1/Char1_RLeg_Digit_2
+    m_Weight: 0
+  - m_Path: Char1_pelivs/Char1_RLeg_thigh/2-2 ganon patel
+    m_Weight: 0
+  - m_Path: 3-1 bicep
+    m_Weight: 0
+  - m_Path: 3-1 bicep/gauntlet
+    m_Weight: 0
+  - m_Path: 2-1 sheik legplate001
+    m_Weight: 0
+  - m_Path: 2-1 sheik legplate001/2-2 ganon knee001
+    m_Weight: 0
+  - m_Path: 2-1 sheik legplate001/2-3 volga boot001
+    m_Weight: 0
+  - m_Path: 2-1 sheik legplate
+    m_Weight: 0
+  - m_Path: 2-1 sheik legplate/2-2 ganon knee
+    m_Weight: 0
+  - m_Path: 2-1 sheik legplate/2-3 volga boot
+    m_Weight: 0
+  - m_Path: 1-0-1  under
+    m_Weight: 0

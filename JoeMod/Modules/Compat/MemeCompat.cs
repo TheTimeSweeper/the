@@ -13,7 +13,7 @@ namespace Modules {
             EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele, true);
             //skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
 
-            if (FacelessJoePlugin.Desolator) {
+            if (TeslaTrooperPlugin.Desolator) {
 
                 GameObject skele2 = Assets.LoadAsset<GameObject>("Desolator_meme");
                 if (skele2) {

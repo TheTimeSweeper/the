@@ -3,7 +3,7 @@ using System;
 using Modules.Characters;
 using R2API;
 using UnityEngine;
-using JoeMod;
+using TeslaTrooper;
 using ModdedEntityStates.TeslaTrooper.Tower;
 
 namespace Modules.Survivors {
@@ -11,8 +11,8 @@ namespace Modules.Survivors {
 
         public override string bodyName => "TeslaTowerScepter";
 
-        public const string TOWER_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_";
-        public const string TOWER_SCEPTER_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_TESLA_TOWER_SCEPTER_";
+        public const string TOWER_PREFIX = TeslaTrooperPlugin.DEV_PREFIX + "_TESLA_TOWER_BODY_";
+        public const string TOWER_SCEPTER_PREFIX = TeslaTrooperPlugin.DEV_PREFIX + "_TESLA_TOWER_SCEPTER_";
 
         public override BodyInfo bodyInfo { get; set; }
 

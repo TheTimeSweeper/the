@@ -45,8 +45,6 @@ namespace AliemMod.Content.Survivors {
 
             cameraParamsDepth = -7,
             cameraParamsVerticalOffset = 0.6f,
-
-
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[]

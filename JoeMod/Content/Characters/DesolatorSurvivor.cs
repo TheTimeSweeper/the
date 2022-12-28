@@ -9,7 +9,7 @@ using ModdedEntityStates.TeslaTrooper;
 using Modules.Characters;
 using R2API;
 using System.Runtime.CompilerServices;
-using JoeMod;
+using TeslaTrooper;
 using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using RoR2.Projectile;
@@ -20,7 +20,7 @@ namespace Modules.Survivors {
 
         public static DesolatorSurvivor instance;
 
-        public const string DESOLATOR_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_DESOLATOR_BODY_";
+        public const string DESOLATOR_PREFIX = TeslaTrooperPlugin.DEV_PREFIX + "_DESOLATOR_BODY_";
         
         public override string survivorTokenPrefix => DESOLATOR_PREFIX;
 
@@ -385,7 +385,7 @@ namespace Modules.Survivors {
         private void InitializeRecolorSkills() {
 
             if (bodyCharacterModel.GetComponent<SkinRecolorController>().Recolors == null) {
-                FacelessJoePlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+                TeslaTrooperPlugin.Log.LogWarning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
                 return;
             }
 
