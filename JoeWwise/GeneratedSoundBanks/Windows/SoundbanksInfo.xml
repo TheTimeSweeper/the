@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="135">
+	<RootPaths>
+		<ProjectRoot>E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\</ProjectRoot>
+		<SourceFilesRoot>E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="545665445" Language="SFX" Hash="3302816447">
+			<ObjectPath>\SoundBanks\Default Work Unit\joe</ObjectPath>
+			<ShortName>joe</ShortName>
+			<Path>joe.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1074701464" Name="play_joe_fireExplosion" ObjectPath="\Events\Default Work Unit\play_joe_fireExplosion">
+					<IncludedMemoryFiles>
+						<File Id="977530294" Language="SFX">
+							<ShortName>FireExplosion7.wav</ShortName>
+							<Path>SFX\FireExplosion7_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1517931512" Name="play_joe_fireShoot" ObjectPath="\Events\Default Work Unit\play_joe_fireShoot">
+					<IncludedMemoryFiles>
+						<File Id="921082361" Language="SFX">
+							<ShortName>FireShoot1.wav</ShortName>
+							<Path>SFX\FireShoot1_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3367825303" Name="play_joe_fleshSlice" ObjectPath="\Events\Default Work Unit\play_joe_fleshSlice">
+					<IncludedMemoryFiles>
+						<File Id="81013995" Language="SFX">
+							<ShortName>fleshSlice.wav</ShortName>
+							<Path>SFX\fleshSlice_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2901043317" Name="play_joe_jerryDeath" ObjectPath="\Events\Default Work Unit\play_joe_jerryDeath">
+					<IncludedMemoryFiles>
+						<File Id="40129160" Language="SFX">
+							<ShortName>JerryDeath8.wav</ShortName>
+							<Path>SFX\JerryDeath8_3F75BDB9.wem</Path>
+						</File>
+						<File Id="155760387" Language="SFX">
+							<ShortName>JerryDeath6.wav</ShortName>
+							<Path>SFX\JerryDeath6_3F75BDB9.wem</Path>
+						</File>
+						<File Id="369113512" Language="SFX">
+							<ShortName>JerryDeath2.wav</ShortName>
+							<Path>SFX\JerryDeath2_3F75BDB9.wem</Path>
+						</File>
+						<File Id="374162746" Language="SFX">
+							<ShortName>JerryDeath4.wav</ShortName>
+							<Path>SFX\JerryDeath4_3F75BDB9.wem</Path>
+						</File>
+						<File Id="473964815" Language="SFX">
+							<ShortName>JerryDeath9.wav</ShortName>
+							<Path>SFX\JerryDeath9_3F75BDB9.wem</Path>
+						</File>
+						<File Id="567174335" Language="SFX">
+							<ShortName>JerryDeath7.wav</ShortName>
+							<Path>SFX\JerryDeath7_3F75BDB9.wem</Path>
+						</File>
+						<File Id="577083552" Language="SFX">
+							<ShortName>JerryDeath3.wav</ShortName>
+							<Path>SFX\JerryDeath3_3F75BDB9.wem</Path>
+						</File>
+						<File Id="736698287" Language="SFX">
+							<ShortName>JerryDeath10.wav</ShortName>
+							<Path>SFX\JerryDeath10_3F75BDB9.wem</Path>
+						</File>
+						<File Id="768397448" Language="SFX">
+							<ShortName>JerryDeath5.wav</ShortName>
+							<Path>SFX\JerryDeath5_3F75BDB9.wem</Path>
+						</File>
+						<File Id="1064628591" Language="SFX">
+							<ShortName>JerryDeath1.wav</ShortName>
+							<Path>SFX\JerryDeath1_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="902618102" Name="play_joe_priAtt2tower" ObjectPath="\Events\Default Work Unit\play_joe_priAtt2tower">
+					<IncludedMemoryFiles>
+						<File Id="533285121" Language="SFX">
+							<ShortName>_priAtt2tower.wav</ShortName>
+							<Path>SFX\_priAtt2tower_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3216733749" Name="play_joe_whoosh" ObjectPath="\Events\Default Work Unit\play_joe_whoosh">
+					<IncludedMemoryFiles>
+						<File Id="120560998" Language="SFX">
+							<ShortName>whoosh3.wav</ShortName>
+							<Path>SFX\whoosh3_3F75BDB9.wem</Path>
+						</File>
+						<File Id="188392812" Language="SFX">
+							<ShortName>whoosh2.wav</ShortName>
+							<Path>SFX\whoosh2_3F75BDB9.wem</Path>
+						</File>
+						<File Id="218245423" Language="SFX">
+							<ShortName>whoosh5.wav</ShortName>
+							<Path>SFX\whoosh5_3F75BDB9.wem</Path>
+						</File>
+						<File Id="700223451" Language="SFX">
+							<ShortName>whoosh1.wav</ShortName>
+							<Path>SFX\whoosh1_3F75BDB9.wem</Path>
+						</File>
+						<File Id="742685232" Language="SFX">
+							<ShortName>whoosh4.wav</ShortName>
+							<Path>SFX\whoosh4_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX" Hash="4204904655">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

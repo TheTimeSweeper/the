@@ -28,6 +28,8 @@ namespace Modules {
             Content.AddEntityState(typeof(Utility1Dash));
             Content.AddEntityState(typeof(Utility1ChargeMeleeDash));
             Content.AddEntityState(typeof(Utility1MeleeDashAttack));
+
+            Content.AddEntityState(typeof(Special1Tenticles));
             #endregion
         }
     }

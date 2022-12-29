@@ -1,397 +1,1178 @@
 fileFormatVersion: 2
 guid: d24300884adefc943a25d5c5f8edec51
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: 1-0-1  under
-    100002: 1-0-2 sternum0101
-    100004: 2-1 sheik legplate
-    100006: 2-1 sheik legplate001
-    100008: 2-2 ganon knee
-    100010: 2-2 ganon knee001
-    100012: 2-2 ganon patel
-    100014: 2-2 ganon patella
-    100016: 2-3 volga boot
-    100018: 2-3 volga boot001
-    100020: 3-1 bicep
-    100022: 3-1 bicep001
-    100024: _-0 bodFrnt
-    100026: bled001
-    100028: Char1_Chest
-    100030: Char1_Head
-    100032: Char1_LArm_bicep
-    100034: Char1_LArm_Collarbone
-    100036: Char1_LArm_forearm_
-    100038: Char1_LArm_index_1
-    100040: Char1_LArm_index_2
-    100042: Char1_LArm_index_3
-    100044: Char1_LArm_middle_1
-    100046: Char1_LArm_middle_1 1
-    100048: Char1_LArm_middle_2
-    100050: Char1_LArm_middle_2 1
-    100052: Char1_LArm_middle_3
-    100054: Char1_LArm_middle_3 1
-    100056: Char1_LArm_Palm
-    100058: Char1_LArm_pinky_1
-    100060: Char1_LArm_pinky_2
-    100062: Char1_LArm_pinky_3
-    100064: Char1_LArm_thumb_1
-    100066: Char1_LArm_thumb_2
-    100068: Char1_LArm_thumb_3
-    100070: Char1_LLeg_Ankle
-    100072: Char1_LLeg_Digit_1
-    100074: Char1_LLeg_Digit_2
-    100076: Char1_LLeg_shin_1
-    100078: Char1_LLeg_shin_2
-    100080: Char1_LLeg_thigh
-    100082: Char1_LLeg_UpVectorNode
-    100084: Char1_Neck_1
-    100086: Char1_Neck_2
-    100088: Char1_Neck_3
-    100090: Char1_Neck_4
-    100092: Char1_Neck_5
-    100094: Char1_pelivs
-    100096: Char1_RArm_bicep
-    100098: Char1_RArm_Collarbone
-    100100: Char1_RArm_forearm_1
-    100102: Char1_RArm_forearm_2
-    100104: Char1_RArm_forearm_3
-    100106: Char1_RArm_index_1
-    100108: Char1_RArm_index_2
-    100110: Char1_RArm_index_3
-    100112: Char1_RArm_middle_1
-    100114: Char1_RArm_middle_1 1
-    100116: Char1_RArm_middle_2
-    100118: Char1_RArm_middle_2 1
-    100120: Char1_RArm_middle_3
-    100122: Char1_RArm_middle_3 1
-    100124: Char1_RArm_Palm
-    100126: Char1_RArm_pinky_1
-    100128: Char1_RArm_pinky_2
-    100130: Char1_RArm_pinky_3
-    100132: Char1_RArm_thumb_1
-    100134: Char1_RArm_thumb_2
-    100136: Char1_RArm_thumb_3
-    100138: Char1_RLeg_Ankle
-    100140: Char1_RLeg_Digit_1
-    100142: Char1_RLeg_Digit_2
-    100144: Char1_RLeg_shin_1
-    100146: Char1_RLeg_shin_2
-    100148: Char1_RLeg_thigh
-    100150: Char1_Spine_1
-    100152: Char1_Spine_2
-    100154: Char1_Spine_3
-    100156: Char1_Spine_4
-    100158: Char1_Spine_5
-    100160: cres
-    100162: //RootNode
-    100164: gauntlet
-    100166: gauntlet001
-    100168: gauntlet002
-    100170: gauntlet003
-    100172: hendl002
-    100174: hendl004002
-    400000: 1-0-1  under
-    400002: 1-0-2 sternum0101
-    400004: 2-1 sheik legplate
-    400006: 2-1 sheik legplate001
-    400008: 2-2 ganon knee
-    400010: 2-2 ganon knee001
-    400012: 2-2 ganon patel
-    400014: 2-2 ganon patella
-    400016: 2-3 volga boot
-    400018: 2-3 volga boot001
-    400020: 3-1 bicep
-    400022: 3-1 bicep001
-    400024: _-0 bodFrnt
-    400026: bled001
-    400028: Char1_Chest
-    400030: Char1_Head
-    400032: Char1_LArm_bicep
-    400034: Char1_LArm_Collarbone
-    400036: Char1_LArm_forearm_
-    400038: Char1_LArm_index_1
-    400040: Char1_LArm_index_2
-    400042: Char1_LArm_index_3
-    400044: Char1_LArm_middle_1
-    400046: Char1_LArm_middle_1 1
-    400048: Char1_LArm_middle_2
-    400050: Char1_LArm_middle_2 1
-    400052: Char1_LArm_middle_3
-    400054: Char1_LArm_middle_3 1
-    400056: Char1_LArm_Palm
-    400058: Char1_LArm_pinky_1
-    400060: Char1_LArm_pinky_2
-    400062: Char1_LArm_pinky_3
-    400064: Char1_LArm_thumb_1
-    400066: Char1_LArm_thumb_2
-    400068: Char1_LArm_thumb_3
-    400070: Char1_LLeg_Ankle
-    400072: Char1_LLeg_Digit_1
-    400074: Char1_LLeg_Digit_2
-    400076: Char1_LLeg_shin_1
-    400078: Char1_LLeg_shin_2
-    400080: Char1_LLeg_thigh
-    400082: Char1_LLeg_UpVectorNode
-    400084: Char1_Neck_1
-    400086: Char1_Neck_2
-    400088: Char1_Neck_3
-    400090: Char1_Neck_4
-    400092: Char1_Neck_5
-    400094: Char1_pelivs
-    400096: Char1_RArm_bicep
-    400098: Char1_RArm_Collarbone
-    400100: Char1_RArm_forearm_1
-    400102: Char1_RArm_forearm_2
-    400104: Char1_RArm_forearm_3
-    400106: Char1_RArm_index_1
-    400108: Char1_RArm_index_2
-    400110: Char1_RArm_index_3
-    400112: Char1_RArm_middle_1
-    400114: Char1_RArm_middle_1 1
-    400116: Char1_RArm_middle_2
-    400118: Char1_RArm_middle_2 1
-    400120: Char1_RArm_middle_3
-    400122: Char1_RArm_middle_3 1
-    400124: Char1_RArm_Palm
-    400126: Char1_RArm_pinky_1
-    400128: Char1_RArm_pinky_2
-    400130: Char1_RArm_pinky_3
-    400132: Char1_RArm_thumb_1
-    400134: Char1_RArm_thumb_2
-    400136: Char1_RArm_thumb_3
-    400138: Char1_RLeg_Ankle
-    400140: Char1_RLeg_Digit_1
-    400142: Char1_RLeg_Digit_2
-    400144: Char1_RLeg_shin_1
-    400146: Char1_RLeg_shin_2
-    400148: Char1_RLeg_thigh
-    400150: Char1_Spine_1
-    400152: Char1_Spine_2
-    400154: Char1_Spine_3
-    400156: Char1_Spine_4
-    400158: Char1_Spine_5
-    400160: cres
-    400162: //RootNode
-    400164: gauntlet
-    400166: gauntlet001
-    400168: gauntlet002
-    400170: gauntlet003
-    400172: hendl002
-    400174: hendl004002
-    2300000: 1-0-2 sternum0101
-    2300002: 2-2 ganon patel
-    2300004: 2-2 ganon patella
-    2300006: bled001
-    2300008: Char1_LArm_index_1
-    2300010: Char1_LArm_index_2
-    2300012: Char1_LArm_index_3
-    2300014: Char1_LArm_middle_1
-    2300016: Char1_LArm_middle_1 1
-    2300018: Char1_LArm_middle_2
-    2300020: Char1_LArm_middle_2 1
-    2300022: Char1_LArm_middle_3
-    2300024: Char1_LArm_middle_3 1
-    2300026: Char1_LArm_pinky_1
-    2300028: Char1_LArm_pinky_2
-    2300030: Char1_LArm_pinky_3
-    2300032: Char1_LArm_thumb_1
-    2300034: Char1_LArm_thumb_2
-    2300036: Char1_LArm_thumb_3
-    2300038: Char1_LLeg_Digit_1
-    2300040: Char1_LLeg_Digit_2
-    2300042: Char1_RArm_index_1
-    2300044: Char1_RArm_index_2
-    2300046: Char1_RArm_index_3
-    2300048: Char1_RArm_middle_1
-    2300050: Char1_RArm_middle_1 1
-    2300052: Char1_RArm_middle_2
-    2300054: Char1_RArm_middle_2 1
-    2300056: Char1_RArm_middle_3
-    2300058: Char1_RArm_middle_3 1
-    2300060: Char1_RArm_pinky_1
-    2300062: Char1_RArm_pinky_2
-    2300064: Char1_RArm_pinky_3
-    2300066: Char1_RArm_thumb_1
-    2300068: Char1_RArm_thumb_2
-    2300070: Char1_RArm_thumb_3
-    2300072: Char1_RLeg_Digit_1
-    2300074: Char1_RLeg_Digit_2
-    2300076: cres
-    2300078: gauntlet002
-    2300080: gauntlet003
-    2300082: hendl002
-    2300084: 1-0-1  under
-    2300086: 2-1 sheik legplate
-    2300088: 2-1 sheik legplate001
-    2300090: 2-2 ganon knee
-    2300092: 2-2 ganon knee001
-    2300094: 2-3 volga boot
-    2300096: 2-3 volga boot001
-    2300098: 3-1 bicep
-    2300100: 3-1 bicep001
-    2300102: _-0 bodFrnt
-    2300104: gauntlet
-    2300106: gauntlet001
-    3300000: 1-0-2 sternum0101
-    3300002: 2-2 ganon patel
-    3300004: 2-2 ganon patella
-    3300006: bled001
-    3300008: Char1_LArm_index_1
-    3300010: Char1_LArm_index_2
-    3300012: Char1_LArm_index_3
-    3300014: Char1_LArm_middle_1
-    3300016: Char1_LArm_middle_1 1
-    3300018: Char1_LArm_middle_2
-    3300020: Char1_LArm_middle_2 1
-    3300022: Char1_LArm_middle_3
-    3300024: Char1_LArm_middle_3 1
-    3300026: Char1_LArm_pinky_1
-    3300028: Char1_LArm_pinky_2
-    3300030: Char1_LArm_pinky_3
-    3300032: Char1_LArm_thumb_1
-    3300034: Char1_LArm_thumb_2
-    3300036: Char1_LArm_thumb_3
-    3300038: Char1_LLeg_Digit_1
-    3300040: Char1_LLeg_Digit_2
-    3300042: Char1_RArm_index_1
-    3300044: Char1_RArm_index_2
-    3300046: Char1_RArm_index_3
-    3300048: Char1_RArm_middle_1
-    3300050: Char1_RArm_middle_1 1
-    3300052: Char1_RArm_middle_2
-    3300054: Char1_RArm_middle_2 1
-    3300056: Char1_RArm_middle_3
-    3300058: Char1_RArm_middle_3 1
-    3300060: Char1_RArm_pinky_1
-    3300062: Char1_RArm_pinky_2
-    3300064: Char1_RArm_pinky_3
-    3300066: Char1_RArm_thumb_1
-    3300068: Char1_RArm_thumb_2
-    3300070: Char1_RArm_thumb_3
-    3300072: Char1_RLeg_Digit_1
-    3300074: Char1_RLeg_Digit_2
-    3300076: cres
-    3300078: gauntlet002
-    3300080: gauntlet003
-    3300082: hendl002
-    3300084: 1-0-1  under
-    3300086: 2-1 sheik legplate
-    3300088: 2-1 sheik legplate001
-    3300090: 2-2 ganon knee
-    3300092: 2-2 ganon knee001
-    3300094: 2-3 volga boot
-    3300096: 2-3 volga boot001
-    3300098: 3-1 bicep
-    3300100: 3-1 bicep001
-    3300102: _-0 bodFrnt
-    3300104: gauntlet
-    3300106: gauntlet001
-    4300000: _-0 bodFrnt
-    4300002: 3-1 bicep001
-    4300004: gauntlet001
-    4300006: Char1_LLeg_Digit_1
-    4300008: Char1_LLeg_Digit_2
-    4300010: 2-2 ganon patella
-    4300012: Char1_LArm_thumb_1
-    4300014: Char1_LArm_thumb_2
-    4300016: Char1_LArm_thumb_3
-    4300018: Char1_LArm_index_1
-    4300020: Char1_LArm_index_2
-    4300022: Char1_LArm_index_3
-    4300024: Char1_LArm_middle_1
-    4300026: Char1_LArm_middle_2
-    4300028: Char1_LArm_middle_3
-    4300030: Char1_LArm_middle_1
-    4300032: Char1_LArm_middle_2
-    4300034: Char1_LArm_middle_3
-    4300036: Char1_LArm_pinky_1
-    4300038: Char1_LArm_pinky_2
-    4300040: Char1_LArm_pinky_3
-    4300042: bled001
-    4300044: cres
-    4300046: hendl002
-    4300048: gauntlet002
-    4300050: Char1_RArm_thumb_1
-    4300052: Char1_RArm_thumb_2
-    4300054: Char1_RArm_thumb_3
-    4300056: Char1_RArm_index_1
-    4300058: Char1_RArm_index_2
-    4300060: Char1_RArm_index_3
-    4300062: Char1_RArm_middle_1
-    4300064: Char1_RArm_middle_2
-    4300066: Char1_RArm_middle_3
-    4300068: Char1_RArm_middle_1
-    4300070: Char1_RArm_middle_2
-    4300072: Char1_RArm_middle_3
-    4300074: Char1_RArm_pinky_1
-    4300076: Char1_RArm_pinky_2
-    4300078: Char1_RArm_pinky_3
-    4300080: gauntlet003
-    4300082: 1-0-2 sternum0101
-    4300084: Char1_RLeg_Digit_1
-    4300086: Char1_RLeg_Digit_2
-    4300088: 2-2 ganon patel
-    4300090: 3-1 bicep
-    4300092: gauntlet
-    4300094: 2-1 sheik legplate001
-    4300096: 2-2 ganon knee001
-    4300098: 2-3 volga boot001
-    4300100: 2-1 sheik legplate
-    4300102: 2-2 ganon knee
-    4300104: 2-3 volga boot
-    4300106: 1-0-1  under
-    7400000: idle 2
-    7400002: run1
-    7400004: run2
-    7400006: strafe right 2
-    7400008: strafe left
-    7400010: cast 2
-    7400012: swing1 v2
-    7400014: ded 2
-    7400016: jump1 up
-    7400018: jump1 land
-    7400020: jump2 arms
-    7400022: jump2 land
-    7400024: swing2 v2
-    7400026: run fwd 2
-    7400028: run bkd 2
-    7400030: strafe right
-    7400032: strafe Left 2
-    7400034: jump1 v2
-    7400036: jump2 v2
-    7400038: Dash1 Forward_Right
-    7400040: Dash1 Forward_left
-    7400042: Dash2 right
-    7400044: Dash2 left
-    7400046: Dash0 back
-    7400048: Chrag1
-    7400050: Chrag2 akt
-    7400052: Jump1 loop
-    7400054: dash 3 forward pose
-    7400056: dash 3 right pose
-    7400058: dash 3 left pose
-    7400060: dash 3 back pose
-    7400062: jump2 Swing loop
-    7400064: jump2 Swing Land
-    7400066: jump2 swing up
-    7400068: jump2 swing land
-    7400070: Jump1 AsDescend
-    7400072: Jump1 up0
-    9500000: //RootNode
-    13700000: 1-0-1  under
-    13700002: 2-1 sheik legplate
-    13700004: 2-1 sheik legplate001
-    13700006: 2-2 ganon knee
-    13700008: 2-2 ganon knee001
-    13700010: 2-3 volga boot
-    13700012: 2-3 volga boot001
-    13700014: 3-1 bicep
-    13700016: 3-1 bicep001
-    13700018: _-0 bodFrnt
-    13700020: gauntlet
-    13700022: gauntlet001
-    2186277476908879412: ImportLogs
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: 1-0-1  under
+  - first:
+      1: 100002
+    second: 1-0-2 sternum0101
+  - first:
+      1: 100004
+    second: 2-1 sheik legplate
+  - first:
+      1: 100006
+    second: 2-1 sheik legplate001
+  - first:
+      1: 100008
+    second: 2-2 ganon knee
+  - first:
+      1: 100010
+    second: 2-2 ganon knee001
+  - first:
+      1: 100012
+    second: 2-2 ganon patel
+  - first:
+      1: 100014
+    second: 2-2 ganon patella
+  - first:
+      1: 100016
+    second: 2-3 volga boot
+  - first:
+      1: 100018
+    second: 2-3 volga boot001
+  - first:
+      1: 100020
+    second: 3-1 bicep
+  - first:
+      1: 100022
+    second: 3-1 bicep001
+  - first:
+      1: 100024
+    second: _-0 bodFrnt
+  - first:
+      1: 100026
+    second: bled001
+  - first:
+      1: 100028
+    second: Char1_Chest
+  - first:
+      1: 100030
+    second: Char1_Head
+  - first:
+      1: 100032
+    second: Char1_LArm_bicep
+  - first:
+      1: 100034
+    second: Char1_LArm_Collarbone
+  - first:
+      1: 100036
+    second: Char1_LArm_forearm_
+  - first:
+      1: 100038
+    second: Char1_LArm_index_1
+  - first:
+      1: 100040
+    second: Char1_LArm_index_2
+  - first:
+      1: 100042
+    second: Char1_LArm_index_3
+  - first:
+      1: 100044
+    second: Char1_LArm_middle_1
+  - first:
+      1: 100046
+    second: Char1_LArm_middle_1 1
+  - first:
+      1: 100048
+    second: Char1_LArm_middle_2
+  - first:
+      1: 100050
+    second: Char1_LArm_middle_2 1
+  - first:
+      1: 100052
+    second: Char1_LArm_middle_3
+  - first:
+      1: 100054
+    second: Char1_LArm_middle_3 1
+  - first:
+      1: 100056
+    second: Char1_LArm_Palm
+  - first:
+      1: 100058
+    second: Char1_LArm_pinky_1
+  - first:
+      1: 100060
+    second: Char1_LArm_pinky_2
+  - first:
+      1: 100062
+    second: Char1_LArm_pinky_3
+  - first:
+      1: 100064
+    second: Char1_LArm_thumb_1
+  - first:
+      1: 100066
+    second: Char1_LArm_thumb_2
+  - first:
+      1: 100068
+    second: Char1_LArm_thumb_3
+  - first:
+      1: 100070
+    second: Char1_LLeg_Ankle
+  - first:
+      1: 100072
+    second: Char1_LLeg_Digit_1
+  - first:
+      1: 100074
+    second: Char1_LLeg_Digit_2
+  - first:
+      1: 100076
+    second: Char1_LLeg_shin_1
+  - first:
+      1: 100078
+    second: Char1_LLeg_shin_2
+  - first:
+      1: 100080
+    second: Char1_LLeg_thigh
+  - first:
+      1: 100082
+    second: Char1_LLeg_UpVectorNode
+  - first:
+      1: 100084
+    second: Char1_Neck_1
+  - first:
+      1: 100086
+    second: Char1_Neck_2
+  - first:
+      1: 100088
+    second: Char1_Neck_3
+  - first:
+      1: 100090
+    second: Char1_Neck_4
+  - first:
+      1: 100092
+    second: Char1_Neck_5
+  - first:
+      1: 100094
+    second: Char1_pelivs
+  - first:
+      1: 100096
+    second: Char1_RArm_bicep
+  - first:
+      1: 100098
+    second: Char1_RArm_Collarbone
+  - first:
+      1: 100100
+    second: Char1_RArm_forearm_1
+  - first:
+      1: 100102
+    second: Char1_RArm_forearm_2
+  - first:
+      1: 100104
+    second: Char1_RArm_forearm_3
+  - first:
+      1: 100106
+    second: Char1_RArm_index_1
+  - first:
+      1: 100108
+    second: Char1_RArm_index_2
+  - first:
+      1: 100110
+    second: Char1_RArm_index_3
+  - first:
+      1: 100112
+    second: Char1_RArm_middle_1
+  - first:
+      1: 100114
+    second: Char1_RArm_middle_1 1
+  - first:
+      1: 100116
+    second: Char1_RArm_middle_2
+  - first:
+      1: 100118
+    second: Char1_RArm_middle_2 1
+  - first:
+      1: 100120
+    second: Char1_RArm_middle_3
+  - first:
+      1: 100122
+    second: Char1_RArm_middle_3 1
+  - first:
+      1: 100124
+    second: Char1_RArm_Palm
+  - first:
+      1: 100126
+    second: Char1_RArm_pinky_1
+  - first:
+      1: 100128
+    second: Char1_RArm_pinky_2
+  - first:
+      1: 100130
+    second: Char1_RArm_pinky_3
+  - first:
+      1: 100132
+    second: Char1_RArm_thumb_1
+  - first:
+      1: 100134
+    second: Char1_RArm_thumb_2
+  - first:
+      1: 100136
+    second: Char1_RArm_thumb_3
+  - first:
+      1: 100138
+    second: Char1_RLeg_Ankle
+  - first:
+      1: 100140
+    second: Char1_RLeg_Digit_1
+  - first:
+      1: 100142
+    second: Char1_RLeg_Digit_2
+  - first:
+      1: 100144
+    second: Char1_RLeg_shin_1
+  - first:
+      1: 100146
+    second: Char1_RLeg_shin_2
+  - first:
+      1: 100148
+    second: Char1_RLeg_thigh
+  - first:
+      1: 100150
+    second: Char1_Spine_1
+  - first:
+      1: 100152
+    second: Char1_Spine_2
+  - first:
+      1: 100154
+    second: Char1_Spine_3
+  - first:
+      1: 100156
+    second: Char1_Spine_4
+  - first:
+      1: 100158
+    second: Char1_Spine_5
+  - first:
+      1: 100160
+    second: cres
+  - first:
+      1: 100162
+    second: //RootNode
+  - first:
+      1: 100164
+    second: gauntlet
+  - first:
+      1: 100166
+    second: gauntlet001
+  - first:
+      1: 100168
+    second: gauntlet002
+  - first:
+      1: 100170
+    second: gauntlet003
+  - first:
+      1: 100172
+    second: hendl002
+  - first:
+      1: 100174
+    second: hendl004002
+  - first:
+      4: 400000
+    second: 1-0-1  under
+  - first:
+      4: 400002
+    second: 1-0-2 sternum0101
+  - first:
+      4: 400004
+    second: 2-1 sheik legplate
+  - first:
+      4: 400006
+    second: 2-1 sheik legplate001
+  - first:
+      4: 400008
+    second: 2-2 ganon knee
+  - first:
+      4: 400010
+    second: 2-2 ganon knee001
+  - first:
+      4: 400012
+    second: 2-2 ganon patel
+  - first:
+      4: 400014
+    second: 2-2 ganon patella
+  - first:
+      4: 400016
+    second: 2-3 volga boot
+  - first:
+      4: 400018
+    second: 2-3 volga boot001
+  - first:
+      4: 400020
+    second: 3-1 bicep
+  - first:
+      4: 400022
+    second: 3-1 bicep001
+  - first:
+      4: 400024
+    second: _-0 bodFrnt
+  - first:
+      4: 400026
+    second: bled001
+  - first:
+      4: 400028
+    second: Char1_Chest
+  - first:
+      4: 400030
+    second: Char1_Head
+  - first:
+      4: 400032
+    second: Char1_LArm_bicep
+  - first:
+      4: 400034
+    second: Char1_LArm_Collarbone
+  - first:
+      4: 400036
+    second: Char1_LArm_forearm_
+  - first:
+      4: 400038
+    second: Char1_LArm_index_1
+  - first:
+      4: 400040
+    second: Char1_LArm_index_2
+  - first:
+      4: 400042
+    second: Char1_LArm_index_3
+  - first:
+      4: 400044
+    second: Char1_LArm_middle_1
+  - first:
+      4: 400046
+    second: Char1_LArm_middle_1 1
+  - first:
+      4: 400048
+    second: Char1_LArm_middle_2
+  - first:
+      4: 400050
+    second: Char1_LArm_middle_2 1
+  - first:
+      4: 400052
+    second: Char1_LArm_middle_3
+  - first:
+      4: 400054
+    second: Char1_LArm_middle_3 1
+  - first:
+      4: 400056
+    second: Char1_LArm_Palm
+  - first:
+      4: 400058
+    second: Char1_LArm_pinky_1
+  - first:
+      4: 400060
+    second: Char1_LArm_pinky_2
+  - first:
+      4: 400062
+    second: Char1_LArm_pinky_3
+  - first:
+      4: 400064
+    second: Char1_LArm_thumb_1
+  - first:
+      4: 400066
+    second: Char1_LArm_thumb_2
+  - first:
+      4: 400068
+    second: Char1_LArm_thumb_3
+  - first:
+      4: 400070
+    second: Char1_LLeg_Ankle
+  - first:
+      4: 400072
+    second: Char1_LLeg_Digit_1
+  - first:
+      4: 400074
+    second: Char1_LLeg_Digit_2
+  - first:
+      4: 400076
+    second: Char1_LLeg_shin_1
+  - first:
+      4: 400078
+    second: Char1_LLeg_shin_2
+  - first:
+      4: 400080
+    second: Char1_LLeg_thigh
+  - first:
+      4: 400082
+    second: Char1_LLeg_UpVectorNode
+  - first:
+      4: 400084
+    second: Char1_Neck_1
+  - first:
+      4: 400086
+    second: Char1_Neck_2
+  - first:
+      4: 400088
+    second: Char1_Neck_3
+  - first:
+      4: 400090
+    second: Char1_Neck_4
+  - first:
+      4: 400092
+    second: Char1_Neck_5
+  - first:
+      4: 400094
+    second: Char1_pelivs
+  - first:
+      4: 400096
+    second: Char1_RArm_bicep
+  - first:
+      4: 400098
+    second: Char1_RArm_Collarbone
+  - first:
+      4: 400100
+    second: Char1_RArm_forearm_1
+  - first:
+      4: 400102
+    second: Char1_RArm_forearm_2
+  - first:
+      4: 400104
+    second: Char1_RArm_forearm_3
+  - first:
+      4: 400106
+    second: Char1_RArm_index_1
+  - first:
+      4: 400108
+    second: Char1_RArm_index_2
+  - first:
+      4: 400110
+    second: Char1_RArm_index_3
+  - first:
+      4: 400112
+    second: Char1_RArm_middle_1
+  - first:
+      4: 400114
+    second: Char1_RArm_middle_1 1
+  - first:
+      4: 400116
+    second: Char1_RArm_middle_2
+  - first:
+      4: 400118
+    second: Char1_RArm_middle_2 1
+  - first:
+      4: 400120
+    second: Char1_RArm_middle_3
+  - first:
+      4: 400122
+    second: Char1_RArm_middle_3 1
+  - first:
+      4: 400124
+    second: Char1_RArm_Palm
+  - first:
+      4: 400126
+    second: Char1_RArm_pinky_1
+  - first:
+      4: 400128
+    second: Char1_RArm_pinky_2
+  - first:
+      4: 400130
+    second: Char1_RArm_pinky_3
+  - first:
+      4: 400132
+    second: Char1_RArm_thumb_1
+  - first:
+      4: 400134
+    second: Char1_RArm_thumb_2
+  - first:
+      4: 400136
+    second: Char1_RArm_thumb_3
+  - first:
+      4: 400138
+    second: Char1_RLeg_Ankle
+  - first:
+      4: 400140
+    second: Char1_RLeg_Digit_1
+  - first:
+      4: 400142
+    second: Char1_RLeg_Digit_2
+  - first:
+      4: 400144
+    second: Char1_RLeg_shin_1
+  - first:
+      4: 400146
+    second: Char1_RLeg_shin_2
+  - first:
+      4: 400148
+    second: Char1_RLeg_thigh
+  - first:
+      4: 400150
+    second: Char1_Spine_1
+  - first:
+      4: 400152
+    second: Char1_Spine_2
+  - first:
+      4: 400154
+    second: Char1_Spine_3
+  - first:
+      4: 400156
+    second: Char1_Spine_4
+  - first:
+      4: 400158
+    second: Char1_Spine_5
+  - first:
+      4: 400160
+    second: cres
+  - first:
+      4: 400162
+    second: //RootNode
+  - first:
+      4: 400164
+    second: gauntlet
+  - first:
+      4: 400166
+    second: gauntlet001
+  - first:
+      4: 400168
+    second: gauntlet002
+  - first:
+      4: 400170
+    second: gauntlet003
+  - first:
+      4: 400172
+    second: hendl002
+  - first:
+      4: 400174
+    second: hendl004002
+  - first:
+      23: 2300000
+    second: 1-0-2 sternum0101
+  - first:
+      23: 2300002
+    second: 2-2 ganon patel
+  - first:
+      23: 2300004
+    second: 2-2 ganon patella
+  - first:
+      23: 2300006
+    second: bled001
+  - first:
+      23: 2300008
+    second: Char1_LArm_index_1
+  - first:
+      23: 2300010
+    second: Char1_LArm_index_2
+  - first:
+      23: 2300012
+    second: Char1_LArm_index_3
+  - first:
+      23: 2300014
+    second: Char1_LArm_middle_1
+  - first:
+      23: 2300016
+    second: Char1_LArm_middle_1 1
+  - first:
+      23: 2300018
+    second: Char1_LArm_middle_2
+  - first:
+      23: 2300020
+    second: Char1_LArm_middle_2 1
+  - first:
+      23: 2300022
+    second: Char1_LArm_middle_3
+  - first:
+      23: 2300024
+    second: Char1_LArm_middle_3 1
+  - first:
+      23: 2300026
+    second: Char1_LArm_pinky_1
+  - first:
+      23: 2300028
+    second: Char1_LArm_pinky_2
+  - first:
+      23: 2300030
+    second: Char1_LArm_pinky_3
+  - first:
+      23: 2300032
+    second: Char1_LArm_thumb_1
+  - first:
+      23: 2300034
+    second: Char1_LArm_thumb_2
+  - first:
+      23: 2300036
+    second: Char1_LArm_thumb_3
+  - first:
+      23: 2300038
+    second: Char1_LLeg_Digit_1
+  - first:
+      23: 2300040
+    second: Char1_LLeg_Digit_2
+  - first:
+      23: 2300042
+    second: Char1_RArm_index_1
+  - first:
+      23: 2300044
+    second: Char1_RArm_index_2
+  - first:
+      23: 2300046
+    second: Char1_RArm_index_3
+  - first:
+      23: 2300048
+    second: Char1_RArm_middle_1
+  - first:
+      23: 2300050
+    second: Char1_RArm_middle_1 1
+  - first:
+      23: 2300052
+    second: Char1_RArm_middle_2
+  - first:
+      23: 2300054
+    second: Char1_RArm_middle_2 1
+  - first:
+      23: 2300056
+    second: Char1_RArm_middle_3
+  - first:
+      23: 2300058
+    second: Char1_RArm_middle_3 1
+  - first:
+      23: 2300060
+    second: Char1_RArm_pinky_1
+  - first:
+      23: 2300062
+    second: Char1_RArm_pinky_2
+  - first:
+      23: 2300064
+    second: Char1_RArm_pinky_3
+  - first:
+      23: 2300066
+    second: Char1_RArm_thumb_1
+  - first:
+      23: 2300068
+    second: Char1_RArm_thumb_2
+  - first:
+      23: 2300070
+    second: Char1_RArm_thumb_3
+  - first:
+      23: 2300072
+    second: Char1_RLeg_Digit_1
+  - first:
+      23: 2300074
+    second: Char1_RLeg_Digit_2
+  - first:
+      23: 2300076
+    second: cres
+  - first:
+      23: 2300078
+    second: gauntlet002
+  - first:
+      23: 2300080
+    second: gauntlet003
+  - first:
+      23: 2300082
+    second: hendl002
+  - first:
+      23: 2300084
+    second: 1-0-1  under
+  - first:
+      23: 2300086
+    second: 2-1 sheik legplate
+  - first:
+      23: 2300088
+    second: 2-1 sheik legplate001
+  - first:
+      23: 2300090
+    second: 2-2 ganon knee
+  - first:
+      23: 2300092
+    second: 2-2 ganon knee001
+  - first:
+      23: 2300094
+    second: 2-3 volga boot
+  - first:
+      23: 2300096
+    second: 2-3 volga boot001
+  - first:
+      23: 2300098
+    second: 3-1 bicep
+  - first:
+      23: 2300100
+    second: 3-1 bicep001
+  - first:
+      23: 2300102
+    second: _-0 bodFrnt
+  - first:
+      23: 2300104
+    second: gauntlet
+  - first:
+      23: 2300106
+    second: gauntlet001
+  - first:
+      33: 3300000
+    second: 1-0-2 sternum0101
+  - first:
+      33: 3300002
+    second: 2-2 ganon patel
+  - first:
+      33: 3300004
+    second: 2-2 ganon patella
+  - first:
+      33: 3300006
+    second: bled001
+  - first:
+      33: 3300008
+    second: Char1_LArm_index_1
+  - first:
+      33: 3300010
+    second: Char1_LArm_index_2
+  - first:
+      33: 3300012
+    second: Char1_LArm_index_3
+  - first:
+      33: 3300014
+    second: Char1_LArm_middle_1
+  - first:
+      33: 3300016
+    second: Char1_LArm_middle_1 1
+  - first:
+      33: 3300018
+    second: Char1_LArm_middle_2
+  - first:
+      33: 3300020
+    second: Char1_LArm_middle_2 1
+  - first:
+      33: 3300022
+    second: Char1_LArm_middle_3
+  - first:
+      33: 3300024
+    second: Char1_LArm_middle_3 1
+  - first:
+      33: 3300026
+    second: Char1_LArm_pinky_1
+  - first:
+      33: 3300028
+    second: Char1_LArm_pinky_2
+  - first:
+      33: 3300030
+    second: Char1_LArm_pinky_3
+  - first:
+      33: 3300032
+    second: Char1_LArm_thumb_1
+  - first:
+      33: 3300034
+    second: Char1_LArm_thumb_2
+  - first:
+      33: 3300036
+    second: Char1_LArm_thumb_3
+  - first:
+      33: 3300038
+    second: Char1_LLeg_Digit_1
+  - first:
+      33: 3300040
+    second: Char1_LLeg_Digit_2
+  - first:
+      33: 3300042
+    second: Char1_RArm_index_1
+  - first:
+      33: 3300044
+    second: Char1_RArm_index_2
+  - first:
+      33: 3300046
+    second: Char1_RArm_index_3
+  - first:
+      33: 3300048
+    second: Char1_RArm_middle_1
+  - first:
+      33: 3300050
+    second: Char1_RArm_middle_1 1
+  - first:
+      33: 3300052
+    second: Char1_RArm_middle_2
+  - first:
+      33: 3300054
+    second: Char1_RArm_middle_2 1
+  - first:
+      33: 3300056
+    second: Char1_RArm_middle_3
+  - first:
+      33: 3300058
+    second: Char1_RArm_middle_3 1
+  - first:
+      33: 3300060
+    second: Char1_RArm_pinky_1
+  - first:
+      33: 3300062
+    second: Char1_RArm_pinky_2
+  - first:
+      33: 3300064
+    second: Char1_RArm_pinky_3
+  - first:
+      33: 3300066
+    second: Char1_RArm_thumb_1
+  - first:
+      33: 3300068
+    second: Char1_RArm_thumb_2
+  - first:
+      33: 3300070
+    second: Char1_RArm_thumb_3
+  - first:
+      33: 3300072
+    second: Char1_RLeg_Digit_1
+  - first:
+      33: 3300074
+    second: Char1_RLeg_Digit_2
+  - first:
+      33: 3300076
+    second: cres
+  - first:
+      33: 3300078
+    second: gauntlet002
+  - first:
+      33: 3300080
+    second: gauntlet003
+  - first:
+      33: 3300082
+    second: hendl002
+  - first:
+      33: 3300084
+    second: 1-0-1  under
+  - first:
+      33: 3300086
+    second: 2-1 sheik legplate
+  - first:
+      33: 3300088
+    second: 2-1 sheik legplate001
+  - first:
+      33: 3300090
+    second: 2-2 ganon knee
+  - first:
+      33: 3300092
+    second: 2-2 ganon knee001
+  - first:
+      33: 3300094
+    second: 2-3 volga boot
+  - first:
+      33: 3300096
+    second: 2-3 volga boot001
+  - first:
+      33: 3300098
+    second: 3-1 bicep
+  - first:
+      33: 3300100
+    second: 3-1 bicep001
+  - first:
+      33: 3300102
+    second: _-0 bodFrnt
+  - first:
+      33: 3300104
+    second: gauntlet
+  - first:
+      33: 3300106
+    second: gauntlet001
+  - first:
+      43: 4300000
+    second: _-0 bodFrnt
+  - first:
+      43: 4300002
+    second: 3-1 bicep001
+  - first:
+      43: 4300004
+    second: gauntlet001
+  - first:
+      43: 4300006
+    second: Char1_LLeg_Digit_1
+  - first:
+      43: 4300008
+    second: Char1_LLeg_Digit_2
+  - first:
+      43: 4300010
+    second: 2-2 ganon patella
+  - first:
+      43: 4300012
+    second: Char1_LArm_thumb_1
+  - first:
+      43: 4300014
+    second: Char1_LArm_thumb_2
+  - first:
+      43: 4300016
+    second: Char1_LArm_thumb_3
+  - first:
+      43: 4300018
+    second: Char1_LArm_index_1
+  - first:
+      43: 4300020
+    second: Char1_LArm_index_2
+  - first:
+      43: 4300022
+    second: Char1_LArm_index_3
+  - first:
+      43: 4300024
+    second: Char1_LArm_middle_1
+  - first:
+      43: 4300026
+    second: Char1_LArm_middle_2
+  - first:
+      43: 4300028
+    second: Char1_LArm_middle_3
+  - first:
+      43: 4300030
+    second: Char1_LArm_middle_1
+  - first:
+      43: 4300032
+    second: Char1_LArm_middle_2
+  - first:
+      43: 4300034
+    second: Char1_LArm_middle_3
+  - first:
+      43: 4300036
+    second: Char1_LArm_pinky_1
+  - first:
+      43: 4300038
+    second: Char1_LArm_pinky_2
+  - first:
+      43: 4300040
+    second: Char1_LArm_pinky_3
+  - first:
+      43: 4300042
+    second: bled001
+  - first:
+      43: 4300044
+    second: cres
+  - first:
+      43: 4300046
+    second: hendl002
+  - first:
+      43: 4300048
+    second: gauntlet002
+  - first:
+      43: 4300050
+    second: Char1_RArm_thumb_1
+  - first:
+      43: 4300052
+    second: Char1_RArm_thumb_2
+  - first:
+      43: 4300054
+    second: Char1_RArm_thumb_3
+  - first:
+      43: 4300056
+    second: Char1_RArm_index_1
+  - first:
+      43: 4300058
+    second: Char1_RArm_index_2
+  - first:
+      43: 4300060
+    second: Char1_RArm_index_3
+  - first:
+      43: 4300062
+    second: Char1_RArm_middle_1
+  - first:
+      43: 4300064
+    second: Char1_RArm_middle_2
+  - first:
+      43: 4300066
+    second: Char1_RArm_middle_3
+  - first:
+      43: 4300068
+    second: Char1_RArm_middle_1
+  - first:
+      43: 4300070
+    second: Char1_RArm_middle_2
+  - first:
+      43: 4300072
+    second: Char1_RArm_middle_3
+  - first:
+      43: 4300074
+    second: Char1_RArm_pinky_1
+  - first:
+      43: 4300076
+    second: Char1_RArm_pinky_2
+  - first:
+      43: 4300078
+    second: Char1_RArm_pinky_3
+  - first:
+      43: 4300080
+    second: gauntlet003
+  - first:
+      43: 4300082
+    second: 1-0-2 sternum0101
+  - first:
+      43: 4300084
+    second: Char1_RLeg_Digit_1
+  - first:
+      43: 4300086
+    second: Char1_RLeg_Digit_2
+  - first:
+      43: 4300088
+    second: 2-2 ganon patel
+  - first:
+      43: 4300090
+    second: 3-1 bicep
+  - first:
+      43: 4300092
+    second: gauntlet
+  - first:
+      43: 4300094
+    second: 2-1 sheik legplate001
+  - first:
+      43: 4300096
+    second: 2-2 ganon knee001
+  - first:
+      43: 4300098
+    second: 2-3 volga boot001
+  - first:
+      43: 4300100
+    second: 2-1 sheik legplate
+  - first:
+      43: 4300102
+    second: 2-2 ganon knee
+  - first:
+      43: 4300104
+    second: 2-3 volga boot
+  - first:
+      43: 4300106
+    second: 1-0-1  under
+  - first:
+      74: 7400000
+    second: idle 2
+  - first:
+      74: 7400002
+    second: run1
+  - first:
+      74: 7400004
+    second: run2
+  - first:
+      74: 7400006
+    second: strafe right 2
+  - first:
+      74: 7400008
+    second: strafe left
+  - first:
+      74: 7400010
+    second: cast 2
+  - first:
+      74: 7400012
+    second: swing1 v2
+  - first:
+      74: 7400014
+    second: ded 2
+  - first:
+      74: 7400016
+    second: jump1 up
+  - first:
+      74: 7400018
+    second: jump1 land
+  - first:
+      74: 7400020
+    second: jump2 arms
+  - first:
+      74: 7400022
+    second: jump2 land
+  - first:
+      74: 7400024
+    second: swing2 v2
+  - first:
+      74: 7400026
+    second: run fwd 2
+  - first:
+      74: 7400028
+    second: run bkd 2
+  - first:
+      74: 7400030
+    second: strafe right
+  - first:
+      74: 7400032
+    second: strafe Left 2
+  - first:
+      74: 7400034
+    second: jump1 v2
+  - first:
+      74: 7400036
+    second: jump2 v2
+  - first:
+      74: 7400038
+    second: Dash1 Forward_Right
+  - first:
+      74: 7400040
+    second: Dash1 Forward_left
+  - first:
+      74: 7400042
+    second: Dash2 right
+  - first:
+      74: 7400044
+    second: Dash2 left
+  - first:
+      74: 7400046
+    second: Dash0 back
+  - first:
+      74: 7400048
+    second: Chrag1
+  - first:
+      74: 7400050
+    second: Chrag2 akt
+  - first:
+      74: 7400052
+    second: Jump1 loop
+  - first:
+      74: 7400054
+    second: dash 3 forward pose
+  - first:
+      74: 7400056
+    second: dash 3 right pose
+  - first:
+      74: 7400058
+    second: dash 3 left pose
+  - first:
+      74: 7400060
+    second: dash 3 back pose
+  - first:
+      74: 7400062
+    second: jump2 Swing loop
+  - first:
+      74: 7400064
+    second: jump2 Swing Land
+  - first:
+      74: 7400066
+    second: jump2 swing up
+  - first:
+      74: 7400068
+    second: jump2 swing land
+  - first:
+      74: 7400070
+    second: Jump1 AsDescend
+  - first:
+      74: 7400072
+    second: Jump1 up0
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: 1-0-1  under
+  - first:
+      137: 13700002
+    second: 2-1 sheik legplate
+  - first:
+      137: 13700004
+    second: 2-1 sheik legplate001
+  - first:
+      137: 13700006
+    second: 2-2 ganon knee
+  - first:
+      137: 13700008
+    second: 2-2 ganon knee001
+  - first:
+      137: 13700010
+    second: 2-3 volga boot
+  - first:
+      137: 13700012
+    second: 2-3 volga boot001
+  - first:
+      137: 13700014
+    second: 3-1 bicep
+  - first:
+      137: 13700016
+    second: 3-1 bicep001
+  - first:
+      137: 13700018
+    second: _-0 bodFrnt
+  - first:
+      137: 13700020
+    second: gauntlet
+  - first:
+      137: 13700022
+    second: gauntlet001
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
+  - first:
+      74: -6252376724223745430
+    second: ded3
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -407,14 +1188,14 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: 0fdsa - Default
-    second: {fileID: 2100000, guid: 3635cae5c3dac1f4b8a89f6d096ed258, type: 2}
+    second: {fileID: 2100000, guid: c02be5e94405ce54c895ae46e6b14d4f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
     second: {fileID: 2100000, guid: 8dc044b771c0fa04b8434e7aa991a823, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -443,6 +1224,7 @@ ModelImporter:
     - serializedVersion: 16
       name: idle 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 1
       lastFrame: 25
       wrapMode: 0
@@ -656,6 +1438,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump1 up
       takeName: Take 001
+      internalID: 0
       firstFrame: 618
       lastFrame: 640
       wrapMode: 0
@@ -869,6 +1652,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump1 land
       takeName: Take 001
+      internalID: 0
       firstFrame: 640
       lastFrame: 655
       wrapMode: 0
@@ -1082,6 +1866,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump2 arms
       takeName: Take 001
+      internalID: 0
       firstFrame: 669
       lastFrame: 673
       wrapMode: 0
@@ -1295,6 +2080,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump2 land
       takeName: Take 001
+      internalID: 0
       firstFrame: 688
       lastFrame: 703
       wrapMode: 0
@@ -1508,6 +2294,7 @@ ModelImporter:
     - serializedVersion: 16
       name: swing1 v2
       takeName: Take 001
+      internalID: 0
       firstFrame: 220
       lastFrame: 249
       wrapMode: 0
@@ -1746,6 +2533,7 @@ ModelImporter:
     - serializedVersion: 16
       name: swing2 v2
       takeName: Take 001
+      internalID: 0
       firstFrame: 251
       lastFrame: 276
       wrapMode: 0
@@ -1959,6 +2747,7 @@ ModelImporter:
     - serializedVersion: 16
       name: run fwd 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 29
       lastFrame: 52
       wrapMode: 0
@@ -2172,6 +2961,7 @@ ModelImporter:
     - serializedVersion: 16
       name: run bkd 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 57
       lastFrame: 80
       wrapMode: 0
@@ -2385,6 +3175,7 @@ ModelImporter:
     - serializedVersion: 16
       name: strafe right 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 83
       lastFrame: 106
       wrapMode: 0
@@ -2598,6 +3389,7 @@ ModelImporter:
     - serializedVersion: 16
       name: strafe Left 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 109
       lastFrame: 132
       wrapMode: 0
@@ -2811,6 +3603,7 @@ ModelImporter:
     - serializedVersion: 16
       name: cast 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 157
       lastFrame: 177
       wrapMode: 0
@@ -3024,6 +3817,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ded 2
       takeName: Take 001
+      internalID: 0
       firstFrame: 329
       lastFrame: 497
       wrapMode: 0
@@ -3237,6 +4031,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump1 v2
       takeName: Take 001
+      internalID: 0
       firstFrame: 620
       lastFrame: 664
       wrapMode: 0
@@ -3450,6 +4245,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump2 v2
       takeName: Take 001
+      internalID: 0
       firstFrame: 675
       lastFrame: 720
       wrapMode: 0
@@ -3663,6 +4459,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dash1 Forward_Right
       takeName: Take 001
+      internalID: 0
       firstFrame: 725
       lastFrame: 745
       wrapMode: 0
@@ -3876,6 +4673,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dash1 Forward_left
       takeName: Take 001
+      internalID: 0
       firstFrame: 775
       lastFrame: 795
       wrapMode: 0
@@ -4089,6 +4887,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dash2 right
       takeName: Take 001
+      internalID: 0
       firstFrame: 750
       lastFrame: 770
       wrapMode: 0
@@ -4302,6 +5101,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dash2 left
       takeName: Take 001
+      internalID: 0
       firstFrame: 800
       lastFrame: 820
       wrapMode: 0
@@ -4515,6 +5315,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dash0 back
       takeName: Take 001
+      internalID: 0
       firstFrame: 825
       lastFrame: 845
       wrapMode: 0
@@ -4728,6 +5529,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Chrag1
       takeName: Take 001
+      internalID: 0
       firstFrame: 850
       lastFrame: 880
       wrapMode: 0
@@ -4941,6 +5743,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Chrag2 akt
       takeName: Take 001
+      internalID: 0
       firstFrame: 880
       lastFrame: 920
       wrapMode: 0
@@ -5154,6 +5957,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump1 loop
       takeName: Take 001
+      internalID: 0
       firstFrame: 639
       lastFrame: 644
       wrapMode: 0
@@ -5367,6 +6171,7 @@ ModelImporter:
     - serializedVersion: 16
       name: dash 3 forward pose
       takeName: Take 001
+      internalID: 0
       firstFrame: 730
       lastFrame: 740
       wrapMode: 0
@@ -5580,6 +6385,7 @@ ModelImporter:
     - serializedVersion: 16
       name: dash 3 right pose
       takeName: Take 001
+      internalID: 0
       firstFrame: 756
       lastFrame: 766
       wrapMode: 0
@@ -5793,6 +6599,7 @@ ModelImporter:
     - serializedVersion: 16
       name: dash 3 left pose
       takeName: Take 001
+      internalID: 0
       firstFrame: 806
       lastFrame: 816
       wrapMode: 0
@@ -6006,6 +6813,7 @@ ModelImporter:
     - serializedVersion: 16
       name: dash 3 back pose
       takeName: Take 001
+      internalID: 0
       firstFrame: 830
       lastFrame: 840
       wrapMode: 0
@@ -6219,6 +7027,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump2 Swing loop
       takeName: Take 001
+      internalID: 0
       firstFrame: 696
       lastFrame: 700
       wrapMode: 0
@@ -6432,6 +7241,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump2 Swing Land
       takeName: Take 001
+      internalID: 0
       firstFrame: 695
       lastFrame: 710
       wrapMode: 0
@@ -6645,6 +7455,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump2 swing up
       takeName: Take 001
+      internalID: 0
       firstFrame: 673
       lastFrame: 695
       wrapMode: 0
@@ -6858,6 +7669,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump1 AsDescend
       takeName: Take 001
+      internalID: 0
       firstFrame: 623
       lastFrame: 642
       wrapMode: 0
@@ -7071,8 +7883,223 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump1 up0
       takeName: Take 001
+      internalID: 0
       firstFrame: 618
       lastFrame: 623
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 1-0-1  under
+        weight: 0
+      - path: 2-1 sheik legplate
+        weight: 0
+      - path: 2-1 sheik legplate/2-2 ganon knee
+        weight: 0
+      - path: 2-1 sheik legplate/2-3 volga boot
+        weight: 0
+      - path: 2-1 sheik legplate001
+        weight: 0
+      - path: 2-1 sheik legplate001/2-2 ganon knee001
+        weight: 0
+      - path: 2-1 sheik legplate001/2-3 volga boot001
+        weight: 0
+      - path: 3-1 bicep
+        weight: 0
+      - path: 3-1 bicep/gauntlet
+        weight: 0
+      - path: 3-1 bicep001
+        weight: 0
+      - path: 3-1 bicep001/gauntlet001
+        weight: 0
+      - path: _-0 bodFrnt
+        weight: 0
+      - path: Char1_pelivs
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_thigh
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_thigh/2-2 ganon patella
+        weight: 0
+      - path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2/Char1_LLeg_Ankle
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2/Char1_LLeg_Ankle/Char1_LLeg_Digit_1
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_thigh/Char1_LLeg_shin_1/Char1_LLeg_shin_2/Char1_LLeg_Ankle/Char1_LLeg_Digit_1/Char1_LLeg_Digit_2
+        weight: 1
+      - path: Char1_pelivs/Char1_LLeg_UpVectorNode
+        weight: 0
+      - path: Char1_pelivs/Char1_RLeg_thigh
+        weight: 1
+      - path: Char1_pelivs/Char1_RLeg_thigh/2-2 ganon patel
+        weight: 0
+      - path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1
+        weight: 1
+      - path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2
+        weight: 1
+      - path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2/Char1_RLeg_Ankle
+        weight: 1
+      - path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2/Char1_RLeg_Ankle/Char1_RLeg_Digit_1
+        weight: 1
+      - path: Char1_pelivs/Char1_RLeg_thigh/Char1_RLeg_shin_1/Char1_RLeg_shin_2/Char1_RLeg_Ankle/Char1_RLeg_Digit_1/Char1_RLeg_Digit_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/1-0-2
+          sternum0101
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_index_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_index_1/Char1_LArm_index_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_index_1/Char1_LArm_index_2/Char1_LArm_index_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1/Char1_LArm_middle_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1/Char1_LArm_middle_2/Char1_LArm_middle_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+          1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+          1/Char1_LArm_middle_2 1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_middle_1
+          1/Char1_LArm_middle_2 1/Char1_LArm_middle_3 1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_pinky_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_pinky_1/Char1_LArm_pinky_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_pinky_1/Char1_LArm_pinky_2/Char1_LArm_pinky_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_thumb_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_thumb_1/Char1_LArm_thumb_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/Char1_LArm_thumb_1/Char1_LArm_thumb_2/Char1_LArm_thumb_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002/bled001
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002/cres
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/Char1_LArm_Palm/hendl004002/hendl002
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_LArm_Collarbone/Char1_LArm_bicep/Char1_LArm_forearm_/gauntlet002
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3/Char1_Neck_4
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3/Char1_Neck_4/Char1_Neck_5
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_Neck_1/Char1_Neck_2/Char1_Neck_3/Char1_Neck_4/Char1_Neck_5/Char1_Head
+        weight: 0
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_index_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_index_1/Char1_RArm_index_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_index_1/Char1_RArm_index_2/Char1_RArm_index_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1/Char1_RArm_middle_2
+          1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1/Char1_RArm_middle_2
+          1/Char1_RArm_middle_3 1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+          1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+          1/Char1_RArm_middle_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_middle_1
+          1/Char1_RArm_middle_2/Char1_RArm_middle_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_pinky_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_pinky_1/Char1_RArm_pinky_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_pinky_1/Char1_RArm_pinky_2/Char1_RArm_pinky_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_thumb_1
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_thumb_1/Char1_RArm_thumb_2
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/Char1_RArm_Palm/Char1_RArm_thumb_1/Char1_RArm_thumb_2/Char1_RArm_thumb_3
+        weight: 1
+      - path: Char1_pelivs/Char1_Spine_1/Char1_Spine_2/Char1_Spine_3/Char1_Spine_4/Char1_Spine_5/Char1_Chest/Char1_RArm_Collarbone/Char1_RArm_bicep/Char1_RArm_forearm_1/Char1_RArm_forearm_2/Char1_RArm_forearm_3/gauntlet003
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ded3
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 342
+      lastFrame: 383
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -7288,25 +8315,28 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -7315,10 +8345,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 0
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton:
     - name: faceless joe v2(Clone)
@@ -7768,13 +8798,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: Char1_pelivs
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

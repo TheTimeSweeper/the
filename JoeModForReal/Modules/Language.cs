@@ -11,7 +11,6 @@ namespace Modules {
 
         internal static string languageRoot => System.IO.Path.Combine(Files.assemblyDir, "Language");
 
-
         internal static string TokensOutput = "";
 
         public static void PrintOutput(string preface = "") {

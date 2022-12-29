@@ -1,4 +1,6 @@
 ﻿using EntityStates;
+using JoeModForReal.Content.Survivors;
+using System;
 using UnityEngine;
 
 namespace ModdedEntityStates.Joe {
@@ -6,13 +8,12 @@ namespace ModdedEntityStates.Joe {
 
         public override void OnEnter() {
             base.OnEnter();
-
         }
-
+        
         public override void FixedUpdate() {
             base.FixedUpdate();
 
-            this.modelAnimator.SetFloat("sprinting", characterBody.isSprinting ? 1 : 0, 0.1f, Time.fixedDeltaTime);
+            this.modelAnimator.SetFloat("sprinting", characterBody.isSprinting ? 1 : 0, 0.1f, Time.fixedDeltaTime);                
         }
     }
 }

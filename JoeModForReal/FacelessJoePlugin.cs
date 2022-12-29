@@ -40,20 +40,22 @@ namespace JoeModForReal {
 
             Logger.LogInfo("[Initializing Joe]");
 
-            //if (Modules.Config.Debug)
-            //    gameObject.AddComponent<TestValueManager>();
+            if (Modules.Config.Debug)
+                gameObject.AddComponent<TestValueManager>();
 
-            Modules.Assets.Initialize();
             Modules.SoundBanks.Init();
+            Modules.Assets.Initialize();
             Modules.Projectiles.Init();
             Modules.EntityStates.Init();
 
-            //Modules.Tokens.GenerateTokens();
+            Modules.Tokens.GenerateTokens();
             Modules.Compat.Initialize();
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
             Modules.Dots.RegisterDots();
+
+            Modules.Assets.LateInitialize();
 
             new Modules.ContentPacks().Initialize();
 

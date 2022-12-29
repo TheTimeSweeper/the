@@ -13,6 +13,9 @@ namespace ModdedEntityStates.Joe {
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
+            ref float ySpeed = ref characterMotor.velocity.y;
+            ySpeed = Mathf.Max(ySpeed, 0);
+
             //TODO: add/set initial upwards yspeed 
             //       - hithop?
 

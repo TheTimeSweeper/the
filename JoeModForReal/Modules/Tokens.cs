@@ -1,4 +1,5 @@
 ﻿using System;
+using JoeModForReal.Content.Survivors;
 using ModdedEntityStates.Joe;
 
 namespace Modules {
@@ -15,11 +16,11 @@ namespace Modules {
             #region not henry
             string prefix = JoeModForReal.Content.Survivors.JoeSurivor.JOE_PREFIX;
 
-            string desc = "joe has a funny vertex on his face that's painted wrong.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > goddammit jerry." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > use the Jump Attack to avoid damage and hit kniggas. is this gonna be annoying not being able to swing in the air? probably" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > use the fireball to fill the empty space in his barren kit. seriously i gotta look at this thing." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > idk what R is but it's gonna be cool." + Environment.NewLine + Environment.NewLine;
+            string desc = "joe is a fast-paced in-your-face melee character. never seen any of those before.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > use your primary jump attack when it's dangerous to engage with regular attacks." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > the fireball does hefty damage, but is more useful to get enemies away from you" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > dash can be used freely to mitigate some damage from hits. use the charged melee version to get to enemies up in the air." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > tenticles ward will help you get out of a pinch." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, jerrys' screams lingering in his hears.";
             string outroFailure = "..and so he vanished, his normals never recalculated outside.";
@@ -27,7 +28,7 @@ namespace Modules {
             string fullName = "Faceless Joe";
             Language.Add(prefix + "NAME", fullName);
             Language.Add(prefix + "DESCRIPTION", desc);
-            Language.Add(prefix + "SUBTITLE", "and the zambambos");
+            Language.Add(prefix + "SUBTITLE", "and the Zambambos");
             Language.Add(prefix + "LORE", "All the best charcoals come from coconuts. They're easy to use and it's easy to grow more. You don't have to chop down an entire tree just to get your charcoal. But I need to, because the charcoals I want can't come from any coconuts. They need to have the perfect lighting temperature, the perfect lifetime, the perfect shape, the perfect flavor-capturing smoke. No, the charcoals I need can only be made from special trees. Trees in a forest just over this hill, habibi. But we're not gonna burn it down, absolutely not. If the trees are gone, how are we gonna get any charcoal? No, we can’t destroy the trees and take from them. We want them to be happy, to help us achieve our dreams of the perfect smoke because they like us. Make sense? Didn’t think so, hehaha. Nice O’s, you’re getting better at those. Anyways, in this forest, there's someone who’s been able to earn the trust of the trees. Maybe if we hand him a hose, and he’ll put his swords down and join us, haha.");
             Language.Add(prefix + "OUTRO_FLAVOR", outro);
             Language.Add(prefix + "OUTRO_FAILURE", outroFailure);
@@ -43,7 +44,7 @@ namespace Modules {
 
             #region Primary
             Language.Add(prefix + "PRIMARY_SWING_NAME", "Swing");
-            Language.Add(prefix + "PRIMARY_SWING_DESCRIPTION", $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n Use <style=cIsUtility>in the air while looking down</style> for a <style=cIsUtility>Falling Jump Attack</style>");
+            Language.Add(prefix + "PRIMARY_SWING_DESCRIPTION", $"{Helpers.agilePrefix} Swing your sword for <style=cIsDamage>{100f * Primary1Swing.swingDamage}% damage</style>.\n Use <style=cIsUtility>in the air while looking down</style> to perform a <style=cIsUtility>Falling Jump Attack</style> for {Helpers.DamageValueText(Primary1Swing.jumpSwingDamage)}");
 
             Language.Add(prefix + "PRIMARY_SWING_NAME_CLASSIC", "Swing Classic");
 
@@ -53,18 +54,18 @@ namespace Modules {
 
             #region Secondary
             Language.Add(prefix + "SECONDARY_FIREBALL_NAME", "Fireball");
-            Language.Add(prefix + "SECONDARY_FIREBALL_DESCRIPTION", $"{Helpers.agilePrefix} Fire a ball for <style=cIsDamage>{100f * Secondary1Fireball.damageCoefficient}% damage</style>.");
+            Language.Add(prefix + "SECONDARY_FIREBALL_DESCRIPTION", $"{Helpers.agilePrefix} Fire a ball for <style=cIsDamage>{100f * Secondary1Fireball.damageCoefficient}% damage</style>, with heavy knock back.");
             #endregion
 
             #region Utility
             Language.Add(prefix + "UTILITY_DASH_NAME", "Dash");
-            Language.Add(prefix + "UTILITY_DASH_DESCRIPTION", $"Dash a short distance. If primary input is held, charge up a {Helpers.UtilityText("Melee Dash Attack")} for {Helpers.DamageText("100-500% damage")}.");
+            Language.Add(prefix + "UTILITY_DASH_DESCRIPTION", $"Dash a short distance. If primary input is held, charge up a {Helpers.UtilityText("Melee Dash Attack")} for {Helpers.DamageText("3x100-500% damage")}.");
             #endregion
 
             #region Special
 
-            //Language.Add(prefix + "SPECIAL_BOMB_NAME", "Something Cool, I'm Sure");
-            //Language.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticHenryValues.bombDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "SPECIAL_TENTICLES_NAME", "Tenticles");
+            Language.Add(prefix + "SPECIAL_TENTICLES_DESCRIPTION", $"Perform a ritual, summoning tentacles that increase your {Helpers.UtilityText("Move Speed")}, {Helpers.UtilityText("Jump Height")}, and grants {Helpers.UtilityText("Life Steal")} up to {JoeSurivor.TenticleMaxHealthMultiplier * 100}% max health.");
             #endregion
 
             #region Achievements

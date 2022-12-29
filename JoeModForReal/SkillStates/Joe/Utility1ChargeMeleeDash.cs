@@ -1,12 +1,13 @@
 ﻿using EntityStates;
+using RoR2;
 using UnityEngine;
 
 namespace ModdedEntityStates.Joe {
     public class Utility1ChargeMeleeDash : BaseSkillState {
 
-        public static float BaseMaxChargeDuration = 2;
+        public static float BaseMaxChargeDuration = 1;
         public static float MinDamageCoefficient = 1;
-        public static float MaxDamageCoefficient = 5;
+        public static float MaxDamageCoefficient = 4;
 
         private float _maxChargeDuration;
         private float _chargeTimer;
@@ -44,7 +45,8 @@ namespace ModdedEntityStates.Joe {
                 float dam = Mathf.Lerp(MinDamageCoefficient, MaxDamageCoefficient, _chargeTimer / _maxChargeDuration);
                 //string shootSound = dam >= MaxDamageCoefficient ? "Play_RayGunBigClassic" : "Play_RayGun";
                 _success = true;
-                outer.SetNextState(new Utility1MeleeDashAttack(dam));
+                EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new Utility1MeleeDashAttack(dam));
+                outer.SetNextStateToMain();
             }
         }
 

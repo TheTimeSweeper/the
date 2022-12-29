@@ -1,6 +1,8 @@
-﻿using RoR2;
+﻿using EntityStates;
+using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Joe {
 
@@ -23,11 +25,13 @@ namespace ModdedEntityStates.Joe {
         
         public override void OnEnter() {
 
-            speedCoefficient = _chargedDamage;
+            speedCoefficient = _chargedDamage * 2;
             duration = 1f;
             _travelEndPercentTime = 17/40f;//todo testvaluemanager
-
+            
             base.OnEnter();
+
+            characterMotor.Motor.ForceUnground();
 
             _overlapInterval = (duration * _travelEndPercentTime / (BaseOverlaps)) / attackSpeedStat;
 
@@ -37,6 +41,10 @@ namespace ModdedEntityStates.Joe {
             skillLocator.utility.DeductStock(1);
 
             ResetOverlap();
+
+            if (NetworkServer.active) {
+                characterBody.AddTimedBuff(Modules.Buffs.DashArmorBuff, duration + 0.1f);
+            }
         }
 
 		// Token: 0x06000E36 RID: 3638 RVA: 0x00011909 File Offset: 0x0000FB09
@@ -83,14 +91,22 @@ namespace ModdedEntityStates.Joe {
         }
 
         private void ResetOverlap() {
-
+            
             this._attack = base.InitMeleeOverlap(_chargedDamage, null, modelLocator.modelTransform, "dash");
+            R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 
         public override void OnExit() {
             base.OnExit();
 
             modelLocator.enabled = true;
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            if(fixedAge > duration * _travelEndPercentTime) {
+                return InterruptPriority.Any;
+            }
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

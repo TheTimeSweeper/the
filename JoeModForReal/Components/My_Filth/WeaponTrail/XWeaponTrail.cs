@@ -183,9 +183,6 @@ namespace Xft
                 InitMeshObj();
                 return;
             }
-
-            RefreshSpline();
-
         }
 
         void FixedUpdate() {
@@ -231,6 +228,8 @@ namespace Xft
 
 
             mVertexPool.LateUpdate();
+
+            RefreshSpline();
         }
 
 

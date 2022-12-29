@@ -6,27 +6,17 @@ namespace ModdedEntityStates.Joe {
 
     public class Primary1Swing : BaseMeleeAttackButEpic {
 
-        public static float swingDamage = 1.6f;
+        public static float swingDamage => TestValueManager.value5;
         public static float jumpSwingDamage = 5f;
-        public static float Lookthreshold = -0.6f;
 
         private bool jumpSwing = false;
 
         public override void OnEnter() {
 
-            Vector3 dir = GetAimRay().direction.normalized;
-
-            bool looking = dir.y <= Lookthreshold && !base.characterMotor.isGrounded;
-
-            if (!isGrounded && looking) {
-                base.outer.SetNextState(new Primary1JumpSwingFall());
-                jumpSwing = true;
-                return;
-            }
-
             SetSwingValues();
 
             base.OnEnter();
+            R2API.DamageAPI.AddModdedDamageType(attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 
         protected virtual void SetSwingValues() {
@@ -47,19 +37,16 @@ namespace ModdedEntityStates.Joe {
             base.attackRecoil = 0.2f;
             base.hitHopVelocity = 4f;
 
-            base.swingSoundString = "";
+            base.swingSoundString = "play_joe_whoosh";
             base.hitSoundString = "";
             base.muzzleString = "";// swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             base.swingEffectPrefab = null;// Modules.Assets.swordSwingEffect;
             base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
 
-            //base.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            base.impactSound = Modules.Assets.FleshSliceSound.index;
         }
 
         public override void FixedUpdate() {
-
-            if (jumpSwing)
-                return;
 
             base.FixedUpdate();
             base.StartAimMode();
@@ -92,8 +79,6 @@ namespace ModdedEntityStates.Joe {
 
         public override void OnExit() {
 
-            if (jumpSwing)
-                return;
             base.OnExit();
         }
     }

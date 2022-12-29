@@ -21,7 +21,7 @@ namespace Modules {
             PluginInfo = info;
         }
 
-        internal static string GetPathToFile(string folderName, string fileName) {
+        internal static string GetPluginFilePath(string folderName, string fileName) {
             return Path.Combine(assemblyDir, folderName, fileName);
         }
     }

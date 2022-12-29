@@ -9,6 +9,8 @@ using RoR2.UI;
 using System;
 using System.Linq;
 using RoR2.Projectile;
+using ModdedEntityStates.Joe;
+using UnityEngine.AddressableAssets;
 
 namespace Modules {
 
@@ -26,6 +28,11 @@ namespace Modules {
         public static GameObject JoeFireball => Projectiles.JoeFireball;
         public static GameObject JoeImpactEffect;
         public static GameObject JoeJumpSwingEffect;
+        public static GameObject TenticlesSpelledWrong;
+
+        public static GameObject MercSwordSlash;
+
+        public static NetworkSoundEventDef FleshSliceSound;
 
         public static void Initialize()
         {
@@ -38,7 +45,7 @@ namespace Modules {
         {
             if (mainAssetBundle == null)
             {
-                mainAssetBundle = AssetBundle.LoadFromFile(Files.GetPathToFile("AssetBundles", "joe"));
+                mainAssetBundle = AssetBundle.LoadFromFile(Files.GetPluginFilePath("AssetBundles", "joe"));
             }
         }
         
@@ -46,6 +53,37 @@ namespace Modules {
 
             JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
             JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
+
+            //todo wtf
+            FleshSliceSound = CreateNetworkSoundEventDef("play_joe_fleshSlice");
+
+            MercSwordSlash = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion();
+        }
+
+        public static void LateInitialize() {
+
+            TenticlesSpelledWrong = CreateTenticles();
+        }
+
+
+        private static GameObject CreateTenticles() {
+            GameObject tenticles = LoadAsset<GameObject>("Tenticles");
+
+            ConvertAllRenderersToHopooShader(tenticles);
+
+            BuffWard buffWard = tenticles.GetComponent<BuffWard>();
+            buffWard.buffDef = Buffs.TenticleBuff;
+            buffWard.Networkradius = Special1Tenticles.Range;
+
+            tenticles.transform.Find("Tenticles").transform.localScale = Vector3.one * Special1Tenticles.Range * 2;
+
+            GameObject warbanner = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
+            Material warbannerMaterial = warbanner.transform.Find("Indicator/IndicatorSphere").GetComponent<MeshRenderer>().material;
+            Material material = tenticles.transform.Find("Indicator/Sphere").GetComponent<MeshRenderer>().material = new Material(warbannerMaterial);
+            material.SetColor("_TintColor", Color.green);
+
+            PrefabAPI.RegisterNetworkPrefab(tenticles);
+            return tenticles;
         }
 
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object

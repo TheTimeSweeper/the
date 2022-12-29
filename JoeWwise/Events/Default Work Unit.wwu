@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{13414924-310C-4600-B974-F7402DDCD46B}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{13414924-310C-4600-B974-F7402DDCD46B}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="play_joe_whoosh" ID="{C03A47F9-50FF-4BF1-8E9E-509465039F41}">
+					<ChildrenList>
+						<Action Name="" ID="{2C75A347-DAA0-45E7-96C4-448DD5D441E3}" ShortID="922996280">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="whoosh" ID="{391A2187-1192-4EA8-9644-9314287F2C17}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_joe_jerryDeath" ID="{CA6C6689-01B7-4EC8-86E1-6632C45A8B06}">
+					<ChildrenList>
+						<Action Name="" ID="{6A9E1024-83E9-4878-AEC3-B868C918AB0E}" ShortID="280327237">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="jerryDeath" ID="{6A54D3DF-25C5-40CA-9B15-58906BE89554}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_joe_fleshSlice" ID="{A331C719-4B19-4091-9BD4-9BEA6339AFC8}">
+					<ChildrenList>
+						<Action Name="" ID="{D9AE124A-4C42-4AB7-B6FF-24175CAE3077}" ShortID="147204867">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="fleshSlice" ID="{4C78E493-C19E-4C41-99A8-94E81D74406B}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_joe_fireExplosion" ID="{F40BFCFD-530D-455A-BFFD-385D448FBFF8}">
+					<ChildrenList>
+						<Action Name="" ID="{871F53C6-78F8-4D38-B103-6B5B1B0D4A57}" ShortID="460814195">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FireExplosion7" ID="{D9DBB57C-A406-4777-8AAB-127B3043F700}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_joe_fireShoot" ID="{BDD09863-CB6F-4A41-891F-6736E4290683}">
+					<ChildrenList>
+						<Action Name="" ID="{832291A7-EC09-448A-B692-9286C1921130}" ShortID="460971758">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FireShoot1" ID="{8AE114CF-9FC4-45F3-902B-E1F2FE00C848}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,19 +1,28 @@
 ﻿using EntityStates;
 using RoR2;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Joe {
+
     public class Utility1Dash : UtilityBaseDash {
+
+        public static float Armor = 100f;
+
         public override void OnEnter() {
 
-			if (inputBank.skill1.down) {
+			if (inputBank.skill1.down && activatorSkillSlot.stock > 0) {
 
 				EntityStateMachine.FindByCustomName(gameObject, "Body").SetNextState(new Utility1ChargeMeleeDash());
 
 				base.outer.SetNextStateToMain();
 				return;
 			}
-
+            
             base.OnEnter();
+
+            if (NetworkServer.active) {
+                characterBody.AddTimedBuff(Modules.Buffs.DashArmorBuff, duration + 0.1f);
+            }
         }
 
         protected override void SetNextState() {

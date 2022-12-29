@@ -9,9 +9,7 @@ using Modules.Characters;
 using Modules.Survivors;
 using Modules;
 
-namespace JoeModForReal.Content.Survivors
-{
-    //todo joe
+namespace JoeModForReal.Content.Survivors {
     internal class JoeSurivor : SurvivorBase
     {
         public override string bodyName => "Joe";
@@ -37,8 +35,9 @@ namespace JoeModForReal.Content.Survivors
             armor = 20f,
 
             jumpCount = 2,
-
-            //aimOriginPosition = new Vector3(0, 2.8f, 0),
+            
+            aimOriginPosition = new Vector3(0, 1.3f, 0),
+            cameraParamsDepth = -10,
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; }
@@ -51,6 +50,15 @@ namespace JoeModForReal.Content.Survivors
 
         public override UnlockableDef characterUnlockableDef { get; }
         private static UnlockableDef masterySkinUnlockableDef;
+
+        public static float TenticleBuffHealMultiplier => TestValueManager.value1;
+        public static float TenticleMaxHealthMultiplier => TestValueManager.value2;
+
+        public override void Initialize() {
+            base.Initialize();
+
+            Hook();
+        }
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
@@ -86,19 +94,23 @@ namespace JoeModForReal.Content.Survivors
 
             #region Primary
 
-            SteppedSkillDef primarySkillDef = Modules.Skills.CreateSkillDef<SteppedSkillDef>(
+            LookingDownSteppedSkillDef primarySkillDef = Modules.Skills.CreateSkillDef<LookingDownSteppedSkillDef>(
                 new SkillDefInfo("JoeSwing",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1Swing)),
                                  "Weapon",
                                  true));
             primarySkillDef.stepCount = 2;
             primarySkillDef.stepGraceDuration = 1.2f;
 
+            primarySkillDef.LookingDownIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
+            primarySkillDef.LookingDownState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
+            primarySkillDef.LookingDownAngle = 42;
 
-            SteppedSkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef<SteppedSkillDef>(
+
+            LookingDownSteppedSkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef<LookingDownSteppedSkillDef>(
                 new SkillDefInfo("JoeSwingClassic",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME_CLASSIC",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
@@ -108,7 +120,6 @@ namespace JoeModForReal.Content.Survivors
                                  true) {
                     mustKeyPress = true 
             });
-
             primarySkillDefSilly.stepCount = 2;
             primarySkillDefSilly.stepGraceDuration = 1;
 
@@ -170,8 +181,8 @@ namespace JoeModForReal.Content.Survivors
                 skillIcon = Modules.Assets.LoadAsset<Sprite>("texUtilityIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Utility1Dash)),
                 activationStateMachineName = "Slide",
-                baseMaxStock = 2,
-                baseRechargeInterval = 4f,
+                baseMaxStock = 1,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
@@ -192,30 +203,30 @@ namespace JoeModForReal.Content.Survivors
 
             #region Special
 
-            //SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-            //    skillName = prefix + "SPECIAL_BOMB_NAME",
-            //    skillNameToken = prefix + "SPECIAL_BOMB_NAME",
-            //    skillDescriptionToken = prefix + "SPECIAL_BOMB_DESCRIPTION",
-            //    skillIcon = Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
-            //    activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Henry.ThrowBomb)),
-            //    activationStateMachineName = "Slide",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 10f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = EntityStates.InterruptPriority.Skill,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = false,
-            //    cancelSprintingOnActivation = true,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1
-            //});
+            SkillDef tenticlesSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
+                skillNameToken = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
+                skillDescriptionToken = JOE_PREFIX + "SPECIAL_TENTICLES_DESCRIPTION",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Special1Tenticles)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 10f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, fireballSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, tenticlesSkillDef);
             #endregion
         }
 
@@ -230,7 +241,7 @@ namespace JoeModForReal.Content.Survivors
             CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
-
+            
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_DEFAULT_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texMainSkin"),
@@ -279,6 +290,42 @@ namespace JoeModForReal.Content.Survivors
             #endregion
 
             skinController.skins = skins.ToArray();
+        }
+
+
+        private void Hook() {
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+        }
+
+        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
+
+            if (sender.HasBuff(Buffs.TenticleBuff)) {
+                args.moveSpeedMultAdd += TestValueManager.value2 * sender.GetBuffCount(Buffs.TenticleBuff);
+                args.attackSpeedMultAdd += TestValueManager.value6 * sender.GetBuffCount(Buffs.TenticleBuff);
+                
+                args.jumpPowerMultAdd += TestValueManager.value3;
+            }
+
+            if (sender.HasBuff(Buffs.DashArmorBuff)) {
+                args.armorAdd += TestValueManager.value7;
+            }
+        }
+
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
+            orig(self, damageInfo);
+
+            if (R2API.DamageAPI.HasModdedDamageType(damageInfo, Modules.DamageTypes.TenticleLifeStealing)) {
+
+                CharacterBody characterBody = damageInfo.attacker?.GetComponent<CharacterBody>();
+                if (characterBody && characterBody.HasBuff(Buffs.TenticleBuff)) {
+
+                    float healthLimit = characterBody.maxHealth * TenticleMaxHealthMultiplier;
+
+                    float healAmount = Mathf.Min(damageInfo.damage * TenticleBuffHealMultiplier, healthLimit - characterBody.healthComponent.health);
+                    characterBody.healthComponent.Heal(healAmount, default(ProcChainMask));
+                }
+            }
         }
     }
 }

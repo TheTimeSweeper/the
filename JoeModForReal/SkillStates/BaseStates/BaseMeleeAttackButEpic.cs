@@ -51,6 +51,7 @@ namespace ModdedEntityStates.BaseStates
         private BaseState.HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
         protected bool rolledCrit;
+        private bool firstFramePassed;
 
         public override void OnEnter()
         {
@@ -159,8 +160,7 @@ namespace ModdedEntityStates.BaseStates
 
             if (base.isAuthority) {
 
-                if (this.attack.Fire())
-                {
+                if (this.attack.Fire()) {
                     this.OnHitEnemyAuthority();
                 }
             }
@@ -205,7 +205,6 @@ namespace ModdedEntityStates.BaseStates
             bool fireStarted = stopwatch >= this.duration * attackStartTime;
             bool fireEnded = stopwatch >= this.duration * attackEndTime;
 
-            Helpers.LogWarning("nig");
             //to guarantee attack comes out if at high attack speed the stopwatch skips past the firing duration between frames
             if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired)) {
 
@@ -225,11 +224,12 @@ namespace ModdedEntityStates.BaseStates
             //    }
             //}
 
-            if (this.stopwatch >= this.duration && base.isAuthority)
+            if (this.stopwatch >= this.duration && base.isAuthority && firstFramePassed)
             {
                 this.outer.SetNextStateToMain();
                 return;
             }
+            firstFramePassed = true;
         }
 
         protected virtual void OnFireAttackEnter() { }

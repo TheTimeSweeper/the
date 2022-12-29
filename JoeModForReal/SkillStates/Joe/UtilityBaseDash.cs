@@ -7,10 +7,10 @@ namespace ModdedEntityStates.Joe {
 
 		// Token: 0x040011B1 RID: 4529
 		[SerializeField]
-		public float speedCoefficient = 4f;
+		public float speedCoefficient = 3f;//todo testvaluemanager
 		// Token: 0x040011B0 RID: 4528
 		[SerializeField]
-		public float duration = 0.2f;
+		public float duration = 0.3f;//todo testvaluemanager
 
 		public float _travelEndPercentTime = 1f;
 

@@ -14,7 +14,7 @@ uh my mom for giving birth to me
 - Q: Faceless Joe? A unique name? This is Risk of Rain reeeeee
   - A: Aha but it's not a unique name. Risk of Rain characters usually have general names that can describe anyone in a group of people. Faceless Joe is just that, describes no one in particular. Anyone in Risk of Rain could be called a Faceless Joe.
 - Q: FAQ before the mod even came out?
-  - A: FAQ's are just a good layout for bullets. In this case (stolen from Tom Scott), FAQ stands for Fully Anticipated Questions
+  - A: FAQ's are just a good layout for what are essentially bullet points. In this case (stolen from Tom Scott), FAQ stands for Fully Anticipated Questions
 ## Known Issues
 - he not done
 

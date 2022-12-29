@@ -5,10 +5,6 @@ using UnityEngine;
 namespace ModdedEntityStates.Joe {
     public class Primary1JumpSwingLand : BaseMeleeAttackButEpic {
 
-        public static float swingDamage = 1.6f;
-
-        private bool jumpSwing = false;
-
         public override void OnEnter() {
 
             SetSwingValues();
@@ -16,6 +12,8 @@ namespace ModdedEntityStates.Joe {
             //JOE: slow for a bit
 
             base.OnEnter();
+
+            R2API.DamageAPI.AddModdedDamageType(attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 
         protected virtual void SetSwingValues() {
@@ -36,13 +34,13 @@ namespace ModdedEntityStates.Joe {
             base.attackRecoil = 0.2f;
             base.hitHopVelocity = 4f;
 
-            base.swingSoundString = "_priAtt2tower";
+            base.swingSoundString = "play_joe_priAtt2tower";
             base.hitSoundString = "";
             base.muzzleString = "JumpSwingMuzzle";// swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             base.swingEffectPrefab = Modules.Assets.JoeJumpSwingEffect;// Modules.Assets.swordSwingEffect;
             base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
 
-            //base.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            base.impactSound = Modules.Assets.FleshSliceSound.index;
         }
 
         public override void FixedUpdate() {

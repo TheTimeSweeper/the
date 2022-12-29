@@ -1,0 +1,29 @@
+Event	ID	Name			Wwise Object Path	Notes
+	902618102	play_joe_priAtt2tower			\Default Work Unit\play_joe_priAtt2tower	
+	1074701464	play_joe_fireExplosion			\Default Work Unit\play_joe_fireExplosion	
+	1517931512	play_joe_fireShoot			\Default Work Unit\play_joe_fireShoot	
+	2901043317	play_joe_jerryDeath			\Default Work Unit\play_joe_jerryDeath	
+	3216733749	play_joe_whoosh			\Default Work Unit\play_joe_whoosh	
+	3367825303	play_joe_fleshSlice			\Default Work Unit\play_joe_fleshSlice	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	40129160	JerryDeath8	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath8_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath8		8279
+	81013995	fleshSlice	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\fleshSlice_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\fleshSlice		18686
+	120560998	whoosh3	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\whoosh3_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\whoosh\whoosh3		3183
+	155760387	JerryDeath6	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath6_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath6		10534
+	188392812	whoosh2	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\whoosh2_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\whoosh\whoosh2		4298
+	218245423	whoosh5	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\whoosh5_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\whoosh\whoosh5		3830
+	369113512	JerryDeath2	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath2_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath2		9493
+	374162746	JerryDeath4	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath4_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath4		7643
+	473964815	JerryDeath9	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath9_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath9		8978
+	533285121	_priAtt2tower	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\_priAtt2tower_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\_priAtt2tower		10111
+	567174335	JerryDeath7	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath7_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath7		6279
+	577083552	JerryDeath3	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath3_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath3		9892
+	700223451	whoosh1	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\whoosh1_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\whoosh\whoosh1		4137
+	736698287	JerryDeath10	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath10_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath10		6372
+	742685232	whoosh4	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\whoosh4_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\whoosh\whoosh4		4062
+	768397448	JerryDeath5	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath5_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath5		9988
+	921082361	FireShoot1	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\FireShoot1_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\FireShoot1		11071
+	977530294	FireExplosion7	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\FireExplosion7_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\FireExplosion7		26700
+	1064628591	JerryDeath1	E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\.cache\Windows\SFX\JerryDeath1_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sounds\SFX\jerryDeath\JerryDeath1		8353
+
