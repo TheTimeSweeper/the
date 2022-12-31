@@ -1,15 +1,20 @@
-﻿using ModdedEntityStates.BaseStates;
+﻿using EntityStates;
+using ModdedEntityStates.BaseStates;
 using RoR2;
 using UnityEngine;
 
 namespace ModdedEntityStates.Joe {
     public class Primary1JumpSwingLand : BaseMeleeAttackButEpic {
 
+        public static float jumpSwingDamage => 3.2f;
+
         public override void OnEnter() {
 
             SetSwingValues();
 
-            //JOE: slow for a bit
+            if (!isGrounded) {
+                SmallHop(characterMotor, 1);
+            }
 
             base.OnEnter();
 
@@ -18,12 +23,12 @@ namespace ModdedEntityStates.Joe {
 
         protected virtual void SetSwingValues() {
             this.hitboxName = "jumpswing";
-
+            
             base.damageType = DamageType.Generic;
-            base.damageCoefficient = Primary1Swing.jumpSwingDamage;
+            base.damageCoefficient = jumpSwingDamage;
             base.procCoefficient = 1f;
             base.pushForce = 600f;
-            base.bonusForce = Vector3.zero;
+            base.bonusForce = Vector3.down * 500f;
 
             base.baseDuration = 12f/60f;
             base.attackStartTime = 0.0f;
@@ -36,9 +41,9 @@ namespace ModdedEntityStates.Joe {
 
             base.swingSoundString = "play_joe_priAtt2tower";
             base.hitSoundString = "";
-            base.muzzleString = "JumpSwingMuzzle";// swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
-            base.swingEffectPrefab = Modules.Assets.JoeJumpSwingEffect;// Modules.Assets.swordSwingEffect;
-            base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
+            base.muzzleString = "JumpSwingMuzzle";
+            base.swingEffectPrefab = Modules.Assets.JoeJumpSwingEffect;
+            base.hitEffectPrefab = Modules.Assets.MercImpactEffect; 
 
             base.impactSound = Modules.Assets.FleshSliceSound.index;
         }
@@ -64,12 +69,18 @@ namespace ModdedEntityStates.Joe {
 
         protected override void SetNextState() {
 
-            return;
+            WindDownState newNextState = new WindDownState();
+            newNextState.windDownTime = 0.35f;
+            base.outer.SetNextState(newNextState);
         }
 
         public override void OnExit() {
 
             base.OnExit();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            return InterruptPriority.Skill;
         }
     }
 }

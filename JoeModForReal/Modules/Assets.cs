@@ -31,8 +31,10 @@ namespace Modules {
         public static GameObject TenticlesSpelledWrong;
 
         public static GameObject MercSwordSlash;
+        public static GameObject MercImpactEffect;
 
         public static NetworkSoundEventDef FleshSliceSound;
+        public static NetworkSoundEventDef FireballImpactSound;
 
         public static void Initialize()
         {
@@ -52,19 +54,48 @@ namespace Modules {
         private static void PopulateAss() {
 
             JoeJumpSwingEffect = LoadEffect("JoeJumpSwingParticlesesEffect");
-            JoeImpactEffect = LoadEffect("JoeImpactEffectBasic");
+            JoeImpactEffect = LoadEffect("JoeImpactEffectBasic", "play_joe_fireExplosion");
 
-            //todo wtf
+            MercSwordSlash = CloneAndColorEffect("RoR2/Base/Merc/MercSwordSlash.prefab", Color.green, "GreenMercSwordSlash");
+            CreateEffectFromObject(MercSwordSlash, "", true, VFXAttributes.VFXPriority.Always);
+
+            MercImpactEffect = CloneAndColorEffect("RoR2/Base/Merc/OmniImpactVFXSlashMerc.prefab", Color.green, "GreenOmniImpactVFXSlashMerc");
+            CreateEffectFromObject(MercImpactEffect, "", false, VFXAttributes.VFXPriority.Medium);
+
             FleshSliceSound = CreateNetworkSoundEventDef("play_joe_fleshSlice");
+            FireballImpactSound = CreateNetworkSoundEventDef("play_joe_fireExplosion");
 
-            MercSwordSlash = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion();
+        }
+        
+        private static GameObject CloneAndColorEffect(string addressablesPath, Color color, string name) {
+
+            GameObject MercSwordSlash = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>(addressablesPath).WaitForCompletion(), name);
+
+            ParticleSystemRenderer[] rends = MercSwordSlash.GetComponentsInChildren<ParticleSystemRenderer>();
+
+            foreach (ParticleSystemRenderer rend in rends) {
+                rend.material.SetColor("_MainColor", color);
+                rend.material.SetColor("_Color", color);
+                rend.material.SetColor("_TintColor", color);
+            }
+
+            //didn't work so saving the processing
+            //ParticleSystem[] particles = MercSwordSlash.GetComponentsInChildren<ParticleSystem>();
+
+            //foreach (ParticleSystem particleSystem in particles) {
+
+            //    ParticleSystem.MainModule main = particleSystem.main;
+            //    main.startColor = color;
+            //}
+
+            return MercSwordSlash;
         }
 
         public static void LateInitialize() {
 
             TenticlesSpelledWrong = CreateTenticles();
-        }
 
+        }
 
         private static GameObject CreateTenticles() {
             GameObject tenticles = LoadAsset<GameObject>("Tenticles");
@@ -241,10 +272,7 @@ namespace Modules {
             return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
         }
 
-        private static GameObject LoadEffect(string resourceName) => LoadEffect(resourceName, "", false);
-        private static GameObject LoadEffect(string resourceName, string soundName) => LoadEffect(resourceName, soundName, false);
-        private static GameObject LoadEffect(string resourceName, bool parentToTransform) => LoadEffect(resourceName, "", parentToTransform);
-        private static GameObject LoadEffect(string resourceName, string soundName, bool parentToTransform) {
+        private static GameObject LoadEffect(string resourceName, string soundName = "", bool parentToTransform = false, VFXAttributes.VFXPriority priority = VFXAttributes.VFXPriority.Always) {
 
             GameObject newEffect = LoadAsset<GameObject>(resourceName);
 
@@ -253,18 +281,18 @@ namespace Modules {
                 return null;
             }
 
-            CreateEffectFromObject(newEffect, soundName, parentToTransform);
+            CreateEffectFromObject(newEffect, soundName, parentToTransform, priority);
 
             return newEffect;
         }
 
         private static void CreateEffectFromObject(GameObject newEffect) => CreateEffectFromObject(newEffect, "", false);
 
-        private static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform) {
+        private static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform, VFXAttributes.VFXPriority priority = VFXAttributes.VFXPriority.Always) {
             newEffect.AddComponent<DestroyOnTimer>().duration = 6;
             newEffect.AddComponent<NetworkIdentity>();
             if (!newEffect.GetComponent<VFXAttributes>()) {
-                newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+                newEffect.AddComponent<VFXAttributes>().vfxPriority = priority;
             }
 
             EffectComponent effect = newEffect.GetComponent<EffectComponent>();

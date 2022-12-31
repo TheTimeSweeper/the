@@ -115,14 +115,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   radius: 1
-  interval: 3
+  interval: 2
   rangeIndicator: {fileID: 5121650538084890465}
   buffDef: {fileID: 0}
-  buffDuration: 3
+  buffDuration: 2
   floorWard: 1
   expires: 1
   invertTeamFilter: 0
-  expireDuration: 8
+  expireDuration: 8.1
   animateRadius: 1
   radiusCoefficientCurve:
     serializedVersion: 2
@@ -180,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5121650538084890465
 Transform:
   m_ObjectHideFlags: 0
@@ -868,21 +868,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3902674112673400902, guid: f70a14e97ae40a04fa30477c1389df5b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.0075797765
-      objectReference: {fileID: 0}
-    - target: {fileID: 3902674112673400902, guid: f70a14e97ae40a04fa30477c1389df5b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.007579779
-      objectReference: {fileID: 0}
-    - target: {fileID: 3902674112673400902, guid: f70a14e97ae40a04fa30477c1389df5b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.026034757
       objectReference: {fileID: 0}
     - target: {fileID: 3902674112673400902, guid: f70a14e97ae40a04fa30477c1389df5b,
         type: 3}

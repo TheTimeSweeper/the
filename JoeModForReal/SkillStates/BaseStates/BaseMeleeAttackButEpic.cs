@@ -51,7 +51,6 @@ namespace ModdedEntityStates.BaseStates
         private BaseState.HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
         protected bool rolledCrit;
-        private bool firstFramePassed;
 
         public override void OnEnter()
         {
@@ -125,7 +124,7 @@ namespace ModdedEntityStates.BaseStates
 
             if (!this.hasHopped) {
                 if (base.characterMotor && !base.characterMotor.isGrounded && this.hitHopVelocity > 0f) {
-                    base.SmallHop(base.characterMotor, this.hitHopVelocity);
+                    base.SmallHop(base.characterMotor, (this.hitHopVelocity / Mathf.Sqrt(this.attackSpeedStat)));
                 }
 
                 this.hasHopped = true;
@@ -168,14 +167,7 @@ namespace ModdedEntityStates.BaseStates
 
         protected virtual void SetNextState()
         {
-            int index = this.swingIndex;
-            if (index == 0) index = 1;
-            else index = 0;
-
-            this.outer.SetNextState(new BaseMeleeAttackButEpic
-            {
-                swingIndex = index
-            });
+            base.outer.SetNextStateToMain();
         }
 
         public override void FixedUpdate()
@@ -215,21 +207,11 @@ namespace ModdedEntityStates.BaseStates
                 FireAttack();
             }
 
-            //if (this.stopwatch >= this.earlyExitTime && base.isAuthority)
-            //{
-            //    if (base.inputBank.skill1.down)
-            //    {
-            //        this.SetNextState();
-            //        return;
-            //    }
-            //}
-
-            if (this.stopwatch >= this.duration && base.isAuthority && firstFramePassed)
+            if (this.stopwatch >= this.duration && base.isAuthority)
             {
-                this.outer.SetNextStateToMain();
+                SetNextState();
                 return;
             }
-            firstFramePassed = true;
         }
 
         protected virtual void OnFireAttackEnter() { }

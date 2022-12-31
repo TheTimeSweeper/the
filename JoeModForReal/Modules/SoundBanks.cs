@@ -17,7 +17,7 @@ namespace Modules {
         public static void Init() {
             AKRESULT akResult = AkSoundEngine.AddBasePath(SoundBankDirectory);
             if (akResult == AKRESULT.AK_Success) {
-                FacelessJoePlugin.Log.LogInfo($"Added bank base path : {SoundBankDirectory}");
+                FacelessJoePlugin.Log.LogMessage($"Added bank base path : {SoundBankDirectory}");
             } else {
                 FacelessJoePlugin.Log.LogError(
                     $"Error adding base path : {SoundBankDirectory} " +
@@ -26,7 +26,7 @@ namespace Modules {
 
             akResult = AkSoundEngine.LoadBank(soundBankFileName, out var _soundBankId);
             if (akResult == AKRESULT.AK_Success) {
-                FacelessJoePlugin.Log.LogInfo($"Added bank : {soundBankFileName}");
+                FacelessJoePlugin.Log.LogMessage($"Added bank : {soundBankFileName}");
             } else {
                 FacelessJoePlugin.Log.LogError(
                     $"Error loading bank : {soundBankFileName} " +

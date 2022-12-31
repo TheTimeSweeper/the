@@ -6,11 +6,7 @@ namespace ModdedEntityStates.Joe {
 
     public class Primary1Swing : BaseMeleeAttackButEpic {
 
-        public static float swingDamage => TestValueManager.value5;
-        public static float jumpSwingDamage = 5f;
-
-        private bool jumpSwing = false;
-
+        public static float swingDamage => 1.8f;
         public override void OnEnter() {
 
             SetSwingValues();
@@ -33,15 +29,15 @@ namespace ModdedEntityStates.Joe {
             base.attackEndTime = 0.31f;
             base.baseEarlyExitTime = 0.38f;
 
-            base.hitStopDuration = 0.0069f;
+            base.hitStopDuration = 0;// .069f;
             base.attackRecoil = 0.2f;
-            base.hitHopVelocity = 4f;
+            base.hitHopVelocity = 2f;
 
             base.swingSoundString = "play_joe_whoosh";
             base.hitSoundString = "";
-            base.muzzleString = "";// swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
-            base.swingEffectPrefab = null;// Modules.Assets.swordSwingEffect;
-            base.hitEffectPrefab = null;// Modules.Assets.swordHitImpactEffect;
+            base.muzzleString = "notMercSlash";// swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
+            base.swingEffectPrefab = Modules.Assets.MercSwordSlash;
+            base.hitEffectPrefab = Modules.Assets.MercImpactEffect;// Modules.Assets.swordHitImpactEffect;
 
             base.impactSound = Modules.Assets.FleshSliceSound.index;
         }
@@ -65,16 +61,6 @@ namespace ModdedEntityStates.Joe {
 
         protected override void OnHitEnemyAuthority() {
             base.OnHitEnemyAuthority();
-        }
-
-        protected override void SetNextState() {
-            //int index = this.swingIndex;
-            //if (index == 0) index = 1;
-            //else index = 0;
-
-            this.outer.SetNextState(new Primary1Swing  {
-                swingIndex = this.swingIndex + 1
-            });
         }
 
         public override void OnExit() {

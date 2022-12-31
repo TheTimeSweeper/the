@@ -8,7 +8,7 @@ namespace ModdedEntityStates.Joe {
 
     public class Secondary1Fireball : BaseSkillState {
 
-        public static float damageCoefficient = 6.9f;
+        public static float damageCoefficient = 6.0f;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.3f;
         //public static float throwForce = 80f;
@@ -49,7 +49,7 @@ namespace ModdedEntityStates.Joe {
 
             if (!this.hasFired) {
                 this.hasFired = true;
-                Util.PlaySound("HenryBombThrow", base.gameObject);
+                Util.PlaySound("play_joe_fireShoot", base.gameObject);
 
                 if (base.isAuthority) {
                     Ray aimRay = base.GetAimRay();
@@ -59,7 +59,7 @@ namespace ModdedEntityStates.Joe {
                         Util.QuaternionSafeLookRotation(aimRay.direction),
                         base.gameObject,
                         Secondary1Fireball.damageCoefficient * this.damageStat,
-                        4000f,
+                        3000f,
                         base.RollCrit(),
                         DamageColorIndex.Default,
                         null,

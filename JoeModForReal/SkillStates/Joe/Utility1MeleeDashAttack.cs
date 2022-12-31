@@ -73,9 +73,10 @@ namespace ModdedEntityStates.Joe {
 
         private void FireAttacks() {
 
-            //yes this scales past framerate cause I am a maniac
+            //yes this scales past framerate cause I'm a maniac
             while(stopwatch > _overlapInterval * _overlapResets) {
                 ResetOverlap();
+                Util.PlaySound("play_joe_whoosh", gameObject);
                 _attack.Fire();
                 _overlapResets++;
             }
@@ -92,7 +93,8 @@ namespace ModdedEntityStates.Joe {
 
         private void ResetOverlap() {
             
-            this._attack = base.InitMeleeOverlap(_chargedDamage, null, modelLocator.modelTransform, "dash");
+            this._attack = base.InitMeleeOverlap(_chargedDamage, Modules.Assets.MercImpactEffect, modelLocator.modelTransform, "dash");
+            _attack.impactSound = Modules.Assets.FleshSliceSound.index;
             R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 

@@ -6,8 +6,6 @@ namespace ModdedEntityStates.Joe {
 
     public class Utility1Dash : UtilityBaseDash {
 
-        public static float Armor = 100f;
-
         public override void OnEnter() {
 
 			if (inputBank.skill1.down && activatorSkillSlot.stock > 0) {
@@ -23,6 +21,8 @@ namespace ModdedEntityStates.Joe {
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(Modules.Buffs.DashArmorBuff, duration + 0.1f);
             }
+
+            Util.PlaySound("play_joe_roguelDash", gameObject);
         }
 
         protected override void SetNextState() {

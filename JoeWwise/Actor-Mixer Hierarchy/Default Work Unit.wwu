@@ -45,6 +45,26 @@
 							</ReferenceList>
 							<ChildrenList>
 								<Sound Name="fleshSlice" ID="{4C78E493-C19E-4C41-99A8-94E81D74406B}" ShortID="553738284">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{74F989F1-D3F4-4664-B2B3-4491E4C68D67}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="152"/>
+															<Property Name="Min" Type="Real64" Value="-202"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
@@ -511,6 +531,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<Sound Name="_priAtt1tank" ID="{C0ADC32F-63AC-4620-A382-6C3EB00133C7}" ShortID="345876690">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
@@ -533,6 +560,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="_priAtt2tower" ID="{C29FE812-0FCD-4C53-9066-D6B637A14D1C}" ShortID="139693023">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
@@ -555,6 +589,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="FireExplosion7" ID="{D9DBB57C-A406-4777-8AAB-127B3043F700}" ShortID="266950592">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
@@ -577,6 +618,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="FireShoot1" ID="{8AE114CF-9FC4-45F3-902B-E1F2FE00C848}" ShortID="135878202">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
@@ -596,6 +644,48 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="FireShoot1" ID="{41D70197-BFAD-436A-9AF3-1DC75CC67CE4}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="roguelDash" ID="{3006A705-C7C4-4ED1-A14F-0583BA1200CC}" ShortID="311128910">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7624DB4E-B5B7-4169-9112-B8869E1C6B93}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="202"/>
+															<Property Name="Min" Type="Real64" Value="-202"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="roguelDash" ID="{FDDE21CA-9A10-443F-974C-157BB7B683D2}">
+											<Language>SFX</Language>
+											<AudioFile>roguelDash.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="851629378"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="roguelDash" ID="{FDDE21CA-9A10-443F-974C-157BB7B683D2}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>

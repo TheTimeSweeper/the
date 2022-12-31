@@ -30,14 +30,17 @@ namespace JoeModForReal.Content.Survivors {
             crosshair = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/SimpleDotCrosshair"),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 100f,
-            healthRegen = 1f,
-            armor = 20f,
+            maxHealth = 120f,
+            healthRegen = 2f,
+            armor = 30f,
 
             jumpCount = 2,
             
             aimOriginPosition = new Vector3(0, 1.3f, 0),
             cameraParamsDepth = -10,
+        
+
+            cameraParamsVerticalOffset = 1.0f,
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; }
@@ -51,8 +54,9 @@ namespace JoeModForReal.Content.Survivors {
         public override UnlockableDef characterUnlockableDef { get; }
         private static UnlockableDef masterySkinUnlockableDef;
 
-        public static float TenticleBuffHealMultiplier => TestValueManager.value1;
-        public static float TenticleMaxHealthMultiplier => TestValueManager.value2;
+        public static float DashArmor = 140;
+        public static float TenticleBuffHealMultiplier = 0.03f;
+        public static float TenticleMaxHealthMultiplier = 0.66f;
 
         public override void Initialize() {
             base.Initialize();
@@ -87,14 +91,13 @@ namespace JoeModForReal.Content.Survivors {
             //Modules.Prefabs.SetupHitbox(model, "Sword2", childLocator.FindChild("hitboxSwing2"));
             //Modules.Prefabs.SetupHitbox(model, "SwordJump", childLocator.FindChild("hitboxJumpSwing"));
         }
-        
-        public override void InitializeSkills()
-        {
+
+        public override void InitializeSkills() {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
             #region Primary
 
-            LookingDownSteppedSkillDef primarySkillDef = Modules.Skills.CreateSkillDef<LookingDownSteppedSkillDef>(
+            LookingDownSkillDef primarySkillDef = Modules.Skills.CreateSkillDef<LookingDownSkillDef>(
                 new SkillDefInfo("JoeSwing",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
@@ -105,12 +108,13 @@ namespace JoeModForReal.Content.Survivors {
             primarySkillDef.stepCount = 2;
             primarySkillDef.stepGraceDuration = 1.2f;
 
-            primarySkillDef.LookingDownIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
-            primarySkillDef.LookingDownState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
+            primarySkillDef.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
+            primarySkillDef.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
+            primarySkillDef.ConditionalRequriedStock = 0;
             primarySkillDef.LookingDownAngle = 42;
 
 
-            LookingDownSteppedSkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef<LookingDownSteppedSkillDef>(
+            LookingDownSkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef<LookingDownSkillDef>(
                 new SkillDefInfo("JoeSwingClassic",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME_CLASSIC",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
@@ -118,11 +122,23 @@ namespace JoeModForReal.Content.Survivors {
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryStupidSwing)),
                                  "Weapon",
                                  true) {
-                    mustKeyPress = true 
-            });
+                    mustKeyPress = true
+                });
             primarySkillDefSilly.stepCount = 2;
             primarySkillDefSilly.stepGraceDuration = 1;
 
+            primarySkillDef.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
+            primarySkillDef.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
+            primarySkillDef.ConditionalRequriedStock = 0;
+            primarySkillDef.LookingDownAngle = 42;
+
+            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDef);
+
+            if (Modules.Config.Cursed) {
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefSilly);
+            }
+
+            #region dev
             SkillDef primarySkillDefBomeb = Modules.Skills.CreateSkillDef(new SkillDefInfo("joeBomb",
                                                                      JOE_PREFIX + "PRIMARY_BOMB_NAME",
                                                                      JOE_PREFIX + "PRIMARY_BOMB_DESCRIPTION",
@@ -139,20 +155,24 @@ namespace JoeModForReal.Content.Survivors {
                                                                       "Weapon",
                                                                       false));
 
-            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe, primarySkillDef, primarySkillDefSilly);
+
+            if (FacelessJoePlugin.andrew) {
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe);
+            }
+            #endregion dev
             #endregion
-            
+
             #region Secondary
 
             SkillDef fireballSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SECONDARY_FIREBALL_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("skill2_icon"),
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Secondary1Fireball)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -160,7 +180,7 @@ namespace JoeModForReal.Content.Survivors {
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -174,16 +194,16 @@ namespace JoeModForReal.Content.Survivors {
 
             #region Utility
 
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+            SkillDef dashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = JOE_PREFIX + "UTILITY_DASH_NAME",
                 skillNameToken = JOE_PREFIX + "UTILITY_DASH_NAME",
                 skillDescriptionToken = JOE_PREFIX + "UTILITY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texUtilityIcon"),
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconUtility"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Utility1Dash)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 6f,
-                beginSkillCooldownOnSkillEnd = true,
+                beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
                 fullRestockOnAssign = true,
@@ -197,7 +217,7 @@ namespace JoeModForReal.Content.Survivors {
                 stockToConsume = 0
             });
 
-            Modules.Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
+            Modules.Skills.AddUtilitySkills(bodyPrefab, dashSkillDef);
 
             #endregion
 
@@ -207,11 +227,11 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
                 skillNameToken = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SPECIAL_TENTICLES_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Special1Tenticles)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -219,7 +239,7 @@ namespace JoeModForReal.Content.Survivors {
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -301,14 +321,15 @@ namespace JoeModForReal.Content.Survivors {
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
 
             if (sender.HasBuff(Buffs.TenticleBuff)) {
-                args.moveSpeedMultAdd += TestValueManager.value2 * sender.GetBuffCount(Buffs.TenticleBuff);
+                args.moveSpeedMultAdd += TestValueManager.value4 * sender.GetBuffCount(Buffs.TenticleBuff);
                 args.attackSpeedMultAdd += TestValueManager.value6 * sender.GetBuffCount(Buffs.TenticleBuff);
-                
-                args.jumpPowerMultAdd += TestValueManager.value3;
+                args.armorAdd += TestValueManager.value3 * sender.GetBuffCount(Buffs.TenticleBuff);
+
+                args.jumpPowerMultAdd += 0.5f;
             }
 
             if (sender.HasBuff(Buffs.DashArmorBuff)) {
-                args.armorAdd += TestValueManager.value7;
+                args.armorAdd += DashArmor;
             }
         }
 
@@ -322,7 +343,7 @@ namespace JoeModForReal.Content.Survivors {
 
                     float healthLimit = characterBody.maxHealth * TenticleMaxHealthMultiplier;
 
-                    float healAmount = Mathf.Min(damageInfo.damage * TenticleBuffHealMultiplier, healthLimit - characterBody.healthComponent.health);
+                    float healAmount = Mathf.Min(characterBody.maxHealth * TenticleBuffHealMultiplier, healthLimit - characterBody.healthComponent.health);
                     characterBody.healthComponent.Heal(healAmount, default(ProcChainMask));
                 }
             }

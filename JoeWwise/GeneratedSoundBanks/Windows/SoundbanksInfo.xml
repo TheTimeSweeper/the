@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="545665445" Language="SFX" Hash="3302816447">
+		<SoundBank Id="545665445" Language="SFX" Hash="2532992043">
 			<ObjectPath>\SoundBanks\Default Work Unit\joe</ObjectPath>
 			<ShortName>joe</ShortName>
 			<Path>joe.bnk</Path>
@@ -89,6 +89,14 @@
 						<File Id="533285121" Language="SFX">
 							<ShortName>_priAtt2tower.wav</ShortName>
 							<Path>SFX\_priAtt2tower_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2386271505" Name="play_joe_roguelDash" ObjectPath="\Events\Default Work Unit\play_joe_roguelDash">
+					<IncludedMemoryFiles>
+						<File Id="851629378" Language="SFX">
+							<ShortName>roguelDash.wav</ShortName>
+							<Path>SFX\roguelDash_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

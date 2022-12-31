@@ -9,15 +9,5 @@
             base.baseEarlyExitTime = 0.0f;
             base.keypress = true;
         }
-
-        protected override void SetNextState() {
-            //int index = this.swingIndex;
-            //if (index == 0) index = 1;
-            //else index = 0;
-
-            this.outer.SetNextState(new PrimaryStupidSwing {
-                swingIndex = this.swingIndex + 1
-            });
-        }
     }
 }

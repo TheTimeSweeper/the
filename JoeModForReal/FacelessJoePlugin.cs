@@ -5,6 +5,8 @@ using JoeModForReal.Content.Survivors;
 using System.Security;
 using System.Security.Permissions;
 using R2API.Utils;
+using System.Collections;
+using UnityEngine;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -13,6 +15,7 @@ namespace JoeModForReal {
 
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
 
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class FacelessJoePlugin : BaseUnityPlugin {
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
@@ -25,6 +28,8 @@ namespace JoeModForReal {
         public static FacelessJoePlugin instance;
         public static ManualLogSource Log;
 
+        public static bool andrew;
+
         void Awake() {
 
             instance = this;
@@ -34,6 +39,10 @@ namespace JoeModForReal {
             Modules.Language.HookRegisterLanguageTokens();
 
             Modules.Config.ReadConfig();
+            andrew &= Modules.Config.Debug;
+
+            if (Modules.Config.Debug)
+                Modules.Tokens.GenerateTokens();
         }
 
         private void Start() {
@@ -48,8 +57,8 @@ namespace JoeModForReal {
             Modules.Projectiles.Init();
             Modules.EntityStates.Init();
 
-            Modules.Tokens.GenerateTokens();
             Modules.Compat.Initialize();
+
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
@@ -61,8 +70,19 @@ namespace JoeModForReal {
 
             new JoeSurivor().Initialize();
 
+            Hook();
+
             Logger.LogInfo("[Initialized]");
         }
 
+        private void Hook() {
+            //RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
+        }
+
+        private void GlobalEventManager_onCharacterDeathGlobal(RoR2.DamageReport obj) {
+            //if (Modules.Config.jerry.Value) {
+            //    RoR2.Util.PlaySound("play_joe_jerryDeath", obj.victimBody.gameObject);
+            //}
+        }
     }
 }

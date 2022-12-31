@@ -210,7 +210,7 @@ namespace Xft
             //mElapsedTime -= UpdateInterval;
 
             UpdateVertex();
-            //UpdateIndices();
+            UpdateIndices();
 
         }
 

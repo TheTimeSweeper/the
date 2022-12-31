@@ -5,9 +5,10 @@ using System.Runtime.CompilerServices;
 namespace Modules {
     public class Compat {
 
-        public static bool TinkersSatchelInstalled;
-        public static bool AetheriumInstalled;
-        public static bool ScepterInstalled;
+        public static bool TinkersSatchelInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.TinkersSatchel");
+        public static bool AetheriumInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.KomradeSpectre.Aetherium");
+        public static bool ScepterInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
+        public static bool RiskOfOptionsInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
         //public static bool VREnabled;
 
         public static void Initialize() {
@@ -17,15 +18,6 @@ namespace Modules {
             //if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI")) {
             //    BetterUICompat.init();
             //}
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.TinkersSatchel")) {
-                TinkersSatchelInstalled = true;
-            }
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.KomradeSpectre.Aetherium")) {
-                AetheriumInstalled = true;
-            }
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter")) {
-                ScepterInstalled = true;
-            }
             //if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DrBibop.VRAPI")) {
             //    VRCompat.init();
             //}

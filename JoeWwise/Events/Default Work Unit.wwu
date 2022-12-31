@@ -58,6 +58,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="play_joe_priAtt2tower" ID="{A25E0D73-5E18-40E9-A35C-9017129FD629}">
+					<ChildrenList>
+						<Action Name="" ID="{B8FDC831-A6E7-4435-8562-EC99FD42778B}" ShortID="391107341">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="_priAtt2tower" ID="{C29FE812-0FCD-4C53-9066-D6B637A14D1C}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_joe_roguelDash" ID="{F05E22B9-4DA9-4BF0-A945-B5EBD35474E2}">
+					<ChildrenList>
+						<Action Name="" ID="{48407039-432E-4A97-A4F5-CC1BBC49F9F0}" ShortID="948418987">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="roguelDash" ID="{3006A705-C7C4-4ED1-A14F-0583BA1200CC}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

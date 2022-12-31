@@ -1,11 +1,12 @@
 ﻿using EntityStates;
 using RoR2;
+using System;
 using UnityEngine;
 
 namespace ModdedEntityStates.Joe {
     public class Primary1JumpSwingFall : BaseSkillState {
 
-        private float _extraGravity = 2.2f;
+        private float _extraGravity = 2.7f;
 
         public override void OnEnter() {
 
@@ -14,10 +15,7 @@ namespace ModdedEntityStates.Joe {
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
             ref float ySpeed = ref characterMotor.velocity.y;
-            ySpeed = Mathf.Max(ySpeed, 0);
-
-            //TODO: add/set initial upwards yspeed 
-            //       - hithop?
+            ySpeed = Mathf.Min(ySpeed, 0);
 
             base.OnEnter();
         }
@@ -29,12 +27,28 @@ namespace ModdedEntityStates.Joe {
             ref float ySpeed = ref characterMotor.velocity.y;
             ySpeed += Physics.gravity.y * _extraGravity * Time.deltaTime;
 
-            if (base.isGrounded) {
+            if (base.isGrounded || CheckEnemy()) {
                 base.outer.SetNextState(new Primary1JumpSwingLand());
                 return;
             }
 
             base.FixedUpdate();
+        }
+
+        private bool CheckEnemy() {
+
+            Ray mond = new Ray(FindModelChild("jumpSwingCheck").position, Vector3.forward);
+
+            if (Util.CharacterSpherecast(gameObject, mond, 1.3f, out RaycastHit HitInfo, 0, LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal)) {
+
+                if (FriendlyFireManager.ShouldDirectHitProceed(HitInfo.collider.GetComponent<HurtBox>().healthComponent, teamComponent.teamIndex)){
+                    return true;
+                }
+                //if (HitInfo.collider.GetComponent<HurtBox>().healthComponent.body.teamComponent.teamIndex == teamComponent.teamIndex)
+                   //return HitInfo.collider.GetComponent<HurtBox>().healthComponent.body;
+            }
+
+            return false;
         }
 
         public override InterruptPriority GetMinimumInterruptPriority() {
