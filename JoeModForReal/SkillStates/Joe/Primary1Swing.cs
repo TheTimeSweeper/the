@@ -6,8 +6,22 @@ namespace ModdedEntityStates.Joe {
 
     public class Primary1Swing : BaseMeleeAttackButEpic {
 
-        public static float swingDamage => 1.8f;
+        public static float swingDamage => 1.6f;
+
+        public float LookingDownAngle = 42;
+        private bool jumpSwing;
+
         public override void OnEnter() {
+
+            Vector3 dir = GetAimRay().direction.normalized;
+
+            bool looking = Vector3.Angle(dir, Vector3.down) <= LookingDownAngle;
+
+            if (!isGrounded && looking) {
+                base.outer.SetNextState(new Primary1JumpSwingFall());
+                jumpSwing = true;
+                return;
+            }
 
             SetSwingValues();
 
@@ -44,6 +58,9 @@ namespace ModdedEntityStates.Joe {
 
         public override void FixedUpdate() {
 
+            if (jumpSwing)
+                return;
+
             base.FixedUpdate();
             base.StartAimMode();
         }
@@ -65,6 +82,8 @@ namespace ModdedEntityStates.Joe {
 
         public override void OnExit() {
 
+            if (jumpSwing)
+                return;
             base.OnExit();
         }
     }

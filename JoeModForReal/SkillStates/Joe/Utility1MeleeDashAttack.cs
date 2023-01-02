@@ -13,19 +13,15 @@ namespace ModdedEntityStates.Joe {
         private float _overlapInterval;
         private int _overlapResets;
 
-        private float _chargedDamage;
+        public float chargedDamage = 1;
 
 		private OverlapAttack _attack;
 
         private Transform _modelTransform;
         
-		public Utility1MeleeDashAttack(float dam) {
-            this._chargedDamage = dam;
-        }
-        
         public override void OnEnter() {
 
-            speedCoefficient = _chargedDamage * 2;
+            speedCoefficient = chargedDamage * 2;
             duration = 1f;
             _travelEndPercentTime = 17/40f;//todo testvaluemanager
             
@@ -93,7 +89,7 @@ namespace ModdedEntityStates.Joe {
 
         private void ResetOverlap() {
             
-            this._attack = base.InitMeleeOverlap(_chargedDamage, Modules.Assets.MercImpactEffect, modelLocator.modelTransform, "dash");
+            this._attack = base.InitMeleeOverlap(chargedDamage, Modules.Assets.MercImpactEffect, modelLocator.modelTransform, "dash");
             _attack.impactSound = Modules.Assets.FleshSliceSound.index;
             R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }

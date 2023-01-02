@@ -21,13 +21,13 @@ namespace ModdedEntityStates.Joe {
         }
 
         public override void FixedUpdate() {
-
+            
             StartAimMode();
 
             ref float ySpeed = ref characterMotor.velocity.y;
             ySpeed += Physics.gravity.y * _extraGravity * Time.deltaTime;
 
-            if (base.isGrounded || CheckEnemy()) {
+            if (base.isGrounded /*|| CheckEnemy()*/) {
                 base.outer.SetNextState(new Primary1JumpSwingLand());
                 return;
             }
@@ -36,6 +36,9 @@ namespace ModdedEntityStates.Joe {
         }
 
         private bool CheckEnemy() {
+
+            if (base.fixedAge < 0.1f)
+                return false;
 
             Ray mond = new Ray(FindModelChild("jumpSwingCheck").position, Vector3.forward);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ModdedEntityStates;
 using ModdedEntityStates.Joe;
 using Modules;
 
@@ -9,6 +10,9 @@ namespace Modules {
         public static void Init() {
 
             #region joe
+
+            Content.AddEntityState(typeof(WindDownState));
+
             //prim
             Content.AddEntityState(typeof(JoeMain));
 

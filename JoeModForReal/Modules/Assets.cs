@@ -59,18 +59,39 @@ namespace Modules {
             MercSwordSlash = CloneAndColorEffect("RoR2/Base/Merc/MercSwordSlash.prefab", Color.green, "GreenMercSwordSlash");
             CreateEffectFromObject(MercSwordSlash, "", true, VFXAttributes.VFXPriority.Always);
 
-            MercImpactEffect = CloneAndColorEffect("RoR2/Base/Merc/OmniImpactVFXSlashMerc.prefab", Color.green, "GreenOmniImpactVFXSlashMerc");
+            MercImpactEffect = CloneAndColorEffectLegacy("Prefabs/Effects/OmniEffect/OmniImpactVFXSlashMerc", Color.green, "GreenOmniImpactVFXSlashMerc");
+            MercImpactEffect.GetComponent<EffectComponent>().soundName = "";
             CreateEffectFromObject(MercImpactEffect, "", false, VFXAttributes.VFXPriority.Medium);
 
             FleshSliceSound = CreateNetworkSoundEventDef("play_joe_fleshSlice");
             FireballImpactSound = CreateNetworkSoundEventDef("play_joe_fireExplosion");
 
         }
-        
+
+        public static void LateInitialize() {
+
+            TenticlesSpelledWrong = CreateTenticles();
+        }
+
         private static GameObject CloneAndColorEffect(string addressablesPath, Color color, string name) {
 
             GameObject MercSwordSlash = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>(addressablesPath).WaitForCompletion(), name);
+            
+            recolorEffect(color, MercSwordSlash);
 
+            return MercSwordSlash;
+        }
+
+        private static GameObject CloneAndColorEffectLegacy(string legacyPath, Color color, string name) {
+
+            GameObject MercSwordSlash = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>(legacyPath), name);
+
+            recolorEffect(color, MercSwordSlash);
+
+            return MercSwordSlash;
+        }
+
+        private static void recolorEffect(Color color, GameObject MercSwordSlash) {
             ParticleSystemRenderer[] rends = MercSwordSlash.GetComponentsInChildren<ParticleSystemRenderer>();
 
             foreach (ParticleSystemRenderer rend in rends) {
@@ -87,14 +108,6 @@ namespace Modules {
             //    ParticleSystem.MainModule main = particleSystem.main;
             //    main.startColor = color;
             //}
-
-            return MercSwordSlash;
-        }
-
-        public static void LateInitialize() {
-
-            TenticlesSpelledWrong = CreateTenticles();
-
         }
 
         private static GameObject CreateTenticles() {

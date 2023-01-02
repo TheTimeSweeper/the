@@ -7,7 +7,7 @@ namespace ModdedEntityStates.Joe {
 
         public static float BaseMaxChargeDuration = 1;
         public static float MinDamageCoefficient = 1;
-        public static float MaxDamageCoefficient = 4;
+        public static float MaxDamageCoefficient = 5;
 
         private float _maxChargeDuration;
         private float _chargeTimer;
@@ -45,7 +45,9 @@ namespace ModdedEntityStates.Joe {
                 float dam = Mathf.Lerp(MinDamageCoefficient, MaxDamageCoefficient, _chargeTimer / _maxChargeDuration);
                 //string shootSound = dam >= MaxDamageCoefficient ? "Play_RayGunBigClassic" : "Play_RayGun";
                 _success = true;
-                EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new Utility1MeleeDashAttack(dam));
+                Utility1MeleeDashAttack newNextState = new Utility1MeleeDashAttack();
+                newNextState.chargedDamage = dam;
+                EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(newNextState);
                 outer.SetNextStateToMain();
             }
         }

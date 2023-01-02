@@ -6,10 +6,11 @@ using EntityStates;
 
 namespace JoeModForReal.Content {
 
-    //didn't work for some reason
+    //didn't work
     public class ComboInputSkillDef : ConditionalSkillDef {
 
         protected override bool CheckCondition(GenericSkill skillSlot) {
+
             return skillSlot.characterBody.inputBank.skill1.down;
         }
     }
@@ -53,27 +54,28 @@ namespace JoeModForReal.Content {
             return ConditionalIcon != null && CanExecuteCondition(skillSlot) ? ConditionalIcon : icon;
         }
 
-        public override EntityState InstantiateNextState([NotNull] GenericSkill skillSlot) {
+        //didn't work in mp. moving back to skillstate onenter
+        //public override EntityState InstantiateNextState([NotNull] GenericSkill skillSlot) {
 
-            SerializableEntityStateType state = this.activationState;
+        //    SerializableEntityStateType state = this.activationState;
 
-            if (CanExecuteCondition(skillSlot)) {
-                state = ConditionalState;
-                skillSlot.DeductStock(ConditionalRequriedStock);
-            }
+        //    if (CanExecuteCondition(skillSlot)) {
+        //        state = ConditionalState;
+        //        skillSlot.DeductStock(ConditionalRequriedStock);
+        //    }
 
-            EntityState entityState = EntityStateCatalog.InstantiateState(state);
-            ISkillState skillState;
-            if ((skillState = (entityState as ISkillState)) != null) {
-                skillState.activatorSkillSlot = skillSlot;
-            }
+        //    EntityState entityState = EntityStateCatalog.InstantiateState(state);
+        //    ISkillState skillState;
+        //    if ((skillState = (entityState as ISkillState)) != null) {
+        //        skillState.activatorSkillSlot = skillSlot;
+        //    }
             
-            SteppedSkillDef.InstanceData instanceData = (SteppedSkillDef.InstanceData)skillSlot.skillInstanceData;
-            SteppedSkillDef.IStepSetter stepSetter;
-            if ((stepSetter = (entityState as SteppedSkillDef.IStepSetter)) != null) {
-                stepSetter.SetStep(instanceData.step);
-            }
-            return entityState;
-        }
+        //    SteppedSkillDef.InstanceData instanceData = (SteppedSkillDef.InstanceData)skillSlot.skillInstanceData;
+        //    SteppedSkillDef.IStepSetter stepSetter;
+        //    if ((stepSetter = (entityState as SteppedSkillDef.IStepSetter)) != null) {
+        //        stepSetter.SetStep(instanceData.step);
+        //    }
+        //    return entityState;
+        //}
     }
 }

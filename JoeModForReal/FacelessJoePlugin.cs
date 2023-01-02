@@ -57,6 +57,8 @@ namespace JoeModForReal {
             Modules.Projectiles.Init();
             Modules.EntityStates.Init();
 
+            Modules.DamageTypes.RegisterDamageTypes();
+
             Modules.Compat.Initialize();
 
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules

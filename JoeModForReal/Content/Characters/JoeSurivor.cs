@@ -32,7 +32,7 @@ namespace JoeModForReal.Content.Survivors {
 
             maxHealth = 120f,
             healthRegen = 2f,
-            armor = 30f,
+            armor = 20f,
 
             jumpCount = 2,
             
@@ -49,12 +49,17 @@ namespace JoeModForReal.Content.Survivors {
 
         public override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
 
-        public override ConfigEntry<bool> characterEnabledConfig => null;// Modules.Config.CharacterEnableConfig(bodyName, false, "Very in-dev test character that was used as a basis for tesla trooper. Enable for fun");
-
+        public override ConfigEntry<bool> characterEnabledConfig => null;
+        
         public override UnlockableDef characterUnlockableDef { get; }
         private static UnlockableDef masterySkinUnlockableDef;
 
-        public static float DashArmor = 140;
+        public static float DashArmor = TestValueManager.value2;// 140;
+
+        public static float TenticlesArmor => TestValueManager.value3;
+        public static float TenticleMoveSpeedAddition => TestValueManager.value4;
+        public static float TenticleAttackSpeed => TestValueManager.value5;
+
         public static float TenticleBuffHealMultiplier = 0.03f;
         public static float TenticleMaxHealthMultiplier = 0.66f;
 
@@ -118,7 +123,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("JoeSwingClassic",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME_CLASSIC",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("skill1_icon"),
+                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryStupidSwing)),
                                  "Weapon",
                                  true) {
@@ -243,7 +248,8 @@ namespace JoeModForReal.Content.Survivors {
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+                keywordTokens = new string[] { JOE_PREFIX + "KEYWORD_TENTICLES" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, tenticlesSkillDef);
@@ -263,8 +269,8 @@ namespace JoeModForReal.Content.Survivors {
             List<SkinDef> skins = new List<SkinDef>();
             
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_DEFAULT_SKIN_NAME",
-                Assets.LoadAsset<Sprite>("texMainSkin"),
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "DEFAULT_SKIN",
+                Assets.LoadAsset<Sprite>("texiconSkinDefault"),
                 defaultRenderers,
                 model);
 
@@ -321,9 +327,9 @@ namespace JoeModForReal.Content.Survivors {
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
 
             if (sender.HasBuff(Buffs.TenticleBuff)) {
-                args.moveSpeedMultAdd += TestValueManager.value4 * sender.GetBuffCount(Buffs.TenticleBuff);
-                args.attackSpeedMultAdd += TestValueManager.value6 * sender.GetBuffCount(Buffs.TenticleBuff);
-                args.armorAdd += TestValueManager.value3 * sender.GetBuffCount(Buffs.TenticleBuff);
+                args.moveSpeedMultAdd += TenticleMoveSpeedAddition * sender.GetBuffCount(Buffs.TenticleBuff);
+                args.attackSpeedMultAdd += TenticleAttackSpeed * sender.GetBuffCount(Buffs.TenticleBuff);
+                args.armorAdd += TenticlesArmor/* * sender.GetBuffCount(Buffs.TenticleBuff)*/;
 
                 args.jumpPowerMultAdd += 0.5f;
             }

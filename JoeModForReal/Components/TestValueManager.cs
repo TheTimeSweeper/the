@@ -13,13 +13,13 @@ public class TestValueManager : MonoBehaviour {
 
     //compiler flags when
     private bool _testingEnabled => Modules.Config.Debug;
+    public static float value1 = 5.5f;
+
+    public static float value2 = 120f;
 
     public static float value3 = 50f;
     public static float value4 = 0.5f;
-
-    public static float value5 = 1.8f;
-    public static float value6 = 0.3f;
-    public static float value8 = 3;
+    public static float value5 = 0.2f;
 
     void Update() {
         if (!_testingEnabled)
@@ -28,13 +28,13 @@ public class TestValueManager : MonoBehaviour {
         if (!Input.GetKey(KeyCode.LeftAlt))
             return;
 
+        manageTestValue(ref value1, "1 fireball dam", KeyCode.T, KeyCode.G, 0.1f);
+
+        manageTestValue(ref value2, "2 dash armor", KeyCode.Y, KeyCode.H, 10f);
+
         manageTestValue(ref value3, "3 tenticle armor", KeyCode.U, KeyCode.J, 1f);
         manageTestValue(ref value4, "4 tenticle move", KeyCode.I, KeyCode.K, 0.1f);
-
-        manageTestValue(ref value5, "5 primary dam", KeyCode.O, KeyCode.L, 0.1f);
-        manageTestValue(ref value6, "6 tenticle aspeed", KeyCode.P, KeyCode.Semicolon, 0.1f);
-
-        manageTestValue(ref value8, "8 jumpswingdam", KeyCode.Keypad7, KeyCode.Keypad4, 0.1f);
+        manageTestValue(ref value5, "5 tenticle aspeed", KeyCode.O, KeyCode.L, 0.1f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {

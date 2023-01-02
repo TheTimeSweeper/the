@@ -67,9 +67,15 @@ namespace Modules {
             #endregion
 
             #region Special
-
             Language.Add(prefix + "SPECIAL_TENTICLES_NAME", "Tenticles");
-            Language.Add(prefix + "SPECIAL_TENTICLES_DESCRIPTION", $"Perform a ritual, summoning tentacles that increase your {Helpers.UtilityText("Armor")}, {Helpers.UtilityText("Move Speed")}, {Helpers.UtilityText("Attack Speed")}, and {Helpers.UtilityText("Jump Height")}, and grants <style=cIsHealing>Life Steal</style> up to {JoeSurivor.TenticleMaxHealthMultiplier * 100}% max health.");
+            Language.Add(prefix + "SPECIAL_TENTICLES_DESCRIPTION", $"Perform a ritual, summoning tentacles that <style=cIsHealing>Empower</style> your stats, and grant <style=cIsHealing>Life Steal</style> up to {JoeSurivor.TenticleMaxHealthMultiplier * 100}% max health.");
+
+            Language.Add(prefix + "KEYWORD_TENTICLES", Helpers.KeywordText("Empower",
+                $"Increase {Helpers.UtilityText($"Armor")} by {Helpers.UtilityText($"{JoeSurivor.TenticlesArmor}")},\n" +
+                $"Increase {Helpers.UtilityText($"Move Speed")} by {Helpers.UtilityText($"{JoeSurivor.TenticleMoveSpeedAddition * 100}%")},\n" +
+                $"Increase {Helpers.UtilityText($"Attack Speed")} by {Helpers.UtilityText($"{JoeSurivor.TenticleAttackSpeed * 100}%")},\n" +
+                $"Increase {Helpers.UtilityText("Jump Height")} by {Helpers.UtilityText("50%")}"));
+            
             #endregion
 
             #region Achievements

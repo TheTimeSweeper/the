@@ -81,6 +81,10 @@ internal static class Helpers {
         }
         return retv;
     }
+
+    internal static string KeywordText(string v, object p) {
+        throw new NotImplementedException();
+    }
 }
 
 public static class ArrayHelper {
