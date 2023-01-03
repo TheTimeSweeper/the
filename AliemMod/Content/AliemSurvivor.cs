@@ -35,7 +35,7 @@ namespace AliemMod.Content.Survivors {
 
             maxHealth = 110f,
             healthRegen = 1.5f,
-            armor = 0f,
+            armor = 10f,
 
             jumpCount = 1,
 
@@ -251,7 +251,7 @@ namespace AliemMod.Content.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM3)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,

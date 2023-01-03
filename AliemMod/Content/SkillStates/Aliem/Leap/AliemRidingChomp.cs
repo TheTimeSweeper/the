@@ -6,7 +6,7 @@ namespace ModdedEntityStates.Aliem {
 
     internal class AliemRidingChomp : BaseRidingState {
 
-		public static float ChompDamageCoefficient = 9;
+		public static float ChompDamageCoefficient = 5;
 
 		public float baseDuration = 0.3f;
 		public float chompTime = 1f;
@@ -43,6 +43,7 @@ namespace ModdedEntityStates.Aliem {
 				BlastAttack blast = new BlastAttack {
 					attacker = base.gameObject,
 					baseDamage = this.damageStat * ChompDamageCoefficient,
+					damageType = DamageType.BonusToLowHealth,
 					//baseForce = this.blastForce,
 					//bonusForce = this.blastBonusForce,
 					crit = this.RollCrit(),
@@ -62,7 +63,7 @@ namespace ModdedEntityStates.Aliem {
 			}
 
             if (NetworkServer.active) {
-				healthComponent.Heal(characterBody.maxHealth * 0.1f, default(ProcChainMask));
+				healthComponent.Heal(characterBody.maxHealth * 0.3f, default(ProcChainMask));
             }
 		}
 

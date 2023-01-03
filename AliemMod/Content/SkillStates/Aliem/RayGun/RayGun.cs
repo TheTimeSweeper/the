@@ -8,7 +8,7 @@ namespace ModdedEntityStates.Aliem {
 		public static float BaseDuration = 0.3f;
 		public static float BaseDelayDuration = 0.00f;
 
-		public static float DamageCoefficient = 2.2f;
+		public static float DamageCoefficient = 2.0f;
 		//needs to be set in the projectilecontroller component
 		//public static float procCoefficient = 1f;
 

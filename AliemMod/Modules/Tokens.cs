@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Modules
 {
     internal static class Tokens {
-
+        
         public static void AddTokens()
         {
             AddAliemTokens();
@@ -62,7 +62,7 @@ namespace Modules
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
             LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", $"Dive forward at hihg speed for {Helpers.DamageValueText(AliemLeap.DamageCoefficient)}. If landing on the ground, hold input to {Helpers.UtilityText("burrow")} into the ground. " +
-                $"If an enemy is hit, hold input to {Helpers.UtilityText("ride")} them. While riding, chomp for {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, and </style=cIsHealing>heal for 10% of maximum health</style>.");
+                $"If an enemy is hit, hold input to {Helpers.UtilityText("ride")} them. While riding, chomp to <style=cIsHealing>heal for 30% of maximum health</style> and deal {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, up to {Helpers.DamageText("3x damage")} to low health targets.");
             #endregion
 
             #region Special
@@ -73,8 +73,6 @@ namespace Modules
             LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_NAME", "Big Grenade");
             specialDesc += $"{Helpers.ScepterDescription("Double area, double damage")}";
             LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION", specialDesc);
-
-
             #endregion
 
             #region Achievements

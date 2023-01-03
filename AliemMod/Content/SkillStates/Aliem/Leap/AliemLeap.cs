@@ -37,7 +37,7 @@ namespace ModdedEntityStates.Aliem {
 				}
 			}
 		}
-		public static float DamageCoefficient = 2;
+		public static float DamageCoefficient = 1;
 
 		private OverlapAttack overlapAttack;
 		//private List<HurtBox> overlapAttackHits = new List<HurtBox>();

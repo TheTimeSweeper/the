@@ -22,7 +22,7 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
   - Aetherium (Item Displays)
   - CustomEmotesAPI
 
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/CSS2.png)]()
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/CSS2.png)]()
 
 Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7).  
 ___
@@ -30,12 +30,12 @@ ___
 Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
 
 Tesla Trooper is a mid-range bruiser on his own, and an all-range monster when he builds his Tesla Tower.  
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/zaps_combined.png)]()
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/zaps_combined.png)]()
 
 Desolator is a walking powerhouse of radiation and area damage.  
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/rad.png)]()
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/rad.png)]()
 
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/readme/Icons.png)]()
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/Icons.png)]()
 
 ## Credits
 SkeletorChampion - Made the character models, which kicked off the mod. Without him, the mod wouldn't exist.  
@@ -51,7 +51,7 @@ Westwood Studios - sounds, inspiration
 Thanks to the lovely reception from the community, including all the great feedback and ideas c:
 
 ## Languages
-If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language).  
+If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/JoeMod/Release/plugins/Language).  
 Bazillion thanks to those that have, and in advance to those that may
 
 Currently Supported:
@@ -97,7 +97,7 @@ ___
 `2.1.0`
  - added sit emotes for both men
  - added language support. thanks to Damglador for pushing for it, and thanks to Moffein and Anreol for the code
-   - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/Release/plugins/language)
+   - if you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/JoeMod/Release/plugins/Language)
  - made desolator back pack tube thing change color with recolors
  - fixed "voice line in css" config for playing wrong voice lines for desolator
  - fixed not being able to play voice lines while using certain abliites
