@@ -89,7 +89,7 @@ namespace Modules
             //    ReticleType.Center,
             //    "Center: reticle will be on the center of the enemy\n" +
             //    "Hurtbox: reticle will be on the specific hurtbox you're targeting\n" +
-            //    "Distance on m1 is still based on hurtbox, does not change gameplay.");
+            //    "Does not change gameplay. Distance on m1 is still based on hurtbox.");
 
             TowerTargeting = TeslaTrooperPlugin.instance.Config.Bind(
                 sectionTeslaTrooper,
