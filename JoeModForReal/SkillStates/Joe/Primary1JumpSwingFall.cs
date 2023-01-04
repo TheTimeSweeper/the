@@ -28,11 +28,16 @@ namespace ModdedEntityStates.Joe {
             ySpeed += Physics.gravity.y * _extraGravity * Time.deltaTime;
 
             if (base.isGrounded /*|| CheckEnemy()*/) {
-                base.outer.SetNextState(new Primary1JumpSwingLand());
+                base.outer.SetNextState(GetLandState());
                 return;
             }
 
             base.FixedUpdate();
+        }
+
+
+        protected virtual EntityState GetLandState() {
+            return new Primary1JumpSwingLand();
         }
 
         private bool CheckEnemy() {

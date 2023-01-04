@@ -1,12 +1,63 @@
-﻿using ModdedEntityStates.BaseStates;
+﻿using EntityStates;
+using ModdedEntityStates.BaseStates;
 using RoR2;
+using RoR2.Projectile;
+using System;
 using UnityEngine;
 
 namespace ModdedEntityStates.Joe {
 
+    public class Primary1ScepterSwing : Primary1Swing {
+        public static float BeamDamage => 1.4f;
+
+        protected override void FireAttack() {
+            base.FireAttack();
+
+            if (isAuthority) {
+                FireSwordBeamAuthority();
+            }
+        }
+
+        private void FireSwordBeamAuthority() {
+
+            Ray aimRay = base.GetAimRay();
+
+            ProjectileManager.instance.FireProjectile(Modules.Projectiles.JoeSwordBeam,
+                aimRay.origin,
+                Util.QuaternionSafeLookRotation(aimRay.direction),
+                base.gameObject,
+                Secondary1Fireball.damageCoefficient * this.damageStat,
+                4000f,
+                base.RollCrit(),
+                DamageColorIndex.Default,
+                null,
+                100);
+        }
+
+        protected override EntityState GetJumpSwingState() {
+            return new Primary1ScepterJumpSwingFall();
+        }
+    }
+
+    public class Primary1ScepterJumpSwingFall : Primary1JumpSwingFall {
+
+        protected override EntityState GetLandState() {
+            return base.GetLandState();
+        }
+    }
+
+    public class Primary1ScepterJumpSwingLand : Primary1JumpSwingLand {
+
+        protected override void FireAttack() {
+            base.FireAttack();
+
+
+        }
+    }
+
     public class Primary1Swing : BaseMeleeAttackButEpic {
 
-        public static float swingDamage => 1.6f;
+        public static float swingDamage => TestValueManager.value2;// 1.6f;
 
         public float LookingDownAngle = 42;
         private bool jumpSwing;
@@ -18,7 +69,7 @@ namespace ModdedEntityStates.Joe {
             bool looking = Vector3.Angle(dir, Vector3.down) <= LookingDownAngle;
 
             if (!isGrounded && looking) {
-                base.outer.SetNextState(new Primary1JumpSwingFall());
+                base.outer.SetNextState(GetJumpSwingState());
                 jumpSwing = true;
                 return;
             }
@@ -27,6 +78,10 @@ namespace ModdedEntityStates.Joe {
 
             base.OnEnter();
             R2API.DamageAPI.AddModdedDamageType(attack, Modules.DamageTypes.TenticleLifeStealing);
+        }
+
+        protected virtual EntityState GetJumpSwingState() {
+            return new Primary1JumpSwingFall();
         }
 
         protected virtual void SetSwingValues() {

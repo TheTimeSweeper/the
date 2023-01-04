@@ -131,13 +131,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367022257695261821}
-  m_LocalRotation: {x: 0.6532805, y: -0.27059862, z: -0.27059785, w: 0.65328234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5202824, y: 1.631665, z: 1.5202824}
+  m_LocalScale: {x: 1.8094522, y: 1.809452, z: 1.8094522}
   m_Children: []
   m_Father: {fileID: 1367022258136526145}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45.000004, y: -90.00001, z: -90.00001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1367022257695261823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +178,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1367022257695261822}
-  - {fileID: 1833691781086343788}
   m_Father: {fileID: 1367022258176961622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -484,7 +483,6 @@ MonoBehaviour:
   groupName: Zone
   hitBoxes:
   - {fileID: 1367022257695261823}
-  - {fileID: 6204718591270176432}
 --- !u!114 &1367022258176961608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,46 +642,3 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeMax: 11
---- !u!1 &2804324795029848059
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1833691781086343788}
-  - component: {fileID: 6204718591270176432}
-  m_Layer: 14
-  m_Name: Cube (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1833691781086343788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804324795029848059}
-  m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5202824, y: 1.631665, z: 1.5202824}
-  m_Children: []
-  m_Father: {fileID: 1367022258136526145}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
---- !u!114 &6204718591270176432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804324795029848059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1783796254, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

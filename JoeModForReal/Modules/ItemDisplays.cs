@@ -19,7 +19,14 @@ namespace Modules
             PopulateDisplaysFromBody("MageBody");
             PopulateDisplaysFromBody("LunarExploderBody");
 
-            AddCustomLightningArm();
+            //AddCustomLightningArm();
+            AddMasterSwordDisplay();
+        }
+
+        private static void AddMasterSwordDisplay() {
+            GameObject display = Assets.LoadAsset<GameObject>("displayMasterSword");
+            display.GetComponent<Renderer>().material.SetHotpooMaterial();
+            itemDisplayPrefabs["displaymastersword"] = display;
         }
 
         private static void PopulateDisplaysFromBody(string bodyName)

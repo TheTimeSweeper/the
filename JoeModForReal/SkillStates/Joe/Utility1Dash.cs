@@ -8,7 +8,7 @@ namespace ModdedEntityStates.Joe {
 
         public override void OnEnter() {
 
-			if (inputBank.skill1.down && activatorSkillSlot.stock > 0) {
+			if (isAuthority && inputBank.skill1.down && activatorSkillSlot.stock > 0) {
 
 				EntityStateMachine.FindByCustomName(gameObject, "Body").SetNextState(new Utility1ChargeMeleeDash());
 
@@ -17,7 +17,7 @@ namespace ModdedEntityStates.Joe {
 			}
             
             base.OnEnter();
-
+            
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(Modules.Buffs.DashArmorBuff, duration + 0.1f);
             }

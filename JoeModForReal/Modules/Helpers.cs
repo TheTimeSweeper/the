@@ -5,7 +5,7 @@ using Modules;
 using RoR2;
 
 internal static class Helpers {
-    public const string agilePrefix = "<style=cIsUtility>Agile.</style> ";
+    public const string agilePrefix = "<style=cIsUtility>Agile.</style>";
 
     public static string DamageText(string text) {
         return $"<style=cIsDamage>{text}</style>";

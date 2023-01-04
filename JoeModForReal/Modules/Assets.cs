@@ -25,7 +25,6 @@ namespace Modules {
         public static Shader hotpoo = RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
         #endregion
 
-        public static GameObject JoeFireball => Projectiles.JoeFireball;
         public static GameObject JoeImpactEffect;
         public static GameObject JoeJumpSwingEffect;
         public static GameObject TenticlesSpelledWrong;

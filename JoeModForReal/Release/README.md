@@ -1,7 +1,8 @@
 # Faceless Joe
 - Adds Faceless Joe, a fast-paced melee character made just for fun
 
-Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/ZZzmFgDbCH).
+Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/kZPNbXjqBg).  
+Was just fuckin around when I made him but all input will still be appreciated.
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeModForReal/Release/_readme/css.png)]()
 
@@ -21,14 +22,13 @@ literally no one else to credit wow
 uh my mom for giving birth to me
 
 ## Known Issues
-- he not done
-- not multiplayer tested
+- just look at him
 
 ## Future Plans
 - FINALLY GET FUCKING ARTIFACT OF VENGEANCE
-- test multiplayer
 - Scepter, Skills++, Emote
-- Character was made just for fun, but if he's enjoyable enough and anyone would like to help with models, icons, etc, I'm down to put in the work making him a real character.
+- finish item displays
+- Character was made just for fun, but if he's enjoyable enough and anyone would like to help with models, animations, icons, etc, I'm down to put in the work making him a real character.
 
 ## Changelog
 

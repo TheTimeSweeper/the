@@ -40,7 +40,7 @@ namespace ModdedEntityStates.Aliem {
 		}
 
         protected virtual void ModifyState() { }
-
+		
         public override void FixedUpdate() {
 			base.FixedUpdate();
 		}

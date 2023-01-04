@@ -2,7 +2,7 @@
     "name": "Faceless_Joe",
     "version_number": "0.1.0",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Adds Faceless Joe from the hit game jam game Joe and the Zambambos. WIP",
+    "description": "A fast-paced in-your-face melee character. Personal guy I did just for fun",
     "dependencies": [
         "bbepis-BepInExPack-5.4.2101",
         "RiskofThunder-R2API_Core-5.0.3",

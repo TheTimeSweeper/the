@@ -8,6 +8,7 @@ using UnityEngine;
 using Modules.Characters;
 using Modules.Survivors;
 using Modules;
+using JoeModForReal.Components;
 
 namespace JoeModForReal.Content.Survivors {
     internal class JoeSurivor : SurvivorBase
@@ -39,7 +40,6 @@ namespace JoeModForReal.Content.Survivors {
             aimOriginPosition = new Vector3(0, 1.3f, 0),
             cameraParamsDepth = -10,
         
-
             cameraParamsVerticalOffset = 1.0f,
         };
 
@@ -54,7 +54,7 @@ namespace JoeModForReal.Content.Survivors {
         public override UnlockableDef characterUnlockableDef { get; }
         private static UnlockableDef masterySkinUnlockableDef;
 
-        public static float DashArmor = TestValueManager.value2;// 140;
+        public static float DashArmor => TestValueManager.value6;// 140;
 
         public static float TenticlesArmor => TestValueManager.value3;
         public static float TenticleMoveSpeedAddition => TestValueManager.value4;
@@ -71,6 +71,7 @@ namespace JoeModForReal.Content.Survivors {
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
+            bodyPrefab.AddComponent<JoeWeaponComponent>();
         }
 
         protected override void InitializeCharacterModel() {
@@ -269,7 +270,7 @@ namespace JoeModForReal.Content.Survivors {
             List<SkinDef> skins = new List<SkinDef>();
             
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(FacelessJoePlugin.DEV_PREFIX + "DEFAULT_SKIN",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
                 Assets.LoadAsset<Sprite>("texiconSkinDefault"),
                 defaultRenderers,
                 model);

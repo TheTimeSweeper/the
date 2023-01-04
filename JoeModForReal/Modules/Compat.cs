@@ -3,7 +3,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 namespace Modules {
-    public class Compat {
+    internal class Compat {
 
         public static bool TinkersSatchelInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.TinkersSatchel");
         public static bool AetheriumInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.KomradeSpectre.Aetherium");
@@ -24,6 +24,19 @@ namespace Modules {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI")) {
                 MemeCompat.init();
             }
+        }
+
+
+        internal static int TryGetScepterCount(Inventory inventory) {
+            if (!ScepterInstalled)
+                return 0;
+
+            return GetScepterCount(inventory);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static int GetScepterCount(Inventory inventory) {
+            return inventory.GetItemCount(AncientScepter.AncientScepterItem.instance.ItemDef);
         }
     }
 }

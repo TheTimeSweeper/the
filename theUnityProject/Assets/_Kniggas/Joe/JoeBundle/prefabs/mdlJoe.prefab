@@ -7778,6 +7778,10 @@ MonoBehaviour:
     transform: {fileID: 939629471879925201}
   - name: JumpSwingMuzzle
     transform: {fileID: 8053908874520673848}
+  - name: Root
+    transform: {fileID: 5761125972279397871}
+  - name: Base
+    transform: {fileID: 7471958790935089626}
   - name: Pelvis
     transform: {fileID: 7471958790935089626}
   - name: ThighL
@@ -7808,10 +7812,12 @@ MonoBehaviour:
     transform: {fileID: 2214557355679270536}
   - name: LowerArmR
     transform: {fileID: 895540425910617464}
+  - name: HandR
+    transform: {fileID: 4761245997242488507}
   - name: notMercSlash
     transform: {fileID: 3181543855702581930}
-  - name: jumpSwingCheck
-    transform: {fileID: 3594147991494840631}
+  - name: JoeSword
+    transform: {fileID: 5567028489271994363}
 --- !u!114 &3371298392336292984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7989,8 +7995,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615414366472689737}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.9799999, z: 1.54}
-  m_LocalScale: {x: 24.851307, y: 11.616415, z: 23.082973}
+  m_LocalPosition: {x: -0, y: 0.9799999, z: 2.86}
+  m_LocalScale: {x: 32.42979, y: 11.616415, z: 29.57506}
   m_Children: []
   m_Father: {fileID: 1288672532}
   m_RootOrder: 3

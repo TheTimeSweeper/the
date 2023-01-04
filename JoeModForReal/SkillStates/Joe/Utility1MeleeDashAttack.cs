@@ -73,11 +73,16 @@ namespace ModdedEntityStates.Joe {
             while(stopwatch > _overlapInterval * _overlapResets) {
                 ResetOverlap();
                 Util.PlaySound("play_joe_whoosh", gameObject);
-                _attack.Fire();
                 _overlapResets++;
+
+                if (isAuthority) {
+                    _attack.Fire();
+                }
             }
 
-            _attack.Fire();
+            if (isAuthority) {
+                _attack.Fire();
+            }
         }
 
         public override void Update() {

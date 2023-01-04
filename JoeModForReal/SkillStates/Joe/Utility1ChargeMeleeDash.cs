@@ -40,8 +40,8 @@ namespace ModdedEntityStates.Joe {
 
             //base.characterBody.SetSpreadBloom(Mathf.Lerp(minBloomRadius, maxBloomRadius, _chargeTimer / _maxChargeDuration), true);
 
-            if (!inputBank.skill1.down && !inputBank.skill3.down) {
-
+            if (isAuthority && !inputBank.skill1.down && !inputBank.skill3.down) {
+                
                 float dam = Mathf.Lerp(MinDamageCoefficient, MaxDamageCoefficient, _chargeTimer / _maxChargeDuration);
                 //string shootSound = dam >= MaxDamageCoefficient ? "Play_RayGunBigClassic" : "Play_RayGun";
                 _success = true;

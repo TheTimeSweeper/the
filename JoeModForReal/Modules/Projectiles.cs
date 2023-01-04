@@ -6,7 +6,9 @@ using UnityEngine;
 namespace Modules {
     internal static class Projectiles {
 
-        internal static GameObject JoeFireball;
+        public static GameObject JoeFireball;
+        public static GameObject JoeSwordBeam;
+
         public static GameObject totallyNewBombPrefab;
 
         public static void Init() {

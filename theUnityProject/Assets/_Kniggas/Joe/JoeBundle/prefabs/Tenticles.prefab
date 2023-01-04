@@ -122,7 +122,7 @@ MonoBehaviour:
   floorWard: 1
   expires: 1
   invertTeamFilter: 0
-  expireDuration: 8.1
+  expireDuration: 7.9
   animateRadius: 1
   radiusCoefficientCurve:
     serializedVersion: 2

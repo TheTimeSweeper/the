@@ -5,7 +5,7 @@
 
 Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/ZZzmFgDbCH).
 
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/Release/Aliem/readme/aliem.png)]()
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/AliemMod/Release/_readme/aliem.png)]()
 
 ## Credits
 Dotflare - Model  
@@ -28,6 +28,8 @@ The Behemoth - inspiration, sounds
 - better effects maybe
 - more sounds
 - replace pod with spaceship that crashes
+- enemy version?
+- r2api split and split bundles nd stuff
 - ~~Item displays~~
 
 ## Changelog

@@ -1,7 +1,7 @@
 ﻿using ModdedEntityStates.TeslaTrooper;
 using UnityEngine;
 
-public class TestValueManager : MonoBehaviour {
+internal class TestValueManager : MonoBehaviour {
 
     //how do doing attributes
     //[debugfloat("valuename", KeyCode.U, KeyCode.J, 5)] on any static value elsewhere
@@ -14,12 +14,13 @@ public class TestValueManager : MonoBehaviour {
     //compiler flags when
     private bool _testingEnabled => Modules.Config.Debug;
     public static float value1 = 5.5f;
-
-    public static float value2 = 120f;
-
+    public static float value2 = 1.8f;
+    
     public static float value3 = 50f;
     public static float value4 = 0.5f;
     public static float value5 = 0.2f;
+    
+    public static float value6 = 150f;
 
     void Update() {
         if (!_testingEnabled)
@@ -30,11 +31,13 @@ public class TestValueManager : MonoBehaviour {
 
         manageTestValue(ref value1, "1 fireball dam", KeyCode.T, KeyCode.G, 0.1f);
 
-        manageTestValue(ref value2, "2 dash armor", KeyCode.Y, KeyCode.H, 10f);
+        manageTestValue(ref value2, "2 primary dam", KeyCode.Y, KeyCode.H, 0.1f);
 
         manageTestValue(ref value3, "3 tenticle armor", KeyCode.U, KeyCode.J, 1f);
         manageTestValue(ref value4, "4 tenticle move", KeyCode.I, KeyCode.K, 0.1f);
         manageTestValue(ref value5, "5 tenticle aspeed", KeyCode.O, KeyCode.L, 0.1f);
+
+        manageTestValue(ref value6, "6 dash armor", KeyCode.P, KeyCode.Semicolon, 10f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {
