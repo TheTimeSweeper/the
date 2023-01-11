@@ -1,6 +1,6 @@
 {
     "name": "Tesla_Trooper",
-    "version_number": "2.1.3",
+    "version_number": "2.1.4",
     "website_url": "https://github.com/TheTimeSweeper/the",
     "description": "Find a Hot Spot. Adds two new survivors, Tesla Trooper and Desolator, based on Red Alert 2, themed around RoR2.",
     "dependencies": [

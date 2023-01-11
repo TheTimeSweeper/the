@@ -52,13 +52,14 @@ Thanks to the lovely reception from the community, including all the great feedb
 
 ## Languages
 If you'd like to translate to your language, check out the [language folder on Github](https://github.com/TheTimeSweeper/the/tree/master/JoeMod/Release/plugins/Language).  
-Bazillion thanks to those that have, and in advance to those that may
+Bazillion thanks to those that have, and in advance to those that may.
 
 Currently Supported:
 - English
 - Ukrainian - by Damglador
 - Spanish - by Juhnter
 - Russian - by Nikto0o
+- French - by Fyrebw
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
@@ -74,8 +75,11 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 
+`2.1.4`
+ - added french translation (thanks Fyrebw!)
+
 `2.1.3`
- - added russian translation (tahnks Nikto0o!)
+ - added russian translation (thanks Nikto0o!)
  - attempt to optimized desolator's big-ass specials by simplifying the hitboxes
    - *this makes the cube hitbox wildly inaccurate to the sphere visual so enjoy the extra range I suppose* 
  - removed joe
