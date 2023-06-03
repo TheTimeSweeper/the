@@ -20,6 +20,10 @@ namespace Modules {
             Content.AddEntityState(typeof(Primary1JumpSwingFall));
             Content.AddEntityState(typeof(Primary1JumpSwingLand));
 
+            Content.AddEntityState(typeof(PrimaryScepter1Swing));
+            Content.AddEntityState(typeof(PrimaryScepter1JumpSwingFall));
+            Content.AddEntityState(typeof(PrimaryScepter1JumpSwingLand));
+
             Content.AddEntityState(typeof(PrimaryStupidSwing));
 
             Content.AddEntityState(typeof(ThrowBoom));

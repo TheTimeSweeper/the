@@ -3,6 +3,7 @@ using RoR2.Skills;
 using UnityEngine;
 using JetBrains.Annotations;
 using EntityStates;
+using System;
 
 namespace JoeModForReal.Content {
 
@@ -28,7 +29,7 @@ namespace JoeModForReal.Content {
         }
     }
 
-
+    //wtf there's a conditionalskilldef in the base game?
     public abstract class ConditionalSkillDef : SteppedSkillDef {
 
         public SerializableEntityStateType ConditionalState;

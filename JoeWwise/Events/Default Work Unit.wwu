@@ -80,6 +80,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="play_joe_loz_fanfare" ID="{780939FA-BCD6-444A-9CC2-FF6DAC8B8732}">
+					<ChildrenList>
+						<Action Name="" ID="{5DD95A98-284B-4677-86DF-8EC80A0113B3}" ShortID="176316986">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="LOZ_Fanfare2" ID="{8BE1F416-DA08-496F-9162-1FBBFA4DB8F3}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="play_joe_loz_swordShoot" ID="{45642162-9E5E-4BE2-8DAF-04F0CA81BF49}">
+					<ChildrenList>
+						<Action Name="" ID="{5DA70F8B-D2AA-4890-8C72-B96B07CD1E0E}" ShortID="1040907295">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="LOZ_Sword_Shoot2" ID="{B0D49210-8961-4B87-80F8-CBDD9F600B5F}" WorkUnitID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

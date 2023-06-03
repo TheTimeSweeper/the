@@ -13,14 +13,16 @@ internal class TestValueManager : MonoBehaviour {
 
     //compiler flags when
     private bool _testingEnabled => Modules.Config.Debug;
-    public static float value1 = 5.5f;
-    public static float value2 = 1.8f;
+    public static float fireballDamage = 5.5f;
+    public static float swingDamage = 1.8f;
     
-    public static float value3 = 50f;
-    public static float value4 = 0.5f;
-    public static float value5 = 0.2f;
+    public static float tenticleArmor = 50f;
+    public static float tenticleMove = 0.5f;
+    public static float swrodBeam = 1.4f;
     
-    public static float value6 = 150f;
+    public static float dashArmor = 150f;
+
+    public static float beems = 10f;
 
     void Update() {
         if (!_testingEnabled)
@@ -29,15 +31,17 @@ internal class TestValueManager : MonoBehaviour {
         if (!Input.GetKey(KeyCode.LeftAlt))
             return;
 
-        manageTestValue(ref value1, "1 fireball dam", KeyCode.T, KeyCode.G, 0.1f);
+        manageTestValue(ref fireballDamage, "1 fireball dam", KeyCode.T, KeyCode.G, 0.1f);
 
-        manageTestValue(ref value2, "2 primary dam", KeyCode.Y, KeyCode.H, 0.1f);
+        manageTestValue(ref swingDamage, "2 primary dam", KeyCode.Y, KeyCode.H, 0.1f);
 
-        manageTestValue(ref value3, "3 tenticle armor", KeyCode.U, KeyCode.J, 1f);
-        manageTestValue(ref value4, "4 tenticle move", KeyCode.I, KeyCode.K, 0.1f);
-        manageTestValue(ref value5, "5 tenticle aspeed", KeyCode.O, KeyCode.L, 0.1f);
+        manageTestValue(ref tenticleArmor, "3 tenticle armor", KeyCode.U, KeyCode.J, 1f);
+        manageTestValue(ref tenticleMove, "4 tenticle move", KeyCode.I, KeyCode.K, 0.1f);
+        manageTestValue(ref swrodBeam, "5 swrodbeam", KeyCode.O, KeyCode.L, 0.1f);
 
-        manageTestValue(ref value6, "6 dash armor", KeyCode.P, KeyCode.Semicolon, 10f);
+        manageTestValue(ref dashArmor, "6 dash armor", KeyCode.P, KeyCode.Semicolon, 10f);
+
+        manageTestValue(ref beems, "7 beems", KeyCode.LeftBracket, KeyCode.RightBracket, 1f);
     }
 
     private void manageTestValue(ref float value, string valueName, KeyCode upKey, KeyCode downKey, float incrementAmount) {

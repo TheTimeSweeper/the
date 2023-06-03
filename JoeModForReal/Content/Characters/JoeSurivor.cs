@@ -9,6 +9,7 @@ using Modules.Characters;
 using Modules.Survivors;
 using Modules;
 using JoeModForReal.Components;
+using System.Runtime.CompilerServices;
 
 namespace JoeModForReal.Content.Survivors {
     internal class JoeSurivor : SurvivorBase
@@ -54,11 +55,11 @@ namespace JoeModForReal.Content.Survivors {
         public override UnlockableDef characterUnlockableDef { get; }
         private static UnlockableDef masterySkinUnlockableDef;
 
-        public static float DashArmor => TestValueManager.value6;// 140;
+        public static float DashArmor => TestValueManager.dashArmor;// 140;
 
-        public static float TenticlesArmor => TestValueManager.value3;
-        public static float TenticleMoveSpeedAddition => TestValueManager.value4;
-        public static float TenticleAttackSpeed => TestValueManager.value5;
+        public static float TenticlesArmor => TestValueManager.tenticleArmor;
+        public static float TenticleMoveSpeedAddition => TestValueManager.tenticleMove;
+        public static float TenticleAttackSpeed = 0.2f;
 
         public static float TenticleBuffHealMultiplier = 0.03f;
         public static float TenticleMaxHealthMultiplier = 0.66f;
@@ -76,6 +77,10 @@ namespace JoeModForReal.Content.Survivors {
 
         protected override void InitializeCharacterModel() {
             base.InitializeCharacterModel();
+        }
+
+        public override void InitializeDoppelganger(string clone) {
+            base.InitializeDoppelganger("Loader");
         }
 
         //you ready for some stupid shit?
@@ -101,7 +106,20 @@ namespace JoeModForReal.Content.Survivors {
         public override void InitializeSkills() {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            #region Primary
+            InitializePrimarySkills();
+
+            InitializeSecondarySkills();
+
+            InitializeUtilitySkills();
+
+            InitializeSpecialSkills();
+
+            if (Compat.ScepterInstalled) {
+                InitializeScepterSkills();
+            }
+        }
+
+        private void InitializePrimarySkills() {
 
             LookingDownSkillDef primarySkillDef = Modules.Skills.CreateSkillDef<LookingDownSkillDef>(
                 new SkillDefInfo("JoeSwing",
@@ -119,6 +137,7 @@ namespace JoeModForReal.Content.Survivors {
             primarySkillDef.ConditionalRequriedStock = 0;
             primarySkillDef.LookingDownAngle = 42;
 
+            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDef);
 
             LookingDownSkillDef primarySkillDefSilly = Modules.Skills.CreateSkillDef<LookingDownSkillDef>(
                 new SkillDefInfo("JoeSwingClassic",
@@ -133,15 +152,27 @@ namespace JoeModForReal.Content.Survivors {
             primarySkillDefSilly.stepCount = 2;
             primarySkillDefSilly.stepGraceDuration = 1;
 
-            primarySkillDef.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
-            primarySkillDef.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
-            primarySkillDef.ConditionalRequriedStock = 0;
-            primarySkillDef.LookingDownAngle = 42;
+            primarySkillDefSilly.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
+            primarySkillDefSilly.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
+            primarySkillDefSilly.ConditionalRequriedStock = 0;
+            primarySkillDefSilly.LookingDownAngle = 42;
 
-            Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDef);
+
+            CombinedSteppedSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<CombinedSteppedSkillDef>(
+                new SkillDefInfo("koalswing",
+                                 JOE_PREFIX + "PRIMARY_KOAL_NAME",
+                                 JOE_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
+                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                                 new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.KoalCombo)),
+                                 "Weapon",
+                                 true));
+            primarySkillDefKoal.mustKeyPress = true;
+            primarySkillDefKoal.stepCount = 4;
+            primarySkillDefKoal.stepGraceDuration = 2f;
+            primarySkillDefKoal.maxCombinedStepCount = 8;
 
             if (Modules.Config.Cursed) {
-                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefSilly);
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefSilly, primarySkillDefKoal);
             }
 
             #region dev
@@ -166,9 +197,9 @@ namespace JoeModForReal.Content.Survivors {
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe);
             }
             #endregion dev
-            #endregion
+        }
 
-            #region Secondary
+        private void InitializeSecondarySkills() {
 
             SkillDef fireballSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
@@ -196,9 +227,41 @@ namespace JoeModForReal.Content.Survivors {
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, fireballSkillDef);
 
-            #endregion
+            RepeatableSteppedSkillDef secondarySkillDefKoal = Modules.Skills.CreateSkillDef<RepeatableSteppedSkillDef>(new SkillDefInfo {
+                skillName = JOE_PREFIX + "SECONDARY_KOAL_NAME",
+                skillNameToken = JOE_PREFIX + "SECONDARY_KOAL_NAME",
+                skillDescriptionToken = JOE_PREFIX + "SECONDARY_KOAL_DESCRIPTION",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.KoalCombo2)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 2,
+                baseRechargeInterval = 6f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 0,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+            secondarySkillDefKoal.stocksToConsumeAfterAllUses = 1;
+            secondarySkillDefKoal.stepCount = 4;
+            secondarySkillDefKoal.maxCombinedStepCount = 8;
+            secondarySkillDefKoal.stepGraceDuration = 2f;
 
-            #region Utility
+
+            if (Modules.Config.Cursed) {
+                Modules.Skills.AddSecondarySkills(bodyPrefab, secondarySkillDefKoal);
+            }
+        }
+
+        private void InitializeUtilitySkills() {
 
             SkillDef dashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = JOE_PREFIX + "UTILITY_DASH_NAME",
@@ -224,10 +287,9 @@ namespace JoeModForReal.Content.Survivors {
             });
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, dashSkillDef);
+        }
 
-            #endregion
-
-            #region Special
+        private void InitializeSpecialSkills() {
 
             SkillDef tenticlesSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
@@ -254,7 +316,32 @@ namespace JoeModForReal.Content.Survivors {
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, tenticlesSkillDef);
-            #endregion
+        }
+
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void InitializeScepterSkills() {
+
+            LookingDownSkillDef primarySkillDef = Modules.Skills.CreateSkillDef<LookingDownSkillDef>(
+                new SkillDefInfo("JoeSwing",
+                                 JOE_PREFIX + "PRIMARY_SWING_NAME",
+                                 JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
+                                 Modules.Assets.LoadAsset<Sprite>("texIconScepterPrimary"),
+                                 new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryScepter1Swing)),
+                                 "Weapon",
+                                 true));
+            primarySkillDef.stepCount = 2;
+            primarySkillDef.stepGraceDuration = 1.2f;
+
+            primarySkillDef.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconScepterPrimaryJumpSwing");
+            primarySkillDef.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryScepter1JumpSwingFall));
+            primarySkillDef.ConditionalRequriedStock = 0;
+            primarySkillDef.LookingDownAngle = 42;
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(primarySkillDef, "JoeBody", SkillSlot.Primary, 0);
+            if (Config.Cursed) {
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(primarySkillDef, "JoeBody", SkillSlot.Primary, 1);
+            }
         }
 
         public override void InitializeSkins()

@@ -4,6 +4,8 @@
 		<UserProjectSettings Name="" ID="{F7CC3E7C-3A0C-46AA-B517-8825693F2F96}">
 			<PropertyList>
 				<Property Name="AudioFilesImporter\Path" Type="string" Value="E:\Abbasses stuff IIX\_thundersweeper\the\JoeWwise\Originals\SFX\"/>
+				<Property Name="Event Action List\{45642162-9E5E-4BE2-8DAF-04F0CA81BF49}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{780939FA-BCD6-444A-9CC2-FF6DAC8B8732}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{A25E0D73-5E18-40E9-A35C-9017129FD629}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{A331C719-4B19-4091-9BD4-9BEA6339AFC8}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{BDD09863-CB6F-4A41-891F-6736E4290683}\x64_Expand States" Type="string" Value=""/>
@@ -59,7 +61,7 @@
 				<Property Name="ProjectExplorer\x64_Expanded_1_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_20_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_21_1" Type="string" Value=""/>
-				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="8LanY+sFMECqBQKhqtVrBt/TVGrFJcpAmxVYkGvolVSYPXxgGD+FRLvq7NfLhIk7Pf6GIiOtCkWpowFTK9Y8aochGjmSEahOlkSTFCh/LBc="/>
+				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="8LanY+sFMECqBQKhqtVrBpg9fGAYP4VEu+rs18uEiTs9/oYiI60KRamjAVMr1jxqBbKluhrAw02V7oAc/N3iaw=="/>
 				<Property Name="ProjectExplorer\x64_Expanded_3_1" Type="string" Value="JElBEwwxAEa5dPdALdzUaw=="/>
 				<Property Name="ProjectExplorer\x64_Expanded_4_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_5_1" Type="string" Value=""/>

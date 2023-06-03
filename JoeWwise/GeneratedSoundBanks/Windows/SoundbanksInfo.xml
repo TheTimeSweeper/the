@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="545665445" Language="SFX" Hash="2532992043">
+		<SoundBank Id="545665445" Language="SFX" Hash="2192777730">
 			<ObjectPath>\SoundBanks\Default Work Unit\joe</ObjectPath>
 			<ShortName>joe</ShortName>
 			<Path>joe.bnk</Path>
@@ -81,6 +81,22 @@
 						<File Id="1064628591" Language="SFX">
 							<ShortName>JerryDeath1.wav</ShortName>
 							<Path>SFX\JerryDeath1_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="993947144" Name="play_joe_loz_fanfare" ObjectPath="\Events\Default Work Unit\play_joe_loz_fanfare">
+					<IncludedMemoryFiles>
+						<File Id="119303480" Language="SFX">
+							<ShortName>LOZ_Fanfare2.wav</ShortName>
+							<Path>SFX\LOZ_Fanfare2_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1747893861" Name="play_joe_loz_swordShoot" ObjectPath="\Events\Default Work Unit\play_joe_loz_swordShoot">
+					<IncludedMemoryFiles>
+						<File Id="901846171" Language="SFX">
+							<ShortName>LOZ_Sword_Shoot2.wav</ShortName>
+							<Path>SFX\LOZ_Sword_Shoot2_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

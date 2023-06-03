@@ -76,7 +76,7 @@ namespace Modules {
 
             GameObject MercSwordSlash = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>(addressablesPath).WaitForCompletion(), name);
             
-            recolorEffect(color, MercSwordSlash);
+            recolorEffects(color, MercSwordSlash);
 
             return MercSwordSlash;
         }
@@ -85,12 +85,12 @@ namespace Modules {
 
             GameObject MercSwordSlash = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>(legacyPath), name);
 
-            recolorEffect(color, MercSwordSlash);
+            recolorEffects(color, MercSwordSlash);
 
             return MercSwordSlash;
         }
 
-        private static void recolorEffect(Color color, GameObject MercSwordSlash) {
+        public static void recolorEffects(Color color, GameObject MercSwordSlash) {
             ParticleSystemRenderer[] rends = MercSwordSlash.GetComponentsInChildren<ParticleSystemRenderer>();
 
             foreach (ParticleSystemRenderer rend in rends) {

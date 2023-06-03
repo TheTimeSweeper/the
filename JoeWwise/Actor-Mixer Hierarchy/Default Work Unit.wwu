@@ -239,6 +239,13 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="jerryDeath" ID="{6A54D3DF-25C5-40CA-9B15-58906BE89554}" ShortID="11323839">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
@@ -251,6 +258,11 @@
 										<Sound Name="JerryDeath3" ID="{193E5C98-E1B6-4834-B8F8-3A045D071652}" ShortID="813016816">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -279,6 +291,11 @@
 										<Sound Name="JerryDeath1" ID="{4B4BF222-27F8-418E-BC21-4D33B0A9C06F}" ShortID="129785330">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -307,6 +324,11 @@
 										<Sound Name="JerryDeath2" ID="{9D47F99B-CC3B-413C-A506-4D78B7F56273}" ShortID="671787891">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -391,6 +413,11 @@
 										<Sound Name="JerryDeath4" ID="{43FEAD08-D3CF-4F80-A7FD-E557F138D5B7}" ShortID="325879193">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -419,6 +446,11 @@
 										<Sound Name="JerryDeath8" ID="{28D08008-F85F-4AB6-A5BD-CE9648C61092}" ShortID="1045825299">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -447,6 +479,11 @@
 										<Sound Name="JerryDeath9" ID="{0D549A97-C824-438B-B18F-2FFB8F6D5098}" ShortID="934846120">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -475,6 +512,11 @@
 										<Sound Name="JerryDeath7" ID="{9EE7F852-A4E6-4F4D-AE5A-A8C2AF09FFC8}" ShortID="1057984921">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -503,6 +545,11 @@
 										<Sound Name="JerryDeath10" ID="{23D016C7-EA10-410C-9A6A-3CDD42D8F814}" ShortID="147653427">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -686,6 +733,79 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="roguelDash" ID="{FDDE21CA-9A10-443F-974C-157BB7B683D2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+						<ActorMixer Name="Keep Pitch" ID="{BAA5B205-C01A-4DC3-95EE-801CFCDDE26B}" ShortID="956247820">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="LOZ_Fanfare2" ID="{8BE1F416-DA08-496F-9162-1FBBFA4DB8F3}" ShortID="276273520">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="LOZ_Fanfare2" ID="{F1C0B81F-8B13-4A1D-BB93-F099206D3210}">
+											<Language>SFX</Language>
+											<AudioFile>LOZ_Fanfare2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="119303480"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="LOZ_Fanfare2" ID="{F1C0B81F-8B13-4A1D-BB93-F099206D3210}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="LOZ_Sword_Shoot2" ID="{B0D49210-8961-4B87-80F8-CBDD9F600B5F}" ShortID="368955877">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="LOZ_Sword_Shoot2" ID="{61E880AB-1C24-4A42-A065-7E30C610AA76}">
+											<Language>SFX</Language>
+											<AudioFile>LOZ_Sword_Shoot2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="901846171"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="LOZ_Sword_Shoot2" ID="{61E880AB-1C24-4A42-A065-7E30C610AA76}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>

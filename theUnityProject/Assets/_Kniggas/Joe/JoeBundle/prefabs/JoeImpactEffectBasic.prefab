@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.79
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -309,7 +309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.07450981
+      value: 0.2901961
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -437,11 +437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[1].countCurve.scalar
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
@@ -690,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.79
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -718,7 +718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.07450981
+      value: 0.2901961
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: ClampVelocityModule.magnitude.scalar
@@ -790,11 +790,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[1].countCurve.scalar
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
@@ -1039,7 +1039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.79
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -1067,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.07450981
+      value: 0.2901961
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -1195,11 +1195,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[1].countCurve.scalar
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
@@ -1460,7 +1460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.79
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -1488,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.07450981
+      value: 0.2901961
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -1616,11 +1616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[1].countCurve.scalar
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
@@ -1881,7 +1881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.79
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -1909,7 +1909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.07450981
+      value: 0.2901961
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -2037,11 +2037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[1].countCurve.scalar
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 19810896, guid: 865f502d43951d64c8db5955d3c0b87f, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope

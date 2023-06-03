@@ -8,7 +8,7 @@ namespace ModdedEntityStates.Joe {
 
     public class Secondary1Fireball : BaseSkillState {
 
-        public static float damageCoefficient => TestValueManager.value1;// 5.5f;
+        public static float damageCoefficient => TestValueManager.fireballDamage;// 5.5f;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.3f;
         //public static float throwForce = 80f;

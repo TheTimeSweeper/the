@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using BepInEx.Configuration;
 using JoeModForReal;
 using RiskOfOptions;
+using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace Modules
         ////secondary
         //public static ConfigEntry<float> secondaryDamage;
         //public static ConfigEntry<int> secondaryStonks;
+        //public static ConfigEntry<Bool> secondaryReload;
         //public static ConfigEntry<float> secondaryCooldown;
 
         public static void ReadConfig()
@@ -44,14 +46,21 @@ namespace Modules
                 false,
                 "Enable wip/unused content").Value;
 
-            //jerry =
-            //    BindAndOptions(
-            //        sectionGeneral,
-            //        "Everyone is Jerry",
-            //        true,
-            //        "When anyone dies, the Jerry scream is heard.");
+            jerry =
+                BindAndOptions(
+                    sectionGeneral,
+                    "Everyone is Jerry",
+                    true,
+                    "When anyone dies, the Jerry scream is heard.");
 
             #region fuck
+
+            var  primaryDamage =
+                BindAndOptions(
+                    "nig",
+                    "Primary Swing Damage",
+                    1.8f
+                );
             /*
             string sectionBETA = "Z_BETA";
 
@@ -86,25 +95,29 @@ namespace Modules
 
         }
 
-        public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "") {
+        public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false) {
 
             if (string.IsNullOrEmpty(description))
                 description = name;
 
-            ConfigEntry<T> entry = FacelessJoePlugin.instance.Config.Bind(section, name, defaultValue, description);
-
-            if (Compat.RiskOfOptionsInstalled) {
-                RegisterOption(entry);
+            if(restartRequired) {
+                description += " (restart required)";
             }
 
-            return entry;
+            ConfigEntry<T> configEntry = FacelessJoePlugin.instance.Config.Bind(section, name, defaultValue, description);
+
+            if (Compat.RiskOfOptionsInstalled) {
+                TryRegisterOption(configEntry, restartRequired);
+            }
+
+            return configEntry;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        public static void RegisterOption<T>(ConfigEntry<T> entry) {
+        public static void TryRegisterOption <T>(ConfigEntry<T> entry, bool restartRequiered) {
 
             if (entry is ConfigEntry<float>) {
-                ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>));
+                ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>, new SliderConfig() { min = 0, max = 20}));
             }
             if (entry is ConfigEntry<int>) {
                 ModSettingsManager.AddOption(new IntSliderOption(entry as ConfigEntry<int>));
@@ -112,6 +125,26 @@ namespace Modules
             if (entry is ConfigEntry<bool>) {
                 ModSettingsManager.AddOption(new CheckBoxOption(entry as ConfigEntry<bool>));
             }
+        }
+
+        public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description = "", float min = 0, float max = 20) {
+
+            if (string.IsNullOrEmpty(description))
+                description = name;
+
+            ConfigEntry<float> configEntry = FacelessJoePlugin.instance.Config.Bind(section, name, defaultValue, description);
+
+            if (Compat.RiskOfOptionsInstalled) {
+                TryRegisterOptionSlider(configEntry, min, max);
+            }
+
+            return configEntry;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        public static void TryRegisterOptionSlider(ConfigEntry<float> entry, float min, float max) {
+
+            ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>, new SliderConfig() { min = min, max = max }));
         }
 
         //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs

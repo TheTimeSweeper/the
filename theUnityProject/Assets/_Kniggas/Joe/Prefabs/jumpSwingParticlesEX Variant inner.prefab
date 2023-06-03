@@ -69,8 +69,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1957211257730542290, guid: 617935f9894a88743b7ae6073696f648,
         type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957211257730542290, guid: 617935f9894a88743b7ae6073696f648,
+        type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 25
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1957211257730542290, guid: 617935f9894a88743b7ae6073696f648,
         type: 3}
@@ -140,12 +145,12 @@ PrefabInstance:
     - target: {fileID: 1957211257730542290, guid: 617935f9894a88743b7ae6073696f648,
         type: 3}
       propertyPath: ClampVelocityModule.magnitude.maxCurve.m_Curve.Array.data[1].time
-      value: 0.6532499
+      value: 0.6636259
       objectReference: {fileID: 0}
     - target: {fileID: 1957211257730542290, guid: 617935f9894a88743b7ae6073696f648,
         type: 3}
       propertyPath: ClampVelocityModule.magnitude.maxCurve.m_Curve.Array.data[1].value
-      value: 0.10561183
+      value: 0.24043849
       objectReference: {fileID: 0}
     - target: {fileID: 1957211257730542290, guid: 617935f9894a88743b7ae6073696f648,
         type: 3}

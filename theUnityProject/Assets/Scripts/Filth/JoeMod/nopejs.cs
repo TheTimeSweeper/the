@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace JoeModForReal.Components.Projectile {
+}
 
 namespace FacelessJoe {
     public class nopejs : MonoBehaviour {

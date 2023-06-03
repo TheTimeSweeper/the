@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-namespace Xft
-{
+namespace Xft {
     public class Spline
     {
 

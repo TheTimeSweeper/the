@@ -41,7 +41,7 @@ namespace ModdedEntityStates.BaseStates
 
         private float earlyExitTime;
         protected float duration;
-        private bool hasFired;
+        protected bool hasFired;
         private float hitPauseTimer;
         protected OverlapAttack attack;
         protected bool inHitPause;
@@ -230,7 +230,7 @@ namespace ModdedEntityStates.BaseStates
             this.swingIndex = reader.ReadInt32();
         }
 
-        public void SetStep(int i) {
+        public virtual void SetStep(int i) {
             swingIndex = i;
         }
     }

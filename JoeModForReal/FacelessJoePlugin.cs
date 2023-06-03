@@ -53,11 +53,12 @@ namespace JoeModForReal {
                 gameObject.AddComponent<TestValueManager>();
 
             Modules.SoundBanks.Init();
+
+            Modules.DamageTypes.RegisterDamageTypes();
+
             Modules.Assets.Initialize();
             Modules.Projectiles.Init();
             Modules.EntityStates.Init();
-
-            Modules.DamageTypes.RegisterDamageTypes();
 
             Modules.Compat.Initialize();
 
@@ -76,15 +77,20 @@ namespace JoeModForReal {
 
             Logger.LogInfo("[Initialized]");
         }
-
+        
         private void Hook() {
-            //RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
+            RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
         }
 
-        private void GlobalEventManager_onCharacterDeathGlobal(RoR2.DamageReport obj) {
-            //if (Modules.Config.jerry.Value) {
-            //    RoR2.Util.PlaySound("play_joe_jerryDeath", obj.victimBody.gameObject);
-            //}
+        private void GlobalEventManager_onCharacterDeathGlobal(RoR2.DamageReport damageReport) {
+
+            if (Modules.Config.jerry.Value) {
+
+                Helpers.LogWarning(damageReport.victimBody);
+                if (damageReport.victimBody) {
+                    RoR2.Util.PlaySound("play_joe_jerryDeath", damageReport.victimBody.gameObject);
+                }
+            }
         }
     }
 }
