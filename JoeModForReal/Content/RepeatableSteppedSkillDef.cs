@@ -11,27 +11,27 @@ namespace JoeModForReal.Content {
 
         public override void OnExecute([NotNull] GenericSkill skillSlot) {
 
-            base.OnExecute(skillSlot);
-
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
-            if (instanceData.step == stepCount) { 
-                //on base.OnExecute, step is about to be incremented past max and reset
+            if (instanceData.step >= stepCount -1) {
                 skillSlot.stock -= stocksToConsumeAfterAllUses;
             }
+
+            base.OnExecute(skillSlot);
         }
 
-        protected override void OnResetSkillInstance([NotNull] GenericSkill skillSlot) {
+        protected override void OnTimeoutResetSkill([NotNull] GenericSkill skillSlot) {
+            base.OnTimeoutResetSkill(skillSlot);
             skillSlot.stock -= stocksToConsumeAfterAllUses;
         }
 
-        public override Sprite GetCurrentIcon([NotNull] GenericSkill skillSlot) {
-            InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
+        //public override Sprite GetCurrentIcon([NotNull] GenericSkill skillSlot) {
+        //    InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
-            int index = instanceData.step;
-            if (extraUseIcons.Length <= index)
-                return base.GetCurrentIcon(skillSlot);
+        //    int index = instanceData.step;
+        //    if (extraUseIcons.Length <= index)
+        //        return base.GetCurrentIcon(skillSlot);
 
-            return HG.ArrayUtils.GetSafe<Sprite>(this.extraUseIcons, index);
-        }
+        //    return HG.ArrayUtils.GetSafe<Sprite>(this.extraUseIcons, index);
+        //}
     }
 }

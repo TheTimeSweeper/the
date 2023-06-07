@@ -54,13 +54,6 @@ namespace Modules
                     "When anyone dies, the Jerry scream is heard.");
 
             #region fuck
-
-            var  primaryDamage =
-                BindAndOptions(
-                    "nig",
-                    "Primary Swing Damage",
-                    1.8f
-                );
             /*
             string sectionBETA = "Z_BETA";
 

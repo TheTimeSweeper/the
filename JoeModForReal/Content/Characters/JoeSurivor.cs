@@ -72,7 +72,16 @@ namespace JoeModForReal.Content.Survivors {
 
         protected override void InitializeCharacterBodyAndModel() {
             base.InitializeCharacterBodyAndModel();
+
             bodyPrefab.AddComponent<JoeWeaponComponent>();
+
+            ComboRecipeCooker comboComponent = bodyPrefab.AddComponent<ComboRecipeCooker>();
+            
+            comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
+                resultState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Secondary1Fireball)),
+                combo = new List<int> { 0, 0, 1, 1 }
+            });
+            
         }
 
         protected override void InitializeCharacterModel() {
@@ -157,22 +166,8 @@ namespace JoeModForReal.Content.Survivors {
             primarySkillDefSilly.ConditionalRequriedStock = 0;
             primarySkillDefSilly.LookingDownAngle = 42;
 
-
-            CombinedSteppedSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<CombinedSteppedSkillDef>(
-                new SkillDefInfo("koalswing",
-                                 JOE_PREFIX + "PRIMARY_KOAL_NAME",
-                                 JOE_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
-                                 new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.KoalCombo)),
-                                 "Weapon",
-                                 true));
-            primarySkillDefKoal.mustKeyPress = true;
-            primarySkillDefKoal.stepCount = 4;
-            primarySkillDefKoal.stepGraceDuration = 2f;
-            primarySkillDefKoal.maxCombinedStepCount = 8;
-
             if (Modules.Config.Cursed) {
-                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefSilly, primarySkillDefKoal);
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefSilly);
             }
 
             #region dev
@@ -192,9 +187,22 @@ namespace JoeModForReal.Content.Survivors {
                                                                       "Weapon",
                                                                       false));
 
+            CombinedSteppedSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<CombinedSteppedSkillDef>(
+                new SkillDefInfo("koalswing",
+                                 JOE_PREFIX + "PRIMARY_KOAL_NAME",
+                                 JOE_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
+                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                                 new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.KoalCombo)),
+                                 "Weapon",
+                                 true));
+            primarySkillDefKoal.mustKeyPress = true;
+            primarySkillDefKoal.stepCount = 4;
+            primarySkillDefKoal.stepGraceDuration = 2f;
+            primarySkillDefKoal.maxCombinedStepCount = 8;
+
 
             if (FacelessJoePlugin.andrew) {
-                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe);
+                Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefBomeb, primarySkillDefBomebe, primarySkillDefKoal);
             }
             #endregion dev
         }
@@ -227,8 +235,10 @@ namespace JoeModForReal.Content.Survivors {
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, fireballSkillDef);
 
+            #region dev
+
             RepeatableSteppedSkillDef secondarySkillDefKoal = Modules.Skills.CreateSkillDef<RepeatableSteppedSkillDef>(new SkillDefInfo {
-                skillName = JOE_PREFIX + "SECONDARY_KOAL_NAME",
+                skillName = JOE_PREFIX + "koalswingSecondary",
                 skillNameToken = JOE_PREFIX + "SECONDARY_KOAL_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SECONDARY_KOAL_DESCRIPTION",
                 skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
@@ -256,9 +266,11 @@ namespace JoeModForReal.Content.Survivors {
             secondarySkillDefKoal.stepGraceDuration = 2f;
 
 
-            if (Modules.Config.Cursed) {
+            if (FacelessJoePlugin.andrew) {
                 Modules.Skills.AddSecondarySkills(bodyPrefab, secondarySkillDefKoal);
             }
+
+            #endregion dev
         }
 
         private void InitializeUtilitySkills() {

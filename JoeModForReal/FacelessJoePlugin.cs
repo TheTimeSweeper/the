@@ -28,10 +28,10 @@ namespace JoeModForReal {
         public static FacelessJoePlugin instance;
         public static ManualLogSource Log;
 
-        public static bool andrew;
+        public static bool andrew = true;
 
         void Awake() {
-
+            
             instance = this;
             Log = Logger;
 
@@ -73,6 +73,11 @@ namespace JoeModForReal {
 
             new JoeSurivor().Initialize();
 
+            if (andrew) {
+                new KoalSurvivor().Initialize();
+                Logger.LogError("ANDREW IS TRUE. DO NOT RELEASE");
+            }
+
             Hook();
 
             Logger.LogInfo("[Initialized]");
@@ -80,13 +85,19 @@ namespace JoeModForReal {
         
         private void Hook() {
             RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
+
+            On.EntityStates.Commando.CommandoWeapon.FirePistol2.FixedUpdate += FirePistol2_FixedUpdate;
+        }
+
+        private void FirePistol2_FixedUpdate(On.EntityStates.Commando.CommandoWeapon.FirePistol2.orig_FixedUpdate orig, EntityStates.Commando.CommandoWeapon.FirePistol2 self) {
+            orig(self);
+            Debug.LogWarning("fixedage");
         }
 
         private void GlobalEventManager_onCharacterDeathGlobal(RoR2.DamageReport damageReport) {
 
             if (Modules.Config.jerry.Value) {
 
-                Helpers.LogWarning(damageReport.victimBody);
                 if (damageReport.victimBody) {
                     RoR2.Util.PlaySound("play_joe_jerryDeath", damageReport.victimBody.gameObject);
                 }

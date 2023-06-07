@@ -9,13 +9,13 @@ namespace ModdedEntityStates.Joe {
         public int ComboStep;
 
         public virtual void SetCombinedStep(int i) {
-            Helpers.LogWarning("primary combinedstep: " + i);
+            //Helpers.LogWarning("primary combinedstep: " + i);
             ComboStep = i;
         }
 
         public override void SetStep(int i) {
             base.SetStep(i);
-            Helpers.LogWarning("primary step: " + i);
+            //Helpers.LogWarning("primary step: " + i);
             swingIndex = Mathf.FloorToInt(i / 2);
         }
 
@@ -35,13 +35,13 @@ namespace ModdedEntityStates.Joe {
         public int ComboStep;
 
         public virtual void SetCombinedStep(int i) {
-            Helpers.LogWarning("secondary combinedstep: " + i);
+            //Helpers.LogWarning("secondary combinedstep: " + i);
             ComboStep = i;
         }
 
         public override void SetStep(int i) {
             base.SetStep(i);
-            Helpers.LogWarning("secondary step: " + i);
+            //Helpers.LogWarning("secondary step: " + i);
             swingIndex = Mathf.FloorToInt(i / 2);
         }
 
