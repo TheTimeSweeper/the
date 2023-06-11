@@ -31,73 +31,49 @@ namespace JoeModForReal.Content {
         // Token: 0x04004411 RID: 17425
         protected float stepResetTimer;
 
-        protected List<GenericSkill> _otherSkills;
-        protected ComboRecipeCooker _comboRecipeCooker;
-        protected int _thisSkillComboMoveIndex;
-
         // Token: 0x02000C1C RID: 3100
         public class InstanceData : SkillDef.BaseSkillInstanceData {
 
+            public List<GenericSkill> otherSkills;
             public int step;
-            public List<int> comboHistory = new List<int>();
+
+            public InstanceData () {
+                otherSkills = HG.CollectionPool<GenericSkill, List<GenericSkill>>.RentCollection();
+            }
+
+            public void Dispose() {
+                otherSkills = HG.CollectionPool<GenericSkill, List<GenericSkill>>.ReturnCollection(otherSkills);
+            }
         }
 
         // Token: 0x0600461E RID: 17950 RVA: 0x00122873 File Offset: 0x00120A73
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {
 
-            _otherSkills = skillSlot.GetComponents<GenericSkill>().ToList();
+            InstanceData data = new InstanceData();
 
-            for (int i = 0; i < _otherSkills.Count; i++) {
-                if (_otherSkills[i] == skillSlot) {
-                    _thisSkillComboMoveIndex = i;
-                    _otherSkills.RemoveAt(i);
-                    break;
+            GenericSkill[] allSkills = skillSlot.GetComponents<GenericSkill>();
+            for (int i = 0; i < allSkills.Length; i++) {
+                if (allSkills[i] != skillSlot) {
+                    data.otherSkills.Add(allSkills[i]);
                 }
             }
 
-            _comboRecipeCooker = skillSlot.GetComponent<ComboRecipeCooker>();
-
-            return new InstanceData();
+            return data;
         }
 
         public override void OnUnassigned([NotNull] GenericSkill skillSlot) {
             base.OnUnassigned(skillSlot);
-            _otherSkills.Clear();
-            _comboRecipeCooker = null;
+            (skillSlot.skillInstanceData as InstanceData).Dispose();
         }
 
         public interface ICombinedStepSetter {
             void SetCombinedStep(int i);
         }
 
-        public override Sprite GetCurrentIcon([NotNull] GenericSkill skillSlot) {
-
-            InstanceData skillInstanceData = skillSlot.skillInstanceData as InstanceData;
-            ComboRecipeCooker.ComboRecipe potentialCombo = _comboRecipeCooker.GetCombo(skillInstanceData.comboHistory, _thisSkillComboMoveIndex);
-            if(potentialCombo!= null && potentialCombo.sprite != null) {
-                return potentialCombo.sprite;
-            }
-
-            return base.GetCurrentIcon(skillSlot);
-        }
-
         public override EntityState InstantiateNextState([NotNull] GenericSkill skillSlot) {
-
-            AddComboIndexToAll(skillSlot);
 
             EntityState entityState = base.InstantiateNextState(skillSlot);
             InstanceData skillInstanceData = skillSlot.skillInstanceData as InstanceData;
-
-            ComboRecipeCooker.ComboRecipe comboRecipe = _comboRecipeCooker.GetCombo(skillInstanceData.comboHistory);
-            if(comboRecipe != null) {
-                entityState = EntityStateCatalog.InstantiateState(comboRecipe.resultState);
-
-                if (comboRecipe.resetComboHistory) {
-
-                    ResetAllComboHistory(skillSlot);
-                    ResetAllCombinedSteppedSkillDefSteps(skillSlot);
-                }
-            }
 
             ICombinedStepSetter combinedStepState = (entityState as ICombinedStepSetter);
             if (combinedStepState != null) {
@@ -117,8 +93,10 @@ namespace JoeModForReal.Content {
 
             int uses = (thisSkillSlot.skillInstanceData as InstanceData).step;
 
-            for (int i = 0; i < _otherSkills.Count; i++) {
-                InstanceData skillInstanceData = _otherSkills[i].skillInstanceData as InstanceData;
+            List<GenericSkill> otherSkills = (thisSkillSlot.skillInstanceData as InstanceData).otherSkills;
+
+            for (int i = 0; i < otherSkills.Count; i++) {
+                InstanceData skillInstanceData = otherSkills[i].skillInstanceData as InstanceData;
                 if (skillInstanceData != null) {
                     uses += skillInstanceData.step;
                 }
@@ -131,42 +109,28 @@ namespace JoeModForReal.Content {
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
             if (instanceData.step >= this.stepCount) {
                 instanceData.step = 0;
-                if (resetOthersOnReset) {
-                    ResetAllComboHistory(skillSlot);
-                }
             }
 
             base.OnExecute(skillSlot);
 
-            ResetAllCombinedSteppedSkillDefTimers();
+            ResetAllCombinedSteppedSkillDefTimers(skillSlot);
             
             instanceData.step++;
             if(maxCombinedStepCount >= 0 && GetTotalCombinedUses(skillSlot) >= maxCombinedStepCount) {
 
                 ResetAllCombinedSteppedSkillDefSteps(skillSlot);
-                ResetAllComboHistory(skillSlot);
             }
         }
 
-        private void AddComboIndexToAll([NotNull] GenericSkill skillSlot) {
-            InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
-            instanceData.comboHistory.Add(_thisSkillComboMoveIndex);
-
-            for (int i = 0; i < _otherSkills.Count; i++) {
-                instanceData = (InstanceData)_otherSkills[i].skillInstanceData;
-                if (instanceData != null) {
-                    instanceData.comboHistory.Add(_thisSkillComboMoveIndex);
-                }
-            }
-        }
-
-        private void ResetAllCombinedSteppedSkillDefTimers() {
+        private void ResetAllCombinedSteppedSkillDefTimers([NotNull] GenericSkill thisSkillSlot) {
 
             stepResetTimer = 0;
 
-            for (int i = 0; i < _otherSkills.Count; i++) {
+            List<GenericSkill> otherSkills = (thisSkillSlot.skillInstanceData as InstanceData).otherSkills;
 
-                GenericSkill otherSkillSLot = _otherSkills[i];
+            for (int i = 0; i < otherSkills.Count; i++) {
+
+                GenericSkill otherSkillSLot = otherSkills[i];
                 CombinedSteppedSkillDef def = otherSkillSLot.skillDef as CombinedSteppedSkillDef;
                 if (def != null) {
                     def.stepResetTimer = 0;
@@ -177,13 +141,16 @@ namespace JoeModForReal.Content {
         private void ResetAllCombinedSteppedSkillDefSteps([NotNull]GenericSkill thisSkillSlot) {
 
             (thisSkillSlot.skillInstanceData as InstanceData).step = 0;
-            ResetOtherCombinedSteppedSkillDefSteps();
+            ResetOtherCombinedSteppedSkillDefSteps(thisSkillSlot);
         }
 
-        private void ResetOtherCombinedSteppedSkillDefSteps() {
-            for (int i = 0; i < this._otherSkills.Count; i++) {
+        private void ResetOtherCombinedSteppedSkillDefSteps([NotNull] GenericSkill thisSkillSlot) {
 
-                GenericSkill otherSkillSLot = _otherSkills[i];
+            List<GenericSkill> otherSkills = (thisSkillSlot.skillInstanceData as InstanceData).otherSkills;
+
+            for (int i = 0; i < otherSkills.Count; i++) {
+
+                GenericSkill otherSkillSLot = otherSkills[i];
                 CombinedSteppedSkillDef combinedDef = otherSkillSLot.skillDef as CombinedSteppedSkillDef;
                 if (combinedDef != null) {
                     InstanceData instanceData = otherSkillSLot.skillInstanceData as InstanceData;
@@ -193,7 +160,6 @@ namespace JoeModForReal.Content {
                 }
             }
         }
-
 
         // Token: 0x06004621 RID: 17953 RVA: 0x001228F8 File Offset: 0x00120AF8
         public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {
@@ -206,29 +172,16 @@ namespace JoeModForReal.Content {
             if (this.stepResetTimer > this.stepGraceDuration) {
 
                 InstanceData skillInstanceData = ((InstanceData)skillSlot.skillInstanceData);
-                if (skillInstanceData.step != 0)
+                if (skillInstanceData.step != 0) {
                     OnTimeoutResetSkill(skillSlot);
+                }
                 skillInstanceData.step = 0;
             }
         }
 
         protected virtual void OnTimeoutResetSkill([NotNull] GenericSkill skillSlot) {
-            if (resetOthersOnReset)
-                ResetOtherCombinedSteppedSkillDefSteps();
-
-            ResetAllComboHistory(skillSlot);
-        }
-
-        private void ResetAllComboHistory([NotNull] GenericSkill skillSlot) {
-
-            InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
-            instanceData.comboHistory.Clear();
-
-            for (int i = 0; i < _otherSkills.Count; i++) {
-                instanceData = (InstanceData)_otherSkills[i].skillInstanceData;
-                if (instanceData != null) {
-                    instanceData.comboHistory.Clear();
-                }
+            if (resetOthersOnReset) {
+                ResetOtherCombinedSteppedSkillDefSteps(skillSlot);
             }
         }
     }

@@ -76,9 +76,33 @@ namespace JoeModForReal.Content.Survivors {
             bodyPrefab.AddComponent<JoeWeaponComponent>();
 
             ComboRecipeCooker comboComponent = bodyPrefab.AddComponent<ComboRecipeCooker>();
-            
+
+            SkillDef fireballSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+                skillName = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
+                skillNameToken = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
+                skillDescriptionToken = JOE_PREFIX + "SECONDARY_FIREBALL_DESCRIPTION",
+                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSecondary"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Secondary1Fireball)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 1,
+                baseRechargeInterval = 6f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Secondary1Fireball)),
+                resultSkillDef = fireballSkillDef,
                 combo = new List<int> { 0, 0, 1, 1 }
             });
             
@@ -187,7 +211,7 @@ namespace JoeModForReal.Content.Survivors {
                                                                       "Weapon",
                                                                       false));
 
-            CombinedSteppedSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<CombinedSteppedSkillDef>(
+            ComboSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<ComboSkillDef>(
                 new SkillDefInfo("koalswing",
                                  JOE_PREFIX + "PRIMARY_KOAL_NAME",
                                  JOE_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
@@ -196,9 +220,7 @@ namespace JoeModForReal.Content.Survivors {
                                  "Weapon",
                                  true));
             primarySkillDefKoal.mustKeyPress = true;
-            primarySkillDefKoal.stepCount = 4;
-            primarySkillDefKoal.stepGraceDuration = 2f;
-            primarySkillDefKoal.maxCombinedStepCount = 8;
+            primarySkillDefKoal.comboGraceDuration = 2f;
 
 
             if (FacelessJoePlugin.andrew) {
@@ -237,7 +259,7 @@ namespace JoeModForReal.Content.Survivors {
 
             #region dev
 
-            RepeatableSteppedSkillDef secondarySkillDefKoal = Modules.Skills.CreateSkillDef<RepeatableSteppedSkillDef>(new SkillDefInfo {
+            RepeatableComboSkillDef secondarySkillDefKoal = Modules.Skills.CreateSkillDef<RepeatableComboSkillDef>(new SkillDefInfo {
                 skillName = JOE_PREFIX + "koalswingSecondary",
                 skillNameToken = JOE_PREFIX + "SECONDARY_KOAL_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SECONDARY_KOAL_DESCRIPTION",
@@ -260,10 +282,9 @@ namespace JoeModForReal.Content.Survivors {
                 stockToConsume = 0,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
+            secondarySkillDefKoal.comboGraceDuration = 2f;
             secondarySkillDefKoal.stocksToConsumeAfterAllUses = 1;
-            secondarySkillDefKoal.stepCount = 4;
-            secondarySkillDefKoal.maxCombinedStepCount = 8;
-            secondarySkillDefKoal.stepGraceDuration = 2f;
+            secondarySkillDefKoal.maxUsesPerStock = 3;
 
 
             if (FacelessJoePlugin.andrew) {

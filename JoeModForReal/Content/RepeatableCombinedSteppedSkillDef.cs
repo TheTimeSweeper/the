@@ -3,7 +3,7 @@ using UnityEngine;
 using JetBrains.Annotations;
 
 namespace JoeModForReal.Content {
-    public class RepeatableSteppedSkillDef : CombinedSteppedSkillDef {
+    public class RepeatableCombinedSteppedSkillDef : CombinedSteppedSkillDef {
 
         public Sprite[] extraUseIcons = new Sprite[0];
 

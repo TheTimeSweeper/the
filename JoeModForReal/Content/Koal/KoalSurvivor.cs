@@ -67,85 +67,191 @@ namespace JoeModForReal.Content.Survivors {
             //in reverse order of priority because combo checker goes through the list and finds the first match
             #region tier3 combos
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary33)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary33),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 1, 0, 0, 0 },
                 resetComboHistory = true
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary32)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary32),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 1, 0, 0 },
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary31)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary31),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 1, 0 },
             });
 
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary33)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary33),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 0, 1, 1, 1 },
                 resetComboHistory = true
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary32)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary32),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 0, 1, 1 }
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary31)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary31),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 0, 1 }
             });
             #endregion
 
             #region tier1 combos
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary23)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary23),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 0, 0, 0 },
                 resetComboHistory = true
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary22)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary22),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 0, 0 },
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary21)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary21),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 0 },
             });
 
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary23)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary23),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 1, 1, 1 },
                 resetComboHistory = true
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary22)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary22),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 1, 1 }
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary21)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary21),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 1 }
             });
             #endregion
 
             #region tier0 combos
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary13)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary13),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 0, 0 },
-                resetComboHistory = true
+                resetComboHistory = true,
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalPrimary12)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalPrimary12),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 0, 0 },
             });
 
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary13)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary13),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 1, 1 },
                 resetComboHistory = true
             });
             comboComponent.comboRecipes.Add(new ComboRecipeCooker.ComboRecipe {
-                resultState = new EntityStates.SerializableEntityStateType(typeof(KoalSecondary12)),
+                resultSkillDef = CreateKoalComboSkillDef(
+                    typeof(KoalSecondary12),
+                    "name",
+                    "nametoken",
+                    "descriptiontoken",
+                    null
+                ),
                 combo = new List<int> { 1, 1 }
             });
             #endregion
+        }
+
+        private SkillDef CreateKoalComboSkillDef(Type stateType, string skillName, string nameToken, string descriptionToken, Sprite sprite) {
+            return Skills.CreateSkillDef(new SkillDefInfo {
+                activationState = new EntityStates.SerializableEntityStateType(stateType),
+                skillName = skillName,
+                skillNameToken = nameToken,
+                skillDescriptionToken = descriptionToken,
+                skillIcon = sprite
+            });
         }
 
         protected override void InitializeCharacterModel() {
@@ -182,7 +288,7 @@ namespace JoeModForReal.Content.Survivors {
 
         private void InitializePrimarySkills() {
 
-            CombinedSteppedSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<CombinedSteppedSkillDef>(
+            ComboSkillDef primarySkillDefKoal = Modules.Skills.CreateSkillDef<ComboSkillDef>(
                 new SkillDefInfo(KOAL_PREFIX + "koalswingPrimary",
                                  KOAL_PREFIX + "PRIMARY_KOAL_NAME",
                                  KOAL_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
@@ -191,15 +297,13 @@ namespace JoeModForReal.Content.Survivors {
                                  "Weapon",
                                  true));
             primarySkillDefKoal.mustKeyPress = true;
-            primarySkillDefKoal.stepCount = 3;
-            primarySkillDefKoal.stepGraceDuration = 2f;
-            primarySkillDefKoal.maxCombinedStepCount = -1;
+            primarySkillDefKoal.comboGraceDuration = 2f;
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefKoal);
         }
 
         private void InitializeSecondarySkills() {
-            RepeatableSteppedSkillDef secondarySkillDefKoal = Modules.Skills.CreateSkillDef<RepeatableSteppedSkillDef>(new SkillDefInfo {
+            RepeatableComboSkillDef secondarySkillDefKoal = Modules.Skills.CreateSkillDef<RepeatableComboSkillDef>(new SkillDefInfo {
                 skillName = KOAL_PREFIX + "koalSwingSecondary",
                 skillNameToken = KOAL_PREFIX + "SECONDARY_KOAL_NAME",
                 skillDescriptionToken = KOAL_PREFIX + "SECONDARY_KOAL_DESCRIPTION",
@@ -222,10 +326,10 @@ namespace JoeModForReal.Content.Survivors {
                 stockToConsume = 0,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
+            secondarySkillDefKoal.comboGraceDuration = 2f;
             secondarySkillDefKoal.stocksToConsumeAfterAllUses = 1;
-            secondarySkillDefKoal.stepCount = 3;
-            secondarySkillDefKoal.maxCombinedStepCount = -1;
-            secondarySkillDefKoal.stepGraceDuration = 2f;
+            secondarySkillDefKoal.maxUsesPerStock = 3;
+
 
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, secondarySkillDefKoal);

@@ -1,16 +1,22 @@
 ﻿using EntityStates;
+using RoR2;
+using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace JoeModForReal.Components {
-    public class ComboRecipeCooker : MonoBehaviour { 
+
+    public interface ILoadoutDisplayStrip {
+        List<SkillDef> GetDisplaySkillDefs(Loadout loadout);
+    }
+
+    public class ComboRecipeCooker : MonoBehaviour,  ILoadoutDisplayStrip { 
 
         [System.Serializable]
         public class ComboRecipe {
-            public SerializableEntityStateType resultState;
+            public SkillDef resultSkillDef;
             public List<int> combo;
             public bool resetComboHistory = false;
-            public Sprite sprite = null;
         }
         public List<ComboRecipe> comboRecipes = new List<ComboRecipe>();
         private Queue<int> recipeReader = new Queue<int>();
@@ -61,6 +67,14 @@ namespace JoeModForReal.Components {
                 }
             }
             return comboMatched;
+        }
+
+        public List<SkillDef> GetDisplaySkillDefs(Loadout loadout) {
+            List<SkillDef> skills = new List<SkillDef>();
+            for (int i = 0; i < comboRecipes.Count; i++) {
+                skills.Add(comboRecipes[i].resultSkillDef);
+            }
+            return skills;
         }
     }
 }
