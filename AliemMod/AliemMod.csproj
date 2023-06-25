@@ -40,6 +40,9 @@
 	  <Reference Include="R2API">
 	    <HintPath>..\libs\R2API.dll</HintPath>
 	  </Reference>
+	  <Reference Include="RiskOfOptions">
+	    <HintPath>..\libs\RiskOfOptions.dll</HintPath>
+	  </Reference>
 	  <Reference Include="TILER2">
 	    <HintPath>..\libs\TILER2.dll</HintPath>
 	  </Reference>

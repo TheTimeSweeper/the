@@ -44,7 +44,7 @@ internal static class Helpers {
     public static bool verbose = false;
     public static void LogVerbose(object message, bool chat = false) {
 
-        if (Config.Debug && verbose) {
+        if (AliemConfig.Debug && verbose) {
             AliemPlugin.Log.LogMessage(message);
 
             if (chat) {
@@ -55,7 +55,7 @@ internal static class Helpers {
 
     public static void LogWarning(object message, bool chat = false) {
 
-        if (Config.Debug) {
+        if (AliemConfig.Debug) {
             AliemPlugin.Log.LogWarning(message);
 
             if (chat) {

@@ -1,52 +1,91 @@
-﻿using System;
+﻿using UnityEngine;
 using BepInEx.Configuration;
-using UnityEngine;
+using System.Runtime.CompilerServices;
+using RiskOfOptions;
+using RiskOfOptions.Options;
+using RiskOfOptions.OptionConfigs;
 
 namespace Modules
 {
     internal static class Config
     {
-        public static bool Debug;
+        public static ConfigFile MyConfig;
 
-        public static bool Cursed;
-
-        public static ConfigEntry<bool> AlwaysRide;
-
-        public static void ReadConfig()
+        public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false)
         {
-            Debug = AliemPlugin.instance.Config.Bind(
-                "Debug",
-                "Debug Logs",
-                false,
-                "in case I forget to delete them when I upload").Value;
+            if (string.IsNullOrEmpty(description))
+            {
+                description = name;
+            }
 
-            string sectionGeneral = "General";
+            if (restartRequired)
+            {
+                description += " (restart required)";
+            }
 
-            Cursed = AliemPlugin.instance.Config.Bind(
-                sectionGeneral,
-                "Cursed",
-                false,
-                "Enable wip/unused content").Value;
+            ConfigEntry<T> configEntry = MyConfig.Bind(section, name, defaultValue, description);
 
-            AlwaysRide = AliemPlugin.instance.Config.Bind(
-                sectionGeneral,
-                "Always Ride",
-                false,
-                "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
+            {
+                TryRegisterOption(configEntry, restartRequired);
+            }
+
+            return configEntry;
+        }
+        public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description = "", float min = 0, float max = 20, bool restartRequired = false)
+        {
+            if (string.IsNullOrEmpty(description))
+            {
+                description = name;
+            }
+
+            if (restartRequired)
+            {
+                description += " (restart required)";
+            }
+
+            ConfigEntry<float> configEntry = MyConfig.Bind(section, name, defaultValue, description);
+
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
+            {
+                TryRegisterOptionSlider(configEntry, min, max, restartRequired);
+            }
+
+            return configEntry;
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void TryRegisterOption<T>(ConfigEntry<T> entry, bool restartRequired)
+        {
+            if (entry is ConfigEntry<float>)
+            {
+                ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>, new SliderConfig() { min = 0, max = 20, formatString = "{0:0.00}", restartRequired = restartRequired }));
+            }
+            if (entry is ConfigEntry<int>)
+            {
+                ModSettingsManager.AddOption(new IntSliderOption(entry as ConfigEntry<int>, restartRequired));
+            }
+            if (entry is ConfigEntry<bool>)
+            {
+                ModSettingsManager.AddOption(new CheckBoxOption(entry as ConfigEntry<bool>, restartRequired));
+            }
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void TryRegisterOptionSlider(ConfigEntry<float> entry, float min, float max, bool restartRequired)
+        {
+            ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>, new SliderConfig() { min = min, max = max, formatString = "{0:0.00}", restartRequired = restartRequired }));
         }
 
-        // this helper automatically makes config entries for disabling survivors
-        public static ConfigEntry<bool> CharacterEnableConfig(string characterName, bool enabledDefault = true, string description = "")
+        //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs
+        public static bool GetKeyPressed(ConfigEntry<KeyboardShortcut> entry)
         {
-            return AliemPlugin.instance.Config.Bind<bool>("General",
-                                                                "Enable "+ characterName,
-                                                                enabledDefault,
-                                                                !string.IsNullOrEmpty(description) ? description : "Set to false to disable this character");
-        }
-
-        public static ConfigEntry<bool> EnemyEnableConfig(string characterName)
-        {
-            return AliemPlugin.instance.Config.Bind<bool>(new ConfigDefinition(characterName, "Enabled"), true, new ConfigDescription("Set to false to disable this enemy"));
+            foreach (var item in entry.Value.Modifiers)
+            {
+                if (!Input.GetKey(item))
+                {
+                    return false;
+                }
+            }
+            return Input.GetKeyDown(entry.Value.MainKey);
         }
     }
 }

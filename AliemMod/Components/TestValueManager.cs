@@ -11,7 +11,7 @@ public class TestValueManager : MonoBehaviour {
     private float _holdTime = 0.4f;    
 
     //compiler flags when
-    private bool _testingEnabled => Modules.Config.Debug;
+    private bool _testingEnabled => Modules.AliemConfig.Debug;
 
     public static float value1 = -60f;
     public static float value2 = 25f;

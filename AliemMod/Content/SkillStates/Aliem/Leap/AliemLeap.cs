@@ -119,7 +119,7 @@ namespace ModdedEntityStates.Aliem {
 					foundBody = FindBodyToRide();
 				}
 				
-				if(foundBody != null && (inputButtonState.down || Modules.Config.AlwaysRide.Value)) {
+				if(foundBody != null && (inputButtonState.down || Modules.AliemConfig.AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {
 						riddenBody = foundBody
 					});

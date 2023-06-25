@@ -110,7 +110,7 @@ namespace AliemMod.Content.Survivors {
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
-            if(DamageAPI.HasModdedDamageType(damageInfo, Modules.DamageTypes.Decapitating)) {
+            if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.Decapitating)) {
 
                 if(self.gameObject.GetComponent<ChompedComponent>() == null) {
                     self.gameObject.AddComponent<ChompedComponent>().init(self.body);
@@ -184,7 +184,7 @@ namespace AliemMod.Content.Survivors {
             primaryInstantSkillDef.mustKeyPress = true;
 
             Skills.AddPrimarySkills(bodyPrefab, primarySimpleGunSkillDef);
-            if (Modules.Config.Cursed) {
+            if (AliemConfig.Cursed.Value) {
                 Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef, primaryInstantSkillDef);
             }
             #endregion
@@ -275,7 +275,7 @@ namespace AliemMod.Content.Survivors {
                 skillName = "aliem_special_grenade",
                 skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecial"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenade)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -297,7 +297,7 @@ namespace AliemMod.Content.Survivors {
             Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
             #endregion
 
-            if (Modules.Compat.ScepterInstalled) {
+            if (Compat.ScepterInstalled) {
                 InitializeScepterSkills();
             }
         }
@@ -309,7 +309,7 @@ namespace AliemMod.Content.Survivors {
                 skillName = "aliem_special_grenade_scepter",
                 skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecialScepter"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecialScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ScepterThrowGrenade)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,

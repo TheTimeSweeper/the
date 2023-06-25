@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using AliemMod.Content;
+using BepInEx;
 using BepInEx.Logging;
 using Modules.Survivors;
 using R2API.Utils;
@@ -53,12 +54,14 @@ public class AliemPlugin : BaseUnityPlugin {
         
         Log = Logger;
 
+        Modules.Config.MyConfig = Config;
+
         Modules.DamageTypes.RegisterDamageTypes();
 
         // load assets and read config
-        Modules.Config.ReadConfig();
+        AliemConfig.ReadConfig();
 
-        if (Modules.Config.Debug)
+        if (AliemConfig.Debug.Value)
             gameObject.AddComponent<TestValueManager>();
 
         Modules.Assets.Initialize();
