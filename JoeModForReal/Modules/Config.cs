@@ -120,7 +120,7 @@ namespace Modules
             }
         }
 
-        public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description = "", float min = 0, float max = 20) {
+        public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description = "", float min = 0, float max = 20, bool restartRequired = false) {
 
             if (string.IsNullOrEmpty(description))
                 description = name;
@@ -128,16 +128,16 @@ namespace Modules
             ConfigEntry<float> configEntry = FacelessJoePlugin.instance.Config.Bind(section, name, defaultValue, description);
 
             if (Compat.RiskOfOptionsInstalled) {
-                TryRegisterOptionSlider(configEntry, min, max);
+                TryRegisterOptionSlider(configEntry, min, max, restartRequired);
             }
 
             return configEntry;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        public static void TryRegisterOptionSlider(ConfigEntry<float> entry, float min, float max) {
+        public static void TryRegisterOptionSlider(ConfigEntry<float> entry, float min_, float max_, bool restartRequired_ = false) {
 
-            ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>, new SliderConfig() { min = min, max = max }));
+            ModSettingsManager.AddOption(new SliderOption(entry as ConfigEntry<float>, new SliderConfig() { min = min_, max = max_, restartRequired = restartRequired_ }));
         }
 
         //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs

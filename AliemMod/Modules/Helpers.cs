@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AliemMod.Content;
 using Modules;
 using RoR2;
 
@@ -44,7 +45,7 @@ internal static class Helpers {
     public static bool verbose = false;
     public static void LogVerbose(object message, bool chat = false) {
 
-        if (AliemConfig.Debug && verbose) {
+        if (AliemConfig.Debug.Value && verbose) {
             AliemPlugin.Log.LogMessage(message);
 
             if (chat) {
@@ -55,7 +56,7 @@ internal static class Helpers {
 
     public static void LogWarning(object message, bool chat = false) {
 
-        if (AliemConfig.Debug) {
+        if (AliemConfig.Debug.Value) {
             AliemPlugin.Log.LogWarning(message);
 
             if (chat) {

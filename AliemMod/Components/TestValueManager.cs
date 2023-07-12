@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AliemMod.Content;
+using System;
 using UnityEngine;
 
 public class TestValueManager : MonoBehaviour {
@@ -11,7 +12,7 @@ public class TestValueManager : MonoBehaviour {
     private float _holdTime = 0.4f;    
 
     //compiler flags when
-    private bool _testingEnabled => Modules.AliemConfig.Debug;
+    private bool _testingEnabled => false;
 
     public static float value1 = -60f;
     public static float value2 = 25f;

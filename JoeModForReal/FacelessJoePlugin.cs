@@ -87,27 +87,27 @@ namespace JoeModForReal {
         private void Hook() {
             RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
 
-            On.EntityStates.Commando.CommandoWeapon.FirePistol2.FixedUpdate += FirePistol2_FixedUpdate;
-
             On.RoR2.UI.LoadoutPanelController.Rebuild += LoadoutPanelController_Rebuild;
-            On.RoR2.UI.CharacterSelectController.RebuildLocal += CharacterSelectController_RebuildLocal;
+            On.RoR2.UI.CharacterSelectController.BuildSkillStripDisplayData += CharacterSelectController_BuildSkillStripDisplayData;
+            //On.RoR2.UI.CharacterSelectController.RebuildLocal += CharacterSelectController_RebuildLocal;
         }
 
-        private void CharacterSelectController_RebuildLocal(On.RoR2.UI.CharacterSelectController.orig_RebuildLocal orig, RoR2.UI.CharacterSelectController self) {
-            orig(self);
-
-            Loadout loadout = Loadout.RequestInstance();
+        private void CharacterSelectController_BuildSkillStripDisplayData(On.RoR2.UI.CharacterSelectController.orig_BuildSkillStripDisplayData orig, RoR2.UI.CharacterSelectController self, Loadout loadout, ValueType bodyInfo, object dest) {
+            orig(self, loadout, bodyInfo, dest);
+            ((RoR2.UI.CharacterSelectController.BodyInfo)bodyInfo).bodyPrefab.GetComponents<Components.ILoadoutDisplayStrip>()
 
         }
+
+        //private void CharacterSelectController_RebuildLocal(On.RoR2.UI.CharacterSelectController.orig_RebuildLocal orig, RoR2.UI.CharacterSelectController self) {
+        //    orig(self);
+
+        //    Loadout loadout = Loadout.RequestInstance();
+
+        //}
 
         private void LoadoutPanelController_Rebuild(On.RoR2.UI.LoadoutPanelController.orig_Rebuild orig, RoR2.UI.LoadoutPanelController self) {
             orig(self);
 
-        }
-
-        private void FirePistol2_FixedUpdate(On.EntityStates.Commando.CommandoWeapon.FirePistol2.orig_FixedUpdate orig, EntityStates.Commando.CommandoWeapon.FirePistol2 self) {
-            orig(self);
-            Debug.LogWarning("fixedage");
         }
 
         private void GlobalEventManager_onCharacterDeathGlobal(RoR2.DamageReport damageReport) {

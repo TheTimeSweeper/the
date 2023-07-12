@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using AliemMod.Content;
+using EntityStates;
 using EntityStates.Croco;
 using RoR2;
 using System;
@@ -119,7 +120,7 @@ namespace ModdedEntityStates.Aliem {
 					foundBody = FindBodyToRide();
 				}
 				
-				if(foundBody != null && (inputButtonState.down || Modules.AliemConfig.AlwaysRide.Value)) {
+				if(foundBody != null && (inputButtonState.down || AliemConfig.AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {
 						riddenBody = foundBody
 					});
