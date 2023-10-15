@@ -38,14 +38,14 @@ namespace Modules.Survivors {
         }
 
         protected virtual void InitializeDisplayPrefab() {
-            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
+            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(characterName + "Display", bodyPrefab, bodyInfo);
         }
         public virtual void InitializeUnlockables()
         {
         }
 
         public virtual void InitializeDoppelganger(string clone) {
-            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, bodyName + "MonsterMaster", clone);
+            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, characterName + "MonsterMaster", clone);
         }
         
         protected virtual void InitializeSurvivor() {

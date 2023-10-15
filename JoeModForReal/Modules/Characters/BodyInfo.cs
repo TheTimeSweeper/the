@@ -5,7 +5,7 @@ namespace Modules.Characters {
 
     // for simplifying characterbody creation
     internal class BodyInfo {
-        public string bodyPrefabName = "";
+        public string bodyName = "";
         public string bodyNameToken = "";
         public string subtitleNameToken = "";
         /// <summary>

@@ -13,15 +13,17 @@ using System.Runtime.CompilerServices;
 using ModdedEntityStates.Koal;
 
 namespace JoeModForReal.Content.Survivors {
+
     internal class KoalSurvivor : SurvivorBase {
-        public override string bodyName => "Koal";
+
+        public override string characterName => "Koal";
 
         public const string KOAL_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_KOAL_";
 
         public override string survivorTokenPrefix => KOAL_PREFIX;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
-            bodyPrefabName = "KoalBody",
+            bodyName = "KoalBody",
             bodyNameToken = KOAL_PREFIX + "NAME",
             subtitleNameToken = KOAL_PREFIX + "SUBTITLE",
             sortPosition = 69,

@@ -30,12 +30,12 @@ namespace ModdedEntityStates.TeslaTrooper {
             aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
 
             if (!base.characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
-                CharacterModel component = base.GetModelTransform().GetComponent<CharacterModel>();
+                CharacterModel characterModel = base.GetModelTransform().GetComponent<CharacterModel>();
 
                 TemporaryOverlay temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
                 temporaryOverlay.duration = ShieldBuffDuration + 1;
                 temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
-                temporaryOverlay.AddToCharacerModel(component);
+                temporaryOverlay.AddToCharacerModel(characterModel);
             }
 
             if (NetworkServer.active) {

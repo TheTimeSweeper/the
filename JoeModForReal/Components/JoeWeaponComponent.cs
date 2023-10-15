@@ -1,10 +1,8 @@
 ﻿using RoR2;
 using RoR2.Projectile;
-using System;
 using UnityEngine;
 
 namespace JoeModForReal.Components {
-
     public class JoeWeaponComponent : MonoBehaviour {
 
         private CharacterBody _characterBody;

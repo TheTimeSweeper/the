@@ -13,6 +13,8 @@ namespace Modules {
 
         public static GameObject totallyNewBombPrefab;
 
+        public static GameObject genjiShuriken;
+
         public static void Init() {
             
             JoeFireball = JankyLoadAliemPrefab("JoeFireballBasic");
@@ -21,6 +23,20 @@ namespace Modules {
             totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb");
 
             JoeSwordBeam = CreateJoeSwordBeam();
+
+            if (JoeModForReal.FacelessJoePlugin.andrew) {
+                genjiShuriken = CloneShuriken();
+            }
+        }
+
+        private static GameObject CloneShuriken() {
+            GameObject shuriken = CloneProjectilePrefab("ShurikenProjectile", "TotallyNewShuriken");
+
+            UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileDirectionalTargetFinder>());
+            UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileSteerTowardTarget>());
+            UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileTargetComponent>());
+
+            return shuriken;
         }
 
         private static GameObject CreateJoeSwordBeam() {

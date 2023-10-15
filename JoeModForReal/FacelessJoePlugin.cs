@@ -44,6 +44,8 @@ namespace JoeModForReal {
 
             if (Modules.Config.Debug)
                 Modules.Tokens.GenerateTokens();
+
+            //On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
         }
 
         private void Start() {
@@ -76,6 +78,7 @@ namespace JoeModForReal {
 
             if (andrew) {
                 new KoalSurvivor().Initialize();
+                new GenjiSurvivor().Initialize();
                 Logger.LogError("ANDREW IS TRUE. DO NOT RELEASE");
             }
 
@@ -87,15 +90,14 @@ namespace JoeModForReal {
         private void Hook() {
             RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
 
-            On.RoR2.UI.LoadoutPanelController.Rebuild += LoadoutPanelController_Rebuild;
-            On.RoR2.UI.CharacterSelectController.BuildSkillStripDisplayData += CharacterSelectController_BuildSkillStripDisplayData;
+            //On.RoR2.UI.LoadoutPanelController.Rebuild += LoadoutPanelController_Rebuild;
+            //On.RoR2.UI.CharacterSelectController.BuildSkillStripDisplayData += CharacterSelectController_BuildSkillStripDisplayData;
             //On.RoR2.UI.CharacterSelectController.RebuildLocal += CharacterSelectController_RebuildLocal;
         }
 
         private void CharacterSelectController_BuildSkillStripDisplayData(On.RoR2.UI.CharacterSelectController.orig_BuildSkillStripDisplayData orig, RoR2.UI.CharacterSelectController self, Loadout loadout, ValueType bodyInfo, object dest) {
             orig(self, loadout, bodyInfo, dest);
-            ((RoR2.UI.CharacterSelectController.BodyInfo)bodyInfo).bodyPrefab.GetComponents<Components.ILoadoutDisplayStrip>()
-
+            ((RoR2.UI.CharacterSelectController.BodyInfo)bodyInfo).bodyPrefab.GetComponents<Components.ILoadoutDisplayStrip>();
         }
 
         //private void CharacterSelectController_RebuildLocal(On.RoR2.UI.CharacterSelectController.orig_RebuildLocal orig, RoR2.UI.CharacterSelectController self) {

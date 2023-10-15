@@ -53,7 +53,7 @@ namespace Modules {
             #region CharacterBody
             CharacterBody bodyComponent = newBodyPrefab.GetComponent<CharacterBody>();
             //identity
-            bodyComponent.name = bodyInfo.bodyPrefabName;
+            bodyComponent.name = bodyInfo.bodyName;
             bodyComponent.baseNameToken = bodyInfo.bodyNameToken;
             bodyComponent.subtitleNameToken = bodyInfo.subtitleNameToken;
             bodyComponent.portraitIcon = bodyInfo.characterPortrait;

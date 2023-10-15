@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Modules.Characters {
     internal abstract class CharacterBase {
 
-        public abstract string bodyName { get; }
+        public abstract string characterName { get; }
 
         public abstract BodyInfo bodyInfo { get; set; }
 
@@ -19,10 +19,13 @@ namespace Modules.Characters {
 
         public virtual GameObject bodyPrefab { get; set; }
         public virtual CharacterModel bodyCharacterModel { get; set; }
-        public string fullBodyName => bodyName + "Body";
+        public BodyIndex bodyIndex;
+        public string fullBodyName => characterName + "Body";
 
         public virtual void Initialize() {
             InitializeCharacter();
+
+            RoR2.ContentManagement.ContentManager.onContentPacksAssigned += lateInit;
         }
 
         public virtual void InitializeCharacter() {
@@ -40,7 +43,7 @@ namespace Modules.Characters {
         }
         
         protected virtual void InitializeCharacterBodyAndModel() {
-            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bodyName + "Body", "mdl" + bodyName, bodyInfo);
+            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(characterName + "Body", "mdl" + characterName, bodyInfo);
             InitializeCharacterModel();
         }
         protected virtual void InitializeCharacterModel() {
@@ -66,18 +69,18 @@ namespace Modules.Characters {
         public virtual void InitializeItemDisplays() {
 
                 ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
-                itemDisplayRuleSet.name = "idrs" + bodyName;
+                itemDisplayRuleSet.name = "idrs" + characterName;
 
                 bodyCharacterModel.itemDisplayRuleSet = itemDisplayRuleSet;
+        }
+
+        public virtual void lateInit(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj) {
+
+            bodyIndex = BodyCatalog.FindBodyIndex(bodyInfo.bodyName);
 
             if (itemDisplays != null) {
-                RoR2.ContentManagement.ContentManager.onContentPacksAssigned += SetItemDisplays;
+                itemDisplays.SetItemDIsplays(bodyCharacterModel.itemDisplayRuleSet);
             }
         }
-
-        public void SetItemDisplays(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj) {
-                itemDisplays.SetItemDIsplays(bodyCharacterModel.itemDisplayRuleSet);
-        }
-
     }
 }

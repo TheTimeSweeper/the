@@ -12,16 +12,17 @@ using JoeModForReal.Components;
 using System.Runtime.CompilerServices;
 
 namespace JoeModForReal.Content.Survivors {
+
     internal class JoeSurivor : SurvivorBase
     {
-        public override string bodyName => "Joe";
+        public override string characterName => "Joe";
 
         public const string JOE_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_";
 
         public override string survivorTokenPrefix => JOE_PREFIX;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
-            bodyPrefabName = "JoeBody",
+            bodyName = "JoeBody",
             bodyNameToken = JOE_PREFIX + "NAME",
             subtitleNameToken = JOE_PREFIX + "SUBTITLE",
             sortPosition = 69,
