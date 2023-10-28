@@ -19,7 +19,7 @@ namespace ModdedEntityStates.Genji {
 			if (base.isAuthority) {
 				Ray aimRay = base.GetAimRay();
 
-				ProjectileManager.instance.FireProjectile(Modules.Projectiles.genjiShuriken,
+				ProjectileManager.instance.FireProjectile(JoeModForReal.Content.Survivors.GenjiProjectiles.genjiShuriken,
 					aimRay.origin,
 					Util.QuaternionSafeLookRotation(direction),
 					base.gameObject,
@@ -62,18 +62,21 @@ namespace ModdedEntityStates.Genji {
 			Vector3 direction = GetAimRay().direction;
             while(intervalTim <= 0) {
 
+				//throw normally until the last one
 				if(thrownShurikens < shurikens - 1) {
 
 					fireProjectile(direction);
 					thrownShurikens++;
 					intervalTim += interval;
 				} 
+				//at the last one, set the final interval
 				else if(thrownShurikens == shurikens - 1) {
 
 					fireProjectile(direction);
 					thrownShurikens++;
 					intervalTim += finalInterval;
 				}
+				//after the final interval, don't throw and end state
 				else if (thrownShurikens == shurikens) {
 					thrownShurikens++;
 					base.outer.SetNextStateToMain();

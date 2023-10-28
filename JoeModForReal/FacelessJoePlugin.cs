@@ -1,13 +1,11 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using System;
 using JoeModForReal.Content.Survivors;
+using R2API.Utils;
+using RoR2;
+using System;
 using System.Security;
 using System.Security.Permissions;
-using R2API.Utils;
-using System.Collections;
-using UnityEngine;
-using RoR2;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -32,7 +30,7 @@ namespace JoeModForReal {
         public static bool andrew = true;
 
         void Awake() {
-            
+
             instance = this;
             Log = Logger;
 

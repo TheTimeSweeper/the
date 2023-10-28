@@ -13,6 +13,9 @@ using System.Runtime.CompilerServices;
 using ModdedEntityStates.Genji;
 using UnityEngine.Networking;
 using System.Linq;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
+using R2API;
 
 namespace JoeModForReal.Content.Survivors {
 
@@ -62,6 +65,9 @@ namespace JoeModForReal.Content.Survivors {
         public override void Initialize() {
             base.Initialize();
 
+            GenjiProjectiles.Init();
+            GenjiDamageTypes.Init();
+
             Hook();
         }
 
@@ -72,7 +78,7 @@ namespace JoeModForReal.Content.Survivors {
             AssistResetSkillTracker assistTracker = bodyPrefab.AddComponent<AssistResetSkillTracker>();
             assistTracker.skillLocator = bodyPrefab.GetComponent<SkillLocator>();
 
-            bodyPrefab.AddComponent<DeflectBulletAttackReceiver>();
+            bodyPrefab.AddComponent<DeflectAttackReceiver>();
 
             HurtBoxGroup hurtBoxGroup = bodyCharacterModel.GetComponent<HurtBoxGroup>();
             HurtBox deflectHurtbox = bodyCharacterModel.GetComponent<ChildLocator>().FindChildComponent<HurtBox>("DeflectHitbox");
@@ -333,6 +339,36 @@ namespace JoeModForReal.Content.Survivors {
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
             GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
             On.RoR2.BulletAttack.ProcessHit += BulletAttack_ProcessHit;
+
+            IL.EntityStates.GolemMonster.FireLaser.OnEnter += FireLaser_OnEnter;
+        }
+
+        //credit in part to moffein for riskymod's assist manager
+        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig,
+                                                   GlobalEventManager self,
+                                                   DamageInfo damageInfo,
+                                                   GameObject victim) {
+
+            orig(self, damageInfo, victim);
+
+            bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
+
+            if (validDamage && damageInfo.attacker) {
+
+                if (damageInfo.attacker.TryGetComponent(out AssistResetSkillTracker assistResetSkillTracker)) {
+
+                    assistResetSkillTracker.addTrackedBody(victim);
+                }
+            }
+            if (damageInfo.HasModdedDamageType(GenjiDamageTypes.GolemLaser)) {
+                if (victim != null && victim.TryGetComponent(out IGolemLaserReceiver laserReceiver)) {
+                    laserReceiver.receiveGolemLaser();
+                }
+            }
+        }
+
+        private void GlobalEventManager_onCharacterDeathGlobal(DamageReport obj) {
+            AssistResetSkillTracker.CheckAllTrackersForDeath(obj.victimBody.gameObject);
         }
 
         private bool BulletAttack_ProcessHit(On.RoR2.BulletAttack.orig_ProcessHit orig,
@@ -354,27 +390,22 @@ namespace JoeModForReal.Content.Survivors {
             return origReturn;
         }
 
-        //credit in part to moffein for riskymod's assist manager
-        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, 
-                                                   GlobalEventManager self, 
-                                                   DamageInfo damageInfo, 
-                                                   GameObject victim) {
+        //add a damagetype to golem laser so they can be detected in a hook
+        //wow i can do il
+        private void FireLaser_OnEnter(MonoMod.Cil.ILContext il) {
 
-            orig(self, damageInfo, victim);
-
-            bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
-
-            if(validDamage && damageInfo.attacker){
-
-                if(damageInfo.attacker.TryGetComponent(out AssistResetSkillTracker assistResetSkillTracker)) {
-
-                    assistResetSkillTracker.addTrackedBody(victim);
-                }
-            }
-        }
-
-        private void GlobalEventManager_onCharacterDeathGlobal(DamageReport obj) {
-            AssistResetSkillTracker.CheckAllTrackersForDeath(obj.victimBody.gameObject);
+            ILCursor cursor = new ILCursor(il);
+            cursor.GotoNext(MoveType.After,
+                //these instructions match right after blastattack is created (make sure to minus cursor index by 1)
+                instruction => instruction.MatchNewobj<BlastAttack>(),
+                instruction => instruction.MatchDup(),
+                instruction => instruction.MatchLdarg(0)
+                );
+            cursor.Index--;
+            cursor.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) => {
+                blastAttack.AddModdedDamageType(GenjiDamageTypes.GolemLaser);
+                return blastAttack;
+            });
         }
     }
 }

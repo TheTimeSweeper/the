@@ -39,7 +39,7 @@ namespace JoeModForReal.Content.Survivors {
                     if (genericSkill.skillDef is AssistResetSkillDef) {
                         //todo probably not networked
                         //todo i thought this was gonna be done in the skilldef
-                        skillLocator.allSkills[i].RestockSteplike();
+                        skillLocator.allSkills[i].Reset();
                     }
                 }
             }

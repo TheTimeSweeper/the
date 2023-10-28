@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using EntityStates.GolemMonster;
 using JoeModForReal.Content.Survivors;
 using RoR2;
 using RoR2.Projectile;
@@ -11,10 +12,11 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.Genji {
     public class Deflect : BaseSkillState {
         public static float Duration = 1;
-        public static float MaxDeflectDistance = 2;
+        public static float MaxProjectileDeflectDistance = 2;
 
-        private DeflectBulletAttackReceiver _bulletAttackReceiver;
-        private GameObject deflectHitbox;
+        private DeflectAttackReceiver _deflectAttackReceiver;
+        private GameObject _deflectHitbox;
+        private ChildLocator _childLocator;
 
         public override void OnEnter() {
             base.OnEnter();
@@ -22,14 +24,20 @@ namespace ModdedEntityStates.Genji {
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, Duration);
             }
-            _bulletAttackReceiver = characterBody.GetComponent<DeflectBulletAttackReceiver>();
-            if (_bulletAttackReceiver != null) {
-                _bulletAttackReceiver.OnBulletAttackReceived += DeflectBullet;
+            _deflectAttackReceiver = characterBody.GetComponent<DeflectAttackReceiver>();
+            if (_deflectAttackReceiver != null) {
+                _deflectAttackReceiver.OnBulletAttackReceived += DeflectBullet;
+                _deflectAttackReceiver.OnGolemLaserReceived += DeflectGolemLaser;
+
             }
-            deflectHitbox = GetModelChildLocator().FindChildGameObject("DeflectHitbox");
-            if (deflectHitbox) {
-                deflectHitbox.SetActive(true);
+
+            _childLocator = GetModelChildLocator();
+            _deflectHitbox = _childLocator.FindChildGameObject("DeflectHitbox");
+            if (_deflectHitbox) {
+                _deflectHitbox.SetActive(true);
             }
+
+            StartAimMode(Duration + 1);
         }
 
         public override void FixedUpdate() {
@@ -45,19 +53,20 @@ namespace ModdedEntityStates.Genji {
         public override void OnExit() {
             base.OnExit();
 
-            if (_bulletAttackReceiver != null) {
-                _bulletAttackReceiver.OnBulletAttackReceived -= DeflectBullet;
+            if (_deflectAttackReceiver != null) {
+                _deflectAttackReceiver.OnBulletAttackReceived -= DeflectBullet;
+                _deflectAttackReceiver.OnGolemLaserReceived -= DeflectGolemLaser;
             }
 
-            if (deflectHitbox) {
-                deflectHitbox.SetActive(false);
+            if (_deflectHitbox) {
+                _deflectHitbox.SetActive(false);
             }
         }
 
         private void DeflectProjectiles() {
 
             List<ProjectileController> projectileInstances = InstanceTracker.GetInstancesList<ProjectileController>();
-            float num = MaxDeflectDistance * MaxDeflectDistance;
+            float num = MaxProjectileDeflectDistance * MaxProjectileDeflectDistance;
             for (int i = 0; i < projectileInstances.Count; i++) {
 
                 ProjectileController projectileController = projectileInstances[i];
@@ -136,7 +145,52 @@ namespace ModdedEntityStates.Genji {
 
             deflectedBullet.Fire();
         }
-        
+
+        private void DeflectGolemLaser() {
+
+            PlayDeflectEffect();
+
+            if (FireLaser.effectPrefab) {
+                EffectManager.SimpleMuzzleFlash(FireLaser.effectPrefab, base.gameObject, "notMercSlash", false);
+            }
+
+            if (base.isAuthority) {
+
+                Ray modifiedAimRay = base.GetAimRay();
+
+                float num = 1000f;
+                Vector3 vector = modifiedAimRay.origin + modifiedAimRay.direction * num;
+                RaycastHit raycastHit;
+                if (Physics.Raycast(modifiedAimRay, out raycastHit, num, LayerIndex.world.mask | LayerIndex.defaultLayer.mask | LayerIndex.entityPrecise.mask)) {
+                    vector = raycastHit.point;
+                }
+                new BlastAttack {
+                    attacker = base.gameObject,
+                    inflictor = base.gameObject,
+                    teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
+                    baseDamage = this.damageStat * FireLaser.damageCoefficient, //todo laser damage
+                    baseForce = FireLaser.force * 0.2f,
+                    position = vector,
+                    radius = FireLaser.blastRadius,
+                    falloffModel = BlastAttack.FalloffModel.SweetSpot,
+                    bonusForce = FireLaser.force * modifiedAimRay.direction
+                }.Fire();
+
+                Vector3 origin = modifiedAimRay.origin;
+                if (_childLocator) {
+                    int childIndex = _childLocator.FindChildIndex("notMercSlash");
+                  if (FireLaser.tracerEffectPrefab) {
+                      EffectData effectData = new EffectData {
+                          origin = vector,
+                          start = modifiedAimRay.origin
+                      };
+                      effectData.SetChildLocatorTransformReference(base.gameObject, childIndex);
+                      EffectManager.SpawnEffect(FireLaser.tracerEffectPrefab, effectData, true);
+                      EffectManager.SpawnEffect(FireLaser.hitEffectPrefab, effectData, true);
+                  }
+                }
+            }
+        }        
 
         private void PlayDeflectEffect() {
 

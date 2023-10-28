@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using JoeModForReal.Content.Survivors;
 using RoR2;
 using RoR2.Projectile;
 using System.Collections.Generic;
@@ -76,7 +77,7 @@ namespace ModdedEntityStates.Genji {
 
             this._attack = base.InitMeleeOverlap(damageCoefficient, Modules.Assets.MercImpactEffect, modelLocator.modelTransform, "dash");
             _attack.impactSound = Modules.Assets.FleshSliceSound.index;
-            R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
+            //R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 
         public override void OnExit() {

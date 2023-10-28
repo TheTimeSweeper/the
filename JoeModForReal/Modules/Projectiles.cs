@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Modules {
+
     internal static class Projectiles {
 
         public static GameObject JoeFireball;
@@ -13,30 +14,14 @@ namespace Modules {
 
         public static GameObject totallyNewBombPrefab;
 
-        public static GameObject genjiShuriken;
-
         public static void Init() {
             
-            JoeFireball = JankyLoadAliemPrefab("JoeFireballBasic");
+            JoeFireball = LoadAndRegisterProjectileAsIs("JoeFireballBasic");
             //JoeFireball.GetComponent<ProjectileSingleTargetImpact>().impactEffect = Assets.JoeImpactEffect;
 
             totallyNewBombPrefab = CloneProjectilePrefab("EngiGrenadeProjectile", "TotallyNotPlagueKnightBomb");
 
             JoeSwordBeam = CreateJoeSwordBeam();
-
-            if (JoeModForReal.FacelessJoePlugin.andrew) {
-                genjiShuriken = CloneShuriken();
-            }
-        }
-
-        private static GameObject CloneShuriken() {
-            GameObject shuriken = CloneProjectilePrefab("ShurikenProjectile", "TotallyNewShuriken");
-
-            UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileDirectionalTargetFinder>());
-            UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileSteerTowardTarget>());
-            UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileTargetComponent>());
-
-            return shuriken;
         }
 
         private static GameObject CreateJoeSwordBeam() {
@@ -59,7 +44,7 @@ namespace Modules {
             return prefab;
         }
 
-        public static GameObject JankyLoadAliemPrefab(string assName) {
+        public static GameObject LoadAndRegisterProjectileAsIs(string assName) {
 
             GameObject prefab = Assets.LoadAsset<GameObject>(assName);
             R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
@@ -69,7 +54,7 @@ namespace Modules {
             return prefab;
         }
 
-        private static GameObject CloneProjectilePrefab(string prefabName, string newPrefabName) {
+        public static GameObject CloneProjectilePrefab(string prefabName, string newPrefabName) {
             GameObject newPrefab = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/" + prefabName), newPrefabName);
             return newPrefab;
         }
