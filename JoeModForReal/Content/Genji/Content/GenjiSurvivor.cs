@@ -63,10 +63,12 @@ namespace JoeModForReal.Content.Survivors {
         private static UnlockableDef masterySkinUnlockableDef;
 
         public override void Initialize() {
-            base.Initialize();
 
             GenjiProjectiles.Init();
             GenjiDamageTypes.Init();
+            GenjiConfig.Init();
+
+            base.Initialize();
 
             Hook();
         }
@@ -96,8 +98,6 @@ namespace JoeModForReal.Content.Survivors {
 
             Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, /*characterName + */"Genji" + "MonsterMaster", "Loader");
         }
-
-        //you ready for some stupid shit?
 
         public override void InitializeUnlockables()
         {
@@ -178,7 +178,7 @@ namespace JoeModForReal.Content.Survivors {
 
         private void InitializeSecondarySkills() {
 
-            SkillDef fireballSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+            SkillDef deflectSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = GENJI_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = GENJI_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillDescriptionToken = GENJI_PREFIX + "SECONDARY_FIREBALL_DESCRIPTION",
@@ -186,7 +186,7 @@ namespace JoeModForReal.Content.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Deflect)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 6f,
+                baseRechargeInterval = GenjiConfig.deflectCooldown.Value,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -199,10 +199,10 @@ namespace JoeModForReal.Content.Survivors {
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
+                keywordTokens = new string[] { }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, fireballSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, deflectSkillDef);
         }
 
         private void InitializeUtilitySkills() {
@@ -215,10 +215,10 @@ namespace JoeModForReal.Content.Survivors {
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Genji.Dash)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = 6f,
+                baseRechargeInterval = GenjiConfig.dashCooldown.Value,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,

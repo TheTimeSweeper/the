@@ -12,6 +12,9 @@ namespace ModdedEntityStates.Joe {
 		[SerializeField]
 		public float duration = 0.3f;//todo testvaluemanager
 
+        [SerializeField]
+		public bool ignoreMoveSpeed = false;
+
 		public float _travelEndPercentTime = 1f;
 
 		// Token: 0x040011AF RID: 4527
@@ -27,8 +30,16 @@ namespace ModdedEntityStates.Joe {
 
             this.blinkVector = this.GetBlinkVector();
 
-            PlayAnimation();
+			gameObject.layer = RoR2.LayerIndex.fakeActor.intVal;
+
+			PlayAnimation();
         }
+
+        public override void OnExit() {
+            base.OnExit();
+
+			gameObject.layer = RoR2.LayerIndex.defaultLayer.intVal;
+		}
 
         protected virtual void PlayAnimation() {
             PlayAnimation("Fullbody, underried", "Dash", "dash.playbackRate", duration);
@@ -64,7 +75,7 @@ namespace ModdedEntityStates.Joe {
         protected virtual void DashUpdate() {
 			if (base.characterMotor && base.characterDirection) {
 				base.characterMotor.velocity = Vector3.zero;
-				base.characterMotor.rootMotion += this.blinkVector * (this.moveSpeedStat * this.speedCoefficient * Time.fixedDeltaTime);
+				base.characterMotor.rootMotion += this.blinkVector * ((ignoreMoveSpeed ? 1 : this.moveSpeedStat) * this.speedCoefficient * Time.fixedDeltaTime);
 			}
 		}
     }

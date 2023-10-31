@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using JoeModForReal.Content.Survivors;
 using RoR2;
 using RoR2.Projectile;
 using System;
@@ -10,16 +11,20 @@ namespace ModdedEntityStates.Genji {
 
 	public class BaseShurikenState : BaseSkillState {
 
-		public static float damageCoefficient = 1;
+		public static float damageCoefficient => GenjiConfig.shurikenDamage.Value;// 1;
 
 		protected void fireProjectile(Vector3 direction) {
 
 			//Util.PlaySound("play_joe_fireShoot", base.gameObject);
 
+			base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", 0.2f);
+
+			StartAimMode();
+
 			if (base.isAuthority) {
 				Ray aimRay = base.GetAimRay();
 
-				ProjectileManager.instance.FireProjectile(JoeModForReal.Content.Survivors.GenjiProjectiles.genjiShuriken,
+				ProjectileManager.instance.FireProjectile(GenjiProjectiles.genjiShuriken,
 					aimRay.origin,
 					Util.QuaternionSafeLookRotation(direction),
 					base.gameObject,
@@ -38,10 +43,10 @@ namespace ModdedEntityStates.Genji {
 	}
 
     public class ThrowShuriken : BaseShurikenState {
-
-        public static float baseInterval = 0.15f;
-		public static float baseFinalInterval = 0.4f;
-        public static int shurikens = 3;
+		
+        public static float baseInterval => GenjiConfig.shurikensInterval.Value;
+		public static float baseFinalInterval => GenjiConfig.shurikensFinalInterval.Value;
+        public static int shurikens => GenjiConfig.shurikens.Value;
 
         private float interval;
 		private float finalInterval;

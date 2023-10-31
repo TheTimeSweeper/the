@@ -8,23 +8,28 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Genji {
+
     public class Dash : ModdedEntityStates.Joe.UtilityBaseDash {
 
-        public float damageCoefficient = 4;
-        public float speed = 6.9f;
+        public float damageCoefficient => GenjiConfig.dashDamage.Value;
+        public float speed => GenjiConfig.dashSpeed.Value;
+        public float dashDuration => GenjiConfig.dashDuration.Value;
+        public float minimumDashDuration = 0.1f;
 
         private OverlapAttack _attack;
 
         private Transform _modelTransform;
+        private bool _startedGrounded;
 
         public override void OnEnter() {
 
             speedCoefficient = speed;
-            duration = 0.5f;
+            ignoreMoveSpeed = true;
+            duration = dashDuration;
             _travelEndPercentTime = 1;//todo testvaluemanager
 
             base.OnEnter();
-
+            _startedGrounded = characterMotor.isGrounded;
             characterMotor.Motor.ForceUnground();
             _modelTransform = modelLocator.modelTransform;
             modelLocator.enabled = false;
@@ -56,6 +61,10 @@ namespace ModdedEntityStates.Genji {
                 _modelTransform.position = transform.position;
             } else {
                 modelLocator.enabled = true;
+            }
+            
+            if (!_startedGrounded && characterMotor.isGrounded && fixedAge > minimumDashDuration) {
+                base.outer.SetNextStateToMain();
             }
         }
 

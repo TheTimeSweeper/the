@@ -11,18 +11,19 @@ using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Genji {
     public class Deflect : BaseSkillState {
-        public static float Duration = 1;
-        public static float MaxProjectileDeflectDistance = 2;
+        public static float Duration => GenjiConfig.deflectDuration.Value;
+        public static float MaxProjectileDeflectDistance = 3;
 
         private DeflectAttackReceiver _deflectAttackReceiver;
         private GameObject _deflectHitbox;
         private ChildLocator _childLocator;
-
+        TemporaryOverlay _temporaryOverlay;
+        
         public override void OnEnter() {
             base.OnEnter();
 
             if (NetworkServer.active) {
-                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, Duration);
+                characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
             }
             _deflectAttackReceiver = characterBody.GetComponent<DeflectAttackReceiver>();
             if (_deflectAttackReceiver != null) {
@@ -38,6 +39,13 @@ namespace ModdedEntityStates.Genji {
             }
 
             StartAimMode(Duration + 1);
+
+            CharacterModel characterModel = base.GetModelTransform().GetComponent<CharacterModel>();
+
+            _temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+            _temporaryOverlay.duration = Duration;
+            _temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
+            _temporaryOverlay.AddToCharacerModel(characterModel);
         }
 
         public override void FixedUpdate() {
@@ -52,6 +60,10 @@ namespace ModdedEntityStates.Genji {
 
         public override void OnExit() {
             base.OnExit();
+            //this can probably go wrong...
+            if (NetworkServer.active) {
+                characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+            }
 
             if (_deflectAttackReceiver != null) {
                 _deflectAttackReceiver.OnBulletAttackReceived -= DeflectBullet;
@@ -60,6 +72,10 @@ namespace ModdedEntityStates.Genji {
 
             if (_deflectHitbox) {
                 _deflectHitbox.SetActive(false);
+            }
+
+            if (_temporaryOverlay) {
+                Destroy(_temporaryOverlay);
             }
         }
 
@@ -87,13 +103,23 @@ namespace ModdedEntityStates.Genji {
 
             Ray aimRay = base.GetAimRay();
 
+            float damage = 1 * damageStat;
+            DamageType damageType = DamageType.Generic;
+            float force = 200;
+            if (projectileController.gameObject.TryGetComponent(out ProjectileDamage projectileDamage)) {
+                damage = projectileDamage.damage * GenjiConfig.deflectProjectileDamageMultiplier.Value;
+                damageType = projectileDamage.damageType;
+                force = projectileDamage.force;
+            }
+
             FireProjectileInfo info = new FireProjectileInfo() {
                 projectilePrefab = projectileController.gameObject,
                 position = projectileController.gameObject.transform.position,
                 rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
                 owner = base.characterBody.gameObject,
-                damage = 1,
-                force = 200f,
+                damage = damage,
+                damageTypeOverride = damageType,
+                force = force,
                 crit = base.RollCrit(),
                 damageColorIndex = DamageColorIndex.Default,
                 target = null,
@@ -125,7 +151,7 @@ namespace ModdedEntityStates.Genji {
                 spreadPitchScale = 1,
                 spreadYawScale = 1,
 
-                damage = bulletAttack_.damage,
+                damage = bulletAttack_.damage * GenjiConfig.deflectBulletAttackDamageMultiplier.Value,
                 damageType = bulletAttack_.damageType,
                 falloffModel = bulletAttack_.falloffModel,
                 force = bulletAttack_.force,
@@ -168,7 +194,8 @@ namespace ModdedEntityStates.Genji {
                     attacker = base.gameObject,
                     inflictor = base.gameObject,
                     teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
-                    baseDamage = this.damageStat * FireLaser.damageCoefficient, //todo laser damage
+                                                  //multiply a survivor's base damage of 12 to get up to golem's base damage of 20
+                    baseDamage = this.damageStat * 1.7f * FireLaser.damageCoefficient * GenjiConfig.deflectGolemLaserDamageMultiplier.Value,
                     baseForce = FireLaser.force * 0.2f,
                     position = vector,
                     radius = FireLaser.blastRadius,
@@ -191,12 +218,16 @@ namespace ModdedEntityStates.Genji {
                 }
             }
         }        
-
+        
         private void PlayDeflectEffect() {
 
-            Util.PlaySound("GenjiDeflect", gameObject);
+            Util.PlaySound("Play_merc_sword_impact", gameObject);
 
             base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", 0.2f);
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority() {
+            return base.fixedAge > 0.5f? InterruptPriority.Any : InterruptPriority.Skill;
         }
     }
 }
