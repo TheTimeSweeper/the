@@ -158,10 +158,10 @@ namespace ModdedEntityStates.Genji {
                 HitEffectNormal = bulletAttack_.HitEffectNormal,
                 procChainMask = default(ProcChainMask),
                 procCoefficient = bulletAttack_.procCoefficient,
-                maxDistance = bulletAttack_.maxDistance,
+                maxDistance = bulletAttack_.maxDistance * 2,
                 radius = bulletAttack_.radius,
                 hitEffectPrefab = bulletAttack_.hitEffectPrefab,
-                smartCollision = bulletAttack_.smartCollision,
+                smartCollision = true,// bulletAttack_.smartCollision,
                 sniper = bulletAttack_.sniper,
                 tracerEffectPrefab = bulletAttack_.tracerEffectPrefab,
             };
@@ -227,7 +227,7 @@ namespace ModdedEntityStates.Genji {
         }
 
         public override InterruptPriority GetMinimumInterruptPriority() {
-            return base.fixedAge > 0.5f? InterruptPriority.Any : InterruptPriority.Skill;
+            return base.fixedAge > 0.2f? InterruptPriority.Any : InterruptPriority.Skill;
         }
     }
 }

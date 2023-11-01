@@ -21,7 +21,8 @@ namespace JoeModForReal.Content.Survivors {
 
     internal class GenjiSurvivor : SurvivorBase
     {
-        public override string characterName => "Joe";
+        public override string characterName => "Genji";
+        public override string mdlName => "Joe";
 
         public const string GENJI_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_GENJI_";
 
@@ -62,11 +63,13 @@ namespace JoeModForReal.Content.Survivors {
         public override UnlockableDef characterUnlockableDef { get; }
         private static UnlockableDef masterySkinUnlockableDef;
 
+        public static SteppedSkillDef swingBladeSkillDef;
+
         public override void Initialize() {
 
+            GenjiConfig.Init();
             GenjiProjectiles.Init();
             GenjiDamageTypes.Init();
-            GenjiConfig.Init();
 
             base.Initialize();
 
@@ -77,8 +80,8 @@ namespace JoeModForReal.Content.Survivors {
             base.InitializeCharacterBodyAndModel();
             bodyPrefab.GetComponent<CharacterBody>().bodyFlags |= CharacterBody.BodyFlags.SprintAnyDirection;
 
-            AssistResetSkillTracker assistTracker = bodyPrefab.AddComponent<AssistResetSkillTracker>();
-            assistTracker.skillLocator = bodyPrefab.GetComponent<SkillLocator>();
+            GenjiDamageTracker damageTracker = bodyPrefab.AddComponent<GenjiDamageTracker>();
+            damageTracker.skillLocator = bodyPrefab.GetComponent<SkillLocator>();
 
             bodyPrefab.AddComponent<DeflectAttackReceiver>();
 
@@ -96,7 +99,7 @@ namespace JoeModForReal.Content.Survivors {
 
         public override void InitializeDoppelganger(string clone) {
 
-            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, /*characterName + */"Genji" + "MonsterMaster", "Loader");
+            base.InitializeDoppelganger("Loader");
         }
 
         public override void InitializeUnlockables()
@@ -235,31 +238,42 @@ namespace JoeModForReal.Content.Survivors {
 
         private void InitializeSpecialSkills() {
 
-            SkillDef tenticlesSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-                skillName = GENJI_PREFIX + "SPECIAL_TENTICLES_NAME",
-                skillNameToken = GENJI_PREFIX + "SPECIAL_TENTICLES_NAME",
-                skillDescriptionToken = GENJI_PREFIX + "SPECIAL_TENTICLES_DESCRIPTION",
+            DamageBuildupSkillDef dragonbladeSkillDef = Modules.Skills.CreateSkillDef<DamageBuildupSkillDef>(new SkillDefInfo {
+                skillName = GENJI_PREFIX + "SPECIAL_DRAGONBLADE_NAME",
+                skillNameToken = GENJI_PREFIX + "SPECIAL_DRAGONBLADE_NAME",
+                skillDescriptionToken = GENJI_PREFIX + "SPECIAL_DRAGONBLADE_DESCRIPTION",
                 skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSpecial"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Genji.DragonBlade)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DragonBlade)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 12f,
-                beginSkillCooldownOnSkillEnd = false,
+                baseRechargeInterval = GenjiConfig.dragonBladeChargeRequired.Value,
+                beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
-                cancelSprintingOnActivation = true,
+                cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { GENJI_PREFIX + "KEYWORD_TENTICLES" }
+                keywordTokens = new string[] { }
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, tenticlesSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, dragonbladeSkillDef);
+
+            swingBladeSkillDef = Modules.Skills.CreateSkillDef<LookingDownSkillDef>(
+                new SkillDefInfo("Onion",
+                                 GENJI_PREFIX + "SPECIAL_SWINGBLADE_NAME",
+                                 GENJI_PREFIX + "SPECIAL_SWINGBLADE_DESCRIPTION",
+                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
+                                 new EntityStates.SerializableEntityStateType(typeof(SwingBlade)),
+                                 "Weapon",
+                                 true));
+            swingBladeSkillDef.stepCount = 2;
+            swingBladeSkillDef.stepGraceDuration = 1.2f;
         }
 
 
@@ -355,9 +369,10 @@ namespace JoeModForReal.Content.Survivors {
 
             if (validDamage && damageInfo.attacker) {
 
-                if (damageInfo.attacker.TryGetComponent(out AssistResetSkillTracker assistResetSkillTracker)) {
+                if (damageInfo.attacker.TryGetComponent(out GenjiDamageTracker genjiDamageTracker)) {
 
-                    assistResetSkillTracker.addTrackedBody(victim);
+                    genjiDamageTracker.assistTracker.addTrackedBody(victim);
+                    genjiDamageTracker.ultimateBuildup.trackDamage(damageInfo.damage);
                 }
             }
             if (damageInfo.HasModdedDamageType(GenjiDamageTypes.GolemLaser)) {
@@ -368,7 +383,7 @@ namespace JoeModForReal.Content.Survivors {
         }
 
         private void GlobalEventManager_onCharacterDeathGlobal(DamageReport obj) {
-            AssistResetSkillTracker.CheckAllTrackersForDeath(obj.victimBody.gameObject);
+            GenjiDamageTracker.AssistTracker.CheckAllTrackersForDeath(obj.victimBody.gameObject);
         }
 
         private bool BulletAttack_ProcessHit(On.RoR2.BulletAttack.orig_ProcessHit orig,

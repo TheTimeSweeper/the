@@ -16,13 +16,13 @@ namespace ModdedEntityStates.BaseStates
         protected bool isFiring;
         protected bool hasExited;
 
-        protected virtual void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1)
+        protected virtual void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1, bool ignoreAttackSpeed = false)
         {
             TimedBaseDuration = baseDuration;
             TimedBaseCastStartTime = baseCastStartTime;
             TimedBaseCastEndTime = baseCastEndTime;
 
-            duration = TimedBaseDuration / base.attackSpeedStat;
+            duration = ignoreAttackSpeed ? TimedBaseDuration : TimedBaseDuration / base.attackSpeedStat;
             castStartTime = baseCastStartTime * duration;
             castEndTime = baseCastEndTime * duration;
         }

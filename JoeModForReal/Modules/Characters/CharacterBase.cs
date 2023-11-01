@@ -21,6 +21,7 @@ namespace Modules.Characters {
         public virtual CharacterModel bodyCharacterModel { get; set; }
         public BodyIndex bodyIndex;
         public string fullBodyName => characterName + "Body";
+        public virtual string mdlName { get; }
 
         public virtual void Initialize() {
             InitializeCharacter();
@@ -43,7 +44,8 @@ namespace Modules.Characters {
         }
         
         protected virtual void InitializeCharacterBodyAndModel() {
-            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(characterName + "Body", "mdl" + characterName, bodyInfo);
+            string mdl = string.IsNullOrEmpty(mdlName) ? "mdl" + characterName : "mdl" + mdlName;
+            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(characterName + "Body", mdl, bodyInfo);
             InitializeCharacterModel();
         }
         protected virtual void InitializeCharacterModel() {

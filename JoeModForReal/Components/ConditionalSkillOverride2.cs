@@ -24,12 +24,12 @@ namespace JoeModForReal.Components {
 			foreach (ConditionalSkillOverride2.ConditionalSkillInfo conditionalSkillInfo in this.conditionalSkillInfos) {
 				if (flag3) {
 					if (this.wasSprinting && !flag) {
-						conditionalSkillInfo.skillSlot.UnsetSkillOverride(this, conditionalSkillInfo.sprintSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+						conditionalSkillInfo.skillSlot.UnsetSkillOverride(this, conditionalSkillInfo.sprintSkillDef, GenericSkill.SkillOverridePriority.Replacement);
 					}
 				}
 				if (flag4) {
 					if (flag && !this.wasSprinting) {
-						conditionalSkillInfo.skillSlot.SetSkillOverride(this, conditionalSkillInfo.sprintSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+						conditionalSkillInfo.skillSlot.SetSkillOverride(this, conditionalSkillInfo.sprintSkillDef, GenericSkill.SkillOverridePriority.Replacement);
 					}
 				}
 			}

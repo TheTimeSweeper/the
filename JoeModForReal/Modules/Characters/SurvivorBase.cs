@@ -38,7 +38,8 @@ namespace Modules.Survivors {
         }
 
         protected virtual void InitializeDisplayPrefab() {
-            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(characterName + "Display", bodyPrefab, bodyInfo);
+            string displayName = string.IsNullOrEmpty(mdlName) ? characterName + "Display" : mdlName + "Display";
+            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(displayName, bodyPrefab, bodyInfo);
         }
         public virtual void InitializeUnlockables()
         {
