@@ -25,10 +25,10 @@ namespace Modules {
         {
             AddTeslaTokens();
             AddTeslaTowerTokens();
-            PrintOutput("Tesla tokens:");
+            PrintOutput("tesla.txt");
 
             AddDesolatorTokens();
-            PrintOutput("Desolator tokens:");
+            PrintOutput("desolator.txt");
         }
 
         private static void PrintOutput(string preface = "") {
@@ -298,7 +298,7 @@ namespace Modules {
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
             
             #region Skins
-            //LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Spetsnaz");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Desecration");
             //LanguageAPI.Add(prefix + "NOD_SKIN_NAME", "Brotherhood");
             //LanguageAPI.Add(prefix + "MC_SKIN_NAME", "Minecraft");
             #endregion
@@ -398,7 +398,7 @@ namespace Modules {
             #endregion
             #endregion not henry 2
         }
-
+        
         public static void AddHenryTokens()
         {
             #region Henry

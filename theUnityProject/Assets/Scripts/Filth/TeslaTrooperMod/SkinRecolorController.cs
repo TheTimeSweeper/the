@@ -31,7 +31,9 @@ public class RecolorGroup {
     }
 
     public void setColors(Color color) {
-
+#if UNITY_EDITOR
+        fillPropertyBlocks();
+#endif
         for (int i = 0; i < _matProperties.Length; i++) {
             _matProperties[i].SetColor("_Color", color);
 
