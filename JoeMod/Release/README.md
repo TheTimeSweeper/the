@@ -38,10 +38,10 @@ Desolator is a walking powerhouse of radiation and area damage.
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/Icons.png)]()
 
 ## Credits
-SkeletorChampion - Made the character models, which kicked off the mod. Without him, the mod wouldn't exist.  
+SkeletorChampion - Made the character models (which kicked off the mod. Without him, the mod wouldn't exist.), and grandmastery skin  
 Violet Chaolan - wwise sound help  
 SweeperSecret - icons,  <3  
-Mr.Bones - mastery skin  
+Mr.Bones - mastery skins  
 Jaysian - Lores  
 SOM - animation help  
 Moffein - consult, savior  
@@ -60,6 +60,7 @@ Currently Supported:
 - Spanish - by Juhnter
 - Russian - by Nikto0o
 - French - by Fyrebw
+- BR Portuguese - by Kauzok
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
@@ -74,6 +75,12 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+
+`2.1.5`
+- added Brazilian Portuguese translation (thanks Kauzok!)
+- added mastery skin for Desolator (thanks again, Mr.Bones)
+  - google translated the name for other languages, sorry if something's wrong!
+- haven't touched this project in several months so I hope nothing broke making this update!
 
 `2.1.4`
  - added french translation (thanks Fyrebw!)
