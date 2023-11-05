@@ -25,10 +25,10 @@ namespace Modules {
         {
             AddTeslaTokens();
             AddTeslaTowerTokens();
-            PrintOutput("Tesla tokens:");
+            PrintOutput("tesla.txt");
 
             AddDesolatorTokens();
-            PrintOutput("Desolator tokens:");
+            PrintOutput("desolator.txt");
         }
 
         private static void PrintOutput(string preface = "") {
@@ -398,7 +398,7 @@ namespace Modules {
             #endregion
             #endregion not henry 2
         }
-
+        
         public static void AddHenryTokens()
         {
             #region Henry

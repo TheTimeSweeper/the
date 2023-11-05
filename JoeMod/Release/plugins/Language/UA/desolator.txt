@@ -10,7 +10,7 @@
         "HABIBI_DESOLATOR_BODY_OUTRO_FLAVOR" : "...і він пішов, залишивши по собі оазис смертей.",
         "HABIBI_DESOLATOR_BODY_OUTRO_FAILURE" : "...і він був стертий, а ось і сусіди.",
         
-        "HABIBI_DESOLATOR_BODY_MASTERY_SKIN_NAME" : "Спєцназ",
+        "HABIBI_DESOLATOR_BODY_MASTERY_SKIN_NAME" : "Осквернення",
         "HABIBI_DESOLATOR_BODY_NOD_SKIN_NAME" : "Братство",
         "HABIBI_DESOLATOR_BODY_MC_SKIN_NAME" : "Minecraft",
         "HABIBI_DESOLATOR_BODY_PASSIVE_NAME" : "Радіоактивний",

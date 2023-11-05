@@ -474,7 +474,7 @@ namespace Modules.Survivors {
 
             #region MasterySkin 
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(DESOLATOR_PREFIX + "MASTERY_SKIN",
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(DESOLATOR_PREFIX + "MASTERY_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texIconSkinDesolatorDefault"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject, 
