@@ -408,7 +408,7 @@ namespace Modules.Survivors {
 
             for (int i = 0; i < skilldefs.Count; i++) {
 
-                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0 ? null : masterySkinUnlockableDef);
+                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], null);
 
                 AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
@@ -457,12 +457,42 @@ namespace Modules.Survivors {
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);
 
-            //defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-            //    "meshHenrySword",
-            //    "meshHenryGun",
-            //    "meshHenry");
+            defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
+                "DesoArmor",
+                "DesoBody",
+                "DesoCannon",
+                "DesoArmorColor");
+
+            defaultSkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matDesolatorArmor");
+            defaultSkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matDesolatorBody");
+            defaultSkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matDesolatorCannon");
+            defaultSkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matDesolatorArmorColor");
             
             skins.Add(defaultSkin);
+
+            #endregion
+
+            #region MasterySkin 
+
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(DESOLATOR_PREFIX + "MASTERY_SKIN",
+                Assets.LoadAsset<Sprite>("texIconSkinDesolatorDefault"),
+                defaultRendererinfos,
+                bodyCharacterModel.gameObject, 
+                masterySkinUnlockableDef);
+
+            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
+                "DesoMasteryArmor",
+                "DesoMasteryBody",
+                "DesoMasteryCannon",
+                "DesoMasteryArmorColor");
+
+            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHotpooMaterial("matDesoMasteryArmor");
+            masterySkin.rendererInfos[1].defaultMaterial = Materials.CreateHotpooMaterial("matDesoMasteryBody");
+            masterySkin.rendererInfos[2].defaultMaterial = Materials.CreateHotpooMaterial("matDesoMasteryArmor");
+            masterySkin.rendererInfos[3].defaultMaterial = Materials.CreateHotpooMaterial("matDesoMasteryCrystal");
+
+            skins.Add(masterySkin);
+
             #endregion
 
             skinController.skins = skins.ToArray();
