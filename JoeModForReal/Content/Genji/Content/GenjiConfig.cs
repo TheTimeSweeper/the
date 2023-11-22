@@ -43,7 +43,7 @@ namespace JoeModForReal.Content.Survivors {
             shurikenDamage = Modules.Config.BindAndOptions<float>(
                 section,
                 "ShurikenDamage",
-                0.7f);
+                0.8f);
 
             shurikensInterval = Modules.Config.BindAndOptionsSlider(
                 section,
@@ -69,7 +69,7 @@ namespace JoeModForReal.Content.Survivors {
             deflectDuration = Modules.Config.BindAndOptions<float>(
                 section,
                 "deflectDuration",
-                3f);
+                2f);
 
             deflectCooldown = Modules.Config.BindAndOptions<float>(
                 section,
@@ -81,7 +81,7 @@ namespace JoeModForReal.Content.Survivors {
             deflectProjectileDamageMultiplier = Modules.Config.BindAndOptions<float>(
                 section,
                 "deflectProjectileDamageMultiplier",
-                2f);
+                3f);
 
             deflectBulletAttackDamageMultiplier = Modules.Config.BindAndOptions<float>(
                 section,
@@ -96,7 +96,7 @@ namespace JoeModForReal.Content.Survivors {
             dashDamage = Modules.Config.BindAndOptions<float>(
                 section,
                 "dashDamage",
-                4f);
+                3f);
             dashCooldown = Modules.Config.BindAndOptions<float>(
                 section,
                 "dashCooldown",
@@ -106,7 +106,7 @@ namespace JoeModForReal.Content.Survivors {
             dashSpeed = Modules.Config.BindAndOptionsSlider(
                 section,
                 "dashSpeed",
-                42f,
+                86f,
                 "",
                 0,
                 1000);

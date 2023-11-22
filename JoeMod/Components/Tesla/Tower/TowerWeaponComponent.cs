@@ -19,7 +19,12 @@ public class TowerWeaponComponent : MonoBehaviour {
 
     void Start() {
 
-        towerSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TowerSkinDef;
+        try {
+            towerSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TowerSkinDef;
+        }
+        catch {
+            Destroy(this);
+        }
     }
 
     private void CharacterBody_onInventoryChanged() {

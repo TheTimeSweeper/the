@@ -74,7 +74,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         FindTrackingTarget(aimRay);
 
         ZappableTower zappableTower;
-        if (trackingTargetZap && trackingTargetZap.hurtBoxGroup.TryGetComponent<ZappableTower>(out zappableTower)) {
+        if (trackingTargetZap && trackingTargetZap.healthComponent.TryGetComponent<ZappableTower>(out zappableTower)) {
             trackingTargetZap = zappableTower.MainHurtbox;
         }
 
@@ -140,42 +140,45 @@ public class TeslaTrackerComponent : MonoBehaviour {
         for (int i = 0; i < hits.Length; i++) {
 
             HurtBox hurtBox = hits[i].collider.GetComponent<HurtBox>();
-            if (hurtBox) {
+            if (hurtBox == null)
+                continue;
+            if (hurtBox.healthComponent == null)
+                continue;
 
-                bool isTower = hurtBox.hurtBoxGroup.GetComponent<ZappableTower>();
+            bool isTower = hurtBox.healthComponent.GetComponent<ZappableTower>();
 
-                //cast a line to see if it is interrupted by world
-                //however the tesla tower is also world so exclude that
-                if (!isTower) {
-                    bool lineOfSightBlocked = Physics.Linecast(hits[i].point, ray.origin, LayerIndex.world.mask, queryTriggerInteraction);
-                    if (lineOfSightBlocked)
-                        continue;
-                }
-                
-                float distance = hits[i].distance;
-                if (distance < shortestDashDistance || distance < shortestZapDistance) {
-                    
-                    HealthComponent healthComponent = hurtBox.healthComponent;
-                    if (healthComponent && healthComponent.gameObject == bodyObject) {
-                        continue;
-                    }
+            //cast a line to see if it is interrupted by world
+            //however the tesla tower is also world so exclude that
+            if (!isTower) {
+                bool lineOfSightBlocked = Physics.Linecast(hits[i].point, ray.origin, LayerIndex.world.mask, queryTriggerInteraction);
+                if (lineOfSightBlocked)
+                    continue;
+            }
 
-                    if (distance < shortestZapDistance) {
-                        zapHit = hurtBox;
-                        shortestZapDistance = distance;
-                    }
+            float distance = hits[i].distance;
+            if (distance < shortestDashDistance || distance < shortestZapDistance) {
 
-                    if (distance < shortestDashDistance) {
-                        if (!dashCooldownTargets.Contains(hurtBox.healthComponent)) {
-                            dashHit = hurtBox;
-                            shortestDashDistance = distance;
-                        }
-                    }
-
-                } else {
+                HealthComponent healthComponent = hurtBox.healthComponent;
+                if (healthComponent && healthComponent.gameObject == bodyObject) {
                     continue;
                 }
+
+                if (distance < shortestZapDistance) {
+                    zapHit = hurtBox;
+                    shortestZapDistance = distance;
+                }
+
+                if (distance < shortestDashDistance) {
+                    if (!dashCooldownTargets.Contains(hurtBox.healthComponent)) {
+                        dashHit = hurtBox;
+                        shortestDashDistance = distance;
+                    }
+                }
+
+            } else {
+                continue;
             }
+
         }
 
         if (zapHit == null && dashHit == null) {

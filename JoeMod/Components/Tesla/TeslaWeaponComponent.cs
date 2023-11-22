@@ -20,8 +20,12 @@ public class TeslaWeaponComponent : MonoBehaviour {
     }
 
     void Start() {
-
-        teslaSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TeslaSkinDef;
+        try {
+            teslaSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TeslaSkinDef;
+        }
+        catch {
+            Destroy(this);
+        }
     }
 
     private void CharacterBody_onInventoryChanged() {

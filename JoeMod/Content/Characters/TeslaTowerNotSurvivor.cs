@@ -63,6 +63,7 @@ namespace Modules.Survivors {
 
             bodyPrefab.AddComponent<TowerWeaponComponent>();
             bodyPrefab.AddComponent<TowerOwnerTrackerComponent>();
+            bodyPrefab.AddComponent<ZappableTower>().MainHurtbox = bodyPrefab.GetComponent<CharacterBody>().mainHurtBox;
         }
 
         protected override void InitializeCharacterBodyAndModel() {

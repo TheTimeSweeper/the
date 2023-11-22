@@ -12,6 +12,7 @@ public class TeslaTowerControllerController : MonoBehaviour {
     public static float NearTowerRange = 60f;
 
     private List<GameObject> teslaTowers = new List<GameObject>();
+    private List<GameObject> otherCommandables = new List<GameObject>();
 
     public GameObject GetNearestTower () { 
 
@@ -38,7 +39,7 @@ public class TeslaTowerControllerController : MonoBehaviour {
 
     //scrapped
     public bool coilReady {
-        get {
+        get {            
             List<GameObject> towers = GetNearbyTowers();
             for (int i = 0; i < towers.Count; i++) {
 
@@ -71,6 +72,13 @@ public class TeslaTowerControllerController : MonoBehaviour {
                 lightningTarget = target,
             }, InterruptPriority.PrioritySkill);
         }
+        
+        for (int i = 0; i < otherCommandables.Count; i++) {
+            otherCommandables[i].GetComponent<EntityStateMachine>().SetInterruptState(new TowerZap() {
+                lightningTarget = target,
+                zaps = 2
+            }, InterruptPriority.PrioritySkill);
+        }
     }
 
     //so DRY it's dehydrated
@@ -83,11 +91,14 @@ public class TeslaTowerControllerController : MonoBehaviour {
 
         for (int i = 0; i < nearbyTowers.Count; i++) {
             GameObject coil = nearbyTowers[i];
-            if (coil == null) {
+            if (coil == null)
                 continue;
-            }
 
-            coil.GetComponent<EntityStateMachine>().SetInterruptState(new TowerBigZapGauntlet() {
+            EntityStateMachine machine = EntityStateMachine.FindByCustomName(coil, "Weapon");
+            if (machine == null)
+                continue;
+
+            machine.SetInterruptState(new TowerBigZapGauntlet() {
                 lightningTarget = target,
             }, InterruptPriority.PrioritySkill);
         }
@@ -136,5 +147,12 @@ public class TeslaTowerControllerController : MonoBehaviour {
 
     public void removeTower(GameObject towerObject) {
         teslaTowers.Remove(towerObject);
+    }
+
+    public void addNotTower(GameObject notTowerBodyObject) {
+        otherCommandables.Add(notTowerBodyObject);
+    }
+    public void removeNotTower(GameObject notTowerBodyObject) {
+        otherCommandables.Remove(notTowerBodyObject);
     }
 }

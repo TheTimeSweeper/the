@@ -625,6 +625,17 @@ namespace Modules.Survivors {
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
             On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
+
+            On.RoR2.BodyCatalog.Init += BodyCatalog_Init;
+        }
+
+        private void BodyCatalog_Init(On.RoR2.BodyCatalog.orig_Init orig) {
+            orig();
+            GameObject shockDroneBody = BodyCatalog.FindBodyPrefab("ShockDroneBody");
+            if (shockDroneBody) {
+                Helpers.LogWarning("hello hello hello");
+                shockDroneBody.AddComponent<AddMinionToOwnerTeslaTracker>();
+            }
         }
 
         private void LightningOrb_Begin(On.RoR2.Orbs.LightningOrb.orig_Begin orig, LightningOrb self) {

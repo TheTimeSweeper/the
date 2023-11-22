@@ -61,6 +61,7 @@ Currently Supported:
 - Russian - by Nikto0o
 - French - by Fyrebw
 - BR Portuguese - by Kauzok
+- Chinese (simplified) - by Rody, and FallenTroop
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
@@ -75,6 +76,12 @@ for no particular reason I made a cool skin for minecraft check it out
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
 ___
 ## Changelog
+
+`2.1.6`
+- added failsafe fix for current incompatiblility with Shaman (must play default skin until he pulls my fix)
+- added simplified chinese translation (thanks Rody and FallenTroop!)
+- fixed Desolator scepter skills multiplayer issues
+- fixed Desolator scepter alt special description displaying wrong damage
 
 `2.1.5`
 - added Brazilian Portuguese translation (thanks Kauzok!)

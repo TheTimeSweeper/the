@@ -18,6 +18,7 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         public LightningOrb lightningOrb;
         public HurtBox lightningTarget;
+        public int zaps = 3;
 
         public static string PrepSound = "Play_tower_btespow_tesla_tower_prep";
         public static string ZapSound = "Play_tower_btesat1a_tesla_tower_attack";
@@ -27,16 +28,17 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         protected string zapSoundCrit = ZapSoundCrit;
         protected bool crit;
 
-        TowerWeaponComponent towerWeaponComponent;
+        private TowerWeaponComponent _towerWeaponComponent;
+        private Transform _originTransform;
 
         public ModdedLightningType GetOrbType {
             get {
 
-                if(towerWeaponComponent) {
-                    if (towerWeaponComponent.hasTeslaCoil)
+                if(_towerWeaponComponent) {
+                    if (_towerWeaponComponent.hasTeslaCoil)
                         return ModdedLightningType.Tesla;
 
-                    return towerWeaponComponent.towerSkinDef.ZapLightningType;
+                    return _towerWeaponComponent.towerSkinDef.ZapLightningType;
                 }
 
                 return ModdedLightningType.Loader;
@@ -48,11 +50,22 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
             base.InitDurationValues(GetBaseDuration(), 1);
 
-            towerWeaponComponent = GetComponent<TowerWeaponComponent>();
+            _towerWeaponComponent = GetComponent<TowerWeaponComponent>();
+
+            _originTransform = base.FindModelChild("Orb");
+            if(_originTransform == null) {
+                _originTransform = base.FindModelChild("Muzzle");
+            }
+            if (_originTransform == null) {
+                _originTransform = base.FindModelChild("muzzle");
+            }
+            if (_originTransform == null) {
+                _originTransform = transform;
+            }
 
             crit = RollCrit();
             lightningOrb = new PseudoLightningOrb {
-                origin = base.FindModelChild("Orb").position,
+                origin = _originTransform.position,
                 damageValue = DamageCoefficient * damageStat,
                 isCrit = crit,
                 //bouncesRemaining = 1,
@@ -125,8 +138,8 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
 
         protected virtual void fireOrb() {
             //todo: custom lightningorb
-            for (int i = 0; i < 3; i++) {
-
+            for (int i = 0; i < zaps; i++) {
+                lightningOrb.origin = _originTransform.position;
                 OrbManager.instance.AddOrb(lightningOrb);
             }
         }

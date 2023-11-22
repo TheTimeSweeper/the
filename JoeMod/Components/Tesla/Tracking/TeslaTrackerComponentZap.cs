@@ -170,7 +170,7 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
         }
 
         ZappableTower zappableTower;
-        if (_trackingTarget && _trackingTarget.hurtBoxGroup.TryGetComponent<ZappableTower>(out zappableTower)) {
+        if (_trackingTarget && _trackingTarget.healthComponent.TryGetComponent<ZappableTower>(out zappableTower)) {
             _trackingTarget = zappableTower.MainHurtbox;
         }
 

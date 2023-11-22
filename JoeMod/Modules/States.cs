@@ -74,7 +74,11 @@ namespace Modules
                 Content.AddEntityState(typeof(DeployIrradiate));
                 Content.AddEntityState(typeof(DeployCancel));
 
+                Content.AddEntityState(typeof(ScepterDeployEnter));
+                Content.AddEntityState(typeof(ScepterDeployIrradiate));
+
                 Content.AddEntityState(typeof(ThrowIrradiator));
+                Content.AddEntityState(typeof(ScepterThrowIrradiator));
 
                 Content.AddEntityState(typeof(EmoteRadiationProjectile));
 

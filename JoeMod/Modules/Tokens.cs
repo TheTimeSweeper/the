@@ -354,7 +354,7 @@ namespace Modules {
                 $"<style=cIsHealing>Irradiating</style>. Throw {Helpers.UtilityText("up to 2")} {name} which cover a large area in radiation for {Helpers.UtilityText($"11 seconds")}, dealing {Helpers.DamageText($"{ThrowIrradiator.DamageCoefficient * 100}% damage per second")}.";
             LanguageAPI.Add(prefix + "SPECIAL_IRRADIATOR_DESCRIPTION", specialDesc);
 
-            string specialDescScepter = specialDesc + Helpers.ScepterDescription($"Explodes on expiration for {Helpers.DamageValueText(ScepterThrowIrradiator.explosionDamageCoefficient)}.");
+            string specialDescScepter = specialDesc + Helpers.ScepterDescription($"Explodes on expiration for {Helpers.DamageValueText(ScepterThrowIrradiator.finalExplosionDamageCoefficient)}.");
 
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_NAME", "Unstable " + name);
             LanguageAPI.Add(prefix + "SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION", specialDescScepter);
