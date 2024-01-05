@@ -62,9 +62,12 @@ namespace ModdedEntityStates.Genji {
             } else {
                 modelLocator.enabled = true;
             }
-            
-            if (!_startedGrounded && characterMotor.isGrounded && fixedAge > minimumDashDuration) {
-                base.outer.SetNextStateToMain();
+            //if (!_startedGrounded && characterMotor.isGrounded && fixedAge > minimumDashDuration) {
+            //    base.outer.SetNextStateToMain();
+            //}
+            if (characterMotor.isGrounded) {
+                float dot = Vector3.Dot(characterMotor.estimatedGroundNormal, blinkVector.normalized);
+                speedCoefficient += speedCoefficient * dot * GenjiConfig.dashGroundFriction.Value;
             }
         }
 

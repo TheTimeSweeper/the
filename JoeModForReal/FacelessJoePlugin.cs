@@ -19,7 +19,7 @@ namespace JoeModForReal {
     public class FacelessJoePlugin : BaseUnityPlugin {
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
         public const string MODNAME = "Faceless Joe";
-        public const string MODVERSION = "0.1.0";
+        public const string MODVERSION = "69.0.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEV_PREFIX = "HABIBI";
@@ -38,12 +38,37 @@ namespace JoeModForReal {
             Modules.Language.HookRegisterLanguageTokens();
 
             Modules.Config.ReadConfig();
-            andrew &= Modules.Config.Debug;
+            //andrew &= Modules.Config.Debug;
 
             if (Modules.Config.Debug)
                 Modules.Tokens.GenerateTokens();
 
             //On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
+
+            On.RoR2.SurvivorCatalog.SetSurvivorDefs += SurvivorCatalog_SetSurvivorDefs;
+        }
+
+        private void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs) {
+            orig(newSurvivorDefs);
+            RoR2.Skills.SkillDef tap = null;
+            for (int i = 0; i < newSurvivorDefs.Length; i++) {
+                if (newSurvivorDefs[i].cachedName.Contains("Commando")) {
+                    tap = newSurvivorDefs[i].bodyPrefab.GetComponent<SkillLocator>().primary.skillFamily.defaultSkillDef;
+                }
+            }
+            if (tap == null)
+                Log.LogWarning("no commando lol");
+
+            bool found = false;
+            for (int i = 0; i < newSurvivorDefs.Length; i++) {
+                if (newSurvivorDefs[i].bodyPrefab.name.Contains("avager")) {
+                    found = true;
+                    Modules.Skills.AddPrimarySkills(newSurvivorDefs[i].bodyPrefab, tap);
+
+                }
+            }
+
+            Log.LogWarning(found);
         }
 
         private void Start() {
@@ -75,7 +100,7 @@ namespace JoeModForReal {
             new JoeSurivor().Initialize();
 
             if (andrew) {
-                new KoalSurvivor().Initialize();
+                //new KoalSurvivor().Initialize();
                 new GenjiSurvivor().Initialize();
                 Logger.LogError("ANDREW IS TRUE. DO NOT RELEASE");
             }

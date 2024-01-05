@@ -34,7 +34,7 @@ namespace JoeModForReal.Content.Survivors {
             subtitleNameToken = GENJI_PREFIX + "SUBTITLE",
             sortPosition = 69.6f,
 
-            characterPortrait = Modules.Assets.LoadCharacterIcon("joe_icon"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("texIconWeeb"),
             bodyColor = Color.green,
 
             crosshair = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/SimpleDotCrosshair"),
@@ -70,9 +70,10 @@ namespace JoeModForReal.Content.Survivors {
             GenjiConfig.Init();
             GenjiProjectiles.Init();
             GenjiDamageTypes.Init();
+            GenjiTokens.Init();
 
             base.Initialize();
-
+            
             Hook();
         }
 
@@ -80,8 +81,9 @@ namespace JoeModForReal.Content.Survivors {
             base.InitializeCharacterBodyAndModel();
             bodyPrefab.GetComponent<CharacterBody>().bodyFlags |= CharacterBody.BodyFlags.SprintAnyDirection;
 
-            GenjiDamageTracker damageTracker = bodyPrefab.AddComponent<GenjiDamageTracker>();
+            GenjiAssistTracker damageTracker = bodyPrefab.AddComponent<GenjiAssistTracker>();
             damageTracker.skillLocator = bodyPrefab.GetComponent<SkillLocator>();
+            bodyPrefab.AddComponent<UltimateBuildup>();
 
             bodyPrefab.AddComponent<DeflectAttackReceiver>();
 
@@ -350,40 +352,19 @@ namespace JoeModForReal.Content.Survivors {
 
 
         private void Hook() {
-            On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
-            GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
+            GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
             On.RoR2.BulletAttack.ProcessHit += BulletAttack_ProcessHit;
 
             IL.EntityStates.GolemMonster.FireLaser.OnEnter += FireLaser_OnEnter;
         }
 
-        //credit in part to moffein for riskymod's assist manager
-        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig,
-                                                   GlobalEventManager self,
-                                                   DamageInfo damageInfo,
-                                                   GameObject victim) {
+        private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {
 
-            orig(self, damageInfo, victim);
-
-            bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
-
-            if (validDamage && damageInfo.attacker) {
-
-                if (damageInfo.attacker.TryGetComponent(out GenjiDamageTracker genjiDamageTracker)) {
-
-                    genjiDamageTracker.assistTracker.addTrackedBody(victim);
-                    genjiDamageTracker.ultimateBuildup.trackDamage(damageInfo.damage);
-                }
-            }
-            if (damageInfo.HasModdedDamageType(GenjiDamageTypes.GolemLaser)) {
-                if (victim != null && victim.TryGetComponent(out IGolemLaserReceiver laserReceiver)) {
+            if (damageReport.damageInfo.HasModdedDamageType(GenjiDamageTypes.GolemLaser)) {
+                if (damageReport.victimBody != null && damageReport.victimBody.gameObject.TryGetComponent(out IGolemLaserReceiver laserReceiver)) {
                     laserReceiver.receiveGolemLaser();
                 }
             }
-        }
-
-        private void GlobalEventManager_onCharacterDeathGlobal(DamageReport obj) {
-            GenjiDamageTracker.AssistTracker.CheckAllTrackersForDeath(obj.victimBody.gameObject);
         }
 
         private bool BulletAttack_ProcessHit(On.RoR2.BulletAttack.orig_ProcessHit orig,

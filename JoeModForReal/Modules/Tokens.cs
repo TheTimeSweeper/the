@@ -8,7 +8,7 @@ namespace Modules {
         public static void GenerateTokens() {
 
             AddJoeTokens();
-            Language.PrintOutput("Joe tokens:");
+            Language.PrintOutput("Joe.txt");
         }
 
         private static void AddJoeTokens() {

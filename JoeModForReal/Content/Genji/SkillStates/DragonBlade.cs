@@ -17,7 +17,7 @@ namespace ModdedEntityStates.Genji {
             EntityStateMachine.FindByCustomName(gameObject, "Body").SetState(EntityStateCatalog.InstantiateState(typeof(DragonBladeIntro)));
 
             skillLocator.primary.SetSkillOverride(this, GenjiSurvivor.swingBladeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            skillLocator.secondary.SetSkillOverride(this, GenjiSurvivor.swingBladeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            //skillLocator.secondary.SetSkillOverride(this, GenjiSurvivor.swingBladeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         protected override void OnCastEnter() {
@@ -29,7 +29,7 @@ namespace ModdedEntityStates.Genji {
             
             EntityStateMachine.FindByCustomName(gameObject, "Body").SetState(EntityStateCatalog.InstantiateState(typeof(DragonBladeOutro)));
             skillLocator.primary.UnsetSkillOverride(this, GenjiSurvivor.swingBladeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            skillLocator.secondary.UnsetSkillOverride(this, GenjiSurvivor.swingBladeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+            //skillLocator.secondary.UnsetSkillOverride(this, GenjiSurvivor.swingBladeSkillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority() {

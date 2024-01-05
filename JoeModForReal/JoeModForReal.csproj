@@ -17,12 +17,13 @@
 			<NoWarn>NU1701</NoWarn>
 		</PackageReference>
 
-		<PackageReference Include="R2API.Core" Version="5.0.3" />
-		<PackageReference Include="R2API.Prefab" Version="1.0.1" />
-		<PackageReference Include="R2API.RecalculateStats" Version="1.0.0" />
-		<PackageReference Include="R2API.Unlockable" Version="1.0.0" />
-		<PackageReference Include="R2API.DamageType" Version="1.0.0" />
-		<PackageReference Include="R2API.Colors" Version="1.0.0" />
+		<PackageReference Include="R2API.Core" Version="*" />
+		<PackageReference Include="R2API.Prefab" Version="*" />
+		<PackageReference Include="R2API.RecalculateStats" Version="*"/>
+		<PackageReference Include="R2API.Unlockable" Version="*" />
+		<PackageReference Include="R2API.DamageType" Version="*" />
+		<PackageReference Include="R2API.Colors" Version="*" />
+		<PackageReference Include="R2API.Language" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>

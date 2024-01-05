@@ -36,7 +36,7 @@ namespace JoeModForReal.Content.Survivors {
         public static ConfigEntry<float> dragonBladeSwingDuration;
         public static ConfigEntry<float> dragonBladeChargeMultiplier;
         public static ConfigEntry<float> dragonBladeChargeRequired;
-
+        
         public static void Init() {
             string section = "Genji";
 
@@ -119,7 +119,7 @@ namespace JoeModForReal.Content.Survivors {
             dashGroundFriction = Modules.Config.BindAndOptionsSlider(
                 section,
                 "dashGroundFriction",
-                42f,
+                0.25f,
                 "How much speed is reduced when touching the ground. set to 1 to instantly stop, set to 0 for no friction. Also based on angle.",
                 0,
                 1);

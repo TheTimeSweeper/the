@@ -7,7 +7,7 @@ namespace JoeModForReal.Content.Survivors {
     public class DamageBuildupSkillDef : SkillDef {
 		
 		protected class InstanceData : SkillDef.BaseSkillInstanceData {
-			public GenjiDamageTracker damageTracker;
+			public UltimateBuildup ultimateBuildup;
 			public GenericSkill skillSlot;
 			
             public void buildDamage(float damage) {
@@ -22,11 +22,11 @@ namespace JoeModForReal.Content.Survivors {
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {
 
 			InstanceData data = new DamageBuildupSkillDef.InstanceData {
-				damageTracker = skillSlot.GetComponent<GenjiDamageTracker>(),
+				ultimateBuildup = skillSlot.GetComponent<UltimateBuildup>(),
 				skillSlot = skillSlot
 			};
 
-            data.damageTracker.ultimateBuildup.OnDamageForUltimate += data.buildDamage;
+            data.ultimateBuildup.OnDamageForUltimate += data.buildDamage;
 
 			skillSlot.stock = 0;
 
@@ -37,7 +37,7 @@ namespace JoeModForReal.Content.Survivors {
             base.OnUnassigned(skillSlot);
 
             InstanceData data = ((DamageBuildupSkillDef.InstanceData)skillSlot.skillInstanceData);
-			data.damageTracker.ultimateBuildup.OnDamageForUltimate -= data.buildDamage;
+			data.ultimateBuildup.OnDamageForUltimate -= data.buildDamage;
 		}
 
         public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {

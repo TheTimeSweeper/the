@@ -840,6 +840,46 @@ namespace Modules.Characters {
             #endregion quips
 
             #region dlc1
+            try {
+                Dlc1Dislpays(itemDisplayRules);
+            } catch {
+                Helpers.LogWarning("no sotv lol");
+            }
+            #endregion dlc1
+            #region compat
+
+            //try {
+            //    if (Compat.TinkersSatchelInstalled) {
+            //        SetTinkersSatchelDisplayRules(itemDisplayRules);
+            //    }
+            //}
+            //catch (System.Exception e) {
+            //    Helpers.LogWarning("error adding displays for Tinker's Satchel \n" + e);
+            //}
+
+
+            //try {
+            //    if (Compat.AetheriumInstalled) {
+            //        SetAetheriumDisplayRules(itemDisplayRules);
+            //    }
+            //}
+            //catch (System.Exception e) {
+            //    Helpers.LogWarning("error adding displays for Aetherium \n" + e);
+            //}
+
+            try {
+                if (Compat.ScepterInstalled) {
+                    FixScepterDisplayRule(itemDisplayRules);
+                }
+            }
+            catch (System.Exception e) {
+                Helpers.LogWarning("error adding displays for Scepter \n" + e);
+            }
+
+            #endregion
+        }
+
+        private static void Dlc1Dislpays(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules) {
 
             itemDisplayRules.Add(ItemDisplays.CreateGenericDisplayRule(DLC1Content.Items.PrimarySkillShuriken, "DisplayShuriken",
                                                                        "LowerArmR",
@@ -1018,40 +1058,6 @@ namespace Modules.Characters {
                                                                        new Vector3(-0.00526F, 0.1283F, 0.01021F),
                                                                        new Vector3(347.7208F, 355.6827F, 359.5909F),
                                                                        new Vector3(0.82375F, 0.82375F, 0.82375F)));
-
-            #endregion
-
-            #region compat
-
-            //try {
-            //    if (Compat.TinkersSatchelInstalled) {
-            //        SetTinkersSatchelDisplayRules(itemDisplayRules);
-            //    }
-            //}
-            //catch (System.Exception e) {
-            //    Helpers.LogWarning("error adding displays for Tinker's Satchel \n" + e);
-            //}
-
-
-            //try {
-            //    if (Compat.AetheriumInstalled) {
-            //        SetAetheriumDisplayRules(itemDisplayRules);
-            //    }
-            //}
-            //catch (System.Exception e) {
-            //    Helpers.LogWarning("error adding displays for Aetherium \n" + e);
-            //}
-
-            try {
-                if (Compat.ScepterInstalled) {
-                    FixScepterDisplayRule(itemDisplayRules);
-                }
-            }
-            catch (System.Exception e) {
-                Helpers.LogWarning("error adding displays for Scepter \n" + e);
-            }
-
-            #endregion
         }
 
         #region tinker

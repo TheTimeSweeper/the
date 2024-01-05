@@ -11,6 +11,7 @@ namespace ModdedEntityStates.Joe {
         public virtual void SetCombinedStep(int i) {
             //Helpers.LogWarning("primary combinedstep: " + i);
             ComboStep = i;
+            
         }
 
         public override void SetStep(int i) {
