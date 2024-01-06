@@ -39,6 +39,7 @@ namespace PlagueMod.Survivors.Plague
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texHenryIcon"),
             bodyColor = Color.white,
+            sortPosition = 69.3f,
 
             crosshair = Assets.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -47,7 +48,7 @@ namespace PlagueMod.Survivors.Plague
             healthRegen = 1.5f,
             armor = 0f,
 
-            jumpCount = 1,
+            jumpCount = 2,
         };
 
         public override UnlockableDef characterUnlockableDef => PlagueUnlockables.characterUnlockableDef;
@@ -73,15 +74,26 @@ namespace PlagueMod.Survivors.Plague
 
             PlagueAssets.Init(assetBundle);
             PlagueBuffs.Init(assetBundle);
-
+     
             InitializeEntityStateMachines();
             InitializeSkills();
             InitializeSkins();
             InitializeCharacterMaster();
-
+            
             AdditionalBodySetup();
 
             AddHooks();
+        }
+
+        protected override void InitializeCharacterBodyPrefab()
+        {
+            characterModelObject = Prefabs.LoadCharacterModel(assetBundle, modelPrefabName);
+            GameObject bundleBodyPrefab = Prefabs.LoadCharacterBody(assetBundle, "PlagueBody");
+
+            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bundleBodyPrefab, characterModelObject, bodyInfo);
+            prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
+
+            prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab);
         }
 
         private void AdditionalBodySetup()
@@ -93,11 +105,11 @@ namespace PlagueMod.Survivors.Plague
 
         public void AddHitboxes()
         {
-           ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
-
-           //example of how to create a hitbox
-           Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
-           Prefabs.SetupHitbox(characterModelObject, hitboxTransform, "Sword");
+           //ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
+           //
+           ////example of how to create a hitbox
+           //Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
+           //Prefabs.SetupHitbox(characterModelObject, hitboxTransform, "Sword");
         }
 
         public override void InitializeEntityStateMachines() 
@@ -159,7 +171,7 @@ namespace PlagueMod.Survivors.Plague
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PaintShotgun)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -196,7 +208,7 @@ namespace PlagueMod.Survivors.Plague
                 skillDescriptionToken = PLAGUE_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Roll)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SimpleBlastJump)),
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 

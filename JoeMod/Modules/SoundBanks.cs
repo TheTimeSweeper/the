@@ -15,6 +15,9 @@ namespace Modules {
         }
 
         public static void Init() {
+
+            if (UnityEngine.Application.isBatchMode) return;
+
             AKRESULT akResult = AkSoundEngine.AddBasePath(SoundBankDirectory);
             //if (akResult == AKRESULT.AK_Success) {
             //    FacelessJoePlugin.Log.LogInfo($"Added bank base path : {SoundBankDirectory}");

@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.Components {
     public class PlagueBombProjectileBehavior : MonoBehaviour {
+
+        [SerializeField]
+        private ProjectileController controller;
         [SerializeField]
         private ProjectileImpactExplosion impactExplosion;
         [SerializeField]

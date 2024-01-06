@@ -9,7 +9,6 @@ namespace PlagueMod.Survivors.Plague.Components
 {
     public class PlagueBombProjectileBehavior : MonoBehaviour
     {
-
         [SerializeField]
         private ProjectileController controller;
         [SerializeField]
@@ -21,14 +20,11 @@ namespace PlagueMod.Survivors.Plague.Components
 
         private PlagueBombPowderSkillDef powderSkillDef;
 
-        void Awake()
+        void Start()
         {
             powderSkillDef = controller.owner?.GetComponent<PlagueBombSelectorController>()?.powderSkillDef;
-
-            if (powderSkillDef)
-            {
-                SetPowder(powderSkillDef);
-            }
+            //todo let's get some weaver in here
+            SetPowder(powderSkillDef);
         }
 
         public void SetPowder(PlagueBombPowderSkillDef skillDef)

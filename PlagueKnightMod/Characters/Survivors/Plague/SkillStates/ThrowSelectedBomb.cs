@@ -13,21 +13,18 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         public static float throwBombBaseDuration = 0.5f;
         public static float throwBombBaseDelayDuration = 0.08f;
 
-        public static float throwBombDamage = 1f;
+        public static float throwBombDamage = 2f;
         //needs to be set in the projectilecontroller component
         //public static float procCoefficient = 1f;
 
-        public static float throwBombProjectilePitch= 0f;
-
-        public static float throwBombThrowForce = 80f;
-        public static float throwBombBoomForce = 100f;
+        public static float throwBombProjectilePitch = 0f;
         
         public float lowGravMultiplier = 0.3f;
         public float smallhopVelocity = 5f;
 
         private PlagueBombSelectorController _selectorComponent;
 
-        public void SetPlagueComponent(PlagueBombSelectorController component)
+        public void SetPlagueComponent(PlagueBombSelectorController component) 
         {
             _selectorComponent = component;
         }
@@ -41,8 +38,8 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             base.baseDelayBeforeFiringProjectile = throwBombBaseDelayDuration;
 
             base.damageCoefficient = throwBombDamage;
-            base.force = throwBombThrowForce;
-            //base.projectilePitchBonus = 0;
+            //base.force = throwBombThrowForce;
+            base.projectilePitchBonus = -5;
             //min/maxSpread
             base.recoilAmplitude = 0.1f;
             base.bloom = 10;
@@ -62,13 +59,13 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             base.FixedUpdate();
 
             if (!isGrounded) {
-                //mess with slowing horizontal velocity
                 ref float ySpeed = ref characterMotor.velocity.y;
                 if (ySpeed < 0) {
                     ySpeed += Physics.gravity.y * -lowGravMultiplier * Time.fixedDeltaTime;
                 }
 
                 //why did I ever think this was a good idea
+                ////mess with slowing horizontal velocity
                 ////actuallylook into other movement affecting options
                 ////what slows you in vanilla? well also how'd moff do it too.
                 //ref float xSpeed = ref characterMotor.velocity.x;

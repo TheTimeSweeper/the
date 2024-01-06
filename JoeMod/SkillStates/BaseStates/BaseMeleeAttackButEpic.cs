@@ -119,8 +119,7 @@ namespace ModdedEntityStates.BaseStates
             //EffectManager.SpawnEffect(this.swingEffectPrefab, effectData, true);
         }
 
-        protected virtual void OnHitEnemyAuthority() => OnHitEnemyAuthority(null);
-        protected virtual void OnHitEnemyAuthority(List<HurtBox> hits) {
+        protected virtual void OnHitEnemyAuthority(List<HurtBox> hits = null) {
             Util.PlaySound(this.hitSoundString, base.gameObject);
 
             if (!this.hasHopped) {

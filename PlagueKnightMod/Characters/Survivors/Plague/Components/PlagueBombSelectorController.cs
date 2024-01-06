@@ -13,7 +13,7 @@ namespace PlagueMod.Survivors.Plague.Components
 
         public PlagueBombCasingSkillDef casingSkillDef => (PlagueBombCasingSkillDef)casingGenericSkill.skillDef;
         public PlagueBombPowderSkillDef powderSkillDef => (PlagueBombPowderSkillDef)powderGenericSkill.skillDef;
-
+        
         private GameObject casingProjectile; //later lol
         private Action<GameObject, Type, Material> projectileSpawnAction;
 

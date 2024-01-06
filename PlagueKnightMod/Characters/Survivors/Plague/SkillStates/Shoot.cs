@@ -5,6 +5,77 @@ using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.SkillStates
 {
+    public class PaintShotgun : BaseSkillState
+    {
+        public static float damageCoefficient = 0.6f; // 60% damage per pellet
+        public static float procCoefficient = 0.5f;
+        public static float baseDuration = 0.5f; // Duration of the attack animation
+        public static uint bulletCount = 6; // Number of pellets
+        public static float range = 20f; // Effective range of the shotgun
+        public static float spreadBloom = 1.2f; // Spread of the shotgun pellets
+
+        private float duration;
+        private bool hasFired;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            duration = baseDuration / attackSpeedStat;
+            characterBody.SetAimTimer(2f);
+            PlayAnimation("Gesture, Additive", "FireShotgun"); // Assuming the animation exists
+        }
+
+        private void FireShotgun()
+        {
+            if (hasFired) return;
+
+            hasFired = true;
+            Ray aimRay = GetAimRay();
+            characterBody.AddSpreadBloom(spreadBloom);
+
+            var bulletAttack = new BulletAttack
+            {
+                origin = aimRay.origin,
+                aimVector = aimRay.direction,
+                damage = damageCoefficient * damageStat,
+                damageType = DamageType.Generic, // Can be customized
+                falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                maxDistance = range,
+                force = 0, // Paint pellets do not apply force
+                hitMask = LayerIndex.CommonMasks.bullet,
+                isCrit = Util.CheckRoll(critStat, characterBody.master),
+                owner = gameObject,
+                muzzleName = "Muzzle", // Should correspond to the model
+                procCoefficient = procCoefficient,
+                bulletCount = bulletCount,
+                radius = 0.5f, // Radius of each pellet's hit area
+                //spreadBloomAngle = spreadBloom,
+                tracerEffectPrefab = null, // Custom effect or null if not needed
+                hitEffectPrefab = null, // Custom hit effect or null
+                queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                // Custom properties for paint effect
+                damageColorIndex = DamageColorIndex.Item, // Example color index for paint
+            };
+
+            bulletAttack.Fire();
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (fixedAge >= duration && isAuthority)
+            {
+                FireShotgun();
+                outer.SetNextStateToMain();
+            }
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.Any;
+        }
+    }
     public class Shoot : BaseSkillState
     {
         public static float damageCoefficient = 1;// HenryStaticValues.gunDamageCoefficient;

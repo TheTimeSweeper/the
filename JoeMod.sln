@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeslaTrooperMod", "JoeMod\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AliemMod", "AliemMod\AliemMod.csproj", "{4F575806-39FA-46D3-9826-379122C26FD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoeModForReal", "JoeModForReal\JoeModForReal.csproj", "{F97DA65D-4BB8-497C-A321-883FD6DD3D26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoeModForReal", "JoeModForReal\JoeModForReal.csproj", "{F97DA65D-4BB8-497C-A321-883FD6DD3D26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

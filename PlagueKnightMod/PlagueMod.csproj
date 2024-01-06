@@ -35,7 +35,15 @@
 
 
   <ItemGroup>
+    <Folder Include="Characters\Survivors\Plague\Components\Bundled\UI\" />
     <Folder Include="Modules\Characters\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="RiskOfOptions">
+      <HintPath>..\libs\RiskOfOptions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="REM change this to your username (or add yours if you're working in a team or somethin)&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; set build=true&#xD;&#xA;&#xD;&#xA;if defined build (&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\theUnityProject\AssetBundles\plaguebundle&quot; (&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\plaguebundle&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;)&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-PlagueKnight\&quot;&#xD;&#xA;)&#xD;&#xA;" />

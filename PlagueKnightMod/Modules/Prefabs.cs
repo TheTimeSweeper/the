@@ -21,25 +21,25 @@ namespace PlagueMod.Modules
 
         public static GameObject CreateDisplayPrefab(AssetBundle assetBundle, string displayPrefabName, GameObject prefab)
         {
-            GameObject model = assetBundle.LoadAsset<GameObject>(displayPrefabName);
-            if (model == null)
+            GameObject display = assetBundle.LoadAsset<GameObject>(displayPrefabName);
+            if (display == null)
             {
                 Log.Error($"could not load display prefab {displayPrefabName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
                 return null;
             }
 
-            CharacterModel characterModel = model.GetComponent<CharacterModel>();
+            CharacterModel characterModel = display.GetComponent<CharacterModel>();
             if (!characterModel)
             {
-                characterModel = model.AddComponent<CharacterModel>();
+                characterModel = display.AddComponent<CharacterModel>();
             }
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(model);
-
-            return model.gameObject;
+            Modules.Assets.ConvertAllRenderersToHopooShader(display);
+            
+            return display;
         }
-
+        
         #region body setup
 
         public static GameObject LoadCharacterModel(AssetBundle assetBundle, string modelName)
@@ -50,18 +50,24 @@ namespace PlagueMod.Modules
                 Log.Error($"could not load model prefab {modelName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
                 return null;
             }
+
             return model;
         }
 
-        public static GameObject CreateBodyPrefab(AssetBundle assetBundle, string modelName, BodyInfo bodyInfo) => CreateBodyPrefab(LoadCharacterModel(assetBundle, modelName), bodyInfo);
-        public static GameObject CreateBodyPrefab(GameObject model, BodyInfo bodyInfo)
+        public static GameObject LoadCharacterBody(AssetBundle assetBundle, string bodyName)
         {
-            if(model == null)
+            GameObject body = assetBundle.LoadAsset<GameObject>(bodyName);
+            if (body == null)
             {
-                Log.Error($"No model prefab for body {bodyInfo.bodyName}. character creation failed");
+                Log.Error($"could not load body prefab {bodyName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
                 return null;
             }
 
+            return body;
+        }
+
+        public static GameObject CloneCharacterBody(BodyInfo bodyInfo)
+        {
             GameObject clonedBody = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body");
             if (!clonedBody)
             {
@@ -71,15 +77,47 @@ namespace PlagueMod.Modules
 
             GameObject newBodyPrefab = PrefabAPI.InstantiateClone(clonedBody, bodyInfo.bodyName);
 
+            for (int i = newBodyPrefab.transform.childCount - 1; i >= 0; i--)
+            {
+                UnityEngine.Object.DestroyImmediate(newBodyPrefab.transform.GetChild(i).gameObject);
+            }
+
+            return newBodyPrefab;
+        }
+
+        public static GameObject CreateBodyPrefab(AssetBundle assetBundle, string modelPrefabName, BodyInfo bodyInfo)
+        {
+            return CreateBodyPrefab(LoadCharacterModel(assetBundle, modelPrefabName), bodyInfo);
+        }
+        public static GameObject CreateBodyPrefab(AssetBundle assetBundle, string bodyPrefabName, string modelPrefabName, BodyInfo bodyInfo)
+        {
+            return CreateBodyPrefab(LoadCharacterBody(assetBundle, bodyPrefabName), LoadCharacterModel(assetBundle, modelPrefabName), bodyInfo);
+        }
+        public static GameObject CreateBodyPrefab(GameObject model, BodyInfo bodyInfo)
+        {
+            return CreateBodyPrefab(CloneCharacterBody(bodyInfo), model, bodyInfo);
+        }
+        public static GameObject CreateBodyPrefab(GameObject newBodyPrefab, AssetBundle assetBundle, string modelName, BodyInfo bodyInfo)
+        {
+            return CreateBodyPrefab(newBodyPrefab, LoadCharacterModel(assetBundle, modelName), bodyInfo);
+        }
+        public static GameObject CreateBodyPrefab(GameObject newBodyPrefab, GameObject model, BodyInfo bodyInfo)
+        {
+            if (model == null || newBodyPrefab == null)
+            {
+                Log.Error($"Character creation failed. Model: {model}, Body: {newBodyPrefab}");
+                return null;
+            }
+
             Transform modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, model.transform, bodyInfo);
 
             SetupCharacterBody(newBodyPrefab, bodyInfo);
 
-            SetupCameraTargetParams(newBodyPrefab, bodyInfo);
             SetupModelLocator(newBodyPrefab, modelBaseTransform, model.transform);
+            SetupCharacterDirection(newBodyPrefab, modelBaseTransform, model.transform);
+            SetupCameraTargetParams(newBodyPrefab, bodyInfo);
             //SetupRigidbody(newPrefab);
             SetupCapsuleCollider(newBodyPrefab);
-            SetupCharacterDirection(newBodyPrefab, modelBaseTransform, model.transform);
 
             Modules.Content.AddCharacterBodyPrefab(newBodyPrefab);
 
@@ -117,7 +155,6 @@ namespace PlagueMod.Modules
 
             if (bodyInfo.autoCalculateLevelStats)
             {
-
                 bodyComponent.levelMaxHealth = Mathf.Round(bodyComponent.baseMaxHealth * 0.3f);
                 bodyComponent.levelMaxShield = Mathf.Round(bodyComponent.baseMaxShield * 0.3f);
                 bodyComponent.levelRegen = bodyComponent.baseRegen * 0.2f;
@@ -130,11 +167,9 @@ namespace PlagueMod.Modules
                 bodyComponent.levelCrit = 0f;
 
                 bodyComponent.levelArmor = 0f;
-
             }
             else
             {
-
                 bodyComponent.levelMaxHealth = bodyInfo.healthGrowth;
                 bodyComponent.levelMaxShield = bodyInfo.shieldGrowth;
                 bodyComponent.levelRegen = bodyInfo.regenGrowth;
@@ -165,12 +200,8 @@ namespace PlagueMod.Modules
 
         private static Transform AddCharacterModelToSurvivorBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo)
         {
-            for (int i = bodyPrefab.transform.childCount - 1; i >= 0; i--)
-            {
-                UnityEngine.Object.DestroyImmediate(bodyPrefab.transform.GetChild(i).gameObject);
-            }
-
-            Transform modelBase = new GameObject("ModelBase").transform;
+            Transform modelBase = bodyPrefab.transform.Find("ModelBase");
+            if(modelBase == null) modelBase = new GameObject("ModelBase").transform;
             modelBase.parent = bodyPrefab.transform;
             modelBase.localPosition = bodyInfo.modelBasePosition;
             modelBase.localRotation = Quaternion.identity;
@@ -179,26 +210,29 @@ namespace PlagueMod.Modules
             modelTransform.localPosition = Vector3.zero;
             modelTransform.localRotation = Quaternion.identity;
 
-            GameObject cameraPivot = new GameObject("CameraPivot");
-            cameraPivot.transform.parent = bodyPrefab.transform;
-            cameraPivot.transform.localPosition = bodyInfo.cameraPivotPosition;
-            cameraPivot.transform.localRotation = Quaternion.identity;
+            Transform cameraPivot = bodyPrefab.transform.Find("CameraPivot"); 
+            if(cameraPivot == null) cameraPivot = new GameObject("CameraPivot").transform;
+            cameraPivot.parent = bodyPrefab.transform;
+            cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
+            cameraPivot.localRotation = Quaternion.identity;
 
-            GameObject aimOrigin = new GameObject("AimOrigin");
-            aimOrigin.transform.parent = bodyPrefab.transform;
-            aimOrigin.transform.localPosition = bodyInfo.aimOriginPosition;
-            aimOrigin.transform.localRotation = Quaternion.identity;
-            bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform = aimOrigin.transform;
+            Transform aimOrigin = bodyPrefab.transform.Find("AimOrigin");
+            if(aimOrigin == null) aimOrigin = new GameObject("AimOrigin").transform;
+            aimOrigin.parent = bodyPrefab.transform;
+            aimOrigin.localPosition = bodyInfo.aimOriginPosition;
+            aimOrigin.localRotation = Quaternion.identity;
+            bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform = aimOrigin;
 
             return modelBase.transform;
         }
 
         private static void SetupCharacterDirection(GameObject prefab, Transform modelBaseTransform, Transform modelTransform)
         {
-            if (!prefab.GetComponent<CharacterDirection>())
+            CharacterDirection characterDirection = prefab.GetComponent<CharacterDirection>();
+
+            if (!characterDirection)
                 return;
 
-            CharacterDirection characterDirection = prefab.GetComponent<CharacterDirection>();
             characterDirection.targetTransform = modelBaseTransform;
             characterDirection.overrideAnimatorForwardTransform = null;
             characterDirection.rootMotionAccumulator = null;
@@ -209,14 +243,14 @@ namespace PlagueMod.Modules
 
         private static void SetupCameraTargetParams(GameObject prefab, BodyInfo bodyInfo)
         {
-            CameraTargetParams cameraTargetParams = prefab.GetComponent<CameraTargetParams>();
+            CameraTargetParams cameraTargetParams = prefab.GetOrAddComponent<CameraTargetParams>();
             cameraTargetParams.cameraParams = bodyInfo.cameraParams;
             cameraTargetParams.cameraPivotTransform = prefab.transform.Find("CameraPivot");
         }
 
         private static void SetupModelLocator(GameObject prefab, Transform modelBaseTransform, Transform modelTransform)
         {
-            ModelLocator modelLocator = prefab.GetComponent<ModelLocator>();
+            ModelLocator modelLocator = prefab.GetOrAddComponent<ModelLocator>();
             modelLocator.modelTransform = modelTransform;
             modelLocator.modelBaseTransform = modelBaseTransform;
         }
@@ -231,7 +265,7 @@ namespace PlagueMod.Modules
         private static void SetupCapsuleCollider(GameObject prefab)
         {
             //character collider MUST be commando's size!
-            CapsuleCollider capsuleCollider = prefab.GetComponent<CapsuleCollider>();
+            CapsuleCollider capsuleCollider = prefab.GetOrAddComponent<CapsuleCollider>();
             capsuleCollider.center = new Vector3(0f, 0f, 0f);
             capsuleCollider.radius = 0.5f;
             capsuleCollider.height = 1.82f;
@@ -341,7 +375,7 @@ namespace PlagueMod.Modules
         }
 
         private static void SetupHurtboxGroup(GameObject bodyPrefab, GameObject model) 
-        {         
+        {
             SetupMainHurtboxesFromChildLocator(bodyPrefab, model);
 
             SetHurtboxesHealthComponents(bodyPrefab);
@@ -360,6 +394,11 @@ namespace PlagueMod.Modules
 
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
+            Log.Warning(childLocator.transformPairs.Length);
+            for (int i = 0; i < childLocator.transformPairs.Length; i++)
+            {
+                Log.Warning(childLocator.transformPairs[i].transform.name);
+            }
             if (!childLocator.FindChild("MainHurtbox"))
             {
                 Log.Error("Could not set up main hurtbox: make sure you have a transform pair in your prefab's ChildLocator called 'MainHurtbox'");
@@ -452,6 +491,10 @@ namespace PlagueMod.Modules
                     {
                         boneCollider.material = ragdollMaterial;
                         boneCollider.sharedMaterial = ragdollMaterial;
+                    }
+                    else
+                    {
+                        Log.Error($"Ragdoll bone {boneTransform.gameObject} doesn't have a collider. Ragdoll will break.");
                     }
                 }
             }
@@ -674,6 +717,15 @@ namespace PlagueMod.Modules
             hitBoxGroup.groupName = hitboxName;
         }
 
+        private static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            T component = gameObject.GetComponent<T>();
+            if (component == null)
+            {
+                component = gameObject.AddComponent<T>();
+            }
+            return component;
+        }
     }
 
     // for simplifying rendererinfo creation

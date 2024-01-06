@@ -2,6 +2,7 @@
 using PlagueMod.Survivors.Plague;
 using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace PlagueMod.Survivors.Plague.SkillStates

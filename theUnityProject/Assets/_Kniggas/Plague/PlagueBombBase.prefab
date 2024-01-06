@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8203607904637719915}
   - component: {fileID: 7308008960810168321}
   - component: {fileID: 7785193410767743754}
+  - component: {fileID: 2985414172121911793}
   m_Layer: 14
   m_Name: PlagueBombBase
   m_TagString: Untagged
@@ -119,7 +120,7 @@ MonoBehaviour:
   startSound: 
   cannotBeDeleted: 0
   flightSoundLoop: {fileID: 0}
-  canImpactOnTrigger: 0
+  canImpactOnTrigger: 1
   allowPrediction: 0
   owner: {fileID: 0}
   procCoefficient: 1
@@ -154,8 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a644a6ee294e0a54a915376e5a9588b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 159668645055115241}
   impactExplosion: {fileID: 7308008960810168321}
   entityStateMachine: {fileID: 8203607904637719915}
+  colorizer: {fileID: 0}
 --- !u!114 &2422474474752723601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +239,7 @@ MonoBehaviour:
   destroyOnWorld: 0
   timerAfterImpact: 1
   lifetime: 10
-  lifetimeAfterImpact: 1
+  lifetimeAfterImpact: 0.2
   lifetimeRandomOffset: 0
   transformSpace: 0
 --- !u!135 &7785193410767743754
@@ -247,8 +250,21 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5627759909093736665}
   m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.617906
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &2985414172121911793
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627759909093736665}
+  m_Material: {fileID: 13400000, guid: 57487560a8a877f45873bad619175871, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2670372
+  m_Radius: 0.26944208
   m_Center: {x: 0, y: 0, z: 0}

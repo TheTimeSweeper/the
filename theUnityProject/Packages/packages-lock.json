@@ -122,6 +122,13 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "riskofthunder-ror2importextensions": {
+      "version": "https://github.com/risk-of-thunder/RoR2ImportExtensions.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ebe4d6e4a27e4b766b33e5bdd3ab6c7d17518dfb"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
