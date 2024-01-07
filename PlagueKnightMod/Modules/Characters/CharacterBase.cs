@@ -101,7 +101,7 @@ namespace PlagueMod.Modules.Characters
         public GameObject crosshair = null;
         public GameObject podPrefab = null;
         #endregion Character
-
+        
         #region Stats
         //main stats
         public float maxHealth = 100f;

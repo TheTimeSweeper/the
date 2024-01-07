@@ -2,8 +2,6 @@
 using RoR2.UI;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace PlagueMod.Survivors.Plague.Components {
     

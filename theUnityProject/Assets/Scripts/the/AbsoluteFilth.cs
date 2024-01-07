@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AbsoluteFilth : MonoBehaviour
 {
+
+    [SerializeField]
+    private Transform anchor;
+
     void Start() {
         Invoke("FullofShameAndDisappointment", 1f);
     }
@@ -11,9 +15,19 @@ public class AbsoluteFilth : MonoBehaviour
 
     [ContextMenu("rotten disgusting crimes")]
     private void FullofShameAndDisappointment () {
-        foreach(var item in FindObjectsOfType<Renderer>()) {
-            item.enabled = true;
+
+        if (anchor == null) {
+
+            foreach (var item in FindObjectsOfType<Renderer>()) {
+                item.enabled = true;
+            }
+            Debug.Log("How dare you");
+        } else {
+            foreach(var item in anchor.GetComponentsInChildren<Renderer>()) {
+                item.enabled = true;
+            }
+
+            Debug.Log("slightly less but still how dare you");
         }
-        Debug.Log("How dare you");
     }
 }

@@ -42,7 +42,7 @@ namespace PlagueMod.Modules
         
         #region body setup
 
-        public static GameObject LoadCharacterModel(AssetBundle assetBundle, string modelName)
+        public static GameObject LoadCharacterModel(AssetBundle assetBundle, string modelName, bool clone = true)
         {
             GameObject model = assetBundle.LoadAsset<GameObject>(modelName);
             if (model == null)
@@ -51,10 +51,13 @@ namespace PlagueMod.Modules
                 return null;
             }
 
+            if(clone)
+                return PrefabAPI.InstantiateClone(model, modelName, false);
+
             return model;
         }
 
-        public static GameObject LoadCharacterBody(AssetBundle assetBundle, string bodyName)
+        public static GameObject LoadCharacterBody(AssetBundle assetBundle, string bodyName, bool clone = true)
         {
             GameObject body = assetBundle.LoadAsset<GameObject>(bodyName);
             if (body == null)
@@ -62,7 +65,8 @@ namespace PlagueMod.Modules
                 Log.Error($"could not load body prefab {bodyName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
                 return null;
             }
-
+            if(clone)
+                return PrefabAPI.InstantiateClone(body, bodyName, false);
             return body;
         }
 
@@ -201,26 +205,35 @@ namespace PlagueMod.Modules
         private static Transform AddCharacterModelToSurvivorBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo)
         {
             Transform modelBase = bodyPrefab.transform.Find("ModelBase");
-            if(modelBase == null) modelBase = new GameObject("ModelBase").transform;
-            modelBase.parent = bodyPrefab.transform;
-            modelBase.localPosition = bodyInfo.modelBasePosition;
-            modelBase.localRotation = Quaternion.identity;
-
+            if (modelBase == null)
+            {
+                modelBase = new GameObject("ModelBase").transform;
+                modelBase.parent = bodyPrefab.transform;
+                modelBase.localPosition = bodyInfo.modelBasePosition;
+                modelBase.localRotation = Quaternion.identity;
+            }
+            
             modelTransform.parent = modelBase.transform;
             modelTransform.localPosition = Vector3.zero;
             modelTransform.localRotation = Quaternion.identity;
 
-            Transform cameraPivot = bodyPrefab.transform.Find("CameraPivot"); 
-            if(cameraPivot == null) cameraPivot = new GameObject("CameraPivot").transform;
-            cameraPivot.parent = bodyPrefab.transform;
-            cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
-            cameraPivot.localRotation = Quaternion.identity;
+            Transform cameraPivot = bodyPrefab.transform.Find("CameraPivot");
+            if (cameraPivot == null)
+            {
+                cameraPivot = new GameObject("CameraPivot").transform;
+                cameraPivot.parent = bodyPrefab.transform;
+                cameraPivot.localPosition = bodyInfo.cameraPivotPosition;
+                cameraPivot.localRotation = Quaternion.identity;
+            }
 
             Transform aimOrigin = bodyPrefab.transform.Find("AimOrigin");
-            if(aimOrigin == null) aimOrigin = new GameObject("AimOrigin").transform;
-            aimOrigin.parent = bodyPrefab.transform;
-            aimOrigin.localPosition = bodyInfo.aimOriginPosition;
-            aimOrigin.localRotation = Quaternion.identity;
+            if (aimOrigin == null)
+            {
+                aimOrigin = new GameObject("AimOrigin").transform;
+                aimOrigin.parent = bodyPrefab.transform;
+                aimOrigin.localPosition = bodyInfo.aimOriginPosition;
+                aimOrigin.localRotation = Quaternion.identity;
+            }
             bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform = aimOrigin;
 
             return modelBase.transform;

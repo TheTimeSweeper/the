@@ -71,7 +71,7 @@ namespace PlagueMod.Survivors.Plague
             PlagueConfig.Init();
             PlagueStates.Init();
             PlagueTokens.Init();
-
+            
             PlagueAssets.Init(assetBundle);
             PlagueBuffs.Init(assetBundle);
      
@@ -87,10 +87,10 @@ namespace PlagueMod.Survivors.Plague
 
         protected override void InitializeCharacterBodyPrefab()
         {
-            characterModelObject = Prefabs.LoadCharacterModel(assetBundle, modelPrefabName);
-            GameObject bundleBodyPrefab = Prefabs.LoadCharacterBody(assetBundle, "PlagueBody");
+            //characterModelObject = Prefabs.LoadCharacterModel(assetBundle, modelPrefabName);
+            GameObject bundleBodyPrefab = Prefabs.LoadCharacterBody(assetBundle, "PlagueBody", false);
 
-            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bundleBodyPrefab, characterModelObject, bodyInfo);
+            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(bundleBodyPrefab, bundleBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject, bodyInfo);
             prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
 
             prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab);
@@ -101,6 +101,8 @@ namespace PlagueMod.Survivors.Plague
             AddHitboxes();
 
             bodyPrefab.AddComponent<PlagueBombSelectorController>();
+
+            bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.DeathState));
         }
 
         public void AddHitboxes()

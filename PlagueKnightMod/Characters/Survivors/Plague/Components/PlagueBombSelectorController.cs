@@ -37,14 +37,14 @@ namespace PlagueMod.Survivors.Plague.Components
             if (tempPowderIndex > 1) tempPowderIndex = 0;
 
             casingGenericSkill.SetSkillFromFamily(tempPowderIndex);
-
+            
         }
 
         public void ChangeSelectedPowder()
         {
             tempCasingIndex++;
             if (tempCasingIndex > 1) tempCasingIndex = 0;
-
+            
             powderGenericSkill.SetSkillFromFamily(tempCasingIndex);
         }
     }
