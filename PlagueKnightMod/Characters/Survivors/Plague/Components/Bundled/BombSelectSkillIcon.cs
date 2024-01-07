@@ -1,4 +1,5 @@
-﻿using RoR2.UI;
+﻿using RoR2;
+using RoR2.UI;
 using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.Components
@@ -9,13 +10,12 @@ namespace PlagueMod.Survivors.Plague.Components
         private SkillIcon skillIcon;
         public SkillIcon SkillIcon { get => skillIcon; set => skillIcon = value; }
 
-        [SerializeField]
-        private PlagueBombSelectUI bombSelectUI;
-        public PlagueBombSelectUI BombSelectUI { get => bombSelectUI; set => bombSelectUI = value; }
+        [HideInInspector]
+        public PlagueSkillGrid plagueSkillGrid;
 
-        public void HandlePointerDown(SkillIcon skillIcon)
+        public void HandlePointerDown()
         {
-
+            plagueSkillGrid.OnPointerDown(SkillIcon.targetSkill);
         }
     }
 }

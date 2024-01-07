@@ -18,6 +18,12 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Characters\Survivors\Plague\Components\Bundled\UI\**" />
+    <EmbeddedResource Remove="Characters\Survivors\Plague\Components\Bundled\UI\**" />
+    <None Remove="Characters\Survivors\Plague\Components\Bundled\UI\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
 			<PrivateAssets>all</PrivateAssets>
@@ -40,7 +46,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Characters\Survivors\Plague\Components\Bundled\UI\" />
     <Folder Include="Modules\Characters\" />
   </ItemGroup>
 

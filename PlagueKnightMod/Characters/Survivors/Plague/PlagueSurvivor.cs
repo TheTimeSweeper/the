@@ -100,8 +100,7 @@ namespace PlagueMod.Survivors.Plague
         {
             AddHitboxes();
 
-            bodyPrefab.AddComponent<PlagueBombSelectorController>();
-
+            //todo fail
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.DeathState));
         }
 
@@ -414,13 +413,19 @@ namespace PlagueMod.Survivors.Plague
             //how to set up AI in code
             //HenryAI.Init(bodyPrefab);
 
-            //how to load a master set up in unity (recommended)
+            //how to load a master set up in unity
             //assetBundle.LoadMaster("HenryMonsterMaster", bodyPrefab);
         }
 
         private void AddHooks()
         {
+            On.RoR2.UI.HUD.Awake += HUD_Awake;
+        }
 
+        private void HUD_Awake(On.RoR2.UI.HUD.orig_Awake orig, RoR2.UI.HUD self)
+        {
+            orig(self);
+            self.gameObject.AddComponent<PlagueHUD>();
         }
     }
 }

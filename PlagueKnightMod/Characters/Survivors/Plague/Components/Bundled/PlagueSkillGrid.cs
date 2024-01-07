@@ -1,29 +1,54 @@
 ﻿using RoR2;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.Components
 {
-    public class PlagueSkillGrid : MonoBehaviour
+    public class CasingSkillGrid : PlagueSkillGrid
     {
+        public override void OnPointerDown(GenericSkill targetSkill)
+        {
+            bombSelectUI.plagueBombSelectorController.SetCasingSkillDef(targetSkill);
+        }
+    }
+    public abstract class PlagueSkillGrid : MonoBehaviour
+    {
+        [SerializeField]
+        protected PlagueBombSelectUI bombSelectUI;
+
         [SerializeField]
         private Transform anchor;
 
         [SerializeField]
-        private List<BombSelectSkillIcon> skillIcons;
+        public List<BombSelectSkillIcon> skillIcons;
 
-        public void Init(List<GenericSkill> genericSkills)
+        public abstract void OnPointerDown(GenericSkill targetSkill);
+
+        public void UpdateGrid(List<GenericSkill> genericSkills)
+        {
+            if(genericSkills.Count != skillIcons.Count)
+            {
+                SyncSkillIcons(genericSkills);
+            }
+
+            for (int i = 0; i < skillIcons.Count; i++)
+            {
+                skillIcons[i].SkillIcon.targetSkill = genericSkills[i];
+            }
+        }
+
+        private void SyncSkillIcons(List<GenericSkill> genericSkills)
         {
             int i = 0;
             for (; i < genericSkills.Count; i++)
             {
                 if (skillIcons.Count <= i)
                 {
-                    skillIcons.Add(Instantiate(skillIcons[0], anchor));
+                    skillIcons.Add(Instantiate(PlagueAssets.skillIconPrefab, anchor));
                 }
                 skillIcons[i].gameObject.SetActive(true);
-                skillIcons[i].SkillIcon.targetSkill = genericSkills[i];
-                skillIcons[i].BombSelectUI = skillIcons[0].BombSelectUI;
+                skillIcons[i].plagueSkillGrid = this;
             }
             for (; i < skillIcons.Count; i++)
             {

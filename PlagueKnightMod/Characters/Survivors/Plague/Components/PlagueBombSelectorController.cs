@@ -8,22 +8,38 @@ namespace PlagueMod.Survivors.Plague.Components
 {
     public class PlagueBombSelectorController : MonoBehaviour
     {
-        public GenericSkill casingGenericSkill;
-        public GenericSkill powderGenericSkill;
+        [SerializeField]
+        public GenericSkillHolder casingGenericSkills;
 
-        public PlagueBombCasingSkillDef casingSkillDef => (PlagueBombCasingSkillDef)casingGenericSkill.skillDef;
-        public PlagueBombPowderSkillDef powderSkillDef => (PlagueBombPowderSkillDef)powderGenericSkill.skillDef;
-        
-        private GameObject casingProjectile; //later lol
+        [SerializeField]
+        public GenericSkillHolder powderGenericSkills;
+
+        [HideInInspector]
+        public GenericSkill casingLoadoutSkill;
+        [HideInInspector]
+        public GenericSkill powderLoadoutSkill;
+
+        [Obsolete("were goin hard now")]
+        public PlagueBombCasingSkillDef casingSkillDef => (PlagueBombCasingSkillDef)casingLoadoutSkill.skillDef;
+        [Obsolete("were goin hard now")]
+        public PlagueBombPowderSkillDef powderSkillDef => (PlagueBombPowderSkillDef)powderLoadoutSkill.skillDef;
+
+        private GameObject cachedProjectile; //later lol
         private Action<GameObject, Type, Material> projectileSpawnAction;
 
         private int tempCasingIndex;
         private int tempPowderIndex;
+        private SkillLocator skillLocator;
 
         void Start()
         {
-            casingGenericSkill = GetComponent<SkillLocator>().FindSkill("casing");
-            powderGenericSkill = GetComponent<SkillLocator>().FindSkill("powder");
+            skillLocator = GetComponent<SkillLocator>();
+
+            casingLoadoutSkill = skillLocator.FindSkill("casing");
+            powderLoadoutSkill = skillLocator.FindSkill("powder");
+
+            casingGenericSkills.Init(casingLoadoutSkill.skillFamily);
+            powderGenericSkills.Init(powderLoadoutSkill.skillFamily);
         }
 
         public GameObject GetSelectedProjectile()
@@ -31,12 +47,23 @@ namespace PlagueMod.Survivors.Plague.Components
             return casingSkillDef.projectilePrefab;
         }
 
+        public void SetCasingSkillDef(GenericSkill targetSkill)
+        {
+            casingLoadoutSkill.SetBaseSkill(targetSkill.baseSkill);
+        }
+
+        //fuck what do we do for lunarprimaryreplacement
+        public void SetPrimaryGenericSkill(GenericSkill targetSkill)
+        {
+            skillLocator.primary = targetSkill;
+        }
+
         public void ChangeSelectedCasing()
         {
             tempPowderIndex++;
             if (tempPowderIndex > 1) tempPowderIndex = 0;
 
-            casingGenericSkill.SetSkillFromFamily(tempPowderIndex);
+            casingLoadoutSkill.SetSkillFromFamily(tempPowderIndex);
             
         }
 
@@ -45,7 +72,7 @@ namespace PlagueMod.Survivors.Plague.Components
             tempCasingIndex++;
             if (tempCasingIndex > 1) tempCasingIndex = 0;
             
-            powderGenericSkill.SetSkillFromFamily(tempCasingIndex);
+            powderLoadoutSkill.SetSkillFromFamily(tempCasingIndex);
         }
     }
 }
