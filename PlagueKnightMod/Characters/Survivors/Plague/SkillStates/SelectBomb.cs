@@ -13,24 +13,28 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             _selectorComponent = component;
         }
 
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            _selectorComponent.ShowUI();
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (inputBank.skill1.justPressed)
-            {
-                _selectorComponent.ChangeSelectedCasing();
-            }
-            if (inputBank.skill2.justPressed)
-            {
-                _selectorComponent.ChangeSelectedPowder();
-            }
 
             if (!inputBank.skill4.down)
             {
                 base.outer.SetNextStateToMain();
             }
         }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            _selectorComponent.ShowUI(false);
+        }
+
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;

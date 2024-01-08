@@ -21,11 +21,17 @@ namespace PlagueMod.Survivors.Plague.Components
 
         [Obsolete("were goin hard now")]
         public PlagueBombCasingSkillDef casingSkillDef => (PlagueBombCasingSkillDef)casingLoadoutSkill.skillDef;
+
+
         [Obsolete("were goin hard now")]
         public PlagueBombPowderSkillDef powderSkillDef => (PlagueBombPowderSkillDef)powderLoadoutSkill.skillDef;
 
         private GameObject cachedProjectile; //later lol
         private Action<GameObject, Type, Material> projectileSpawnAction;
+
+        public bool initialized { get; private set; }
+
+        public PlagueBombSelectUI bombSelectUI { private get; set; }
 
         private int tempCasingIndex;
         private int tempPowderIndex;
@@ -40,6 +46,12 @@ namespace PlagueMod.Survivors.Plague.Components
 
             casingGenericSkills.Init(casingLoadoutSkill.skillFamily);
             powderGenericSkills.Init(powderLoadoutSkill.skillFamily);
+            initialized = true;
+        }
+
+        public void ShowUI(bool shouldShow = true)
+        {
+            bombSelectUI.Show(shouldShow);
         }
 
         public GameObject GetSelectedProjectile()
@@ -56,6 +68,8 @@ namespace PlagueMod.Survivors.Plague.Components
         public void SetPrimaryGenericSkill(GenericSkill targetSkill)
         {
             skillLocator.primary = targetSkill;
+            powderLoadoutSkill.SetBaseSkill(targetSkill.baseSkill);
+
         }
 
         public void ChangeSelectedCasing()

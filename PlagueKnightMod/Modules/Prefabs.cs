@@ -407,11 +407,6 @@ namespace PlagueMod.Modules
 
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
-            Log.Warning(childLocator.transformPairs.Length);
-            for (int i = 0; i < childLocator.transformPairs.Length; i++)
-            {
-                Log.Warning(childLocator.transformPairs[i].transform.name);
-            }
             if (!childLocator.FindChild("MainHurtbox"))
             {
                 Log.Error("Could not set up main hurtbox: make sure you have a transform pair in your prefab's ChildLocator called 'MainHurtbox'");

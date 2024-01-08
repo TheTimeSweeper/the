@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.SkillDefs
 {
-    public class PlagueBombCasingSkillDef : SkillDef
+    public class PlagueBombCasingSkillDef : PlagueBombSelectionSkillDef
     {
         public GameObject projectilePrefab;
     }

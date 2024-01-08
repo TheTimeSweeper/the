@@ -15,7 +15,7 @@ namespace PlagueMod.Survivors.Plague.Components
             {
                 SyncGenericSkills(skillFamily);
             }
-
+            
             for (int i = 0; i < genericSkills.Count; i++)
             {
                 genericSkills[i].SetBaseSkill(skillFamily.variants[i].skillDef);
@@ -42,6 +42,8 @@ namespace PlagueMod.Survivors.Plague.Components
                 genericSkills.RemoveAt(i);
             }
             gameObject.SetActive(true);
+
+            GetComponent<SkillLocator>().Awake();
         }
     }
 }

@@ -35,18 +35,20 @@ namespace PlagueMod.Survivors.Plague.Components
                     }
                 }
 
-                if (plagueBombSelectorController)
+                if (plagueBombSelectorController && plagueBombSelectorController.initialized)
                 {
+                    plagueBombSelectorController.bombSelectUI = bombSelectUI;
                     bombSelectUI.UpdateGrids(plagueBombSelectorController.powderGenericSkills.genericSkills, plagueBombSelectorController.casingGenericSkills.genericSkills);
                 }
             }
         }
-
+        
         private void InitBombSelectUI()
         {
             bombSelectUI = GameObject.Instantiate<PlagueBombSelectUI>(PlagueAssets.bombSelectUI, hud.mainUIPanel.transform);
             bombSelectUI.transform.localPosition = Vector3.zero;
             bombSelectUI.plagueBombSelectorController = plagueBombSelectorController;
+            bombSelectUI.Show(false);
         }
     }
 }

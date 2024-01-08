@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.Components
 {
-    public class CasingSkillGrid : PlagueSkillGrid
-    {
-        public override void OnPointerDown(GenericSkill targetSkill)
-        {
-            bombSelectUI.plagueBombSelectorController.SetCasingSkillDef(targetSkill);
-        }
-    }
     public abstract class PlagueSkillGrid : MonoBehaviour
     {
         [SerializeField]

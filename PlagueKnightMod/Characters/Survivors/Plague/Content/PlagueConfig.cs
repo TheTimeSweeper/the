@@ -6,6 +6,7 @@ namespace PlagueMod.Survivors.Plague
     {
         public static ConfigEntry<float> blastJumpForward;
         public static ConfigEntry<float> blastJumpUpward;
+        public static ConfigEntry<float> blastJumpAirControl;
 
         public static void Init()
         {
@@ -24,6 +25,13 @@ namespace PlagueMod.Survivors.Plague
                 "",
                 0,
                 100);
+            blastJumpAirControl = Modules.Config.BindAndOptionsSlider(
+                section,
+                "blastJumpAirControl",
+                0.1f,
+                "",
+                0,
+                1);
         }
     }
 }

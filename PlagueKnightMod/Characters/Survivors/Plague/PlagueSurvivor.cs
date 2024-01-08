@@ -37,8 +37,8 @@ namespace PlagueMod.Survivors.Plague
             bodyNameToken = PLAGUE_PREFIX + "NAME",
             subtitleNameToken = PLAGUE_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texHenryIcon"),
-            bodyColor = Color.white,
+            characterPortrait = assetBundle.LoadAsset<Texture>("texIconPlague"),
+            bodyColor = Color.green,
             sortPosition = 69.3f,
 
             crosshair = Assets.LoadCrosshair("Standard"),
@@ -143,7 +143,7 @@ namespace PlagueMod.Survivors.Plague
             GenericSkill powderSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "powder", true);
             AddPowderSkills(powderSkill);
         }
-
+        
         private void AddPrmarySkills()
         {
             PlagueBombSelectionSkillDef slashSkillDef = Skills.CreateSkillDef<PlagueBombSelectionSkillDef>(new SkillDefInfo
@@ -151,7 +151,7 @@ namespace PlagueMod.Survivors.Plague
                     "plagueThrow",
                     PLAGUE_PREFIX + "PRIMARY_THROW_NAME",
                     PLAGUE_PREFIX + "PRIMARY_THROW_DESCRIPTION",
-                    assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                    assetBundle.LoadAsset<Sprite>("texIconSkillPlagueBomb"),
                     new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowSelectedBomb)),
                     "Weapon",
                     true
@@ -160,10 +160,8 @@ namespace PlagueMod.Survivors.Plague
             Skills.AddPrimarySkills(bodyPrefab, slashSkillDef);
         }
 
-        //let's look at secondary before primary because it is simpler
         private void AddSecondarySkills()
         {
-            //here is a basic skill def with all fields accounted for
             SkillDef gunSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "HenryGun",
@@ -204,20 +202,20 @@ namespace PlagueMod.Survivors.Plague
             //here's a skilldef of a typical movement skill. some fields are omitted and will just have default values
             SkillDef rollSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryRoll",
+                skillName = "PlagueBlastJump",
                 skillNameToken = PLAGUE_PREFIX + "UTILITY_ROLL_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "UTILITY_ROLL_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlagueBlastJump"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SimpleBlastJump)),
                 activationStateMachineName = "Body",
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-
-                baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                
+                baseMaxStock = 2,
+                baseRechargeInterval = 8f,
 
                 isCombatSkill = false,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 forceSprintDuringState = true,
                 cancelSprintingOnActivation = false,
             });
@@ -237,7 +235,7 @@ namespace PlagueMod.Survivors.Plague
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SelectBomb)),
                 activationStateMachineName = "Weapon",
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 0f,
                 baseMaxStock = 1,
@@ -250,13 +248,14 @@ namespace PlagueMod.Survivors.Plague
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
                 beginSkillCooldownOnSkillEnd = false,
-                mustKeyPress = false,
+                mustKeyPress = true,
 
                 isCombatSkill = false,
                 canceledFromSprinting = false,
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = false,
             });
+
 
             Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
         }
@@ -268,16 +267,16 @@ namespace PlagueMod.Survivors.Plague
                 skillName = "simpleCasing",
                 skillNameToken = PLAGUE_PREFIX + "CASING_SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "CASING_SIMPLE_DESCRIPTION",
-                skillIcon = null,
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlagueCasing1Simple"),
             });
             simpleCasingSkillDef.projectilePrefab = PlagueAssets.SimpleBombCasingProjectile;
-
+            
             PlagueBombCasingSkillDef simpleCasingSkillDef2 = Skills.CreateSkillDef<PlagueBombCasingSkillDef>(new SkillDefInfo
             {
                 skillName = "simpleCasing2",
                 skillNameToken = PLAGUE_PREFIX + "CASING 2 _SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "CASING 2 _SIMPLE_DESCRIPTION",
-                skillIcon = null,
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlagueCasing2Orbit"),
             });
             simpleCasingSkillDef2.projectilePrefab = PlagueAssets.SimpleBombCasingSquareProjectile;
 
@@ -291,7 +290,7 @@ namespace PlagueMod.Survivors.Plague
                 skillName = "simplePowder",
                 skillNameToken = PLAGUE_PREFIX + "POWDER_SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "POWDER_SIMPLE_DESCRIPTION",
-                skillIcon = null,
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlaguePowder1Simple"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
                 activationStateMachineName = "Weapon",
@@ -300,8 +299,8 @@ namespace PlagueMod.Survivors.Plague
                 baseRechargeInterval = 1,
 
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
             });
             simplePowderSkillDef.flyingState = new EntityStates.SerializableEntityStateType(typeof(TestPowderSkillState));
             simplePowderSkillDef.impactProjectilePrefab = PlagueAssets.SimpleImpactPowderProjectile;
@@ -312,15 +311,15 @@ namespace PlagueMod.Survivors.Plague
                 skillName = "simplePowder2",
                 skillNameToken = PLAGUE_PREFIX + "POWDER 2 _SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "POWDER 2 _SIMPLE_DESCRIPTION",
-                skillIcon = null,
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlaguePowder2Combo"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
                 activationStateMachineName = "Weapon",
 
-                baseMaxStock = 1,
-                baseRechargeInterval = 1,
+                baseMaxStock = 3,
+                baseRechargeInterval = 6,
 
-                rechargeStock = 1,
+                rechargeStock = 3,
                 requiredStock = 1,
                 stockToConsume = 1,
             });

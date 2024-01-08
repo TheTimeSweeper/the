@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.SkillDefs
 {
-    public class PlagueBombPowderSkillDef : SkillDef
+    public class PlagueBombPowderSkillDef : PlagueBombSelectionSkillDef
     {
         public EntityStates.SerializableEntityStateType flyingState;
         public GameObject impactProjectilePrefab;

@@ -5,13 +5,13 @@ using UnityEngine.Networking;
 
 namespace PlagueMod.Survivors.Plague.SkillStates
 {
-    public class BaseBlastJump : BaseSkillState
+    public class BaseBlastJump : GenericCharacterMain
     {
         // Token: 0x04000DD4 RID: 3540
         //public static GameObject blinkPrefab;
 
         // Token: 0x04000DD5 RID: 3541
-        public static float duration = 0.3f;
+        public static float duration = 5.0f;
 
         // Token: 0x04000DD6 RID: 3542
         public static string beginSoundString;
@@ -19,8 +19,12 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         public static float forwardVelocity => PlagueConfig.blastJumpForward.Value;
         public static float upwardVelocity => PlagueConfig.blastJumpUpward.Value;
 
+        public static float airControl => PlagueConfig.blastJumpAirControl.Value;
+
         // Token: 0x04000DE2 RID: 3554
         protected Vector3 blastPosition;
+
+        protected float previousAirControl;
 
         // Token: 0x06000BAD RID: 2989 RVA: 0x000308AC File Offset: 0x0002EAAC
         public override void OnEnter()
@@ -31,6 +35,8 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             base.PlayAnimation("FullBody, Underride", "Smear");
             base.characterMotor.Motor.ForceUnground();
             base.characterMotor.velocity = Vector3.zero;
+            previousAirControl = characterMotor.airControl;
+            characterMotor.airControl = airControl;
 
             Vector3 moveDirection = inputBank.moveVector;
 
@@ -64,9 +70,32 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (base.fixedAge >= BaseBlastJump.duration && base.isAuthority)
+            if (base.fixedAge >= BaseBlastJump.duration || characterMotor.isGrounded)
             {
                 this.outer.SetNextStateToMain();
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            characterMotor.airControl = previousAirControl;
+        }
+
+        public override void ProcessJump()
+        {
+
+            if (this.jumpInputReceived && base.characterBody && base.characterMotor.jumpCount < base.characterBody.maxJumpCount)
+            {
+                Vector3 previousLateralVelocity = characterMotor.velocity;
+                previousLateralVelocity.y = 0;
+                base.ProcessJump();
+                characterMotor.velocity += previousLateralVelocity;
+            } 
+            else
+            {
+                base.ProcessJump();
             }
         }
     }

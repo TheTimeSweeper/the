@@ -41,8 +41,6 @@ namespace PlagueMod.Modules
                     bool isInferno = difficultyDef.nameToken == "INFERNO_NAME";
                     bool isEclipse = difficultyIndex >= DifficultyIndex.Eclipse1 && difficultyIndex <= DifficultyIndex.Eclipse8;
 
-                    Log.Warning($"{isDifficulty} {isInferno} {isEclipse}");
-
                     if (isDifficulty || isInferno || isEclipse)
                     {
                         base.Grant();
