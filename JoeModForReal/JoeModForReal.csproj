@@ -19,7 +19,7 @@
 
 		<PackageReference Include="R2API.Core" Version="*" />
 		<PackageReference Include="R2API.Prefab" Version="*" />
-		<PackageReference Include="R2API.RecalculateStats" Version="*"/>
+		<PackageReference Include="R2API.RecalculateStats" Version="*" />
 		<PackageReference Include="R2API.Unlockable" Version="*" />
 		<PackageReference Include="R2API.DamageType" Version="*" />
 		<PackageReference Include="R2API.Colors" Version="*" />
@@ -42,6 +42,6 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\joe&quot; &quot;$(ProjectDir)\Release\plugins\AssetBundles&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\JoeWwise\GeneratedSoundBanks\Windows\joe.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Faceless_Joe&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\Release\plugins&quot; &quot;E:\r2Profiles\uh help\BepInEx\plugins\TheTimesweeper-Faceless_Joe&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\Release\plugins&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Faceless_Joe&quot;&#xD;&#xA;" />
+	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\joe&quot; &quot;$(ProjectDir)\Release\plugins\AssetBundles&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\JoeWwise\GeneratedSoundBanks\Windows\joe.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Faceless_Joe&quot;&#xD;&#xA;" />
 	</Target>
 </Project>

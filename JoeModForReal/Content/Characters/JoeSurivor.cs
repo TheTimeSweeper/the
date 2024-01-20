@@ -15,6 +15,7 @@ namespace JoeModForReal.Content.Survivors {
 
     internal class JoeSurivor : SurvivorBase
     {
+        public static JoeSurivor instance;
         public override string characterName => "Joe";
 
         public const string JOE_PREFIX = FacelessJoePlugin.DEV_PREFIX + "_JOE_BODY_";
@@ -66,6 +67,8 @@ namespace JoeModForReal.Content.Survivors {
         public static float TenticleMaxHealthMultiplier = 0.66f;
 
         public override void Initialize() {
+            instance = this;
+
             base.Initialize();
 
             Hook();

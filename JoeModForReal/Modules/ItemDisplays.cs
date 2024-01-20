@@ -14,10 +14,7 @@ namespace Modules
 
         public static void PopulateDisplays()
         {
-            //PopulateFromBody("CommandoBody");
-            //PopulateFromBody("CrocoBody");
-            PopulateDisplaysFromBody("MageBody");
-            PopulateDisplaysFromBody("LunarExploderBody");
+            PopulateDisplaysFromBody("MercBody");
 
             //AddCustomLightningArm();
             AddMasterSwordDisplay();

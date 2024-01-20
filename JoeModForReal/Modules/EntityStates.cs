@@ -37,6 +37,7 @@ namespace Modules {
             Content.AddEntityState(typeof(Utility1ChargeMeleeDash));
             Content.AddEntityState(typeof(Utility1MeleeDashAttack));
 
+            //spe
             Content.AddEntityState(typeof(Special1Tenticles));
             #endregion
         }
