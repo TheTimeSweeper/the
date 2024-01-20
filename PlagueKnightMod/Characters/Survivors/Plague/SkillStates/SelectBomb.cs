@@ -4,21 +4,16 @@ using PlagueMod.Survivors.Plague.SkillDefs;
 
 namespace PlagueMod.Survivors.Plague.SkillStates
 {
-    public class SelectBomb : BaseSkillState, PlagueBombSelectionSkillDef.IPlagueBombSetSelector
+    public class SelectBomb : BaseSkillState, PlagueBombSelectionSkillDef.IPlagueBombSelector
     {
-        private PlagueBombSelectorController _selectorComponent;
-
-        public void SetPlagueComponent(PlagueBombSelectorController component)
-        {
-            _selectorComponent = component;
-        }
+        public PlagueBombSelectorController selectorComponent { get; set; }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            _selectorComponent.ShowUI();
+            selectorComponent.ShowUI();
         }
-
+        
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -32,7 +27,7 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            _selectorComponent.ShowUI(false);
+            selectorComponent.ShowUI(false);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

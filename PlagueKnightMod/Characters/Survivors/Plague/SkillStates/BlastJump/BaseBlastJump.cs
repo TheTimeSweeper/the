@@ -11,7 +11,7 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         //public static GameObject blinkPrefab;
 
         // Token: 0x04000DD5 RID: 3541
-        public static float duration = 5.0f;
+        public static float minDuration = 0.3f;
 
         // Token: 0x04000DD6 RID: 3542
         public static string beginSoundString;
@@ -20,6 +20,8 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         public static float upwardVelocity => PlagueConfig.blastJumpUpward.Value;
 
         public static float airControl => PlagueConfig.blastJumpAirControl.Value;
+
+        public static float gravity => PlagueConfig.blastJumpGravity.Value;
 
         // Token: 0x04000DE2 RID: 3554
         protected Vector3 blastPosition;
@@ -39,6 +41,8 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             characterMotor.airControl = airControl;
 
             Vector3 moveDirection = inputBank.moveVector;
+
+            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
             if (base.isAuthority)
             {
@@ -66,11 +70,16 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             this.blastPosition = reader.ReadVector3();
         }
 
-        // Token: 0x06000BB3 RID: 2995 RVA: 0x00030AFF File Offset: 0x0002ECFF
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (base.fixedAge >= BaseBlastJump.duration || characterMotor.isGrounded)
+            if (isAuthority)
+            {
+                ref float ySpeed = ref characterMotor.velocity.y;
+                ySpeed += -gravity * Time.deltaTime;
+            }
+
+            if (base.fixedAge >= BaseBlastJump.minDuration && characterMotor.isGrounded)
             {
                 this.outer.SetNextStateToMain();
             }
@@ -80,19 +89,20 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         {
             base.OnExit();
 
+            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
             characterMotor.airControl = previousAirControl;
         }
 
         public override void ProcessJump()
         {
-
             if (this.jumpInputReceived && base.characterBody && base.characterMotor.jumpCount < base.characterBody.maxJumpCount)
             {
                 Vector3 previousLateralVelocity = characterMotor.velocity;
                 previousLateralVelocity.y = 0;
                 base.ProcessJump();
                 characterMotor.velocity += previousLateralVelocity;
-            } 
+                characterMotor.velocity.y = Mathf.Sqrt((characterMotor.velocity.y * characterMotor.velocity.y * (Physics.gravity.y - gravity))/Physics.gravity.y); //been like 10 years. can I still do algebra?
+            }
             else
             {
                 base.ProcessJump();

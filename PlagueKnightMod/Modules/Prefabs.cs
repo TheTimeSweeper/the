@@ -365,11 +365,11 @@ namespace PlagueMod.Modules
                         {
                             if (customInfos[i].dontHotpoo)
                             {
-                                mat = rend.material;
+                                mat = rend.sharedMaterial;
                             }
                             else
                             {
-                                mat = rend.material.ConvertDefaultShaderToHopoo();
+                                mat = rend.sharedMaterial.ConvertDefaultShaderToHopoo();
                             }
                         }
 
@@ -487,7 +487,7 @@ namespace PlagueMod.Modules
 
             if (!ragdollController) return;
 
-            if (ragdollMaterial == null) ragdollMaterial = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
+            if (ragdollMaterial == null) ragdollMaterial = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().sharedMaterial;
 
             foreach (Transform boneTransform in ragdollController.bones)
             {
@@ -497,7 +497,7 @@ namespace PlagueMod.Modules
                     Collider boneCollider = boneTransform.GetComponent<Collider>();
                     if (boneCollider)
                     {
-                        boneCollider.material = ragdollMaterial;
+                        //boneCollider.material = ragdollMaterial;
                         boneCollider.sharedMaterial = ragdollMaterial;
                     }
                     else
@@ -586,6 +586,7 @@ namespace PlagueMod.Modules
         }
         #endregion master
 
+        #region helpers
         public static void ClearEntityStateMachines(GameObject bodyPrefab)
         {
             EntityStateMachine[] machines = bodyPrefab.GetComponents<EntityStateMachine>();
@@ -734,6 +735,7 @@ namespace PlagueMod.Modules
             }
             return component;
         }
+        #endregion helpers
     }
 
     // for simplifying rendererinfo creation

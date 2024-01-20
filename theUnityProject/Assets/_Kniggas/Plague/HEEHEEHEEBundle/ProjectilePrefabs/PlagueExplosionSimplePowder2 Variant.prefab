@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 6178876287323742588, guid: 7f17b908bbf44f04da2adcefbddac77a,
         type: 3}
       propertyPath: blastDamageCoefficient
-      value: 0.7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7840423234899525505, guid: 7f17b908bbf44f04da2adcefbddac77a,
         type: 3}

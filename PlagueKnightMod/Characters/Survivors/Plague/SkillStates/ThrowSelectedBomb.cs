@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace PlagueMod.Survivors.Plague.SkillStates
 {
-    public class ThrowSelectedBomb : GenericProjectileBaseState, PlagueBombSelectionSkillDef.IPlagueBombSetSelector
+    public class ThrowSelectedBomb : GenericProjectileBaseState, PlagueBombSelectionSkillDef.IPlagueBombSelector
     {
         //the news didn't work. set them in onenter
         public static float throwBombBaseDuration = 0.5f;
@@ -20,19 +20,18 @@ namespace PlagueMod.Survivors.Plague.SkillStates
         public static float throwBombProjectilePitch = 0f;
         
         public float lowGravMultiplier = 0.3f;
-        public float smallhopVelocity = 5f;
+        public float smallhopVelocity => PlagueConfig.bombSmallHop.Value;
 
-        private PlagueBombSelectorController _selectorComponent;
+        public float bombAircontrol => PlagueConfig.bombAirControl.Value;
 
-        public void SetPlagueComponent(PlagueBombSelectorController component) 
-        {
-            _selectorComponent = component;
-        }
+        public PlagueBombSelectorController selectorComponent { get; set ; }
 
         public override void OnEnter() {
 
-            base.projectilePrefab = _selectorComponent.GetSelectedProjectile();
+            base.projectilePrefab = selectorComponent.GetSelectedProjectile();
             //base.effectPrefab
+
+            EntityStateMachine.FindByCustomName(gameObject, "Body").SetNextStateToMain();
 
             base.baseDuration = throwBombBaseDuration;
             base.baseDelayBeforeFiringProjectile = throwBombBaseDelayDuration;
@@ -47,12 +46,13 @@ namespace PlagueMod.Survivors.Plague.SkillStates
             //targetmuzzle
             base.attackSoundString = "HenryBombThrow";
 
-            
             base.OnEnter();
 
             if (!base.isGrounded) {
                 base.SmallHop(base.characterMotor, smallhopVelocity / Mathf.Sqrt(this.attackSpeedStat));
             }
+
+            characterMotor.airControl = bombAircontrol;
         }
 
         public override void FixedUpdate() {

@@ -1,5 +1,5 @@
 {
-    "name": "JoeModForReal",
+    "name": "RA2Mod",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -10,7 +10,7 @@
         "KinematicCharacterController.dll",
         "com.unity.multiplayer-hlapi.Runtime.dll"
     ],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

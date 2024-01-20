@@ -10,7 +10,6 @@ namespace PlagueMod.Survivors.Plague.Components
     {
         [SerializeField]
         public GenericSkillHolder casingGenericSkills;
-
         [SerializeField]
         public GenericSkillHolder powderGenericSkills;
 
@@ -19,11 +18,7 @@ namespace PlagueMod.Survivors.Plague.Components
         [HideInInspector]
         public GenericSkill powderLoadoutSkill;
 
-        [Obsolete("were goin hard now")]
         public PlagueBombCasingSkillDef casingSkillDef => (PlagueBombCasingSkillDef)casingLoadoutSkill.skillDef;
-
-
-        [Obsolete("were goin hard now")]
         public PlagueBombPowderSkillDef powderSkillDef => (PlagueBombPowderSkillDef)powderLoadoutSkill.skillDef;
 
         private GameObject cachedProjectile; //later lol
@@ -41,9 +36,11 @@ namespace PlagueMod.Survivors.Plague.Components
         {
             skillLocator = GetComponent<SkillLocator>();
 
-            casingLoadoutSkill = skillLocator.FindSkill("casing");
-            powderLoadoutSkill = skillLocator.FindSkill("powder");
-
+            casingLoadoutSkill = skillLocator.FindSkill("LOADOUT_CASING");
+            powderLoadoutSkill = skillLocator.FindSkill("LOADOUT_POWDER");
+            casingLoadoutSkill.SetSkillFromFamily(0);
+            powderLoadoutSkill.SetSkillFromFamily(0);
+            
             casingGenericSkills.Init(casingLoadoutSkill.skillFamily);
             powderGenericSkills.Init(powderLoadoutSkill.skillFamily);
             initialized = true;
@@ -69,7 +66,6 @@ namespace PlagueMod.Survivors.Plague.Components
         {
             skillLocator.primary = targetSkill;
             powderLoadoutSkill.SetBaseSkill(targetSkill.baseSkill);
-
         }
 
         public void ChangeSelectedCasing()

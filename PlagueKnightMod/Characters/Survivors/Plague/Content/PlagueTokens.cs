@@ -28,13 +28,13 @@ namespace PlagueMod.Survivors.Plague
              + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine
              + "< ! > Bomb can be used to wipe crowds with ease." + Environment.NewLine + Environment.NewLine;
 
-            string outro = "..and so he left, searching for a new identity.";
-            string outroFailure = "..and so he vanished, forever a blank slate.";
+            string outro = "..and so he left, the bigger the explosion, the better the alchemist.";
+            string outroFailure = "..and so he vanished, never to dance again.";
 
-            Language.Add(prefix + "NAME", "Henry");
+            Language.Add(prefix + "NAME", "HEE HEE HEE");
             Language.Add(prefix + "DESCRIPTION", desc);
-            Language.Add(prefix + "SUBTITLE", "The Chosen One");
-            Language.Add(prefix + "LORE", "sample lore");
+            Language.Add(prefix + "SUBTITLE", "HEE HEE HEE");
+            Language.Add(prefix + "LORE", "HEE HEE HEE");
             Language.Add(prefix + "OUTRO_FLAVOR", outro);
             Language.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -58,6 +58,12 @@ namespace PlagueMod.Survivors.Plague
 
             #region Special
             #endregion
+
+            #region even more special than special
+            Language.Add("LOADOUT_CASING", "Casing");
+            Language.Add("LOADOUT_POWDER", "Powder");
+            Language.Add("TITLE_LANGUAGE_TOKEN", "hi <color=red>hello</color> hi");
+            #endregion  even more special than special
 
             #region Achievements
             Language.Add(Tokens.GetAchievementNameToken(PlagueMasteryAchievement.identifier), "Henry: Mastery");

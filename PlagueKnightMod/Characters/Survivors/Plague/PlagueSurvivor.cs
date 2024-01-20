@@ -137,10 +137,10 @@ namespace PlagueMod.Survivors.Plague
             AddSecondarySkills();
             AddUtiitySkills();
             AddSpecialSkills();
-
-            GenericSkill casingSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "casing", true);
+            
+            GenericSkill casingSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_CASING", true);
             AddCasingSkills(casingSkill);
-            GenericSkill powderSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "powder", true);
+            GenericSkill powderSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_POWDER", true);
             AddPowderSkills(powderSkill);
         }
         
@@ -268,6 +268,9 @@ namespace PlagueMod.Survivors.Plague
                 skillNameToken = PLAGUE_PREFIX + "CASING_SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "CASING_SIMPLE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlagueCasing1Simple"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
+                activationStateMachineName = "weapon"
             });
             simpleCasingSkillDef.projectilePrefab = PlagueAssets.SimpleBombCasingProjectile;
             
@@ -277,6 +280,9 @@ namespace PlagueMod.Survivors.Plague
                 skillNameToken = PLAGUE_PREFIX + "CASING 2 _SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "CASING 2 _SIMPLE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlagueCasing2Orbit"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
+                activationStateMachineName = "weapon"
             });
             simpleCasingSkillDef2.projectilePrefab = PlagueAssets.SimpleBombCasingSquareProjectile;
 
@@ -291,8 +297,8 @@ namespace PlagueMod.Survivors.Plague
                 skillNameToken = PLAGUE_PREFIX + "POWDER_SIMPLE_NAME",
                 skillDescriptionToken = PLAGUE_PREFIX + "POWDER_SIMPLE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlaguePowder1Simple"),
-
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
+                
+                //activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
                 activationStateMachineName = "Weapon",
 
                 baseMaxStock = 1,
@@ -313,7 +319,7 @@ namespace PlagueMod.Survivors.Plague
                 skillDescriptionToken = PLAGUE_PREFIX + "POWDER 2 _SIMPLE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlaguePowder2Combo"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
+                //activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowSelectedBomb)),
                 activationStateMachineName = "Weapon",
 
                 baseMaxStock = 3,
@@ -411,7 +417,7 @@ namespace PlagueMod.Survivors.Plague
 
             //how to set up AI in code
             //HenryAI.Init(bodyPrefab);
-
+            
             //how to load a master set up in unity
             //assetBundle.LoadMaster("HenryMonsterMaster", bodyPrefab);
         }

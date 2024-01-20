@@ -7,6 +7,9 @@ namespace PlagueMod.Survivors.Plague.Components
 {
     public class GenericSkillHolder : MonoBehaviour
     {
+        [SerializeField]
+        protected string skillNames;
+
         public List<GenericSkill> genericSkills;
 
         public void Init(SkillFamily skillFamily)
@@ -33,6 +36,7 @@ namespace PlagueMod.Survivors.Plague.Components
                 {
                     GenericSkill genericSkill = gameObject.AddComponent<GenericSkill>();
                     genericSkill._skillFamily = skillFamily;
+                    genericSkill.skillName = skillNames + i;
                     genericSkills.Add(genericSkill);
                 }
             }
