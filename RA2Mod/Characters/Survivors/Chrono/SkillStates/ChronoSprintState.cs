@@ -1,12 +1,13 @@
 ﻿using EntityStates;
 using RA2Mod.Modules.BaseStates;
 using RA2Mod.Survivors.Chrono.Components;
+using RA2Mod.Survivors.Chrono.SkillDefs;
 using RoR2;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates {
 
-    public class ChronoSprintState : BaseSkillState
+    public class ChronoSprintState : BaseSkillState, IHasSkillDefComponent<PhaseIndicatorController>
     {
         private ChronoProjectionMotor marker;
 
@@ -14,19 +15,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
 
         private Transform origPivot;
 
+        public PhaseIndicatorController componentFromSkillDef { get; set; }
+
         public override void OnEnter()
         {
             base.OnEnter();
 
             marker = Object.Instantiate(ChronoAssets.markerPrefab, modelLocator.modelBaseTransform.position, transform.rotation, null);
 
-            //foreach (CameraRigController cameraRigController in CameraRigController.readOnlyInstancesList)
-            //{
-            //    if (cameraRigController.target == gameObject)
-            //    {
-            //        cameraRigController.SetOverrideCam(marker, 0f);
-            //    }
-            //}
             origPivot = cameraTargetParams.cameraPivotTransform;
             cameraTargetParams.cameraPivotTransform = marker.cameraPivot;
             cameraTargetParams.dontRaycastToPivot = true;
@@ -47,7 +43,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
             {
                 PhaseState state = new PhaseState();
                 state.windDownTime = Vector3.Distance(marker.viewPosition, transform.position) / (6 * Mathf.Max(characterBody.moveSpeed, 0.5f));
-                
+                state.controller = componentFromSkillDef;
                 StopCamera();
 
                 characterMotor.Motor.SetPosition(marker.viewPosition);
@@ -71,13 +67,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
             if (!inCamera)
                 return;
 
-            //foreach (CameraRigController cameraRigController in CameraRigController.readOnlyInstancesList)
-            //{
-            //    if (cameraRigController.target == gameObject)
-            //    {
-            //        cameraRigController.SetOverrideCam(null, 0.5f);
-            //    }
-            //}
             cameraTargetParams.cameraPivotTransform = origPivot;
             cameraTargetParams.dontRaycastToPivot = false;
             inCamera = false;

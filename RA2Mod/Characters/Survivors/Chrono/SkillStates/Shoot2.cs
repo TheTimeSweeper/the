@@ -1,12 +1,13 @@
 ﻿using EntityStates;
 using R2API;
-using RA2Mod.Survivors.Chrono;
+using RA2Mod.Survivors.Chrono.SkillDefs;
+using RA2Mod.Survivors.Chrono.Components;
 using RoR2;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
-    public class Shoot2 : BaseSkillState
+    public class Shoot2 : BaseSkillState, IHasSkillDefComponent<ChronoTrackerVanish>
     {
         public static float damageCoefficient = 0;
         public static float procCoefficient = 1f;
@@ -22,6 +23,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private float fireTime;
         private bool hasFired;
         private string muzzleString;
+
+        public ChronoTrackerVanish componentFromSkillDef { get; set; }
 
         public override void OnEnter()
         {
@@ -72,7 +75,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
                     BulletAttack bulletAttack = new BulletAttack {
                         bulletCount = 1,
-                        aimVector = aimRay.direction,
+                        aimVector = componentFromSkillDef.GetTrackingTarget().transform.position - aimRay.origin,
                         origin = aimRay.origin,
                         damage = damageCoefficient * damageStat,
                         damageColorIndex = DamageColorIndex.Default,

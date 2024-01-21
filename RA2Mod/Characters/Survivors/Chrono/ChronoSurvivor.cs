@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using R2API;
+using RA2Mod.Survivors.Chrono.SkillDefs;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -104,7 +105,9 @@ namespace RA2Mod.Survivors.Chrono
         private void AdditionalBodySetup()
         {
             prefabCharacterBody.bodyFlags |= CharacterBody.BodyFlags.SprintAnyDirection;
-            //prefabCharacterBody.sprintingSpeedMultiplier = 10;
+            prefabCharacterBody.gameObject.AddComponent<ChronoTrackerBomb>();
+            prefabCharacterBody.gameObject.AddComponent<ChronoTrackerVanish>();
+            prefabCharacterBody.gameObject.AddComponent<PhaseIndicatorController>();
         }
 
         public override void InitializeEntityStateMachines() 
@@ -132,7 +135,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             GenericSkill passiveSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_PASSIVE", "chronopassive");
 
-            SkillDef sprintSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            HasPhaseIndicatorSkillDef sprintSkillDef = Skills.CreateSkillDef<HasPhaseIndicatorSkillDef>(new SkillDefInfo
             {
                 skillName = "chronoPassive",
                 skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
@@ -167,9 +170,9 @@ namespace RA2Mod.Survivors.Chrono
 
         private void AddPrimarySkills()
         {
-            SkillDef slashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef shootSkillDef = Skills.CreateSkillDef(new SkillDefInfo
                 (
-                    "ChronoShoot",
+                    "chronoShoot",
                     CHRONO_PREFIX + "PRIMARY_SHOOT_NAME",
                     CHRONO_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
@@ -178,21 +181,20 @@ namespace RA2Mod.Survivors.Chrono
                     false
                 ));
 
-            Skills.AddPrimarySkills(bodyPrefab, slashSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, shootSkillDef);
         }
 
         private void AddSecondarySkills()
         {
-            //here is a basic skill def with all fields accounted for
-            SkillDef gunSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            ChronoTrackerSkillDefBomb bombSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefBomb> (new SkillDefInfo
             {
-                skillName = "HenryGun",
-                skillNameToken = CHRONO_PREFIX + "SECONDARY_GUN_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "SECONDARY_GUN_DESCRIPTION",
+                skillName = "chronoIvan",
+                skillNameToken = CHRONO_PREFIX + "SECONDARY_BOMB_NAME",
+                skillDescriptionToken = CHRONO_PREFIX + "SECONDARY_BOMB_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoBomb)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -216,7 +218,7 @@ namespace RA2Mod.Survivors.Chrono
 
             });
 
-            Skills.AddSecondarySkills(bodyPrefab, gunSkillDef);
+            Skills.AddSecondarySkills(bodyPrefab, bombSkillDef);
         }
 
         private void AddUtiitySkills()
@@ -248,11 +250,11 @@ namespace RA2Mod.Survivors.Chrono
         private void AddSpecialSkills()
         {
             //a basic skill
-            SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            ChronoTrackerSkillDefVanish vanishSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefVanish> (new SkillDefInfo
             {
-                skillName = "HenryBomb",
-                skillNameToken = CHRONO_PREFIX + "SPECIAL_BOMB_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillName = "chronoVanish",
+                skillNameToken = CHRONO_PREFIX + "SPECIAL_VANISH_NAME",
+                skillDescriptionToken = CHRONO_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot2)),
@@ -266,7 +268,7 @@ namespace RA2Mod.Survivors.Chrono
                 mustKeyPress = false,
             });
 
-            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
+            Skills.AddSpecialSkills(bodyPrefab, vanishSkillDef);
         }
         #endregion skills
         
@@ -382,7 +384,7 @@ namespace RA2Mod.Survivors.Chrono
                 {
                     self.body.AddBuff(ChronoBuffs.chronoDebuff);
                     //self.body.GetComponent<ChronoBuffTracker>().invokeBuffsChanged();
-                    self.body.inventory.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex);
+                    self.body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex);
                 }
             }
 

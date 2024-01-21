@@ -307,7 +307,7 @@ MonoBehaviour:
   CapsuleYOffset: 1
   CapsulePhysicsMaterial: {fileID: 0}
   DetectDiscreteCollisions: 0
-  GroundDetectionExtraDistance: 5
+  GroundDetectionExtraDistance: 2
   MaxStepHeight: 1
   MinRequiredStepDepth: 0.1
   MaxStableSlopeAngle: 55

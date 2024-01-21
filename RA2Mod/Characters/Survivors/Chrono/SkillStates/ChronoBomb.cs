@@ -3,20 +3,26 @@ using RA2Mod.Survivors.Chrono;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
+using RA2Mod.Survivors.Chrono.SkillDefs;
+using RA2Mod.Survivors.Chrono.Components;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
-    public class ThrowBomb : GenericProjectileBaseState
+    public class ChronoBomb : GenericProjectileBaseState, IHasSkillDefComponent<ChronoTrackerBomb>
     {
         public static float BaseDuration = 0.65f;
         //delays for projectiles feel absolute ass so only do this if you know what you're doing, otherwise it's best to keep it at 0
         public static float BaseDelayDuration = 0.0f;
 
-        public static float DamageCoefficient = 16f;
+        public static float DamageCoefficient = 3f;
+
+        public ChronoTrackerBomb componentFromSkillDef { get; set; }
+
+        public Transform trackingTarget;
 
         public override void OnEnter()
         {
-            //projectilePrefab = ChronoAssets.bombProjectilePrefab;
+            projectilePrefab = ChronoAssets.chronoBombProjectile;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
@@ -36,12 +42,22 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             recoilAmplitude = 0.1f;
             bloom = 10;
 
+            if (componentFromSkillDef)
+            {
+                trackingTarget = componentFromSkillDef.GetTrackingTarget().transform;
+            }
+
             base.OnEnter();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+        }
+
+        public override Ray ModifyProjectileAimRay(Ray aimRay)
+        {
+            return new Ray(trackingTarget.position, Vector3.up);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

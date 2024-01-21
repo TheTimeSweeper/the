@@ -50,7 +50,6 @@ namespace RA2Mod.Survivors.Chrono
             {
                 base.CheckInventory(ref info, body);
                 sickness = body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
-                Log.Warning(sickness);
             }
 
             //public override void CheckBuffs(ref HealthBar.BarInfo info, CharacterBody body)

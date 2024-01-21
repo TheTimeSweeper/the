@@ -6,7 +6,7 @@ using System.Text;
 using UnityEngine;
 namespace RA2Mod.Survivors.Chrono.Components
 {
-    public class ChronoProjectionMotor : BaseCharacterController, ICameraStateProvider {
+    public class ChronoProjectionMotor : BaseCharacterController {
 
         [SerializeField]
         public Transform cameraPivot;
@@ -14,8 +14,6 @@ namespace RA2Mod.Survivors.Chrono.Components
         [SerializeField]
         private Transform view;
         public Vector3 viewPosition => lastPosition + Vector3.up * 1;
-
-        private Transform crosshairView;
 
         private Vector3 lastPosition;
         private Vector3 lastLastPosition;
@@ -47,43 +45,12 @@ namespace RA2Mod.Survivors.Chrono.Components
         }
         #endregion motor
 
-        #region camera
-        public void GetCameraState(CameraRigController cameraRigController, ref CameraState cameraState) {
-
-            Vector3 cameraLocalPos = cameraRigController.targetParams.currentCameraParamsData.idealLocalCameraPos.value;
-            cameraLocalPos.y += cameraRigController.targetParams.currentCameraParamsData.pivotVerticalOffset.value;
-            cameraLocalPos += (cameraRigController.targetParams.cameraPivotTransform ? cameraRigController.targetParams.cameraPivotTransform.localPosition : Vector3.zero);
-            
-            //Vector3 direction = cameraRigController.targetBody.inputBank.GetAimRay().direction;
-            Vector3 direction = (cameraRigController.crosshairWorldPosition - cameraRigController.targetBody.inputBank.aimOrigin).normalized;
-            Quaternion rotation = Util.QuaternionSafeLookRotation(direction);
-            cameraState.rotation = rotation;
-            //cameraState.position = cameraPivot.position + cameraLocalPos.magnitude * -direction;
-            cameraState.position = cameraPivot.position + (rotation * cameraLocalPos);
-
-            crosshairView.position = cameraRigController.crosshairWorldPosition;
-        }
-
-        public bool IsHudAllowed(CameraRigController cameraRigController) {
-            return true;
-        }
-
-        public bool IsUserControlAllowed(CameraRigController cameraRigController) {
-            return true;
-        }
-
-        public bool IsUserLookAllowed(CameraRigController cameraRigController) {
-            return true;
-        }
-        #endregion camera
-
         void Awake()
         {
-            crosshairView = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
-            DestroyImmediate(crosshairView.GetComponent<Collider>());
-            crosshairView.transform.localScale = Vector3.one * 0.3f;
-
             inverseFixedDeltaTime = 1 / Time.fixedDeltaTime;
+
+            lastLastPosition = transform.position;
+            lastPosition = transform.position;
         }
 
         void FixedUpdate()

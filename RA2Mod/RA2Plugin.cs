@@ -38,6 +38,8 @@ namespace RA2Mod
             // used when you want to properly set up language folders
             Modules.Language.Init();
 
+            Log.Warning("hello");
+
             // character initialization
             new ChronoSurvivor().Initialize();
 
