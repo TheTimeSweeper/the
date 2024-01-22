@@ -18,10 +18,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
             {
                 sprintInputReceived = false;
             }
-
+            
             base.HandleMovements();
             
-            if (sprintInputReceived && canExecute) {
+            if (sprintInputReceived && canExecute && isAuthority) {
                 passiveSkill.ExecuteIfReady();
             }
         }

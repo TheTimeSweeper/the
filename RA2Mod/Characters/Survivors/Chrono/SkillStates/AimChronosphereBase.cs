@@ -24,14 +24,15 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void OnEnter()
         {
             projectilePrefab = ChronoAssets.chronoBombProjectile;
-            endpointVisualizerPrefab = ChronoAssets.visualizer;
+            endpointVisualizerPrefab = ChronoAssets.endPointivsualizer;
             endpointVisualizerRadiusScale = BaseRadius;
-            maxDistance = 130;
-            rayRadius = 1.6f;
+            arcVisualizerPrefab = ChronoAssets.arcvisualizer;
+            maxDistance = 120;
+            rayRadius = 0.4f;
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
-            //this.projectileBaseSpeed = 80;
+            projectileBaseSpeed = 120;            
 
             base.OnEnter();
             PlayEnterSounds();
@@ -40,10 +41,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             GetModelAnimator().SetBool("isHandOut", true);
 
             viewRadius = BaseRadius;
-            Log.Warning(viewRadius);
 
             viewRadius *= skillsPlusMulti;
-            Log.Warning(viewRadius);
 
         }
 
@@ -64,14 +63,22 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             base.FixedUpdate();
             StartAimMode();
 
-            if (!inputBank.skill1.down)
+            if (isAuthority)
             {
-                unpressed = true;
-            }
-            else
-            {
-                if (unpressed)
-                    repressed = true;
+                if (inputBank.skill2.down)
+                {
+                    outer.SetNextStateToMain();
+                }
+
+                if (!inputBank.skill1.down)
+                {
+                    unpressed = true;
+                }
+                else
+                {
+                    if (unpressed)
+                        repressed = true;
+                }
             }
 
             endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);

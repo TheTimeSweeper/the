@@ -5,6 +5,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using RA2Mod.Survivors.Chrono.SkillDefs;
 using RA2Mod.Survivors.Chrono.Components;
+using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
@@ -42,12 +43,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             recoilAmplitude = 0.1f;
             bloom = 10;
 
-            if (componentFromSkillDef)
+            if (componentFromSkillDef && isAuthority)
             {
                 trackingTarget = componentFromSkillDef.GetTrackingTarget();
             }
-
-            trackingTarget.healthComponent.body.AddTimedBuff(ChronoBuffs.ivand, 3);
+            if (NetworkServer.active)
+            {
+                trackingTarget.healthComponent.body.AddTimedBuff(ChronoBuffs.ivand, 3);
+            }
 
             base.OnEnter();
         }
@@ -74,6 +77,18 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             {
                 PlayAnimation("Gesture, Override", "ThrowBomb", "ThrowBomb.playbackRate", this.duration);
             }
+        }
+
+        // Token: 0x06000E64 RID: 3684 RVA: 0x0003E1A0 File Offset: 0x0003C3A0
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            writer.Write(HurtBoxReference.FromHurtBox(this.trackingTarget));
+        }
+
+        // Token: 0x06000E65 RID: 3685 RVA: 0x0003E1B4 File Offset: 0x0003C3B4
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            this.trackingTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
         }
     }
 }

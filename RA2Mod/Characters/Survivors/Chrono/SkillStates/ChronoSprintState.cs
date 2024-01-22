@@ -4,6 +4,7 @@ using RA2Mod.Survivors.Chrono.Components;
 using RA2Mod.Survivors.Chrono.SkillDefs;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
@@ -29,8 +30,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             cameraTargetParams.dontRaycastToPivot = true;
             characterBody.aimOriginTransform = marker.cameraPivot;
             inCamera = true;
-
-            characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
+            if (NetworkServer.active)
+            {
+                characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
+            }
             
             //marker.transform.position = transform.position;
         }
@@ -42,11 +45,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             marker.SimpleMove(inputBank.moveVector + (inputBank.jump.down ? Vector3.up : inputBank.skill3.down ? Vector3.down : Vector3.zero));
 
             base.characterBody.isSprinting = true;
-
+            
             if (!inputBank.sprint.down)
             {
                 PhaseState state = new PhaseState();
-                state.windDownTime = Vector3.Distance(marker.viewPosition, transform.position) / (6 * Mathf.Max(characterBody.moveSpeed, 0.5f));
+                float dist = Vector3.Distance(marker.viewPosition, transform.position)/Mathf.Max(characterBody.moveSpeed, 0.3f) * ChronoConfig.M0SprintBlinkTimeMulti.Value;
+                state.windDownTime = 0.01f * dist * dist + 1 * dist; //fucking around in desmos
+
+                //Log.Warning($"dist {Vector3.Distance(marker.viewPosition, transform.position)} time {state.windDownTime}");
                 state.controller = componentFromSkillDef;
                 StopCamera();
 

@@ -7,7 +7,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     {
         protected override EntityState ActuallyPickNextState(Vector3 point)
         {
-            return new PlaceChronosphere2 { originalPoint = point };
+            return new AimChronosphere2 { originalPoint = point };
         }
     }
 }

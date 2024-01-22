@@ -91,6 +91,7 @@ namespace RA2Mod.Survivors.Chrono
             ChronoAssets.Init(assetBundle);
             ChronoBuffs.Init(assetBundle);
             ChronoItems.Init();
+            ChronoCompat.init();
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -105,9 +106,11 @@ namespace RA2Mod.Survivors.Chrono
         private void AdditionalBodySetup()
         {
             prefabCharacterBody.bodyFlags |= CharacterBody.BodyFlags.SprintAnyDirection;
-            prefabCharacterBody.gameObject.AddComponent<ChronoTrackerBomb>();
-            prefabCharacterBody.gameObject.AddComponent<ChronoTrackerVanish>();
-            prefabCharacterBody.gameObject.AddComponent<PhaseIndicatorController>();
+            bodyPrefab.AddComponent<ChronoTrackerBomb>();
+            bodyPrefab.AddComponent<ChronoTrackerVanish>();
+            bodyPrefab.AddComponent<PhaseIndicatorController>();
+            bodyPrefab.AddComponent<ChronosphereProjectionController>();
+
         }
 
         public override void InitializeEntityStateMachines() 
@@ -198,7 +201,7 @@ namespace RA2Mod.Survivors.Chrono
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 4f,
                 baseMaxStock = 2,
 
                 rechargeStock = 1,
@@ -208,7 +211,7 @@ namespace RA2Mod.Survivors.Chrono
                 resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 beginSkillCooldownOnSkillEnd = false,
 
                 isCombatSkill = true,
@@ -263,11 +266,11 @@ namespace RA2Mod.Survivors.Chrono
                 activationStateMachineName = "Weapon", 
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseMaxStock = 3,
+                baseMaxStock = 2,
                 baseRechargeInterval = 8f,
 
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
             });
 
             Skills.AddSpecialSkills(bodyPrefab, vanishSkillDef);
@@ -381,7 +384,7 @@ namespace RA2Mod.Survivors.Chrono
             if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
             {
                 int count = self.body.GetBuffCount(ChronoBuffs.chronoDebuff);
-                if(self.combinedHealthFraction < count / ChronoConfig.chronoStacksToVanish.Value)
+                if(self.combinedHealthFraction < count / ChronoConfig.M4ChronoStacksToVanish.Value)
                 {
                     self.Suicide(damageInfo.attacker, damageInfo.inflictor);
                     Util.PlaySound("Play_ChronoVanish", self.gameObject);

@@ -5,7 +5,9 @@ namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoConfig
     {
-        public static ConfigEntry<float> chronoStacksToVanish;
+        public static ConfigEntry<float> M4ChronoStacksToVanish;
+
+        public static ConfigEntry<float> M0SprintBlinkTimeMulti;
 
         public static ConfigEntry<float> M1Damage;
 
@@ -19,18 +21,18 @@ namespace RA2Mod.Survivors.Chrono
         {
             string section = "Chrono";
 
-            chronoStacksToVanish = Config.BindAndOptionsSlider(
+            M0SprintBlinkTimeMulti = Config.BindAndOptionsSlider(
                 section,
-                "chronoStacksToVanish",
-                20,
+                "M0SprintBlinkTimeMulti",
+                0.15f,
                 "",
                 0,
-                100);
+                1);
 
             M1Damage = Config.BindAndOptionsSlider(
                 section,
                 "M1Damage",
-                0.1f,
+                1f,
                 "",
                 0,
                 10);
@@ -46,7 +48,7 @@ namespace RA2Mod.Survivors.Chrono
             M4Interval = Config.BindAndOptionsSlider(
                 section,
                 "M4Interval",
-                0.1f,
+                0.3f,
                 "",
                 0,
                 1);
@@ -54,7 +56,7 @@ namespace RA2Mod.Survivors.Chrono
             M4Duration = Config.BindAndOptionsSlider(
                 section,
                 "M4Duration",
-                3f,
+                2f,
                 "",
                 0,
                 10);
@@ -62,10 +64,18 @@ namespace RA2Mod.Survivors.Chrono
             M4Damage = Config.BindAndOptionsSlider(
                 section,
                 "M4Damage",
-                3f,
+                0.4f,
                 "",
                 0,
                 10);
+
+            M4ChronoStacksToVanish = Config.BindAndOptionsSlider(
+                section,
+                "chronoStacksToVanish",
+                100,
+                "",
+                0,
+                200);
         }
     }
 }

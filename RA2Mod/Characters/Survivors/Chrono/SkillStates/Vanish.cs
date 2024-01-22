@@ -4,35 +4,36 @@ using RA2Mod.Survivors.Chrono.SkillDefs;
 using RA2Mod.Survivors.Chrono.Components;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class Vanish : BaseSkillState, IHasSkillDefComponent<ChronoTrackerVanish>
     {
-        public static float damageCoefficient = 0.1f;
-        public static float procCoefficient = 1f;
-        public static float baseDuration = 3f;
-
-        public static float tickInterval = 0.2f;
-
-        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
+        public static float damageCoefficient => ChronoConfig.M4Damage.Value;
+        public static float procCoefficient = 0.5f;
+        public static float baseDuration => ChronoConfig.M4Duration.Value;
+        
+        public static float baseTickInterval => ChronoConfig.M4Interval.Value;
 
         private float duration;
+        private float tickInterval;
+
+        private float nextInterval;
 
         public ChronoTrackerVanish componentFromSkillDef { get; set; }
 
         private DamageInfo damageInfo;
         private HurtBox targetHurtBox;
         private Transform muzzleTransform;
-
+        
         private ChronoTether vanishTether;
-
-        private float nextInterval;
 
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / attackSpeedStat;
+            tickInterval = baseTickInterval / attackSpeedStat;
             characterBody.SetAimTimer(2f);
 
             Util.PlaySound("Play_ChronoAttackShort", gameObject);
@@ -42,10 +43,12 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 muzzleTransform = transform;
 
             PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", duration);
-
-            targetHurtBox = componentFromSkillDef.GetTrackingTarget();
-
+            if (isAuthority)
+            {
+                targetHurtBox = componentFromSkillDef.GetTrackingTarget();
+            }
             vanishTether = Object.Instantiate(ChronoAssets.chronoVanishTether);
+            Log.Warning("tether "+ vanishTether != null);
 
             damageInfo = new DamageInfo
             {
@@ -58,7 +61,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 crit = base.RollCrit(),
                 force = Vector3.zero,
                 procChainMask = default(ProcChainMask),
-                procCoefficient = 0f,
+                procCoefficient = procCoefficient,
             };
             damageInfo.AddModdedDamageType(ChronoDamageTypes.chronoDamage);
             damageInfo.AddModdedDamageType(ChronoDamageTypes.vanishingDamage);
@@ -75,12 +78,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             base.OnExit();
 
-            vanishTether.Dispose();
+            vanishTether?.Dispose();
         }
 
         public override void Update()
         {
             base.Update();
+            if (!vanishTether)
+                return;
             vanishTether.transform.position = muzzleTransform.position;
             if (targetHurtBox)
             {
@@ -92,22 +97,42 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             base.FixedUpdate();
 
-            if (fixedAge >= duration && isAuthority || targetHurtBox == null || !targetHurtBox.healthComponent.alive)
+            if (fixedAge >= duration || targetHurtBox == null || !targetHurtBox.healthComponent.alive)
             {
-                outer.SetNextStateToMain();
+                if (isAuthority)
+                {
+                    outer.SetNextStateToMain();
+                }
                 return;
             }
+
 
             while (fixedAge >= nextInterval)
             {
                 nextInterval += tickInterval;
-                DoDamage();
+
+                if (NetworkServer.active)
+                {
+                    DoDamage();
+                }
             }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;
+        }
+
+        // Token: 0x06000E64 RID: 3684 RVA: 0x0003E1A0 File Offset: 0x0003C3A0
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            writer.Write(HurtBoxReference.FromHurtBox(this.targetHurtBox));
+        }
+
+        // Token: 0x06000E65 RID: 3685 RVA: 0x0003E1B4 File Offset: 0x0003C3B4
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            this.targetHurtBox = reader.ReadHurtBoxReference().ResolveHurtBox();
         }
     }
 }

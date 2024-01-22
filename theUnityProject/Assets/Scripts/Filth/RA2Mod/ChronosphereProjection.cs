@@ -1,8 +1,9 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.Chrono.Components {
-    public class ChronosphereProjection : MonoBehaviour {
+    public class ChronosphereProjection : NetworkBehaviour {
 
         [SerializeField]
         private ObjectScaleCurve sphere;
