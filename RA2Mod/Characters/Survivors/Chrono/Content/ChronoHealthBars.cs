@@ -38,7 +38,7 @@ namespace RA2Mod.Survivors.Chrono
                 //todo temp
                 info.enabled = sickness > 0;
                 info.normalizedXMin = 0;
-                info.normalizedXMax = sickness * 0.1f;
+                info.normalizedXMax = sickness / ChronoConfig.chronoStacksToVanish.Value;
             }
 
             public override void ApplyBar(ref HealthBar.BarInfo info, Image image, HealthComponent source, ref int i)
@@ -51,12 +51,6 @@ namespace RA2Mod.Survivors.Chrono
                 base.CheckInventory(ref info, body);
                 sickness = body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
             }
-
-            //public override void CheckBuffs(ref HealthBar.BarInfo info, CharacterBody body)
-            //{
-            //    base.CheckBuffs(ref info, body);
-            //    buffs = body.GetBuffCount(ChronoBuffs.chronoDebuff);
-            //}
         }
     }
 }

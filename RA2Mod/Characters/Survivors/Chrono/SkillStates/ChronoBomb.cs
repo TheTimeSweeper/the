@@ -18,7 +18,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public ChronoTrackerBomb componentFromSkillDef { get; set; }
 
-        public Transform trackingTarget;
+        public HurtBox trackingTarget;
 
         public override void OnEnter()
         {
@@ -44,8 +44,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             if (componentFromSkillDef)
             {
-                trackingTarget = componentFromSkillDef.GetTrackingTarget().transform;
+                trackingTarget = componentFromSkillDef.GetTrackingTarget();
             }
+
+            trackingTarget.healthComponent.body.AddTimedBuff(ChronoBuffs.ivand, 3);
 
             base.OnEnter();
         }
@@ -57,7 +59,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public override Ray ModifyProjectileAimRay(Ray aimRay)
         {
-            return new Ray(trackingTarget.position, Vector3.up);
+            return new Ray(trackingTarget.transform.position, Vector3.up);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

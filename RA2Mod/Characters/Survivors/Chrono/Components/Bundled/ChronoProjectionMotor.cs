@@ -42,6 +42,10 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public void SimpleMove(Vector3 deltaPosition) {
             Motor.MoveCharacter(transform.position + deltaPosition);
+            if(deltaPosition.y > 0)
+            {
+                Motor.ForceUnground();
+            }
         }
         #endregion motor
 

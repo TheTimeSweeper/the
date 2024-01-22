@@ -44,9 +44,9 @@ namespace RA2Mod.Survivors.Chrono
             crosshair = Assets.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 110f,
-            healthRegen = 1.5f,
-            armor = 0f,
+            maxHealth = 130f,
+            healthRegen = 2.0f,
+            armor = 10f,
 
             jumpCount = 1,
         };
@@ -119,12 +119,12 @@ namespace RA2Mod.Survivors.Chrono
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
         }
-
+        
         #region skills
         public override void InitializeSkills()
         {
-            Skills.CreateSkillFamilies(bodyPrefab);
             AddPassiveSkill();
+            Skills.CreateSkillFamilies(bodyPrefab);
             AddPrimarySkills();
             AddSecondarySkills();
             AddUtiitySkills();
@@ -183,10 +183,10 @@ namespace RA2Mod.Survivors.Chrono
 
             Skills.AddPrimarySkills(bodyPrefab, shootSkillDef);
         }
-
+        
         private void AddSecondarySkills()
         {
-            ChronoTrackerSkillDefBomb bombSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefBomb> (new SkillDefInfo
+            ChronoTrackerSkillDefBomb secondarySkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefBomb> (new SkillDefInfo
             {
                 skillName = "chronoIvan",
                 skillNameToken = CHRONO_PREFIX + "SECONDARY_BOMB_NAME",
@@ -199,7 +199,7 @@ namespace RA2Mod.Survivors.Chrono
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 1f,
-                baseMaxStock = 1,
+                baseMaxStock = 2,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -218,33 +218,34 @@ namespace RA2Mod.Survivors.Chrono
 
             });
 
-            Skills.AddSecondarySkills(bodyPrefab, bombSkillDef);
+            Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef);
         }
-
+        
         private void AddUtiitySkills()
         {
             //here's a skilldef of a typical movement skill. some fields are omitted and will just have default values
-            SkillDef rollSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef utilitySkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryRoll",
+                skillName = "chronosphere",
                 skillNameToken = CHRONO_PREFIX + "UTILITY_ROLL_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Roll)),
-                activationStateMachineName = "Body",
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AimChronosphere1)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 16f,
 
                 isCombatSkill = false,
-                mustKeyPress = false,
-                forceSprintDuringState = true,
-                cancelSprintingOnActivation = false,
+                mustKeyPress = true,
+                forceSprintDuringState = false,
+                cancelSprintingOnActivation = true,
+                fullRestockOnAssign = false
             });
 
-            Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
+            Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef);
         }
 
         private void AddSpecialSkills()
@@ -257,12 +258,13 @@ namespace RA2Mod.Survivors.Chrono
                 skillDescriptionToken = CHRONO_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot2)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Vanish)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
-                activationStateMachineName = "Weapon2", interruptPriority = EntityStates.InterruptPriority.Skill,
+                activationStateMachineName = "Weapon", 
+                interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseMaxStock = 3,
+                baseRechargeInterval = 8f,
 
                 isCombatSkill = true,
                 mustKeyPress = false,
@@ -362,17 +364,6 @@ namespace RA2Mod.Survivors.Chrono
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
  
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-
-            On.RoR2.CharacterBody.OnBuffFirstStackGained += CharacterBody_OnBuffFirstStackGained;
-        }
-
-        private void CharacterBody_OnBuffFirstStackGained(On.RoR2.CharacterBody.orig_OnBuffFirstStackGained orig, CharacterBody self, BuffDef buffDef)
-        {
-            orig(self, buffDef);
-            if (buffDef == ChronoBuffs.chronoDebuff)
-            {
-                //self.gameObject.AddComponent<ChronoBuffTracker>();
-            }
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
@@ -383,7 +374,6 @@ namespace RA2Mod.Survivors.Chrono
                 if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamage))
                 {
                     self.body.AddBuff(ChronoBuffs.chronoDebuff);
-                    //self.body.GetComponent<ChronoBuffTracker>().invokeBuffsChanged();
                     self.body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex);
                 }
             }
@@ -391,9 +381,10 @@ namespace RA2Mod.Survivors.Chrono
             if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
             {
                 int count = self.body.GetBuffCount(ChronoBuffs.chronoDebuff);
-                if(self.combinedHealthFraction < count *0.1f)
+                if(self.combinedHealthFraction < count / ChronoConfig.chronoStacksToVanish.Value)
                 {
                     self.Suicide(damageInfo.attacker, damageInfo.inflictor);
+                    Util.PlaySound("Play_ChronoVanish", self.gameObject);
                 }
             }
         }
@@ -403,6 +394,11 @@ namespace RA2Mod.Survivors.Chrono
             if (sender.HasBuff(ChronoBuffs.chronoDebuff))
             {
                 args.moveSpeedReductionMultAdd += 1;
+            }
+
+            if (sender.HasBuff(ChronoBuffs.chronoSphereRootDebuff))
+            {
+                args.moveSpeedRootCount += 1;
             }
         }
     }

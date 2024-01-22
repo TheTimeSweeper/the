@@ -150,8 +150,6 @@ namespace Slipstream
 
             public virtual void CheckInventory(ref HealthBar.BarInfo info, CharacterBody body) { }
 
-            //public virtual void CheckBuffs(ref HealthBar.BarInfo info, CharacterBody body) { }
-
             //Sets bar information such as the beginning and end of the bar and the sprite/material
             public virtual void ApplyBar(ref HealthBar.BarInfo info, Image image, HealthComponent source, ref int i)
             {
@@ -182,14 +180,6 @@ namespace Slipstream
                     barInfo.CheckInventory(ref barInfo.info, body);
                 }
             }
-
-            //public void UpdateBuffs(CharacterBody body)
-            //{
-            //    foreach (var barInfo in barInfos)
-            //    {
-            //        barInfo.CheckBuffs(ref barInfo.info, body);
-            //    }
-            //}
 
             public void UpdateInfo()
             {
@@ -229,15 +219,6 @@ namespace Slipstream
                 barInfos = barDataTypes.Select(dataType => (BarData)Activator.CreateInstance(dataType)).ToList();
                 //healthBar.source.body.gameObject.AddComponent<ChronoBuffTracker>().onBuffsChanged += onBuffsChanged;
             }
-
-            //private void onBuffsChanged(CharacterBody body)
-            //{
-
-            //    foreach (var barInfo in barInfos)
-            //    {
-            //        barInfo.CheckBuffs(ref barInfo.info, body);
-            //    }
-            //}
         }
     }
 }

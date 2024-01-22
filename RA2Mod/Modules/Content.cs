@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RA2Mod.Survivors.Chrono.Components;
+using RoR2;
 using RoR2.Skills;
 using System;
 using UnityEngine;
@@ -64,6 +65,11 @@ namespace RA2Mod.Modules
             AddUnlockableDef(unlockableDef);
 
             return unlockableDef;
+        }
+
+        internal static void AddNetworkedObject(GameObject gameObject)
+        {
+            ContentPacks.networkedObjects.Add(gameObject);
         }
 
         internal static void AddSkillDef(SkillDef skillDef)

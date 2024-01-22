@@ -46,5 +46,10 @@ namespace RA2Mod
             // make a content pack and add it. this has to be last
             new Modules.ContentPacks().Initialize();
         }
+
+        void Start()
+        {
+            Modules.SoundBanks.Init();
+        }
     }
 }

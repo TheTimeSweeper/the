@@ -5,8 +5,8 @@ using RA2Mod.Survivors.Chrono.SkillDefs;
 using RoR2;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates {
-
+namespace RA2Mod.Survivors.Chrono.SkillStates
+{
     public class ChronoSprintState : BaseSkillState, IHasSkillDefComponent<PhaseIndicatorController>
     {
         private ChronoProjectionMotor marker;
@@ -14,6 +14,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
         private bool inCamera;
 
         private Transform origPivot;
+        private Transform origOrigin;
 
         public PhaseIndicatorController componentFromSkillDef { get; set; }
 
@@ -26,7 +27,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
             origPivot = cameraTargetParams.cameraPivotTransform;
             cameraTargetParams.cameraPivotTransform = marker.cameraPivot;
             cameraTargetParams.dontRaycastToPivot = true;
+            characterBody.aimOriginTransform = marker.cameraPivot;
             inCamera = true;
+
+            characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
             
             //marker.transform.position = transform.position;
         }
@@ -46,6 +50,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
                 state.controller = componentFromSkillDef;
                 StopCamera();
 
+                Util.PlaySound("Play_ChronoMove", gameObject);
                 characterMotor.Motor.SetPosition(marker.viewPosition);
                 characterBody.isSprinting = false;
 
@@ -69,6 +74,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
 
             cameraTargetParams.cameraPivotTransform = origPivot;
             cameraTargetParams.dontRaycastToPivot = false;
+            characterBody.aimOriginTransform = origOrigin;
+
             inCamera = false;
         }
     }

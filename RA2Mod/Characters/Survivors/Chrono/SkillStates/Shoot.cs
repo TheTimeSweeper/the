@@ -29,9 +29,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "Muzzle";
+            muzzleString = "HandR";
 
-            PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+
+            PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", duration);
         }
 
         public override void OnExit()
@@ -63,7 +64,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
                 characterBody.AddSpreadBloom(1.5f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("HenryShootPistol", gameObject);
+                Util.PlaySound("Play_moonBrother_phaseJump_jumpAway", gameObject);
 
                 if (isAuthority)
                 {
@@ -108,7 +109,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Skill;
         }
     }
 }

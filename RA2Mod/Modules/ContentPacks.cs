@@ -27,6 +27,7 @@ namespace RA2Mod.Modules {
         public static List<ItemDef> itemDefs = new List<ItemDef>();
 
         public static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
+        public static List<GameObject> networkedObjects = new List<GameObject>();
 
         public void Initialize()
         {
@@ -58,6 +59,7 @@ namespace RA2Mod.Modules {
             contentPack.itemDefs.Add(itemDefs.ToArray());
 
             contentPack.networkSoundEventDefs.Add(networkSoundEventDefs.ToArray());
+            contentPack.networkedObjectPrefabs.Add(networkedObjects.ToArray());
 
             args.ReportProgress(1f);
             yield break;

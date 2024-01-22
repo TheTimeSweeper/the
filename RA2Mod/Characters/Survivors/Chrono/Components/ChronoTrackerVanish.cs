@@ -5,7 +5,7 @@ namespace RA2Mod.Survivors.Chrono.Components
 {
     public class ChronoTrackerVanish : DependentChronoHuntressTracker
     {
-        public override float maxTrackingDistance => 40;
+        public override float maxTrackingDistance => 80;
 
         public override float maxTrackingAngle => 30;
 

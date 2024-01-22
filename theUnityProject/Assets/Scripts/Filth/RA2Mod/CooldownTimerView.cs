@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace RA2Mod.Survivors.Chrono.Components {
+
     public class CooldownTimerView : MonoBehaviour {
         [SerializeField]
         private Image filledImage;

@@ -845,6 +845,178 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Chrono" ID="{298E0B71-A625-43FE-BA54-77505AFDF45C}" ShortID="112538862">
+					<ChildrenList>
+						<Event Name="Play_ChronoAttack" ID="{5A2F8C9F-F30C-4CA3-8947-0D1FF0EB4E64}">
+							<ChildrenList>
+								<Action Name="" ID="{EB4561C2-8C21-4317-9BAF-5B10D920F279}" ShortID="927986866">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronoAttack" ID="{7979267D-00ED-4B94-AF18-0485922D44E7}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronoAttackShort" ID="{0032535A-D822-481A-97F7-7FFEAF15A838}">
+							<ChildrenList>
+								<Action Name="" ID="{D5E54043-01C9-4B72-9A18-3BCF8FB9E3C1}" ShortID="336326123">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronoAttackShort" ID="{153505F2-9FAA-4837-8586-B3E281FD0347}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronoMove" ID="{C5DC965B-5196-4883-AB66-DECB6130B70D}">
+							<ChildrenList>
+								<Action Name="" ID="{C8D4880D-6B96-472C-BB72-1ED7560F9082}" ShortID="661652212">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronoMove" ID="{2DC573D6-B7B8-455B-967A-9750B3A46564}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronosphereMove" ID="{6F7530D6-4644-4612-BA66-2DFB35BAA738}">
+							<ChildrenList>
+								<Action Name="" ID="{6F6EC3A0-3006-4A5B-8C01-E93016A84EEB}" ShortID="679588089">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronosphereMove" ID="{2C52B8D0-14EF-4356-B23D-A01A63983491}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronosphereSelectEnd" ID="{95C5EAC3-D3AA-4E9E-8A3E-E894DC2B224D}">
+							<ChildrenList>
+								<Action Name="" ID="{58CDE53D-A156-427F-81B9-8552D9431135}" ShortID="866553521">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronosphereSelectEnd" ID="{5DA7FFB6-C39D-4782-9601-F91AE4E32C64}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronosphereSelectLoop" ID="{0C501004-0467-435F-853C-F474AA91C826}">
+							<ChildrenList>
+								<Action Name="" ID="{C5C749F7-9AB5-4126-B699-47E6EB66A554}" ShortID="535052038">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronosphereSelectLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronosphereSelectStart" ID="{B4892347-FFDE-46ED-8BE0-DFB4A9952A9D}">
+							<ChildrenList>
+								<Action Name="" ID="{55B2457C-BD44-4E10-BF24-6A226E80FCB0}" ShortID="844671547">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronosphereSelectStart" ID="{4D194304-BA94-48DE-9FC7-07E30AF3A34F}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_ChronoVanish" ID="{1EC29972-8084-4F04-BAD6-49C7D1D88DBE}">
+							<ChildrenList>
+								<Action Name="" ID="{E68FE72E-3F46-4AD4-BDFE-2CBFCF1182DF}" ShortID="633700274">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronoVanish" ID="{04079F65-7489-4FBC-A1BD-3A45BA90DCE5}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_ChronosphereSelectLoop" ID="{1A4B7365-C548-4C7C-A7AE-1826B2A26CC5}">
+							<ChildrenList>
+								<Action Name="" ID="{6E99AA50-A72F-465D-AFBC-D7D7186C9822}" ShortID="139791763">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChronosphereSelectLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Event Name="Play_Chrono_Voiceline_Attack" ID="{67527D86-5DC1-419C-8690-C6DE052A3A6F}">
+					<ChildrenList>
+						<Action Name="" ID="{859864AB-D7BD-458C-9EA2-74D9750750E5}" ShortID="495443110">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Attack Voice" ID="{86AD91D1-BD4A-42AE-BE82-455F4B82E3B8}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Chrono_Voiceline_Move" ID="{D509674A-EC6C-43D3-88F4-49C57043FA43}">
+					<ChildrenList>
+						<Action Name="" ID="{BBDE3ACB-D52F-4932-B7AD-A151F6AADA04}" ShortID="949257993">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Move Voice" ID="{E494C514-8ACB-4C76-AA78-9CDFFB57DCCB}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Chrono_Voiceline_Select" ID="{7D486FCF-C838-4BA9-84EA-AB14AA242E2B}">
+					<ChildrenList>
+						<Action Name="" ID="{A7B0C9A9-3E90-436B-B6AA-0CE8D24DD107}" ShortID="491391879">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Select Voice" ID="{5FCE9561-41D5-44BC-915B-146B3C0AD012}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
