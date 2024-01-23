@@ -33,7 +33,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             {
                 for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
                 {
-                    RootTeleportees(TeamComponent.GetTeamMembers(teamIndex));
+                    //RootTeleportees(TeamComponent.GetTeamMembers(teamIndex));
                 }
             }
 

@@ -25,6 +25,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private DamageInfo damageInfo;
         private HurtBox targetHurtBox;
+        private bool targetingAlly;
         private Transform muzzleTransform;
         
         private ChronoTether vanishTether;
@@ -46,9 +47,16 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             if (isAuthority)
             {
                 targetHurtBox = componentFromSkillDef.GetTrackingTarget();
+                targetingAlly = componentFromSkillDef.GetIsAlly();
             }
             vanishTether = Object.Instantiate(ChronoAssets.chronoVanishTether);
             Log.Warning("tether "+ vanishTether != null);
+
+            if (targetingAlly && NetworkServer.active)
+            {
+                targetHurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration);
+                return;
+            }
 
             damageInfo = new DamageInfo
             {
@@ -105,15 +113,16 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 }
                 return;
             }
-
-
-            while (fixedAge >= nextInterval)
+            if (!targetingAlly)
             {
-                nextInterval += tickInterval;
-
-                if (NetworkServer.active)
+                while (fixedAge >= nextInterval)
                 {
-                    DoDamage();
+                    nextInterval += tickInterval;
+
+                    if (NetworkServer.active)
+                    {
+                        DoDamage();
+                    }
                 }
             }
         }
@@ -127,12 +136,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void OnSerialize(NetworkWriter writer)
         {
             writer.Write(HurtBoxReference.FromHurtBox(this.targetHurtBox));
+            writer.Write(targetingAlly);
         }
 
         // Token: 0x06000E65 RID: 3685 RVA: 0x0003E1B4 File Offset: 0x0003C3B4
         public override void OnDeserialize(NetworkReader reader)
         {
             this.targetHurtBox = reader.ReadHurtBoxReference().ResolveHurtBox();
+            targetingAlly = reader.ReadBoolean();
         }
     }
 }

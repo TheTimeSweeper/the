@@ -37,8 +37,8 @@ namespace RA2Mod.Survivors.Chrono
             bodyNameToken = CHRONO_PREFIX + "NAME",
             subtitleNameToken = CHRONO_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texChronoIcon"),
-            bodyColor = Color.white,
+            characterPortrait = assetBundle.LoadAsset<Texture>("texIconChrono"),
+            bodyColor = Color.cyan,
             sortPosition = 100,
 
             crosshair = Assets.LoadCrosshair("Standard"),
@@ -201,7 +201,7 @@ namespace RA2Mod.Survivors.Chrono
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 6f,
                 baseMaxStock = 2,
 
                 rechargeStock = 1,
@@ -230,8 +230,8 @@ namespace RA2Mod.Survivors.Chrono
             SkillDef utilitySkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "chronosphere",
-                skillNameToken = CHRONO_PREFIX + "UTILITY_ROLL_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "UTILITY_ROLL_DESCRIPTION",
+                skillNameToken = CHRONO_PREFIX + "UTILITY_CHRONOSPHERE_NAME",
+                skillDescriptionToken = CHRONO_PREFIX + "UTILITY_CHRONOSPHERE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimChronosphere1)),
