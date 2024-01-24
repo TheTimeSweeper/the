@@ -25,7 +25,7 @@ namespace RA2Mod
 
         public static RA2Plugin instance;
 
-        public static bool testAsyncLoading = false;
+        public static bool testAsyncLoading = true;
 
         void Awake()
         {

@@ -236,6 +236,12 @@ namespace RA2Mod.Survivors.Chrono
             {
                 chronosphereProjection = result.GetComponent<ChronosphereProjection>();
             });
+
+            Texture2D lightningCloud = null;
+            yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/ColorRamps/texRampLightning2.png", (result) =>
+            {
+                lightningCloud = result;
+            });
             yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/Icicle/matIceAuraSphere.mat", (result) =>
             {
                 Material sphereMat = new Material(result);
@@ -244,7 +250,7 @@ namespace RA2Mod.Survivors.Chrono
                 sphereMat.SetFloat("_RimStrength", 0.84f);
                 sphereMat.SetFloat("_AlphaBoost", 0.51f);
                 sphereMat.SetFloat("_IntersectionStrength", 12.86f);
-                sphereMat.SetTexture("_Cloud2Tex", Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png").WaitForCompletion());
+                sphereMat.SetTexture("_Cloud2Tex", lightningCloud);
                 sphereMat.SetTextureScale("_Cloud2Tex", new Vector2(0.01f, 0.01f));
                 sphereMat.SetTextureScale("_Cloud1Tex", new Vector2(0.02f, 0.02f));
                 sphereMat.SetTexture("_RemapTex", lightningRamp);
