@@ -43,6 +43,11 @@ namespace RA2Mod.Modules {
         {
             this.contentPack.identifier = this.identifier;
 
+            if (RA2Plugin.testAsyncLoading)
+            {
+                yield return Survivors.Chrono.ChronoAssets.InitAsync(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+            }
+
             contentPack.bodyPrefabs.Add(bodyPrefabs.ToArray());
             contentPack.masterPrefabs.Add(masterPrefabs.ToArray());
             contentPack.projectilePrefabs.Add(projectilePrefabs.ToArray());

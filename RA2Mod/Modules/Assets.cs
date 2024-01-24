@@ -4,10 +4,15 @@ using UnityEngine;
 using UnityEngine.Networking;
 using RoR2;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using RoR2.UI;
 using RoR2.Projectile;
 using Path = System.IO.Path;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AddressableAssets;
+using System.Runtime.CompilerServices;
+using System;
 
 namespace RA2Mod.Modules
 {
@@ -44,6 +49,28 @@ namespace RA2Mod.Modules
 
             return assetBundle;
 
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
+        {
+            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            yield return request;
+            OnComplete(request.asset as T);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
+        {
+            var loadAsset = Addressables.LoadAssetAsync<T>(key);
+            if (!loadAsset.IsDone) { yield return loadAsset; }
+            OnComplete(loadAsset.Result);
+        }
+        //credit to groove salad with ivyl
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static AsyncOperationHandle LoadAddressableAssetAsync<TObject>(object key, out AsyncOperationHandle<TObject> handle)
+        {
+            return handle = Addressables.LoadAssetAsync<TObject>(key);
         }
 
         internal static GameObject CloneTracer(string originalTracerName, string newTracerName)

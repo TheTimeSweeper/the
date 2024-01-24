@@ -19,7 +19,6 @@ namespace PlagueMod.Survivors.Plague
 
         public static void AddHenryTokens()
         {
-            #region Henry
             string prefix = PlagueSurvivor.PLAGUE_PREFIX;
 
             string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
@@ -62,13 +61,11 @@ namespace PlagueMod.Survivors.Plague
             #region even more special than special
             Language.Add("LOADOUT_CASING", "Casing");
             Language.Add("LOADOUT_POWDER", "Powder");
-            Language.Add("TITLE_LANGUAGE_TOKEN", "hi <color=red>hello</color> hi");
             #endregion  even more special than special
 
             #region Achievements
             Language.Add(Tokens.GetAchievementNameToken(PlagueMasteryAchievement.identifier), "Henry: Mastery");
             Language.Add(Tokens.GetAchievementDescriptionToken(PlagueMasteryAchievement.identifier), "As Henry, beat the game or obliterate on Monsoon.");
-            #endregion
             #endregion
         }
     }

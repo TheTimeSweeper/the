@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using R2API;
 using RA2Mod.Survivors.Chrono.SkillDefs;
+using UnityEngine.SceneManagement;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -57,7 +58,7 @@ namespace RA2Mod.Survivors.Chrono
 
         //set in base classes
         public override AssetBundle assetBundle { get; protected set; }
-
+        
         public override GameObject bodyPrefab { get; protected set; }
         public override CharacterBody prefabCharacterBody { get; protected set; }
         public override GameObject characterModelObject { get; protected set; }
@@ -66,11 +67,10 @@ namespace RA2Mod.Survivors.Chrono
 
         public override void Initialize()
         {
-            //uncomment if you have multiple characters
-            //ConfigEntry<bool> characterEnabled = Config.CharacterEnableConfig("Survivors", "Henry");
+            //ConfigEntry<bool> characterEnabled = General.GeneralConfig.ChronoEnabled;
 
             //if (!characterEnabled.Value)
-            //    return;
+            //   return;
 
             base.Initialize();
         }
@@ -80,18 +80,26 @@ namespace RA2Mod.Survivors.Chrono
             //need the character unlockable before you initialize the survivordef
             //ChronoUnlockables.Init();
 
+            Log.CurrentTime("SURVIVOR INIT 1");
+
             base.InitializeCharacter();
 
+            Log.CurrentTime("SURVIVOR INIT 2");
             ChronoConfig.Init();
             ChronoStates.Init();
             ChronoTokens.Init();
 
+            Log.CurrentTime("SURVIVOR INIT 3");
             ChronoHealthBars.Init();
             ChronoDamageTypes.Init();
-            ChronoAssets.Init(assetBundle);
+            if (!RA2Plugin.testAsyncLoading)
+            {
+                ChronoAssets.Init(assetBundle);
+            }
             ChronoBuffs.Init(assetBundle);
             ChronoItems.Init();
-            ChronoCompat.init();
+            ChronoCompat.Init();
+            Log.CurrentTime("SURVIVOR INIT 4");
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -101,6 +109,19 @@ namespace RA2Mod.Survivors.Chrono
             AdditionalBodySetup();
 
             AddHooks();
+
+            Log.CurrentTime("SURVIVOR INIT END");
+
+            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+        }
+
+        private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+        {
+            if(arg0.name == "title")
+            {
+                Log.CurrentTime("TITLE SCREEN");
+                Log.AllTimes();
+            }
         }
 
         private void AdditionalBodySetup()
@@ -379,6 +400,13 @@ namespace RA2Mod.Survivors.Chrono
                     self.body.AddBuff(ChronoBuffs.chronoDebuff);
                     self.body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex);
                 }
+
+                if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamageDouble))
+                {
+                    self.body.AddBuff(ChronoBuffs.chronoDebuff);
+                    self.body.AddBuff(ChronoBuffs.chronoDebuff);
+                    self.body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex, 2);
+                }
             }
 
             if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
@@ -386,8 +414,8 @@ namespace RA2Mod.Survivors.Chrono
                 int count = self.body.GetBuffCount(ChronoBuffs.chronoDebuff);
                 if(self.combinedHealthFraction < count / ChronoConfig.M4ChronoStacksToVanish.Value)
                 {
+                    EffectManager.SimpleEffect(ChronoAssets.vanishEffect, self.transform.position, Quaternion.identity, true);
                     self.Suicide(damageInfo.attacker, damageInfo.inflictor);
-                    Util.PlaySound("Play_ChronoVanish", self.gameObject);
                 }
             }
         }

@@ -45,9 +45,10 @@ namespace RA2Mod.Survivors.Chrono
             Language.Add(prefix + "PASSIVE_SPRINT_DESCRIPTION", "Instead of sprinting, you time-skip from place to place, after which, you are Disabled for a short time based on distance.");
             #endregion
 
+
             #region Primary
             Language.Add(prefix + "PRIMARY_SHOOT_NAME", "Neutron Rifle");
-            Language.Add(prefix + "PRIMARY_SHOOT_DESCRIPTION", $"Fire a time-stopping rifle for % damage. Enemies hit are applied [Chrono Sickness] for x% of their health.");
+            Language.Add(prefix + "PRIMARY_SHOOT_DESCRIPTION", $"Fire a time-stopping rifle for % damage. Enemies hit are applied [Chrono Sickness] for x% of their maximum health.");
             #endregion
 
             #region Secondary
@@ -62,8 +63,16 @@ namespace RA2Mod.Survivors.Chrono
 
             #region Special
             Language.Add(prefix + "SPECIAL_VANISH_NAME", "Never Existed");
-            Language.Add(prefix + "SPECIAL_VANISH_DESCRIPTION", $"Shortly focus your rifle on an enemy. Dealing up to x% damage and continuously applying [Chrono Sickness] for up to x% their health. If an enemy’s health is below the [Chrono Sickness] threshold, they vanish from existence.");
+            Language.Add(prefix + "SPECIAL_VANISH_DESCRIPTION", $"Shortly focus your rifle on an enemy. Dealing up to x% damage and continuously applying [Chrono Sickness] for up to x% their maximum health. If an enemy’s health is below the [Chrono Sickness] threshold, they vanish from existence.");
             #endregion
+
+            #region compat
+            Language.Add(prefix + "PRIMARY_SHOOT_DRIVER_NAME", "Neutron Rifle");
+            Language.Add(prefix + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire a time-stopping rifle for % damage and apply x% [Chrono Sickness] to enemies.");
+
+            Language.Add(prefix + "SPECIAL_VANISH_DRIVER_NAME", "Never Existed");
+            Language.Add(prefix + "SPECIAL_VANISH_DRIVER_DESCRIPTION", $"Focus your rifle for x% damage per second. An enemy below the [Chrono Sickness] threshold will vanish from existence.");
+            #endregion compat
 
             #region Achievements
             Language.Add(Tokens.GetAchievementNameToken(ChronoMasteryAchievement.identifier), "Henry: Mastery");

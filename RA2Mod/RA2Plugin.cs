@@ -5,6 +5,7 @@ using RoR2;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
+using RA2Mod.General;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -24,11 +25,16 @@ namespace RA2Mod
 
         public static RA2Plugin instance;
 
+        public static bool testAsyncLoading = false;
+
         void Awake()
         {
             instance = this;
             
             Log.Init(Logger);
+            Log.CurrentTime("START " + (testAsyncLoading? "async" : "sync"));
+
+            GeneralConfig.Init();
 
             Modules.Language.Init();
 

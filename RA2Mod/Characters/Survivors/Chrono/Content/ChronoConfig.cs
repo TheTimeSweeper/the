@@ -19,7 +19,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public static void Init()
         {
-            string section = "Chrono";
+            string section = "4. Chrono Legionnaire";
 
             M0SprintBlinkTimeMulti = Config.BindAndOptionsSlider(
                 section,

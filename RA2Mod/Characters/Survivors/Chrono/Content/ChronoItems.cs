@@ -19,6 +19,7 @@ namespace RA2Mod.Survivors.Chrono
             chronoSicknessItemDef.canRemove = false;
             chronoSicknessItemDef.hidden = true;
             chronoSicknessItemDef.tier = ItemTier.NoTier;
+            chronoSicknessItemDef.deprecatedTier = ItemTier.NoTier;
 
             Content.AddItemDef(chronoSicknessItemDef);
         }

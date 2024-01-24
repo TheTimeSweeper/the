@@ -10,11 +10,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class Vanish : BaseSkillState, IHasSkillDefComponent<ChronoTrackerVanish>
     {
-        public static float damageCoefficient => ChronoConfig.M4Damage.Value;
+        public virtual float damageCoefficient => ChronoConfig.M4Damage.Value;
         public static float procCoefficient = 0.5f;
-        public static float baseDuration => ChronoConfig.M4Duration.Value;
+        public virtual float baseDuration => ChronoConfig.M4Duration.Value;
         
-        public static float baseTickInterval => ChronoConfig.M4Interval.Value;
+        public virtual float baseTickInterval => ChronoConfig.M4Interval.Value;
 
         private float duration;
         private float tickInterval;
@@ -25,8 +25,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private DamageInfo damageInfo;
         private HurtBox targetHurtBox;
-        private bool targetingAlly;
-        private Transform muzzleTransform;
+        protected bool targetingAlly;
+        protected Transform muzzleTransform;
         
         private ChronoTether vanishTether;
 
@@ -39,22 +39,27 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             Util.PlaySound("Play_ChronoAttackShort", gameObject);
 
-            muzzleTransform = GetModelChildLocator().FindChild("HandR");
+            muzzleTransform = FindModelChild("HandR");
             if (muzzleTransform == null)
                 muzzleTransform = transform;
 
-            PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", duration);
+            PlayShootAnimation();
+
             if (isAuthority)
             {
                 targetHurtBox = componentFromSkillDef.GetTrackingTarget();
                 targetingAlly = componentFromSkillDef.GetIsAlly();
             }
             vanishTether = Object.Instantiate(ChronoAssets.chronoVanishTether);
-            Log.Warning("tether "+ vanishTether != null);
 
-            if (targetingAlly && NetworkServer.active)
+            SetTetherPoints();
+
+            if (targetingAlly)
             {
-                targetHurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration);
+                if (NetworkServer.active)
+                {
+                    targetHurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration);
+                }
                 return;
             }
 
@@ -75,7 +80,12 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             damageInfo.AddModdedDamageType(ChronoDamageTypes.vanishingDamage);
         }
 
-        public void DoDamage()
+        protected virtual void PlayShootAnimation()
+        {
+            PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", duration);
+        }
+
+        public virtual void DoDamage()
         {
             damageInfo.position = targetHurtBox.transform.position;
 
@@ -92,6 +102,12 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void Update()
         {
             base.Update();
+
+            SetTetherPoints();
+        }
+
+        protected virtual void SetTetherPoints()
+        {
             if (!vanishTether)
                 return;
             vanishTether.transform.position = muzzleTransform.position;

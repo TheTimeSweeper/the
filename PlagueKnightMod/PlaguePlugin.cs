@@ -46,17 +46,6 @@ namespace PlagueMod
 
             // now make a content pack and add it this has to be last
             new Modules.ContentPacks().Initialize();
-
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.LoadoutSkillTitles"))
-            {
-                AddLoadoutSkillTitle();
-            }
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        public static void AddLoadoutSkillTitle()
-        {
-            LoadoutSkillTitles.LoadoutSkillTitlesPlugin.AddTitleToken("PlagueBody", 4, "TITLE_LANGUAGE_TOKEN");
         }
     }
 }

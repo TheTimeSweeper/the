@@ -8,9 +8,9 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class Shoot : BaseSkillState
     {
-        public static float damageCoefficient => ChronoConfig.M1Damage.Value;
+        public virtual float damageCoefficient => ChronoConfig.M1Damage.Value;
         public static float procCoefficient = 1f;
-        public static float baseDuration = 0.6f;
+        public virtual float baseDuration => 0.6f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 000f;
@@ -18,10 +18,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public static float range = 256f;
         public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
-        private float duration;
+        protected float duration;
+        protected string muzzleString;
         private float fireTime;
         private bool hasFired;
-        private string muzzleString;
 
         public override void OnEnter()
         {
@@ -30,8 +30,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
             muzzleString = "HandR";
+            PlayShootAnimation();
+        }
 
-
+        protected virtual void PlayShootAnimation()
+        {
             PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", duration);
         }
 

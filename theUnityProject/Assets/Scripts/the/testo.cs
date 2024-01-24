@@ -1,16 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class testo: MonoBehaviour {
-    NavMeshAgent agent;
 
-    [SerializeField]
-    private GameObject target;
-    private void Awake() {
-        agent = GetComponent<NavMeshAgent>();
-    }
+    void Awake() {
+        var nip = new TimeSpan(0, 0, 0, 10, 40);
+        Debug.LogWarning(nip.TotalSeconds.ToString("0.000"));
 
-    private void Update() {
-        agent.SetDestination(target.transform.position);
     }
 }

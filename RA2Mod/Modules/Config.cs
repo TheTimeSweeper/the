@@ -28,7 +28,8 @@ namespace RA2Mod.Modules
             return BindAndOptions<bool>(section,
                                         "Enable " + characterName,
                                         enabledByDefault,
-                                        description);
+                                        description,
+                                        true);
         }
 
         public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false)

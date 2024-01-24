@@ -1,9 +1,10 @@
-﻿using RoR2;
+﻿using RA2Mod.Survivors.Chrono.SkillDefs;
+using RoR2;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.Components
 {
-    public class ChronoTrackerVanish : DependentChronoHuntressTracker
+    public class ChronoTrackerVanish : TrackerSkillDefRequired<ChronoTrackerSkillDefVanish>//, IDependentTracker
     {
         public override float maxTrackingDistance => 80;
 
@@ -13,9 +14,9 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public override bool filterByLoS => false;
 
-        public override DependentChronoHuntressTracker dependentTracker { get; set; }
+        //public Tracker dependentTracker { get; set; }
 
-        protected override void Awake()
+        protected override void SetIndicator()
         {
             //dependentTracker = GetComponent<ChronoTrackerBomb>();
             this.indicator = new Indicator(base.gameObject, ChronoAssets.chronoIndicatorVanish);

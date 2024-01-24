@@ -1,11 +1,12 @@
-﻿using RoR2;
+﻿using RA2Mod.Survivors.Chrono.SkillDefs;
+using RoR2;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.Components
 {
-    public class ChronoTrackerBomb : DependentChronoHuntressTracker
+    public class ChronoTrackerBomb : Tracker
     {
-        public override float maxTrackingDistance => 10;
+        public override float maxTrackingDistance => 12;
 
         public override float maxTrackingAngle => 180;
 
@@ -13,25 +14,31 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public override bool filterByLoS => false;
 
-        public override DependentChronoHuntressTracker dependentTracker { get; set; }
-
         private CameraTargetParams cameraTargetParams;
+
+        private SkillLocator skillLocator;
 
         protected override void Awake()
         {
-            dependentTracker = null;
             cameraTargetParams = GetComponent<CameraTargetParams>();
             this.indicator = new Indicator(base.gameObject, ChronoAssets.chronoIndicatorIvan);
+
+            skillLocator = GetComponent<SkillLocator>();
         }
 
         protected override HurtBox SearchForTarget(Ray aimRay)
         {
-            if (cameraTargetParams)
-            {
-                aimRay.origin = cameraTargetParams.cameraPivotTransform.position;
-            }
+            //if (cameraTargetParams)
+            //{
+            //    aimRay.origin = cameraTargetParams.cameraPivotTransform.position;
+            //}
 
             return base.SearchForTarget(aimRay);
+        }
+
+        protected override TeamMask GetTeamMask()
+        {
+            return TeamMask.all;
         }
     }
 }

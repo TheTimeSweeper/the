@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace RA2Mod.Survivors.Chrono.SkillDefs
 {
-    public abstract class ChronoTrackerSkillDef<T> : HasComponentSkillDef<T> where T : DependentChronoHuntressTracker
+    public abstract class ChronoTrackerSkillDef<T> : HasComponentSkillDef<T> where T : Tracker
     {
         // Token: 0x060045B8 RID: 17848 RVA: 0x00122449 File Offset: 0x00120649
         private static bool HasTarget([NotNull] GenericSkill skillSlot)

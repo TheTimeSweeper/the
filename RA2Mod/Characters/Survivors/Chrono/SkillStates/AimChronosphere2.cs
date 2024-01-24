@@ -16,6 +16,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private float sqrRadius;
         ChronosphereProjectionController chronosphereProjectionController;
 
+        private bool playedEnterSoundsHack;
+
         public override void OnEnter()
         {
             chronosphereProjectionController = GetComponent<ChronosphereProjectionController>();
@@ -77,6 +79,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            if (!playedEnterSoundsHack && projectionGameObject != null)
+            {;
+                PlayEnterSounds();
+            }
         }
 
         public override void OnExit()
@@ -107,6 +113,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         protected override void PlayEnterSounds()
         {
+            playedEnterSoundsHack = true;
             Util.PlaySound("Play_ChronosphereSelectStart", projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectLoop", projectionGameObject);
         }

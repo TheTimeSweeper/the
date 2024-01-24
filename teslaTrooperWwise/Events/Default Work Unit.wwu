@@ -581,6 +581,20 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Voiceline_Driver" ID="{9C72DDCA-D035-444F-8A0F-62292B922D02}">
+									<ChildrenList>
+										<Action Name="" ID="{29BD9E1E-F99D-420D-825E-9E3303C56547}" ShortID="751522499">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Driver Voice" ID="{BC6E4D4E-B4A8-469E-AFF3-F908746E55DC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Event Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}">
@@ -785,6 +799,20 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Desolator_Voiceline_Driver" ID="{2325DD1B-F9C9-41F1-9BB1-14F9AD6993FA}">
+									<ChildrenList>
+										<Action Name="" ID="{C9BF1C29-CAAA-4159-8D70-407219A517E3}" ShortID="370811730">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Driver Voice" ID="{BF3F0BCE-8CF4-44AB-83A3-282C985974B9}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Event Name="Play_Desolator_Beam_Short" ID="{688428D0-9151-47DE-A8AC-C14EAC7AD445}">
@@ -947,19 +975,33 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_Chrono_Voiceline_Driver" ID="{E090F2CF-3281-464F-8ADB-3A7A67B4ECE2}">
+									<ChildrenList>
+										<Action Name="" ID="{D4FF5B36-EB5C-4514-9E86-0E8A3244FC7D}" ShortID="731968228">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Driver Voice" ID="{E17792C0-4E91-465D-A209-A3C89D3519FC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Sphere" ID="{2965CC11-60FD-4808-A721-09A42C3570BD}" ShortID="142686265">
 							<ChildrenList>
 								<Event Name="Play_ChronosphereSelectLoop" ID="{0C501004-0467-435F-853C-F474AA91C826}">
 									<ChildrenList>
-										<Action Name="" ID="{C5C749F7-9AB5-4126-B699-47E6EB66A554}" ShortID="535052038">
+										<Action Name="" ID="{EC4AC9F3-D51A-4F3E-A748-140787F3E1C3}" ShortID="340120394">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="ChronosphereHumLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+													<ObjectRef Name="ChronosphereSelectLoop" ID="{01BC3988-7F9A-4443-BC21-606D7984BEA3}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
