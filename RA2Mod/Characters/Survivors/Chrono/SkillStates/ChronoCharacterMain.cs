@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using RoR2;
+using RoR2.Skills;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates {
     public class ChronoCharacterMain : GenericCharacterMain {
@@ -22,7 +23,13 @@ namespace RA2Mod.Survivors.Chrono.SkillStates {
             base.HandleMovements();
             
             if (sprintInputReceived && canExecute && isAuthority) {
-                passiveSkill.ExecuteIfReady();
+
+                SkillDef skillDef = passiveSkill.skillDef;
+
+                passiveSkill.hasExecutedSuccessfully = true;
+                //ugly avoid CharacterBody.OnSkillActivated cause it was not intended to be used with extra generic skills woops
+                passiveSkill.stateMachine.SetInterruptState(skillDef.InstantiateNextState(passiveSkill), skillDef.interruptPriority);
+                passiveSkill.stock -= skillDef.stockToConsume;
             }
         }
         

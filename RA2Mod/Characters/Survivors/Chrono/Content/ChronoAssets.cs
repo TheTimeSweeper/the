@@ -38,6 +38,11 @@ namespace RA2Mod.Survivors.Chrono
         {
             Log.CurrentTime("SYNC START");
 
+            for (int i = 1; i < 21; i++)
+            {
+                testTextures.Add(assetBundle.LoadAsset<Texture2D>("testTexture " + i));
+            }
+
             cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "chronoCancel",
@@ -110,13 +115,6 @@ namespace RA2Mod.Survivors.Chrono
             sphereMat.SetTexture("_RemapTex", lightningRamp);
 
             chronosphereProjection.sphereRenderer.sharedMaterial = sphereMat;
-            R2API.PrefabAPI.RegisterNetworkPrefab(chronosphereProjectionObject);
-            Content.AddNetworkedObject(chronosphereProjectionObject);
-
-            for (int i = 1; i < 21; i++)
-            {
-                testTextures.Add(assetBundle.LoadAsset<Texture2D>("testTexture " + i));
-            }
 
             Log.CurrentTime("SYNC FINISH");
         }
@@ -124,6 +122,12 @@ namespace RA2Mod.Survivors.Chrono
         public static IEnumerator InitAsync(AssetBundle assetBundle)
         {
             Log.CurrentTime("ASYNC START");
+
+            //AssetBundleRequest[] loadTextures = new AssetBundleRequest[21];
+            //for (int i = 1; i < 21; i++)
+            //{
+            //    loadTextures[i] = assetBundle.LoadAssetAsync<Texture2D>("testTexture " + i);
+            //}
 
             yield return assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
             {
@@ -167,20 +171,22 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             //ivan bomb
-            yield return assetBundle.LoadAssetAsync("ChronoIvanBombProjectile", (GameObject result) =>
+            yield return assetBundle.LoadAssetAsync<GameObject>("ChronoIvanBombProjectile", subLoadIvanBomb);
+            IEnumerator subLoadIvanBomb(GameObject resulte)
             {
-                chronoBombProjectile = result;
-            });
-            R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
-            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
-            {
-                chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = result;
-            });
-            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
-            {
-                chronoBombProjectile.GetComponent<ProjectileImpactExplosion>().explosionEffect = result;
-            });
-            Content.AddProjectilePrefab(chronoBombProjectile);
+                chronoBombProjectile = resulte;
+                R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
+                Content.AddProjectilePrefab(chronoBombProjectile);
+
+                yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
+                {
+                    chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = result;
+                });
+                yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
+                {
+                    chronoBombProjectile.GetComponent<ProjectileImpactExplosion>().explosionEffect = result;
+                });
+            }
 
             //indicators
             yield return assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoIvan", (result) =>
@@ -194,6 +200,20 @@ namespace RA2Mod.Survivors.Chrono
             yield return assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoPhaseCooldown", (result) =>
             {
                 chronoIndicatorPhase = result;
+            });
+            //vanish vfx
+            yield return assetBundle.LoadAssetAsync<GameObject>("ChronoVanishVFX", (result) =>
+            {
+                vanishEffect = result;
+            });
+            //visualizers
+            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
+            {
+                endPointivsualizer = result;
+            });
+            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
+            {
+                arcvisualizer = result;
             });
 
             Texture2D lightningRamp = null;
@@ -214,29 +234,11 @@ namespace RA2Mod.Survivors.Chrono
                 chronoVanishTether.GetComponent<LineRenderer>().sharedMaterial = beamMat;
             });
 
-
-            //vanish vfx
-            yield return assetBundle.LoadAssetAsync<GameObject>("ChronoVanishVFX", (result) =>
-            {
-                vanishEffect = result;
-            });
-
-            //visualizers
-            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
-            {
-                endPointivsualizer = result;
-            });
-            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
-            {
-                arcvisualizer = result;
-            });
-
             //chronosphere here we go
             yield return assetBundle.LoadAssetAsync<GameObject>("ChronosphereProjection", (result) =>
             {
                 chronosphereProjection = result.GetComponent<ChronosphereProjection>();
             });
-
             Texture2D lightningCloud = null;
             yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/ColorRamps/texRampLightning2.png", (result) =>
             {
@@ -256,16 +258,11 @@ namespace RA2Mod.Survivors.Chrono
                 sphereMat.SetTexture("_RemapTex", lightningRamp);
                 chronosphereProjection.sphereRenderer.sharedMaterial = sphereMat;
             });
-            R2API.PrefabAPI.RegisterNetworkPrefab(chronosphereProjection.gameObject);
-            Content.AddNetworkedObject(chronosphereProjection.gameObject);
 
-            for (int i = 1; i < 21; i++)
-            {
-                yield return assetBundle.LoadAssetAsync<Texture2D>("testTexture " + i, (result) =>
-                {
-                    testTextures.Add(result);
-                });
-            }
+            //foreach (var request in loadTextures)
+            //{
+            //    yield return request;
+            //}
 
             Log.CurrentTime("ASYNC FINISH");
         }

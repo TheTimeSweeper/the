@@ -8,7 +8,7 @@ namespace RA2Mod.Survivors.Chrono {
     {
         // armor buff gained during roll
         public static BuffDef chronoDebuff;
-        public static BuffDef chronoSphereRootDebuff;
+        public static BuffDef chronosphereRootDebuff;
         public static BuffDef ivand;
 
         public static void Init(AssetBundle assetBundle)
@@ -19,7 +19,7 @@ namespace RA2Mod.Survivors.Chrono {
                 true,
                 true);
 
-            chronoSphereRootDebuff = Modules.Content.CreateAndAddBuff("chronoSphereRootDebuff",
+            chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("chronosphereRootDebuff",
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
                 Color.blue,
                 false,

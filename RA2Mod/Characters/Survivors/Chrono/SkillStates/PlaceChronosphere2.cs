@@ -16,7 +16,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private float sqrRadius;
 
-        public List<CharacterBody> characterBodies = new List<CharacterBody>();
+        public List<CharacterBody> teamCharacterBodies = new List<CharacterBody>();
 
         public override void OnEnter()
         {
@@ -24,14 +24,35 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             sqrRadius = BaseRadius * BaseRadius;
 
-            for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
+            if (isAuthority)
             {
-                GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
+                for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
+                {
+                    GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
+                }
             }
 
             MoveTeleportees();
+        }
 
-            outer.SetNextState(new WindDownState { windDownTime = 1f });
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (fixedAge > Time.fixedDeltaTime * 2)
+            {
+                outer.SetNextState(new WindDownState { windDownTime = 1f });
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            for (int i = 0; i < teamCharacterBodies.Count; i++)
+            {
+                TrySetBodyInvisible(teamCharacterBodies[i], false);
+            }
         }
 
         private void GatherTeleportees(ReadOnlyCollection<TeamComponent> teamComponents)
@@ -42,7 +63,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 {
                     if (teamComponents[i].TryGetComponent(out CharacterBody body))
                     {
-                        characterBodies.Add(body);
+                        teamCharacterBodies.Add(body);
                     }
                 }
             }
@@ -51,16 +72,15 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private void MoveTeleportees()
         {
             trajectoryPoint += Vector3.up * 1;
-            for (int i = 0; i < characterBodies.Count; i++)
+            for (int i = 0; i < teamCharacterBodies.Count; i++)
             {
-                if (characterBodies[i] == null)
+                CharacterBody body = teamCharacterBodies[i];
+                if (body == null)
                     continue;
-                if (NetworkServer.active)
-                {
-                    //characterBodies[i].RemoveBuff(ChronoBuffs.chronoSphereRootDebuff);
-                }
-                Vector3 originalPosition = characterBodies[i].gameObject.transform.position;
+                Vector3 originalPosition = body.gameObject.transform.position;
                 Vector3 relativeDistance = (originalPosition - originalPoint) * 0.5f;
+
+                TrySetBodyInvisible(body, true);
 
                 Vector3 resultPoint;
                 if (Physics.Linecast(trajectoryPoint, trajectoryPoint + relativeDistance, out RaycastHit info, LayerIndex.world.mask))
@@ -72,17 +92,31 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                     resultPoint = trajectoryPoint + relativeDistance;
                 }
 
-                if (characterBodies[i].TryGetComponent(out CharacterMotor motor))
+                if (body.TryGetComponent(out CharacterMotor motor))
                 {
                     motor.Motor.SetPosition(resultPoint);
                 }
-                else if (characterBodies[i].TryGetComponent(out RigidbodyMotor rbmotor))
+                else if (body.TryGetComponent(out RigidbodyMotor rbmotor))
                 {
                     rbmotor.rigid.MovePosition(resultPoint);
                 }
                 else
                 {
-                    characterBodies[i].gameObject.transform.position = resultPoint;
+                    body.gameObject.transform.position = resultPoint;
+                }
+            }
+        }
+
+        private void TrySetBodyInvisible(CharacterBody body, bool shouldInvis)
+        {
+            var model = body.modelLocator?.modelTransform?.GetComponent<CharacterModel>();
+            if (model)
+            {
+                model.invisibilityCount += shouldInvis ? 1 : -1;
+
+                if (shouldInvis == false)
+                {
+                    TeleportOutController.AddTPOutEffect(model, 1f, 0f, 0.2f);
                 }
             }
         }
@@ -90,19 +124,23 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void OnSerialize(NetworkWriter writer)
         {
             base.OnSerialize(writer);
-            Log.Warning($"writing originalPoint {originalPoint}");
             writer.Write(originalPoint);
-            Log.Warning($"writing trajectoryPoint {trajectoryPoint}");
             writer.Write(trajectoryPoint);
+            for (int i = 0; i < teamCharacterBodies.Count; i++)
+            {
+                writer.Write(teamCharacterBodies[i].gameObject);
+            }
         }
 
         public override void OnDeserialize(NetworkReader reader)
         {
             base.OnDeserialize(reader);
             originalPoint = reader.ReadVector3();
-            Log.Warning($"reading originalPoint {originalPoint}");
             trajectoryPoint = reader.ReadVector3();
-            Log.Warning($"reading trajectoryPoint {trajectoryPoint}");
+            while (reader.Position < reader.Length)
+            {
+                teamCharacterBodies.Add(reader.ReadGameObject().GetComponent<CharacterBody>());
+            }
         }
     }
 }

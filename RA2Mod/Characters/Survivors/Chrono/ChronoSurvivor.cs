@@ -130,8 +130,6 @@ namespace RA2Mod.Survivors.Chrono
             bodyPrefab.AddComponent<ChronoTrackerBomb>();
             bodyPrefab.AddComponent<ChronoTrackerVanish>();
             bodyPrefab.AddComponent<PhaseIndicatorController>();
-            bodyPrefab.AddComponent<ChronosphereProjectionController>();
-
         }
 
         public override void InitializeEntityStateMachines() 
@@ -427,7 +425,7 @@ namespace RA2Mod.Survivors.Chrono
                 args.moveSpeedReductionMultAdd += 1;
             }
 
-            if (sender.HasBuff(ChronoBuffs.chronoSphereRootDebuff))
+            if (sender.HasBuff(ChronoBuffs.chronosphereRootDebuff))
             {
                 args.moveSpeedRootCount += 1;
             }

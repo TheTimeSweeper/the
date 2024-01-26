@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using RA2Mod.Survivors.Chrono.Components;
 using RoR2;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,32 +12,32 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     {
         public Vector3 originalPoint;
         
-        private GameObject projectionGameObject => chronosphereProjectionController.projection;
+        private GameObject projectionGameObject;
 
         private float sqrRadius;
-        ChronosphereProjectionController chronosphereProjectionController;
 
-        private bool playedEnterSoundsHack;
+        public List<CharacterBody> teleporteeBodies = new List<CharacterBody>();
 
         public override void OnEnter()
         {
-            chronosphereProjectionController = GetComponent<ChronosphereProjectionController>();
+            ChronosphereProjection chronosphereProjection = Object.Instantiate(ChronoAssets.chronosphereProjection);
+            chronosphereProjection.transform.position = originalPoint;
+            projectionGameObject = chronosphereProjection.gameObject;
+            chronosphereProjection.RadiusAndEnable(AimChronosphereBase.BaseRadius);
 
-            if (NetworkServer.active)
+            PlayEnterSounds();
+
+            if (isAuthority)
             {
-                ChronosphereProjection chronosphereProjection = Object.Instantiate(ChronoAssets.chronosphereProjection);
-                chronosphereProjection.transform.position = originalPoint;
-                NetworkServer.Spawn(chronosphereProjection.gameObject);
-                chronosphereProjection.RpcSetRadiusAndEnable(AimChronosphereBase.BaseRadius);
-                chronosphereProjectionController.RpcSetProjection(chronosphereProjection.gameObject);
+                for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
+                {
+                    GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
+                }
             }
 
             if (NetworkServer.active)
             {
-                for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
-                {
-                    //RootTeleportees(TeamComponent.GetTeamMembers(teamIndex));
-                }
+                RootTeleportees();
             }
 
             sqrRadius = BaseRadius * BaseRadius;
@@ -47,8 +48,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             viewRadius *= 0.5f;
         }
-
-        private void RootTeleportees(ReadOnlyCollection<TeamComponent> teamComponents)
+        
+        private void GatherTeleportees(ReadOnlyCollection<TeamComponent> teamComponents)
         {
             for (int i = 0; i < teamComponents.Count; i++)
             {
@@ -58,10 +59,28 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                     {
                         if (FriendlyFireManager.ShouldDirectHitProceed(body.healthComponent, teamComponent.teamIndex))
                         {
-                            body.AddBuff(ChronoBuffs.chronoSphereRootDebuff);
+                            teleporteeBodies.Add(body);
                         }
                     }
                 }
+            }
+        }
+
+        private void RootTeleportees()
+        {
+            for (int i = 0; i < teleporteeBodies.Count; i++)
+            {
+                Log.Warning("adding buff " + teleporteeBodies[i].name);
+                teleporteeBodies[i].AddBuff(ChronoBuffs.chronosphereRootDebuff);
+            }
+        }
+
+        private void UnRootTeleportees()
+        {
+            for (int i = 0; i < teleporteeBodies.Count; i++)
+            {
+                Log.Warning("removing buff " + teleporteeBodies[i].name);
+                teleporteeBodies[i].RemoveBuff(ChronoBuffs.chronosphereRootDebuff);
             }
         }
 
@@ -76,15 +95,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             dest.travelTime = this.projectileBaseSpeed / vector.magnitude;
         }
 
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if (!playedEnterSoundsHack && projectionGameObject != null)
-            {;
-                PlayEnterSounds();
-            }
-        }
-
         public override void OnExit()
         {
             base.OnExit();
@@ -96,8 +106,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             if (NetworkServer.active)
             {
-                NetworkServer.Destroy(projectionGameObject);
+                UnRootTeleportees();
             }
+
+            Object.DestroyImmediate(projectionGameObject);
 
             skillLocator.utility.UnsetSkillOverride(this, ChronoAssets.cancelSKillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
@@ -105,15 +117,15 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         protected override EntityState ActuallyPickNextState(Vector3 point)
         {
             return new PlaceChronosphere2 {
-                originalPoint = originalPoint, 
-                BaseRadius = BaseRadius, 
-                trajectoryPoint = currentTrajectoryInfo.hitPoint
+                originalPoint = originalPoint,
+                BaseRadius = BaseRadius,
+                trajectoryPoint = currentTrajectoryInfo.hitPoint,
+                //teamCharacterBodies = teleporteeBodies
             };
         }
 
         protected override void PlayEnterSounds()
         {
-            playedEnterSoundsHack = true;
             Util.PlaySound("Play_ChronosphereSelectStart", projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectLoop", projectionGameObject);
         }
@@ -124,16 +136,24 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             Util.PlaySound("Play_ChronosphereSelectEnd", projectionGameObject);
         }
 
-        public override void OnDeserialize(NetworkReader reader)
-        {
-            base.OnDeserialize(reader);
-            originalPoint = reader.ReadVector3();
-        }
-
         public override void OnSerialize(NetworkWriter writer)
         {
             base.OnSerialize(writer);
             writer.Write(originalPoint);
+            for (int i = 0; i < teleporteeBodies.Count; i++)
+            {
+                writer.Write(teleporteeBodies[i].gameObject);
+            }
+        }
+
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            originalPoint = reader.ReadVector3();
+            while (reader.Position < reader.Length)
+            {
+                teleporteeBodies.Add(reader.ReadGameObject().GetComponent<CharacterBody>());
+            }
         }
     }
 }

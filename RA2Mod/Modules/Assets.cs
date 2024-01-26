@@ -58,6 +58,13 @@ namespace RA2Mod.Modules
             yield return request;
             OnComplete(request.asset as T);
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
+        {
+            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            yield return request;
+            yield return OnComplete(request.asset as T);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
@@ -65,6 +72,13 @@ namespace RA2Mod.Modules
             var loadAsset = Addressables.LoadAssetAsync<T>(key);
             if (!loadAsset.IsDone) { yield return loadAsset; }
             OnComplete(loadAsset.Result);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
+        {
+            var loadAsset = Addressables.LoadAssetAsync<T>(key);
+            if (!loadAsset.IsDone) { yield return loadAsset; }
+            yield return OnComplete(loadAsset.Result);
         }
         //credit to groove salad with ivyl
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

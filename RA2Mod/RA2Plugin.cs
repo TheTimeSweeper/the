@@ -27,6 +27,11 @@ namespace RA2Mod
 
         public static bool testAsyncLoading = true;
 
+        void Start()
+        {
+            Modules.SoundBanks.Init();
+        }
+
         void Awake()
         {
             instance = this;
@@ -41,11 +46,23 @@ namespace RA2Mod
             new ChronoSurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
+
+            On.RoR2.CharacterBody.SetBuffCount += CharacterBody_SetBuffCount;
+
+            On.RoR2.CharacterBody.OnClientBuffsChanged += CharacterBody_OnClientBuffsChanged;
         }
 
-        void Start()
+        private void CharacterBody_OnClientBuffsChanged(On.RoR2.CharacterBody.orig_OnClientBuffsChanged orig, CharacterBody self)
         {
-            Modules.SoundBanks.Init();
+            orig(self);
+            Log.Warning($"{self.name} has buff {self.HasBuff(ChronoBuffs.chronosphereRootDebuff)}\n{System.Environment.StackTrace}");
+        }
+
+        private void CharacterBody_SetBuffCount(On.RoR2.CharacterBody.orig_SetBuffCount orig, CharacterBody self, BuffIndex buffType, int newCount)
+        {
+            orig(self, buffType, newCount);
+
+            Log.Warning($"apply {BuffCatalog.GetBuffDef(buffType).name} to {self.name}\n{System.Environment.StackTrace}");
         }
     }
 }
