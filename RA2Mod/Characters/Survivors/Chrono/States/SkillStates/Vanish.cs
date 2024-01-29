@@ -29,11 +29,12 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         protected Transform muzzleTransform;
         
         private ChronoTether vanishTether;
-
+        private SetStateOnHurt setStateOnHurt;
+        
         public override void OnEnter()
         {
             base.OnEnter();
-            duration = baseDuration / attackSpeedStat;
+            duration = baseDuration;
             tickInterval = baseTickInterval / attackSpeedStat;
             characterBody.SetAimTimer(2f);
 
@@ -63,6 +64,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 return;
             }
 
+            if (Util.HasEffectiveAuthority(targetHurtBox.healthComponent.gameObject))
+            {
+                TryFreeze(targetHurtBox.healthComponent.body);
+            }
+
             damageInfo = new DamageInfo
             {
                 //position = this.targetRoot.transform.position,
@@ -74,10 +80,28 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 crit = base.RollCrit(),
                 force = Vector3.zero,
                 procChainMask = default(ProcChainMask),
-                procCoefficient = procCoefficient,
+                procCoefficient = 0.5f,
             };
-            damageInfo.AddModdedDamageType(ChronoDamageTypes.chronoDamage);
+            damageInfo.AddModdedDamageType(ChronoDamageTypes.chronoDamagePierce);
             damageInfo.AddModdedDamageType(ChronoDamageTypes.vanishingDamage);
+        }
+
+        private void TryFreeze(CharacterBody body)
+        {
+            //if(body.TryGetComponent(out SetStateOnHurt setStateOnHurt))
+            //{
+            //    if (setStateOnHurt.targetStateMachine)
+            //    {
+            //        FrozenState frozenState = new FrozenState();
+            //        frozenState.freezeDuration = duration;
+            //        setStateOnHurt.targetStateMachine.SetInterruptState(frozenState, InterruptPriority.Frozen);
+            //    }
+            //    EntityStateMachine[] array = setStateOnHurt.idleStateMachine;
+            //    for (int i = 0; i < array.Length; i++)
+            //    {
+            //        array[i].SetNextState(new Idle());
+            //    }
+            //}
         }
 
         protected virtual void PlayShootAnimation()

@@ -48,7 +48,6 @@ namespace RA2Mod.Modules
                         break;
                 }
             }
-
         }
 
         public static void ClearGenericSkills(GameObject targetPrefab)

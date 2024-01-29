@@ -62,19 +62,6 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         }
 
-        private void FindLocalUser() {
-            if (localUser == null) {
-                if (base.characterBody) {
-                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList) {
-                        if (lu.cachedBody == base.characterBody) {
-                            this.localUser = lu;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
         public override void OnExit() {
             base.OnExit();
 
@@ -132,13 +119,28 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new() {
+        private bool CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new() {
             if (Modules.Config.GetKeyPressed(keybind)) {
 
                 FindLocalUser();
                 
                 if (localUser != null && !localUser.isUIFocused) {
                     outer.SetInterruptState(new T(), InterruptPriority.Any);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void FindLocalUser() {
+            if (localUser == null) {
+                if (base.characterBody) {
+                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList) {
+                        if (lu.cachedBody == base.characterBody) {
+                            this.localUser = lu;
+                            break;
+                        }
+                    }
                 }
             }
         }

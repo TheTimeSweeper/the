@@ -20,6 +20,11 @@ namespace RA2Mod.Survivors.Chrono.Components
             }
         }
 
+        protected override void OnEnable()
+        {
+            OnSkillChanged();
+        }
+        
         void OnDestroy()
         {
             foreach (GenericSkill skill in skillMap.Keys)
@@ -28,9 +33,12 @@ namespace RA2Mod.Survivors.Chrono.Components
             }
         }
 
-        protected virtual void OnSkillChanged(GenericSkill genericSKill)
+        protected virtual void OnSkillChanged(GenericSkill genericSkill = null)
         {
-            skillMap[genericSKill] = genericSKill.skillDef is T;
+            if (genericSkill)
+            {
+                skillMap[genericSkill] = genericSkill.skillDef is T;
+            }
 
             foreach (bool isSkill in skillMap.Values)
             {

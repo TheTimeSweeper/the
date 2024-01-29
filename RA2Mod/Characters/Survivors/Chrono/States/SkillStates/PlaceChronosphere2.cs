@@ -33,16 +33,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             }
 
             MoveTeleportees();
-        }
 
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-
-            if (fixedAge > Time.fixedDeltaTime * 2)
-            {
-                outer.SetNextState(new WindDownState { windDownTime = 1f });
-            }
+            outer.SetNextState(new WindDownState { windDownTime = 1f });
         }
 
         public override void OnExit()
@@ -63,7 +55,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 {
                     if (teamComponents[i].TryGetComponent(out CharacterBody body))
                     {
-                        teamCharacterBodies.Add(body);
+                        if (body.isFlying || !body.isChampion)
+                        {
+                            teamCharacterBodies.Add(body);
+                        }
                     }
                 }
             }

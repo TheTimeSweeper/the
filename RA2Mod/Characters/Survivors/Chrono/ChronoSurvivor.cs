@@ -31,7 +31,7 @@ namespace RA2Mod.Survivors.Chrono
         public const string CHRONO_PREFIX = RA2Plugin.DEVELOPER_PREFIX + "_CHRONO_";
 
         public override string survivorTokenPrefix => CHRONO_PREFIX;
-        
+
         public override BodyInfo bodyInfo => new BodyInfo
         {
             bodyName = bodyName,
@@ -50,7 +50,23 @@ namespace RA2Mod.Survivors.Chrono
             armor = 10f,
 
             jumpCount = 1,
+
+            cameraParams = cameraParams
         };
+
+        private CharacterCameraParams cameraParams { get
+            {
+                CharacterCameraParams camera = ScriptableObject.CreateInstance<CharacterCameraParams>();
+                camera.data.minPitch = -70;
+                camera.data.maxPitch = 70;
+                camera.data.wallCushion = 0.1f;
+                camera.data.pivotVerticalOffset = 1.37f;
+                camera.data.idealLocalCameraPos = new Vector3(0, 0, -10);
+                camera.data.fov = new HG.BlendableTypes.BlendableFloat { value = 60f, alpha = 1f };
+
+                return camera;
+            } 
+        }
 
         public override UnlockableDef characterUnlockableDef => ChronoUnlockables.characterUnlockableDef;
 
@@ -285,7 +301,7 @@ namespace RA2Mod.Survivors.Chrono
                 activationStateMachineName = "Weapon", 
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseMaxStock = 2,
+                baseMaxStock = 1,
                 baseRechargeInterval = 8f,
 
                 isCombatSkill = true,
@@ -395,27 +411,47 @@ namespace RA2Mod.Survivors.Chrono
             {
                 if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamage))
                 {
-                    self.body.AddBuff(ChronoBuffs.chronoDebuff);
-                    self.body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex);
+                    AddChronoSickness(self.body);
                 }
 
                 if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamageDouble))
                 {
-                    self.body.AddBuff(ChronoBuffs.chronoDebuff);
-                    self.body.AddBuff(ChronoBuffs.chronoDebuff);
-                    self.body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex, 2);
+                    AddChronoSickness(self.body);
+                    AddChronoSickness(self.body);
                 }
+            }
+
+            if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamagePierce))
+            {
+                AddChronoSickness(self.body);
             }
 
             if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
             {
-                int count = self.body.GetBuffCount(ChronoBuffs.chronoDebuff);
-                if(self.combinedHealthFraction < count / ChronoConfig.M4ChronoStacksToVanish.Value)
+                int count = 0;
+                if (self.body.inventory)
+                {
+                    count = self.body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
+                }
+                if(self.combinedHealthFraction < count / (ChronoConfig.M4ChronoStacksToVanish.Value * 2))
                 {
                     EffectManager.SimpleEffect(ChronoAssets.vanishEffect, self.transform.position, Quaternion.identity, true);
+                    if(self.body.modelLocator && self.body.modelLocator.modelTransform)
+                    {
+                        CharacterModel characterModel = self.body.modelLocator.modelTransform.GetComponent<CharacterModel>();
+                        TeleportOutController.AddTPOutEffect(characterModel, 0f, 1f, 0.2f);
+                        characterModel.invisibilityCount++;
+                    }
                     self.Suicide(damageInfo.attacker, damageInfo.inflictor);
                 }
             }
+        }
+
+        private static void AddChronoSickness(CharacterBody body)
+        {
+            body.AddBuff(ChronoBuffs.chronoDebuff);
+            int stacks = body.isChampion ? 1 : 2;
+            body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex, stacks);
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)

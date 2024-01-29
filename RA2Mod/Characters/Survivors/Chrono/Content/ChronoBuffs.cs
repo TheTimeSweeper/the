@@ -10,6 +10,7 @@ namespace RA2Mod.Survivors.Chrono {
         public static BuffDef chronoDebuff;
         public static BuffDef chronosphereRootDebuff;
         public static BuffDef ivand;
+        public static BuffDef vanishFreeze;
 
         public static void Init(AssetBundle assetBundle)
         {
@@ -19,15 +20,21 @@ namespace RA2Mod.Survivors.Chrono {
                 true,
                 true);
 
-            chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("chronosphereRootDebuff",
+            chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("ChronosphereRoot",
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
                 Color.blue,
                 false,
                 true);
 
-            ivand = Modules.Content.CreateAndAddBuff("ivand",
+            ivand = Modules.Content.CreateAndAddBuff("ChronoIvand",
                 assetBundle.LoadAsset<Sprite>("texBuffChronoClock"),
                 Color.blue,
+                true,
+                true);
+
+            vanishFreeze = Modules.Content.CreateAndAddBuff("ChronoVanishfreeze",
+                assetBundle.LoadAsset<Sprite>("texBuffChronoClock"),
+                Color.cyan,
                 true,
                 true);
 

@@ -12,7 +12,7 @@ namespace RA2Mod.Survivors.Chrono.Components
         [SerializeField]
         private ObjectScaleCurve sphere;
 
-        public void RadiusAndEnable(float radius)
+        public void SetRadiusAndEnable(float radius)
         {
             sphere.transform.localScale = Vector3.one * radius * 2;
             sphere.enabled = true;

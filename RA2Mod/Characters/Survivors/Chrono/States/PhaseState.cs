@@ -1,7 +1,8 @@
 ﻿using EntityStates;
 using RA2Mod.Survivors.Chrono.Components;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates {
+namespace RA2Mod.Survivors.Chrono.SkillStates
+{
     public class PhaseState : BaseSkillState {
 
         public float windDownTime = 0.5f;

@@ -436,6 +436,36 @@ Transform:
   m_Father: {fileID: 4761245997242488507}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0.27382302, y: -0.45474362, z: 45.90943}
+--- !u!1 &719769894523967559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7798190828824670497}
+  m_Layer: 0
+  m_Name: ChronosphereAimOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7798190828824670497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719769894523967559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 12.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5761125972279397871}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1061977694531386138
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,6 +7694,7 @@ Transform:
   - {fileID: 1288672532}
   - {fileID: 4483297840398306617}
   - {fileID: 5133534269842455549}
+  - {fileID: 7798190828824670497}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7706,82 +7737,102 @@ MonoBehaviour:
     defaultMaterial: {fileID: 2100000, guid: b553d834b813e434fb71cde30df47412, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 7120139615890997139}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 6912150599872810146}
     defaultMaterial: {fileID: 2100000, guid: fc4d1082e696ce540bf0f2d40e517588, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 4720273262316700815}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 722540732418903635}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 4278673165314211276}
     defaultMaterial: {fileID: 2100000, guid: fc4d1082e696ce540bf0f2d40e517588, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 6618709788336099277}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 7994186638621099462}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 5645249272948915791}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 8730215088236475522}
     defaultMaterial: {fileID: 2100000, guid: fc4d1082e696ce540bf0f2d40e517588, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 6095919358225176793}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 488148552298887148}
     defaultMaterial: {fileID: 2100000, guid: fc4d1082e696ce540bf0f2d40e517588, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 8756945362791717032}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 3840282614907640645}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 5403758474014280868}
     defaultMaterial: {fileID: 2100000, guid: fc4d1082e696ce540bf0f2d40e517588, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 2553251510129331433}
     defaultMaterial: {fileID: 2100000, guid: f9bb4f7deaeed7948bb505e388892f8c, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 8275649068108116204}
     defaultMaterial: {fileID: 2100000, guid: 141e00d18e9241f40ae38011a40cacbf, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 3185339949839974279}
     defaultMaterial: {fileID: 2100000, guid: 7f83a1c333fd97e43bd0502d885a3f10, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 6848046967542801952}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   - renderer: {fileID: 433182295164332890}
     defaultMaterial: {fileID: 2100000, guid: c0beaeb4deafb754ba29c2594ef4395f, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
+    hideOnDeath: 0
   baseLightInfos:
   - light: {fileID: 7621453353539438461}
     defaultColor: {r: 1, g: 0.9048682, b: 0.50735295, a: 1}
@@ -7884,6 +7935,8 @@ MonoBehaviour:
     transform: {fileID: 5567028489271994363}
   - name: DeflectHitbox
     transform: {fileID: 5133534269842455549}
+  - name: ChronosphereAimOrigin
+    transform: {fileID: 7798190828824670497}
 --- !u!114 &3371298392336292984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8216,7 +8269,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.22112302, y: 0.0000000121071935, z: 0.0000001937151}
+  m_ConnectedAnchor: {x: -0.22112277, y: 0.000000008381903, z: -0.00000043213367}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:

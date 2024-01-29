@@ -12,10 +12,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     public class ChronoBomb : GenericProjectileBaseState, IHasSkillDefComponent<ChronoTrackerBomb>
     {
         public static float BaseDuration = 0.65f;
-        //delays for projectiles feel absolute ass so only do this if you know what you're doing, otherwise it's best to keep it at 0
-        public static float BaseDelayDuration = 0.0f;
 
-        public static float DamageCoefficient = 3f;
+        public static float DamageCoefficient = ChronoConfig.M2Damage.Value;
 
         public ChronoTrackerBomb componentFromSkillDef { get; set; }
 
@@ -30,7 +28,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             attackSoundString = "HenryBombThrow";
 
             baseDuration = BaseDuration;
-            baseDelayBeforeFiringProjectile = BaseDelayDuration;
+            baseDelayBeforeFiringProjectile = 0;
 
             damageCoefficient = DamageCoefficient;
             //proc coefficient is set on the components of the projectile prefab

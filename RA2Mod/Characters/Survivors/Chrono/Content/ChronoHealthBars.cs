@@ -35,10 +35,10 @@ namespace RA2Mod.Survivors.Chrono
             public override void UpdateInfo(ref HealthBar.BarInfo info, HealthComponent healthSource)
             {
                 base.UpdateInfo(ref info, healthSource);
-                //todo temp
+
                 info.enabled = sickness > 0;
                 info.normalizedXMin = 0;
-                info.normalizedXMax = sickness / ChronoConfig.M4ChronoStacksToVanish.Value;
+                info.normalizedXMax = sickness / (ChronoConfig.M4ChronoStacksToVanish.Value * 2);
             }
 
             public override void ApplyBar(ref HealthBar.BarInfo info, Image image, HealthComponent source, ref int i)

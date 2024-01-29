@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.Components
 {
-    public class ChronoTrackerVanish : TrackerSkillDefRequired<ChronoTrackerSkillDefVanish>//, IDependentTracker
+    public class ChronoTrackerVanish : Tracker//, IDependentTracker
     {
         public override float maxTrackingDistance => 80;
-
+        
         public override float maxTrackingAngle => 30;
 
         public override BullseyeSearch.SortMode bullseyeSortMode => BullseyeSearch.SortMode.Angle;

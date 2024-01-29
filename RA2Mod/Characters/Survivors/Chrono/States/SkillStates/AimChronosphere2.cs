@@ -17,28 +17,28 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private float sqrRadius;
 
         public List<CharacterBody> teleporteeBodies = new List<CharacterBody>();
+        public CameraTargetParams.CameraParamsOverrideHandle cameraOverride;
+        public Transform origOrigin;
 
         public override void OnEnter()
         {
             ChronosphereProjection chronosphereProjection = Object.Instantiate(ChronoAssets.chronosphereProjection);
             chronosphereProjection.transform.position = originalPoint;
             projectionGameObject = chronosphereProjection.gameObject;
-            chronosphereProjection.RadiusAndEnable(AimChronosphereBase.BaseRadius);
+            chronosphereProjection.SetRadiusAndEnable(AimChronosphereBase.BaseRadius);
 
-            PlayEnterSounds();
+            //if (isAuthority)
+            //{
+            //    for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
+            //    {
+            //        GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
+            //    }
+            //}
 
-            if (isAuthority)
-            {
-                for (TeamIndex teamIndex = TeamIndex.Neutral; teamIndex < TeamIndex.Count; teamIndex += 1)
-                {
-                    GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
-                }
-            }
-
-            if (NetworkServer.active)
-            {
-                RootTeleportees();
-            }
+            //if (NetworkServer.active)
+            //{
+            //    RootTeleportees();
+            //}
 
             sqrRadius = BaseRadius * BaseRadius;
 
@@ -70,7 +70,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             for (int i = 0; i < teleporteeBodies.Count; i++)
             {
-                Log.Warning("adding buff " + teleporteeBodies[i].name);
                 teleporteeBodies[i].AddBuff(ChronoBuffs.chronosphereRootDebuff);
             }
         }
@@ -79,7 +78,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             for (int i = 0; i < teleporteeBodies.Count; i++)
             {
-                Log.Warning("removing buff " + teleporteeBodies[i].name);
                 teleporteeBodies[i].RemoveBuff(ChronoBuffs.chronosphereRootDebuff);
             }
         }
@@ -90,7 +88,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             Vector3 vector = dest.hitPoint - originalPoint;
             dest.finalRay.origin = originalPoint;
-            dest.finalRay.direction = vector;
+            dest.finalRay.direction = vector.normalized;
             dest.speedOverride = this.projectileBaseSpeed;
             dest.travelTime = this.projectileBaseSpeed / vector.magnitude;
         }
@@ -101,17 +99,20 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             if (castSuccessful)
             {
-                Util.PlaySound("Play_ChronosphereMove", projectionGameObject);
+                Util.PlaySound("Play_ChronosphereMove", gameObject);
             }
 
-            if (NetworkServer.active)
-            {
-                UnRootTeleportees();
-            }
+            //if (NetworkServer.active)
+            //{
+            //    UnRootTeleportees();
+            //}
 
-            Object.DestroyImmediate(projectionGameObject);
+            Object.Destroy(projectionGameObject);
 
             skillLocator.utility.UnsetSkillOverride(this, ChronoAssets.cancelSKillDef, GenericSkill.SkillOverridePriority.Contextual);
+            
+            characterBody.aimOriginTransform = origOrigin;
+            cameraTargetParams.RemoveParamsOverride(cameraOverride, 0.5f);
         }
 
         protected override EntityState ActuallyPickNextState(Vector3 point)
@@ -126,12 +127,15 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         protected override void PlayEnterSounds()
         {
+            Log.Warning("what " + projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectStart", projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectLoop", projectionGameObject);
         }
         
         protected override void PlayExitSounds()
         {
+
+            Log.Warning("the fuck " + projectionGameObject);
             Util.PlaySound("Stop_ChronosphereSelectLoop", projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectEnd", projectionGameObject);
         }

@@ -12,15 +12,16 @@ namespace RA2Mod.General
         public static void Init()
         {
             //0-0. General
-            //0-1. Survivors
-            //1-0, 1-1, 1-2, characters
-            //2-0 compats?
+                //0-1. Survivors
+            //1-1, 1-2, 1-3, the boys
+            //2-1 compats?
             string section = "0-0. General";
 
-            Debug = Config.BindAndOptions<bool>(
-            section,
-            "Debug Logs",
-            true);
+            Debug = RA2Plugin.instance.Config.Bind<bool>(
+                section,
+                "Debug Logs", 
+                false, 
+                "In case I forget to remove something");
 
             string survivorSection = "0-1. Survivors";
 

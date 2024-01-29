@@ -1029,7 +1029,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="ChronosphereHumLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+													<ObjectRef Name="ChronosphereSelectLoop" ID="{01BC3988-7F9A-4443-BC21-606D7984BEA3}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

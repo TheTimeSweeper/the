@@ -32,14 +32,14 @@ namespace RA2Mod
         internal static void WarningDebug(string format, params object[] data) => DebugWarning(format, data);
         internal static void DebugWarning(string format, params object[] data)
         {
-            if (General.GeneralConfig.Debug == null || General.GeneralConfig.Debug.Value)
+            if (General.GeneralConfig.Debug.Value)
             {
                 _logSource.LogWarning(string.Format(format, data));
             }
         }
         internal static void CurrentTime(string funny)
         {
-            if (General.GeneralConfig.Debug == null || General.GeneralConfig.Debug.Value)
+            if (General.GeneralConfig.Debug.Value)
             {
                 funnyLog += "\n" + funny;
                 TimeSpan timeSpan = DateTime.Now - _startTime;

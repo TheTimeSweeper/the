@@ -10,7 +10,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     {
         public virtual float damageCoefficient => ChronoConfig.M1Damage.Value;
         public static float procCoefficient = 1f;
-        public virtual float baseDuration => 0.6f;
+        public virtual float baseDuration => ChronoConfig.M1Duration.Value;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 000f;
@@ -67,7 +67,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
                 characterBody.AddSpreadBloom(1.5f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("Play_moonBrother_phaseJump_jumpAway", gameObject);
+                Util.PlaySound("Play_huntress_R_snipe_shoot", gameObject);
 
                 if (isAuthority)
                 {

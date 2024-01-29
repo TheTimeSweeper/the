@@ -15,11 +15,6 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         float endTimer = -1;
 
-        void Awake()
-        {
-            rend.GetPropertyBlock(block);
-        }
-
         public void SetTetherPoint(Vector3 position)
         {
             tetherPoint.position = position;
@@ -41,7 +36,8 @@ namespace RA2Mod.Survivors.Chrono.Components
                 return;
             }
 
-            block.SetFloat("_alphaBoost", endTimer * 2);
+            rend.GetPropertyBlock(block);
+            block.SetFloat("_AlphaBoost", 1 - endTimer * 2);
             rend.SetPropertyBlock(block);
         }
     }

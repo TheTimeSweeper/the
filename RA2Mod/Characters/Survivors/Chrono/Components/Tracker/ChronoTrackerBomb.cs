@@ -10,7 +10,7 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public override float maxTrackingAngle => 180;
 
-        public override BullseyeSearch.SortMode bullseyeSortMode => BullseyeSearch.SortMode.DistanceAndAngle;
+        public override BullseyeSearch.SortMode bullseyeSortMode => BullseyeSearch.SortMode.Angle;
 
         public override bool filterByLoS => false;
 
@@ -32,7 +32,7 @@ namespace RA2Mod.Survivors.Chrono.Components
             //{
             //    aimRay.origin = cameraTargetParams.cameraPivotTransform.position;
             //}
-
+            
             return base.SearchForTarget(aimRay);
         }
 

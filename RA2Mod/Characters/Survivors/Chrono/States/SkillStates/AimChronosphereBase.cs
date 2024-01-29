@@ -6,7 +6,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public abstract class AimChronosphereBase : AimThrowableBase
     {
-        public static float BaseRadius = ChronoConfig.M3Radius.Value;
+        public static float BaseRadius => ChronoConfig.M3Radius.Value;
 
         public static string EnterSoundString = "Play_ChronosphereHumStart";
         public static string LoopSoundString = "Play_ChronosphereHumLoop";
@@ -21,6 +21,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private bool unpressed;
         private bool repressed;
 
+        private bool validTarget;
+
         public override void OnEnter()
         {
             projectilePrefab = ChronoAssets.chronoBombProjectile;
@@ -32,7 +34,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
-            projectileBaseSpeed = 120;            
+            projectileBaseSpeed = 10;            
 
             base.OnEnter();
             PlayEnterSounds();
@@ -83,6 +85,47 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);
         }
+        public override void Update()
+        {
+            base.Update();
+
+            endpointVisualizerTransform.gameObject.SetActive(validTarget);
+        }
+
+        public override void UpdateTrajectoryInfo(out TrajectoryInfo dest)
+        {
+            dest = default(AimThrowableBase.TrajectoryInfo);
+            Ray aimRay = base.GetAimRay();
+            RaycastHit raycastHit = default(RaycastHit);
+            bool flag = false;
+
+            if(Physics.SphereCast(aimRay, rayRadius, out raycastHit, maxDistance, LayerIndex.world.mask, QueryTriggerInteraction.UseGlobal))
+            {
+                flag = true;
+            }
+            if (!flag && Util.CharacterSpherecast(base.gameObject, aimRay, this.rayRadius, out raycastHit, this.maxDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal) && raycastHit.collider.GetComponent<HurtBox>())
+            {
+                flag = true;
+            }
+
+            if (flag)
+            {
+                dest.hitPoint = raycastHit.point;
+                dest.hitNormal = raycastHit.normal;
+                validTarget = true;
+            }
+            else
+            {
+                dest.hitPoint = aimRay.GetPoint(this.maxDistance);
+                dest.hitNormal = -aimRay.direction;
+                validTarget = false;
+            }
+
+            Vector3 vector = dest.hitPoint - aimRay.origin;
+            dest.speedOverride = this.projectileBaseSpeed;
+            dest.finalRay = aimRay;
+            dest.travelTime = this.projectileBaseSpeed / vector.magnitude;
+        }
 
         public override bool KeyIsDown()
         {
@@ -105,14 +148,19 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             base.skillLocator.utility.AddOneStock();
         }
 
-        //todo rework this to a simple projectile
-        //instead of using a fake one in OnEnter and then not using it actually
         public override void FireProjectile() { }
 
         public override EntityState PickNextState()
         {
-            castSuccessful = true;
-            return ActuallyPickNextState(currentTrajectoryInfo.hitPoint);
+            if (validTarget)
+            {
+                castSuccessful = true;
+                return ActuallyPickNextState(currentTrajectoryInfo.hitPoint);
+            }
+            else
+            {
+                return EntityStateCatalog.InstantiateState(outer.mainStateType);
+            }
         }
 
         protected abstract EntityState ActuallyPickNextState(Vector3 point);

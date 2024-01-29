@@ -66,13 +66,13 @@ namespace RA2Mod.Survivors.Chrono.Components
         }
 
         // Token: 0x06002689 RID: 9865 RVA: 0x000A840C File Offset: 0x000A660C
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             this.indicator.active = true;
         }
 
         // Token: 0x0600268A RID: 9866 RVA: 0x000A841A File Offset: 0x000A661A
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             this.indicator.active = false;
         }

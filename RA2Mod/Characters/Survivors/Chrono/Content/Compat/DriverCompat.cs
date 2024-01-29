@@ -34,12 +34,12 @@ namespace RA2Mod.Survivors.Chrono
 
         private static void InitConfig()
         {
-            string section = "3-1. Driver Compat";
+            string section = "2-1. Driver Compat";
 
             DriverGunM1Damage = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM1Damage",
-                1f,
+                2.5f,
                 "",
                 0,
                 20);
@@ -55,7 +55,7 @@ namespace RA2Mod.Survivors.Chrono
             DriverGunM2Damage = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM2Damage",
-                0.5f,
+                0.6f,
                 "",
                 0,
                 10);
@@ -135,7 +135,7 @@ namespace RA2Mod.Survivors.Chrono
                 icon = assetBundle.LoadAsset<Texture2D>("texIconChrono"),
                 crosshairPrefab = ChronoSurvivor.instance.prefabCharacterBody.defaultCrosshairPrefab,
                 tier = DriverWeaponTier.Uncommon,
-                shotCount = 8,
+                shotCount = 20,
                 primarySkillDef = shootSkillDef,
                 secondarySkillDef = vanishSkillDef,
                 mesh = assetBundle.LoadAsset<Mesh>("meshDriverChronoGun"),
@@ -207,6 +207,8 @@ namespace RA2Mod.Survivors.Chrono
             }
 
             base.OnEnter();
+
+            PlayAnimation("Gesture, Override", "FireMachineGun", "shoot.playbackRate", 1000);
 
             muzzleTransform = FindModelChild("ShotgunMuzzle");
             if(muzzleTransform == null)
