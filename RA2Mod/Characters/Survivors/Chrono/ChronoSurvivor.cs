@@ -400,8 +400,19 @@ namespace RA2Mod.Survivors.Chrono
         private void AddHooks()
         {
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+
+            On.RoR2.CharacterBody.OnBuffFinalStackLost += CharacterBody_OnBuffFinalStackLost;
  
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+        }
+
+        private void CharacterBody_OnBuffFinalStackLost(On.RoR2.CharacterBody.orig_OnBuffFinalStackLost orig, CharacterBody self, BuffDef buffDef)
+        {
+            orig(self, buffDef);
+            if(buffDef == ChronoBuffs.chronoSicknessDebuff)
+            {
+                self.inventory.RemoveItem(ChronoItems.chronoSicknessItemDef, self.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef));
+            }
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
@@ -439,7 +450,6 @@ namespace RA2Mod.Survivors.Chrono
                     if(self.body.modelLocator && self.body.modelLocator.modelTransform)
                     {
                         CharacterModel characterModel = self.body.modelLocator.modelTransform.GetComponent<CharacterModel>();
-                        TeleportOutController.AddTPOutEffect(characterModel, 0f, 1f, 0.2f);
                         characterModel.invisibilityCount++;
                     }
                     self.Suicide(damageInfo.attacker, damageInfo.inflictor);
@@ -449,17 +459,24 @@ namespace RA2Mod.Survivors.Chrono
 
         private static void AddChronoSickness(CharacterBody body)
         {
-            body.AddBuff(ChronoBuffs.chronoDebuff);
+            if (!body.isPlayerControlled)
+            {
+                body.AddBuff(ChronoBuffs.chronoSicknessDebuff);
+            } 
+            else
+            {
+                body.AddTimedBuff(ChronoBuffs.chronoSicknessDebuff, 5);
+            }
             int stacks = body.isChampion ? 1 : 2;
             body.inventory?.GiveItem(ChronoItems.chronoSicknessItemDef.itemIndex, stacks);
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(ChronoBuffs.chronoDebuff))
-            {
-                args.moveSpeedReductionMultAdd += 1;
-            }
+            //if (sender.HasBuff(ChronoBuffs.chronoSicknessDebuff))
+            //{
+            //    args.moveSpeedReductionMultAdd += 1;
+            //}
 
             if (sender.HasBuff(ChronoBuffs.chronosphereRootDebuff))
             {

@@ -11,7 +11,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     public class Vanish : BaseSkillState, IHasSkillDefComponent<ChronoTrackerVanish>
     {
         public virtual float damageCoefficient => ChronoConfig.M4Damage.Value;
-        public static float procCoefficient = 0.5f;
+        public static float procCoefficient = 1;
         public virtual float baseDuration => ChronoConfig.M4Duration.Value;
         
         public virtual float baseTickInterval => ChronoConfig.M4Interval.Value;
@@ -80,7 +80,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 crit = base.RollCrit(),
                 force = Vector3.zero,
                 procChainMask = default(ProcChainMask),
-                procCoefficient = 0.5f,
+                procCoefficient = procCoefficient,
             };
             damageInfo.AddModdedDamageType(ChronoDamageTypes.chronoDamagePierce);
             damageInfo.AddModdedDamageType(ChronoDamageTypes.vanishingDamage);
@@ -114,6 +114,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             damageInfo.position = targetHurtBox.transform.position;
 
             targetHurtBox.healthComponent.TakeDamage(damageInfo);
+            GlobalEventManager.instance.OnHitEnemy(damageInfo, targetHurtBox.healthComponent.gameObject);
+            GlobalEventManager.instance.OnHitAll(damageInfo, targetHurtBox.healthComponent.gameObject);
         }
 
         public override void OnExit()

@@ -11,9 +11,17 @@ namespace RA2Mod.Survivors.Chrono.Components
         [SerializeField]
         private Renderer rend;
 
-        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        [SerializeField]
+        private float disposeTime;
 
-        float endTimer = -1;
+        private MaterialPropertyBlock block = new MaterialPropertyBlock();
+
+        private float endTimer = -1;
+        private float startAlpha;
+        void Awake()
+        {
+            startAlpha = rend.material.GetFloat("_AlphaBoost");
+        }
 
         public void SetTetherPoint(Vector3 position)
         {
@@ -30,14 +38,14 @@ namespace RA2Mod.Survivors.Chrono.Components
             if (endTimer < 0)
                 return;
             endTimer += Time.deltaTime;
-            if (endTimer >= 0.5f)
+            if (endTimer >= disposeTime)
             {
                 Destroy(gameObject);
                 return;
             }
 
             rend.GetPropertyBlock(block);
-            block.SetFloat("_AlphaBoost", 1 - endTimer * 2);
+            block.SetFloat("_AlphaBoost", Mathf.Lerp(startAlpha, startAlpha, endTimer / disposeTime));
             rend.SetPropertyBlock(block);
         }
     }

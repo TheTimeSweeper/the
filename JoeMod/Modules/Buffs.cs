@@ -82,7 +82,7 @@ namespace Modules {
                                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
                                lime,
                                true,
-                               true);
+                               false);
             }
         }
 

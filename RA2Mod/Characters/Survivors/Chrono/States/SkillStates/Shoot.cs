@@ -16,7 +16,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public static float force = 000f;
         public static float recoil = 3f;
         public static float range = 256f;
-        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
+        //public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
         protected float duration;
         protected string muzzleString;
@@ -58,7 +58,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 return;
             }
         }
-
+        
         private void Fire()
         {
             if (!hasFired)
@@ -97,7 +97,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,
-                        tracerEffectPrefab = tracerEffectPrefab,
+                        tracerEffectPrefab = ChronoAssets.chronoTracer,
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,

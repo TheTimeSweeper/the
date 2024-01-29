@@ -23,6 +23,7 @@ namespace RA2Mod.Survivors.Chrono
         public static GameObject chronoIndicatorPhase;
 
         public static ChronoTether chronoVanishTether;
+        public static GameObject chronoTracer;
         public static GameObject vanishEffect;
 
         public static ChronosphereProjection chronosphereProjection;
@@ -234,9 +235,10 @@ namespace RA2Mod.Survivors.Chrono
                     lightningRamp = result;
                 });
 
+                Material beamMat = null;
                 yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", (result) =>
                 {
-                    Material beamMat = new Material(result);
+                    beamMat = new Material(result);
                     beamMat.SetTexture("_MainTex", chronoBeam);
                     beamMat.SetTexture("_RemapTex", lightningRamp);
 
@@ -245,12 +247,24 @@ namespace RA2Mod.Survivors.Chrono
                     beamMat.SetTextureScale("_Cloud2Tex", new Vector2(12.0f, 0.4f));
                     beamMat.SetTextureOffset("_Cloud2Tex", new Vector2(0, 0.46f));
                     beamMat.SetVector("_CutoffScroll", new Vector4(-27.4f, 0, -13f, 11.38f));
-                    
+
+                    beamMat.SetColor("_EmissionColor", new Color(0, 0.06280571f, 0.3396226f, 0));
                     beamMat.SetFloat("_AlphaBoost", 1.28f);
                     beamMat.SetFloat("_Cutoff", 0.3f);
                     beamMat.SetFloat("_SpecularStrength", 0f);
                     chronoVanishTether.GetComponent<LineRenderer>().sharedMaterial = beamMat;
                 });
+
+                yield return assetBundle.LoadAssetAsync<GameObject>("ChronoTracer", (result) =>
+                {
+                    chronoTracer = result;
+                    beamMat = new Material(beamMat);
+                    beamMat.SetTexture("_Cloud2Tex", null);
+                    beamMat.SetFloat("_AlphaBoost", 0.4f);
+                    chronoTracer.GetComponentInChildren<LineRenderer>().sharedMaterial = beamMat;
+                    Content.CreateAndAddEffectDef(chronoTracer);
+                });
+
             }
 
             //chronosphere here we go
