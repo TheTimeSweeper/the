@@ -1,13 +1,13 @@
-Shader "StubbedShader/deferred/hgstandard" {
+Shader "StubbedRoR2/Base/Shaders/HGStandard" {
 	Properties {
 		[Header(Default)] [Toggle(CUTOUT)] _EnableCutout ("Cutout", Float) = 0
 		_Color ("Main Color", Color) = (0.5,0.5,0.5,1)
 		_MainTex ("Base (RGB) Specular Scale (A)", 2D) = "white" {}
 		_NormalStrength ("Normal Strength", Range(0, 5)) = 1
 		_NormalTex ("Normal Map", 2D) = "bump" {}
-		_EmColor ("Emission Color", Vector) = (0,0,0,1)
+		_EmColor ("Emission Color", Color) = (0,0,0,1)
 		[NoScaleOffset] _EmTex ("Emission Tex (RGB)", 2D) = "white" {}
-		_EmPower ("Emission Power", Range(0, 1000)) = 1
+		_EmPower ("Emission Power", Range(0, 10)) = 1
 		_Smoothness ("Smoothness", Range(0, 1)) = 0
 		[Toggle(FORCE_SPEC)] _ForceSpecOn ("Ignore Diffuse Alpha for Speculars", Float) = 0
 		[MaterialEnum(Two Tone,0,Smoothed Two Tone,1,Unlitish,3,Subsurface,4,Grass,5)] _RampInfo ("Ramp Choice", Float) = 0
@@ -55,14 +55,37 @@ Shader "StubbedShader/deferred/hgstandard" {
 		_FlowHeightBias ("Flow Height Bias", Range(-1, 1)) = 0
 		_FlowHeightPower ("Flow Height Power", Range(0.1, 20)) = 1
 		_FlowEmissionStrength ("Flow Height Strength", Range(0.1, 20)) = 1
-		_FlowSpeed ("Flow Speed", Range(0, 15)) = 1
+		_FlowSpeed ("Flow Speed", Range(0, 100)) = 1
 		_FlowMaskStrength ("Mask Flow Strength", Range(0, 5)) = 0
 		_FlowNormalStrength ("Normal Flow Strength", Range(0, 5)) = 1
 		_FlowTextureScaleFactor ("Flow Texture Scale Factor", Range(0, 10)) = 1
 		[Header(Limb Removal)] [Toggle(LIMBREMOVAL)] _LimbRemovalOn ("Enable Limb Removal", Float) = 0
 		[PerRendererData] _LimbPrimeMask ("Limb Prime Mask", Range(1, 10000)) = 1
-		[PerRendererData] _FlashColor ("Flash Color", Vector) = (0,0,0,1)
+		[PerRendererData] _FlashColor ("Flash Color", Color) = (0,0,0,1)
 		[PerRendererData] _Fade ("Fade", Range(0, 1)) = 1
+	}
+	//DummyShaderTextExporter
+	SubShader{
+		Tags { "RenderType"="Opaque" }
+		LOD 200
+		CGPROGRAM
+#pragma surface surf Standard
+#pragma target 3.0
+
+		sampler2D _MainTex;
+		fixed4 _Color;
+		struct Input
+		{
+			float2 uv_MainTex;
+		};
+		
+		void surf(Input IN, inout SurfaceOutputStandard o)
+		{
+			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+			o.Albedo = c.rgb;
+			o.Alpha = c.a;
+		}
+		ENDCG
 	}
 	Fallback "Diffuse"
 }

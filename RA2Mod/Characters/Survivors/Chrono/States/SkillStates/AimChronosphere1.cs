@@ -23,11 +23,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             origOrigin = characterBody.aimOriginTransform;
             characterBody.aimOriginTransform = FindModelChild("ChronosphereAimOrigin");
-            characterBody.aimOriginTransform.position = new Vector3(characterBody.aimOriginTransform.position.x, transform.position.y + ChronoConfig.yy.Value, characterBody.aimOriginTransform.position.z);
+            characterBody.aimOriginTransform.position = new Vector3(characterBody.aimOriginTransform.position.x, transform.position.y + 10, characterBody.aimOriginTransform.position.z);
             
             base.OnEnter();
 
-            cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.chronosphereCamera, ChronoConfig.t.Value);
+            cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.chronosphereCamera, ChronoConfig.M3ChronosphereCameraLerpTime.Value);
         }
 
         public override void UpdateTrajectoryInfo(out TrajectoryInfo dest)
@@ -52,7 +52,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             if (!castSuccessful)
             {
                 characterBody.aimOriginTransform = origOrigin;
-                cameraTargetParams.RemoveParamsOverride(cameraOverride, ChronoConfig.t.Value);
+                cameraTargetParams.RemoveParamsOverride(cameraOverride, ChronoConfig.M3ChronosphereCameraLerpTime.Value);
             }
         }
     }

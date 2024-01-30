@@ -34,7 +34,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
-            projectileBaseSpeed = 10;            
+            projectileBaseSpeed = 60;            
 
             base.OnEnter();
             PlayEnterSounds();
@@ -45,6 +45,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             viewRadius = BaseRadius;
 
             viewRadius *= skillsPlusMulti;
+
+            base.characterBody.hideCrosshair = false;
 
         }
 
@@ -96,7 +98,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             dest = default(AimThrowableBase.TrajectoryInfo);
             Ray aimRay = base.GetAimRay();
-            RaycastHit raycastHit = default(RaycastHit);
+            RaycastHit raycastHit;
             bool flag = false;
 
             if(Physics.SphereCast(aimRay, rayRadius, out raycastHit, maxDistance, LayerIndex.world.mask, QueryTriggerInteraction.UseGlobal))

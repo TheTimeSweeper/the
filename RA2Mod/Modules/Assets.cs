@@ -46,6 +46,7 @@ namespace RA2Mod.Modules
             }
 
             loadedBundles[bundleName] = assetBundle;
+            RA2Plugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(assetBundle));
 
             return assetBundle;
 
@@ -69,14 +70,14 @@ namespace RA2Mod.Modules
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
         {
-            var loadAsset = Addressables.LoadAssetAsync<T>(key);
+            AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
             if (!loadAsset.IsDone) { yield return loadAsset; }
             OnComplete(loadAsset.Result);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
         {
-            var loadAsset = Addressables.LoadAssetAsync<T>(key);
+            AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
             if (!loadAsset.IsDone) { yield return loadAsset; }
             yield return OnComplete(loadAsset.Result);
         }

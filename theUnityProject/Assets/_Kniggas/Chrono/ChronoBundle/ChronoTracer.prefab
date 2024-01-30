@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166536393666831041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0702467, y: -0.47645473, z: 11.819836}
+  m_LocalPosition: {x: 0.14049435, y: -0.9529097, z: 10.67967}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4265306907227748310}
-  m_RootOrder: 2
+  m_Father: {fileID: 3116538475578496184}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717603870932878464
 GameObject:
@@ -53,12 +53,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717603870932878464}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.14049435, y: -0.9529097, z: -2.2803292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4265306907227748310}
-  m_RootOrder: 1
+  m_Father: {fileID: 3116538475578496184}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5984827293058163330
 GameObject:
@@ -87,8 +87,8 @@ Transform:
   m_LocalPosition: {x: 0.14049435, y: -0.9529097, z: 23.639671}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4265306907227748310}
-  m_RootOrder: 3
+  m_Father: {fileID: 3116538475578496184}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6350865948007548414
 GameObject:
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 3710486883815087618}
   - component: {fileID: 6527995926577602543}
   - component: {fileID: 4857929881666268514}
-  - component: {fileID: 1107718783088543265}
+  - component: {fileID: 4325725616180244419}
   m_Layer: 0
   m_Name: ChronoTetherTracer
   m_TagString: Untagged
@@ -118,10 +118,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6350865948007548414}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.14049435, y: -0.9529097, z: -2.2803292}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6437703777761791152}
+  - {fileID: 1008273601740900820}
+  - {fileID: 562929650721377414}
   m_Father: {fileID: 4265306907227748310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,26 +168,26 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -15.466945, y: 3.4891214, z: 6.268463}
-  - {x: -15.075755, y: 3.7328188, z: 7.512656}
-  - {x: -14.77487, y: 3.9073746, z: 8.756849}
-  - {x: -14.564291, y: 4.0127892, z: 10.001042}
-  - {x: -14.4440155, y: 4.0490627, z: 11.245236}
-  - {x: -14.414045, y: 4.0161953, z: 12.489429}
-  - {x: -14.474379, y: 3.914186, z: 13.733623}
-  - {x: -14.625018, y: 3.7430358, z: 14.977816}
-  - {x: -14.865961, y: 3.5027442, z: 16.22201}
-  - {x: -15.197209, y: 3.1933112, z: 17.466202}
-  - {x: -15.596187, y: 2.8320222, z: 18.710396}
-  - {x: -15.927435, y: 2.5225894, z: 19.954588}
-  - {x: -16.168377, y: 2.2822976, z: 21.198782}
-  - {x: -16.319017, y: 2.1111472, z: 22.442976}
-  - {x: -16.37935, y: 2.009138, z: 23.687168}
-  - {x: -16.34938, y: 1.9762706, z: 24.931362}
-  - {x: -16.229105, y: 2.0125437, z: 26.175554}
-  - {x: -16.018524, y: 2.1179585, z: 27.419748}
-  - {x: -15.717639, y: 2.2925146, z: 28.663942}
-  - {x: -15.32645, y: 2.5362117, z: 29.908134}
+  - {x: -15.185956, y: 1.583302, z: 1.7078047}
+  - {x: -14.80216, y: 1.8771524, z: 3.0720153}
+  - {x: -14.508671, y: 2.1018615, z: 4.436226}
+  - {x: -14.305485, y: 2.2574294, z: 5.800436}
+  - {x: -14.192604, y: 2.343856, z: 7.1646466}
+  - {x: -14.170028, y: 2.3611412, z: 8.528857}
+  - {x: -14.237757, y: 2.3092856, z: 9.893067}
+  - {x: -14.39579, y: 2.1882885, z: 11.257278}
+  - {x: -14.644128, y: 1.9981498, z: 12.621489}
+  - {x: -14.98277, y: 1.7388699, z: 13.9857}
+  - {x: -15.389142, y: 1.427734, z: 15.349911}
+  - {x: -15.727784, y: 1.1684545, z: 16.71412}
+  - {x: -15.976122, y: 0.97831607, z: 18.078331}
+  - {x: -16.134155, y: 0.85731876, z: 19.442543}
+  - {x: -16.201883, y: 0.80546254, z: 20.806753}
+  - {x: -16.179308, y: 0.8227481, z: 22.170963}
+  - {x: -16.066427, y: 0.9091746, z: 23.535173}
+  - {x: -15.863241, y: 1.0647424, z: 24.899384}
+  - {x: -15.569751, y: 1.2894517, z: 26.263596}
+  - {x: -15.185956, y: 1.583302, z: 27.627806}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.7649118
@@ -353,26 +356,26 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     localVelocity: {x: -16.3, y: -12.48, z: 0}
   linePositionList:
-  - {x: -15.466945, y: 3.4891214, z: 6.268463}
-  - {x: -15.075755, y: 3.7328188, z: 7.512656}
-  - {x: -14.77487, y: 3.9073746, z: 8.756849}
-  - {x: -14.564291, y: 4.0127892, z: 10.001042}
-  - {x: -14.4440155, y: 4.0490627, z: 11.245236}
-  - {x: -14.414045, y: 4.0161953, z: 12.489429}
-  - {x: -14.474379, y: 3.914186, z: 13.733623}
-  - {x: -14.625018, y: 3.7430358, z: 14.977816}
-  - {x: -14.865961, y: 3.5027442, z: 16.22201}
-  - {x: -15.197209, y: 3.1933112, z: 17.466202}
-  - {x: -15.596187, y: 2.8320222, z: 18.710396}
-  - {x: -15.927435, y: 2.5225894, z: 19.954588}
-  - {x: -16.168377, y: 2.2822976, z: 21.198782}
-  - {x: -16.319017, y: 2.1111472, z: 22.442976}
-  - {x: -16.37935, y: 2.009138, z: 23.687168}
-  - {x: -16.34938, y: 1.9762706, z: 24.931362}
-  - {x: -16.229105, y: 2.0125437, z: 26.175554}
-  - {x: -16.018524, y: 2.1179585, z: 27.419748}
-  - {x: -15.717639, y: 2.2925146, z: 28.663942}
-  - {x: -15.32645, y: 2.5362117, z: 29.908134}
+  - {x: -15.185956, y: 1.583302, z: 1.7078047}
+  - {x: -14.80216, y: 1.8771524, z: 3.0720153}
+  - {x: -14.508671, y: 2.1018615, z: 4.436226}
+  - {x: -14.305485, y: 2.2574294, z: 5.800436}
+  - {x: -14.192604, y: 2.343856, z: 7.1646466}
+  - {x: -14.170028, y: 2.3611412, z: 8.528857}
+  - {x: -14.237757, y: 2.3092856, z: 9.893067}
+  - {x: -14.39579, y: 2.1882885, z: 11.257278}
+  - {x: -14.644128, y: 1.9981498, z: 12.621489}
+  - {x: -14.98277, y: 1.7388699, z: 13.9857}
+  - {x: -15.389142, y: 1.427734, z: 15.349911}
+  - {x: -15.727784, y: 1.1684545, z: 16.71412}
+  - {x: -15.976122, y: 0.97831607, z: 18.078331}
+  - {x: -16.134155, y: 0.85731876, z: 19.442543}
+  - {x: -16.201883, y: 0.80546254, z: 20.806753}
+  - {x: -16.179308, y: 0.8227481, z: 22.170963}
+  - {x: -16.066427, y: 0.9091746, z: 23.535173}
+  - {x: -15.863241, y: 1.0647424, z: 24.899384}
+  - {x: -15.569751, y: 1.2894517, z: 26.263596}
+  - {x: -15.185956, y: 1.583302, z: 27.627806}
   lineRenderer: {fileID: 9185250154458864725}
 --- !u!114 &6527995926577602543
 MonoBehaviour:
@@ -404,7 +407,7 @@ MonoBehaviour:
   - {fileID: 6437703777761791152}
   - {fileID: 1008273601740900820}
   - {fileID: 562929650721377414}
---- !u!114 &1107718783088543265
+--- !u!114 &4325725616180244419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,15 +416,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6350865948007548414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 511512695, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Script: {fileID: 11500000, guid: 20351679261b958438315cc93cd768f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectIndex: -1
-  positionAtReferencedTransform: 0
-  parentToReferencedTransform: 0
-  applyScale: 0
-  soundName: 
-  disregardZScale: 0
+  tetherPoint: {fileID: 562929650721377414}
+  rend: {fileID: 9185250154458864725}
+  disposeTime: 0.5
+  disposeImmediately: 0
 --- !u!1 &7378710051466223265
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,9 +432,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4265306907227748310}
-  - component: {fileID: 4785760077116226325}
   - component: {fileID: 1158397277141551932}
   - component: {fileID: 3876853662188226274}
+  - component: {fileID: 2935820828801918464}
   m_Layer: 0
   m_Name: ChronoTracer
   m_TagString: Untagged
@@ -448,32 +449,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7378710051466223265}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8774948, y: 3.0679097, z: 2.2803292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3116538475578496184}
-  - {fileID: 6437703777761791152}
-  - {fileID: 1008273601740900820}
-  - {fileID: 562929650721377414}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4785760077116226325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7378710051466223265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20351679261b958438315cc93cd768f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tetherPoint: {fileID: 562929650721377414}
-  rend: {fileID: 9185250154458864725}
-  disposeTime: 0.5
 --- !u!114 &1158397277141551932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,15 +490,26 @@ MonoBehaviour:
   startTransform: {fileID: 0}
   beamObject: {fileID: 0}
   beamDensity: 10
-  speed: 1202
+  speed: 2048
   headTransform: {fileID: 562929650721377414}
   tailTransform: {fileID: 6437703777761791152}
-  length: 1006
+  length: 512
   reverse: 0
   onTailReachedDestination:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4785760077116226325}
+      - m_Target: {fileID: 2935820828801918464}
+        m_MethodName: UnparentTransform
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3116538475578496184}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4325725616180244419}
         m_MethodName: Dispose
         m_Mode: 1
         m_Arguments:
@@ -526,3 +520,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2935820828801918464}
+        m_MethodName: DestroySelf
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2935820828801918464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378710051466223265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 733712478, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

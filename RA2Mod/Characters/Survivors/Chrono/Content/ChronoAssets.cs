@@ -17,6 +17,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public static ChronoProjectionMotor markerPrefab;
         public static GameObject chronoBombProjectile;
+        public static GameObject lunarSunExplosion;
 
         public static GameObject chronoIndicatorIvan;
         public static GameObject chronoIndicatorVanish;
@@ -82,7 +83,7 @@ namespace RA2Mod.Survivors.Chrono
             chronoBombProjectile = assetBundle.LoadAsset<GameObject>("ChronoIvanBombProjectile");
             R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
             chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/StickyBomb").GetComponent<ProjectileController>().ghostPrefab;
-            chronoBombProjectile.GetComponent<ProjectileImpactExplosion>().explosionEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ExplosionLunarSun");
+            chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ExplosionLunarSun");
             Content.AddProjectilePrefab(chronoBombProjectile);
 
             chronoIndicatorIvan = assetBundle.LoadAsset<GameObject>("IndicatorChronoIvan");
@@ -185,7 +186,8 @@ namespace RA2Mod.Survivors.Chrono
                 });
                 yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
                 {
-                    chronoBombProjectile.GetComponent<ProjectileImpactExplosion>().explosionEffect = result;
+                    lunarSunExplosion = result;
+                    chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
                 });
             }
 

@@ -68,7 +68,7 @@ namespace RA2Mod.Survivors.Chrono
 
             #region compat
             Language.Add(prefix + "PRIMARY_SHOOT_DRIVER_NAME", "Neutron Rifle");
-            Language.Add(prefix + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire a time-stopping rifle for % damage and apply x% [Chrono Sickness] to enemies.");
+            Language.Add(prefix + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for % damage and apply x% [Chrono Sickness] to enemies.");
 
             Language.Add(prefix + "SPECIAL_VANISH_DRIVER_NAME", "Never Existed");
             Language.Add(prefix + "SPECIAL_VANISH_DRIVER_DESCRIPTION", $"Focus your rifle for x% damage per second. An enemy below the [Chrono Sickness] threshold will vanish from existence.");

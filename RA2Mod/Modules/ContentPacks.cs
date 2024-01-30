@@ -29,6 +29,9 @@ namespace RA2Mod.Modules {
         public static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
         public static List<GameObject> networkedObjects = new List<GameObject>();
 
+        public delegate void DoThingsAfterShitHasLoaded();
+        public DoThingsAfterShitHasLoaded doShitAfterThingsHaveLoaded;
+
         public void Initialize()
         {
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
@@ -79,6 +82,7 @@ namespace RA2Mod.Modules {
 
         public System.Collections.IEnumerator FinalizeAsync(FinalizeAsyncArgs args)
         {
+            doShitAfterThingsHaveLoaded?.Invoke();
             args.ReportProgress(1f);
             yield break;
         }

@@ -1,11 +1,13 @@
 ﻿using RTAutoSprintEx;
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoCompat
     {
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void Init()
         {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
@@ -14,7 +16,7 @@ namespace RA2Mod.Survivors.Chrono
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.Driver"))
             {
-                DriverCompat.Init();
+                new DriverCompat().Init();
             }
         }
 

@@ -289,7 +289,7 @@ namespace RA2Mod.Survivors.Chrono
         private void AddSpecialSkills()
         {
             //a basic skill
-            ChronoTrackerSkillDefVanish vanishSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefVanish> (new SkillDefInfo
+            ChronoTrackerSkillDefVanish vanishSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefVanish>(new SkillDefInfo
             {
                 skillName = "chronoVanish",
                 skillNameToken = CHRONO_PREFIX + "SPECIAL_VANISH_NAME",
@@ -298,14 +298,15 @@ namespace RA2Mod.Survivors.Chrono
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Vanish)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
-                activationStateMachineName = "Weapon", 
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 6f,
 
                 isCombatSkill = true,
                 mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = true
             });
 
             Skills.AddSpecialSkills(bodyPrefab, vanishSkillDef);

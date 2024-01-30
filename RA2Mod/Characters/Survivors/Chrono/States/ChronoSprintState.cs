@@ -41,7 +41,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
             }
 
-            cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, ChronoConfig.t2.Value);
+            cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, ChronoConfig.M0CameraLerpTime.Value);
         }
 
         public override void FixedUpdate()
@@ -103,7 +103,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             UnityEngine.Object.Destroy(marker.gameObject);
 
-            cameraTargetParams.RemoveParamsOverride(cameraOverride, ChronoConfig.t2.Value);
+            cameraTargetParams.RemoveParamsOverride(cameraOverride, ChronoConfig.M0CameraLerpTime.Value);
         }
 
         private void StopCamera()

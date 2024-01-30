@@ -14,7 +14,7 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public void SetRadiusAndEnable(float radius)
         {
-            sphere.transform.localScale = Vector3.one * radius * 2;
+            sphere.transform.localScale = Vector3.one * radius;
             sphere.enabled = true;
         }
     }

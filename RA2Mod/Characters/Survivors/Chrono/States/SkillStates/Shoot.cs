@@ -3,6 +3,7 @@ using R2API;
 using RA2Mod.Survivors.Chrono;
 using RoR2;
 using UnityEngine;
+using static RoR2.BulletAttack;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
@@ -11,10 +12,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public virtual float damageCoefficient => ChronoConfig.M1Damage.Value;
         public static float procCoefficient = 1f;
         public virtual float baseDuration => ChronoConfig.M1Duration.Value;
+        public virtual float hitRadius => ChronoConfig.M1Radius.Value;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 000f;
-        public static float recoil = 3f;
+        public virtual float recoil => ChronoConfig.M1Screenshake.Value;
         public static float range = 256f;
         //public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
@@ -22,6 +24,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         protected string muzzleString;
         private float fireTime;
         private bool hasFired;
+        private bool triggeredComboExplosion;
 
         public override void OnEnter()
         {
@@ -78,7 +81,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                         bulletCount = 1,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
-                        damage = damageCoefficient * damageStat,
+                        damage = 0,//damageCoefficient * damageStat,
+                        procCoefficient = 0,//procCoefficient,
                         damageColorIndex = DamageColorIndex.Default,
                         damageType = DamageType.Generic,
                         falloffModel = BulletAttack.FalloffModel.None,
@@ -87,12 +91,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                         hitMask = LayerIndex.CommonMasks.bullet,
                         minSpread = 0f,
                         maxSpread = 0f,
-                        isCrit = RollCrit(),
+                        isCrit = false,//RollCrit(),
                         owner = gameObject,
                         muzzleName = muzzleString,
                         smartCollision = true,
                         procChainMask = default,
-                        procCoefficient = procCoefficient,
                         radius = 0.75f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
@@ -101,13 +104,56 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+                        hitEffectPrefab = null,//EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+                        hitCallback = ComboHitCallback
                     };
 
-                    bulletAttack.AddModdedDamageType(ChronoDamageTypes.chronoDamage);
                     bulletAttack.Fire();
                 }
             }
+        }
+
+        //credit to moffien with pilot
+        private bool ComboHitCallback(BulletAttack bulletRef, ref BulletHit hitInfo)
+        {
+            if (hitInfo.point != null && !triggeredComboExplosion)
+            {
+                triggeredComboExplosion = true;
+
+                if (ChronoAssets.lunarSunExplosion)
+                {
+                    EffectManager.SpawnEffect(
+                        ChronoAssets.lunarSunExplosion, 
+                        new EffectData { 
+                            origin = hitInfo.point, 
+                            scale = hitRadius 
+                        }, 
+                        true);
+                }
+                BlastAttack blastAttack = new BlastAttack()
+                {
+                    attacker = base.gameObject,
+                    attackerFiltering = AttackerFiltering.Default,
+                    baseDamage = this.damageStat * damageCoefficient,
+                    baseForce = 0f,
+                    bonusForce = default(Vector3),
+                    canRejectForce = true,
+                    crit = base.RollCrit(),
+                    damageColorIndex = DamageColorIndex.Default,
+                    damageType = DamageType.Generic,
+                    falloffModel = BlastAttack.FalloffModel.None,
+                    inflictor = base.gameObject,
+                    position = hitInfo.point,
+                    procChainMask = default,
+                    procCoefficient = procCoefficient,
+                    radius = hitRadius,
+                    teamIndex = base.GetTeam()
+                };
+                blastAttack.AddModdedDamageType(ChronoDamageTypes.chronoDamage);
+                blastAttack.Fire();
+            }
+
+            return BulletAttack.defaultHitCallback.Invoke(bulletRef, ref hitInfo);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

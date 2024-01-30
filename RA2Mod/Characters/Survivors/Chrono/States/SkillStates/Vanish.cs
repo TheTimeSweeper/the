@@ -36,7 +36,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             base.OnEnter();
             duration = baseDuration;
             tickInterval = baseTickInterval / attackSpeedStat;
-            characterBody.SetAimTimer(2f);
+            StartAimMode(4);
 
             Util.PlaySound("Play_ChronoAttackShort", gameObject);
 

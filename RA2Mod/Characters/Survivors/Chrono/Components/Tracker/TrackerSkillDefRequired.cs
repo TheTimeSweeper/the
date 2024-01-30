@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using RoR2.Skills;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace RA2Mod.Survivors.Chrono.Components
@@ -17,12 +18,8 @@ namespace RA2Mod.Survivors.Chrono.Components
             {
                 skillMap[skills[i]] = false;
                 skills[i].onSkillChanged += OnSkillChanged;
+                OnSkillChanged(skills[i]);
             }
-        }
-
-        protected override void OnEnable()
-        {
-            OnSkillChanged();
         }
         
         void OnDestroy()
@@ -33,13 +30,15 @@ namespace RA2Mod.Survivors.Chrono.Components
             }
         }
 
-        protected virtual void OnSkillChanged(GenericSkill genericSkill = null)
+        protected virtual void OnSkillChanged(GenericSkill genericSkill)
         {
-            if (genericSkill)
-            {
-                skillMap[genericSkill] = genericSkill.skillDef is T;
-            }
+            skillMap[genericSkill] = genericSkill.skillDef is T;
 
+            CheckSkills();
+        }
+
+        private void CheckSkills()
+        {
             foreach (bool isSkill in skillMap.Values)
             {
                 if (isSkill)

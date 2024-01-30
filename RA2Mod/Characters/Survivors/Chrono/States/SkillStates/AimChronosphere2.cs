@@ -127,7 +127,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         protected override void PlayEnterSounds()
         {
-            Log.Warning("what " + projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectStart", projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectLoop", projectionGameObject);
         }
@@ -135,7 +134,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         protected override void PlayExitSounds()
         {
 
-            Log.Warning("the fuck " + projectionGameObject);
             Util.PlaySound("Stop_ChronosphereSelectLoop", projectionGameObject);
             Util.PlaySound("Play_ChronosphereSelectEnd", projectionGameObject);
         }

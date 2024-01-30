@@ -22,24 +22,43 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> DriverGunM2TickInterval;
         public static ConfigEntry<float> DriverGunM2Duration;
 
+        private ushort chronoGunIndex;
+
         private static AssetBundle assetBundle => ChronoSurvivor.instance.assetBundle;
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        public static void Init()
+        public void Init()
         {
             On.RoR2.SurvivorCatalog.SetSurvivorDefs += SurvivorCatalog_SetSurvivorDefs;
 
             InitConfig();
+
+            if (General.GeneralConfig.Debug.Value)
+            {
+                On.RoR2.CharacterBody.Update += CharacterBody_Update;
+            }
         }
 
-        private static void InitConfig()
+        private void CharacterBody_Update(On.RoR2.CharacterBody.orig_Update orig, CharacterBody self)
+        {
+            orig(self);
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                if(self.TryGetComponent(out DriverController cantdrive55))
+                {
+                    cantdrive55.PickUpWeapon(RobDriver.DriverWeaponCatalog.GetWeaponFromIndex(chronoGunIndex));
+                }
+            }
+        }
+
+        private void InitConfig()
         {
             string section = "2-1. Driver Compat";
 
             DriverGunM1Damage = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM1Damage",
-                2.5f,
+                1.10f,
                 "",
                 0,
                 20);
@@ -47,7 +66,7 @@ namespace RA2Mod.Survivors.Chrono
             DriverGunM1Duration = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM1Duration",
-                0.6f,
+                0.38f,
                 "",
                 0,
                 5);
@@ -55,7 +74,7 @@ namespace RA2Mod.Survivors.Chrono
             DriverGunM2Damage = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM2Damage",
-                0.6f,
+                0.18f,
                 "",
                 0,
                 10);
@@ -63,7 +82,7 @@ namespace RA2Mod.Survivors.Chrono
             DriverGunM2TickInterval = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM2TickInterval",
-                0.2f,
+                0.13f,
                 "",
                 0,
                 10);
@@ -77,7 +96,7 @@ namespace RA2Mod.Survivors.Chrono
                 20);
         }
 
-        private static void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs)
+        private void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs)
         {
             orig(newSurvivorDefs);
 
@@ -95,15 +114,15 @@ namespace RA2Mod.Survivors.Chrono
             Log.CurrentTime("no driver. chrono compat failed");
         }
 
-        private static void DoDriverCompat()
+        private void DoDriverCompat()
         {
             chronoIndicatorVanishDriver = assetBundle.LoadAsset<GameObject>("IndicatorChronoVanishDriver");
 
             SkillDef shootSkillDef = Skills.CreateSkillDef(new SkillDefInfo
                 (
                     "chronoShoot",
-                    ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_NAME",
-                    ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
+                    ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME",
+                    ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION",
                     ChronoSurvivor.instance.assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                     new EntityStates.SerializableEntityStateType(typeof(ShootDriver)),
                     "Weapon",
@@ -113,8 +132,8 @@ namespace RA2Mod.Survivors.Chrono
             ChronoTrackerSkillDefVanish vanishSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefVanish>(new SkillDefInfo
             {
                 skillName = "chronoVanish",
-                skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_NAME",
-                skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
+                skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_NAME",
+                skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(VanishDriver)),
@@ -122,29 +141,31 @@ namespace RA2Mod.Survivors.Chrono
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 5f,
 
                 isCombatSkill = true,
                 mustKeyPress = true,
             });
             
-            DriverWeaponDef chronoGunWeaponDef = DriverWeaponDef.CreateWeaponDefFromInfo(new DriverWeaponDefInfo
+            var chronoGunWeaponDef = DriverWeaponDef.CreateWeaponDefFromInfo(new DriverWeaponDefInfo
             {
                 nameToken = ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_NAME",
                 descriptionToken = ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION",
                 icon = assetBundle.LoadAsset<Texture2D>("texIconChrono"),
                 crosshairPrefab = ChronoSurvivor.instance.prefabCharacterBody.defaultCrosshairPrefab,
                 tier = DriverWeaponTier.Uncommon,
-                shotCount = 20,
+                shotCount = 48,
                 primarySkillDef = shootSkillDef,
                 secondarySkillDef = vanishSkillDef,
                 mesh = assetBundle.LoadAsset<Mesh>("meshDriverChronoGun"),
                 material = assetBundle.LoadAsset<Material>("matDriverChronoGun"),
                 animationSet = DriverWeaponDef.AnimationSet.TwoHanded,
                 calloutSoundString = "Play_Chrono_Voiceline_Driver",
-                configIdentifier = "Chrono Legionnaire Gun Neutron Rifle"
+                configIdentifier = "Chrono Legionnaire Neutron Rifle"
             });
             RobDriver.DriverWeaponCatalog.AddWeapon(chronoGunWeaponDef);
+
+            chronoGunIndex = chronoGunWeaponDef.index;
         }
     }
 
@@ -169,7 +190,10 @@ namespace RA2Mod.Survivors.Chrono
 
     public class ShootDriver : Shoot
     {
+        public override float baseDuration => DriverCompat.DriverGunM1Duration.Value;
         public override float damageCoefficient => DriverCompat.DriverGunM1Damage.Value;
+        public override float hitRadius => 1;
+        public override float recoil => 0.4f;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -186,7 +210,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             base.PlayShootAnimation();
 
-            PlayAnimation("Gesture, Override", "FireMachineGun", "shoot.playbackRate", duration);
+            PlayAnimation("Gesture, Override", "FireMachineGun", "Shoot.playbackRate", duration);
         }
     }
 
@@ -208,7 +232,7 @@ namespace RA2Mod.Survivors.Chrono
 
             base.OnEnter();
 
-            PlayAnimation("Gesture, Override", "FireMachineGun", "shoot.playbackRate", 1000);
+            PlayAnimation("Gesture, Override", "FireMachineGun", "Shoot.playbackRate", 1000);
 
             muzzleTransform = FindModelChild("ShotgunMuzzle");
             if(muzzleTransform == null)
@@ -231,17 +255,22 @@ namespace RA2Mod.Survivors.Chrono
         {
             if (iDrive)
             {
-                iDrive.StartTimer(baseTickInterval);
+                iDrive.StartTimer(baseTickInterval/baseDuration * 10);
             }
 
             base.DoDamage();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            base.PlayAnimation("Gesture, Override", "BufferEmpty");
         }
 
         public override void FixedUpdate()
         {
             if (iDrive && cachedWeaponDef != iDrive.weaponDef)
             {
-                base.PlayAnimation("Gesture, Override", "BufferEmpty");
                 this.outer.SetNextStateToMain();
                 return;
             }

@@ -104,7 +104,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private void TrySetBodyInvisible(CharacterBody body, bool shouldInvis)
         {
-            var model = body.modelLocator?.modelTransform?.GetComponent<CharacterModel>();
+            var model = body?.modelLocator?.modelTransform?.GetComponent<CharacterModel>();
             if (model)
             {
                 model.invisibilityCount += shouldInvis ? 1 : -1;

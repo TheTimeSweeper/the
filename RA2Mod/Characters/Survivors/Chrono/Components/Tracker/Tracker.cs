@@ -40,7 +40,7 @@ namespace RA2Mod.Survivors.Chrono.Components
         }
 
         // Token: 0x06002687 RID: 9863 RVA: 0x000A83DE File Offset: 0x000A65DE
-        protected void Start()
+        protected virtual void Start()
         {
             this.inputBank = base.GetComponent<InputBankTest>();
             this.teamComponent = base.GetComponent<TeamComponent>();

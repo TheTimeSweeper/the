@@ -5,28 +5,18 @@ namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoCameraParams
     {
-        public static CharacterCameraParamsData chronosphereCamera => Modules.CameraParams.CreateCameraParams(
+        public static CharacterCameraParamsData chronosphereCamera = Modules.CameraParams.CreateCameraParams(
                 2,
-                new Vector3(0, ChronoConfig.y.Value, ChronoConfig.z.Value),
+                new Vector3(0, 9, -17),
                 90,
                 0.1f,
-                ChronoConfig.fov.Value);
+                80);
 
-        public static CharacterCameraParamsData sprintCamera => Modules.CameraParams.CreateCameraParams(
+        public static CharacterCameraParamsData sprintCamera = Modules.CameraParams.CreateCameraParams(
                 2,
-                new Vector3(0, ChronoConfig.y2.Value, ChronoConfig.z2.Value),
+                new Vector3(0, 0, -15),
                 90,
                 0.1f,
-                ChronoConfig.fov2.Value);
-
-        public static void Init()
-        {
-            //chronosphereCamera = Modules.CameraParams.CreateCameraParams(
-            //    2,
-            //    new Vector3(0, 10, -10),
-            //    90,
-            //    0.1f,
-            //    100);
-        }
+                66);
     }
 }

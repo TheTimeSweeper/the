@@ -12,6 +12,8 @@ namespace RA2Mod.Survivors.Chrono
 
         public static ConfigEntry<float> M1Damage;
         public static ConfigEntry<float> M1Duration;
+        public static ConfigEntry<float> M1Radius;
+        public static ConfigEntry<float> M1Screenshake;
 
         public static ConfigEntry<float> M2Damage;
 
@@ -27,11 +29,11 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> yy;
         public static ConfigEntry<float> z;
         public static ConfigEntry<float> fov;
-        public static ConfigEntry<float> t;
+        public static ConfigEntry<float> M3ChronosphereCameraLerpTime;
         public static ConfigEntry<float> y2;
         public static ConfigEntry<float> z2;
         public static ConfigEntry<float> fov2;
-        public static ConfigEntry<float> t2;
+        public static ConfigEntry<float> M0CameraLerpTime;
 
         public static void Init()
         {
@@ -46,7 +48,7 @@ namespace RA2Mod.Survivors.Chrono
             M0SprintTeleportDistTimeMulti = Config.BindAndOptionsSlider(
                 section,
                 "M0SprintBlinkTimeMulti",
-                0.16f,
+                0.169f,
                 "Phase out penalty multiplier based on distance teleported.",
                 0,
                 1);
@@ -55,10 +57,17 @@ namespace RA2Mod.Survivors.Chrono
                 section,
                 "M0SprintblinkTimeTimeMulti",
                 0.5f,
-                "Phase out penalty multiplier based on time spent in teleporting state. Only comes into play after 1 second, and replaces distance penalty if larger (does not add)",
+                "Phase out penalty multiplier based on time spent in teleporting state. Only comes into play after 1 second, and only replaces distance penalty if larger (does not add)",
                 0,
                 1);
-
+            M0CameraLerpTime = Config.BindAndOptionsSlider(
+                section,
+                "M0CameraLerpTime",
+                0.5f,
+                "",
+                0,
+                3);
+            //
             M1Damage = Config.BindAndOptionsSlider(
                 section,
                 "M1Damage",
@@ -74,7 +83,22 @@ namespace RA2Mod.Survivors.Chrono
                 "",
                 0,
                 10);
+            M1Radius = Config.BindAndOptionsSlider(
+                section,
+                "M1Radius",
+                6f,
+                "",
+                0,
+                100);
 
+            M1Screenshake = Config.BindAndOptionsSlider(
+                section,
+                "M1Screenshake",
+                2f,
+                "",
+                0,
+                10);
+            //
             M2Damage = Config.BindAndOptionsSlider(
                 section,
                 "M2Damage",
@@ -82,7 +106,7 @@ namespace RA2Mod.Survivors.Chrono
                 "",
                 0,
                 10);
-
+            //
             M3Radius = Config.BindAndOptionsSlider(
                 section,
                 "M3Radius",
@@ -90,7 +114,14 @@ namespace RA2Mod.Survivors.Chrono
                 "",
                 0,
                 100);
-
+            M3ChronosphereCameraLerpTime = Config.BindAndOptionsSlider(
+                section,
+                "M3ChronosphereCameraLerpTime",
+                0.5f,
+                "",
+                0,
+                3);
+            //
             M4Interval = Config.BindAndOptionsSlider(
                 section,
                 "M4Interval",
@@ -123,71 +154,6 @@ namespace RA2Mod.Survivors.Chrono
                 0,
                 200);
 
-            y = Config.BindAndOptionsSlider(
-                section,
-                "y",
-                9,
-                "",
-                0,
-                100);
-
-            yy = Config.BindAndOptionsSlider(
-                section,
-                "yy",
-                10,
-                "",
-                0,
-                100);
-            z = Config.BindAndOptionsSlider(
-                section,
-                "z",
-                -17,
-                "",
-                -100,
-                0);
-            fov = Config.BindAndOptionsSlider(
-                section,
-                "fov",
-                80,
-                "",
-                0,
-                200);
-            t = Config.BindAndOptionsSlider(
-                section,
-                "t",
-                0.5f,
-                "",
-                0,
-                3);
-
-            y2 = Config.BindAndOptionsSlider(
-                section,
-                "y2",
-                0,
-                "",
-                0,
-                100);
-            z2 = Config.BindAndOptionsSlider(
-                section,
-                "z2",
-                -15,
-                "",
-                -100,
-                0);
-            fov2 = Config.BindAndOptionsSlider(
-                section,
-                "fov2",
-                66,
-                "",
-                0,
-                200);
-            t2 = Config.BindAndOptionsSlider(
-                section,
-                "t2",
-                0.5f,
-                "",
-                0,
-                3);
         }
     }
 }

@@ -16,8 +16,10 @@ GameObject:
   - component: {fileID: 888678822752223933}
   - component: {fileID: 468421335959962266}
   - component: {fileID: 193195871939145373}
-  - component: {fileID: 3518189985384056052}
   - component: {fileID: 4255234972392490387}
+  - component: {fileID: 7903051195810718763}
+  - component: {fileID: 4717578004271408768}
+  - component: {fileID: 4600552837440487106}
   m_Layer: 14
   m_Name: ChronoIvanBombProjectile
   m_TagString: Untagged
@@ -103,7 +105,7 @@ MonoBehaviour:
   startSound: Play_IvanBombStart
   cannotBeDeleted: 0
   flightSoundLoop: {fileID: 11400000, guid: de07568a85a3b5a488fe4ddd51b23f41, type: 2}
-  canImpactOnTrigger: 0
+  canImpactOnTrigger: 1
   allowPrediction: 0
   owner: {fileID: 0}
   procCoefficient: 1
@@ -169,9 +171,9 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.52
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3518189985384056052
+--- !u!114 &4255234972392490387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,10 +182,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 7166828520325906878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -317677761, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Script: {fileID: 1790887305, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  falloffModel: 1
+  damage: 0
+  crit: 0
+  force: 0
+  damageColorIndex: 0
+  damageType: 0
+  useDotMaxStacksFromAttacker: 0
+  dotMaxStacksFromAttacker: 4294967295
+--- !u!114 &7903051195810718763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828520325906878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -974958137, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  falloffModel: 0
   blastRadius: 20
   blastDamageCoefficient: 1
   blastProcCoefficient: 1
@@ -212,19 +233,7 @@ MonoBehaviour:
   maxStacksFromAttacker: 4294967295
   calculateTotalDamage: 0
   totalDamageMultiplier: 0
-  impactEffect: {fileID: 0}
-  lifetimeExpiredSoundString: 
-  lifetimeExpiredSound: {fileID: 0}
-  offsetForLifetimeExpiredSound: 0
-  destroyOnEnemy: 0
-  destroyOnWorld: 0
-  impactOnWorld: 0
-  timerAfterImpact: 0
-  lifetime: 3
-  lifetimeAfterImpact: 0
-  lifetimeRandomOffset: 0
-  transformSpace: 0
---- !u!114 &4255234972392490387
+--- !u!114 &4717578004271408768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,13 +242,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 7166828520325906878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1790887305, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Script: {fileID: 1810124184, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  crit: 0
-  force: 0
-  damageColorIndex: 0
-  damageType: 0
-  useDotMaxStacksFromAttacker: 0
-  dotMaxStacksFromAttacker: 4294967295
+  fuse: 3
+  onFuse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7903051195810718763}
+        m_MethodName: Detonate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!135 &4600552837440487106
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828520325906878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.991467
+  m_Center: {x: 0, y: 0, z: 0}

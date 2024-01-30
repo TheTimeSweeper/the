@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.Components
 {
-    public class ChronoTrackerVanish : Tracker//, IDependentTracker
+    public class ChronoTrackerVanish : TrackerSkillDefRequired<ChronoTrackerSkillDefVanish>//, IDependentTracker
     {
         public override float maxTrackingDistance => 80;
         
