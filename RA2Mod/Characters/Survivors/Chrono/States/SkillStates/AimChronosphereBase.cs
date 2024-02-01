@@ -34,7 +34,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
-            projectileBaseSpeed = 60;            
+            projectileBaseSpeed = 30;            
 
             base.OnEnter();
             PlayEnterSounds();
@@ -138,9 +138,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-
-            if (!castSuccessful)
-                RefundStock();
 
             PlayExitSounds();
         }

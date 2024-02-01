@@ -243,7 +243,7 @@ namespace RA2Mod.Modules
             if (aimOrigin == null)
             {
                 aimOrigin = new GameObject("AimOrigin").transform;
-                aimOrigin.parent = modelTransform;
+                aimOrigin.parent = bodyPrefab.transform;
                 aimOrigin.localPosition = bodyInfo.aimOriginPosition;
                 aimOrigin.localRotation = Quaternion.identity;
             }

@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using RA2Mod.Modules.BaseStates;
+using RA2Mod.Survivors.Chrono.Components;
 using RoR2;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class PlaceChronosphere2 : BaseSkillState
     {
+        public static float teleportDelay => ChronoConfig.M3Delay.Value;
+
         public float BaseRadius;
         public Vector3 trajectoryPoint;
         public Vector3 originalPoint;
@@ -18,9 +21,19 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public List<CharacterBody> teamCharacterBodies = new List<CharacterBody>();
 
+        private ChronosphereProjection chronosphereProjection;
+        private bool hasMoved;
+
         public override void OnEnter()
         {
-            base.OnEnter();
+            base.OnEnter(); 
+
+            skillLocator.utility.DeductStock(1);
+
+            chronosphereProjection = Object.Instantiate(ChronoAssets.chronosphereProjection);
+            chronosphereProjection.transform.position = trajectoryPoint;
+            chronosphereProjection.SetRadiusAndEnable(BaseRadius * 0.5f);
+            chronosphereProjection.AnimateShader(true, 0, teleportDelay, false);
 
             sqrRadius = BaseRadius * BaseRadius;
 
@@ -31,10 +44,18 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                     GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
                 }
             }
+        }
 
-            MoveTeleportees();
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            if (base.fixedAge > teleportDelay && !hasMoved)
+            {
+                hasMoved = true;
+                MoveTeleportees();
 
-            outer.SetNextState(new WindDownState { windDownTime = 1f });
+                outer.SetNextState(new WindDownState { windDownTime = 0.5f });
+            }
         }
 
         public override void OnExit()
@@ -45,6 +66,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             {
                 TrySetBodyInvisible(teamCharacterBodies[i], false);
             }
+            chronosphereProjection.AnimateShader(false, 0, 0.3f, true);
         }
 
         private void GatherTeleportees(ReadOnlyCollection<TeamComponent> teamComponents)
@@ -100,6 +122,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                     body.gameObject.transform.position = resultPoint;
                 }
             }
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
         }
 
         private void TrySetBodyInvisible(CharacterBody body, bool shouldInvis)

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: matTrailSiphonHealth 3
-  m_Shader: {fileID: 4800000, guid: e07db353f1045e64fb27887f3706a9fe, type: 2}
+  m_Name: matTetherVanish
+  m_Shader: {fileID: 4800000, guid: 6fce1d35c82ed884d900443afafb6fcb, type: 3}
   m_ShaderKeywords: CLOUDNORMAL VERTEXCOLOR _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 13.67, y: 0.4}
         m_Offset: {x: 0, y: 0.46}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 87e78ec4972d4a64582fcf03c6e1f2b3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 41d540acf05905c4fbcb5f278f62ab58, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RemapTex:
-        m_Texture: {fileID: 2800000, guid: 6e8a0133526851246b7de33cde8e0fd8, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0ebe92308684484cb5d2b93722f89d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -80,5 +80,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CutoffScroll: {r: -27.4, g: 0, b: -13, a: 11.38}
-    - _EmissionColor: {r: 0, g: 0.06280571, b: 0.33962262, a: 1}
+    - _EmissionColor: {r: 0.06836831, g: 0, b: 0.3411765, a: 1}
     - _TintColor: {r: 2.670157, g: 2.670157, b: 2.670157, a: 1}

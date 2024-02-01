@@ -150,7 +150,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 359c54690d422b64389ae8f02538f87f, type: 2}
+  - {fileID: 2100000, guid: b0ec7b85ccfd44a44b8f5604a8228cf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -442,6 +442,7 @@ MonoBehaviour:
   tetherPoint: {fileID: 7384380459065438725}
   rend: {fileID: 323980615099466272}
   disposeTime: 0.5
+  disposeImmediately: 0
 --- !u!1 &2885103429444304119
 GameObject:
   m_ObjectHideFlags: 0

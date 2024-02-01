@@ -21,6 +21,7 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         private float endTimer = -1;
         private float startAlpha;
+
         void Awake()
         {
             startAlpha = rend.material.GetFloat("_AlphaBoost");

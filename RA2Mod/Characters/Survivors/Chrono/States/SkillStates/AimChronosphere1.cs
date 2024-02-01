@@ -43,7 +43,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             dest.finalRay.origin = origOrigin.position;
             dest.finalRay.direction = vector.normalized;
             dest.speedOverride = this.projectileBaseSpeed;
-            dest.travelTime = this.projectileBaseSpeed / vector.magnitude;
+            dest.travelTime = vector.magnitude / this.projectileBaseSpeed;
         }
 
         public override void OnExit()

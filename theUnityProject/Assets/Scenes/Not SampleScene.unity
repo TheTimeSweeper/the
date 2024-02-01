@@ -25017,10 +25017,10 @@ Transform:
   - {fileID: 1031752960}
   - {fileID: 4940890015230196256}
   - {fileID: 4825898963032351545}
+  - {fileID: 8695565993885431911}
   - {fileID: 3013825882325159739}
   - {fileID: 8741833348810177830}
   - {fileID: 1506945326}
-  - {fileID: 8695565993885431911}
   m_Father: {fileID: 415591913}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47614,7 +47614,7 @@ PrefabInstance:
     - target: {fileID: 3191926749274600055, guid: 9e042854f9cf14249bce7a631169d57c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3191926749274600055, guid: 9e042854f9cf14249bce7a631169d57c,
         type: 3}
@@ -55483,11 +55483,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1418013630}
     m_Modifications:
-    - target: {fileID: 323980615099466272, guid: 10d7b9a533e872a4eb09a01abbdf53c3,
-        type: 3}
-      propertyPath: m_UseWorldSpace
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2532531593006799755, guid: 10d7b9a533e872a4eb09a01abbdf53c3,
         type: 3}
       propertyPath: m_Name
@@ -55496,7 +55491,7 @@ PrefabInstance:
     - target: {fileID: 5784796504509319885, guid: 10d7b9a533e872a4eb09a01abbdf53c3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5784796504509319885, guid: 10d7b9a533e872a4eb09a01abbdf53c3,
         type: 3}
@@ -88659,7 +88654,7 @@ PrefabInstance:
     - target: {fileID: 4265306907227748310, guid: f399308ce11ee8d40a664223069be242,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4265306907227748310, guid: f399308ce11ee8d40a664223069be242,
         type: 3}
@@ -110089,15 +110084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChronosphereProjection
       objectReference: {fileID: 0}
-    - target: {fileID: 1710467795882193953, guid: 369940c74eb9bfa48908ca4fc50ca08e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6511530829751886538, guid: 369940c74eb9bfa48908ca4fc50ca08e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6511530829751886538, guid: 369940c74eb9bfa48908ca4fc50ca08e,
         type: 3}

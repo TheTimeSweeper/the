@@ -51,7 +51,7 @@ namespace RA2Mod.Survivors.Chrono
 
             jumpCount = 1,
 
-            cameraParams = cameraParams
+            cameraParams = cameraParams,
         };
 
         private CharacterCameraParams cameraParams { get
@@ -275,6 +275,8 @@ namespace RA2Mod.Survivors.Chrono
 
                 baseMaxStock = 1,
                 baseRechargeInterval = 16f,
+                stockToConsume = 0,
+                requiredStock = 1,
 
                 isCombatSkill = false,
                 mustKeyPress = true,

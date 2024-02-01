@@ -25,6 +25,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public PhaseIndicatorController componentFromSkillDef { get; set; }
 
+        private InteractionDriver interactor;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -39,6 +41,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             if (NetworkServer.active)
             {
                 characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
+            }
+            if(gameObject.TryGetComponent(out interactor))
+            {
+                interactor.interactableCooldown = 100;                                                                              
             }
 
             cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, ChronoConfig.M0CameraLerpTime.Value);
@@ -104,6 +110,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             UnityEngine.Object.Destroy(marker.gameObject);
 
             cameraTargetParams.RemoveParamsOverride(cameraOverride, ChronoConfig.M0CameraLerpTime.Value);
+
+            if (interactor)
+            {
+                interactor.interactableCooldown = 0;
+            }
         }
 
         private void StopCamera()

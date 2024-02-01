@@ -116,7 +116,7 @@ namespace RA2Mod.Survivors.Chrono
             sphereMat.SetTextureScale("_Cloud1Tex", new Vector2(0.02f, 0.02f));
             sphereMat.SetTexture("_RemapTex", lightningRamp);
 
-            chronosphereProjection.sphereRenderer.sharedMaterial = sphereMat;
+            chronosphereProjection.sphereRenderers[0].sharedMaterial = sphereMat;
 
             Log.CurrentTime("SYNC FINISH");
         }
@@ -226,47 +226,25 @@ namespace RA2Mod.Survivors.Chrono
             {
                 chronoVanishTether = tetherResult.GetComponent<ChronoTether>();
 
-                Texture2D chronoBeam = null;
-                yield return assetBundle.LoadAssetAsync<Texture2D>("texChronoBeam.png", (result) =>
-                {
-                    chronoBeam = result;
-                });
-                Texture2D lightningRamp = null;
-                yield return assetBundle.LoadAssetAsync<Texture2D>("texRampLightning3.png", (result) =>
-                {
-                    lightningRamp = result;
-                });
-
                 Material beamMat = null;
                 yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", (result) =>
                 {
-                    beamMat = new Material(result);
-                    beamMat.SetTexture("_MainTex", chronoBeam);
-                    beamMat.SetTexture("_RemapTex", lightningRamp);
-
-                    beamMat.SetTextureScale("_Cloud1Tex", new Vector2(19.7f, 0.2f));
-                    beamMat.SetTextureOffset("_Cloud1Tex", new Vector2(0, 1.37f));
-                    beamMat.SetTextureScale("_Cloud2Tex", new Vector2(12.0f, 0.4f));
-                    beamMat.SetTextureOffset("_Cloud2Tex", new Vector2(0, 0.46f));
-                    beamMat.SetVector("_CutoffScroll", new Vector4(-27.4f, 0, -13f, 11.38f));
-
-                    beamMat.SetColor("_EmissionColor", new Color(0, 0.06280571f, 0.3396226f, 0));
-                    beamMat.SetFloat("_AlphaBoost", 1.28f);
-                    beamMat.SetFloat("_Cutoff", 0.3f);
-                    beamMat.SetFloat("_SpecularStrength", 0f);
-                    chronoVanishTether.GetComponent<LineRenderer>().sharedMaterial = beamMat;
+                    beamMat = result;
+                    LineRenderer line = chronoVanishTether.GetComponent<LineRenderer>();
+                    line.sharedMaterial.SetTexture("_NormalTex", beamMat.GetTexture("_NormalTex"));
+                    line.sharedMaterial.SetTexture("_Cloud1Tex", beamMat.GetTexture("_Cloud1Tex"));
+                    line.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
                 });
 
                 yield return assetBundle.LoadAssetAsync<GameObject>("ChronoTracer", (result) =>
                 {
                     chronoTracer = result;
-                    beamMat = new Material(beamMat);
-                    beamMat.SetTexture("_Cloud2Tex", null);
-                    beamMat.SetFloat("_AlphaBoost", 0.4f);
-                    chronoTracer.GetComponentInChildren<LineRenderer>().sharedMaterial = beamMat;
+                    LineRenderer line = chronoTracer.GetComponentInChildren<LineRenderer>();
+                    line.sharedMaterial.SetTexture("_NormalTex", beamMat.GetTexture("_NormalTex"));
+                    line.sharedMaterial.SetTexture("_Cloud1Tex", beamMat.GetTexture("_Cloud1Tex"));
+                    line.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
                     Content.CreateAndAddEffectDef(chronoTracer);
                 });
-
             }
 
             //chronosphere here we go
@@ -276,30 +254,38 @@ namespace RA2Mod.Survivors.Chrono
                 chronosphereProjection = chronosphereResult.GetComponent<ChronosphereProjection>();
 
                 Texture2D lightningCloud = null;
-                yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/ColorRamps/texRampLightning2.png", (result) =>
+                yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png", (result) =>
                 {
                     lightningCloud = result;
                 });
-                Texture2D lightningRamp = null;
-                yield return assetBundle.LoadAssetAsync<Texture2D>("texRampLightning3.png", (result) =>
+                Texture2D magmaCloud = null;
+                yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texMagmaCloud.png", (result) =>
                 {
-                    lightningRamp = result;
+                    magmaCloud = result;
                 });
-                yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/Icicle/matIceAuraSphere.mat", (result) =>
+
+                for (int i = 0; i < chronosphereProjection.sphereRenderers.Length; i++)
                 {
-                    Material sphereMat = new Material(result);
-                    sphereMat.SetFloat("_Boost", 0.11f);
-                    sphereMat.SetFloat("_RimPower", 2f);
-                    sphereMat.SetFloat("_RimStrength", 1.34f);
-                    sphereMat.SetFloat("_AlphaBoost", 0.9f);
-                    sphereMat.SetFloat("_IntersectionStrength", 3.0f);
-                    sphereMat.SetTexture("_Cloud2Tex", lightningCloud);
-                    sphereMat.SetTextureScale("_Cloud2Tex", new Vector2(0.01f, 0.01f));
-                    sphereMat.SetTextureScale("_Cloud1Tex", new Vector2(0.02f, 0.02f));
-                    sphereMat.SetTexture("_RemapTex", lightningRamp);
-                    sphereMat.SetVector("_CutoffScroll", new Vector4(-31.4f, -40f, 91f, 134f));
-                    chronosphereProjection.sphereRenderer.sharedMaterial = sphereMat;
-                });
+                    Renderer rend = chronosphereProjection.sphereRenderers[i];
+                    rend.sharedMaterial.SetTexture("_Cloud1Tex", magmaCloud);
+                    rend.sharedMaterial.SetTexture("_Cloud2Tex", lightningCloud);
+                }
+
+                //yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/Icicle/matIceAuraSphere.mat", (result) =>
+                //{
+                //    Material sphereMat = new Material(result);
+                //    sphereMat.SetFloat("_Boost", 0.11f);
+                //    sphereMat.SetFloat("_RimPower", 2f);
+                //    sphereMat.SetFloat("_RimStrength", 1.34f);
+                //    sphereMat.SetFloat("_AlphaBoost", 0.9f);
+                //    sphereMat.SetFloat("_IntersectionStrength", 3.0f);
+                //    sphereMat.SetTexture("_Cloud2Tex", lightningCloud);
+                //    sphereMat.SetTextureScale("_Cloud2Tex", new Vector2(0.01f, 0.01f));
+                //    sphereMat.SetTextureScale("_Cloud1Tex", new Vector2(0.02f, 0.02f));
+                //    sphereMat.SetTexture("_RemapTex", lightningRamp);
+                //    sphereMat.SetVector("_CutoffScroll", new Vector4(-31.4f, -40f, 91f, 134f));
+                //    chronosphereProjection.sphereRenderer.sharedMaterial = sphereMat;
+                //});
             }
 
             //foreach (var request in loadTextures)

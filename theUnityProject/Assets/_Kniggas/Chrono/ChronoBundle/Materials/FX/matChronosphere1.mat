@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: matIceAuraSphere 4
-  m_Shader: {fileID: 4800000, guid: 2c7217b4ad0cec241ba8851e3f194208, type: 2}
+  m_Name: matChronosphere1
+  m_Shader: {fileID: 4800000, guid: ee1b3d7c668ffb342b9a23c284a35709, type: 3}
   m_ShaderKeywords: TRIPLANAR _EMISSION
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -28,18 +28,18 @@ Material:
         m_Scale: {x: 0.01, y: 0.01}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1487336712d122543b7673af22dc1e2f, type: 3}
-        m_Scale: {x: 1, y: 3}
-        m_Offset: {x: 0, y: 0.04}
+        m_Texture: {fileID: 2800000, guid: 415cfb32beef1ff4ebc9a1d64f8ff612, type: 3}
+        m_Scale: {x: 1, y: 0.2}
+        m_Offset: {x: 0, y: -0.61}
     - _RemapTex:
-        m_Texture: {fileID: 2800000, guid: 6e8a0133526851246b7de33cde8e0fd8, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0ebe92308684484cb5d2b93722f89d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaBoost: 1.8
-    - _Boost: 2.97
+    - _Boost: 0.45
     - _BumpScale: 1
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -50,7 +50,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _IntersectionStrength: 1.42
-    - _InvFade: 11.2
+    - _InvFade: 6.6
     - _Magnitude: 10
     - _Metallic: 0
     - _Mode: 0
@@ -59,7 +59,7 @@ Material:
     - _RimPower: 1
     - _RimStrength: 1.35
     - _SmoothnessTextureChannel: 0
-    - _SoftPower: 3
+    - _SoftPower: 3.03
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendFloat: 5

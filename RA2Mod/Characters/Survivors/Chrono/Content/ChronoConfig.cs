@@ -7,6 +7,7 @@ namespace RA2Mod.Survivors.Chrono
     {
         public static ConfigEntry<float> M0SprintTeleportDistTimeMulti;
         public static ConfigEntry<float> M0SprintTeleportTimeTimeMulti;
+        public static ConfigEntry<float> M0CameraLerpTime;
 
         public static ConfigEntry<bool> M0TeleportOnRelese;
 
@@ -18,22 +19,13 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> M2Damage;
 
         public static ConfigEntry<float> M3Radius;
+        public static ConfigEntry<float> M3Delay;
+        public static ConfigEntry<float> M3ChronosphereCameraLerpTime;
 
         public static ConfigEntry<float> M4Interval;
         public static ConfigEntry<float> M4Duration;
         public static ConfigEntry<float> M4Damage;
         public static ConfigEntry<float> M4ChronoStacksToVanish;
-
-
-        public static ConfigEntry<float> y;
-        public static ConfigEntry<float> yy;
-        public static ConfigEntry<float> z;
-        public static ConfigEntry<float> fov;
-        public static ConfigEntry<float> M3ChronosphereCameraLerpTime;
-        public static ConfigEntry<float> y2;
-        public static ConfigEntry<float> z2;
-        public static ConfigEntry<float> fov2;
-        public static ConfigEntry<float> M0CameraLerpTime;
 
         public static void Init()
         {
@@ -114,6 +106,13 @@ namespace RA2Mod.Survivors.Chrono
                 "",
                 0,
                 100);
+            M3Delay = Config.BindAndOptionsSlider(
+                section,
+                "M3Delay",
+                0.3f,
+                "",
+                0,
+                1);
             M3ChronosphereCameraLerpTime = Config.BindAndOptionsSlider(
                 section,
                 "M3ChronosphereCameraLerpTime",

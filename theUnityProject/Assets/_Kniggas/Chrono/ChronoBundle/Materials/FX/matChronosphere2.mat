@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: matIceAuraSphere 5
-  m_Shader: {fileID: 4800000, guid: 2c7217b4ad0cec241ba8851e3f194208, type: 2}
-  m_ShaderKeywords: TRIPLANAR _EMISSION
+  m_Name: matChronosphere2
+  m_Shader: {fileID: 4800000, guid: ee1b3d7c668ffb342b9a23c284a35709, type: 3}
+  m_ShaderKeywords: TRIPLANAR USE_CLOUDS _EMISSION
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -28,36 +28,51 @@ Material:
         m_Scale: {x: 0.01, y: 0.01}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1487336712d122543b7673af22dc1e2f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 415cfb32beef1ff4ebc9a1d64f8ff612, type: 3}
+        m_Scale: {x: 1, y: 0.2}
+        m_Offset: {x: 0, y: -0.64}
     - _RemapTex:
-        m_Texture: {fileID: 2800000, guid: 6e8a0133526851246b7de33cde8e0fd8, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0ebe92308684484cb5d2b93722f89d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaBias: 0
     - _AlphaBoost: 4.2
-    - _Boost: 1.26
+    - _Boost: 0.2330679
     - _BumpScale: 1
-    - _Cull: 2
+    - _CalcTextureAlphaOn: 0
+    - _CloudOffsetOn: 0
+    - _CloudsOn: 1
+    - _Cull: 0
     - _Cutoff: 0.5
+    - _DepthOffset: 0
     - _DetailNormalMapScale: 1
+    - _DisableRemapOn: 0
+    - _DistortionStrength: 0.1
     - _DstBlend: 0
     - _DstBlendFloat: 1
     - _ExternalAlpha: 1
+    - _Fade: 1
+    - _FadeCloseDistance: 0.5
+    - _FadeCloseOn: 0
     - _FadeFromVertexColorsOn: 0
+    - _FresnelOn: 0
+    - _FresnelPower: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _InternalSimpleBlendMode: 0
     - _IntersectionStrength: 1.42
     - _InvFade: 13.5
     - _Magnitude: 10
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OffsetAmount: 0
     - _Parallax: 0.02
     - _RimPower: 1.2
     - _RimStrength: 2.11
+    - _SkyboxOnly: 0
     - _SmoothnessTextureChannel: 0
     - _SoftPower: 3
     - _SpecularHighlights: 1
@@ -65,7 +80,12 @@ Material:
     - _SrcBlendFloat: 5
     - _TriplanarOn: 1
     - _UVSec: 0
+    - _UseUV1On: 0
+    - _VertexAlphaOn: 0
+    - _VertexColorOn: 0
     - _VertexColorsOn: 0
+    - _VertexOffsetOn: 0
+    - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

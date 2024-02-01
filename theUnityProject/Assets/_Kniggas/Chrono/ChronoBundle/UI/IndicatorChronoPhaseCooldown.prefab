@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.8215716, b: 1, a: 1}
+  m_Color: {r: 0.4009434, g: 0.4752836, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.8215716, b: 1, a: 1}
+  m_Color: {r: 0.4009434, g: 0.4752836, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.8215716, b: 1, a: 0.5254902}
+  m_Color: {r: 0.4009434, g: 0.4752836, b: 1, a: 0.36862746}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 6253503630232812013}
   - component: {fileID: 6253503630232812014}
   m_Layer: 5
-  m_Name: IndicatorchronoPhaseCooldown
+  m_Name: IndicatorChronoPhaseCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

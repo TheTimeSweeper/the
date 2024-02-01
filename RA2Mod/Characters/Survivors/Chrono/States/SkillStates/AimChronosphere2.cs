@@ -12,7 +12,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     {
         public Vector3 originalPoint;
         
-        private GameObject projectionGameObject;
+        private ChronosphereProjection chronosphereProjection;
 
         private float sqrRadius;
 
@@ -22,10 +22,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public override void OnEnter()
         {
-            ChronosphereProjection chronosphereProjection = Object.Instantiate(ChronoAssets.chronosphereProjection);
+            chronosphereProjection = Object.Instantiate(ChronoAssets.chronosphereProjection);
             chronosphereProjection.transform.position = originalPoint;
-            projectionGameObject = chronosphereProjection.gameObject;
             chronosphereProjection.SetRadiusAndEnable(AimChronosphereBase.BaseRadius);
+            chronosphereProjection.AnimateShader(true, 0, 1, false);
 
             //if (isAuthority)
             //{
@@ -87,10 +87,9 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             base.UpdateTrajectoryInfo(out dest);
 
             Vector3 vector = dest.hitPoint - originalPoint;
-            dest.finalRay.origin = originalPoint;
-            dest.finalRay.direction = vector.normalized;
+            dest.finalRay = new Ray(originalPoint, vector.normalized);
             dest.speedOverride = this.projectileBaseSpeed;
-            dest.travelTime = this.projectileBaseSpeed / vector.magnitude;
+            dest.travelTime = vector.magnitude / this.projectileBaseSpeed;
         }
 
         public override void OnExit()
@@ -107,7 +106,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             //    UnRootTeleportees();
             //}
 
-            Object.Destroy(projectionGameObject);
+            chronosphereProjection.AnimateShader(false, castSuccessful ? PlaceChronosphere2.teleportDelay : 0, castSuccessful ? 0.3f : 0.2f, true);
 
             skillLocator.utility.UnsetSkillOverride(this, ChronoAssets.cancelSKillDef, GenericSkill.SkillOverridePriority.Contextual);
             
@@ -127,15 +126,15 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         protected override void PlayEnterSounds()
         {
-            Util.PlaySound("Play_ChronosphereSelectStart", projectionGameObject);
-            Util.PlaySound("Play_ChronosphereSelectLoop", projectionGameObject);
+            Util.PlaySound("Play_ChronosphereSelectStart", chronosphereProjection.gameObject);
+            Util.PlaySound("Play_ChronosphereSelectLoop", chronosphereProjection.gameObject);
         }
         
         protected override void PlayExitSounds()
         {
 
-            Util.PlaySound("Stop_ChronosphereSelectLoop", projectionGameObject);
-            Util.PlaySound("Play_ChronosphereSelectEnd", projectionGameObject);
+            Util.PlaySound("Stop_ChronosphereSelectLoop", chronosphereProjection.gameObject);
+            Util.PlaySound("Play_ChronosphereSelectEnd", chronosphereProjection.gameObject);
         }
 
         public override void OnSerialize(NetworkWriter writer)
