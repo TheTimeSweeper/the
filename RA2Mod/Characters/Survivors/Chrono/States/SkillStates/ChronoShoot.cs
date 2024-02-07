@@ -7,7 +7,7 @@ using static RoR2.BulletAttack;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
-    public class Shoot : BaseSkillState
+    public class ChronoShoot : BaseSkillState
     {
         public virtual float damageCoefficient => ChronoConfig.M1Damage.Value;
         public static float procCoefficient = 1f;

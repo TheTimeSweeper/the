@@ -41,7 +41,7 @@ namespace RA2Mod.Modules {
         {
             addContentPackProvider(this);
         }
-
+        
         public System.Collections.IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
         {
             this.contentPack.identifier = this.identifier;

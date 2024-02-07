@@ -11,7 +11,7 @@ namespace RA2Mod.Survivors.Chrono
             Modules.Content.AddEntityState(typeof(Modules.BaseStates.WindDownState));
             Modules.Content.AddEntityState(typeof(PhaseState));
 
-            Modules.Content.AddEntityState(typeof(Shoot));
+            Modules.Content.AddEntityState(typeof(ChronoShoot));
 
             Modules.Content.AddEntityState(typeof(ChronoBomb));
 

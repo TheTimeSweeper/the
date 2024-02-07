@@ -1,4 +1,4 @@
-﻿namespace RA2Mod.Survivors.Chrono.Components
+﻿namespace RA2Mod.General.Components
 {
     public interface IDependentTracker
     {

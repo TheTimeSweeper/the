@@ -1,10 +1,10 @@
 ﻿using EntityStates;
 using R2API;
-using RA2Mod.Survivors.Chrono.SkillDefs;
 using RA2Mod.Survivors.Chrono.Components;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
+using RA2Mod.General.SkillDefs;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {

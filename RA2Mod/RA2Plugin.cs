@@ -1,11 +1,10 @@
 ﻿using BepInEx;
-using RA2Mod.Survivors.Chrono;
 using R2API.Utils;
-using RoR2;
-using System.Collections.Generic;
+using RA2Mod.General;
+using RA2Mod.Survivors.Chrono;
+using RA2Mod.Survivors.GI;
 using System.Security;
 using System.Security.Permissions;
-using RA2Mod.General;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -43,6 +42,7 @@ namespace RA2Mod
             Modules.Language.Init();
 
             new ChronoSurvivor().Initialize();
+            new GISurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
         }

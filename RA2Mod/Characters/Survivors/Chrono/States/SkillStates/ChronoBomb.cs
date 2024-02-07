@@ -3,9 +3,9 @@ using RA2Mod.Survivors.Chrono;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
-using RA2Mod.Survivors.Chrono.SkillDefs;
 using RA2Mod.Survivors.Chrono.Components;
 using UnityEngine.Networking;
+using RA2Mod.General.SkillDefs;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {

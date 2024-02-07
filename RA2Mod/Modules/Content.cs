@@ -23,6 +23,11 @@ namespace RA2Mod.Modules
         {
             ContentPacks.projectilePrefabs.Add(prefab);
         }
+        internal static void NetworkAndAddProjectilePrefab(GameObject prefab)
+        {
+            R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
+            AddProjectilePrefab(prefab);
+        }
 
         internal static void AddSurvivorDef(SurvivorDef survivorDef)
         {

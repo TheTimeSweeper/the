@@ -1,4 +1,5 @@
-﻿using RA2Mod.Survivors.Chrono.Components;
+﻿using RA2Mod.General.SkillDefs;
+using RA2Mod.Survivors.Chrono.Components;
 using RoR2;
 using System.Diagnostics.CodeAnalysis;
 

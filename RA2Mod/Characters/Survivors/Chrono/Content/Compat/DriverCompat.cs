@@ -188,7 +188,7 @@ namespace RA2Mod.Survivors.Chrono
     //public class ChronoTrackerSkillDefVanishDriver : ChronoTrackerSkillDefVanish { }
 
 
-    public class ShootDriver : Shoot
+    public class ShootDriver : ChronoShoot
     {
         public override float baseDuration => DriverCompat.DriverGunM1Duration.Value;
         public override float damageCoefficient => DriverCompat.DriverGunM1Damage.Value;

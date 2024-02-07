@@ -3,9 +3,9 @@ using RoR2.Skills;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace RA2Mod.Survivors.Chrono.Components
+namespace RA2Mod.General.Components
 {
-    public abstract class TrackerSkillDefRequired<T> : Tracker where T: SkillDef
+    public abstract class TrackerSkillDefRequired<T> : Tracker where T : SkillDef
     {
         private Dictionary<GenericSkill, bool> skillMap = new Dictionary<GenericSkill, bool>();
 
@@ -21,7 +21,7 @@ namespace RA2Mod.Survivors.Chrono.Components
                 OnSkillChanged(skills[i]);
             }
         }
-        
+
         void OnDestroy()
         {
             foreach (GenericSkill skill in skillMap.Keys)

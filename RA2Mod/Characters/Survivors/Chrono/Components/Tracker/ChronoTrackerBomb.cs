@@ -1,4 +1,5 @@
-﻿using RA2Mod.Survivors.Chrono.SkillDefs;
+﻿using RA2Mod.General.Components;
+using RA2Mod.Survivors.Chrono.SkillDefs;
 using RoR2;
 using UnityEngine;
 

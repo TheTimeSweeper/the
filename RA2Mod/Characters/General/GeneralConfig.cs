@@ -8,6 +8,7 @@ namespace RA2Mod.General
         public static ConfigEntry<bool> Debug;
 
         public static ConfigEntry<bool> ChronoEnabled;
+        public static ConfigEntry<bool> GIEnabled;
 
         public static void Init()
         {
@@ -26,7 +27,7 @@ namespace RA2Mod.General
             string survivorSection = "0-1. Survivors";
 
             //ChronoEnabled = Config.CharacterEnableConfig(survivorSection, "Chrono Legionnaire");
-
+            GIEnabled = Config.CharacterEnableConfig(survivorSection, "GI", "BETA", true);
         }
     }
 }

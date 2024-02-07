@@ -2053,6 +2053,11 @@
 														<Sound Name="Chrono Never Existed" ID="{77081B37-0ED6-4912-B6E3-B5EF90EBE766}" ShortID="124030823">
 															<PropertyList>
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
@@ -2082,6 +2087,692 @@
 															</ChildrenList>
 															<ActiveSourceList>
 																<ActiveSource Name="ichratc" ID="{104EC728-1AED-4194-9CCD-8BCEDF6BA299}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="GI" ID="{A80B1EA3-5E24-4B14-965E-8C7A645CC054}" ShortID="2973358">
+									<ChildrenList>
+										<RandomSequenceContainer Name="GI Voiceline" ID="{A5A3FFD4-D6A1-4528-A215-3E89A1FB6D39}" ShortID="80933434">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<RandomSequenceContainer Name="GI Voiceline Attack" ID="{C0A473EA-C417-4553-A263-CC53FC4805F9}" ShortID="792833979">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="igiata" ID="{2C35DEE1-8C58-44C1-A249-D596B8F568FD}" ShortID="873965856">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiata" ID="{5EE09D39-E777-41E2-B13A-EEBCBA7BF8D4}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiata.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="720532510"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiata" ID="{5EE09D39-E777-41E2-B13A-EEBCBA7BF8D4}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igiatb" ID="{04AD96F0-A194-40BA-8E89-F19CCBA85449}" ShortID="36241871">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiatb" ID="{B58C3F29-4EB1-424B-BC5C-532C7B1B3E0A}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiatb.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="248182755"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiatb" ID="{B58C3F29-4EB1-424B-BC5C-532C7B1B3E0A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igiatc" ID="{C2D3CCE5-795C-4E2A-B674-E6308C39BBFC}" ShortID="774073519">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiatc" ID="{179A6AA1-7A1A-4927-9C15-9B152494B075}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiatc.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="908225389"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiatc" ID="{179A6AA1-7A1A-4927-9C15-9B152494B075}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igiatd" ID="{D0492F39-FD77-4190-80D0-80E234EF7E11}" ShortID="698868927">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiatd" ID="{4ACA6F15-E519-4548-84F1-1993DFEE94F7}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiatd.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="194251310"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiatd" ID="{4ACA6F15-E519-4548-84F1-1993DFEE94F7}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igiate" ID="{FBC5CA48-20FE-453C-A962-EF342EDAA23A}" ShortID="787460954">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiate" ID="{C2B50388-D306-40A1-BD39-41FB36FA0EF9}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiate.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="537107677"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiate" ID="{C2B50388-D306-40A1-BD39-41FB36FA0EF9}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igiatf" ID="{864F9252-1711-4C55-8C76-7E455A7D59CB}" ShortID="226619155">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiatf" ID="{BAC6121C-A42C-480F-9130-113625B24B1C}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiatf.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="94459984"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiatf" ID="{BAC6121C-A42C-480F-9130-113625B24B1C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="GI Voiceline Move" ID="{0FEA52B3-B809-4EC6-992D-7F7F27D328BA}" ShortID="191761511">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="igimoa" ID="{717359CA-B013-4F27-8FAE-F94F39C90013}" ShortID="81168653">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igimoa" ID="{305305FE-E3CF-4048-BB49-1A186CB72CF2}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igimoa.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="561778382"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igimoa" ID="{305305FE-E3CF-4048-BB49-1A186CB72CF2}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igimob" ID="{3BE9092A-3A86-4139-B8A2-0905E6F39EB8}" ShortID="913582977">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igimob" ID="{8DD76FBA-D4B1-49E9-B4B8-FA5678FCA26D}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igimob.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="873790695"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igimob" ID="{8DD76FBA-D4B1-49E9-B4B8-FA5678FCA26D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igimoc" ID="{5EA9680D-2094-4ED4-AECD-884FB3C76F3C}" ShortID="370245455">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igimoc" ID="{CBB198A2-9B96-49B0-842D-390968E17399}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igimoc.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="721398574"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igimoc" ID="{CBB198A2-9B96-49B0-842D-390968E17399}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igimod" ID="{14FF273D-4026-4E6E-8A3D-F03F91D15791}" ShortID="706062035">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igimod" ID="{85A87CE2-0E0B-459E-96D3-869BD567076A}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igimod.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="140147118"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igimod" ID="{85A87CE2-0E0B-459E-96D3-869BD567076A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igimoe" ID="{F7C71498-3632-4E47-ADBE-349EE69A956A}" ShortID="218370762">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igimoe" ID="{407F3ADA-672E-45DB-832C-A3F9D81F6B80}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igimoe.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="23844364"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igimoe" ID="{407F3ADA-672E-45DB-832C-A3F9D81F6B80}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igimof" ID="{47D0440D-6EA8-47AA-BB81-A34BD37EDD02}" ShortID="938002565">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igimof" ID="{647A53E8-EA72-4F20-971B-105E9E81C2C5}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igimof.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="201379143"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igimof" ID="{647A53E8-EA72-4F20-971B-105E9E81C2C5}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="GI Voiceline Select" ID="{A9CF14C1-A457-4770-B9D1-81E3716A1D73}" ShortID="325789233">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="igisea" ID="{AA3A547A-B6CB-4C6F-88D1-1CE9B43B69BF}" ShortID="698899643">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igisea" ID="{C19FDA51-5DEE-41AF-B964-EE8290663D0B}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igisea.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="854607531"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igisea" ID="{C19FDA51-5DEE-41AF-B964-EE8290663D0B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igiseb" ID="{483FC942-4F82-43B0-962C-3879ADC1215E}" ShortID="454833166">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiseb" ID="{FB16B0CF-7163-41C0-817D-5D76ABE18561}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiseb.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="580738995"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiseb" ID="{FB16B0CF-7163-41C0-817D-5D76ABE18561}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igisec" ID="{E2022D17-6C9E-43A1-BFEC-B95C97B63CDA}" ShortID="291518252">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igisec" ID="{42E9DDFC-FE49-4BCF-BCD1-736523A90DFB}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igisec.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1058430212"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igisec" ID="{42E9DDFC-FE49-4BCF-BCD1-736523A90DFB}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igised" ID="{FD240248-C5EB-4455-A53A-7020AAEEE5CA}" ShortID="549339996">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igised" ID="{0C152B95-B09E-47D1-84CC-AEF8BB6F588E}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igised.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="604394593"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igised" ID="{0C152B95-B09E-47D1-84CC-AEF8BB6F588E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igisee" ID="{F15141F7-3F8A-4A73-85E0-511CF1A4FE98}" ShortID="97906215">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igisee" ID="{82BF4D83-91DC-4D02-B457-19EC68815400}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igisee.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="923161941"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igisee" ID="{82BF4D83-91DC-4D02-B457-19EC68815400}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igisef" ID="{219A7761-C66A-4C9F-872F-0310461A3F47}" ShortID="212235340">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igisef" ID="{300F948D-1AA9-4545-8379-7A9384711E4C}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igisef.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="493949410"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igisef" ID="{300F948D-1AA9-4545-8379-7A9384711E4C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="GI Voiceline Driver" ID="{A9C20877-55D5-45B6-B26C-665585407A77}" ShortID="833184660">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="igiseb" ID="{599705D0-FB9B-4301-9C89-A83F43D8B1B5}" ShortID="28260328">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igiseb" ID="{B685EEF7-EC01-46AF-A558-590B8E03ECDE}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igiseb.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="580738995"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igiseb" ID="{B685EEF7-EC01-46AF-A558-590B8E03ECDE}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="igisee" ID="{9C86655A-C2E5-41E2-B803-132F31FE5BE6}" ShortID="32555931">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="voice" ID="{4AB68BF8-864C-46A8-AE9D-AE519232951E}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="igisee" ID="{4BC6D594-DF00-4508-A854-A882ACD21667}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>igisee.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="923161941"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="igisee" ID="{4BC6D594-DF00-4508-A854-A882ACD21667}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>
@@ -4029,6 +4720,149 @@
 												</Sound>
 											</ChildrenList>
 										</ActorMixer>
+									</ChildrenList>
+								</Folder>
+								<Folder Name="GI" ID="{5068C2C7-B4A1-460B-B9AF-0BECE159F854}" ShortID="1051483827">
+									<ChildrenList>
+										<Sound Name="GIShoot2Single" ID="{2D002DBE-4391-4FBC-8537-AFD599658152}" ShortID="785381307">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="giShoot2Single" ID="{4099CEDE-325F-49DC-A782-4ECBADE35A7F}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>giShoot2Single.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="840080710"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="giShoot2Single" ID="{4099CEDE-325F-49DC-A782-4ECBADE35A7F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="GIShootSingle" ID="{758A6F00-2A29-4C08-ABC1-EF2952CB91E9}" ShortID="231360526">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="giShootSingle" ID="{4AC594DD-EAEF-4C5E-B1EB-FFBF9CEE98CF}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>giShootSingle.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="225617152"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="giShootSingle" ID="{4AC594DD-EAEF-4C5E-B1EB-FFBF9CEE98CF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="GIBarricade" ID="{8B20336B-E503-45E8-8A84-53F3AAE4AD74}" ShortID="496107227">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="GIBarricade2" ID="{EC7B460B-B348-4E79-B239-8B2523ADB79C}" ShortID="808086314">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="giBarricade2" ID="{D371DFAF-BD81-4D81-BED1-7FE445D9BAC5}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>giBarricade2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="530998985"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="giBarricade2" ID="{D371DFAF-BD81-4D81-BED1-7FE445D9BAC5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="GIBarricade1" ID="{E27797E4-F537-4683-9347-703FAF92931A}" ShortID="4729901">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="giBarricade1" ID="{1BF3330C-42AE-4769-96FC-31E42FF96D9F}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>giBarricade1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="92561902"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="giBarricade1" ID="{1BF3330C-42AE-4769-96FC-31E42FF96D9F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>

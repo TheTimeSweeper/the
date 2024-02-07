@@ -16,7 +16,7 @@ namespace RA2Mod.Modules.Characters
 
         public abstract UnlockableDef characterUnlockableDef { get; }
 
-        public abstract GameObject displayPrefab { get; protected set; }
+        public virtual GameObject displayPrefab { get; protected set; }
 
         public override void InitializeCharacter()
         {

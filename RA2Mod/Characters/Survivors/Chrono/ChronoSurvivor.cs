@@ -40,7 +40,7 @@ namespace RA2Mod.Survivors.Chrono
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconChrono"),
             bodyColor = Color.cyan,
-            sortPosition = 100,
+            sortPosition = 69.5f,
 
             crosshair = Assets.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -71,15 +71,6 @@ namespace RA2Mod.Survivors.Chrono
         public override UnlockableDef characterUnlockableDef => ChronoUnlockables.characterUnlockableDef;
 
         public override ItemDisplaysBase itemDisplays => null;// new ChronoItemDisplays();
-
-        //set in base classes
-        public override AssetBundle assetBundle { get; protected set; }
-        
-        public override GameObject bodyPrefab { get; protected set; }
-        public override CharacterBody prefabCharacterBody { get; protected set; }
-        public override GameObject characterModelObject { get; protected set; }
-        public override CharacterModel prefabCharacterModel { get; protected set; }
-        public override GameObject displayPrefab { get; protected set; }
 
         public override void Initialize()
         {
@@ -214,7 +205,7 @@ namespace RA2Mod.Survivors.Chrono
                     CHRONO_PREFIX + "PRIMARY_SHOOT_NAME",
                     CHRONO_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoShoot)),
                     "Weapon",
                     false
                 ));
@@ -318,7 +309,7 @@ namespace RA2Mod.Survivors.Chrono
         #region skins
         public override void InitializeSkins()
         {
-            ModelSkinController skinController = prefabCharacterModel.gameObject.AddComponent<ModelSkinController>();
+            ModelSkinController skinController = prefabCharacterModel.gameObject.GetComponent<ModelSkinController>();
             ChildLocator childLocator = prefabCharacterModel.GetComponent<ChildLocator>();
 
             CharacterModel.RendererInfo[] defaultRendererinfos = prefabCharacterModel.baseRendererInfos;

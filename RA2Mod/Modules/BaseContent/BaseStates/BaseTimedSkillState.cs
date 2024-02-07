@@ -4,15 +4,15 @@ using System;
 namespace RA2Mod.Modules.BaseStates
 {
     //see example skills below
-    public class BaseTimedSkillState : BaseSkillState
+    public abstract class BaseTimedSkillState : BaseSkillState
     {
         //total duration of the move
-        public float TimedBaseDuration;
+        public abstract float TimedBaseDuration { get; }
 
         //time relative to duration that the skill starts
         //for example, set 0.5 and the "cast" will happen halfway through the skill
-        public float TimedBaseCastStartTime;
-        public float TimedBaseCastEndTime;
+        public abstract float TimedBaseCastStartPercentTime { get; }
+        public virtual float TimedBaseCastEndPercentTime { get; }
 
         protected float duration;
         protected float castStartPercentTime;
@@ -21,16 +21,17 @@ namespace RA2Mod.Modules.BaseStates
         protected bool isFiring;
         protected bool hasExited;
 
-        //initialize your time values here
-        protected virtual void InitDurationValues(float baseDuration, float castStartPercentTime, float castEndPercentTime = 1)
+        public override void OnEnter()
         {
-            TimedBaseDuration = baseDuration;
-            TimedBaseCastStartTime = castStartPercentTime;
-            TimedBaseCastEndTime = castEndPercentTime;
+            InitDurationValues();
+            base.OnEnter();
+        }
 
+        protected virtual void InitDurationValues()
+        {
             duration = TimedBaseDuration / attackSpeedStat;
-            this.castStartPercentTime = castStartPercentTime * duration;
-            this.castEndPercentTime = castEndPercentTime * duration;
+            this.castStartPercentTime = TimedBaseCastStartPercentTime * duration;
+            this.castEndPercentTime = TimedBaseCastEndPercentTime * duration;
         }
 
         protected virtual void OnCastEnter() { }
@@ -68,9 +69,14 @@ namespace RA2Mod.Modules.BaseStates
 
             if (fixedAge > duration)
             {
-                outer.SetNextStateToMain();
+                SetNextState();
                 return;
             }
+        }
+
+        protected virtual void SetNextState()
+        {
+            outer.SetNextStateToMain();
         }
 
         public override void Update()
@@ -85,16 +91,10 @@ namespace RA2Mod.Modules.BaseStates
 
     public class ExampleTimedSkillState : BaseTimedSkillState
     {
-        public static float SkillBaseDuration = 1.5f;
-        public static float SkillStartTime = 0.2f;
-        public static float SkillEndTime = 0.9f;
+        public override float TimedBaseDuration => 1.5f;
 
-        public override void OnEnter()
-        {
-            base.OnEnter();
-
-            InitDurationValues(SkillBaseDuration, SkillStartTime, SkillEndTime);
-        }
+        public override float TimedBaseCastStartPercentTime => 0.2f;
+        public override float TimedBaseCastEndPercentTime => 0.9f;
 
         protected override void OnCastEnter()
         {
@@ -114,15 +114,8 @@ namespace RA2Mod.Modules.BaseStates
 
     public class ExampleDelayedSkillState : BaseTimedSkillState
     {
-        public static float SkillBaseDuration = 1.5f;
-        public static float SkillStartTime = 0.2f;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-
-            InitDurationValues(SkillBaseDuration, SkillStartTime);
-        }
+        public override float TimedBaseDuration => 1.5f;
+        public override float TimedBaseCastStartPercentTime => 0.2f;
 
         protected override void OnCastEnter()
         {

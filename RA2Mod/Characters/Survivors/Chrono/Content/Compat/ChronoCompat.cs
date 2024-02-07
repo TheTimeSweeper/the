@@ -7,10 +7,12 @@ namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoCompat
     {
+        public static bool AutoSprintInstalled;
+
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void Init()
         {
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
+            if (AutoSprintInstalled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
             {
                 RA2Plugin.instance.StartCoroutine(AutoSprintCompat());
             }

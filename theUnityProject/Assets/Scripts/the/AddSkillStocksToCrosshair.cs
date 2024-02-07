@@ -6,16 +6,15 @@ using static RoR2.UI.CrosshairController;
 
 public class AddSkillStocksToCrosshair : MonoBehaviour
 {
-
     [SerializeField]
     private Transform stonkGrid;
     [SerializeField]
     private CrosshairController crosshairController;
 
-    [ContextMenu("go")]
+    [ContextMenu("add to crosshairController")]
     public void transfer() {
 
-        List<SkillStockSpriteDisplay> displays = new List<SkillStockSpriteDisplay>() { };
+        List<SkillStockSpriteDisplay> displays = crosshairController.skillStockSpriteDisplays.ToList();
         SkillStockSpriteDisplay firstDisplay = crosshairController.skillStockSpriteDisplays[0];
 
         for (int i = 0; i < stonkGrid.childCount; i++) {

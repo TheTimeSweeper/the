@@ -1,8 +1,8 @@
 ﻿using EntityStates;
+using RA2Mod.General.SkillDefs;
 using RA2Mod.Modules;
 using RA2Mod.Modules.BaseStates;
 using RA2Mod.Survivors.Chrono.Components;
-using RA2Mod.Survivors.Chrono.SkillDefs;
 using Rewired;
 using RoR2;
 using UnityEngine;
@@ -76,14 +76,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 Util.PlaySound("Play_ChronoMove", gameObject);
                 characterMotor.Motor.SetPosition(marker.viewPosition);
                 characterBody.isSprinting = false;
-
+                
                 outer.SetNextState(state);
             }
         }
 
         private bool GetSprintReleased()
         {
-            if (ChronoConfig.M0TeleportOnRelese.Value)
+            if (ChronoConfig.M0TeleportOnRelese.Value || ChronoCompat.AutoSprintInstalled)
             {
                 PlayerCharacterMasterController playerMaster;
                 if (playerMaster = characterBody.master.playerCharacterMasterController)

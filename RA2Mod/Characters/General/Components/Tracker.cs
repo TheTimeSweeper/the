@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Chrono.Components
+namespace RA2Mod.General.Components
 {
     public abstract class Tracker : MonoBehaviour
     {
@@ -36,14 +36,14 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         protected virtual void SetIndicator()
         {
-            this.indicator = new Indicator(base.gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
+            indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
         }
 
         // Token: 0x06002687 RID: 9863 RVA: 0x000A83DE File Offset: 0x000A65DE
         protected virtual void Start()
         {
-            this.inputBank = base.GetComponent<InputBankTest>();
-            this.teamComponent = base.GetComponent<TeamComponent>();
+            inputBank = GetComponent<InputBankTest>();
+            teamComponent = GetComponent<TeamComponent>();
 
             mask = GetTeamMask();
         }
@@ -55,7 +55,7 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public HurtBox GetTrackingTarget()
         {
-            return this.trackingTarget;
+            return trackingTarget;
         }
         public bool GetIsAlly()
         {
@@ -68,26 +68,26 @@ namespace RA2Mod.Survivors.Chrono.Components
         // Token: 0x06002689 RID: 9865 RVA: 0x000A840C File Offset: 0x000A660C
         protected virtual void OnEnable()
         {
-            this.indicator.active = true;
+            indicator.active = true;
         }
 
         // Token: 0x0600268A RID: 9866 RVA: 0x000A841A File Offset: 0x000A661A
         protected virtual void OnDisable()
         {
-            this.indicator.active = false;
+            indicator.active = false;
         }
 
         // Token: 0x0600268B RID: 9867 RVA: 0x000A8428 File Offset: 0x000A6628
         private void FixedUpdate()
         {
-            this.trackerUpdateStopwatch += Time.fixedDeltaTime;
-            if (this.trackerUpdateStopwatch >= this.trackerUpdateInterval)
+            trackerUpdateStopwatch += Time.fixedDeltaTime;
+            if (trackerUpdateStopwatch >= trackerUpdateInterval)
             {
-                this.trackerUpdateStopwatch -= this.trackerUpdateInterval;
+                trackerUpdateStopwatch -= trackerUpdateInterval;
 
-                Ray aimRay = new Ray(this.inputBank.aimOrigin, this.inputBank.aimDirection);
+                Ray aimRay = new Ray(inputBank.aimOrigin, inputBank.aimDirection);
 
-                trackingTarget = this.SearchForTarget(aimRay);
+                trackingTarget = SearchForTarget(aimRay);
 
                 indicator.targetTransform = trackingTarget?.transform;
             }
@@ -103,16 +103,16 @@ namespace RA2Mod.Survivors.Chrono.Components
                 }
             }
 
-            this.search.teamMaskFilter = TeamMask.all;
-            this.search.filterByLoS = filterByLoS;
-            this.search.searchOrigin = aimRay.origin;
-            this.search.searchDirection = aimRay.direction;
-            this.search.sortMode = this.bullseyeSortMode;
-            this.search.maxDistanceFilter = this.maxTrackingDistance;
-            this.search.maxAngleFilter = this.maxTrackingAngle;
-            this.search.RefreshCandidates();
-            this.search.FilterOutGameObject(base.gameObject);
-            return this.search.GetResults().FirstOrDefault<HurtBox>();
+            search.teamMaskFilter = TeamMask.all;
+            search.filterByLoS = filterByLoS;
+            search.searchOrigin = aimRay.origin;
+            search.searchDirection = aimRay.direction;
+            search.sortMode = bullseyeSortMode;
+            search.maxDistanceFilter = maxTrackingDistance;
+            search.maxAngleFilter = maxTrackingAngle;
+            search.RefreshCandidates();
+            search.FilterOutGameObject(gameObject);
+            return search.GetResults().FirstOrDefault();
         }
     }
 }

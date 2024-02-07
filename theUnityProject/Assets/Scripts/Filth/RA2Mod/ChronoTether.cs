@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.Components {
     public class ChronoTether : MonoBehaviour {

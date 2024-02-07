@@ -50,7 +50,7 @@ namespace RA2Mod.Modules
                 Log.Error($"could not load model prefab {modelName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
                 return null;
             }
-            return model;
+            return PrefabAPI.InstantiateClone(model, modelName, false);
         }
 
         public static GameObject LoadCharacterBody(AssetBundle assetBundle, string bodyName)
@@ -325,6 +325,7 @@ namespace RA2Mod.Modules
             SetupAimAnimator(bodyPrefab, characterModel.gameObject);
             SetupFootstepController(characterModel.gameObject);
             SetupRagdoll(characterModel.gameObject);
+            SetupSkinController(characterModel.gameObject);
 
             return characterModel;
         }
@@ -532,6 +533,11 @@ namespace RA2Mod.Modules
             aimAnimator.giveupDuration = 3f;
             aimAnimator.inputBank = prefab.GetComponent<InputBankTest>();
         }
+
+        private static void SetupSkinController(GameObject gameObject)
+        {
+            gameObject.GetOrAddComponent<ModelSkinController>();
+        }
         #endregion
 
         #region master
@@ -668,7 +674,7 @@ namespace RA2Mod.Modules
         }
 
         //this but in reverse https://media.discordapp.net/attachments/875473107891150878/896193331720237106/caption-7.gif?ex=65989f94&is=65862a94&hm=e1f51da3ad190c00c5da1f90269d5ef10bedb0ae063c0f20aa0dd8721608018a&
-        public static void AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null,  Type initalStateType = null)
+        public static void AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null,  Type initalStateType = null, bool addToHurt = true)
         {
             EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(prefab, machineName);
             if (entityStateMachine == null)
@@ -706,7 +712,7 @@ namespace RA2Mod.Modules
             }
 
             SetStateOnHurt setStateOnHurt = prefab.GetComponent<SetStateOnHurt>();
-            if (setStateOnHurt)
+            if (setStateOnHurt && addToHurt)
             {
                 setStateOnHurt.idleStateMachine = setStateOnHurt.idleStateMachine.Append(entityStateMachine).ToArray();
             }
@@ -742,6 +748,15 @@ namespace RA2Mod.Modules
             hitBoxGroup.groupName = hitBoxGroupName;
         }
 
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            T component = gameObject.GetComponent<T>();
+            if (component == null)
+            {
+                component = gameObject.AddComponent<T>();
+            }
+            return component;
+        }
     }
 
     // for simplifying rendererinfo creation

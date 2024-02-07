@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Chrono.SkillDefs
+namespace RA2Mod.General.SkillDefs
 {
     public interface IHasSkillDefComponent<T>
     {
@@ -18,7 +18,7 @@ namespace RA2Mod.Survivors.Chrono.SkillDefs
     {
         public abstract override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot);
 
-        public class InstanceData<T> : SkillDef.BaseSkillInstanceData where T: MonoBehaviour
+        public class InstanceData<T> : BaseSkillInstanceData where T : MonoBehaviour
         {
             public T componentFromSkillDef;
         }
@@ -28,9 +28,9 @@ namespace RA2Mod.Survivors.Chrono.SkillDefs
             EntityState entityState = base.InstantiateNextState(skillSlot);
 
             InstanceData<T> instanceData = (InstanceData<T>)skillSlot.skillInstanceData;
-            
+
             IHasSkillDefComponent<T> somethingComponentSkill;
-            if ((somethingComponentSkill = (entityState as IHasSkillDefComponent<T>)) != null)
+            if ((somethingComponentSkill = entityState as IHasSkillDefComponent<T>) != null)
             {
                 somethingComponentSkill.componentFromSkillDef = instanceData.componentFromSkillDef;
 

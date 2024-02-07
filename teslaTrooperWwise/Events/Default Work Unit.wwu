@@ -1165,6 +1165,126 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="GI" ID="{5ABB3F51-BD8A-4FE8-B64F-27369B2B0AC2}" ShortID="981602398">
+					<ChildrenList>
+						<Event Name="Play_GIShootSingle" ID="{AFBBB373-320C-4EE4-8E1F-9CD3B666D48B}">
+							<ChildrenList>
+								<Action Name="" ID="{64594323-4E0B-42D4-8361-96B92C6D47A3}" ShortID="837172814">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GIShootSingle" ID="{758A6F00-2A29-4C08-ABC1-EF2952CB91E9}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_GIBarricade" ID="{7EAB0E89-7AA3-4162-AD5E-2BB46CD05E8C}">
+							<ChildrenList>
+								<Action Name="" ID="{AFD4A9F9-C1F7-4D20-964C-947C19A6429E}" ShortID="213104476">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GIBarricade" ID="{8B20336B-E503-45E8-8A84-53F3AAE4AD74}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_GIShoot2Single" ID="{D4EB6163-D2A3-4219-BDBE-F46DE2508088}">
+							<ChildrenList>
+								<Action Name="" ID="{809B8F3F-277E-4B18-8740-6C5CF51B2001}" ShortID="1028942001">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="GIShoot2Single" ID="{2D002DBE-4391-4FBC-8537-AFD599658152}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Folder Name="VoiceLines" ID="{29202375-44FA-458F-9609-006C8349DC89}" ShortID="658626680">
+							<ChildrenList>
+								<Event Name="Play_GI_Voiceline_Select" ID="{D5C229D1-21C0-491E-A830-CA7AE34E77AB}">
+									<ChildrenList>
+										<Action Name="" ID="{ECD83D42-D916-420F-B232-8A98C566BEB5}" ShortID="683266825">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="GI Voiceline Select" ID="{A9CF14C1-A457-4770-B9D1-81E3716A1D73}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_GI_Voiceline" ID="{874C877A-35CF-41C8-AD48-65A57D2A9052}">
+									<ChildrenList>
+										<Action Name="" ID="{7A77A085-B756-46FF-AD76-C4C79CF613A8}" ShortID="972770257">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="GI Voiceline" ID="{A5A3FFD4-D6A1-4528-A215-3E89A1FB6D39}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_GI_Voiceline_Attack" ID="{CD4BFC6A-080A-4B32-AEA8-02FABAF2B503}">
+									<ChildrenList>
+										<Action Name="" ID="{B1AE625B-123D-4645-BC01-52AF29E648ED}" ShortID="212904252">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="GI Voiceline Attack" ID="{C0A473EA-C417-4553-A263-CC53FC4805F9}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_GI_Voiceline_Driver" ID="{BD941747-E25D-4B1A-96D4-99059AE811DF}">
+									<ChildrenList>
+										<Action Name="" ID="{2558927B-8B64-4F60-82E7-50FF7C7B7E46}" ShortID="868115912">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="GI Voiceline Driver" ID="{A9C20877-55D5-45B6-B26C-665585407A77}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_GI_Voiceline_Move" ID="{D5623438-7FEC-4140-8225-BE64F8395E09}">
+									<ChildrenList>
+										<Action Name="" ID="{E47C6B41-B710-46FD-B3B1-208A76BAB628}" ShortID="614019077">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="GI Voiceline Move" ID="{0FEA52B3-B809-4EC6-992D-7F7F27D328BA}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
