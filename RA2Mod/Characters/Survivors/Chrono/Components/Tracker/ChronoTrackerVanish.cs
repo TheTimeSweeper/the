@@ -22,5 +22,10 @@ namespace RA2Mod.Survivors.Chrono.Components
             //dependentTracker = GetComponent<ChronoTrackerBomb>();
             this.indicator = new Indicator(base.gameObject, ChronoAssets.chronoIndicatorVanish);
         }
+
+        protected override TeamMask GetTeamMask()
+        {
+            return TeamMask.all;
+        }
     }
 }

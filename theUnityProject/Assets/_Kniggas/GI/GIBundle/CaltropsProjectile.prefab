@@ -197,7 +197,7 @@ MonoBehaviour:
   lifetimeExpiredSoundString: 
   lifetimeExpiredSound: {fileID: 0}
   offsetForLifetimeExpiredSound: 0
-  destroyOnEnemy: 0
+  destroyOnEnemy: 1
   destroyOnWorld: 1
   impactOnWorld: 1
   timerAfterImpact: 0

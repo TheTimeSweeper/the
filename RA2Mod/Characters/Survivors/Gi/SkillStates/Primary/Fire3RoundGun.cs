@@ -2,7 +2,7 @@
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class FirePistol : BaseShoot
+    public class Fire3RoundGun : BaseFireGun
     {
         public static float baseInterval => GIConfig.M1PistolInterval.Value;
         public static float baseFinalInterval => GIConfig.M1PistolFinalInterval.Value;

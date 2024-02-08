@@ -1,47 +1,37 @@
 ﻿using EntityStates;
+using RA2Mod.Survivors.GI;
 using RoR2;
+using System;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class HeavyFire : BaseSkillState
+    public abstract class BaseFireGun : BaseSkillState
     {
-        public static float damageCoefficient = GIConfig.M1HeavyFireDamage.Value;
+        public static float damageCoefficient => GIConfig.M1PistolDamage.Value;
         public static float procCoefficient = 1f;
-        public static float baseDuration => GIConfig.M1HeavyFireDuration.Value;
-        public static float force => GIConfig.M1HeavyFireForce.Value;
-        public static float recoil => GIConfig.M1HeavyFireRecoil.Value;
+        public static float force = 10f;
+        public static float recoil = 0.2f;
         public static float range = 256f;
-        public static GameObject tracerEffectPrefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/TracerToolbotRebar.prefab").WaitForCompletion();
+        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
-        private float duration;
+        private bool hasFired;
         private string muzzleString;
 
         public override void OnEnter()
         {
             base.OnEnter();
-
-            duration = baseDuration / attackSpeedStat;
             characterBody.SetAimTimer(2f);
-            muzzleString = "JoeSword";
+            muzzleString = "HandR";
 
             PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
-
-            Fire();
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if (fixedAge >= duration)
-                base.outer.SetNextStateToMain();
         }
 
         protected void Fire()
         {
             characterBody.AddSpreadBloom(1.5f);
             EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-            Util.PlaySound("Play_GIShoot2Single", gameObject);
+            Util.PlaySound("Play_GIShootSingle", gameObject);
 
             if (isAuthority)
             {
@@ -56,7 +46,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
                     damage = damageCoefficient * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
                     damageType = DamageType.Generic,
-                    falloffModel = BulletAttack.FalloffModel.None,
+                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                     maxDistance = range,
                     force = force,
                     hitMask = LayerIndex.CommonMasks.bullet,
@@ -68,15 +58,15 @@ namespace RA2Mod.Survivors.GI.SkillStates
                     smartCollision = true,
                     procChainMask = default,
                     procCoefficient = procCoefficient,
-                    radius = GIConfig.M1HeavyFireRadius.Value,
+                    radius = 0.75f,
                     sniper = false,
-                    stopperMask = LayerIndex.world.mask,
+                    stopperMask = LayerIndex.CommonMasks.bullet,
                     weapon = null,
                     tracerEffectPrefab = tracerEffectPrefab,
                     spreadPitchScale = 0f,
                     spreadYawScale = 0f,
                     queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                    hitEffectPrefab = EntityStates.Toolbot.FireNailgun.hitEffectPrefab,
+                    hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
                 }.Fire();
             }
         }

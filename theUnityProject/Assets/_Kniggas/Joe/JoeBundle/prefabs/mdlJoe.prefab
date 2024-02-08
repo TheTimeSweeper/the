@@ -7937,6 +7937,10 @@ MonoBehaviour:
     transform: {fileID: 5133534269842455549}
   - name: ChronosphereAimOrigin
     transform: {fileID: 7798190828824670497}
+  - name: Weapon1
+    transform: {fileID: 5567028489271994363}
+  - name: Weapon2
+    transform: {fileID: 5290656929197421031}
 --- !u!114 &3371298392336292984
 MonoBehaviour:
   m_ObjectHideFlags: 0

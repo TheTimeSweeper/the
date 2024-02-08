@@ -6,7 +6,6 @@ namespace RA2Mod.General.Components
 {
     public abstract class Tracker : MonoBehaviour
     {
-
         public abstract float maxTrackingDistance { get; }
         public abstract float maxTrackingAngle { get; }
         public abstract BullseyeSearch.SortMode bullseyeSortMode { get; }
@@ -103,7 +102,7 @@ namespace RA2Mod.General.Components
                 }
             }
 
-            search.teamMaskFilter = TeamMask.all;
+            search.teamMaskFilter = mask;
             search.filterByLoS = filterByLoS;
             search.searchOrigin = aimRay.origin;
             search.searchDirection = aimRay.direction;

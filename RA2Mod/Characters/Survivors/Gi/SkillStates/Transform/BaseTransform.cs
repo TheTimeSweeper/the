@@ -49,7 +49,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
         }
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Death;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

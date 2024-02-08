@@ -674,7 +674,7 @@ namespace RA2Mod.Modules
         }
 
         //this but in reverse https://media.discordapp.net/attachments/875473107891150878/896193331720237106/caption-7.gif?ex=65989f94&is=65862a94&hm=e1f51da3ad190c00c5da1f90269d5ef10bedb0ae063c0f20aa0dd8721608018a&
-        public static void AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null,  Type initalStateType = null, bool addToHurt = true)
+        public static void AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null,  Type initalStateType = null, bool addToHurt = true, bool addToDeath = true)
         {
             EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(prefab, machineName);
             if (entityStateMachine == null)
@@ -706,7 +706,7 @@ namespace RA2Mod.Modules
             }
 
             CharacterDeathBehavior deathBehavior = prefab.GetComponent<CharacterDeathBehavior>();
-            if (deathBehavior)
+            if (deathBehavior && addToDeath)
             {
                 deathBehavior.idleStateMachine = deathBehavior.idleStateMachine.Append(entityStateMachine).ToArray();
             }

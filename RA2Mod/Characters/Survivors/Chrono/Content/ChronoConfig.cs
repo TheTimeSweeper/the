@@ -1,5 +1,4 @@
-﻿using BepInEx.Configuration;
-using RA2Mod.Modules;
+﻿using RA2Mod.Modules;
 
 namespace RA2Mod.Survivors.Chrono
 {

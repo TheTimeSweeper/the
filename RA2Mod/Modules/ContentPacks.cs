@@ -21,6 +21,7 @@ namespace RA2Mod.Modules {
         public static List<SkillFamily> skillFamilies = new List<SkillFamily>();
         public static List<SkillDef> skillDefs = new List<SkillDef>();
         public static List<Type> entityStates = new List<Type>();
+        public static List<EntityStateConfiguration> entityStateConfigurations = new List<EntityStateConfiguration>();
 
         public static List<BuffDef> buffDefs = new List<BuffDef>();
         public static List<EffectDef> effectDefs = new List<EffectDef>();
@@ -61,6 +62,7 @@ namespace RA2Mod.Modules {
             contentPack.skillDefs.Add(skillDefs.ToArray());
             contentPack.skillFamilies.Add(skillFamilies.ToArray());
             contentPack.entityStateTypes.Add(entityStates.ToArray());
+            contentPack.entityStateConfigurations.Add(entityStateConfigurations.ToArray());
 
             contentPack.buffDefs.Add(buffDefs.ToArray());
             contentPack.effectDefs.Add(effectDefs.ToArray());

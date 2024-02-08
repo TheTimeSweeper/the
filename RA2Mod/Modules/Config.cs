@@ -1,15 +1,95 @@
-﻿using System.Runtime.CompilerServices;
-using BepInEx.Configuration;
+﻿using BepInEx.Configuration;
 using RiskOfOptions;
 using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
+using RoR2;
+using RoR2.Skills;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace RA2Mod.Modules
 {
+    public class ConfigEntry<T>
+    {
+        public ConfigEntry(BepInEx.Configuration.ConfigEntry<T> actualConfigEntry, T defaultValue)
+        {
+            ActualConfigEntry = actualConfigEntry;
+            DefaultValue = defaultValue;
+        }
+
+        public BepInEx.Configuration.ConfigEntry<T> ActualConfigEntry;
+        public T DefaultValue;
+
+        public T Value
+        {
+            get
+            {
+                if (ActualConfigEntry != null)
+                {
+                    return ActualConfigEntry.Value;
+                }
+                return DefaultValue;
+            }
+        }
+    }
+
     public static class Config
     {
         public static ConfigFile MyConfig = RA2Plugin.instance.Config;
+
+        private static List<string> disabledSections = new List<string>();
+
+        private static bool enableAll = true;
+
+        public static void DisableSection(string section)
+        {
+            disabledSections.Add(section);
+        }
+        private static bool SectionDisabled(string section)
+        {
+            return disabledSections.Contains(section);
+        }
+
+        public static void ConfigureBody(CharacterBody body, string section, string bodyInfoTitle = "")
+        {
+            if (string.IsNullOrEmpty(bodyInfoTitle))
+            {
+                bodyInfoTitle = body.name;
+            }
+
+
+        }
+
+        public static void ConfigureSkillDef(SkillDef skillDef, string section, string skillTitle, bool cooldown = true, bool maxStock = true, bool rechargeStock = false)
+        {
+            if (cooldown)
+            {
+                skillDef.baseRechargeInterval = Config.BindAndOptionsSlider(
+                    section,
+                    $"{skillTitle} cooldown",
+                    skillDef.baseRechargeInterval,
+                    "",
+                    0,
+                    20).Value;
+            }
+            if (maxStock)
+            {
+                skillDef.baseMaxStock = Config.BindAndOptions(
+                    section,
+                    $"{skillTitle} stocks",
+                    skillDef.baseMaxStock,
+                    "").Value;
+            }
+            if (rechargeStock)
+            {
+                skillDef.rechargeStock = Config.BindAndOptions(
+                    section,
+                    $"{skillTitle} recharge stocks",
+                    skillDef.baseMaxStock,
+                    "").Value;
+            }
+        }
 
         /// <summary>
         /// automatically makes config entries for disabling survivors
@@ -44,6 +124,9 @@ namespace RA2Mod.Modules
                 description += " (restart required)";
             }
 
+            if(!enableAll && SectionDisabled(section))
+                return new ConfigEntry<T>(null, defaultValue);
+
             BepInEx.Configuration.ConfigEntry<T> configEntry = MyConfig.Bind(section, name, defaultValue, description);
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
@@ -51,8 +134,9 @@ namespace RA2Mod.Modules
                 TryRegisterOption(configEntry, restartRequired);
             }
 
-            return configEntry;
+            return new ConfigEntry<T>(configEntry, defaultValue);
         }
+
         public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description = "", float min = 0, float max = 20, bool restartRequired = false)
         {
             if (string.IsNullOrEmpty(description))
@@ -65,6 +149,9 @@ namespace RA2Mod.Modules
                 description += " (restart required)";
             }
 
+            if (!enableAll && SectionDisabled(section))
+                return new ConfigEntry<float>(null, defaultValue);
+
             BepInEx.Configuration.ConfigEntry<float> configEntry = MyConfig.Bind(section, name, defaultValue, description);
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
@@ -72,7 +159,7 @@ namespace RA2Mod.Modules
                 TryRegisterOptionSlider(configEntry, min, max, restartRequired);
             }
 
-            return configEntry;
+            return new ConfigEntry<float>(configEntry, defaultValue);
         }
 
         //add risk of options dll to your project libs and uncomment this for a soft dependency

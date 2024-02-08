@@ -1,11 +1,10 @@
-﻿using BepInEx.Configuration;
-using RA2Mod.Modules;
+﻿using RA2Mod.Modules;
 
 namespace RA2Mod.General
 {
     public static class GeneralConfig
     {
-        public static ConfigEntry<bool> Debug;
+        public static BepInEx.Configuration.ConfigEntry<bool> Debug;
 
         public static ConfigEntry<bool> ChronoEnabled;
         public static ConfigEntry<bool> GIEnabled;

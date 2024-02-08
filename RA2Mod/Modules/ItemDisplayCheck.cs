@@ -61,11 +61,11 @@ namespace RA2Mod.Modules
             foreach (Object keyAsset in missingKeyAssets)
             {
                 string thing = $"";
-                if (ItemDisplays.KeyAssetDisplayPrefabs.ContainsKey(keyAsset))
+                if (ItemDisplays.KeyAssetDisplayRules.ContainsKey(keyAsset))
                 {
                     //if we have a displayprefab for it (Populated in ItemDisplays.PopulateDisplays),
                         //generate a rule formatted to the code in this project
-                    thing += SpitOutNewRule(keyAsset, firstCompatibleChild, ItemDisplays.KeyAssetDisplayPrefabs[keyAsset]);
+                    thing += SpitOutNewRule(keyAsset, firstCompatibleChild, ItemDisplays.KeyAssetDisplayRules[keyAsset]);
                 }
                 else
                 {
@@ -79,7 +79,7 @@ namespace RA2Mod.Modules
 
         private static void LazyGatherAllItems()
         {
-            allDisplayedItems = new List<Object>(ItemDisplays.KeyAssetDisplayPrefabs.Keys);
+            allDisplayedItems = new List<Object>(ItemDisplays.KeyAssetDisplayRules.Keys);
 
             allDisplayedItems.Sort((item1, item2) => {
                 //sort defs by keyasset so it shows up in the same order as the idph

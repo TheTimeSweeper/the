@@ -26,8 +26,7 @@ namespace RA2Mod.General.Components
 
         void FixedUpdate()
         {
-            float distance = (transform.position - targetComponent.target.position).sqrMagnitude;
-            bool overriding = targetComponent.target && distance < overrideSqrDistance;
+            bool overriding = targetComponent.target && (transform.position - targetComponent.target.position).sqrMagnitude < overrideSqrDistance;
             steerComponent.enabled = overriding;
             pidComopnent.enabled = !overriding;
         }

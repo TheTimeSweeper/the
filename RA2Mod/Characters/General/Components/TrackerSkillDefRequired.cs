@@ -9,10 +9,9 @@ namespace RA2Mod.General.Components
     {
         private Dictionary<GenericSkill, bool> skillMap = new Dictionary<GenericSkill, bool>();
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
-
+            base.Start();
             GenericSkill[] skills = GetComponents<GenericSkill>();
             for (int i = 0; i < skills.Length; i++)
             {
@@ -43,11 +42,12 @@ namespace RA2Mod.General.Components
             {
                 if (isSkill)
                 {
-                    indicator.active = true;
+                    enabled = true;
                     return;
                 }
             }
-            indicator.active = false;
+
+            enabled = false;
         }
     }
 }

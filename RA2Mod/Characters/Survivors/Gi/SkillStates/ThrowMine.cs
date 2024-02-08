@@ -1,36 +1,31 @@
 ﻿using EntityStates;
-using RA2Mod.General.SkillDefs;
-using RA2Mod.General.Components;
-using RA2Mod.Survivors.GI;
-using RoR2;
-using RoR2.Projectile;
-using UnityEngine;
-using RA2Mod.Survivors.GI.Components;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class ThrowCaltrops : GenericProjectileBaseState
+    public class ThrowMine : GenericProjectileBaseState
     {
-        public static float BaseDuration => GIConfig.M2CaltropsThrowDuration.Value;
+        public static float BaseDuration => GIConfig.M2MineThrowDuration.Value;
 
-        public static float DamageCoefficient => GIConfig.M2CaltropsDamage.Value;
+        public static float DamageCoefficient => GIConfig.M2MineDamage.Value;
+
+        public static float BaseForce => GIConfig.M2MineForce.Value;
 
         public override void OnEnter()
         {
-            projectilePrefab = GIAssets.caltropsPrefab;
+            projectilePrefab = GIAssets.minePrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
-            attackSoundString = "Play_HenryBombThrow";
-            
+            attackSoundString = "Play_engi_M2_throw";
+
             baseDuration = BaseDuration;
             baseDelayBeforeFiringProjectile = 0;
 
             damageCoefficient = DamageCoefficient;
             //proc coefficient is set on the components of the projectile prefab
-            force = 80f;
+            force = BaseForce;
 
-            base.projectilePitchBonus = GIConfig.M2CaltropsPitch.Value;
+            base.projectilePitchBonus = GIConfig.M2MinePitch.Value;
             //base.minSpread = 0;
             //base.maxSpread = 0;
 

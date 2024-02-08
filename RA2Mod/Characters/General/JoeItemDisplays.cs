@@ -11,9 +11,9 @@ using UnityEngine;
                     {localScale})
 */
 
-namespace RA2Mod.Survivors.GI
+namespace RA2Mod.General
 {
-    public class GIItemDisplays : ItemDisplaysBase
+    public class JoeItemDisplays : ItemDisplaysBase
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {

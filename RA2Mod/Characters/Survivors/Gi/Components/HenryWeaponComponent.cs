@@ -7,7 +7,7 @@ namespace RA2Mod.Survivors.GI.Components
 {
     public class GIMissileTracker: TrackerSkillDefRequired<GIMissileTrackerSkillDef>
     {
-        public override float maxTrackingDistance => 100;
+        public override float maxTrackingDistance => 69;
 
         public override float maxTrackingAngle => 30;
 

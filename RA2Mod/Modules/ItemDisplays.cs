@@ -7,7 +7,7 @@ namespace RA2Mod.Modules
     internal static class ItemDisplays
     {
         private static Dictionary<string, GameObject> itemDisplayPrefabs = new Dictionary<string, GameObject>();
-        public static Dictionary<Object, ItemDisplayRule[]> KeyAssetDisplayPrefabs = new Dictionary<Object, ItemDisplayRule[]>();
+        public static Dictionary<Object, ItemDisplayRule[]> KeyAssetDisplayRules = new Dictionary<Object, ItemDisplayRule[]>();
         public static Dictionary<string, Object> KeyAssets = new Dictionary<string, Object>();
 
         public static int queuedDisplays;
@@ -33,13 +33,13 @@ namespace RA2Mod.Modules
             initialized = false;
 
             itemDisplayPrefabs = null;
-            KeyAssetDisplayPrefabs = null;
+            KeyAssetDisplayRules = null;
             KeyAssets = null;
         }
 
         internal static void PopulateDisplays()
         {
-            PopulateFromBody("MercBody");
+            PopulateFromBody("LoaderBody");
 
             PopulateCustomLightningArm();
 
@@ -56,7 +56,7 @@ namespace RA2Mod.Modules
             {
                 ItemDisplayRule[] rules = itemRuleGroups[i].displayRuleGroup.rules;
 
-                KeyAssetDisplayPrefabs[itemRuleGroups[i].keyAsset] = rules;
+                KeyAssetDisplayRules[itemRuleGroups[i].keyAsset] = rules;
                 KeyAssets[itemRuleGroups[i].keyAsset.name] = itemRuleGroups[i].keyAsset;
 
                 for (int j = 0; j < rules.Length; j++)
@@ -115,6 +115,7 @@ namespace RA2Mod.Modules
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(string itemName, params ItemDisplayRule[] rules) => CreateDisplayRuleGroupWithRules(GetKeyAssetFromString(itemName), rules);
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(Object keyAsset_, params ItemDisplayRule[] rules)
         {
+            Log.Warning(keyAsset_);
             if (keyAsset_ == null)
                 Log.Error("could not find keyasset");
 

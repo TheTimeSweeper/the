@@ -48,33 +48,13 @@ namespace RA2Mod.Survivors.GI
             jumpCount = 1,
         };
 
-        //public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
-        //{
-        //        new CustomRendererInfo
-        //        {
-        //            childName = "SwordModel",
-        //            material = assetBundle.LoadMaterial("matHenry"),
-        //        },
-        //        new CustomRendererInfo
-        //        {
-        //            childName = "GunModel",
-        //        },
-        //        new CustomRendererInfo
-        //        {
-        //            childName = "Model",
-        //        }
-        //};
-
         public override UnlockableDef characterUnlockableDef => GIUnlockables.characterUnlockableDef;
 
-        public override ItemDisplaysBase itemDisplays => null;// new GIItemDisplays();
+        public override ItemDisplaysBase itemDisplays => new RA2Mod.General.JoeItemDisplays();
 
         public override void Initialize()
         {
-            //uncomment if you have multiple characters
-            ConfigEntry<bool> characterEnabled = General.GeneralConfig.GIEnabled;
-
-            if (!characterEnabled.Value)
+            if (!General.GeneralConfig.GIEnabled.Value)
                 return;
 
             base.Initialize();
@@ -88,6 +68,7 @@ namespace RA2Mod.Survivors.GI
             base.InitializeCharacter();
 
             GIConfig.Init();
+
             GIStates.Init();
             GITokens.Init();
 
@@ -125,7 +106,7 @@ namespace RA2Mod.Survivors.GI
             
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
-            Prefabs.AddEntityStateMachine(bodyPrefab, "Transform", null, null, false);
+            Prefabs.AddEntityStateMachine(bodyPrefab, "Transform", null, null, false, false);
         }
 
         #region skills
@@ -148,7 +129,7 @@ namespace RA2Mod.Survivors.GI
                     GI_PREFIX + "PRIMARY_GUN_NAME",
                     GI_PREFIX + "PRIMARY_GUN_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.FirePistol)),
+                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.Fire3RoundGun)),
                     "Weapon",
                     false
                 ));
@@ -160,14 +141,14 @@ namespace RA2Mod.Survivors.GI
                 //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(HeavyFire)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FireGunHeavy)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Any,
 
                 baseRechargeInterval = 0f,
                 baseMaxStock = 20,
 
-                rechargeStock = 10,
+                rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
 
@@ -202,14 +183,14 @@ namespace RA2Mod.Survivors.GI
                 //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(FireHeavyMissile)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FireMissileHeavy)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Any,
 
                 baseRechargeInterval = 0f,
                 baseMaxStock = 10,
 
-                rechargeStock = 5,
+                rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
 
@@ -230,6 +211,11 @@ namespace RA2Mod.Survivors.GI
             ShowOnCrosshairWhenSkillDef showOnCrosshairWhenSkillDef = prefabCharacterBody.defaultCrosshairPrefab.GetComponent<ShowOnCrosshairWhenSkillDef>();
             showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef1.upgradedSkillDef);
             showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef2.upgradedSkillDef);
+
+            Config.ConfigureSkillDef(primarySkillDef1, GIConfig.GISection, "M1 Gun");
+            Config.ConfigureSkillDef(primarySkillDef1.upgradedSkillDef, GIConfig.GISection, "M1 Gun Heavy", false);
+            Config.ConfigureSkillDef(primarySkillDef2, GIConfig.GISection, "M1 Missile");
+            Config.ConfigureSkillDef(primarySkillDef2.upgradedSkillDef, GIConfig.GISection, "M1 Missile Heavy", false);
         }
 
         private void AddSecondarySkills()
@@ -271,14 +257,14 @@ namespace RA2Mod.Survivors.GI
                 skillName = "GIMine",
                 skillNameToken = GI_PREFIX + "SECONDARY_MINE_NAME",
                 skillDescriptionToken = GI_PREFIX + "SECONDARY_MINE_DESCRIPTION",
-                keywordTokens = new string[] { "KEYWORD_AGILE" },
+                //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Engi.EngiWeapon.FireMines)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowMine)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 8f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -299,6 +285,9 @@ namespace RA2Mod.Survivors.GI
 
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
+
+            Config.ConfigureSkillDef(secondarySkillDef1, GIConfig.GISection, "M2 Caltrops");
+            Config.ConfigureSkillDef(secondarySkillDef1.upgradedSkillDef, GIConfig.GISection, "M2 Mine");
         }
 
         private void AddUtiitySkills()
@@ -313,9 +302,9 @@ namespace RA2Mod.Survivors.GI
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(LiterallyCommandoSlide)),
                 activationStateMachineName = "Transform",
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 8f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -333,11 +322,15 @@ namespace RA2Mod.Survivors.GI
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = true,
             };
-            UpgradableSkillDef utilitySkillDef1 = Skills.CreateSkillDef<UpgradableSkillDef>(skillDefInfo);
-            skillDefInfo.interruptPriority = EntityStates.InterruptPriority.Death;
-            utilitySkillDef1.upgradedSkillDef = Skills.CreateSkillDef(skillDefInfo);
+            SkillDef utilitySkillDef1 = Skills.CreateSkillDef(skillDefInfo);
+            //skillDefInfo.interruptPriority = EntityStates.InterruptPriority.Death;
+            //skillDefInfo.stockToConsume = 0;
+            //utilitySkillDef1.upgradedSkillDef = Skills.CreateSkillDef(skillDefInfo);
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
+
+            Config.ConfigureSkillDef(utilitySkillDef1, GIConfig.GISection, "M3 slide");
+            //Config.ConfigureSkillDef(utilitySkillDef1.upgradedSkillDef, GIConfig.GISection, "M3 slide out of transform");
         }
 
         private void AddSpecialSkills()
@@ -352,9 +345,9 @@ namespace RA2Mod.Survivors.GI
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BarricadeTransform)),
                 activationStateMachineName = "Transform",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-
+                 
                 baseMaxStock = 1,
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 8f,
 
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -374,7 +367,7 @@ namespace RA2Mod.Survivors.GI
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(UnBarricade)),
                 activationStateMachineName = "Transform",
-                interruptPriority = EntityStates.InterruptPriority.Death,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -388,6 +381,8 @@ namespace RA2Mod.Survivors.GI
             });
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
+
+            Config.ConfigureSkillDef(specialSkillDef1, GIConfig.GISection, "M4 Transform");
         }
         #endregion skills
         

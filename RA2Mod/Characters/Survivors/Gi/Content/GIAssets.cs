@@ -6,14 +6,17 @@ using RoR2.Projectile;
 using UnityEngine.AddressableAssets;
 using R2API;
 using UnityEngine;
+using EntityStates;
 
 namespace RA2Mod.Survivors.GI
 {
     public static class GIAssets
     {
-        public static GameObject caltropsPrefab;
         public static GameObject missilePrefab;
         public static GameObject heavyMissilePrefab;
+
+        public static GameObject caltropsPrefab;
+        public static GameObject minePrefab;
 
         private static AssetBundle _assetBundle;
 
@@ -26,7 +29,7 @@ namespace RA2Mod.Survivors.GI
             missilePrefab = PrefabAPI.InstantiateClone(missilePrefab, "GIToolbotGrenadeLauncherProjectile", true);
 
             ProjectileImpactExplosion missileImpact = missilePrefab.GetComponent<ProjectileImpactExplosion>();
-            missileImpact.blastRadius = GIConfig.M1HeavyMissileExplosionRadius.Value;
+            missileImpact.blastRadius = GIConfig.M1MissileExplosionRadius.Value;
 
             Content.AddProjectilePrefab(missilePrefab);
 
@@ -36,7 +39,7 @@ namespace RA2Mod.Survivors.GI
 
             ProjectileImpactExplosion heavyMissileImpact = heavyMissilePrefab.GetComponent<ProjectileImpactExplosion>();
             heavyMissileImpact.falloffModel = BlastAttack.FalloffModel.None;
-            heavyMissileImpact.blastRadius = GIConfig.M1MissileExplosionRadius.Value;
+            heavyMissileImpact.blastRadius = GIConfig.M1HeavyMissileExplosionRadius.Value;
             heavyMissileImpact.impactEffect = missileImpact.impactEffect;
             
             Content.NetworkAndAddProjectilePrefab(heavyMissilePrefab);
@@ -49,6 +52,25 @@ namespace RA2Mod.Survivors.GI
             //DamageAPI.ModdedDamageTypeHolderComponent damageTypeHolder = caltropsDotZone.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             //damageTypeHolder.Add(GIDamageTypes.CaltropsSlow);
             Content.NetworkAndAddProjectilePrefab(caltropsDotZone);
+
+            //mine
+            minePrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiMine.prefab").WaitForCompletion(), "GIEngiMine");
+
+            UnityEngine.Object.Destroy(minePrefab.GetComponent<ProjectileDeployToOwner>());
+            UnityEngine.Object.Destroy(minePrefab.GetComponent<Deployable>());
+            UnityEngine.Object.Destroy(minePrefab.GetComponent<ApplyTorqueOnStart>());
+            minePrefab.GetComponent<ProjectileDamage>().damageType = DamageType.Stun1s;
+
+            EntityStateMachine mainMachine = EntityStateMachine.FindByCustomName(minePrefab, "Main");
+            SerializableEntityStateType MainState = new SerializableEntityStateType(typeof(SkillStates.Mine.WaitForStickMutiny));
+            mainMachine.initialStateType = MainState;
+
+            EntityStateMachine armingMachine = EntityStateMachine.FindByCustomName(minePrefab, "Arming");
+            SerializableEntityStateType mineArmingState = new SerializableEntityStateType(typeof(SkillStates.Mine.MineArmingMutiny));
+            armingMachine.initialStateType = mineArmingState;
+            armingMachine.mainStateType = mineArmingState;
+
+            Content.AddProjectilePrefab(minePrefab);
         }
     }
 }

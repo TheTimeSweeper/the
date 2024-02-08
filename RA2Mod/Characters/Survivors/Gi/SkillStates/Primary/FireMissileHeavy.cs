@@ -9,7 +9,7 @@ using RA2Mod.Survivors.GI.Components;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class FireHeavyMissile : GenericProjectileBaseState, IHasSkillDefComponent<GIMissileTracker>
+    public class FireMissileHeavy : GenericProjectileBaseState, IHasSkillDefComponent<GIMissileTracker>
     {
         public static float BaseDuration => GIConfig.M1HeavyMissileDuration.Value;
 

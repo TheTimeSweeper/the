@@ -70,7 +70,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public override UnlockableDef characterUnlockableDef => ChronoUnlockables.characterUnlockableDef;
 
-        public override ItemDisplaysBase itemDisplays => null;// new ChronoItemDisplays();
+        public override ItemDisplaysBase itemDisplays =>  new RA2Mod.General.JoeItemDisplays();
 
         public override void Initialize()
         {

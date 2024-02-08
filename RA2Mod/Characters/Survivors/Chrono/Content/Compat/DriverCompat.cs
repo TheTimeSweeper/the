@@ -1,5 +1,4 @@
-﻿using BepInEx.Configuration;
-using RA2Mod.Modules;
+﻿using RA2Mod.Modules;
 using RA2Mod.Survivors.Chrono.Components;
 using RA2Mod.Survivors.Chrono.SkillDefs;
 using RA2Mod.Survivors.Chrono.SkillStates;

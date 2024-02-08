@@ -287,7 +287,7 @@ MonoBehaviour:
   steerComponent: {fileID: 8342322650052232262}
   pidComopnent: {fileID: 5805118507224622993}
   targetComponent: {fileID: 9100231200180362229}
-  overrideSqrDistance: 16
+  overrideSqrDistance: 36
 --- !u!114 &1857493271547864830
 MonoBehaviour:
   m_ObjectHideFlags: 0

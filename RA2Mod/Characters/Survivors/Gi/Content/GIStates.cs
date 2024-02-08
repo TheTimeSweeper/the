@@ -6,11 +6,11 @@ namespace RA2Mod.Survivors.GI
     {
         public static void Init()
         {
-            Modules.Content.AddEntityState(typeof(BaseShoot));
+            Modules.Content.AddEntityState(typeof(BaseFireGun));
 
             Modules.Content.AddEntityState(typeof(Roll));
 
-            Modules.Content.AddEntityState(typeof(FireHeavyMissile));
+            Modules.Content.AddEntityState(typeof(FireMissileHeavy));
         }
     }
 }
