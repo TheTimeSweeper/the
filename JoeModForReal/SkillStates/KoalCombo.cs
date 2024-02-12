@@ -8,16 +8,20 @@ namespace ModdedEntityStates.Joe {
 
         public int ComboStep;
 
+        public override void OnEnter() {
+            base.OnEnter();
+
+            Helpers.LogWarning("primary combinedstep: " + ComboStep);
+            Helpers.LogWarning("primary step: " + swingIndex);
+        }
+
         public virtual void SetCombinedStep(int i) {
-            //Helpers.LogWarning("primary combinedstep: " + i);
             ComboStep = i;
-            
         }
 
         public override void SetStep(int i) {
             base.SetStep(i);
-            //Helpers.LogWarning("primary step: " + i);
-            swingIndex = Mathf.FloorToInt(i / 2);
+            swingIndex = i;
         }
 
         public override void OnSerialize(NetworkWriter writer) {
@@ -35,15 +39,20 @@ namespace ModdedEntityStates.Joe {
 
         public int ComboStep;
 
+        public override void OnEnter() {
+            base.OnEnter();
+
+            Helpers.LogWarning("secondary combinedstep: " + ComboStep);
+            Helpers.LogWarning("secondary step: " + swingIndex);
+        }
+
         public virtual void SetCombinedStep(int i) {
-            //Helpers.LogWarning("secondary combinedstep: " + i);
             ComboStep = i;
         }
 
         public override void SetStep(int i) {
             base.SetStep(i);
-            //Helpers.LogWarning("secondary step: " + i);
-            swingIndex = Mathf.FloorToInt(i / 2);
+            swingIndex = i;
         }
 
         public override void OnSerialize(NetworkWriter writer) {
