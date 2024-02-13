@@ -6,7 +6,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
     public class EnterBarricade : BaseTimedSkillState
     {
 
-        public override float TimedBaseDuration => GIConfig.M4TransformInDuration.Value;
+        public override float TimedBaseDuration => GIConfig.M4_Transform_InDuration.Value;
         public override float TimedBaseCastStartPercentTime => 1f;
 
         public override void OnEnter()

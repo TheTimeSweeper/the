@@ -2,9 +2,9 @@
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class BurstFireDuration : BurstFire
+    public abstract class BurstFireDuration : BurstFire
     {
-        public virtual float baseDuration => 1;
+        public abstract float baseDuration { get; }
         public override int shurikens => totalShurikens;
         private int totalShurikens;
 

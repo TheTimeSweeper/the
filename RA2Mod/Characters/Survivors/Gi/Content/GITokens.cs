@@ -44,25 +44,25 @@ namespace RA2Mod.Survivors.GI
             Language.Add(prefix + "PASSIVE_NAME", "Henry passive");
             Language.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
-
+            
             #region Primary
-            string heavyGun = $"Fire Heavy Machine Gun for {Tokens.DamageValueText(GIConfig.M1HeavyFireDamage.Value)}.";
+            string heavyGun = $"Fire Heavy Machine Gun for {Tokens.DamageValueText(GIConfig.M1_HeavyFire_Damage.Value)}.";
             Language.Add(prefix + "PRIMARY_GUN_NAME", "Gun");
-            Language.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Fire Pistol for {Tokens.DamageText($"{GIConfig.M1PistolShots.Value}x{GIConfig.M1PistolDamage.Value * 100}% damage")}.\nWhile deployed, {heavyGun}");
+            Language.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Fire Pistol for {Tokens.DamageText($"{GIConfig.M1_Pistol_Shots.Value}x{GIConfig.M1_Pistol_Damage.Value * 100}% damage")}.\nWhile deployed, {heavyGun}");
             Language.Add(prefix + "PRIMARY_GUN_HEAVY_NAME", "Gun Heavy");
             Language.Add(prefix + "PRIMARY_GUN_HEAVY_DESCRIPTION", heavyGun);
 
-            string heavyMissile = $"Fire Heavy Missile for {Tokens.DamageValueText(GIConfig.M1HeavyMissileDamage.Value)}.";
+            string heavyMissile = $"Fire Heavy Missile for {Tokens.DamageValueText(GIConfig.M1_HeavyMissile_Damage.Value)}.";
             Language.Add(prefix + "PRIMARY_ROCKET_NAME", "Missile");
-            Language.Add(prefix + "PRIMARY_ROCKET_DESCRIPTION", $"Fire a rocket for {Tokens.DamageValueText(GIConfig.M1MissileDamage.Value)}.\nWhile deployed, {heavyMissile}");
+            Language.Add(prefix + "PRIMARY_ROCKET_DESCRIPTION", $"Fire a rocket for {Tokens.DamageValueText(GIConfig.M1_Missile_Damage.Value)}.\nWhile deployed, {heavyMissile}");
             Language.Add(prefix + "PRIMARY_ROCKET_HEAVY_NAME", "Missile heavy");
             Language.Add(prefix + "PRIMARY_ROCKET_HEAVY_NAME", heavyMissile);
             #endregion
 
             #region Secondary
-            string heavyMine = $"Throw a {Tokens.DamageText("stunning")} mine for {Tokens.DamageValueText(GIConfig.M2MineDamage.Value)}.";
+            string heavyMine = $"Throw a {Tokens.DamageText("stunning")} mine for {Tokens.DamageValueText(GIConfig.M2_Mine_Damage.Value)}.";
             Language.Add(prefix + "SECONDARY_CALTROPS_NAME", "Caltrops");
-            Language.Add(prefix + "SECONDARY_CALTROPS_DESCRIPTION", $"Throw {Tokens.DamageText("slowing")} caltrops, dealing {Tokens.DamageValueText(GIConfig.M2CaltropsDotDamage.Value * 3 * GIConfig.M2CaltropsDotDuration.Value)} over {GIConfig.M2CaltropsDotDuration.Value} seconds.\nWhile deployed, {heavyMine}");
+            Language.Add(prefix + "SECONDARY_CALTROPS_DESCRIPTION", $"Throw {Tokens.DamageText("slowing")} caltrops, dealing {Tokens.DamageValueText(GIConfig.M2_Caltrops_DotDamage.Value * 3 * 3)} over {3} seconds.\nWhile deployed, {heavyMine}");
             Language.Add(prefix + "SECONDARY_MINE_NAME", "Mine");
             Language.Add(prefix + "SECONDARY_MINE_DESCRIPTION", heavyMine);
             #endregion
@@ -74,7 +74,7 @@ namespace RA2Mod.Survivors.GI
 
             #region Special
             Language.Add(prefix + "SPECIAL_DEPLOY_NAME", "Deploy");
-            Language.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", $"Deploy and swap skills and dont move and get {GIConfig.M4TransformArmor.Value} armor.");
+            Language.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", $"Deploy and swap skills and dont move and get {GIConfig.M4_Transform_Armor.Value} armor.");
             Language.Add(prefix + "SPECIAL_UNDEPLOY_NAME", "UnDeploy");
             Language.Add(prefix + "SPECIAL_UNDEPLOY_DESCRIPTION", $"Go back I want to b emon ke.");
             #endregion

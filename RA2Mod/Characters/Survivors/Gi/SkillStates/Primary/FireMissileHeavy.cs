@@ -9,24 +9,19 @@ using RA2Mod.Survivors.GI.Components;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class FireMissileHeavy : GenericProjectileBaseState, IHasSkillDefComponent<GIMissileTracker>
+    public class FireMissileHeavy : BurstFireDuration, IHasSkillDefComponent<GIMissileTracker>
     {
-        public static float BaseDuration => GIConfig.M1HeavyMissileDuration.Value;
+        private GameObject projectilePrefab;
 
-        public static float DamageCoefficient => GIConfig.M1HeavyMissileDamage.Value;
+        public override float baseDuration => GIConfig.M1_HeavyMissile_Interval.Value * 2;
+        public override float baseInterval => GIConfig.M1_HeavyMissile_Interval.Value;
+        public override float baseFinalInterval => GIConfig.M1_HeavyMissile_FinalInterval.Value;
+
+        public static float BaseDuration => GIConfig.M1_HeavyMissile_Interval.Value;
+
+        public static float DamageCoefficient => GIConfig.M1_HeavyMissile_Damage.Value;
 
         public GIMissileTracker componentFromSkillDef { get; set; }
-
-        public GameObject target
-        {
-            get
-            {
-                if (componentFromSkillDef == null)
-                    return null;
-
-                return componentFromSkillDef.GetTrackingTarget().gameObject;
-            }
-        }
 
         public override void OnEnter()
         {
@@ -34,60 +29,60 @@ namespace RA2Mod.Survivors.GI.SkillStates
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
-            attackSoundString = "Play_PatriotMissile";
-
-            baseDuration = BaseDuration;
-            baseDelayBeforeFiringProjectile = 0;
-
-            damageCoefficient = DamageCoefficient;
-            //proc coefficient is set on the components of the projectile prefab
-            force = 80f;
-
-            //base.projectilePitchBonus = 0;
-            //base.minSpread = 0;
-            //base.maxSpread = 0;
-
-            recoilAmplitude = 0.1f;
-            bloom = 10;
+            //recoilAmplitude = 0.1f;
+            //bloom = 10;
 
             base.OnEnter();
         }
 
-        public override Ray ModifyProjectileAimRay(Ray aimRay)
+        protected override void Fire()
+        {
+
+            PlayAnimation("Gesture, Override", "ThrowBomb", "ThrowBomb.playbackRate", interval);
+
+            Util.PlaySound("Play_PatriotMissile", gameObject);
+
+            if (isAuthority)
+            {
+                FireProjectileAuthority();
+            }
+        }
+
+        public Ray ModifyProjectileAimRay(Ray aimRay)
         {
             aimRay.direction = Vector3.up + aimRay.direction * 0.1f;
             return aimRay;
         }
-
+        
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;
         }
 
-        public override void FireProjectile()
+        public void FireProjectileAuthority()
         {
             Ray aimRay = base.GetAimRay();
-            aimRay = this.ModifyProjectileAimRay(aimRay);
-            aimRay.direction = Util.ApplySpread(aimRay.direction, this.minSpread, this.maxSpread, 1f, 1f, 0f, this.projectilePitchBonus);
+            aimRay.direction = Vector3.up + aimRay.direction * 0.1f;
             ProjectileManager.instance.FireProjectile(
-                this.projectilePrefab, 
-                aimRay.origin, 
+                this.projectilePrefab,
+                aimRay.origin,
                 Util.QuaternionSafeLookRotation(aimRay.direction),
-                base.gameObject, 
-                this.damageStat * this.damageCoefficient,
-                this.force,
-                Util.CheckRoll(this.critStat, base.characterBody.master), 
+                base.gameObject,
+                this.damageStat * DamageCoefficient,
+                0,
+                base.RollCrit(),
                 DamageColorIndex.Default,
-                componentFromSkillDef.GetTrackingTarget().gameObject, 
+                GetTarget(),
                 -1f);
         }
 
-        public override void PlayAnimation(float duration)
+        private GameObject GetTarget()
         {
-            if (GetModelAnimator())
-            {
-                PlayAnimation("Gesture, Override", "ThrowBomb", "ThrowBomb.playbackRate", this.duration);
-            }
+            if (!componentFromSkillDef)
+                return null;
+            if (!componentFromSkillDef.GetTrackingTarget())
+                return null;
+            return componentFromSkillDef.GetTrackingTarget().gameObject;
         }
     }
 }

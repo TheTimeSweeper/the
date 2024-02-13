@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
-    public class BurstFire : BaseSkillState
+    public abstract class BurstFire : BaseSkillState
     {
-        public virtual float baseInterval => 0.1f;
-        public virtual float baseFinalInterval => 0.4f;
-        public virtual int shurikens => 3;
+        public abstract float baseInterval { get; }
+        public abstract float baseFinalInterval { get; }
+        public abstract int shurikens { get; }
 
         protected float interval;
         protected float finalInterval;
@@ -59,9 +59,6 @@ namespace RA2Mod.Survivors.GI.SkillStates
             }
         }
 
-        protected virtual void Fire()
-        {
-
-        }
+        protected abstract void Fire();
     }
 }

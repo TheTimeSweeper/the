@@ -192,13 +192,13 @@ namespace RA2Mod.Survivors.GI
                 activationState = new EntityStates.SerializableEntityStateType(typeof(FireMissileHeavy)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Any,
-
+                
                 baseRechargeInterval = 0f,
-                baseMaxStock = 10,
+                baseMaxStock = 12,
 
-                rechargeStock = 10,
-                requiredStock = 1,
-                stockToConsume = 1,
+                rechargeStock = 12,
+                requiredStock = 2,
+                stockToConsume = 2,
 
                 resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
@@ -219,10 +219,10 @@ namespace RA2Mod.Survivors.GI
             //showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef1.upgradedSkillDef);
             //showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef2.upgradedSkillDef);
 
-            Config.ConfigureSkillDef(primarySkillDef1, GIConfig.GISectionStocks, "M1 Pistol", false);
-            Config.ConfigureSkillDef(primarySkillDef1.upgradedSkillDef, GIConfig.GISectionStocks, "M1 Heavy Fire", false, true, true);
-            Config.ConfigureSkillDef(primarySkillDef2, GIConfig.GISectionStocks, "M1 Missile", false);
-            Config.ConfigureSkillDef(primarySkillDef2.upgradedSkillDef, GIConfig.GISectionStocks, "M1 Heavy Missile", false, true, true);
+            //Config.ConfigureSkillDef(primarySkillDef1, GIConfig.GISectionStocks, "M1 Pistol", false);
+            Config.ConfigureSkillDef(primarySkillDef1.upgradedSkillDef, GIConfig.SectionBody, "M1 Heavy Fire", false, true, true);
+            //Config.ConfigureSkillDef(primarySkillDef2, GIConfig.GISectionStocks, "M1 Missile", false);
+            Config.ConfigureSkillDef(primarySkillDef2.upgradedSkillDef, GIConfig.SectionBody, "M1 Heavy Missile", false, true, true);
         }
 
         private void AddSecondarySkills()
@@ -240,7 +240,7 @@ namespace RA2Mod.Survivors.GI
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 5f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -293,8 +293,8 @@ namespace RA2Mod.Survivors.GI
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
 
-            Config.ConfigureSkillDef(secondarySkillDef1, GIConfig.GISectionStocks, "M2 Caltrops");
-            Config.ConfigureSkillDef(secondarySkillDef1.upgradedSkillDef, GIConfig.GISectionStocks, "M2 Mine");
+            Config.ConfigureSkillDef(secondarySkillDef1, GIConfig.SectionBody, "M2 Caltrops");
+            Config.ConfigureSkillDef(secondarySkillDef1.upgradedSkillDef, GIConfig.SectionBody, "M2 Mine");
         }
 
         private void AddUtiitySkills()
@@ -338,7 +338,7 @@ namespace RA2Mod.Survivors.GI
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
 
-            Config.ConfigureSkillDef(utilitySkillDef1, GIConfig.GISectionStocks, "M3 slide");
+            Config.ConfigureSkillDef(utilitySkillDef1, GIConfig.SectionBody, "M3 slide");
             //Config.ConfigureSkillDef(utilitySkillDef1.upgradedSkillDef, GIConfig.GISectionStocks, "M3 slide out of transform");
         }
 
@@ -391,7 +391,7 @@ namespace RA2Mod.Survivors.GI
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
 
-            Config.ConfigureSkillDef(specialSkillDef1, GIConfig.GISectionStocks, "M4 Transform");
+            Config.ConfigureSkillDef(specialSkillDef1, GIConfig.SectionBody, "M4 Transform");
         }
         #endregion skills
         
@@ -535,7 +535,7 @@ namespace RA2Mod.Survivors.GI
         {
             if (sender.HasBuff(GIBuffs.armorBuff))
             {
-                args.armorAdd += GIConfig.M4TransformArmor.Value;
+                args.armorAdd += GIConfig.M4_Transform_Armor.Value;
             }
         }
     }

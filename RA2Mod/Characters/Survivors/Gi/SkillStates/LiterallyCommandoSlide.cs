@@ -8,9 +8,9 @@ namespace RA2Mod.Survivors.GI.SkillStates
     public class LiterallyCommandoSlide : BaseSkillState
     {
         // Token: 0x040016BA RID: 5818
-        public static float slideGroundDuration => GIConfig.M3SlideDuration.Value;
+        public static float slideGroundDuration => GIConfig.M3_Slide_Duration.Value;
 
-        public static float slideAirDuration => GIConfig.M3SlideAirDuration.Value;
+        public static float slideAirDuration => GIConfig.M3_Slide_AirDuration.Value;
         // Token: 0x040016BC RID: 5820
         public static AnimationCurve forwardSpeedCoefficientCurve => SlideState.forwardSpeedCoefficientCurve;
         // Token: 0x040016BE RID: 5822
@@ -44,7 +44,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
             {
                 this.PlayAnimation("Body", "Jump");
                 Vector3 velocity = base.characterMotor.velocity;
-                velocity.y = base.characterBody.jumpPower * GIConfig.M3SlideAirJumpMultiplier.Value;
+                velocity.y = base.characterBody.jumpPower * GIConfig.M3_Slide_AirJumpMultiplier.Value;
                 base.characterMotor.velocity = velocity;
                 slideDuration = slideAirDuration;
                 return;

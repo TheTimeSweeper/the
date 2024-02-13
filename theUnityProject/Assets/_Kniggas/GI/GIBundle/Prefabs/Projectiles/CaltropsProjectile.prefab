@@ -174,7 +174,7 @@ MonoBehaviour:
   explosionEffect: {fileID: 0}
   explosionSoundString: 
   fireChildren: 1
-  childrenProjectilePrefab: {fileID: 7314577808162306991, guid: e806ebfbc34f66c4998a0eb6e89c8610,
+  childrenProjectilePrefab: {fileID: 7314577808162306991, guid: 50fb0ddd54d1c4246b4c6e9a0f620276,
     type: 3}
   childrenCount: 1
   childrenDamageCoefficient: 1

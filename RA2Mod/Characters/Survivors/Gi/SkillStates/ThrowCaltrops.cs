@@ -11,13 +11,13 @@ namespace RA2Mod.Survivors.GI.SkillStates
 {
     public class ThrowCaltrops : GenericProjectileBaseState
     {
-        public static float BaseDuration => GIConfig.M2CaltropsThrowDuration.Value;
+        public static float BaseDuration => GIConfig.M2_Caltrops_ThrowDuration.Value;
 
-        public static float DamageCoefficient => GIConfig.M2CaltropsDotDamage.Value;
+        public static float DamageCoefficient => GIConfig.M2_Caltrops_DotDamage.Value;
 
         public override void OnEnter()
         {
-            projectilePrefab = GIAssets.caltropsPrefab;
+            projectilePrefab = GIConfig.M2_Caltrops_Optimized.Value? GIAssets.caltropsPrefabOpti : GIAssets.caltropsPrefab;
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
@@ -30,7 +30,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
             //proc coefficient is set on the components of the projectile prefab
             force = 80f;
 
-            base.projectilePitchBonus = GIConfig.M2CaltropsPitch.Value;
+            base.projectilePitchBonus = -8f;
             //base.minSpread = 0;
             //base.maxSpread = 0;
 

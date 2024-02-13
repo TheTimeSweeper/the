@@ -6,14 +6,14 @@ namespace RA2Mod.Survivors.GI.SkillStates
 {
     public class FireGunHeavy : BurstFireDuration
     {
-        public override float baseDuration => GIConfig.M1HeavyFireInterval.Value * 3f;
-        public override float baseInterval => GIConfig.M1HeavyFireInterval.Value;
-        public override float baseFinalInterval => GIConfig.M1HeavyFireFinalInterval.Value;
+        public override float baseDuration => GIConfig.M1_HeavyFire_Interval.Value * 3f;
+        public override float baseInterval => GIConfig.M1_HeavyFire_Interval.Value;
+        public override float baseFinalInterval => GIConfig.M1_HeavyFire_FinalInterval.Value;
 
-        public static float damageCoefficient => GIConfig.M1HeavyFireDamage.Value;
+        public static float damageCoefficient => GIConfig.M1_HeavyFire_Damage.Value;
         public static float procCoefficient = 1f;
-        public static float force => GIConfig.M1HeavyFireForce.Value;
-        public static float recoil => GIConfig.M1HeavyFireRecoil.Value;
+        public static float force => GIConfig.M1_HeavyFire_Force.Value;
+        public static float recoil => GIConfig.M1_HeavyFire_Recoil.Value;
         public static float range = 200f;
         public static GameObject tracerEffectPrefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/TracerToolbotRebar.prefab").WaitForCompletion();
 
@@ -59,7 +59,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
                     smartCollision = true,
                     procChainMask = default,
                     procCoefficient = procCoefficient,
-                    radius = GIConfig.M1HeavyFireRadius.Value,
+                    radius = GIConfig.M1_HeavyFire_Radius.Value,
                     sniper = false,
                     stopperMask = LayerIndex.world.mask,
                     weapon = null,

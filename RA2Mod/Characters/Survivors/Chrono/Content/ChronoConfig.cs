@@ -26,9 +26,15 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> M4Damage;
         public static ConfigEntry<float> M4ChronoStacksToVanish;
 
+        public const string ConfigVersion = " 0.0.0";
+        public const string SectionSkills = "1-3. Chrono Skills" + ConfigVersion;
+        public const string SectionBody = "1-3. Chrono Body" + ConfigVersion;
+
         public static void Init()
         {
             string section = "1-3. Chrono Legionnaire 0.0.0";
+
+            Config.ConfigureBody(ChronoSurvivor.instance.prefabCharacterBody, section);
 
             M0TeleportOnRelese = Config.BindAndOptions(
                 section,
@@ -85,7 +91,7 @@ namespace RA2Mod.Survivors.Chrono
             M1Screenshake = Config.BindAndOptionsSlider(
                 section,
                 "M1Screenshake",
-                2f,
+                0.5f,
                 0,
                 10,
                 "");

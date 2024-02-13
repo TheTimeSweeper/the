@@ -5,7 +5,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
 {
     public class UnBarricade : BaseTimedSkillState
     {
-        public override float TimedBaseDuration => GIConfig.M4TransformOutDuration.Value;
+        public override float TimedBaseDuration => GIConfig.M4_Transform_OutDuration.Value;
         public override float TimedBaseCastStartPercentTime => 1f;
         
         public override void OnEnter()

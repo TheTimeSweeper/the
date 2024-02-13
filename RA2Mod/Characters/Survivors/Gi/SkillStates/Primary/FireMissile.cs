@@ -4,9 +4,9 @@ namespace RA2Mod.Survivors.GI.SkillStates
 {
     public class FireMissile : GenericProjectileBaseState
     {
-        public static float BaseDuration => GIConfig.M1MissileDuration.Value;
+        public static float BaseDuration => GIConfig.M1_Missile_Duration.Value;
 
-        public static float DamageCoefficient => GIConfig.M1MissileDamage.Value;
+        public static float DamageCoefficient => GIConfig.M1_Missile_Damage.Value;
 
         public override void OnEnter()
         {

@@ -1222,6 +1222,23 @@ MonoBehaviour:
     ignoreOverlays: 0
     hideOnDeath: 0
   baseLightInfos: []
+--- !u!114 &5325381768297936774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6661092512779019383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1864444436, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusPointTransform: {fileID: 2094578816614353640}
+  cameraPositionTransform: {fileID: 8896519474110702528}
+  modelRotation: {x: 0, y: 0, z: 0, w: 1}
+  minDistance: 0.5
+  maxDistance: 3
 --- !u!114 &6262626756039961703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,23 +1290,6 @@ MonoBehaviour:
   - {fileID: 818969860297897809}
   - {fileID: 4609930775166186560}
   componentsToDisableOnRagdoll: []
---- !u!114 &5325381768297936774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6661092512779019383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1864444436, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  focusPointTransform: {fileID: 2094578816614353640}
-  cameraPositionTransform: {fileID: 8896519474110702528}
-  modelRotation: {x: 0, y: 0, z: 0, w: 1}
-  minDistance: 1
-  maxDistance: 10
 --- !u!54 &5675853463613087722
 Rigidbody:
   m_ObjectHideFlags: 0

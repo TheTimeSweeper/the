@@ -8,11 +8,11 @@ namespace RA2Mod.Survivors.GI.SkillStates
 {
     public class Fire3RoundPistol : BurstFire
     {
-        public override float baseInterval => GIConfig.M1PistolInterval.Value;
-        public override float baseFinalInterval => GIConfig.M1PistolFinalInterval.Value;
-        public override int shurikens => GIConfig.M1PistolShots.Value;
+        public override float baseInterval => GIConfig.M1_Pistol_Interval.Value;
+        public override float baseFinalInterval => GIConfig.M1_Pistol_FinalInterval.Value;
+        public override int shurikens => GIConfig.M1_Pistol_Shots.Value;
 
-        public static float damageCoefficient => GIConfig.M1PistolDamage.Value;
+        public static float damageCoefficient => GIConfig.M1_Pistol_Damage.Value;
         public static float procCoefficient = 1f;
         public static float force = 10f;
         public static float recoil = 0.2f;
@@ -49,7 +49,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
                     damage = damageCoefficient * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
                     damageType = DamageType.Generic,
-                    falloffModel = GIConfig.M1PistolFalloff.Value ? BulletAttack.FalloffModel.DefaultBullet : BulletAttack.FalloffModel.None,
+                    falloffModel = GIConfig.M1_Pistol_Falloff.Value ? BulletAttack.FalloffModel.DefaultBullet : BulletAttack.FalloffModel.None,
                     maxDistance = range,
                     force = force,
                     hitMask = LayerIndex.CommonMasks.bullet,

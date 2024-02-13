@@ -7,6 +7,7 @@ using UnityEngine.AddressableAssets;
 using R2API;
 using UnityEngine;
 using EntityStates;
+using RA2Mod.General.Components;
 
 namespace RA2Mod.Survivors.GI
 {
@@ -16,6 +17,7 @@ namespace RA2Mod.Survivors.GI
         public static GameObject heavyMissilePrefab;
 
         public static GameObject caltropsPrefab;
+        public static GameObject caltropsPrefabOpti;
         public static GameObject minePrefab;
 
         private static AssetBundle _assetBundle;
@@ -25,23 +27,25 @@ namespace RA2Mod.Survivors.GI
             _assetBundle = assetBundle;
 
             //missile
-            missilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/ToolbotGrenadeLauncherProjectile.prefab").WaitForCompletion();
-            missilePrefab = PrefabAPI.InstantiateClone(missilePrefab, "GIToolbotGrenadeLauncherProjectile", true);
+            missilePrefab = _assetBundle.LoadAsset<GameObject>("GIToolbotRocketProjectile").InstantiateClone("GIToolbotRocketProjectile");
+            ProjectileController missileController = missilePrefab.GetComponent<ProjectileController>();
+            missileController.ghostPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/ToolbotGrenadeGhost.prefab").WaitForCompletion();
 
             ProjectileImpactExplosion missileImpact = missilePrefab.GetComponent<ProjectileImpactExplosion>();
-            missileImpact.blastRadius = GIConfig.M1MissileExplosionRadius.Value;
+            missileImpact.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/OmniExplosionVFXToolbotQuick.prefab").WaitForCompletion();
+            missileImpact.blastRadius = GIConfig.M1_Missile_ExplosionRadius.Value;
 
-            Content.AddProjectilePrefab(missilePrefab);
+            Content.NetworkAndAddProjectilePrefab(missilePrefab);
 
             //heavy missile
-            heavyMissilePrefab = _assetBundle.LoadAsset<GameObject>("GIMissileProjectile").InstantiateClone("GIMissileProjectile");
-            heavyMissilePrefab.GetComponent<ProjectileController>().ghostPrefab = missilePrefab.GetComponent<ProjectileController>().ghostPrefab;
-
+            heavyMissilePrefab = _assetBundle.LoadAsset<GameObject>("GIHeavyMissileProjectile").InstantiateClone("GIHeavyMissileProjectile");
+            heavyMissilePrefab.GetComponent<ProjectileController>().ghostPrefab = missileController.ghostPrefab;
+            
             ProjectileImpactExplosion heavyMissileImpact = heavyMissilePrefab.GetComponent<ProjectileImpactExplosion>();
             heavyMissileImpact.falloffModel = BlastAttack.FalloffModel.None;
-            heavyMissileImpact.blastRadius = GIConfig.M1HeavyMissileExplosionRadius.Value;
+            heavyMissileImpact.blastRadius = GIConfig.M1_HeavyMissile_ExplosionRadius.Value;
             heavyMissileImpact.impactEffect = missileImpact.impactEffect;
-            
+
             Content.NetworkAndAddProjectilePrefab(heavyMissilePrefab);
 
             //caltropses
@@ -49,11 +53,13 @@ namespace RA2Mod.Survivors.GI
             Content.NetworkAndAddProjectilePrefab(caltropsPrefab);
 
             GameObject caltropsDotZone = _assetBundle.LoadAsset<GameObject>("CaltropsDotZone");
-            //DamageAPI.ModdedDamageTypeHolderComponent damageTypeHolder = caltropsDotZone.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            //damageTypeHolder.Add(GIDamageTypes.CaltropsSlow);
-            caltropsDotZone.transform.Find("Scaler").transform.localScale = Vector3.one * GIConfig.M2CaltropsScale.Value;
-            caltropsDotZone.GetComponent<ProjectileDotZone>().lifetime = GIConfig.M2CaltropsDotDuration.Value;
-            Content.NetworkAndAddProjectilePrefab(caltropsDotZone);
+            InitCaltropsDotZone(caltropsDotZone);
+
+            caltropsPrefabOpti = _assetBundle.LoadAsset<GameObject>("CaltropsProjectileOpti");
+            Content.NetworkAndAddProjectilePrefab(caltropsPrefabOpti);
+
+            GameObject caltropsDotZoneOpti = _assetBundle.LoadAsset<GameObject>("CaltropsDotZoneOpti");
+            InitCaltropsDotZone(caltropsDotZoneOpti);
 
             //mine
             minePrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiMine.prefab").WaitForCompletion(), "GIEngiMine");
@@ -73,6 +79,17 @@ namespace RA2Mod.Survivors.GI
             armingMachine.mainStateType = mineArmingState;
 
             Content.AddProjectilePrefab(minePrefab);
+        }
+
+        private static void InitCaltropsDotZone(GameObject caltropsDotZone)
+        {
+
+            //DamageAPI.ModdedDamageTypeHolderComponent damageTypeHolder = caltropsDotZone.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            //damageTypeHolder.Add(GIDamageTypes.CaltropsSlow);
+            //caltropsDotZone.transform.Find("Scaler").transform.localScale = Vector3.one * GIConfig.M2_Caltrops_Scale.Value;
+            //caltropsDotZone.GetComponent<ProjectileDotZone>().lifetime = GIConfig.M2_Caltrops_DotDuration.Value;
+            Content.NetworkAndAddProjectilePrefab(caltropsDotZone);
+            Content.NetworkAndAddProjectilePrefab(caltropsDotZone.GetComponent<ProjectileSpawnDotzoneChildren>().childPrefab.gameObject);
         }
     }
 }
