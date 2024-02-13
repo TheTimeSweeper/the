@@ -131,15 +131,20 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private void TrySetBodyInvisible(CharacterBody body, bool shouldInvis)
         {
-            var model = body?.modelLocator?.modelTransform?.GetComponent<CharacterModel>();
-            if (model)
-            {
+            if (body == null)
+                return;
+            if (body.modelLocator == null)
+                return;
+            if (body.modelLocator.modelTransform == null)
+                return;
+            if (body.modelLocator.modelTransform.TryGetComponent(out CharacterModel model)){
+
                 model.invisibilityCount += shouldInvis ? 1 : -1;
 
                 if (shouldInvis == false)
                 {
                     TeleportOutController.AddTPOutEffect(model, 1f, 0f, 0.2f);
-                }
+                } 
             }
         }
 

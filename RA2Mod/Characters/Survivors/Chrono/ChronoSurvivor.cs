@@ -14,6 +14,7 @@ using UnityEngine;
 using R2API;
 using RA2Mod.Survivors.Chrono.SkillDefs;
 using UnityEngine.SceneManagement;
+using RA2Mod.General.Components;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -137,6 +138,7 @@ namespace RA2Mod.Survivors.Chrono
             bodyPrefab.AddComponent<ChronoTrackerBomb>();
             bodyPrefab.AddComponent<ChronoTrackerVanish>();
             bodyPrefab.AddComponent<PhaseIndicatorController>();
+            bodyPrefab.AddComponent<VoiceLines>().prefix = "Play_Chrono_";
         }
 
         public override void InitializeEntityStateMachines() 

@@ -51,34 +51,37 @@ namespace RA2Mod.Survivors.GI
             Language.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Fire Pistol for {Tokens.DamageText($"{GIConfig.M1PistolShots.Value}x{GIConfig.M1PistolDamage.Value * 100}% damage")}.\nWhile deployed, {heavyGun}");
             Language.Add(prefix + "PRIMARY_GUN_HEAVY_NAME", "Gun Heavy");
             Language.Add(prefix + "PRIMARY_GUN_HEAVY_DESCRIPTION", heavyGun);
+
+            string heavyMissile = $"Fire Heavy Missile for {Tokens.DamageValueText(GIConfig.M1HeavyMissileDamage.Value)}.";
+            Language.Add(prefix + "PRIMARY_ROCKET_NAME", "Missile");
+            Language.Add(prefix + "PRIMARY_ROCKET_DESCRIPTION", $"Fire a rocket for {Tokens.DamageValueText(GIConfig.M1MissileDamage.Value)}.\nWhile deployed, {heavyMissile}");
+            Language.Add(prefix + "PRIMARY_ROCKET_HEAVY_NAME", "Missile heavy");
+            Language.Add(prefix + "PRIMARY_ROCKET_HEAVY_NAME", heavyMissile);
             #endregion
 
             #region Secondary
-            string heavyMissile = $"Fire Heavy Missile for {Tokens.DamageValueText(GIConfig.M1MissileDamage.Value)}.";
-            Language.Add(prefix + "SECONDARY_ROCKET_NAME", "Missile");
-            Language.Add(prefix + "SECONDARY_ROCKET_DESCRIPTION", $"Fire Literally Mul-T scrap launcher for {Tokens.DamageValueText(3.6f)}.\nWhile deployed, {heavyMissile}");
-            Language.Add(prefix + "SECONDARY_ROCKET_HEAVY_NAME", "Missile heavy");
-            Language.Add(prefix + "SECONDARY_ROCKET_HEAVY_NAME", heavyMissile);
+            string heavyMine = $"Throw a {Tokens.DamageText("stunning")} mine for {Tokens.DamageValueText(GIConfig.M2MineDamage.Value)}.";
+            Language.Add(prefix + "SECONDARY_CALTROPS_NAME", "Caltrops");
+            Language.Add(prefix + "SECONDARY_CALTROPS_DESCRIPTION", $"Throw {Tokens.DamageText("slowing")} caltrops, dealing {Tokens.DamageValueText(GIConfig.M2CaltropsDotDamage.Value * 3 * GIConfig.M2CaltropsDotDuration.Value)} over {GIConfig.M2CaltropsDotDuration.Value} seconds.\nWhile deployed, {heavyMine}");
+            Language.Add(prefix + "SECONDARY_MINE_NAME", "Mine");
+            Language.Add(prefix + "SECONDARY_MINE_DESCRIPTION", heavyMine);
             #endregion
 
             #region Utility
-            string heavySlide = $"Throw Literally Engi Mine for {Tokens.DamageText("300-900% damage")}.";
-            Language.Add(prefix + "UTILITY_SLIDE_NAME", "Literally Commando Slide");
-            Language.Add(prefix + "UTILITY_SLIDE_DESCRIPTION", $"Literally Commando Slide \nWhile deployed, {heavySlide}");
-            Language.Add(prefix + "UTILITY_MINE_NAME", "Literally Engi Mine");
-            Language.Add(prefix + "UTILITY_MINE_DESCRIPTION", heavySlide);
+            Language.Add(prefix + "UTILITY_SLIDE_NAME", "Basically Commando Slide");
+            Language.Add(prefix + "UTILITY_SLIDE_DESCRIPTION", $"Commando Slide but in the air as well");
             #endregion
 
             #region Special
             Language.Add(prefix + "SPECIAL_DEPLOY_NAME", "Deploy");
             Language.Add(prefix + "SPECIAL_DEPLOY_DESCRIPTION", $"Deploy and swap skills and dont move and get {GIConfig.M4TransformArmor.Value} armor.");
             Language.Add(prefix + "SPECIAL_UNDEPLOY_NAME", "UnDeploy");
-            Language.Add(prefix + "SPECIAL_UNDEPLOY_DESCRIPTION", $"Go back I want to b emonk e.");
+            Language.Add(prefix + "SPECIAL_UNDEPLOY_DESCRIPTION", $"Go back I want to b emon ke.");
             #endregion
 
             #region Achievements
-            Language.Add(Tokens.GetAchievementNameToken(HenryMasteryAchievement.identifier), "Henry: Mastery");
-            Language.Add(Tokens.GetAchievementDescriptionToken(HenryMasteryAchievement.identifier), "As Henry, beat the game or obliterate on Monsoon.");
+            Language.Add(Tokens.GetAchievementNameToken(GIMasteryAchievement.identifier), "G.I.: Mastery");
+            Language.Add(Tokens.GetAchievementDescriptionToken(GIMasteryAchievement.identifier), "As G.I., beat the game or obliterate on Monsoon.");
             #endregion
         }
     }

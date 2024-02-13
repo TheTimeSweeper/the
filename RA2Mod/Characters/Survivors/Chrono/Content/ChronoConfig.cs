@@ -40,117 +40,117 @@ namespace RA2Mod.Survivors.Chrono
                 section,
                 "M0SprintBlinkTimeMulti",
                 0.169f,
-                "Phase out penalty multiplier based on distance teleported.",
                 0,
-                1);
+                1,
+                "Phase out penalty multiplier based on distance teleported.");
 
             M0SprintTeleportTimeTimeMulti = Config.BindAndOptionsSlider(
                 section,
                 "M0SprintblinkTimeTimeMulti",
                 0.5f,
-                "Phase out penalty multiplier based on time spent in teleporting state. Only comes into play after 1 second, and only replaces distance penalty if larger (does not add)",
                 0,
-                1);
+                1,
+                "Phase out penalty multiplier based on time spent in teleporting state. Only comes into play after 1 second, and only replaces distance penalty if larger (does not add)");
             M0CameraLerpTime = Config.BindAndOptionsSlider(
                 section,
                 "M0CameraLerpTime",
                 0.5f,
-                "",
                 0,
-                3);
+                3,
+                "");
             //
             M1Damage = Config.BindAndOptionsSlider(
                 section,
                 "M1Damage",
                 2f,
-                "",
                 0,
-                10);
+                10,
+                "");
 
             M1Duration = Config.BindAndOptionsSlider(
                 section,
                 "M1Duration",
                 0.8f,
-                "",
                 0,
-                10);
+                10,
+                "");
             M1Radius = Config.BindAndOptionsSlider(
                 section,
                 "M1Radius",
                 6f,
-                "",
                 0,
-                100);
+                100,
+                "");
 
             M1Screenshake = Config.BindAndOptionsSlider(
                 section,
                 "M1Screenshake",
                 2f,
-                "",
                 0,
-                10);
+                10,
+                "");
             //
             M2Damage = Config.BindAndOptionsSlider(
                 section,
                 "M2Damage",
                 5f,
-                "",
                 0,
-                10);
+                10,
+                "");
             //
             M3Radius = Config.BindAndOptionsSlider(
                 section,
                 "M3Radius",
                 20f,
-                "",
                 0,
-                100);
+                100,
+                "");
             M3Delay = Config.BindAndOptionsSlider(
                 section,
                 "M3Delay",
                 0.3f,
-                "",
                 0,
-                1);
+                1,
+                "");
             M3ChronosphereCameraLerpTime = Config.BindAndOptionsSlider(
                 section,
                 "M3ChronosphereCameraLerpTime",
                 0.5f,
-                "",
                 0,
-                3);
+                3,
+                "");
             //
             M4Interval = Config.BindAndOptionsSlider(
                 section,
                 "M4Interval",
                 0.3f,
-                "",
                 0,
-                1);
+                1,
+                "");
 
             M4Duration = Config.BindAndOptionsSlider(
                 section,
                 "M4Duration",
                 3f,
-                "",
                 0,
-                10);
+                10,
+                "");
 
             M4Damage = Config.BindAndOptionsSlider(
                 section,
                 "M4Damage",
                 0.8f,
-                "",
                 0,
-                10);
+                10,
+                "");
 
             M4ChronoStacksToVanish = Config.BindAndOptionsSlider(
                 section,
                 "chronoStacksToVanish",
-                100,
-                "",
+                100f,
                 0,
-                200);
+                200,
+                "");
 
         }
     }

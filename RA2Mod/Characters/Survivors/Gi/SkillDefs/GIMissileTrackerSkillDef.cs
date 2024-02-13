@@ -9,7 +9,7 @@ namespace RA2Mod.Survivors.GI.SkillDefs
     {
         public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
         {
-            return new InstanceData<GIMissileTracker>
+            return new InstanceData
             {
                 componentFromSkillDef = skillSlot.GetComponent<GIMissileTracker>()
             };

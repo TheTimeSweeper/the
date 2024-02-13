@@ -1,12 +1,14 @@
 ﻿using EntityStates;
 using RA2Mod.Survivors.GI.SkillDefs;
 using RoR2;
+using RoR2.UI;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
     public class BaseTransform : BaseSkillState
     {
+        private CrosshairUtils.OverrideRequest crosshairRequest = null;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -35,10 +37,20 @@ namespace RA2Mod.Survivors.GI.SkillStates
                 if (setOverride)
                 {
                     genericSkill.SetSkillOverride(this, def.upgradedSkillDef, GenericSkill.SkillOverridePriority.Upgrade);
+
+                    if (def.crosshairOverride != null)
+                    {
+                        crosshairRequest = CrosshairUtils.RequestOverrideForBody(characterBody, def.crosshairOverride, CrosshairUtils.OverridePriority.Skill);
+                    }
                 }
                 else
                 {
                     genericSkill.UnsetSkillOverride(this, def.upgradedSkillDef, GenericSkill.SkillOverridePriority.Upgrade);
+
+                    if (crosshairRequest != null)
+                    {
+                        crosshairRequest.Dispose();
+                    }
                 }
             }
         }
@@ -47,9 +59,9 @@ namespace RA2Mod.Survivors.GI.SkillStates
             base.OnExit();
             OverrideSkills(false);
         }
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
-        }
+        //public override InterruptPriority GetMinimumInterruptPriority()
+        //{
+        //    return InterruptPriority.PrioritySkill;
+        //}
     }
 }

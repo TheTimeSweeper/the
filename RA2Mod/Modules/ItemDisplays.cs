@@ -115,7 +115,6 @@ namespace RA2Mod.Modules
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(string itemName, params ItemDisplayRule[] rules) => CreateDisplayRuleGroupWithRules(GetKeyAssetFromString(itemName), rules);
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(Object keyAsset_, params ItemDisplayRule[] rules)
         {
-            Log.Warning(keyAsset_);
             if (keyAsset_ == null)
                 Log.Error("could not find keyasset");
 

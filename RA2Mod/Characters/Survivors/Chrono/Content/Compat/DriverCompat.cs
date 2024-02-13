@@ -57,42 +57,42 @@ namespace RA2Mod.Survivors.Chrono
             DriverGunM1Damage = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM1Damage",
-                1.10f,
-                "",
+                2.0f,
                 0,
-                20);
+                20,
+                "");
 
             DriverGunM1Duration = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM1Duration",
-                0.38f,
-                "",
+                0.4f,
                 0,
-                5);
+                5,
+                "");
 
             DriverGunM2Damage = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM2Damage",
-                0.18f,
-                "",
+                0.3f,
                 0,
-                10);
+                10,
+                "");
 
             DriverGunM2TickInterval = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM2TickInterval",
-                0.13f,
-                "",
+                0.11f,
                 0,
-                10);
+                10,
+                "");
 
             DriverGunM2Duration = Config.BindAndOptionsSlider(
                 section,
                 "DriverGunM2Duration",
                 3f,
-                "",
                 0,
-                20);
+                20,
+                "");
         }
 
         private void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs)

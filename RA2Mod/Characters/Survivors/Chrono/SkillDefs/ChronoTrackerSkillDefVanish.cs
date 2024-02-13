@@ -9,7 +9,7 @@ namespace RA2Mod.Survivors.Chrono.SkillDefs
     {
         public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
         {
-            return new InstanceData<ChronoTrackerVanish>
+            return new InstanceData
             {
                 componentFromSkillDef = skillSlot.GetComponent<ChronoTrackerVanish>()
             };

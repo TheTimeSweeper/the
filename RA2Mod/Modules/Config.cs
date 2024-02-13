@@ -51,27 +51,66 @@ namespace RA2Mod.Modules
             return disabledSections.Contains(section);
         }
 
-        public static void ConfigureBody(CharacterBody body, string section, string bodyInfoTitle = "")
+        public static void ConfigureBody(CharacterBody bodyComponent, string section, string bodyInfoTitle = "")
         {
             if (string.IsNullOrEmpty(bodyInfoTitle))
             {
-                bodyInfoTitle = body.name;
+                bodyInfoTitle = bodyComponent.name;
             }
 
+            bodyComponent.baseMaxHealth = Config.BindAndOptions(
+                    section,
+                    $"{bodyInfoTitle} Base Max Health",
+                    bodyComponent.baseMaxHealth,
+                    0,
+                    1000,
+                    "levelMaxHealth will be adjusted accordingly (baseMaxHealth * 0.3)",
+                    true).Value;
+            bodyComponent.levelMaxHealth = Mathf.Round(bodyComponent.baseMaxHealth * 0.3f);
 
+            bodyComponent.baseRegen = Config.BindAndOptions(
+                    section,
+                    $"{bodyInfoTitle} Base Regen",
+                    bodyComponent.baseRegen,
+                    "levelRegen will be adjusted accordingly (baseRegen * 0.2)",
+                    true).Value;
+            bodyComponent.levelRegen = bodyComponent.baseRegen * 0.2f;
+
+            bodyComponent.baseArmor = Config.BindAndOptions(
+                    section,
+                    $"{bodyInfoTitle} Armor",
+                    bodyComponent.baseArmor,
+                    "",
+                    true).Value;
+
+            bodyComponent.baseDamage = Config.BindAndOptions(
+                    section,
+                    $"{bodyInfoTitle} Base Damage",
+                    bodyComponent.baseDamage,
+                    "pretty much all survivors are 12. If you want to change damage, change damage of the moves instead.\nlevelDamage will be adjusted accordingly (baseDamage * 0.2)",
+                    true).Value;
+            bodyComponent.levelDamage = bodyComponent.baseDamage * 0.2f;
+
+            bodyComponent.baseJumpCount = Config.BindAndOptions(
+                    section,
+                    $"{bodyInfoTitle} Jump Count",
+                    bodyComponent.baseJumpCount,
+                    "",
+                    true).Value;
         }
 
         public static void ConfigureSkillDef(SkillDef skillDef, string section, string skillTitle, bool cooldown = true, bool maxStock = true, bool rechargeStock = false)
         {
             if (cooldown)
             {
-                skillDef.baseRechargeInterval = Config.BindAndOptionsSlider(
+                skillDef.baseRechargeInterval = Config.BindAndOptions(
                     section,
                     $"{skillTitle} cooldown",
                     skillDef.baseRechargeInterval,
-                    "",
                     0,
-                    20).Value;
+                    20,
+                    "",
+                    true).Value;
             }
             if (maxStock)
             {
@@ -79,7 +118,10 @@ namespace RA2Mod.Modules
                     section,
                     $"{skillTitle} stocks",
                     skillDef.baseMaxStock,
-                    "").Value;
+                    0,
+                    100,
+                    "",
+                    true).Value;
             }
             if (rechargeStock)
             {
@@ -87,7 +129,10 @@ namespace RA2Mod.Modules
                     section,
                     $"{skillTitle} recharge stocks",
                     skillDef.baseMaxStock,
-                    "").Value;
+                    0,
+                    100,
+                    "",
+                    true).Value;
             }
         }
 
@@ -111,8 +156,11 @@ namespace RA2Mod.Modules
                                         description,
                                         true);
         }
-
-        public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false)
+        public static ConfigEntry<T> BindAndOptionsSlider<T>(string section, string name, T defaultValue, float min = 0, float max = 20, string description = "", bool restartRequired = false) =>
+            BindAndOptions<T>(section, name, defaultValue, min, max, description, restartRequired);
+        public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false) =>
+            BindAndOptions<T>(section, name, defaultValue, 0, 20, description, restartRequired);
+        public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, float min, float max, string description = "", bool restartRequired = false)
         {
             if (string.IsNullOrEmpty(description))
             {
@@ -131,58 +179,32 @@ namespace RA2Mod.Modules
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
             {
-                TryRegisterOption(configEntry, restartRequired);
+                TryRegisterOption(configEntry, min, max, restartRequired);
             }
 
             return new ConfigEntry<T>(configEntry, defaultValue);
         }
 
-        public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description = "", float min = 0, float max = 20, bool restartRequired = false)
-        {
-            if (string.IsNullOrEmpty(description))
-            {
-                description = name;
-            }
-
-            if (restartRequired)
-            {
-                description += " (restart required)";
-            }
-
-            if (!enableAll && SectionDisabled(section))
-                return new ConfigEntry<float>(null, defaultValue);
-
-            BepInEx.Configuration.ConfigEntry<float> configEntry = MyConfig.Bind(section, name, defaultValue, description);
-
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
-            {
-                TryRegisterOptionSlider(configEntry, min, max, restartRequired);
-            }
-
-            return new ConfigEntry<float>(configEntry, defaultValue);
-        }
-
         //add risk of options dll to your project libs and uncomment this for a soft dependency
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static void TryRegisterOption<T>(BepInEx.Configuration.ConfigEntry<T> entry, bool restartRequired)
+        private static void TryRegisterOption<T>(BepInEx.Configuration.ConfigEntry<T> entry, float min, float max, bool restartRequired)
         {
-            if (entry is ConfigEntry<float>)
+            if (entry is BepInEx.Configuration.ConfigEntry<float>)
             {
-                ModSettingsManager.AddOption(new SliderOption(entry as BepInEx.Configuration.ConfigEntry<float>, new SliderConfig() { min = 0, max = 20, formatString = "{0:0.00}", restartRequired = restartRequired }));
+                ModSettingsManager.AddOption(new SliderOption(entry as BepInEx.Configuration.ConfigEntry<float>, new SliderConfig() { min = min, max = max, formatString = "{0:0.00}", restartRequired = restartRequired }));
             }
-            if (entry is ConfigEntry<int>)
+            if (entry is BepInEx.Configuration.ConfigEntry<int>)
             {
-                ModSettingsManager.AddOption(new IntSliderOption(entry as BepInEx.Configuration.ConfigEntry<int>, restartRequired));
+                ModSettingsManager.AddOption(new IntSliderOption(entry as BepInEx.Configuration.ConfigEntry<int>, new IntSliderConfig() { min = (int)min, max = (int)max, restartRequired = restartRequired }));
             }
-            if (entry is ConfigEntry<bool>)
+            if (entry is BepInEx.Configuration.ConfigEntry<bool>)
             {
                 ModSettingsManager.AddOption(new CheckBoxOption(entry as BepInEx.Configuration.ConfigEntry<bool>, restartRequired));
             }
-        }
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static void TryRegisterOptionSlider(BepInEx.Configuration.ConfigEntry<float> entry, float min, float max, bool restartRequired)
-        {
-            ModSettingsManager.AddOption(new SliderOption(entry as BepInEx.Configuration.ConfigEntry<float>, new SliderConfig() { min = min, max = max, formatString = "{0:0.00}", restartRequired = restartRequired }));
+            if (entry is BepInEx.Configuration.ConfigEntry<KeyboardShortcut>)
+            {
+                ModSettingsManager.AddOption(new KeyBindOption(entry as BepInEx.Configuration.ConfigEntry<KeyboardShortcut>, restartRequired));
+            }
         }
 
         //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs

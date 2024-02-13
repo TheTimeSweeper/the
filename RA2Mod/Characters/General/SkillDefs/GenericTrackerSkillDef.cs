@@ -9,7 +9,7 @@ namespace RA2Mod.General.SkillDefs
         // Token: 0x060045B8 RID: 17848 RVA: 0x00122449 File Offset: 0x00120649
         private static bool HasTarget([NotNull] GenericSkill skillSlot)
         {
-            T huntressTracker = ((InstanceData<T>)skillSlot.skillInstanceData).componentFromSkillDef;
+            T huntressTracker = ((InstanceData)skillSlot.skillInstanceData).componentFromSkillDef;
             return huntressTracker != null ? huntressTracker.GetTrackingTarget() : null;
         }
         // Token: 0x060045B9 RID: 17849 RVA: 0x00122471 File Offset: 0x00120671

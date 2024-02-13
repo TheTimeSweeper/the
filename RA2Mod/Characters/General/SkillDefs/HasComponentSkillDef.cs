@@ -18,7 +18,7 @@ namespace RA2Mod.General.SkillDefs
     {
         public abstract override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot);
 
-        public class InstanceData<T> : BaseSkillInstanceData where T : MonoBehaviour
+        public class InstanceData : BaseSkillInstanceData 
         {
             public T componentFromSkillDef;
         }
@@ -27,7 +27,7 @@ namespace RA2Mod.General.SkillDefs
         {
             EntityState entityState = base.InstantiateNextState(skillSlot);
 
-            InstanceData<T> instanceData = (InstanceData<T>)skillSlot.skillInstanceData;
+            InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
             IHasSkillDefComponent<T> somethingComponentSkill;
             if ((somethingComponentSkill = entityState as IHasSkillDefComponent<T>) != null)

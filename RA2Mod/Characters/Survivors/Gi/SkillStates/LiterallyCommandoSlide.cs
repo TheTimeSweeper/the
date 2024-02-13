@@ -8,7 +8,9 @@ namespace RA2Mod.Survivors.GI.SkillStates
     public class LiterallyCommandoSlide : BaseSkillState
     {
         // Token: 0x040016BA RID: 5818
-        public static float slideDuration => GIConfig.M3SlideDuration.Value;
+        public static float slideGroundDuration => GIConfig.M3SlideDuration.Value;
+
+        public static float slideAirDuration => GIConfig.M3SlideAirDuration.Value;
         // Token: 0x040016BC RID: 5820
         public static AnimationCurve forwardSpeedCoefficientCurve => SlideState.forwardSpeedCoefficientCurve;
         // Token: 0x040016BE RID: 5822
@@ -21,6 +23,9 @@ namespace RA2Mod.Survivors.GI.SkillStates
         private GameObject slideEffectInstance;
         // Token: 0x040016C3 RID: 5827
         private bool startedStateGrounded;
+
+        private float slideDuration;
+
         // Token: 0x060011EA RID: 4586 RVA: 0x0004F418 File Offset: 0x0004D618
         public override void OnEnter()
         {
@@ -39,10 +44,12 @@ namespace RA2Mod.Survivors.GI.SkillStates
             {
                 this.PlayAnimation("Body", "Jump");
                 Vector3 velocity = base.characterMotor.velocity;
-                velocity.y = base.characterBody.jumpPower;
+                velocity.y = base.characterBody.jumpPower * GIConfig.M3SlideAirJumpMultiplier.Value;
                 base.characterMotor.velocity = velocity;
+                slideDuration = slideAirDuration;
                 return;
             }
+            slideDuration = slideGroundDuration;
             base.PlayAnimation("Fullbody, overried", "Dash", "dash.playbackRate", slideDuration);
             if (slideEffectPrefab)
             {

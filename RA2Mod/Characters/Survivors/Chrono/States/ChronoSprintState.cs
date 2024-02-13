@@ -36,8 +36,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             origPivot = cameraTargetParams.cameraPivotTransform;
             cameraTargetParams.cameraPivotTransform = marker.cameraPivot;
             cameraTargetParams.dontRaycastToPivot = true;
+            origOrigin = characterBody.aimOriginTransform;
             characterBody.aimOriginTransform = marker.cameraPivot;
             inCamera = true;
+
             if (NetworkServer.active)
             {
                 characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
@@ -53,6 +55,9 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            if (!isAuthority)
+                return;
+
             timeSpent += Time.fixedDeltaTime;
 
             Vector3 moveVector = inputBank.moveVector * (Mathf.Min(moveSpeedStat, 20) * 0.1f);

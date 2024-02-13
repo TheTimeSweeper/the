@@ -182,7 +182,6 @@ namespace RA2Mod.Modules
                 bodyComponent.levelCrit = 0f;
 
                 bodyComponent.levelArmor = 0f;
-
             }
             else
             {

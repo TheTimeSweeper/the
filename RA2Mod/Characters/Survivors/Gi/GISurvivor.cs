@@ -1,4 +1,6 @@
 ﻿using BepInEx.Configuration;
+using EntityStates;
+using EntityStates.Engi.Mine;
 using RA2Mod.General.Components;
 using RA2Mod.Modules;
 using RA2Mod.Modules.Characters;
@@ -6,6 +8,7 @@ using RA2Mod.Survivors.GI.Components;
 using RA2Mod.Survivors.GI.SkillDefs;
 using RA2Mod.Survivors.GI.SkillStates;
 using RoR2;
+using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
@@ -37,11 +40,11 @@ namespace RA2Mod.Survivors.GI
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconGI"),
             bodyColor = Color.blue,
             sortPosition = 69.6f,
-
+            
             crosshair = assetBundle.LoadAsset<GameObject>("GICrosshair"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 130f,
+            maxHealth = 140f,
             healthRegen = 2.0f,
             armor = 10f,
 
@@ -71,7 +74,7 @@ namespace RA2Mod.Survivors.GI
 
             GIStates.Init();
             GITokens.Init();
-
+            
             GIAssets.Init(assetBundle);
             GIBuffs.Init(assetBundle);
 
@@ -89,6 +92,7 @@ namespace RA2Mod.Survivors.GI
         {
             //AddHitboxes();
             bodyPrefab.AddComponent<GIMissileTracker>();
+            bodyPrefab.AddComponent<VoiceLines>().prefix = "Play_GI_";
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }
@@ -129,10 +133,11 @@ namespace RA2Mod.Survivors.GI
                     GI_PREFIX + "PRIMARY_GUN_NAME",
                     GI_PREFIX + "PRIMARY_GUN_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.Fire3RoundGun)),
+                    new EntityStates.SerializableEntityStateType(typeof(Fire3RoundPistol)),
                     "Weapon",
                     false
                 ));
+            primarySkillDef1.crosshairOverride = assetBundle.LoadAsset<GameObject>("GICrosshairHMG");
             primarySkillDef1.upgradedSkillDef = Skills.CreateSkillDef<GILimitedUseSkillDef>(new SkillDefInfo
             {
                 skillName = "GIGun1Heavy",
@@ -146,11 +151,11 @@ namespace RA2Mod.Survivors.GI
                 interruptPriority = EntityStates.InterruptPriority.Any,
 
                 baseRechargeInterval = 0f,
-                baseMaxStock = 20,
+                baseMaxStock = 21,
 
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
+                rechargeStock = 21,
+                requiredStock = 3,
+                stockToConsume = 3,
 
                 resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
@@ -175,6 +180,7 @@ namespace RA2Mod.Survivors.GI
                     "Weapon",
                     false
                 ));
+            primarySkillDef2.crosshairOverride = assetBundle.LoadAsset<GameObject>("GICrosshairMissile");
             primarySkillDef2.upgradedSkillDef = Skills.CreateSkillDef<GIMissileTrackerLimitedUseSkillDef>(new SkillDefInfo
             {
                 skillName = "GIRocketHeavy",
@@ -190,7 +196,7 @@ namespace RA2Mod.Survivors.GI
                 baseRechargeInterval = 0f,
                 baseMaxStock = 10,
 
-                rechargeStock = 1,
+                rechargeStock = 10,
                 requiredStock = 1,
                 stockToConsume = 1,
 
@@ -208,14 +214,15 @@ namespace RA2Mod.Survivors.GI
 
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1, primarySkillDef2);
 
-            ShowOnCrosshairWhenSkillDef showOnCrosshairWhenSkillDef = prefabCharacterBody.defaultCrosshairPrefab.GetComponent<ShowOnCrosshairWhenSkillDef>();
-            showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef1.upgradedSkillDef);
-            showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef2.upgradedSkillDef);
+            //nvm just doing crosshair overrides instead
+            //ShowOnCrosshairWhenSkillDef showOnCrosshairWhenSkillDef = prefabCharacterBody.defaultCrosshairPrefab.GetComponent<ShowOnCrosshairWhenSkillDef>();
+            //showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef1.upgradedSkillDef);
+            //showOnCrosshairWhenSkillDef.IncludedSkillDefs.Add(primarySkillDef2.upgradedSkillDef);
 
-            Config.ConfigureSkillDef(primarySkillDef1, GIConfig.GISection, "M1 Gun");
-            Config.ConfigureSkillDef(primarySkillDef1.upgradedSkillDef, GIConfig.GISection, "M1 Gun Heavy", false);
-            Config.ConfigureSkillDef(primarySkillDef2, GIConfig.GISection, "M1 Missile");
-            Config.ConfigureSkillDef(primarySkillDef2.upgradedSkillDef, GIConfig.GISection, "M1 Missile Heavy", false);
+            Config.ConfigureSkillDef(primarySkillDef1, GIConfig.GISectionStocks, "M1 Pistol", false);
+            Config.ConfigureSkillDef(primarySkillDef1.upgradedSkillDef, GIConfig.GISectionStocks, "M1 Heavy Fire", false, true, true);
+            Config.ConfigureSkillDef(primarySkillDef2, GIConfig.GISectionStocks, "M1 Missile", false);
+            Config.ConfigureSkillDef(primarySkillDef2.upgradedSkillDef, GIConfig.GISectionStocks, "M1 Heavy Missile", false, true, true);
         }
 
         private void AddSecondarySkills()
@@ -286,8 +293,8 @@ namespace RA2Mod.Survivors.GI
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
 
-            Config.ConfigureSkillDef(secondarySkillDef1, GIConfig.GISection, "M2 Caltrops");
-            Config.ConfigureSkillDef(secondarySkillDef1.upgradedSkillDef, GIConfig.GISection, "M2 Mine");
+            Config.ConfigureSkillDef(secondarySkillDef1, GIConfig.GISectionStocks, "M2 Caltrops");
+            Config.ConfigureSkillDef(secondarySkillDef1.upgradedSkillDef, GIConfig.GISectionStocks, "M2 Mine");
         }
 
         private void AddUtiitySkills()
@@ -304,7 +311,7 @@ namespace RA2Mod.Survivors.GI
                 activationStateMachineName = "Transform",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 6f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -312,7 +319,7 @@ namespace RA2Mod.Survivors.GI
                 stockToConsume = 1,
 
                 resetCooldownTimerOnUse = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 dontAllowPastMaxStocks = false,
                 mustKeyPress = false,
                 beginSkillCooldownOnSkillEnd = false,
@@ -322,15 +329,17 @@ namespace RA2Mod.Survivors.GI
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = true,
             };
-            SkillDef utilitySkillDef1 = Skills.CreateSkillDef(skillDefInfo);
+            var utilitySkillDef1 = Skills.CreateSkillDef<UpgradableSkillDef>(skillDefInfo);
+            skillDefInfo.skillName = "GICommandoSlideHeavy";
             //skillDefInfo.interruptPriority = EntityStates.InterruptPriority.Death;
-            //skillDefInfo.stockToConsume = 0;
-            //utilitySkillDef1.upgradedSkillDef = Skills.CreateSkillDef(skillDefInfo);
+            skillDefInfo.stockToConsume = 0;
+            skillDefInfo.fullRestockOnAssign = true;
+            utilitySkillDef1.upgradedSkillDef = Skills.CreateSkillDef(skillDefInfo);
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
 
-            Config.ConfigureSkillDef(utilitySkillDef1, GIConfig.GISection, "M3 slide");
-            //Config.ConfigureSkillDef(utilitySkillDef1.upgradedSkillDef, GIConfig.GISection, "M3 slide out of transform");
+            Config.ConfigureSkillDef(utilitySkillDef1, GIConfig.GISectionStocks, "M3 slide");
+            //Config.ConfigureSkillDef(utilitySkillDef1.upgradedSkillDef, GIConfig.GISectionStocks, "M3 slide out of transform");
         }
 
         private void AddSpecialSkills()
@@ -375,14 +384,14 @@ namespace RA2Mod.Survivors.GI
                 rechargeStock = 1,
                 requiredStock = 0,
                 stockToConsume = 0,
-
+                
                 isCombatSkill = false,
                 mustKeyPress = true,
             });
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
 
-            Config.ConfigureSkillDef(specialSkillDef1, GIConfig.GISection, "M4 Transform");
+            Config.ConfigureSkillDef(specialSkillDef1, GIConfig.GISectionStocks, "M4 Transform");
         }
         #endregion skills
         
@@ -476,6 +485,50 @@ namespace RA2Mod.Survivors.GI
         private void AddHooks()
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+            On.EntityStates.Engi.Mine.Detonate.Explode += Detonate_Explode;
+        }
+
+        private void Detonate_Explode(On.EntityStates.Engi.Mine.Detonate.orig_Explode orig, EntityStates.Engi.Mine.Detonate self)
+        {
+            ProjectileDamage component = self.GetComponent<ProjectileDamage>();
+            float num = 0f;
+            float num2 = 0f;
+            float num3 = 0f;
+            EntityStateMachine armingStateMachine = self.armingStateMachine;
+            BaseMineArmingState baseMineArmingState;
+            if ((baseMineArmingState = (((armingStateMachine != null) ? armingStateMachine.state : null) as BaseMineArmingState)) != null)
+            {
+                num = baseMineArmingState.damageScale;
+                num2 = baseMineArmingState.forceScale;
+                num3 = baseMineArmingState.blastRadiusScale;
+            }
+            float num4 = Detonate.blastRadius * num3;
+            new BlastAttack
+            {
+                procChainMask = self.projectileController.procChainMask,
+                procCoefficient = self.projectileController.procCoefficient,
+                attacker = self.projectileController.owner,
+                inflictor = self.gameObject,
+                teamIndex = self.projectileController.teamFilter.teamIndex,
+                baseDamage = component.damage * num,
+                baseForce = component.force * num2,
+                falloffModel = BlastAttack.FalloffModel.None,
+                crit = component.crit,
+                radius = num4,
+                position = self.transform.position,
+                damageColorIndex = component.damageColorIndex,
+                damageType = DamageType.Stun1s
+            }.Fire();
+            if (Detonate.explosionEffectPrefab)
+            {
+                EffectManager.SpawnEffect(Detonate.explosionEffectPrefab, new EffectData
+                {
+                    origin = self.transform.position,
+                    rotation = self.transform.rotation,
+                    scale = num4
+                }, true);
+            }
+            EntityState.Destroy(self.gameObject);
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)

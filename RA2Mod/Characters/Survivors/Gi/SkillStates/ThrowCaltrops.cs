@@ -13,7 +13,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
     {
         public static float BaseDuration => GIConfig.M2CaltropsThrowDuration.Value;
 
-        public static float DamageCoefficient => GIConfig.M2CaltropsDamage.Value;
+        public static float DamageCoefficient => GIConfig.M2CaltropsDotDamage.Value;
 
         public override void OnEnter()
         {

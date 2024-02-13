@@ -51,6 +51,8 @@ namespace RA2Mod.Survivors.GI
             GameObject caltropsDotZone = _assetBundle.LoadAsset<GameObject>("CaltropsDotZone");
             //DamageAPI.ModdedDamageTypeHolderComponent damageTypeHolder = caltropsDotZone.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             //damageTypeHolder.Add(GIDamageTypes.CaltropsSlow);
+            caltropsDotZone.transform.Find("Scaler").transform.localScale = Vector3.one * GIConfig.M2CaltropsScale.Value;
+            caltropsDotZone.GetComponent<ProjectileDotZone>().lifetime = GIConfig.M2CaltropsDotDuration.Value;
             Content.NetworkAndAddProjectilePrefab(caltropsDotZone);
 
             //mine

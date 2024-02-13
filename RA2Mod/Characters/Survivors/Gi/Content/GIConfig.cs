@@ -5,6 +5,7 @@ namespace RA2Mod.Survivors.GI
     public static class GIConfig
     {
         public static ConfigEntry<float> M1PistolDamage;
+        public static ConfigEntry<bool> M1PistolFalloff;
         public static ConfigEntry<float> M1PistolInterval;
         public static ConfigEntry<float> M1PistolFinalInterval;
         public static ConfigEntry<int> M1PistolShots;
@@ -25,7 +26,9 @@ namespace RA2Mod.Survivors.GI
         public static ConfigEntry<float> M1HeavyMissileExplosionRadius;
 
         public static ConfigEntry<float> M2CaltropsThrowDuration;
-        public static ConfigEntry<float> M2CaltropsDamage;
+        public static ConfigEntry<float> M2CaltropsDotDamage;
+        public static ConfigEntry<float> M2CaltropsDotDuration;
+        public static ConfigEntry<float> M2CaltropsScale;
         public static ConfigEntry<float> M2CaltropsPitch;
 
         public static ConfigEntry<float> M2MineThrowDuration;
@@ -37,6 +40,7 @@ namespace RA2Mod.Survivors.GI
 
         public static ConfigEntry<float> M3SlideDuration;
         public static ConfigEntry<float> M3SlideAirDuration;
+        public static ConfigEntry<float> M3SlideAirJumpMultiplier;
 
         public static ConfigEntry<float> M4TransformInDuration;
         public static ConfigEntry<float> M4TransformOutDuration;
@@ -53,15 +57,20 @@ namespace RA2Mod.Survivors.GI
 
             Config.ConfigureBody(GISurvivor.instance.prefabCharacterBody, GIConfig.GISectionBody);
             #region m1 1 1
-            M1PistolDamage = Config.BindAndOptionsSlider(
+            M1PistolDamage = Config.BindAndOptions(
                 GISectionSkills,
                 "M1PistolDamage",
-                1.2f,
+                1.0f,
                 0,
                 20,
                 "");
+            M1PistolFalloff = Config.BindAndOptions(
+                GISectionSkills,
+                "M1PistolFalloff",
+                true,
+                "");
 
-            M1PistolInterval = Config.BindAndOptionsSlider(
+            M1PistolInterval = Config.BindAndOptions(
                 GISectionSkills,
                 "M1PistolInterval",
                 0.12f,
@@ -69,7 +78,7 @@ namespace RA2Mod.Survivors.GI
                 1,
                 "");
 
-            M1PistolFinalInterval = Config.BindAndOptionsSlider(
+            M1PistolFinalInterval = Config.BindAndOptions(
                 GISectionSkills,
                 "M1PistolFinalInterval",
                 0.4f,
@@ -85,7 +94,7 @@ namespace RA2Mod.Survivors.GI
             #endregion m1 1 1
 
             #region m1 1 2
-            M1HeavyFireDamage = Config.BindAndOptionsSlider(
+            M1HeavyFireDamage = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyFireDamage",
                 2f,
@@ -93,103 +102,37 @@ namespace RA2Mod.Survivors.GI
                 20,
                 "");
 
-            M1HeavyFireInterval = Config.BindAndOptionsSlider(
+            M1HeavyFireInterval = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyFireInterval",
-                0.11F,
+                0.13F,
                 0,
                 20,
                 "");
-            string logbaseduration, loginterval, logbaseminusint, logfinal;
-            int iterations = 50;
 
-            logbaseduration = "\nlogbaseduration"; loginterval = "\nloginterval"; logbaseminusint = "\nlogbaseminusint"; logfinal = "\nlogfinal"; 
-            for (int i = 0; i < iterations; i++)
-            {
-                float baseDuration = M1HeavyFireInterval.Value * 3f;
-                float interval = M1HeavyFireInterval.Value / (1 + i *0.15f);
-                logbaseduration += $"\n{baseDuration}";
-                loginterval += $"\n{interval}";
-                logbaseminusint += $"\n{baseDuration / interval}";
-                logfinal += $"\n{(int)(baseDuration / interval)}";
-            }
-            Log.Warning("(int)");
-            //Log.Warning(logbaseduration);
-            //Log.Warning(loginterval);
-            Log.Warning(logbaseminusint);
-            Log.Warning(logfinal);
-
-            logbaseduration = "\nlogbaseduration"; loginterval = "\nloginterval"; logbaseminusint = "\nlogbaseminusint"; logfinal = "\nlogfinal";
-            for (int i = 0; i < iterations; i++)
-            {
-                float baseDuration = M1HeavyFireInterval.Value * 3.1f;
-                float interval = M1HeavyFireInterval.Value / (1 + i * 0.15f);
-                logbaseduration += $"\n{baseDuration}";
-                loginterval += $"\n{interval}";
-                logbaseminusint += $"\n{baseDuration / interval}";
-                logfinal += $"\n{(int)(baseDuration / interval)}";
-            }
-            Log.Warning("(int) 3.1");
-            //Log.Warning(logbaseduration);
-            //Log.Warning(loginterval);
-            //Log.Warning(logbaseminusint);
-            Log.Warning(logfinal);
-
-            logbaseduration = "\nlogbaseduration"; loginterval = "\nloginterval"; logbaseminusint = "\nlogbaseminusint"; logfinal = "\nlogfinal";
-            for (int i = 0; i < iterations; i++)
-            {
-                float baseDuration = M1HeavyFireInterval.Value * 3f;
-                float interval = M1HeavyFireInterval.Value / (1 + i * 0.15f);
-                logbaseduration += $"\n{baseDuration}";
-                loginterval += $"\n{interval}";
-                logbaseminusint += $"\n{baseDuration / interval}";
-                logfinal += $"\n{UnityEngine.Mathf.RoundToInt(baseDuration / interval)}";
-            }
-            Log.Warning("round");
-            //Log.Warning(logbaseduration);
-            //Log.Warning(loginterval);
-            //Log.Warning(logbaseminusint);
-            Log.Warning(logfinal);
-
-            logbaseduration = "\nlogbaseduration"; loginterval = "\nloginterval"; logbaseminusint = "\nlogbaseminusint"; logfinal = "\nlogfinal";
-            for (int i = 0; i < iterations; i++)
-            {
-                float baseDuration = M1HeavyFireInterval.Value * 3.1f;
-                float interval = M1HeavyFireInterval.Value / (1 + i * 0.15f);
-                logbaseduration += $"\n{baseDuration}";
-                loginterval += $"\n{interval}";
-                logbaseminusint += $"\n{baseDuration / interval}";
-                logfinal += $"\n{UnityEngine.Mathf.RoundToInt(baseDuration / interval)}";
-            }
-            Log.Warning("round 3.1");
-            //Log.Warning(logbaseduration);
-            //Log.Warning(loginterval);
-            //Log.Warning(logbaseminusint);
-            Log.Warning(logfinal);
-
-            M1HeavyFireFinalInterval = Config.BindAndOptionsSlider(
+            M1HeavyFireFinalInterval = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyFireFinalInterval",
-                0.14F,
+                0.15F,
                 0,
                 20,
                 "");
-            M1HeavyFireRadius = Config.BindAndOptionsSlider(
+            M1HeavyFireRadius = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyFireRadius",
                 3f,
                 0,
                 20,
                 "");
-
-            M1HeavyFireForce = Config.BindAndOptionsSlider(
+            
+            M1HeavyFireForce = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyFireForce",
                 200f,
                 0,
                 10000,
                 "");
-            M1HeavyFireRecoil = Config.BindAndOptionsSlider(
+            M1HeavyFireRecoil = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyFireRecoil",
                 0.5f,
@@ -199,14 +142,14 @@ namespace RA2Mod.Survivors.GI
             #endregion m1 1 2
 
             #region m1 2 1
-            M1MissileDuration = Config.BindAndOptionsSlider(
+            M1MissileDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M1MissileDuration",
                 0.8f,
                 0,
                 20,
                 "");
-            M1MissileDamage = Config.BindAndOptionsSlider(
+            M1MissileDamage = Config.BindAndOptions(
                 GISectionSkills,
                 "M1MissileDamage",
                 3f,
@@ -214,7 +157,7 @@ namespace RA2Mod.Survivors.GI
                 20,
                 "");
 
-            M1MissileExplosionRadius = Config.BindAndOptionsSlider(
+            M1MissileExplosionRadius = Config.BindAndOptions(
                 GISectionSkills,
                 "M1MissileExplosionRadius",
                 6f,
@@ -225,21 +168,21 @@ namespace RA2Mod.Survivors.GI
             #endregion m1 2 1
 
             #region m1 2 2
-            M1HeavyMissileDuration = Config.BindAndOptionsSlider(
+            M1HeavyMissileDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyMissileDuration",
                 0.4f,
                 0,
                 20,
                 "");
-            M1HeavyMissileDamage = Config.BindAndOptionsSlider(
+            M1HeavyMissileDamage = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyMissileDamage",
                 5f,
                 0,
                 20,
                 "");
-            M1HeavyMissileExplosionRadius = Config.BindAndOptionsSlider(
+            M1HeavyMissileExplosionRadius = Config.BindAndOptions(
                 GISectionSkills,
                 "M1HeavyMissileExplosionRadius",
                 12f,
@@ -250,7 +193,7 @@ namespace RA2Mod.Survivors.GI
             #endregion m1 2 2
 
             #region m2 1 1
-            M2CaltropsThrowDuration = Config.BindAndOptionsSlider(
+            M2CaltropsThrowDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M2CaltropsThrowDuration",
                 0.5f,
@@ -258,7 +201,7 @@ namespace RA2Mod.Survivors.GI
                 10,
                 "");
 
-            M2CaltropsPitch = Config.BindAndOptionsSlider(
+            M2CaltropsPitch = Config.BindAndOptions(
                 GISectionSkills,
                 "M2CaltropsPitch",
                 -8f,
@@ -266,10 +209,27 @@ namespace RA2Mod.Survivors.GI
                 90,
                 "");
 
-            M2CaltropsDamage = Config.BindAndOptionsSlider(
+            M2CaltropsScale = Config.BindAndOptions(
                 GISectionSkills,
-                "M2CaltropsDamage",
+                "M2CaltropsScale",
+                30f,
+                0,
+                100,
+                "",
+                true);
+
+            M2CaltropsDotDamage = Config.BindAndOptions(
+                GISectionSkills,
+                "M2CaltropsDotDamage",
                 0.25f,
+                0,
+                20,
+                "");
+
+            M2CaltropsDotDuration = Config.BindAndOptions(
+                GISectionSkills,
+                "M2CaltropsDotDuration",
+                3f,
                 0,
                 20,
                 "");
@@ -277,14 +237,14 @@ namespace RA2Mod.Survivors.GI
 
             #region m2 1 2
 
-            M2MineThrowDuration = Config.BindAndOptionsSlider(
+            M2MineThrowDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M2MineThrowDuration",
                 0.5f,
                 0,
                 10,
                 "");
-            M2MinePitch = Config.BindAndOptionsSlider(
+            M2MinePitch = Config.BindAndOptions(
                 GISectionSkills,
                 "M2MinePitch",
                 -8f,
@@ -292,28 +252,28 @@ namespace RA2Mod.Survivors.GI
                 90,
                 "");
 
-            M2MineDamage = Config.BindAndOptionsSlider(
+            M2MineDamage = Config.BindAndOptions(
                 GISectionSkills,
                 "M2MineDamage",
                 5f,
                 0,
                 20,
                 "");
-            M2MineForce = Config.BindAndOptionsSlider(
+            M2MineForce = Config.BindAndOptions(
                 GISectionSkills,
                 "M2MineForce",
                 4000f,
                 0,
                 10000,
                 "");
-            M2MineTriggerRadius = Config.BindAndOptionsSlider(
+            M2MineTriggerRadius = Config.BindAndOptions(
                 GISectionSkills,
                 "M2MineTriggerRadius",
                 8f,
                 0,
                 20,
                 "");
-            M2MineBlastRadius = Config.BindAndOptionsSlider(
+            M2MineBlastRadius = Config.BindAndOptions(
                 GISectionSkills,
                 "M2MineBlastRadius",
                 12f,
@@ -324,25 +284,33 @@ namespace RA2Mod.Survivors.GI
 
             #region m3
 
-            M3SlideDuration = Config.BindAndOptionsSlider(
+            M3SlideDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M3SlideDuration",
+                1f,
+                0,
+                20,
+                "");
+
+            M3SlideAirDuration = Config.BindAndOptions(
+                GISectionSkills,
+                "M3SlideAirDuration",
                 0.8f,
                 0,
                 20,
                 "");
 
-            M3SlideAirDuration = Config.BindAndOptionsSlider(
+            M3SlideAirJumpMultiplier = Config.BindAndOptions(
                 GISectionSkills,
-                "M3SlideAirDuration",
-                0.69f,
+                "M3SlideAirJumpMultiplier",
+                1.3f,
                 0,
                 20,
                 "");
             #endregion m3
 
             #region m4
-            M4TransformInDuration = Config.BindAndOptionsSlider(
+            M4TransformInDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M4TransformDuration",
                 0.3f,
@@ -350,7 +318,7 @@ namespace RA2Mod.Survivors.GI
                 20,
                 "");
 
-            M4TransformOutDuration = Config.BindAndOptionsSlider(
+            M4TransformOutDuration = Config.BindAndOptions(
                 GISectionSkills,
                 "M4TransformOutDuration",
                 0.2f,
@@ -358,7 +326,7 @@ namespace RA2Mod.Survivors.GI
                 20,
                 "");
 
-            M4TransformArmor = Config.BindAndOptionsSlider(
+            M4TransformArmor = Config.BindAndOptions(
                 GISectionSkills,
                 "M4TransformArmor",
                 50f,

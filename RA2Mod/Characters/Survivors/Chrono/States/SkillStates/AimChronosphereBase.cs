@@ -30,7 +30,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             endpointVisualizerRadiusScale = BaseRadius;
             arcVisualizerPrefab = ChronoAssets.arcvisualizer;
             maxDistance = 120;
-            rayRadius = 0.4f;
+            rayRadius = 1f;
             setFuse = false;
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
@@ -99,18 +99,21 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             dest = default(AimThrowableBase.TrajectoryInfo);
             Ray aimRay = base.GetAimRay();
             RaycastHit raycastHit;
-            bool flag = false;
+            bool foundPoint = false;
 
             if(Physics.SphereCast(aimRay, rayRadius, out raycastHit, maxDistance, LayerIndex.world.mask, QueryTriggerInteraction.UseGlobal))
             {
-                flag = true;
+                foundPoint = true;
             }
-            if (!flag && Util.CharacterSpherecast(base.gameObject, aimRay, this.rayRadius, out raycastHit, this.maxDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal) && raycastHit.collider.GetComponent<HurtBox>())
+            if (!foundPoint && Util.CharacterSpherecast(base.gameObject, aimRay, this.rayRadius, out raycastHit, this.maxDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal) && raycastHit.collider.GetComponent<HurtBox>())
             {
-                flag = true;
+                foundPoint = true;
             }
 
-            if (flag)
+            if ((raycastHit.point - transform.position).magnitude > maxDistance)
+                foundPoint = false;
+
+            if (foundPoint)
             {
                 dest.hitPoint = raycastHit.point;
                 dest.hitNormal = raycastHit.normal;

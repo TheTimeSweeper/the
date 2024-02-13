@@ -12,8 +12,8 @@ namespace RA2Mod.Survivors.GI
         public static void Init()
         {
             masterySkinUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
-                HenryMasteryAchievement.unlockableIdentifier,
-                Modules.Tokens.GetAchievementNameToken(HenryMasteryAchievement.identifier),
+                GIMasteryAchievement.unlockableIdentifier,
+                Modules.Tokens.GetAchievementNameToken(GIMasteryAchievement.identifier),
                 GISurvivor.instance.assetBundle.LoadAsset<Sprite>("texMasteryAchievement"));
         }
     }
