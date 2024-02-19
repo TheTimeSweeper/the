@@ -233,7 +233,7 @@ namespace RA2Mod.Survivors.GI
                 skillName = "GICaltrops",
                 skillNameToken = GI_PREFIX + "SECONDARY_CALTROPS_NAME",
                 skillDescriptionToken = GI_PREFIX + "SECONDARY_CALTROPS_DESCRIPTION",
-                //keywordTokens = new string[] { "KEYWORD_AGILE" },
+                keywordTokens = new string[] { "KEYWORD_STUNNING" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
                 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowCaltrops)),
@@ -387,6 +387,8 @@ namespace RA2Mod.Survivors.GI
                 
                 isCombatSkill = false,
                 mustKeyPress = true,
+                dontAllowPastMaxStocks = true,
+                fullRestockOnAssign = false
             });
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
@@ -490,6 +492,12 @@ namespace RA2Mod.Survivors.GI
 
         private void Detonate_Explode(On.EntityStates.Engi.Mine.Detonate.orig_Explode orig, EntityStates.Engi.Mine.Detonate self)
         {
+            if(!self.outer.name.Contains("GIEngiMine"))
+            {
+                orig(self);
+                return;
+            }
+
             ProjectileDamage component = self.GetComponent<ProjectileDamage>();
             float num = 0f;
             float num2 = 0f;

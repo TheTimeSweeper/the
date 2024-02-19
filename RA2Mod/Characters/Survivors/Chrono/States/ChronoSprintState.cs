@@ -21,7 +21,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private CameraTargetParams.CameraParamsOverrideHandle cameraOverride;
         private float heightLimit = 50;
         private float timeSpent = -1;
-        private float timeSpentMultiplier => ChronoConfig.M0SprintTeleportTimeTimeMulti.Value;
+        protected virtual float timeSpentMultiplier => ChronoConfig.M0_SprintTeleport_TimeTimeMulti.Value;
+        protected virtual float distMultiplier => ChronoConfig.M0_SprintTeleport_DistTimeMulti.Value;
 
         public PhaseIndicatorController componentFromSkillDef { get; set; }
 
@@ -46,7 +47,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             }
             if(gameObject.TryGetComponent(out interactor))
             {
-                interactor.interactableCooldown = 100;                                                                              
+                interactor.enabled = false;                                                                              
             }
 
             cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, ChronoConfig.M0CameraLerpTime.Value);
@@ -55,6 +56,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
             if (!isAuthority)
                 return;
 
@@ -65,11 +67,12 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             marker.SimpleMove(moveVector);
 
+
             base.characterBody.isSprinting = true;
             if (GetSprintReleased())
             {
                 PhaseState state = new PhaseState();
-                float dist = Vector3.Distance(marker.viewPosition, transform.position) / Mathf.Max(characterBody.moveSpeed, 0.3f) * ChronoConfig.M0SprintTeleportDistTimeMulti.Value;
+                float dist = Vector3.Distance(marker.viewPosition, transform.position) / Mathf.Max(characterBody.moveSpeed, 0.3f) * distMultiplier;
                 float distTime = 0.01f * dist * dist + 1 * dist; //fucking around in desmos
                 float timeTime = timeSpent * timeSpentMultiplier;
                 state.windDownTime = Mathf.Max(distTime, timeTime);
@@ -88,15 +91,15 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private bool GetSprintReleased()
         {
-            if (ChronoConfig.M0TeleportOnRelese.Value || ChronoCompat.AutoSprintInstalled)
+            if (ChronoConfig.M0_SprintTeleport_OnRelease.Value || ChronoCompat.AutoSprintInstalled)
             {
                 PlayerCharacterMasterController playerMaster;
                 if (playerMaster = characterBody.master.playerCharacterMasterController)
                 {
-                    LocalUser localUser;
+                    //LocalUser localUser;
                     Player player;
-                    CameraRigController cameraRigController;
-                    if (PlayerCharacterMasterController.CanSendBodyInput(playerMaster.networkUser, out localUser, out player, out cameraRigController))
+                    //CameraRigController cameraRigController;
+                    if (PlayerCharacterMasterController.CanSendBodyInput(playerMaster.networkUser, out _, out player, out _))
                     {
                         return !player.GetButton(18);
                     }
@@ -118,7 +121,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             if (interactor)
             {
-                interactor.interactableCooldown = 0;
+                interactor.enabled = true;
             }
         }
 

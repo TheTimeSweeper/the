@@ -166,10 +166,10 @@ namespace RA2Mod.Modules
             {
                 description = name;
             }
-
+            description += $"\nDefault: {defaultValue}";
             if (restartRequired)
             {
-                description += " (restart required)";
+                description += "\n(restart required)";
             }
 
             if(!enableAll && SectionDisabled(section))

@@ -6,7 +6,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public abstract class AimChronosphereBase : AimThrowableBase
     {
-        public static float BaseRadius => ChronoConfig.M3Radius.Value;
+        public static float BaseRadius => ChronoConfig.M3_Chronosphere_Radius.Value;
 
         public static string EnterSoundString = "Play_ChronosphereHumStart";
         public static string LoopSoundString = "Play_ChronosphereHumLoop";

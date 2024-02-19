@@ -68,6 +68,7 @@ namespace RA2Mod.Survivors.GI
             UnityEngine.Object.Destroy(minePrefab.GetComponent<Deployable>());
             UnityEngine.Object.Destroy(minePrefab.GetComponent<ApplyTorqueOnStart>());
             minePrefab.GetComponent<ProjectileDamage>().damageType = DamageType.Stun1s;
+            minePrefab.GetComponent<ProjectileStickOnImpact>().ignoreCharacters = false;
 
             EntityStateMachine mainMachine = EntityStateMachine.FindByCustomName(minePrefab, "Main");
             SerializableEntityStateType MainState = new SerializableEntityStateType(typeof(SkillStates.Mine.WaitForStickMutiny));

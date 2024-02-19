@@ -221,11 +221,10 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             //tether
-            Material beamMat = null;
             yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", loadBeamMat);
             IEnumerator loadBeamMat(Material beamMatResult)
             {
-                beamMat = beamMatResult;
+                Material beamMat = beamMatResult;
 
                 yield return assetBundle.LoadAssetAsync<GameObject>("ChronoTether", (result) =>
                 {

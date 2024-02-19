@@ -13,7 +13,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     {
         public static float BaseDuration = 0.65f;
 
-        public static float DamageCoefficient = ChronoConfig.M2Damage.Value;
+        public static float DamageCoefficient = ChronoConfig.M2_Bomb_Damage.Value;
 
         public ChronoTrackerBomb componentFromSkillDef { get; set; }
 

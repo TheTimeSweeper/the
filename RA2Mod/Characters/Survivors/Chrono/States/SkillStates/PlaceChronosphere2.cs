@@ -11,7 +11,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class PlaceChronosphere2 : BaseSkillState
     {
-        public static float teleportDelay => ChronoConfig.M3Delay.Value;
+        public static float teleportDelay => ChronoConfig.M3_Chronosphere_Delay.Value;
 
         public float BaseRadius;
         public Vector3 trajectoryPoint;
@@ -26,7 +26,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public override void OnEnter()
         {
-            base.OnEnter(); 
+            base.OnEnter();
 
             skillLocator.utility.DeductStock(1);
 
@@ -44,6 +44,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                     GatherTeleportees(TeamComponent.GetTeamMembers(teamIndex));
                 }
             }
+
+            MoveTeleportees();
         }
 
         public override void FixedUpdate()
@@ -52,7 +54,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             if (base.fixedAge > teleportDelay && !hasMoved)
             {
                 hasMoved = true;
-                MoveTeleportees();
+
 
                 outer.SetNextState(new WindDownState { windDownTime = 0.5f });
             }
@@ -109,18 +111,25 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                     resultPoint = trajectoryPoint + relativeDistance;
                 }
 
-                if (body.TryGetComponent(out CharacterMotor motor))
-                {
-                    motor.Motor.SetPosition(resultPoint);
-                }
-                else if (body.TryGetComponent(out RigidbodyMotor rbmotor))
-                {
-                    rbmotor.rigid.MovePosition(resultPoint);
-                }
-                else
-                {
-                    body.gameObject.transform.position = resultPoint;
-                }
+                TeleportHelper.TeleportBody(body, resultPoint);
+
+                //TeleportBody(body, resultPoint);
+            }
+        }
+
+        private static void TeleportBody(CharacterBody body, Vector3 resultPoint)
+        {
+            if (body.TryGetComponent(out CharacterMotor motor))
+            {
+                motor.Motor.SetPosition(resultPoint);
+            }
+            else if (body.TryGetComponent(out RigidbodyMotor rbmotor))
+            {
+                rbmotor.rigid.MovePosition(resultPoint);
+            }
+            else
+            {
+                body.gameObject.transform.position = resultPoint;
             }
         }
 
@@ -139,7 +148,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 return;
             if (body.modelLocator.modelTransform.TryGetComponent(out CharacterModel model)){
 
-                model.invisibilityCount += shouldInvis ? 1 : -1;
+                //model.invisibilityCount += shouldInvis ? 1 : -1;
 
                 if (shouldInvis == false)
                 {
@@ -153,10 +162,12 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             base.OnSerialize(writer);
             writer.Write(originalPoint);
             writer.Write(trajectoryPoint);
+
             for (int i = 0; i < teamCharacterBodies.Count; i++)
             {
                 writer.Write(teamCharacterBodies[i].gameObject);
             }
+
         }
 
         public override void OnDeserialize(NetworkReader reader)

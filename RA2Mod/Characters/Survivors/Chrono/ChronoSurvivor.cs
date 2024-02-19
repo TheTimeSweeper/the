@@ -15,6 +15,8 @@ using R2API;
 using RA2Mod.Survivors.Chrono.SkillDefs;
 using UnityEngine.SceneManagement;
 using RA2Mod.General.Components;
+using System.Runtime.CompilerServices;
+using R2API.Utils;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -197,6 +199,47 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             Skills.AddSkillsToFamily(passiveSkill.skillFamily, sprintSkillDef);
+
+            if (Modules.Compat.scepterInstalled)
+            {
+                AddScepterPassiveSkill(sprintSkillDef);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void AddScepterPassiveSkill(SkillDef originalSkillDef)
+        {
+            HasPhaseIndicatorSkillDef sprintSkillDefScepter = Skills.CreateSkillDef<HasPhaseIndicatorSkillDef>(new SkillDefInfo
+            {
+                skillName = "chronoPassiveScepter",
+                skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
+                skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoSprintStateEpic)),
+                activationStateMachineName = "Body",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0.0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 0,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = true,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(sprintSkillDefScepter, bodyName, originalSkillDef);
         }
 
         private void AddPrimarySkills()
@@ -250,6 +293,8 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef);
+
+            Config.ConfigureSkillDef(secondarySkillDef, ChronoConfig.SectionBody, "M2 Bomb");
         }
         
         private void AddUtiitySkills()
@@ -279,6 +324,8 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef);
+
+            Config.ConfigureSkillDef(utilitySkillDef, ChronoConfig.SectionBody, "M3 Chronosphere");
         }
 
         private void AddSpecialSkills()
@@ -305,6 +352,8 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             Skills.AddSpecialSkills(bodyPrefab, vanishSkillDef);
+            
+            Config.ConfigureSkillDef(vanishSkillDef, ChronoConfig.SectionBody, "M4 Vanish");
         }
         #endregion skills
         
@@ -396,10 +445,69 @@ namespace RA2Mod.Survivors.Chrono
         private void AddHooks()
         {
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            IL.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamageIL;
+
+            IL.EntityStates.GenericCharacterDeath.OnEnter += GenericCharacterDeath_OnEnter1;
 
             On.RoR2.CharacterBody.OnBuffFinalStackLost += CharacterBody_OnBuffFinalStackLost;
  
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+        }
+
+        private void GenericCharacterDeath_OnEnter1(ILContext il)
+        {
+            ILCursor cursor = new ILCursor(il);
+            cursor.GotoNext(MoveType.After,
+                //instruction => instruction.MatchLdarg(0),
+                //instruction => instruction.MatchCall<EntityStates.EntityState>("get_characterBody"),
+                //instruction => instruction.MatchCall<UnityEngine.Object>("op_Implicit"),
+                //instruction => instruction.MatchBrfalse(out _),
+                //instruction => instruction.MatchLdarg(0),
+                instruction => instruction.MatchCall<EntityStates.EntityState>("get_isAuthority")
+                );
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.EmitDelegate<Func<bool, EntityStates.GenericCharacterDeath, bool>>((authority, death) =>
+            {
+                if (death.healthComponent && (death.healthComponent.killingDamageType & DamageType.OutOfBounds) > DamageType.Generic)
+                {
+                    authority = false;
+
+                    EffectManager.SimpleEffect(ChronoAssets.vanishEffect, death.transform.position, Quaternion.identity, true);
+                }
+
+                return authority;
+            });
+        }
+
+        private void HealthComponent_TakeDamageIL(ILContext il)
+        {
+            ILCursor cursor = new ILCursor(il);
+            cursor.GotoNext(MoveType.After,
+                instruction => instruction.MatchLdcI4(0x10000),
+                instruction => instruction.MatchOr(),
+                instruction => instruction.MatchStfld<DamageInfo>("damageType"),
+                instruction => instruction.MatchLdloc(8)
+                );
+            cursor.Emit(OpCodes.Ldarg_1);
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.EmitDelegate<Func<bool, DamageInfo, HealthComponent, bool>>((flag5, damageInfo, self) =>
+            {
+                if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
+                {
+                    int count = 0;
+                    if (self.body.inventory)
+                    {
+                        count = self.body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
+                    }
+                    if (self.combinedHealthFraction < count / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2))
+                    {
+                        flag5 = true;
+                        damageInfo.damageType |= DamageType.VoidDeath;
+                        damageInfo.damageType |= DamageType.OutOfBounds;
+                    }
+                }
+                return flag5;
+            });
         }
 
         private void CharacterBody_OnBuffFinalStackLost(On.RoR2.CharacterBody.orig_OnBuffFinalStackLost orig, CharacterBody self, BuffDef buffDef)
@@ -413,6 +521,30 @@ namespace RA2Mod.Survivors.Chrono
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
+            //if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
+            //{
+            //    int count = 0;
+            //    if (self.body.inventory)
+            //    {
+            //        count = self.body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
+            //    }
+            //    if (self.combinedHealthFraction < count / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2))
+            //    {
+            //        EffectManager.SimpleEffect(ChronoAssets.vanishEffect, self.transform.position, Quaternion.identity, true);
+            //        if (self.body.modelLocator && self.body.modelLocator.modelTransform)
+            //        {
+            //            CharacterModel characterModel = self.body.modelLocator.modelTransform.GetComponent<CharacterModel>();
+            //            characterModel.invisibilityCount++;
+            //        }
+            //        self.Suicide(damageInfo.attacker, damageInfo.inflictor);
+            //    }
+            //}
+
+
+            if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamagePierce))
+            {
+                AddChronoSickness(self.body);
+            }
             orig(self, damageInfo);
             if (!damageInfo.rejected)
             {
@@ -425,30 +557,6 @@ namespace RA2Mod.Survivors.Chrono
                 {
                     AddChronoSickness(self.body);
                     AddChronoSickness(self.body);
-                }
-            }
-
-            if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamagePierce))
-            {
-                AddChronoSickness(self.body);
-            }
-
-            if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
-            {
-                int count = 0;
-                if (self.body.inventory)
-                {
-                    count = self.body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
-                }
-                if(self.combinedHealthFraction < count / (ChronoConfig.M4ChronoStacksToVanish.Value * 2))
-                {
-                    EffectManager.SimpleEffect(ChronoAssets.vanishEffect, self.transform.position, Quaternion.identity, true);
-                    if(self.body.modelLocator && self.body.modelLocator.modelTransform)
-                    {
-                        CharacterModel characterModel = self.body.modelLocator.modelTransform.GetComponent<CharacterModel>();
-                        characterModel.invisibilityCount++;
-                    }
-                    self.Suicide(damageInfo.attacker, damageInfo.inflictor);
                 }
             }
         }

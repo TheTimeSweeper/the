@@ -38,7 +38,7 @@ namespace RA2Mod.Survivors.Chrono
 
                 info.enabled = sickness > 0;
                 info.normalizedXMin = 0;
-                info.normalizedXMax = sickness / (ChronoConfig.M4ChronoStacksToVanish.Value * 2);
+                info.normalizedXMax = sickness / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2);
             }
 
             public override void ApplyBar(ref HealthBar.BarInfo info, Image image, HealthComponent source, ref int i)

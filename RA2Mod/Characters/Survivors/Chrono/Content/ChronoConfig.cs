@@ -4,27 +4,27 @@ namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoConfig
     {
-        public static ConfigEntry<float> M0SprintTeleportDistTimeMulti;
-        public static ConfigEntry<float> M0SprintTeleportTimeTimeMulti;
+        public static ConfigEntry<float> M0_SprintTeleport_DistTimeMulti;
+        public static ConfigEntry<float> M0_SprintTeleport_TimeTimeMulti;
         public static ConfigEntry<float> M0CameraLerpTime;
 
-        public static ConfigEntry<bool> M0TeleportOnRelese;
+        public static ConfigEntry<bool> M0_SprintTeleport_OnRelease;
 
-        public static ConfigEntry<float> M1Damage;
-        public static ConfigEntry<float> M1Duration;
-        public static ConfigEntry<float> M1Radius;
+        public static ConfigEntry<float> M1_Shoot_Damage;
+        public static ConfigEntry<float> M1_Shoot_Duration;
+        public static ConfigEntry<float> M1_Shoot_Radius;
         public static ConfigEntry<float> M1Screenshake;
 
-        public static ConfigEntry<float> M2Damage;
+        public static ConfigEntry<float> M2_Bomb_Damage;
 
-        public static ConfigEntry<float> M3Radius;
-        public static ConfigEntry<float> M3Delay;
+        public static ConfigEntry<float> M3_Chronosphere_Radius;
+        public static ConfigEntry<float> M3_Chronosphere_Delay;
         public static ConfigEntry<float> M3ChronosphereCameraLerpTime;
 
-        public static ConfigEntry<float> M4Interval;
-        public static ConfigEntry<float> M4Duration;
-        public static ConfigEntry<float> M4Damage;
-        public static ConfigEntry<float> M4ChronoStacksToVanish;
+        public static ConfigEntry<float> M4_Vanish_TickInterval;
+        public static ConfigEntry<float> M4_Vanish_TickDamage;
+        public static ConfigEntry<float> M4_Vanish_Duration;
+        public static ConfigEntry<float> M4_Vanish_ChronoStacksRequired;
 
         public const string ConfigVersion = " 0.0.0";
         public const string SectionSkills = "1-3. Chrono Skills" + ConfigVersion;
@@ -32,126 +32,124 @@ namespace RA2Mod.Survivors.Chrono
 
         public static void Init()
         {
-            string section = "1-3. Chrono Legionnaire 0.0.0";
+            Config.ConfigureBody(ChronoSurvivor.instance.prefabCharacterBody, SectionBody);
 
-            Config.ConfigureBody(ChronoSurvivor.instance.prefabCharacterBody, section);
-
-            M0TeleportOnRelese = Config.BindAndOptions(
-                section,
-                "M0TeleportOnRelese",
+            M0_SprintTeleport_OnRelease = Config.BindAndOptions(
+                SectionSkills,
+                "M0_SprintTeleport_OnRelease",
                 false,
                 "Should sprinting teleport on release, or should it require a second press of sprint");
 
-            M0SprintTeleportDistTimeMulti = Config.BindAndOptionsSlider(
-                section,
-                "M0SprintBlinkTimeMulti",
+            M0_SprintTeleport_DistTimeMulti = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M0_SprintTeleport_DistTimeMulti",
                 0.169f,
                 0,
                 1,
                 "Phase out penalty multiplier based on distance teleported.");
 
-            M0SprintTeleportTimeTimeMulti = Config.BindAndOptionsSlider(
-                section,
-                "M0SprintblinkTimeTimeMulti",
+            M0_SprintTeleport_TimeTimeMulti = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M0_SprintTeleport_TimeTimeMulti",
                 0.5f,
                 0,
                 1,
                 "Phase out penalty multiplier based on time spent in teleporting state. Only comes into play after 1 second, and only replaces distance penalty if larger (does not add)");
             M0CameraLerpTime = Config.BindAndOptionsSlider(
-                section,
+                SectionSkills,
                 "M0CameraLerpTime",
                 0.5f,
                 0,
                 3,
                 "");
             //
-            M1Damage = Config.BindAndOptionsSlider(
-                section,
-                "M1Damage",
+            M1_Shoot_Damage = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M1_Shoot_Damage",
                 2f,
                 0,
                 10,
                 "");
 
-            M1Duration = Config.BindAndOptionsSlider(
-                section,
-                "M1Duration",
-                0.8f,
+            M1_Shoot_Duration = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M1_Shoot_Duration",
+                0.6f,
                 0,
                 10,
                 "");
-            M1Radius = Config.BindAndOptionsSlider(
-                section,
-                "M1Radius",
+            M1_Shoot_Radius = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M1_Shoot_Radius",
                 6f,
                 0,
                 100,
                 "");
 
             M1Screenshake = Config.BindAndOptionsSlider(
-                section,
+                SectionSkills,
                 "M1Screenshake",
                 0.5f,
                 0,
                 10,
                 "");
             //
-            M2Damage = Config.BindAndOptionsSlider(
-                section,
-                "M2Damage",
+            M2_Bomb_Damage = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M2_Bomb_Damage",
                 5f,
                 0,
                 10,
                 "");
             //
-            M3Radius = Config.BindAndOptionsSlider(
-                section,
-                "M3Radius",
+            M3_Chronosphere_Radius = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M3_Chronosphere_Radius",
                 20f,
                 0,
                 100,
                 "");
-            M3Delay = Config.BindAndOptionsSlider(
-                section,
-                "M3Delay",
-                0.3f,
+            M3_Chronosphere_Delay = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M3_Chronosphere_Delay",
+                0.06f,
                 0,
                 1,
                 "");
             M3ChronosphereCameraLerpTime = Config.BindAndOptionsSlider(
-                section,
+                SectionSkills,
                 "M3ChronosphereCameraLerpTime",
                 0.5f,
                 0,
                 3,
                 "");
             //
-            M4Interval = Config.BindAndOptionsSlider(
-                section,
-                "M4Interval",
+            M4_Vanish_TickInterval = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M4_Vanish_TickInterval",
                 0.3f,
                 0,
                 1,
                 "");
 
-            M4Duration = Config.BindAndOptionsSlider(
-                section,
-                "M4Duration",
+            M4_Vanish_Duration = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M4_Vanish_Duration",
                 3f,
                 0,
                 10,
                 "");
 
-            M4Damage = Config.BindAndOptionsSlider(
-                section,
-                "M4Damage",
+            M4_Vanish_TickDamage = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M4_Vanish_TickDamage",
                 0.8f,
                 0,
                 10,
                 "");
 
-            M4ChronoStacksToVanish = Config.BindAndOptionsSlider(
-                section,
+            M4_Vanish_ChronoStacksRequired = Config.BindAndOptionsSlider(
+                SectionSkills,
                 "chronoStacksToVanish",
                 100f,
                 0,

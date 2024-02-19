@@ -9,10 +9,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class ChronoShoot : BaseSkillState
     {
-        public virtual float damageCoefficient => ChronoConfig.M1Damage.Value;
+        public virtual float damageCoefficient => ChronoConfig.M1_Shoot_Damage.Value;
         public static float procCoefficient = 1f;
-        public virtual float baseDuration => ChronoConfig.M1Duration.Value;
-        public virtual float hitRadius => ChronoConfig.M1Radius.Value;
+        public virtual float baseDuration => ChronoConfig.M1_Shoot_Duration.Value;
+        public virtual float hitRadius => ChronoConfig.M1_Shoot_Radius.Value;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing
         public static float firePercentTime = 0.0f;
         public static float force = 000f;
@@ -96,7 +96,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                         muzzleName = muzzleString,
                         smartCollision = true,
                         procChainMask = default,
-                        radius = 0.75f,
+                        radius = 0.9f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,

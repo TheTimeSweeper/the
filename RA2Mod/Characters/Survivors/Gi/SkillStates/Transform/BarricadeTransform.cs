@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using RoR2;
+using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.GI.SkillStates
 {
@@ -17,7 +18,10 @@ namespace RA2Mod.Survivors.GI.SkillStates
             bodyMachine.mainStateType = new SerializableEntityStateType(typeof(BarricadeMain));
             bodyMachine.SetNextState(new EnterBarricade());
 
-            characterBody.AddBuff(GIBuffs.armorBuff);
+            if (NetworkServer.active)
+            {
+                characterBody.AddBuff(GIBuffs.armorBuff);
+            }
         }
 
         public override void OnExit()
@@ -26,7 +30,10 @@ namespace RA2Mod.Survivors.GI.SkillStates
             bodyMachine.mainStateType = origMain;
             bodyMachine.SetNextStateToMain();
 
-            characterBody.RemoveBuff(GIBuffs.armorBuff);
+            if (NetworkServer.active)
+            {
+                characterBody.RemoveBuff(GIBuffs.armorBuff);
+            }
         }
     }
 }

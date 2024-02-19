@@ -16,7 +16,7 @@ namespace RA2Mod.Survivors.Chrono
             {
                 RA2Plugin.instance.StartCoroutine(AutoSprintCompat());
             }
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.Driver"))
+            if (Modules.Compat.driverInstalled)
             {
                 new DriverCompat().Init();
             }

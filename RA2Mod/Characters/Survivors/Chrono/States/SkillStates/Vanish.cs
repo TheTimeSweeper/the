@@ -10,11 +10,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class Vanish : BaseSkillState, IHasSkillDefComponent<ChronoTrackerVanish>
     {
-        public virtual float damageCoefficient => ChronoConfig.M4Damage.Value;
+        public virtual float damageCoefficient => ChronoConfig.M4_Vanish_TickDamage.Value;
         public static float procCoefficient = 1;
-        public virtual float baseDuration => ChronoConfig.M4Duration.Value;
+        public virtual float baseDuration => ChronoConfig.M4_Vanish_Duration.Value;
         
-        public virtual float baseTickInterval => ChronoConfig.M4Interval.Value;
+        public virtual float baseTickInterval => ChronoConfig.M4_Vanish_TickInterval.Value;
 
         private float duration;
         private float tickInterval;
@@ -34,7 +34,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            duration = baseDuration;
+            duration = baseDuration / attackSpeedStat;
             tickInterval = baseTickInterval / attackSpeedStat;
             StartAimMode(4);
 
