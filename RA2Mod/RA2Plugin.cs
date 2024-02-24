@@ -19,13 +19,13 @@ namespace RA2Mod
     {
         public const string MODUID = "com.thetimesweeper.ra2mod";
         public const string MODNAME = "RA2Mod";
-        public const string MODVERSION = "0.2.2";
+        public const string MODVERSION = "0.3.0";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 
         public static RA2Plugin instance;
 
-        public static bool testAsyncLoading = true;
+        public static bool testAsyncLoading = false;
 
         void Start()
         {

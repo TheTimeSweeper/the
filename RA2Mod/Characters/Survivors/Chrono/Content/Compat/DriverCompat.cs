@@ -32,6 +32,18 @@ namespace RA2Mod.Survivors.Chrono
 
             InitConfig();
 
+            #region compat
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_NAME", "Chrono Gun");
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Makes enemies Vanish from existence.");
+
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME", "Chrono Gun");
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for {Tokens.DamageValueText(DriverCompat.DriverGunM1Damage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} to enemies.");
+            
+            int driverTicks = (int)(DriverCompat.DriverGunM2Duration.Value / DriverCompat.DriverGunM2TickInterval.Value);
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_NAME", "Deconstructing");
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION", $"Focus your rifle for up to {Tokens.DamageValueText(DriverCompat.DriverGunM2Damage.Value * driverTicks)}. An enemy below the {Tokens.UtilityText("Chrono Sickness")} threshold will vanish from existence.");
+            #endregion compat
+
             if (General.GeneralConfig.Debug.Value)
             {
                 On.RoR2.CharacterBody.Update += CharacterBody_Update;

@@ -28,11 +28,16 @@ namespace RA2Mod.Survivors.Chrono
         public static GameObject vanishEffect;
 
         public static ChronosphereProjection chronosphereProjection;
+        public static ChronosphereProjection chronosphereProjectionFreeze;
+        public static Material frozenOverlayMaterial;
 
         public static GameObject endPointivsualizer;
         public static GameObject arcvisualizer;
 
         public static SkillDef cancelSKillDef;
+
+        public static Texture2D testNOISE;
+        public static Texture2D testNOISE2;
 
         //public static List<Texture2D> testTextures = new List<Texture2D>();
 
@@ -40,6 +45,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             Log.CurrentTime("SYNC START");
 
+            testNOISE = assetBundle.LoadAsset<Texture2D>("NOISE");
             //for (int i = 1; i < 21; i++)
             //{
             //    testTextures.Add(assetBundle.LoadAsset<Texture2D>("testTexture " + i));
@@ -59,7 +65,7 @@ namespace RA2Mod.Survivors.Chrono
 
                 baseRechargeInterval = 1f,
                 baseMaxStock = 0,
-
+                 
                 rechargeStock = 0,
                 requiredStock = 1,
                 stockToConsume = 0,
@@ -90,46 +96,54 @@ namespace RA2Mod.Survivors.Chrono
             chronoIndicatorVanish = assetBundle.LoadAsset<GameObject>("IndicatorChronoVanish");
             chronoIndicatorPhase = assetBundle.LoadAsset<GameObject>("IndicatorChronoPhaseCooldown");
 
-            GameObject beamObject = assetBundle.LoadAsset<GameObject>("ChronoTether");
-            Material beamMat = Addressables.LoadAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat").WaitForCompletion();
-            beamMat = new Material(beamMat);
-            Texture2D lightningRamp = assetBundle.LoadAsset<Texture2D>("RoR2/Base/Common/ColorRamps/texRampLightning3.png");
-            beamMat.SetTexture("_RemapTex", lightningRamp);
-            beamObject.GetComponent<LineRenderer>().sharedMaterial = beamMat;
-            chronoVanishTether = beamObject.GetComponent<ChronoTether>();
-
             vanishEffect = assetBundle.LoadAsset<GameObject>("ChronoVanishVFX");
+            Modules.Content.CreateAndAddEffectDef(vanishEffect);
 
             endPointivsualizer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
             arcvisualizer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab").WaitForCompletion();
 
-            GameObject chronosphereProjectionObject = assetBundle.LoadAsset<GameObject>("ChronosphereProjection");
-            chronosphereProjection = chronosphereProjectionObject.GetComponent<ChronosphereProjection>();
-            Material sphereMat = Addressables.LoadAssetAsync<Material>("RoR2/Base/Icicle/matIceAuraSphere.mat").WaitForCompletion();
-            sphereMat.SetFloat("_Boost", 1.85f);
-            sphereMat.SetFloat("_RimPower", 1.36f);
-            sphereMat.SetFloat("_RimStrength", 0.84f);
-            sphereMat.SetFloat("_AlphaBoost", 0.51f);
-            sphereMat.SetFloat("_IntersectionStrength", 12.86f);
-            sphereMat.SetTexture("_Cloud2Tex", Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png").WaitForCompletion());
-            sphereMat.SetTextureScale("_Cloud2Tex", new Vector2(0.01f, 0.01f));
-            sphereMat.SetTextureScale("_Cloud1Tex", new Vector2(0.02f, 0.02f));
-            sphereMat.SetTexture("_RemapTex", lightningRamp);
+            testNOISE2 = assetBundle.LoadAsset<Texture2D>("NOISE2");
 
-            chronosphereProjection.sphereRenderers[0].sharedMaterial = sphereMat;
+            Material beamMat = Addressables.LoadAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat").WaitForCompletion();
+            beamMat = new Material(beamMat);
+
+            chronoVanishTether = assetBundle.LoadAsset<GameObject>("ChronoTether").GetComponent<ChronoTether>();
+            LineRenderer vanishLine = chronoVanishTether.GetComponent<LineRenderer>();
+            vanishLine.sharedMaterial.SetTexture("_NormalTex", beamMat.GetTexture("_NormalTex"));
+            vanishLine.sharedMaterial.SetTexture("_Cloud1Tex", beamMat.GetTexture("_Cloud1Tex"));
+            vanishLine.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
+
+            chronoTracer = assetBundle.LoadAsset<GameObject>("ChronoTracer");
+            LineRenderer tracerLine = chronoTracer.GetComponentInChildren<LineRenderer>();
+            tracerLine.sharedMaterial.SetTexture("_NormalTex", beamMat.GetTexture("_NormalTex"));
+            tracerLine.sharedMaterial.SetTexture("_Cloud1Tex", beamMat.GetTexture("_Cloud1Tex"));
+            tracerLine.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
+            Content.CreateAndAddEffectDef(chronoTracer);
+
+            chronosphereProjection = assetBundle.LoadAsset<GameObject>("ChronosphereProjection").GetComponent<ChronosphereProjection>();
+
+            chronosphereProjectionFreeze = assetBundle.LoadAsset<GameObject>("chronosphereProjectionFreeze").GetComponent<ChronosphereProjection>();
+            chronosphereProjectionFreeze.GetComponentInChildren<SphereCollider>().radius = ChronoConfig.M3_Freezosphere_Radius.Value;
+
+            frozenOverlayMaterial = assetBundle.LoadAsset<Material>("matChronosphereFreezeOverlay");
 
             Log.CurrentTime("SYNC FINISH");
         }
 
         public static IEnumerator InitAsync(AssetBundle assetBundle)
         {
-            Log.CurrentTime("ASYNC START");
+            //Log.CurrentTime("ASYNC START");
 
             //AssetBundleRequest[] loadTextures = new AssetBundleRequest[21];
             //for (int i = 1; i < 21; i++)
             //{
             //    loadTextures[i] = assetBundle.LoadAssetAsync<Texture2D>("testTexture " + i);
             //}
+
+            yield return assetBundle.LoadAssetAsync("NOISE", (Texture2D result) =>
+            {
+                testNOISE = result;
+            });
 
             yield return assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
             {
@@ -220,6 +234,11 @@ namespace RA2Mod.Survivors.Chrono
                 arcvisualizer = result;
             });
 
+            yield return assetBundle.LoadAssetAsync("NOISE2", (Texture2D result) =>
+            {
+                testNOISE2 = result;
+            });
+
             //tether
             yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", loadBeamMat);
             IEnumerator loadBeamMat(Material beamMatResult)
@@ -248,35 +267,215 @@ namespace RA2Mod.Survivors.Chrono
 
             //chronosphere here we go
             yield return assetBundle.LoadAssetAsync<GameObject>("ChronosphereProjection", loadChronoProjection);
-            IEnumerator loadChronoProjection(GameObject chronosphereResult)
+            /*IEnumerator */ void loadChronoProjection(GameObject chronosphereResult)
             {
                 chronosphereProjection = chronosphereResult.GetComponent<ChronosphereProjection>();
 
-                Texture2D lightningCloud = null;
-                yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png", (result) =>
-                {
-                    lightningCloud = result;
-                });
-                Texture2D magmaCloud = null;
-                yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texMagmaCloud.png", (result) =>
-                {
-                    magmaCloud = result;
-                });
+                //Texture2D lightningCloud = null;
+                //yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png", (result) =>
+                //{
+                //    lightningCloud = result;
+                //});
+                //Texture2D magmaCloud = null;
+                //yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texMagmaCloud.png", (result) =>
+                //{
+                //    magmaCloud = result;
+                //});
 
-                for (int i = 0; i < chronosphereProjection.sphereRenderers.Length; i++)
-                {
-                    Renderer rend = chronosphereProjection.sphereRenderers[i];
-                    rend.sharedMaterial.SetTexture("_Cloud1Tex", magmaCloud);
-                    rend.sharedMaterial.SetTexture("_Cloud2Tex", lightningCloud);
-                }
+                //for (int i = 0; i < chronosphereProjection.sphereRenderers.Length; i++)
+                //{
+                //    Renderer rend = chronosphereProjection.sphereRenderers[i];
+                //    rend.sharedMaterial.SetTexture("_Cloud1Tex", magmaCloud);
+                //    rend.sharedMaterial.SetTexture("_Cloud2Tex", lightningCloud);
+                //}
             }
+            //freezosphere
+            yield return assetBundle.LoadAssetAsync<GameObject>("chronosphereProjectionFreeze", loadChronoProjectionFreeze);
+            /*IEnumerator */ void loadChronoProjectionFreeze(GameObject chronosphereResult)
+            {
+                chronosphereProjectionFreeze = chronosphereResult.GetComponent<ChronosphereProjection>();
+                
+                chronosphereProjectionFreeze.GetComponentInChildren<SphereCollider>().radius = ChronoConfig.M3_Freezosphere_Radius.Value;
+                //Texture2D lightningCloud = null;
+                //yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png", (result) =>
+                //{
+                //    lightningCloud = result;
+                //});
+                //Texture2D magmaCloud = null;
+                //yield return Assets.LoadAddressableAssetAsync<Texture2D>("RoR2/Base/Common/texMagmaCloud.png", (result) =>
+                //{
+                //    magmaCloud = result;
+                //});
+
+                //for (int i = 0; i < chronosphereProjection.sphereRenderers.Length; i++)
+                //{
+                //    Renderer rend = chronosphereProjection.sphereRenderers[i];
+                //    rend.sharedMaterial.SetTexture("_Cloud1Tex", magmaCloud);
+                //    rend.sharedMaterial.SetTexture("_Cloud2Tex", lightningCloud);
+                //}
+            }
+            //overlay
+            yield return assetBundle.LoadAssetAsync<Material>("matChronosphereFreezeOverlay", (result) =>
+            {
+                frozenOverlayMaterial = result;
+            });
 
             //foreach (var request in loadTextures)
             //{
             //    yield return request;
             //}
 
-            Log.CurrentTime("ASYNC FINISH");
+            //Log.CurrentTime("ASYNC FINISH");
+        }
+
+        public static List<IEnumerator> InitAsync2(AssetBundle assetBundle)
+        {
+            List<IEnumerator> loads = new List<IEnumerator>();
+
+            loads.Add(assetBundle.LoadAssetAsync("NOISE", (Texture2D result) =>
+            {
+                testNOISE = result;
+            }));
+
+            loads.Add(assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
+            {
+                cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+                {
+                    skillName = "chronoCancel",
+                    skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "CANCEL_NAME",
+                    skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "CANCEL_DESC",
+                    keywordTokens = new string[] { "KEYWORD_AGILE" },
+                    skillIcon = result,
+
+                    activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Idle)),
+                    activationStateMachineName = "Weapon",
+                    interruptPriority = EntityStates.InterruptPriority.Any,
+
+                    baseRechargeInterval = 1f,
+                    baseMaxStock = 0,
+
+                    rechargeStock = 0,
+                    requiredStock = 1,
+                    stockToConsume = 0,
+
+                    resetCooldownTimerOnUse = false,
+                    fullRestockOnAssign = true,
+                    dontAllowPastMaxStocks = false,
+                    mustKeyPress = true,
+                    beginSkillCooldownOnSkillEnd = false,
+
+                    isCombatSkill = false,
+                    canceledFromSprinting = false,
+                    cancelSprintingOnActivation = false,
+                    forceSprintDuringState = false,
+                });
+            }));
+
+            //projection
+            loads.Add(assetBundle.LoadAssetAsync("ChronoProjection", (GameObject result) =>
+            {
+                markerPrefab = result.GetComponent<ChronoProjectionMotor>();
+                R2API.PrefabAPI.RegisterNetworkPrefab(markerPrefab.gameObject);
+            }));
+
+            //ivan bomb
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronoIvanBombProjectile", subLoadIvanBomb));
+            void subLoadIvanBomb(GameObject ivanResult)
+            {
+                chronoBombProjectile = ivanResult;
+                R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
+                Content.AddProjectilePrefab(chronoBombProjectile);
+
+                loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
+                {
+
+                    chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = result;
+                }));
+                loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
+                {
+                    lunarSunExplosion = result;
+                    chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
+                }));
+            }
+
+            //indicators
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoIvan", (result) =>
+            {
+                chronoIndicatorIvan = result;
+            }));
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoVanish", (result) =>
+            {
+                chronoIndicatorVanish = result;
+            }));
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoPhaseCooldown", (result) =>
+            {
+                chronoIndicatorPhase = result;
+            }));
+            //vanish vfx
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronoVanishVFX", (result) =>
+            {
+                vanishEffect = result;
+                Modules.Content.CreateAndAddEffectDef(vanishEffect);
+            }));
+            //visualizers
+            loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
+            {
+                endPointivsualizer = result;
+            }));
+            loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
+            {
+                arcvisualizer = result;
+            }));
+
+            loads.Add(assetBundle.LoadAssetAsync("NOISE2", (Texture2D result) =>
+            {
+                testNOISE2 = result;
+            }));
+            //tether
+            loads.Add(Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", loadBeamMat));
+            void loadBeamMat(Material beamMatResult)
+            {
+                Material beamMat = beamMatResult;
+
+                loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronoTether", (result) =>
+                {
+                    chronoVanishTether = result.GetComponent<ChronoTether>();
+                    LineRenderer line = chronoVanishTether.GetComponent<LineRenderer>();
+                    line.sharedMaterial.SetTexture("_NormalTex", beamMat.GetTexture("_NormalTex"));
+                    line.sharedMaterial.SetTexture("_Cloud1Tex", beamMat.GetTexture("_Cloud1Tex"));
+                    line.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
+                }));
+
+                loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronoTracer", (result) =>
+                {
+                    chronoTracer = result;
+                    LineRenderer line = chronoTracer.GetComponentInChildren<LineRenderer>();
+                    line.sharedMaterial.SetTexture("_NormalTex", beamMat.GetTexture("_NormalTex"));
+                    line.sharedMaterial.SetTexture("_Cloud1Tex", beamMat.GetTexture("_Cloud1Tex"));
+                    line.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
+                    Content.CreateAndAddEffectDef(chronoTracer);
+                }));
+            }
+
+            //chronospheres here we go
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronosphereProjection", (result) =>
+            {
+                chronosphereProjection = result.GetComponent<ChronosphereProjection>();
+            }));
+            loads.Add(assetBundle.LoadAssetAsync<GameObject>("chronosphereProjectionFreeze", (result) =>
+            {
+                chronosphereProjectionFreeze = result.GetComponent<ChronosphereProjection>();
+
+                chronosphereProjectionFreeze.GetComponentInChildren<SphereCollider>().radius = ChronoConfig.M3_Freezosphere_Radius.Value;
+            }));
+
+            //overlay
+            loads.Add(assetBundle.LoadAssetAsync<Material>("matChronosphereFreezeOverlay", (result) =>
+            {
+                frozenOverlayMaterial = result;
+            }));
+
+            return loads;
         }
     }
 }

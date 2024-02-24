@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Cloud1Tex:
-        m_Texture: {fileID: 2800000, guid: 6a4385cf472a4f84fb6625f430070676, type: 3}
+        m_Texture: {fileID: 2800000, guid: 537bab35cb1530647bb2d501e214d01a, type: 3}
         m_Scale: {x: 0.02, y: 0.02}
         m_Offset: {x: 0, y: 0}
     - _Cloud2Tex:
-        m_Texture: {fileID: 2800000, guid: 3199c3eae19ba5e4f989143debe32dc2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3b5670fd4ead3e14098ff94e453d4818, type: 3}
         m_Scale: {x: 0.01, y: 0.01}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

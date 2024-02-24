@@ -11,14 +11,14 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
     public class AimChronosphere2 : AimChronosphereBase
     {
         public Vector3 originalPoint;
+        public CameraTargetParams.CameraParamsOverrideHandle cameraOverride;
+        public Transform origOrigin;
         
         private ChronosphereProjection chronosphereProjection;
 
         private float sqrRadius;
 
         public List<CharacterBody> teleporteeBodies = new List<CharacterBody>();
-        public CameraTargetParams.CameraParamsOverrideHandle cameraOverride;
-        public Transform origOrigin;
 
         public override void OnEnter()
         {

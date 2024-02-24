@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: matChronosphere2
+  m_Name: matChronosphereFreeze2
   m_Shader: {fileID: 4800000, guid: ee1b3d7c668ffb342b9a23c284a35709, type: 3}
   m_ShaderKeywords: TRIPLANAR USE_CLOUDS _EMISSION
   m_LightmapFlags: 4
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 0.2}
         m_Offset: {x: 0, y: -0.64}
     - _RemapTex:
-        m_Texture: {fileID: 2800000, guid: c0ebe92308684484cb5d2b93722f89d9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 819f09bc27a7acd4c8e0489dfeaa37ab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

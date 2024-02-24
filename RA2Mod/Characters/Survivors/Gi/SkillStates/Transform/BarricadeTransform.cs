@@ -16,7 +16,16 @@ namespace RA2Mod.Survivors.GI.SkillStates
             bodyMachine = EntityStateMachine.FindByCustomName(gameObject, "Body");
             origMain = bodyMachine.mainStateType;
             bodyMachine.mainStateType = new SerializableEntityStateType(typeof(BarricadeMain));
-            bodyMachine.SetNextState(new EnterBarricade());
+
+            EntityState state;
+            if(mainUpgrade != null)
+            {
+                state = EntityStateCatalog.InstantiateState(mainUpgrade.enterBarricadeState);
+            } else
+            {
+                state = new EnterBarricade();
+            }
+            bodyMachine.SetNextState(state);
 
             if (NetworkServer.active)
             {

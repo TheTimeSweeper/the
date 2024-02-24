@@ -7,8 +7,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 {
     public class AimChronosphere1 : AimChronosphereBase
     {
-        private CameraTargetParams.CameraParamsOverrideHandle cameraOverride;
-        private Transform origOrigin;
+        protected CameraTargetParams.CameraParamsOverrideHandle cameraOverride;
+        protected Transform origOrigin;
 
         protected override EntityState ActuallyPickNextState(Vector3 point)
         {

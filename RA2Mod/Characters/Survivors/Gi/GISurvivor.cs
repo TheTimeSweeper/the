@@ -138,6 +138,7 @@ namespace RA2Mod.Survivors.GI
                     false
                 ));
             primarySkillDef1.crosshairOverride = assetBundle.LoadAsset<GameObject>("GICrosshairHMG");
+            primarySkillDef1.enterBarricadeState = new SerializableEntityStateType(typeof(EnterBarricade));
             primarySkillDef1.upgradedSkillDef = Skills.CreateSkillDef<GILimitedUseSkillDef>(new SkillDefInfo
             {
                 skillName = "GIGun1Heavy",
@@ -181,6 +182,7 @@ namespace RA2Mod.Survivors.GI
                     false
                 ));
             primarySkillDef2.crosshairOverride = assetBundle.LoadAsset<GameObject>("GICrosshairMissile");
+            primarySkillDef2.enterBarricadeState = new SerializableEntityStateType(typeof(EnterBarricadeMissile));
             primarySkillDef2.upgradedSkillDef = Skills.CreateSkillDef<GIMissileTrackerLimitedUseSkillDef>(new SkillDefInfo
             {
                 skillName = "GIRocketHeavy",
@@ -378,10 +380,10 @@ namespace RA2Mod.Survivors.GI
                 activationStateMachineName = "Transform",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
-                baseMaxStock = 1,
+                baseMaxStock = 0,
                 baseRechargeInterval = 0f,
 
-                rechargeStock = 1,
+                rechargeStock = 0,
                 requiredStock = 0,
                 stockToConsume = 0,
                 

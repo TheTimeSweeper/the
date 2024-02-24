@@ -1,4 +1,5 @@
-﻿using RoR2.Skills;
+﻿using EntityStates;
+using RoR2.Skills;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.GI.SkillDefs
@@ -7,5 +8,7 @@ namespace RA2Mod.Survivors.GI.SkillDefs
     {
         public SkillDef upgradedSkillDef;
         public GameObject crosshairOverride;
+        public SerializableEntityStateType enterBarricadeState;
+        //public SerializableEntityStateType exitBarricadeState;
     }
 }

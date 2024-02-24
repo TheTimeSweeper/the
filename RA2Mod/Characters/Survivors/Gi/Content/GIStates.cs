@@ -20,6 +20,7 @@ namespace RA2Mod.Survivors.GI
             Modules.Content.AddEntityState(typeof(BarricadeMain));
             Modules.Content.AddEntityState(typeof(BarricadeTransform));
             Modules.Content.AddEntityState(typeof(EnterBarricade));
+            Modules.Content.AddEntityState(typeof(EnterBarricadeMissile));
             Modules.Content.AddEntityState(typeof(UnBarricade));
 
             Modules.Content.AddEntityState(typeof(LiterallyCommandoSlide));

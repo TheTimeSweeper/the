@@ -305,7 +305,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillName = "chronosphere",
                 skillNameToken = CHRONO_PREFIX + "UTILITY_CHRONOSPHERE_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "UTILITY_CHRONOSPHERE_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoUtility"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimChronosphere1)),
                 activationStateMachineName = "Weapon",
@@ -323,7 +323,30 @@ namespace RA2Mod.Survivors.Chrono
                 fullRestockOnAssign = false
             });
 
-            Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef);
+            SkillDef utilitySkillDef2 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "freezosphere",
+                skillNameToken = CHRONO_PREFIX + "UTILITY_FREEZOSPHERE_NAME",
+                skillDescriptionToken = CHRONO_PREFIX + "UTILITY_FREEZOSPHERE_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoUtilityAlt"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AimFreezoSphere)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseMaxStock = 1,
+                baseRechargeInterval = 16f,
+                stockToConsume = 0,
+                requiredStock = 1,
+                
+                isCombatSkill = false,
+                mustKeyPress = true,
+                forceSprintDuringState = false,
+                cancelSprintingOnActivation = true,
+                fullRestockOnAssign = false
+            });
+
+            Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef, utilitySkillDef2);
 
             Config.ConfigureSkillDef(utilitySkillDef, ChronoConfig.SectionBody, "M3 Chronosphere");
         }

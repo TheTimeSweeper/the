@@ -53,10 +53,24 @@ namespace RA2Mod.Modules
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAndSetAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
+        {
+            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            while (!request.isDone)
+            {
+                yield return null;
+            }
+            OnComplete(request.asset as T);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
-            yield return request;
+            while (!request.isDone)
+            {
+                yield return null;
+            }
             OnComplete(request.asset as T);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -71,14 +85,14 @@ namespace RA2Mod.Modules
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            if (!loadAsset.IsDone) { yield return loadAsset; }
+            while (!loadAsset.IsDone) { yield return null; }
             OnComplete(loadAsset.Result);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            if (!loadAsset.IsDone) { yield return loadAsset; }
+            while (!loadAsset.IsDone) { yield return null; }
             yield return OnComplete(loadAsset.Result);
         }
         //credit to groove salad with ivyl

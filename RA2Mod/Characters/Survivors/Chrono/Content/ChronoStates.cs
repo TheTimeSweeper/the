@@ -19,6 +19,9 @@ namespace RA2Mod.Survivors.Chrono
             Modules.Content.AddEntityState(typeof(AimChronosphere2));
             Modules.Content.AddEntityState(typeof(PlaceChronosphere2));
 
+            Modules.Content.AddEntityState(typeof(AimFreezoSphere));
+            Modules.Content.AddEntityState(typeof(PlaceFreezoSphere));
+
             Modules.Content.AddEntityState(typeof(Vanish));
         }
     }

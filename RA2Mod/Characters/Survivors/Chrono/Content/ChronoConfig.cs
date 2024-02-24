@@ -21,6 +21,10 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> M3_Chronosphere_Delay;
         public static ConfigEntry<float> M3ChronosphereCameraLerpTime;
 
+        public static ConfigEntry<float> M3_Freezosphere_Radius;
+        public static ConfigEntry<float> M3_Freezosphere_FreezeDuration;
+        public static ConfigEntry<float> M3_Freezosphere_CastDuration;
+
         public static ConfigEntry<float> M4_Vanish_TickInterval;
         public static ConfigEntry<float> M4_Vanish_TickDamage;
         public static ConfigEntry<float> M4_Vanish_Duration;
@@ -123,6 +127,31 @@ namespace RA2Mod.Survivors.Chrono
                 0,
                 3,
                 "");
+            //
+            M3_Freezosphere_Radius = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M3_Freezosphere_Radius",
+                30f,
+                0,
+                100,
+                "projectile freeze radius requires restart");
+
+            M3_Freezosphere_FreezeDuration = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M3_Freezosphere_FreezeDuration",
+                5f,
+                0,
+                20,
+                "visuals require restart");
+
+            M3_Freezosphere_CastDuration = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M3_Freezosphere_CastDuration",
+                0.6f,
+                0,
+                20,
+                "");
+
             //
             M4_Vanish_TickInterval = Config.BindAndOptionsSlider(
                 SectionSkills,

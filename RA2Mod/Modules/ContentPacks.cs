@@ -49,7 +49,18 @@ namespace RA2Mod.Modules {
 
             if (RA2Plugin.testAsyncLoading)
             {
-                yield return Survivors.Chrono.ChronoAssets.InitAsync(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+                //Log.CurrentTime("ASYNC START");
+                //yield return Survivors.Chrono.ChronoAssets.InitAsync(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+                //Log.CurrentTime("ASYNC FINISH");
+
+                Log.CurrentTime("ASYNC2 START");
+                List<System.Collections.IEnumerator> enumerators = Survivors.Chrono.ChronoAssets.InitAsync2(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+
+                for (int i = 0; i < enumerators.Count; i++)
+                {
+                    while (enumerators[i].MoveNext()) { yield return null; }
+                }
+                Log.CurrentTime("ASYNC2 FINISH");
             }
 
             contentPack.bodyPrefabs.Add(bodyPrefabs.ToArray());

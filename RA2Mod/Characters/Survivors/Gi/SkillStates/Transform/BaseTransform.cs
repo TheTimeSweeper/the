@@ -9,6 +9,8 @@ namespace RA2Mod.Survivors.GI.SkillStates
     public class BaseTransform : BaseSkillState
     {
         private CrosshairUtils.OverrideRequest crosshairRequest = null;
+        protected UpgradableSkillDef mainUpgrade;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -31,21 +33,22 @@ namespace RA2Mod.Survivors.GI.SkillStates
 
         private void TryUpgradeSkill(GenericSkill genericSkill, bool setOverride)
         {
-            UpgradableSkillDef def = genericSkill.baseSkill as UpgradableSkillDef;
-            if (def)
+            UpgradableSkillDef skillDef = genericSkill.baseSkill as UpgradableSkillDef;
+            if (skillDef)
             {
                 if (setOverride)
                 {
-                    genericSkill.SetSkillOverride(this, def.upgradedSkillDef, GenericSkill.SkillOverridePriority.Upgrade);
+                    genericSkill.SetSkillOverride(this, skillDef.upgradedSkillDef, GenericSkill.SkillOverridePriority.Upgrade);
 
-                    if (def.crosshairOverride != null)
+                    if (skillDef.crosshairOverride != null)
                     {
-                        crosshairRequest = CrosshairUtils.RequestOverrideForBody(characterBody, def.crosshairOverride, CrosshairUtils.OverridePriority.Skill);
+                        mainUpgrade = skillDef;
+                        crosshairRequest = CrosshairUtils.RequestOverrideForBody(characterBody, skillDef.crosshairOverride, CrosshairUtils.OverridePriority.Skill);
                     }
                 }
                 else
                 {
-                    genericSkill.UnsetSkillOverride(this, def.upgradedSkillDef, GenericSkill.SkillOverridePriority.Upgrade);
+                    genericSkill.UnsetSkillOverride(this, skillDef.upgradedSkillDef, GenericSkill.SkillOverridePriority.Upgrade);
 
                     if (crosshairRequest != null)
                     {
