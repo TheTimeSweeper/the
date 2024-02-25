@@ -25,7 +25,7 @@ namespace RA2Mod
 
         public static RA2Plugin instance;
 
-        public static bool testAsyncLoading = false;
+        public static int testAsyncLoading = 0;
 
         void Start()
         {
@@ -38,7 +38,8 @@ namespace RA2Mod
 
             Log.Init(Logger);
             GeneralConfig.Init();
-            Log.CurrentTime("START " + (testAsyncLoading ? "async" : "sync"));
+        
+            Log.CurrentTime("START " + (testAsyncLoading == 0? "sync" : "async" + testAsyncLoading));
 
             Modules.Language.Init();
 

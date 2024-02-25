@@ -102,7 +102,7 @@ namespace RA2Mod.Survivors.Chrono
             Log.CurrentTime("SURVIVOR INIT 3");
             ChronoHealthBars.Init();
             ChronoDamageTypes.Init();
-            if (!RA2Plugin.testAsyncLoading)
+            if (RA2Plugin.testAsyncLoading == 0)
             {
                 ChronoAssets.Init(assetBundle);
             }

@@ -53,17 +53,6 @@ namespace RA2Mod.Modules
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAndSetAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
-        {
-            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
-            while (!request.isDone)
-            {
-                yield return null;
-            }
-            OnComplete(request.asset as T);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
@@ -74,27 +63,43 @@ namespace RA2Mod.Modules
             OnComplete(request.asset as T);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
-        {
-            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
-            yield return request;
-            yield return OnComplete(request.asset as T);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
             while (!loadAsset.IsDone) { yield return null; }
             OnComplete(loadAsset.Result);
         }
+
+        //testing yielding chains of coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
+        internal static IEnumerator LoadAssetAsyncYielding<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
+        {
+            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            yield return request;
+            OnComplete(request.asset as T);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAssetAsyncYielding<T>(this AssetBundle assetBundle, string name, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
+        {
+            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            yield return request;
+            yield return OnComplete(request.asset as T);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAddressableAssetAsyncYielding<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            while (!loadAsset.IsDone) { yield return null; }
+            yield return loadAsset;
+            OnComplete(loadAsset.Result);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAddressableAssetAsyncYielding<T>(object key, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
+        {
+            AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
+            yield return loadAsset;
             yield return OnComplete(loadAsset.Result);
         }
+
         //credit to groove salad with ivyl
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static AsyncOperationHandle LoadAddressableAssetAsync<TObject>(object key, out AsyncOperationHandle<TObject> handle)

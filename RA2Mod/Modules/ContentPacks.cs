@@ -47,20 +47,46 @@ namespace RA2Mod.Modules {
         {
             this.contentPack.identifier = this.identifier;
 
-            if (RA2Plugin.testAsyncLoading)
+            if (RA2Plugin.testAsyncLoading == 1)
             {
-                //Log.CurrentTime("ASYNC START");
-                //yield return Survivors.Chrono.ChronoAssets.InitAsync(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
-                //Log.CurrentTime("ASYNC FINISH");
+                Log.CurrentTime("ASYNC START");
 
+                yield return Survivors.Chrono.ChronoAssets.InitAsync(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+
+                Log.CurrentTime("ASYNC FINISH");
+            }
+            if (RA2Plugin.testAsyncLoading == 2)
+            {
                 Log.CurrentTime("ASYNC2 START");
+
                 List<System.Collections.IEnumerator> enumerators = Survivors.Chrono.ChronoAssets.InitAsync2(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
 
                 for (int i = 0; i < enumerators.Count; i++)
                 {
-                    while (enumerators[i].MoveNext()) { yield return null; }
+                    while (enumerators[i].MoveNext()) yield return null;
                 }
+
                 Log.CurrentTime("ASYNC2 FINISH");
+            }
+            if (RA2Plugin.testAsyncLoading == 3)
+            {
+                Log.CurrentTime("ASYNC3 START");
+
+                List<System.Collections.IEnumerator> enumerators = Survivors.Chrono.ChronoAssets.InitAsync2(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+                
+                bool inComplete = true;
+                while (inComplete)
+                {
+                    inComplete = false;
+                    for (int i = 0; i < enumerators.Count; i++)
+                    {
+                        bool incompleted = enumerators[i].MoveNext();
+                        inComplete |= incompleted;
+                    }
+                    if (inComplete) yield return null;
+                }
+
+                Log.CurrentTime("ASYNC3 FINISH");
             }
 
             contentPack.bodyPrefabs.Add(bodyPrefabs.ToArray());

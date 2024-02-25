@@ -10,6 +10,7 @@ using RoR2.Skills;
 using System.Collections;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
+using R2API;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -36,8 +37,8 @@ namespace RA2Mod.Survivors.Chrono
 
         public static SkillDef cancelSKillDef;
 
-        public static Texture2D testNOISE;
-        public static Texture2D testNOISE2;
+        public static List<Texture2D> testTextures = new List<Texture2D>();
+        public static int noises = 4;
 
         //public static List<Texture2D> testTextures = new List<Texture2D>();
 
@@ -45,11 +46,10 @@ namespace RA2Mod.Survivors.Chrono
         {
             Log.CurrentTime("SYNC START");
 
-            testNOISE = assetBundle.LoadAsset<Texture2D>("NOISE");
-            //for (int i = 1; i < 21; i++)
-            //{
-            //    testTextures.Add(assetBundle.LoadAsset<Texture2D>("testTexture " + i));
-            //}
+            for (int i = 1; i <= noises; i++)
+            {
+                testTextures.Add(assetBundle.LoadAsset<Texture2D>("NOISE" + i));
+            }
 
             cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -102,8 +102,6 @@ namespace RA2Mod.Survivors.Chrono
             endPointivsualizer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
             arcvisualizer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab").WaitForCompletion();
 
-            testNOISE2 = assetBundle.LoadAsset<Texture2D>("NOISE2");
-
             Material beamMat = Addressables.LoadAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat").WaitForCompletion();
             beamMat = new Material(beamMat);
 
@@ -132,20 +130,15 @@ namespace RA2Mod.Survivors.Chrono
 
         public static IEnumerator InitAsync(AssetBundle assetBundle)
         {
-            //Log.CurrentTime("ASYNC START");
-
-            //AssetBundleRequest[] loadTextures = new AssetBundleRequest[21];
-            //for (int i = 1; i < 21; i++)
-            //{
-            //    loadTextures[i] = assetBundle.LoadAssetAsync<Texture2D>("testTexture " + i);
-            //}
-
-            yield return assetBundle.LoadAssetAsync("NOISE", (Texture2D result) =>
+            for (int i = 1; i <= noises; i++)
             {
-                testNOISE = result;
-            });
+                yield return assetBundle.LoadAssetAsyncYielding("NOISE" + i, (Texture2D result) =>
+                {
+                    testTextures.Add(result);
+                });
+            }
 
-            yield return assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
+            yield return assetBundle.LoadAssetAsyncYielding("texIconChronoCancel", (Sprite result) =>
             {
                 cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
                 {
@@ -180,25 +173,25 @@ namespace RA2Mod.Survivors.Chrono
             });
 
             //projection
-            yield return assetBundle.LoadAssetAsync("ChronoProjection", (GameObject result) =>
+            yield return assetBundle.LoadAssetAsyncYielding("ChronoProjection", (GameObject result) =>
             {
                 markerPrefab = result.GetComponent<ChronoProjectionMotor>();
                 R2API.PrefabAPI.RegisterNetworkPrefab(markerPrefab.gameObject);
             });
 
             //ivan bomb
-            yield return assetBundle.LoadAssetAsync<GameObject>("ChronoIvanBombProjectile", subLoadIvanBomb);
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("ChronoIvanBombProjectile", subLoadIvanBomb);
             IEnumerator subLoadIvanBomb(GameObject ivanResult)
             {
                 chronoBombProjectile = ivanResult;
                 R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
                 Content.AddProjectilePrefab(chronoBombProjectile);
 
-                yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
+                yield return Assets.LoadAddressableAssetAsyncYielding<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
                 {
                     chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = result;
                 });
-                yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
+                yield return Assets.LoadAddressableAssetAsyncYielding<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
                 {
                     lunarSunExplosion = result;
                     chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
@@ -206,46 +199,41 @@ namespace RA2Mod.Survivors.Chrono
             }
 
             //indicators
-            yield return assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoIvan", (result) =>
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("IndicatorChronoIvan", (result) =>
             {
                 chronoIndicatorIvan = result;
             });
-            yield return assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoVanish", (result) =>
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("IndicatorChronoVanish", (result) =>
             {
                 chronoIndicatorVanish = result;
             });
-            yield return assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoPhaseCooldown", (result) =>
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("IndicatorChronoPhaseCooldown", (result) =>
             {
                 chronoIndicatorPhase = result;
             });
             //vanish vfx
-            yield return assetBundle.LoadAssetAsync<GameObject>("ChronoVanishVFX", (result) =>
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("ChronoVanishVFX", (result) =>
             {
                 vanishEffect = result;
                 Modules.Content.CreateAndAddEffectDef(vanishEffect);
             });
             //visualizers
-            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
+            yield return Assets.LoadAddressableAssetAsyncYielding<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
             {
                 endPointivsualizer = result;
             });
-            yield return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
+            yield return Assets.LoadAddressableAssetAsyncYielding<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
             {
                 arcvisualizer = result;
             });
 
-            yield return assetBundle.LoadAssetAsync("NOISE2", (Texture2D result) =>
-            {
-                testNOISE2 = result;
-            });
-
             //tether
-            yield return Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", loadBeamMat);
+            yield return Assets.LoadAddressableAssetAsyncYielding<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", loadBeamMat);
             IEnumerator loadBeamMat(Material beamMatResult)
             {
                 Material beamMat = beamMatResult;
 
-                yield return assetBundle.LoadAssetAsync<GameObject>("ChronoTether", (result) =>
+                yield return assetBundle.LoadAssetAsyncYielding<GameObject>("ChronoTether", (result) =>
                 {
                     chronoVanishTether = result.GetComponent<ChronoTether>();
                     LineRenderer line = chronoVanishTether.GetComponent<LineRenderer>();
@@ -254,7 +242,7 @@ namespace RA2Mod.Survivors.Chrono
                     line.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
                 });
 
-                yield return assetBundle.LoadAssetAsync<GameObject>("ChronoTracer", (result) =>
+                yield return assetBundle.LoadAssetAsyncYielding<GameObject>("ChronoTracer", (result) =>
                 {
                     chronoTracer = result;
                     LineRenderer line = chronoTracer.GetComponentInChildren<LineRenderer>();
@@ -266,7 +254,7 @@ namespace RA2Mod.Survivors.Chrono
             }
 
             //chronosphere here we go
-            yield return assetBundle.LoadAssetAsync<GameObject>("ChronosphereProjection", loadChronoProjection);
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("ChronosphereProjection", loadChronoProjection);
             /*IEnumerator */ void loadChronoProjection(GameObject chronosphereResult)
             {
                 chronosphereProjection = chronosphereResult.GetComponent<ChronosphereProjection>();
@@ -290,7 +278,7 @@ namespace RA2Mod.Survivors.Chrono
                 //}
             }
             //freezosphere
-            yield return assetBundle.LoadAssetAsync<GameObject>("chronosphereProjectionFreeze", loadChronoProjectionFreeze);
+            yield return assetBundle.LoadAssetAsyncYielding<GameObject>("chronosphereProjectionFreeze", loadChronoProjectionFreeze);
             /*IEnumerator */ void loadChronoProjectionFreeze(GameObject chronosphereResult)
             {
                 chronosphereProjectionFreeze = chronosphereResult.GetComponent<ChronosphereProjection>();
@@ -315,27 +303,22 @@ namespace RA2Mod.Survivors.Chrono
                 //}
             }
             //overlay
-            yield return assetBundle.LoadAssetAsync<Material>("matChronosphereFreezeOverlay", (result) =>
+            yield return assetBundle.LoadAssetAsyncYielding<Material>("matChronosphereFreezeOverlay", (result) =>
             {
                 frozenOverlayMaterial = result;
             });
-
-            //foreach (var request in loadTextures)
-            //{
-            //    yield return request;
-            //}
-
-            //Log.CurrentTime("ASYNC FINISH");
         }
 
         public static List<IEnumerator> InitAsync2(AssetBundle assetBundle)
         {
             List<IEnumerator> loads = new List<IEnumerator>();
-
-            loads.Add(assetBundle.LoadAssetAsync("NOISE", (Texture2D result) =>
+            for (int i = 1; i <= noises; i++)
             {
-                testNOISE = result;
-            }));
+                loads.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
+                {
+                    testTextures.Add(result);
+                }));
+            }
 
             loads.Add(assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
             {
@@ -379,8 +362,7 @@ namespace RA2Mod.Survivors.Chrono
             }));
 
             //ivan bomb
-            loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronoIvanBombProjectile", subLoadIvanBomb));
-            void subLoadIvanBomb(GameObject ivanResult)
+            loads.Add(assetBundle.LoadAssetAsync("ChronoIvanBombProjectile", (GameObject ivanResult) =>
             {
                 chronoBombProjectile = ivanResult;
                 R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
@@ -388,7 +370,6 @@ namespace RA2Mod.Survivors.Chrono
 
                 loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
                 {
-
                     chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = result;
                 }));
                 loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
@@ -396,7 +377,7 @@ namespace RA2Mod.Survivors.Chrono
                     lunarSunExplosion = result;
                     chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
                 }));
-            }
+            }));
 
             //indicators
             loads.Add(assetBundle.LoadAssetAsync<GameObject>("IndicatorChronoIvan", (result) =>
@@ -426,14 +407,8 @@ namespace RA2Mod.Survivors.Chrono
             {
                 arcvisualizer = result;
             }));
-
-            loads.Add(assetBundle.LoadAssetAsync("NOISE2", (Texture2D result) =>
-            {
-                testNOISE2 = result;
-            }));
             //tether
-            loads.Add(Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", loadBeamMat));
-            void loadBeamMat(Material beamMatResult)
+            loads.Add(Assets.LoadAddressableAssetAsync<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", (Material beamMatResult) =>
             {
                 Material beamMat = beamMatResult;
 
@@ -455,7 +430,7 @@ namespace RA2Mod.Survivors.Chrono
                     line.sharedMaterial.SetTexture("_Cloud2Tex", beamMat.GetTexture("_Cloud2Tex"));
                     Content.CreateAndAddEffectDef(chronoTracer);
                 }));
-            }
+            }));
 
             //chronospheres here we go
             loads.Add(assetBundle.LoadAssetAsync<GameObject>("ChronosphereProjection", (result) =>
@@ -465,7 +440,6 @@ namespace RA2Mod.Survivors.Chrono
             loads.Add(assetBundle.LoadAssetAsync<GameObject>("chronosphereProjectionFreeze", (result) =>
             {
                 chronosphereProjectionFreeze = result.GetComponent<ChronosphereProjection>();
-
                 chronosphereProjectionFreeze.GetComponentInChildren<SphereCollider>().radius = ChronoConfig.M3_Freezosphere_Radius.Value;
             }));
 
