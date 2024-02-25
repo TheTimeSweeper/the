@@ -80,8 +80,7 @@ namespace RA2Mod.Modules {
                     inComplete = false;
                     for (int i = 0; i < enumerators.Count; i++)
                     {
-                        bool incompleted = enumerators[i].MoveNext();
-                        inComplete |= incompleted;
+                        inComplete |= enumerators[i].MoveNext();
                     }
                     if (inComplete) yield return null;
                 }
