@@ -27,10 +27,13 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public PhaseIndicatorController componentFromSkillDef { get; set; }
 
         private InteractionDriver interactor;
+        private bool hasInputBank;
 
         public override void OnEnter()
         {
             base.OnEnter();
+
+            hasInputBank = inputBank != null;
 
             marker = Object.Instantiate(ChronoAssets.markerPrefab, modelLocator.modelBaseTransform.position, transform.rotation, null);
 
@@ -57,18 +60,17 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         {
             base.FixedUpdate();
 
-            if (!isAuthority)
-                return;
-
             timeSpent += Time.fixedDeltaTime;
+            if (hasInputBank)
+            {
+                Vector3 moveVector = inputBank.moveVector * (Mathf.Clamp(moveSpeedStat, 0, 10) * 0.1f);
+                moveVector.y = inputBank.jump.down && (marker.transform.position.y - transform.position.y < heightLimit) ? 1 : inputBank.skill3.down ? -1 : 0;
 
-            Vector3 moveVector = inputBank.moveVector * (Mathf.Clamp(moveSpeedStat, 0 , 10) * 0.1f);
-            moveVector.y = inputBank.jump.down && (marker.transform.position.y - transform.position.y < heightLimit) ? 1 : inputBank.skill3.down ? -1 : 0;
-
-            marker.SimpleMove(moveVector);
+                marker.SimpleMove(moveVector);
+            }
 
             base.characterBody.isSprinting = true;
-            if (GetSprintReleased())
+            if (GetSprintReleased() && isAuthority)
             {
                 PhaseState state = new PhaseState();
                 float dist = Vector3.Distance(marker.viewPosition, transform.position) / Mathf.Max(characterBody.moveSpeed, 0.3f) * distMultiplier;
