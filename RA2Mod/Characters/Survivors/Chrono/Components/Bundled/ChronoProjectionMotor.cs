@@ -49,6 +49,7 @@ namespace RA2Mod.Survivors.Chrono.Components
         }
         #endregion motor
 
+        #region projection preview
         void Awake()
         {
             inverseFixedDeltaTime = 1 / Time.fixedDeltaTime;
@@ -81,5 +82,6 @@ namespace RA2Mod.Survivors.Chrono.Components
         {
             view.transform.position = Vector3.Lerp(lastLastPosition, lastPosition, (Run.TimeStamp.now - Run.FixedTimeStamp.now) * inverseFixedDeltaTime);
         }
+        #endregion projection preview
     }
 }

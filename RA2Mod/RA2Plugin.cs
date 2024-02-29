@@ -25,7 +25,7 @@ namespace RA2Mod
 
         public static RA2Plugin instance;
 
-        public static int testAsyncLoading = 0;
+        public static int testAsyncLoading = 2;
 
         void Start()
         {

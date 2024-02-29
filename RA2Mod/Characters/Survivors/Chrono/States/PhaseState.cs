@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using RA2Mod.Survivors.Chrono.Components;
+using RoR2;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
@@ -10,6 +11,9 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public override void OnEnter() {
             base.OnEnter();
+            Util.PlaySound("Play_ChronoMove", gameObject);
+            characterBody.isSprinting = false;
+
             //apply phase effect
             controller?.UpdateIndicatorActive(true);
             GetModelAnimator().enabled = false;

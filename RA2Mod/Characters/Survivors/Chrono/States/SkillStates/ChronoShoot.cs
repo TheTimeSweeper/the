@@ -105,7 +105,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         hitEffectPrefab = null,//EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
-                        hitCallback = ComboHitCallback
+                        hitCallback = HitCallBack
                     };
 
                     bulletAttack.Fire();
@@ -114,7 +114,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         }
 
         //credit to moffien with pilot
-        private bool ComboHitCallback(BulletAttack bulletRef, ref BulletHit hitInfo)
+        private bool HitCallBack(BulletAttack bulletRef, ref BulletHit hitInfo)
         {
             if (hitInfo.point != null && !triggeredComboExplosion)
             {

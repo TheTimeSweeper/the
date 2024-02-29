@@ -47,6 +47,8 @@ namespace RA2Mod.Modules {
         {
             this.contentPack.identifier = this.identifier;
 
+            //1: yielding other coroutines
+            //about equal with loading everything in awake
             if (RA2Plugin.testAsyncLoading == 1)
             {
                 Log.CurrentTime("ASYNC START");
@@ -55,6 +57,9 @@ namespace RA2Mod.Modules {
 
                 Log.CurrentTime("ASYNC FINISH");
             }
+
+            //2: loading all coroutines in a list and stepping through them, yielding null
+            //best
             if (RA2Plugin.testAsyncLoading == 2)
             {
                 Log.CurrentTime("ASYNC2 START");
@@ -68,6 +73,9 @@ namespace RA2Mod.Modules {
 
                 Log.CurrentTime("ASYNC2 FINISH");
             }
+
+            //3: number 2 but attempting to step through multiple in a while
+            //worst
             if (RA2Plugin.testAsyncLoading == 3)
             {
                 Log.CurrentTime("ASYNC3 START");
@@ -86,6 +94,56 @@ namespace RA2Mod.Modules {
                 }
 
                 Log.CurrentTime("ASYNC3 FINISH");
+            }
+
+            //4: number 3 but removing finished enumerators
+            //slightly better than worst
+            if (RA2Plugin.testAsyncLoading == 4)
+            {
+                Log.CurrentTime("ASYNC3.2 START");
+
+                List<System.Collections.IEnumerator> enumerators = Survivors.Chrono.ChronoAssets.InitAsync2(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+
+                bool inComplete = true;
+                while (inComplete)
+                {
+                    inComplete = false;
+                    for (int i = enumerators.Count - 1; i >= 0; i--)
+                    {
+                        bool movingNext = enumerators[i].MoveNext();
+                        if (!movingNext)
+                        {
+                            enumerators.RemoveAt(i);
+                        }
+                        inComplete |= movingNext;
+                    }
+                    if (inComplete) yield return null;
+                }
+
+                Log.CurrentTime("ASYNC3.2 FINISH");
+            }
+
+            //5: number 4 without an extra bool
+            //slightly better than slightly better than worst
+            if (RA2Plugin.testAsyncLoading == 5)
+            {
+                Log.CurrentTime("ASYNC3.2.2 START");
+
+                List<System.Collections.IEnumerator> enumerators = Survivors.Chrono.ChronoAssets.InitAsync2(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
+
+                while (enumerators.Count > 0)
+                {
+                    for (int i = enumerators.Count - 1; i >= 0; i--)
+                    {
+                        if (!enumerators[i].MoveNext())
+                        {
+                            enumerators.RemoveAt(i);
+                        }
+                    }
+                    if (enumerators.Count > 0) yield return null;
+                }
+
+                Log.CurrentTime("ASYNC3.2.2 FINISH");
             }
 
             contentPack.bodyPrefabs.Add(bodyPrefabs.ToArray());

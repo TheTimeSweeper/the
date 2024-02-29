@@ -89,7 +89,8 @@ namespace RA2Mod.Survivors.Chrono
             chronoBombProjectile = assetBundle.LoadAsset<GameObject>("ChronoIvanBombProjectile");
             R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
             chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/StickyBomb").GetComponent<ProjectileController>().ghostPrefab;
-            chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ExplosionLunarSun");
+            lunarSunExplosion = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ExplosionLunarSun");
+            chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
             Content.AddProjectilePrefab(chronoBombProjectile);
 
             chronoIndicatorIvan = assetBundle.LoadAsset<GameObject>("IndicatorChronoIvan");

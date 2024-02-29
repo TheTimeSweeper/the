@@ -62,11 +62,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             timeSpent += Time.fixedDeltaTime;
 
-            Vector3 moveVector = inputBank.moveVector * (Mathf.Min(moveSpeedStat, 20) * 0.1f);
+            Vector3 moveVector = inputBank.moveVector * (Mathf.Clamp(moveSpeedStat, 0 , 10) * 0.1f);
             moveVector.y = inputBank.jump.down && (marker.transform.position.y - transform.position.y < heightLimit) ? 1 : inputBank.skill3.down ? -1 : 0;
 
             marker.SimpleMove(moveVector);
-
 
             base.characterBody.isSprinting = true;
             if (GetSprintReleased())
@@ -81,9 +80,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 state.controller = componentFromSkillDef;
                 StopCamera();
                 
-                Util.PlaySound("Play_ChronoMove", gameObject);
                 characterMotor.Motor.SetPosition(marker.viewPosition);
-                characterBody.isSprinting = false;
                 
                 outer.SetNextState(state);
             }
