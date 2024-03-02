@@ -46,12 +46,13 @@ namespace RA2Mod.Survivors.Chrono
         public static void InitAsync(AssetBundle assetBundle)
         {
             Log.CurrentTime("INIT ASYNC");
-
+            
             for (int i = 1; i <= noises; i++)
             {
                 loads.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
                 {
                     testTextures.Add(result);
+                    Log.Warning(result);
                 }));
             }
 
