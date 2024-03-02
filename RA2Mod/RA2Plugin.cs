@@ -38,7 +38,7 @@ namespace RA2Mod
 
             GeneralConfig.Init();
 
-            Log.CurrentTime("START");
+            Log.CurrentTime("START new");
 
             Modules.Language.Init();
 
