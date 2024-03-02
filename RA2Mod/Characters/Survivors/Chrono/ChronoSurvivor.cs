@@ -90,26 +90,18 @@ namespace RA2Mod.Survivors.Chrono
             //need the character unlockable before you initialize the survivordef
             //ChronoUnlockables.Init();
 
-            Log.CurrentTime("SURVIVOR INIT 1");
-
             base.InitializeCharacter();
 
-            Log.CurrentTime("SURVIVOR INIT 2");
             ChronoConfig.Init();
             ChronoStates.Init();
             ChronoTokens.Init();
 
-            Log.CurrentTime("SURVIVOR INIT 3");
             ChronoHealthBars.Init();
             ChronoDamageTypes.Init();
-            if (RA2Plugin.testAsyncLoading == 0)
-            {
-                ChronoAssets.Init(assetBundle);
-            }
+            ChronoAssets.InitAsync(assetBundle);
             ChronoBuffs.Init(assetBundle);
             ChronoItems.Init();
             ChronoCompat.Init();
-            Log.CurrentTime("SURVIVOR INIT 4");
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -119,19 +111,6 @@ namespace RA2Mod.Survivors.Chrono
             AdditionalBodySetup();
 
             AddHooks();
-
-            Log.CurrentTime("SURVIVOR INIT END");
-
-            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        }
-
-        private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
-        {
-            if(arg0.name == "title")
-            {
-                Log.CurrentTime("TITLE SCREEN");
-                Log.AllTimes();
-            }
         }
 
         private void AdditionalBodySetup()

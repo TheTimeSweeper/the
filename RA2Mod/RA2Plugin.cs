@@ -25,8 +25,6 @@ namespace RA2Mod
 
         public static RA2Plugin instance;
 
-        public static int testAsyncLoading = 2;
-
         void Start()
         {
             Modules.SoundBanks.Init();
@@ -38,8 +36,6 @@ namespace RA2Mod
 
             Log.Init(Logger);
             GeneralConfig.Init();
-        
-            Log.CurrentTime("START " + (testAsyncLoading == 0? "sync" : "async" + testAsyncLoading));
 
             Modules.Language.Init();
 
@@ -47,6 +43,17 @@ namespace RA2Mod
             //new GISurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
+
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+        }
+
+        private void SceneManager_sceneLoaded(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.LoadSceneMode arg1)
+        {
+            if (arg0.name == "title")
+            {
+                Log.CurrentTime("TITLE SCREEN");
+                Log.AllTimes();
+            }
         }
     }
 }
