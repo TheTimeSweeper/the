@@ -111,6 +111,8 @@ namespace RA2Mod.Survivors.Chrono
             AdditionalBodySetup();
 
             AddHooks();
+
+            Log.CurrentTime($"{bodyName} initializecharacter done");
         }
 
         private void AdditionalBodySetup()

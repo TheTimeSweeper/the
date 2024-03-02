@@ -21,38 +21,39 @@ namespace RA2Mod.Modules
         //cache bundles if multiple characters use the same one
         internal static Dictionary<string, AssetBundle> loadedBundles = new Dictionary<string, AssetBundle>();
 
-        internal static AssetBundle LoadAssetBundle(string bundleName)
+        internal static void LoadAssetBundleAsync(string bundleName, Action<AssetBundle> onComplete = null)
         {
-
             if (bundleName == "myassetbundle")
             {
-                Log.Error($"AssetBundle name hasn't been changed. not loading any assets to avoid conflicts.\nMake sure to rename your assetbundle filename and rename the AssetBundleName field in your character setup code ");
-                return null;
+                Log.Error($"AssetBundle name hasn't been changed. not loading any assets to avoid conflicts. Everything will now break.\nMake sure to rename your assetbundle filename and rename the AssetBundleName field in your character setup code.");
             }
 
             if (loadedBundles.ContainsKey(bundleName))
             {
-                return loadedBundles[bundleName];
+                onComplete?.Invoke(loadedBundles[bundleName]);
             }
 
-            AssetBundle assetBundle = null;
-            try
+            loadedBundles[bundleName] = null;
+            string path = Path.Combine(Path.GetDirectoryName(RA2Plugin.instance.Info.Location), "AssetBundles", bundleName);
+
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetBundleFromPathAsync(path, (bundle) =>
             {
-                assetBundle = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(RA2Plugin.instance.Info.Location), "AssetBundles", bundleName));
-            }
-            catch (System.Exception e)
-            {
-                Log.Error($"Error loading asset bundle, {bundleName}. Your asset bundle must be in a folder next to your mod dll called 'AssetBundles'. Follow the guide to build and install your mod correctly!\n{e}");
-            }
-
-            loadedBundles[bundleName] = assetBundle;
-            RA2Plugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(assetBundle));
-
-            return assetBundle;
-
+                loadedBundles[bundleName] = bundle;
+                RA2Plugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(bundle));
+                onComplete?.Invoke(bundle);
+            }));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static IEnumerator LoadAssetBundleFromPathAsync(string path, Action<AssetBundle> onComplete)
+        {
+            AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(path);
+            while (!request.isDone)
+            {
+                yield return null;
+            }
+            onComplete(request.assetBundle);
+        }
+
         internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
@@ -62,7 +63,6 @@ namespace RA2Mod.Modules
             }
             OnComplete(request.asset as T);
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
@@ -70,43 +70,14 @@ namespace RA2Mod.Modules
             OnComplete(loadAsset.Result);
         }
 
-        //testing yielding chains of coroutines
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAssetAsyncYielding<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
-        {
-            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
-            yield return request;
-            OnComplete(request.asset as T);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAssetAsyncYielding<T>(this AssetBundle assetBundle, string name, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
-        {
-            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
-            yield return request;
-            yield return OnComplete(request.asset as T);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAddressableAssetAsyncYielding<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
-        {
-            AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            yield return loadAsset;
-            OnComplete(loadAsset.Result);
-        }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerator LoadAddressableAssetAsyncYielding<T>(object key, Func<T, IEnumerator> OnComplete) where T : UnityEngine.Object
-        {
-            AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            yield return loadAsset;
-            yield return OnComplete(loadAsset.Result);
-        }
-
-        //credit to groove salad with ivyl
+        //credit to groove salad with ivyl, unused tho
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static AsyncOperationHandle LoadAddressableAssetAsync<TObject>(object key, out AsyncOperationHandle<TObject> handle)
         {
             return handle = Addressables.LoadAssetAsync<TObject>(key);
         }
 
+        #region legacy non-async helpers
         internal static GameObject CloneTracer(string originalTracerName, string newTracerName)
         {
             if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) 
@@ -208,5 +179,6 @@ namespace RA2Mod.Modules
             Content.AddProjectilePrefab(newPrefab);
             return newPrefab;
         }
+        #endregion 
     }
 }

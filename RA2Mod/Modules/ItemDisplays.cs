@@ -158,12 +158,7 @@ namespace RA2Mod.Modules
 
         private static Object GetKeyAssetFromString(string itemName)
         {
-            Object itemDef = RoR2.LegacyResourcesAPI.Load<ItemDef>("ItemDefs/" + itemName);
-
-            if (itemDef == null)
-            {
-                itemDef = RoR2.LegacyResourcesAPI.Load<EquipmentDef>("EquipmentDefs/" + itemName);
-            }
+            Object itemDef = KeyAssets[itemName];
 
             if (itemDef == null)
             {

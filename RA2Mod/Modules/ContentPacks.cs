@@ -31,7 +31,7 @@ namespace RA2Mod.Modules {
         public static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
         public static List<GameObject> networkedObjects = new List<GameObject>();
 
-        public static List<IEnumerator> asyncLoads = new List<IEnumerator>();
+        public static List<IEnumerator> asyncLoadCoroutines = new List<IEnumerator>();
 
         public void Initialize()
         {
@@ -46,11 +46,12 @@ namespace RA2Mod.Modules {
         public System.Collections.IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
         {
             this.contentPack.identifier = this.identifier;
-
-            for (int i = 0; i < asyncLoads.Count; i++)
+            Log.CurrentTime("LoadStaticContentAsync start");
+            for (int i = 0; i < asyncLoadCoroutines.Count; i++)
             {
-                while (asyncLoads[i].MoveNext()) yield return null;
+                while (asyncLoadCoroutines[i].MoveNext()) yield return null;
             }
+            Log.CurrentTime("LoadStaticContentAsync done");
 
             contentPack.bodyPrefabs.Add(bodyPrefabs.ToArray());
             contentPack.masterPrefabs.Add(masterPrefabs.ToArray());

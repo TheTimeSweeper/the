@@ -13,6 +13,18 @@ namespace RA2Mod.Modules.Characters
         public abstract string modelPrefabName { get; }
         
         public abstract BodyInfo bodyInfo { get; }
+        private BodyInfo cachedBodyInfo;
+        private BodyInfo _bodyInfo
+        {
+            get
+            {
+                if(cachedBodyInfo != null)
+                {
+                    cachedBodyInfo = bodyInfo;
+                }
+                return cachedBodyInfo;
+            }
+        }
 
         public virtual CustomRendererInfo[] customRendererInfos { get; }
 
@@ -30,14 +42,22 @@ namespace RA2Mod.Modules.Characters
         public virtual void Initialize()
         {
             instance = this as T;
-            assetBundle = Assets.LoadAssetBundle(assetBundleName);
 
-            InitializeCharacter();
+            Log.CurrentTime($"{bodyName} init");
+
+            Assets.LoadAssetBundleAsync(assetBundleName, (loadedAssetBundle) => {
+
+                Log.CurrentTime($"{bodyName} assetbundle loaded");
+                assetBundle = loadedAssetBundle;
+                InitializeCharacter();
+            });
         }
-
+        
         public virtual void InitializeCharacter()
         {
             InitializeCharacterBodyPrefab();
+
+            Log.CurrentTime($"{bodyName} body prefab");
 
             InitializeItemDisplays();
         }
@@ -58,14 +78,11 @@ namespace RA2Mod.Modules.Characters
             
             prefabCharacterModel.itemDisplayRuleSet = itemDisplayRuleSet;
 
-            if (itemDisplays != null) {
+            if (itemDisplays != null)
+            {
                 Modules.ItemDisplays.queuedDisplays++;
-                RoR2.ContentManagement.ContentManager.onContentPacksAssigned += SetItemDisplays;
+                itemDisplays.SetItemDisplays(prefabCharacterModel.itemDisplayRuleSet);
             }
-        }
-
-        public void SetItemDisplays(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj) {
-            itemDisplays.SetItemDisplays(prefabCharacterModel.itemDisplayRuleSet);
         }
 
         public abstract void InitializeEntityStateMachines();

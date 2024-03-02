@@ -35,7 +35,10 @@ namespace RA2Mod
             instance = this;
 
             Log.Init(Logger);
+
             GeneralConfig.Init();
+
+            Log.CurrentTime("START");
 
             Modules.Language.Init();
 
@@ -44,7 +47,10 @@ namespace RA2Mod
 
             new Modules.ContentPacks().Initialize();
 
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+            if (GeneralConfig.Debug.Value)
+            {
+                UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+            }
         }
 
         private void SceneManager_sceneLoaded(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.LoadSceneMode arg1)

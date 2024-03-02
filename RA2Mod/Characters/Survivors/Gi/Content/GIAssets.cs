@@ -8,6 +8,8 @@ using R2API;
 using UnityEngine;
 using EntityStates;
 using RA2Mod.General.Components;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace RA2Mod.Survivors.GI
 {
@@ -21,6 +23,8 @@ namespace RA2Mod.Survivors.GI
         public static GameObject minePrefab;
 
         private static AssetBundle _assetBundle;
+
+        public static List<IEnumerator> loads => Modules.ContentPacks.asyncLoadCoroutines;
 
         public static void Init(AssetBundle assetBundle)
         {

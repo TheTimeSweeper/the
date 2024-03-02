@@ -9,8 +9,6 @@ namespace RA2Mod.Modules.Characters
         {
             List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
 
-            Log.CurrentTime("ITEM DISPLAY START");
-
             ItemDisplays.LazyInit();
 
             SetItemDisplayRules(itemDisplayRules);
@@ -18,8 +16,6 @@ namespace RA2Mod.Modules.Characters
             itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
 
             ItemDisplays.DisposeWhenDone();
-
-            Log.CurrentTime("ITEM DISPLAY END");
         }
 
         protected abstract void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules);

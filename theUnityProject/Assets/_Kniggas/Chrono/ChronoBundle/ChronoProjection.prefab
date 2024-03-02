@@ -15442,7 +15442,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4198731459813386232}
-  - component: {fileID: 3343620327403121672}
   m_Layer: 0
   m_Name: XTrail
   m_TagString: Untagged
@@ -15466,26 +15465,6 @@ Transform:
   m_Father: {fileID: 73503961423890301}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3343620327403121672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3288367421252342668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c2c9828fec98747a1b0680f47bed80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PointStart: {fileID: 4362162869248562343}
-  PointEnd: {fileID: 4832163600218765879}
-  MaxFrame: 14
-  Granularity: 60
-  Fps: 10
-  frames: 1
-  MyColor: {r: 0.4198113, g: 1, b: 0.5123509, a: 1}
-  MyMaterial: {fileID: 2100000, guid: 75f756109f216ad409ff1a5ea7dd7b2c, type: 2}
 --- !u!1 &3295450668591504679
 GameObject:
   m_ObjectHideFlags: 0

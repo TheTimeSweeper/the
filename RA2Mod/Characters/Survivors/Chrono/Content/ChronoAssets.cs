@@ -16,6 +16,8 @@ namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoAssets {
 
+        public static List<IEnumerator> loads => Modules.ContentPacks.asyncLoadCoroutines;
+
         public static ChronoProjectionMotor markerPrefab;
         public static GameObject chronoBombProjectile;
         public static GameObject lunarSunExplosion;
@@ -38,10 +40,21 @@ namespace RA2Mod.Survivors.Chrono
 
         public static SkillDef cancelSKillDef;
 
-        public static List<IEnumerator> loads => Modules.ContentPacks.asyncLoads;
+        public static List<Texture2D> testTextures = new List<Texture2D>();
+        public static int noises = 4;
 
         public static void InitAsync(AssetBundle assetBundle)
         {
+            Log.CurrentTime("INIT ASYNC");
+
+            for (int i = 1; i <= noises; i++)
+            {
+                loads.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
+                {
+                    testTextures.Add(result);
+                }));
+            }
+
             loads.Add(assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
             {
                 cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -174,7 +187,10 @@ namespace RA2Mod.Survivors.Chrono
             loads.Add(assetBundle.LoadAssetAsync<Material>("matChronosphere1", (result) =>
             {
                 phaseOverlayMaterial = result;
+                Log.CurrentTime("LAST ASYNC LOAD");
             }));
+
+            Log.CurrentTime("END ASYNC");
         }
     }
 }
