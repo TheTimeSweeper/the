@@ -21,7 +21,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
 
         public static float DamageCoefficient => GIConfig.M1_HeavyMissile_Damage.Value;
 
-        public GIMissileTracker componentFromSkillDef { get; set; }
+        public GIMissileTracker componentFromSkillDef1 { get; set; }
 
         public override void OnEnter()
         {
@@ -78,11 +78,11 @@ namespace RA2Mod.Survivors.GI.SkillStates
 
         private GameObject GetTarget()
         {
-            if (!componentFromSkillDef)
+            if (!componentFromSkillDef1)
                 return null;
-            if (!componentFromSkillDef.GetTrackingTarget())
+            if (!componentFromSkillDef1.GetTrackingTarget())
                 return null;
-            return componentFromSkillDef.GetTrackingTarget().gameObject;
+            return componentFromSkillDef1.GetTrackingTarget().gameObject;
         }
     }
 }

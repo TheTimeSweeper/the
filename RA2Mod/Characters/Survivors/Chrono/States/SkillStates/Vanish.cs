@@ -21,7 +21,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         private float nextInterval;
 
-        public ChronoTrackerVanish componentFromSkillDef { get; set; }
+        public ChronoTrackerVanish componentFromSkillDef1 { get; set; }
 
         private DamageInfo damageInfo;
         private HurtBox targetHurtBox;
@@ -48,8 +48,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
             if (isAuthority)
             {
-                targetHurtBox = componentFromSkillDef.GetTrackingTarget();
-                targetingAlly = componentFromSkillDef.GetIsAlly();
+                targetHurtBox = componentFromSkillDef1.GetTrackingTarget();
+                targetingAlly = componentFromSkillDef1.GetIsAlly();
             }
             vanishTether = Object.Instantiate(ChronoAssets.chronoVanishTether);
 

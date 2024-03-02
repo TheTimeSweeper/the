@@ -44,7 +44,7 @@ namespace RA2Mod
             Modules.Language.Init();
 
             new ChronoSurvivor().Initialize();
-            new GISurvivor().Initialize();
+            //new GISurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
         }

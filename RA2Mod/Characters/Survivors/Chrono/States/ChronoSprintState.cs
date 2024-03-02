@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.Chrono.SkillStates
 {
-    public class ChronoSprintState : BaseSkillState, IHasSkillDefComponent<PhaseIndicatorController>
+    public class ChronoSprintState : BaseSkillState, IHasSkillDefComponent<PhaseIndicatorController, ChronoSprintProjectionSpawner, InteractionDriver>
     {
         private ChronoProjectionMotor marker;
 
@@ -24,19 +24,49 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         protected virtual float timeSpentMultiplier => ChronoConfig.M0_SprintTeleport_TimeTimeMulti.Value;
         protected virtual float distMultiplier => ChronoConfig.M0_SprintTeleport_DistTimeMulti.Value;
 
-        public PhaseIndicatorController componentFromSkillDef { get; set; }
+        public PhaseIndicatorController componentFromSkillDef1 { get; set; }
+        private PhaseIndicatorController phaseIndicator => componentFromSkillDef1;
+        public ChronoSprintProjectionSpawner componentFromSkillDef2 { get; set; }
+        private ChronoSprintProjectionSpawner projectionSpawner => componentFromSkillDef2;
+        public InteractionDriver componentFromSkillDef3 { get; set; }
+        private InteractionDriver interactor => componentFromSkillDef3;
 
-        private InteractionDriver interactor;
+
         private bool hasInputBank;
+        private bool markerInitted;
 
         public override void OnEnter()
         {
             base.OnEnter();
 
+            heightLimit = characterBody.jumpPower * characterBody.maxJumpCount * ChronoConfig.M0_JumpMultiplier.Value;
+            if (characterBody.inventory)
+            {
+                heightLimit += characterBody.inventory.GetItemCount(RoR2Content.Items.JumpBoost) * characterBody.jumpPower * ChronoConfig.M0_JumpMultiplier.Value;
+            }
+
             hasInputBank = inputBank != null;
+            if(projectionSpawner == null)
+            {
+                componentFromSkillDef2 = GetComponent<ChronoSprintProjectionSpawner>();
+                Log.Warning("what the actual fucking shit");
+            }
 
-            marker = Object.Instantiate(ChronoAssets.markerPrefab, modelLocator.modelBaseTransform.position, transform.rotation, null);
+            if (NetworkServer.active && projectionSpawner != null)
+            {
+                projectionSpawner.SpawnProjectionServer(modelLocator.modelBaseTransform.position, transform.rotation);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
+            }
+            if (interactor != null)
+            {
+                interactor.enabled = false;
+            }
 
+            cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, 0.6f);
+        }
+
+        private void InitMarker()
+        {            
             origPivot = cameraTargetParams.cameraPivotTransform;
             cameraTargetParams.cameraPivotTransform = marker.cameraPivot;
             cameraTargetParams.dontRaycastToPivot = true;
@@ -44,32 +74,53 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             characterBody.aimOriginTransform = marker.cameraPivot;
             inCamera = true;
 
-            if (NetworkServer.active)
-            {
-                characterBody.AddTimedBuff(RoR2Content.Buffs.ArmorBoost, 0.5f);
-            }
-            if(gameObject.TryGetComponent(out interactor))
-            {
-                interactor.enabled = false;                                                                              
-            }
-
-            cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, ChronoConfig.M0CameraLerpTime.Value);
+            if (!isAuthority)
+                marker.InitNonAuthority();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
+            base.characterBody.isSprinting = true;
+
+            marker = projectionSpawner.marker;
+
+            if (marker == null)
+                return;
+
+            if (!markerInitted)
+            {
+                InitMarker();
+                markerInitted = true;
+            }
+            
             timeSpent += Time.fixedDeltaTime;
+
             if (hasInputBank)
             {
                 Vector3 moveVector = inputBank.moveVector * (Mathf.Clamp(moveSpeedStat, 0, 10) * 0.1f);
-                moveVector.y = inputBank.jump.down && (marker.transform.position.y - transform.position.y < heightLimit) ? 1 : inputBank.skill3.down ? -1 : 0;
 
-                marker.SimpleMove(moveVector);
+                if (inputBank.jump.down)
+                {
+                    if (marker.transform.position.y - transform.position.y < heightLimit)
+                    {
+                        moveVector.y = 1;
+                    }
+                }
+                else if(inputBank.skill3.down)
+                {
+                    moveVector.y = -1;
+                }
+
+                if (isAuthority)
+                {
+                  projectionSpawner.MoveMarkerAuthority(moveVector);
+                }
+                marker.UpdateAim(GetAimRay().direction);
             }
+            marker.UpdateHeightBeam(transform.position.y, heightLimit);
 
-            base.characterBody.isSprinting = true;
             if (GetSprintReleased() && isAuthority)
             {
                 PhaseState state = new PhaseState();
@@ -79,7 +130,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
                 state.windDownTime = Mathf.Max(distTime, timeTime);
 
                 //Log.Warning($"dist {Vector3.Distance(marker.viewPosition, transform.position)} time {state.windDownTime}");
-                state.controller = componentFromSkillDef;
+                state.controller = phaseIndicator;
                 StopCamera();
                 
                 characterMotor.Motor.SetPosition(marker.viewPosition);
@@ -111,12 +162,13 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-
+            
             StopCamera();
-
-            UnityEngine.Object.Destroy(marker.gameObject);
-
-            cameraTargetParams.RemoveParamsOverride(cameraOverride, ChronoConfig.M0CameraLerpTime.Value);
+            if (NetworkServer.active)
+            {
+                projectionSpawner.DisposeMarkerServer();
+            }
+            cameraTargetParams.RemoveParamsOverride(cameraOverride, 0.6f);
 
             if (interactor)
             {

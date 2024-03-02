@@ -2,6 +2,6 @@
 {
     public interface IDependentTracker
     {
-        Tracker dependentTracker { get; set; }
+        ITracker dependentTracker { get; set; }
     }
 }

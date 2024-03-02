@@ -4,12 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace RA2Mod.General.SkillDefs
 {
-    public abstract class GenericTrackerSkillDef<T> : HasComponentSkillDef<T> where T : Tracker
+    public abstract class GenericTrackerSkillDef<T> : HasComponentSkillDef<T> where T : ITracker
     {
         // Token: 0x060045B8 RID: 17848 RVA: 0x00122449 File Offset: 0x00120649
         private static bool HasTarget([NotNull] GenericSkill skillSlot)
         {
-            T huntressTracker = ((InstanceData)skillSlot.skillInstanceData).componentFromSkillDef;
+            T huntressTracker = ((InstanceData)skillSlot.skillInstanceData).componentFromSkillDef1;
             return huntressTracker != null ? huntressTracker.GetTrackingTarget() : null;
         }
         // Token: 0x060045B9 RID: 17849 RVA: 0x00122471 File Offset: 0x00120671

@@ -15,7 +15,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public static float DamageCoefficient = ChronoConfig.M2_Bomb_Damage.Value;
 
-        public ChronoTrackerBomb componentFromSkillDef { get; set; }
+        public ChronoTrackerBomb componentFromSkillDef1 { get; set; }
 
         public HurtBox trackingTarget;
 
@@ -41,9 +41,9 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             recoilAmplitude = 0.1f;
             bloom = 10;
 
-            if (componentFromSkillDef && isAuthority)
+            if (componentFromSkillDef1 && isAuthority)
             {
-                trackingTarget = componentFromSkillDef.GetTrackingTarget();
+                trackingTarget = componentFromSkillDef1.GetTrackingTarget();
             }
             if (NetworkServer.active)
             {

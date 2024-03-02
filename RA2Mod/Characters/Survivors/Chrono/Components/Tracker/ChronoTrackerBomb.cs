@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Chrono.Components
 {
-    public class ChronoTrackerBomb : Tracker
+    public class ChronoTrackerBomb : GenericTracker
     {
         public override float maxTrackingDistance => 12;
 

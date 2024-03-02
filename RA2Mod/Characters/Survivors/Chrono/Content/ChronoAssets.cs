@@ -31,6 +31,7 @@ namespace RA2Mod.Survivors.Chrono
         public static ChronosphereProjection chronosphereProjection;
         public static ChronosphereProjection chronosphereProjectionFreeze;
         public static Material frozenOverlayMaterial;
+        public static Material phaseOverlayMaterial;
 
         public static GameObject endPointivsualizer;
         public static GameObject arcvisualizer;
@@ -125,6 +126,7 @@ namespace RA2Mod.Survivors.Chrono
             chronosphereProjectionFreeze.GetComponentInChildren<SphereCollider>().radius = ChronoConfig.M3_Freezosphere_Radius.Value;
 
             frozenOverlayMaterial = assetBundle.LoadAsset<Material>("matChronosphereFreezeOverlay");
+            phaseOverlayMaterial = assetBundle.LoadAsset<Material>("matChronosphere1");
 
             Log.CurrentTime("SYNC FINISH");
         }
@@ -308,6 +310,11 @@ namespace RA2Mod.Survivors.Chrono
             {
                 frozenOverlayMaterial = result;
             });
+
+            yield return assetBundle.LoadAssetAsyncYielding<Material>("matChronosphere1", (result) =>
+            {
+                phaseOverlayMaterial = result;
+            });
         }
 
         public static List<IEnumerator> InitAsync2(AssetBundle assetBundle)
@@ -360,6 +367,7 @@ namespace RA2Mod.Survivors.Chrono
             {
                 markerPrefab = result.GetComponent<ChronoProjectionMotor>();
                 R2API.PrefabAPI.RegisterNetworkPrefab(markerPrefab.gameObject);
+                Modules.Content.AddNetworkedObject(markerPrefab.gameObject);
             }));
 
             //ivan bomb
@@ -448,6 +456,10 @@ namespace RA2Mod.Survivors.Chrono
             loads.Add(assetBundle.LoadAssetAsync<Material>("matChronosphereFreezeOverlay", (result) =>
             {
                 frozenOverlayMaterial = result;
+            }));
+            loads.Add(assetBundle.LoadAssetAsync<Material>("matChronosphere1", (result) =>
+            {
+                phaseOverlayMaterial = result;
             }));
 
             return loads;

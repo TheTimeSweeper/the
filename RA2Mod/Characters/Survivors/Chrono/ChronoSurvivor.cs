@@ -140,6 +140,7 @@ namespace RA2Mod.Survivors.Chrono
             bodyPrefab.AddComponent<ChronoTrackerBomb>();
             bodyPrefab.AddComponent<ChronoTrackerVanish>();
             bodyPrefab.AddComponent<PhaseIndicatorController>();
+            bodyPrefab.AddComponent<ChronoSprintProjectionSpawner>();
             bodyPrefab.AddComponent<VoiceLines>().prefix = "Play_Chrono_";
         }
 
@@ -168,7 +169,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             GenericSkill passiveSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_PASSIVE", "chronopassive");
 
-            HasPhaseIndicatorSkillDef sprintSkillDef = Skills.CreateSkillDef<HasPhaseIndicatorSkillDef>(new SkillDefInfo
+            ChronoSprintComponentsSkillDef sprintSkillDef = Skills.CreateSkillDef<ChronoSprintComponentsSkillDef>(new SkillDefInfo
             {
                 skillName = "chronoPassive",
                 skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
@@ -209,7 +210,7 @@ namespace RA2Mod.Survivors.Chrono
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void AddScepterPassiveSkill(SkillDef originalSkillDef)
         {
-            HasPhaseIndicatorSkillDef sprintSkillDefScepter = Skills.CreateSkillDef<HasPhaseIndicatorSkillDef>(new SkillDefInfo
+            ChronoSprintComponentsSkillDef sprintSkillDefScepter = Skills.CreateSkillDef<ChronoSprintComponentsSkillDef>(new SkillDefInfo
             {
                 skillName = "chronoPassiveScepter",
                 skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
@@ -349,6 +350,7 @@ namespace RA2Mod.Survivors.Chrono
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef, utilitySkillDef2);
 
             Config.ConfigureSkillDef(utilitySkillDef, ChronoConfig.SectionBody, "M3 Chronosphere");
+            Config.ConfigureSkillDef(utilitySkillDef2, ChronoConfig.SectionBody, "M3 Freezosphere");
         }
 
         private void AddSpecialSkills()

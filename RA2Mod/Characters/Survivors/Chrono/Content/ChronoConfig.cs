@@ -4,11 +4,12 @@ namespace RA2Mod.Survivors.Chrono
 {
     public static class ChronoConfig
     {
-        public static ConfigEntry<float> M0_SprintTeleport_DistTimeMulti;
-        public static ConfigEntry<float> M0_SprintTeleport_TimeTimeMulti;
-        public static ConfigEntry<float> M0CameraLerpTime;
+        public static ConfigEntry<float> M0_JumpMultiplier;
 
         public static ConfigEntry<bool> M0_SprintTeleport_OnRelease;
+
+        public static ConfigEntry<float> M0_SprintTeleport_DistTimeMulti;
+        public static ConfigEntry<float> M0_SprintTeleport_TimeTimeMulti;
 
         public static ConfigEntry<float> M1_Shoot_Damage;
         public static ConfigEntry<float> M1_Shoot_Duration;
@@ -29,7 +30,6 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> M4_Vanish_TickDamage;
         public static ConfigEntry<float> M4_Vanish_Duration;
         public static ConfigEntry<float> M4_Vanish_ChronoStacksRequired;
-
         public const string ConfigVersion = " 0.0.0";
         public const string SectionSkills = "1-3. Chrono Skills" + ConfigVersion;
         public const string SectionBody = "1-3. Chrono Body" + ConfigVersion;
@@ -59,14 +59,16 @@ namespace RA2Mod.Survivors.Chrono
                 0,
                 1,
                 "Phase out penalty multiplier based on time spent in teleporting state. Only comes into play after 1 second, and only replaces distance penalty if larger (does not add)");
-            M0CameraLerpTime = Config.BindAndOptionsSlider(
-                SectionSkills,
-                "M0CameraLerpTime",
-                0.5f,
-                0,
-                3,
-                "");
             //
+
+            M0_JumpMultiplier = Config.BindAndOptionsSlider(
+                SectionSkills,
+                "M0_JumpMultiplier",
+                2f,
+                0,
+                100,
+                "");
+
             M1_Shoot_Damage = Config.BindAndOptionsSlider(
                 SectionSkills,
                 "M1_Shoot_Damage",

@@ -63,7 +63,7 @@ Material:
     - _GlossyReflections: 1
     - _InternalSimpleBlendMode: 0
     - _IntersectionStrength: 1.42
-    - _InvFade: 13.5
+    - _InvFade: 0.5
     - _Magnitude: 10
     - _Metallic: 0
     - _Mode: 0
@@ -74,7 +74,7 @@ Material:
     - _RimStrength: 2.11
     - _SkyboxOnly: 0
     - _SmoothnessTextureChannel: 0
-    - _SoftPower: 3
+    - _SoftPower: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendFloat: 5

@@ -5,14 +5,5 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace RA2Mod.Survivors.Chrono.SkillDefs
 {
-    public class ChronoTrackerSkillDefVanish : GenericTrackerSkillDef<ChronoTrackerVanish>
-    {
-        public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
-        {
-            return new InstanceData
-            {
-                componentFromSkillDef = skillSlot.GetComponent<ChronoTrackerVanish>()
-            };
-        }
-    }
+    public class ChronoTrackerSkillDefVanish : GenericTrackerSkillDef<ChronoTrackerVanish> { }
 }

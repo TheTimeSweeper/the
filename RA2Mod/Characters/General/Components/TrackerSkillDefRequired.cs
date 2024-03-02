@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RA2Mod.General.Components
 {
-    public abstract class TrackerSkillDefRequired<T> : Tracker where T : SkillDef
+    public abstract class TrackerSkillDefRequired<T> : GenericTracker where T : SkillDef
     {
         private Dictionary<GenericSkill, bool> skillMap = new Dictionary<GenericSkill, bool>();
 

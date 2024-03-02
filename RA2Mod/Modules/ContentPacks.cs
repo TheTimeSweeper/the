@@ -46,13 +46,13 @@ namespace RA2Mod.Modules {
         public System.Collections.IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
         {
             this.contentPack.identifier = this.identifier;
-
+            
             //1: yielding other coroutines
             //about equal with loading everything in awake
             if (RA2Plugin.testAsyncLoading == 1)
             {
                 Log.CurrentTime("ASYNC START");
-
+                
                 yield return Survivors.Chrono.ChronoAssets.InitAsync(Survivors.Chrono.ChronoSurvivor.instance.assetBundle);
 
                 Log.CurrentTime("ASYNC FINISH");
@@ -70,7 +70,7 @@ namespace RA2Mod.Modules {
                 {
                     while (enumerators[i].MoveNext()) yield return null;
                 }
-
+                
                 Log.CurrentTime("ASYNC2 FINISH");
             }
 

@@ -5,13 +5,23 @@ using KinematicCharacterController;
 using RoR2;
 
 namespace RA2Mod.Survivors.Chrono.Components {
+
     public class ChronoProjectionMotor : BaseCharacterController, ICameraStateProvider {
 
         [SerializeField]
         private Transform cameraPivot;
 
         [SerializeField]
-        private Transform view;
+        private Transform positionProjection;
+
+        [SerializeField]
+        private Animator projectionAnimator;
+
+        [SerializeField]
+        private Transform truePositionView;
+
+        [SerializeField]
+        private Transform heightBeam;
 
         #region motor
         public override void AfterCharacterUpdate(float deltaTime) { }
