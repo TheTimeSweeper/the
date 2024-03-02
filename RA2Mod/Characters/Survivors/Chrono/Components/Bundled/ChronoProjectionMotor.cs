@@ -35,10 +35,7 @@ namespace RA2Mod.Survivors.Chrono.Components
         private float heightBeamYMax;
 
         private Vector3 lastPosition;
-        private Vector3 lastLastPosition;
-        private Run.TimeStamp lastLastPositionTime;
-
-        private float inverseFixedDeltaTime;
+        private bool nonAuthority;
 
         #region motor
         public override void AfterCharacterUpdate(float deltaTime) { }
@@ -64,6 +61,7 @@ namespace RA2Mod.Survivors.Chrono.Components
         {
             heightBeam.gameObject.SetActive(false);
             truePositionView.gameObject.SetActive(false);
+            nonAuthority = true;
         }
 
         public void SimpleMove(Vector3 deltaPosition, Vector3 finalPosition)
@@ -91,9 +89,6 @@ namespace RA2Mod.Survivors.Chrono.Components
         #region projection preview
         void Awake()
         {
-            inverseFixedDeltaTime = 1 / Time.fixedDeltaTime;
-
-            lastLastPosition = transform.position;
             lastPosition = transform.position;
 
             projectionAnimator.SetFloat("walkSpeed", 2);
@@ -102,31 +97,40 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         void FixedUpdate()
         {
-            lastLastPosition = lastPosition;
-            lastLastPositionTime = Run.TimeStamp.now;
-            Vector3 foundPosition = Find();
-            if (foundPosition != default(Vector3))
+            Vector3 foundPosition = Find(out bool positionValid);
+            if (positionValid)
             {
                 lastPosition = foundPosition;
             }
             positionProjection.transform.position = lastPosition;
         }
 
-        public Vector3 Find() 
+        public Vector3 Find() => Find(out _);
+        public Vector3 Find(out bool positionValid) 
         {
             RaycastHit hit;
             if (Physics.SphereCast(cameraPivot.position, 1, Vector3.down, out hit, 300f, LayerIndex.world.mask)) {
+                positionValid = true;
                 return new Vector3(transform.position.x, hit.point.y, transform.position.z);
             }
+            positionValid = false;
             return default(Vector3);
         }
         
         void Update()
         {
-            positionProjection.transform.position = Vector3.Lerp(lastLastPosition, lastPosition, Mathf.Clamp01((Run.TimeStamp.now - lastLastPositionTime) * inverseFixedDeltaTime));
-            
-            if (viewYaw == -1)
+            Vector3 position = Find(out bool positionValid);
+            if (positionValid)
+            {
+                positionProjection.transform.position = position;
+            } else {
+                positionProjection.transform.position = lastPosition;
+            }
+
+            if (viewYaw == -1 || Mathf.Abs(viewYaw - setYaw) > 40)
+            {
                 viewYaw = setYaw;
+            }
             viewYaw = Mathf.Lerp(viewYaw, setYaw, 0.2f);
             positionProjection.transform.rotation = Quaternion.Euler(0f, viewYaw, 0f);
             
@@ -139,11 +143,14 @@ namespace RA2Mod.Survivors.Chrono.Components
             projectionAnimator.SetFloat("rightSpeed", currentDeltaPosition.x, 0.4f, Time.deltaTime);
             projectionAnimator.SetFloat("forwardSpeed", currentDeltaPosition.z, 0.4f, Time.deltaTime);
 
-            Vector3 setPosition = heightBeam.position;
-            setPosition.y = Mathf.Min(heightBeamYMin, positionProjection.transform.position.y);
-            heightBeam.position = setPosition;
+            if (!nonAuthority)
+            {
+                Vector3 setPosition = heightBeam.position;
+                setPosition.y = Mathf.Min(heightBeamYMin, positionProjection.transform.position.y);
+                heightBeam.position = setPosition;
 
-            heightBeam.localScale = new Vector3(heightBeamYMax - setPosition.y, 1, 1);
+                heightBeam.localScale = new Vector3(heightBeamYMax - setPosition.y, 1, 1);
+            }
         }
         #endregion projection preview
     }

@@ -31,7 +31,6 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         public InteractionDriver componentFromSkillDef3 { get; set; }
         private InteractionDriver interactor => componentFromSkillDef3;
 
-
         private bool hasInputBank;
         private bool markerInitted;
 
@@ -46,10 +45,10 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             }
 
             hasInputBank = inputBank != null;
+            //well turns out the skilldef method only set 
             if(projectionSpawner == null)
             {
                 componentFromSkillDef2 = GetComponent<ChronoSprintProjectionSpawner>();
-                Log.Warning("what the actual fucking shit");
             }
 
             if (NetworkServer.active && projectionSpawner != null)

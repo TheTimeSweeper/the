@@ -7,29 +7,14 @@ namespace RA2Mod.Survivors.Chrono.Components
     public class ChronoSprintProjectionSpawner : NetworkBehaviour
     {
         public ChronoProjectionMotor marker;
-
-        //private CharacterMaster master;
-
-        //public void Start()
-        //{
-        //    master = GetComponent<CharacterBody>().master;
-        //}
-
+        
         [Server]
         public void SpawnProjectionServer(Vector3 position, Quaternion rotation)
         {
             marker = Object.Instantiate(ChronoAssets.markerPrefab, position, rotation, null);
 
-            //NetworkConnection clientAuthorityOwner = null;
-            //if (master != null && master.networkIdentity != null)
-            //{
-            //    clientAuthorityOwner = master.networkIdentity.clientAuthorityOwner;
-            //}
-            //if (clientAuthorityOwner != null)
-            //{
-                NetworkServer.Spawn(marker.gameObject);
-                RpcSendMarker(marker.gameObject);
-            //}
+            NetworkServer.Spawn(marker.gameObject);
+            RpcSendMarker(marker.gameObject);
         }
 
         [ClientRpc]

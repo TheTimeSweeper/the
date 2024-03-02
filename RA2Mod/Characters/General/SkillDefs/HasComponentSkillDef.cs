@@ -36,7 +36,6 @@ namespace RA2Mod.General.SkillDefs
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
             IHasSkillDefComponent<T> hasComopnentState;
-            Log.Warning("nip1");
             if ((hasComopnentState = entityState as IHasSkillDefComponent<T>) != null)
             {
                 hasComopnentState.componentFromSkillDef1 = instanceData.componentFromSkillDef1;
@@ -78,7 +77,6 @@ namespace RA2Mod.General.SkillDefs
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
             IHasSkillDefComponent<T, U> hasComponentState;
-            Log.Warning("nip2");
             if ((hasComponentState = entityState as IHasSkillDefComponent<T, U>) != null)
             {
                 hasComponentState.componentFromSkillDef1 = instanceData.componentFromSkillDef1;
@@ -106,15 +104,12 @@ namespace RA2Mod.General.SkillDefs
 
         public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
         {
-            Log.Warning($"skillslot onassigned spawner " + (skillSlot.GetComponent<RA2Mod.Survivors.Chrono.Components.ChronoSprintProjectionSpawner>() != null));
-            /*return*/var instanceData = new InstanceData
+            return new InstanceData
             {
                 componentFromSkillDef1 = skillSlot.GetComponent<T>(),
                 componentFromSkillDef2 = skillSlot.GetComponent<U>(),
                 componentFromSkillDef3 = skillSlot.GetComponent<V>()
             };
-            Log.Warning($"skillslot onassigned instanceData spawner " + (instanceData.componentFromSkillDef2 != null));
-            return instanceData;
         }
 
         public override EntityState InstantiateNextState([NotNull] GenericSkill skillSlot)
@@ -124,12 +119,10 @@ namespace RA2Mod.General.SkillDefs
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
             IHasSkillDefComponent<T, U, V> hasComponentState;
-            Log.Warning("nip3 this is only running on authority?");
             if ((hasComponentState = entityState as IHasSkillDefComponent<T, U, V>) != null)
             {
                 hasComponentState.componentFromSkillDef1 = instanceData.componentFromSkillDef1;
                 hasComponentState.componentFromSkillDef2 = instanceData.componentFromSkillDef2;
-                Log.Warning($"fucking has component2 instanceData {instanceData.componentFromSkillDef2 != null} hasComponentState {hasComponentState.componentFromSkillDef2 != null}");
                 hasComponentState.componentFromSkillDef3 = instanceData.componentFromSkillDef3;
             }
             return entityState;
