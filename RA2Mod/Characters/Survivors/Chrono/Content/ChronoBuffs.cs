@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RA2Mod.Modules;
+using RoR2;
 using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -15,30 +16,36 @@ namespace RA2Mod.Survivors.Chrono {
         public static void Init(AssetBundle assetBundle)
         {
             chronoSicknessDebuff = Modules.Content.CreateAndAddBuff("ChronoDebuff",
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
+                null,
                 Color.cyan,
                 true,
                 true);
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(chronoSicknessDebuff, assetBundle, "texBuffChronoClock"));
 
             chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("ChronosphereRoot",
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
+                null,
                 Color.blue,
                 false,
                 true);
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(chronosphereRootDebuff, "RoR2/Base/Common/texBuffGenericShield.tif"));
 
             ivand = Modules.Content.CreateAndAddBuff("ChronoIvand",
-                assetBundle.LoadAsset<Sprite>("texBuffChronoClock"),
+                null,
                 Color.blue,
                 true,
                 true);
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(ivand, assetBundle, "texBuffChronoClock"));
 
             vanishFreeze = Modules.Content.CreateAndAddBuff("ChronoVanishfreeze",
-                assetBundle.LoadAsset<Sprite>("texBuffChronoClock"),
+                null,
                 Color.cyan,
                 true,
                 true);
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(vanishFreeze, "RoR2/Base/Common/texBuffGenericShield.tif"));
 
-            R2API.TempVisualEffectAPI.AddTemporaryVisualEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercExposeEffect.prefab").WaitForCompletion(), GetHasIvanTempVisualEffect);
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Merc/MercExposeEffect.prefab", (result) => {
+                R2API.TempVisualEffectAPI.AddTemporaryVisualEffect(result, GetHasIvanTempVisualEffect);
+            }));
         }
         
         private static bool GetHasIvanTempVisualEffect(CharacterBody body)

@@ -35,6 +35,7 @@ namespace RA2Mod.General.Components
 
         protected virtual void SetIndicator()
         {
+            //LegacyResourcesAPI runtime
             indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
         }
 

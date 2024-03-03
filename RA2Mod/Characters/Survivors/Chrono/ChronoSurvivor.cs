@@ -17,6 +17,7 @@ using UnityEngine.SceneManagement;
 using RA2Mod.General.Components;
 using System.Runtime.CompilerServices;
 using R2API.Utils;
+using System.Collections;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -40,13 +41,16 @@ namespace RA2Mod.Survivors.Chrono
             bodyName = bodyName,
             bodyNameToken = CHRONO_PREFIX + "NAME",
             subtitleNameToken = CHRONO_PREFIX + "SUBTITLE",
-
-            characterPortrait = assetBundle.LoadAsset<Texture>("texIconChrono"),
             bodyColor = Color.cyan,
             sortPosition = 69.5f,
 
-            crosshair = Assets.LoadCrosshair("Standard"),
-            podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            characterPortraitPathBundle = "texIconChrono",
+            crosshairPathAddressable = "RoR2/Base/UI/StandardCrosshair.prefab",
+            podPrefabPathAddressable = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
+
+            //characterPortrait = assetBundle.LoadAsset<Texture>("texIconChrono"),
+            //crosshair = Assets.LoadCrosshair("Standard"),
+            //podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 130f,
             healthRegen = 2.0f,
@@ -73,7 +77,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public override UnlockableDef characterUnlockableDef => ChronoUnlockables.characterUnlockableDef;
 
-        public override ItemDisplaysBase itemDisplays =>  new RA2Mod.General.JoeItemDisplays();
+        public override ItemDisplaysBase itemDisplays { get; } = new RA2Mod.General.JoeItemDisplays();
 
         public override void Initialize()
         {
@@ -85,20 +89,33 @@ namespace RA2Mod.Survivors.Chrono
             base.Initialize();
         }
 
+        public override IEnumerator AssetBundleInitializedCoroutine()
+        {
+            return ChronoAssets.OnAssetbundleLoaded(assetBundle, InitializeCharacter);
+        }
+
         public override void InitializeCharacter()
         {
             //need the character unlockable before you initialize the survivordef
             //ChronoUnlockables.Init();
-
+            
             base.InitializeCharacter();
+        }
+
+        public override void OnCharacterInitialized()
+        {
+            base.OnCharacterInitialized();
+
+            Config.ConfigureBody(prefabCharacterBody, ChronoConfig.SectionBody);
 
             ChronoConfig.Init();
+            //some assets are changed based on config
+            ChronoAssets.OnCharacterInitialized(assetBundle);
             ChronoStates.Init();
             ChronoTokens.Init();
-
+            
             ChronoHealthBars.Init();
             ChronoDamageTypes.Init();
-            ChronoAssets.InitAsync(assetBundle);
             ChronoBuffs.Init(assetBundle);
             ChronoItems.Init();
             ChronoCompat.Init();
@@ -138,12 +155,14 @@ namespace RA2Mod.Survivors.Chrono
         #region skills
         public override void InitializeSkills()
         {
+            Log.CurrentTime("initializeSkills");
             AddPassiveSkill();
             Skills.CreateSkillFamilies(bodyPrefab);
             AddPrimarySkills();
             AddSecondarySkills();
             AddUtiitySkills();
             AddSpecialSkills();
+            Log.CurrentTime("initializeSkills end");
         }
 
         private void AddPassiveSkill()
@@ -155,7 +174,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillName = "chronoPassive",
                 skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoPassive"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoSprintState)),
                 activationStateMachineName = "Body",
@@ -196,7 +215,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillName = "chronoPassiveScepter",
                 skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoPassive"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoSprintStateEpic)),
                 activationStateMachineName = "Body",
@@ -231,7 +250,7 @@ namespace RA2Mod.Survivors.Chrono
                     "chronoShoot",
                     CHRONO_PREFIX + "PRIMARY_SHOOT_NAME",
                     CHRONO_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
-                    assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                    assetBundle.LoadAsset<Sprite>("texIconChronoPrimary"),
                     new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoShoot)),
                     "Weapon",
                     false
@@ -248,7 +267,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillNameToken = CHRONO_PREFIX + "SECONDARY_BOMB_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "SECONDARY_BOMB_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSecondary"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoBomb)),
                 activationStateMachineName = "Weapon2",
@@ -342,7 +361,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillName = "chronoVanish",
                 skillNameToken = CHRONO_PREFIX + "SPECIAL_VANISH_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSpecial"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Vanish)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine

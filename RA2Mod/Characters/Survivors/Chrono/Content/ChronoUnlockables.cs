@@ -1,4 +1,5 @@
-﻿using RA2Mod.Survivors.Chrono.Achievements;
+﻿using RA2Mod.Modules;
+using RA2Mod.Survivors.Chrono.Achievements;
 using RoR2;
 using UnityEngine;
 
@@ -14,7 +15,12 @@ namespace RA2Mod.Survivors.Chrono
             masterySkinUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 ChronoMasteryAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(ChronoMasteryAchievement.identifier),
-                ChronoSurvivor.instance.assetBundle.LoadAsset<Sprite>("texMasteryAchievement"));
+                null);
+
+            Modules.ContentPacks.asyncLoadCoroutines.Add(ChronoSurvivor.instance.assetBundle.LoadAssetAsync<Sprite>("texMasteryAchievement", (result) =>
+            {
+                masterySkinUnlockableDef.achievementIcon = result;
+            }));
         }
     }
 }

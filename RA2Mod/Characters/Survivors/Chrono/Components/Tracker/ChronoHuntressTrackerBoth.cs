@@ -40,6 +40,7 @@ namespace RA2Mod.Survivors.Chrono.Components
         // Token: 0x06002686 RID: 9862 RVA: 0x000A83C1 File Offset: 0x000A65C1
         private void Awake()
         {
+            //LegacyResourcesAPI runtime
             this.bombIndicator = new Indicator(base.gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
             this.vanishIndicator = new Indicator(base.gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
         }

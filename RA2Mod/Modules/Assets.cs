@@ -39,9 +39,22 @@ namespace RA2Mod.Modules
             ContentPacks.asyncLoadCoroutines.Add(LoadAssetBundleFromPathAsync(path, (bundle) =>
             {
                 loadedBundles[bundleName] = bundle;
-                RA2Plugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(bundle));
+                ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(bundle));
                 onComplete?.Invoke(bundle);
             }));
+        }
+
+        internal static IEnumerator LoadFromAddressableOrBundle<T>(AssetBundle assetBundle, string bundlePath, string addressablePath, Action<T> OnComplete) where T : UnityEngine.Object
+        {
+            if (!string.IsNullOrEmpty(bundlePath))
+            {
+                return assetBundle.LoadAssetAsync<T>(bundlePath, OnComplete);
+            }
+            if (!string.IsNullOrEmpty(addressablePath))
+            {
+                return Assets.LoadAddressableAssetAsync<T>(addressablePath, OnComplete);
+            }
+            return null;
         }
 
         internal static IEnumerator LoadAssetBundleFromPathAsync(string path, Action<AssetBundle> onComplete)
@@ -51,18 +64,29 @@ namespace RA2Mod.Modules
             {
                 yield return null;
             }
-            onComplete(request.assetBundle);
+            onComplete?.Invoke(request.assetBundle);
         }
 
-        internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> OnComplete) where T : UnityEngine.Object
+        internal static IEnumerator LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : UnityEngine.Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
             while (!request.isDone)
             {
                 yield return null;
             }
-            OnComplete(request.asset as T);
+            onComplete?.Invoke(request.asset as T);
         }
+
+        internal static IEnumerator LoadAssetToCollection<T>(this AssetBundle assetBundle, string name, Dictionary<string, T> assetCollection) where T : UnityEngine.Object
+        {
+            AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            while (!request.isDone)
+            {
+                yield return null;
+            }
+            assetCollection[name] = request.asset as T;
+        }
+
         internal static IEnumerator LoadAddressableAssetAsync<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
@@ -77,13 +101,27 @@ namespace RA2Mod.Modules
             return handle = Addressables.LoadAssetAsync<TObject>(key);
         }
 
+        internal static IEnumerator LoadBuffIconAsync(BuffDef buffDef, AssetBundle assetBundle, string bundleLoadPath)
+        {
+            return assetBundle.LoadAssetAsync<Sprite>(bundleLoadPath, (result) => {
+                buffDef.iconSprite = result;
+            });
+        }
+        internal static IEnumerator LoadBuffIconAsync(BuffDef buffDef, string addressablePath)
+        {
+            return LoadAddressableAssetAsync<Sprite>(addressablePath, (result) => {
+                buffDef.iconSprite = result;
+            });
+        }
+
         #region legacy non-async helpers
         internal static GameObject CloneTracer(string originalTracerName, string newTracerName)
         {
-            if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName) == null) 
+            GameObject loadedTracer = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName);
+            if (loadedTracer == null) 
                 return null;
 
-            GameObject newTracer = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName), newTracerName, true);
+            GameObject newTracer = PrefabAPI.InstantiateClone(loadedTracer, newTracerName, true);
 
             if (!newTracer.GetComponent<EffectComponent>()) newTracer.AddComponent<EffectComponent>();
             if (!newTracer.GetComponent<VFXAttributes>()) newTracer.AddComponent<VFXAttributes>();

@@ -18,18 +18,13 @@ namespace RA2Mod.Modules.Characters
 
         public virtual GameObject displayPrefab { get; protected set; }
 
-        public override void InitializeCharacter()
+        public override void OnCharacterInitialized()
         {
-            base.InitializeCharacter();
-
-            InitializeDisplayPrefab();
-
-            InitializeSurvivor();
-        }
-
-        protected virtual void InitializeDisplayPrefab()
-        {
-            displayPrefab = Prefabs.CreateDisplayPrefab(assetBundle, displayPrefabName, bodyPrefab);
+            ContentPacks.asyncLoadCoroutines.Add(Prefabs.CreateDisplayPrefabAsync(assetBundle, displayPrefabName, bodyPrefab, (result) =>
+            {
+                displayPrefab = result;
+                InitializeSurvivor();
+            }));
         }
 
         protected virtual void InitializeSurvivor()

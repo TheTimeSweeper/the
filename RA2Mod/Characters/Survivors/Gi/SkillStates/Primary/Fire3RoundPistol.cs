@@ -17,7 +17,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
         public static float force = 10f;
         public static float recoil = 0.2f;
         public static float range = 120f;
-        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
+        public static GameObject tracerEffectPrefab = null;// LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
         private string muzzleString;
 

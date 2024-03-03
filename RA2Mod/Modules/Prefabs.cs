@@ -8,6 +8,7 @@ using static RoR2.CharacterAI.AISkillDriver;
 using RoR2.Skills;
 using System;
 using System.Linq;
+using System.Collections;
 
 namespace RA2Mod.Modules
 {
@@ -19,7 +20,30 @@ namespace RA2Mod.Modules
         // cache this just to give our ragdolls the same physic material as vanilla stuff
         private static PhysicMaterial ragdollMaterial;
 
-        public static GameObject CreateDisplayPrefab(AssetBundle assetBundle, string displayPrefabName, GameObject prefab)
+        public static IEnumerator CreateDisplayPrefabAsync(AssetBundle assetBundle, string displayPrefabName, GameObject bodyPrefab, Action<GameObject> OnComplete)
+        {
+            return assetBundle.LoadAssetAsync<GameObject>(displayPrefabName, (display) =>
+            {
+                if (display == null)
+                {
+                    Log.Error($"could not load display prefab {displayPrefabName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
+                    OnComplete(null);
+                }
+
+                CharacterModel characterModel = display.GetComponent<CharacterModel>();
+                if (!characterModel)
+                {
+                    characterModel = display.AddComponent<CharacterModel>();
+                }
+                characterModel.baseRendererInfos = bodyPrefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
+
+                Modules.Assets.ConvertAllRenderersToHopooShader(display);
+
+                OnComplete(display);
+            });
+        }
+
+        public static GameObject CreateDisplayPrefab(AssetBundle assetBundle, string displayPrefabName, GameObject bodyPrefab)
         {
             GameObject display = assetBundle.LoadAsset<GameObject>(displayPrefabName);
             if (display == null)
@@ -33,7 +57,7 @@ namespace RA2Mod.Modules
             {
                 characterModel = display.AddComponent<CharacterModel>();
             }
-            characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
+            characterModel.baseRendererInfos = bodyPrefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
             Modules.Assets.ConvertAllRenderersToHopooShader(display);
 
@@ -41,6 +65,34 @@ namespace RA2Mod.Modules
         }
 
         #region body setup
+
+        internal static IEnumerator LoadCharacterModelAsync(AssetBundle assetBundle, string modelName, Action<GameObject> onComplete)
+        {
+            return assetBundle.LoadAssetAsync<GameObject>(modelName, onComplete);
+        }
+
+        internal static IEnumerator CloneCharacterBodyAsync(GameObject modelObject, BodyInfo bodyInfo, Action<GameObject> onComplete)
+        {
+            return Assets.LoadAddressableAssetAsync<GameObject>(bodyInfo.bodyToClonePath, (loadedBody) =>
+            {
+                if (!loadedBody)
+                {
+                    Log.Error(bodyInfo.bodynameToClone + " Body to clone is not a valid body, character creation failed");
+                    return;
+                }
+
+                GameObject newBodyPrefab = PrefabAPI.InstantiateClone(loadedBody, bodyInfo.bodyName);
+
+                for (int i = newBodyPrefab.transform.childCount - 1; i >= 0; i--)
+                {
+                    UnityEngine.Object.DestroyImmediate(newBodyPrefab.transform.GetChild(i).gameObject);
+                }
+
+                CreateBodyPrefab(newBodyPrefab, modelObject, bodyInfo);
+
+                onComplete?.Invoke(newBodyPrefab);
+            });
+        }
 
         public static GameObject LoadCharacterModel(AssetBundle assetBundle, string modelName)
         {
@@ -63,13 +115,13 @@ namespace RA2Mod.Modules
             }
             return body;
         }
-
+        //LegacyResourcesAPI old
         public static GameObject CloneCharacterBody(BodyInfo bodyInfo)
         {
-            GameObject clonedBody = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body");
+            GameObject clonedBody = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodynameToClone + "Body");
             if (!clonedBody)
             {
-                Log.Error(bodyInfo.bodyNameToClone + " Body to clone is not a valid body, character creation failed");
+                Log.Error(bodyInfo.bodynameToClone + " Body to clone is not a valid body, character creation failed");
                 return null;
             }
 
@@ -210,7 +262,7 @@ namespace RA2Mod.Modules
             bodyComponent.rootMotionInMainState = false;
 
             bodyComponent.hullClassification = HullClassification.Human;
-
+            
             bodyComponent.isChampion = false;
         }
 
@@ -299,17 +351,13 @@ namespace RA2Mod.Modules
         #region ModelSetup
         public static CharacterModel SetupCharacterModel(GameObject bodyPrefab, CustomRendererInfo[] customInfos = null)
         {
-
             CharacterModel characterModel = bodyPrefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
             bool preattached = characterModel != null;
             if (!preattached)
+            {
                 characterModel = bodyPrefab.GetComponent<ModelLocator>().modelTransform.gameObject.AddComponent<CharacterModel>();
-
+            }
             characterModel.body = bodyPrefab.GetComponent<CharacterBody>();
-
-            characterModel.autoPopulateLightInfos = true;
-            characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
 
             if (!preattached)
             {
@@ -412,7 +460,7 @@ namespace RA2Mod.Modules
         {
             if (bodyPrefab.GetComponent<HurtBoxGroup>() != null)
             {
-                Log.Debug("Hitboxgroup already exists on model prefab. aborting code setup");
+                Log.Debug("HurtBoxGroup already exists on model prefab. aborting code setup");
                 return;
             }
 
@@ -489,7 +537,11 @@ namespace RA2Mod.Modules
             footstepHandler.baseFootstepString = "Play_player_footstep";
             footstepHandler.sprintFootstepOverrideString = "";
             footstepHandler.enableFootstepDust = true;
-            footstepHandler.footstepDustPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/GenericFootstepDust");
+
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Common/VFX/GenericFootstepDust.prefab", (result) =>
+            {
+                footstepHandler.footstepDustPrefab = result;
+            }));
         }
 
         private static void SetupRagdoll(GameObject model)
@@ -497,9 +549,22 @@ namespace RA2Mod.Modules
             RagdollController ragdollController = model.GetComponent<RagdollController>();
 
             if (!ragdollController) return;
+            if (ragdollMaterial == null)
+            {
+                ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<PhysicMaterial>("RoR2/Base/Common/physmatRagdoll.physicMaterial", (result) =>
+                {
+                    ragdollMaterial = result;
+                    SetupRagdollBones(ragdollController);
+                }));
+            }
+            else
+            {
+                SetupRagdollBones(ragdollController);
+            }
+        }
 
-            if (ragdollMaterial == null) ragdollMaterial = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
-
+        private static void SetupRagdollBones(RagdollController ragdollController)
+        {
             foreach (Transform boneTransform in ragdollController.bones)
             {
                 if (boneTransform)
@@ -540,6 +605,7 @@ namespace RA2Mod.Modules
         #endregion
 
         #region master
+        //LegacyResourcesAPI old
         public static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy) => CloneDopplegangerMaster(bodyPrefab, masterName, masterToCopy);
         public static GameObject CloneDopplegangerMaster(GameObject bodyPrefab, string masterName, string masterToCopy)
         {
@@ -549,7 +615,21 @@ namespace RA2Mod.Modules
             Modules.Content.AddMasterPrefab(newMaster);
             return newMaster;
         }
+        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete) =>
+            CloneDopplegangerMasterAsync(bodyPrefab, masterName, "RoR2/Base/Merc/MercMonsterMaster.prefab", onComplete);
+        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, string masterToCopyPath, Action<GameObject> onComplete)
+        {
+            return Assets.LoadAddressableAssetAsync<GameObject>(masterToCopyPath, (result) =>
+            {
+                GameObject newMaster = PrefabAPI.InstantiateClone(result, masterName, true);
+                newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
+                Modules.Content.AddMasterPrefab(newMaster);
+                onComplete(newMaster);
+            });
+        }
+
+        //LegacyResourcesAPI old
         public static GameObject CreateBlankMasterPrefab(GameObject bodyPrefab, string masterName)
         {
             GameObject masterObject = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster"), masterName, true);
@@ -566,6 +646,28 @@ namespace RA2Mod.Modules
             }
 
             return masterObject;
+        }
+
+
+        public static IEnumerator CreateBlankMasterPrefabAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete)
+        {
+            return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) => {
+
+                GameObject masterObject = PrefabAPI.InstantiateClone(result, masterName, true);
+                //should the user call this themselves?
+                Modules.ContentPacks.masterPrefabs.Add(masterObject);
+
+                CharacterMaster characterMaster = masterObject.GetComponent<CharacterMaster>();
+                characterMaster.bodyPrefab = bodyPrefab;
+
+                AISkillDriver[] drivers = masterObject.GetComponents<AISkillDriver>();
+                for (int i = 0; i < drivers.Length; i++)
+                {
+                    UnityEngine.Object.Destroy(drivers[i]);
+                }
+
+                onComplete(masterObject);
+            });
         }
 
         public static GameObject LoadMaster(this AssetBundle assetBundle, GameObject bodyPrefab, string assetName)

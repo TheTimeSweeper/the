@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,15 +15,19 @@ namespace RA2Mod.Modules.Characters
         
         public abstract BodyInfo bodyInfo { get; }
         private BodyInfo cachedBodyInfo;
-        private BodyInfo _bodyInfo
+        protected BodyInfo _bodyInfo
         {
             get
             {
-                if(cachedBodyInfo != null)
+                if(cachedBodyInfo == null)
                 {
                     cachedBodyInfo = bodyInfo;
                 }
                 return cachedBodyInfo;
+            }
+            set
+            {
+                cachedBodyInfo = value;
             }
         }
 
@@ -49,27 +54,47 @@ namespace RA2Mod.Modules.Characters
 
                 Log.CurrentTime($"{bodyName} assetbundle loaded");
                 assetBundle = loadedAssetBundle;
-                InitializeCharacter();
+                ContentPacks.asyncLoadCoroutines.Add(_bodyInfo.FinalizeBodyInfoAsync(assetBundle));
+                ContentPacks.asyncLoadCoroutines.Add(AssetBundleInitializedCoroutine());
             });
         }
+
+        public abstract IEnumerator AssetBundleInitializedCoroutine();
         
         public virtual void InitializeCharacter()
         {
             InitializeCharacterBodyPrefab();
-
-            Log.CurrentTime($"{bodyName} body prefab");
-
-            InitializeItemDisplays();
         }
+
+        public abstract void OnCharacterInitialized();
 
         protected virtual void InitializeCharacterBodyPrefab()
         {
-            characterModelObject = Prefabs.LoadCharacterModel(assetBundle, modelPrefabName);
+            ContentPacks.asyncLoadCoroutines.Add(Prefabs.LoadCharacterModelAsync(assetBundle, modelPrefabName, (modelResult) =>
+            {
+                characterModelObject = modelResult;
 
-            bodyPrefab = Modules.Prefabs.CreateBodyPrefab(characterModelObject, bodyInfo);
-            prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
+                ContentPacks.asyncLoadCoroutines.Add(Prefabs.CloneCharacterBodyAsync(characterModelObject, _bodyInfo, (bodyResult) =>
+                {
+                    bodyPrefab = bodyResult;
+                    prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
 
-            prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
+                    prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
+
+                    Log.CurrentTime($"{bodyName} body prefab");
+
+                    OnCharacterInitialized();
+
+                    InitializeItemDisplays();
+                }));
+            }));
+
+            //characterModelObject = Prefabs.LoadCharacterModel(assetBundle, modelPrefabName);
+
+            //bodyPrefab = Modules.Prefabs.CreateBodyPrefab(characterModelObject, bodyInfo);
+            //prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
+
+            //prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
         }
 
         public virtual void InitializeItemDisplays() {
@@ -80,7 +105,6 @@ namespace RA2Mod.Modules.Characters
 
             if (itemDisplays != null)
             {
-                Modules.ItemDisplays.queuedDisplays++;
                 itemDisplays.SetItemDisplays(prefabCharacterModel.itemDisplayRuleSet);
             }
         }
@@ -103,17 +127,29 @@ namespace RA2Mod.Modules.Characters
         public string bodyNameToken = "";
         public string subtitleNameToken = "";
 
-        /// <summary> body prefab you're cloning for your character- commando is the safest </summary>
-        public string bodyNameToClone = "Commando";
+        /// <summary> the body prefab you're cloning for your character- commando is the safest </summary>
+        [Obsolete("I recommend loading asynchronously instead, using bodyToClonePath.")]
+        public string bodynameToClone = "Commando";
+
+        /// <summary> addressable path for the body prefab you're cloning for your character- commando is the safest </summary>
+        public string bodyToClonePath = "RoR2/Base/Commando/CommandoBody.prefab";
 
         public Color bodyColor = Color.white;
 
-        public Texture characterPortrait = null;
-
         public float sortPosition = 100f;
 
+        public Texture characterPortrait = null;
+        public string characterPortraitPathBundle = null;
+        public string characterPortraitPathAddressable = null;
+
         public GameObject crosshair = null;
+        public string crosshairPathBundle = null;
+        public string crosshairPathAddressable = null;
         public GameObject podPrefab = null;
+        public string podPrefabPathBundle = null;
+        public string podPrefabPathAddressable = null;
+
+        public Func<IEnumerator> assetLoadCoroutine = null;
         #endregion Character
 
         #region Stats
@@ -185,6 +221,44 @@ namespace RA2Mod.Modules.Characters
                 return _cameraParams;
             }
             set => _cameraParams = value;
+        }
+
+        public IEnumerator FinalizeBodyInfoAsync(AssetBundle assetBundle)
+        {
+            List<IEnumerator> bodyInfoLoads = new List<IEnumerator>();
+
+            if (characterPortrait == null)
+            {
+                bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<Texture>(
+                    assetBundle,
+                    characterPortraitPathBundle,
+                    characterPortraitPathAddressable,
+                    (result) => characterPortrait = result));
+            }
+            if (crosshair == null)
+            {
+                bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<GameObject>(
+                    assetBundle,
+                    crosshairPathBundle,
+                    crosshairPathAddressable,
+                    (result) => crosshair = result));
+            }
+            if (podPrefab == null)
+            {
+                bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<GameObject>(
+                    assetBundle,
+                    podPrefabPathBundle,
+                    podPrefabPathAddressable,
+                    (result) => podPrefab = result));
+            }
+
+            for (int i = 0; i < bodyInfoLoads.Count; i++)
+            {
+                while (bodyInfoLoads[i] != null && bodyInfoLoads[i].MoveNext())
+                {
+                    yield return null;
+                }
+            }
         }
         #endregion camera
     }

@@ -36,8 +36,6 @@ namespace RA2Mod.Survivors.Chrono
 
         public static void Init()
         {
-            Config.ConfigureBody(ChronoSurvivor.instance.prefabCharacterBody, SectionBody);
-
             M0_SprintTeleport_OnRelease = Config.BindAndOptions(
                 SectionSkills,
                 "M0_SprintTeleport_OnRelease",

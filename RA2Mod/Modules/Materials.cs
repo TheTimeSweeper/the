@@ -6,8 +6,25 @@ namespace RA2Mod.Modules
     internal static class Materials
     {
         private static List<Material> cachedMaterials = new List<Material>();
+        internal static Shader _hotpoo;
+        internal static Shader hotpoo
+        {
+            get
+            {
+                if(_hotpoo == null)
+                {
+                    Log.Warning("Hotpoo was null. doing the big scary waitforcompletion");
+                    _hotpoo = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<Shader>("RoR2/Base/Shaders/HGStandard.shader").WaitForCompletion();
+                }
+                return _hotpoo;
+            }
+            set => _hotpoo = value;
+        }// = null;// RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
 
-        internal static Shader hotpoo = RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
+        public static void Init()
+        {
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<Shader>("RoR2/Base/Shaders/HGStandard.shader", (result) => hotpoo = result));
+        }
 
         public static Material LoadMaterial(this AssetBundle assetBundle, string materialName) => CreateHopooMaterialFromBundle(assetBundle, materialName);
         public static Material CreateHopooMaterialFromBundle(this AssetBundle assetBundle, string materialName)

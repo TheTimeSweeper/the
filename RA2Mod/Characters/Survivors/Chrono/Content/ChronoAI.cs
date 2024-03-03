@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RA2Mod.Modules;
+using RoR2;
 using RoR2.CharacterAI;
 using System;
 using UnityEngine;
@@ -9,16 +10,24 @@ namespace RA2Mod.Survivors.Chrono
     {
         public static void Init(GameObject bodyPrefab, string masterName)
         {
-            GameObject master = Modules.Prefabs.CreateBlankMasterPrefab(bodyPrefab, masterName);
+             ContentPacks.asyncLoadCoroutines.Add(Prefabs.CreateBlankMasterPrefabAsync(bodyPrefab, masterName, (result) => {
 
-            BaseAI baseAI = master.GetComponent<BaseAI>();
-            baseAI.aimVectorDampTime = 0.01f;
-            baseAI.aimVectorMaxSpeed = 360;
+                GameObject master = result;
 
-            //TestShootAi(master);
+                BaseAI baseAI = master.GetComponent<BaseAI>();
+                baseAI.aimVectorDampTime = 0.01f;
+                baseAI.aimVectorMaxSpeed = 360;
 
-            TestSprintAI(master);
+                //TestShootAi(master);
 
+                TestSprintAI(master);
+
+                //CreateAI(master);
+            }));
+        }
+
+        private static void CreateAI(GameObject master)
+        {
             ////some fields omitted that aren't commonly changed. will be set to default values
             //AISkillDriver shootDriver = master.AddComponent<AISkillDriver>();
             ////Selection Conditions

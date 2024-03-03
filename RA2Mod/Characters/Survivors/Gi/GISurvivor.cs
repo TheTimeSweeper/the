@@ -11,6 +11,7 @@ using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +54,7 @@ namespace RA2Mod.Survivors.GI
 
         public override UnlockableDef characterUnlockableDef => GIUnlockables.characterUnlockableDef;
 
-        public override ItemDisplaysBase itemDisplays => new RA2Mod.General.JoeItemDisplays();
+        public override ItemDisplaysBase itemDisplays { get; } = new RA2Mod.General.JoeItemDisplays();
 
         public override void Initialize()
         {
@@ -63,18 +64,29 @@ namespace RA2Mod.Survivors.GI
             base.Initialize();
         }
 
+
+        //yeah this is shit. let's just see if it works though
+        public override IEnumerator AssetBundleInitializedCoroutine()
+        {
+            InitializeCharacter();
+            yield break;
+        }
+
         public override void InitializeCharacter()
         {
             //need the character unlockable before you initialize the survivordef
             //GIUnlockables.Init();
 
             base.InitializeCharacter();
+        }
 
+        public override void OnCharacterInitialized()
+        {
             GIConfig.Init();
 
             GIStates.Init();
             GITokens.Init();
-            
+
             GIAssets.Init(assetBundle);
             GIBuffs.Init(assetBundle);
 

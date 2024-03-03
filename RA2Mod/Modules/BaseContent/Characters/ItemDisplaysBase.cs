@@ -11,15 +11,26 @@ namespace RA2Mod.Modules.Characters
 
             Log.CurrentTime("ITEM DISPLAY START");
 
-            ItemDisplays.LazyInit();
+            Modules.ItemDisplays.queuedDisplays++;
+            ItemDisplays.SetItemDisplaysWhenReady(() =>
+            {
+                SetItemDisplayRules(itemDisplayRules);
+                itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
+                ItemDisplays.DisposeWhenDone();
+                Log.CurrentTime("ITEM DISPLAY END");
+            });
 
-            SetItemDisplayRules(itemDisplayRules);
+            //Modules.ItemDisplays.queuedDisplays++;
 
-            itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
+            //ItemDisplays.GetDisplaysReady();
 
-            ItemDisplays.DisposeWhenDone();
+            //SetItemDisplayRules(itemDisplayRules);
 
-            Log.CurrentTime("ITEM DISPLAY END");
+            //itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
+
+            //ItemDisplays.DisposeWhenDone();
+
+            //Log.CurrentTime("ITEM DISPLAY END");
         }
 
         protected abstract void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules);

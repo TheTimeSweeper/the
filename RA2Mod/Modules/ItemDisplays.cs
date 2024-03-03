@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,14 +14,26 @@ namespace RA2Mod.Modules
         public static int queuedDisplays;
 
         public static bool initialized = false;
+        public static bool initializing = false;
 
-        public static void LazyInit()
+        public static void SetItemDisplaysWhenReady(System.Action onComplete)
         {
-            if (initialized)
-                return;
-            initialized = true;
+            if (!initialized && !initializing)
+            { 
+                initializing = true;
+                ContentPacks.asyncLoadCoroutines.Add(PopulateDisplays());
+            }
 
-            PopulateDisplays();
+            ContentPacks.asyncLoadCoroutines.Add(WaitForPopulate(onComplete));
+        }
+
+        public static IEnumerator WaitForPopulate(System.Action onComplete)
+        {
+            while (!initialized)
+            {
+                yield return null;
+            }
+            onComplete();
         }
 
         internal static void DisposeWhenDone()
@@ -31,24 +44,35 @@ namespace RA2Mod.Modules
             if (!initialized)
                 return;
             initialized = false;
+            initializing = false;
 
             itemDisplayPrefabs = null;
             KeyAssetDisplayRules = null;
             KeyAssets = null;
         }
 
-        internal static void PopulateDisplays()
+        internal static IEnumerator PopulateDisplays()
         {
-            PopulateFromBody("LoaderBody");
+            IEnumerator loadIDRS = Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Loader/LoaderBody.prefab", (result) => {
+                PopulateFromBody(result);
+            });
+
+            while (loadIDRS.MoveNext())
+            {
+                yield return null;
+            }
 
             PopulateCustomLightningArm();
-
             //if you have any custom item displays to add here I would be very impressed
+
+            initialized = true;
         }
 
-        private static void PopulateFromBody(string bodyName)
+        private static void PopulateFromBody(GameObject bodyPrefab)
         {
-            ItemDisplayRuleSet itemDisplayRuleSet = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/" + bodyName).GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>().itemDisplayRuleSet;
+            //GameObject bodyPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("RoR2/Base/Loader/LoaderBody.prefab");
+
+            ItemDisplayRuleSet itemDisplayRuleSet = bodyPrefab.GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>().itemDisplayRuleSet;
 
             ItemDisplayRuleSet.KeyAssetRuleGroup[] itemRuleGroups = itemDisplayRuleSet.keyAssetRuleGroups;
 

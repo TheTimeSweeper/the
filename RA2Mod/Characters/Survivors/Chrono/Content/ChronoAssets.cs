@@ -43,20 +43,53 @@ namespace RA2Mod.Survivors.Chrono
         public static List<Texture2D> testTextures = new List<Texture2D>();
         public static int noises = 4;
 
-        public static void InitAsync(AssetBundle assetBundle)
+        public static IEnumerator OnAssetbundleLoaded(AssetBundle assetBundle, Action OnComplete)
+        {
+            //List<IEnumerator> subEnumerators = new List<IEnumerator>();
+
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChrono", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoRA2", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPassive", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPrimary", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoSecondary", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoUtility", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoUtilityAlt", null));
+            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoSpecial", null));
+
+            //for (int i = 0; i < subEnumerators.Count; i++)
+            //{
+            //    while (subEnumerators[i].MoveNext()) yield return null;
+            //}
+            OnComplete?.Invoke();
+            yield break;
+        }
+
+        public static void OnCharacterInitialized(AssetBundle assetBundle)
         {
             Log.CurrentTime("INIT ASYNC");
+
+            List<IEnumerator> subEnumerators = new List<IEnumerator>();
             
-            for (int i = 1; i <= noises; i++)
+            loads.Add(loadSubEnumerators());
+
+            IEnumerator loadSubEnumerators()
             {
-                loads.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
+                for (int i = 1; i <= noises; i++)
                 {
-                    testTextures.Add(result);
-                    Log.Warning(result);
-                }));
+                    /*loads*/
+                    subEnumerators.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
+                    {
+                        testTextures.Add(result);
+                        Log.Warning(result);
+                    }));
+                }
+                for (int i = 0; i < subEnumerators.Count; i++)
+                {
+                    while (subEnumerators[i].MoveNext()) yield return null;
+                }
             }
 
-            loads.Add(assetBundle.LoadAssetAsync("texIconChronoCancel", (Sprite result) =>
+            loads.Add(assetBundle.LoadAssetAsync("texIconChronoUtilityCancel", (Sprite result) =>
             {
                 cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
                 {
