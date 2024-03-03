@@ -39,7 +39,6 @@ namespace RA2Mod.Modules
             ContentPacks.asyncLoadCoroutines.Add(LoadAssetBundleFromPathAsync(path, (bundle) =>
             {
                 loadedBundles[bundleName] = bundle;
-                ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(bundle));
                 onComplete?.Invoke(bundle);
             }));
         }
@@ -64,6 +63,7 @@ namespace RA2Mod.Modules
             {
                 yield return null;
             }
+            ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(request.assetBundle));
             onComplete?.Invoke(request.assetBundle);
         }
 
