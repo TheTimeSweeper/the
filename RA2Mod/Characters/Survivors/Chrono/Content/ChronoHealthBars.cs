@@ -16,7 +16,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public class VanishingBarData : ExtraHealthbarSegment.BarData
         {
-            private int sickness;
+            private float sickness;
 
             HealthBarStyle.BarStyle vanishingBarStyle;
 
@@ -32,13 +32,14 @@ namespace RA2Mod.Survivors.Chrono
                 return style;
             }
 
-            public override void UpdateInfo(ref HealthBar.BarInfo info, HealthComponent healthSource)
+            public override void UpdateInfo(ref HealthBar.BarInfo info, HealthBar healthBar)
             {
-                base.UpdateInfo(ref info, healthSource);
+                base.UpdateInfo(ref info, healthBar);
+                float eliteFraction = healthBar.viewerBody != null? healthBar.viewerBody.executeEliteHealthFraction : 0;
 
                 info.enabled = sickness > 0;
-                info.normalizedXMin = 0;
-                info.normalizedXMax = sickness / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2);
+                info.normalizedXMin = eliteFraction;
+                info.normalizedXMax = sickness + eliteFraction;
             }
 
             public override void ApplyBar(ref HealthBar.BarInfo info, Image image, HealthComponent source, ref int i)
@@ -50,6 +51,7 @@ namespace RA2Mod.Survivors.Chrono
             {
                 base.CheckInventory(ref info, body);
                 sickness = body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
+                sickness = sickness / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2);
             }
         }
     }

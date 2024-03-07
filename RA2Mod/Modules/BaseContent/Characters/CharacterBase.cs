@@ -82,7 +82,7 @@ namespace RA2Mod.Modules.Characters
                     prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
 
                     Log.CurrentTime($"{bodyName} body prefab");
-
+                    
                     OnCharacterInitialized();
 
                     InitializeItemDisplays();

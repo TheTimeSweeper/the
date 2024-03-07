@@ -30,7 +30,8 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         
         private ChronoTether vanishTether;
         private SetStateOnHurt setStateOnHurt;
-        
+        private bool rolledCrit;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -68,16 +69,20 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             {
                 TryFreeze(targetHurtBox.healthComponent.body);
             }
+            rolledCrit = base.RollCrit();
+        }
 
+        private void ResetDamageInfo()
+        {
             damageInfo = new DamageInfo
             {
-                //position = this.targetRoot.transform.position,
+                position = targetHurtBox.transform.position,
                 attacker = gameObject,
                 inflictor = gameObject,
                 damage = damageCoefficient * this.damageStat,
                 damageColorIndex = DamageColorIndex.Default,
                 damageType = DamageType.Generic,
-                crit = base.RollCrit(),
+                crit = rolledCrit,
                 force = Vector3.zero,
                 procChainMask = default(ProcChainMask),
                 procCoefficient = procCoefficient,
@@ -111,9 +116,11 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public virtual void DoDamage()
         {
-            damageInfo.position = targetHurtBox.transform.position;
+            //create a new damgeinfo every time in case it gets rejected initially
+            ResetDamageInfo();
 
             targetHurtBox.healthComponent.TakeDamage(damageInfo);
+
             GlobalEventManager.instance.OnHitEnemy(damageInfo, targetHurtBox.healthComponent.gameObject);
             GlobalEventManager.instance.OnHitAll(damageInfo, targetHurtBox.healthComponent.gameObject);
         }

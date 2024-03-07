@@ -122,7 +122,7 @@ namespace RA2Mod.Survivors.Chrono
                 }
             }
 
-            Log.CurrentTime("no driver. chrono compat failed");
+            Log.Debug("no driver. chrono compat failed");
         }
 
         private void DoDriverCompat()
@@ -275,7 +275,7 @@ namespace RA2Mod.Survivors.Chrono
         public override void OnExit()
         {
             base.OnExit();
-            base.PlayAnimation("Gesture, Override", "BufferEmpty");
+            base.PlayCrossfade("Gesture, Override", "BufferEmpty", 0.8f);
         }
 
         public override void FixedUpdate()

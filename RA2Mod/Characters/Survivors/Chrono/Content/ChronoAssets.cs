@@ -41,25 +41,34 @@ namespace RA2Mod.Survivors.Chrono
         public static SkillDef cancelSKillDef;
 
         public static List<Texture2D> testTextures = new List<Texture2D>();
-        public static int noises = 4;
+        public static int noises = 0;
 
         public static IEnumerator OnAssetbundleLoaded(AssetBundle assetBundle, Action OnComplete)
         {
-            //List<IEnumerator> subEnumerators = new List<IEnumerator>();
-
+            List<IEnumerator> subEnumerators = new List<IEnumerator>();
+            
             //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChrono", null));
             //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoRA2", null));
-            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPassive", null));
-            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPrimary", null));
-            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoSecondary", null));
-            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoUtility", null));
-            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoUtilityAlt", null));
-            //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoSpecial", null));
+            subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPassive", null));
+            subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPrimary", null));
+            subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoSecondary", null));
+            subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoUtility", null));
+            subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoUtilityAlt", null));
+            subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoSpecial", null));
+            //well this was equally as fast. guess just save a dictionary then
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChrono", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoRA2", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoPassive", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoPrimary", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoSecondary", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoUtility", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoUtilityAlt", skillIcons));
+            //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoSpecial", skillIcons));
 
-            //for (int i = 0; i < subEnumerators.Count; i++)
-            //{
-            //    while (subEnumerators[i].MoveNext()) yield return null;
-            //}
+            for (int i = 0; i < subEnumerators.Count; i++)
+            {
+                while (subEnumerators[i].MoveNext()) yield return null;
+            }
             OnComplete?.Invoke();
             yield break;
         }
@@ -138,10 +147,6 @@ namespace RA2Mod.Survivors.Chrono
                 R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
                 Content.AddProjectilePrefab(chronoBombProjectile);
 
-                loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBombGhost.prefab", (result) =>
-                {
-                    chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab = result;
-                }));
                 loads.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
                 {
                     lunarSunExplosion = result;

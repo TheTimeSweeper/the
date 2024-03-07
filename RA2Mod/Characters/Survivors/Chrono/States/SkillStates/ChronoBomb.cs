@@ -60,12 +60,32 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
 
         public override Ray ModifyProjectileAimRay(Ray aimRay)
         {
-            return new Ray(trackingTarget.transform.position, Vector3.up);
+            return new Ray(trackingTarget.transform.position, Vector3.forward);
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.Skill;
+        }
+
+        public override void FireProjectile()
+        {
+            if (NetworkServer.active)
+            {
+                Ray aimRay = base.GetAimRay();
+                aimRay = ModifyProjectileAimRay(aimRay);
+                ProjectileManager.instance.FireProjectile(
+                    this.projectilePrefab,
+                    aimRay.origin,
+                    Util.QuaternionSafeLookRotation(aimRay.direction),
+                    base.gameObject,
+                    this.damageStat * DamageCoefficient,
+                    0,
+                    base.RollCrit(),
+                    DamageColorIndex.Default,
+                    null,
+                    -1f);
+            }
         }
 
         public override void PlayAnimation(float duration)

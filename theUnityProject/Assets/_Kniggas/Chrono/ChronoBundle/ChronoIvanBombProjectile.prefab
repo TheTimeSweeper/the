@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catalogIndex: -1
-  ghostPrefab: {fileID: 0}
+  ghostPrefab: {fileID: 6138324122856648497, guid: 60c8f2fd69b5b1e4b938eb0c84c000c5,
+    type: 3}
   ghostTransformAnchor: {fileID: 0}
   startSound: Play_IvanBombStart
   cannotBeDeleted: 0

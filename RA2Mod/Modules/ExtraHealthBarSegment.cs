@@ -136,7 +136,7 @@ namespace Slipstream
 
             public abstract HealthBarStyle.BarStyle GetStyle();
 
-            public virtual void UpdateInfo(ref HealthBar.BarInfo info, HealthComponent healthSource)
+            public virtual void UpdateInfo(ref HealthBar.BarInfo info, HealthBar healthBar)
             {
                 if (cachedStyle == null) cachedStyle = GetStyle();
                 HealthBarStyle.BarStyle style = cachedStyle.Value;
@@ -191,7 +191,7 @@ namespace Slipstream
                         barData.tracker = this;
                     if (barData.bar == null) // I cant do this in the init because it loses its reference somehow -Bubbet
                         barData.bar = healthBar;
-                    barData.UpdateInfo(ref barData.info, healthBar.source);
+                    barData.UpdateInfo(ref barData.info, healthBar);
                 }
             }
             public void ApplyBar(ref int i)

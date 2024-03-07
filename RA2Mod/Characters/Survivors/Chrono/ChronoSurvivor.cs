@@ -44,7 +44,7 @@ namespace RA2Mod.Survivors.Chrono
             bodyColor = Color.cyan,
             sortPosition = 69.5f,
 
-            characterPortraitPathBundle = "texIconChrono",
+            characterPortraitPathBundle = General.GeneralConfig.RA2Icon.Value ? "texIconChronoRA2" : "texIconChrono",
             crosshairPathAddressable = "RoR2/Base/UI/StandardCrosshair.prefab",
             podPrefabPathAddressable = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
 
@@ -515,7 +515,8 @@ namespace RA2Mod.Survivors.Chrono
                 );
             cursor.Emit(OpCodes.Ldarg_1);
             cursor.Emit(OpCodes.Ldarg_0);
-            cursor.EmitDelegate<Func<bool, DamageInfo, HealthComponent, bool>>((flag5, damageInfo, self) =>
+            cursor.Emit(OpCodes.Ldloc_1);
+            cursor.EmitDelegate<Func<bool, DamageInfo, HealthComponent, CharacterBody, bool>>((flag5, damageInfo, self, attackerBody) =>
             {
                 if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
                 {
@@ -524,7 +525,9 @@ namespace RA2Mod.Survivors.Chrono
                     {
                         count = self.body.inventory.GetItemCount(ChronoItems.chronoSicknessItemDef.itemIndex);
                     }
-                    if (self.combinedHealthFraction < count / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2))
+
+                    float eliteFraction = attackerBody != null ? attackerBody.executeEliteHealthFraction : 0;
+                    if (self.combinedHealthFraction < ((count / (ChronoConfig.M4_Vanish_ChronoStacksRequired.Value * 2)) + eliteFraction))
                     {
                         flag5 = true;
                         damageInfo.damageType |= DamageType.VoidDeath;

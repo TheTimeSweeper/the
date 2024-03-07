@@ -22,30 +22,27 @@ namespace RA2Mod.Survivors.Chrono {
                 true);
             ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(chronoSicknessDebuff, assetBundle, "texBuffChronoClock"));
 
-            chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("ChronosphereRoot",
-                null,
-                Color.blue,
-                false,
-                true);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(chronosphereRootDebuff, "RoR2/Base/Common/texBuffGenericShield.tif"));
+            //chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("ChronosphereRoot",
+            //    null,
+            //    Color.blue,
+            //    false,
+            //    true);
+            //ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(chronosphereRootDebuff, "RoR2/Base/Common/texBuffGenericShield.tif"));
 
-            ivand = Modules.Content.CreateAndAddBuff("ChronoIvand",
-                null,
-                Color.blue,
-                true,
-                true);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(ivand, assetBundle, "texBuffChronoClock"));
+            //ivand = Modules.Content.CreateAndAddBuff("ChronoIvand",
+            //    null,
+            //    Color.blue,
+            //    true,
+            //    true);
+            //ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(ivand, assetBundle, "texBuffChronoClock"));
 
-            vanishFreeze = Modules.Content.CreateAndAddBuff("ChronoVanishfreeze",
-                null,
-                Color.cyan,
-                true,
-                true);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(vanishFreeze, "RoR2/Base/Common/texBuffGenericShield.tif"));
+            //vanishFreeze = Modules.Content.CreateAndAddBuff("ChronoVanishfreeze",
+            //    null,
+            //    Color.cyan,
+            //    true,
+            //    true);
+            //ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(vanishFreeze, "RoR2/Base/Common/texBuffGenericShield.tif"));
 
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Merc/MercExposeEffect.prefab", (result) => {
-                R2API.TempVisualEffectAPI.AddTemporaryVisualEffect(result, GetHasIvanTempVisualEffect);
-            }));
         }
         
         private static bool GetHasIvanTempVisualEffect(CharacterBody body)
