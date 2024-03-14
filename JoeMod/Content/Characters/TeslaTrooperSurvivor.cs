@@ -633,7 +633,7 @@ namespace Modules.Survivors {
             orig();
             GameObject shockDroneBody = BodyCatalog.FindBodyPrefab("ShockDroneBody");
             if (shockDroneBody) {
-                Helpers.LogWarning("hello hello hello");
+                //Helpers.LogWarning("hello hello hello");
                 shockDroneBody.AddComponent<AddMinionToOwnerTeslaTracker>();
             }
         }

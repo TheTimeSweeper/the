@@ -21,17 +21,17 @@ public class TeslaIndicatorView : MonoBehaviour {
         indicatorRenderer.color = targetColors[currentTarget];
     }
 
-    public void SetSpriteRange(int currentRange) {
-        indicatorRenderer.sprite = rangeSprites[currentRange];
-    }
     public void SetSpriteAlly() {
         indicatorRenderer.sprite = allySprite;
     }
     public void SetSpriteTower() {
         indicatorRenderer.sprite = towerSprite;
     }
+    public void SetSpriteRange(int currentRange) {
+        indicatorRenderer.sprite = rangeSprites[currentRange];
+    }
 
-    public void SetTowerSprite(bool hasTower) {
+    public void SetTowerIndicator(bool hasTower) {
         towerIndicator.SetActive(hasTower);
     }
 }

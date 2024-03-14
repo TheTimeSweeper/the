@@ -81,8 +81,12 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
             return null;
         if (!_hasTowerNear)
             return null;
+        if (_trackingTarget == null)
+            return null;
+        if (_trackingTarget.hurtBoxGroup == null)
+            return null;
 
-        return _trackingTarget?.hurtBoxGroup.mainHurtBox;
+        return _trackingTarget.hurtBoxGroup.mainHurtBox;
     }
 
     public HurtBox GetTrackingTarget() {
@@ -169,10 +173,10 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
             setIndicatorRange(GetTrackingTargetDistance());
         }
 
-        ZappableTower zappableTower;
-        if (_trackingTarget && _trackingTarget.healthComponent.TryGetComponent<ZappableTower>(out zappableTower)) {
-            _trackingTarget = zappableTower.MainHurtbox;
-        }
+        //ZappableTower zappableTower;
+        //if (_trackingTarget && _trackingTarget.hurtBoxGroup.TryGetComponent<ZappableTower>(out zappableTower)) {
+        //    _trackingTarget = zappableTower.MainHurtbox;
+        //}
 
         indicator.targetTransform = (_trackingTarget ? _trackingTarget.transform : null);
         
@@ -247,7 +251,7 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
                 }
 
                 //tower indicator
-                indicatorView.SetTowerSprite(!targetingAlly && towerIsTargeting);
+                indicatorView.SetTowerIndicator(!targetingAlly && towerIsTargeting);
             }
         }
     }

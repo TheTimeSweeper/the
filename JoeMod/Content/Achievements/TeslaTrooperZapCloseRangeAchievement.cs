@@ -31,7 +31,7 @@ namespace Modules.Achievements {
 					closeZaps++;
 					if (closeZaps >= requirement)
 						base.Grant();
-					Helpers.LogWarning(closeZaps);
+					//Helpers.LogWarning(closeZaps);
 				} else {
 					closeZaps = 0;
 				}

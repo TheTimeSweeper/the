@@ -74,7 +74,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
         FindTrackingTarget(aimRay);
 
         ZappableTower zappableTower;
-        if (trackingTargetZap && trackingTargetZap.healthComponent.TryGetComponent<ZappableTower>(out zappableTower)) {
+        if (trackingTargetZap && trackingTargetZap.hurtBoxGroup && trackingTargetZap.hurtBoxGroup.TryGetComponent<ZappableTower>(out zappableTower)) {
             trackingTargetZap = zappableTower.MainHurtbox;
         }
 
@@ -145,7 +145,7 @@ public class TeslaTrackerComponent : MonoBehaviour {
             if (hurtBox.healthComponent == null)
                 continue;
 
-            bool isTower = hurtBox.healthComponent.GetComponent<ZappableTower>();
+            bool isTower = hurtBox.hurtBoxGroup && hurtBox.hurtBoxGroup.GetComponent<ZappableTower>();
 
             //cast a line to see if it is interrupted by world
             //however the tesla tower is also world so exclude that

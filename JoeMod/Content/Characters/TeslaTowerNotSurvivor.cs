@@ -39,7 +39,6 @@ namespace Modules.Survivors {
             moveSpeed = 0,
             jumpCount = 0,
             
-            //todo camera stuck in tower when you play as it
             aimOriginPosition = new Vector3( 0, 10, 0),
             cameraPivotPosition = new Vector3(0, 5, 0),
             cameraParamsVerticalOffset = 10,
@@ -63,7 +62,6 @@ namespace Modules.Survivors {
 
             bodyPrefab.AddComponent<TowerWeaponComponent>();
             bodyPrefab.AddComponent<TowerOwnerTrackerComponent>();
-            bodyPrefab.AddComponent<ZappableTower>().MainHurtbox = bodyPrefab.GetComponent<CharacterBody>().mainHurtBox;
         }
 
         protected override void InitializeCharacterBodyAndModel() {

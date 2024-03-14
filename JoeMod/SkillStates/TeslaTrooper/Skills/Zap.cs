@@ -37,7 +37,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         private HurtBox _targetHurtbox;
         private bool _attackingTeammate;
         
-        private float _baseCastInterval = 0.04f;
+        private float _baseCastInterval = 0.1f;
 
         private Transform _muzzleTransform;
         private float _originSpacing = 0.22f;
@@ -205,10 +205,10 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         protected override void OnCastEnter()
         {
-            if (_targetHurtbox)
-            {
-                PlayZap();
-            }
+            //if (_targetHurtbox)
+            //{
+            //    PlayZap();
+            //}
         }
 
         protected override void OnCastFixedUpdate()
@@ -216,6 +216,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (_targetHurtbox) {
 
                 while (_currentCasts < totalOrbCasts && fixedAge > nextCastTime) {
+                    PlayZap();
                     if (NetworkServer.active) {
                         FireZap();
                     }
@@ -226,7 +227,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
         private void FireZap() {
-            
+
             if (_attackingTeammate) {
                 FireZapTeammate();
                 return;

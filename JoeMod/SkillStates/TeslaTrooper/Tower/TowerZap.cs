@@ -53,12 +53,12 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
             _towerWeaponComponent = GetComponent<TowerWeaponComponent>();
 
             _originTransform = base.FindModelChild("Orb");
-            if(_originTransform == null) {
-                _originTransform = base.FindModelChild("Muzzle");
-            }
-            if (_originTransform == null) {
-                _originTransform = base.FindModelChild("muzzle");
-            }
+            //if (_originTransform == null) {
+            //    _originTransform = base.FindModelChild("Muzzle");
+            //}
+            //if (_originTransform == null) {
+            //    _originTransform = base.FindModelChild("muzzle");
+            //}
             if (_originTransform == null) {
                 _originTransform = transform;
             }
