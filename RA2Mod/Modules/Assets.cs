@@ -20,8 +20,9 @@ namespace RA2Mod.Modules
     {
         //cache bundles if multiple characters use the same one
         internal static Dictionary<string, AssetBundle> loadedBundles = new Dictionary<string, AssetBundle>();
+        internal static Dictionary<string, Action<AssetBundle>> loadingBundles = new Dictionary<string, Action<AssetBundle>>();
 
-        internal static void LoadAssetBundleAsync(string bundleName, Action<AssetBundle> onComplete = null)
+        internal static void LoadAssetBundleAsync(string bundleName, Action<AssetBundle> onComplete)
         {
             if (bundleName == "myassetbundle")
             {
@@ -30,17 +31,27 @@ namespace RA2Mod.Modules
 
             if (loadedBundles.ContainsKey(bundleName))
             {
-                onComplete?.Invoke(loadedBundles[bundleName]);
+                onComplete(loadedBundles[bundleName]);
+                return;
             }
 
-            loadedBundles[bundleName] = null;
+            if (loadingBundles.ContainsKey(bundleName))
+            {
+                loadingBundles[bundleName] += onComplete;
+                return;
+            }
+
+            //loadedBundles[bundleName] = null;
             string path = Path.Combine(Path.GetDirectoryName(RA2Plugin.instance.Info.Location), "AssetBundles", bundleName);
 
-            ContentPacks.asyncLoadCoroutines.Add(LoadAssetBundleFromPathAsync(path, (bundle) =>
-            {
-                loadedBundles[bundleName] = bundle;
-                onComplete?.Invoke(bundle);
-            }));
+            Action<AssetBundle> onBundleComplete = (bundle) =>
+                           {
+                               loadedBundles[bundleName] = bundle;
+                               loadingBundles.Remove(bundleName);
+                               onComplete?.Invoke(bundle);
+                           };
+            loadingBundles[bundleName] = onBundleComplete;
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetBundleFromPathAsync(path, onBundleComplete));
         }
 
         internal static IEnumerator LoadFromAddressableOrBundle<T>(AssetBundle assetBundle, string bundlePath, string addressablePath, Action<T> OnComplete) where T : UnityEngine.Object

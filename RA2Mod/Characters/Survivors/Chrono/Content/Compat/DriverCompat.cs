@@ -134,7 +134,7 @@ namespace RA2Mod.Survivors.Chrono
                     "chronoShoot",
                     ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME",
                     ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION",
-                    ChronoSurvivor.instance.assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                    ChronoSurvivor.instance.assetBundle.LoadAsset<Sprite>("texIconChronoPrimary"),
                     new EntityStates.SerializableEntityStateType(typeof(ShootDriver)),
                     "Weapon",
                     false
@@ -145,7 +145,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillName = "chronoVanish",
                 skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_NAME",
                 skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSpecial"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(VanishDriver)),
                 activationStateMachineName = "Weapon",
@@ -157,12 +157,12 @@ namespace RA2Mod.Survivors.Chrono
                 isCombatSkill = true,
                 mustKeyPress = true,
             });
-            
-            var chronoGunWeaponDef = DriverWeaponDef.CreateWeaponDefFromInfo(new DriverWeaponDefInfo
+
+            DriverWeaponDef chronoGunWeaponDef = DriverWeaponDef.CreateWeaponDefFromInfo(new DriverWeaponDefInfo
             {
                 nameToken = ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_NAME",
                 descriptionToken = ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION",
-                icon = assetBundle.LoadAsset<Texture2D>("texIconChrono"),
+                icon = assetBundle.LoadAsset<Texture2D>("texIconChronoRA2"),
                 crosshairPrefab = ChronoSurvivor.instance.prefabCharacterBody.defaultCrosshairPrefab,
                 tier = DriverWeaponTier.Uncommon,
                 shotCount = 48,
@@ -172,7 +172,7 @@ namespace RA2Mod.Survivors.Chrono
                 material = assetBundle.LoadAsset<Material>("matDriverChronoGun"),
                 animationSet = DriverWeaponDef.AnimationSet.TwoHanded,
                 calloutSoundString = "Play_Chrono_Voiceline_Driver",
-                configIdentifier = "Chrono Legionnaire Neutron Rifle"
+                configIdentifier = "Chrono Legionnaire Gun"
             });
             RobDriver.DriverWeaponCatalog.AddWeapon(chronoGunWeaponDef);
 
@@ -221,7 +221,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             base.PlayShootAnimation();
 
-            PlayAnimation("Gesture, Override", "FireMachineGun", "Shoot.playbackRate", duration);
+            PlayAnimation("Gesture, Override", "FireMachineGun", "Shoot.playbackRate", duration * 3);
         }
     }
 
@@ -275,7 +275,8 @@ namespace RA2Mod.Survivors.Chrono
         public override void OnExit()
         {
             base.OnExit();
-            base.PlayCrossfade("Gesture, Override", "BufferEmpty", 0.8f);
+            //base.PlayCrossfade("Gesture, Override", "BufferEmpty", 0.8f);
+            PlayAnimation("Gesture, Override", "FireMachineGun", "Shoot.playbackRate", 1);
         }
 
         public override void FixedUpdate()

@@ -64,14 +64,6 @@ namespace RA2Mod.Survivors.GI
             base.Initialize();
         }
 
-
-        //yeah this is shit. let's just see if it works though
-        public override IEnumerator AssetBundleInitializedCoroutine()
-        {
-            InitializeCharacter();
-            yield break;
-        }
-
         public override void InitializeCharacter()
         {
             //need the character unlockable before you initialize the survivordef
@@ -104,7 +96,8 @@ namespace RA2Mod.Survivors.GI
         {
             //AddHitboxes();
             bodyPrefab.AddComponent<GIMissileTracker>();
-            bodyPrefab.AddComponent<VoiceLines>().prefix = "Play_GI_";
+            VoiceLineController voiceLineController = bodyPrefab.AddComponent<VoiceLineController>();
+            voiceLineController.voiceLineContext = new VoiceLineContext("GI", 6, 6, 6);
             //bodyPrefab.AddComponent<HuntressTrackerComopnent>();
             //anything else here
         }

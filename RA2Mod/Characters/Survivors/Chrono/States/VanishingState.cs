@@ -10,6 +10,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private TemporaryOverlay temporaryOverlay;
         private Animator modelAnimator;
         private float duration;
+
         public override void OnEnter()
         {
             base.OnEnter();

@@ -43,10 +43,11 @@ namespace RA2Mod.Survivors.Chrono
         public static List<Texture2D> testTextures = new List<Texture2D>();
         public static int noises = 0;
 
-        public static IEnumerator OnAssetbundleLoaded(AssetBundle assetBundle, Action OnComplete)
+        public static List<IEnumerator> GetAssetBundleInitializedCoroutines(AssetBundle assetBundle)
         {
             List<IEnumerator> subEnumerators = new List<IEnumerator>();
             
+            //finalizebodyinfoasync
             //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChrono", null));
             //subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoRA2", null));
             subEnumerators.Add(assetBundle.LoadAssetAsync<Sprite>("texIconChronoPassive", null));
@@ -65,36 +66,34 @@ namespace RA2Mod.Survivors.Chrono
             //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoUtilityAlt", skillIcons));
             //subEnumerators.Add(assetBundle.LoadAssetToCollection<Sprite>("texIconChronoSpecial", skillIcons));
 
-            for (int i = 0; i < subEnumerators.Count; i++)
-            {
-                while (subEnumerators[i].MoveNext()) yield return null;
-            }
-            OnComplete?.Invoke();
-            yield break;
+            return subEnumerators;
         }
 
         public static void OnCharacterInitialized(AssetBundle assetBundle)
         {
             Log.CurrentTime("INIT ASYNC");
 
-            List<IEnumerator> subEnumerators = new List<IEnumerator>();
-            
-            loads.Add(loadSubEnumerators());
-
-            IEnumerator loadSubEnumerators()
+            if (noises > 0)
             {
-                for (int i = 1; i <= noises; i++)
+                List<IEnumerator> testSubEnumerators = new List<IEnumerator>();
+
+                loads.Add(loadSubEnumerators());
+
+                IEnumerator loadSubEnumerators()
                 {
-                    /*loads*/
-                    subEnumerators.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
+                    for (int i = 1; i <= noises; i++)
                     {
-                        testTextures.Add(result);
-                        Log.Warning(result);
-                    }));
-                }
-                for (int i = 0; i < subEnumerators.Count; i++)
-                {
-                    while (subEnumerators[i].MoveNext()) yield return null;
+                        /*loads.Add*/
+                        testSubEnumerators.Add(assetBundle.LoadAssetAsync("NOISE" + i, (Texture2D result) =>
+                        {
+                            testTextures.Add(result);
+                            Log.Warning(result);
+                        }));
+                    }
+                    for (int i = 0; i < testSubEnumerators.Count; i++)
+                    {
+                        while (testSubEnumerators[i].MoveNext()) yield return null;
+                    }
                 }
             }
 

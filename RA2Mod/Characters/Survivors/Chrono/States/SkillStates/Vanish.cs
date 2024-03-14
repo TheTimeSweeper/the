@@ -31,6 +31,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
         private ChronoTether vanishTether;
         private SetStateOnHurt setStateOnHurt;
         private bool rolledCrit;
+        private uint soundID;
 
         public override void OnEnter()
         {
@@ -39,9 +40,9 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             tickInterval = baseTickInterval / attackSpeedStat;
             StartAimMode(4);
 
-            Util.PlaySound("Play_ChronoAttackShort", gameObject);
+            soundID = Util.PlaySound("Play_ChronoAttackShort", gameObject);
 
-            muzzleTransform = FindModelChild("HandR");
+            muzzleTransform = FindModelChild("Muzzle");
             if (muzzleTransform == null)
                 muzzleTransform = transform;
 
@@ -130,6 +131,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             base.OnExit();
 
             vanishTether?.Dispose();
+            Util.PlaySound("Stop_ChronoAttackShort", gameObject);
         }
 
         public override void Update()

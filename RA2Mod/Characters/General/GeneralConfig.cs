@@ -13,6 +13,8 @@ namespace RA2Mod.General
         public static ConfigEntry<KeyboardShortcut> RestKeybind { get; private set; }
         public static ConfigEntry<KeyboardShortcut> VoiceKey { get; private set; }
         public static ConfigEntry<bool> VoiceInLobby;
+        public static ConfigEntry<bool> VoiceOnSpawn;
+        public static ConfigEntry<bool> VoiceOnDeath;
         public static ConfigEntry<bool> RA2Icon;
 
         public static ConfigEntry<bool> ChronoEnabled;

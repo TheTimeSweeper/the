@@ -32,7 +32,7 @@ namespace RA2Mod.Survivors.Chrono.SkillStates
             duration = baseDuration / attackSpeedStat;
             fireTime = firePercentTime * duration;
             characterBody.SetAimTimer(2f);
-            muzzleString = "HandR";
+            muzzleString = "Muzzle";
             PlayShootAnimation();
         }
 

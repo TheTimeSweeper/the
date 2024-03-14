@@ -54,13 +54,35 @@ namespace RA2Mod.Modules.Characters
 
                 Log.CurrentTime($"{bodyName} assetbundle loaded");
                 assetBundle = loadedAssetBundle;
+
+                ContentPacks.asyncLoadCoroutines.Add(LoadAssetsBeforeCharacterCreation());
                 ContentPacks.asyncLoadCoroutines.Add(_bodyInfo.FinalizeBodyInfoAsync(assetBundle));
-                ContentPacks.asyncLoadCoroutines.Add(AssetBundleInitializedCoroutine());
+                if(_bodyInfo.asyncLoads != null)
+                {
+                    ContentPacks.asyncLoadCoroutines.AddRange(_bodyInfo.asyncLoads);
+                }
             });
+        } 
+
+        public virtual List<IEnumerator> GetAssetBundleInitializedCoroutines()
+        {
+            return null;
         }
 
-        public abstract IEnumerator AssetBundleInitializedCoroutine();
-        
+        public virtual IEnumerator LoadAssetsBeforeCharacterCreation()
+        {
+            List<IEnumerator> subEnumerators = GetAssetBundleInitializedCoroutines();
+            if (subEnumerators != null)
+            {
+                for (int i = 0; i < subEnumerators.Count; i++)
+                {
+                    while (subEnumerators[i].MoveNext()) yield return null;
+                }
+            }
+            InitializeCharacter();
+            yield break;
+        }
+
         public virtual void InitializeCharacter()
         {
             InitializeCharacterBodyPrefab();
@@ -138,18 +160,28 @@ namespace RA2Mod.Modules.Characters
 
         public float sortPosition = 100f;
 
+        /// <summary>
+        /// pass in instead a bundle path or addressable path to load async
+        /// </summary>
         public Texture characterPortrait = null;
-        public string characterPortraitPathBundle = null;
-        public string characterPortraitPathAddressable = null;
+        public string characterPortraitBundlePath = null;
+        public string characterPortraitAddressablePath = null;
 
+        /// <summary>
+        /// pass in instead a bundle path or addressable path to load async
+        /// </summary>
         public GameObject crosshair = null;
-        public string crosshairPathBundle = null;
-        public string crosshairPathAddressable = null;
-        public GameObject podPrefab = null;
-        public string podPrefabPathBundle = null;
-        public string podPrefabPathAddressable = null;
+        public string crosshairBundlePath = null;
+        public string crosshairAddressablePath = null;
 
-        public Func<IEnumerator> assetLoadCoroutine = null;
+        /// <summary>
+        /// pass in instead a bundle path or addressable path to load async
+        /// </summary>
+        public GameObject podPrefab = null;
+        public string podPrefabBundlePath = null;
+        public string podPrefabAddressablePath = null;
+
+        public List<IEnumerator> asyncLoads = null;
         #endregion Character
 
         #region Stats
@@ -231,24 +263,24 @@ namespace RA2Mod.Modules.Characters
             {
                 bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<Texture>(
                     assetBundle,
-                    characterPortraitPathBundle,
-                    characterPortraitPathAddressable,
+                    characterPortraitBundlePath,
+                    characterPortraitAddressablePath,
                     (result) => characterPortrait = result));
             }
             if (crosshair == null)
             {
                 bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<GameObject>(
                     assetBundle,
-                    crosshairPathBundle,
-                    crosshairPathAddressable,
+                    crosshairBundlePath,
+                    crosshairAddressablePath,
                     (result) => crosshair = result));
             }
             if (podPrefab == null)
             {
                 bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<GameObject>(
                     assetBundle,
-                    podPrefabPathBundle,
-                    podPrefabPathAddressable,
+                    podPrefabBundlePath,
+                    podPrefabAddressablePath,
                     (result) => podPrefab = result));
             }
 

@@ -62,7 +62,7 @@ namespace RA2Mod.Modules
                 yield return null;
             }
 
-            PopulateCustomLightningArm();
+            //PopulateCustomLightningArm();
             //if you have any custom item displays to add here I would be very impressed
 
             initialized = true;

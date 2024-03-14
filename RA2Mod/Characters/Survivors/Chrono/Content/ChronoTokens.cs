@@ -24,7 +24,7 @@ namespace RA2Mod.Survivors.Chrono
              + "< ! > I highly recommend setting sprint to alt or on your mouse if you can." + Environment.NewLine + Environment.NewLine
              + "< ! > I.V.A.N. bombs are great for area damage. Blink in, place one, and blink out." + Environment.NewLine + Environment.NewLine
              + "< ! > Chronosphere can be used for movement, for defense, or for grouping up enemies to better be exploded by bombs." + Environment.NewLine + Environment.NewLine
-             + "< ! > While building up [Chrono Sickness] can help execute enemies with special, dealing damage is still important to get them to that threshold." + Environment.NewLine + Environment.NewLine;
+             + "< ! > While building up Chrono Sickness can help execute enemies with special, dealing damage is still important to get them to that threshold." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, without a trace.";
             string outroFailure = "..and so he vanished, as if he never existed.";
@@ -60,14 +60,14 @@ namespace RA2Mod.Survivors.Chrono
             Language.Add(prefix + "UTILITY_CHRONOSPHERE_NAME", "Chronosphere");
             Language.Add(prefix + "UTILITY_CHRONOSPHERE_DESCRIPTION", $"Highlight an area, then highlight a second area. {Tokens.UtilityText("All units")} in the first area are teleported to the second area.");
             
-            Language.Add(prefix + "UTILITY_FREEZOSPHERE_NAME", "Freezosphere");
-            Language.Add(prefix + "UTILITY_FREEZOSPHERE_DESCRIPTION", $"Straight up freeze enemies (and at some point projectiles).");
+            Language.Add(prefix + "UTILITY_FREEZOSPHERE_NAME", "Suspend Sphere");
+            Language.Add(prefix + "UTILITY_FREEZOSPHERE_DESCRIPTION", $"{Tokens.UtilityText("Stop time")} for enemies and projecitles for {Tokens.UtilityText($"{ChronoConfig.M3_Freezosphere_FreezeDuration.Value} seconds")}.");
             #endregion
 
             #region Special
             Language.Add(prefix + "SPECIAL_VANISH_NAME", "Deconstructing");
-            int ticks = (int)(ChronoConfig.M4_Vanish_Duration.Value / ChronoConfig.M4_Vanish_TickInterval.Value);
-            Language.Add(prefix + "SPECIAL_VANISH_DESCRIPTION", $"Continuously deal {Tokens.DamageValueText(ChronoConfig.M4_Vanish_TickDamage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} over {ChronoConfig.M4_Vanish_Duration.Value} seconds. If an enemy’s health is below the {Tokens.UtilityText("Chrono Sickness")} threshold, they vanish from existence.");
+            int ticks = UnityEngine.Mathf.RoundToInt(ChronoConfig.M4_Vanish_Duration.Value / ChronoConfig.M4_Vanish_TickInterval.Value);
+            Language.Add(prefix + "SPECIAL_VANISH_DESCRIPTION", $"Deal {Tokens.DamageValueText(ChronoConfig.M4_Vanish_TickDamage.Value * ticks)} and apply {Tokens.UtilityText("Chrono Sickness")} over {ChronoConfig.M4_Vanish_Duration.Value} seconds. If an enemy’s health is below the {Tokens.UtilityText("Chrono Sickness")} threshold, they vanish from existence.");
             #endregion
 
             #region Achievements

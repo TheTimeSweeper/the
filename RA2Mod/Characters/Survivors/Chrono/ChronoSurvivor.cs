@@ -29,8 +29,8 @@ namespace RA2Mod.Survivors.Chrono
 
         public override string masterName => "ChronoMonsterMaster";
 
-        public override string modelPrefabName => "mdlJoe";
-        public override string displayPrefabName => "JoeDisplay";
+        public override string modelPrefabName => "mdlChrono";
+        public override string displayPrefabName => "ChronoDisplay";
 
         public const string CHRONO_PREFIX = RA2Plugin.DEVELOPER_PREFIX + "_CHRONO_";
 
@@ -44,9 +44,9 @@ namespace RA2Mod.Survivors.Chrono
             bodyColor = Color.cyan,
             sortPosition = 69.5f,
 
-            characterPortraitPathBundle = General.GeneralConfig.RA2Icon.Value ? "texIconChronoRA2" : "texIconChrono",
-            crosshairPathAddressable = "RoR2/Base/UI/StandardCrosshair.prefab",
-            podPrefabPathAddressable = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
+            characterPortraitBundlePath = General.GeneralConfig.RA2Icon.Value ? "texIconChronoRA2" : "texIconChrono",
+            crosshairAddressablePath = "RoR2/Base/UI/StandardCrosshair.prefab",
+            podPrefabAddressablePath = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
 
             //characterPortrait = assetBundle.LoadAsset<Texture>("texIconChrono"),
             //crosshair = Assets.LoadCrosshair("Standard"),
@@ -89,21 +89,16 @@ namespace RA2Mod.Survivors.Chrono
             base.Initialize();
         }
 
-        public override IEnumerator AssetBundleInitializedCoroutine()
+        public override List<IEnumerator> GetAssetBundleInitializedCoroutines()
         {
-            return ChronoAssets.OnAssetbundleLoaded(assetBundle, InitializeCharacter);
-        }
-
-        public override void InitializeCharacter()
-        {
-            //need the character unlockable before you initialize the survivordef
-            //ChronoUnlockables.Init();
-            
-            base.InitializeCharacter();
+            return ChronoAssets.GetAssetBundleInitializedCoroutines(assetBundle);
         }
 
         public override void OnCharacterInitialized()
         {
+            //need the character unlockable before you initialize the survivordef
+            //ChronoUnlockables.Init();
+
             base.OnCharacterInitialized();
 
             Config.ConfigureBody(prefabCharacterBody, ChronoConfig.SectionBody);
@@ -132,6 +127,15 @@ namespace RA2Mod.Survivors.Chrono
             Log.CurrentTime($"{bodyName} initializecharacter done");
         }
 
+        //do display prefab stuff here
+        protected override void InitializeSurvivor()
+        {
+            base.InitializeSurvivor();
+
+            VoiceLineController voiceLineController = displayPrefab.AddComponent<VoiceLineController>();
+            voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
+        }
+
         private void AdditionalBodySetup()
         {
             prefabCharacterBody.bodyFlags |= CharacterBody.BodyFlags.SprintAnyDirection;
@@ -139,7 +143,8 @@ namespace RA2Mod.Survivors.Chrono
             bodyPrefab.AddComponent<ChronoTrackerVanish>();
             bodyPrefab.AddComponent<PhaseIndicatorController>();
             bodyPrefab.AddComponent<ChronoSprintProjectionSpawner>();
-            bodyPrefab.AddComponent<VoiceLines>().prefix = "Play_Chrono_";
+            VoiceLineController voiceLineController = bodyPrefab.AddComponent<VoiceLineController>();
+            voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
         }
 
         public override void InitializeEntityStateMachines() 
@@ -266,7 +271,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillName = "chronoIvan",
                 skillNameToken = CHRONO_PREFIX + "SECONDARY_BOMB_NAME",
                 skillDescriptionToken = CHRONO_PREFIX + "SECONDARY_BOMB_DESCRIPTION",
-                keywordTokens = new string[] { "KEYWORD_AGILE" },
+                //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSecondary"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoBomb)),

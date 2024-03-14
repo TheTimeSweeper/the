@@ -24,8 +24,6 @@ namespace RA2Mod.Survivors.GI
 
         private static AssetBundle _assetBundle;
 
-        public static List<IEnumerator> loads => Modules.ContentPacks.asyncLoadCoroutines;
-
         public static void Init(AssetBundle assetBundle)
         {
             _assetBundle = assetBundle;

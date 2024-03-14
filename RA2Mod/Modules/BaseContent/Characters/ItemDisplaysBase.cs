@@ -7,13 +7,11 @@ namespace RA2Mod.Modules.Characters
     {
         public void SetItemDisplays(ItemDisplayRuleSet itemDisplayRuleSet)
         {
-            List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
-
-            Log.CurrentTime("ITEM DISPLAY START");
-
             Modules.ItemDisplays.queuedDisplays++;
             ItemDisplays.SetItemDisplaysWhenReady(() =>
             {
+                Log.CurrentTime("ITEM DISPLAY START");
+                List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
                 SetItemDisplayRules(itemDisplayRules);
                 itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
                 ItemDisplays.DisposeWhenDone();

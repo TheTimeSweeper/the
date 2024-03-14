@@ -7,7 +7,7 @@ namespace RA2Mod.Survivors.Chrono.Components
 {
     public class ChronoTrackerVanish : TrackerSkillDefRequired<ChronoTrackerSkillDefVanish>//, IDependentTracker
     {
-        public override float maxTrackingDistance => 80;
+        public override float maxTrackingDistance => 30;
         
         public override float maxTrackingAngle => 30;
 
