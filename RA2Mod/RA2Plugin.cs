@@ -37,6 +37,7 @@ namespace RA2Mod
             Log.Init(Logger);
 
             GeneralConfig.Init();
+            GeneralCompat.Init();
 
             Log.CurrentTime("START new");
 

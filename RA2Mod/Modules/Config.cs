@@ -208,16 +208,16 @@ namespace RA2Mod.Modules
         }
 
         //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs
-        public static bool GetKeyPressed(ConfigEntry<KeyboardShortcut> entry)
+        public static bool GetKeyPressed(KeyboardShortcut entry)
         {
-            foreach (var item in entry.Value.Modifiers)
+            foreach (var item in entry.Modifiers)
             {
                 if (!Input.GetKey(item))
                 {
                     return false;
                 }
             }
-            return Input.GetKeyDown(entry.Value.MainKey);
+            return Input.GetKeyDown(entry.MainKey);
         }
     }
 }

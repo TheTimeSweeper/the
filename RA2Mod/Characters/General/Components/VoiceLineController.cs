@@ -68,16 +68,16 @@ namespace RA2Mod.General.Components
         {
             _body = GetComponent<CharacterBody>();
             _authority = Util.HasEffectiveAuthority(gameObject);
-
-            if (GeneralConfig.VoiceOnDeath.Value)
-            {
-                PlayVoicelineAuthority(voiceLineContext.RandomSelectVoice());
-            }
+            
+            //if (GeneralConfig.VoiceOnDeath.Value)
+            //{
+            //    PlayVoicelineAuthority(voiceLineContext.RandomSelectVoice());
+            //}
         }
 
         protected virtual void Update()
         {
-            if (Modules.Config.GetKeyPressed(GeneralConfig.VoiceKey))
+            if (Modules.Config.GetKeyPressed(GeneralConfig.VoiceKey.Value))
             {
                 if (_body == null || !Util.HasEffectiveAuthority(gameObject))
                     return;
