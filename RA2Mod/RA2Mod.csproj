@@ -41,7 +41,7 @@
 		<PackageReference Include="R2API.RecalculateStats" Version="1.*" />
 		<PackageReference Include="R2API.Language" Version="1.*" />
 		<PackageReference Include="R2API.DamageType" Version="1.*" />
-		<PackageReference Include="R2API.TempVisualEffect" Version="1.*" />
+		<PackageReference Include="R2API.Deployable" Version="1.*" />
 	</ItemGroup>
 
 	<ItemGroup>

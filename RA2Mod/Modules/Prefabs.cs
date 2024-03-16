@@ -22,7 +22,7 @@ namespace RA2Mod.Modules
 
         public static IEnumerator CreateDisplayPrefabAsync(AssetBundle assetBundle, string displayPrefabName, GameObject bodyPrefab, Action<GameObject> OnComplete)
         {
-            return assetBundle.LoadAssetAsync<GameObject>(displayPrefabName, (display) =>
+            return assetBundle.LoadBundleAssetCoroutine<GameObject>(displayPrefabName, (display) =>
             {
                 if (display == null)
                 {
@@ -68,12 +68,12 @@ namespace RA2Mod.Modules
 
         internal static IEnumerator LoadCharacterModelAsync(AssetBundle assetBundle, string modelName, Action<GameObject> onComplete)
         {
-            return assetBundle.LoadAssetAsync<GameObject>(modelName, onComplete);
+            return assetBundle.LoadBundleAssetCoroutine<GameObject>(modelName, onComplete);
         }
 
         internal static IEnumerator CloneCharacterBodyAsync(GameObject modelObject, BodyInfo bodyInfo, Action<GameObject> onComplete)
         {
-            return Assets.LoadAddressableAssetAsync<GameObject>(bodyInfo.bodyToClonePath, (loadedBody) =>
+            return Assets.LoadAddressableAssetCoroutine<GameObject>(bodyInfo.bodyToClonePath, (loadedBody) =>
             {
                 if (!loadedBody)
                 {
@@ -538,7 +538,7 @@ namespace RA2Mod.Modules
             footstepHandler.sprintFootstepOverrideString = "";
             footstepHandler.enableFootstepDust = true;
 
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Common/VFX/GenericFootstepDust.prefab", (result) =>
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetCoroutine<GameObject>("RoR2/Base/Common/VFX/GenericFootstepDust.prefab", (result) =>
             {
                 footstepHandler.footstepDustPrefab = result;
             }));
@@ -551,7 +551,7 @@ namespace RA2Mod.Modules
             if (!ragdollController) return;
             if (ragdollMaterial == null)
             {
-                ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<PhysicMaterial>("RoR2/Base/Common/physmatRagdoll.physicMaterial", (result) =>
+                ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetCoroutine<PhysicMaterial>("RoR2/Base/Common/physmatRagdoll.physicMaterial", (result) =>
                 {
                     ragdollMaterial = result;
                     SetupRagdollBones(ragdollController);
@@ -615,11 +615,11 @@ namespace RA2Mod.Modules
             Modules.Content.AddMasterPrefab(newMaster);
             return newMaster;
         }
-        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete) =>
+        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete = null) =>
             CloneDopplegangerMasterAsync(bodyPrefab, masterName, "RoR2/Base/Merc/MercMonsterMaster.prefab", onComplete);
-        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, string masterToCopyPath, Action<GameObject> onComplete)
+        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, string masterToCopyPath, Action<GameObject> onComplete = null)
         {
-            return Assets.LoadAddressableAssetAsync<GameObject>(masterToCopyPath, (result) =>
+            return Assets.LoadAddressableAssetCoroutine<GameObject>(masterToCopyPath, (result) =>
             {
                 GameObject newMaster = PrefabAPI.InstantiateClone(result, masterName, true);
                 newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
@@ -651,7 +651,7 @@ namespace RA2Mod.Modules
 
         public static IEnumerator CreateBlankMasterPrefabAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete)
         {
-            return Assets.LoadAddressableAssetAsync<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) => {
+            return Assets.LoadAddressableAssetCoroutine<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) => {
 
                 GameObject masterObject = PrefabAPI.InstantiateClone(result, masterName, true);
                 //should the user call this themselves?

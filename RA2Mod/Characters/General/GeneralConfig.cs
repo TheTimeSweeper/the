@@ -23,7 +23,7 @@ namespace RA2Mod.General
         public static void Init()
         {
             //0-0. General
-                //0-1. Survivors
+                //0-1. Survivors, 0-2 items, etc
             //1-1, 1-2, 1-3, the boys
             //2-1 compats?
             string sectionGeneral = "0-0. General";

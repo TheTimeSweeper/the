@@ -18,6 +18,7 @@ using RA2Mod.General.Components;
 using System.Runtime.CompilerServices;
 using R2API.Utils;
 using System.Collections;
+using RA2Mod.General;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -132,7 +133,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             base.InitializeSurvivor();
 
-            VoiceLineController voiceLineController = displayPrefab.AddComponent<VoiceLineController>();
+            VoiceLineInLobby voiceLineController = displayPrefab.AddComponent<VoiceLineInLobby>();
             voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
         }
 
@@ -206,7 +207,7 @@ namespace RA2Mod.Survivors.Chrono
 
             Skills.AddSkillsToFamily(passiveSkill.skillFamily, sprintSkillDef);
 
-            if (Modules.Compat.scepterInstalled)
+            if (GeneralCompat.scepterInstalled)
             {
                 AddScepterPassiveSkill(sprintSkillDef);
             }

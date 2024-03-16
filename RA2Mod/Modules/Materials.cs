@@ -23,9 +23,10 @@ namespace RA2Mod.Modules
 
         public static void Init()
         {
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetAsync<Shader>("RoR2/Base/Shaders/HGStandard.shader", (result) => hotpoo = result));
+            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetCoroutine<Shader>("RoR2/Base/Shaders/HGStandard.shader", (result) => hotpoo = result));
         }
 
+        [System.Obsolete("CreateHopooMaterialFromBundle is a bit more descriptive")]
         public static Material LoadMaterial(this AssetBundle assetBundle, string materialName) => CreateHopooMaterialFromBundle(assetBundle, materialName);
         public static Material CreateHopooMaterialFromBundle(this AssetBundle assetBundle, string materialName)
         {

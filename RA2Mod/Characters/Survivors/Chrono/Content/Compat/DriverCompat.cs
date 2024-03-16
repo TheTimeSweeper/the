@@ -28,13 +28,13 @@ namespace RA2Mod.Survivors.Chrono
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public void Init()
         {
-            On.RoR2.SurvivorCatalog.SetSurvivorDefs += SurvivorCatalog_SetSurvivorDefs;
+            General.GeneralCompat.FuckWithDriver += GeneralCompat_FuckWithDriver;
 
             InitConfig();
 
             #region compat
             Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_NAME", "Chrono Gun");
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Makes enemies Vanish from existence.");
+            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Makes enemies vanish from existence.");
 
             Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME", "Chrono Gun");
             Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for {Tokens.DamageValueText(DriverCompat.DriverGunM1Damage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} to enemies.");
@@ -107,22 +107,12 @@ namespace RA2Mod.Survivors.Chrono
                 "");
         }
 
-        private void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs)
+
+        private void GeneralCompat_FuckWithDriver(GameObject driverBody)
         {
-            orig(newSurvivorDefs);
-
-            for (int i = 0; i < newSurvivorDefs.Length; i++)
-            {
-                if (newSurvivorDefs[i].bodyPrefab.name == "RobDriverBody")
-                {
-                    newSurvivorDefs[i].bodyPrefab.AddComponent<ChronoTrackerVanishDriver>();
-                    Log.Debug("found driver. adding tracker");
-                    DoDriverCompat();
-                    return;
-                }
-            }
-
-            Log.Debug("no driver. chrono compat failed");
+            driverBody.AddComponent<ChronoTrackerVanishDriver>();
+            Log.Debug("found driver. adding tracker");
+            DoDriverCompat();
         }
 
         private void DoDriverCompat()

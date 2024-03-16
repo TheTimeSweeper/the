@@ -1,4 +1,5 @@
-﻿using RTAutoSprintEx;
+﻿using RA2Mod.General;
+using RTAutoSprintEx;
 using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
@@ -16,7 +17,7 @@ namespace RA2Mod.Survivors.Chrono
             {
                 RA2Plugin.instance.StartCoroutine(AutoSprintCompat());
             }
-            if (Modules.Compat.driverInstalled)
+            if (GeneralCompat.driverInstalled)
             {
                 new DriverCompat().Init();
             }

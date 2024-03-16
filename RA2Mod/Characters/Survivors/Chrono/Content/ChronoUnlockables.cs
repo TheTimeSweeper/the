@@ -17,7 +17,7 @@ namespace RA2Mod.Survivors.Chrono
                 Modules.Tokens.GetAchievementNameToken(ChronoMasteryAchievement.identifier),
                 null);
 
-            Modules.ContentPacks.asyncLoadCoroutines.Add(ChronoSurvivor.instance.assetBundle.LoadAssetAsync<Sprite>("texMasteryAchievement", (result) =>
+            Modules.ContentPacks.asyncLoadCoroutines.Add(ChronoSurvivor.instance.assetBundle.LoadBundleAssetCoroutine<Sprite>("texMasteryAchievement", (result) =>
             {
                 masterySkinUnlockableDef.achievementIcon = result;
             }));

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: matChronosphere1
+  m_Name: matChronoGhost
   m_Shader: {fileID: 4800000, guid: ee1b3d7c668ffb342b9a23c284a35709, type: 3}
   m_ShaderKeywords: TRIPLANAR _EMISSION
   m_LightmapFlags: 4
@@ -39,7 +39,7 @@ Material:
     - _AlphaBoost: 1.8
     - _Boost: 0.45
     - _BumpScale: 1
-    - _Cull: 0
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
