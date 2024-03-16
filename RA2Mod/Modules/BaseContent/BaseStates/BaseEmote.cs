@@ -100,7 +100,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             //emote cancels
             if (base.isAuthority && base.characterMotor.isGrounded) {
 
-                CheckEmote<Rest>(Modules.Config.restKeybind);
+                CheckEmote<Rest>(RA2Mod.General.GeneralConfig.RestKeybind.Value);
             }
 
 
@@ -119,8 +119,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        private bool CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new() {
-            if (Modules.Config.GetKeyPressed(keybind)) {
+        private bool CheckEmote<T>(KeyboardShortcut keybind) where T : EntityState, new() {
+            if (RA2Mod.Modules.Config.GetKeyPressed(keybind)) {
 
                 FindLocalUser();
                 
