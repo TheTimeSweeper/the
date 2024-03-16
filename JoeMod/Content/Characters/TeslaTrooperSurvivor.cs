@@ -462,7 +462,7 @@ namespace Modules.Survivors {
             ModelSkinController skinController = bodyCharacterModel.gameObject.AddComponent<ModelSkinController>();
             ChildLocator childLocator = bodyCharacterModel.GetComponent<ChildLocator>();
 
-            CharacterModel.RendererInfo[] defaultRenderers = bodyCharacterModel.baseRendererInfos;
+            CharacterModel.RendererInfo[] defaultRendererinfos = bodyCharacterModel.baseRendererInfos;
 
             List<TeslaSkinDef> skins = new List<TeslaSkinDef>();
 
@@ -474,12 +474,12 @@ namespace Modules.Survivors {
 
             TeslaSkinDef defaultSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>("DEFAULT_SKIN",
                 Assets.LoadAsset<Sprite>("texTeslaSkinDefault"),
-                defaultRenderers,
+                defaultRendererinfos,
                 bodyCharacterModel.gameObject);
                                                                                                              //probably better to use strings for childnames instead of ints
             defaultSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects, 0);
 
-            defaultSkin.meshReplacements = Skins.getMeshReplacements(defaultRenderers,
+            defaultSkin.meshReplacements = Skins.getMeshReplacements(defaultRendererinfos,
                 "meshTeslaArmor",
                 "meshTeslaArmor_Fanservice",
                 null,//"meshTeslaEmission",
@@ -495,13 +495,13 @@ namespace Modules.Survivors {
 
             TeslaSkinDef masterySkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MASTERY_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMastery"),
-                defaultRenderers,
+                defaultRendererinfos,
                 bodyCharacterModel.gameObject,
                 masterySkinUnlockableDef);
 
             masterySkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
 
-            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
                 "meshMasteryArmor",
                 null,//"meshMasteryArmor_Fanservice",
                 "meshMasteryEmission",
@@ -530,13 +530,13 @@ namespace Modules.Survivors {
 
             TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "NOD_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinNod"),
-                defaultRenderers,
+                defaultRendererinfos,
                 bodyCharacterModel.gameObject,
                 grandMasterySkinUnlockableDef);
 
             nodSkin.gameObjectActivations = Modules.Skins.getGameObjectActivationsFromList(activatedGameObjects, 1);
 
-            nodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+            nodSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
                 "meshNodArmor",
                 null,//"meshNodArmor_Fanservice",
                 "meshNodEmission",
@@ -564,16 +564,15 @@ namespace Modules.Survivors {
             nodSkin.ZapBounceLightningType = LightningOrb.LightningType.Count + 10;
             #endregion
             
-
             #region MCSkin
             TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
                 Assets.LoadAsset<Sprite>("texTeslaSkinMC"),
-                defaultRenderers,
+                defaultRendererinfos,
                 bodyCharacterModel.gameObject);
 
             MCSkin.gameObjectActivations = Skins.getGameObjectActivationsFromList(activatedGameObjects);
 
-            MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
+            MCSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
                 "meshMCArmor",
                 null,
                 null,
@@ -698,7 +697,9 @@ namespace Modules.Survivors {
         #region tower hacks
 
         private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot) {
-            if (MasterCatalog.FindMasterIndex(deployable.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+            MasterCatalog.MasterIndex masterIndex = MasterCatalog.FindMasterIndex(deployable.gameObject);
+            if (masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) || 
+                masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab)) {
                 //Helpers.LogWarning("adddeployable true");
                 slot = teslaTowerDeployableSlot;
             }

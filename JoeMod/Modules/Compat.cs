@@ -12,12 +12,6 @@ namespace Modules {
         public static bool VREnabled;
 
         public static void Initialize() {
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.cwmlolzlz.skills")) {
-                SkillsPlusCompat.init();
-            }
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI")) {
-                BetterUICompat.init();
-            }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.TinkersSatchel")) {
                 TinkersSatchelInstalled = true;
             }
@@ -26,6 +20,12 @@ namespace Modules {
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter")) {
                 ScepterInstalled = true;
+            }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.cwmlolzlz.skills")) {
+                SkillsPlusCompat.init();
+            }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI")) {
+                BetterUICompat.init();
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DrBibop.VRAPI")) {
                 VRCompat.init();
