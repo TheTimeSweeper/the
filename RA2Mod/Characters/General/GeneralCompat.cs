@@ -1,11 +1,13 @@
-﻿using RoR2;
+﻿using EntityStates;
+using RoR2;
 using RoR2.Skills;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using VRAPI;
 
 namespace RA2Mod.General
 {
-    public class GeneralCompat
+    public static class GeneralCompat
     {
         public delegate void Meme_SurivorCatalog_Init();
         public static event Meme_SurivorCatalog_Init Meme_OnSurvivorCatalog_Init;
@@ -80,5 +82,63 @@ namespace RA2Mod.General
         {
             return inventory.GetItemCount(AncientScepter.AncientScepterItem.instance.ItemDef);
         }
+
+
+        #region vr helpers
+        public static Ray GetAimRay(this BaseState state, bool dominant = true)
+        {
+            if (IsLocalVRPlayer(state.characterBody))
+            {
+                return GetVrAimRay(dominant);
+            }
+            return state.GetAimRay();
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static Ray GetVrAimRay(bool dominant)
+        {
+            return dominant ? MotionControls.dominantHand.aimRay : MotionControls.nonDominantHand.aimRay;
+        }
+
+        public static Ray GetAimRayCamera(BaseState state)
+        {
+            if (IsLocalVRPlayer(state.characterBody))
+            {
+                return GetVRAimRayCamera();
+            }
+            return state.GetAimRay();
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static Ray GetVRAimRayCamera()
+        {
+            //todo teslamove no camera.main in fixedupdate
+            return new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        }
+
+        public static ChildLocator GetModelChildLocator(this BaseState state, bool dominant = true)
+        {
+            if (IsLocalVRPlayer(state.characterBody))
+            {
+                return GetVRChildLocator(dominant);
+            }
+            return state.GetModelChildLocator();
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static ChildLocator GetVRChildLocator(bool dominant)
+        {
+            if (dominant)
+            {
+                return MotionControls.dominantHand.transform.GetComponentInChildren<ChildLocator>();
+            }
+            else
+            {
+                return MotionControls.nonDominantHand.transform.GetComponentInChildren<ChildLocator>();
+            }
+        }
+
+        public static bool IsLocalVRPlayer(CharacterBody body)
+        {
+            return General.GeneralCompat.VREnabled && body == LocalUserManager.GetFirstLocalUser().cachedBody;
+        }
+        #endregion vr helpers
     }
 }

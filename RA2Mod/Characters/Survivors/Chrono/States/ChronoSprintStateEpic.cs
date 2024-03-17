@@ -1,4 +1,4 @@
-﻿namespace RA2Mod.Survivors.Chrono.SkillStates
+﻿namespace RA2Mod.Survivors.Chrono.States
 {
     public class ChronoSprintStateEpic : ChronoSprintState
     {

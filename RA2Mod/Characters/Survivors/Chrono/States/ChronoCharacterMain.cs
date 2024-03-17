@@ -2,7 +2,7 @@
 using RoR2;
 using RoR2.Skills;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates {
+namespace RA2Mod.Survivors.Chrono.States {
     public class ChronoCharacterMain : GenericCharacterMain {
 
         private GenericSkill passiveSkill;

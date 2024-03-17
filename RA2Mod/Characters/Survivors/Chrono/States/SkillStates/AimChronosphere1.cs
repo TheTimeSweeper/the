@@ -3,7 +3,7 @@ using RA2Mod.Modules;
 using RoR2;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class AimChronosphere1 : AimChronosphereBase
     {

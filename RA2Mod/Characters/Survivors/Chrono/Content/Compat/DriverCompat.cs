@@ -1,7 +1,7 @@
 ﻿using RA2Mod.Modules;
 using RA2Mod.Survivors.Chrono.Components;
 using RA2Mod.Survivors.Chrono.SkillDefs;
-using RA2Mod.Survivors.Chrono.SkillStates;
+using RA2Mod.Survivors.Chrono.States;
 using RobDriver.Modules.Components;
 using RoR2;
 using RoR2.Skills;

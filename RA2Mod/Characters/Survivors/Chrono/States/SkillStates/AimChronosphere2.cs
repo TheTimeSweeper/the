@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class AimChronosphere2 : AimChronosphereBase
     {

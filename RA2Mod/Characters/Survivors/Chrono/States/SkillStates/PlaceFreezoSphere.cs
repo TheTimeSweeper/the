@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class PlaceFreezoSphere : BaseSkillState
     {
