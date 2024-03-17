@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class AimFreezoSphere : AimChronosphere1
     {

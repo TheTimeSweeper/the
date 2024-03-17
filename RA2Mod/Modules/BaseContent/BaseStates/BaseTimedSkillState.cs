@@ -15,8 +15,8 @@ namespace RA2Mod.Modules.BaseStates
         public virtual float TimedBaseCastEndPercentTime { get; }
 
         protected float duration;
-        protected float castStartPercentTime;
-        protected float castEndPercentTime;
+        protected float castStartTime;
+        protected float castEndTime;
         protected bool hasFired;
         protected bool isFiring;
         protected bool hasExited;
@@ -30,8 +30,8 @@ namespace RA2Mod.Modules.BaseStates
         protected virtual void InitDurationValues()
         {
             duration = TimedBaseDuration / attackSpeedStat;
-            this.castStartPercentTime = TimedBaseCastStartPercentTime * duration;
-            this.castEndPercentTime = TimedBaseCastEndPercentTime * duration;
+            this.castStartTime = TimedBaseCastStartPercentTime * duration;
+            this.castEndTime = TimedBaseCastEndPercentTime * duration;
         }
 
         protected virtual void OnCastEnter() { }
@@ -44,14 +44,14 @@ namespace RA2Mod.Modules.BaseStates
             base.FixedUpdate();
 
             //wait start duration and fire
-            if (!hasFired && fixedAge > castStartPercentTime)
+            if (!hasFired && fixedAge > castStartTime)
             {
                 hasFired = true;
                 OnCastEnter();
             }
 
-            bool fireStarted = fixedAge >= castStartPercentTime;
-            bool fireEnded = fixedAge >= castEndPercentTime;
+            bool fireStarted = fixedAge >= castStartTime;
+            bool fireEnded = fixedAge >= castEndTime;
             isFiring = false;
 
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime

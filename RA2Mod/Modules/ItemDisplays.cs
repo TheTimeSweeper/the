@@ -136,6 +136,19 @@ namespace RA2Mod.Modules
 
         #region add rule helpers
 
+        public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(Object itemDef, string prefabName, string childName, Vector3 position, Vector3 rotation, Vector3 scale)
+        {
+            return CreateDisplayRuleGroupWithRules(itemDef, new ItemDisplayRule[] {
+                CreateDisplayRule(prefabName, childName, position, rotation, scale)
+            });
+        }
+        public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateGenericDisplayRule(Object itemDef, GameObject prefab, string childName, Vector3 position, Vector3 rotation, Vector3 scale)
+        {
+            return CreateDisplayRuleGroupWithRules(itemDef, new ItemDisplayRule[] {
+                CreateDisplayRule(prefab, childName, position, rotation, scale)
+            });
+        }
+
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(string itemName, params ItemDisplayRule[] rules) => CreateDisplayRuleGroupWithRules(GetKeyAssetFromString(itemName), rules);
         public static ItemDisplayRuleSet.KeyAssetRuleGroup CreateDisplayRuleGroupWithRules(Object keyAsset_, params ItemDisplayRule[] rules)
         {

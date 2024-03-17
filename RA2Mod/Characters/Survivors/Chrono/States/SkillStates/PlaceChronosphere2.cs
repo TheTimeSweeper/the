@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class PlaceChronosphere2 : BaseSkillState
     {

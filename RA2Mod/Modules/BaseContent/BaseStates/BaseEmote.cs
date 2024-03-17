@@ -4,10 +4,14 @@ using System;
 using static RoR2.CameraTargetParams;
 using EntityStates;
 using BepInEx.Configuration;
+using RA2Mod.General;
+using ModdedEntityStates.TeslaTrooper;
+using RA2Mod.Modules.BaseStates;
 
-namespace ModdedEntityStates.TeslaTrooper {
-
-    public class BaseEmote : BaseState {
+namespace RA2Mod.Modules.BaseStates
+{
+    public class BaseEmote : BaseState
+    {
         public string soundString;
         public string animString;
         public float duration;
@@ -20,7 +24,8 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public LocalUser localUser;
 
-        private CharacterCameraParamsData emoteCameraParams = new CharacterCameraParamsData() {
+        private CharacterCameraParamsData emoteCameraParams = new CharacterCameraParamsData()
+        {
             maxPitch = 70,
             minPitch = -70,
             pivotVerticalOffset = 0.2f,
@@ -32,99 +37,113 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private CameraParamsOverrideHandle camOverrideHandle;
 
-        public override void OnEnter() {
+        public override void OnEnter()
+        {
             base.OnEnter();
-            this.animator = base.GetModelAnimator();
-            this.childLocator = base.GetModelChildLocator();
+            animator = GetModelAnimator();
+            childLocator = GetModelChildLocator();
             FindLocalUser();
 
-            base.characterBody.hideCrosshair = true;
-            
-            if (base.GetAimAnimator()) base.GetAimAnimator().enabled = false;
-            this.animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0);
-            this.animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 0);
-            
+            characterBody.hideCrosshair = true;
+
+            if (GetAimAnimator()) GetAimAnimator().enabled = false;
+            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0);
+            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 0);
+
             //if (this.animDuration == 0 && this.duration != 0) this.animDuration = this.duration;
 
             //if (this.duration > 0) base.PlayAnimation("FullBody, Override", this.animString, "Emote.playbackRate", this.duration);
             //else base.PlayAnimation("FullBody, Override", this.animString, "Emote.playbackRate", this.animDuration);
 
-            base.PlayAnimation("FullBody, Override", this.animString);
+            base.PlayAnimation("FullBody, Override", animString);
 
-            this.activePlayID = Util.PlaySound(soundString, base.gameObject);
+            activePlayID = Util.PlaySound(soundString, gameObject);
 
-            CameraParamsOverrideRequest request = new CameraParamsOverrideRequest {
+            CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+            {
                 cameraParamsData = emoteCameraParams,
                 priority = 0,
             };
 
-            camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, 0.5f);
+            camOverrideHandle = cameraTargetParams.AddParamsOverride(request, 0.5f);
 
         }
 
-        public override void OnExit() {
+        public override void OnExit()
+        {
             base.OnExit();
 
-            base.characterBody.hideCrosshair = false;
+            characterBody.hideCrosshair = false;
 
-            if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;
-            this.animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1);
-            this.animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1);
+            if (GetAimAnimator()) GetAimAnimator().enabled = true;
+            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1);
+            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1);
 
             base.PlayAnimation("FullBody, Override", "BufferEmpty");
-            if (this.activePlayID != 0) AkSoundEngine.StopPlayingID(this.activePlayID);
+            if (activePlayID != 0) AkSoundEngine.StopPlayingID(activePlayID);
 
-            base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.5f);
+            cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.5f);
         }
 
-        public override void FixedUpdate() {
+        public override void FixedUpdate()
+        {
             base.FixedUpdate();
 
             bool flag = false;
 
-            if (base.characterMotor) {
-                if (!base.characterMotor.isGrounded) flag = true;
-                if (base.characterMotor.velocity != Vector3.zero) flag = true;
+            if (characterMotor)
+            {
+                if (!characterMotor.isGrounded) flag = true;
+                if (characterMotor.velocity != Vector3.zero) flag = true;
             }
 
-            if (base.inputBank) {
-                if (base.inputBank.skill1.down) flag = true;
-                if (base.inputBank.skill2.down) flag = true;
-                if (base.inputBank.skill3.down) flag = true;
-                if (base.inputBank.skill4.down) flag = true;
-                if (base.inputBank.jump.down) flag = true;
+            if (inputBank)
+            {
+                if (inputBank.skill1.down) flag = true;
+                if (inputBank.skill2.down) flag = true;
+                if (inputBank.skill3.down) flag = true;
+                if (inputBank.skill4.down) flag = true;
+                if (inputBank.jump.down) flag = true;
 
-                if (base.inputBank.moveVector != Vector3.zero) flag = true;
+                if (inputBank.moveVector != Vector3.zero) flag = true;
             }
 
             //emote cancels
-            if (base.isAuthority && base.characterMotor.isGrounded) {
+            if (isAuthority && characterMotor.isGrounded)
+            {
 
-                CheckEmote<Rest>(RA2Mod.General.GeneralConfig.RestKeybind.Value);
+                CheckEmote<Rest>(GeneralConfig.RestKeybind.Value);
             }
 
 
-            if (this.duration > 0 && base.fixedAge >= this.duration) flag = true;
-            
-            if (flag) {
-                this.outer.SetNextStateToMain();
+            if (duration > 0 && fixedAge >= duration) flag = true;
+
+            if (flag)
+            {
+                outer.SetNextStateToMain();
             }
         }
 
-        private void CheckEmote(KeyCode keybind, EntityState state) {
-            if (Input.GetKeyDown(keybind)) {
-                if (!localUser.isUIFocused) {
+        private void CheckEmote(KeyCode keybind, EntityState state)
+        {
+            if (Input.GetKeyDown(keybind))
+            {
+                if (!localUser.isUIFocused)
+                {
                     outer.SetInterruptState(state, InterruptPriority.Any);
                 }
             }
         }
 
-        private bool CheckEmote<T>(KeyboardShortcut keybind) where T : EntityState, new() {
-            if (RA2Mod.Modules.Config.GetKeyPressed(keybind)) {
+        private bool CheckEmote<T>(KeyboardShortcut keybind) where T : EntityState, new()
+        {
+            if (Config.GetKeyPressed(keybind))
+            {
 
                 FindLocalUser();
-                
-                if (localUser != null && !localUser.isUIFocused) {
+
+                if (localUser != null && !localUser.isUIFocused)
+                {
                     outer.SetInterruptState(new T(), InterruptPriority.Any);
                     return true;
                 }
@@ -132,12 +151,17 @@ namespace ModdedEntityStates.TeslaTrooper {
             return false;
         }
 
-        private void FindLocalUser() {
-            if (localUser == null) {
-                if (base.characterBody) {
-                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList) {
-                        if (lu.cachedBody == base.characterBody) {
-                            this.localUser = lu;
+        private void FindLocalUser()
+        {
+            if (localUser == null)
+            {
+                if (characterBody)
+                {
+                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList)
+                    {
+                        if (lu.cachedBody == characterBody)
+                        {
+                            localUser = lu;
                             break;
                         }
                     }
@@ -145,20 +169,27 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority() {
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
             return InterruptPriority.Any;
         }
     }
+}
 
-    public class Rest : BaseEmote {
-        public override void OnEnter() {
-            this.animString = "Sit";
-            this.duration = 0;
+namespace ModdedEntityStates.TeslaTrooper
+{
+    public class Rest : BaseEmote
+    {
+        public override void OnEnter()
+        {
+            animString = "Sit";
+            duration = 0;
             base.OnEnter();
             PlayAnimation("RadCannonSpin", "CannonSpin");
         }
 
-        public override void OnExit() {
+        public override void OnExit()
+        {
             base.OnExit();
             PlayAnimation("RadCannonSpin", "DesolatorIdlePose");
         }

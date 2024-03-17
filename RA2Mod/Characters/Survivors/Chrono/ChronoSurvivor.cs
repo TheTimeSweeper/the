@@ -4,7 +4,7 @@ using MonoMod.Cil;
 using RA2Mod.Modules;
 using RA2Mod.Modules.Characters;
 using RA2Mod.Survivors.Chrono.Components;
-using RA2Mod.Survivors.Chrono.SkillStates;
+using RA2Mod.Survivors.Chrono.States;
 using RoR2;
 using RoR2.Skills;
 using RoR2.UI;
@@ -182,7 +182,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoPassive"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoSprintState)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(States.ChronoSprintState)),
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -223,7 +223,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoPassive"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoSprintStateEpic)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(States.ChronoSprintStateEpic)),
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -257,7 +257,7 @@ namespace RA2Mod.Survivors.Chrono
                     CHRONO_PREFIX + "PRIMARY_SHOOT_NAME",
                     CHRONO_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texIconChronoPrimary"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoShoot)),
+                    new EntityStates.SerializableEntityStateType(typeof(States.ChronoShoot)),
                     "Weapon",
                     false
                 ));
@@ -275,7 +275,7 @@ namespace RA2Mod.Survivors.Chrono
                 //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSecondary"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ChronoBomb)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(States.ChronoBomb)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -369,7 +369,7 @@ namespace RA2Mod.Survivors.Chrono
                 skillDescriptionToken = CHRONO_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSpecial"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Vanish)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(States.Vanish)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,

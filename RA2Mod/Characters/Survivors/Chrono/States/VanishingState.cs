@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class VanishingState : BaseState
     {

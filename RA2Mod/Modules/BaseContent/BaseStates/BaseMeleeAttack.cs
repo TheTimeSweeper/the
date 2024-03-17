@@ -2,10 +2,9 @@
 using RoR2;
 using RoR2.Audio;
 using RoR2.Skills;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+
 
 namespace RA2Mod.Modules.BaseStates
 {
@@ -42,7 +41,7 @@ namespace RA2Mod.Modules.BaseStates
         public float duration;
         private bool hasFired;
         private float hitPauseTimer;
-        private OverlapAttack attack;
+        protected OverlapAttack attack;
         protected bool inHitPause;
         private bool hasHopped;
         protected float stopwatch;
@@ -72,6 +71,12 @@ namespace RA2Mod.Modules.BaseStates
             attack.hitBoxGroup = FindHitBoxGroup(hitboxGroupName);
             attack.isCrit = RollCrit();
             attack.impactSound = impactSound;
+
+            if (General.GeneralCompat.IsLocalVRPlayer(base.characterBody))
+            {
+                attackEndPercentTime -= attackStartPercentTime * 0.5f;
+                attackStartPercentTime = 0;
+            }
         }
 
         protected virtual void PlayAttackAnimation()
@@ -90,7 +95,7 @@ namespace RA2Mod.Modules.BaseStates
 
         protected virtual void PlaySwingEffect()
         {
-            EffectManager.SimpleMuzzleFlash(swingEffectPrefab, gameObject, muzzleString, true);
+            EffectManager.SimpleMuzzleFlash(swingEffectPrefab, gameObject, muzzleString, false);
         }
 
         protected virtual void OnHitEnemyAuthority()
@@ -121,7 +126,7 @@ namespace RA2Mod.Modules.BaseStates
             }
         }
 
-        private void FireAttack()
+        protected virtual void FireAttackUpdate()
         {
             if (isAuthority)
             {
@@ -132,7 +137,7 @@ namespace RA2Mod.Modules.BaseStates
             }
         }
 
-        private void EnterAttack()
+        protected virtual void FireAttackEnter()
         {
             hasFired = true;
             Util.PlayAttackSpeedSound(swingSoundString, gameObject, attackSpeedStat);
@@ -174,9 +179,9 @@ namespace RA2Mod.Modules.BaseStates
             {
                 if (!hasFired)
                 {
-                    EnterAttack();
+                    FireAttackEnter();
                 }
-                FireAttack();
+                FireAttackUpdate();
             }
 
             if (stopwatch >= duration && isAuthority)

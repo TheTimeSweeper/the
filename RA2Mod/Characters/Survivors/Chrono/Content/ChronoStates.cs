@@ -1,4 +1,4 @@
-﻿using RA2Mod.Survivors.Chrono.SkillStates;
+﻿using RA2Mod.Survivors.Chrono.States;
 
 namespace RA2Mod.Survivors.Chrono
 {

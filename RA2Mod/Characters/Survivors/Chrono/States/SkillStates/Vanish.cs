@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using RA2Mod.General.SkillDefs;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class Vanish : BaseSkillState, IHasSkillDefComponent<ChronoTrackerVanish>
     {

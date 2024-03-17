@@ -5,7 +5,7 @@ using RoR2;
 using UnityEngine;
 using static RoR2.BulletAttack;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class ChronoShoot : BaseSkillState
     {

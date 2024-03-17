@@ -7,7 +7,7 @@ using RA2Mod.Survivors.Chrono.Components;
 using UnityEngine.Networking;
 using RA2Mod.General.SkillDefs;
 
-namespace RA2Mod.Survivors.Chrono.SkillStates
+namespace RA2Mod.Survivors.Chrono.States
 {
     public class ChronoBomb : GenericProjectileBaseState, IHasSkillDefComponent<ChronoTrackerBomb>
     {
