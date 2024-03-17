@@ -3,8 +3,6 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RA2Mod.Modules;
 using RA2Mod.Modules.Characters;
-using RA2Mod.Survivors.Chrono.Components;
-using RA2Mod.Survivors.Chrono.SkillStates;
 using RoR2;
 using RoR2.Skills;
 using RoR2.UI;
@@ -12,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using R2API;
-using RA2Mod.Survivors.Chrono.SkillDefs;
 using UnityEngine.SceneManagement;
 using RA2Mod.General.Components;
 using System.Runtime.CompilerServices;
@@ -20,8 +17,9 @@ using R2API.Utils;
 using System.Collections;
 using RA2Mod.General;
 using TeslaTrooper;
-using ModdedEntityStates.TeslaTrooper;
 using RoR2.Orbs;
+using RA2Mod.Survivors.Tesla.States;
+using RA2Mod.Survivors.Tesla.SkillDefs;
 
 namespace RA2Mod.Survivors.Tesla
 {
@@ -83,7 +81,7 @@ namespace RA2Mod.Survivors.Tesla
 
         public override UnlockableDef characterUnlockableDef => TeslaUnlockables.characterUnlockableDef;
 
-        public override ItemDisplaysBase itemDisplays { get; } = new RA2Mod.General.JoeItemDisplays();
+        public override ItemDisplaysBase itemDisplays { get; } = new TeslaItemDisplays();
 
         public override void Initialize()
         {
@@ -164,7 +162,7 @@ namespace RA2Mod.Survivors.Tesla
             bodyPrefab.AddComponent<TeslaTowerControllerController>();
             bodyPrefab.AddComponent<TeslaWeaponComponent>();
             bodyPrefab.AddComponent<TeslaZapBarrierController>();
-            if (Compat.VREnabled)
+            if (GeneralCompat.VREnabled)
             {
                 bodyPrefab.AddComponent<TeslaVRComponent>();
             }
@@ -188,7 +186,7 @@ namespace RA2Mod.Survivors.Tesla
         {
             Prefabs.ClearEntityStateMachines(bodyPrefab);
 
-            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(ChronoCharacterMain), typeof(EntityStates.SpawnTeleporterState));
+            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(TeslaCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");

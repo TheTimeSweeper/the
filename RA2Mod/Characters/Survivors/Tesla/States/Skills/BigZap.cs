@@ -1,18 +1,23 @@
 ﻿using EntityStates;
-using ModdedEntityStates.BaseStates;
 using Modules;
 using R2API;
 using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
+using RA2Mod.Modules.BaseStates;
 
-namespace ModdedEntityStates.TeslaTrooper {
-    
-    public class BigZap : BaseTimedSkillState {
-        public static GameObject bigZapEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
-        public static GameObject bigZapEffectPrefabArea = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/lightningstakenova");
-        public static GameObject bigZapEffectFlashPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
-        
+namespace RA2Mod.Survivors.Tesla.States
+{
+    public class BigZap : BaseTimedSkillState
+    {
+        public override float TimedBaseDuration => BaseDuration;
+        public override float TimedBaseCastStartPercentTime => BaseCastTime;
+
+        //todo teslamove assets
+        public static GameObject bigZapEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/magelightningbombexplosion");
+        public static GameObject bigZapEffectPrefabArea = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/lightningstakenova");
+        public static GameObject bigZapEffectFlashPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning");
+
         public static float DamageCoefficient = 6.9f;
         public static float ProcCoefficient = 1f;
         public static float BaseAttackRadius = 10;
@@ -31,44 +36,52 @@ namespace ModdedEntityStates.TeslaTrooper {
         private bool commandedTowers;
         private HurtBox commandTarget;
 
-        public override void OnEnter() {
+
+        public override void OnEnter()
+        {
             base.OnEnter();
 
-            InitDurationValues(BaseDuration, BaseCastTime);
-            
+            //todo teslamove hascomponentskilldef
             TeslaTowerControllerController controller = GetComponent<TeslaTowerControllerController>();
-                                                      
-            if (controller && controller.coilReady && base.isAuthority) {
+
+            if (controller && controller.coilReady && isAuthority)
+            {
                 //client will find the commandtarget and serialize it
                 commandTarget = GetComponent<TeslaTrackerComponentZap>()?.GetTrackingTarget();
             }
 
             //server will deserialize a commandTarget from the client
-            if (commandTarget) {
+            if (commandTarget)
+            {
 
-                if (NetworkServer.active) {
+                if (NetworkServer.active)
+                {
                     controller.commandTowers(commandTarget);
                 }
-                
+
                 commandedTowers = true;
             }
 
-            if (commandedTowers) {
+            if (commandedTowers)
+            {
 
                 //todo anim tower
                 PlayAnimation("Gesture, Additive", "Shock_bak", "Shock.playbackRate", 0.3f);
 
-            } else {
+            }
+            else
+            {
 
                 attackRadius = BaseAttackRadius * skillsPlusAreaMulti;
 
                 PlayAnimation("Gesture, Additive", "Shock", "Shock.playbackRate", 0.3f);
 
-                base.characterBody.AddSpreadBloom(1);
+                characterBody.AddSpreadBloom(1);
             }
         }
 
-        protected override void OnCastEnter() {
+        protected override void OnCastEnter()
+        {
             base.OnCastEnter();
 
             if (commandedTowers)
@@ -76,9 +89,11 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             bool isCrit = RollCrit();
 
-            if (base.isAuthority) {
+            if (isAuthority)
+            {
 
-                BlastAttack blast = new BlastAttack {
+                BlastAttack blast = new BlastAttack
+                {
                     attacker = gameObject,
                     inflictor = gameObject,
                     teamIndex = teamComponent.teamIndex,
@@ -104,26 +119,29 @@ namespace ModdedEntityStates.TeslaTrooper {
                 };
                 blast.Fire();
             }
-            
+
             Util.PlaySound(isCrit ? zapSound : zapSoundCrit, gameObject);
-            
+
             #region effects
-            EffectData fect = new EffectData {
+            EffectData fect = new EffectData
+            {
                 origin = aimPoint,
                 scale = attackRadius,
             };
 
-            if (Input.GetKey(KeyCode.LeftAlt)) {
+            if (General.GeneralConfig.Debug.Value && Input.GetKey(KeyCode.LeftAlt))
+            {
                 tryEffects(fect);
                 return;
             }
-            
+
             EffectManager.SpawnEffect(bigZapEffectPrefabArea, fect, true);
 
             if (!Input.GetKey(KeyCode.G))
                 EffectManager.SpawnEffect(bigZapEffectPrefab, fect, true);
 
-            if (Input.GetKey(KeyCode.H)) {
+            if (Input.GetKey(KeyCode.H))
+            {
                 fect.scale /= 2f;
                 EffectManager.SpawnEffect(bigZapEffectFlashPrefab, fect, true);
             }
@@ -135,21 +153,21 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         public static GameObject[] effects =
             {
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/magelightningbombexplosion"), //oke
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/lightningstakenova"), //decent, simple, probably best but boring
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/magelightningbombexplosion"), //oke
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/lightningstakenova"), //decent, simple, probably best but boring
 
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/impactlightning"), //2 //teeny         //gauntlet? too blue, not cyan, mabye that's fine
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/lightningflash"),// teeny              //looks like purity lol
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/lightningstrikeimpact"), //NOT TEENY
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact"), //small lightning, doesn't scale, probably still don't want lightning tho
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/impactlightning"), //2 //teeny         //gauntlet? too blue, not cyan, mabye that's fine
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/lightningflash"),// teeny              //looks like purity lol
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/lightningstrikeimpact"), //NOT TEENY
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact"), //small lightning, doesn't scale, probably still don't want lightning tho
 
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightning"), //6              // teeny      //gauntlet? way too small. what's this even for anyway?  
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglarge"),             // teeny      //cool but too arti again  
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglargewithtrail"),    // teeny      //same as last. when parented to gauntlet must be cool
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightning"), //6              // teeny      //gauntlet? way too small. what's this even for anyway?  
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglarge"),             // teeny      //cool but too arti again  
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashmagelightninglargewithtrail"),    // teeny      //same as last. when parented to gauntlet must be cool
 
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"), //9  //p good, scale too high, no sound            //also p good gauntlet
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightningmage"), //probably favorite, but too blatantly arti. also doesn't scale I think, outer radius blast too far (misleading (but i can just increase my range to match lol)
-                RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning"), //same as 10 but yellow
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"), //9  //p good, scale too high, no sound            //also p good gauntlet
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightningmage"), //probably favorite, but too blatantly arti. also doesn't scale I think, outer radius blast too far (misleading (but i can just increase my range to match lol)
+                LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning"), //same as 10 but yellow
             };
 
         private static void tryEffects(EffectData fect)
@@ -167,18 +185,21 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
         #endregion testeffects
 
-        public override void OnExit() {
+        public override void OnExit()
+        {
             base.OnExit();
 
             GetModelAnimator().SetBool("isHandOut", false);
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority() {
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
             return InterruptPriority.Skill;
         }
 
         // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
-        public override void OnSerialize(NetworkWriter writer) {
+        public override void OnSerialize(NetworkWriter writer)
+        {
 
             writer.Write(HurtBoxReference.FromHurtBox(commandTarget));
             //not needed here, as both server and authority will set this value in onenter
@@ -186,9 +207,10 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
         // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
-        public override void OnDeserialize(NetworkReader reader) {
+        public override void OnDeserialize(NetworkReader reader)
+        {
 
-            this.commandTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
+            commandTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
             //this.commandedTowers = reader.ReadBoolean();
         }
     }

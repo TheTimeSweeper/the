@@ -1,9 +1,11 @@
 ﻿using EntityStates;
+using RA2Mod.General;
+using RA2Mod.Survivors.Tesla;
 using RoR2;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper {
-
+namespace RA2Mod.Survivors.Tesla.States
+{
     public class DeployTeslaTower : BaseSkillState
     {
         protected struct TotallyOriginalPlacementInfo
@@ -13,8 +15,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             public Quaternion rotation;
         }
 
-        public GameObject blueprintPrefab = Modules.Assets.TeslaCoilBlueprint;
-        public GameObject teslacoilPrefab = Modules.Assets.TeslaCoil;
+        public GameObject blueprintPrefab = TeslaAssets.TeslaCoilBlueprint;
+        public GameObject teslacoilPrefab = TeslaAssets.TeslaCoil;
 
         protected TotallyOriginalPlacementInfo currentPlacementInfo;
         private float _minTowerHeight = 3;
@@ -30,7 +32,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         private bool ConstructionComplete;
 
         private BlueprintController blueprints;
-        private GameObject coilMasterPrefab = Modules.Survivors.TeslaTowerNotSurvivor.masterPrefab;
+        private GameObject coilMasterPrefab = Survivors.TeslaTower.TeslaTowerNotSurvivor.masterPrefab;
 
         public override void OnEnter()
         {
@@ -79,7 +81,7 @@ namespace ModdedEntityStates.TeslaTrooper {
                 }
                 else if (inputBank && entryCountdown <= 0f)
                 {
-                    if (currentPlacementInfo.ok && (inputBank.skill1.down || inputBank.skill4.justPressed || (Modules.VRCompat.IsLocalVRPlayer(characterBody) && inputBank.skill4.justReleased)))
+                    if (currentPlacementInfo.ok && (inputBank.skill1.down || inputBank.skill4.justPressed || GeneralCompat.IsLocalVRPlayer(characterBody) && inputBank.skill4.justReleased))
                     {
                         HandleConstructCoil();
                     }
@@ -92,8 +94,10 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        protected virtual void HandleConstructCoil() {
-            if (characterBody) {
+        protected virtual void HandleConstructCoil()
+        {
+            if (characterBody)
+            {
 
                 constructCoil(currentPlacementInfo);
 
@@ -101,9 +105,11 @@ namespace ModdedEntityStates.TeslaTrooper {
 
                 ConstructionComplete = true;
 
-                if (skillLocator) {
+                if (skillLocator)
+                {
                     GenericSkill skill = skillLocator.GetSkill(SkillSlot.Special);
-                    if (skill) {
+                    if (skill)
+                    {
                         skill.DeductStock(1);
                     }
                 }
@@ -112,10 +118,11 @@ namespace ModdedEntityStates.TeslaTrooper {
             exitPending = true;
         }
 
-        protected virtual void constructCoil(TotallyOriginalPlacementInfo placementInfo) {
-            base.characterBody.SendConstructTurret(base.characterBody, 
-                                                   placementInfo.position, 
-                                                   placementInfo.rotation, 
+        protected virtual void constructCoil(TotallyOriginalPlacementInfo placementInfo)
+        {
+            characterBody.SendConstructTurret(characterBody,
+                                                   placementInfo.position,
+                                                   placementInfo.rotation,
                                                    MasterCatalog.FindMasterIndex(coilMasterPrefab));
         }
 
@@ -148,15 +155,18 @@ namespace ModdedEntityStates.TeslaTrooper {
         protected TotallyOriginalPlacementInfo GetPlacementInfo()
         {
             RaycastHit raycastHit;
-            Ray aimRay = Modules.VRCompat.GetAimRay(this, false);
+            Ray aimRay = this.GetAimRay(false);
 
             //quick direct raycast to check if we closer ground
             float deployForwardDistance;
-            if (Physics.Raycast(aimRay, out raycastHit, 10, LayerIndex.world.mask)) {
+            if (Physics.Raycast(aimRay, out raycastHit, 10, LayerIndex.world.mask))
+            {
                 Vector3 diff = raycastHit.point - aimRay.origin;
                 diff.y = 0;
                 deployForwardDistance = Mathf.Min(diff.magnitude, _baseDeployForwardDistance);
-            } else {
+            }
+            else
+            {
                 deployForwardDistance = _baseDeployForwardDistance;
             }
 

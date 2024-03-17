@@ -1,14 +1,17 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper {
-    public class DeployTeslaTowerScepter : DeployTeslaTower {
+namespace RA2Mod.Survivors.Tesla.States
+{
+    public class DeployTeslaTowerScepter : DeployTeslaTower
+    {
 
-        private GameObject coilMasterPrefab = Modules.Survivors.TeslaTowerScepter.masterPrefab;
+        private GameObject coilMasterPrefab = Survivors.TeslaTower.TeslaTowerScepter.masterPrefab;
 
-        protected override void constructCoil(TotallyOriginalPlacementInfo placementInfo) {
+        protected override void constructCoil(TotallyOriginalPlacementInfo placementInfo)
+        {
 
-            base.characterBody.SendConstructTurret(base.characterBody,
+            characterBody.SendConstructTurret(characterBody,
                                                    placementInfo.position,
                                                    placementInfo.rotation,
                                                    MasterCatalog.FindMasterIndex(coilMasterPrefab));

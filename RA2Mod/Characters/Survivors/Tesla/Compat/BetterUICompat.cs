@@ -1,4 +1,4 @@
-﻿using ModdedEntityStates.TeslaTrooper;
+﻿using RA2Mod.Survivors.Tesla.States;
 using System.Collections.Generic;
 using static BetterUI.ProcCoefficientCatalog;
 

@@ -1,12 +1,13 @@
 ﻿using RA2Mod.Modules;
 using ModdedEntityStates.TeslaTrooper;
+using RA2Mod.Survivors.Tesla.States;
 
 namespace RA2Mod.Survivors.Tesla
 {
     public class TeslaStates { 
         public static void Init()
         {
-            Content.AddEntityState(typeof(TeslaTrooperMain));
+            Content.AddEntityState(typeof(TeslaCharacterMain));
 
             Content.AddEntityState(typeof(Zap));
 

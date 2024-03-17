@@ -1,4 +1,5 @@
-﻿using RA2Mod.Survivors.Tesla.Achievements;
+﻿using RA2Mod.General;
+using RA2Mod.Survivors.Tesla.Achievements;
 using RoR2;
 using UnityEngine;
 
@@ -25,6 +26,24 @@ namespace RA2Mod.Survivors.Tesla
                 TeslaGrandMasteryAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(TeslaGrandMasteryAchievement.identifier),
                 TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texTeslaSkinNod"));
+
+            utilityUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
+                TeslaTowerBigZapAchievement.unlockableIdentifier,
+                Modules.Tokens.GetAchievementNameToken(TeslaTowerBigZapAchievement.identifier),
+                TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texTeslaSkillUtilityAlt"));
+            
+            secondaryUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
+                TeslaShieldZapKillAchievement.unlockableIdentifier,
+                Modules.Tokens.GetAchievementNameToken(TeslaShieldZapKillAchievement.identifier),
+                TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texTeslaSkillUtilityAlt"));
+
+            if (GeneralConfig.Cursed.Value)
+            {
+                cursedPrimaryUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
+                TeslaAllyZapAchievement.unlockableIdentifier,
+                Modules.Tokens.GetAchievementNameToken(TeslaAllyZapAchievement.identifier),
+                TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texTeslaSkillSecondaryAlt")); 
+            }
         }
     }
 }

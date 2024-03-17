@@ -1,43 +1,49 @@
 ﻿using EntityStates;
-using ModdedEntityStates.BaseStates;
+using RA2Mod.General;
+using RA2Mod.Modules.BaseStates;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.TeslaTrooper {
+namespace RA2Mod.Survivors.Tesla.States
+{
     public class ShieldZapStart : BaseTimedSkillState
     {
+        public override float TimedBaseDuration => BaseDuration;
+        public override float TimedBaseCastStartPercentTime => BaseCastStartTime;
+        public override float TimedBaseCastEndPercentTime => MoveSlowEndTime;
+
         public static float BaseDuration = 1;
 
         public static float BaseCastStartTime = 0.0f; //todo: anim: 0.13 when legs are separated
         public static float MoveSlowEndTime = 0.6f;
 
-        public GameObject CastShieldEffect = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
-        
-        public override void OnEnter() {
+        public GameObject CastShieldEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/simplelightningstrikeimpact");
+
+        public override void OnEnter()
+        {
             base.OnEnter();
-            InitDurationValues(BaseDuration, BaseCastStartTime, MoveSlowEndTime);
 
             //todo: lingering gesture, interruptible legs
-                //he's running in place what
-            base.PlayCrossfade("FullBody, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
-            base.PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
+            //he's running in place what
+            PlayCrossfade("FullBody, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
+            PlayCrossfade("Gesture, Override", "CastShield", "CastShield.playbackRate", duration, 0.1f * duration);
         }
 
         protected override void OnCastEnter()
         {
             EffectManager.SpawnEffect(CastShieldEffect, new EffectData
             {
-                origin =  Modules.VRCompat.GetModelChildLocator(this).FindChild("MuzzleGauntlet").position,
+                origin = this.GetModelChildLocator(true).FindChild("MuzzleGauntlet").position,
             }, false);
         }
 
         public override void Update()
         {
             base.Update();
-            if (base.characterMotor && isFiring)
+            if (characterMotor && isFiring)
             {
-                base.characterMotor.moveDirection = Vector3.zero;
+                characterMotor.moveDirection = Vector3.zero;
             }
         }
 

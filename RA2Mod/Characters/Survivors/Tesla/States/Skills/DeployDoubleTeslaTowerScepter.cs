@@ -1,14 +1,17 @@
-﻿namespace ModdedEntityStates.TeslaTrooper {
-
-    public class DeployDoubleTeslaTowerScepter : DeployTeslaTower {
+﻿namespace RA2Mod.Survivors.Tesla.States
+{
+    public class DeployDoubleTeslaTowerScepter : DeployTeslaTower
+    {
         private int towersLeft = 1;
 
-        protected override void HandleConstructCoil() {
-
+        protected override void HandleConstructCoil()
+        {
             //doesn't work. spams towers because we're checking skill.down instead of justpressed
             //scrapped anyways
-            if (towersLeft > 0) {
-                if (characterBody) {
+            if (towersLeft > 0)
+            {
+                if (characterBody)
+                {
 
                     constructCoil(currentPlacementInfo);
 
@@ -16,7 +19,9 @@
 
                     towersLeft--;
                 }
-            } else {
+            }
+            else
+            {
                 base.HandleConstructCoil();
             }
         }

@@ -3,11 +3,13 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.TeslaTrooper {
-    
-    public class FireChargedZapPunch : ZapPunch {
+namespace RA2Mod.Survivors.Tesla.States
+{
 
-        public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerRailgunCryo");
+    public class FireChargedZapPunch : ZapPunch
+    {
+
+        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerRailgunCryo");
         public static float MaxChargeDamageCoefficient = 8;
         public static float MaxBeamDamageCoefficient = 12;
         public static float MaxDistance = 50;
@@ -23,19 +25,23 @@ namespace ModdedEntityStates.TeslaTrooper {
         private bool commandedTowers;
         private HurtBox commandTarget;
 
-        public override void OnEnter() {
+        public override void OnEnter()
+        {
 
             TeslaTowerControllerController controller = GetComponent<TeslaTowerControllerController>();
 
-            if (controller && controller.coilReady && base.isAuthority) {
+            if (controller && controller.coilReady && isAuthority)
+            {
                 //client will find the commandtarget and serialize it
                 commandTarget = characterBody.hurtBoxGroup.hurtBoxes[2];//guantlet hurtbox
             }
 
             //server will deserialize a commandTarget from the client
-            if (commandTarget) {
+            if (commandTarget)
+            {
 
-                if (NetworkServer.active) {
+                if (NetworkServer.active)
+                {
                     controller.commandTowersGauntlet(commandTarget);
                 }
 
@@ -43,7 +49,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
                 commandedTowers = true;
 
-                if(!characterMotor.isGrounded)
+                if (!characterMotor.isGrounded)
                     SmallHop(characterMotor, hitHopVelocity);
             }
 
@@ -51,24 +57,30 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             base.OnEnter();
 
-            if (commandedTowers) {
+            if (commandedTowers)
+            {
                 attack.damageColorIndex = DamageColorIndex.WeakPoint;
             }
 
-            base.attack.pushAwayForce = Mathf.Lerp(minPushForce, maxPushForce, chargeMultiplier);
+            attack.pushAwayForce = Mathf.Lerp(minPushForce, maxPushForce, chargeMultiplier);
         }
 
-        protected override float GetDamageCoefficient() {
+        protected override float GetDamageCoefficient()
+        {
             return MaxChargeDamageCoefficient * chargeMultiplier;
         }
 
-        private void SetDurations() {
-            if (commandedTowers) {
-                BasePunchDuration = 1; 
+        private void SetDurations()
+        {
+            if (commandedTowers)
+            {
+                BasePunchDuration = 1;
                 animationDuration = 1.0f;
                 baseAttackStartTime = 0.29f;
                 baseAttackEndTime = 0.58f;
-            } else {
+            }
+            else
+            {
                 BasePunchDuration = 1;
                 animationDuration = 0.4f;
                 baseAttackStartTime = 0.214f;
@@ -76,52 +88,60 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        protected override void PlayAttackAnimation() {
+        protected override void PlayAttackAnimation()
+        {
 
-            if (commandedTowers) {
+            if (commandedTowers)
+            {
 
                 PlayCrossfade("Gesture, Override", "ShockPunchBeef", "Punch.playbackRate", animationDuration, 0.1f);
 
-            } else {
+            }
+            else
+            {
 
                 PlayCrossfade("Gesture, Override", "ShockPunchBeefLite", "Punch.playbackRate", animationDuration, 0.1f);
             }
         }
 
-        protected override void FireConeProjectile() {
-            if (!commandedTowers) {
+        protected override void FireConeProjectile()
+        {
+            if (!commandedTowers)
+            {
                 base.FireConeProjectile();
             }
         }
-        
-        protected override void OnFireAttackEnter() {
-            base.OnFireAttackEnter();
+
+        protected override void FireAttackEnter()
+        {
+            base.FireAttackEnter();
 
             if (!commandedTowers)
                 return;
 
-            base.AddRecoil(-3f * RecoilAmplitude, -5f * RecoilAmplitude, -0.5f * RecoilAmplitude, 0.5f * RecoilAmplitude);
+            AddRecoil(-3f * RecoilAmplitude, -5f * RecoilAmplitude, -0.5f * RecoilAmplitude, 0.5f * RecoilAmplitude);
 
             Util.PlaySound("Play_tower_btesat2a_tesla_tower_attack", gameObject);
 
-            Ray aimRay = base.GetAimRay();
+            Ray aimRay = GetAimRay();
 
-            if (base.isAuthority) {
+            if (isAuthority)
+            {
                 BulletAttack bulletAttack = new BulletAttack();
-                bulletAttack.owner = base.gameObject;
-                bulletAttack.weapon = base.gameObject;
+                bulletAttack.owner = gameObject;
+                bulletAttack.weapon = gameObject;
                 bulletAttack.origin = aimRay.origin;
                 bulletAttack.aimVector = aimRay.direction;
                 //bulletAttack.minSpread = this.minSpread;
                 //bulletAttack.maxSpread = this.maxSpread;
                 bulletAttack.bulletCount = 1u;
-                bulletAttack.damage = chargeMultiplier * MaxBeamDamageCoefficient * towerMultiplier * this.damageStat;
+                bulletAttack.damage = chargeMultiplier * MaxBeamDamageCoefficient * towerMultiplier * damageStat;
                 bulletAttack.force = 100f;
                 bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                 bulletAttack.tracerEffectPrefab = tracerEffectPrefab;
                 bulletAttack.muzzleName = "MuzzleGauntlet";
-                bulletAttack.hitEffectPrefab = this.hitEffectPrefab;
-                bulletAttack.isCrit = rolledCrit;
+                bulletAttack.hitEffectPrefab = hitEffectPrefab;
+                bulletAttack.isCrit = attack.isCrit;
                 bulletAttack.HitEffectNormal = false;
                 bulletAttack.radius = 3f;
                 bulletAttack.damageType = DamageType.Shock5s;
@@ -134,15 +154,17 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
         // Token: 0x0600419A RID: 16794 RVA: 0x0002F86B File Offset: 0x0002DA6B
-        public override void OnSerialize(NetworkWriter writer) {
+        public override void OnSerialize(NetworkWriter writer)
+        {
 
             writer.Write(HurtBoxReference.FromHurtBox(commandTarget));
         }
 
         // Token: 0x0600419B RID: 16795 RVA: 0x0010A8CC File Offset: 0x00108ACC
-        public override void OnDeserialize(NetworkReader reader) {
-            
-            this.commandTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
+        public override void OnDeserialize(NetworkReader reader)
+        {
+
+            commandTarget = reader.ReadHurtBoxReference().ResolveHurtBox();
         }
     }
 }

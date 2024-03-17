@@ -6,10 +6,13 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using RA2Mod.Modules.BaseStates;
+using RA2Mod.Survivors.Tesla.Orbs;
 
-namespace ModdedEntityStates.TeslaTrooper {
-    public class BlinkZap : EntityStates.Huntress.BlinkState {
-
+namespace RA2Mod.Survivors.Tesla.States
+{
+    public class BlinkZap : EntityStates.Huntress.BlinkState
+    {
         #region Gameplay Values
         public static float DamageCoefficient = 3f;
         public static float ProcCoefficient = 1f;
@@ -20,10 +23,14 @@ namespace ModdedEntityStates.TeslaTrooper {
         private HurtBox _targetHurtbox;
         private CameraTargetParams.CameraParamsOverrideHandle _cameraOverrideHandle;
 
-        private ModdedLightningType GetModdedOrbType {
-            get {
-                if (_weaponComponent) {
-                    if (_weaponComponent.hasTeslaCoil) {
+        private ModdedLightningType GetModdedOrbType
+        {
+            get
+            {
+                if (_weaponComponent)
+                {
+                    if (_weaponComponent.hasTeslaCoil)
+                    {
                         return ModdedLightningType.Tesla;
                     }
                     return _weaponComponent.teslaSkinDef.ZapLightningType;
@@ -33,8 +40,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        public override void OnEnter() {
-
+        public override void OnEnter()
+        {
             _weaponComponent = GetComponent<TeslaWeaponComponent>();
 
             _tracker = GetComponent<TeslaTrackerComponentDash>();
@@ -47,34 +54,40 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             characterMotor.Motor.ForceUnground();
 
-            if (_targetHurtbox) {
+            if (_targetHurtbox)
+            {
 
                 float distance = Vector3.Distance(_targetHurtbox.transform.position, transform.position);
                 duration = distance * 0.8f / (speedCoefficient * moveSpeedStat);
 
-                _cameraOverrideHandle = cameraTargetParams.AddParamsOverride(new CameraTargetParams.CameraParamsOverrideRequest {
-                    cameraParamsData = GetBlinkCameraParams(distance*0.5f),
+                _cameraOverrideHandle = cameraTargetParams.AddParamsOverride(new CameraTargetParams.CameraParamsOverrideRequest
+                {
+                    cameraParamsData = GetBlinkCameraParams(distance * 0.5f),
                     priority = 0.1f
                 }, 0);
 
                 FireLightningOrb();
             }
 
-            if (NetworkServer.active) {
+            if (NetworkServer.active)
+            {
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration + 1.0f);
             }
 
             Util.PlaySound("Play_trooper_blink", gameObject);
         }
-        public override Vector3 GetBlinkVector() {
-            if (!_targetHurtbox) {
+        public override Vector3 GetBlinkVector()
+        {
+            if (!_targetHurtbox)
+            {
                 return base.GetBlinkVector();
             }
 
             return Vector3.Normalize(_targetHurtbox.transform.position - transform.position);
         }
 
-        public override void OnExit() {
+        public override void OnExit()
+        {
             base.OnExit();
 
             cameraTargetParams.RemoveParamsOverride(_cameraOverrideHandle, 0.1f);
@@ -84,22 +97,23 @@ namespace ModdedEntityStates.TeslaTrooper {
             EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetInterruptState(windDownState, InterruptPriority.Any);
         }
 
-        private CharacterCameraParamsData GetBlinkCameraParams(float distance) {
-
+        private CharacterCameraParamsData GetBlinkCameraParams(float distance)
+        {
             CharacterCameraParamsData blinkParams = cameraTargetParams.cameraParams.data;
 
             blinkParams.idealLocalCameraPos.value = blinkParams.idealLocalCameraPos.value + new Vector3(0f, 1.5f, -distance);
             return blinkParams;
         }
 
-        private void FireLightningOrb() {
-
-            if (!_tracker.GetIsTargetingTeammate()) {
-
-                PseudoLightningOrb orb = new PseudoLightningOrb {
+        private void FireLightningOrb()
+        {
+            if (!_tracker.GetIsTargetingTeammate())
+            {
+                PseudoLightningOrb orb = new PseudoLightningOrb
+                {
                     origin = transform.position,
                     damageValue = DamageCoefficient * damageStat,
-                    isCrit = base.RollCrit(),
+                    isCrit = RollCrit(),
                     bouncesRemaining = 0,
                     //damageCoefficientPerBounce = BounceDamageMultplier,
                     damageType = DamageType.Stun1s,
@@ -120,14 +134,16 @@ namespace ModdedEntityStates.TeslaTrooper {
                 OrbManager.instance.AddOrb(orb);
             }
 
-            HarmlessBlinkCooldownOrb orb2 = new HarmlessBlinkCooldownOrb {
+            HarmlessBlinkCooldownOrb orb2 = new HarmlessBlinkCooldownOrb
+            {
                 target = _targetHurtbox,
                 origin = transform.position,
                 ownerGameObject = gameObject,
                 speed = speedCoefficient * moveSpeedStat,
                 moddedLightningType = GetModdedOrbType,
             };
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++)
+            {
                 OrbManager.instance.AddOrb(orb2);
             }
         }

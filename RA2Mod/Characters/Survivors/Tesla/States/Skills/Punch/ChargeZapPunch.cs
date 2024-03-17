@@ -2,8 +2,10 @@
 using RoR2;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper {
-    public class ChargeZapPunch : BaseSkillState {
+namespace RA2Mod.Survivors.Tesla.States
+{
+    public class ChargeZapPunch : BaseSkillState
+    {
 
         public static float MinCharge = 0.1f;
         public static float MaxCharge = 1;
@@ -17,7 +19,8 @@ namespace ModdedEntityStates.TeslaTrooper {
         private bool _playingLoop;
         private bool _playingLoop2;
 
-        public override void OnEnter() {
+        public override void OnEnter()
+        {
             base.OnEnter();
 
             _maxChargeTime = BaseChargeTime / attackSpeedStat;
@@ -29,15 +32,17 @@ namespace ModdedEntityStates.TeslaTrooper {
             StartAimMode(_maxChargeTime);
         }
 
-        public override void FixedUpdate() {
+        public override void FixedUpdate()
+        {
             base.FixedUpdate();
 
             ManageSound();
 
-            if (!_reachedMax && fixedAge > _maxChargeTime) {
+            if (!_reachedMax && fixedAge > _maxChargeTime)
+            {
                 _reachedMax = true;
 
-                EffectManager.SimpleMuzzleFlash(RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
+                EffectManager.SimpleMuzzleFlash(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
                                                 gameObject,
                                                 "MuzzleGauntlet",
                                                 true);
@@ -45,9 +50,10 @@ namespace ModdedEntityStates.TeslaTrooper {
                 Util.PlaySound("Play_TeslaChargingComplete", gameObject);
             }
 
-            base.characterBody.SetSpreadBloom(Mathf.Lerp(0, 0.6f, base.fixedAge / _maxChargeTime), true);
+            characterBody.SetSpreadBloom(Mathf.Lerp(0, 0.6f, fixedAge / _maxChargeTime), true);
 
-            if (inputBank.skill2.justReleased) {
+            if (inputBank.skill2.justReleased)
+            {
 
                 float charge = Mathf.Lerp(MinCharge, MaxCharge, fixedAge / _maxChargeTime);
 
@@ -60,16 +66,19 @@ namespace ModdedEntityStates.TeslaTrooper {
         }
 
 
-        private void ManageSound() {
+        private void ManageSound()
+        {
             //magic number for length of RayGunChargeUp sound
-            if (!_playingLoop && !_playingLoop2 && fixedAge > 5.6f) {
+            if (!_playingLoop && !_playingLoop2 && fixedAge > 5.6f)
+            {
                 _playingLoop = true;
 
                 AkSoundEngine.StopPlayingID(_chargeSoundID);
                 _chargeSoundID = Util.PlaySound("Play_TeslaChargingLoop", gameObject);
             }
 
-            if (!_playingLoop2 && fixedAge > _maxChargeTime) {
+            if (!_playingLoop2 && fixedAge > _maxChargeTime)
+            {
                 _playingLoop2 = true;
                 AkSoundEngine.StopPlayingID(_chargeSoundID);
 
@@ -77,18 +86,21 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority() {
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
             return InterruptPriority.Skill;
         }
 
-        public override void OnExit() {
+        public override void OnExit()
+        {
             base.OnExit();
 
             AkSoundEngine.StopPlayingID(_chargeSoundID);
 
             //refund if interrupted
-            if (!_success) {
-                base.activatorSkillSlot.AddOneStock();
+            if (!_success)
+            {
+                activatorSkillSlot.AddOneStock();
             }
         }
     }

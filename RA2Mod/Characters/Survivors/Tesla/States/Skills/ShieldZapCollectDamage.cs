@@ -1,74 +1,87 @@
 ﻿using EntityStates;
+using RA2Mod.Survivors.Tesla;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.TeslaTrooper {
-    public class ShieldZapCollectDamage : BaseSkillState {
-
+namespace RA2Mod.Survivors.Tesla.States
+{
+    public class ShieldZapCollectDamage : BaseSkillState
+    {
         public static float ShieldBuffDuration = 4;
 
         public float skillsPlusSeconds = 0;
 
-        public RoR2.CameraTargetParams.AimRequest aimRequest;
+        public CameraTargetParams.AimRequest aimRequest;
 
         private float blockedDamage = 0;
 
         private bool completed;
         private bool buffDetectedAtSomePoint;
 
-        public override void OnEnter() {
+        public override void OnEnter()
+        {
             base.OnEnter();
 
             EntityStateMachine.FindByCustomName(gameObject, "Weapon").SetNextState(new ShieldZapStart());
 
             TeslaZapBarrierController controller = GetComponent<TeslaZapBarrierController>();
-            if (controller) {
+            if (controller)
+            {
                 controller.StartRecordingDamage();
             }
 
-            aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
+            aimRequest = cameraTargetParams.RequestAimType(CameraTargetParams.AimType.Aura);
 
-            if (!base.characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
-                CharacterModel characterModel = base.GetModelTransform().GetComponent<CharacterModel>();
+            if (!characterBody.HasBuff(TeslaBuffs.zapShieldBuff))
+            {
+                CharacterModel characterModel = GetModelTransform().GetComponent<CharacterModel>();
 
-                TemporaryOverlay temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+                TemporaryOverlay temporaryOverlay = gameObject.AddComponent<TemporaryOverlay>();
                 temporaryOverlay.duration = ShieldBuffDuration + 1;
                 temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
                 temporaryOverlay.AddToCharacerModel(characterModel);
             }
 
-            if (NetworkServer.active) {
+            if (NetworkServer.active)
+            {
 
-                Util.CleanseBody(base.characterBody, true, false, false, true, true, false);
-                base.characterBody.AddTimedBuff(Modules.Buffs.zapShieldBuff, ShieldBuffDuration + skillsPlusSeconds);
+                Util.CleanseBody(characterBody, true, false, false, true, true, false);
+                characterBody.AddTimedBuff(TeslaBuffs.zapShieldBuff, ShieldBuffDuration + skillsPlusSeconds);
             }
         }
 
-        public override void FixedUpdate() {
+        public override void FixedUpdate()
+        {
             base.FixedUpdate();
 
-            if (!buffDetectedAtSomePoint) {
-                buffDetectedAtSomePoint |= characterBody.HasBuff(Modules.Buffs.zapShieldBuff);
+            if (!buffDetectedAtSomePoint)
+            {
+                buffDetectedAtSomePoint |= characterBody.HasBuff(TeslaBuffs.zapShieldBuff);
                 return;
             }
 
             //UGLY HACK: client takes a sec to realize host has given the body a buff up in onEnter
-            if (buffDetectedAtSomePoint && !characterBody.HasBuff(Modules.Buffs.zapShieldBuff)) {
-                ShieldZapReleaseDamage newNextState = new ShieldZapReleaseDamage() {
-                    aimRequest = this.aimRequest,
+            if (buffDetectedAtSomePoint && !characterBody.HasBuff(TeslaBuffs.zapShieldBuff))
+            {
+                ShieldZapReleaseDamage newNextState = new ShieldZapReleaseDamage()
+                {
+                    aimRequest = aimRequest,
                     collectedDamage = blockedDamage,
                 };
-                /*EntityStateMachine.FindByCustomName(gameObject, "Weapon")*/outer.SetNextState(newNextState);
+                /*EntityStateMachine.FindByCustomName(gameObject, "Weapon")*/
+                outer.SetNextState(newNextState);
                 completed = true;
                 //base.outer.SetNextStateToMain();
             }
         }
 
-        public override void OnExit() {
+        public override void OnExit()
+        {
             base.OnExit();
 
-            if (!completed) {
+            if (!completed)
+            {
                 if (aimRequest != null)
                     aimRequest.Dispose();
             }

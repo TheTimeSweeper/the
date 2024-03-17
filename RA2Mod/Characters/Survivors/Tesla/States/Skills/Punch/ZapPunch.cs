@@ -1,13 +1,16 @@
-﻿using ModdedEntityStates.BaseStates; //todo just take make them in root moddedentitystates
+﻿using RA2Mod.General;
+using RA2Mod.Modules.BaseStates;
 using RoR2;
 using RoR2.Projectile;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper {
+namespace RA2Mod.Survivors.Tesla.States
+{
 
-    public class ZapPunch : BaseMeleeAttackButEpic {
+    public class ZapPunch : BaseMeleeAttack
+    {
 
         #region Gameplay Values
         public static float DefaultDamageCoefficient = 3f;
@@ -25,74 +28,82 @@ namespace ModdedEntityStates.TeslaTrooper {
         protected float baseAttackEndTime = 0.71f;
         #endregion
 
-        public static NetworkSoundEventDef loaderZapFistSoundEvent = RoR2.LegacyResourcesAPI.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseLoaderM1Impact");
+        public static NetworkSoundEventDef loaderZapFistSoundEvent = LegacyResourcesAPI.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseLoaderM1Impact");
 
-        public override void OnEnter() {
-            
-            base.hitboxName = "PunchHitbox";
+        public override void OnEnter()
+        {
 
-            base.damageCoefficient = GetDamageCoefficient();
+            hitboxGroupName = "PunchHitbox";
 
-            base.procCoefficient = ProcCoefficient;
-            base.pushForce = 930;
+            damageCoefficient = GetDamageCoefficient();
 
-            base.baseDuration = BasePunchDuration;
-            base.attackStartTime = baseAttackStartTime * animationDuration;
-            base.attackEndTime = baseAttackEndTime * animationDuration;
-            base.baseEarlyExitTime = 0.8f;
+            procCoefficient = ProcCoefficient;
+            pushForce = 930;
 
-            base.hitStopDuration = 0.14f;
-            base.swingSoundString = "Play_PunchWoosh";
-            base.hitSoundString = "";
-            base.muzzleString = "PunchHitboxAnchor"; // swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
-            base.hitstopAnimationParameter = "Shock.playbackRate";
-            base.swingEffectPrefab = Modules.Assets.TeslaZapConeEffect;
-            base.hitEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloader"); // Modules.Assets.swordHitImpactEffect;
+            baseDuration = BasePunchDuration;
+            attackStartPercentTime = baseAttackStartTime * animationDuration;
+            attackEndPercentTime = baseAttackEndTime * animationDuration;
+            earlyExitPercentTime = 0.8f;
 
-            base.impactSound = RoR2.Audio.NetworkSoundEventIndex.Invalid;
+            hitStopDuration = 0.14f;
+            swingSoundString = "Play_PunchWoosh";
+            hitSoundString = "";
+            muzzleString = "PunchHitboxAnchor"; // swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
+            playbackRateParam = "Shock.playbackRate";
+            swingEffectPrefab = TeslaAssets.TeslaZapConeEffect;
+            hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloader"); // Modules.Assets.swordHitImpactEffect;
+
+            impactSound = RoR2.Audio.NetworkSoundEventIndex.Invalid;
 
             ModifyState();
 
             base.OnEnter();
         }
 
-        protected virtual float GetDamageCoefficient() {
+        protected virtual float GetDamageCoefficient()
+        {
             return DefaultDamageCoefficient;
         }
 
         protected virtual void ModifyState() { }
 
-        protected override void PlayAttackAnimation() {
-            base.PlayAnimation("Gesture, Override", "ShockPunch", "Punch.playbackRate", duration* animationDuration);
+        protected override void PlayAttackAnimation()
+        {
+            PlayAnimation("Gesture, Override", "ShockPunch", "Punch.playbackRate", duration * animationDuration);
         }
 
-        protected override void OnFireAttackEnter() {
+        protected override void FireAttackEnter()
+        {
+            base.FireAttackEnter();
 
-            Vector3 direction = Modules.VRCompat.GetAimRay(this).direction;
+            Vector3 direction = this.GetAimRay(true).direction;
             direction.y = Mathf.Max(direction.y, direction.y * 0.5f);
             FindModelChild("PunchHitboxAnchor").rotation = Util.QuaternionSafeLookRotation(direction);
 
             FireConeProjectile();
         }
 
-        protected virtual void FireConeProjectile() {
+        protected virtual void FireConeProjectile()
+        {
 
-            if (isAuthority) {
-                if (base.FindModelChild(base.muzzleString)) {
-                    FireProjectileInfo fireProjectileInfo = default(FireProjectileInfo);
-                    fireProjectileInfo.position = base.FindModelChild(this.muzzleString).position;
+            if (isAuthority)
+            {
+                if (FindModelChild(muzzleString))
+                {
+                    FireProjectileInfo fireProjectileInfo = default;
+                    fireProjectileInfo.position = FindModelChild(muzzleString).position;
                     fireProjectileInfo.rotation = Quaternion.LookRotation(GetAimRay().direction);
-                    fireProjectileInfo.crit = rolledCrit;
-                    fireProjectileInfo.damage = damageCoefficient * OrbDamageMultiplier * this.damageStat;
-                    fireProjectileInfo.owner = base.gameObject;
-                    fireProjectileInfo.projectilePrefab = Modules.Assets.TeslaLoaderZapConeProjectile;
+                    fireProjectileInfo.crit = attack.isCrit;
+                    fireProjectileInfo.damage = damageCoefficient * OrbDamageMultiplier * damageStat;
+                    fireProjectileInfo.owner = gameObject;
+                    fireProjectileInfo.projectilePrefab = TeslaAssets.TeslaLoaderZapConeProjectile;
                     ProjectileManager.instance.FireProjectile(fireProjectileInfo);
                 };
             }
         }
 
-        protected override void OnHitEnemyAuthority(List<HurtBox> hits) {
-            base.OnHitEnemyAuthority(hits);
-        }
+        //protected override void OnHitEnemyAuthority(List<HurtBox> hits) {
+        //    base.OnHitEnemyAuthority(hits);
+        //}
     }
 }

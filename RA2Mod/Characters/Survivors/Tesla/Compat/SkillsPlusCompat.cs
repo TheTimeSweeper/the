@@ -1,5 +1,5 @@
 ﻿using EntityStates;
-using ModdedEntityStates.TeslaTrooper;
+using RA2Mod.Survivors.Tesla.States;
 using RoR2;
 using RoR2.Skills;
 using SkillsPlusPlus;

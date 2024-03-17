@@ -3,7 +3,8 @@ using RoR2;
 using System;
 using UnityEngine;
 
-namespace ModdedEntityStates.TeslaTrooper {
+namespace RA2Mod.Survivors.Tesla.States
+{
     public class AimBigZap : AimThrowableBase //AimMortar
     {
         public static string EnterSoundString = EntityStates.Treebot.Weapon.AimMortar.enterSoundString;
@@ -15,11 +16,11 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         private bool showingEmpowered;
         protected bool castSuccessful;
-        
+
         private float viewRadius;
 
-        public override void OnEnter() {
-
+        public override void OnEnter()
+        {
             coilController = GetComponent<TeslaTowerControllerController>();
             tracker = GetComponent<TeslaTrackerComponentZap>();
 
@@ -35,7 +36,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             damageCoefficient = 0f;
             baseMinimumDuration = 0.2f;
             //this.projectileBaseSpeed = 80;
-            
+
             base.OnEnter();
             Util.PlaySound(EnterSoundString, gameObject);
 
@@ -43,11 +44,13 @@ namespace ModdedEntityStates.TeslaTrooper {
             GetModelAnimator().SetBool("isHandOut", true);
         }
 
-        public override void UpdateTrajectoryInfo(out TrajectoryInfo dest) {
+        public override void UpdateTrajectoryInfo(out TrajectoryInfo dest)
+        {
             base.UpdateTrajectoryInfo(out dest);
 
             HurtBox target = tracker?.GetTrackingTarget();
-            if (target != null && showingEmpowered) {
+            if (target != null && showingEmpowered)
+            {
                 dest.hitPoint = target.transform.position;
             }
         }
@@ -58,20 +61,26 @@ namespace ModdedEntityStates.TeslaTrooper {
             StartAimMode();
 
             //scrapping the cooldown setup
-            if (coilController && coilController.GetNearestTower()) {
+            if (coilController && coilController.GetNearestTower())
+            {
 
                 ShowEmpowered();
-            } else {
+            }
+            else
+            {
                 if (showingEmpowered)
                     RemoveEmpowered();
             }
 
-            if (coilController && coilController.GetNearestTower() && tracker?.GetTrackingTarget() != null) {
+            if (coilController && coilController.GetNearestTower() && tracker?.GetTrackingTarget() != null)
+            {
                 viewRadius = Tower.TowerBigZap.BaseAttackRadius;
 
                 maxDistance = TeslaTrackerComponent.maxTrackingDistance;
 
-            } else {
+            }
+            else
+            {
 
                 viewRadius = BigZap.BaseAttackRadius;
 
@@ -83,7 +92,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             endpointVisualizerRadiusScale = Mathf.Lerp(endpointVisualizerRadiusScale, viewRadius, 0.5f);
         }
 
-        public override bool KeyIsDown() {
+        public override bool KeyIsDown()
+        {
             return base.KeyIsDown() && !characterBody.isSprinting;
         }
 
@@ -99,15 +109,17 @@ namespace ModdedEntityStates.TeslaTrooper {
                 RemoveEmpowered();
         }
 
-        private void RefundStock() {
-            base.activatorSkillSlot.AddOneStock();
+        private void RefundStock()
+        {
+            activatorSkillSlot.AddOneStock();
         }
 
         //todo rework this to a simple projectile
         //instead of using a fake one in OnEnter and then not using it actually
         public override void FireProjectile() { }
 
-        public override EntityState PickNextState() {
+        public override EntityState PickNextState()
+        {
             castSuccessful = true;
             return new BigZap() { aimPoint = currentTrajectoryInfo.hitPoint };
         }
@@ -118,7 +130,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             return InterruptPriority.PrioritySkill;
         }
 
-        private void ShowEmpowered() {
+        private void ShowEmpowered()
+        {
             showingEmpowered = true;
 
             //scrapping this cooldown system. it was novel though
@@ -131,7 +144,8 @@ namespace ModdedEntityStates.TeslaTrooper {
             tracker?.SetIndicatorEmpowered(true);
         }
 
-        private void RemoveEmpowered() {
+        private void RemoveEmpowered()
+        {
             showingEmpowered = false;
 
             //skillLocator.special = skillLocator.FindSkill("Special");

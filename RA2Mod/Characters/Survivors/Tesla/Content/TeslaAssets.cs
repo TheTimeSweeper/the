@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RA2Mod.Modules;
 
-namespace RA2Mod.Survivors.Tesla
-
+namespace RA2Mod.Survivors.Tesla 
+{ 
     public class TeslaAssets
     {
         #region tesla
@@ -57,7 +57,7 @@ namespace RA2Mod.Survivors.Tesla
                 (nig1, nig2) =>
                 {
                     nig1.GetComponent<Renderer>().sharedMaterial = nig2;
-                };
+                }));
         }
     }
 }
