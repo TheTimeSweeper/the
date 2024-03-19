@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using RA2Mod.Minions.TeslaTower.States;
 using RoR2;
 using System;
 using UnityEngine;
@@ -74,7 +75,7 @@ namespace RA2Mod.Survivors.Tesla.States
 
             if (coilController && coilController.GetNearestTower() && tracker?.GetTrackingTarget() != null)
             {
-                viewRadius = Tower.TowerBigZap.BaseAttackRadius;
+                viewRadius = TowerBigZap.BaseAttackRadius;
 
                 maxDistance = TeslaTrackerComponent.maxTrackingDistance;
 

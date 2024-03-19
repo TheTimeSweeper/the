@@ -1,9 +1,8 @@
 ﻿using EntityStates;
-using ModdedEntityStates.TeslaTrooper.Tower;
+using RA2Mod.General.Components;
+using RA2Mod.Minions.TeslaTower.States;
 using RoR2;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 

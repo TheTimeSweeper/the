@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Tesla.Orbs
 {
-    public class PseudoLightningOrb : LightningOrb
+    public class HarmlessBlinkCooldownOrb : Orb
     {
+        public GameObject ownerGameObject = null;
+        public ModdedLightningType moddedLightningType = ModdedLightningType.Ukulele;
+        public float speed = -1;
 
-        public ModdedLightningType moddedLightningType;
-
-        // Token: 0x060040C4 RID: 16580 RVA: 0x0010BF94 File Offset: 0x0010A194
         public override void Begin()
         {
+            base.Begin();
 
             if (speed <= 0)
             {
@@ -51,13 +52,24 @@ namespace RA2Mod.Survivors.Tesla.Orbs
                     break;
 
             }
+
             EffectData effectData = new EffectData
             {
                 origin = origin,
                 genericFloat = duration
             };
             effectData.SetHurtBoxReference(target);
+
             EffectManager.SpawnEffect(effect, effectData, true);
+        }
+
+        public override void OnArrival()
+        {
+
+            if (target && ownerGameObject)
+            {
+                ownerGameObject.GetComponent<TeslaTrackerComponent>().AddCooldownTarget(target.healthComponent);
+            }
         }
     }
 }

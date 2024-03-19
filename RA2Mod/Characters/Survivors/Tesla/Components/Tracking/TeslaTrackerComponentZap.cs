@@ -1,4 +1,4 @@
-﻿using Modules.Survivors;
+﻿using RA2Mod.Survivors.Tesla;
 using RoR2;
 using System;
 using UnityEngine;
@@ -47,7 +47,7 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
     private bool _isMelee;
 
     void Awake() {
-        indicator = new TeslaZapIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefab);
+        indicator = new TeslaZapIndicator(base.gameObject, TeslaAssets.TeslaIndicatorPrefab);
         towerControllerComponent = GetComponent<TeslaTowerControllerController>();
     }
     
@@ -180,7 +180,7 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
 
         indicator.targetTransform = (_trackingTarget ? _trackingTarget.transform : null);
         
-        if(Modules.Config.TowerTargeting.Value)
+        if(TeslaConfig.M4_Tower_Targeting.Value)
             setIsTowerTargeting();
     }
     

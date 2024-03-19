@@ -1,4 +1,4 @@
-﻿using Modules.Survivors;
+﻿using RA2Mod.Survivors.Tesla;
 using RoR2;
 using System;
 using UnityEngine;
@@ -21,7 +21,7 @@ public class TeslaTrackerComponentDash : MonoBehaviour {
     private bool _isReady;
 
     void Awake() {
-        indicator = new TeslaDashIndicator(base.gameObject, Modules.Assets.TeslaIndicatorPrefabDash);
+        indicator = new TeslaDashIndicator(base.gameObject, TeslaAssets.TeslaIndicatorPrefabDash);
     }
 
     void Start() {

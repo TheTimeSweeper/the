@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using RA2Mod.Minions.TeslaTower.States;
 using RA2Mod.Survivors.Tesla.States;
 using RoR2;
 using RoR2.Skills;
@@ -9,21 +10,6 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Tesla.Compat
 {
-    public class MemeCompat
-    {
-        public static void init()
-        {
-            General.GeneralCompat.Meme_OnSurvivorCatalog_Init += GeneralCompat_onSurvivorCatalog_Init;
-        }
-
-        private static void GeneralCompat_onSurvivorCatalog_Init()
-        {
-            //todo teslamove async
-            GameObject skele = TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<GameObject>("TeslaTrooper_meme");
-            EmotesAPI.CustomEmotesAPI.ImportArmature(TeslaTrooperSurvivor.instance.bodyPrefab, skele, true);
-            //skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
-        }
-    }
 
     public class SkillsPlusCompat
     {

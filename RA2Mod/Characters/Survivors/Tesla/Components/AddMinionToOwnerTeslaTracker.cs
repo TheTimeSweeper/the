@@ -1,14 +1,18 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace Modules.Survivors {
-    public class AddMinionToOwnerTeslaTracker : MonoBehaviour {
-        
-        void Start() {
+namespace RA2Mod.Survivors.Tesla.Components
+{
+    public class AddMinionToOwnerTeslaTracker : MonoBehaviour
+    {
+
+        void Start()
+        {
             GetComponent<CharacterBody>().master.GetComponent<MinionOwnership>().ownerMaster.GetBodyObject().GetComponent<TeslaTowerControllerController>().addNotTower(gameObject);
         }
 
-        void OnDestroy() {
+        void OnDestroy()
+        {
 
             GetComponent<CharacterBody>().master.GetComponent<MinionOwnership>().ownerMaster.GetBodyObject().GetComponent<TeslaTowerControllerController>().removeNotTower(gameObject);
         }

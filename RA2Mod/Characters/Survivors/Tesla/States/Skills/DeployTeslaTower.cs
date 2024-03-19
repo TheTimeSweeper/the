@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using RA2Mod.General;
+using RA2Mod.Minions.TeslaTower;
 using RA2Mod.Survivors.Tesla;
 using RoR2;
 using UnityEngine;
@@ -32,7 +33,7 @@ namespace RA2Mod.Survivors.Tesla.States
         private bool ConstructionComplete;
 
         private BlueprintController blueprints;
-        private GameObject coilMasterPrefab = Survivors.TeslaTower.TeslaTowerNotSurvivor.masterPrefab;
+        private GameObject coilMasterPrefab = TeslaTowerNotSurvivor.masterPrefab;
 
         public override void OnEnter()
         {

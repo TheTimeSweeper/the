@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RA2Mod.Minions.TeslaTower.States;
+using RoR2;
 using RoR2.Achievements;
 using System;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace RA2Mod.Survivors.Tesla.Achievements
             public override void OnInstall()
             {
                 base.OnInstall();
-                Tower.TowerBigZap.onTowerBigZapMultiHit += OnTowerBigZapHit;
+                TowerBigZap.onTowerBigZapMultiHit += OnTowerBigZapHit;
             }
 
             // Token: 0x06005701 RID: 22273 RVA: 0x00160C04 File Offset: 0x0015EE04
@@ -53,7 +54,7 @@ namespace RA2Mod.Survivors.Tesla.Achievements
             // Token: 0x06005702 RID: 22274 RVA: 0x00160C48 File Offset: 0x0015EE48
             public override void OnUninstall()
             {
-                Tower.TowerBigZap.onTowerBigZapMultiHit -= OnTowerBigZapHit;
+                TowerBigZap.onTowerBigZapMultiHit -= OnTowerBigZapHit;
                 base.OnUninstall();
             }
         }

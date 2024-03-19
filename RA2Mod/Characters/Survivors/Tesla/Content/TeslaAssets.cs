@@ -25,6 +25,13 @@ namespace RA2Mod.Survivors.Tesla
         public static GameObject TeslaMageLightningOrbEffectRedThick;
 
         public static Material ChainLightningMaterial;
+
+        public static Sprite[] rangeSprites = null;// new Sprite[] { Modules.Assets.LoadAsset<Sprite>("texIndicator1Close"),
+                                                         //Modules.Assets.LoadAsset<Sprite>("texIndicator2Med"),
+                                                        // Modules.Assets.LoadAsset<Sprite>("texIndicator3Far") };
+        public static Sprite allySprite = null;// Modules.Assets.LoadAsset<Sprite>("texIndicatorAlly");
+        public static Sprite towerSprite = null;// Modules.Assets.LoadAsset<Sprite>("texIndicatorTowerIcon");
+
         #endregion
 
         internal static List<IEnumerator> GetAssetBundleInitializedCoroutines(AssetBundle assetBundle)

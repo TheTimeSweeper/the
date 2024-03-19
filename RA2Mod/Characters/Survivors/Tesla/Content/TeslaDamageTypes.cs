@@ -20,6 +20,7 @@ namespace RA2Mod.Survivors.Tesla
             //ShockMed = DamageAPI.ReserveDamageType();
             ShockShort = DamageAPI.ReserveDamageType();
 
+            //todo teslamove likely ra2mod.hooks.takedamageserver
             Conductive = DamageAPI.ReserveDamageType();
         }
     }

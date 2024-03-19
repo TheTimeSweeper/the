@@ -16,10 +16,12 @@ using System.Runtime.CompilerServices;
 using R2API.Utils;
 using System.Collections;
 using RA2Mod.General;
-using TeslaTrooper;
 using RoR2.Orbs;
 using RA2Mod.Survivors.Tesla.States;
 using RA2Mod.Survivors.Tesla.SkillDefs;
+using RA2Mod.Survivors.Tesla.Orbs;
+using RA2Mod.Minions.TeslaTower;
+using RA2Mod.Survivors.Tesla.Components;
 
 namespace RA2Mod.Survivors.Tesla
 {
@@ -117,7 +119,6 @@ namespace RA2Mod.Survivors.Tesla
             TeslaBuffs.Init(assetBundle);
             TeslaCompat.Init();
             TeslaDeployables.Init();
-            //todo teslamove hitboxes
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -179,8 +180,15 @@ namespace RA2Mod.Survivors.Tesla
             //todo teslamove chainlightningmaterial in the before init loading
             childLocator.FindChild("LightningParticles").GetComponent<ParticleSystemRenderer>().trailMaterial = TeslaAssets.ChainLightningMaterial;
             childLocator.FindChild("LightningParticles2").GetComponent<ParticleSystemRenderer>().trailMaterial = TeslaAssets.ChainLightningMaterial;
+            
+            InitializeHitboxes();
         }
-    
+
+        private void InitializeHitboxes()
+        {
+            Modules.Prefabs.SetupHitBoxGroup(characterModelObject, "PunchHitbox", "PunchHitbox");
+        }
+
         //todo teslamove esm
         public override void InitializeEntityStateMachines() 
         {
@@ -649,14 +657,225 @@ namespace RA2Mod.Survivors.Tesla
             //assetBundle.LoadMaster(bodyPrefab, masterName);
         }
 
-        private void AddHooks()
+        #region hooks
+        protected void AddHooks()
         {
-            R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+
+            On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
+
+            On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
+            //On.RoR2.Inventory.CopyItemsFrom_Inventory_Func2 += Inventory_CopyItemsFrom_Inventory_Func2;
+
+            //On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
+            //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
+            //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
+
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+
+            On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
+
+            On.RoR2.BodyCatalog.Init += BodyCatalog_Init;
         }
 
-        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
+        private void BodyCatalog_Init(On.RoR2.BodyCatalog.orig_Init orig)
+        {
+            orig();
+            GameObject shockDroneBody = BodyCatalog.FindBodyPrefab("ShockDroneBody");
+            if (shockDroneBody)
+            {
+                //Helpers.LogWarning("hello hello hello");
+                shockDroneBody.AddComponent<AddMinionToOwnerTeslaTracker>();
+            }
+        }
+
+        private void LightningOrb_Begin(On.RoR2.Orbs.LightningOrb.orig_Begin orig, LightningOrb self)
         {
 
+            GameObject effect = null;
+            switch (self.lightningType)
+            {
+                case LightningOrb.LightningType.Count + 10:
+                    effect = TeslaAssets.TeslaMageLightningOrbEffectRed;
+                    self.duration = 0.01f;
+                    break;
+            }
+
+            if (effect != null)
+            {
+
+                EffectData effectData = new EffectData
+                {
+                    origin = self.origin,
+                    genericFloat = self.duration
+                };
+                effectData.SetHurtBoxReference(self.target);
+                EffectManager.SpawnEffect(effect, effectData, true);
+            }
+            else
+            {
+
+                orig(self);
+            }
         }
+
+        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex)
+        {
+            orig(self, skinIndex);
+
+            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
+            if (skinRecolorController)
+            {
+
+                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
+                if (color)
+                    skinRecolorController.SetRecolor(color.skillName.ToLowerInvariant());
+            }
+        }
+
+        private void BaseAI_OnBodyDamaged(On.RoR2.CharacterAI.BaseAI.orig_OnBodyDamaged orig, RoR2.CharacterAI.BaseAI self, DamageReport damageReport)
+        {
+
+            //keep tower from drawing aggro
+            GameObject originalAttacker = damageReport.damageInfo.attacker;
+            if (damageReport.attackerBodyIndex == BodyCatalog.FindBodyIndex("TeslaTowerBody"))
+            {
+                damageReport.damageInfo.attacker = null;
+            }
+
+            //no longer needed as ally zap orb is new custom harmless buff orb
+            ////keep allies from retaliating against trooper charging them
+            //bool originalNeverRetaliate = self.neverRetaliateFriendlies;
+            //if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.conductive)) {
+            //    self.neverRetaliateFriendlies = true;
+            //}
+
+            orig(self, damageReport);
+
+            //self.neverRetaliateFriendlies = originalNeverRetaliate;
+            damageReport.damageInfo.attacker = originalAttacker;
+        }
+
+        #region tower hacks
+
+        private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot)
+        {
+            MasterCatalog.MasterIndex masterIndex = MasterCatalog.FindMasterIndex(deployable.gameObject);
+            if (masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) ||
+                masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab))
+            {
+                //Helpers.LogWarning("adddeployable true");
+                slot = TeslaDeployables.teslaTowerDeployableSlot;
+            }
+
+            orig(self, deployable, slot);
+        }
+
+        //private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {
+        //    if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+        //        filter = TeslaTowerCopyFilterDelegate;
+        //    }
+        //    orig(self, other, filter);
+        //}
+
+        //private void Inventory_AddItemsFrom_Int32Array_Func2(On.RoR2.Inventory.orig_AddItemsFrom_Int32Array_Func2 orig, Inventory self, int[] otherItemStacks, Func<ItemIndex, bool> filter) {
+        //    if (MasterCatalog.FindMasterIndex(self.gameObject) == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) {
+
+        //        for (ItemIndex itemIndex = (ItemIndex)0; itemIndex < (ItemIndex)self.itemStacks.Length; itemIndex++) {
+        //            int itemstack = otherItemStacks[(int)itemIndex];
+        //            if (itemstack > 0) {
+        //            }
+        //        }
+        //    }
+        //    orig(self, otherItemStacks, filter);
+        //}
+
+        private Func<ItemIndex, bool> TeslaTowerCopyFilterDelegate = new Func<ItemIndex, bool>(TeslaTowerCopyFilter);
+
+        private static bool TeslaTowerCopyFilter(ItemIndex itemIndex)
+        {
+            return !ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.CannotCopy) &&
+                (ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage) ||
+                ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
+            //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
+        }
+        private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg)
+        {
+            orig(netMsg);
+        }
+        #endregion tower hacks
+
+        #region conductive
+        private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        {
+
+            CheckConductive(self, damageInfo);
+
+            //handled by harmlessbufforb
+            //if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.ApplyBlinkCooldown)) {
+            //        self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
+            //}
+
+            orig(self, damageInfo);
+        }
+
+        private static void CheckConductive(HealthComponent self, DamageInfo damageInfo)
+        {
+
+            ApplyConductive(self, damageInfo);
+
+            ConsumeConductiveAlly(self, damageInfo);
+        }
+
+        private static void ApplyConductive(HealthComponent self, DamageInfo damageInfo)
+        {
+
+            //mark enemies (or allies) conductive
+            bool attackConductive = damageInfo.HasModdedDamageType(TeslaDamageTypes.Conductive);
+            if (attackConductive)
+            {
+                if (damageInfo.attacker?.GetComponent<TeamComponent>()?.teamIndex == self.body.teamComponent.teamIndex)
+                {
+                    if (self.body.GetBuffCount(TeslaBuffs.conductiveBuffTeam) < 1)
+                    {
+                        self.body.AddBuff(TeslaBuffs.conductiveBuffTeam);
+                    }
+                }
+            }
+        }
+
+        private static void ConsumeConductiveAlly(HealthComponent self, DamageInfo damageInfo)
+        {
+
+            if (!damageInfo.attacker)
+                return;
+
+            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            if (attackerBody)
+            {
+                bool teamCharged = attackerBody.HasBuff(TeslaBuffs.conductiveBuffTeam) || attackerBody.HasBuff(TeslaBuffs.conductiveBuffTeamGrace);
+                if (teamCharged)
+                {
+                    //consume allied charged stacks for damage boost and shock
+
+                    int buffCount = attackerBody.GetBuffCount(TeslaBuffs.conductiveBuffTeam);
+                    for (int i = 0; i < buffCount; i++)
+                    {
+
+                        attackerBody.RemoveBuff(TeslaBuffs.conductiveBuffTeam);
+                        if (!attackerBody.HasBuff(TeslaBuffs.conductiveBuffTeamGrace))
+                        {
+                            attackerBody.AddTimedBuff(TeslaBuffs.conductiveBuffTeamGrace, 0.1f);
+                        }
+                    }
+
+                    damageInfo.AddModdedDamageType(TeslaDamageTypes.ShockShort);
+                    damageInfo.damage *= TeslaConfig.M1_Zap_ConductiveAllyBoost.Value;// 1f + (0.1f * buffCount);
+                    damageInfo.damageColorIndex = TeslaColors.ChargedColor;
+                }
+            }
+        }
+        #endregion conductive
+        #endregion hooks
     }
 }

@@ -1,5 +1,5 @@
-﻿using RoR2;
-using TeslaTrooper;
+﻿using RA2Mod.Survivors.Tesla.Orbs;
+using RoR2;
 
 namespace RA2Mod.Survivors.Tesla
 {

@@ -1,5 +1,4 @@
 ﻿using EntityStates;
-using TeslaTrooper;
 using R2API;
 using RoR2;
 using RoR2.Orbs;

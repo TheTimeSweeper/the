@@ -5,9 +5,11 @@ using System.Text;
 
 namespace RA2Mod.Survivors.Tesla
 {
+    //todo teslamove ugh
     public class TeslaConfig
     {
         public static ConfigEntry<bool> M1_Zap_TargetingReticleCenter;
+        public static ConfigEntry<float> M1_Zap_ConductiveAllyBoost;
 
         public static ConfigEntry<float> M3_ChargingUp_DamageAbsorption;
         public static float UtilityDamageAbsorption => UnityEngine.Mathf.Clamp01(M3_ChargingUp_DamageAbsorption.Value);
@@ -29,6 +31,14 @@ namespace RA2Mod.Survivors.Tesla
             //    false,
             //    "Keeps the targeting reticle at the center of the body.\nDoes not change gameplay. Damage is still based on the part of the body that is closest to the reticle",
             //    false);
+            M1_Zap_ConductiveAllyBoost = Config.BindAndOptions(
+                SectionSkills,
+                "M1_Zap_ConductiveAllyBoost",
+                1.3f,
+                0,
+                20,
+                "Damage Multiplier added when you zap an ally");
+
 
             M3_ChargingUp_DamageAbsorption = Config.BindAndOptions(
                 SectionSkills,

@@ -21,7 +21,7 @@ public class TeslaWeaponComponent : MonoBehaviour {
 
     void Start() {
         try {
-            teslaSkinDef = Modules.Skins.GetCurrentSkinDef(characterBody) as TeslaSkinDef;
+            teslaSkinDef = RA2Mod.Modules.Skins.GetCurrentSkinDef(characterBody) as TeslaSkinDef;
         }
         catch {
             Destroy(this);
