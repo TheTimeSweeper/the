@@ -160,6 +160,8 @@ namespace RA2Mod.Modules.Characters
 
         public float sortPosition = 100f;
 
+        public CharacterBody.BodyFlags bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
+
         /// <summary>
         /// pass in instead a bundle path or addressable path to load async
         /// </summary>
@@ -235,7 +237,6 @@ namespace RA2Mod.Modules.Characters
 
         /// <summary> large characters like loader are -12. for smaller characters like commando go for -10 maybe -9 </summary>
         public float cameraParamsDepth = -10;
-
         private CharacterCameraParams _cameraParams;
         public CharacterCameraParams cameraParams
         {

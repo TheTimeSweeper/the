@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace Modules {
 
-    public class VRCompat {
+    public static class VRCompat {
 
         public static void init() {
 
@@ -33,7 +33,7 @@ namespace Modules {
         }
 
         #region helpers
-        public static Ray GetAimRay(BaseState state, bool dominant = true) {
+        public static Ray GetAimRay(this BaseState state, bool dominant = true) {
             if (IsLocalVRPlayer(state.characterBody)) {
                 return GetVrAimRay(dominant);
             }
@@ -57,7 +57,7 @@ namespace Modules {
         }
 
         public static ChildLocator GetModelChildLocator(BaseState state, bool dominant = true) {
-            if (Modules.VRCompat.IsLocalVRPlayer(state.characterBody)) {
+            if (IsLocalVRPlayer(state.characterBody)) {
                 return GetVRChildLocator(dominant);
             }
             return state.GetModelChildLocator();

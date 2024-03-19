@@ -1,4 +1,5 @@
 ﻿using R2API;
+using RA2Mod.Survivors.Tesla;
 using RoR2;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,11 @@ namespace RA2Mod.Modules
             return skinDef;
         }
 
+        internal static SkinDef GetCurrentSkinDef(CharacterBody characterBody)
+        {
+            return SkinCatalog.GetBodySkinDef(characterBody.bodyIndex, (int)characterBody.skinIndex);
+        }
+
         public static T CreateSkinDef<T>(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null) where T : SkinDef
         {
             SkinDefInfo skinDefInfo = new SkinDefInfo
@@ -91,6 +97,34 @@ namespace RA2Mod.Modules
             skinDef.minionSkinReplacements = skinDefInfo.MinionSkinReplacements;
             skinDef.nameToken = skinDefInfo.NameToken;
             skinDef.name = skinDefInfo.Name;
+        }
+
+        /// <summary>
+        /// creates a new skindef that has the original skindef in its baseSkins
+        /// </summary>
+        /// <param name="originalSkinDef"></param>
+        /// <returns></returns>
+        public static T DuplicateScepterSkinDef<T>(T originalSkinDef, string newName = "_SCEPTER") where T : SkinDef
+        {
+            //why do we need to do this again?
+            On.RoR2.SkinDef.Awake += DoNothing;
+
+            T newSkinDef = ScriptableObject.CreateInstance<T>();
+            newSkinDef.baseSkins = new SkinDef[] { originalSkinDef };
+            newSkinDef.icon = originalSkinDef.icon;
+            newSkinDef.unlockableDef = originalSkinDef.unlockableDef;
+            newSkinDef.rootObject = originalSkinDef.rootObject;
+            newSkinDef.rendererInfos = originalSkinDef.rendererInfos;
+            newSkinDef.gameObjectActivations = originalSkinDef.gameObjectActivations;
+            newSkinDef.meshReplacements = originalSkinDef.meshReplacements;
+            newSkinDef.projectileGhostReplacements = originalSkinDef.projectileGhostReplacements;
+            newSkinDef.minionSkinReplacements = originalSkinDef.minionSkinReplacements;
+            newSkinDef.nameToken = originalSkinDef.nameToken + newName;
+            newSkinDef.name = originalSkinDef.name + newName;
+
+            On.RoR2.SkinDef.Awake -= DoNothing;
+
+            return newSkinDef;
         }
 
         private static void DoNothing(On.RoR2.SkinDef.orig_Awake orig, RoR2.SkinDef self)
