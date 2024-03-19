@@ -155,6 +155,18 @@ namespace RA2Mod.Modules
             return null;
         }
 
+        internal static List<IEnumerator> LoadAssetsAsync<T>(AssetBundle assetBundle, params string[] paths) where T: UnityEngine.Object
+        {
+            List<IEnumerator> coroutines = new List<IEnumerator>();
+
+            for (int i = 0; i < paths.Length; i++)
+            {
+                coroutines.Add(assetBundle.LoadBundleAssetCoroutine<T>(paths[i], null));
+            }
+
+            return coroutines;
+        }
+
         internal static IEnumerator LoadBuffIconAsync(BuffDef buffDef, AssetBundle assetBundle, string bundleLoadPath)
         {
             return assetBundle.LoadBundleAssetCoroutine<Sprite>(bundleLoadPath, (result) => {
@@ -284,6 +296,7 @@ namespace RA2Mod.Modules
     {
         public T result;
         public bool isDone;
+        public IEnumerator coroutine;
 
         public static implicit operator T(AsyncAsset<T> asset)
         {
@@ -292,7 +305,7 @@ namespace RA2Mod.Modules
 
         public AsyncAsset(string name)
         {
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAddressableAssetCoroutine<T>(name, (loadResult) => {
+            ContentPacks.asyncLoadCoroutines.Add(coroutine = Assets.LoadAddressableAssetCoroutine<T>(name, (loadResult) => {
                 result = loadResult;
                 isDone = true;
             }));
@@ -300,7 +313,7 @@ namespace RA2Mod.Modules
 
         public AsyncAsset(AssetBundle bundle, string path)
         {
-            ContentPacks.asyncLoadCoroutines.Add(bundle.LoadBundleAssetCoroutine<T>(path, (loadResult) => {
+            ContentPacks.asyncLoadCoroutines.Add(coroutine = bundle.LoadBundleAssetCoroutine<T>(path, (loadResult) => {
                 result = loadResult;
                 isDone = true;
             }));

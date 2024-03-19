@@ -221,7 +221,6 @@ namespace RA2Mod.Modules
 
             if (bodyInfo.autoCalculateLevelStats)
             {
-
                 bodyComponent.levelMaxHealth = Mathf.Round(bodyComponent.baseMaxHealth * 0.3f);
                 bodyComponent.levelMaxShield = Mathf.Round(bodyComponent.baseMaxShield * 0.3f);
                 bodyComponent.levelRegen = bodyComponent.baseRegen * 0.2f;
@@ -237,7 +236,6 @@ namespace RA2Mod.Modules
             }
             else
             {
-
                 bodyComponent.levelMaxHealth = bodyInfo.healthGrowth;
                 bodyComponent.levelMaxShield = bodyInfo.shieldGrowth;
                 bodyComponent.levelRegen = bodyInfo.regenGrowth;
@@ -256,9 +254,10 @@ namespace RA2Mod.Modules
 
             bodyComponent.baseJumpCount = bodyInfo.jumpCount;
 
+            bodyComponent.bodyFlags = bodyInfo.bodyFlags;
+
             bodyComponent.sprintingSpeedMultiplier = 1.45f;
 
-            bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
             bodyComponent.rootMotionInMainState = false;
 
             bodyComponent.hullClassification = HullClassification.Human;
@@ -729,7 +728,7 @@ namespace RA2Mod.Modules
             }
         }
 
-        public static void AddMainEntityStateMachine(GameObject bodyPrefab, string machineName = "Body", Type mainStateType = null, Type initalStateType = null)
+        public static EntityStateMachine AddMainEntityStateMachine(GameObject bodyPrefab, string machineName = "Body", Type mainStateType = null, Type initalStateType = null)
         {
             EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(bodyPrefab, machineName);
             if (entityStateMachine == null)
@@ -772,10 +771,12 @@ namespace RA2Mod.Modules
             {
                 setStateOnHurt.targetStateMachine = entityStateMachine;
             }
+
+            return entityStateMachine;
         }
 
         //this but in reverse https://media.discordapp.net/attachments/875473107891150878/896193331720237106/caption-7.gif?ex=65989f94&is=65862a94&hm=e1f51da3ad190c00c5da1f90269d5ef10bedb0ae063c0f20aa0dd8721608018a&
-        public static void AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null,  Type initalStateType = null, bool addToHurt = true, bool addToDeath = true)
+        public static EntityStateMachine AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null,  Type initalStateType = null, bool addToHurt = true, bool addToDeath = true)
         {
             EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(prefab, machineName);
             if (entityStateMachine == null)
@@ -817,8 +818,28 @@ namespace RA2Mod.Modules
             {
                 setStateOnHurt.idleStateMachine = setStateOnHurt.idleStateMachine.Append(entityStateMachine).ToArray();
             }
+
+            return entityStateMachine;
         }
 
+        public static void SetupHitBoxGroup(GameObject modelPrefab, string groupName, params string[] hitboxChildNames)
+        {
+            ChildLocator childLocator = modelPrefab.GetComponent<ChildLocator>();
+
+            Transform[] hitboxTransforms = new Transform[hitboxChildNames.Length];
+            for (int i = 0; i < hitboxChildNames.Length; i++)
+            {
+                hitboxTransforms[i] = childLocator.FindChild(hitboxChildNames[i]);
+
+                if (hitboxTransforms[i] == null)
+                {
+                    Log.Error("missing hitbox for " + hitboxChildNames[i]);
+                }
+            }
+            SetupHitBoxGroup(modelPrefab, groupName, hitboxTransforms);
+        }
+
+        [Obsolete("use SetupHitBoxGroup")]
         public static void SetupHitbox(GameObject prefab, Transform hitboxTransform, string hitboxName) => SetupHitBoxGroup(prefab, hitboxName, hitboxTransform);
         public static void SetupHitBoxGroup(GameObject prefab, string hitBoxGroupName, params Transform[] hitBoxTransforms)
         {

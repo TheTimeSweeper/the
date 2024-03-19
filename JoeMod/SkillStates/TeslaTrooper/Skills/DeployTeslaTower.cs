@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using Modules;
 using RoR2;
 using UnityEngine;
 
@@ -148,7 +149,7 @@ namespace ModdedEntityStates.TeslaTrooper {
         protected TotallyOriginalPlacementInfo GetPlacementInfo()
         {
             RaycastHit raycastHit;
-            Ray aimRay = Modules.VRCompat.GetAimRay(this, false);
+            Ray aimRay = this.GetAimRay(false);
 
             //quick direct raycast to check if we closer ground
             float deployForwardDistance;
