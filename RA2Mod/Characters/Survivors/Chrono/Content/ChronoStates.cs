@@ -1,4 +1,5 @@
-﻿using RA2Mod.Survivors.Chrono.States;
+﻿using RA2Mod.General.States;
+using RA2Mod.Survivors.Chrono.States;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -8,7 +9,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             Modules.Content.AddEntityState(typeof(ChronoCharacterMain));
             Modules.Content.AddEntityState(typeof(ChronoSprintState));
-            Modules.Content.AddEntityState(typeof(Modules.BaseStates.WindDownState));
+            Modules.Content.AddEntityState(typeof(WindDownState));
             Modules.Content.AddEntityState(typeof(PhaseState));
 
             Modules.Content.AddEntityState(typeof(ChronoShoot));

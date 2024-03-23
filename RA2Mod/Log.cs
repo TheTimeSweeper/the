@@ -9,7 +9,7 @@ namespace RA2Mod
     {
         private static ManualLogSource _logSource;
         
-        private static DateTime _startTime;
+        public static DateTime _startTime;
 
         private static string timesLog = "";
         private static string funnyLog = "";
@@ -17,7 +17,6 @@ namespace RA2Mod
         internal static void Init(ManualLogSource logSource)
         {
             _logSource = logSource;
-            _startTime = DateTime.Now;
         }
 
         internal static void Debug(object data) => _logSource.LogDebug(data);

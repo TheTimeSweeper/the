@@ -3,6 +3,8 @@ using R2API.Utils;
 using RA2Mod.General;
 using RA2Mod.Survivors.Chrono;
 using RA2Mod.Survivors.GI;
+using RA2Mod.Survivors.Tesla;
+using RA2Mod.Minions.TeslaTower;
 using System.Security;
 using System.Security.Permissions;
 
@@ -13,6 +15,13 @@ namespace RA2Mod
 {
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.johnedwa.RTAutoSprintEx", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.cwmlolzlz.skills", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.xoxfaby.BetterUI", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.KomradeSpectre.Aetherium", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.ThinkInvisible.TinkersSatchel", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.DrBibop.VRAPI", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     public class RA2Plugin : BaseUnityPlugin
@@ -25,6 +34,11 @@ namespace RA2Mod
 
         public static RA2Plugin instance;
 
+        public RA2Plugin()
+        {
+            Log._startTime = System.DateTime.Now;
+        }
+
         void Start()
         {
             Modules.SoundBanks.Init();
@@ -33,8 +47,27 @@ namespace RA2Mod
         void Awake()
         {
             instance = this;
-
             Log.Init(Logger);
+
+            //System.Type[] types;
+
+            //try
+            //{
+            //    types = System.Reflection.Assembly.GetExecutingAssembly().GetExportedTypes();
+            //    foreach (System.Type t in types)
+            //    {
+            //        Log.Warning(t.ToString());
+            //    }
+            //}
+            //catch (System.Reflection.ReflectionTypeLoadException e)
+            //{
+            //    Log.Warning("error\n" + e);
+            //    types = e.Types;
+            //    foreach (System.Type t in types)
+            //    {
+            //        Log.Warning(t.ToString());
+            //    }
+            //}
 
             GeneralConfig.Init();
             GeneralCompat.Init();
@@ -45,6 +78,7 @@ namespace RA2Mod
 
             new ChronoSurvivor().Initialize();
             new GISurvivor().Initialize();
+            new TeslaTrooperSurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
 
