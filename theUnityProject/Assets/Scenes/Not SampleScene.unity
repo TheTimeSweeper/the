@@ -25203,6 +25203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1418013630}
   - component: {fileID: 1418013631}
+  - component: {fileID: 1418013632}
   m_Layer: 0
   m_Name: Never Existed
   m_TagString: Untagged
@@ -25250,6 +25251,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa59865f513383a4caa2d715f3a9140a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1418013632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418013629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424ddd6f84fc23f43838ad5e4bbd60e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7986864117656387974}
+  animationCombos: []
+  aimPitch: 0.5
+  aimYaw: 0.5
 --- !u!1 &1424302140
 GameObject:
   m_ObjectHideFlags: 0
@@ -114647,6 +114664,12 @@ PrefabInstance:
 --- !u!4 &7986864117656387973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6941095561614800082, guid: e51a7fdc750a8bb48aa5035a225cd404,
+    type: 3}
+  m_PrefabInstance: {fileID: 7986864117656387972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7986864117656387974 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3941658440491527848, guid: e51a7fdc750a8bb48aa5035a225cd404,
     type: 3}
   m_PrefabInstance: {fileID: 7986864117656387972}
   m_PrefabAsset: {fileID: 0}
