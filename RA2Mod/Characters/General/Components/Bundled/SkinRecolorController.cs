@@ -92,7 +92,7 @@ namespace RA2Mod.General.Components
 
             if (recolors[i].colors.Length < recolorGroups.Length)
             {
-                Debug.LogError("not enough colors for this recolor");
+                Log.Error("not enough colors for this recolor");
             }
             SetRecolor(recolors[i].colors);
             currentColor = i;

@@ -1,4 +1,6 @@
 ﻿using EntityStates;
+using RA2Mod.General.States;
+using RA2Mod.Modules;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -8,11 +10,20 @@ using VRAPI;
 
 namespace RA2Mod.General
 {
+    public static class GeneralStates
+    {
+        public static void Init()
+        {
+            Content.AddEntityState(typeof(WindDownState));
+            Content.AddEntityState(typeof(Rest));
+        }
+    }
     public static class GeneralCompat
     {
         public delegate void Meme_SurivorCatalog_Init();
         public static event Meme_SurivorCatalog_Init Meme_OnSurvivorCatalog_Init;
 
+        //todo teslamove hooks
         public delegate void Driver_SurvivorCatalog_SetSurvivorDefs(GameObject driverBody);
         public static event Driver_SurvivorCatalog_SetSurvivorDefs FuckWithDriver;
 
@@ -22,7 +33,6 @@ namespace RA2Mod.General
         public static bool VREnabled;
 
         public static bool driverInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.Driver");
-        public static bool scepterInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
 
         public static void Init()
         {

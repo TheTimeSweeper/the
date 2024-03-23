@@ -5,8 +5,7 @@ using static RoR2.CameraTargetParams;
 using EntityStates;
 using BepInEx.Configuration;
 using RA2Mod.General;
-using ModdedEntityStates.TeslaTrooper;
-using RA2Mod.Modules.BaseStates;
+using RA2Mod.General.States;
 
 namespace RA2Mod.Modules.BaseStates
 {
@@ -172,26 +171,6 @@ namespace RA2Mod.Modules.BaseStates
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.Any;
-        }
-    }
-}
-
-namespace ModdedEntityStates.TeslaTrooper
-{
-    public class Rest : BaseEmote
-    {
-        public override void OnEnter()
-        {
-            animString = "Sit";
-            duration = 0;
-            base.OnEnter();
-            PlayAnimation("RadCannonSpin", "CannonSpin");
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-            PlayAnimation("RadCannonSpin", "DesolatorIdlePose");
         }
     }
 }

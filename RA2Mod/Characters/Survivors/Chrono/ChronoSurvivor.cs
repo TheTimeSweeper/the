@@ -207,7 +207,7 @@ namespace RA2Mod.Survivors.Chrono
 
             Skills.AddSkillsToFamily(passiveSkill.skillFamily, sprintSkillDef);
 
-            if (GeneralCompat.scepterInstalled)
+            if (GeneralCompat.ScepterInstalled)
             {
                 AddScepterPassiveSkill(sprintSkillDef);
             }

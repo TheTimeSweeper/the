@@ -42,8 +42,8 @@ namespace RA2Mod.Survivors.GI
             bodyColor = Color.blue,
             sortPosition = 69.6f,
             
-            crosshair = assetBundle.LoadAsset<GameObject>("GICrosshair"),
-            podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            crosshairBundlePath = "GICrosshair",
+            podPrefabAddressablePath = "Prefabs/NetworkedObjects/SurvivorPod",
 
             maxHealth = 140f,
             healthRegen = 2.0f,
@@ -74,6 +74,8 @@ namespace RA2Mod.Survivors.GI
 
         public override void OnCharacterInitialized()
         {
+            base.OnCharacterInitialized();
+
             GIConfig.Init();
 
             GIStates.Init();
