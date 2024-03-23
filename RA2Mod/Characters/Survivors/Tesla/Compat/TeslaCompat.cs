@@ -2,13 +2,13 @@
 
 namespace RA2Mod.Survivors.Tesla
 {
-    public class TeslaCompat
+    public static class TeslaCompat
     {
         public static void Init()
         {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.cwmlolzlz.skills"))
             {
-                SkillsPlusCompat.init();
+                //SkillsPlusCompat.init();
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI"))
             {

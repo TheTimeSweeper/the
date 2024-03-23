@@ -6,26 +6,25 @@ using RoR2.Skills;
 using SkillsPlusPlus;
 using SkillsPlusPlus.Modifiers;
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace RA2Mod.Survivors.Tesla.Compat
 {
-
     public class SkillsPlusCompat
     {
         //todo teslamove network this shit probably // or just.. not
         public static int SkillsPlusAdditionalTowers;
 
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void init()
         {
-
             SkillModifierManager.LoadSkillModifiers();
         }
 
         [SkillLevelModifier("Tesla_Primary_Zap", typeof(Zap))]
-        public class TeslaPrimaryModifier : BaseSkillModifier
+        internal class TeslaPrimaryModifier : BaseSkillModifier
         {
-
             public override void OnSkillEnter(BaseState skillState, int level)
             {
                 base.OnSkillEnter(skillState, level);
@@ -37,9 +36,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
         }
 
         [SkillLevelModifier("Tesla_Secondary_BigZap", typeof(AimBigZap), typeof(BigZap), typeof(TowerBigZap))]
-        class TeslaSecondaryModifier : BaseSkillModifier
+        internal class TeslaSecondaryModifier : BaseSkillModifier
         {
-
             public override void OnSkillEnter(BaseState skillState, int level)
             {
                 base.OnSkillEnter(skillState, level);
@@ -69,9 +67,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
         }
 
         [SkillLevelModifier("Tesla_Utility_ShieldZap", typeof(ShieldZapCollectDamage))]
-        public class TeslaUtilityModifier : BaseSkillModifier
+        internal class TeslaUtilityModifier : BaseSkillModifier
         {
-
             public override void OnSkillEnter(BaseState skillState, int level)
             {
                 base.OnSkillEnter(skillState, level);
@@ -83,9 +80,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
         }
 
         [SkillLevelModifier("Tesla_Special_Tower", new Type[0])]//, typeof(DeployTeslaTower), typeof(TowerLifetime))]
-        public class TeslaSpecialModifier : BaseSkillModifier
+        internal class TeslaSpecialModifier : BaseSkillModifier
         {
-
             public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
             {
                 base.OnSkillLeveledUp(level, characterBody, skillDef);
@@ -98,9 +94,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
 
         //are scepter skills even getting upgraded?
         [SkillLevelModifier("Tesla_Special_Scepter_Tower", new Type[0])]
-        public class TeslaSpecialScepterModifier : BaseSkillModifier
+        internal class TeslaSpecialScepterModifier : BaseSkillModifier
         {
-
             public override void OnSkillLeveledUp(int level, CharacterBody characterBody, SkillDef skillDef)
             {
                 base.OnSkillLeveledUp(level, characterBody, skillDef);
@@ -113,9 +108,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
 
         //todo desomove
         //[SkillLevelModifier("Desolator_Primary_Beam", typeof(RadBeam))]
-        //public class DesolatorPrimaryModifier : BaseSkillModifier
+        //internal class DesolatorPrimaryModifier : BaseSkillModifier
         //{
-
         //    public override void OnSkillEnter(BaseState skillState, int level)
         //    {
         //        base.OnSkillEnter(skillState, level);

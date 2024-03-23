@@ -22,7 +22,7 @@ namespace Modules.Achievements {
         {
             return BodyCatalog.FindBodyIndex("TeslaTrooperBody");
         }
-
+        
         public override void OnBodyRequirementMet()
         {
             Zap.onZapAuthority += OnZapAuthority;

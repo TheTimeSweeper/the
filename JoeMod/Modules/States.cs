@@ -13,6 +13,7 @@ namespace Modules
         public static void RegisterStates() {
 
             Content.AddEntityState(typeof(WindDownState));
+            Content.AddEntityState(typeof(Rest));
             
             #region tesla trooper
             Content.AddEntityState(typeof(TeslaTrooperMain));
@@ -36,7 +37,6 @@ namespace Modules
             Content.AddEntityState(typeof(DeployTeslaTower)); 
             Content.AddEntityState(typeof(DeployTeslaTowerScepter));
 
-            Content.AddEntityState(typeof(Rest));
 
             Content.AddEntityState(typeof(TeslaVoiceLines));
             #endregion tesla trooper

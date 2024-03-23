@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class KeepHeadInPositionComponent : MonoBehaviour {
+namespace RA2Mod.General.Components {
+    public class KeepHeadInPositionComponent : MonoBehaviour {
 
-    [SerializeField]
-    private Transform reference;
+        [SerializeField]
+        private Transform reference;
+    }
 }

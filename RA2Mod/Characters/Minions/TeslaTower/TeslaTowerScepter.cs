@@ -6,6 +6,7 @@ using RA2Mod.Modules.Characters;
 using RA2Mod.Survivors.Tesla;
 using RA2Mod.Modules;
 using RA2Mod.Minions.TeslaTower.States;
+using System.Linq;
 
 namespace RA2Mod.Minions.TeslaTower
 {
@@ -88,6 +89,8 @@ namespace RA2Mod.Minions.TeslaTower
 
             ModelSkinController skinController = characterModelObject.GetComponent<ModelSkinController>();
 
+            SkinDef[] teslaSkins = TeslaTrooperSurvivor.instance.characterModelObject.GetComponent<ModelSkinController>().skins;
+
             #region Default
             TeslaSkinDef scepterDefault = Skins.DuplicateScepterSkinDef(skinController.skins[0] as TeslaSkinDef);
 
@@ -129,6 +132,8 @@ namespace RA2Mod.Minions.TeslaTower
                 minionSkin = scepterMastery,
             };
 
+            teslaSkins[1].minionSkinReplacements = teslaSkins[1].minionSkinReplacements.Append(MasteryMinionSkinReplacement).ToArray();
+
             #endregion Mastery
 
             #region Nod
@@ -156,6 +161,8 @@ namespace RA2Mod.Minions.TeslaTower
                 minionSkin = scepterNod,
             };
 
+            teslaSkins[2].minionSkinReplacements = teslaSkins[2].minionSkinReplacements.Append(NodMinionSkinReplacement).ToArray();
+
             #endregion Nod
 
             #region MC
@@ -181,6 +188,8 @@ namespace RA2Mod.Minions.TeslaTower
                 minionBodyPrefab = bodyPrefab,
                 minionSkin = scepterMC,
             };
+
+            teslaSkins[3].minionSkinReplacements = teslaSkins[3].minionSkinReplacements.Append(MCMinionSkinReplacement).ToArray();
 
             #endregion MC
         }

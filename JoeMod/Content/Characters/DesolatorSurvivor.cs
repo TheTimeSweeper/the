@@ -14,6 +14,7 @@ using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using RoR2.Projectile;
 using EntityStates;
+using RA2Mod.General.Components;
 
 namespace Modules.Survivors {
     internal class DesolatorSurvivor : SurvivorBase {

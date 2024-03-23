@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 
-public class DesolatorMenu : MonoBehaviour {
+namespace RA2Mod.Survivors.Desolator.Components {
+    public class DesolatorMenu : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject lightPrefab;
+        [SerializeField]
+        private GameObject lightPrefab;
 
-    [SerializeField]
-    private Transform deployPoint;
+        [SerializeField]
+        private Transform deployPoint;
 
-    private void Start() {
-        GameObject thing = Instantiate(lightPrefab, deployPoint, true);
-        thing.transform.parent = null;
+        private void Start() {
+            GameObject thing = Instantiate(lightPrefab, deployPoint, true);
+            thing.transform.parent = null;
+        }
     }
 }

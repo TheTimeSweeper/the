@@ -11,6 +11,7 @@ using RA2Mod.Modules;
 using RA2Mod.Survivors.Tesla.Orbs;
 using System.Collections;
 using RA2Mod.Minions.TeslaTower.States;
+using System.Linq;
 
 namespace RA2Mod.Minions.TeslaTower
 {
@@ -78,6 +79,10 @@ namespace RA2Mod.Minions.TeslaTower
             InitializeCharacterMaster();
 
             AdditionalBodySetup();
+            if (General.GeneralCompat.ScepterInstalled)
+            {
+                new TeslaTowerScepter().Initialize();
+            }
 
             Log.CurrentTime($"{bodyName} initializecharacter done");
         }
@@ -173,6 +178,8 @@ namespace RA2Mod.Minions.TeslaTower
             ModelSkinController skinController = characterModelObject.AddComponent<ModelSkinController>();
             ChildLocator childLocator = characterModelObject.GetComponent<ChildLocator>();
 
+            SkinDef[] teslaSkins = TeslaTrooperSurvivor.instance.characterModelObject.GetComponent<ModelSkinController>().skins;
+
             CharacterModel.RendererInfo[] defaultRenderers = prefabCharacterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
@@ -261,6 +268,8 @@ namespace RA2Mod.Minions.TeslaTower
                 minionSkin = masterySkin,
             };
 
+            teslaSkins[1].minionSkinReplacements = teslaSkins[1].minionSkinReplacements.Append(MasteryMinionSkinReplacement).ToArray();
+
             #endregion mastery
 
             #region nod
@@ -313,8 +322,10 @@ namespace RA2Mod.Minions.TeslaTower
                 minionSkin = NodSkin,
             };
 
+            teslaSkins[2].minionSkinReplacements = teslaSkins[2].minionSkinReplacements.Append(NodMinionSkinReplacement).ToArray();
+
             #endregion
-            
+
             #region mince
 
             TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TOWER_PREFIX + "MC_SKIN_NAME",
@@ -362,6 +373,8 @@ namespace RA2Mod.Minions.TeslaTower
                 minionBodyPrefab = bodyPrefab,
                 minionSkin = MCSkin,
             };
+
+            teslaSkins[3].minionSkinReplacements = teslaSkins[3].minionSkinReplacements.Append(MCMinionSkinReplacement).ToArray();
 
             #endregion
 

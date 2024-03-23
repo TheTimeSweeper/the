@@ -36,7 +36,7 @@ namespace RA2Mod.Survivors.Tesla
 
         internal static List<IEnumerator> GetAssetBundleInitializedCoroutines(AssetBundle assetBundle)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         internal static void OnCharacterInitialized(AssetBundle assetBundle)

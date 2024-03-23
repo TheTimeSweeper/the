@@ -3,7 +3,7 @@ using RoR2.Achievements;
 
 namespace RA2Mod.Survivors.Tesla.Achievements
 {
-    [RegisterAchievement(identifier, unlockableIdentifier, null, typeof(TeslaShieldZapKillAchievementServer))]
+    //[RegisterAchievement(identifier, unlockableIdentifier, null, typeof(TeslaShieldZapKillAchievementServer))]
     public class TeslaShieldZapKillAchievement : BaseAchievement
     {
         public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "SHIELDZAPUNLOCKABLE_ACHIEVEMENT_ID";

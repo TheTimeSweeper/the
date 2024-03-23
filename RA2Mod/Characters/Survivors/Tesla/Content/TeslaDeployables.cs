@@ -30,7 +30,7 @@ namespace RA2Mod.Survivors.Tesla
                 int lysateCount = self.inventory.GetItemCount(DLC1Content.Items.EquipmentMagazineVoid);
                 result += Mathf.Min(lysateCount, TeslaConfig.M4_Tower_LysateLimit.Value);
 
-                result += Compat.SkillsPlusCompat.SkillsPlusAdditionalTowers;
+                //result += Compat.SkillsPlusCompat.SkillsPlusAdditionalTowers;
 
                 result += General.GeneralCompat.TryGetScepterCount(self.inventory);
             }

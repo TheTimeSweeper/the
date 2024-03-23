@@ -3,6 +3,7 @@ using RoR2;
 using VRAPI;
 using RoR2.Skills;
 using Modules.Survivors;
+using RA2Mod.General.Components;
 
 public class TeslaVRComponent : MonoBehaviour {
 

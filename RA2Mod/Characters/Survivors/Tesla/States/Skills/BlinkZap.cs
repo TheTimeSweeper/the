@@ -5,8 +5,8 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using RA2Mod.Modules.BaseStates;
 using RA2Mod.Survivors.Tesla.Orbs;
+using RA2Mod.General.States;
 
 namespace RA2Mod.Survivors.Tesla.States
 {

@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using ModdedEntityStates.TeslaTrooper.Tower;
+using RA2Mod.General.Components;
 using RoR2;
 using System;
 using System.Collections.Generic;

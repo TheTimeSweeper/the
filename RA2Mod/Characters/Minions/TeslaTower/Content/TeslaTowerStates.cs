@@ -18,11 +18,14 @@ namespace RA2Mod.Minions.TeslaTower
             Content.AddEntityState(typeof(TowerBigZap));
             Content.AddEntityState(typeof(TowerBigZapGauntlet));
 
-            //scepter
-            Content.AddEntityState(typeof(TowerSpawnStateScepter));
-            Content.AddEntityState(typeof(TowerIdleSearchScepter));
+            if (General.GeneralCompat.ScepterInstalled)
+            {
+                //scepter
+                Content.AddEntityState(typeof(TowerSpawnStateScepter));
+                Content.AddEntityState(typeof(TowerIdleSearchScepter));
 
-            Content.AddEntityState(typeof(TowerZapMulti));
+                Content.AddEntityState(typeof(TowerZapMulti));
+            }
         }
     }
 }

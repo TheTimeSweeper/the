@@ -1,12 +1,10 @@
-﻿using EntityStates;
-using RoR2;
-using System.Runtime.CompilerServices;
+﻿using RoR2;
 using UnityEngine;
 using VRAPI;
 
 namespace RA2Mod.Survivors.Tesla.Compat
 {
-    public class VRCompat
+    public static class VRCompat
     {
         public static void init()
         {

@@ -127,6 +127,8 @@ namespace RA2Mod.Survivors.Tesla
 
             AdditionalBodySetup();
 
+            new TeslaTowerNotSurvivor().Initialize();
+
             AddHooks();
 
             Log.CurrentTime($"{bodyName} initializecharacter done");
@@ -213,7 +215,7 @@ namespace RA2Mod.Survivors.Tesla
 
             InitializeSpecialSkills();
 
-            if (GeneralCompat.scepterInstalled)
+            if (GeneralCompat.ScepterInstalled)
             {
                 InitializeScepterSkills();
             }
@@ -557,10 +559,11 @@ namespace RA2Mod.Survivors.Tesla
             masterySkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMastery");
             masterySkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMastery");
 
-            masterySkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                //TeslaTowerNotSurvivor.MasteryMinionSkinReplacement,
-                //TeslaTowerScepter.MasteryMinionSkinReplacement
-            };
+            //moved to tower initialization
+            //masterySkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+            //    TeslaTowerNotSurvivor.MasteryMinionSkinReplacement,
+            //    TeslaTowerScepter.MasteryMinionSkinReplacement
+            //};
 
             skins.Add(masterySkin);
             #endregion
@@ -592,10 +595,11 @@ namespace RA2Mod.Survivors.Tesla
             nodSkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matNod_Body");
             //nodSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matNod");
 
-            nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                //TeslaTowerNotSurvivor.NodMinionSkinReplacement,
-                //TeslaTowerScepter.NodMinionSkinReplacement
-            };
+            //moved to tower initialization
+            //nodSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+            //    TeslaTowerNotSurvivor.NodMinionSkinReplacement,
+            //    TeslaTowerScepter.NodMinionSkinReplacement
+            //};
 
             skins.Add(nodSkin);
 
@@ -628,10 +632,11 @@ namespace RA2Mod.Survivors.Tesla
             MCSkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_BodyColor");
             MCSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Hammer");
 
-            MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-                //TeslaTowerNotSurvivor.MCMinionSkinReplacement,
-                //TeslaTowerScepter.MCMinionSkinReplacement
-            };
+            //moved to tower initialization
+            //MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+            //    TeslaTowerNotSurvivor.MCMinionSkinReplacement,
+            //    TeslaTowerScepter.MCMinionSkinReplacement
+            //};
 
             if (GeneralConfig.Cursed.Value)
             {

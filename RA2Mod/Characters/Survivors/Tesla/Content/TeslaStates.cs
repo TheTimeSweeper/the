@@ -1,6 +1,6 @@
 ﻿using RA2Mod.Modules;
-using ModdedEntityStates.TeslaTrooper;
 using RA2Mod.Survivors.Tesla.States;
+using RA2Mod.General.States;
 
 namespace RA2Mod.Survivors.Tesla
 {
