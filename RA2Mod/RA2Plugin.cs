@@ -3,8 +3,8 @@ using R2API.Utils;
 using RA2Mod.General;
 using RA2Mod.Survivors.Chrono;
 using RA2Mod.Survivors.GI;
-using RA2Mod.Survivors.Tesla;
-using RA2Mod.Minions.TeslaTower;
+//using RA2Mod.Survivors.Tesla;
+//using RA2Mod.Minions.TeslaTower;
 using System.Security;
 using System.Security.Permissions;
 
@@ -79,9 +79,9 @@ namespace RA2Mod
 
             Modules.Language.Init();
 
-            //new ChronoSurvivor().Initialize();
-            //new GISurvivor().Initialize();
-            new TeslaTrooperSurvivor().Initialize();
+            new ChronoSurvivor().Initialize();
+            new GISurvivor().Initialize();
+            //new TeslaTrooperSurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
 

@@ -80,7 +80,7 @@ namespace RA2Mod.Survivors.Chrono
             //return subEnumerators;
         }
 
-        public static void OnCharacterInitialized(AssetBundle assetBundle_)
+        public static void OnCharacterInitializedE(AssetBundle assetBundle_)
         {
             Log.CurrentTime("INIT ASYNC");
             assetBundle = assetBundle_;
@@ -229,7 +229,7 @@ namespace RA2Mod.Survivors.Chrono
             Log.CurrentTime("END ASYNC");
         }
 
-        public static void OnCharacterInitializedManual(AssetBundle assetBundle_)
+        public static void OnCharacterInitialized(AssetBundle assetBundle_)
         {
             Log.CurrentTime("INIT ASYNC");
 

@@ -1,5 +1,4 @@
 ﻿using R2API;
-using RA2Mod.Survivors.Tesla;
 using RoR2;
 using System;
 using System.Collections.Generic;

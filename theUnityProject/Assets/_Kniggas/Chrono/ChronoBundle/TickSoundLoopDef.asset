@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: -1387411909, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
   m_Name: TickSoundLoopDef
   m_EditorClassIdentifier: 
-  startSoundName: Play_IvanBombStart
+  startSoundName: Play_IvanBombLoop
   stopSoundName: Stop_IvanBombLoop

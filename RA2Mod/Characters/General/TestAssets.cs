@@ -61,7 +61,7 @@ namespace RA2Mod.General
             new AsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result).AddCoroutine();
             
             ////create asyncasset for you and adds coroutine
-            ////no different from loadassetasync if you're going to do completion. yeah I should delete this
+            ////no different from loadassetasync if you're going to do completion.
             assetBundle.AddAsyncAsset<GameObject>("TeslaCoilBlueprint", (result) => TeslaCoilBlueprintGamOb = result);
             Assets.AddAsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result);
 
@@ -76,6 +76,7 @@ namespace RA2Mod.General
             //some code later...
             GameObject projectilePrefab = TeslaCoilBlueprintAsync; //use gamobject like normal
 
+            //
             //thinkin
             TeslaCoilBlueprintAsync = assetBundle.AddAsyncAsset<GameObject>("TeslaCoilBlueprint");
             assetBundle.LoadAssetAsync("TeslaCoilBlueprint", (GameObject result) => TeslaCoilBlueprintGamOb = result); //think i'll go with this
