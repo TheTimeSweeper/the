@@ -11,38 +11,31 @@ namespace RA2Mod.Modules
         public static Dictionary<Object, ItemDisplayRule[]> KeyAssetDisplayRules = new Dictionary<Object, ItemDisplayRule[]>();
         public static Dictionary<string, Object> KeyAssets = new Dictionary<string, Object>();
 
-        public static int queuedDisplays;
-
         public static bool initialized = false;
         public static bool initializing = false;
 
+        public static event System.Action OnDisplaysPopulated;
+
         public static void SetItemDisplaysWhenReady(System.Action onComplete)
         {
-            if (!initialized && !initializing)
+            if (initialized)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            OnDisplaysPopulated += onComplete;
+
+            if (!initializing)
             { 
                 initializing = true;
                 ContentPacks.asyncLoadCoroutines.Add(PopulateDisplays());
+                RoR2Application.onLoad += DisposeWhenDone;
             }
-
-            ContentPacks.asyncLoadCoroutines.Add(WaitForPopulate(onComplete));
-        }
-
-        public static IEnumerator WaitForPopulate(System.Action onComplete)
-        {
-            while (!initialized)
-            {
-                yield return null;
-            }
-            onComplete();
         }
 
         internal static void DisposeWhenDone()
         {
-            queuedDisplays--;
-            if (queuedDisplays > 0)
-                return;
-            if (!initialized)
-                return;
             initialized = false;
             initializing = false;
 
@@ -53,7 +46,7 @@ namespace RA2Mod.Modules
 
         internal static IEnumerator PopulateDisplays()
         {
-            IEnumerator loadIDRS = Assets.LoadAddressableAssetCoroutine<GameObject>("RoR2/Base/Loader/LoaderBody.prefab", (result) => {
+            IEnumerator loadIDRS = Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/Loader/LoaderBody.prefab", (result) => {
                 PopulateFromBody(result);
             });
 
@@ -62,10 +55,11 @@ namespace RA2Mod.Modules
                 yield return null;
             }
 
-            //PopulateCustomLightningArm();
+            PopulateCustomLightningArm();
             //if you have any custom item displays to add here I would be very impressed
 
             initialized = true;
+            OnDisplaysPopulated?.Invoke();
         }
 
         private static void PopulateFromBody(GameObject bodyPrefab)

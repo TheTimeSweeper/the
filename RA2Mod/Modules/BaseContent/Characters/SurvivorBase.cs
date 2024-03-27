@@ -3,6 +3,7 @@ using RoR2;
 using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Skills;
+using System.Collections;
 
 namespace RA2Mod.Modules.Characters
 {
@@ -18,13 +19,16 @@ namespace RA2Mod.Modules.Characters
 
         public virtual GameObject displayPrefab { get; protected set; }
 
-        public override void OnCharacterInitialized()
+        public override List<IEnumerator> GetCharacterInitializedCoroutines()
         {
-            ContentPacks.asyncLoadCoroutines.Add(Prefabs.CreateDisplayPrefabAsync(assetBundle, displayPrefabName, bodyPrefab, (result) =>
+            List<IEnumerator> list = new List<IEnumerator>();
+            list.Add(Prefabs.CreateDisplayPrefabAsync(assetBundle, displayPrefabName, bodyPrefab, (result) =>
             {
                 displayPrefab = result;
                 InitializeSurvivor();
             }));
+
+            return list;
         }
 
         protected virtual void InitializeSurvivor()

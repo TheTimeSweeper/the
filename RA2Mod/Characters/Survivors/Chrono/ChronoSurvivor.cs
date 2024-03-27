@@ -100,8 +100,6 @@ namespace RA2Mod.Survivors.Chrono
             //need the character unlockable before you initialize the survivordef
             //ChronoUnlockables.Init();
 
-            base.OnCharacterInitialized();
-
             Config.ConfigureBody(prefabCharacterBody, ChronoConfig.SectionBody);
 
             ChronoConfig.Init();
@@ -168,6 +166,7 @@ namespace RA2Mod.Survivors.Chrono
             AddSecondarySkills();
             AddUtiitySkills();
             AddSpecialSkills();
+            AddRecolorSkills();
             Log.CurrentTime("initializeSkills end");
         }
 
@@ -386,8 +385,14 @@ namespace RA2Mod.Survivors.Chrono
             
             Config.ConfigureSkillDef(vanishSkillDef, ChronoConfig.SectionBody, "M4 Vanish");
         }
+
+        private void AddRecolorSkills()
+        {
+
+        }
+
         #endregion skills
-        
+
         #region skins
         public override void InitializeSkins()
         {

@@ -3,8 +3,8 @@ using R2API.Utils;
 using RA2Mod.General;
 using RA2Mod.Survivors.Chrono;
 using RA2Mod.Survivors.GI;
-using RA2Mod.Survivors.Tesla;
-using RA2Mod.Minions.TeslaTower;
+//using RA2Mod.Survivors.Tesla;
+//using RA2Mod.Minions.TeslaTower;
 using System.Security;
 using System.Security.Permissions;
 
@@ -36,7 +36,10 @@ namespace RA2Mod
 
         public RA2Plugin()
         {
-            Log._startTime = System.DateTime.Now;
+            if (Log._startTime == default(System.DateTime))
+            {
+                Log._startTime = System.DateTime.Now;
+            }
         }
 
         void Start()
@@ -78,7 +81,7 @@ namespace RA2Mod
 
             new ChronoSurvivor().Initialize();
             new GISurvivor().Initialize();
-            new TeslaTrooperSurvivor().Initialize();
+            //new TeslaTrooperSurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
 

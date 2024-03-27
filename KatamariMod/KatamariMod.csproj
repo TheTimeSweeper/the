@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Release;Debug</Configurations>
+  </PropertyGroup>
+	
+<PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>    
+</PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Characters\Survivors\Katamari\Components\Bundled\UI\**" />
+    <EmbeddedResource Remove="Characters\Survivors\Katamari\Components\Bundled\UI\**" />
+    <None Remove="Characters\Survivors\Katamari\Components\Bundled\UI\**" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="BepInEx.Core" Version="5.4.21" />
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.0" />
+		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
+		<PackageReference Include="MMHOOK.RoR2" Version="2022.9.20">
+			<NoWarn>NU1701</NoWarn>
+		</PackageReference>
+		<PackageReference Include="R2API.Core" Version="5.0.3" />
+		<PackageReference Include="R2API.Prefab" Version="1.0.1" />
+		<PackageReference Include="R2API.RecalculateStats" Version="1.0.0" />
+		<PackageReference Include="R2API.Language" Version="1.0.0" />
+		<PackageReference Include="R2API.Unlockable" Version="1.0.0" />
+		<PackageReference Include="R2API.DamageType" Version="1.0.0" />
+		<PackageReference Include="R2API.Sound" Version="1.0.0" />
+	</ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Characters\Survivors\Katamari\Components\Bundled\" />
+    <Folder Include="Characters\Survivors\Katamari\SkillDefs\" />
+    <Folder Include="Characters\Survivors\Katamari\SkillStates\" />
+    <Folder Include="Modules\Characters\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="LoadoutSkillTitles">
+      <HintPath>..\libs\LoadoutSkillTitles.dll</HintPath>
+    </Reference>
+    <Reference Include="RiskOfOptions">
+      <HintPath>..\libs\RiskOfOptions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; set build=true&#xD;&#xA;&#xD;&#xA;if defined build (&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\theUnityProject\AssetBundles\katamaribundle&quot; (&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\katamaribundle&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;)&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Katamari\&quot;&#xD;&#xA;)&#xD;&#xA;" />
+  </Target>
+
+</Project>

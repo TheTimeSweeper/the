@@ -48,7 +48,7 @@ namespace RA2Mod.General.Components
 
         /*protected override*/ void Awake()
         {
-            if (GeneralConfig.VoiceOnSpawn.Value)
+            if (GeneralConfig.VoiceInLobby.Value)
             {
                 //to network the voice in lobby I have to fucking add a networkidentity and fucking somehow make this authority
                 //task for future dumbass me
@@ -69,7 +69,7 @@ namespace RA2Mod.General.Components
             _body = GetComponent<CharacterBody>();
             _authority = Util.HasEffectiveAuthority(gameObject);
             
-            //if (GeneralConfig.VoiceOnDeath.Value)
+            //if (GeneralConfig.VoiceOnSpawn.Value)
             //{
             //    PlayVoicelineAuthority(voiceLineContext.RandomSelectVoice());
             //}

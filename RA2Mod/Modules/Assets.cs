@@ -13,6 +13,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
 using System.Runtime.CompilerServices;
 using System;
+using Object = UnityEngine.Object;
 
 namespace RA2Mod.Modules
 {
@@ -22,6 +23,7 @@ namespace RA2Mod.Modules
         internal static Dictionary<string, AssetBundle> loadedBundles = new Dictionary<string, AssetBundle>();
         internal static Dictionary<string, Action<AssetBundle>> loadingBundles = new Dictionary<string, Action<AssetBundle>>();
 
+        #region bundle
         internal static void LoadAssetBundleAsync(string bundleName, Action<AssetBundle> onComplete)
         {
             if (bundleName == "myassetbundle")
@@ -63,121 +65,188 @@ namespace RA2Mod.Modules
             ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(request.assetBundle));
             onComplete?.Invoke(request.assetBundle);
         }
+        #endregion bundle
 
-        internal static void LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : UnityEngine.Object
+        internal static void LoadAssetAsync<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : Object
         {
-            ContentPacks.asyncLoadCoroutines.Add(assetBundle.LoadBundleAssetCoroutine<T>(name, onComplete));
+            ContentPacks.asyncLoadCoroutines.Add(assetBundle.LoadAssetCoroutine<T>(name, onComplete));
+        }
+        internal static void LoadAssetAsync<T>(string Path, Action<T> onComplete) where T : Object
+        {
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetCoroutine<T>(Path, onComplete));
         }
 
-        internal static AsyncAsset<T> AsyncLoadAsset<T>(this AssetBundle assetBundle, string name) where T : UnityEngine.Object
+        internal static AsyncAsset<T> AddAsyncAsset<T>(this AssetBundle assetBundle, string name, Action<T> onComplete = null) where T : Object
         {
-            return new AsyncAsset<T>(assetBundle, name);
+            return new AsyncAsset<T>(assetBundle, name, onComplete).AddCoroutine();
         }
-        internal static AsyncAsset<T> AsyncLoadAddressable<T>(string path) where T: UnityEngine.Object
+        internal static AsyncAsset<T> AddAsyncAsset<T>(string path, Action<T> onComplete = null) where T: Object
         {
-            return new AsyncAsset<T>(path);
+            return new AsyncAsset<T>(path, onComplete).AddCoroutine();
         }
 
-        internal static IEnumerator LoadBundleAssetCoroutine<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : UnityEngine.Object
+        internal static IEnumerator LoadAssetCoroutine<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
             while (!request.isDone)
-            {
                 yield return null;
-            }
+            
             onComplete?.Invoke(request.asset as T);
         }
-
-        internal static IEnumerator LoadAddressableAssetCoroutine<T>(object key, Action<T> OnComplete) where T : UnityEngine.Object
+        internal static IEnumerator LoadAssetCoroutine<T>(object key, Action<T> OnComplete) where T : Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            while (!loadAsset.IsDone) { yield return null; }
-            OnComplete(loadAsset.Result);
+            while (!loadAsset.IsDone) 
+                yield return null; 
+            
+            OnComplete?.Invoke(loadAsset.Result);
         }
 
+        #region there is a thin line between jank and genius
+        internal static void LoadAssetsAsync<T1>(
+            AsyncAsset<T1> load1,
+            Action<T1> onComplete) where T1 : Object
+        {
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetsAsyncCoroutine(load1, onComplete));
+        }
+        internal static IEnumerator LoadAssetsAsyncCoroutine<T1>(
+            AsyncAsset<T1> load1,
+            Action<T1> onComplete) where T1 : Object
+        {
+            while (!load1.coroutine.MoveNext())
+                yield return null;
+
+            onComplete(load1.result);
+        }
+        internal static void LoadAssetsAsync<T1, T2>(
+            AsyncAsset<T1> load1,
+            AsyncAsset<T2> load2,
+            Action<T1, T2> onComplete) where T1 : Object where T2 : Object
+        {
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetsAsyncCoroutine(load1, load2, onComplete));
+        }
         internal static IEnumerator LoadAssetsAsyncCoroutine<T1, T2>(
             AsyncAsset<T1> load1, 
             AsyncAsset<T2> load2, 
-            Action<T1, T2> onComplete) where T1: UnityEngine.Object where T2: UnityEngine.Object
+            Action<T1, T2> onComplete) where T1: Object where T2: Object
         {
-            while (!load1.isDone)
+            while (!load1.coroutine.MoveNext())
                 yield return null;
-            while (!load2.isDone)
+            while (!load2.coroutine.MoveNext())
                 yield return null;
 
             onComplete(load1.result, load2.result);
+        }
+        internal static void LoadAssetsAsync<T1, T2, T3>(
+            AsyncAsset<T1> load1, 
+            AsyncAsset<T2> load2,
+            AsyncAsset<T3> load3, 
+            Action<T1, T2, T3> onComplete) where T1 : Object where T2 : Object where T3: Object
+        {
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetsAsyncCoroutine(load1, load2, load3, onComplete));
         }
         internal static IEnumerator LoadAssetsAsyncCoroutine<T1, T2, T3>(
             AsyncAsset<T1> load1, 
             AsyncAsset<T2> load2,
             AsyncAsset<T3> load3, 
-            Action<T1, T2, T3> onComplete) where T1 : UnityEngine.Object where T2 : UnityEngine.Object where T3: UnityEngine.Object
+            Action<T1, T2, T3> onComplete) where T1 : Object where T2 : Object where T3: Object
         {
-            while (!load1.isDone)
+            while (!load1.coroutine.MoveNext())
                 yield return null;
-            while (!load2.isDone)
+            while (!load2.coroutine.MoveNext())
                 yield return null;
-            while (!load3.isDone)
+            while (!load3.coroutine.MoveNext())
                 yield return null;
 
             onComplete(load1.result, load2.result, load3.result);
+        }
+        internal static void LoadAssetsAsync<T1, T2, T3, T4>(
+            AsyncAsset<T1> load1,
+            AsyncAsset<T2> load2,
+            AsyncAsset<T3> load3,
+            AsyncAsset<T4> load4,
+            Action<T1, T2, T3, T4> onComplete) where T1 : Object where T2 : Object where T3 : Object where T4 : Object
+        {
+            ContentPacks.asyncLoadCoroutines.Add(LoadAssetsAsyncCoroutine(load1, load2, load3, load4, onComplete));
         }
         internal static IEnumerator LoadAssetsAsyncCoroutine<T1, T2, T3, T4>(
             AsyncAsset<T1> load1, 
             AsyncAsset<T2> load2,
             AsyncAsset<T3> load3,
             AsyncAsset<T4> load4,
-            Action<T1, T2, T3, T4> onComplete) where T1 : UnityEngine.Object where T2 : UnityEngine.Object where T3 : UnityEngine.Object where T4 : UnityEngine.Object
+            Action<T1, T2, T3, T4> onComplete) where T1 : Object where T2 : Object where T3 : Object where T4 : Object
         {
-            while (!load1.isDone)
+            while (!load1.coroutine.MoveNext())
                 yield return null;
-            while (!load2.isDone)
+            while (!load2.coroutine.MoveNext())
                 yield return null;
-            while (!load3.isDone)
+            while (!load3.coroutine.MoveNext())
                 yield return null;
-            while (!load4.isDone)
+            while (!load4.coroutine.MoveNext())
                 yield return null;
 
             onComplete(load1.result, load2.result, load3.result, load4.result);
         }
+        #endregion sometimes a a very thin line
 
         #region sillyzone
-        internal static IEnumerator LoadFromAddressableOrBundle<T>(AssetBundle assetBundle, string bundlePath, string addressablePath, Action<T> OnComplete) where T : UnityEngine.Object
+        internal static IEnumerator LoadFromAddressableOrBundle<T>(AssetBundle assetBundle, string bundlePath, string addressablePath, Action<T> OnComplete) where T : Object
         {
             if (!string.IsNullOrEmpty(bundlePath))
             {
-                return assetBundle.LoadBundleAssetCoroutine<T>(bundlePath, OnComplete);
+                return assetBundle.LoadAssetCoroutine<T>(bundlePath, OnComplete);
             }
             if (!string.IsNullOrEmpty(addressablePath))
             {
-                return Assets.LoadAddressableAssetCoroutine<T>(addressablePath, OnComplete);
+                return Assets.LoadAssetCoroutine<T>(addressablePath, OnComplete);
             }
             return null;
         }
 
-        internal static List<IEnumerator> LoadAssetsAsync<T>(AssetBundle assetBundle, params string[] paths) where T: UnityEngine.Object
+        /// <summary>
+        /// used to simply call the load on objects that will be loaded again later
+        /// </summary>
+        internal static IEnumerator PreLoadAssetsAsync<T>(AssetBundle assetBundle, params string[] paths) where T : Object
+        {
+            List<IEnumerator> coroutines = PreLoadAssetsAsyncCoroutines<T>(assetBundle, paths);
+
+            for (int i = 0; i < coroutines.Count; i++)
+            {
+                while (coroutines[i].MoveNext())
+                {
+                    yield return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// used to simply call the load on objects that will be loaded again later
+        /// </summary>
+        internal static List<IEnumerator> PreLoadAssetsAsyncCoroutines<T>(AssetBundle assetBundle, params string[] paths) where T: Object
         {
             List<IEnumerator> coroutines = new List<IEnumerator>();
 
             for (int i = 0; i < paths.Length; i++)
             {
-                coroutines.Add(assetBundle.LoadBundleAssetCoroutine<T>(paths[i], null));
+                coroutines.Add(assetBundle.LoadAssetCoroutine<T>(paths[i], null));
             }
 
             return coroutines;
         }
 
+        /// <summary>
+        /// if I got tired of loading buff icons async maybe there's a better way
+        /// </summary>
         internal static IEnumerator LoadBuffIconAsync(BuffDef buffDef, AssetBundle assetBundle, string bundleLoadPath)
         {
-            return assetBundle.LoadBundleAssetCoroutine<Sprite>(bundleLoadPath, (result) => {
-                buffDef.iconSprite = result;
-            });
+            return assetBundle.LoadAssetCoroutine<Sprite>(bundleLoadPath, (result) => buffDef.iconSprite = result);
         }
+        /// <summary>
+        /// if I got tired of loading buff icons async maybe there's a better way
+        /// </summary>
         internal static IEnumerator LoadBuffIconAsync(BuffDef buffDef, string addressablePath)
         {
-            return LoadAddressableAssetCoroutine<Sprite>(addressablePath, (result) => {
-                buffDef.iconSprite = result;
-            });
+            return LoadAssetCoroutine<Sprite>(addressablePath, (result) => buffDef.iconSprite = result);
         }
         #endregion sillyzone
 
@@ -292,31 +361,41 @@ namespace RA2Mod.Modules
         #endregion 
     }
 
-    public class AsyncAsset<T> where T : UnityEngine.Object
+    public class AsyncAsset<T> where T : Object
     {
         public T result;
         public bool isDone;
         public IEnumerator coroutine;
+        public Action<T> onComplete;
 
         public static implicit operator T(AsyncAsset<T> asset)
         {
             return asset.result;
         }
 
-        public AsyncAsset(string name)
+        public AsyncAsset(string path_, Action<T> onComplete_ = null)
         {
-            ContentPacks.asyncLoadCoroutines.Add(coroutine = Assets.LoadAddressableAssetCoroutine<T>(name, (loadResult) => {
-                result = loadResult;
-                isDone = true;
-            }));
+            onComplete = onComplete_;
+            coroutine = Assets.LoadAssetCoroutine<T>(path_, OnCoroutineComplete);
         }
 
-        public AsyncAsset(AssetBundle bundle, string path)
+        public AsyncAsset(AssetBundle bundle_, string name_, Action<T> onComplete_ = null)
         {
-            ContentPacks.asyncLoadCoroutines.Add(coroutine = bundle.LoadBundleAssetCoroutine<T>(path, (loadResult) => {
-                result = loadResult;
-                isDone = true;
-            }));
+            onComplete = onComplete_;
+            coroutine = bundle_.LoadAssetCoroutine<T>(name_, OnCoroutineComplete);
+        }
+
+        public AsyncAsset<T> AddCoroutine()
+        {
+            Modules.ContentPacks.asyncLoadCoroutines.Add(coroutine);
+            return this;
+        }
+
+        public void OnCoroutineComplete(T loadResult)
+        {
+            result = loadResult;
+            isDone = true;
+            onComplete?.Invoke(result);
         }
     }
 }
