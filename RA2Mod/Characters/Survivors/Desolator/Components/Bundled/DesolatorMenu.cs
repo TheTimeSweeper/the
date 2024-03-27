@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace RA2Mod.Survivors.Desolator.Components {
-    public class DesolatorMenu : MonoBehaviour {
+    public class DesolatorMenu : RA2Mod.General.Components.MenuSoundComponent {
 
         [SerializeField]
         private GameObject lightPrefab;
@@ -13,13 +13,6 @@ namespace RA2Mod.Survivors.Desolator.Components {
             GameObject thing = Instantiate(lightPrefab, deployPoint, false);
             thing.transform.localPosition = Vector3.zero;
             thing.transform.parent = null;
-
-            RoR2.Util.PlaySound("Play_Desolator_Deploy", gameObject);
-
-            if (Modules.Config.VoiceInLobby.Value) {
-
-                RoR2.Util.PlaySound("Play_Desolator_Voiceline", gameObject);
-            }
         }
     }
 }

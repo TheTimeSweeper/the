@@ -9,7 +9,8 @@ namespace RA2Mod.Survivors.Desolator.Components {
         private CharacterModel characterModel;
 
         public void SpawnProjectile() {
-            EntityStateMachine.FindByCustomName(characterModel.body.gameObject, "Weapon").SetNextState(new ModdedEntityStates.Desolator.EmoteRadiationProjectile());
+            //todo desomove
+            //EntityStateMachine.FindByCustomName(characterModel.body.gameObject, "Weapon").SetNextState(new ModdedEntityStates.Desolator.EmoteRadiationProjectile());
         }
     }
 }

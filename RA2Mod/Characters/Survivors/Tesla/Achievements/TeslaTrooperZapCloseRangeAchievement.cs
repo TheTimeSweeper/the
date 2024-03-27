@@ -4,12 +4,12 @@ using RoR2;
 using RoR2.Achievements;
 using RoR2.Skills;
 
-namespace Modules.Achievements {
-
+namespace RA2Mod.Survivors.Tesla.Achievements
+{
     //scrapped because boring
     //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
-    public class TeslaTrooperZapCloseRangeAchievement : BaseAchievement {
-
+    public class TeslaTrooperZapCloseRangeAchievement : BaseAchievement
+    {
         public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_ID";
         public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "ZAPCLOSERANGEUNLOCKABLE_REWARD_ID";
 
@@ -22,7 +22,7 @@ namespace Modules.Achievements {
         {
             return BodyCatalog.FindBodyIndex("TeslaTrooperBody");
         }
-        
+
         public override void OnBodyRequirementMet()
         {
             Zap.onZapAuthority += OnZapAuthority;
@@ -41,7 +41,7 @@ namespace Modules.Achievements {
                 {
                     closeZaps++;
                     if (closeZaps >= requirement)
-                        base.Grant();
+                        Grant();
                     //Helpers.LogWarning(closeZaps);
                 }
                 else

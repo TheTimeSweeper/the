@@ -83,6 +83,7 @@ namespace RA2Mod.Survivors.Tesla
 
         public override UnlockableDef characterUnlockableDef => TeslaUnlockables.characterUnlockableDef;
 
+        //todo teslamove i bork eitm dispaley
         public override ItemDisplaysBase itemDisplays { get; } = new TeslaItemDisplays();
 
         public override void Initialize()
@@ -102,10 +103,7 @@ namespace RA2Mod.Survivors.Tesla
 
         public override void OnCharacterInitialized()
         {
-            //need the character unlockable before you initialize the survivordef
             TeslaUnlockables.Init();
-
-            base.OnCharacterInitialized();
 
             Config.ConfigureBody(prefabCharacterBody, TeslaConfig.SectionBody);
 
@@ -313,7 +311,6 @@ namespace RA2Mod.Survivors.Tesla
 
         private void InitializeUtilitySkills()
         {
-
             SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Utility_ShieldZap",
@@ -321,7 +318,7 @@ namespace RA2Mod.Survivors.Tesla
                 skillDescriptionToken = TESLA_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillUtility"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZapCollectDamage)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon2",
                 baseMaxStock = 1,
                 baseRechargeInterval = 7f,
                 beginSkillCooldownOnSkillEnd = true,
@@ -371,7 +368,6 @@ namespace RA2Mod.Survivors.Tesla
 
         private void InitializeSpecialSkills()
         {
-
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Special_Tower",
@@ -402,7 +398,6 @@ namespace RA2Mod.Survivors.Tesla
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills()
         {
-
             SkillDef scepterTeslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Special_Scepter_Tower",
@@ -608,42 +603,43 @@ namespace RA2Mod.Survivors.Tesla
             #endregion
 
             #region MCSkin
-            TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
+
+            if (GeneralConfig.Cursed.Value)
+            {
+                TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRendererinfos,
                 characterModelObject);
 
-            MCSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects);
+                MCSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects);
 
-            MCSkin.meshReplacements = assetBundle.GetMeshReplacements(defaultRendererinfos,
-                "meshMCArmor",
-                null,
-                null,
-                "meshMCBody",
-                "meshMCArmorColor",
-                "meshMCBodyColor",
-                "meshMCHammer");
+                MCSkin.meshReplacements = assetBundle.GetMeshReplacements(defaultRendererinfos,
+                    "meshMCArmor",
+                    null,
+                    null,
+                    "meshMCBody",
+                    "meshMCArmorColor",
+                    "meshMCBodyColor",
+                    "meshMCHammer");
 
-            MCSkin.rendererInfos[0].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Armor");
-          //MCSkin.rendererInfos[1].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Armor");
-          //MCSkin.rendererInfos[2].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Armor");
-            MCSkin.rendererInfos[3].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Body");
-            MCSkin.rendererInfos[4].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_ArmorColor");
-            MCSkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_BodyColor");
-            MCSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Hammer");
+                MCSkin.rendererInfos[0].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Armor");
+                //MCSkin.rendererInfos[1].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Armor");
+                //MCSkin.rendererInfos[2].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Armor");
+                MCSkin.rendererInfos[3].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Body");
+                MCSkin.rendererInfos[4].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_ArmorColor");
+                MCSkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_BodyColor");
+                MCSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matMC_Hammer");
 
-            //moved to tower initialization
-            //MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
-            //    TeslaTowerNotSurvivor.MCMinionSkinReplacement,
-            //    TeslaTowerScepter.MCMinionSkinReplacement
-            //};
+                //moved to tower initialization
+                //MCSkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[] {
+                //    TeslaTowerNotSurvivor.MCMinionSkinReplacement,
+                //    TeslaTowerScepter.MCMinionSkinReplacement
+                //};
 
-            if (GeneralConfig.Cursed.Value)
-            {
                 skins.Add(MCSkin);
             }
             #endregion MCSkin
-
+            
             skinController.skins = skins.ToArray();
         }
         #endregion skins

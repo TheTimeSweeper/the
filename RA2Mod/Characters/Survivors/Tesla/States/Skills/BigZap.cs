@@ -1,6 +1,4 @@
 ﻿using EntityStates;
-using Modules;
-using R2API;
 using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
