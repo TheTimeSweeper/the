@@ -12,11 +12,11 @@ namespace RA2Mod.Minions.TeslaTower
         internal static List<IEnumerator> GetAssetBundleInitializedCoroutines(AssetBundle assetBundle)
         {
             //todo teslamove async fun
-            List<IEnumerator> coroutines = Modules.Assets.LoadAssetsAsync<Sprite>(assetBundle,
+            List<IEnumerator> coroutines = Modules.Assets.PreLoadAssetsAsyncCoroutines<Sprite>(assetBundle,
                 "texIconTeslaTower",
                 "texTeslaSkillSecondaryThunderclap");
 
-            coroutines.Add(Modules.Assets.LoadAddressableAssetCoroutine<Material>("RoR2/Base/Common/VFX/matLightningLongBlue.mat", (result) =>
+            coroutines.Add(Modules.Assets.LoadAssetCoroutine<Material>("RoR2/Base/Common/VFX/matLightningLongBlue.mat", (result) =>
             {
                 ChainLightningMaterial = result;
             }));

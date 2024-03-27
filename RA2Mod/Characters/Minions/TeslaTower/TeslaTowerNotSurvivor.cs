@@ -12,6 +12,7 @@ using RA2Mod.Survivors.Tesla.Orbs;
 using System.Collections;
 using RA2Mod.Minions.TeslaTower.States;
 using System.Linq;
+using RA2Mod.General;
 
 namespace RA2Mod.Minions.TeslaTower
 {
@@ -34,6 +35,7 @@ namespace RA2Mod.Minions.TeslaTower
             bodyColor = new Color(134f / 216f, 234f / 255f, 255f / 255f), //new Color(115f/216f, 216f/255f, 0.93f),
             sortPosition = 69f,
 
+            bodyToClonePath = "RoR2/Base/Engi/EngiTurretBody.prefab",
             characterPortraitBundlePath = "texIconTeslaTower",
             crosshairAddressablePath = "RoR2/Base/UI/TiltedBracketCrosshair.prefab",
             podPrefab = null,
@@ -45,6 +47,11 @@ namespace RA2Mod.Minions.TeslaTower
             armor = 1200f,
 
             jumpCount = 1,
+
+            //every line of code I write to make this mangled mess work without just setting up a boilerplate characterbody
+            hasCharacterDirection = false,
+            hasFoostepController = false,
+            hasRagdoll = false,
 
             aimOriginPosition = new Vector3(0, 10, 0),
             cameraPivotPosition = new Vector3(0, 5, 0),
@@ -173,13 +180,12 @@ namespace RA2Mod.Minions.TeslaTower
         }
 #endregion skills
 
-        public override void InitializeSkins() {
-
-            ModelSkinController skinController = characterModelObject.AddComponent<ModelSkinController>();
+        public override void InitializeSkins() 
+        {
+            ModelSkinController skinController = characterModelObject.GetComponent<ModelSkinController>();
             ChildLocator childLocator = characterModelObject.GetComponent<ChildLocator>();
 
             SkinDef[] teslaSkins = TeslaTrooperSurvivor.instance.characterModelObject.GetComponent<ModelSkinController>().skins;
-
             CharacterModel.RendererInfo[] defaultRenderers = prefabCharacterModel.baseRendererInfos;
 
             List<SkinDef> skins = new List<SkinDef>();
@@ -328,56 +334,58 @@ namespace RA2Mod.Minions.TeslaTower
 
             #region mince
 
-            TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TOWER_PREFIX + "MC_SKIN_NAME",
+            if (GeneralConfig.Cursed.Value)
+            {
+                TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TOWER_PREFIX + "MC_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
                 characterModelObject);
 
-            MCSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects,
-                0,
-                1,
-                2,
-                //3,
-                4,
-                5,
-                6,
-                //7,
-                8,
-                9);
+                MCSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects,
+                    0,
+                    1,
+                    2,
+                    //3,
+                    4,
+                    5,
+                    6,
+                    //7,
+                    8,
+                    9);
 
-            MCSkin.meshReplacements = Modules.Skins.GetMeshReplacements(assetBundle, defaultRenderers,
-                "MC_Base_Pillars_Colors",
-                "MC_Base_Platform",
-                "MC_Base_Center",
-                null,//"MC_Base_Tubes",
+                MCSkin.meshReplacements = Modules.Skins.GetMeshReplacements(assetBundle, defaultRenderers,
+                    "MC_Base_Pillars_Colors",
+                    "MC_Base_Platform",
+                    "MC_Base_Center",
+                    null,//"MC_Base_Tubes",
 
-                "MC_Circles",
-                "MC_Pole",
-                "MC_Pole_Tracer",
-                null,//"MC_Emission",
-                "MC_Orb");
+                    "MC_Circles",
+                    "MC_Pole",
+                    "MC_Pole_Tracer",
+                    null,//"MC_Emission",
+                    "MC_Orb");
+                
+                MCSkin.rendererInfos[0].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerRedstone");
+                MCSkin.rendererInfos[1].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerCobblestone");
+                MCSkin.rendererInfos[2].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerIron");
+                //MCSkin.rendererInfos[3].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerRedstone");
 
-            MCSkin.rendererInfos[0].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerRedstone");
-            MCSkin.rendererInfos[1].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerCobblestone");
-            MCSkin.rendererInfos[2].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerIron");
-          //MCSkin.rendererInfos[3].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerRedstone");
-                                                      
-            MCSkin.rendererInfos[4].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerQuartz");
-            MCSkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerCobblestone");
-            MCSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("WHITE");
-          //MCSkin.rendererInfos[7].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerIron");
-            MCSkin.rendererInfos[8].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerDiamond");
-            
-            skins.Add(MCSkin);
-            MCMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
-                minionBodyPrefab = bodyPrefab,
-                minionSkin = MCSkin,
-            };
+                MCSkin.rendererInfos[4].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerQuartz");
+                MCSkin.rendererInfos[5].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerCobblestone");
+                MCSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("WHITE");
+                //MCSkin.rendererInfos[7].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerIron");
+                MCSkin.rendererInfos[8].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerDiamond");
 
-            teslaSkins[3].minionSkinReplacements = teslaSkins[3].minionSkinReplacements.Append(MCMinionSkinReplacement).ToArray();
+                skins.Add(MCSkin);
+                MCMinionSkinReplacement = new SkinDef.MinionSkinReplacement
+                {
+                    minionBodyPrefab = bodyPrefab,
+                    minionSkin = MCSkin,
+                };
 
+                teslaSkins[3].minionSkinReplacements = teslaSkins[3].minionSkinReplacements.Append(MCMinionSkinReplacement).ToArray();
+            }
             #endregion
-
 
             skinController.skins = skins.ToArray();
         }
