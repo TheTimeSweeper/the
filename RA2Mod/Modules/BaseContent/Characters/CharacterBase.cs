@@ -83,6 +83,25 @@ namespace RA2Mod.Modules.Characters
             yield break;
         }
 
+        public virtual List<IEnumerator> GetCharacterInitializedCoroutines()
+        {
+            return null;
+        }
+
+        public virtual IEnumerator LoadAssetsAfterCharacterCreation()
+        {
+            List<IEnumerator> subEnumerators = GetCharacterInitializedCoroutines();
+            if (subEnumerators != null)
+            {
+                for (int i = 0; i < subEnumerators.Count; i++)
+                {
+                    while (subEnumerators[i].MoveNext()) yield return null;
+                }
+            }
+            OnCharacterInitialized();
+            yield break;
+        }
+
         public virtual void InitializeCharacter()
         {
             InitializeCharacterBodyPrefab();
@@ -101,13 +120,13 @@ namespace RA2Mod.Modules.Characters
                     bodyPrefab = bodyResult;
                     prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
 
-                    prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
+                    prefabCharacterModel = Modules.Prefabs.SetupCharacterModel(bodyPrefab, _bodyInfo, customRendererInfos);
 
                     Log.CurrentTime($"{bodyName} body prefab");
                     
-                    OnCharacterInitialized();
-
                     InitializeItemDisplays();
+
+                    ContentPacks.asyncLoadCoroutines.Add(LoadAssetsAfterCharacterCreation());
                 }));
             }));
 
@@ -237,6 +256,13 @@ namespace RA2Mod.Modules.Characters
 
         /// <summary> large characters like loader are -12. for smaller characters like commando go for -10 maybe -9 </summary>
         public float cameraParamsDepth = -10;
+
+        internal bool hasAimAnimator = true;
+        internal bool hasCharacterDirection = true;
+        internal bool hasFoostepController = true;
+        internal bool hasRagdoll = true;
+        internal bool hasSkinController = true;
+
         private CharacterCameraParams _cameraParams;
         public CharacterCameraParams cameraParams
         {

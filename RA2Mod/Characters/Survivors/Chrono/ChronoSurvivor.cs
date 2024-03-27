@@ -100,8 +100,6 @@ namespace RA2Mod.Survivors.Chrono
             //need the character unlockable before you initialize the survivordef
             //ChronoUnlockables.Init();
 
-            base.OnCharacterInitialized();
-
             Config.ConfigureBody(prefabCharacterBody, ChronoConfig.SectionBody);
 
             ChronoConfig.Init();

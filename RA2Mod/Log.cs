@@ -9,7 +9,7 @@ namespace RA2Mod
     {
         private static ManualLogSource _logSource;
         
-        public static DateTime _startTime;
+        public static DateTime _startTime = default(DateTime);
 
         private static string timesLog = "";
         private static string funnyLog = "";
@@ -28,6 +28,10 @@ namespace RA2Mod
         internal static void Info(object data) => _logSource.LogInfo(data);
         internal static void Message(object data) => _logSource.LogMessage(data);
         internal static void Warning(object data) => _logSource.LogWarning(data);
+        internal static void WarningNull(string name, UnityEngine.Object objecte)
+        {
+            Log.Warning($"{name} is {objecte!= null}");
+        }
         internal static void WarningDebug(string format, params object[] data) => DebugWarning(format, data);
         internal static void DebugWarning(string format, params object[] data)
         {

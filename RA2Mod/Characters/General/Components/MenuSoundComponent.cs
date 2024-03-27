@@ -7,7 +7,7 @@ namespace RA2Mod.General.Components
     {
         public string sound = "";
 
-        void OnEnable()
+        protected virtual void OnEnable()
         {
             Util.PlaySound(sound, gameObject);
         }

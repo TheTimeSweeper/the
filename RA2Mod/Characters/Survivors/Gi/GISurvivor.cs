@@ -74,8 +74,6 @@ namespace RA2Mod.Survivors.GI
 
         public override void OnCharacterInitialized()
         {
-            base.OnCharacterInitialized();
-
             GIConfig.Init();
 
             GIStates.Init();

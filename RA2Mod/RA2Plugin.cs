@@ -36,7 +36,10 @@ namespace RA2Mod
 
         public RA2Plugin()
         {
-            Log._startTime = System.DateTime.Now;
+            if (Log._startTime == default(System.DateTime))
+            {
+                Log._startTime = System.DateTime.Now;
+            }
         }
 
         void Start()
@@ -76,8 +79,8 @@ namespace RA2Mod
 
             Modules.Language.Init();
 
-            new ChronoSurvivor().Initialize();
-            new GISurvivor().Initialize();
+            //new ChronoSurvivor().Initialize();
+            //new GISurvivor().Initialize();
             new TeslaTrooperSurvivor().Initialize();
 
             new Modules.ContentPacks().Initialize();
