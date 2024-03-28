@@ -432,7 +432,7 @@ namespace RA2Mod.Survivors.Tesla
 
             if (characterModelObject.GetComponent<SkinRecolorController>().Recolors == null)
             {
-                Log.Warning("Could not load recolors. Make sure you have FixPluginTypesSerialization Installed");
+                Log.Warning("Could not load recolors. types not serialized?");
                 return;
             }
 
@@ -661,8 +661,6 @@ namespace RA2Mod.Survivors.Tesla
         #region hooks
         protected void AddHooks()
         {
-            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
-
             On.RoR2.CharacterAI.BaseAI.OnBodyDamaged += BaseAI_OnBodyDamaged;
 
             On.RoR2.CharacterMaster.AddDeployable += CharacterMaster_AddDeployable;
@@ -717,20 +715,6 @@ namespace RA2Mod.Survivors.Tesla
             {
 
                 orig(self);
-            }
-        }
-
-        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex)
-        {
-            orig(self, skinIndex);
-
-            SkinRecolorController skinRecolorController = self.GetComponent<SkinRecolorController>();
-            if (skinRecolorController)
-            {
-
-                SkillDef color = self.characterModel.body?.skillLocator?.FindSkill("Recolor")?.skillDef;
-                if (color)
-                    skinRecolorController.SetRecolor(color.skillName.ToLowerInvariant());
             }
         }
 
