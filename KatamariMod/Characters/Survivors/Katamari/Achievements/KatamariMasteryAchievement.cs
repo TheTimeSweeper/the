@@ -7,11 +7,11 @@ using KatamariMod.Modules;
 namespace KatamariMod.Survivors.Plague.Achievements
 {
     //automatically crates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
-    [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
+    //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class KatamariMasteryAchievement : BaseMasteryAchievement
     {
-        public const string identifier = KatamariSurvivor.PLAGUE_PREFIX + "masteryAchievement";
-        public const string unlockableIdentifier = KatamariSurvivor.PLAGUE_PREFIX + "masteryUnlockable";
+        public const string identifier = KatamariSurvivor.JOHNSON_PREFIX + "masteryAchievement";
+        public const string unlockableIdentifier = KatamariSurvivor.JOHNSON_PREFIX + "masteryUnlockable";
 
         public override string RequiredCharacterBody => KatamariSurvivor.instance.bodyName;
 

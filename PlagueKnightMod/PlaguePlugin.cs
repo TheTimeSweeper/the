@@ -24,7 +24,7 @@ namespace PlagueMod
         //   this shouldn't even have to be said
         public const string MODUID = "com.thetimesweeper.PlagueKnightMod";
         public const string MODNAME = "PlagueKnightMod";
-        public const string MODVERSION = "0.0.0";
+        public const string MODVERSION = "0.0.1";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "HABIBI";

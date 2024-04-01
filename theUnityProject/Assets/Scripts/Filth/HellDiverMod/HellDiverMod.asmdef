@@ -1,0 +1,17 @@
+{
+    "name": "HellDiverMod",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "RoR2.dll",
+        "KinematicCharacterController.dll",
+        "com.unity.multiplayer-hlapi.Runtime.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

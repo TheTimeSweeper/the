@@ -56,7 +56,7 @@ public class BaseUnattachedAnimator : MonoBehaviour {
     private void Jumb() {
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            animator.CrossFade("Jump", 0.05f);
+            animator.Play("Jump");
             animator.SetBool("isGrounded", false);
             _jumpTim = 1.5f;
         }
@@ -67,7 +67,7 @@ public class BaseUnattachedAnimator : MonoBehaviour {
 
         if (_jumpTim <= 0) {
             if (!animator.GetBool("isGrounded")) {
-                animator.Play("LightImpact");
+                animator.Play("LightImpact", 1);
             }
             animator.SetBool("isGrounded", true);
         }

@@ -3,34 +3,26 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using static RoR2.UI.CrosshairController;
-using RoR2;
 
 public class AddSkillStocksToCrosshair : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] stonks;
-    [SerializeField]
-    private SkillSlot skillSlot;
-    [SerializeField]
-    private int interval = 1;
-    [SerializeField]
-    private int max = 100;
 
-    [ContextMenu("add to crosshairController")]
+    [SerializeField]
+    private Transform stonkGrid;
+    [SerializeField]
+    private CrosshairController crosshairController;
+
+    [ContextMenu("go")]
     public void transfer() {
-        CrosshairController crosshairController = GetComponent<CrosshairController>();
-        List<SkillStockSpriteDisplay> displays = crosshairController.skillStockSpriteDisplays.ToList();
-#if UNITY_EDITOR
-        UnityEditor.Undo.RecordObject(crosshairController, "crosshair stonks");
-#endif
-        for (int i = 0; i < stonks.Length; i++) {
 
-            displays.Add(new SkillStockSpriteDisplay {
-                minimumStockCountToBeValid = (i + 1) * interval,
-                target = stonks[i],
-                maximumStockCountToBeValid = max,
-                skillSlot = skillSlot,
-            });
+        List<SkillStockSpriteDisplay> displays = new List<SkillStockSpriteDisplay>() { };
+        SkillStockSpriteDisplay firstDisplay = crosshairController.skillStockSpriteDisplays[0];
+
+        for (int i = 0; i < stonkGrid.childCount; i++) {
+            SkillStockSpriteDisplay display = firstDisplay;
+            display.minimumStockCountToBeValid = i + 1;
+            display.target = stonkGrid.GetChild(i).gameObject;
+            displays.Add(display);
         }
 
         crosshairController.skillStockSpriteDisplays = displays.ToArray();
