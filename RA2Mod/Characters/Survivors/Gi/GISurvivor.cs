@@ -43,7 +43,7 @@ namespace RA2Mod.Survivors.GI
             sortPosition = 69.6f,
             
             crosshairBundlePath = "GICrosshair",
-            podPrefabAddressablePath = "Prefabs/NetworkedObjects/SurvivorPod",
+            podPrefabAddressablePath = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
 
             maxHealth = 140f,
             healthRegen = 2.0f,
@@ -61,6 +61,7 @@ namespace RA2Mod.Survivors.GI
             if (!General.GeneralConfig.GIEnabled.Value)
                 return;
 
+            Log.WarningDebug("I GROOM MINORS");
             base.Initialize();
         }
 
@@ -69,11 +70,15 @@ namespace RA2Mod.Survivors.GI
             //need the character unlockable before you initialize the survivordef
             //GIUnlockables.Init();
 
+            Log.WarningDebug("THIS IS WHERE MY SERVER GOT DOXXED ON 4CHAN");
             base.InitializeCharacter();
         }
 
         public override void OnCharacterInitialized()
         {
+            Log.WarningDebug("WE DON'T HAVE AGE VERIFICATION CAUSE WE WANT MINORS HERE");
+            Config.ConfigureBody(prefabCharacterBody, GIConfig.SectionBody);
+
             GIConfig.Init();
 
             GIStates.Init();
@@ -91,7 +96,7 @@ namespace RA2Mod.Survivors.GI
 
             AddHooks();
         }
-
+        
         private void AdditionalBodySetup()
         {
             //AddHitboxes();

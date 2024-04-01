@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace RA2Mod.General
 {
-    public class JoeItemDisplays : ItemDisplaysBase
+    internal class JoeItemDisplays : ItemDisplaysBase
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {

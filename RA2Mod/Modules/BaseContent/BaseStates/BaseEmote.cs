@@ -110,7 +110,7 @@ namespace RA2Mod.Modules.BaseStates
             //emote cancels
             if (isAuthority && characterMotor.isGrounded)
             {
-
+                //todo separate checking from the state
                 CheckEmote<Rest>(GeneralConfig.RestKeybind.Value);
             }
 
