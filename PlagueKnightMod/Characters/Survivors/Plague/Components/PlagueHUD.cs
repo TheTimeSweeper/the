@@ -38,7 +38,7 @@ namespace PlagueMod.Survivors.Plague.Components
                 if (plagueBombSelectorController && plagueBombSelectorController.initialized)
                 {
                     plagueBombSelectorController.bombSelectUI = bombSelectUI;
-                    bombSelectUI.UpdateGrids(plagueBombSelectorController.powderGenericSkills.genericSkills, plagueBombSelectorController.casingGenericSkills.genericSkills);
+                    bombSelectUI.UpdateGrids();
                 }
             }
         }

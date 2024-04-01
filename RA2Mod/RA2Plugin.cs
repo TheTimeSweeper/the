@@ -28,7 +28,7 @@ namespace RA2Mod
     {
         public const string MODUID = "com.thetimesweeper.ra2mod";
         public const string MODNAME = "RA2Mod";
-        public const string MODVERSION = "0.5.0";
+        public const string MODVERSION = "0.5.1";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 
@@ -52,28 +52,10 @@ namespace RA2Mod
             instance = this;
             Log.Init(Logger);
 
-            //System.Type[] types;
-
-            //try
-            //{
-            //    types = System.Reflection.Assembly.GetExecutingAssembly().GetExportedTypes();
-            //    foreach (System.Type t in types)
-            //    {
-            //        Log.Warning(t.ToString());
-            //    }
-            //}
-            //catch (System.Reflection.ReflectionTypeLoadException e)
-            //{
-            //    Log.Warning("error\n" + e);
-            //    types = e.Types;
-            //    foreach (System.Type t in types)
-            //    {
-            //        Log.Warning(t.ToString());
-            //    }
-            //}
-
             GeneralConfig.Init();
             GeneralCompat.Init();
+            GeneralStates.Init();
+            GeneralHooks.Init();
 
             Log.CurrentTime("START new");
 
@@ -82,7 +64,6 @@ namespace RA2Mod
             new ChronoSurvivor().Initialize();
             new GISurvivor().Initialize();
             //new TeslaTrooperSurvivor().Initialize();
-
             new Modules.ContentPacks().Initialize();
 
             if (GeneralConfig.Debug.Value)

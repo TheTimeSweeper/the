@@ -7,7 +7,7 @@ using PlagueMod.Modules;
 namespace PlagueMod.Survivors.Plague.Achievements
 {
     //automatically crates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
-    [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
+    //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class PlagueMasteryAchievement : BaseMasteryAchievement
     {
         public const string identifier = PlagueSurvivor.PLAGUE_PREFIX + "masteryAchievement";

@@ -1,8 +1,5 @@
 ﻿using EntityStates;
-using RA2Mod.General.States;
-using RA2Mod.Modules;
 using RoR2;
-using RoR2.Skills;
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -10,14 +7,6 @@ using VRAPI;
 
 namespace RA2Mod.General
 {
-    public static class GeneralStates
-    {
-        public static void Init()
-        {
-            Content.AddEntityState(typeof(WindDownState));
-            Content.AddEntityState(typeof(Rest));
-        }
-    }
     public static class GeneralCompat
     {
         public delegate void Meme_SurivorCatalog_Init();

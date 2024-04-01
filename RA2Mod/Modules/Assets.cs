@@ -43,15 +43,19 @@ namespace RA2Mod.Modules
                 return;
             }
 
+            loadingBundles[bundleName] = onComplete;
+
             string path = Path.Combine(Path.GetDirectoryName(RA2Plugin.instance.Info.Location), "AssetBundles", bundleName);
 
             Action<AssetBundle> onBundleComplete = (bundle) =>
                            {
                                loadedBundles[bundleName] = bundle;
-                               loadingBundles.Remove(bundleName);
-                               onComplete?.Invoke(bundle);
+                               if (loadingBundles.ContainsKey(bundleName))
+                               {
+                                   loadingBundles[bundleName]?.Invoke(bundle);
+                                   loadingBundles.Remove(bundleName);
+                               }
                            };
-            loadingBundles[bundleName] = onBundleComplete;
             ContentPacks.asyncLoadCoroutines.Add(LoadAssetBundleFromPathAsync(path, onBundleComplete));
         }
 

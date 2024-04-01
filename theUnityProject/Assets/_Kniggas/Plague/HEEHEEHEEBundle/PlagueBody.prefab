@@ -578,13 +578,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7896492078848794072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1991074056, guid: 3029f3340c0951f4fbf7c3ea6dc0803e, type: 3}
+  m_Script: {fileID: 11500000, guid: b5d747ccc8cf75b4492011841374d7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   casingGenericSkills: {fileID: 2211960691182524837}
   powderGenericSkills: {fileID: 4561632997195113861}
-  casingLoadoutSkill: {fileID: 0}
-  powderLoadoutSkill: {fileID: 0}
 --- !u!114 &2211960691182524837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,11 +592,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7896492078848794072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1589109162, guid: 3029f3340c0951f4fbf7c3ea6dc0803e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5844a50329fcf7348a5feb405937354d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillNames: Casing
-  genericSkills: []
 --- !u!114 &4561632997195113861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,11 +605,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7896492078848794072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1589109162, guid: 3029f3340c0951f4fbf7c3ea6dc0803e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5844a50329fcf7348a5feb405937354d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillNames: Powder
-  genericSkills: []
 --- !u!1 &8513165308620666496
 GameObject:
   m_ObjectHideFlags: 0

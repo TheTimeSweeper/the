@@ -55,8 +55,7 @@ namespace RA2Mod.Survivors.GI
         public static void Init()
         {
             Config.DisableSection(SectionSkills);
-
-            Config.ConfigureBody(GISurvivor.instance.prefabCharacterBody, GIConfig.SectionBody);
+            Log.Warning(GISurvivor.instance.bodyName);
             #region m1 1 1
             M1_Pistol_Damage = Config.BindAndOptions(
                 SectionSkills,

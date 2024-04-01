@@ -23,16 +23,16 @@ namespace KatamariMod.Survivors.Plague
         public override string modelPrefabName => "mdlKatamari";
         public override string displayPrefabName => "KatamariDisplay";
 
-        public const string PLAGUE_PREFIX = KatamariPlugin.DEVELOPER_PREFIX + "_PLAGUE_";
+        public const string JOHNSON_PREFIX = KatamariPlugin.DEVELOPER_PREFIX + "_KATAMARI_";
 
         //used when registering your survivor's language tokens
-        public override string survivorTokenPrefix => PLAGUE_PREFIX;
+        public override string survivorTokenPrefix => JOHNSON_PREFIX;
 
         public override BodyInfo bodyInfo => new BodyInfo
         {
             bodyName = bodyName,
-            bodyNameToken = PLAGUE_PREFIX + "NAME",
-            subtitleNameToken = PLAGUE_PREFIX + "SUBTITLE",
+            bodyNameToken = JOHNSON_PREFIX + "NAME",
+            subtitleNameToken = JOHNSON_PREFIX + "SUBTITLE",
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconPlague"),
             bodyColor = Color.green,

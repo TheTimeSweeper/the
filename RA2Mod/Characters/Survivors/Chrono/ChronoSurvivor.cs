@@ -144,6 +144,7 @@ namespace RA2Mod.Survivors.Chrono
             bodyPrefab.AddComponent<ChronoSprintProjectionSpawner>();
             VoiceLineController voiceLineController = bodyPrefab.AddComponent<VoiceLineController>();
             voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
+            Log.WarningNull("voicelinecontext", voiceLineController.voiceLineContext);
         }
 
         public override void InitializeEntityStateMachines() 
@@ -341,7 +342,7 @@ namespace RA2Mod.Survivors.Chrono
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseMaxStock = 1,
-                baseRechargeInterval = 16f,
+                baseRechargeInterval = 13f,
                 stockToConsume = 0,
                 requiredStock = 1,
                 
@@ -388,7 +389,67 @@ namespace RA2Mod.Survivors.Chrono
 
         private void AddRecolorSkills()
         {
+            if (characterModelObject.GetComponent<SkinRecolorController>().Recolors == null)
+            {
+                Log.Warning("Could not load recolors. types not serialized?");
+                return;
+            }
 
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
+
+            List<SkillDef> skilldefs = new List<SkillDef> {
+                createRecolorSkillDef("Blue"),
+                createRecolorSkillDef("Red"),
+                createRecolorSkillDef("Green"),
+                createRecolorSkillDef("Yellow"),
+                createRecolorSkillDef("Orange"),
+                createRecolorSkillDef("Cyan"),
+                createRecolorSkillDef("Purple"),
+                createRecolorSkillDef("Pink"),
+            };
+
+            if (General.GeneralConfig.NewColor.Value)
+            {
+                skilldefs.Add(createRecolorSkillDef("Black"));
+            }
+
+            for (int i = 0; i < skilldefs.Count; i++)
+            {
+
+                Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0 ? null : ChronoUnlockables.recolorsUnlockableDef);
+
+                AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
+            }
+
+            FinalizeCSSPreviewDisplayController();
+        }
+
+        private SkillDef createRecolorSkillDef(string name)
+        {
+
+            Color color1 = Color.white;
+
+            Recolor[] thing = characterModelObject.GetComponent<SkinRecolorController>().Recolors;
+
+            for (int i = 0; i < thing.Length; i++)
+            {
+
+                Recolor recolor = thing[i];
+
+                if (recolor.recolorName == name.ToLowerInvariant())
+                {
+
+                    color1 = recolor.colors[0] * 0.69f;
+                }
+            }
+
+            return Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = name,
+                skillNameToken = $"{CHRONO_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
+                skillDescriptionToken = "",
+                skillIcon = Modules.Skins.CreateRecolorIcon(color1),
+            });
         }
 
         #endregion skills

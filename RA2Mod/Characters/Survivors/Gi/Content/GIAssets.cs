@@ -21,7 +21,8 @@ namespace RA2Mod.Survivors.GI
         public static GameObject caltropsPrefab;
         public static GameObject caltropsPrefabOpti;
         public static GameObject minePrefab;
-
+        internal static GameObject heavyGunTracer;
+        internal static GameObject gunTracer;
         private static AssetBundle _assetBundle;
 
         public static void Init(AssetBundle assetBundle)
@@ -80,6 +81,10 @@ namespace RA2Mod.Survivors.GI
             SerializableEntityStateType mineArmingState = new SerializableEntityStateType(typeof(SkillStates.Mine.MineArmingMutiny));
             armingMachine.initialStateType = mineArmingState;
             armingMachine.mainStateType = mineArmingState;
+
+            heavyGunTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/TracerToolbotRebar.prefab").WaitForCompletion();
+
+            gunTracer = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
             Content.AddProjectilePrefab(minePrefab);
         }

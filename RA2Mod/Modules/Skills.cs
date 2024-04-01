@@ -61,18 +61,29 @@ namespace RA2Mod.Modules
         public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName, bool hidden = false) => CreateGenericSkillWithSkillFamily(targetPrefab, familyName, familyName, hidden);
         public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string genericSkillName, string familyName, bool hidden = false)
         {
+            string uniqueFamilyname = targetPrefab.name + familyName + "Family";
+            SkillFamily newFamily = CreateSkillFamily(uniqueFamilyname);
+
+            return CreateGenericSkillWithSkillFamily(targetPrefab, genericSkillName, newFamily, hidden);
+        }
+        public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string genericSkillName, SkillFamily skillFamily, bool hidden = false)
+        {
             GenericSkill skill = targetPrefab.AddComponent<GenericSkill>();
             skill.skillName = genericSkillName;
             skill.hideInCharacterSelect = hidden;
 
+            skill._skillFamily = skillFamily;
+            return skill;
+        }
+
+        public static SkillFamily CreateSkillFamily(string uniqueFamilyname)
+        {
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            (newFamily as ScriptableObject).name = targetPrefab.name + familyName + "Family";
+            (newFamily as ScriptableObject).name = uniqueFamilyname;
             newFamily.variants = new SkillFamily.Variant[0];
 
-            skill._skillFamily = newFamily;
-
             RA2Mod.Modules.Content.AddSkillFamily(newFamily);
-            return skill;
+            return newFamily;
         }
         #endregion
 
@@ -177,6 +188,11 @@ namespace RA2Mod.Modules
 
 
             return skillDef;
+        }
+
+        internal static void AddSkillToFamily(SkillFamily recolorFamily, SkillDef skillDef, object p)
+        {
+            throw new NotImplementedException();
         }
         #endregion skilldefs
     }

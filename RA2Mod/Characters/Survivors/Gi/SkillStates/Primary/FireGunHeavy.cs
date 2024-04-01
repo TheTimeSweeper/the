@@ -15,7 +15,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
         public static float force => GIConfig.M1_HeavyFire_Force.Value;
         public static float recoil => GIConfig.M1_HeavyFire_Recoil.Value;
         public static float range = 200f;
-        public static GameObject tracerEffectPrefab = null;// UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/TracerToolbotRebar.prefab").WaitForCompletion();
+        public static GameObject tracerEffectPrefab = GIAssets.heavyGunTracer;
 
         private string muzzleString;
 

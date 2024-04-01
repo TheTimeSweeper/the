@@ -9,6 +9,7 @@ namespace RA2Mod.Survivors.Chrono
     {
         public static UnlockableDef characterUnlockableDef = null;
         public static UnlockableDef masterySkinUnlockableDef = null;
+        public static UnlockableDef recolorsUnlockableDef = null;
 
         public static void Init()
         {
