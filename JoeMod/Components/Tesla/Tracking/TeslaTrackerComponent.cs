@@ -144,6 +144,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
                 continue;
             if (hurtBox.healthComponent == null)
                 continue;
+            if (hurtBox.hurtBoxGroup == null)
+                continue;
 
             bool isTower = hurtBox.hurtBoxGroup && hurtBox.hurtBoxGroup.GetComponent<ZappableTower>();
 
