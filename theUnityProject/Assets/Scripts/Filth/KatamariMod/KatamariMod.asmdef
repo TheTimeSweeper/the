@@ -1,5 +1,5 @@
 {
-    "name": "HellDiverMod",
+    "name": "KatamariMod",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -10,7 +10,7 @@
         "KinematicCharacterController.dll",
         "com.unity.multiplayer-hlapi.Runtime.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

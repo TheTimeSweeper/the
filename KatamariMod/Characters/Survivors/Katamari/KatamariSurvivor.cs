@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KatamariMod.Survivors.Plague
+namespace KatamariMod.Survivors.Katamari
 {
     public class KatamariSurvivor : SurvivorBase<KatamariSurvivor>
     {
@@ -51,7 +51,7 @@ namespace KatamariMod.Survivors.Plague
         public override UnlockableDef characterUnlockableDef => KatamariUnlockables.characterUnlockableDef;
         
         public override ItemDisplaysBase itemDisplays => new KatamariItemDisplays();
-
+        
         public override void InitializeCharacter()
         {
             //uncomment if you have multiple characters
@@ -65,7 +65,7 @@ namespace KatamariMod.Survivors.Plague
 
             base.InitializeCharacter();
 
-            //KatamariConfig.Init();
+            KatamariConfig.Init();
             //KatamariStates.Init();
             //KatamariTokens.Init();
             
@@ -98,7 +98,7 @@ namespace KatamariMod.Survivors.Plague
         {
             AddHitboxes();
 
-            prefabCharacterModel.transform.Find("Katamari").gameObject.AddComponent<RollUp>();
+            prefabCharacterModel.transform.Find("Katamari").gameObject.AddComponent<RollUp>().model = prefabCharacterModel;
 
             //todo fail
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.DeathState));
@@ -122,7 +122,7 @@ namespace KatamariMod.Survivors.Plague
             //if you set up a custom main characterstate, set it up here
                 //don't forget to register custom entitystates in your HenryStates.cs
             //the main "body" state machine has some special properties
-            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(EntityStates.GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
+            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(States.KatamariCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
             Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
@@ -133,29 +133,29 @@ namespace KatamariMod.Survivors.Plague
         {
             Skills.ClearGenericSkills(bodyPrefab);
 
-            //Skills.CreateSkillFamilies(bodyPrefab);
+            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary);
 
-            //AddPrmarySkills();
+            AddPrmarySkills();
             //AddSecondarySkills();
             //AddUtiitySkills();
             //AddSpecialSkills();
         }
         
-        //private void AddPrmarySkills()
-        //{
-        //    SkillDef slashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-        //        (
-        //            "plagueThrow",
-        //            PLAGUE_PREFIX + "PRIMARY_THROW_NAME",
-        //            PLAGUE_PREFIX + "PRIMARY_THROW_DESCRIPTION",
-        //            assetBundle.LoadAsset<Sprite>("texIconSkillPlagueBomb"),
-        //            new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.CommandoWeapon.FirePistol2)),
-        //            "Weapon",
-        //            true
-        //        ));
+        private void AddPrmarySkills()
+        {
+            SkillDef slashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+                (
+                    "chargeupRoll",
+                    JOHNSON_PREFIX + "PRIMARY_ROLL_NAME",
+                    JOHNSON_PREFIX + "PRIMARY_ROLL_DESCRIPTION",
+                    assetBundle.LoadAsset<Sprite>("texIconSkillPrimary"),
+                    new EntityStates.SerializableEntityStateType(typeof(States.ChargeUpRoll)),
+                    "Weapon",
+                    true
+                ));
 
-        //    Skills.AddPrimarySkills(bodyPrefab, slashSkillDef);
-        //}
+            Skills.AddPrimarySkills(bodyPrefab, slashSkillDef);
+        }
 
         //private void AddSecondarySkills()
         //{

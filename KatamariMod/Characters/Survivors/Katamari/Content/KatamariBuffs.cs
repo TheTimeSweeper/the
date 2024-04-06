@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace KatamariMod.Survivors.Plague
+namespace KatamariMod.Survivors.Katamari
 {
     public static class KatamariBuffs
     {

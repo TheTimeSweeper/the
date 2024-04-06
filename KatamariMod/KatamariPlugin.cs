@@ -1,5 +1,5 @@
 ﻿using BepInEx;
-using KatamariMod.Survivors.Plague;
+using KatamariMod.Survivors.Katamari;
 using R2API.Utils;
 using RoR2;
 using System.Collections.Generic;
