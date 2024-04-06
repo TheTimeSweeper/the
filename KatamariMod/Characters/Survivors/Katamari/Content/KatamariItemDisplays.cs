@@ -4,7 +4,7 @@ using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KatamariMod.Survivors.Plague
+namespace KatamariMod.Survivors.Katamari
 {
     public class KatamariItemDisplays : ItemDisplaysBase
     {

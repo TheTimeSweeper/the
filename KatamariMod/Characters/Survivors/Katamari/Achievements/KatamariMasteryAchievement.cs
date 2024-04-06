@@ -1,10 +1,10 @@
 ﻿using RoR2;
 using System;
 using UnityEngine;
-using KatamariMod.Survivors.Plague;
+using KatamariMod.Survivors.Katamari;
 using KatamariMod.Modules;
 
-namespace KatamariMod.Survivors.Plague.Achievements
+namespace KatamariMod.Survivors.Katamari.Achievements
 {
     //automatically crates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
     //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]

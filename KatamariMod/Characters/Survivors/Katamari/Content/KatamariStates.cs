@@ -1,4 +1,4 @@
-﻿namespace KatamariMod.Survivors.Plague
+﻿namespace KatamariMod.Survivors.Katamari
 {
     public static class KatamariStates
     {

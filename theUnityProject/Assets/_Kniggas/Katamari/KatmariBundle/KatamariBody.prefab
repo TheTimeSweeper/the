@@ -71,7 +71,6 @@ GameObject:
   m_Component:
   - component: {fileID: 934439786828972354}
   - component: {fileID: 3225522873108022304}
-  - component: {fileID: 8532351274990464585}
   - component: {fileID: 7263985671806742742}
   - component: {fileID: 2668505518174880319}
   - component: {fileID: 2272248004137661490}
@@ -91,6 +90,7 @@ GameObject:
   - component: {fileID: 7192944416378985005}
   - component: {fileID: 4765342801441237047}
   - component: {fileID: 7073391296345926779}
+  - component: {fileID: 8625006354849114404}
   m_Layer: 0
   m_Name: KatamariBody
   m_TagString: Untagged
@@ -148,31 +148,6 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &8532351274990464585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7175525364674932075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1530905962, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeedPenaltyCoefficient: 1
-  characterDirection: {fileID: 0}
-  muteWalkMotion: 0
-  mass: 100
-  airControl: 0.25
-  disableAirControlUntilCollision: 0
-  generateParametersOnAwake: 1
-  _gravityParameters:
-    environmentalAntiGravityGranterCount: 0
-    antiGravityNeutralizerCount: 0
-    channeledAntiGravityGranterCount: 0
-  _flightParameters:
-    channeledFlightGranterCount: 0
 --- !u!114 &7263985671806742742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: -1568778350, guid: 050936fea8909af15a3fd3b64da1ff83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterController: {fileID: 8532351274990464585}
+  CharacterController: {fileID: 8625006354849114404}
   Capsule: {fileID: 7192944416378985005}
   Rigidbody: {fileID: 2627407662403078597}
   CapsuleRadius: 0.4216505
@@ -566,6 +541,31 @@ MonoBehaviour:
   deathState:
     _typeName: EntityStates.Commando.DeathState
   idleStateMachine: []
+--- !u!114 &8625006354849114404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175525364674932075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9acca3760a28e764dbc7cc27d0e31416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeedPenaltyCoefficient: 1
+  characterDirection: {fileID: 0}
+  muteWalkMotion: 0
+  mass: 100
+  airControl: 0.25
+  disableAirControlUntilCollision: 0
+  generateParametersOnAwake: 1
+  _gravityParameters:
+    environmentalAntiGravityGranterCount: 0
+    antiGravityNeutralizerCount: 0
+    channeledAntiGravityGranterCount: 0
+  _flightParameters:
+    channeledFlightGranterCount: 0
 --- !u!1 &8657529569856030259
 GameObject:
   m_ObjectHideFlags: 0

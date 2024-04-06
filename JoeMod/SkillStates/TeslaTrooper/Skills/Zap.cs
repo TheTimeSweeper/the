@@ -205,10 +205,10 @@ namespace ModdedEntityStates.TeslaTrooper {
 
         protected override void OnCastEnter()
         {
-            //if (_targetHurtbox)
-            //{
-            //    PlayZap();
-            //}
+            if (_targetHurtbox) {
+
+                PlayZapSound();
+            }
         }
 
         protected override void OnCastFixedUpdate()
@@ -216,7 +216,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             if (_targetHurtbox) {
 
                 while (_currentCasts < totalOrbCasts && fixedAge > nextCastTime) {
-                    PlayZap();
+                    PlayZapAnimation();
                     if (NetworkServer.active) {
                         FireZap();
                     }
@@ -266,8 +266,7 @@ namespace ModdedEntityStates.TeslaTrooper {
             }
         }
 
-        private void PlayZap()
-        {
+        private void PlayZapAnimation() {
             EffectManager.SimpleMuzzleFlash(RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxlightning"),
                                             gameObject,
                                             "MuzzleGauntlet",
@@ -275,7 +274,9 @@ namespace ModdedEntityStates.TeslaTrooper {
 
             PlayAnimation("Gesture, Additive", "Shock");
             //PlayCrossfade("Gesture, Override", "Shock", 0.1f);
-            
+        }
+
+        private void PlayZapSound() {
             string sound = "Play_itesatta";
             if (_crit) sound = "Play_zap_crit";// "Play_trooper_itesat2b_tesla_trooper_attack";
             //sound = EntityStates.Mage.Weapon.FireLaserbolt.attackString;

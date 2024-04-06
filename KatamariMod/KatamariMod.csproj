@@ -19,9 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Characters\Survivors\Katamari\Components\Bundled\UI\**" />
-    <EmbeddedResource Remove="Characters\Survivors\Katamari\Components\Bundled\UI\**" />
-    <None Remove="Characters\Survivors\Katamari\Components\Bundled\UI\**" />
+    <Compile Remove="Characters\Survivors\Katamari\SkillDefs\**" />
+    <Compile Remove="Characters\Survivors\Katamari\SkillStates\**" />
+    <EmbeddedResource Remove="Characters\Survivors\Katamari\SkillDefs\**" />
+    <EmbeddedResource Remove="Characters\Survivors\Katamari\SkillStates\**" />
+    <None Remove="Characters\Survivors\Katamari\SkillDefs\**" />
+    <None Remove="Characters\Survivors\Katamari\SkillStates\**" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -46,9 +49,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Characters\Survivors\Katamari\Components\Bundled\" />
-    <Folder Include="Characters\Survivors\Katamari\SkillDefs\" />
-    <Folder Include="Characters\Survivors\Katamari\SkillStates\" />
     <Folder Include="Modules\Characters\" />
   </ItemGroup>
 

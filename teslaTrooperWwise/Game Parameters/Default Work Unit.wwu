@@ -13,6 +13,7 @@
 						<Property Name="InitialValue" Type="Real64" Value="100"/>
 					</PropertyList>
 				</GameParameter>
+				<GameParameter Name="Pitch_TeslaCharge" ID="{7E611772-933D-4A81-9FD6-DE0D6DA41E34}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

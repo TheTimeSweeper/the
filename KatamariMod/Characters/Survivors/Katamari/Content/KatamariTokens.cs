@@ -1,8 +1,8 @@
 ﻿using System;
 using KatamariMod.Modules;
-using KatamariMod.Survivors.Plague.Achievements;
+using KatamariMod.Survivors.Katamari.Achievements;
 
-namespace KatamariMod.Survivors.Plague
+namespace KatamariMod.Survivors.Katamari
 {
     public static class KatamariTokens
     {

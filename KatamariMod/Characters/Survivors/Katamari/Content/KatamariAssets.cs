@@ -4,7 +4,7 @@ using KatamariMod.Modules;
 using System;
 using RoR2.Projectile;
 
-namespace KatamariMod.Survivors.Plague
+namespace KatamariMod.Survivors.Katamari
 {
     public static class KatamariAssets
     {

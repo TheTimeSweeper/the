@@ -7,8 +7,8 @@ namespace Modules {
     internal static class DamageTypes {
 
         public static float StunLongTime = 2.5f;
-        public static float ShockTimeMed = 2.5f;
-        public static float ShockTimeShort = 1f;
+        public static float ShockTimeMed = 3.5f;
+        public static float ShockTimeShort = 2f;
 
         public static DamageAPI.ModdedDamageType StunLong;
         public static DamageAPI.ModdedDamageType ShockMed;

@@ -1,8 +1,8 @@
-﻿using KatamariMod.Survivors.Plague.Achievements;
+﻿using KatamariMod.Survivors.Katamari.Achievements;
 using RoR2;
 using UnityEngine;
 
-namespace KatamariMod.Survivors.Plague {
+namespace KatamariMod.Survivors.Katamari {
     public static class KatamariUnlockables
     {
         public static UnlockableDef characterUnlockableDef = null;

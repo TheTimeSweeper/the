@@ -9,6 +9,7 @@ namespace KatamariMod.Characters.Survivors.Katamari.Components
 {
     class RollUp : MonoBehaviour
     {
+        public CharacterModel model;
         private Vector3 lastposition;
         private float radius;
 
@@ -34,6 +35,11 @@ namespace KatamariMod.Characters.Survivors.Katamari.Components
         {
             //if (other.gameObject.layer == RoR2.LayerIndex.defaultLayer.intVal)
             //{
+
+            if (other.TryGetComponent(out CharacterBody body) && model.body == body)
+            {
+                return;
+            }
             
             if (other.GetComponent<Renderer>())
             {

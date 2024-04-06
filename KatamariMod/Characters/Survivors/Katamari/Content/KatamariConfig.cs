@@ -1,60 +1,46 @@
 ﻿using BepInEx.Configuration;
 
-namespace KatamariMod.Survivors.Plague
+namespace KatamariMod.Survivors.Katamari
 {
     public static class KatamariConfig
     {
-        public static ConfigEntry<float> blastJumpForward;
-        public static ConfigEntry<float> blastJumpUpward;
-        public static ConfigEntry<float> blastJumpAirControl;
-        public static ConfigEntry<float> blastJumpGravity;
-        public static ConfigEntry<float> bombAirControl;
-        public static ConfigEntry<float> bombSmallHop;
+        public static ConfigEntry<float> passive_speedAirControlMultiplier;
+        public static ConfigEntry<float> passive_speedAttackThreshold;
+        public static ConfigEntry<float> passive_speedAttackMultiplier;
+
+        public static ConfigEntry<float> ChargeRoll_Multiplier;
 
         public static void Init()
         {
-            string section = "Plague";
-            blastJumpForward = Modules.Config.BindAndOptionsSlider(
+            string section = "Skills";
+            passive_speedAirControlMultiplier = Modules.Config.BindAndOptionsSlider(
                 section,
-                "blastJumpForward",
+                "passive_speedAirControlMultiplier",
                 10,
-                "",
-                0,
-                20);
-            blastJumpUpward = Modules.Config.BindAndOptionsSlider(
+                "lower air controll means more slipperiness, and more influence of momentum",
+                -100,
+                100);
+
+            passive_speedAttackThreshold = Modules.Config.BindAndOptionsSlider(
                 section,
-                "blastJumpUpward",
+                "passive_velocityAttackThreshold",
                 10,
                 "",
                 0,
                 100);
-            blastJumpAirControl = Modules.Config.BindAndOptionsSlider(
+
+            passive_speedAttackMultiplier = Modules.Config.BindAndOptionsSlider(
                 section,
-                "blastJumpAirControl",
+                "passive_velocityAttackMultiplier",
+                10,
+                "",
+                0,
+                100);
+
+            ChargeRoll_Multiplier = Modules.Config.BindAndOptionsSlider(
+                section,
+                "ChargeRoll_Multiplier",
                 0.1f,
-                "",
-                0,
-                1);
-            blastJumpGravity = Modules.Config.BindAndOptionsSlider(
-                section,
-                "blastJumpGravity",
-                1f,
-                "",
-                0,
-                100);        
-
-            bombAirControl = Modules.Config.BindAndOptionsSlider(
-                section,
-                "bombAirControl",
-                0.25f,
-                "",
-                0,
-                1);
-
-            bombSmallHop = Modules.Config.BindAndOptionsSlider(
-                section,
-                "bombSmallHop",
-                3f,
                 "",
                 0,
                 10);

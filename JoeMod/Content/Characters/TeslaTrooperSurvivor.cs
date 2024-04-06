@@ -72,7 +72,7 @@ namespace Modules.Survivors {
         #endregion
 
         #region cool stuff
-        public static float conductiveAllyBoost = 1.3f;
+        public static float conductiveAllyBoost = 1.1f;
 
         public static DeployableSlot teslaTowerDeployableSlot;
         public DeployableAPI.GetDeployableSameSlotLimit GetTeslaTowerSlotLimit;
@@ -793,7 +793,7 @@ namespace Modules.Survivors {
                         }
                     }
 
-                    damageInfo.AddModdedDamageType(DamageTypes.ShockShort);
+                    damageInfo.AddModdedDamageType(DamageTypes.ShockMed);
                     damageInfo.damage *= conductiveAllyBoost;// 1f + (0.1f * buffCount);
                     damageInfo.damageColorIndex = Colors.ChargedColor;
                 }
