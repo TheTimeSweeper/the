@@ -9,15 +9,19 @@ namespace ModdedEntityStates.TeslaTrooper.Tower {
         public override void OnEnter() {
             base.OnEnter();
 
-			TeslaTowerControllerController towerController = characterBody.master.minionOwnership?.ownerMaster.GetBodyObject()?.GetComponent<TeslaTowerControllerController>();
+			if(characterBody.master.minionOwnership && characterBody.master.minionOwnership.ownerMaster.GetBodyObject()) {
 
-			if (towerController) {
-				towerController.removeTower(gameObject);
+				TeslaTowerControllerController towerController = characterBody.master.minionOwnership.ownerMaster.GetBodyObject().GetComponent<TeslaTowerControllerController>();
 
-				//characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
-				//    towerController.removeTower(gameObject);
-				//});
+				if (towerController) {
+					towerController.removeTower(gameObject);
+
+					//characterBody.masterObject.GetComponent<Deployable>()?.onUndeploy.AddListener(() => {
+					//    towerController.removeTower(gameObject);
+					//});
+				}
 			}
+
 		}
 
         // Token: 0x06004324 RID: 17188 RVA: 0x0011196C File Offset: 0x0010FB6C

@@ -139,7 +139,8 @@ public class TeslaTrackerComponent : MonoBehaviour {
         float shortestZapDistance = float.PositiveInfinity;
 
         for (int i = 0; i < hits.Length; i++) {
-
+            if (hits[i].collider == null)
+                continue;
             HurtBox hurtBox = hits[i].collider.GetComponent<HurtBox>();
             if (hurtBox == null)
                 continue;

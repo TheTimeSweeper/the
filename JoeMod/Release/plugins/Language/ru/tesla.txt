@@ -14,11 +14,11 @@
     "HABIBI_TESLA_BODY_PASSIVE_DESCRIPTION" : "Sample text.",
     "HABIBI_TESLA_BODY_PRIMARY_ZAP_NAME" : "Перчатка Теслы",
     "HABIBI_TESLA_BODY_PRIMARY_ZAP_DESCRIPTION" : "<style=cIsUtility>Заряжающий</style>. Бьёт молнией цели на <style=cIsDamage>120% урона</style>. Стреляет <style=cIsUtility>до 3 молний</style> на <style=cIsUtility>ближней дистанции</style>.",
-    "KEYWORD_CHARGED" : "<style=cKeywordName>Заряжающий</style><style=cSub>Следующая атака Заряженного союзника <style=cIsUtility>оглушает</style> и повышает урон на <style=cIsDamage>1.3x</style>",
+    "KEYWORD_CHARGED" : "<style=cKeywordName>Заряжающий</style><style=cSub>Следующая атака Заряженного союзника <style=cIsUtility>оглушает</style> и повышает урон на <style=cIsDamage>1.1x</style>",
     "HABIBI_TESLA_BODY_PRIMARY_PUNCH_NAME" : "Кастеты Теслы",
     "HABIBI_TESLA_BODY_PRIMARY_PUNCH_DESCRIPTION" : "Ударяет противников на <style=cIsDamage>300% урона</style>, и зацепляет противников в конусе на <style=cIsDamage>150% урона</style>. <style=cIsUtility>Deflects Projectiles</style>.",
     "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_NAME" : "2000 Вольтов",
-    "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Огулшение.</style> Создает электрический взрыв в большой области на <style=cIsDamage>690% урона</style>. Находясь рядом с <style=cIsUtility>Башней Теслы</style>, создает <style=cIsUtility>усиленную, оглушает</style> версию на <style=cIsDamage>1200% урона</style>.",
+    "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Огулшение.</style> Создает электрический взрыв в большой области на <style=cIsDamage>690% урона</style>. Находясь рядом с <style=cIsUtility>Башней Теслы</style>, создает <style=cIsUtility>усиленную, оглушает</style> версию на <style=cIsDamage>1500% урона</style>.",
     "HABIBI_TESLA_BODY_SECONDARY_BIGZAPPUNCH_NAME" : "Заряженный Кулак",
     "HABIBI_TESLA_BODY_SECONDARY_BIGZAPPUNCH_DESCRIPTION" : "Заряжает для удара на <style=cIsDamage>80%-800% урона</style>, и наносит в конусе <style=cIsDamage>40%-400% урона</style>. Если рядом с <style=cIsUtility>Башней Теслы</style>, заменяет конус на <style=cIsUtility>шокирующий</style> луч наносящий <style=cIsDamage>120%-1200% урона</style>",
     "HABIBI_TESLA_BODY_UTILITY_BARRIER_NAME" : "Подзарядка",
@@ -69,6 +69,6 @@
     "HABIBI_TESLA_TOWER_BODY_PRIMARY_ZAP_NAME" : "Башня Теслы",
     "HABIBI_TESLA_TOWER_BODY_PRIMARY_ZAP_DESCRIPTION" : "Бьет молнией ближайших противников на  <style=cIsDamage>3x2.3</style>.",
     "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_NAME" : "2000 Volts (Tower)",
-    "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Оглушающий</style>. Создаёт $<style=cIsDamage>усиленный</style> взрыв на цели Башни Теслы на <style=cIsDamage>1200% урона</style>",
+    "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Оглушающий</style>. Создаёт $<style=cIsDamage>усиленный</style> взрыв на цели Башни Теслы на <style=cIsDamage>1500% урона</style>",
     }
 }

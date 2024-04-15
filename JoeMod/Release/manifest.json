@@ -1,8 +1,9 @@
 {
+    "author": "TheTimesweeper",
     "name": "Tesla_Trooper",
-    "version_number": "2.1.6",
+    "version_number": "2.2.2",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Make it glow. Adds two new survivors, Tesla Trooper and Desolator, based on Red Alert 2, themed around RoR2.",
+    "description": "Already there. Adds two new survivors, Tesla Trooper and Desolator, based on Red Alert 2, themed around RoR2.",
     "dependencies": [
         "bbepis-BepInExPack-5.4.2101",
         "RiskofThunder-R2API_Core-5.0.3",

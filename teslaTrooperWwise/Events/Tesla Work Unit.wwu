@@ -563,7 +563,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="itesatta_01_01" ID="{864509E9-AC8F-481E-BC30-3EB1113058AD}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+											<ObjectRef Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

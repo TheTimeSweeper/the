@@ -12,6 +12,7 @@ namespace RA2Mod.General
         public static ConfigEntry<bool> Cursed;
         public static ConfigEntry<KeyboardShortcut> RestKeybind { get; private set; }
         public static ConfigEntry<KeyboardShortcut> VoiceKey { get; private set; }
+
         public static ConfigEntry<bool> VoiceInLobby;
         public static ConfigEntry<bool> VoiceOnSpawn;
         public static ConfigEntry<bool> VoiceOnDeath;
@@ -19,6 +20,7 @@ namespace RA2Mod.General
 
         public static ConfigEntry<bool> ChronoEnabled;
         public static ConfigEntry<bool> GIEnabled;
+        public static ConfigEntry<bool> ConscriptEnabled;
 
         public static void Init()
         {
@@ -77,6 +79,8 @@ namespace RA2Mod.General
 
             //ChronoEnabled = Config.CharacterEnableConfig(survivorSection, "Chrono Legionnaire");
             GIEnabled = Config.CharacterEnableConfig(sectionSurvivors, "GI", "BETA", true);
+            ConscriptEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Conscript", "BETA", true);
+
         }
     }
 }

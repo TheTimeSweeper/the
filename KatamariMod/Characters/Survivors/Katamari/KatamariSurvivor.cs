@@ -28,7 +28,7 @@ namespace KatamariMod.Survivors.Katamari
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => JOHNSON_PREFIX;
 
-        public override BodyInfo bodyInfo => new BodyInfo
+        protected override BodyInfo newBodyInfo => new BodyInfo
         {
             bodyName = bodyName,
             bodyNameToken = JOHNSON_PREFIX + "NAME",
@@ -39,7 +39,7 @@ namespace KatamariMod.Survivors.Katamari
             sortPosition = 69.3f,
 
             crosshair = Assets.LoadCrosshair("Standard"),
-            podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            podPrefab = R2API.PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"), "nip", true),
 
             maxHealth = 110f,
             healthRegen = 1.5f,
@@ -98,7 +98,7 @@ namespace KatamariMod.Survivors.Katamari
         {
             AddHitboxes();
 
-            prefabCharacterModel.transform.Find("Katamari").gameObject.AddComponent<RollUp>().model = prefabCharacterModel;
+            //prefabCharacterModel.transform.Find("Katamari").gameObject.AddComponent<RollUp>().model = prefabCharacterModel;
 
             //todo fail
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.DeathState));
