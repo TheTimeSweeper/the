@@ -15,12 +15,12 @@
         "HABIBI_TESLA_BODY_PRIMARY_ZAP_NAME" : "Рукавиця Тесли",
         "HABIBI_TESLA_BODY_PRIMARY_ZAP_DESCRIPTION" : "<style=cIsUtility>Заряджає</style>. Вдаряє струмом цілі, завдаючи <style=cIsDamage>120% damage</style>. Виконує <style=cIsUtility>до 3 розрядів</style> на <style=cIsUtility>близькій дистанції</style>.",
     
-        "KEYWORD_CHARGED" : "<style=cKeywordName>Заряджання</style><style=cSub>Заряджені союзники своєю наступною атакою <style=cIsUtility>накладають електрошок</style> та завдають <style=cIsDamage>1.3x шкоди</style>",
+        "KEYWORD_CHARGED" : "<style=cKeywordName>Заряджання</style><style=cSub>Заряджені союзники своєю наступною атакою <style=cIsUtility>накладають електрошок</style> та завдають <style=cIsDamage>1.1x шкоди</style>",
     
         "HABIBI_TESLA_BODY_PRIMARY_PUNCH_NAME" : "Кастет Тесли",
         "HABIBI_TESLA_BODY_PRIMARY_PUNCH_DESCRIPTION" : "Вдаряє ворога, завдаючи <style=cIsDamage>300% шкоди</style> та вдаряє током ворогів в конусі, завдаючи <style=cIsDamage>150% шкоди</style>. <style=cIsUtility>Відбиває снаряди</style>.",
         "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_NAME" : "2000 Вольт",
-        "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Приголомшує.</style> Створює електричний вибух в великій області, що завдає <style=cIsDamage>690% шкоди</style>. Якщо поряд <style=cIsUtility>Вежа Тесли</style>, виконує <style=cIsUtility>надзаряджену, електрошокову</style> версію, завдаючи <style=cIsDamage>1200% шкоди</style>.",
+        "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Приголомшує.</style> Створює електричний вибух в великій області, що завдає <style=cIsDamage>690% шкоди</style>. Якщо поряд <style=cIsUtility>Вежа Тесли</style>, виконує <style=cIsUtility>надзаряджену, електрошокову</style> версію, завдаючи <style=cIsDamage>1500% шкоди</style>.",
         "HABIBI_TESLA_BODY_SECONDARY_BIGZAPPUNCH_NAME" : "Заряджений кулак",
         "HABIBI_TESLA_BODY_SECONDARY_BIGZAPPUNCH_DESCRIPTION" : "Утримайте щоб зарядити кулак та завдати <style=cIsDamage>80%-800% шкоди</style> ударом та зачепити ворогів конусним розрядом, завдаючи <style=cIsDamage>40%-400% шкоди</style>. Якщо поряд <style=cIsUtility>Вежа Тести</style>, замінює конусний електричний розряд променем з далекої дальності, що накладає <style=cIsUtility>електрошок</style> та завдає <style=cIsDamage>120%-1200% шкоди</style>",
         "HABIBI_TESLA_BODY_UTILITY_BARRIER_NAME" : "Статичний обладунок",
@@ -75,6 +75,6 @@
         "HABIBI_TESLA_TOWER_BODY_PRIMARY_ZAP_NAME" : "Вежа Тесли",
         "HABIBI_TESLA_TOWER_BODY_PRIMARY_ZAP_DESCRIPTION" : "Вражає струмом ворогів поблизу, завдаючи <style=cIsDamage>3x230% шкоди</style>.",
         "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_NAME" : "2000 Вольти (Вежа)",
-        "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Електрошок</style>. Виконує потужний $<style=cIsDamage>розряд</style> по цілі Вежі Тесли, завдаючи <style=cIsDamage>1200% шкоди</style>",
+        "HABIBI_TESLA_TOWER_BODY_SECONDARY_BIGZAP_DESCRIPTION" : "<style=cIsUtility>Електрошок</style>. Виконує потужний $<style=cIsDamage>розряд</style> по цілі Вежі Тесли, завдаючи <style=cIsDamage>1500% шкоди</style>",
     }
 }
