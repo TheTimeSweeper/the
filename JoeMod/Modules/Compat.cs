@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using System;
+using System.Collections;
 using System.Runtime.CompilerServices;
 
 namespace Modules {
@@ -33,6 +34,20 @@ namespace Modules {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI") ) {
                 MemeCompat.init();
             }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx")) {
+                TryAutoSprintCompat();
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void TryAutoSprintCompat() {
+            TeslaTrooperPlugin.instance.StartCoroutine(AutoSprintCompat());
+        }
+
+        private static IEnumerator AutoSprintCompat() {
+            //let awake happen
+            yield return null;
+            TeslaTrooperPlugin.instance.GetComponent<RTAutoSprintEx.RTAutoSprintEx>().RT_SprintDisableMessage("ModdedEntityStates.TeslaTrooper.AimBigZap");
         }
 
         internal static int TryGetScepterCount(Inventory inventory) {

@@ -71,6 +71,8 @@ namespace Modules.Survivors {
         public static float ArmorShredAmount= 8f;
         public static float ArmorShredDuration = 8f;
 
+        public static List<BuffIndex> compatibleRadiationBuffs = new List<BuffIndex>();
+
         public static string funTokenString;
 
         public override void Initialize() {
@@ -505,16 +507,47 @@ namespace Modules.Survivors {
         private void Hook() {
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.BuffCatalog.Init += BuffCatalog_Init;
+        }
+
+        private void BuffCatalog_Init(On.RoR2.BuffCatalog.orig_Init orig) {
+            orig();
+
+            for (int i = 0; i < BuffCatalog.buffDefs.Length; i++) {
+
+                string buffName = BuffCatalog.buffDefs[i].name.ToLowerInvariant();
+                if (buffName.Contains("nuclea") || buffName.Contains("radiat") || buffName.Contains("nuke")) {
+
+                    compatibleRadiationBuffs.Add(BuffCatalog.buffDefs[i].buffIndex);
+                    if (!BuffCatalog.buffDefs[i].canStack) {
+                        compatibleRadiationBuffs.Add(BuffCatalog.buffDefs[i].buffIndex);
+                    }
+                }
+            }
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo) {
 
             if (DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.DesolatorDot) || DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.DesolatorDotPrimary)) {
-                int radStacks = self.body ? self.body.GetBuffCount(Modules.Buffs.desolatorDotDeBuff) : 0;
+
+                int radStacks;
+                if (self.body == null) {
+                    radStacks = 0;
+                } else {
+                    radStacks = self.body.GetBuffCount(Buffs.desolatorDotDeBuff) + GetCompatibleRadiationBuffs(self.body);
+                }
                 damageInfo.damage += DamageMultiplierPerIrradiatedStack * radStacks * damageInfo.damage;
             }
 
             orig(self, damageInfo);
+        }
+
+        private int GetCompatibleRadiationBuffs(CharacterBody body) {
+            int count = 0;
+            for (int i = 0; i < compatibleRadiationBuffs.Count; i++) {
+                count += body.GetBuffCount(compatibleRadiationBuffs[i]);
+            }
+            return count;
         }
 
         private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport) {

@@ -51,6 +51,7 @@ namespace ModdedEntityStates.TeslaTrooper {
 
                 float distance = Vector3.Distance(_targetHurtbox.transform.position, transform.position);
                 duration = distance * 0.8f / (speedCoefficient * moveSpeedStat);
+                duration = Mathf.Min(duration, 1);
 
                 _cameraOverrideHandle = cameraTargetParams.AddParamsOverride(new CameraTargetParams.CameraParamsOverrideRequest {
                     cameraParamsData = GetBlinkCameraParams(distance*0.5f),

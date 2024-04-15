@@ -1,4 +1,9 @@
 ## Changelog
+`2.2.2`
+- fixed Tesla Trooper Surging Forward while rooted locking you in purgatory 
+- fixed Tesla Trooper M2 conflict with autosprint, only a year after it was reported
+- Desolator passive now counts stacks from SS2U Nucleator dot
+
 `2.2.1`
 - forgot to update text to the changes of last patch woops
 
