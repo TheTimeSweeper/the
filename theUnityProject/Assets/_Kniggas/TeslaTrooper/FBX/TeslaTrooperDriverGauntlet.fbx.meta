@@ -3,7 +3,12 @@ guid: f69f1cea20d1a8a4491797eca333d3dc
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matTeslaArmor
+    second: {fileID: 2100000, guid: 837807e5c2dfab040bd449c80f53de46, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
