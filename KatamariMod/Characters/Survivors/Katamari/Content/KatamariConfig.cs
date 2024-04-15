@@ -17,7 +17,7 @@ namespace KatamariMod.Survivors.Katamari
                 section,
                 "passive_speedAirControlMultiplier",
                 10,
-                "lower air controll means more slipperiness, and more influence of momentum",
+                "lower air control means more slipperiness, and more influence of momentum",
                 -100,
                 100);
 

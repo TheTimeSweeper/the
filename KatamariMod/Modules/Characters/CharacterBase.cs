@@ -11,8 +11,20 @@ namespace KatamariMod.Modules.Characters
 
         public abstract string bodyName { get; }
         public abstract string modelPrefabName { get; }
-        
-        public abstract BodyInfo bodyInfo { get; }
+
+        private BodyInfo _cachedBodyInfo;
+        public BodyInfo bodyInfo
+        {
+            get
+            {
+                if(_cachedBodyInfo == null)
+                {
+                    _cachedBodyInfo = newBodyInfo;
+                }
+                return _cachedBodyInfo;
+            }
+        }
+        protected abstract BodyInfo newBodyInfo { get; }
 
         public virtual CustomRendererInfo[] customRendererInfos { get; }
 
