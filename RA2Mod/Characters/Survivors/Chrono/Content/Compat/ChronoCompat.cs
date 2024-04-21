@@ -13,13 +13,13 @@ namespace RA2Mod.Survivors.Chrono
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void Init()
         {
-            if (AutoSprintInstalled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
-            {
-                RA2Plugin.instance.StartCoroutine(AutoSprintCompat());
-            }
             if (GeneralCompat.driverInstalled)
             {
                 new DriverCompat().Init();
+            }
+            if (AutoSprintInstalled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
+            {
+                RA2Plugin.instance.StartCoroutine(AutoSprintCompat());
             }
         }
 

@@ -138,12 +138,14 @@ namespace ModdedEntityStates.Desolator {
 
             if (NetworkServer.active) {
 
+                characterBody.AddTimedBuff(Modules.Buffs.desolatorDeployBuff, 0.2f);
                 characterBody.RemoveBuff(Modules.Buffs.desolatorDeployBuff);
             }
 
             if (!_complete) {
                 aimRequest?.Dispose();
 
+                Helpers.LogWarning("unset DeployIrradiate onexit !_complete");
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
                 PlayCrossfade("FullBody, Override", "BufferEmpty", 0.5f);
