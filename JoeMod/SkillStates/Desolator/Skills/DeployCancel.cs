@@ -17,9 +17,10 @@ namespace ModdedEntityStates.Desolator {
             PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
 
             base.outer.SetNextStateToMain();
-
-            skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
-
+            
+            if (skillLocator.special.skillDef == DesolatorSurvivor.cancelDeploySkillDef) {
+                skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            }
         }
 
         //public override void FixedUpdate() {

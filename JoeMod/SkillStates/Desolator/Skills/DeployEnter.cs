@@ -25,14 +25,15 @@ namespace ModdedEntityStates.Desolator {
 
             PlayCrossfade("FullBody, Override", "Deploy", "Deploy.playbackRate", duration, 0.05f);
 
-            GetModelAnimator().SetFloat("CannonBarCharge", 1);
+            Animator animator = GetModelAnimator();
+            animator.SetFloat("CannonBarCharge", 1);
             PlayAnimation("RadCannonBar", "CannonCharge");
 
-            GetModelAnimator().SetFloat("CannonSpin", 0.99f);
+            animator.SetFloat("CannonSpin", 0.99f);
             PlayCrossfade("RadCannonSpin", "CannonSpin", 0.1f);
 
-            GetModelAnimator().SetFloat("aimYawCycle", 0.5f);
-            GetModelAnimator().SetFloat("aimPitchCycle", 0.5f);
+            animator.SetFloat("aimYawCycle", 0.5f);
+            animator.SetFloat("aimPitchCycle", 0.5f);
 
             if (NetworkServer.active) {
                 characterBody.AddTimedBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility, BaseDuration);

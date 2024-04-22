@@ -90,7 +90,32 @@ ModelImporter:
   - first:
       74: -3498632222991233575
     second: Armature|AimYaw
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ArmorDecalMaterial
+    second: {fileID: 2100000, guid: 9af35c74bcaa2e3479b95bc58a8edd8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ArmorMaterial
+    second: {fileID: 2100000, guid: 619f93896280c564f8742b387f014fc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackpackMaterial
+    second: {fileID: 2100000, guid: b12d00e4073a7304eab41372bffd634f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BasemeshMaterial
+    second: {fileID: 2100000, guid: 1266b6aa1b2631d4ca28015b525a4d68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GunMaterial
+    second: {fileID: 2100000, guid: d6dfdda99e26b7a47b4ffb9a0d4d249d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

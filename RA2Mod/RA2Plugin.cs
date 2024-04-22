@@ -62,8 +62,8 @@ namespace RA2Mod
 
             Modules.Language.Init();
 
-            //new ChronoSurvivor().Initialize();
-            //new GISurvivor().Initialize();
+            new ChronoSurvivor().Initialize();
+            new GISurvivor().Initialize();
             //new TeslaTrooperSurvivor().Initialize();
             new ConscriptSurvivor().Initialize();
             new Modules.ContentPacks().Initialize();

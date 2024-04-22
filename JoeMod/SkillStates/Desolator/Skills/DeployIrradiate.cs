@@ -136,11 +136,6 @@ namespace ModdedEntityStates.Desolator {
 
             characterBody.hideCrosshair = false;
 
-            if (NetworkServer.active) {
-
-                characterBody.RemoveBuff(Modules.Buffs.desolatorDeployBuff);
-            }
-
             if (!_complete) {
                 aimRequest?.Dispose();
 
@@ -150,6 +145,12 @@ namespace ModdedEntityStates.Desolator {
 
                 PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
                 PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
+            }
+
+            if (NetworkServer.active) {
+
+                characterBody.AddTimedBuff(Modules.Buffs.desolatorDeployBuff, 0.2f);
+                characterBody.RemoveBuff(Modules.Buffs.desolatorDeployBuff);
             }
         }
 

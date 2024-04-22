@@ -81,6 +81,11 @@ ___
 ## Changelog
 see Changelog tab for more  
 
+`2.2.3`
+- fixed desolator scepter resetting when zetaspects is installed
+  - *skill will still reset if a buff is lost while in special because of code jank on scepter's end. full fix to completely workaround all this coming at some point.*
+- fixed desolator rad cannon not spinning when deployed
+
 `2.2.2`
 - fixed Tesla Trooper Surging Forward while rooted locking you in purgatory 
 - fixed Tesla Trooper M2 conflict with autosprint, only a year after it was reported
