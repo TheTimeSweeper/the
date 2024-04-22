@@ -136,22 +136,21 @@ namespace ModdedEntityStates.Desolator {
 
             characterBody.hideCrosshair = false;
 
-            if (NetworkServer.active) {
-
-                characterBody.AddTimedBuff(Modules.Buffs.desolatorDeployBuff, 0.2f);
-                characterBody.RemoveBuff(Modules.Buffs.desolatorDeployBuff);
-            }
-
             if (!_complete) {
                 aimRequest?.Dispose();
 
-                Helpers.LogWarning("unset DeployIrradiate onexit !_complete");
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
                 PlayCrossfade("FullBody, Override", "BufferEmpty", 0.5f);
 
                 PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
                 PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
+            }
+
+            if (NetworkServer.active) {
+
+                characterBody.AddTimedBuff(Modules.Buffs.desolatorDeployBuff, 0.2f);
+                characterBody.RemoveBuff(Modules.Buffs.desolatorDeployBuff);
             }
         }
 

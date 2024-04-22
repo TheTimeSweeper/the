@@ -1,4 +1,9 @@
 ## Changelog
+`2.2.3`
+- fixed desolator scepter resetting when zetaspects is installed
+  - *skill will still reset if a buff is lost while in special because of code jank on scepter's end. full fix to completely workaround all this coming at some point.*
+- fixed desolator rad cannon not spinning when deployed
+
 `2.2.2`
 - fixed Tesla Trooper Surging Forward while rooted locking you in purgatory 
 - fixed Tesla Trooper M2 conflict with autosprint, only a year after it was reported
@@ -24,8 +29,8 @@
   - secondary (empowered): now commands Starstorm 2 Shock Drones as well
   - fix potential nullref spam on tracking component
 - Desolator
-  - fixed a bug where sceptered special reverts to regular special after using it
-    - *I assume. I could not reproduce it so if it still happens to you, let me know and give a log*
+  - ~~fixed a bug where sceptered special reverts to regular special after using it~~
+    - ~~*I assume. I could not reproduce it so if it still happens to you, let me know and give a log*~~
   - he'll get some more love I promise
 
 `2.1.6`

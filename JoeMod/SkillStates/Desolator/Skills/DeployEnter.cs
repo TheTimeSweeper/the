@@ -52,7 +52,6 @@ namespace ModdedEntityStates.Desolator {
             } else {
                 aimRequest.Dispose();
 
-                Helpers.LogWarning("unset DeployEnter onexit !_complete");
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
                 PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);

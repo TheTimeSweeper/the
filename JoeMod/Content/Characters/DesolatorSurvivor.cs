@@ -75,6 +75,16 @@ namespace Modules.Survivors {
 
         public static string funTokenString;
 
+        private BodyIndex? _lazyBodyIndex;
+        public BodyIndex bodyIndex {
+            get {
+                if(_lazyBodyIndex == null) {
+                    _lazyBodyIndex = bodyPrefab.GetComponent<CharacterBody>().bodyIndex;
+                }
+                return _lazyBodyIndex.Value;
+            }
+        }
+
         public override void Initialize() {
             instance = this;
 
@@ -88,7 +98,7 @@ namespace Modules.Survivors {
             bodyPrefab.AddComponent<TeslaZapBarrierController>();
             bodyPrefab.AddComponent<DesolatorAuraHolder>();
             bodyPrefab.AddComponent<DesolatorWeaponComponent>();
-
+            
             bodyPrefab.GetComponent<Interactor>().maxInteractionDistance = 5f;
 
             bodyPrefab.GetComponent<CharacterBody>().spreadBloomCurve = AnimationCurve.EaseInOut(0, 0, 0.5f, 1);
@@ -354,6 +364,7 @@ namespace Modules.Survivors {
             });
 
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterDeploySkillDef, "DesolatorBody", SkillSlot.Special, 0);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterDeploySkillDef, "DesolatorBody", cancelDeploySkillDef);
 
             SkillDef scepterIrradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower_Scepter",

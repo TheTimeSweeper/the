@@ -151,16 +151,35 @@ namespace ModdedEntityStates.TeslaTrooper {
     }
 
     public class Rest : BaseEmote {
+        Animator modelAnimator;
+
         public override void OnEnter() {
             this.animString = "Sit";
             this.duration = 0;
             base.OnEnter();
-            PlayAnimation("RadCannonSpin", "CannonSpin");
+            //todo not this lol
+            if (characterBody.bodyIndex == Modules.Survivors.DesolatorSurvivor.instance.bodyIndex) {
+                PlayAnimation("RadCannonSpin", "CannonSpin");
+                modelAnimator = GetModelAnimator();
+            }
+        }
+
+        public override void Update() {
+            base.Update();
+            if (characterBody.bodyIndex == Modules.Survivors.DesolatorSurvivor.instance.bodyIndex) {
+                modelAnimator.SetFloat("CannonSpin", modelAnimator.GetFloat("CannonSpinCurve"));
+            }
         }
 
         public override void OnExit() {
             base.OnExit();
-            PlayAnimation("RadCannonSpin", "DesolatorIdlePose");
+            if (characterBody.bodyIndex == Modules.Survivors.DesolatorSurvivor.instance.bodyIndex) {
+                PlayAnimation("RadCannonSpin", "DesolatorIdlePose");
+            }
         }
+    }
+
+    public class DesolatorRest : Rest {
+
     }
 }

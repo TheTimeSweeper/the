@@ -19,7 +19,6 @@ namespace ModdedEntityStates.Desolator {
             base.outer.SetNextStateToMain();
             
             if (skillLocator.special.skillDef == DesolatorSurvivor.cancelDeploySkillDef) {
-                Helpers.LogWarning("unset DeployCancel onenter skilldef was is");
                 skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
             }
         }
