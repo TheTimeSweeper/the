@@ -4,7 +4,6 @@ using RA2Mod.General;
 using RA2Mod.Survivors.Chrono;
 using RA2Mod.Survivors.Conscript;
 using RA2Mod.Survivors.GI;
-using RA2Mod.Survivors.Tesla;
 //using RA2Mod.Survivors.Tesla;
 //using RA2Mod.Minions.TeslaTower;
 using System.Security;
@@ -64,8 +63,8 @@ namespace RA2Mod
             Modules.Language.Init();
 
             new ChronoSurvivor().Initialize();
-            //new GISurvivor().Initialize();
-            new TeslaTrooperSurvivor().Initialize();
+            new GISurvivor().Initialize();
+            //new TeslaTrooperSurvivor().Initialize();
             new ConscriptSurvivor().Initialize();
             new Modules.ContentPacks().Initialize();
 
