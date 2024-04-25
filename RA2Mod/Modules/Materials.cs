@@ -58,6 +58,13 @@ namespace RA2Mod.Modules
                 return tempMat;
             }
 
+            string name = tempMat.shader.name.ToLowerInvariant();
+            if (!name.StartsWith("standard") && !name.StartsWith("autodesk"))
+            {
+                Log.Debug($"{tempMat.name} is not unity standard shader. aborting material conversion");
+                return tempMat;
+            }
+
             float? bumpScale = null;
             Color? emissionColor = null;
 

@@ -1,0 +1,15 @@
+﻿{
+    strings:
+    {
+    "HABIBI_MC_SKIN_NAME" : "Minecraft",
+    "HABIBI_RECOLOR_RED_NAME" : "Червоний",
+    "HABIBI_RECOLOR_BLUE_NAME" : "Синій",
+    "HABIBI_RECOLOR_GREEN_NAME" : "Зелений",
+    "HABIBI_RECOLOR_YELLOW_NAME" : "Жовтий",
+    "HABIBI_RECOLOR_ORANGE_NAME" : "Помаранчевий"
+    "HABIBI_RECOLOR_CYAN_NAME" : "Блакитний",
+    "HABIBI_RECOLOR_PURPLE_NAME" : "Фіолетовий",
+    "HABIBI_RECOLOR_PINK_NAME" : "Рожевий",
+    "HABIBI_RECOLOR_BLACK_NAME" : "Чорний",
+    }
+}

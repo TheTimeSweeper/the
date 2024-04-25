@@ -112,6 +112,7 @@ namespace RA2Mod.Survivors.Tesla
             TeslaAssets.OnCharacterInitialized(assetBundle);
             TeslaStates.Init();
             TeslaTokens.Init();
+            Modules.Language.PrintOutput("tesla.txt");
             
             TeslaDamageTypes.Init();
             TeslaBuffs.Init(assetBundle);
@@ -234,7 +235,7 @@ namespace RA2Mod.Survivors.Tesla
                                                                               "Weapon",
                                                                               false));
 
-            primarySkillDefZap.keywordTokens = new string[] { "KEYWORD_CHARGED" };
+            primarySkillDefZap.keywordTokens = new string[] { TESLA_PREFIX + "KEYWORD_CHARGED" };
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
 
@@ -485,7 +486,7 @@ namespace RA2Mod.Survivors.Tesla
             return Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = name,
-                skillNameToken = $"{TESLA_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
+                skillNameToken = $"{RA2Plugin.DEVELOPER_PREFIX}_RECOLOR_{name.ToUpper()}_NAME",
                 skillDescriptionToken = "",
                 skillIcon = Modules.Skins.CreateRecolorIcon(color1),
             });

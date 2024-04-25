@@ -18,6 +18,8 @@ namespace RA2Mod.General
         public static ConfigEntry<bool> VoiceOnDeath;
         public static ConfigEntry<bool> RA2Icon;
 
+        public static ConfigEntry<bool> TeslaEnabled;
+        public static ConfigEntry<bool> DesolatorEnabled;
         public static ConfigEntry<bool> ChronoEnabled;
         public static ConfigEntry<bool> GIEnabled;
         public static ConfigEntry<bool> ConscriptEnabled;
@@ -77,7 +79,9 @@ namespace RA2Mod.General
 
             string sectionSurvivors = "0-1. Survivors";
 
-            //ChronoEnabled = Config.CharacterEnableConfig(survivorSection, "Chrono Legionnaire");
+            TeslaEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Tesla Trooper");
+            DesolatorEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Desolator");
+            ChronoEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Chrono Legionnaire");
             GIEnabled = Config.CharacterEnableConfig(sectionSurvivors, "GI", "BETA", true);
             ConscriptEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Conscript", "BETA", true);
 

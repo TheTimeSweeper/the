@@ -1,0 +1,54 @@
+{
+    strings:
+    {
+        "HABIBI_DESOLATOR_BODY_NAME" : "Спустошувач",
+        "HABIBI_DESOLATOR_BODY_DESCRIPTION" : "Спустошувач - це ходяча електростанція радіації та зони ураження/<color=#CCD3E0>\n\n< ! > Рад-гармата накладає два стеки радіації, допомагаючи іншим здібностям наносити більше шкоди.\n\n< ! > Випалена земля просто наносить велику шкоду, особливо по ворогу з великою кількістю стеків радіації.\n\n< ! > Використовуйте швидкість пересування від Реактора, щоб вирватися з оточення, але також ви можете використовувати його властивості ослаблення, щоб допомогти завдати додаткової шкоди.\n\n< ! > Розповсюдження пустки робить вас вразливими для атак, але ви отримуєте винагороду за те, що залишаєтесь на місці довше, щоб збільшити шкоду та радіацію.\n\n",
+        "HABIBI_DESOLATOR_BODY_SUBTITLE" : "Ось і сонце сходить",
+    
+        "HABIBI_DESOLATOR_BODY_LORE" : "<i>У співпраці з [ВІДРЕДАГОВАНО], Міністерство інформації презентує...</i>\n<i>\"СПУСТОШУВАЧ: ГЕРОЙ РЕВОЛЮЦІЇ ПРОТИ ТИРАНІЇ!\"</i>\n\nПлівка розбризкується, її вік видно, як іржу на металі, але вона все одно крутиться на стрічці. Вона відтворює обшарпаний бункер, в якому вибухові двері заварені наглухо і заставлені до краю всіма доступними предметами в кімнаті: книгами, стільцями, ліжком. Самотньо сидить нервовий чоловік, дивиться.\n\n<i>СПУСТОШУВАЧ, колись бідний невинний хлопчик з нетрів, який виріс, не знаючи нічого, окрім НЕНАВИСТІ від тиранічної влади! Шукав спосіб звільнити себе і своїх товаришів від варварів!\nВін сам організував нашу СЛАВНУ РЕВОЛЮЦІЮ! Боровся пліч-о-пліч з бійцями на передовій, щоб жодна битва не була програна!\nАле врешті-решт, він був ТЯЖКО ПОРАНЕНИЙ і за допомогою сили експериментальних технологій, вкрадених у наших ВИРОБНИКІВ, він був ВІДНОВЛЕНИЙ на того героя, яким ми його знаємо сьогодні!</i>\n\nБункер здригається, а його єдине освітлення гойдається туди-сюди у відповідь. Його минуле наздогнало його, чия робота буде переслідувати його.\nНіхто не знає правди про його вчинки, його робота полягала в тому, щоб приховати їх. Але така робота вимагала такої душевної стійкості, щоб витримати перефарбування фактів.\nЗа межами бункера можна було почути крики, але вони тонули у звуках, схожих на мул.\n\n<i>СПУСТОШУВАЧ повернувся на фронт! Рятуючи всіх своїх співвітчизників-</i>\n\"Вони були замордовані.\"\n<i>щоб вони не несли такого ж тягаря, як і він!-</i>\n\"Ви принесли нашим братам по зброї не менше страждань, ніж ворогу.\"\n<i>РЕВОЛЮЦІЯ ПУСТЕЛЬНИКА І ЙОГО ТОВАРИША ВРЯТУВАЛА НАШУ ПЛАНЕТУ, НА ЯКІЙ ВІН ПОБУДУВАВ СУСПІЛЬСТВО, ЯКЕ МИ МАЄМО СЬОГОДНІ!</i>\n\"Все, що ви залишили - це червону річку трупів за справу, в яку ви не вірили, а рятівник революції мав ідеальне виправдання.\"\n\nАле не встиг він продовжити перегляд стрічки, як несамовитий чоловік відчув, як по його шкірі поповзли мурашки, а піт виступив на обличчі. Він був тут.\nПерш ніж встигає обробити чергову думку, двері світяться переливчастим зеленим кольором і починають танути. Болти, які тримали двері, що витримали ядерну атаку, розтанули, як масло від розпеченого ножа. Залишки ліквідованої барикади розкидані по підлозі, шматки металу і меблів, що палають, злиті в радіоактивний суп. Це він, це-\n\n<i>СПУСТОШУВАЧ!</i>\n\nПлівка урочисто дзвенить; перед тим, як розбризкати те, що залишилося від платівки. Зрештою розчиняється, як і двері перед нею.\nПерш ніж чоловік встиг обмінятися словами, плоть, що танула, почала розколюватися і сповзати з його тіла, подібно до м'яса, що готувалося на повільному вогні. Його очі затуманилися, він востаннє подивився на радіоактивну присутність і промовив останні слова, які він коли-небудь почує.\n\n\"Тихіше, кінець близький.\"\n\nМозок хлюпає, м'язи стікають, оголюючи скелет під собою, бо навіть атомарна структура кісток почала розріджуватися. Незабаром і сама кімната стала нестійкою, останнім, що залишилося, були важкі кроки в сталевих чоботях і важке дихання. Його дихання було єдиним, що залишалося в ньому людського.",
+        
+        "HABIBI_DESOLATOR_BODY_OUTRO_FLAVOR" : "...і він пішов, залишивши по собі оазис смертей.",
+        "HABIBI_DESOLATOR_BODY_OUTRO_FAILURE" : "...і він був стертий, а ось і сусіди.",
+        
+        "HABIBI_DESOLATOR_BODY_MASTERY_SKIN_NAME" : "Осквернення",
+        "HABIBI_DESOLATOR_BODY_NOD_SKIN_NAME" : "Братство",
+        "HABIBI_DESOLATOR_BODY_MC_SKIN_NAME" : "Minecraft",
+        "HABIBI_DESOLATOR_BODY_PASSIVE_NAME" : "Радіоактивний",
+        
+        "HABIBI_DESOLATOR_BODY_PASSIVE_DESCRIPTION" : "Атаки Спустошувача завдають більше шкоди по <style=cIsHealing>опроміненим</style> цілям: <style=cIsDamage>+0.04x</style> за кожен стек <style=cIsHealing>Радіації</style>.",
+        "HABIBI_DESOLATOR_BODY_PRIMARY_BEAM_NAME" : "Рад-гармата",
+        "HABIBI_DESOLATOR_BODY_PRIMARY_BEAM_DESCRIPTION" : "<style=cIsHealing>Опромінює</style>. Стріляє в ворогів променем радіації, що завдає <style=cIsDamage>100% шкоди</style>.",
+        "KEYWORD_RADIATION_PRIMARY" : "<style=cKeywordName>Опромінення</style><style=cSub>Накладає 2 стеки <style=cIsHealing>Радіації</style>, кожен завдає <style=cIsDamage>9.8% шкоди за секунду</style>, тримаючись <style=cIsUtility>8 секунди</style>.</style>",
+        "HABIBI_DESOLATOR_BODY_SECONDARY_BIGBEAM_NAME" : "Випалена земля",
+        "HABIBI_DESOLATOR_BODY_SECONDARY_BIGBEAM_DESCRIPTION" : "<style=cIsHealing>Опромінює</style>. Підриває територію, завдаючи <style=cIsDamage>320% шкоди</style>, та покриваючи зону радіацією на <style=cIsUtility>2 секунди</style>. Вороги при контакті отримують <style=cIsDamage>20% шкоди двічі на секунду</style>",
+        "KEYWORD_RADIATION_SECONDARY" : "<style=cKeywordName>Опромінення</style><style=cSub>Вибуху: Завдає <style=cIsDamage>14% шкоди за секунду</style>, тримаючись <style=cIsUtility>8 секунд</style>.\nЗони опромінення: Завдає <style=cIsDamage>7% шкоди за секунду</style>, тримаючись <style=cIsUtility>8 секунд</style>.</style>",
+        "HABIBI_DESOLATOR_BODY_UTILITY_AURA_NAME" : "Реактор",
+        "HABIBI_DESOLATOR_BODY_UTILITY_AURA_DESCRIPTION" : "На <style=cIsUtility>4 секунди</style>, <style=cIsDamage>Послаблює</style> всіх ворогів поблизу та дає бонус до <style=cIsUtility>швидкості пересування</style> й <style=cIsUtility>броні</style>",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_DEPLOY_NAME" : "Розповсюдження пустки",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_DEPLOY_DESCRIPTION" : "<style=cIsHealing>Опромінює</style>. Розгортає вашу рад-гармату на землі. Дає <style=cIsUtility>бар'єр</style> за кожного ворога поблизу. <style=cIsUtility>Кожні 3 секунди</style>, накачує басейн радіації, що тримається <style=cIsUtility>7 секунд</style>, завдаючи <style=cIsDamage>20% шкоди за секунду</style>.",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_SCEPTER_DEPLOY_NAME" : "Ось і сусіди з'явилися",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_SCEPTER_DEPLOY_DESCRIPTION" : "<style=cIsHealing>Опромінює</style>. Розгортає вашу рад-гармату на землі. Дає <style=cIsUtility>бар'єр</style> за кожного ворога поблизу. <style=cIsUtility>Кожні 3 секунди</style>, накачує басейн радіації, що тримається <style=cIsUtility>7 секунд</style>, завдаючи <style=cIsDamage>20% шкоди за секунду</style>.\n<color=#d299ff>SCEPTER: Подвійна площа. 1.5x Faster ticks per second.</color>",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_DEPLOY_CANCEL_NAME" : "Відмінити",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_DEPLOY_CANCEL_DESCRIPTION" : "Припинити розповсюджувати пустку",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_IRRADIATOR_NAME" : "Опромінювачі",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_IRRADIATOR_DESCRIPTION" : "<style=cIsHealing>Опромінює</style>. Кидає <style=cIsUtility>до 2</style> опромінювачів, що покривають велику область радіацією на <style=cIsUtility>11 секунд</style>, завдаючи <style=cIsDamage>15% шкоди за секунду</style>.",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_SCEPTER_IRRADIATOR_NAME" : "Нестабільні опромінювачі",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION" : "<style=cIsHealing>Опромінює</style>. Кидає <style=cIsUtility>до 2</style> опромінювачів, що покривають велику область радіацією на <style=cIsUtility>11 секунд</style>, завдаючи <style=cIsDamage>15% шкоди за секунду</style>.\n<color=#d299ff>SCEPTER: Вибухає наприкінці, завдаючи <style=cIsDamage>1600% шкоди</style>.</color>",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_IRRADIATOR_NAME_FUN" : "Світлові палички",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_IRRADIATOR_DESCRIPTION_FUN" : "<style=cIsHealing>Опромінює</style>. Кидає <style=cIsUtility>до 2</style> світлових паличок, що покривають велику площу радіацією на <style=cIsUtility>11 секунд</style>, завдаючи <style=cIsDamage>15% шкоди за секунду</style>.",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_SCEPTER_IRRADIATOR_NAME_FUN" : "Нестабільні світлові палички",
+        "HABIBI_DESOLATOR_BODY_SPECIAL_SCEPTER_IRRADIATOR_DESCRIPTION_FUN" : "<style=cIsHealing>Опромінює</style>. Кидає <style=cIsUtility>до 2</style> світлових паличок, що покривають велику площу радіацією на <style=cIsUtility>11 секунд</style>, завдаючи <style=cIsDamage>15% шкоди за секунду</style>.\n<color=#d299ff>SCEPTER: Вибухає наприкінці, завдаючи <style=cIsDamage>1600% шкоди</style>.</color>",
+    
+        "KEYWORD_RADIATION_SPECIAL" : "<style=cKeywordName>Опромінення</style><style=cSub>Кожен тік завдає <style=cIsDamage>9.8% шкоди за секунду</style>, триває <style=cIsUtility>8 секунд</style>.</style>",
+    
+        "HABIBI_DESOLATOR_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_NAME" : "Спустошувач: Майстерність",
+        "HABIBI_DESOLATOR_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_DESC" : "За Спустошувача, пройдіть гру або зітріть себе на складності Мусон.",
+        "HABIBI_DESOLATOR_BODY_MASTERYUNLOCKABLE_UNLOCKABLE_NAME" : "Спустошувач: Майстерність",
+        "HABIBI_DESOLATOR_BODY_GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_NAME" : "Спустошувач: Велична майстерність",
+        "HABIBI_DESOLATOR_BODY_GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_DESC" : "За Спустошувача, пройдіть гру або зітріть себе на складності Тайфун або Затемненні.\n<color=#8888>(Враховується складність Тайфун або вище)</color>",
+        "HABIBI_DESOLATOR_BODY_GRANDMASTERYUNLOCKABLE_UNLOCKABLE_NAME" : "Спустошувач: Велична майстерність",
+        "HABIBI_DESOLATOR_BODY_CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME" : "Опромінювачі",
+        "HABIBI_DESOLATOR_BODY_CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC" : "Знайти та активувати 3 опромінювачі на етапі 3.",
+        "HABIBI_DESOLATOR_BODY_CHARACTERUNLOCKABLE_UNLOCKABLE_NAME" : "Опромінювачі",
+    }
+}

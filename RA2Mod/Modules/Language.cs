@@ -4,13 +4,22 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace RA2Mod.Modules {
+
+    internal static class LanguageAPI
+    {
+        public static void Add(string token, string text)
+        {
+            Modules.Language.Add(token, text);
+        }
+    }
+
     internal static class Language
     {
         public static string TokensOutput = "";
 
         public static bool usingLanguageFolder = false;
 
-        public static bool printingEnabled = false;
+        public static bool printingEnabled = true;
 
         public static void Init() {
             if (usingLanguageFolder) {
@@ -27,7 +36,7 @@ namespace RA2Mod.Modules {
 
         public static void Add(string token, string text) {
             if (!usingLanguageFolder) {
-                LanguageAPI.Add(token, text);
+                R2API.LanguageAPI.Add(token, text);
             }
 
             if (!printingEnabled) return;

@@ -37,13 +37,13 @@ namespace RA2Mod.Survivors.Tesla
                 Modules.Tokens.GetAchievementNameToken(TeslaShieldZapKillAchievement.identifier),
                 TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texTeslaSkillUtilityAlt"));
 
-            if (GeneralConfig.Cursed.Value)
-            {
+            //if (false)//GeneralConfig.Cursed.Value)
+            //{
                 cursedPrimaryUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 TeslaAllyZapAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(TeslaAllyZapAchievement.identifier),
                 TeslaTrooperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texTeslaSkillSecondaryAlt")); 
-            }
+            //}
         }
     }
 }

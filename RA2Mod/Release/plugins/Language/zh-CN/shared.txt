@@ -1,0 +1,15 @@
+﻿{
+    strings:
+    {
+    "HABIBI_MC_SKIN_NAME" : "我的世界",
+    "HABIBI_RECOLOR_RED_NAME" : "红色",
+    "HABIBI_RECOLOR_BLUE_NAME" : "蓝色",
+    "HABIBI_RECOLOR_GREEN_NAME" : "绿色",
+    "HABIBI_RECOLOR_YELLOW_NAME" : "黄色",
+    "HABIBI_RECOLOR_ORANGE_NAME" : "橙猫猫",
+    "HABIBI_RECOLOR_CYAN_NAME" : "蛋蛋色",
+    "HABIBI_RECOLOR_PURPLE_NAME" : "紫色",
+    "HABIBI_RECOLOR_PINK_NAME" : "粉色",
+    "HABIBI_RECOLOR_BLACK_NAME" : "黑色",
+    }
+}

@@ -61,7 +61,6 @@ namespace RA2Mod.Survivors.GI
             if (!General.GeneralConfig.GIEnabled.Value)
                 return;
 
-            Log.WarningDebug("I GROOM MINORS");
             base.Initialize();
         }
 
@@ -70,13 +69,11 @@ namespace RA2Mod.Survivors.GI
             //need the character unlockable before you initialize the survivordef
             //GIUnlockables.Init();
 
-            Log.WarningDebug("THIS IS WHERE MY SERVER GOT DOXXED ON 4CHAN");
             base.InitializeCharacter();
         }
 
         public override void OnCharacterInitialized()
         {
-            Log.WarningDebug("WE DON'T HAVE AGE VERIFICATION CAUSE WE WANT MINORS HERE");
             Config.ConfigureBody(prefabCharacterBody, GIConfig.SectionBody);
 
             GIConfig.Init();

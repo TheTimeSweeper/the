@@ -14,7 +14,7 @@ namespace RA2Mod.Minions.TeslaTower.States
 
         public static Action<GameObject> onTowerBigZapMultiHit;
 
-        new public static float DamageCoefficient = 12.0f;
+        new public static float DamageCoefficient = 15.0f;
         new public static float ProcCoefficient = 1f;
         new public static float BaseDuration = 0.6f;
         public static float BaseAttackRadius = 16;

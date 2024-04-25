@@ -22,7 +22,7 @@ namespace RA2Mod.Modules.Characters
         public override List<IEnumerator> GetCharacterInitializedCoroutines()
         {
             List<IEnumerator> list = new List<IEnumerator>();
-            list.Add(Prefabs.CreateDisplayPrefabAsync(assetBundle, displayPrefabName, bodyPrefab, (result) =>
+            list.Add(Prefabs.CreateDisplayPrefabAsync(assetBundle, displayPrefabName, characterModelObject, (result) =>
             {
                 displayPrefab = result;
                 InitializeSurvivor();

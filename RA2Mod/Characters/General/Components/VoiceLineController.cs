@@ -89,8 +89,7 @@ namespace RA2Mod.General.Components
         protected virtual void PlayRandomVoiceLineAuthority()
         {
             string sound;
-            Log.Warning(_body != null);
-            Log.Warning(voiceLineContext != null);
+
             if (_body.outOfCombat)
             {
                 if (_body.isSprinting)

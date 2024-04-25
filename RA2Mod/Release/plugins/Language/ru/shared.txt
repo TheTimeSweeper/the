@@ -1,0 +1,15 @@
+﻿{
+    strings:
+    {
+    "HABIBI_MC_SKIN_NAME" : "Майнкрафт",
+    "HABIBI_RECOLOR_RED_NAME" : "Красный",
+    "HABIBI_RECOLOR_BLUE_NAME" : "Синий",
+    "HABIBI_RECOLOR_GREEN_NAME" : "Зеленый",
+    "HABIBI_RECOLOR_YELLOW_NAME" : "Желтый",
+    "HABIBI_RECOLOR_ORANGE_NAME" : "Оранжевый",
+    "HABIBI_RECOLOR_CYAN_NAME" : "Голубой",
+    "HABIBI_RECOLOR_PURPLE_NAME" : "Фиолетовый",
+    "HABIBI_RECOLOR_PINK_NAME" : "Розовый",
+    "HABIBI_RECOLOR_BLACK_NAME" : "Черный",
+    }
+}

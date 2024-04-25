@@ -1,0 +1,15 @@
+{
+    strings:
+    {
+    "HABIBI_MC_SKIN_NAME" : "Minecraft",
+    "HABIBI_RECOLOR_RED_NAME" : "Rouge",
+    "HABIBI_RECOLOR_BLUE_NAME" : "Bleu",
+    "HABIBI_RECOLOR_GREEN_NAME" : "Vert",
+    "HABIBI_RECOLOR_YELLOW_NAME" : "Jaune",
+    "HABIBI_RECOLOR_ORANGE_NAME" : "Orange",
+    "HABIBI_RECOLOR_CYAN_NAME" : "Cyan",
+    "HABIBI_RECOLOR_PURPLE_NAME" : "Violet",
+    "HABIBI_RECOLOR_PINK_NAME" : "Rose",
+    "HABIBI_RECOLOR_BLACK_NAME" : "Noir",
+    }
+}

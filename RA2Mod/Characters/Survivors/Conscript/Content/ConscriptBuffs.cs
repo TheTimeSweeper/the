@@ -20,7 +20,7 @@ namespace RA2Mod.Survivors.Conscript
             magazineBuff = Modules.Content.CreateAndAddBuff("ConscriptMagazineBuff",
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
                 Color.green,
-                true,
+                false,
                 false);
         }
     }

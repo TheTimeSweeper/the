@@ -254,10 +254,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   radius: 30
-  interval: 1
+  interval: 0.5
   rangeIndicator: {fileID: 4676398906290184222}
   buffDef: {fileID: 0}
-  buffDuration: 100
+  buffDuration: 0.5
   floorWard: 1
   expires: 1
   invertTeamFilter: 0

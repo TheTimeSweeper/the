@@ -3,7 +3,7 @@ using RA2Mod.Modules.Achievements;
 
 namespace RA2Mod.Survivors.Tesla.Achievements
 {
-    //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
+    [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class TeslaGrandMasteryAchievement : BaseMasteryAchievement
     {
         public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_ID";

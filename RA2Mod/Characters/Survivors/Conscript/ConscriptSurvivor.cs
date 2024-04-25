@@ -203,7 +203,7 @@ namespace RA2Mod.Survivors.Conscript
             secondarySkillDef1.reloadState = new SerializableEntityStateType(typeof(Reload));
             secondarySkillDef1.hasMagazineReloadState = new SerializableEntityStateType(typeof(ReloadFast));
             secondarySkillDef1.reloadInterruptPriority = InterruptPriority.Any;
-            secondarySkillDef1.graceDuration = 0.5f;
+            secondarySkillDef1.graceDuration = 5f;
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
         }

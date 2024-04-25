@@ -20,7 +20,7 @@ namespace RA2Mod.Modules
         // cache this just to give our ragdolls the same physic material as vanilla stuff
         private static PhysicMaterial ragdollMaterial;
 
-        public static IEnumerator CreateDisplayPrefabAsync(AssetBundle assetBundle, string displayPrefabName, GameObject bodyPrefab, Action<GameObject> OnComplete)
+        public static IEnumerator CreateDisplayPrefabAsync(AssetBundle assetBundle, string displayPrefabName, GameObject characterModelObject, Action<GameObject> OnComplete)
         {
             return assetBundle.LoadAssetCoroutine<GameObject>(displayPrefabName, (display) =>
             {
@@ -28,6 +28,7 @@ namespace RA2Mod.Modules
                 {
                     Log.Error($"could not load display prefab {displayPrefabName}. Make sure this prefab exists in assetbundle {assetBundle.name}");
                     OnComplete(null);
+                    return;
                 }
 
                 CharacterModel characterModel = display.GetComponent<CharacterModel>();
@@ -35,7 +36,7 @@ namespace RA2Mod.Modules
                 {
                     characterModel = display.AddComponent<CharacterModel>();
                 }
-                characterModel.baseRendererInfos = bodyPrefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
+                characterModel.baseRendererInfos = characterModelObject.GetComponent<CharacterModel>().baseRendererInfos;
 
                 Modules.Assets.ConvertAllRenderersToHopooShader(display);
 

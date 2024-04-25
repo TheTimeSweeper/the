@@ -29,12 +29,12 @@ namespace RA2Mod.Survivors.Tesla
             //    SectionSkills,
             //    "M1_Zap_TargetingReticleCenter",
             //    false,
-            //    "Keeps the targeting reticle at the center of the body.\nDoes not change gameplay. Damage is still based on the part of the body that is closest to the reticle",
+            //    "Keeps the targeting reticle at the center of the body.\nDoes not change gameplay. Damage is still based on the part of the body that is closest to the crosshair",
             //    false);
             M1_Zap_ConductiveAllyBoost = Config.BindAndOptions(
                 SectionSkills,
                 "M1_Zap_ConductiveAllyBoost",
-                1.3f,
+                1.1f,
                 0,
                 20,
                 "Damage Multiplier added when you zap an ally");
@@ -60,6 +60,8 @@ namespace RA2Mod.Survivors.Tesla
                 SectionSkills,
                 "M4_Tower Lysate Cell Additional Tower Limit",
                 1,
+                -1,
+                20,
                 "With additional towers, lysate cell is way too strong for a green item. Default is 1, but for proper balance I would suggest 0\n-1 for unlimited. have fun");
 
             M4_Tower_ItemDisplays = Config.BindAndOptions(

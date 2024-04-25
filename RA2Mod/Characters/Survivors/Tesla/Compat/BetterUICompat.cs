@@ -6,45 +6,43 @@ namespace RA2Mod.Survivors.Tesla.Compat
 {
     public class BetterUICompat
     {
+        private static string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
+
         public static void init()
         {
             //tesla trooper
-            AddSkill("Tesla_Primary_Zap", "TESLA_BOLTS", Zap.ProcCoefficient);
-            AddSkill("Tesla_Secondary_BigZap", "TESLA_BLAST", BigZap.ProcCoefficient);
-            AddSkill("Tesla_Utility_ShieldZap", "TESLA_BLAST", 1);
+            AddSkill("Tesla_Primary_Zap", prefix + "PROC_BOLTS", Zap.ProcCoefficient);
+            AddSkill("Tesla_Secondary_BigZap", prefix + "PROC_BLAST", BigZap.ProcCoefficient);
+            AddSkill("Tesla_Utility_ShieldZap", prefix + "PROC_BLAST", 1);
 
             //tesla trooper alts
             AddSkill("Tesla_Primary_Punch", new List<ProcCoefficientInfo>() {
                 new ProcCoefficientInfo {
-                    name = "TESLA_FIST",
+                    name = prefix + "PROC_FIST",
                     procCoefficient = ZapPunch.ProcCoefficient
                 },
                 new ProcCoefficientInfo {
-                    name = "TESLA_BOLTS",
+                    name = prefix + "PROC_BOLTS",
                     procCoefficient = ZapPunch.OrbProcCoefficient
-                },
-                new ProcCoefficientInfo {
-                    name = "TESLA_PROJECTILES",
-                    procCoefficient = 1
                 }
             });
 
             AddSkill("Tesla_Secondary_BigZapPunch", new List<ProcCoefficientInfo>() {
                 new ProcCoefficientInfo {
-                    name = "TESLA_FIST",
+                    name = prefix + "PROC_FIST",
                     procCoefficient = ZapPunch.ProcCoefficient
                 },
                 new ProcCoefficientInfo {
-                    name = "TESLA_BOLTS",
+                    name = prefix + "PROC_BOLTS",
                     procCoefficient = ZapPunch.OrbProcCoefficient
                 },
                 new ProcCoefficientInfo {
-                    name = "TESLA_BEAM",
+                    name = prefix + "PROC_BEAM",
                     procCoefficient = 1
                 }
             });
 
-            AddSkill("Tesla_Utility_BlinkZap", "TESLA_BOLT", 1);
+            AddSkill("Tesla_Utility_BlinkZap", prefix + "PROC_BOLT", 1);
         }
 
     }
