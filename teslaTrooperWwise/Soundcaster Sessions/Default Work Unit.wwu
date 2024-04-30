@@ -6,28 +6,24 @@
 				<SoundcasterSession Name="test blast" ID="{D5F6EF97-16EA-4B2C-92A6-0509C7A2E23C}">
 					<ModuleList>
 						<Module>
-							<ObjectRef Name="Play_ChronosphereHumStart" ID="{F4D35CE7-1568-4ECB-93AA-7F16DB5C07AC}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<ObjectRef Name="Play_Chronosphere_StartLoop" ID="{F4D35CE7-1568-4ECB-93AA-7F16DB5C07AC}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_ChronosphereSelectStart" ID="{B4892347-FFDE-46ED-8BE0-DFB4A9952A9D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<ObjectRef Name="Play_ChronosphereAlt_Start" ID="{B4892347-FFDE-46ED-8BE0-DFB4A9952A9D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_IvanBombStart" ID="{D7B78E8A-2DC7-41B8-B3C9-6C2288040495}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<ObjectRef Name="Play_IvanBomb_Start" ID="{D7B78E8A-2DC7-41B8-B3C9-6C2288040495}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
 							<Position X="0" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_ChronosphereHumEnd" ID="{78A17D02-A234-457E-89E6-02D7F2FC296D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<ObjectRef Name="Play_Chronosphere_Move" ID="{78A17D02-A234-457E-89E6-02D7F2FC296D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_ChronosphereSelectEnd" ID="{95C5EAC3-D3AA-4E9E-8A3E-E894DC2B224D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<ObjectRef Name="Play_ChronosphereAlt_End" ID="{95C5EAC3-D3AA-4E9E-8A3E-E894DC2B224D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
 							<Position X="1" Y="1"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="Stop_IvanBombLoop" ID="{75120A3A-6223-4833-A107-671B56071AC2}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
-							<Position X="1" Y="2"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="Play_ChronoAttack" ID="{5A2F8C9F-F30C-4CA3-8947-0D1FF0EB4E64}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>

@@ -36,15 +36,15 @@ namespace RA2Mod.Survivors.Tesla
         public override string modelPrefabName => "mdlTeslaTrooper";
         public override string displayPrefabName => "TeslaTrooperDisplay";
 
-        public const string TESLA_PREFIX = RA2Plugin.DEVELOPER_PREFIX + "_TESLA_BODY_";
+        public const string TOKEN_PREFIX = RA2Plugin.DEVELOPER_PREFIX + "_TESLA_BODY_";
 
-        public override string survivorTokenPrefix => TESLA_PREFIX;
+        public override string survivorTokenPrefix => TOKEN_PREFIX;
 
         public override BodyInfo bodyInfo => new BodyInfo
         {
             bodyName = bodyName,
-            bodyNameToken = TESLA_PREFIX + "NAME",
-            subtitleNameToken = TESLA_PREFIX + "SUBTITLE",
+            bodyNameToken = TOKEN_PREFIX + "NAME",
+            subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
             bodyColor = Color.cyan,
             sortPosition = 69f,
 
@@ -107,14 +107,15 @@ namespace RA2Mod.Survivors.Tesla
 
             Config.ConfigureBody(prefabCharacterBody, TeslaConfig.SectionBody);
 
-            TeslaConfig.Init();
             //some assets are changed based on config
+            TeslaConfig.Init();
+            TeslaDamageTypes.Init();
             TeslaAssets.OnCharacterInitialized(assetBundle);
             TeslaStates.Init();
             TeslaTokens.Init();
+            TeslaColors.Init();
             Modules.Language.PrintOutput("tesla.txt");
             
-            TeslaDamageTypes.Init();
             TeslaBuffs.Init(assetBundle);
             TeslaCompat.Init();
             TeslaDeployables.Init();
@@ -140,7 +141,7 @@ namespace RA2Mod.Survivors.Tesla
 
             VoiceLineInLobby voiceLineController = displayPrefab.AddComponent<VoiceLineInLobby>();
             //todo teslamove
-            voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
+            voiceLineController.voiceLineContext = new VoiceLineContext("Tesla", 5, 6, 4);
 
             displayPrefab.AddComponent<MenuSoundComponent>().sound = "Play_Tesla_lobby";
 
@@ -155,7 +156,7 @@ namespace RA2Mod.Survivors.Tesla
         {
             VoiceLineController voiceLineController = bodyPrefab.AddComponent<VoiceLineController>();
             //todo teslamove
-            voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
+            voiceLineController.voiceLineContext = new VoiceLineContext("Tesla", 5, 6, 4);
 
             bodyPrefab.AddComponent<TeslaTrackerComponent>();
             bodyPrefab.AddComponent<TeslaTrackerComponentZap>();
@@ -178,7 +179,6 @@ namespace RA2Mod.Survivors.Tesla
 
             ChildLocator childLocator = characterModelObject.GetComponent<ChildLocator>();
 
-            //todo teslamove chainlightningmaterial in the before init loading
             childLocator.FindChild("LightningParticles").GetComponent<ParticleSystemRenderer>().trailMaterial = TeslaAssets.ChainLightningMaterial;
             childLocator.FindChild("LightningParticles2").GetComponent<ParticleSystemRenderer>().trailMaterial = TeslaAssets.ChainLightningMaterial;
             
@@ -228,14 +228,14 @@ namespace RA2Mod.Survivors.Tesla
         {
             TeslaTrackingSkillDef primarySkillDefZap =           //this constructor creates a skilldef for a typical primary
                 Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
-                                                                              TESLA_PREFIX + "PRIMARY_ZAP_NAME",
-                                                                              TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
+                                                                              TOKEN_PREFIX + "PRIMARY_ZAP_NAME",
+                                                                              TOKEN_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
                                                                               assetBundle.LoadAsset<Sprite>("texTeslaSkillPrimary"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                               "Weapon",
                                                                               false));
 
-            primarySkillDefZap.keywordTokens = new string[] { TESLA_PREFIX + "KEYWORD_CHARGED" };
+            primarySkillDefZap.keywordTokens = new string[] { TOKEN_PREFIX + "KEYWORD_CHARGED" };
 
             Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefZap);
 
@@ -243,8 +243,8 @@ namespace RA2Mod.Survivors.Tesla
             {
                 SkillDef primarySkillDefPunch =
                     Skills.CreateSkillDef(new SkillDefInfo("Tesla_Primary_Punch",
-                                                           TESLA_PREFIX + "PRIMARY_PUNCH_NAME",
-                                                           TESLA_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
+                                                           TOKEN_PREFIX + "PRIMARY_PUNCH_NAME",
+                                                           TOKEN_PREFIX + "PRIMARY_PUNCH_DESCRIPTION",
                                                            assetBundle.LoadAsset<Sprite>("texTeslaSkillSecondaryAlt"),
                                                            new EntityStates.SerializableEntityStateType(typeof(ZapPunchWithDeflect)),
                                                            "Weapon",
@@ -259,8 +259,8 @@ namespace RA2Mod.Survivors.Tesla
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Secondary_BigZap",
-                skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAP_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SECONDARY_BIGZAP_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
@@ -284,8 +284,8 @@ namespace RA2Mod.Survivors.Tesla
             SkillDef bigZapPunchSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Secondary_BigZapPunch",
-                skillNameToken = TESLA_PREFIX + "SECONDARY_BIGZAPPUNCH_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "SECONDARY_BIGZAPPUNCH_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SECONDARY_BIGZAPPUNCH_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_BIGZAPPUNCH_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillSecondaryAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ChargeZapPunch)),
                 activationStateMachineName = "Weapon",
@@ -315,8 +315,8 @@ namespace RA2Mod.Survivors.Tesla
             SkillDef shieldSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Utility_ShieldZap",
-                skillNameToken = TESLA_PREFIX + "UTILITY_BARRIER_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "UTILITY_BARRIER_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "UTILITY_BARRIER_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillUtility"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ShieldZapCollectDamage)),
                 activationStateMachineName = "Weapon2",
@@ -339,8 +339,8 @@ namespace RA2Mod.Survivors.Tesla
             TeslaTrackingResettingSkillDef blinkZapSkillDef = Modules.Skills.CreateSkillDef<TeslaTrackingResettingSkillDef>(new SkillDefInfo
             {
                 skillName = "Tesla_Utility_BlinkZap",
-                skillNameToken = TESLA_PREFIX + "UTILITY_BLINK_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "UTILITY_BLINK_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "UTILITY_BLINK_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "UTILITY_BLINK_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillUtilityAlt"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(BlinkZap)),
                 activationStateMachineName = "Body",
@@ -372,8 +372,8 @@ namespace RA2Mod.Survivors.Tesla
             SkillDef teslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Special_Tower",
-                skillNameToken = TESLA_PREFIX + "SPECIAL_TOWER_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SPECIAL_TOWER_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_TOWER_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTower)),
                 activationStateMachineName = "Weapon",
@@ -402,8 +402,8 @@ namespace RA2Mod.Survivors.Tesla
             SkillDef scepterTeslaCoilSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Special_Scepter_Tower",
-                skillNameToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_NAME",
-                skillDescriptionToken = TESLA_PREFIX + "SPECIAL_SCEPTER_TOWER_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SPECIAL_SCEPTER_TOWER_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_SCEPTER_TOWER_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillSpecialScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DeployTeslaTowerScepter)),
                 activationStateMachineName = "Weapon",
@@ -437,59 +437,32 @@ namespace RA2Mod.Survivors.Tesla
                 return;
             }
 
-            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_COLOR", TOKEN_PREFIX + "Recolor", true).skillFamily;
+
+            SkinRecolorController recolorController = characterModelObject.GetComponent<SkinRecolorController>();
 
             List<SkillDef> skilldefs = new List<SkillDef> {
-                createRecolorSkillDef("Red"),
-                createRecolorSkillDef("Blue"),
-                createRecolorSkillDef("Green"),
-                createRecolorSkillDef("Yellow"),
-                createRecolorSkillDef("Orange"),
-                createRecolorSkillDef("Cyan"),
-                createRecolorSkillDef("Purple"),
-                createRecolorSkillDef("Pink"),
+                recolorController.createRecolorSkillDef("Red"),
+                recolorController.createRecolorSkillDef("Blue"),
+                recolorController.createRecolorSkillDef("Green"),
+                recolorController.createRecolorSkillDef("Yellow"),
+                recolorController.createRecolorSkillDef("Orange"),
+                recolorController.createRecolorSkillDef("Cyan"),
+                recolorController.createRecolorSkillDef("Purple"),
+                recolorController.createRecolorSkillDef("Pink"),
             };
 
             if (General.GeneralConfig.NewColor.Value)
             {
-                skilldefs.Add(createRecolorSkillDef("Black"));
+                skilldefs.Add(recolorController.createRecolorSkillDef("Black"));
             }
 
             for (int i = 0; i < skilldefs.Count; i++)
             {
-
                 Modules.Skills.AddSkillToFamily(recolorFamily, skilldefs[i], i == 0 ? null : TeslaUnlockables.recolorsUnlockableDef);
 
                 AddCssPreviewSkill(i, recolorFamily, skilldefs[i]);
             }
-        }
-
-        private SkillDef createRecolorSkillDef(string name)
-        {
-
-            Color color1 = Color.white;
-
-            Recolor[] thing = characterModelObject.GetComponent<SkinRecolorController>().Recolors;
-
-            for (int i = 0; i < thing.Length; i++)
-            {
-
-                Recolor recolor = thing[i];
-
-                if (recolor.recolorName == name.ToLowerInvariant())
-                {
-
-                    color1 = recolor.colors[0] * 0.69f;
-                }
-            }
-
-            return Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = name,
-                skillNameToken = $"{RA2Plugin.DEVELOPER_PREFIX}_RECOLOR_{name.ToUpper()}_NAME",
-                skillDescriptionToken = "",
-                skillIcon = Modules.Skins.CreateRecolorIcon(color1),
-            });
         }
         #endregion skills
 
@@ -530,7 +503,7 @@ namespace RA2Mod.Survivors.Tesla
 
             #region MasterySkin
 
-            TeslaSkinDef masterySkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MASTERY_SKIN_NAME",
+            TeslaSkinDef masterySkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TOKEN_PREFIX + "MASTERY_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinMastery"),
                 defaultRendererinfos,
                 characterModelObject,
@@ -566,7 +539,7 @@ namespace RA2Mod.Survivors.Tesla
 
             #region NodSkin
 
-            TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "NOD_SKIN_NAME",
+            TeslaSkinDef nodSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TOKEN_PREFIX + "NOD_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinNod"),
                 defaultRendererinfos,
                 characterModelObject,
@@ -607,7 +580,7 @@ namespace RA2Mod.Survivors.Tesla
 
             if (GeneralConfig.Cursed.Value)
             {
-                TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TESLA_PREFIX + "MC_SKIN_NAME",
+                TeslaSkinDef MCSkin = Modules.Skins.CreateSkinDef<TeslaSkinDef>(TOKEN_PREFIX + "MC_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRendererinfos,
                 characterModelObject);
@@ -669,13 +642,50 @@ namespace RA2Mod.Survivors.Tesla
 
             //On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
-            //On.RoR2.CharacterBody.HandleConstructTurret += CharacterBody_HandleConstructTurret;
 
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
             On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
 
             On.RoR2.BodyCatalog.Init += BodyCatalog_Init;
+
+            //todo teslamove global hooks
+            On.RoR2.SetStateOnHurt.OnTakeDamageServer += SetStateOnHurt_OnTakeDamageServer;
+        }
+
+        private static void SetStateOnHurt_OnTakeDamageServer(On.RoR2.SetStateOnHurt.orig_OnTakeDamageServer orig, SetStateOnHurt self, DamageReport damageReport)
+        {
+            orig(self, damageReport);
+
+            DamageInfo damageInfo = damageReport.damageInfo;
+            HealthComponent victim = damageReport.victim;
+
+            bool flag = damageInfo.procCoefficient >= Mathf.Epsilon;
+
+            if (!victim.isInFrozenState)
+            {
+
+                //if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(StunLong))
+                //{
+                //    self.SetStun(StunLongTime);
+                //    return;
+                //}
+
+                if ((damageInfo.damageType & DamageType.Shock5s) == damageInfo.damageType)
+                {
+                    if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(TeslaDamageTypes.ShockMed))
+                    {
+                        self.SetShock(TeslaDamageTypes.ShockTimeMed);
+                        return;
+                    }
+                    ////how scuffed is this?
+                    //if (flag && self.canBeStunned && damageInfo.HasModdedDamageType(ShockShort))
+                    //{
+                    //    self.SetShock(ShockTimeShort);
+                    //    return;
+                    //}
+                }
+            }
         }
 
         private void BodyCatalog_Init(On.RoR2.BodyCatalog.orig_Init orig)
@@ -691,7 +701,6 @@ namespace RA2Mod.Survivors.Tesla
 
         private void LightningOrb_Begin(On.RoR2.Orbs.LightningOrb.orig_Begin orig, LightningOrb self)
         {
-
             GameObject effect = null;
             switch (self.lightningType)
             {
@@ -703,7 +712,6 @@ namespace RA2Mod.Survivors.Tesla
 
             if (effect != null)
             {
-
                 EffectData effectData = new EffectData
                 {
                     origin = self.origin,
@@ -714,14 +722,12 @@ namespace RA2Mod.Survivors.Tesla
             }
             else
             {
-
                 orig(self);
             }
         }
 
         private void BaseAI_OnBodyDamaged(On.RoR2.CharacterAI.BaseAI.orig_OnBodyDamaged orig, RoR2.CharacterAI.BaseAI self, DamageReport damageReport)
         {
-
             //keep tower from drawing aggro
             GameObject originalAttacker = damageReport.damageInfo.attacker;
             if (damageReport.attackerBodyIndex == BodyCatalog.FindBodyIndex("TeslaTowerBody"))
@@ -729,19 +735,11 @@ namespace RA2Mod.Survivors.Tesla
                 damageReport.damageInfo.attacker = null;
             }
 
-            //no longer needed as ally zap orb is new custom harmless buff orb
-            ////keep allies from retaliating against trooper charging them
-            //bool originalNeverRetaliate = self.neverRetaliateFriendlies;
-            //if (DamageAPI.HasModdedDamageType(damageReport.damageInfo, DamageTypes.conductive)) {
-            //    self.neverRetaliateFriendlies = true;
-            //}
-
             orig(self, damageReport);
 
-            //self.neverRetaliateFriendlies = originalNeverRetaliate;
             damageReport.damageInfo.attacker = originalAttacker;
         }
-
+        
         #region tower hacks
 
         private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot)
@@ -750,7 +748,6 @@ namespace RA2Mod.Survivors.Tesla
             if (masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) ||
                 masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab))
             {
-                //Helpers.LogWarning("adddeployable true");
                 slot = TeslaDeployables.teslaTowerDeployableSlot;
             }
 
@@ -785,10 +782,6 @@ namespace RA2Mod.Survivors.Tesla
                 ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.OnKillEffect));
             //return ItemCatalog.GetItemDef(itemIndex).ContainsTag(ItemTag.Damage);
         }
-        private void CharacterBody_HandleConstructTurret(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg)
-        {
-            orig(netMsg);
-        }
         #endregion tower hacks
 
         #region conductive
@@ -796,11 +789,6 @@ namespace RA2Mod.Survivors.Tesla
         {
 
             CheckConductive(self, damageInfo);
-
-            //handled by harmlessbufforb
-            //if(DamageAPI.HasModdedDamageType(damageInfo, DamageTypes.ApplyBlinkCooldown)) {
-            //        self.body.AddTimedBuff(Buffs.blinkCooldownBuff, 4f);
-            //}
 
             orig(self, damageInfo);
         }
@@ -815,7 +803,6 @@ namespace RA2Mod.Survivors.Tesla
 
         private static void ApplyConductive(HealthComponent self, DamageInfo damageInfo)
         {
-
             //mark enemies (or allies) conductive
             bool attackConductive = damageInfo.HasModdedDamageType(TeslaDamageTypes.Conductive);
             if (attackConductive)
@@ -832,7 +819,6 @@ namespace RA2Mod.Survivors.Tesla
 
         private static void ConsumeConductiveAlly(HealthComponent self, DamageInfo damageInfo)
         {
-
             if (!damageInfo.attacker)
                 return;
 
@@ -847,7 +833,6 @@ namespace RA2Mod.Survivors.Tesla
                     int buffCount = attackerBody.GetBuffCount(TeslaBuffs.conductiveBuffTeam);
                     for (int i = 0; i < buffCount; i++)
                     {
-
                         attackerBody.RemoveBuff(TeslaBuffs.conductiveBuffTeam);
                         if (!attackerBody.HasBuff(TeslaBuffs.conductiveBuffTeamGrace))
                         {
@@ -855,7 +840,7 @@ namespace RA2Mod.Survivors.Tesla
                         }
                     }
 
-                    damageInfo.AddModdedDamageType(TeslaDamageTypes.ShockShort);
+                    damageInfo.AddModdedDamageType(TeslaDamageTypes.ShockMed);
                     damageInfo.damage *= TeslaConfig.M1_Zap_ConductiveAllyBoost.Value;// 1f + (0.1f * buffCount);
                     damageInfo.damageColorIndex = TeslaColors.ChargedColor;
                 }

@@ -6,7 +6,7 @@ namespace RA2Mod.Survivors.Tesla.Compat
 {
     public class BetterUICompat
     {
-        private static string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
+        private static string prefix = TeslaTrooperSurvivor.TOKEN_PREFIX;
 
         public static void init()
         {

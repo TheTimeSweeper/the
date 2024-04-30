@@ -7,8 +7,8 @@ namespace RA2Mod.Survivors.Tesla.Achievements
     [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class TeslaMasteryAchievement : BaseMasteryAchievement
     {
-        public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "MASTERYUNLOCKABLE_ACHIEVEMENT_ID";
-        public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "MASTERYUNLOCKABLE_REWARD_ID";
+        public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "MASTERYUNLOCKABLE_ACHIEVEMENT_ID";
+        public const string unlockableIdentifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "MASTERYUNLOCKABLE_REWARD_ID";
 
         public override string RequiredCharacterBody => TeslaTrooperSurvivor.instance.bodyName;
 

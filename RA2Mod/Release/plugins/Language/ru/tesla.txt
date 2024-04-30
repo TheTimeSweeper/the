@@ -11,7 +11,7 @@
     "HABIBI_TESLA_BODY_NOD_SKIN_NAME" : "Братсво",
     "HABIBI_TESLA_BODY_PRIMARY_ZAP_NAME" : "Перчатка Теслы",
     "HABIBI_TESLA_BODY_PRIMARY_ZAP_DESCRIPTION" : "<style=cIsUtility>Заряжающий</style>. Бьёт молнией цели на <style=cIsDamage>120% урона</style>. Стреляет <style=cIsUtility>до 3 молний</style> на <style=cIsUtility>ближней дистанции</style>.",
-    "KEYWORD_CHARGED" : "<style=cKeywordName>Заряжающий</style><style=cSub>Следующая атака Заряженного союзника <style=cIsUtility>оглушает</style> и повышает урон на <style=cIsDamage>1.1x</style>",
+    "HABIBI_TESLA_BODY_KEYWORD_CHARGED" : "<style=cKeywordName>Заряжающий</style><style=cSub>Следующая атака Заряженного союзника <style=cIsUtility>оглушает</style> и повышает урон на <style=cIsDamage>1.1x</style>",
     "HABIBI_TESLA_BODY_PRIMARY_PUNCH_NAME" : "Кастеты Теслы",
     "HABIBI_TESLA_BODY_PRIMARY_PUNCH_DESCRIPTION" : "Ударяет противников на <style=cIsDamage>300% урона</style>, и зацепляет противников в конусе на <style=cIsDamage>150% урона</style>. <style=cIsUtility>Deflects Projectiles</style>.",
     "HABIBI_TESLA_BODY_SECONDARY_BIGZAP_NAME" : "2000 Вольтов",

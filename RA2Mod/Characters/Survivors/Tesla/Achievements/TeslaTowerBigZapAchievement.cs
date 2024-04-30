@@ -9,8 +9,8 @@ namespace RA2Mod.Survivors.Tesla.Achievements
     [RegisterAchievement(identifier, unlockableIdentifier, null, typeof(TeslaTrooperTowerBigZapServerAchievement))]
     public class TeslaTowerBigZapAchievement : BaseAchievement
     {
-        public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "BIGZAPUNLOCKABLE_ACHIEVEMENT_ID";
-        public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "BIGZAPUNLOCKABLE_REWARD_ID";
+        public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "BIGZAPUNLOCKABLE_ACHIEVEMENT_ID";
+        public const string unlockableIdentifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "BIGZAPUNLOCKABLE_REWARD_ID";
 
         public override BodyIndex LookUpRequiredBodyIndex()
         {

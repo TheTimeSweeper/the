@@ -16,7 +16,7 @@ namespace RA2Mod.Survivors.Tesla.States
             public Quaternion rotation;
         }
 
-        public GameObject blueprintPrefab = TeslaAssets.TeslaCoilBlueprintGamOb;
+        public GameObject blueprintPrefab = TeslaAssets.TeslaCoilBlueprint;
         public GameObject teslacoilPrefab = TeslaAssets.TeslaCoil;
 
         protected TotallyOriginalPlacementInfo currentPlacementInfo;

@@ -18,7 +18,7 @@ namespace RA2Mod.Survivors.Tesla
 
         private static void TrooperTokens()
         {
-            string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
+            string prefix = TeslaTrooperSurvivor.TOKEN_PREFIX;
 
             string desc = "The Tesla Trooper is a close-mid-range bruiser, who can construct Tesla Towers to empower his combat potential.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
                         + "< ! > Use Tesla Gauntlet close range to deal the most damage. The reticle will reflect this" + Environment.NewLine + Environment.NewLine
@@ -198,7 +198,7 @@ namespace RA2Mod.Survivors.Tesla
 
         private static void CompatTokens()
         {
-            string prefix = TeslaTrooperSurvivor.TESLA_PREFIX;
+            string prefix = TeslaTrooperSurvivor.TOKEN_PREFIX;
 
             LanguageAPI.Add("TESLA_PRIMARY_ZAP_UPGRADE_DESCRIPTION", "Every 2 levels, <style=cIsUtility>+1</style> Close-Range Bolt");
             LanguageAPI.Add("TESLA_SECONDARY_BIGZAP_UPGRADE_DESCRIPTION", "<style=cIsUtility>+10%</style> Area, <style=cIsDamage>+10%</style> Damage");

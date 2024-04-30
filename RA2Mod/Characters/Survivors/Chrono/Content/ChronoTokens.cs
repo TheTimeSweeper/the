@@ -18,7 +18,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public static void AddHenryTokens()
         {
-            string prefix = ChronoSurvivor.CHRONO_PREFIX;
+            string prefix = ChronoSurvivor.TOKEN_PREFIX;
 
             string desc = "The Chrono Legionnaire uses manipulation of time to shake up the battlefield.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
              + "< ! > I highly recommend setting sprint to alt or on your mouse if you can." + Environment.NewLine + Environment.NewLine

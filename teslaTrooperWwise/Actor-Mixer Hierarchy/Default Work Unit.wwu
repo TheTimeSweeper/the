@@ -4099,387 +4099,8 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<Sound Name="ChronoMove" ID="{2DC573D6-B7B8-455B-967A-9750B3A46564}" ShortID="813407171">
-													<PropertyList>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{9F269F1F-6F00-416C-AAB1-2676B307E14C}">
-																		<PropertyList>
-																			<Property Name="Enabled" Type="bool" Value="True"/>
-																			<Property Name="Max" Type="Real64" Value="152"/>
-																			<Property Name="Min" Type="Real64" Value="-202"/>
-																		</PropertyList>
-																	</Modifier>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="ChronoMove" ID="{3963925B-676E-4AB3-AA82-45E60FF615E8}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>ChronoMove.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="266375039"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="ChronoMove" ID="{3963925B-676E-4AB3-AA82-45E60FF615E8}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="ChronoVanish" ID="{04079F65-7489-4FBC-A1BD-3A45BA90DCE5}" ShortID="636360168">
-													<PropertyList>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{EF079D1B-59A4-49DA-BD66-C9FDC199CE97}"/>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="ChronoVanish" ID="{9174B3C8-B862-4700-BA2F-C094F3C84CD9}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>ChronoVanish.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="711715899"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="ChronoVanish" ID="{9174B3C8-B862-4700-BA2F-C094F3C84CD9}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="ChronoAttackShort" ID="{153505F2-9FAA-4837-8586-B3E281FD0347}" ShortID="956801244">
-													<PropertyList>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="ChronoAttackShort" ID="{846FC7D2-ED26-403A-BCF2-624638C502E9}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>ChronoAttackShort.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="505651589"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="ChronoAttackShort" ID="{846FC7D2-ED26-403A-BCF2-624638C502E9}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
 												<Folder Name="ChronoSphere" ID="{722ADF77-6432-46A3-8A4B-FCCFB7B86066}" ShortID="67731096">
 													<ChildrenList>
-														<RandomSequenceContainer Name="ChronosphereHumLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" ShortID="822386779">
-															<PropertyList>
-																<Property Name="Inclusion" Type="bool">
-																	<ValueList>
-																		<Value>False</Value>
-																	</ValueList>
-																</Property>
-																<Property Name="Pitch" Type="int32">
-																	<ModifierList>
-																		<ModifierInfo>
-																			<Modifier Name="" ID="{28D71661-6A45-4ECE-A786-C84601D68EFA}"/>
-																		</ModifierInfo>
-																	</ModifierList>
-																</Property>
-																<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-																<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<Sound Name="ChronosphereHumLoopC" ID="{141CC57B-25DA-4256-84FC-B549A797BB6F}" ShortID="794425604">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																		<Property Name="Pitch" Type="int32">
-																			<ModifierList>
-																				<ModifierInfo>
-																					<Modifier Name="" ID="{0494AC94-5B2E-48AF-BF82-9C648CBF8AC4}">
-																						<PropertyList>
-																							<Property Name="Enabled" Type="bool" Value="True"/>
-																							<Property Name="Max" Type="Real64" Value="101"/>
-																							<Property Name="Min" Type="Real64" Value="-101"/>
-																						</PropertyList>
-																					</Modifier>
-																				</ModifierInfo>
-																			</ModifierList>
-																		</Property>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="ChronosphereHumLoopC" ID="{DEC162FF-7BE6-4C4F-AB48-6B95C0541BE4}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>ChronosphereHumLoopC.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="547527568"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="ChronosphereHumLoopC" ID="{DEC162FF-7BE6-4C4F-AB48-6B95C0541BE4}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="ChronosphereHumLoopA" ID="{F5AED4BB-C07C-4494-B7D9-6D15EF2220E1}" ShortID="356027781">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																		<Property Name="Pitch" Type="int32">
-																			<ModifierList>
-																				<ModifierInfo>
-																					<Modifier Name="" ID="{6F780AC9-35AD-4246-8C1F-E8F767A17FF5}">
-																						<PropertyList>
-																							<Property Name="Enabled" Type="bool" Value="True"/>
-																							<Property Name="Max" Type="Real64" Value="101"/>
-																							<Property Name="Min" Type="Real64" Value="-101"/>
-																						</PropertyList>
-																					</Modifier>
-																				</ModifierInfo>
-																			</ModifierList>
-																		</Property>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="ChronosphereHumLoopA" ID="{2BC38BD3-3702-426B-BBF9-F12ED4F3D640}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>ChronosphereHumLoopA.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="524328653"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="ChronosphereHumLoopA" ID="{2BC38BD3-3702-426B-BBF9-F12ED4F3D640}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="ChronosphereHumLoopB" ID="{568357F8-5047-4919-A3B6-F20D3F420698}" ShortID="339413063">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																		<Property Name="Pitch" Type="int32">
-																			<ModifierList>
-																				<ModifierInfo>
-																					<Modifier Name="" ID="{155F9D4B-BD8B-47CF-911B-9E028CD99E63}">
-																						<PropertyList>
-																							<Property Name="Enabled" Type="bool" Value="True"/>
-																							<Property Name="Max" Type="Real64" Value="101"/>
-																							<Property Name="Min" Type="Real64" Value="-101"/>
-																						</PropertyList>
-																					</Modifier>
-																				</ModifierInfo>
-																			</ModifierList>
-																		</Property>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="ChronosphereHumLoopB" ID="{A47CF192-F47C-4FF6-82E7-E44ABDAE5C34}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>ChronosphereHumLoopB.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="685375211"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="ChronosphereHumLoopB" ID="{A47CF192-F47C-4FF6-82E7-E44ABDAE5C34}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-															</ChildrenList>
-														</RandomSequenceContainer>
-														<Sound Name="ChronosphereHumEnd" ID="{0EE3D2D6-019F-44EF-9471-1104799B7993}" ShortID="305660125">
-															<PropertyList>
-																<Property Name="Inclusion" Type="bool">
-																	<ValueList>
-																		<Value>False</Value>
-																	</ValueList>
-																</Property>
-																<Property Name="Pitch" Type="int32">
-																	<ModifierList>
-																		<ModifierInfo>
-																			<Modifier Name="" ID="{E9C73D98-17DC-4C97-9023-AD30D0F3BDD1}"/>
-																		</ModifierInfo>
-																	</ModifierList>
-																</Property>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="ChronosphereHumEnd" ID="{ED4A9E7F-8031-47E8-9B9D-54F404CEC30A}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>ChronosphereHumEnd.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="523974580"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="ChronosphereHumEnd" ID="{ED4A9E7F-8031-47E8-9B9D-54F404CEC30A}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="ChronosphereHumStart" ID="{CCF58EB7-7AD2-4F8A-9120-2DDC3AEBFC22}" ShortID="455390197">
-															<PropertyList>
-																<Property Name="Inclusion" Type="bool">
-																	<ValueList>
-																		<Value>False</Value>
-																	</ValueList>
-																</Property>
-																<Property Name="Pitch" Type="int32">
-																	<ModifierList>
-																		<ModifierInfo>
-																			<Modifier Name="" ID="{D1481DBB-4F7A-482B-B70D-D3EEB0DA6E2E}"/>
-																		</ModifierInfo>
-																	</ModifierList>
-																</Property>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="ChronosphereHumStart" ID="{D4E13BAB-7A1F-4C27-84F9-EB1E3F68CD36}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>ChronosphereHumStart.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="741092325"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="ChronosphereHumStart" ID="{D4E13BAB-7A1F-4C27-84F9-EB1E3F68CD36}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
 														<BlendContainer Name="ChronoSphere_loop" ID="{F2390A46-0892-447A-8EE6-427E9E5039FB}" ShortID="618708136">
 															<PropertyList>
 																<Property Name="MaxSoundPerInstance" Type="int16">
@@ -4656,7 +4277,1142 @@
 														</RandomSequenceContainer>
 													</ChildrenList>
 												</Folder>
-												<Folder Name="SphereSelect" ID="{C1A88698-522E-43DC-9827-4807DFFFF46A}" ShortID="304753227">
+												<Folder Name="Chrono_Attack" ID="{8A8FABF9-B3CA-4FD2-94C0-F11A090AE6AD}" ShortID="996964738">
+													<ChildrenList>
+														<RandomSequenceContainer Name="Chrono_Attack" ID="{CE18A4DB-1940-4F7C-82AA-C93EEDD683AE}" ShortID="250247668">
+															<PropertyList>
+																<Property Name="OverrideEffect" Type="bool" Value="True"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{EA3E4D6D-3C8F-49EB-B5AE-77C58DE3758F}">
+																				<PropertyList>
+																					<Property Name="Max" Type="Real64" Value="50"/>
+																					<Property Name="Min" Type="Real64" Value="-50"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="RenderEffect0" Type="bool">
+																	<ValueList>
+																		<Value>True</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{8161FFC0-A6E6-4DB1-8CA8-B5E8AE30C216}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Min" Type="Real64" Value="-2"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="Effect0" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+																	<ObjectRef Name="Plate_Medium" ID="{33384D0C-6ACB-4E3D-AC82-73AAB3AE1CA5}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="chrono_legionnaire_beam-001" ID="{110B4715-207E-4A60-B263-54ED77E15E28}" ShortID="424270468">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-001" ID="{4EC0058F-10A0-43DF-9693-8A7DFF157D83}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.570719834710744"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.221609297520661"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.46322851239669"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-001.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="48580881"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-001" ID="{4EC0058F-10A0-43DF-9693-8A7DFF157D83}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_beam-002" ID="{02118D0C-081F-4001-8BC3-4F59276D0AF2}" ShortID="1064361530">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-002" ID="{3E472EB3-A640-46B3-8316-768F04CA40C9}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.247868371212121"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0863361742424242"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.01375378787879"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-002.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="870984441"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-002" ID="{3E472EB3-A640-46B3-8316-768F04CA40C9}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_beam-003" ID="{E687B268-2DB7-4CEA-A16A-B2D2AE452CA8}" ShortID="705440728">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-003" ID="{5A8A216C-C98A-4EA3-A89B-ADBEC36875F2}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.432999483471074"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0990521694214876"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.34427944214876"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-003.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="654073730"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-003" ID="{5A8A216C-C98A-4EA3-A89B-ADBEC36875F2}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_beam-004" ID="{7BD676C3-55AE-4125-85BD-A100F9B8F9EB}" ShortID="366462706">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-004" ID="{372530B8-5BC6-41D2-85E5-32104D2CB19D}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.715339101239669"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0770365185950413"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.47836747589531"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-004.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="377536987"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-004" ID="{372530B8-5BC6-41D2-85E5-32104D2CB19D}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+														</RandomSequenceContainer>
+													</ChildrenList>
+												</Folder>
+												<Folder Name="Chrono_move" ID="{018ABCE9-1F37-451D-AB53-1DECD3C89764}" ShortID="994613690">
+													<ChildrenList>
+														<RandomSequenceContainer Name="Chrono_move" ID="{A9A94787-89AA-4E4D-A6B3-5B77C18191AF}" ShortID="232713876">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{61681486-520F-4E4E-977C-6CE8D8496F0E}">
+																				<PropertyList>
+																					<Property Name="Max" Type="Real64" Value="30"/>
+																					<Property Name="Min" Type="Real64" Value="-30"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="chrono_legionnaire_teleport-004" ID="{6897F7A6-9FBC-41EC-9926-67A826CCC173}" ShortID="778140804">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_teleport-004" ID="{086F48BD-734A-4FA9-AE7F-3623B1864279}">
+																			<PropertyList>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.74412520661157"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_teleport-004.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="888831462"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_teleport-004" ID="{086F48BD-734A-4FA9-AE7F-3623B1864279}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_teleport-001" ID="{CA689897-BC34-47C7-927D-A1DD95EB4CD1}" ShortID="968256990">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_teleport-001" ID="{C313C2E8-5A62-467D-B5DF-5C63DDF505EB}">
+																			<PropertyList>
+																				<Property Name="LoopBegin" Type="Real64" Value="1.71427613636364"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="1.71427613636364"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_teleport-001.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="189399554"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_teleport-001" ID="{C313C2E8-5A62-467D-B5DF-5C63DDF505EB}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_teleport-002" ID="{8EC969C5-352E-4D46-A6C9-317E14538463}" ShortID="699994349">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_teleport-002" ID="{4D08A94C-D55E-4030-8E3C-A13682B15E4E}">
+																			<PropertyList>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.662685399449035"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_teleport-002.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="864890931"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_teleport-002" ID="{4D08A94C-D55E-4030-8E3C-A13682B15E4E}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_teleport-003" ID="{80AF7188-DF8B-4E45-B701-9EBC9F06E343}" ShortID="278825924">
+																	<ReferenceList>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_teleport-003" ID="{945184C2-3ED7-4374-A89A-E383378832C1}">
+																			<PropertyList>
+																				<Property Name="LoopBegin" Type="Real64" Value="0.552086776859505"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.552086776859505"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_teleport-003.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="708903633"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_teleport-003" ID="{945184C2-3ED7-4374-A89A-E383378832C1}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+														</RandomSequenceContainer>
+													</ChildrenList>
+												</Folder>
+												<Folder Name="Tether" ID="{FDB5BF85-6F49-40BB-8756-E38357970D53}" ShortID="556073414">
+													<ChildrenList>
+														<Sound Name="tether_vanish" ID="{9A9FC5F8-ACE3-4435-A167-FC99A386C0F5}" ShortID="988983964">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="tether_vanish" ID="{0BA1C58C-262E-42E7-8CCC-B9DA9B878C80}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="0.351422475106686"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.351422475106686"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="VolumeOffset" Type="Real64">
+																			<ValueList>
+																				<Value>10</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>tether_vanish.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="754429648"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="tether_vanish" ID="{0BA1C58C-262E-42E7-8CCC-B9DA9B878C80}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<BlendContainer Name="Tether_loop" ID="{629164CD-34CA-41F1-BFF2-6BD23A2061E5}" ShortID="122720900">
+															<PropertyList>
+																<Property Name="MaxSoundPerInstance" Type="int16">
+																	<ValueList>
+																		<Value>1</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="UseMaxSoundPerInstance" Type="bool">
+																	<ValueList>
+																		<Value>True</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="thether_loop-001" ID="{CEAAA1FC-AE81-4269-8C7C-AE6C7AE00F42}" ShortID="1041641455">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="thether_loop-001" ID="{7F9320DA-8DC8-4773-81D9-0364D87F73C5}">
+																			<PropertyList>
+																				<Property Name="CrossfadeDuration" Type="Real64" Value="1157.89"/>
+																				<Property Name="CrossfadeShape" Type="int16" Value="6"/>
+																				<Property Name="FadeInShape" Type="int16" Value="7"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="0.888162577050735"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="2.31279919393077"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0834515173067804"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>thether_loop-001.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="347972553"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="thether_loop-001" ID="{7F9320DA-8DC8-4773-81D9-0364D87F73C5}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="thether_loop-002" ID="{B5193F8F-37FD-4846-95D8-71A69A741444}" ShortID="956296372">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ValueList>
+																				<Value>-530</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="thether_loop-002" ID="{00BAD9A0-3DBA-482B-A54D-F468D914D098}">
+																			<PropertyList>
+																				<Property Name="CrossfadeDuration" Type="Real64" Value="746.67"/>
+																				<Property Name="CrossfadeShape" Type="int16" Value="0"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="0.709036273115221"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="2.2634619487909"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>thether_loop-002.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="561841733"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="thether_loop-002" ID="{00BAD9A0-3DBA-482B-A54D-F468D914D098}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+														</BlendContainer>
+														<RandomSequenceContainer Name="Chrono_Attack_tether" ID="{BEF19981-7F47-4677-A563-ED80A7E389E7}" ShortID="200524415">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Lowpass" Type="int16">
+																	<ValueList>
+																		<Value>42</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Pitch" Type="int32">
+																	<ValueList>
+																		<Value>-560</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{4AC141ED-5E6C-46E1-977F-3F5028B805CC}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Min" Type="Real64" Value="-2"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<Sound Name="chrono_legionnaire_beam-001" ID="{BAB6CE9C-2101-48EC-8037-8E9308DC38FD}" ShortID="480416921">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-001" ID="{E1955939-CE5B-4384-A5AD-66C71F1BE8AB}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.570719834710744"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.221609297520661"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.46322851239669"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-001.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="1008485630"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-001" ID="{E1955939-CE5B-4384-A5AD-66C71F1BE8AB}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_beam-002" ID="{DCFC017C-F162-4D1B-B20A-51BDBACAA5D8}" ShortID="715162994">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-002" ID="{F1C55419-69E3-4416-BA6E-B0F82903FCC0}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.247868371212121"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0863361742424242"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.01375378787879"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-002.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="309097752"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-002" ID="{F1C55419-69E3-4416-BA6E-B0F82903FCC0}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_beam-003" ID="{4EBD759F-0A66-4EF6-9320-03A17DE3F452}" ShortID="653578753">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-003" ID="{237A26F9-D6F2-4BD7-996C-A1F2E847D00A}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.432999483471074"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0990521694214876"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.34427944214876"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-003.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="337826098"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-003" ID="{237A26F9-D6F2-4BD7-996C-A1F2E847D00A}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="chrono_legionnaire_beam-004" ID="{C77CDA39-FDA4-463C-9D19-5EF4579469C1}" ShortID="871779852">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="chrono_legionnaire_beam-004" ID="{5D5DC0A4-01EE-425F-B042-0A5839A8F055}">
+																			<PropertyList>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.715339101239669"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0770365185950413"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="1.47836747589531"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>chrono_legionnaire_beam-004.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="1042579839"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="chrono_legionnaire_beam-004" ID="{5D5DC0A4-01EE-425F-B042-0A5839A8F055}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+															</ChildrenList>
+														</RandomSequenceContainer>
+													</ChildrenList>
+												</Folder>
+												<Folder Name="Sticky Bomb" ID="{51D898D5-33AD-4AAB-B745-1C1BC80D3EC5}" ShortID="336334395">
+													<ChildrenList>
+														<Sound Name="chrono_legionnaire_sticky_bomb_loop" ID="{18DB31F6-97F9-4555-A7DE-1D26D438D2E5}" ShortID="591567453">
+															<PropertyList>
+																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="chrono_legionnaire_sticky_bomb_loop" ID="{249740D1-5DB9-4F10-A064-7646FC9FE5E5}">
+																	<PropertyList>
+																		<Property Name="CrossfadeDuration" Type="Real64" Value="204.916"/>
+																		<Property Name="LoopBegin" Type="Real64" Value="2.11684779516358"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="2.68298150782361"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="3.05835277382646"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>chrono_legionnaire_sticky_bomb_loop.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="397573915"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="chrono_legionnaire_sticky_bomb_loop" ID="{249740D1-5DB9-4F10-A064-7646FC9FE5E5}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="chrono_legionnaire_sticky_bomb_start" ID="{05BF333D-CCED-4DC9-90A3-20A80A0CB391}" ShortID="449229471">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="chrono_legionnaire_sticky_bomb_start" ID="{F94D79B5-9F9A-4859-96AB-35C118AF1247}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="0.271544807965861"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.271544807965861"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="VolumeOffset" Type="Real64">
+																			<ValueList>
+																				<Value>3.9</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>chrono_legionnaire_sticky_bomb_start.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="383182057"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="chrono_legionnaire_sticky_bomb_start" ID="{F94D79B5-9F9A-4859-96AB-35C118AF1247}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="chrono_legionnaire_sticky_bomb_end" ID="{7C82FFE6-68BD-44AB-AB1E-A5846F65F1E1}" ShortID="724709406">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="chrono_legionnaire_sticky_bomb_end" ID="{2D1548EC-B966-421E-9268-42B492575E4D}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="0.104082503556188"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.104082503556188"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>chrono_legionnaire_sticky_bomb_end.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="583101678"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="chrono_legionnaire_sticky_bomb_end" ID="{2D1548EC-B966-421E-9268-42B492575E4D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</Folder>
+												<Folder Name="Old" ID="{98C8B59C-F9A2-4E4E-91A0-B769D07B3175}" ShortID="785054146">
+													<ChildrenList>
+														<Sound Name="ChronoAttack" ID="{7979267D-00ED-4B94-AF18-0485922D44E7}" ShortID="347947661">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="OverrideEffect" Type="bool" Value="True"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronoAttack" ID="{51F519FC-1618-4BC3-AC96-5875B11F3202}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronoAttack.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="374347383"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronoAttack" ID="{51F519FC-1618-4BC3-AC96-5875B11F3202}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="ChronosphereMove" ID="{2C52B8D0-14EF-4356-B23D-A01A63983491}" ShortID="191016992">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{53BB2FC2-0612-48EE-91D6-539FB019B864}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronosphereMove" ID="{5A76F5B5-52D4-4043-88AC-8497602A49B0}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronosphereMove.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="9435602"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronosphereMove" ID="{5A76F5B5-52D4-4043-88AC-8497602A49B0}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="ChronoVanish" ID="{04079F65-7489-4FBC-A1BD-3A45BA90DCE5}" ShortID="636360168">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{EF079D1B-59A4-49DA-BD66-C9FDC199CE97}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronoVanish" ID="{9174B3C8-B862-4700-BA2F-C094F3C84CD9}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronoVanish.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="711715899"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronoVanish" ID="{9174B3C8-B862-4700-BA2F-C094F3C84CD9}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="ChronosphereOpen" ID="{74E0C136-C3C0-44DE-8F36-E6DE61AE914B}" ShortID="538203597">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{9DE15BBA-2A64-4562-89D8-ACDD9C00124C}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-9</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronosphereOpen" ID="{BBD3CF38-7E15-46D2-A884-1BA50E40DDF6}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronosphereOpen.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="270195695"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronosphereOpen" ID="{BBD3CF38-7E15-46D2-A884-1BA50E40DDF6}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="IvanBombLoop" ID="{5A91CE60-7AC2-4880-9342-E452745B2BDC}" ShortID="620110573">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{BFDADCE5-4AF6-4061-9E38-491E86C03353}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="IvanBombLoop" ID="{A50D6368-96B2-432C-AA3C-E6495EA9347A}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>IvanBombLoop.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="344299080"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="IvanBombLoop" ID="{A50D6368-96B2-432C-AA3C-E6495EA9347A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="ChronoMove" ID="{2DC573D6-B7B8-455B-967A-9750B3A46564}" ShortID="813407171">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{9F269F1F-6F00-416C-AAB1-2676B307E14C}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="152"/>
+																					<Property Name="Min" Type="Real64" Value="-202"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronoMove" ID="{3963925B-676E-4AB3-AA82-45E60FF615E8}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronoMove.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="266375039"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronoMove" ID="{3963925B-676E-4AB3-AA82-45E60FF615E8}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="IvanBombStart" ID="{70F8AFB7-F4C9-4611-83D4-05835E298039}" ShortID="670041191">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{781584F8-E98E-46F4-B98F-A884681482D7}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="IvanBombStart" ID="{737C6090-0480-4BA9-B223-9E98A2317494}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>IvanBombStart.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="310991816"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="IvanBombStart" ID="{737C6090-0480-4BA9-B223-9E98A2317494}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="ChronoAttackShort" ID="{153505F2-9FAA-4837-8586-B3E281FD0347}" ShortID="956801244">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronoAttackShort" ID="{846FC7D2-ED26-403A-BCF2-624638C502E9}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronoAttackShort.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="505651589"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronoAttackShort" ID="{846FC7D2-ED26-403A-BCF2-624638C502E9}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</Folder>
+												<Folder Name="Chronosphere_Alt" ID="{C1A88698-522E-43DC-9827-4807DFFFF46A}" ShortID="304753227">
 													<ChildrenList>
 														<Sound Name="ChronosphereSelectStart" ID="{77002539-3267-43E9-B2C1-0B7BBD33A36D}" ShortID="559022406">
 															<PropertyList>
@@ -5818,405 +6574,26 @@
 														</RandomSequenceContainer>
 													</ChildrenList>
 												</Folder>
-												<Sound Name="ChronosphereMove" ID="{2C52B8D0-14EF-4356-B23D-A01A63983491}" ShortID="191016992">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{53BB2FC2-0612-48EE-91D6-539FB019B864}"/>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
+												<Folder Name="Chronosphere_Aim" ID="{6C10A868-E516-4FAB-BF4D-B088AF21B85B}" ShortID="629942700">
 													<ChildrenList>
-														<AudioFileSource Name="ChronosphereMove" ID="{5A76F5B5-52D4-4043-88AC-8497602A49B0}">
+														<RandomSequenceContainer Name="ChronosphereHumLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" ShortID="822386779">
 															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>ChronosphereMove.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="9435602"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="ChronosphereMove" ID="{5A76F5B5-52D4-4043-88AC-8497602A49B0}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="ChronosphereOpen" ID="{74E0C136-C3C0-44DE-8F36-E6DE61AE914B}" ShortID="538203597">
-													<PropertyList>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{9DE15BBA-2A64-4562-89D8-ACDD9C00124C}"/>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>-9</Value>
-															</ValueList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="ChronosphereOpen" ID="{BBD3CF38-7E15-46D2-A884-1BA50E40DDF6}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>ChronosphereOpen.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="270195695"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="ChronosphereOpen" ID="{BBD3CF38-7E15-46D2-A884-1BA50E40DDF6}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="IvanBombLoop" ID="{5A91CE60-7AC2-4880-9342-E452745B2BDC}" ShortID="620110573">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{BFDADCE5-4AF6-4061-9E38-491E86C03353}"/>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="IvanBombLoop" ID="{A50D6368-96B2-432C-AA3C-E6495EA9347A}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>IvanBombLoop.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="344299080"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="IvanBombLoop" ID="{A50D6368-96B2-432C-AA3C-E6495EA9347A}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="IvanBombStart" ID="{70F8AFB7-F4C9-4611-83D4-05835E298039}" ShortID="670041191">
-													<PropertyList>
-														<Property Name="3DSpatialization" Type="int16" Value="1"/>
-														<Property Name="Inclusion" Type="bool">
-															<ValueList>
-																<Value>False</Value>
-															</ValueList>
-														</Property>
-														<Property Name="Pitch" Type="int32">
-															<ModifierList>
-																<ModifierInfo>
-																	<Modifier Name="" ID="{781584F8-E98E-46F4-B98F-A884681482D7}"/>
-																</ModifierInfo>
-															</ModifierList>
-														</Property>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Attenuation">
-															<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-														</Reference>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="IvanBombStart" ID="{737C6090-0480-4BA9-B223-9E98A2317494}">
-															<PropertyList>
-																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-															</PropertyList>
-															<Language>SFX</Language>
-															<AudioFile>IvanBombStart.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="310991816"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="IvanBombStart" ID="{737C6090-0480-4BA9-B223-9E98A2317494}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Folder Name="Chrono_Attack" ID="{8A8FABF9-B3CA-4FD2-94C0-F11A090AE6AD}" ShortID="996964738">
-													<ChildrenList>
-														<RandomSequenceContainer Name="Chrono_Attack" ID="{CE18A4DB-1940-4F7C-82AA-C93EEDD683AE}" ShortID="250247668">
-															<PropertyList>
-																<Property Name="OverrideEffect" Type="bool" Value="True"/>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																<Property Name="Pitch" Type="int32">
 																	<ModifierList>
 																		<ModifierInfo>
-																			<Modifier Name="" ID="{EA3E4D6D-3C8F-49EB-B5AE-77C58DE3758F}">
-																				<PropertyList>
-																					<Property Name="Max" Type="Real64" Value="50"/>
-																					<Property Name="Min" Type="Real64" Value="-50"/>
-																				</PropertyList>
-																			</Modifier>
+																			<Modifier Name="" ID="{28D71661-6A45-4ECE-A786-C84601D68EFA}"/>
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
-																<Property Name="RenderEffect0" Type="bool">
-																	<ValueList>
-																		<Value>True</Value>
-																	</ValueList>
-																</Property>
-																<Property Name="Volume" Type="Real64">
-																	<ModifierList>
-																		<ModifierInfo>
-																			<Modifier Name="" ID="{8161FFC0-A6E6-4DB1-8CA8-B5E8AE30C216}">
-																				<PropertyList>
-																					<Property Name="Enabled" Type="bool" Value="True"/>
-																					<Property Name="Min" Type="Real64" Value="-2"/>
-																				</PropertyList>
-																			</Modifier>
-																		</ModifierInfo>
-																	</ModifierList>
-																</Property>
+																<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+																<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 															</PropertyList>
 															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
 																</Reference>
-																<Reference Name="Effect0" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
-																	<ObjectRef Name="Plate_Medium" ID="{33384D0C-6ACB-4E3D-AC82-73AAB3AE1CA5}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<Sound Name="chrono_legionnaire_beam-001" ID="{110B4715-207E-4A60-B263-54ED77E15E28}" ShortID="424270468">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-001" ID="{4EC0058F-10A0-43DF-9693-8A7DFF157D83}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.570719834710744"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.221609297520661"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.46322851239669"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-001.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="48580881"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-001" ID="{4EC0058F-10A0-43DF-9693-8A7DFF157D83}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_beam-002" ID="{02118D0C-081F-4001-8BC3-4F59276D0AF2}" ShortID="1064361530">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-002" ID="{3E472EB3-A640-46B3-8316-768F04CA40C9}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.247868371212121"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0863361742424242"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.01375378787879"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-002.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="870984441"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-002" ID="{3E472EB3-A640-46B3-8316-768F04CA40C9}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_beam-003" ID="{E687B268-2DB7-4CEA-A16A-B2D2AE452CA8}" ShortID="705440728">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-003" ID="{5A8A216C-C98A-4EA3-A89B-ADBEC36875F2}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.432999483471074"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0990521694214876"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.34427944214876"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-003.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="654073730"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-003" ID="{5A8A216C-C98A-4EA3-A89B-ADBEC36875F2}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_beam-004" ID="{7BD676C3-55AE-4125-85BD-A100F9B8F9EB}" ShortID="366462706">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-004" ID="{372530B8-5BC6-41D2-85E5-32104D2CB19D}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.715339101239669"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0770365185950413"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.47836747589531"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-004.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="377536987"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-004" ID="{372530B8-5BC6-41D2-85E5-32104D2CB19D}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-															</ChildrenList>
-														</RandomSequenceContainer>
-													</ChildrenList>
-												</Folder>
-												<Folder Name="Chrono_move" ID="{018ABCE9-1F37-451D-AB53-1DECD3C89764}" ShortID="994613690">
-													<ChildrenList>
-														<RandomSequenceContainer Name="Chrono_move" ID="{A9A94787-89AA-4E4D-A6B3-5B77C18191AF}" ShortID="232713876">
-															<PropertyList>
-																<Property Name="Pitch" Type="int32">
-																	<ModifierList>
-																		<ModifierInfo>
-																			<Modifier Name="" ID="{61681486-520F-4E4E-977C-6CE8D8496F0E}">
-																				<PropertyList>
-																					<Property Name="Max" Type="Real64" Value="30"/>
-																					<Property Name="Min" Type="Real64" Value="-30"/>
-																				</PropertyList>
-																			</Modifier>
-																		</ModifierInfo>
-																	</ModifierList>
-																</Property>
-															</PropertyList>
-															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
 																</Reference>
@@ -6225,231 +6602,21 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<Sound Name="chrono_legionnaire_teleport-004" ID="{6897F7A6-9FBC-41EC-9926-67A826CCC173}" ShortID="778140804">
-																	<ReferenceList>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_teleport-004" ID="{086F48BD-734A-4FA9-AE7F-3623B1864279}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.74412520661157"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_teleport-004.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="888831462"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_teleport-004" ID="{086F48BD-734A-4FA9-AE7F-3623B1864279}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_teleport-001" ID="{CA689897-BC34-47C7-927D-A1DD95EB4CD1}" ShortID="968256990">
-																	<ReferenceList>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_teleport-001" ID="{C313C2E8-5A62-467D-B5DF-5C63DDF505EB}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="1.71427613636364"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="1.71427613636364"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_teleport-001.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="189399554"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_teleport-001" ID="{C313C2E8-5A62-467D-B5DF-5C63DDF505EB}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_teleport-002" ID="{8EC969C5-352E-4D46-A6C9-317E14538463}" ShortID="699994349">
-																	<ReferenceList>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_teleport-002" ID="{4D08A94C-D55E-4030-8E3C-A13682B15E4E}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.662685399449035"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_teleport-002.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="864890931"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_teleport-002" ID="{4D08A94C-D55E-4030-8E3C-A13682B15E4E}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_teleport-003" ID="{80AF7188-DF8B-4E45-B701-9EBC9F06E343}" ShortID="278825924">
-																	<ReferenceList>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_teleport-003" ID="{945184C2-3ED7-4374-A89A-E383378832C1}">
-																			<PropertyList>
-																				<Property Name="LoopBegin" Type="Real64" Value="0.552086776859505"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.552086776859505"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_teleport-003.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="708903633"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_teleport-003" ID="{945184C2-3ED7-4374-A89A-E383378832C1}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-															</ChildrenList>
-														</RandomSequenceContainer>
-													</ChildrenList>
-												</Folder>
-												<Folder Name="Tether" ID="{FDB5BF85-6F49-40BB-8756-E38357970D53}" ShortID="556073414">
-													<ChildrenList>
-														<Sound Name="tether_vanish" ID="{9A9FC5F8-ACE3-4435-A167-FC99A386C0F5}" ShortID="988983964">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="tether_vanish" ID="{0BA1C58C-262E-42E7-8CCC-B9DA9B878C80}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="0.351422475106686"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="0.351422475106686"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="VolumeOffset" Type="Real64">
-																			<ValueList>
-																				<Value>10</Value>
-																			</ValueList>
-																		</Property>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>tether_vanish.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="754429648"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="tether_vanish" ID="{0BA1C58C-262E-42E7-8CCC-B9DA9B878C80}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<BlendContainer Name="Tether_loop" ID="{629164CD-34CA-41F1-BFF2-6BD23A2061E5}" ShortID="122720900">
-															<PropertyList>
-																<Property Name="MaxSoundPerInstance" Type="int16">
-																	<ValueList>
-																		<Value>1</Value>
-																	</ValueList>
-																</Property>
-																<Property Name="UseMaxSoundPerInstance" Type="bool">
-																	<ValueList>
-																		<Value>True</Value>
-																	</ValueList>
-																</Property>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<Sound Name="thether_loop-001" ID="{CEAAA1FC-AE81-4269-8C7C-AE6C7AE00F42}" ShortID="1041641455">
+																<Sound Name="ChronosphereHumLoopC" ID="{141CC57B-25DA-4256-84FC-B549A797BB6F}" ShortID="794425604">
 																	<PropertyList>
 																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																		<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="thether_loop-001" ID="{7F9320DA-8DC8-4773-81D9-0364D87F73C5}">
-																			<PropertyList>
-																				<Property Name="CrossfadeDuration" Type="Real64" Value="1157.89"/>
-																				<Property Name="CrossfadeShape" Type="int16" Value="6"/>
-																				<Property Name="FadeInShape" Type="int16" Value="7"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="0.888162577050735"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="2.31279919393077"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0834515173067804"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>thether_loop-001.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="347972553"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="thether_loop-001" ID="{7F9320DA-8DC8-4773-81D9-0364D87F73C5}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="thether_loop-002" ID="{B5193F8F-37FD-4846-95D8-71A69A741444}" ShortID="956296372">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																		<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 																		<Property Name="Pitch" Type="int32">
-																			<ValueList>
-																				<Value>-530</Value>
-																			</ValueList>
+																			<ModifierList>
+																				<ModifierInfo>
+																					<Modifier Name="" ID="{0494AC94-5B2E-48AF-BF82-9C648CBF8AC4}">
+																						<PropertyList>
+																							<Property Name="Enabled" Type="bool" Value="True"/>
+																							<Property Name="Max" Type="Real64" Value="101"/>
+																							<Property Name="Min" Type="Real64" Value="-101"/>
+																						</PropertyList>
+																					</Modifier>
+																				</ModifierInfo>
+																			</ModifierList>
 																		</Property>
 																	</PropertyList>
 																	<ReferenceList>
@@ -6464,51 +6631,127 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="thether_loop-002" ID="{00BAD9A0-3DBA-482B-A54D-F468D914D098}">
+																		<AudioFileSource Name="ChronosphereHumLoopC" ID="{DEC162FF-7BE6-4C4F-AB48-6B95C0541BE4}">
 																			<PropertyList>
-																				<Property Name="CrossfadeDuration" Type="Real64" Value="746.67"/>
-																				<Property Name="CrossfadeShape" Type="int16" Value="0"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="0.709036273115221"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="2.2634619487909"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
 																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
 																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
-																			<AudioFile>thether_loop-002.wav</AudioFile>
+																			<AudioFile>ChronosphereHumLoopC.wav</AudioFile>
 																			<MediaIDList>
-																				<MediaID ID="561841733"/>
+																				<MediaID ID="547527568"/>
 																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
-																		<ActiveSource Name="thether_loop-002" ID="{00BAD9A0-3DBA-482B-A54D-F468D914D098}" Platform="Linked"/>
+																		<ActiveSource Name="ChronosphereHumLoopC" ID="{DEC162FF-7BE6-4C4F-AB48-6B95C0541BE4}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="ChronosphereHumLoopA" ID="{F5AED4BB-C07C-4494-B7D9-6D15EF2220E1}" ShortID="356027781">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ModifierList>
+																				<ModifierInfo>
+																					<Modifier Name="" ID="{6F780AC9-35AD-4246-8C1F-E8F767A17FF5}">
+																						<PropertyList>
+																							<Property Name="Enabled" Type="bool" Value="True"/>
+																							<Property Name="Max" Type="Real64" Value="101"/>
+																							<Property Name="Min" Type="Real64" Value="-101"/>
+																						</PropertyList>
+																					</Modifier>
+																				</ModifierInfo>
+																			</ModifierList>
+																		</Property>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="ChronosphereHumLoopA" ID="{2BC38BD3-3702-426B-BBF9-F12ED4F3D640}">
+																			<PropertyList>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>ChronosphereHumLoopA.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="524328653"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="ChronosphereHumLoopA" ID="{2BC38BD3-3702-426B-BBF9-F12ED4F3D640}" Platform="Linked"/>
+																	</ActiveSourceList>
+																</Sound>
+																<Sound Name="ChronosphereHumLoopB" ID="{568357F8-5047-4919-A3B6-F20D3F420698}" ShortID="339413063">
+																	<PropertyList>
+																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																		<Property Name="Pitch" Type="int32">
+																			<ModifierList>
+																				<ModifierInfo>
+																					<Modifier Name="" ID="{155F9D4B-BD8B-47CF-911B-9E028CD99E63}">
+																						<PropertyList>
+																							<Property Name="Enabled" Type="bool" Value="True"/>
+																							<Property Name="Max" Type="Real64" Value="101"/>
+																							<Property Name="Min" Type="Real64" Value="-101"/>
+																						</PropertyList>
+																					</Modifier>
+																				</ModifierInfo>
+																			</ModifierList>
+																		</Property>
+																	</PropertyList>
+																	<ReferenceList>
+																		<Reference Name="Attenuation">
+																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																		</Reference>
+																		<Reference Name="Conversion">
+																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																		</Reference>
+																		<Reference Name="OutputBus">
+																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																		</Reference>
+																	</ReferenceList>
+																	<ChildrenList>
+																		<AudioFileSource Name="ChronosphereHumLoopB" ID="{A47CF192-F47C-4FF6-82E7-E44ABDAE5C34}">
+																			<PropertyList>
+																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																			</PropertyList>
+																			<Language>SFX</Language>
+																			<AudioFile>ChronosphereHumLoopB.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="685375211"/>
+																			</MediaIDList>
+																		</AudioFileSource>
+																	</ChildrenList>
+																	<ActiveSourceList>
+																		<ActiveSource Name="ChronosphereHumLoopB" ID="{A47CF192-F47C-4FF6-82E7-E44ABDAE5C34}" Platform="Linked"/>
 																	</ActiveSourceList>
 																</Sound>
 															</ChildrenList>
-														</BlendContainer>
-														<RandomSequenceContainer Name="Chrono_Attack_tether" ID="{BEF19981-7F47-4677-A563-ED80A7E389E7}" ShortID="200524415">
+														</RandomSequenceContainer>
+														<Sound Name="ChronosphereHumEnd" ID="{0EE3D2D6-019F-44EF-9471-1104799B7993}" ShortID="305660125">
 															<PropertyList>
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																<Property Name="Lowpass" Type="int16">
-																	<ValueList>
-																		<Value>42</Value>
-																	</ValueList>
-																</Property>
 																<Property Name="Pitch" Type="int32">
-																	<ValueList>
-																		<Value>-560</Value>
-																	</ValueList>
-																</Property>
-																<Property Name="Volume" Type="Real64">
 																	<ModifierList>
 																		<ModifierInfo>
-																			<Modifier Name="" ID="{4AC141ED-5E6C-46E1-977F-3F5028B805CC}">
-																				<PropertyList>
-																					<Property Name="Enabled" Type="bool" Value="True"/>
-																					<Property Name="Min" Type="Real64" Value="-2"/>
-																				</PropertyList>
-																			</Modifier>
+																			<Modifier Name="" ID="{E9C73D98-17DC-4C97-9023-AD30D0F3BDD1}"/>
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
@@ -6525,274 +6768,7 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<Sound Name="chrono_legionnaire_beam-001" ID="{BAB6CE9C-2101-48EC-8037-8E9308DC38FD}" ShortID="480416921">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-001" ID="{E1955939-CE5B-4384-A5AD-66C71F1BE8AB}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.570719834710744"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.221609297520661"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.46322851239669"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-001.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="1008485630"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-001" ID="{E1955939-CE5B-4384-A5AD-66C71F1BE8AB}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_beam-002" ID="{DCFC017C-F162-4D1B-B20A-51BDBACAA5D8}" ShortID="715162994">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-002" ID="{F1C55419-69E3-4416-BA6E-B0F82903FCC0}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.247868371212121"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0863361742424242"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.01375378787879"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-002.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="309097752"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-002" ID="{F1C55419-69E3-4416-BA6E-B0F82903FCC0}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_beam-003" ID="{4EBD759F-0A66-4EF6-9320-03A17DE3F452}" ShortID="653578753">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-003" ID="{237A26F9-D6F2-4BD7-996C-A1F2E847D00A}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.432999483471074"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0990521694214876"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.34427944214876"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-003.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="337826098"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-003" ID="{237A26F9-D6F2-4BD7-996C-A1F2E847D00A}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-																<Sound Name="chrono_legionnaire_beam-004" ID="{C77CDA39-FDA4-463C-9D19-5EF4579469C1}" ShortID="871779852">
-																	<PropertyList>
-																		<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																	</PropertyList>
-																	<ReferenceList>
-																		<Reference Name="Attenuation">
-																			<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																		</Reference>
-																		<Reference Name="Conversion">
-																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																		</Reference>
-																		<Reference Name="OutputBus">
-																			<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																		</Reference>
-																	</ReferenceList>
-																	<ChildrenList>
-																		<AudioFileSource Name="chrono_legionnaire_beam-004" ID="{5D5DC0A4-01EE-425F-B042-0A5839A8F055}">
-																			<PropertyList>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.715339101239669"/>
-																				<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																				<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0770365185950413"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="1.47836747589531"/>
-																			</PropertyList>
-																			<Language>SFX</Language>
-																			<AudioFile>chrono_legionnaire_beam-004.wav</AudioFile>
-																			<MediaIDList>
-																				<MediaID ID="1042579839"/>
-																			</MediaIDList>
-																		</AudioFileSource>
-																	</ChildrenList>
-																	<ActiveSourceList>
-																		<ActiveSource Name="chrono_legionnaire_beam-004" ID="{5D5DC0A4-01EE-425F-B042-0A5839A8F055}" Platform="Linked"/>
-																	</ActiveSourceList>
-																</Sound>
-															</ChildrenList>
-														</RandomSequenceContainer>
-													</ChildrenList>
-												</Folder>
-												<Folder Name="Sticky Bomb" ID="{51D898D5-33AD-4AAB-B745-1C1BC80D3EC5}" ShortID="336334395">
-													<ChildrenList>
-														<Sound Name="chrono_legionnaire_sticky_bomb_loop" ID="{18DB31F6-97F9-4555-A7DE-1D26D438D2E5}" ShortID="591567453">
-															<PropertyList>
-																<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="chrono_legionnaire_sticky_bomb_loop" ID="{249740D1-5DB9-4F10-A064-7646FC9FE5E5}">
-																	<PropertyList>
-																		<Property Name="CrossfadeDuration" Type="Real64" Value="204.916"/>
-																		<Property Name="LoopBegin" Type="Real64" Value="2.11684779516358"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="2.68298150782361"/>
-																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="3.05835277382646"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>chrono_legionnaire_sticky_bomb_loop.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="397573915"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="chrono_legionnaire_sticky_bomb_loop" ID="{249740D1-5DB9-4F10-A064-7646FC9FE5E5}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="chrono_legionnaire_sticky_bomb_start" ID="{05BF333D-CCED-4DC9-90A3-20A80A0CB391}" ShortID="449229471">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="chrono_legionnaire_sticky_bomb_start" ID="{F94D79B5-9F9A-4859-96AB-35C118AF1247}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="0.271544807965861"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="0.271544807965861"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="VolumeOffset" Type="Real64">
-																			<ValueList>
-																				<Value>3.9</Value>
-																			</ValueList>
-																		</Property>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>chrono_legionnaire_sticky_bomb_start.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="383182057"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="chrono_legionnaire_sticky_bomb_start" ID="{F94D79B5-9F9A-4859-96AB-35C118AF1247}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="chrono_legionnaire_sticky_bomb_end" ID="{7C82FFE6-68BD-44AB-AB1E-A5846F65F1E1}" ShortID="724709406">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="chrono_legionnaire_sticky_bomb_end" ID="{2D1548EC-B966-421E-9268-42B492575E4D}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="0.104082503556188"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="0.104082503556188"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>chrono_legionnaire_sticky_bomb_end.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="583101678"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="chrono_legionnaire_sticky_bomb_end" ID="{2D1548EC-B966-421E-9268-42B492575E4D}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-													</ChildrenList>
-												</Folder>
-												<Folder Name="New Virtual Folder" ID="{98C8B59C-F9A2-4E4E-91A0-B769D07B3175}" ShortID="785054146">
-													<ChildrenList>
-														<Sound Name="ChronoAttack" ID="{7979267D-00ED-4B94-AF18-0485922D44E7}" ShortID="347947661">
-															<PropertyList>
-																<Property Name="3DSpatialization" Type="int16" Value="1"/>
-																<Property Name="OverrideEffect" Type="bool" Value="True"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Attenuation">
-																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
-																</Reference>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="ChronoAttack" ID="{51F519FC-1618-4BC3-AC96-5875B11F3202}">
+																<AudioFileSource Name="ChronosphereHumEnd" ID="{ED4A9E7F-8031-47E8-9B9D-54F404CEC30A}">
 																	<PropertyList>
 																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
 																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
@@ -6800,14 +6776,55 @@
 																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
-																	<AudioFile>ChronoAttack.wav</AudioFile>
+																	<AudioFile>ChronosphereHumEnd.wav</AudioFile>
 																	<MediaIDList>
-																		<MediaID ID="374347383"/>
+																		<MediaID ID="523974580"/>
 																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
-																<ActiveSource Name="ChronoAttack" ID="{51F519FC-1618-4BC3-AC96-5875B11F3202}" Platform="Linked"/>
+																<ActiveSource Name="ChronosphereHumEnd" ID="{ED4A9E7F-8031-47E8-9B9D-54F404CEC30A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="ChronosphereHumStart" ID="{CCF58EB7-7AD2-4F8A-9120-2DDC3AEBFC22}" ShortID="455390197">
+															<PropertyList>
+																<Property Name="3DSpatialization" Type="int16" Value="1"/>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{D1481DBB-4F7A-482B-B70D-D3EEB0DA6E2E}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Attenuation">
+																	<ObjectRef Name="ranged" ID="{80CDBC5D-C445-4836-AADC-52A8E16E905F}" WorkUnitID="{5DE001C2-0B19-420A-80DE-DFDE1A186FD9}"/>
+																</Reference>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="ChronosphereHumStart" ID="{D4E13BAB-7A1F-4C27-84F9-EB1E3F68CD36}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>ChronosphereHumStart.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="741092325"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="ChronosphereHumStart" ID="{D4E13BAB-7A1F-4C27-84F9-EB1E3F68CD36}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>

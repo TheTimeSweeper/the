@@ -44,7 +44,7 @@ public class TeslaTrackerComponentDash : MonoBehaviour {
 
     private void Utility_onSkillChanged(GenericSkill genericSkill) {
 
-        _isDashing = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TESLA_PREFIX + "UTILITY_BLINK_NAME";
+        _isDashing = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TOKEN_PREFIX + "UTILITY_BLINK_NAME";
     }
 
     private void FixedUpdate() {

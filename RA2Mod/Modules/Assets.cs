@@ -314,19 +314,32 @@ namespace RA2Mod.Modules
                 return null;
             }
 
-            newEffect.AddComponent<DestroyOnTimer>().duration = 12;
-            newEffect.AddComponent<NetworkIdentity>();
-            newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
-            EffectComponent effect = newEffect.AddComponent<EffectComponent>();
-            effect.applyScale = false;
-            effect.effectIndex = EffectIndex.Invalid;
-            effect.parentToReferencedTransform = parentToTransform;
-            effect.positionAtReferencedTransform = true;
-            effect.soundName = soundName;
-
-            Modules.Content.CreateAndAddEffectDef(newEffect);
+            CreateEffectFromObject(newEffect, soundName, parentToTransform);
 
             return newEffect;
+        }
+
+        internal static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform)
+        {
+            newEffect.AddComponent<DestroyOnTimer>().duration = 6;
+            newEffect.AddComponent<NetworkIdentity>();
+            if (!newEffect.GetComponent<VFXAttributes>())
+            {
+                newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+            }
+
+            EffectComponent effect = newEffect.GetComponent<EffectComponent>();
+            if (!effect)
+            {
+                effect = newEffect.AddComponent<EffectComponent>();
+                effect.applyScale = true;
+                effect.effectIndex = EffectIndex.Invalid;
+                effect.parentToReferencedTransform = parentToTransform;
+                effect.positionAtReferencedTransform = true;
+                effect.soundName = soundName;
+            }
+
+            Content.CreateAndAddEffectDef(newEffect);
         }
 
         internal static GameObject CreateProjectileGhostPrefab(this AssetBundle assetBundle, string ghostName)

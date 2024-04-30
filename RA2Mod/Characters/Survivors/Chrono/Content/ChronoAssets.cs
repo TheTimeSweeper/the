@@ -94,8 +94,8 @@ namespace RA2Mod.Survivors.Chrono
                     cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
                     {
                         skillName = "chronoCancel",
-                        skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "CANCEL_NAME",
-                        skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "CANCEL_DESC",
+                        skillNameToken = ChronoSurvivor.TOKEN_PREFIX + "CANCEL_NAME",
+                        skillDescriptionToken = ChronoSurvivor.TOKEN_PREFIX + "CANCEL_DESC",
                         keywordTokens = new string[] { "KEYWORD_AGILE" },
                         skillIcon = result,
 
@@ -242,8 +242,8 @@ namespace RA2Mod.Survivors.Chrono
                 cancelSKillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
                 {
                     skillName = "chronoCancel",
-                    skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "CANCEL_NAME",
-                    skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "CANCEL_DESC",
+                    skillNameToken = ChronoSurvivor.TOKEN_PREFIX + "CANCEL_NAME",
+                    skillDescriptionToken = ChronoSurvivor.TOKEN_PREFIX + "CANCEL_DESC",
                     keywordTokens = new string[] { "KEYWORD_AGILE" },
                     skillIcon = result,
 

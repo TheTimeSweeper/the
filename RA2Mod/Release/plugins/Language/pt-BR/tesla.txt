@@ -25,7 +25,7 @@
     "HABIBI_TESLA_BODY_SPECIAL_TOWER_NAME" : "Torre de Tesla",
     "HABIBI_TESLA_BODY_SPECIAL_TOWER_DESCRIPTION" : "Construa uma Torre de Tesla por <style=cIsUtility>12 segundos</style> que eletrocuta unidades próximas, causando <style=cIsDamage>3x230% de dano</style>. Aprimora a Habilidade Secundária.",
     "HABIBI_TESLA_BODY_SPECIAL_SCEPTER_TOWER_NAME" : "Tesla Network",
-    "HABIBI_TESLA_BODY_SPECIAL_SCEPTER_TOWER_DESCRIPTION" : "Contrua uma Torre de Tesla por <style=cIsUtility>12 segundos</style> que eletrocuta unidades próximas, causando <style=cIsDamage>3x230% de dano</style>. Aprimora a Habilidade Secundária.\n<color=#d299ff>CETRO: Tempo de Recarga diminuído, Carga Adicional, a Torre eletrocuta até 3 unidades simultaneamente</color
+    "HABIBI_TESLA_BODY_SPECIAL_SCEPTER_TOWER_DESCRIPTION" : "Contrua uma Torre de Tesla por <style=cIsUtility>12 segundos</style> que eletrocuta unidades próximas, causando <style=cIsDamage>3x230% de dano</style>. Aprimora a Habilidade Secundária.\n<color=#d299ff>CETRO: Tempo de Recarga diminuído, Carga Adicional, a Torre eletrocuta até 3 unidades simultaneamente</color>",
     "ACHIEVEMENT_HABIBI_TESLA_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_ID_NAME"            : "Soldado Tesla: Domínio",
     "ACHIEVEMENT_HABIBI_TESLA_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_ID_DESCRIPTION"     : "Como Soldado Tesla,  vença o jogo ou aniquile em Monção.",
     "ACHIEVEMENT_HABIBI_TESLA_BODY_GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_ID_NAME"       : "Soldado Tesla: Grande Domínio",

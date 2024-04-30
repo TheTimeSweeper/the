@@ -7,8 +7,8 @@ namespace RA2Mod.Survivors.Chrono.Achievements
     //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class ChronoMasteryAchievement : BaseMasteryAchievement
     {
-        public const string identifier = ChronoSurvivor.CHRONO_PREFIX + "masteryAchievement";
-        public const string unlockableIdentifier = ChronoSurvivor.CHRONO_PREFIX + "masteryUnlockable";
+        public const string identifier = ChronoSurvivor.TOKEN_PREFIX + "masteryAchievement";
+        public const string unlockableIdentifier = ChronoSurvivor.TOKEN_PREFIX + "masteryUnlockable";
 
         public override string RequiredCharacterBody => ChronoSurvivor.instance.bodyName;
 

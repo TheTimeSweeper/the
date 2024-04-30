@@ -33,15 +33,15 @@ namespace RA2Mod.Survivors.Chrono
         public override string modelPrefabName => "mdlChrono";
         public override string displayPrefabName => "ChronoDisplay";
 
-        public const string CHRONO_PREFIX = RA2Plugin.DEVELOPER_PREFIX + "_CHRONO_";
+        public const string TOKEN_PREFIX = RA2Plugin.DEVELOPER_PREFIX + "_CHRONO_";
 
-        public override string survivorTokenPrefix => CHRONO_PREFIX;
+        public override string survivorTokenPrefix => TOKEN_PREFIX;
 
         public override BodyInfo bodyInfo => new BodyInfo
         {
             bodyName = bodyName,
-            bodyNameToken = CHRONO_PREFIX + "NAME",
-            subtitleNameToken = CHRONO_PREFIX + "SUBTITLE",
+            bodyNameToken = TOKEN_PREFIX + "NAME",
+            subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
             bodyColor = Color.cyan,
             sortPosition = 69.5f,
 
@@ -173,13 +173,13 @@ namespace RA2Mod.Survivors.Chrono
 
         private void AddPassiveSkill()
         {
-            GenericSkill passiveSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_PASSIVE", "chronopassive");
+            GenericSkill passiveSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_SKILL_PASSIVE", "chronopassive");
 
             ChronoSprintComponentsSkillDef sprintSkillDef = Skills.CreateSkillDef<ChronoSprintComponentsSkillDef>(new SkillDefInfo
             {
                 skillName = "chronoPassive",
-                skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "PASSIVE_SPRINT_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoPassive"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(States.ChronoSprintState)),
@@ -219,8 +219,8 @@ namespace RA2Mod.Survivors.Chrono
             ChronoSprintComponentsSkillDef sprintSkillDefScepter = Skills.CreateSkillDef<ChronoSprintComponentsSkillDef>(new SkillDefInfo
             {
                 skillName = "chronoPassiveScepter",
-                skillNameToken = CHRONO_PREFIX + "PASSIVE_SPRINT_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "PASSIVE_SPRINT_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "PASSIVE_SPRINT_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoPassive"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(States.ChronoSprintStateEpic)),
@@ -254,8 +254,8 @@ namespace RA2Mod.Survivors.Chrono
             SkillDef shootSkillDef = Skills.CreateSkillDef(new SkillDefInfo
                 (
                     "chronoShoot",
-                    CHRONO_PREFIX + "PRIMARY_SHOOT_NAME",
-                    CHRONO_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
+                    TOKEN_PREFIX + "PRIMARY_SHOOT_NAME",
+                    TOKEN_PREFIX + "PRIMARY_SHOOT_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texIconChronoPrimary"),
                     new EntityStates.SerializableEntityStateType(typeof(States.ChronoShoot)),
                     "Weapon",
@@ -270,8 +270,8 @@ namespace RA2Mod.Survivors.Chrono
             ChronoTrackerSkillDefBomb secondarySkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefBomb> (new SkillDefInfo
             {
                 skillName = "chronoIvan",
-                skillNameToken = CHRONO_PREFIX + "SECONDARY_BOMB_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "SECONDARY_BOMB_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SECONDARY_BOMB_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_BOMB_DESCRIPTION",
                 //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSecondary"),
 
@@ -310,8 +310,8 @@ namespace RA2Mod.Survivors.Chrono
             SkillDef utilitySkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "chronosphere",
-                skillNameToken = CHRONO_PREFIX + "UTILITY_CHRONOSPHERE_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "UTILITY_CHRONOSPHERE_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "UTILITY_CHRONOSPHERE_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "UTILITY_CHRONOSPHERE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoUtility"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimChronosphere1)),
@@ -333,8 +333,8 @@ namespace RA2Mod.Survivors.Chrono
             SkillDef utilitySkillDef2 = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "freezosphere",
-                skillNameToken = CHRONO_PREFIX + "UTILITY_FREEZOSPHERE_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "UTILITY_FREEZOSPHERE_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "UTILITY_FREEZOSPHERE_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "UTILITY_FREEZOSPHERE_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoUtilityAlt"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimFreezoSphere)),
@@ -365,8 +365,8 @@ namespace RA2Mod.Survivors.Chrono
             ChronoTrackerSkillDefVanish vanishSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefVanish>(new SkillDefInfo
             {
                 skillName = "chronoVanish",
-                skillNameToken = CHRONO_PREFIX + "SPECIAL_VANISH_NAME",
-                skillDescriptionToken = CHRONO_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SPECIAL_VANISH_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_VANISH_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSpecial"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(States.Vanish)),
@@ -395,24 +395,25 @@ namespace RA2Mod.Survivors.Chrono
                 return;
             }
 
-            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "Recolor", true).skillFamily;
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_COLOR", TOKEN_PREFIX + "Recolor", true).skillFamily;
+            
+            SkinRecolorController recolorController = characterModelObject.GetComponent<SkinRecolorController>();
 
             List<SkillDef> skilldefs = new List<SkillDef> {
-                createRecolorSkillDef("Blue"),
-                createRecolorSkillDef("Red"),
-                createRecolorSkillDef("Green"),
-                createRecolorSkillDef("Yellow"),
-                createRecolorSkillDef("Orange"),
-                createRecolorSkillDef("Cyan"),
-                createRecolorSkillDef("Purple"),
-                createRecolorSkillDef("Pink"),
+                recolorController.createRecolorSkillDef("Blue"),
+                recolorController.createRecolorSkillDef("Red"),
+                recolorController.createRecolorSkillDef("Green"),
+                recolorController.createRecolorSkillDef("Yellow"),
+                recolorController.createRecolorSkillDef("Orange"),
+                recolorController.createRecolorSkillDef("Cyan"),
+                recolorController.createRecolorSkillDef("Purple"),
+                recolorController.createRecolorSkillDef("Pink"),
             };
 
             if (General.GeneralConfig.NewColor.Value)
             {
-                skilldefs.Add(createRecolorSkillDef("Black"));
+                skilldefs.Add(recolorController.createRecolorSkillDef("Black"));
             }
-
             for (int i = 0; i < skilldefs.Count; i++)
             {
 
@@ -422,34 +423,6 @@ namespace RA2Mod.Survivors.Chrono
             }
 
             FinalizeCSSPreviewDisplayController();
-        }
-
-        private SkillDef createRecolorSkillDef(string name)
-        {
-
-            Color color1 = Color.white;
-
-            Recolor[] thing = characterModelObject.GetComponent<SkinRecolorController>().Recolors;
-
-            for (int i = 0; i < thing.Length; i++)
-            {
-
-                Recolor recolor = thing[i];
-
-                if (recolor.recolorName == name.ToLowerInvariant())
-                {
-
-                    color1 = recolor.colors[0] * 0.69f;
-                }
-            }
-
-            return Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = name,
-                skillNameToken = $"{CHRONO_PREFIX}RECOLOR_{name.ToUpper()}_NAME",
-                skillDescriptionToken = "",
-                skillIcon = Modules.Skins.CreateRecolorIcon(color1),
-            });
         }
 
         #endregion skills

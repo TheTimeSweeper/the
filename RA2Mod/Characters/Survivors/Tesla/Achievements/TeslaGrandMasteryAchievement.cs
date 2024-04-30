@@ -6,8 +6,8 @@ namespace RA2Mod.Survivors.Tesla.Achievements
     [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class TeslaGrandMasteryAchievement : BaseMasteryAchievement
     {
-        public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_ID";
-        public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "GRANDMASTERYUNLOCKABLE_REWARD_ID";
+        public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_ID";
+        public const string unlockableIdentifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "GRANDMASTERYUNLOCKABLE_REWARD_ID";
 
         public override string RequiredCharacterBody => TeslaTrooperSurvivor.instance.bodyName;
 

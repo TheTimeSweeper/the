@@ -19,7 +19,7 @@ public class TeslaVRComponent : MonoBehaviour {
 
     private void onHandPairSet() {
 
-        if (body.baseNameToken != TeslaTrooperSurvivor.TESLA_PREFIX + "NAME")
+        if (body.baseNameToken != TeslaTrooperSurvivor.TOKEN_PREFIX + "NAME")
             return;
 
         SkillDef color = body.skillLocator?.FindSkill("Recolor")?.skillDef;

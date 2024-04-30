@@ -66,6 +66,7 @@ namespace RA2Mod
             new ChronoSurvivor().Initialize();
             new GISurvivor().Initialize();
             new ConscriptSurvivor().Initialize();
+            
             new Modules.ContentPacks().Initialize();
 
             if (GeneralConfig.Debug.Value)

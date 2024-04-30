@@ -10,8 +10,8 @@ namespace RA2Mod.Survivors.Tesla.Achievements
     //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class TeslaRepairTowerAchievement : BaseAchievement
     {
-        public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "CHARACTERUNLOCKABLE_ACHIEVEMENT_ID";
-        public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "CHARACTERUNLOCKABLE_REWARD_ID";
+        public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "CHARACTERUNLOCKABLE_ACHIEVEMENT_ID";
+        public const string unlockableIdentifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "CHARACTERUNLOCKABLE_REWARD_ID";
 
     }
 
@@ -19,8 +19,8 @@ namespace RA2Mod.Survivors.Tesla.Achievements
     //[RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class TeslaZapCloseRangeAchievement : BaseAchievement
     {
-        public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_ID";
-        public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "ZAPCLOSERANGEUNLOCKABLE_REWARD_ID";
+        public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "ZAPCLOSERANGEUNLOCKABLE_ACHIEVEMENT_ID";
+        public const string unlockableIdentifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "ZAPCLOSERANGEUNLOCKABLE_REWARD_ID";
 
         //public override string AchievementSpriteName => "texTeslaSkillSecondaryAlt";
 

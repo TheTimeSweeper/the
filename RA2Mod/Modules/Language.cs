@@ -19,7 +19,7 @@ namespace RA2Mod.Modules {
 
         public static bool usingLanguageFolder = false;
 
-        public static bool printingEnabled = true;
+        public static bool printingEnabled = false;
 
         public static void Init() {
             if (usingLanguageFolder) {

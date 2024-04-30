@@ -10,6 +10,10 @@
 					</PropertyList>
 					<ChildrenList>
 						<Folder Name="VoiceLines" ID="{63B1B6AE-DF98-476F-A464-8E57BF21C9DA}" ShortID="213595527">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="15"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
 							<ChildrenList>
 								<Event Name="Play_Chrono_Voiceline_Move" ID="{D509674A-EC6C-43D3-88F4-49C57043FA43}">
 									<ChildrenList>
@@ -286,10 +290,21 @@
 										<Action Name="" ID="{49AE527F-A52A-4C7B-9EFE-A00525421641}" ShortID="277058044">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="1"/>
+												<Property Name="Delay" Type="Real64" Value="1.2"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="ChronosphereHumLoop" ID="{ADE8CCC4-5094-4CC2-B34A-940DDECFB139}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{7666EA57-4326-480D-A9F8-F912DD4C1437}" ShortID="185975909">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="ChronosphereHumStart" ID="{CCF58EB7-7AD2-4F8A-9120-2DDC3AEBFC22}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -307,29 +322,25 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{B359FD29-84A8-40D5-8E93-E9E8208CD6FC}" ShortID="960990825">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="ChronosphereHumEnd" ID="{0EE3D2D6-019F-44EF-9471-1104799B7993}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 									</ChildrenList>
 								</Event>
-								<Folder Name="chronosphere_select" ID="{6313C918-27BB-4C21-B5F2-3C5D6D457DF6}" ShortID="335125690">
+								<Folder Name="chronosphereAlt" ID="{6313C918-27BB-4C21-B5F2-3C5D6D457DF6}" ShortID="335125690">
 									<PropertyList>
 										<Property Name="Color" Type="int16" Value="17"/>
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 									</PropertyList>
 									<ChildrenList>
-										<Event Name="Play_ChronosphereSelectLoop" ID="{0C501004-0467-435F-853C-F474AA91C826}">
-											<ChildrenList>
-												<Action Name="" ID="{EC4AC9F3-D51A-4F3E-A748-140787F3E1C3}" ShortID="340120394">
-													<PropertyList>
-														<Property Name="ActionType" Type="int16" Value="1"/>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="ChronosphereSelectLoop" ID="{01BC3988-7F9A-4443-BC21-606D7984BEA3}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
-														</Reference>
-													</ReferenceList>
-												</Action>
-											</ChildrenList>
-										</Event>
-										<Event Name="Play_ChronosphereSelectEnd" ID="{95C5EAC3-D3AA-4E9E-8A3E-E894DC2B224D}">
+										<Event Name="Play_ChronosphereAlt_End" ID="{95C5EAC3-D3AA-4E9E-8A3E-E894DC2B224D}">
 											<ChildrenList>
 												<Action Name="" ID="{58CDE53D-A156-427F-81B9-8552D9431135}" ShortID="866553521">
 													<PropertyList>
@@ -354,7 +365,7 @@
 												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Play_ChronosphereSelectStart" ID="{B4892347-FFDE-46ED-8BE0-DFB4A9952A9D}">
+										<Event Name="Play_ChronosphereAlt_Start" ID="{B4892347-FFDE-46ED-8BE0-DFB4A9952A9D}">
 											<ChildrenList>
 												<Action Name="" ID="{55B2457C-BD44-4E10-BF24-6A226E80FCB0}" ShortID="844671547">
 													<PropertyList>
@@ -378,7 +389,7 @@
 												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Stop_ChronosphereSelectLoop" ID="{1A4B7365-C548-4C7C-A7AE-1826B2A26CC5}">
+										<Event Name="Stop_ChronosphereAlt_Loop" ID="{1A4B7365-C548-4C7C-A7AE-1826B2A26CC5}">
 											<Comment>not necesssary</Comment>
 											<ChildrenList>
 												<Action Name="" ID="{6E99AA50-A72F-465D-AFBC-D7D7186C9822}" ShortID="139791763">
@@ -402,7 +413,7 @@
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 									</PropertyList>
 									<ChildrenList>
-										<Event Name="Play_ChronosphereHumEnd" ID="{78A17D02-A234-457E-89E6-02D7F2FC296D}">
+										<Event Name="Play_Chronosphere_Move" ID="{78A17D02-A234-457E-89E6-02D7F2FC296D}">
 											<ChildrenList>
 												<Action Name="" ID="{F12937E2-40DB-47F3-8226-8702175E63FC}" ShortID="946577887">
 													<PropertyList>
@@ -415,19 +426,9 @@
 														</Reference>
 													</ReferenceList>
 												</Action>
-												<Action Name="" ID="{AE5848F0-B687-47DE-BDCE-A2B24A1A662D}" ShortID="804014056">
-													<PropertyList>
-														<Property Name="ActionType" Type="int16" Value="2"/>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="ChronoSphere_loop" ID="{F2390A46-0892-447A-8EE6-427E9E5039FB}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
-														</Reference>
-													</ReferenceList>
-												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Play_ChronosphereHumStart" ID="{F4D35CE7-1568-4ECB-93AA-7F16DB5C07AC}">
+										<Event Name="Play_Chronosphere_StartLoop" ID="{F4D35CE7-1568-4ECB-93AA-7F16DB5C07AC}">
 											<ChildrenList>
 												<Action Name="" ID="{EBE06CAC-B936-411A-9B1A-628AD99C4FA0}" ShortID="278064890">
 													<PropertyList>
@@ -451,42 +452,25 @@
 												</Action>
 											</ChildrenList>
 										</Event>
+										<Event Name="Stop_Chronosphere_Loop" ID="{F746267D-6DA1-4827-BF24-8F457706DC1C}">
+											<ChildrenList>
+												<Action Name="" ID="{2772B4F2-F118-4703-9B33-D2F6E72A9BFC}" ShortID="816731996">
+													<PropertyList>
+														<Property Name="ActionType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="ChronoSphere_loop" ID="{F2390A46-0892-447A-8EE6-427E9E5039FB}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="chronosphereAim" ID="{8B149590-CFA8-4D25-9091-60A1D538EA59}" ShortID="977471898"/>
 							</ChildrenList>
 						</Folder>
-						<Event Name="Play_IvanBombLoop" ID="{383FD967-4A96-4E95-93DD-7AF55AEE8930}">
-							<Comment>NOT USED</Comment>
-							<ChildrenList>
-								<Action Name="" ID="{B0C610AD-3E98-4950-8D67-7A87E44DE15C}" ShortID="615836457">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="1"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="IvanBombLoop" ID="{5A91CE60-7AC2-4880-9342-E452745B2BDC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Stop_ChronoAttackShort" ID="{C05E4FBE-35B5-42B2-8F65-4F5E026C2304}">
-							<Comment>NOT USED</Comment>
-							<ChildrenList>
-								<Action Name="" ID="{6B0D666D-C80C-4015-8638-B72B0A4F7842}" ShortID="953555027">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="2"/>
-										<Property Name="Delay" Type="Real64" Value="0.3"/>
-										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="ChronoAttackShort" ID="{153505F2-9FAA-4837-8586-B3E281FD0347}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
 						<Folder Name="Tether" ID="{B26ED283-9963-4BBF-8A06-E216B2B50BDD}" ShortID="1025787850">
 							<PropertyList>
 								<Property Name="Color" Type="int16" Value="13"/>
@@ -531,10 +515,14 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
-										<Action Name="" ID="{4F546AF6-102B-40F0-BFFE-A2AB33203D9D}" ShortID="104181111">
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_TetherLoop" ID="{C05E4FBE-35B5-42B2-8F65-4F5E026C2304}">
+									<Comment>NOT USED</Comment>
+									<ChildrenList>
+										<Action Name="" ID="{6C7B9E79-BB1D-4318-AC38-B997F0020E14}" ShortID="254249747">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="2"/>
-												<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
@@ -552,7 +540,7 @@
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 							</PropertyList>
 							<ChildrenList>
-								<Event Name="Play_IvanBombStart" ID="{D7B78E8A-2DC7-41B8-B3C9-6C2288040495}">
+								<Event Name="Play_IvanBomb_Start" ID="{D7B78E8A-2DC7-41B8-B3C9-6C2288040495}">
 									<ChildrenList>
 										<Action Name="" ID="{CD03EB4E-4294-48BB-9166-782C0CAA77BA}" ShortID="310883869">
 											<PropertyList>
@@ -576,9 +564,9 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Stop_IvanBombLoop" ID="{75120A3A-6223-4833-A107-671B56071AC2}">
+								<Event Name="Play_IvanBomb_Explode" ID="{14A43E0A-2830-4AE3-AFA1-EDB54D43BE1E}">
 									<ChildrenList>
-										<Action Name="" ID="{7D652B9B-E667-4014-9359-413DA27525DA}" ShortID="465926097">
+										<Action Name="" ID="{DFB19FC7-FF3A-4CC4-97AE-43DF82D0D7E8}" ShortID="764144465">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="1"/>
 											</PropertyList>
@@ -588,7 +576,11 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
-										<Action Name="" ID="{59F96EF4-78BC-465F-A917-5B0278E7A790}" ShortID="86549769">
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_IvanBomb_Loop" ID="{4250E676-67D2-48C1-AE5B-D9C2679A1430}">
+									<ChildrenList>
+										<Action Name="" ID="{7C14E9C7-9733-4C0A-B3DF-7D0DC9E685BB}" ShortID="457984400">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="2"/>
 											</PropertyList>

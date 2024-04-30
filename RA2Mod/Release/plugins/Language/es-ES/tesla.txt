@@ -25,7 +25,7 @@
     "HABIBI_TESLA_BODY_SPECIAL_TOWER_NAME" : "Torre Tesla",
     "HABIBI_TESLA_BODY_SPECIAL_TOWER_DESCRIPTION" : "Construye una torre tesla durante <style=cIsUtility>12 segundos</style> que fulmina a las unidades cercanas con <style=cIsDamage>3x230% de daño</style>. Mejora la habilidad Secundaria.",
     "HABIBI_TESLA_BODY_SPECIAL_SCEPTER_TOWER_NAME" : "Red Tesla",
-    "HABIBI_TESLA_BODY_SPECIAL_SCEPTER_TOWER_DESCRIPTION" : "Construye una Torre Tesla durante <style=cIsUtility>12 segundos</style> que electrocuta a las unidades cercanas con <style=cIsDamage>3x230% de daño</style>. Mejora la habilidad Secundaria.\n<color=#d299ff>SCEPTER: Enfriamiento reducido, reserva adicional, la torre dispara hasta a 3 objetivos simultáneos</color
+    "HABIBI_TESLA_BODY_SPECIAL_SCEPTER_TOWER_DESCRIPTION" : "Construye una Torre Tesla durante <style=cIsUtility>12 segundos</style> que electrocuta a las unidades cercanas con <style=cIsDamage>3x230% de daño</style>. Mejora la habilidad Secundaria.\n<color=#d299ff>SCEPTER: Enfriamiento reducido, reserva adicional, la torre dispara hasta a 3 objetivos simultáneos</color>",
     "ACHIEVEMENT_HABIBI_TESLA_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_ID_NAME"             : "Soldado Tesla: Maestría",
     "ACHIEVEMENT_HABIBI_TESLA_BODY_MASTERYUNLOCKABLE_ACHIEVEMENT_ID_DESCRIPTION"      : "Como Soldado Tesla, supera el juego o destruyete en Monzón.",
     "ACHIEVEMENT_HABIBI_TESLA_BODY_GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_ID_NAME"       : "Soldado Tesla: Gran Maestría",

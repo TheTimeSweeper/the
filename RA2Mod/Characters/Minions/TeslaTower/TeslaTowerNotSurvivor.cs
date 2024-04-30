@@ -107,7 +107,6 @@ namespace RA2Mod.Minions.TeslaTower
             UnityEngine.Object.Destroy(bodyPrefab.GetComponent<SetStateOnHurt>());
             UnityEngine.Object.Destroy(bodyPrefab.GetComponent<AkEvent>());
 
-            //todo teslamove towerassets?
             characterModelObject.GetComponent<ChildLocator>().FindChild("LightningParticles").GetComponent<ParticleSystemRenderer>().material = TeslaTowerAssets.ChainLightningMaterial;
         }
 

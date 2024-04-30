@@ -6,8 +6,8 @@ namespace RA2Mod.Survivors.Tesla.Achievements
     [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
     public class TeslaAllyZapAchievement : BaseAchievement
     {
-        public const string identifier = TeslaTrooperSurvivor.TESLA_PREFIX + "ZAPALLYUNLOCKABLE_ACHIEVEMENT_ID";
-        public const string unlockableIdentifier = TeslaTrooperSurvivor.TESLA_PREFIX + "ZAPALLYUNLOCKABLE_REWARD_ID";
+        public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "ZAPALLYUNLOCKABLE_ACHIEVEMENT_ID";
+        public const string unlockableIdentifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "ZAPALLYUNLOCKABLE_REWARD_ID";
 
         private int allyZaps;
         public static int requirement = 3;

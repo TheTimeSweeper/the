@@ -37,6 +37,9 @@ public class BaseUnattachedAnimator : MonoBehaviour {
     [SerializeField, Range(0, 0.999f)]
     protected float aimYaw = 0.5f;
 
+    [SerializeField]
+    private bool mouseLook;
+
     protected float _combatTim;
     protected float _jumpTim;
 
@@ -96,7 +99,14 @@ public class BaseUnattachedAnimator : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E))
             aimYaw -= 0.2f;
 
+
+        if (mouseLook) {
+            aimYaw += Input.GetAxis("Mouse X") * Time.deltaTime;
+            aimPitch += Input.GetAxis("Mouse Y") * Time.deltaTime;
+        }
+
         aimYaw = Mathf.Clamp(aimYaw, 0, 0.999f);
+        aimPitch = Mathf.Clamp(aimPitch, 0, 0.999f);
 
         animator.SetFloat("aimYawCycle", aimYaw);
         animator.SetFloat("aimPitchCycle", aimPitch);

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using RA2Mod.Modules;
+using RoR2.Skills;
+using UnityEngine;
 namespace RA2Mod.General.Components
 {
     [System.Serializable]
@@ -110,6 +112,29 @@ namespace RA2Mod.General.Components
                     return;
                 }
             }
+        }
+
+        public SkillDef createRecolorSkillDef(string name)
+        {
+            Color color1 = Color.white;
+
+            for (int i = 0; i < Recolors.Length; i++)
+            {
+                Recolor recolor = Recolors[i];
+
+                if (recolor.recolorName == name.ToLowerInvariant())
+                {
+                    color1 = recolor.colors[0] * 0.69f;
+                }
+            }
+
+            return Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = name,
+                skillNameToken = $"{RA2Plugin.DEVELOPER_PREFIX}_RECOLOR_{name.ToUpper()}_NAME",
+                skillDescriptionToken = "",
+                skillIcon = Modules.Skins.CreateRecolorIcon(color1),
+            });
         }
     }
 }

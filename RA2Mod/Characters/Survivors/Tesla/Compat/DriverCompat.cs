@@ -23,8 +23,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
             //InitConfig();
 
             #region tokens
-            Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "DRIVER_GUN_NAME", "Tesla Gauntlet");
-            Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "DRIVER_GUN_DESCRIPTION", $"2000 volts coming up.");
+            Modules.Language.Add(TeslaTrooperSurvivor.TOKEN_PREFIX + "DRIVER_GUN_NAME", "Tesla Gauntlet");
+            Modules.Language.Add(TeslaTrooperSurvivor.TOKEN_PREFIX + "DRIVER_GUN_DESCRIPTION", $"2000 volts coming up.");
 
             //Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME", "Chrono Gun");
             //Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for {Tokens.DamageValueText(DriverCompat.DriverGunM1Damage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} to enemies.");
@@ -66,8 +66,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
 
             TeslaTrackingSkillDef primarySkillDefZap =           //this constructor creates a skilldef for a typical primary
                 Skills.CreateSkillDef<TeslaTrackingSkillDef>(new SkillDefInfo("Tesla_Primary_Zap",
-                                                                              TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_ZAP_NAME",
-                                                                              TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
+                                                                              TeslaTrooperSurvivor.TOKEN_PREFIX + "PRIMARY_ZAP_NAME",
+                                                                              TeslaTrooperSurvivor.TOKEN_PREFIX + "PRIMARY_ZAP_DESCRIPTION",
                                                                               assetBundle.LoadAsset<Sprite>("texTeslaSkillPrimary"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(Zap)),
                                                                               "Weapon",
@@ -78,8 +78,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
             SkillDef bigZapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Tesla_Secondary_BigZap",
-                skillNameToken = TeslaTrooperSurvivor.TESLA_PREFIX + "SECONDARY_BIGZAP_NAME",
-                skillDescriptionToken = TeslaTrooperSurvivor.TESLA_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
+                skillNameToken = TeslaTrooperSurvivor.TOKEN_PREFIX + "SECONDARY_BIGZAP_NAME",
+                skillDescriptionToken = TeslaTrooperSurvivor.TOKEN_PREFIX + "SECONDARY_BIGZAP_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBigZap)),
                 activationStateMachineName = "Weapon",
@@ -102,8 +102,8 @@ namespace RA2Mod.Survivors.Tesla.Compat
 
             DriverWeaponDef chronoGunWeaponDef = DriverWeaponDef.CreateWeaponDefFromInfo(new DriverWeaponDefInfo
             {
-                nameToken = TeslaTrooperSurvivor.TESLA_PREFIX + "DRIVER_GUN_NAME",
-                descriptionToken = TeslaTrooperSurvivor.TESLA_PREFIX + "DRIVER_GUN_DESCRIPTION",
+                nameToken = TeslaTrooperSurvivor.TOKEN_PREFIX + "DRIVER_GUN_NAME",
+                descriptionToken = TeslaTrooperSurvivor.TOKEN_PREFIX + "DRIVER_GUN_DESCRIPTION",
                 icon = assetBundle.LoadAsset<Texture2D>("texIconChronoRA2"),
                 crosshairPrefab = TeslaTrooperSurvivor.instance.prefabCharacterBody.defaultCrosshairPrefab,
                 tier = DriverWeaponTier.Uncommon,

@@ -71,7 +71,7 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
 
     private void Primary_onSkillChanged(GenericSkill genericSkill) {
 
-        _isMelee = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_PUNCH_NAME";
+        _isMelee = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TOKEN_PREFIX + "PRIMARY_PUNCH_NAME";
     }
 
     #region access

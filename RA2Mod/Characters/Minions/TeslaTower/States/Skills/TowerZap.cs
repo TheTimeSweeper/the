@@ -101,7 +101,7 @@ namespace RA2Mod.Minions.TeslaTower.States
 
         protected virtual float GetBaseDuration()
         {
-            return TimedBaseDuration;
+            return BaseDuration;
         }
 
         protected virtual void PlayPrep()

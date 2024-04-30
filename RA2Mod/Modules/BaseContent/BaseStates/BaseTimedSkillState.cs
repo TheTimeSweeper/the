@@ -9,10 +9,10 @@ namespace RA2Mod.Modules.BaseStates
         //total duration of the move
         public abstract float TimedBaseDuration { get; }
 
-        //time relative to duration that the skill starts
+        //0-1 time relative to duration that the skill starts
         //for example, set 0.5 and the "cast" will happen halfway through the skill
         public abstract float TimedBaseCastStartPercentTime { get; }
-        public virtual float TimedBaseCastEndPercentTime { get; }
+        public virtual float TimedBaseCastEndPercentTime => 1;
 
         protected float duration;
         protected float castStartTime;
@@ -43,22 +43,20 @@ namespace RA2Mod.Modules.BaseStates
         {
             base.FixedUpdate();
 
-            //wait start duration and fire
-            if (!hasFired && fixedAge > castStartTime)
-            {
-                hasFired = true;
-                OnCastEnter();
-            }
-
             bool fireStarted = fixedAge >= castStartTime;
             bool fireEnded = fixedAge >= castEndTime;
             isFiring = false;
 
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
-            if (fireStarted && !fireEnded || fireStarted && fireEnded && !hasFired)
+            if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired))
             {
                 isFiring = true;
                 OnCastFixedUpdate();
+                if (!hasFired)
+                {
+                    OnCastEnter();
+                    hasFired = true;
+                }
             }
 
             if (fireEnded && !hasExited)

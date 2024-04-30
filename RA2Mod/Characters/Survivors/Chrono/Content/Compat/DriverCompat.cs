@@ -33,15 +33,15 @@ namespace RA2Mod.Survivors.Chrono
             InitConfig();
 
             #region tokens
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_NAME", "Chrono Gun");
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Makes enemies vanish from existence.");
+            Modules.Language.Add(ChronoSurvivor.TOKEN_PREFIX + "DRIVER_GUN_NAME", "Chrono Gun");
+            Modules.Language.Add(ChronoSurvivor.TOKEN_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Makes enemies vanish from existence.");
 
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME", "Chrono Gun");
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for {Tokens.DamageValueText(DriverCompat.DriverGunM1Damage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} to enemies.");
+            Modules.Language.Add(ChronoSurvivor.TOKEN_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME", "Chrono Gun");
+            Modules.Language.Add(ChronoSurvivor.TOKEN_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for {Tokens.DamageValueText(DriverCompat.DriverGunM1Damage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} to enemies.");
             
             int driverTicks = (int)(DriverCompat.DriverGunM2Duration.Value / DriverCompat.DriverGunM2TickInterval.Value);
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_NAME", "Deconstructing");
-            Modules.Language.Add(ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION", $"Focus your rifle for up to {Tokens.DamageValueText(DriverCompat.DriverGunM2Damage.Value * driverTicks)}. An enemy below the {Tokens.UtilityText("Chrono Sickness")} threshold will vanish from existence.");
+            Modules.Language.Add(ChronoSurvivor.TOKEN_PREFIX + "SPECIAL_VANISH_DRIVER_NAME", "Deconstructing");
+            Modules.Language.Add(ChronoSurvivor.TOKEN_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION", $"Focus your rifle for up to {Tokens.DamageValueText(DriverCompat.DriverGunM2Damage.Value * driverTicks)}. An enemy below the {Tokens.UtilityText("Chrono Sickness")} threshold will vanish from existence.");
             #endregion tokens
 
             if (General.GeneralConfig.Debug.Value)
@@ -122,8 +122,8 @@ namespace RA2Mod.Survivors.Chrono
             SkillDef shootSkillDef = Skills.CreateSkillDef(new SkillDefInfo
                 (
                     "chronoShoot",
-                    ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME",
-                    ChronoSurvivor.CHRONO_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION",
+                    ChronoSurvivor.TOKEN_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME",
+                    ChronoSurvivor.TOKEN_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION",
                     ChronoSurvivor.instance.assetBundle.LoadAsset<Sprite>("texIconChronoPrimary"),
                     new EntityStates.SerializableEntityStateType(typeof(ShootDriver)),
                     "Weapon",
@@ -133,8 +133,8 @@ namespace RA2Mod.Survivors.Chrono
             ChronoTrackerSkillDefVanish vanishSkillDef = Skills.CreateSkillDef<ChronoTrackerSkillDefVanish>(new SkillDefInfo
             {
                 skillName = "chronoVanish",
-                skillNameToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_NAME",
-                skillDescriptionToken = ChronoSurvivor.CHRONO_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION",
+                skillNameToken = ChronoSurvivor.TOKEN_PREFIX + "SPECIAL_VANISH_DRIVER_NAME",
+                skillDescriptionToken = ChronoSurvivor.TOKEN_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texIconChronoSpecial"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(VanishDriver)),
@@ -150,8 +150,8 @@ namespace RA2Mod.Survivors.Chrono
 
             DriverWeaponDef chronoGunWeaponDef = DriverWeaponDef.CreateWeaponDefFromInfo(new DriverWeaponDefInfo
             {
-                nameToken = ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_NAME",
-                descriptionToken = ChronoSurvivor.CHRONO_PREFIX + "DRIVER_GUN_DESCRIPTION",
+                nameToken = ChronoSurvivor.TOKEN_PREFIX + "DRIVER_GUN_NAME",
+                descriptionToken = ChronoSurvivor.TOKEN_PREFIX + "DRIVER_GUN_DESCRIPTION",
                 icon = assetBundle.LoadAsset<Texture2D>("texIconChronoRA2"),
                 crosshairPrefab = ChronoSurvivor.instance.prefabCharacterBody.defaultCrosshairPrefab,
                 tier = DriverWeaponTier.Uncommon,
