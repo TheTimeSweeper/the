@@ -42,7 +42,7 @@ namespace RA2Mod.Survivors.Chrono
 
             #region Passive
             Language.Add(prefix + "PASSIVE_SPRINT_NAME", "Already There");
-            Language.Add(prefix + "PASSIVE_SPRINT_DESCRIPTION", "Instead of sprinting, you time-skip from place to place, after which, you are Disabled for a short time based on distance.");
+            Language.Add(prefix + "PASSIVE_SPRINT_DESCRIPTION", $"Instead of sprinting, you time-skip from place to place, after which, you are {Tokens.UtilityText("disabled")} for a short time based on distance.");
             #endregion
 
 

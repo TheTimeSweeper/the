@@ -10,10 +10,10 @@ namespace RA2Mod.Survivors.Tesla
         public static UnlockableDef characterUnlockableDef = null;
         public static UnlockableDef masterySkinUnlockableDef;
         public static UnlockableDef grandMasterySkinUnlockableDef;
-        internal static UnlockableDef recolorsUnlockableDef;
-        internal static UnlockableDef utilityUnlockableDef;
-        internal static UnlockableDef secondaryUnlockableDef;
-        internal static UnlockableDef cursedPrimaryUnlockableDef;
+        public static UnlockableDef recolorsUnlockableDef;
+        public static UnlockableDef utilityUnlockableDef;
+        public static UnlockableDef secondaryUnlockableDef;
+        public static UnlockableDef cursedPrimaryUnlockableDef;
 
         public static void Init()
         {

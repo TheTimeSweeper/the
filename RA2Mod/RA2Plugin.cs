@@ -3,6 +3,7 @@ using R2API.Utils;
 using RA2Mod.General;
 using RA2Mod.Survivors.Chrono;
 using RA2Mod.Survivors.Conscript;
+using RA2Mod.Survivors.Desolator;
 using RA2Mod.Survivors.GI;
 using RA2Mod.Survivors.Tesla;
 using System.Security;
@@ -28,7 +29,7 @@ namespace RA2Mod
     {
         public const string MODUID = "com.thetimesweeper.ra2mod";
         public const string MODNAME = "RA2Mod";
-        public const string MODVERSION = "0.5.1";
+        public const string MODVERSION = "0.6.0";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 
@@ -52,6 +53,9 @@ namespace RA2Mod
             instance = this;
             Log.Init(Logger);
 
+            //async load hopoo shader
+            Modules.Materials.Init();
+
             GeneralConfig.Init();
             GeneralCompat.Init();
             GeneralStates.Init();
@@ -63,6 +67,7 @@ namespace RA2Mod
             Modules.Language.Init();
 
             new TeslaTrooperSurvivor().Initialize();
+            new DesolatorSurvivor().Initialize();
             new ChronoSurvivor().Initialize();
             new GISurvivor().Initialize();
             new ConscriptSurvivor().Initialize();

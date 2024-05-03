@@ -40,7 +40,7 @@ namespace RA2Mod.Survivors.GI
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconGI"),
             bodyColor = Color.blue,
-            sortPosition = 69.6f,
+            sortPosition = 69.4f,
             
             crosshairBundlePath = "GICrosshair",
             podPrefabAddressablePath = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",

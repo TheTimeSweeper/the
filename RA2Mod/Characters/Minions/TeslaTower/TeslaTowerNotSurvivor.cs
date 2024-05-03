@@ -210,6 +210,8 @@ namespace RA2Mod.Minions.TeslaTower
                 defaultRenderers,
                 characterModelObject);
 
+            defaultSkin.ZapLightningType = ModdedLightningType.Loader;
+
             defaultSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects,
                 0, 
                 1,
@@ -231,6 +233,8 @@ namespace RA2Mod.Minions.TeslaTower
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinDefault"),
                 defaultRenderers,
                 characterModelObject);
+
+            masterySkin.ZapLightningType = ModdedLightningType.Loader;
 
             masterySkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects,
                 0,
@@ -284,6 +288,8 @@ namespace RA2Mod.Minions.TeslaTower
                 defaultRenderers,
                 characterModelObject);
 
+            NodSkin.ZapLightningType = ModdedLightningType.NodMageThick;
+
             NodSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects,
                 0,
                 //1,
@@ -318,8 +324,6 @@ namespace RA2Mod.Minions.TeslaTower
           //NodSkin.rendererInfos[6].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("WHITE");
             NodSkin.rendererInfos[7].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerNod");
           //NodSkin.rendererInfos[8].defaultMaterial = assetBundle.CreateHopooMaterialFromBundle("matTowerDiamond");
-            
-            NodSkin.ZapLightningType = ModdedLightningType.NodMageThick;
 
             skins.Add(NodSkin);
             NodMinionSkinReplacement = new SkinDef.MinionSkinReplacement {
@@ -339,6 +343,8 @@ namespace RA2Mod.Minions.TeslaTower
                 assetBundle.LoadAsset<Sprite>("texTeslaSkinMC"),
                 defaultRenderers,
                 characterModelObject);
+
+                MCSkin.ZapLightningType = ModdedLightningType.Loader;
 
                 MCSkin.gameObjectActivations = Skins.GetGameObjectActivationsFromList(activatedGameObjects,
                     0,

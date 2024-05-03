@@ -54,14 +54,14 @@ namespace RA2Mod.Survivors.Conscript.SkillDefs
                 if (skillSlot.stateMachine && !skillSlot.stateMachine.HasPendingState() && skillSlot.stateMachine.CanInterruptState(this.reloadInterruptPriority))
                 {
                     instanceData.graceStopwatch += Time.fixedDeltaTime;
-                    if (instanceData.graceStopwatch >= this.graceDuration || instanceData.currentStock == 0)
+                    if ((instanceData.graceStopwatch >= this.graceDuration || instanceData.currentStock == 0) && skillSlot.cooldownRemaining <= 0)
                     {
                         int magazines = skillSlot.GetComponent<CharacterBody>().GetBuffCount(ConscriptBuffs.magazineBuff);
                         SerializableEntityStateType newReloadState = magazines >= 1? hasMagazineReloadState : this.reloadState;
 
                         EntityState entityState = EntityStateCatalog.InstantiateState(newReloadState);
                         ISkillState skillState;
-                        if ((skillState = (entityState as ISkillState)) != null)
+                        if ((skillState = (entityState as ISkillState)) != null) 
                         {
                             skillState.activatorSkillSlot = skillSlot;
                         }

@@ -39,7 +39,7 @@ namespace RA2Mod.Survivors.Conscript
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconConscript"),
             bodyColor = Color.blue,
-            sortPosition = 69.6f,
+            sortPosition = 69.5f,
             
             crosshairBundlePath = "GICrosshair",
             podPrefabAddressablePath = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
@@ -185,7 +185,7 @@ namespace RA2Mod.Survivors.Conscript
                 baseRechargeInterval = 5f,
                 baseMaxStock = 1,
 
-                rechargeStock = 1,
+                rechargeStock = 0,
                 requiredStock = 1,
                 stockToConsume = 1,
 

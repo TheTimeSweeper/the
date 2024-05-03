@@ -29,7 +29,6 @@ namespace RA2Mod.Survivors.Tesla.States
 
             if (isAuthority && characterMotor.isGrounded)
             {
-
                 CheckEmote<Rest>(GeneralConfig.RestKeybind.Value);
             }
         }

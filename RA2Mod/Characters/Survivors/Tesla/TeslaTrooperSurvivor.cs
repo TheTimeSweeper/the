@@ -31,7 +31,7 @@ namespace RA2Mod.Survivors.Tesla
 
         public override string bodyName => "TeslaTrooperBody";
 
-        public override string masterName => "TeslaTrooperMaster";
+        public override string masterName => "TeslaTrooperMonsterMaster";
 
         public override string modelPrefabName => "mdlTeslaTrooper";
         public override string displayPrefabName => "TeslaTrooperDisplay";
@@ -46,7 +46,7 @@ namespace RA2Mod.Survivors.Tesla
             bodyNameToken = TOKEN_PREFIX + "NAME",
             subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
             bodyColor = Color.cyan,
-            sortPosition = 69f,
+            sortPosition = 69.1f,
 
             characterPortraitBundlePath = General.GeneralConfig.RA2Icon.Value ? "texIconTeslaRA2" : "texIconTesla",
             crosshairBundlePath = "TeslaCrosshair",
@@ -141,7 +141,7 @@ namespace RA2Mod.Survivors.Tesla
 
             VoiceLineInLobby voiceLineController = displayPrefab.AddComponent<VoiceLineInLobby>();
             //todo teslamove
-            voiceLineController.voiceLineContext = new VoiceLineContext("Tesla", 5, 6, 4);
+            voiceLineController.voiceLineContext = new VoiceLineContext("Tesla", 5, 4, 6);
 
             displayPrefab.AddComponent<MenuSoundComponent>().sound = "Play_Tesla_lobby";
 
@@ -156,7 +156,7 @@ namespace RA2Mod.Survivors.Tesla
         {
             VoiceLineController voiceLineController = bodyPrefab.AddComponent<VoiceLineController>();
             //todo teslamove
-            voiceLineController.voiceLineContext = new VoiceLineContext("Tesla", 5, 6, 4);
+            voiceLineController.voiceLineContext = new VoiceLineContext("Tesla", 5, 4, 6);
 
             bodyPrefab.AddComponent<TeslaTrackerComponent>();
             bodyPrefab.AddComponent<TeslaTrackerComponentZap>();
@@ -437,7 +437,7 @@ namespace RA2Mod.Survivors.Tesla
                 return;
             }
 
-            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_COLOR", TOKEN_PREFIX + "Recolor", true).skillFamily;
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_SKILL_COLOR", "Recolor", true).skillFamily;
 
             SkinRecolorController recolorController = characterModelObject.GetComponent<SkinRecolorController>();
 
@@ -643,6 +643,7 @@ namespace RA2Mod.Survivors.Tesla
             //On.RoR2.Inventory.AddItemsFrom_Int32Array_Func2 += Inventory_AddItemsFrom_Int32Array_Func2;
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
 
+            //todo teslamove global hooks
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
 
             On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
@@ -651,6 +652,15 @@ namespace RA2Mod.Survivors.Tesla
 
             //todo teslamove global hooks
             On.RoR2.SetStateOnHurt.OnTakeDamageServer += SetStateOnHurt_OnTakeDamageServer;
+
+            On.RoR2.JitterBones.RebuildBones += JitterBones_RebuildBones;
+        }
+
+        private void JitterBones_RebuildBones(On.RoR2.JitterBones.orig_RebuildBones orig, JitterBones self)
+        {
+            if (self._skinnedMeshRenderer && self._skinnedMeshRenderer.name == "Tower_Base_Pillars_Color")
+                return;
+            orig(self);
         }
 
         private static void SetStateOnHurt_OnTakeDamageServer(On.RoR2.SetStateOnHurt.orig_OnTakeDamageServer orig, SetStateOnHurt self, DamageReport damageReport)
@@ -790,12 +800,36 @@ namespace RA2Mod.Survivors.Tesla
 
             CheckConductive(self, damageInfo);
 
+            bool bypassArmor = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
+            if (self && self.body)
+            {
+                if (self.body.HasBuff(TeslaBuffs.zapShieldBuff) && !bypassArmor)
+                {
+                    float mitigatedDamage = damageInfo.damage;
+
+                    if (TeslaConfig.UtilityDamageAbsorption >= 1.0f)
+                    {
+                        damageInfo.rejected = true;
+                    }
+                    //else
+                    //{
+                    //    mitigatedDamage = (1.0f - TeslaConfig.UtilityDamageAbsorption) * damageInfo.damage;
+                    //}
+
+                    IReflectionBarrier bar = self.GetComponent<IReflectionBarrier>();
+                    if (bar != null)
+                    {
+                        bar.StoreDamage(damageInfo, damageInfo.damage);
+                        damageInfo.damage = mitigatedDamage;
+                    }
+                }
+            }
+
             orig(self, damageInfo);
         }
 
         private static void CheckConductive(HealthComponent self, DamageInfo damageInfo)
         {
-
             ApplyConductive(self, damageInfo);
 
             ConsumeConductiveAlly(self, damageInfo);

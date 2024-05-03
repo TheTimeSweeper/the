@@ -10,19 +10,19 @@ namespace RA2Mod.Survivors.Tesla
         {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.cwmlolzlz.skills"))
             {
-                //SkillsPlusCompat.init();
+                TeslaSkillsPlusCompat.init();
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI"))
             {
-                BetterUICompat.init();
+                TeslaBetterUICompat.init();
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DrBibop.VRAPI"))
             {
-                VRCompat.init();
+                TeslaVRCompat.init();
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI"))
             {
-                MemeCompat.init();
+                TeslaMemeCompat.init();
             }
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
             {
@@ -30,7 +30,7 @@ namespace RA2Mod.Survivors.Tesla
             }
             if (GeneralCompat.driverInstalled)
             {
-                new DriverCompat().Init();
+                new TeslaDriverCompat().Init();
             }
         }
 
@@ -38,7 +38,7 @@ namespace RA2Mod.Survivors.Tesla
         {
             //let awake happen
             yield return null;
-            RA2Plugin.instance.GetComponent<RTAutoSprintEx.RTAutoSprintEx>().RT_SprintDisableMessage("ModdedEntityStates.TeslaTrooper.AimBigZap");
+            RA2Plugin.instance.GetComponent<RTAutoSprintEx.RTAutoSprintEx>().RT_SprintDisableMessage("RA2Mod.Survivors.Tesla.States.AimBigZap");
         }
     }
 }

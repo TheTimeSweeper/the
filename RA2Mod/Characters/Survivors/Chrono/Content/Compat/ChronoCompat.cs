@@ -15,11 +15,15 @@ namespace RA2Mod.Survivors.Chrono
         {
             if (GeneralCompat.driverInstalled)
             {
-                new DriverCompat().Init();
+                new ChronoDriverCompat().Init();
             }
             if (AutoSprintInstalled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx"))
             {
                 RA2Plugin.instance.StartCoroutine(AutoSprintCompat());
+            }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI"))
+            {
+                ChronoMemeCompat.init();
             }
         }
 

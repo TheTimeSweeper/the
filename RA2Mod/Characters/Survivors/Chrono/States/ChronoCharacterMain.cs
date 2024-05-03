@@ -10,7 +10,7 @@ namespace RA2Mod.Survivors.Chrono.States {
         public override void OnEnter()
         {
             base.OnEnter();
-            passiveSkill = skillLocator.FindSkill("LOADOUT_PASSIVE");
+            passiveSkill = skillLocator.FindSkill("LOADOUT_SKILL_PASSIVE");
         }
 
         public override void HandleMovements() {

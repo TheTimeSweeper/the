@@ -20,8 +20,7 @@ namespace RA2Mod.General
         public static bool AetheriumInstalled;
         public static bool ScepterInstalled;
         public static bool VREnabled;
-
-        public static bool driverInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.Driver");
+        public static bool driverInstalled;
 
         public static void Init()
         {
@@ -37,12 +36,9 @@ namespace RA2Mod.General
             {
                 ScepterInstalled = true;
             }
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI"))
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.Driver"))
             {
-                On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
-            }
-            if (driverInstalled)
-            {
+                driverInstalled = true;
                 On.RoR2.SurvivorCatalog.SetSurvivorDefs += SurvivorCatalog_SetSurvivorDefs;
             }
         }
@@ -63,12 +59,6 @@ namespace RA2Mod.General
             Log.Debug("no driver. ra2 compat failed");
         }
 
-        private static void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
-        {
-            Meme_OnSurvivorCatalog_Init?.Invoke();
-            orig();
-        }
-
         internal static int TryGetScepterCount(Inventory inventory)
         {
             if (!ScepterInstalled)
@@ -82,7 +72,6 @@ namespace RA2Mod.General
         {
             return inventory.GetItemCount(AncientScepter.AncientScepterItem.instance.ItemDef);
         }
-
 
         #region vr helpers
         public static Ray GetAimRay(this BaseState state, bool dominant = true)

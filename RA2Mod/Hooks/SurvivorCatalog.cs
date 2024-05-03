@@ -1,13 +1,13 @@
 ﻿using RoR2;
+using System;
 using UnityEngine;
 
 namespace RA2Mod.Hooks.RoR2
 {
-    public class SurvivorCatalog
+    public static class SurvivorCatalog
     {
         #region Init
-        public delegate void InitEvent();
-        public static event InitEvent Init
+        public static event Action Init
         {
             add
             {
@@ -21,9 +21,9 @@ namespace RA2Mod.Hooks.RoR2
             }
         }
         private static InitHook InitHookTracker = new InitHook();
-        public class InitHook : HookTracker
+        private class InitHook : HookTracker
         {
-            public event InitEvent InitHookEvent;
+            public event Action InitHookEvent;
 
             public override void ApplyHook()
             {
@@ -44,8 +44,7 @@ namespace RA2Mod.Hooks.RoR2
         #endregion init
 
         #region setsurvivordefs
-        public delegate void SetSurvivorDefsEvent(SurvivorDef[] newSurvivorDefs);
-        public static event SetSurvivorDefsEvent SetSurvivorDefs
+        public static event Action<SurvivorDef[]> SetSurvivorDefs
         {
             add
             {
@@ -58,8 +57,7 @@ namespace RA2Mod.Hooks.RoR2
                 SetSurvivorDefsHookTracker.OnUnsubscribed();
             }
         }
-        public delegate void SetSurvivorDefsEvent_Driver(GameObject driverBody);
-        public static event SetSurvivorDefsEvent_Driver SetSurvivorDefs_Driver
+        public static event Action<GameObject> SetSurvivorDefs_Driver
         {
             add
             {
@@ -73,10 +71,10 @@ namespace RA2Mod.Hooks.RoR2
             }
         }
         private static SetSurvivorDefsHook SetSurvivorDefsHookTracker = new SetSurvivorDefsHook();
-        public class SetSurvivorDefsHook : HookTracker
+        private class SetSurvivorDefsHook : HookTracker
         {
-            public event SetSurvivorDefsEvent SetSurvivorDefsHookEvent;
-            public event SetSurvivorDefsEvent_Driver SetSurvivorDefsHookEvent_Driver;
+            public event Action<SurvivorDef[]> SetSurvivorDefsHookEvent;
+            public event Action<GameObject> SetSurvivorDefsHookEvent_Driver;
 
             public override void ApplyHook()
             {

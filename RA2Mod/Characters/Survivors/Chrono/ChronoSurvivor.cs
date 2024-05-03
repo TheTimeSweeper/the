@@ -43,7 +43,7 @@ namespace RA2Mod.Survivors.Chrono
             bodyNameToken = TOKEN_PREFIX + "NAME",
             subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
             bodyColor = Color.cyan,
-            sortPosition = 69.5f,
+            sortPosition = 69.3f,
 
             characterPortraitBundlePath = General.GeneralConfig.RA2Icon.Value ? "texIconChronoRA2" : "texIconChrono",
             crosshairAddressablePath = "RoR2/Base/UI/StandardCrosshair.prefab",
@@ -395,7 +395,7 @@ namespace RA2Mod.Survivors.Chrono
                 return;
             }
 
-            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_COLOR", TOKEN_PREFIX + "Recolor", true).skillFamily;
+            SkillFamily recolorFamily = Modules.Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_SKILL_COLOR", "Recolor", true).skillFamily;
             
             SkinRecolorController recolorController = characterModelObject.GetComponent<SkinRecolorController>();
 
