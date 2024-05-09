@@ -5,6 +5,7 @@ using RoR2.Projectile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -43,7 +44,12 @@ namespace RA2Mod.Survivors.Desolator.States
             _animator = base.GetModelAnimator();
 
             Util.PlaySound("Play_Desolator_Deploy", base.gameObject);
-            PlayCrossfade("FullBody, Override", "DeployPump",/* "DeployPump.playbackRate", duration,*/ 0.05f);
+            PlayCrossfade("FullBody, Override", "DesolatorDeployPump",/* "DeployPump.playbackRate", duration,*/ 0.05f);
+
+            if (General.GeneralCompat.driverInstalled)
+            {
+                TryDriverCompat();
+            }
 
             if (base.isAuthority) {
                 DropRadiationProjectile();
@@ -63,7 +69,16 @@ namespace RA2Mod.Survivors.Desolator.States
 
             characterBody.hideCrosshair = true;
         }
-        
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void TryDriverCompat()
+        {
+            if (gameObject.TryGetComponent(out RobDriver.Modules.Components.DriverController cantDrive55))
+            {
+                cantDrive55.StartTimer(1);
+            }
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();

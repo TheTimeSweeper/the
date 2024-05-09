@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeslaTrooperMod", "JoeMod\TeslaTrooperMod.csproj", "{43CDEEAF-94C6-45A9-8F92-76016FD84CC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AliemMod", "AliemMod\AliemMod.csproj", "{4F575806-39FA-46D3-9826-379122C26FD5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoeModForReal", "JoeModForReal\JoeModForReal.csproj", "{F97DA65D-4BB8-497C-A321-883FD6DD3D26}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{43CDEEAF-94C6-45A9-8F92-76016FD84CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43CDEEAF-94C6-45A9-8F92-76016FD84CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43CDEEAF-94C6-45A9-8F92-76016FD84CC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F575806-39FA-46D3-9826-379122C26FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F575806-39FA-46D3-9826-379122C26FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F575806-39FA-46D3-9826-379122C26FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F575806-39FA-46D3-9826-379122C26FD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F97DA65D-4BB8-497C-A321-883FD6DD3D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F97DA65D-4BB8-497C-A321-883FD6DD3D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F97DA65D-4BB8-497C-A321-883FD6DD3D26}.Release|Any CPU.ActiveCfg = Release|Any CPU

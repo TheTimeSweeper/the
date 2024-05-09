@@ -2,7 +2,7 @@
 using EntityStates;
 
 namespace ModdedEntityStates.Aliem {
-    public class RayGunInstant : RayGun {
+    public class RayGunInstant : RayGunFire {
 
         protected override void ModifyState() {
 

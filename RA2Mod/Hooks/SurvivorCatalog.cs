@@ -11,19 +11,19 @@ namespace RA2Mod.Hooks.RoR2
         {
             add
             {
-                InitHookTracker.InitHookEvent += value;
-                InitHookTracker.OnSubscribed();
+                initHookTracker.Event_Init += value;
+                initHookTracker.OnSubscribed();
             }
             remove
             {
-                InitHookTracker.InitHookEvent -= value;
-                InitHookTracker.OnUnsubscribed();
+                initHookTracker.Event_Init -= value;
+                initHookTracker.OnUnsubscribed();
             }
         }
-        private static InitHook InitHookTracker = new InitHook();
+        private static InitHook initHookTracker = new InitHook();
         private class InitHook : HookTracker
         {
-            public event Action InitHookEvent;
+            public event Action Event_Init;
 
             public override void ApplyHook()
             {
@@ -37,7 +37,7 @@ namespace RA2Mod.Hooks.RoR2
 
             private void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
             {
-                InitHookEvent?.Invoke();
+                Event_Init?.Invoke();
                 orig();
             }
         }
@@ -48,12 +48,12 @@ namespace RA2Mod.Hooks.RoR2
         {
             add
             {
-                SetSurvivorDefsHookTracker.SetSurvivorDefsHookEvent += value;
+                SetSurvivorDefsHookTracker.Event_SetSurvivorDefs += value;
                 SetSurvivorDefsHookTracker.OnSubscribed();
             }
             remove
             {
-                SetSurvivorDefsHookTracker.SetSurvivorDefsHookEvent -= value;
+                SetSurvivorDefsHookTracker.Event_SetSurvivorDefs -= value;
                 SetSurvivorDefsHookTracker.OnUnsubscribed();
             }
         }
@@ -61,20 +61,20 @@ namespace RA2Mod.Hooks.RoR2
         {
             add
             {
-                SetSurvivorDefsHookTracker.SetSurvivorDefsHookEvent_Driver += value;
+                SetSurvivorDefsHookTracker.Event_SetSurvivorDefs_Driver += value;
                 SetSurvivorDefsHookTracker.OnSubscribed();
             }
             remove
             {
-                SetSurvivorDefsHookTracker.SetSurvivorDefsHookEvent_Driver -= value;
+                SetSurvivorDefsHookTracker.Event_SetSurvivorDefs_Driver -= value;
                 SetSurvivorDefsHookTracker.OnUnsubscribed();
             }
         }
         private static SetSurvivorDefsHook SetSurvivorDefsHookTracker = new SetSurvivorDefsHook();
         private class SetSurvivorDefsHook : HookTracker
         {
-            public event Action<SurvivorDef[]> SetSurvivorDefsHookEvent;
-            public event Action<GameObject> SetSurvivorDefsHookEvent_Driver;
+            public event Action<SurvivorDef[]> Event_SetSurvivorDefs;
+            public event Action<GameObject> Event_SetSurvivorDefs_Driver;
 
             public override void ApplyHook()
             {
@@ -89,13 +89,13 @@ namespace RA2Mod.Hooks.RoR2
             private void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs)
             {
                 orig(newSurvivorDefs);
-                SetSurvivorDefsHookEvent?.Invoke(newSurvivorDefs);
+                Event_SetSurvivorDefs?.Invoke(newSurvivorDefs);
 
                 for (int i = 0; i < newSurvivorDefs.Length; i++)
                 {
                     if (newSurvivorDefs[i].bodyPrefab.name == "RobDriverBody")
                     {
-                        SetSurvivorDefsHookEvent_Driver?.Invoke(newSurvivorDefs[i].bodyPrefab);
+                        Event_SetSurvivorDefs_Driver?.Invoke(newSurvivorDefs[i].bodyPrefab);
                         return;
                     }
                 }
@@ -166,48 +166,48 @@ namespace RA2Mod.Hooks.RoR2
     #endregion dun work
 
     #region work but COPY PASTE
-    public class SurvivorCatalog0
-    {
-        public static int initHooks;
-        public delegate void InitEvent();
-        public static event InitEvent initHook;
-        public static event InitEvent Init
-        {
-            add
-            {
-                initHook += value;
-                if (initHooks == 0)
-                {
-                    ApplyHook();
-                }
-                initHooks++;
-            }
-            remove
-            {
-                initHook -= value;
-                initHooks--;
-                if (initHooks == 0)
-                {
-                    RemoveHook();
-                }
-            }
-        }
+    //public class TestSurvivorCatalog
+    //{
+    //    public static int initHooks;
+    //    public delegate void InitEvent();
+    //    public static event InitEvent initHook;
+    //    public static event InitEvent Init
+    //    {
+    //        add
+    //        {
+    //            initHook += value;
+    //            if (initHooks == 0)
+    //            {
+    //                ApplyHook();
+    //            }
+    //            initHooks++;
+    //        }
+    //        remove
+    //        {
+    //            initHook -= value;
+    //            initHooks--;
+    //            if (initHooks == 0)
+    //            {
+    //                RemoveHook();
+    //            }
+    //        }
+    //    }
 
-        public static void ApplyHook()
-        {
-            On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
-        }
+    //    public static void ApplyHook()
+    //    {
+    //        On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
+    //    }
 
-        private static void RemoveHook()
-        {
-            On.RoR2.SurvivorCatalog.Init -= SurvivorCatalog_Init;
-        }
+    //    private static void RemoveHook()
+    //    {
+    //        On.RoR2.SurvivorCatalog.Init -= SurvivorCatalog_Init;
+    //    }
 
-        private static void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
-        {
-            initHook?.Invoke();
-            orig();
-        }
-    }
+    //    private static void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
+    //    {
+    //        initHook?.Invoke();
+    //        orig();
+    //    }
+    //}
     #endregion COPY PASTE
 }

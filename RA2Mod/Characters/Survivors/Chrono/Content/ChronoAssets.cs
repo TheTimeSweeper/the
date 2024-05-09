@@ -141,8 +141,17 @@ namespace RA2Mod.Survivors.Chrono
                     chronoBombProjectile = ivanResult;
                     R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
                     Content.AddProjectilePrefab(chronoBombProjectile);
-                    lunarSunExplosion = result;
-                    chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
+                    
+                    GameObject bombExplosion = result.InstantiateClone(result.name + "ChronoBomb", false);
+                    bombExplosion.GetComponent<EffectComponent>().soundName = "Play_IvanBomb_Explode";
+                    Content.CreateAndAddEffectDef(bombExplosion);
+
+                    chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = bombExplosion;
+
+                    lunarSunExplosion = result.InstantiateClone(result.name + "Chrono", false);
+                    bombExplosion.GetComponent<EffectComponent>().soundName = "";
+                    Content.CreateAndAddEffectDef(lunarSunExplosion);
+
                 });
 
             //indicators
@@ -288,8 +297,15 @@ namespace RA2Mod.Survivors.Chrono
 
                 loads.Add(Assets.LoadAssetCoroutine<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
                 {
-                    lunarSunExplosion = result;
-                    chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = lunarSunExplosion;
+                    GameObject bombExplosion = result.InstantiateClone(result.name + "ChronoBomb", false);
+                    bombExplosion.GetComponent<EffectComponent>().soundName = "Play_IvanBomb_Explode";
+                    Content.CreateAndAddEffectDef(bombExplosion);
+
+                    chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = bombExplosion;
+
+                    lunarSunExplosion = result.InstantiateClone(result.name + "Chrono", false);
+                    bombExplosion.GetComponent<EffectComponent>().soundName = "";
+                    Content.CreateAndAddEffectDef(lunarSunExplosion);
                 }));
             }));
 

@@ -120,6 +120,7 @@ MonoBehaviour:
   sphereRenderers:
   - {fileID: 5946660191786453941}
   - {fileID: 8351179881412712641}
+  loopSoundDef: {fileID: 0}
 --- !u!1 &2900397714831073806
 GameObject:
   m_ObjectHideFlags: 0

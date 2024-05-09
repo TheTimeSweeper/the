@@ -113,6 +113,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_AliemEnergySword" ID="{30063DDA-04DF-4A52-88B5-4F1416E9EEFB}">
+					<ChildrenList>
+						<Action Name="" ID="{063D7D86-CE04-4452-B79B-CA1704BE7285}" ShortID="485011803">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemEnergySword" ID="{1BFA3688-6C7F-44B0-8037-B071F801DF76}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemEnergySwordCharged" ID="{E034B1EA-0027-4390-9568-E922B773F9CE}">
+					<ChildrenList>
+						<Action Name="" ID="{D8DD1E98-6D30-4789-B745-D6589B654D9D}" ShortID="780091710">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemEnergySwordCharged" ID="{0DB8008E-8859-4044-BE1A-B8F34CD7BA4D}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -1,32 +1,33 @@
 ﻿using RA2Mod.Hooks.RoR2;
+using System;
 using UnityEngine;
 
 namespace RA2Mod.Hooks
 {
     public class ChildLocator
     {
-        public static FindChildHook FindChildHookTracker = new FindChildHook();
-        public delegate void FindChildEvent(string childName, Transform child);
-        public static event FindChildEvent FindChild
+        private static FindChildHook FindChildHookTracker = new FindChildHook();
+        public static event Action<string, Transform> FindChild
         {
             add
             {
-                FindChildHookTracker.FindChildHookEvent += value;
+                FindChildHookTracker.Event_FindChild += value;
                 FindChildHookTracker.OnSubscribed();
             }
             remove
             {
-                FindChildHookTracker.FindChildHookEvent -= value;
+                FindChildHookTracker.Event_FindChild -= value;
                 FindChildHookTracker.OnUnsubscribed();
             }
         }
 
-        public class FindChildHook : HookTracker
+        private class FindChildHook : HookTracker
         {
-            public event FindChildEvent FindChildHookEvent;
+            public event Action<string, Transform> Event_FindChild;
 
             public override void ApplyHook()
             {
+                
                 On.ChildLocator.FindChild_string += ChildLocator_FindChild_string;
             }
 
@@ -38,7 +39,7 @@ namespace RA2Mod.Hooks
             private Transform ChildLocator_FindChild_string(On.ChildLocator.orig_FindChild_string orig, global::ChildLocator self, string childName)
             {
                 Transform childFound = orig(self, childName);
-                FindChildHookEvent.Invoke(childName, childFound);
+                Event_FindChild.Invoke(childName, childFound);
                 return childFound;
             }
         }

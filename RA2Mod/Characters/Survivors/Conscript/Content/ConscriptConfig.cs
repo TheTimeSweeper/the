@@ -16,7 +16,6 @@ namespace RA2Mod.Survivors.Conscript
         public static void Init()
         {
             Config.DisableSection(SectionSkills);
-            Log.Warning(ConscriptSurvivor.instance.bodyName);
 
             #region m1 1 1
             M1_Rifle_Damage = Config.BindAndOptions(

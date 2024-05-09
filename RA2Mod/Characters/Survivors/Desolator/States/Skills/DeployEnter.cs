@@ -20,26 +20,34 @@ namespace RA2Mod.Survivors.Desolator.States
 
         public override float TimedBaseCastStartPercentTime => StartTime;
 
-        public override void OnEnter() {
+        public override void OnEnter()
+        {
             base.OnEnter();
 
             aimRequest = cameraTargetParams.RequestAimType(RoR2.CameraTargetParams.AimType.Aura);
 
-            PlayCrossfade("FullBody, Override", "Deploy", "Deploy.playbackRate", duration, 0.05f);
+            PlayCrossfade("Gesture, Override", "BufferEmpty", 0.05f);
+            PlayCrossfade("FullBody, Override", "DesolatorDeploy", "Deploy.playbackRate", duration, 0.05f);
 
             Animator animator = GetModelAnimator();
+            PlayCannonAnimations(animator);
+
+            animator.SetFloat("aimYawCycle", 0.5f);
+            animator.SetFloat("aimPitchCycle", 0.5f);
+
+            if (NetworkServer.active)
+            {
+                characterBody.AddTimedBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
+            }
+        }
+
+        protected virtual void PlayCannonAnimations(Animator animator)
+        {
             animator.SetFloat("CannonBarCharge", 1);
             PlayAnimation("RadCannonBar", "CannonCharge");
 
             animator.SetFloat("CannonSpin", 0.99f);
             PlayCrossfade("RadCannonSpin", "CannonSpin", 0.1f);
-
-            animator.SetFloat("aimYawCycle", 0.5f);
-            animator.SetFloat("aimPitchCycle", 0.5f);
-
-            if (NetworkServer.active) {
-                characterBody.AddTimedBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
-            }
         }
 
         protected override void SetNextState()

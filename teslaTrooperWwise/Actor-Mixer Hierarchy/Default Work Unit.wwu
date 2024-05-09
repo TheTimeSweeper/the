@@ -4078,12 +4078,12 @@
 										<Property Name="OverrideColor" Type="bool" Value="True"/>
 									</PropertyList>
 									<ChildrenList>
-										<ActorMixer Name="ChronoSoundsQuieter" ID="{5E4C4A42-E5CB-4D1D-94D3-67E50941EA19}" ShortID="304336007">
+										<ActorMixer Name="ChronoSoundsVolume" ID="{5E4C4A42-E5CB-4D1D-94D3-67E50941EA19}" ShortID="304336007">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="1"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-1</Value>
+														<Value>4</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -5802,7 +5802,7 @@
 																	<PropertyList>
 																		<Property Name="InitialDelay" Type="Real64">
 																			<ValueList>
-																				<Value>2</Value>
+																				<Value>1</Value>
 																			</ValueList>
 																		</Property>
 																	</PropertyList>

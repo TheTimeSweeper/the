@@ -160,6 +160,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3649913553987201929, guid: 369940c74eb9bfa48908ca4fc50ca08e,
+        type: 3}
+      propertyPath: loopSoundDef
+      value: 
+      objectReference: {fileID: 11400000, guid: ac1f9a06a06631742a6d1b7e939fc483,
+        type: 2}
     - target: {fileID: 5946660191786453941, guid: 369940c74eb9bfa48908ca4fc50ca08e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -19,7 +19,7 @@ namespace RA2Mod.Modules.Characters
 
         public virtual GameObject displayPrefab { get; protected set; }
 
-        public override List<IEnumerator> GetCharacterInitializedCoroutines()
+        public override List<IEnumerator> GetCoroutinesAfterPrefabCreation()
         {
             List<IEnumerator> list = new List<IEnumerator>();
             list.Add(Prefabs.CreateDisplayPrefabAsync(assetBundle, displayPrefabName, characterModelObject, (result) =>

@@ -70,7 +70,7 @@ namespace RA2Mod.Survivors.Chrono.States
 
                 characterBody.AddSpreadBloom(1.5f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
-                Util.PlaySound("Play_huntress_R_snipe_shoot", gameObject);
+                Util.PlaySound("Play_ChronoAttack", gameObject);
 
                 if (isAuthority)
                 {

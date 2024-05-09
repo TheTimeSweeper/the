@@ -63,19 +63,13 @@ namespace RA2Mod.Survivors.Conscript
             base.Initialize();
         }
 
-        public override void InitializeCharacter()
-        {
-            //need the character unlockable before you initialize the survivordef
-            //GIUnlockables.Init();
-
-            base.InitializeCharacter();
-        }
-
         public override void OnCharacterInitialized()
         {
             Config.ConfigureBody(prefabCharacterBody, ConscriptConfig.SectionBody);
 
             ConscriptConfig.Init();
+
+            //GIUnlockables.Init();
 
             ConscriptStates.Init();
             ConscriptTokens.Init();

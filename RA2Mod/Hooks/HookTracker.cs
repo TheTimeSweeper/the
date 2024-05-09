@@ -2,19 +2,19 @@
 {
     public abstract class HookTracker
     {
-        public static int initHooks;
+        private int addedHooks;
         public void OnSubscribed()
         {
-            if (initHooks == 0)
+            if (addedHooks == 0)
             {
                 ApplyHook();
             }
-            initHooks++;
+            addedHooks++;
         }
         public void OnUnsubscribed()
         {
-            initHooks--;
-            if (initHooks == 0)
+            addedHooks--;
+            if (addedHooks == 0)
             {
                 RemoveHook();
             }

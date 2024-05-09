@@ -9,10 +9,17 @@ namespace Modules {
         public static void Init() {
             Content.AddEntityState(typeof(AliemCharacterMain));
 
-            Content.AddEntityState(typeof(RayGun));
-            Content.AddEntityState(typeof(RayGunBig));
+            Content.AddEntityState(typeof(RayGunFire));
+            Content.AddEntityState(typeof(RayGunFireUncharged));
+            Content.AddEntityState(typeof(RayGunChargedFire));
             Content.AddEntityState(typeof(RayGunInputs));
             Content.AddEntityState(typeof(RayGunInstant));
+
+            Content.AddEntityState(typeof(SwordCharging));
+            Content.AddEntityState(typeof(SwordFire));
+            Content.AddEntityState(typeof(SwordFireCharged));
+            Content.AddEntityState(typeof(SwordFireChargedDash));
+            Content.AddEntityState(typeof(SwordInputs));
 
             Content.AddEntityState(typeof(AliemLeapM2));
             Content.AddEntityState(typeof(AliemLeapM3));

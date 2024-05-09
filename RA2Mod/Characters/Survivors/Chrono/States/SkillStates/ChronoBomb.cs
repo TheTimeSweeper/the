@@ -25,7 +25,7 @@ namespace RA2Mod.Survivors.Chrono.States
             //base.effectPrefab = Modules.Assets.SomeMuzzleEffect;
             //targetmuzzle = "muzzleThrow"
 
-            attackSoundString = "HenryBombThrow";
+            attackSoundString = "";
 
             baseDuration = BaseDuration;
             baseDelayBeforeFiringProjectile = 0;

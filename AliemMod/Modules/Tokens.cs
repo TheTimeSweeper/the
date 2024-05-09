@@ -45,10 +45,10 @@ namespace Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_GUN_NAME", "Ray Gun");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGun.DamageCoefficient)}");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGunFire.BaseDamageCoefficient)}");
 
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_NAME", "Ray Gun (chargeable)");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGun.DamageCoefficient)}.\nHold to charge up and fire a large blast for up to {Helpers.DamageValueText(ChargeRayGunBig.MaxDamageCoefficient)}");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGunFire.BaseDamageCoefficient)}.\nHold to charge up and fire a large blast for up to {Helpers.DamageValueText(10/*RayGunCharging.MaxDamageCoefficient*/)}");
 
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.maxCharge)}.");
@@ -56,7 +56,7 @@ namespace Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Ray Gun Big");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Shoot a charged blast from your raygun for {Helpers.DamageValueText(RayGunBig.BaseDamage)}");
+            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Shoot a charged blast from your raygun for {Helpers.DamageValueText(RayGunChargedFire.BaseDamage)}");
             #endregion
 
             #region Utility

@@ -3,12 +3,13 @@ using RoR2;
 using System;
 using UnityEngine;
 
-namespace ModdedEntityStates.Aliem {
-    public class ChargeRayGunBig : BaseSkillState {
+namespace ModdedEntityStates.Aliem
+{
+    public class RayGunCharging : BaseSkillState {
 
-        public static float BaseMaxChargeDuration = 3;
-        public static float MinDamageCoefficient = 1;
-        public static float MaxDamageCoefficient = 10;
+        public virtual float BaseMaxChargeDuration => 3;
+        public virtual float MinDamageCoefficient => 1;
+        public virtual float MaxDamageCoefficient => 10;
 
         private float minBloomRadius = 0.2f;
         private float maxBloomRadius = 0.8f;
@@ -48,12 +49,17 @@ namespace ModdedEntityStates.Aliem {
 
             base.characterBody.SetSpreadBloom(Mathf.Lerp(minBloomRadius, maxBloomRadius, _chargeTimer / _maxChargeDuration), true);
             
-            if (!inputBank.skill1.down) {
-
+            if (!inputBank.skill1.down)
+            {
                 float dam = Mathf.Lerp(MinDamageCoefficient, MaxDamageCoefficient, _chargeTimer / _maxChargeDuration);
-                string shootSound = dam >= MaxDamageCoefficient ? "Play_RayGunBigClassic" : "Play_RayGun";
-                outer.SetNextState(new RayGunBig(dam, shootSound));
+                StartNextState(dam);
             }
+        }
+
+        protected virtual void StartNextState(float dam)
+        {
+            string shootSound = dam >= MaxDamageCoefficient ? "Play_RayGunBigClassic" : "Play_RayGun";
+            outer.SetNextState(new RayGunChargedFire(dam, shootSound));
         }
 
         private void playMaxChargeEffect() {

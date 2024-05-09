@@ -514,7 +514,8 @@ namespace RA2Mod.Survivors.Chrono
 
         private void AddHooks()
         {
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            Hooks.RoR2.HealthComponent.TakeDamage_Pre += HealthComponent_TakeDamage_Pre;
+            Hooks.RoR2.HealthComponent.TakeDamage_Post += HealthComponent_TakeDamage_Post;
             IL.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamageIL;
 
             IL.EntityStates.GenericCharacterDeath.OnEnter += GenericCharacterDeath_OnEnter1;
@@ -592,7 +593,7 @@ namespace RA2Mod.Survivors.Chrono
             }
         }
 
-        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        private void HealthComponent_TakeDamage_Pre(HealthComponent self, DamageInfo damageInfo)
         {
             //if (damageInfo.HasModdedDamageType(ChronoDamageTypes.vanishingDamage))
             //{
@@ -618,7 +619,10 @@ namespace RA2Mod.Survivors.Chrono
             {
                 AddChronoSickness(self.body);
             }
-            orig(self, damageInfo);
+        }
+
+        private void HealthComponent_TakeDamage_Post(HealthComponent self, DamageInfo damageInfo)
+        {
             if (!damageInfo.rejected)
             {
                 if (damageInfo.HasModdedDamageType(ChronoDamageTypes.chronoDamage))

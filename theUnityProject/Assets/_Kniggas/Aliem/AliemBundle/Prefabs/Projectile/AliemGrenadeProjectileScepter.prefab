@@ -17,6 +17,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: AliemGrenadeProjectileScepter
       objectReference: {fileID: 0}
+    - target: {fileID: 6667090249292508408, guid: e07153054bb2b6d43bcb935db6156a1b,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.7282418
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265936816853420219, guid: e07153054bb2b6d43bcb935db6156a1b,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.3016009
+      objectReference: {fileID: 0}
     - target: {fileID: 7268054146633646865, guid: e07153054bb2b6d43bcb935db6156a1b,
         type: 3}
       propertyPath: ghostPrefab

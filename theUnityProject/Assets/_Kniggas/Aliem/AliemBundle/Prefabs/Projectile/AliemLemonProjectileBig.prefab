@@ -47,6 +47,7 @@ MonoBehaviour:
   offsetForLifetimeExpiredSound: 0
   destroyOnEnemy: 1
   destroyOnWorld: 1
+  impactOnWorld: 1
   timerAfterImpact: 0
   lifetime: 10
   lifetimeAfterImpact: 0
@@ -67,7 +68,12 @@ PrefabInstance:
     - target: {fileID: 2220918672866445434, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}
       propertyPath: m_Radius
-      value: 0.24
+      value: 0.11421077
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774711668604365881, guid: 6658e13b94b72c744b6766dd272ab4bd,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.21700808
       objectReference: {fileID: 0}
     - target: {fileID: 4186879966619110937, guid: 6658e13b94b72c744b6766dd272ab4bd,
         type: 3}

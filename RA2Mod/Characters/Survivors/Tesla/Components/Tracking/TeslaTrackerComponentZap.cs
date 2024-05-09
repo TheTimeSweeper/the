@@ -68,7 +68,7 @@ public class TeslaTrackerComponentZap : MonoBehaviour {
 
         teslaTrackerComponent.SearchEvent -= OnSearch;
     }
-
+        
     private void Primary_onSkillChanged(GenericSkill genericSkill) {
 
         _isMelee = genericSkill.skillDef.skillNameToken == TeslaTrooperSurvivor.TOKEN_PREFIX + "PRIMARY_PUNCH_NAME";

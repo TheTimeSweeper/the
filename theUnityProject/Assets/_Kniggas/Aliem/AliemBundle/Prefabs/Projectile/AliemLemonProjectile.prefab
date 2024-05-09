@@ -36,7 +36,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 29.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7880610295682449118}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,7 +52,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.46
+  m_Radius: 0.23413837
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8611790517450840566
 MonoBehaviour:
@@ -85,7 +86,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!54 &4336098156672240363
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,8 +135,8 @@ MonoBehaviour:
   startSound: 
   cannotBeDeleted: 0
   flightSoundLoop: {fileID: 0}
-  canImpactOnTrigger: 0
-  allowPrediction: 0
+  canImpactOnTrigger: 1
+  allowPrediction: 1
   owner: {fileID: 0}
   procCoefficient: 1
 --- !u!114 &3892064971403492686
@@ -189,7 +190,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  oscillate: 1
+  oscillate: 0
   oscillateMagnitude: 1
   oscillateSpeed: 0
 --- !u!114 &3198832983392041584
@@ -228,3 +229,47 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   hitSoundString: 
   enemyHitSoundString: 
+--- !u!1 &4624140736719127666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7880610295682449118}
+  - component: {fileID: 2774711668604365881}
+  m_Layer: 24
+  m_Name: Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7880610295682449118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624140736719127666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4186879966619110937}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2774711668604365881
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624140736719127666}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5903351
+  m_Center: {x: 0, y: 0, z: 0}

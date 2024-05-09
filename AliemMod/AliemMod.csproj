@@ -20,8 +20,16 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="BepInEx.Core" Version="5.4.19" />
-		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.1-r.1" />
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.*" />
 		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
+		<PackageReference Include="R2API.Core" Version="5.*" />
+		<PackageReference Include="R2API.Prefab" Version="1.*" />
+		<PackageReference Include="R2API.Language" Version="1.*" />
+		<PackageReference Include="R2API.Sound" Version="1.*" />
+		<PackageReference Include="R2API.Loadout" Version="1.*" />
+		<PackageReference Include="R2API.DamageType" Version="1.*" />
+		<PackageReference Include="R2API.RecalculateStats" Version="1.*" />
+		<PackageReference Include="R2API.Unlockable" Version="1.*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -36,9 +44,6 @@
 	  </Reference>
 	  <Reference Include="MMHOOK_RoR2">
 	    <HintPath>..\libs\MMHOOK_RoR2.dll</HintPath>
-	  </Reference>
-	  <Reference Include="R2API">
-	    <HintPath>..\libs\R2API.dll</HintPath>
 	  </Reference>
 	  <Reference Include="RiskOfOptions">
 	    <HintPath>..\libs\RiskOfOptions.dll</HintPath>

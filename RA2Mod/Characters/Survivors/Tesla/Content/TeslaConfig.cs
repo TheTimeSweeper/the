@@ -39,14 +39,13 @@ namespace RA2Mod.Survivors.Tesla
                 20,
                 "Damage Multiplier added when you zap an ally");
 
-
             M3_ChargingUp_DamageAbsorption = Config.BindAndOptions(
                 SectionSkills,
                 "M3_ChargingUp_DamageAbsorption",
                 1.0f,
                 0,
                 1,
-                "How much damage (as a percentage) is completely blocked while charging up. If set to 0, no damage would be blocked." +
+                "How much damage (as a multiplier from 0 to 1) is completely blocked while charging up. If set to 0, no damage would be blocked." +
                 "\nNote that this does not affect how much damage is reflected after the buff expires." +
                 "\nPeople have felt that 100% damage absorption is too strong, but in practice anything lower is still very risky in ror2. I suggest trying other means of balancing if you still feel that way (duration, cooldown, etc)");
 

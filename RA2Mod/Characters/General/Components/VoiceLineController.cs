@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 namespace RA2Mod.General.Components
 {
-    //[System.Serializable]
+    [System.Serializable]
     public class VoiceLineContext
     {
         //[SerializeField]
@@ -115,22 +115,22 @@ namespace RA2Mod.General.Components
 
             if (NetworkServer.active)
             {
-                RpcMove(sound);
+                RpcSound(sound);
             }
             else
             {
-                CmdMove(sound);
+                CmdSound(sound);
             }
         }
 
         [Command]
-        private void CmdMove(string sound)
+        private void CmdSound(string sound)
         {
             Util.PlaySound(sound, gameObject);
         }
 
         [ClientRpc]
-        private void RpcMove(string sound)
+        private void RpcSound(string sound)
         {
             Util.PlaySound(sound, gameObject);
         }

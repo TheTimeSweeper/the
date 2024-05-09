@@ -134,6 +134,7 @@ namespace RA2Mod.Survivors.Desolator
             Modules.Language.PrintOutput("desolator.txt");
 
             DesolatorBuffs.Init(assetBundle);
+            DesolatorDots.Init();
             DesolatorCompat.Init();
             DesolatorDeployables.Init();
 
@@ -546,7 +547,7 @@ namespace RA2Mod.Survivors.Desolator
         protected void AddHooks()
         {
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            Hooks.RoR2.HealthComponent.TakeDamage_Pre += HealthComponent_TakeDamage;
             On.RoR2.BuffCatalog.Init += BuffCatalog_Init;
 
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
@@ -595,7 +596,7 @@ namespace RA2Mod.Survivors.Desolator
             }
         }
 
-        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        private void HealthComponent_TakeDamage(HealthComponent self, DamageInfo damageInfo)
         {
 
             if (DamageAPI.HasModdedDamageType(damageInfo, DesolatorDamageTypes.DesolatorDot) || DamageAPI.HasModdedDamageType(damageInfo, DesolatorDamageTypes.DesolatorDotPrimary))
@@ -619,8 +620,6 @@ namespace RA2Mod.Survivors.Desolator
                     damageInfo.force = Vector3.zero;
                 }
             }
-
-            orig(self, damageInfo);
         }
 
         private int GetCompatibleRadiationBuffs(CharacterBody body)

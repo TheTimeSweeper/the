@@ -98,7 +98,7 @@ namespace RA2Mod.Survivors.Chrono.States
 
             if (castSuccessful)
             {
-                Util.PlaySound("Play_ChronosphereMove", gameObject);
+                Util.PlaySound("Play_Chronosphere_Move", gameObject);
             }
 
             //if (NetworkServer.active)
@@ -126,15 +126,12 @@ namespace RA2Mod.Survivors.Chrono.States
 
         protected override void PlayEnterSounds()
         {
-            Util.PlaySound("Play_ChronosphereSelectStart", chronosphereProjection.gameObject);
-            Util.PlaySound("Play_ChronosphereSelectLoop", chronosphereProjection.gameObject);
+            Util.PlaySound("Play_Chronosphere_StartLoop", chronosphereProjection.gameObject);
         }
         
         protected override void PlayExitSounds()
         {
-
-            Util.PlaySound("Stop_ChronosphereSelectLoop", chronosphereProjection.gameObject);
-            Util.PlaySound("Play_ChronosphereSelectEnd", chronosphereProjection.gameObject);
+            Util.PlaySound("Stop_Chronosphere_Loop", chronosphereProjection.gameObject);
         }
 
         public override void OnSerialize(NetworkWriter writer)

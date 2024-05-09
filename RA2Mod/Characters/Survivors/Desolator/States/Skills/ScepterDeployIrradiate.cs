@@ -11,7 +11,7 @@ namespace RA2Mod.Survivors.Desolator.States
         protected override void SetNextState()
         {
             _complete = true;
-            var state = new ScepterDeployIrradiate { aimRequest = this.aimRequest };
+            ScepterDeployIrradiate state = new ScepterDeployIrradiate { aimRequest = this.aimRequest, activatorSkillSlot = activatorSkillSlot };
             outer.SetNextState(state);
         }
 

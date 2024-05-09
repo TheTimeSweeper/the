@@ -644,7 +644,7 @@ namespace RA2Mod.Survivors.Tesla
             //On.RoR2.MasterSummon.Perform += MasterSummon_Perform;
 
             //todo teslamove global hooks
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            Hooks.RoR2.HealthComponent.TakeDamage_Pre += HealthComponent_TakeDamage;
 
             On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
 
@@ -795,9 +795,8 @@ namespace RA2Mod.Survivors.Tesla
         #endregion tower hacks
 
         #region conductive
-        private static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        private static void HealthComponent_TakeDamage(HealthComponent self, DamageInfo damageInfo)
         {
-
             CheckConductive(self, damageInfo);
 
             bool bypassArmor = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
@@ -824,8 +823,6 @@ namespace RA2Mod.Survivors.Tesla
                     }
                 }
             }
-
-            orig(self, damageInfo);
         }
 
         private static void CheckConductive(HealthComponent self, DamageInfo damageInfo)

@@ -140,10 +140,14 @@ public class TeslaTrackerComponent : MonoBehaviour {
 
         for (int i = 0; i < hits.Length; i++) {
 
+            if (hits[i].collider == null)
+                continue;
             HurtBox hurtBox = hits[i].collider.GetComponent<HurtBox>();
             if (hurtBox == null)
                 continue;
             if (hurtBox.healthComponent == null)
+                continue; 
+            if (hurtBox.hurtBoxGroup == null)
                 continue;
 
             bool isTower = hurtBox.hurtBoxGroup && hurtBox.hurtBoxGroup.GetComponent<ZappableTower>();

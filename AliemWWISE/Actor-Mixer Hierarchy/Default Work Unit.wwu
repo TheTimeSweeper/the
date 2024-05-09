@@ -406,6 +406,127 @@
 										<ActiveSource Name="Heavy Swing Hit" ID="{DE5F6BD0-60F3-46BE-9C0F-969BCF7D651E}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="AliemEnergySwordCharged" ID="{0DB8008E-8859-4044-BE1A-B8F34CD7BA4D}" ShortID="660432150">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7D024A2C-47CE-429F-93DD-A022C657EDC7}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="126"/>
+															<Property Name="Min" Type="Real64" Value="-152"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="swingEnergySwordCharged" ID="{E1928C9E-BC69-44F9-808C-DD1B0DBF2F19}">
+											<Language>SFX</Language>
+											<AudioFile>swingEnergySwordCharged.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1063021362"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="swingEnergySwordCharged" ID="{E1928C9E-BC69-44F9-808C-DD1B0DBF2F19}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<RandomSequenceContainer Name="AliemEnergySword" ID="{1BFA3688-6C7F-44B0-8037-B071F801DF76}" ShortID="945159007">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0CECB1CF-DB26-4EC6-8734-3419EB5B10B3}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="126"/>
+															<Property Name="Min" Type="Real64" Value="-152"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="swingEnergySword1" ID="{34F08717-907B-4148-B595-0BF00E484792}" ShortID="844609990">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="swingEnergySword1" ID="{7F9B4586-0C46-44AA-A4F4-AAD96568B108}">
+													<Language>SFX</Language>
+													<AudioFile>swingEnergySword1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="478240976"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="swingEnergySword1" ID="{7F9B4586-0C46-44AA-A4F4-AAD96568B108}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="swingEnergySword2" ID="{A7F4AFBC-6825-4374-A27E-6C46EF786B90}" ShortID="1068132618">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="swingEnergySword2" ID="{9EA7835F-0C9A-4A07-BE59-44D66CB53391}">
+													<Language>SFX</Language>
+													<AudioFile>swingEnergySword2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="152158963"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="swingEnergySword2" ID="{9EA7835F-0C9A-4A07-BE59-44D66CB53391}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>

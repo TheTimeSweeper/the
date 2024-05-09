@@ -12,7 +12,7 @@ namespace RA2Mod.Survivors.Desolator.States
             base.OnEnter();
 
             //todo deso anim legs
-            PlayCrossfade("FullBody, Override", "UnDeploy", "Deploy.playbackRate", 0.3f, 0.05f);
+            PlayCrossfade("FullBody, Override", "DesolatorUnDeploy", "Deploy.playbackRate", 0.3f, 0.05f);
 
             PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
             PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);

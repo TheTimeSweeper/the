@@ -1,14 +1,15 @@
 ﻿using EntityStates;
 using System;
+using UnityEngine;
 
-namespace ModdedEntityStates.Aliem {
+namespace ModdedEntityStates.Aliem
+{
+    public class RayGunFire : GenericProjectileBaseState {
 
-    public class RayGun : GenericProjectileBaseState {
+		public virtual float BaseDuration => 0.3f;
+		public virtual float BaseDelayDuration => 0.00f;
 
-		public static float BaseDuration = 0.3f;
-		public static float BaseDelayDuration = 0.00f;
-
-		public static float DamageCoefficient = 2.0f;
+		public static float BaseDamageCoefficient = 2.0f;
 		//needs to be set in the projectilecontroller component
 		//public static float procCoefficient = 1f;
 
@@ -16,15 +17,18 @@ namespace ModdedEntityStates.Aliem {
 		
 		public static float ProjectileForce = 80f;
 
-		public override void OnEnter() {
+        public virtual GameObject projectile => Modules.Projectiles.RayGunProjectilePrefab;
 
-			base.projectilePrefab = Modules.Projectiles.RayGunProjectilePrefab;
+        public virtual string soundString => "Play_RayGun";
+
+        public override void OnEnter() {
+			base.projectilePrefab = projectile;
 			//base.effectPrefab
 
 			base.baseDuration = BaseDuration;
 			base.baseDelayBeforeFiringProjectile = BaseDelayDuration;
 			
-			base.damageCoefficient = DamageCoefficient;
+			base.damageCoefficient = BaseDamageCoefficient;
 			base.force = ProjectileForce;
 			//base.projectilePitchBonus = 0;
 			//min/maxSpread
@@ -32,7 +36,7 @@ namespace ModdedEntityStates.Aliem {
 			base.bloom = 10;
 
 			//targetmuzzle
-			base.attackSoundString = "Play_RayGun";
+			base.attackSoundString = soundString;
 
 			ModifyState();
 

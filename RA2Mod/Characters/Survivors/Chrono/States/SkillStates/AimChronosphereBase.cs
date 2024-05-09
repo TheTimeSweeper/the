@@ -9,7 +9,7 @@ namespace RA2Mod.Survivors.Chrono.States
         public static float BaseRadius => ChronoConfig.M3_Chronosphere_Radius.Value;
 
         public static string EnterSoundString = "Play_ChronosphereHumStart";
-        public static string LoopSoundString = "Play_ChronosphereHumLoop";
+        //public static string LoopSoundString = "Play_ChronosphereHumLoop";
         public static string LoopStopSoundString = "Stop_ChronosphereHumLoop";
         public static string ExitSoundString = "Play_ChronosphereHumEnd";
         public float skillsPlusMulti = 1;
@@ -53,13 +53,13 @@ namespace RA2Mod.Survivors.Chrono.States
         protected virtual void PlayEnterSounds()
         {
             Util.PlaySound(EnterSoundString, gameObject);
-            Util.PlaySound(LoopSoundString, gameObject);
+            //Util.PlaySound(LoopSoundString, gameObject);
         }
 
         protected virtual void PlayExitSounds()
         {
             Util.PlaySound(LoopStopSoundString, gameObject);
-            Util.PlaySound(EnterSoundString, gameObject);
+            Util.PlaySound(ExitSoundString, gameObject);
         }
 
         public override void FixedUpdate()

@@ -1,12 +1,15 @@
 ﻿using R2API;
 using RoR2;
 using RoR2.Projectile;
+using System;
 using UnityEngine;
 
 namespace Modules {
     internal static class Projectiles {
         internal static GameObject RayGunProjectilePrefab;
         internal static GameObject RayGunProjectilePrefabBig;
+        internal static GameObject SwordProjectilePrefab;
+        internal static GameObject SwordProjectilePrefabBig;
         internal static GameObject GrenadeProjectile;
         internal static GameObject GrenadeProjectileScepter;
 
@@ -18,18 +21,32 @@ namespace Modules {
             RayGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemLemonProjectileBig");
             RayGunProjectilePrefabBig.GetComponent<ProjectileImpactExplosion>().impactEffect = Assets.m2EffectPrefab;
 
+            SwordProjectilePrefab = JankyLoadAliemPrefab("AliemSwordProjectile");
+            SwordProjectilePrefabBig = JankyLoadAliemPrefab("AliemSwordProjectileBig");
+
             GrenadeProjectile = JankyLoadAliemPrefab("AliemGrenadeProjectile");
             GrenadeProjectile.GetComponent<ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXToolbotQuick");
             
             GrenadeProjectileScepter = JankyLoadAliemPrefab("AliemGrenadeProjectileScepter");
             GrenadeProjectileScepter.GetComponent<ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXGreaterWisp");
+
+            FunnyMaterial("AliemSwordProjectileGhost");
+            FunnyMaterial("AliemSwordProjectileGhostBig");
+        }
+
+        private static void FunnyMaterial(string assName)
+        {
+            GameObject prefab = Assets.LoadAsset<GameObject>(assName).InstantiateClone(assName, true);
+
+            prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetHotpooMaterial();
+            prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetCull();
         }
 
         public static GameObject JankyLoadAliemPrefab(string assName) {
 
-            GameObject prefab = Assets.LoadAsset<GameObject>(assName);
-            R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
-
+            GameObject prefab = Assets.LoadAsset<GameObject>(assName).InstantiateClone(assName, true);
+            //R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
+            
             Content.AddProjectilePrefab(prefab);
 
             return prefab;

@@ -131,7 +131,7 @@ namespace RA2Mod.Survivors.Chrono.States
             base.OnExit();
 
             vanishTether?.Dispose();
-            Util.PlaySound("Stop_ChronoAttackShort", gameObject);
+            Util.PlaySound("Stop_TetherLoop", gameObject);
         }
 
         public override void Update()

@@ -57,6 +57,10 @@ namespace AliemMod.Content.Survivors {
                 {
                     childName = "MeshBody",
                 },
+                new CustomRendererInfo
+                {
+                    childName = "MeshKnife",
+                },
         };
 
         public override UnlockableDef characterUnlockableDef => null;
@@ -145,12 +149,11 @@ namespace AliemMod.Content.Survivors {
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
             
-            //example of how to create a hitbox
-            //Transform swordHitbox = childLocator.FindChild("SwordHitbox");
-            //Prefabs.SetupHitbox(model, swordHitbox, "Sword");
-
             Transform leapHitbox = childLocator.FindChild("LeapHitbox");
             Prefabs.SetupHitbox(model, leapHitbox, "Leap");
+
+            Transform knifeHitbox = childLocator.FindChild("KnifeHitbox");
+            Prefabs.SetupHitbox(model, knifeHitbox, "Knife");
         }
     
 
@@ -162,7 +165,7 @@ namespace AliemMod.Content.Survivors {
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_DESCRIPTION",
                                                                               Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
-                                                                              new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGun)),
+                                                                              new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunFireUncharged)),
                                                                               "Weapon",
                                                                               true));
 
@@ -181,11 +184,19 @@ namespace AliemMod.Content.Survivors {
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInstant)),
                                                                               "Weapon",
                                                                               true));
+
+            SkillDef primaryInputsSwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_sword_inputs",
+                                                                              ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_NAME",
+                                                                              ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_DESCRIPTION",
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordInputs)),
+                                                                              "Slide",
+                                                                              true));
             primaryInstantSkillDef.mustKeyPress = true;
 
             Skills.AddPrimarySkills(bodyPrefab, primarySimpleGunSkillDef);
             if (AliemConfig.Cursed.Value) {
-                Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef, primaryInstantSkillDef);
+                Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef, primaryInstantSkillDef, primaryInputsSwordSkillDef);
             }
             #endregion
 
@@ -195,7 +206,7 @@ namespace AliemMod.Content.Survivors {
                 skillNameToken = ALIEM_PREFIX + "SECONDARY_GUN_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_GUN_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSecondary"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunBig)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -342,7 +353,7 @@ namespace AliemMod.Content.Survivors {
 
             #region DefaultSkin
             //this creates a SkinDef with all default fields
-            SkinDef defaultSkin = Skins.CreateSkinDef("DEFAULT_SKIN",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
                 defaultRendererinfos,
                 model);
@@ -416,7 +427,7 @@ namespace AliemMod.Content.Survivors {
 
             string token = $"{ALIEM_PREFIX}SKIN_{skinColor.ToUpperInvariant()}";
 
-            SkinDef skinDef = Skins.CreateSkinDef(skinColor,
+            SkinDef skinDef = Modules.Skins.CreateSkinDef(skinColor,
                                                   CreateRecolorIcon(color),
                                                   defaultSkin.rendererInfos,
                                                   defaultSkin.rootObject,

@@ -389,7 +389,7 @@
 												</Action>
 											</ChildrenList>
 										</Event>
-										<Event Name="Stop_ChronosphereAlt_Loop" ID="{1A4B7365-C548-4C7C-A7AE-1826B2A26CC5}">
+										<Event Name="Stop_ChronosphereAlt_JustLoop" ID="{1A4B7365-C548-4C7C-A7AE-1826B2A26CC5}">
 											<Comment>not necesssary</Comment>
 											<ChildrenList>
 												<Action Name="" ID="{6E99AA50-A72F-465D-AFBC-D7D7186C9822}" ShortID="139791763">

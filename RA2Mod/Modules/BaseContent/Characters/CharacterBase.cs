@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,6 +45,30 @@ namespace RA2Mod.Modules.Characters
         public virtual GameObject characterModelObject       {get; protected set;}
         public virtual CharacterModel prefabCharacterModel   {get; protected set;}
 
+        private BodyIndex? _lazyBodyIndex;
+        public BodyIndex bodyIndex
+        {
+            get
+            {
+                if (_lazyBodyIndex == null)
+                {
+                    if(bodyPrefab == null)
+                    {
+                        Log.Error("Cannot get BodyIndex. Body has not been created.");
+                        return default(BodyIndex);
+                    }
+                    BodyIndex bodyIndex = bodyPrefab.GetComponent<CharacterBody>().bodyIndex;
+                    if (bodyIndex == default(BodyIndex)) {
+                        Log.Error("Cannot get BodyIndex. Body has not been registered.");
+                        return bodyIndex;
+                    }
+
+                    _lazyBodyIndex = bodyIndex;
+                }
+                return _lazyBodyIndex.Value;
+            }
+        }
+
         public virtual void Initialize()
         {
             instance = this as T;
@@ -55,7 +80,7 @@ namespace RA2Mod.Modules.Characters
                 Log.CurrentTime($"{bodyName} assetbundle loaded");
                 assetBundle = loadedAssetBundle;
 
-                ContentPacks.asyncLoadCoroutines.Add(LoadAssetsBeforeCharacterCreation());
+                ContentPacks.asyncLoadCoroutines.Add(LoadAssetsThenInitializeCharacter());
                 ContentPacks.asyncLoadCoroutines.Add(_bodyInfo.FinalizeBodyInfoAsync(assetBundle));
                 if(_bodyInfo.asyncLoads != null)
                 {
@@ -69,7 +94,7 @@ namespace RA2Mod.Modules.Characters
             return null;
         }
 
-        public virtual IEnumerator LoadAssetsBeforeCharacterCreation()
+        public virtual IEnumerator LoadAssetsThenInitializeCharacter()
         {
             List<IEnumerator> subEnumerators = GetAssetBundleInitializedCoroutines();
             if (subEnumerators != null)
@@ -80,25 +105,6 @@ namespace RA2Mod.Modules.Characters
                 }
             }
             InitializeCharacter();
-            yield break;
-        }
-
-        public virtual List<IEnumerator> GetCharacterInitializedCoroutines()
-        {
-            return null;
-        }
-
-        public virtual IEnumerator LoadAssetsAfterCharacterCreation()
-        {
-            List<IEnumerator> subEnumerators = GetCharacterInitializedCoroutines();
-            if (subEnumerators != null)
-            {
-                for (int i = 0; i < subEnumerators.Count; i++)
-                {
-                    while (subEnumerators[i].MoveNext()) yield return null;
-                }
-            }
-            OnCharacterInitialized();
             yield break;
         }
 
@@ -113,7 +119,7 @@ namespace RA2Mod.Modules.Characters
         {
             ContentPacks.asyncLoadCoroutines.Add(Prefabs.LoadCharacterModelAsync(assetBundle, modelPrefabName, (modelResult) =>
             {
-                characterModelObject = modelResult;
+                characterModelObject = modelResult.InstantiateClone(modelPrefabName);
 
                 ContentPacks.asyncLoadCoroutines.Add(Prefabs.CloneCharacterBodyAsync(characterModelObject, _bodyInfo, (bodyResult) =>
                 {
@@ -126,7 +132,7 @@ namespace RA2Mod.Modules.Characters
                     
                     InitializeItemDisplays();
 
-                    ContentPacks.asyncLoadCoroutines.Add(LoadAssetsAfterCharacterCreation());
+                    ContentPacks.asyncLoadCoroutines.Add(LoadAssetsThenFinalizeCharacter());
                 }));
             }));
 
@@ -148,6 +154,25 @@ namespace RA2Mod.Modules.Characters
             {
                 itemDisplays.SetItemDisplays(prefabCharacterModel.itemDisplayRuleSet);
             }
+        }
+
+        public virtual List<IEnumerator> GetCoroutinesAfterPrefabCreation()
+        {
+            return null;
+        }
+
+        public virtual IEnumerator LoadAssetsThenFinalizeCharacter()
+        {
+            List<IEnumerator> subEnumerators = GetCoroutinesAfterPrefabCreation();
+            if (subEnumerators != null)
+            {
+                for (int i = 0; i < subEnumerators.Count; i++)
+                {
+                    while (subEnumerators[i].MoveNext()) yield return null;
+                }
+            }
+            OnCharacterInitialized();
+            yield break;
         }
 
         public abstract void InitializeEntityStateMachines();

@@ -31,6 +31,9 @@ namespace RA2Mod.Survivors.Desolator.Compat
             //Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "SPECIAL_VANISH_DRIVER_DESCRIPTION", $"Focus your rifle for up to {Tokens.DamageValueText(DriverCompat.DriverGunM2Damage.Value * driverTicks)}. An enemy below the {Tokens.UtilityText("Chrono Sickness")} threshold will vanish from existence.");
             #endregion tokens
 
+            Content.AddEntityState(typeof(DriverRadBeam));
+            Content.AddEntityState(typeof(DriverDeployEnter));
+
             if (General.GeneralConfig.Debug.Value)
             {
                 On.RoR2.CharacterBody.Update += CharacterBody_Update;
@@ -63,7 +66,7 @@ namespace RA2Mod.Survivors.Desolator.Compat
                                                        DesolatorSurvivor.TOKEN_PREFIX + "PRIMARY_BEAM_NAME",
                                                        DesolatorSurvivor.TOKEN_PREFIX + "PRIMARY_BEAM_DESCRIPTION",
                                                        assetBundle.LoadAsset<Sprite>("texDesolatorSkillPrimary"),
-                                                       new EntityStates.SerializableEntityStateType(typeof(RadBeam)),
+                                                       new EntityStates.SerializableEntityStateType(typeof(DriverRadBeam)),
                                                        "Weapon",
                                                        false));
 
@@ -73,7 +76,7 @@ namespace RA2Mod.Survivors.Desolator.Compat
                 skillNameToken = DesolatorSurvivor.TOKEN_PREFIX + "SPECIAL_DEPLOY_NAME",
                 skillDescriptionToken = DesolatorSurvivor.TOKEN_PREFIX + "SPECIAL_DEPLOY_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texDesolatorSkillSpecial"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployEnter)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DriverDeployEnter)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 12f,
@@ -111,6 +114,24 @@ namespace RA2Mod.Survivors.Desolator.Compat
             RobDriver.DriverWeaponCatalog.AddWeapon(desolatorGunWeaponDef);
 
             desolatorGunIndex = desolatorGunWeaponDef.index;
+        }
+
+        public class DriverRadBeam : RadBeam
+        {
+            public override string muzzleString => "ShotgunMuzzle";
+
+            public override void PlayShootAnimation()
+            {
+                PlayAnimation("Gesture, Override", "FireTwohand");
+                GetComponent<DriverController>().StartTimer();
+            }
+        }
+
+        public class DriverDeployEnter : DeployEnter
+        {
+            protected override void PlayCannonAnimations(Animator animator)
+            {
+            }
         }
     }
 }

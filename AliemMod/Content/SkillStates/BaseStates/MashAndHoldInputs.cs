@@ -3,15 +3,15 @@ using RoR2;
 using UnityEngine;
 
 namespace ModdedEntityStates.Aliem {
-    public class MashAndHoldInputs : BaseSkillState {
+    public abstract class MashAndHoldInputs : BaseSkillState {
 		
 		protected virtual string StateMachineName => "Weapon";
 
-		protected virtual EntityState initialMashState => null;
+		protected abstract EntityState initialMashState { get; }
 
-		protected virtual EntityState mashState => null;
+		protected abstract EntityState mashState { get; }
 		protected virtual InterruptPriority mashInterruptPriority => InterruptPriority.Any;
-		protected virtual EntityState holdState => null;
+		protected abstract EntityState holdState { get; }
 		protected virtual InterruptPriority holdInterruptPriority => InterruptPriority.Skill;
 
 		protected virtual bool RepeatHoldState => true;

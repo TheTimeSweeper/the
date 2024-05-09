@@ -64,18 +64,11 @@ namespace RA2Mod.Survivors.GI
             base.Initialize();
         }
 
-        public override void InitializeCharacter()
-        {
-            //need the character unlockable before you initialize the survivordef
-            //GIUnlockables.Init();
-
-            base.InitializeCharacter();
-        }
-
         public override void OnCharacterInitialized()
         {
             Config.ConfigureBody(prefabCharacterBody, GIConfig.SectionBody);
 
+            //GIUnlockables.Init();
             GIConfig.Init();
 
             GIStates.Init();
@@ -93,7 +86,17 @@ namespace RA2Mod.Survivors.GI
 
             AddHooks();
         }
-        
+
+        protected override void InitializeSurvivor()
+        {
+            base.InitializeSurvivor();
+
+            VoiceLineInLobby voiceLineController = displayPrefab.AddComponent<VoiceLineInLobby>();
+            voiceLineController.voiceLineContext = new VoiceLineContext("GI", 6, 6, 6);
+
+            displayPrefab.AddComponent<MenuSoundComponent>().sound = "Play_GIBarricade";
+        }
+
         private void AdditionalBodySetup()
         {
             //AddHitboxes();

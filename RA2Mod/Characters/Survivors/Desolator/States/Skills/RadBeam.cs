@@ -14,6 +14,8 @@ namespace RA2Mod.Survivors.Desolator.States
 
         public float skillsPlusDurationMultiplier = 1;
 
+        public virtual string muzzleString => "MuzzleGauntlet";
+
         public override void OnEnter() {
 
             EntityStates.Toolbot.FireSpear goodstate = new EntityStates.Toolbot.FireSpear();
@@ -33,18 +35,21 @@ namespace RA2Mod.Survivors.Desolator.States
             spreadBloomValue = 2000f;//uh
             recoilAmplitudeY = 1;
             recoilAmplitudeX = 1;
-            muzzleName = "MuzzleGauntlet";
+            muzzleName = muzzleString;
             fireSoundString = "Play_Desolator_Beam_Short";
             muzzleFlashPrefab = goodstate.muzzleFlashPrefab;
             tracerEffectPrefab = DesolatorAssets.DesolatorTracerSnipe;
             hitEffectPrefab = DesolatorAssets.IrradiatedImpactEffect;
             base.OnEnter();
 
-            //PlayCrossfade("Gesture Right Arm, Override", "HandOut", 0.05f);
-            //GetModelAnimator().SetBool("isHandOut", true);
-            //PlayAnimation("Gesture, Additive", "Shock");
+            PlayShootAnimation();
+        }
+
+        public virtual void PlayShootAnimation()
+        {
             PlayAnimation("Desolator, Override", "DesolatorShoot");
         }
+        
         public override void ModifyBullet(BulletAttack bulletAttack) {
             //bulletAttack.damageType = DamageType.BlightOnHit;
             bulletAttack.falloffModel = BulletAttack.FalloffModel.None;

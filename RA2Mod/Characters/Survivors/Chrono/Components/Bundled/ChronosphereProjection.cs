@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using RoR2.Audio;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -15,6 +16,9 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         [SerializeField]
         private ObjectScaleCurve sphere;
+
+        [SerializeField]
+        private LoopSoundDef loopSoundDef;
 
         private MaterialPropertyBlock block = new MaterialPropertyBlock();
         private float endTimer = -1;
@@ -40,6 +44,10 @@ namespace RA2Mod.Survivors.Chrono.Components
         {
             sphere.transform.localScale = Vector3.one * radius * 2;
             //sphere.enabled = true;
+            if (loopSoundDef)
+            {
+                Util.PlaySound(loopSoundDef.startSoundName, gameObject);
+            }
         }
 
         public void AnimateShader(bool shouldShow, float delay = 0, float showTime = 1, bool destroyonEnd = false)
@@ -51,6 +59,11 @@ namespace RA2Mod.Survivors.Chrono.Components
             destroyOnEnd = destroyonEnd;
 
             endTimer = 0;
+
+            if (destroyonEnd && loopSoundDef)
+            {
+                Util.PlaySound(loopSoundDef.stopSoundName, gameObject);
+            }
         }
 
 

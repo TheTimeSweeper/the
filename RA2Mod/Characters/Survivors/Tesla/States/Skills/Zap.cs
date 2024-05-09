@@ -137,8 +137,6 @@ namespace RA2Mod.Survivors.Tesla.States
 
             _tracker = GetComponent<TeslaTrackerComponentZap>();
 
-            Log.Warning($"enterzap {_weaponComponent} {_tracker}");
-
             _muzzleTransform = this.GetModelChildLocator(true).FindChild("MuzzleGauntlet");
             if (_muzzleTransform == null)
                 _muzzleTransform = transform;
@@ -204,7 +202,6 @@ namespace RA2Mod.Survivors.Tesla.States
         {
             base.OnExit();
 
-            Log.Warning("exitzap");
             GetModelAnimator().SetBool("isHandOut", false);
         }
 
@@ -241,9 +238,6 @@ namespace RA2Mod.Survivors.Tesla.States
 
         protected override void OnCastFixedUpdate()
         {
-
-            Log.Warning($"terg {_targetHurtbox}");
-
             if (_targetHurtbox)
             {
                 while (_currentCasts < totalOrbCasts && fixedAge > nextCastTime)
@@ -261,8 +255,6 @@ namespace RA2Mod.Survivors.Tesla.States
 
         private void FireZap()
         {
-            Log.Warning("firezap");
-
             if (_attackingTeammate)
             {
                 FireZapTeammate();
