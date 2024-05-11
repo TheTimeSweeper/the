@@ -90,7 +90,10 @@ namespace ModdedEntityStates
 
         protected virtual void PlaySwingEffect()
         {
-            EffectManager.SimpleMuzzleFlash(swingEffectPrefab, gameObject, muzzleString, false);
+            if (swingEffectPrefab)
+            {
+                EffectManager.SimpleMuzzleFlash(swingEffectPrefab, gameObject, muzzleString, false);
+            }
         }
 
         protected virtual void OnHitEnemyAuthority()

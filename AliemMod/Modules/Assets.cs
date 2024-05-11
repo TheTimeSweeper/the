@@ -56,6 +56,8 @@ namespace Modules {
                 {
                     mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
                 }
+
+                AliemPlugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(mainAssetBundle));
             }
         }
         
@@ -162,9 +164,9 @@ namespace Modules {
 
             foreach (LineRenderer rend in newEffect.GetComponentsInChildren<LineRenderer>()) {
                 if (rend) {
-                    Material mat = UnityEngine.Object.Instantiate<Material>(rend.material);
+                    Material mat = UnityEngine.Object.Instantiate<Material>(rend.sharedMaterial);
                     mat.SetColor("_TintColor", beamColor);
-                    rend.material = mat;
+                    rend.sharedMaterial = mat;
 
                     if (lineColor != null) {
                         rend.startColor = lineColor.Value;
@@ -234,9 +236,9 @@ namespace Modules {
             
             if (color.HasValue) {
                 foreach(var rend in newTracer.GetComponentsInChildren<ParticleSystemRenderer>()) {
-                    rend.material.SetColor("_MainColor", color.Value);
-                    rend.material.SetColor("_Color", color.Value);
-                    rend.material.SetColor("_TintColor", color.Value);
+                    rend.sharedMaterial.SetColor("_MainColor", color.Value);
+                    rend.sharedMaterial.SetColor("_Color", color.Value);
+                    rend.sharedMaterial.SetColor("_TintColor", color.Value);
                 }
             }
 

@@ -1,4 +1,5 @@
 ﻿using AliemMod.Components;
+using AliemMod.Components.Bundled;
 using BepInEx.Configuration;
 using KinematicCharacterController;
 using Modules;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static RoR2.CharacterSelectSurvivorPreviewDisplayController;
 
 namespace AliemMod.Content.Survivors {
 
@@ -51,11 +53,15 @@ namespace AliemMod.Content.Survivors {
         {
                 new CustomRendererInfo
                 {
+                    childName = "MeshBody",
+                },
+                new CustomRendererInfo
+                {
                     childName = "MeshBlaster",
                 },
                 new CustomRendererInfo
                 {
-                    childName = "MeshBody",
+                    childName = "MeshWeapon2",
                 },
                 new CustomRendererInfo
                 {
@@ -75,6 +81,7 @@ namespace AliemMod.Content.Survivors {
         private static UnlockableDef masterySkinUnlockableDef;
 
         public static AliemSurvivor instance;
+        private CharacterSelectSurvivorPreviewDisplayController cssPreviewDisplayController;
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
@@ -92,6 +99,8 @@ namespace AliemMod.Content.Survivors {
             CreateBurrowEffect();
 
             FixMotorCollider();
+
+            cssPreviewDisplayController = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
 
             //todo animate popping out of the ground for css
             //displayPrefab.AddComponent<AliemMenuSound>();
@@ -169,6 +178,7 @@ namespace AliemMod.Content.Survivors {
                                                                               "Weapon",
                                                                               true));
 
+
             SkillDef primaryInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_inputs",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
@@ -177,13 +187,14 @@ namespace AliemMod.Content.Survivors {
                                                                               "Slide",
                                                                               true));
 
-            SkillDef primaryInstantSkillDef= Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_instant",
+            SkillDef primaryInstantSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_instant",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_DESCRIPTION",
                                                                               Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInstant)),
                                                                               "Weapon",
                                                                               true));
+            primaryInstantSkillDef.mustKeyPress = true;
 
             SkillDef primaryInputsSwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_sword_inputs",
                                                                               ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_NAME",
@@ -192,12 +203,18 @@ namespace AliemMod.Content.Survivors {
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordInputs)),
                                                                               "Slide",
                                                                               true));
-            primaryInstantSkillDef.mustKeyPress = true;
 
             Skills.AddPrimarySkills(bodyPrefab, primarySimpleGunSkillDef);
             if (AliemConfig.Cursed.Value) {
                 Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef, primaryInstantSkillDef, primaryInputsSwordSkillDef);
             }
+
+            AddWeaponSkin(primarySimpleGunSkillDef, 0);
+            AddWeaponSkin(primaryInputsSkillDef, 0);
+            AddWeaponSkin(primaryInstantSkillDef, 0);
+            AddWeaponSkin(primaryInputsSwordSkillDef, 1);
+            FinalizeCSSPreviewDisplayController();
+
             #endregion
 
             #region Secondary
@@ -280,7 +297,7 @@ namespace AliemMod.Content.Survivors {
 
             Skills.AddUtilitySkills(bodyPrefab, UtilityLeapSkillDef);
             #endregion
-
+            
             #region Special
             SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "aliem_special_grenade",
@@ -312,6 +329,17 @@ namespace AliemMod.Content.Survivors {
                 InitializeScepterSkills();
             }
         }
+
+        private void AddWeaponSkin(SkillDef skillDef, int skin)
+        {
+            bodyCharacterModel.GetComponent<WeaponSkinController>().AddWeaponSkin(skillDef, skin);
+
+            SkillChangeResponse skillResponse = cssPreviewDisplayController.skillChangeResponses[skin];
+            skillResponse.triggerSkillFamily = bodyPrefab.GetComponent<SkillLocator>().primary.skillFamily;
+            skillResponse.triggerSkill = skillDef;
+
+            HG.ArrayUtils.ArrayAppend(ref cssPreviewDisplayController.skillChangeResponses, skillResponse);
+        }
         
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
@@ -341,13 +369,11 @@ namespace AliemMod.Content.Survivors {
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterBombSkillDef, "AliemBody", SkillSlot.Special, 0);
         }
         public override void InitializeSkins() {
-            GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
-            CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
-            ModelSkinController skinController = model.AddComponent<ModelSkinController>();
-            ChildLocator childLocator = model.GetComponent<ChildLocator>();
+            ModelSkinController skinController = bodyCharacterModel.gameObject.AddComponent<ModelSkinController>();
+            ChildLocator childLocator = bodyCharacterModel.GetComponent<ChildLocator>();
 
-            CharacterModel.RendererInfo[] defaultRendererinfos = characterModel.baseRendererInfos;
+            CharacterModel.RendererInfo[] defaultRendererinfos = bodyCharacterModel.baseRendererInfos;
             
             List<SkinDef> skins = new List<SkinDef>();
 
@@ -356,7 +382,7 @@ namespace AliemMod.Content.Survivors {
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
                 defaultRendererinfos,
-                model);
+                bodyCharacterModel.gameObject);
             
             //these are your Mesh Replacements. The order here is based on your CustomRendererInfos from earlier
             //pass in meshes as they are named in your assetbundle
@@ -432,7 +458,7 @@ namespace AliemMod.Content.Survivors {
                                                   defaultSkin.rendererInfos,
                                                   defaultSkin.rootObject,
                                                   masterySkinUnlockableDef);
-            skinDef.rendererInfos[1].defaultMaterial = material;
+            skinDef.rendererInfos[0].defaultMaterial = material;
 
             R2API.LanguageAPI.Add(token, skinColor);
             return skinDef;

@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &133744251452000566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5204955767275340709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -179576646, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 0}
+  skillChangeResponses:
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3468472123149245946}
+          m_MethodName: ApplyWeaponSkin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 3f7f0cec0ce302243a5bc3cdaa7aff94,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: RoR2.SkinDef, RoR2
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: blaster
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3468472123149245946}
+          m_MethodName: ApplyWeaponSkin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 3fb873c9d4586c04aa914bf0b58eb84c,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: RoR2.SkinDef, RoR2
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: blaster
+            m_BoolArgument: 0
+          m_CallState: 2
+  skinChangeResponses: []
 --- !u!1001 &7966621711093067791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,3 +282,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dad81005b208874b94370acc331606e, type: 3}
+--- !u!1 &5204955767275340709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2789020704342586282, guid: 2dad81005b208874b94370acc331606e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966621711093067791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3468472123149245946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6822211506981711349, guid: 2dad81005b208874b94370acc331606e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7966621711093067791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5204955767275340709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707e3830074da7442a724a60ffff95e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

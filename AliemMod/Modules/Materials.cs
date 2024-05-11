@@ -50,6 +50,13 @@ namespace Modules {
                 tempMat.shader = Assets.hotpoo;
                 return tempMat;
             }
+
+            string name = tempMat.shader.name.ToLowerInvariant();
+            if (!name.StartsWith("standard") && !name.StartsWith("autodesk"))
+            {
+                Helpers.LogVerbose($"{tempMat.name} is not unity standard shader. aborting material conversion");
+                return tempMat;
+            }
             #endregion
 
             float? bumpScale = null;

@@ -235,7 +235,7 @@ namespace Modules {
                         Material mat = customInfos[i].material;
 
                         if (mat == null) {
-                            mat = rend.material.SetHotpooMaterial();
+                            mat = rend.sharedMaterial.SetHotpooMaterial();
                         }
 
                         rendererInfos.Add(new CharacterModel.RendererInfo {
