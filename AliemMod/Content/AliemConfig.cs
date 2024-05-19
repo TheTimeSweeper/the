@@ -11,10 +11,9 @@ namespace AliemMod.Content
 
         public static ConfigEntry<bool> Cursed;
         public static ConfigEntry<bool> AlwaysRide;
-
-        //examples
-        public static ConfigEntry<float> SomeFloatConfig;
-        public static ConfigEntry<float> SomeFloatConfigWithSlider;
+        public static ConfigEntry<float> rideOffset;
+        public static ConfigEntry<float> rideLerpSpeed;
+        public static ConfigEntry<float> rideClimbAnimTime;
 
         public static void ReadConfig()
         {
@@ -39,21 +38,25 @@ namespace AliemMod.Content
                 false,
                 "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
 
-            //creates a float option in RiskOfOptions using a default slider with range 0-20
-            SomeFloatConfig = Config.BindAndOptions(
+            rideOffset = Config.BindAndOptions(
                 sectionGeneral,
-                "Name of Float Config",
-                2f,
-                "description of float config");
+                "RideOFfset",
+                0.5f,
+                "");
 
-            //creates a float option in RiskOfOptions using a slider with custom range
-            SomeFloatConfigWithSlider = Config.BindAndOptionsSlider(
+            rideLerpSpeed = Config.BindAndOptionsSlider(
                 sectionGeneral,
-                "Name of Float Config Slider",
-                0f,
-                "description of float config slider",
-                -10f,
-                10f);
+                "rideLerpSpeed",
+                2f,
+                "",
+                0,
+                1000);
+
+            rideClimbAnimTime = Config.BindAndOptions(
+                sectionGeneral,
+                "rideClimbAnimTime",
+                0.2f,
+                "");
 
         }
     }

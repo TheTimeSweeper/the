@@ -19,13 +19,7 @@ MonoBehaviour:
   unlockableDef: {fileID: 0}
   rootObject: {fileID: 2789020704342586282, guid: 2dad81005b208874b94370acc331606e,
     type: 3}
-  rendererInfos:
-  - renderer: {fileID: 2614009580564897429, guid: 2dad81005b208874b94370acc331606e,
-      type: 3}
-    defaultMaterial: {fileID: 2100000, guid: 556772bc865ff2d408c5e39511a5829c, type: 2}
-    defaultShadowCastingMode: 1
-    ignoreOverlays: 0
-    hideOnDeath: 0
+  rendererInfos: []
   gameObjectActivations:
   - gameObject: {fileID: 4903228129116968927, guid: 2dad81005b208874b94370acc331606e,
       type: 3}

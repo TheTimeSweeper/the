@@ -54,6 +54,7 @@ public class BaseUnattachedAnimator : MonoBehaviour {
         animator.SetFloat("rightSpeed", hori);
 
         animator.SetBool("isSprinting", Input.GetKey(KeyCode.LeftControl));
+        animator.SetFloat("walkSpeed", Input.GetKey(KeyCode.LeftControl) ? 10 : 7);
     }
 
     private void Jumb() {
@@ -66,7 +67,7 @@ public class BaseUnattachedAnimator : MonoBehaviour {
 
         _jumpTim -= Time.deltaTime;
 
-        animator.SetFloat("upSpeed", Mathf.Lerp(-48, 16, _jumpTim / 2f));
+        animator.SetFloat("upSpeed", Mathf.Lerp(-20, 16, _jumpTim / 2f));
 
         if (_jumpTim <= 0) {
             if (!animator.GetBool("isGrounded")) {

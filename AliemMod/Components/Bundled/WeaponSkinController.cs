@@ -12,8 +12,7 @@ namespace AliemMod.Components.Bundled
         [SerializeField]
         private SkinDef[] weaponSkins;
 
-        [SerializeField]
-        private Dictionary<SkillDef, SkinDef> _weaponSkillsSkins = new Dictionary<SkillDef, SkinDef>();
+        private static Dictionary<SkillDef, SkinDef> _weaponSkillsSkins = new Dictionary<SkillDef, SkinDef>();
 
         private GenericSkill _primaryGenericSkill;
 
@@ -27,18 +26,23 @@ namespace AliemMod.Components.Bundled
 
         void Start()
         {
-            _primaryGenericSkill = GetComponent<CharacterModel>().body.GetComponent<SkillLocator>().primary;
-
-            _primaryGenericSkill.onSkillChanged += OnSkillChanged;
-            OnSkillChanged(_primaryGenericSkill);
+            if (TryGetComponent(out CharacterModel model))
+            {
+                _primaryGenericSkill = model.body.GetComponent<SkillLocator>().primary;
+                _primaryGenericSkill.onSkillChanged += OnSkillChanged;
+                OnSkillChanged(_primaryGenericSkill);
+            }
         }
 
         void OnDestroy()
         {
-            _primaryGenericSkill.onSkillChanged -= OnSkillChanged;
+            if (_primaryGenericSkill != null)
+            {
+                _primaryGenericSkill.onSkillChanged -= OnSkillChanged;
+            }
         }
 
-        protected virtual void OnSkillChanged(GenericSkill genericSkill)
+        private void OnSkillChanged(GenericSkill genericSkill)
         {
             if (_weaponSkillsSkins.ContainsKey(genericSkill.skillDef))
             {
@@ -53,6 +57,7 @@ namespace AliemMod.Components.Bundled
 
         public void ApplyWeaponSkin(SkinDef skin)
         {
+            Helpers.LogWarning("applying " + skin.name);
             skin.Apply(gameObject);
         }
     }

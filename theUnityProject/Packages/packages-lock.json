@@ -7,15 +7,6 @@
       "dependencies": {},
       "hash": "749aa265400eab1b8a493dc475ece2d48cf36d54"
     },
-    "com.passivepicasso.thunderkit": {
-      "version": "https://github.com/PassivePicasso/ThunderKit.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.scriptablebuildpipeline": "1.16.1"
-      },
-      "hash": "39f7d7c528fe6687bc223653dfb462808a3a3b8b"
-    },
     "com.unity.assetbundlebrowser": {
       "version": "1.7.0",
       "depth": 0,
@@ -33,13 +24,6 @@
     "com.unity.postprocessing": {
       "version": "2.3.0",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.scriptablebuildpipeline": {
-      "version": "1.16.1",
-      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -90,13 +74,6 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
-    },
-    "riskofthunder-ror2importextensions": {
-      "version": "https://github.com/risk-of-thunder/RoR2ImportExtensions.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ebe4d6e4a27e4b766b33e5bdd3ab6c7d17518dfb"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

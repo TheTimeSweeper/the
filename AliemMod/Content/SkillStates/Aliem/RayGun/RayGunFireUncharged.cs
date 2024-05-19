@@ -12,7 +12,7 @@ namespace ModdedEntityStates.Aliem
         {
             OverlapAttack overlap = InitMeleeOverlap(0, null, GetModelTransform(), "Knife");
             List<HurtBox> hitResults = new List<HurtBox>();
-
+            
             overlap.Fire(hitResults);
             if(hitResults.Count > 0)
             {

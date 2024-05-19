@@ -6,7 +6,7 @@ namespace ModdedEntityStates.Aliem {
         public override void OnEnter() {
             base.OnEnter();
 
-			PlayAnimation("FullBody, Override", "BufferEmpty");
+			PlayAnimation("FullBody, Underride", "BufferEmpty");
 
 			base.outer.SetState(new AliemCharacterMain { wasRiding = true });
 		}

@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Content.Survivors;
 using EntityStates;
 using EntityStates.Croco;
 using RoR2;
@@ -12,6 +13,7 @@ namespace ModdedEntityStates.Aliem {
 
 	public class AliemLeapM2 : AliemLeap {
         //is this jank?
+        //yes, but iskillstate essentially does the same thing
         protected override int inputButton => 2;
 	}
 
@@ -20,7 +22,7 @@ namespace ModdedEntityStates.Aliem {
 		protected override int inputButton => 3;
 	}
 
-	public class AliemLeap : BaseCharacterMain {
+	public class AliemLeap : GenericCharacterMain {
 
 		protected virtual int inputButton => 2;
 		private InputBankTest.ButtonState inputButtonState {
@@ -37,8 +39,8 @@ namespace ModdedEntityStates.Aliem {
 						return inputBank.skill4;
 				}
 			}
-		}
-		public static float DamageCoefficient = 1;
+        }
+        public static float DamageCoefficient = 1;
 
 		private OverlapAttack overlapAttack;
 		//private List<HurtBox> overlapAttackHits = new List<HurtBox>();
@@ -59,8 +61,7 @@ namespace ModdedEntityStates.Aliem {
 			if (modelTransform) {
 				hitBoxGroup = Array.Find(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup hitboxGroup) => hitboxGroup.groupName == "Leap");
 			}
-
-			overlapAttack = new OverlapAttack {
+            overlapAttack = new OverlapAttack {
 				attacker = base.gameObject,
 				inflictor = gameObject,
 				teamIndex = base.GetTeam(),
@@ -72,9 +73,6 @@ namespace ModdedEntityStates.Aliem {
 				//damageType = DamageType.Stun1s,
 			};
 
-			//handled in riding state
-			//R2API.DamageAPI.AddModdedDamageType(overlapAttack, Modules.DamageTypes.ApplyAliemRiddenBuff);
-
 			GetModelAnimator().SetFloat("aimYawCycle", 0.5f);
 			GetModelAnimator().SetFloat("aimPitchCycle", 0.5f);
 
@@ -82,9 +80,8 @@ namespace ModdedEntityStates.Aliem {
 			base.characterMotor.airControl = BaseLeap.airControl;
 			Vector3 direction = base.GetAimRay().direction;
 			if (base.isAuthority) {
-				base.characterBody.isSprinting = true;
 				direction.y = Mathf.Max(direction.y, BaseLeap.minimumY);
-				Vector3 a = direction.normalized * BaseLeap.aimVelocity * this.moveSpeedStat;
+				Vector3 a = direction.normalized * BaseLeap.aimVelocity * this.moveSpeedStat * (characterBody.isSprinting ? 1: characterBody.sprintingSpeedMultiplier);
 				Vector3 b = Vector3.up * BaseLeap.upwardVelocity;
 				Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * BaseLeap.forwardVelocity;
 				base.characterMotor.Motor.ForceUnground();
@@ -92,7 +89,7 @@ namespace ModdedEntityStates.Aliem {
 			}
 			base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 			//base.GetModelTransform().GetComponent<AimAnimator>().enabled = true;
-			base.PlayCrossfade("FullBody, Override", "Dive", 0.1f);
+			base.PlayCrossfade("FullBody, Underride", "Dive", 0.1f);
 			//base.PlayCrossfade("Gesture, AdditiveHigh", "Leap", 0.1f);
 			//base.PlayCrossfade("Gesture, Override", "Leap", 0.1f);
 			Util.PlaySound(BaseLeap.leapSoundString, base.gameObject);
@@ -110,7 +107,12 @@ namespace ModdedEntityStates.Aliem {
 		}
 
 		public override void FixedUpdate() {
+
 			base.FixedUpdate();
+
+            characterBody.isSprinting = true;
+
+            characterDirection.moveVector = characterMotor.velocity;
 
 			if (base.isAuthority && base.characterMotor) {
 				base.characterMotor.moveDirection = base.inputBank.moveVector;
@@ -122,6 +124,7 @@ namespace ModdedEntityStates.Aliem {
 				
 				if(foundBody != null && (inputButtonState.down || AliemConfig.AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {
+                        inputButton = inputButton,
 						riddenBody = foundBody
 					});
 					return;
@@ -145,12 +148,22 @@ namespace ModdedEntityStates.Aliem {
 				//hit wall or somethin
 				if (base.fixedAge >= BaseLeap.minimumDuration && this.hitSomethingFrames > 1) {
 
-					PlayAnimation("FullBody, Override", "BufferEmpty");
-					this.outer.SetNextStateToMain();
+                    PlayAnimation("FullBody, Underride", "BufferEmpty");
+                    this.outer.SetNextStateToMain();
 					return;
 				}
 			}
 		}
+
+        public override void ProcessJump()
+        {
+            if (jumpInputReceived)
+            {
+                PlayAnimation("FullBody, Underride", "DiveRecover");
+                outer.SetNextStateToMain();
+            }
+            base.ProcessJump();
+        }
 
         private CharacterBody FindBodyToRide() {
 
@@ -158,8 +171,9 @@ namespace ModdedEntityStates.Aliem {
 
 			if (Util.CharacterSpherecast(gameObject, mond, 1.51f, out RaycastHit HitInfo, 0, LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal)) {
 
-				if(HitInfo.collider.GetComponent<HurtBox>().healthComponent.body.teamComponent.teamIndex == teamComponent.teamIndex)
-					return HitInfo.collider.GetComponent<HurtBox>().healthComponent.body;
+                HealthComponent healthComponent = HitInfo.collider.GetComponent<HurtBox>().healthComponent;
+                if (healthComponent != null && healthComponent.body.teamComponent.teamIndex == teamComponent.teamIndex)
+					return healthComponent.body;
 			}
 			return null;
         }
@@ -179,17 +193,20 @@ namespace ModdedEntityStates.Aliem {
 		// Token: 0x060011AE RID: 4526 RVA: 0x0004E124 File Offset: 0x0004C324
 		public override void OnExit() {
 			Util.PlaySound(BaseLeap.soundLoopStopEvent, base.gameObject);
-			if (base.isAuthority) {
+
+            if (base.isAuthority) {
 				base.characterMotor.onMovementHit -= this.OnMovementHit;
 			}
 			base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 			base.characterMotor.airControl = this.previousAirControl;
-			base.characterBody.isSprinting = false;
-			int layerIndex = base.modelAnimator.GetLayerIndex("Impact");
-			if (layerIndex >= 0) {
-				base.modelAnimator.SetLayerWeight(layerIndex, 2f);
-				this.PlayAnimation("Impact", "LightImpact");
-			}
+			//base.characterBody.isSprinting = false;
+
+
+   //         int layerIndex = base.modelAnimator.GetLayerIndex("Impact");
+			//if (layerIndex >= 0) {
+			//	base.modelAnimator.SetLayerWeight(layerIndex, 2f);
+			//	this.PlayAnimation("Impact", "LightImpact");
+			//}
 			//base.PlayCrossfade("Gesture, Override", "BufferEmpty", 0.1f);
 			//base.PlayCrossfade("Gesture, AdditiveHigh", "BufferEmpty", 0.1f);
 			//EntityState.Destroy(this.leftFistEffectInstance);

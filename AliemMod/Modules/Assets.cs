@@ -47,7 +47,7 @@ namespace Modules {
 
             PopulateAss();
         }
-
+        
         public static void LoadAssetBundle()
         {
             if (mainAssetBundle == null)

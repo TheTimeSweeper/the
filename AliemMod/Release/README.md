@@ -9,6 +9,7 @@ Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the
 
 ## Credits
 Dotflare - Model  
+rob - Animations
 The Behemoth - inspiration, sounds 
 
 ## Known Issues
@@ -22,17 +23,25 @@ The Behemoth - inspiration, sounds
 - finish him lol
 - planned kit 
   - m1 - mash to shoot hold to charge
-  - m2 - dive (current shift)
-  - shift - fire trail from invasion
-  - r - mutations from invasion (so still grenade lol)
+  - m2 - dive
+  - shift - mutations from invasion
+  - r - idk
 - better effects maybe
 - more sounds
 - replace pod with spaceship that crashes
 - enemy version?
-- r2api split and split bundles nd stuff
 - ~~Item displays~~
 
 ## Changelog
+`1.0.0`
+- increased projectile size of ray gun with respect to enemies but not world
+- reworked kit
+- added laser sword
+- allow shooting while diving and riding
+- severely improved riding presentation
+- updated a lot of animations (thanks rob!)
+- added shank on close range ray gun (in reference to the original game)
+
 `0.3.2`
 - increased damage on ray gun
   - *projectile is harder to hit (especially in mp), so it can afford to do higher than commando-tier damage*

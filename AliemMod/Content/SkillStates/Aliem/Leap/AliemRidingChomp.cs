@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem {
 
-    internal class AliemRidingChomp : BaseRidingState {
+    internal class AliemRidingChomp : BaseSkillState {
 
 		public static float ChompDamageCoefficient = 5;
 
@@ -31,7 +31,7 @@ namespace ModdedEntityStates.Aliem {
             }
 
 			if (base.fixedAge > duration) {
-				base.outer.SetNextState(ChooseNextState());
+                base.outer.SetNextStateToMain();
 			}
 		}
 
@@ -67,8 +67,10 @@ namespace ModdedEntityStates.Aliem {
             }
 		}
 
-        protected EntityState ChooseNextState() {
-            return new AliemCharacterMain { wasRiding = true };
+        public override void OnExit()
+        {
+            base.OnExit();
+            EntityStateMachine.FindByCustomName(gameObject, "Body").SetNextState(new EndRidingState());
         }
     }
 }

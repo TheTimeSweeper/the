@@ -2,6 +2,7 @@
 using AliemMod.Components.Bundled;
 using BepInEx.Configuration;
 using KinematicCharacterController;
+using ModdedEntityStates.Aliem;
 using Modules;
 using Modules.Characters;
 using Modules.Survivors;
@@ -91,6 +92,12 @@ namespace AliemMod.Content.Survivors {
             Hooks();
 
             bodyPrefab.AddComponent<RayGunChargeComponent>();
+
+            //VehicleSeat vehicleSeat = bodyPrefab.AddComponent<VehicleSeat>();
+            //vehicleSeat.passengerState = new EntityStates.SerializableEntityStateType(typeof(AliemRidingState));
+            //vehicleSeat.hidePassenger = false;
+            //vehicleSeat.disablePassengerMotor = true;
+            //vehicleSeat.isEquipmentActivationAllowed = true;
         }
 
         protected override void InitializeCharacterBodyAndModel() {
@@ -167,13 +174,16 @@ namespace AliemMod.Content.Survivors {
     
 
         public override void InitializeSkills() {
-            Skills.CreateSkillFamilies(bodyPrefab);
+            Skills.ClearGenericSkills(bodyPrefab);
+
 
             #region Primary
+            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary);
+
             SkillDef primarySimpleGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_DESCRIPTION",
-                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunFireUncharged)),
                                                                               "Weapon",
                                                                               true));
@@ -182,7 +192,7 @@ namespace AliemMod.Content.Survivors {
             SkillDef primaryInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_inputs",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
-                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInputs)),
                                                                               "Slide",
                                                                               true));
@@ -190,7 +200,7 @@ namespace AliemMod.Content.Survivors {
             SkillDef primaryInstantSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_gun_instant",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_DESCRIPTION",
-                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInstant)),
                                                                               "Weapon",
                                                                               true));
@@ -199,7 +209,7 @@ namespace AliemMod.Content.Survivors {
             SkillDef primaryInputsSwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo("aliem_primary_sword_inputs",
                                                                               ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_NAME",
                                                                               ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_DESCRIPTION",
-                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconPrimary"),
+                                                                              Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
                                                                               new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordInputs)),
                                                                               "Slide",
                                                                               true));
@@ -218,11 +228,13 @@ namespace AliemMod.Content.Survivors {
             #endregion
 
             #region Secondary
+            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Secondary);
+
             SkillDef SecondaryGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "aliem_secondary_gun",
                 skillNameToken = ALIEM_PREFIX + "SECONDARY_GUN_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_GUN_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSecondary"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondaryGunBig"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -246,15 +258,15 @@ namespace AliemMod.Content.Survivors {
                 skillName = "aliem_secondary_leap",
                 skillNameToken = ALIEM_PREFIX + "UTILITY_LEAP_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM2)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
+                forceSprintDuringState = false, //handled by state itself
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -266,24 +278,25 @@ namespace AliemMod.Content.Survivors {
                 keywordTokens = new string[] { }
             });
 
-            Skills.AddSecondarySkills(bodyPrefab, SecondaryGunSkillDef/*, SecondaryLeapSkillDef*/);
+            Skills.AddSecondarySkills(bodyPrefab, SecondaryGunSkillDef, SecondaryLeapSkillDef);
             #endregion
 
             #region Utility
+            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Utility);
 
             SkillDef UtilityLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "aliem_utility_leap",
                 skillNameToken = ALIEM_PREFIX + "UTILITY_LEAP_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconUtility"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM3)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
+                forceSprintDuringState = false, //handled by state itself
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -297,13 +310,54 @@ namespace AliemMod.Content.Survivors {
 
             Skills.AddUtilitySkills(bodyPrefab, UtilityLeapSkillDef);
             #endregion
-            
+
+            #region chomp
+
+            GenericSkill chompSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_SKILL_RIDING", "Riding");
+
+            SkillDef ChompSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "aliem_utility_Chomp",
+                skillNameToken = ALIEM_PREFIX + "UTILITY_CHOMP_NAME",
+                skillDescriptionToken = ALIEM_PREFIX + "UTILITY_CHOMP_DESCRIPTION",
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemChomp"),
+                keywordTokens = new string[] { },
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AliemRidingChomp)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 0f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = false,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+
+            Skills.AddSkillsToFamily(chompSkill.skillFamily, ChompSkillDef);
+
+            #endregion
+
             #region Special
+            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Special);
+
             SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "aliem_special_grenade",
                 skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecial"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenade"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenade)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -348,7 +402,7 @@ namespace AliemMod.Content.Survivors {
                 skillName = "aliem_special_grenade_scepter",
                 skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSpecialScepter"),
+                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenadeScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ScepterThrowGrenade)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
