@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using AliemMod.Content;
+using EntityStates;
 using RoR2;
 using UnityEngine.Networking;
 
@@ -6,7 +7,7 @@ namespace ModdedEntityStates.Aliem {
 
     internal class AliemRidingChomp : BaseSkillState {
 
-		public static float ChompDamageCoefficient = 5;
+		public static float ChompDamageCoefficient => AliemConfig.M3_ChompDamage.Value;
 
 		public float baseDuration = 0.3f;
 		public float chompTime = 1f;
@@ -43,7 +44,7 @@ namespace ModdedEntityStates.Aliem {
 				BlastAttack blast = new BlastAttack {
 					attacker = base.gameObject,
 					baseDamage = this.damageStat * ChompDamageCoefficient,
-					damageType = DamageType.BonusToLowHealth,
+					damageType = AliemConfig.M3_ChompSlayer.Value? DamageType.BonusToLowHealth : DamageType.Generic,
 					//baseForce = this.blastForce,
 					//bonusForce = this.blastBonusForce,
 					crit = this.RollCrit(),
@@ -63,14 +64,19 @@ namespace ModdedEntityStates.Aliem {
 			}
 
             if (NetworkServer.active) {
-				healthComponent.Heal(characterBody.maxHealth * 0.3f, default(ProcChainMask));
+				healthComponent.Heal(characterBody.maxHealth * AliemConfig.M3_ChompHealing.Value, default(ProcChainMask));
             }
 		}
 
         public override void OnExit()
         {
             base.OnExit();
-            EntityStateMachine.FindByCustomName(gameObject, "Body").SetNextState(new EndRidingState());
+            EntityStateMachine.FindByCustomName(gameObject, "Body").SetInterruptState(new EndRidingState(), InterruptPriority.PrioritySkill);
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

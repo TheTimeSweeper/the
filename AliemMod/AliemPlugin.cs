@@ -81,6 +81,12 @@ public class AliemPlugin : BaseUnityPlugin {
         
         if (sender.HasBuff(Modules.Buffs.riddenBuff)) {
             args.moveSpeedMultAdd += 1.3f;
+            args.attackSpeedMultAdd += 1.2f;
+        }
+
+        if (sender.HasBuff(Modules.Buffs.diveBuff))
+        {
+            args.armorAdd += 50f;
         }
     }
 }

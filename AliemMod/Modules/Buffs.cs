@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Modules {
 
@@ -9,16 +10,24 @@ namespace Modules {
     {
         //Aliem
         public static BuffDef riddenBuff;
+        public static BuffDef diveBuff;
 
         public static void RegisterBuffs() {
 
             //Aliem
             riddenBuff =
                 AddNewBuff("RiddenByAliem",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
-                           Color.red,
+                           Assets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliem"),
+                           Color.yellow,
                            false,
-                           true);
+                           false);
+
+            diveBuff =
+                AddNewBuff("AliemDive",
+                           Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/texBuffGenericShield.tif").WaitForCompletion(),
+                           Color.yellow,
+                           false,
+                           false);
         }
 
         public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {

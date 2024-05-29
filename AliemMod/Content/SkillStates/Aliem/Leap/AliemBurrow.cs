@@ -1,5 +1,7 @@
-﻿using EntityStates;
+﻿using AliemMod.Content;
+using EntityStates;
 using RoR2;
+using UnityEngine;
 
 namespace ModdedEntityStates.Aliem {
     public class AliemBurrow : BaseCharacterMain {
@@ -64,6 +66,25 @@ namespace ModdedEntityStates.Aliem {
 			GetModelChildLocator().FindChildGameObject("Burrow")?.SetActive(false);
 			base.PlayCrossfade("FullBody, Override", "UnBurrow", 0.1f);
 			Util.PlaySound("Play_INV_DigPopOut", gameObject);
+
+            if (isAuthority) {
+                new BlastAttack
+                {
+                    attacker = base.gameObject,
+                    baseDamage = this.damageStat * AliemConfig.M3_BurrowPopOutDamage.Value,
+                    baseForce = 0,
+                    bonusForce = Vector3.up * AliemConfig.M3_BurrowPopOutForce.Value,
+                    crit = base.RollCrit(),
+                    damageType = DamageType.Stun1s,
+                    falloffModel = BlastAttack.FalloffModel.None,
+                    procCoefficient = 1,
+                    radius = 4,
+                    position = transform.position,
+                    attackerFiltering = AttackerFiltering.NeverHitSelf,
+                    //impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
+                    teamIndex = base.teamComponent.teamIndex
+                }.Fire();
+            }
 		}
     }
 }

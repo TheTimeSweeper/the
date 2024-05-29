@@ -17,9 +17,9 @@ namespace ModdedEntityStates.Aliem {
         private Vector3 _initialPosition;
         private Vector3 _lastPosition;
 
-        private Transform _modelTransform;
+        private Quaternion _lastRotation;
 
-        private float _offset => AliemConfig.rideOffset.Value;
+        private Transform _modelTransform;
 
         public override void OnEnter() {
             base.OnEnter();
@@ -29,9 +29,13 @@ namespace ModdedEntityStates.Aliem {
 			}
 
 			riddenCollider = findHighestHurtbox();
+            if (riddenCollider == null)
+            {
+                outer.SetNextStateToMain();
+                return;
+            }
             Vector3 ridePosition = riddenCollider.bounds.center;
-            ridePosition.y = Mathf.Lerp(ridePosition.y, riddenCollider.bounds.max.y, 0.8f);
-            ridePosition += Vector3.up * _offset;
+            ridePosition.y = riddenCollider.bounds.max.y;
             _anchor = new GameObject("aliemAnchor");
             _anchor.transform.SetParent(riddenCollider.transform);
             _anchor.transform.position = ridePosition;
@@ -49,7 +53,9 @@ namespace ModdedEntityStates.Aliem {
             _initialPosition = _modelTransform ? _modelTransform.position : transform.position;
             _lastPosition = _initialPosition;
 
-            this.characterDirection.enabled = false;
+            _lastRotation = transform.rotation;
+
+            //this.characterDirection.enabled = false;
             this.modelLocator.enabled = false;
 
             modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimPitch"), 0);
@@ -58,17 +64,26 @@ namespace ModdedEntityStates.Aliem {
 
         private Collider findHighestHurtbox() {
 
+            if (riddenBody.hurtBoxGroup == null)
+                return null;
+
             HurtBox[] hurtboxes = riddenBody.hurtBoxGroup.hurtBoxes;
-			HurtBox highestHurtbox = hurtboxes[0];
+			HurtBox highestHurtbox = null;
             for (int i = 0; i < hurtboxes.Length; i++) {
 
                 HurtBox hurtBox = hurtboxes[i];
-
+                if (hurtBox == null)
+                    continue;
+                if(highestHurtbox == null)
+                {
+                    highestHurtbox = hurtBox;
+                    continue;
+                }
 				if(hurtBox.transform.position.y > highestHurtbox.transform.position.y) {
 					highestHurtbox = hurtBox;
                 }
             }
-			return highestHurtbox.collider;
+			return highestHurtbox?.collider;
         }
 
         public override void Update()
@@ -112,14 +127,17 @@ namespace ModdedEntityStates.Aliem {
         {
             Vector3 lerpPosition = Vector3.Lerp(_initialPosition, _anchor.transform.position, base.fixedAge * AliemConfig.rideLerpSpeed.Value);
 
-            lerpPosition = Vector3.Lerp(_lastPosition, lerpPosition, 0.2f);
+            lerpPosition = Vector3.Lerp(_lastPosition, lerpPosition, AliemConfig.rideLerpTim.Value);
 
             characterMotor.Motor.SetPosition(lerpPosition);
 
             if (_modelTransform)
             {
                 _modelTransform.position = lerpPosition;
-                _modelTransform.rotation = _anchor.transform.rotation;//Util.QuaternionSafeLookRotation(ridePosition - transform.position);
+                Quaternion rotation = Quaternion.Lerp(_lastRotation, _anchor.transform.rotation, AliemConfig.rideLerpTim2.Value);
+                _modelTransform.rotation = rotation;
+                characterDirection.forward = _anchor.transform.forward;
+                _lastRotation = rotation;
             }
 
             _lastPosition = lerpPosition;
@@ -135,7 +153,7 @@ namespace ModdedEntityStates.Aliem {
 
             PlayAnimation("FullBody, Underride", "BufferEmpty");
 
-            this.characterDirection.enabled = true;
+            //this.characterDirection.enabled = true;
             this.modelLocator.enabled = true;
 
             modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimPitch"), 1);

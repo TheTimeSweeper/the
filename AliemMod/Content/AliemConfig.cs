@@ -5,59 +5,244 @@ using Modules;
 
 namespace AliemMod.Content
 {
-    internal static class AliemConfig
+    public static class AliemConfig
     {
         public static ConfigEntry<bool> Debug;
 
         public static ConfigEntry<bool> Cursed;
-        public static ConfigEntry<bool> AlwaysRide;
-        public static ConfigEntry<float> rideOffset;
+
+        public static ConfigEntry<float> M1_RayGun_Damage;
+        public static ConfigEntry<bool> M1_RayGun_Sound_Alt;
+        public static ConfigEntry<float> M1_Sword_Damage;
+        public static ConfigEntry<float> M1_MachineGun_Damage;
+
+        public static ConfigEntry<float> M2_RayGunCharged_Damage;
+        public static ConfigEntry<float> M2_SwordCharged_Damage;
+        public static ConfigEntry<float> M2_MachineGunCharged_Damage;
+        public static ConfigEntry<float> M2_MachineGunCharged_Interval;
+        public static ConfigEntry<int> M2_MachineGunCharged_Bullets;
+        public static ConfigEntry<float> M2_MachineGunCharged_Spread;
+
+        public static ConfigEntry<bool> M3_AlwaysRide;
+        public static ConfigEntry<float> M3_ImpactDamage;
+        public static ConfigEntry<float> M3_BurrowPopOutDamage;
+        public static ConfigEntry<float> M3_BurrowPopOutForce;
+        public static ConfigEntry<float> M3_ChompDamage;
+        public static ConfigEntry<bool> M3_ChompSlayer;
+        public static ConfigEntry<float> M3_ChompHealing;
+
+        public static ConfigEntry<float> M4_GrenadeDamage;
+
         public static ConfigEntry<float> rideLerpSpeed;
         public static ConfigEntry<float> rideClimbAnimTime;
+        public static ConfigEntry<float> rideLerpTim;
+        public static ConfigEntry<float> rideLerpTim2;
+
+        public static ConfigEntry<float> bloom1;
+        public static ConfigEntry<float> bloom2;
+
+        public static ConfigEntry<float> radius;
+
+        public static string sectionDebug = "Debug";
+        public static string sectionSkills = "Skills";
+        public static string sectionBody = "Body";
 
         public static void ReadConfig()
         {
-            Debug = Config.BindAndOptions(
-                "Debug",
+            Debug = AliemPlugin.instance.Config.Bind(
+                sectionDebug,
                 "Debug Logs",
                 false,
                 "in case I forget to delete them when I upload");
 
-            string sectionGeneral = "General";
-
             Cursed = Config.BindAndOptions(
-                sectionGeneral,
+                sectionSkills,
                 "Cursed",
                 false,
                 "Enable wip/unused content",
                 true);
 
-            AlwaysRide = Config.BindAndOptions(
-                sectionGeneral,
-                "Always Ride",
+            M1_RayGun_Damage = Config.BindAndOptions(
+                sectionSkills,
+                "M1_RayGun_Damage",
+                2f,
+                0,
+                10,
+                "");
+            M1_RayGun_Sound_Alt = Config.BindAndOptions(
+                sectionSkills,
+                "M1_RayGun_Sound_Alt",
                 false,
-                "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
+                "Lighter sound");
 
-            rideOffset = Config.BindAndOptions(
-                sectionGeneral,
-                "RideOFfset",
-                0.5f,
+            M1_Sword_Damage = Config.BindAndOptions(
+                sectionSkills,
+                "M1_Sword_Damage",
+                1.5f,
+                0,
+                10,
                 "");
 
-            rideLerpSpeed = Config.BindAndOptionsSlider(
-                sectionGeneral,
-                "rideLerpSpeed",
+            M1_MachineGun_Damage = Config.BindAndOptions(
+                sectionSkills,
+                "M1_MachineGun_Damage",
+                1f,
+                0,
+                10,
+                "");
+
+            M2_RayGunCharged_Damage = Config.BindAndOptions(
+                sectionSkills,
+                "M2_RayGunCharged_Damage",
+                6f,
+                0,
+                10,
+                "");
+
+            M2_SwordCharged_Damage = Config.BindAndOptions(
+                sectionSkills,
+                "M2_SwordCharged_Damage",
+                6f,
+                0,
+                10,
+                "");
+
+            M2_MachineGunCharged_Damage = Config.BindAndOptions(
+                sectionSkills,
+                "M2_MachineGunCharged_Damage",
+                1f,
+                0,
+                20,
+                "");
+            M2_MachineGunCharged_Interval = Config.BindAndOptions(
+                sectionSkills,
+                "M2_MachineGunCharged_Interval",
+                0.1f,
+                0,
+                1,
+                "");
+            M2_MachineGunCharged_Bullets = Config.BindAndOptions(
+                sectionSkills,
+                "M2_MachineGunCharged_Bullets",
+                6,
+                0,
+                50,
+                "");
+            M2_MachineGunCharged_Spread = Config.BindAndOptions(
+                sectionSkills,
+                "M2_MachineGunCharged_Spread",
+                1f,
+                0,
+                360,
+                "");
+
+            M3_AlwaysRide = Config.BindAndOptions(
+                sectionSkills,
+                "M3_AlwaysRide",
+                false,
+                "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
+            M3_ImpactDamage = Config.BindAndOptions(
+                sectionSkills,
+                "M3_ImpactDamage",
+                1f,
+                0,
+                20,
+                "");
+            M3_BurrowPopOutDamage = Config.BindAndOptions(
+                sectionSkills,
+                "M3_BurrowPopOutDamage",
                 2f,
+                0,
+                20,
+                "");
+            M3_BurrowPopOutForce = Config.BindAndOptions(
+                sectionSkills,
+                "M3_BurrowPopOutForce",
+                200f,
+                0,
+                10000,
+                "");
+            M3_ChompDamage = Config.BindAndOptions(
+                sectionSkills,
+                "M3_ChompDamage",
+                5f,
+                0,
+                20,
+                "");
+            M3_ChompSlayer = Config.BindAndOptions(
+                sectionSkills,
+                "M3_ChompSlayer",
+                true,
+                "Does chomp deal up to 3x damage to low health enemies");
+            M3_ChompHealing = Config.BindAndOptions(
+                sectionSkills,
+                "M3_ChompHealing",
+                0.3f,
+                0,
+                1,
+                "");
+
+            M4_GrenadeDamage = Config.BindAndOptions(
+                sectionSkills,
+                "M4_GrenadeDamage",
+                12f,
+                0,
+                20,
+                "");
+            #region debug
+            rideLerpSpeed = Config.BindAndOptions(
+                sectionDebug,
+                "rideLerpSpeed",
+                3f,
+                0,
+                1000,
+                "");
+
+            rideLerpTim = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "rideLerpTim",
+                0.5f,
                 "",
                 0,
-                1000);
+                1);
+            rideLerpTim2 = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "rideLerpTimRot",
+                0.1f,
+                "",
+                0,
+                1);
 
             rideClimbAnimTime = Config.BindAndOptions(
-                sectionGeneral,
+                sectionDebug,
                 "rideClimbAnimTime",
                 0.2f,
                 "");
 
+            bloom1 = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "bloom1",
+                0.5f,
+                "",
+                0,
+                5);
+
+            bloom2 = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "bloom2",
+                0.5f,
+                "",
+                0,
+                5);
+
+            radius = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "radius",
+                1f,
+                "",
+                0,
+                5);
+            #endregion debug
         }
     }
 }

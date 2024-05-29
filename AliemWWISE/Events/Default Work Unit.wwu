@@ -135,6 +135,83 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_AliemMinigun" ID="{1120ABE4-52E5-4187-A20B-418C93EBD50D}">
+					<ChildrenList>
+						<Action Name="" ID="{51EAECA5-4282-470A-A74F-4FE3E23DE855}" ShortID="536305431">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemMinigun" ID="{F80BEA4A-0364-49CE-86B8-FE87549E3C82}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemRifle" ID="{6C546CB9-2F1E-432A-8BC0-0BC118FAEB26}">
+					<ChildrenList>
+						<Action Name="" ID="{0DFB26D0-F608-4A8C-943C-2C6AF3A87022}" ShortID="976656453">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemRifle" ID="{A17C88E4-3057-4968-9371-8735F951A9A1}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemLightningCharged" ID="{F6572B63-8278-4786-84FA-EF20A3FC221C}">
+					<ChildrenList>
+						<Action Name="" ID="{E68470A5-5287-4EDF-B16F-EB9EC88F1CA9}" ShortID="715522359">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemLightningCharged" ID="{F6445D6B-4D30-4B6D-84D3-A8AE70EFDCA9}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemLightningGun1" ID="{4BF66782-EF29-48D8-BEE0-4FE91B8890C8}">
+					<ChildrenList>
+						<Action Name="" ID="{7CA57A8B-51CD-42E1-9164-60415E227B87}" ShortID="598749740">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemLightningGun1" ID="{703C6E54-108D-42F3-BC0B-91341B3ADAC1}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemRevolver1" ID="{5776D445-5EE7-4176-ADE4-005AC1794C33}">
+					<ChildrenList>
+						<Action Name="" ID="{24611FF6-CE70-43B8-BE5F-C892D7B5D096}" ShortID="989647356">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemRevolver1" ID="{5D11B284-935E-4D6A-B611-E4FA49FFA67E}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemSawedoff1" ID="{CC74579E-D987-48EF-8834-36EEE253E66C}">
+					<ChildrenList>
+						<Action Name="" ID="{FBBD6540-43DC-46BF-A604-A7AED081B0A7}" ShortID="373152104">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemSawedoff1" ID="{58E6FAE3-BFCC-4C1F-85E6-3B21BC9941CC}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemRifleCharged" ID="{7CB8E5C1-76A6-4174-8ECC-6DBE1E8E966F}">
+					<ChildrenList>
+						<Action Name="" ID="{0C32DDEC-F3E5-41CB-B51D-77596FCEEFED}" ShortID="410533917">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemRifleCharged" ID="{3E99077D-FDFB-4910-A89E-ABF4A71E7421}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -16,6 +16,8 @@ namespace AliemMod.Components.Bundled
 
         private GenericSkill _primaryGenericSkill;
 
+        private SkinDef _currentWeaponSkin;
+
         public void AddWeaponSkin(SkillDef skillDef, int skin)
         {
             if (!_weaponSkillsSkins.ContainsKey(skillDef))
@@ -23,11 +25,25 @@ namespace AliemMod.Components.Bundled
                 _weaponSkillsSkins[skillDef] = weaponSkins[skin];
             }
         }
+        public void AddWeaponSkin(SkillDef skillDef, SkinDef skin)
+        {
+            if (!_weaponSkillsSkins.ContainsKey(skillDef))
+            {
+                _weaponSkillsSkins[skillDef] = skin;
+            }
+            else
+            {
+                Helpers.LogWarning("already contains key for " + skillDef.skillName);
+            }
+        }
 
         void Start()
         {
             if (TryGetComponent(out CharacterModel model))
             {
+                if (model.body == null)
+                    return;
+
                 _primaryGenericSkill = model.body.GetComponent<SkillLocator>().primary;
                 _primaryGenericSkill.onSkillChanged += OnSkillChanged;
                 OnSkillChanged(_primaryGenericSkill);
@@ -57,8 +73,21 @@ namespace AliemMod.Components.Bundled
 
         public void ApplyWeaponSkin(SkinDef skin)
         {
-            Helpers.LogWarning("applying " + skin.name);
-            skin.Apply(gameObject);
+            if (_currentWeaponSkin == null)
+            {
+                _currentWeaponSkin = skin;
+                return;
+            }
+            (skin as PartialSkinDef).Apply(gameObject);
+            _currentWeaponSkin = skin;
+        }
+
+        public void ApplyCurrentWeaponSkin()
+        {
+            if (_currentWeaponSkin == null)
+                return;
+
+            ApplyWeaponSkin(_currentWeaponSkin);
         }
     }
 }

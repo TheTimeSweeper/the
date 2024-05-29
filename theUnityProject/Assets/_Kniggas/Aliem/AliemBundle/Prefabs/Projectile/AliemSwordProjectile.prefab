@@ -73,7 +73,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &8623763152179746456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   cannotBeDeleted: 0
   flightSoundLoop: {fileID: 0}
   canImpactOnTrigger: 0
-  allowPrediction: 1
+  allowPrediction: 0
   owner: {fileID: 0}
   procCoefficient: 1
 --- !u!114 &7827757718152977054

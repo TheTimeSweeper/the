@@ -1490,7 +1490,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7039024845160122674, guid: 93984793f0c3a464dadb1ee80436ac3e,
+  m_Motion: {fileID: -7446867569379588585, guid: 93984793f0c3a464dadb1ee80436ac3e,
     type: 3}
   m_Tag: 
   m_SpeedParameter: ShootGun.playbackRate
@@ -3965,7 +3965,8 @@ AnimatorState:
   - {fileID: 1101199161795086896}
   - {fileID: 1101319678514533208}
   - {fileID: 1101078728235002568}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 8133902692385903381}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -5012,6 +5013,21 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!114 &8133902692385903381
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1124653335, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intParameterName: flinchIndex
+  rangeMin: 0
+  rangeMax: 2
 --- !u!1102 &8426237723590175957
 AnimatorState:
   serializedVersion: 5

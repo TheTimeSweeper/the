@@ -133,8 +133,21 @@ namespace Modules {
             material.SetColor("_EmColor", emissionColor);
             return material;
         }
+
         public static Material SetCull(this Material material, bool cull = false) {
             material.SetInt("_Cull", cull ? 1 : 0);
+            return material;
+        }
+
+        public static Material SetSpecular(this Material material, float strength)
+        {
+            material.SetFloat("_SpecularStrength", strength);
+            return material;
+        }
+        public static Material SetSpecular(this Material material, float strength, float exponent)
+        {
+            material.SetFloat("_SpecularStrength", strength);
+            material.SetFloat("SpecularExponent", exponent);
             return material;
         }
     }

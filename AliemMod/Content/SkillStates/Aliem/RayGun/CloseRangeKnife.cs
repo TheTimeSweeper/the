@@ -1,4 +1,7 @@
-﻿using RoR2;
+﻿using AliemMod.Content;
+using EntityStates;
+using Modules;
+using RoR2;
 using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
@@ -8,9 +11,9 @@ namespace ModdedEntityStates.Aliem
         public override void OnEnter()
         {
             hitboxGroupName = "Knife";
-
+            
             damageType = DamageType.Generic;
-            damageCoefficient = 2;
+            damageCoefficient = AliemConfig.M1_RayGun_Damage.Value;
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
@@ -26,14 +29,14 @@ namespace ModdedEntityStates.Aliem
 
             hitStopDuration = 0.00f;
             attackRecoil = 0.5f;
-            hitHopVelocity = 4f;
+            hitHopVelocity = 3f;
 
             swingSoundString = "";
             hitSoundString = "";
             muzzleString = "KnifeHitbox";
             playbackRateParam = "ShootGun.playbackRate";
-            swingEffectPrefab = null;
-            hitEffectPrefab = null;
+            swingEffectPrefab = Assets.knifeSwingEffect;
+            hitEffectPrefab = Assets.knifeImpactEffect;
 
             //impactSound = HenryAssets.swordHitSoundEvent.index;
 

@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using AliemMod.Content;
+using EntityStates;
 using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
@@ -7,10 +8,17 @@ namespace ModdedEntityStates.Aliem
     {
         public override GameObject projectile => Modules.Projectiles.SwordProjectilePrefabBig;
         public override string soundString => "Play_AliemEnergySwordCharged";
+        public float SwordDamageCoefficient;
+        public override float BaseDamageCoefficient => SwordDamageCoefficient;
+
+        public SwordFireCharged()
+        {
+            SwordDamageCoefficient = AliemConfig.M2_SwordCharged_Damage.Value;
+        }
 
         public SwordFireCharged(float dam)
         {
-            base.damageCoefficient = dam;
+            SwordDamageCoefficient = dam;
         }
 
         public override void OnEnter()

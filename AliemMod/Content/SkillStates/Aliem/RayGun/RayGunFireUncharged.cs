@@ -10,7 +10,7 @@ namespace ModdedEntityStates.Aliem
 
         public override void OnEnter()
         {
-            OverlapAttack overlap = InitMeleeOverlap(0, null, GetModelTransform(), "Knife");
+            OverlapAttack overlap = InitMeleeOverlap(0, null, GetModelTransform(), "KnifeDetection");
             List<HurtBox> hitResults = new List<HurtBox>();
             
             overlap.Fire(hitResults);

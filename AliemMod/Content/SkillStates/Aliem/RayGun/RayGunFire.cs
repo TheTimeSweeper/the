@@ -1,4 +1,6 @@
-﻿using EntityStates;
+﻿using AliemMod.Content;
+using EntityStates;
+using Modules;
 using System;
 using UnityEngine;
 
@@ -9,7 +11,8 @@ namespace ModdedEntityStates.Aliem
 		public virtual float BaseDuration => 0.3f;
 		public virtual float BaseDelayDuration => 0.00f;
 
-		public static float BaseDamageCoefficient = 2.0f;
+		public static float RayGunDamageCoefficient => AliemConfig.M1_RayGun_Damage.Value;
+        public virtual float BaseDamageCoefficient => RayGunDamageCoefficient;
 		//needs to be set in the projectilecontroller component
 		//public static float procCoefficient = 1f;
 
@@ -19,7 +22,7 @@ namespace ModdedEntityStates.Aliem
 
         public virtual GameObject projectile => Modules.Projectiles.RayGunProjectilePrefab;
 
-        public virtual string soundString => "Play_RayGun";
+        public virtual string soundString => AliemConfig.M1_RayGun_Sound_Alt.Value? "Play_INV_RayGun" : "Play_RayGun";
 
         public override void OnEnter() {
 			base.projectilePrefab = projectile;

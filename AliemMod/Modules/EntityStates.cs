@@ -14,12 +14,18 @@ namespace Modules {
             Content.AddEntityState(typeof(RayGunChargedFire));
             Content.AddEntityState(typeof(RayGunInputs));
             Content.AddEntityState(typeof(RayGunInstant));
+            Content.AddEntityState(typeof(CloseRangeKnife));
 
             Content.AddEntityState(typeof(SwordCharging));
             Content.AddEntityState(typeof(SwordFire));
             Content.AddEntityState(typeof(SwordFireCharged));
             Content.AddEntityState(typeof(SwordFireChargedDash));
             Content.AddEntityState(typeof(SwordInputs));
+
+            Content.AddEntityState(typeof(ShootRifleUncharged));
+            Content.AddEntityState(typeof(ShootRifleCharged));
+
+            Content.AddEntityState(typeof(ChargedLunarNeedleFire));
 
             Content.AddEntityState(typeof(AliemLeapM2));
             Content.AddEntityState(typeof(AliemLeapM3));

@@ -49,6 +49,7 @@ namespace ModdedEntityStates
         protected Animator animator;
         private HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
+        private GameObject swingEffectInstance;
 
         public override void OnEnter()
         {
@@ -85,14 +86,24 @@ namespace ModdedEntityStates
             {
                 RemoveHitstop();
             }
+
+            if (this.swingEffectInstance)
+            {
+                EntityState.Destroy(this.swingEffectInstance);
+            }
+
             base.OnExit();
         }
 
-        protected virtual void PlaySwingEffect()
+        protected virtual void PlaySwingEffect() 
         {
-            if (swingEffectPrefab)
+            Helpers.LogWarning(muzzleString);
+            Transform transform = base.FindModelChild(muzzleString);
+            if (transform)
             {
-                EffectManager.SimpleMuzzleFlash(swingEffectPrefab, gameObject, muzzleString, false);
+                this.swingEffectInstance = UnityEngine.Object.Instantiate<GameObject>(this.swingEffectPrefab, transform);
+                Helpers.LogWarning(swingEffectInstance);
+
             }
         }
 

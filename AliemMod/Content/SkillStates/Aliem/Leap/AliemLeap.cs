@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 using static RoR2.LayerIndex;
 
 namespace ModdedEntityStates.Aliem {
@@ -40,7 +41,7 @@ namespace ModdedEntityStates.Aliem {
 				}
 			}
         }
-        public static float DamageCoefficient = 1;
+        public static float DamageCoefficient => AliemConfig.M3_ImpactDamage.Value;
 
 		private OverlapAttack overlapAttack;
 		//private List<HurtBox> overlapAttackHits = new List<HurtBox>();
@@ -100,6 +101,11 @@ namespace ModdedEntityStates.Aliem {
 				base.characterMotor.onMovementHit += this.OnMovementHit;
 			}
 			Util.PlaySound(BaseLeap.soundLoopStartEvent, base.gameObject);
+
+            if (NetworkServer.active)
+            {
+                characterBody.AddBuff(Modules.Buffs.diveBuff);
+            }
 		}
 
 		private void OnMovementHit(ref CharacterMotor.MovementHitInfo movementHitInfo) {
@@ -122,7 +128,7 @@ namespace ModdedEntityStates.Aliem {
 					foundBody = FindBodyToRide();
 				}
 				
-				if(foundBody != null && (inputButtonState.down || AliemConfig.AlwaysRide.Value)) {
+				if(foundBody != null && (inputButtonState.down || AliemConfig.M3_AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {
                         inputButton = inputButton,
 						riddenBody = foundBody
@@ -199,19 +205,25 @@ namespace ModdedEntityStates.Aliem {
 			}
 			base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 			base.characterMotor.airControl = this.previousAirControl;
-			//base.characterBody.isSprinting = false;
+            //base.characterBody.isSprinting = false;
 
 
-   //         int layerIndex = base.modelAnimator.GetLayerIndex("Impact");
-			//if (layerIndex >= 0) {
-			//	base.modelAnimator.SetLayerWeight(layerIndex, 2f);
-			//	this.PlayAnimation("Impact", "LightImpact");
-			//}
-			//base.PlayCrossfade("Gesture, Override", "BufferEmpty", 0.1f);
-			//base.PlayCrossfade("Gesture, AdditiveHigh", "BufferEmpty", 0.1f);
-			//EntityState.Destroy(this.leftFistEffectInstance);
-			//EntityState.Destroy(this.rightFistEffectInstance);
-			base.OnExit();
+            //         int layerIndex = base.modelAnimator.GetLayerIndex("Impact");
+            //if (layerIndex >= 0) {
+            //	base.modelAnimator.SetLayerWeight(layerIndex, 2f);
+            //	this.PlayAnimation("Impact", "LightImpact");
+            //}
+            //base.PlayCrossfade("Gesture, Override", "BufferEmpty", 0.1f);
+            //base.PlayCrossfade("Gesture, AdditiveHigh", "BufferEmpty", 0.1f);
+            //EntityState.Destroy(this.leftFistEffectInstance);
+            //EntityState.Destroy(this.rightFistEffectInstance);
+
+            if (NetworkServer.active)
+            {
+                characterBody.RemoveBuff(Modules.Buffs.diveBuff);
+            }
+
+            base.OnExit();
 		}
 
 		public override InterruptPriority GetMinimumInterruptPriority() {

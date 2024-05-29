@@ -36,7 +36,7 @@ namespace Modules {
 
         private static void FunnyMaterial(string assName)
         {
-            GameObject prefab = Assets.LoadAsset<GameObject>(assName).InstantiateClone(assName, true);
+            GameObject prefab = Assets.LoadAsset<GameObject>(assName);//.InstantiateClone(assName, false);
 
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetHotpooMaterial();
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetCull();
@@ -44,8 +44,8 @@ namespace Modules {
 
         public static GameObject JankyLoadAliemPrefab(string assName) {
 
-            GameObject prefab = Assets.LoadAsset<GameObject>(assName).InstantiateClone(assName, true);
-            //R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
+            GameObject prefab = Assets.LoadAsset<GameObject>(assName);//.InstantiateClone(assName, true);
+            R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
             
             Content.AddProjectilePrefab(prefab);
 

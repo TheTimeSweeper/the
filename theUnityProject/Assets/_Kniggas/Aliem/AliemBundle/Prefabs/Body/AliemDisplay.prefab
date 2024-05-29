@@ -23,6 +23,23 @@ MonoBehaviour:
           m_MethodName: ApplyWeaponSkin
           m_Mode: 2
           m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 3df4055c19d8ab94c928cdd8ba0bcf3e,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: RoR2.SkinDef, RoR2
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: blaster
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3468472123149245946}
+          m_MethodName: ApplyWeaponSkin
+          m_Mode: 2
+          m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: 3f7f0cec0ce302243a5bc3cdaa7aff94,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: RoR2.SkinDef, RoR2
@@ -41,6 +58,23 @@ MonoBehaviour:
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: 3fb873c9d4586c04aa914bf0b58eb84c,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: RoR2.SkinDef, RoR2
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: blaster
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerSkillFamily: {fileID: 0}
+    triggerSkill: {fileID: 0}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3468472123149245946}
+          m_MethodName: ApplyWeaponSkin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 1fe46e5eee62cf349afb797405ec8399,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: RoR2.SkinDef, RoR2
             m_IntArgument: 0

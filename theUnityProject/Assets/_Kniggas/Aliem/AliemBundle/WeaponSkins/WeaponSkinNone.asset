@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1255927399, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
-  m_Name: BlasterWeaponSkin
+  m_Script: {fileID: 11500000, guid: dcb932b5226bdb24b98ef658cb612a8c, type: 3}
+  m_Name: WeaponSkinNone
   m_EditorClassIdentifier: 
   baseSkins: []
   icon: {fileID: 0}
@@ -21,12 +21,12 @@ MonoBehaviour:
     type: 3}
   rendererInfos: []
   gameObjectActivations:
+  - gameObject: {fileID: 8982248484663935976, guid: 2dad81005b208874b94370acc331606e,
+      type: 3}
+    shouldActivate: 0
   - gameObject: {fileID: 4903228129116968927, guid: 2dad81005b208874b94370acc331606e,
       type: 3}
     shouldActivate: 0
-  meshReplacements:
-  - renderer: {fileID: 2614009580564897429, guid: 2dad81005b208874b94370acc331606e,
-      type: 3}
-    mesh: {fileID: 4300000, guid: 7afe67e3cca9ec9458fcd00871cb9f41, type: 2}
+  meshReplacements: []
   projectileGhostReplacements: []
   minionSkinReplacements: []
