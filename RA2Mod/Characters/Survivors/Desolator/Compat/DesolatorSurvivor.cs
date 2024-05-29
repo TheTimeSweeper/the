@@ -105,10 +105,8 @@ namespace RA2Mod.Survivors.Desolator
 
         public override void Initialize()
         {
-            //ConfigEntry<bool> characterEnabled = General.GeneralConfig.TeslaEnabled;
-
-            //if (!characterEnabled.Value)
-            //   return;
+            if (!GeneralConfig.DesolatorEnabled.Value)
+               return;
 
             base.Initialize();
         }

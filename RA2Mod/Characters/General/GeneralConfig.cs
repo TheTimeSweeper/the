@@ -79,11 +79,11 @@ namespace RA2Mod.General
 
             string sectionSurvivors = "0-1. Survivors";
 
-            TeslaEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Tesla Trooper");
-            DesolatorEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Desolator");
-            ChronoEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Chrono Legionnaire");
-            GIEnabled = Config.CharacterEnableConfig(sectionSurvivors, "GI", "BETA", true);
-            ConscriptEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Conscript", "BETA", true);
+            TeslaEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Tesla Trooper", "", false);
+            DesolatorEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Desolator", "", false);
+            ChronoEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Chrono Legionnaire", "", true);
+            GIEnabled = Config.CharacterEnableConfig(sectionSurvivors, "GI", "BETA", false);
+            ConscriptEnabled = Config.CharacterEnableConfig(sectionSurvivors, "Conscript", "BETA", false);
 
         }
     }

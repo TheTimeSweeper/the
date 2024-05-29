@@ -82,10 +82,8 @@ namespace RA2Mod.Survivors.Chrono
 
         public override void Initialize()
         {
-            //ConfigEntry<bool> characterEnabled = General.GeneralConfig.ChronoEnabled;
-
-            //if (!characterEnabled.Value)
-            //   return;
+            if (!GeneralConfig.ChronoEnabled.Value)
+               return;
 
             base.Initialize();
         }

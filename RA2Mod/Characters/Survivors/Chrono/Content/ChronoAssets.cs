@@ -149,7 +149,7 @@ namespace RA2Mod.Survivors.Chrono
                     chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = bombExplosion;
 
                     lunarSunExplosion = result.InstantiateClone(result.name + "Chrono", false);
-                    bombExplosion.GetComponent<EffectComponent>().soundName = "";
+                    lunarSunExplosion.GetComponent<EffectComponent>().soundName = "";
                     Content.CreateAndAddEffectDef(lunarSunExplosion);
 
                 });
@@ -304,7 +304,7 @@ namespace RA2Mod.Survivors.Chrono
                     chronoBombProjectile.GetComponent<ProjectileExplosion>().explosionEffect = bombExplosion;
 
                     lunarSunExplosion = result.InstantiateClone(result.name + "Chrono", false);
-                    bombExplosion.GetComponent<EffectComponent>().soundName = "";
+                    lunarSunExplosion.GetComponent<EffectComponent>().soundName = "";
                     Content.CreateAndAddEffectDef(lunarSunExplosion);
                 }));
             }));

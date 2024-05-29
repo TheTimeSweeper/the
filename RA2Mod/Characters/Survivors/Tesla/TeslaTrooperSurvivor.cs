@@ -88,10 +88,8 @@ namespace RA2Mod.Survivors.Tesla
 
         public override void Initialize()
         {
-            //ConfigEntry<bool> characterEnabled = General.GeneralConfig.TeslaEnabled;
-
-            //if (!characterEnabled.Value)
-            //   return;
+            if (!GeneralConfig.TeslaEnabled.Value)
+               return;
 
             base.Initialize();
         }
