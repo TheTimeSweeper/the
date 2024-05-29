@@ -51,7 +51,7 @@ public class AliemPlugin : BaseUnityPlugin {
 
         Modules.Assets.Initialize();
         Modules.Projectiles.Init();
-        Modules.EntityStates.Init();
+        Modules.States.Init();
 
         //if (Modules.Config.Debug)
         //    gameObject.AddComponent<TestValueManager>();
@@ -81,12 +81,17 @@ public class AliemPlugin : BaseUnityPlugin {
         
         if (sender.HasBuff(Modules.Buffs.riddenBuff)) {
             args.moveSpeedMultAdd += 1.3f;
-            args.attackSpeedMultAdd += 1.2f;
+            //args.attackSpeedMultAdd += 1.2f;
         }
 
         if (sender.HasBuff(Modules.Buffs.diveBuff))
         {
             args.armorAdd += 50f;
+        }
+
+        if (sender.HasBuff(Modules.Buffs.attackSpeedBuff))
+        {
+            args.attackSpeedMultAdd += 0.5f;
         }
     }
 }

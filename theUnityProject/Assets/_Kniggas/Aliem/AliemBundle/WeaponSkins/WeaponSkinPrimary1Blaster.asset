@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb932b5226bdb24b98ef658cb612a8c, type: 3}
-  m_Name: WeaponSkinRifle
+  m_Name: WeaponSkinPrimary1Blaster
   m_EditorClassIdentifier: 
   baseSkins: []
   icon: {fileID: 0}
@@ -22,7 +22,7 @@ MonoBehaviour:
   rendererInfos:
   - renderer: {fileID: 2614009580564897429, guid: 2dad81005b208874b94370acc331606e,
       type: 3}
-    defaultMaterial: {fileID: 2100000, guid: 335ff296138c4364d9ce96289a541033, type: 2}
+    defaultMaterial: {fileID: 2100000, guid: 556772bc865ff2d408c5e39511a5829c, type: 2}
     defaultShadowCastingMode: 1
     ignoreOverlays: 0
     hideOnDeath: 0
@@ -36,6 +36,6 @@ MonoBehaviour:
   meshReplacements:
   - renderer: {fileID: 2614009580564897429, guid: 2dad81005b208874b94370acc331606e,
       type: 3}
-    mesh: {fileID: 4300000, guid: 5366d7c5735645b43be5b551fcf8e07b, type: 2}
+    mesh: {fileID: 4300000, guid: 7afe67e3cca9ec9458fcd00871cb9f41, type: 2}
   projectileGhostReplacements: []
   minionSkinReplacements: []

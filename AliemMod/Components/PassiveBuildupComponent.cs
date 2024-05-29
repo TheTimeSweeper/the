@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace AliemMod.Components {
-    public class RayGunChargeComponent: MonoBehaviour {
+    public class PassiveBuildupComponent : MonoBehaviour {
 
         public static float maxCharge = 1;
         public static float minCharge = 0.2f;

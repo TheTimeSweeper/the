@@ -107,6 +107,12 @@ AvatarMask:
     m_Weight: 1
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R
     m_Weight: 1
+  - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/Blaster.R
+    m_Weight: 1
+  - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/Blaster.R/BlasterHead.R
+    m_Weight: 1
+  - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/Blaster.R/BlasterHead.R/BlasterBottom.R
+    m_Weight: 1
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/index1.R
     m_Weight: 1
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/index1.R/index2.R
@@ -126,11 +132,11 @@ AvatarMask:
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/middle1.R/middle2.R/middle3.R
     m_Weight: 1
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/thumb1.R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/thumb1.R/thumb2.R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: HominidArmature/BASE/stomach/chest/neck/shoulder.R/arm1.R/arm2.R/hand.R/thumb1.R/thumb2.R/thumb3.R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: HominidArmature/elbow.L
     m_Weight: 0
   - m_Path: HominidArmature/elbow.R
@@ -149,9 +155,15 @@ AvatarMask:
     m_Weight: 0
   - m_Path: HominidArmature/knee.R
     m_Weight: 0
-  - m_Path: HominidBlaster
+  - m_Path: meshAliembody
     m_Weight: 0
-  - m_Path: HominidBody
+  - m_Path: meshAliemKnife
     m_Weight: 0
-  - m_Path: HominidKnife
+  - m_Path: meshAliemWeapon_Blaster
+    m_Weight: 0
+  - m_Path: meshAliemWeapon_Blaster.R
+    m_Weight: 0
+  - m_Path: meshAliemWeapon_SecondMesh
+    m_Weight: 0
+  - m_Path: meshAliemWeapon_SecondMesh.R
     m_Weight: 0

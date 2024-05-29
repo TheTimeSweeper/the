@@ -137,6 +137,40 @@ namespace Modules {
         #endregion
 
         #region skilldefs
+        public static T CloneSkillDef<T>(SkillDef skillDefToCopy) where T: SkillDef
+        {
+            T skillDef = ScriptableObject.CreateInstance<T>();
+
+            skillDef.skillName = skillDefToCopy.skillName;
+            (skillDef as ScriptableObject).name = skillDefToCopy.skillName;
+            skillDef.skillNameToken = skillDefToCopy.skillNameToken;
+            skillDef.skillDescriptionToken = skillDefToCopy.skillDescriptionToken;
+            skillDef.icon = skillDefToCopy.icon;
+
+            skillDef.activationState = skillDefToCopy.activationState;
+            skillDef.activationStateMachineName = skillDefToCopy.activationStateMachineName;
+            skillDef.baseMaxStock = skillDefToCopy.baseMaxStock;
+            skillDef.baseRechargeInterval = skillDefToCopy.baseRechargeInterval;
+            skillDef.beginSkillCooldownOnSkillEnd = skillDefToCopy.beginSkillCooldownOnSkillEnd;
+            skillDef.canceledFromSprinting = skillDefToCopy.canceledFromSprinting;
+            skillDef.forceSprintDuringState = skillDefToCopy.forceSprintDuringState;
+            skillDef.fullRestockOnAssign = skillDefToCopy.fullRestockOnAssign;
+            skillDef.interruptPriority = skillDefToCopy.interruptPriority;
+            skillDef.resetCooldownTimerOnUse = skillDefToCopy.resetCooldownTimerOnUse;
+            skillDef.isCombatSkill = skillDefToCopy.isCombatSkill;
+            skillDef.mustKeyPress = skillDefToCopy.mustKeyPress;
+            skillDef.cancelSprintingOnActivation = skillDefToCopy.cancelSprintingOnActivation;
+            skillDef.rechargeStock = skillDefToCopy.rechargeStock;
+            skillDef.requiredStock = skillDefToCopy.requiredStock;
+            skillDef.stockToConsume = skillDefToCopy.stockToConsume;
+
+            skillDef.keywordTokens = skillDefToCopy.keywordTokens;
+
+            Modules.Content.AddSkillDef(skillDef);
+
+            return skillDef;
+        }
+
         public static SkillDef CreateSkillDef (SkillDefInfo skillDefInfo){
 
             return CreateSkillDef<SkillDef>(skillDefInfo);
@@ -144,7 +178,7 @@ namespace Modules {
 
         public static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T: SkillDef {
 
-            T skillDef = ScriptableObject.CreateInstance<T>() ;
+            T skillDef = ScriptableObject.CreateInstance<T>();
 
             popuplateSKillDef(skillDefInfo, skillDef);
 

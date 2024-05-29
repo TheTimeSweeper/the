@@ -6,8 +6,8 @@ namespace ModdedEntityStates.Aliem
     {
         protected override EntityState initialMashState => new SwordFire();
 
-        protected override EntityState mashState => new SwordFire();
+        protected override EntityState newMashState => new SwordFire();
 
-        protected override EntityState holdState => new SwordCharging();
+        protected override EntityState newHoldState => new ChargeSword();
     }
 }

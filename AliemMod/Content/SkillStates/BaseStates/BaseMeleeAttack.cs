@@ -97,13 +97,10 @@ namespace ModdedEntityStates
 
         protected virtual void PlaySwingEffect() 
         {
-            Helpers.LogWarning(muzzleString);
             Transform transform = base.FindModelChild(muzzleString);
             if (transform)
             {
                 this.swingEffectInstance = UnityEngine.Object.Instantiate<GameObject>(this.swingEffectPrefab, transform);
-                Helpers.LogWarning(swingEffectInstance);
-
             }
         }
 

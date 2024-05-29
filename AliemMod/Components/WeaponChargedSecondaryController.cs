@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace AliemMod.Components
 {
-    public class WeaponSecondaryController : MonoBehaviour
+    public class WeaponChargedSecondaryController : MonoBehaviour
     {
         public static Dictionary<SkillDef, SkillDef> skillPairs = new Dictionary<SkillDef, SkillDef>();
 
@@ -34,11 +34,8 @@ namespace AliemMod.Components
 
         private void OnSkillChanged(GenericSkill primaryGenericSkill)
         {
-            Helpers.LogWarning(primaryGenericSkill.skillDef.skillName);
-
             if (skillPairs.ContainsKey(primaryGenericSkill.skillDef))
             {
-                Helpers.LogWarning(skillPairs[primaryGenericSkill.skillDef].skillName);
                 _secondaryGenericSkill.SetBaseSkill(skillPairs[primaryGenericSkill.skillDef]);
             }
         }

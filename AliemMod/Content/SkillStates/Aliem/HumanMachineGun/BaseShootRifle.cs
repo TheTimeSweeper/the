@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
 {
-    public abstract class BaseShootRifle : BaseSkillState
+    public abstract class BaseShootRifle : BaseSkillState, IOffHandable
     {
         public abstract float damageCoefficient { get; }
         public virtual float procCoefficient => 1f;
@@ -18,9 +18,11 @@ namespace ModdedEntityStates.Aliem
         public virtual float minSpread => 0;
         public virtual float spread => 0;
         public virtual LayerMask stopperMask => LayerIndex.CommonMasks.bullet;
-        public virtual string muzzleString => "BlasterMuzzle";
+        public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
 
         public virtual GameObject tracerEffectPrefab => Modules.Assets.rifleTracer;
+
+        public bool isOffHanded { get; set; }
 
         private float duration;
 
@@ -96,6 +98,9 @@ namespace ModdedEntityStates.Aliem
         {
             Util.PlaySound("Play_AliemRifle", gameObject);
             base.PlayAnimation("Gesture, Override", "ShootGun", "ShootGun.playbackRate", duration * 2);
+            base.PlayAnimation(isOffHanded ? "RightArm, Over" : "LeftArm, Over", "ShootGun");
+            base.PlayAnimation(isOffHanded ? "LeftArm, Under" : "RightArm, Under", "ShootGun");//stupid sync didn't work
+
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

@@ -1,5 +1,5 @@
 # Aliem
-- When will alien hominid invasion come out that shit's gonna be fun
+- ~~When will alien hominid invasion come out that shit's gonna be fun~~ it is fun indeed
 - happy halloween modjam 2022 c:
 - multiplayer compatible!
 
@@ -9,7 +9,7 @@ Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the
 
 ## Credits
 Dotflare - Model  
-rob - Animations
+rob - Animations  
 The Behemoth - inspiration, sounds 
 
 ## Known Issues
@@ -21,11 +21,6 @@ The Behemoth - inspiration, sounds
 
 ## Future Plans (that I may or may not get to)
 - finish him lol
-- planned kit 
-  - m1 - mash to shoot hold to charge
-  - m2 - dive
-  - shift - mutations from invasion
-  - r - idk
 - better effects maybe
 - more sounds
 - replace pod with spaceship that crashes
@@ -34,13 +29,22 @@ The Behemoth - inspiration, sounds
 
 ## Changelog
 `1.0.0`
-- increased projectile size of ray gun with respect to enemies but not world
-- reworked kit
-- added laser sword
+- added energy sword
+- added human machine gun
+- solidified mash to shoot and hold to charge functionality for primaries
+  - mash at pretty lenient pace and it will auto shoot at max attack speed
+- secondary now fires primary at max charge, depending on selected primary
+- added Weapon Swap specials, replacing secondary with a second primary
+- a slew of configs to fuck with
 - allow shooting while diving and riding
+- added armor while diving
+- gave him a double jump which can cancel dive
 - severely improved riding presentation
-- updated a lot of animations (thanks rob!)
+- added hitbox on popping out of burrowing
 - added shank on close range ray gun (in reference to the original game)
+- increased size of projectiles with respect to enemies but not world
+- updated a lot of animations (thanks rob!)
+- I know there was more this can't be it
 
 `0.3.2`
 - increased damage on ray gun

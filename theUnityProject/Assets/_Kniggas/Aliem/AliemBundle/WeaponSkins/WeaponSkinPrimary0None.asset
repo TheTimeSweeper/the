@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb932b5226bdb24b98ef658cb612a8c, type: 3}
-  m_Name: WeaponSkinNone
+  m_Name: WeaponSkinPrimary0None
   m_EditorClassIdentifier: 
   baseSkins: []
   icon: {fileID: 0}

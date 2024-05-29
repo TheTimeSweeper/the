@@ -1,9 +1,9 @@
 {
     "author": "TheTimesweeper",
     "name": "Alien_Hominid",
-    "version_number": "0.3.3",
+    "version_number": "0.3.4",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Adds an aliem",
+    "description": "Adds an aliem | new weapons n stuff!",
     "dependencies": [
         "bbepis-BepInExPack-5.4.2101",
         "Smooth_Salad-ShaderSwapper-1.0.1",

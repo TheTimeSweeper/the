@@ -10,6 +10,8 @@ namespace AliemMod.Components.Bundled {
 
         [SerializeField]
         private SkinDef[] weaponSkins;
+        [SerializeField]
+        private SkinDef[] weaponSkinsSecondaries;
 
         public void ApplyWeaponSkin(SkinDef skin) {
         }

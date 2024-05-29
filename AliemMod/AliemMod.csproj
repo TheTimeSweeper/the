@@ -20,7 +20,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="BepInEx.Core" Version="5.4.19" />
-		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.*" />
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="*-*" />
 		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
 		<PackageReference Include="R2API.Core" Version="5.*" />
 		<PackageReference Include="R2API.Prefab" Version="1.*" />
@@ -57,6 +57,11 @@
 	  <Reference Include="TinkersSatchel">
 	    <HintPath>..\libs\TinkersSatchel.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Content\SkillStates\Aliem\WeaponSwap\" />
+	  <Folder Include="Content\SkillStates\WeaponSwap\" />
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">

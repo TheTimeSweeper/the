@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using RoR2.Projectile;
 using UnityEngine.AddressableAssets;
+using AliemMod.Content;
 
 namespace Modules {
 
@@ -109,7 +110,7 @@ namespace Modules {
 
             rifleTracerBig = mainAssetBundle.LoadAsset<GameObject>("RifleTracerThick").InstantiateClone("okimgonnarenamethatonebeforeIfuckinforgetitandmakeahugemistake", false);
             rifleTracerBig.transform.Find("BeamTrails").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidRaidCrab/matVoidRaidCrabTripleBeam3.mat").WaitForCompletion();
-            rifleTracerBig.transform.Find("VolumeTracer").transform.localScale = Vector3.one * 1f;//radius
+            rifleTracerBig.transform.Find("VolumeTracer").transform.localScale = Vector3.one * AliemConfig.radius.Value;//radius
 
             AddNewEffectDef(rifleTracerBig);
         }

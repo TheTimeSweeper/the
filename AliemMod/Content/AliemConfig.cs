@@ -12,16 +12,22 @@ namespace AliemMod.Content
         public static ConfigEntry<bool> Cursed;
 
         public static ConfigEntry<float> M1_RayGun_Damage;
+        public static ConfigEntry<float> M1_RayGunCharged_Damage_Min;
+        public static ConfigEntry<float> M1_RayGunCharged_Damage_Max;
         public static ConfigEntry<bool> M1_RayGun_Sound_Alt;
-        public static ConfigEntry<float> M1_Sword_Damage;
-        public static ConfigEntry<float> M1_MachineGun_Damage;
 
-        public static ConfigEntry<float> M2_RayGunCharged_Damage;
-        public static ConfigEntry<float> M2_SwordCharged_Damage;
-        public static ConfigEntry<float> M2_MachineGunCharged_Damage;
-        public static ConfigEntry<float> M2_MachineGunCharged_Interval;
-        public static ConfigEntry<int> M2_MachineGunCharged_Bullets;
-        public static ConfigEntry<float> M2_MachineGunCharged_Spread;
+        public static ConfigEntry<float> M1_Sword_Damage;
+        public static ConfigEntry<float> M1_SwordCharged_Damage_Min;
+        public static ConfigEntry<float> M1_SwordCharged_Damage_Max;
+        public static ConfigEntry<float> M1_SwordCharged_Speed_Min;
+        public static ConfigEntry<float> M1_SwordCharged_Speed_Max;
+
+        public static ConfigEntry<float> M1_MachineGun_Damage;
+        public static ConfigEntry<float> M1_MachineGunCharged_Damage;
+        public static ConfigEntry<int> M1_MachineGunCharged_Bullets_Min;
+        public static ConfigEntry<int> M1_MachineGunCharged_Bullets_Max;
+        public static ConfigEntry<float> M1_MachineGunCharged_Interval;
+        public static ConfigEntry<float> M1_MachineGunCharged_Spread;
 
         public static ConfigEntry<bool> M3_AlwaysRide;
         public static ConfigEntry<float> M3_ImpactDamage;
@@ -32,6 +38,7 @@ namespace AliemMod.Content
         public static ConfigEntry<float> M3_ChompHealing;
 
         public static ConfigEntry<float> M4_GrenadeDamage;
+        public static ConfigEntry<float> M4_WeaponSwap_Duration;
 
         public static ConfigEntry<float> rideLerpSpeed;
         public static ConfigEntry<float> rideClimbAnimTime;
@@ -42,6 +49,7 @@ namespace AliemMod.Content
         public static ConfigEntry<float> bloom2;
 
         public static ConfigEntry<float> radius;
+        public static ConfigEntry<float> smallhop;
 
         public static string sectionDebug = "Debug";
         public static string sectionSkills = "Skills";
@@ -69,6 +77,20 @@ namespace AliemMod.Content
                 0,
                 10,
                 "");
+            M1_RayGunCharged_Damage_Min = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_RayGunCharged_Damage_Min),
+                2f,
+                0,
+                20,
+                "");
+            M1_RayGunCharged_Damage_Max = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_RayGunCharged_Damage_Max),
+                6f,
+                0,
+                20,
+                "");
             M1_RayGun_Sound_Alt = Config.BindAndOptions(
                 sectionSkills,
                 "M1_RayGun_Sound_Alt",
@@ -82,6 +104,35 @@ namespace AliemMod.Content
                 0,
                 10,
                 "");
+            M1_SwordCharged_Damage_Min = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SwordCharged_Damage_Min),
+                1.5f,
+                0,
+                10,
+                "");
+            M1_SwordCharged_Damage_Max = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SwordCharged_Damage_Max),
+                6f,
+                0,
+                10,
+                "");
+
+            M1_SwordCharged_Speed_Min = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SwordCharged_Speed_Min),
+                8f,
+                -20,
+                100,
+                "");
+            M1_SwordCharged_Speed_Max = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SwordCharged_Speed_Max),
+                18f,
+                0,
+                100,
+                "");
 
             M1_MachineGun_Damage = Config.BindAndOptions(
                 sectionSkills,
@@ -91,46 +142,37 @@ namespace AliemMod.Content
                 10,
                 "");
 
-            M2_RayGunCharged_Damage = Config.BindAndOptions(
+            M1_MachineGunCharged_Damage = Config.BindAndOptions(
                 sectionSkills,
-                "M2_RayGunCharged_Damage",
-                6f,
-                0,
-                10,
-                "");
-
-            M2_SwordCharged_Damage = Config.BindAndOptions(
-                sectionSkills,
-                "M2_SwordCharged_Damage",
-                6f,
-                0,
-                10,
-                "");
-
-            M2_MachineGunCharged_Damage = Config.BindAndOptions(
-                sectionSkills,
-                "M2_MachineGunCharged_Damage",
-                1f,
+                "M1_MachineGunCharged_Damage",
+                1.5f,
                 0,
                 20,
                 "");
-            M2_MachineGunCharged_Interval = Config.BindAndOptions(
+            M1_MachineGunCharged_Bullets_Min = Config.BindAndOptions(
                 sectionSkills,
-                "M2_MachineGunCharged_Interval",
+                nameof(M1_MachineGunCharged_Bullets_Min),
+                2,
+                0,
+                50,
+                "");
+            M1_MachineGunCharged_Bullets_Max = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_MachineGunCharged_Bullets_Max),
+                8,
+                0,
+                50,
+                "");
+            M1_MachineGunCharged_Interval = Config.BindAndOptions(
+                sectionSkills,
+                "M1_MachineGunCharged_Interval",
                 0.1f,
                 0,
                 1,
                 "");
-            M2_MachineGunCharged_Bullets = Config.BindAndOptions(
+            M1_MachineGunCharged_Spread = Config.BindAndOptions(
                 sectionSkills,
-                "M2_MachineGunCharged_Bullets",
-                6,
-                0,
-                50,
-                "");
-            M2_MachineGunCharged_Spread = Config.BindAndOptions(
-                sectionSkills,
-                "M2_MachineGunCharged_Spread",
+                "M1_MachineGunCharged_Spread",
                 1f,
                 0,
                 360,
@@ -158,7 +200,7 @@ namespace AliemMod.Content
             M3_BurrowPopOutForce = Config.BindAndOptions(
                 sectionSkills,
                 "M3_BurrowPopOutForce",
-                200f,
+                1000f,
                 0,
                 10000,
                 "");
@@ -186,6 +228,14 @@ namespace AliemMod.Content
                 sectionSkills,
                 "M4_GrenadeDamage",
                 12f,
+                0,
+                20,
+                "");
+
+            M4_WeaponSwap_Duration = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M4_WeaponSwap_Duration),
+                10f,
                 0,
                 20,
                 "");
@@ -230,7 +280,7 @@ namespace AliemMod.Content
             bloom2 = Config.BindAndOptionsSlider(
                 sectionDebug,
                 "bloom2",
-                0.5f,
+                0.25f,
                 "",
                 0,
                 5);
@@ -239,6 +289,14 @@ namespace AliemMod.Content
                 sectionDebug,
                 "radius",
                 1f,
+                "",
+                0,
+                5);
+
+            smallhop = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "smallhop",
+                0f,
                 "",
                 0,
                 5);

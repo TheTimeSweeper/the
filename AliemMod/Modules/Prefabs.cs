@@ -3,6 +3,8 @@ using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
 using Modules.Characters;
+using System;
+using System.Linq;
 
 namespace Modules {
     // module for creating body prefabs and whatnot
@@ -159,7 +161,7 @@ namespace Modules {
         {
             for (int i = bodyPrefab.transform.childCount - 1; i >= 0; i--) {
 
-                Object.DestroyImmediate(bodyPrefab.transform.GetChild(i).gameObject);
+                UnityEngine.Object.DestroyImmediate(bodyPrefab.transform.GetChild(i).gameObject);
             }
 
             Transform modelBase = new GameObject("ModelBase").transform;
@@ -418,6 +420,125 @@ namespace Modules {
             hitBoxGroup.hitBoxes = hitBoxes.ToArray();
 
             hitBoxGroup.groupName = hitboxName;
+        }
+
+        public static void ClearEntityStateMachines(GameObject bodyPrefab)
+        {
+            EntityStateMachine[] machines = bodyPrefab.GetComponents<EntityStateMachine>();
+
+            for (int i = machines.Length - 1; i >= 0; i--)
+            {
+                UnityEngine.Object.DestroyImmediate(machines[i]);
+            }
+
+            NetworkStateMachine networkMachine = bodyPrefab.GetComponent<NetworkStateMachine>();
+            networkMachine.stateMachines = Array.Empty<EntityStateMachine>();
+
+            CharacterDeathBehavior deathBehavior = bodyPrefab.GetComponent<CharacterDeathBehavior>();
+            if (deathBehavior)
+            {
+                deathBehavior.idleStateMachine = Array.Empty<EntityStateMachine>();
+            }
+
+            SetStateOnHurt setStateOnHurt = bodyPrefab.GetComponent<SetStateOnHurt>();
+            if (setStateOnHurt)
+            {
+                setStateOnHurt.idleStateMachine = Array.Empty<EntityStateMachine>();
+            }
+        }
+
+        public static EntityStateMachine AddMainEntityStateMachine(GameObject bodyPrefab, string machineName = "Body", Type mainStateType = null, Type initalStateType = null)
+        {
+            EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(bodyPrefab, machineName);
+            if (entityStateMachine == null)
+            {
+                entityStateMachine = bodyPrefab.AddComponent<EntityStateMachine>();
+            }
+            else
+            {
+                Helpers.LogVerbose($"An Entity State Machine already exists with the name {machineName}. replacing.");
+            }
+
+            entityStateMachine.customName = machineName;
+
+            if (mainStateType == null)
+            {
+                mainStateType = typeof(EntityStates.GenericCharacterMain);
+            }
+            entityStateMachine.mainStateType = new EntityStates.SerializableEntityStateType(mainStateType);
+
+            if (initalStateType == null)
+            {
+                initalStateType = typeof(EntityStates.SpawnTeleporterState);
+            }
+            entityStateMachine.initialStateType = new EntityStates.SerializableEntityStateType(initalStateType);
+
+            NetworkStateMachine networkMachine = bodyPrefab.GetComponent<NetworkStateMachine>();
+            if (networkMachine)
+            {
+                networkMachine.stateMachines = networkMachine.stateMachines.Append(entityStateMachine).ToArray();
+            }
+
+            CharacterDeathBehavior deathBehavior = bodyPrefab.GetComponent<CharacterDeathBehavior>();
+            if (deathBehavior)
+            {
+                deathBehavior.deathStateMachine = entityStateMachine;
+            }
+
+            SetStateOnHurt setStateOnHurt = bodyPrefab.GetComponent<SetStateOnHurt>();
+            if (setStateOnHurt)
+            {
+                setStateOnHurt.targetStateMachine = entityStateMachine;
+            }
+
+            return entityStateMachine;
+        }
+        //this but in reverse https://media.discordapp.net/attachments/875473107891150878/896193331720237106/caption-7.gif?ex=65989f94&is=65862a94&hm=e1f51da3ad190c00c5da1f90269d5ef10bedb0ae063c0f20aa0dd8721608018a&
+        public static EntityStateMachine AddEntityStateMachine(GameObject prefab, string machineName, Type mainStateType = null, Type initalStateType = null, bool addToHurt = true, bool addToDeath = true)
+        {
+            EntityStateMachine entityStateMachine = EntityStateMachine.FindByCustomName(prefab, machineName);
+            if (entityStateMachine == null)
+            {
+                entityStateMachine = prefab.AddComponent<EntityStateMachine>();
+            }
+            else
+            {
+                Helpers.LogVerbose($"An Entity State Machine already exists with the name {machineName}. replacing.");
+            }
+
+            entityStateMachine.customName = machineName;
+
+            if (mainStateType == null)
+            {
+                mainStateType = typeof(EntityStates.Idle);
+            }
+            entityStateMachine.mainStateType = new EntityStates.SerializableEntityStateType(mainStateType);
+
+            if (initalStateType == null)
+            {
+                initalStateType = typeof(EntityStates.Idle);
+            }
+            entityStateMachine.initialStateType = new EntityStates.SerializableEntityStateType(initalStateType);
+
+            NetworkStateMachine networkMachine = prefab.GetComponent<NetworkStateMachine>();
+            if (networkMachine)
+            {
+                networkMachine.stateMachines = networkMachine.stateMachines.Append(entityStateMachine).ToArray();
+            }
+
+            CharacterDeathBehavior deathBehavior = prefab.GetComponent<CharacterDeathBehavior>();
+            if (deathBehavior && addToDeath)
+            {
+                deathBehavior.idleStateMachine = deathBehavior.idleStateMachine.Append(entityStateMachine).ToArray();
+            }
+
+            SetStateOnHurt setStateOnHurt = prefab.GetComponent<SetStateOnHurt>();
+            if (setStateOnHurt && addToHurt)
+            {
+                setStateOnHurt.idleStateMachine = setStateOnHurt.idleStateMachine.Append(entityStateMachine).ToArray();
+            }
+
+            return entityStateMachine;
         }
 
         #endregion ComponentSetup

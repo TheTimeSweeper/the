@@ -6,7 +6,7 @@ namespace ModdedEntityStates.Aliem
 {
     public class RayGunFireUncharged : RayGunFire
     {
-        private bool cancelCancel;
+        private bool cancelCancelCancel;
 
         public override void OnEnter()
         {
@@ -17,7 +17,7 @@ namespace ModdedEntityStates.Aliem
             if(hitResults.Count > 0)
             {
                 outer.SetNextState(new CloseRangeKnife());
-                cancelCancel = true;
+                cancelCancelCancel = true;
                 return;
             }
 
@@ -26,7 +26,7 @@ namespace ModdedEntityStates.Aliem
 
         public override void FixedUpdate()
         {
-            if (cancelCancel)
+            if (cancelCancelCancel)
                 return;
 
             base.FixedUpdate();

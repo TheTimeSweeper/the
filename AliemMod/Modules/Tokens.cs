@@ -40,45 +40,54 @@ namespace Modules
             #endregion
 
             #region Primary
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_NAME", "Ray Gun");
+
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_NAME", "Ray Gun");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}." +
+                $"\n{Helpers.UtilityText("Hold to charge")} and fire a large blast for {Helpers.DamageRangeText(AliemConfig.M1_RayGunCharged_Damage_Min.Value, AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
+
+            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_NAME", "Energy Sword");
+            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}." +
+                $"\n{Helpers.UtilityText("Hold to charge")} and dash and slash for {Helpers.DamageRangeText(AliemConfig.M1_SwordCharged_Damage_Min.Value, AliemConfig.M1_SwordCharged_Damage_Max.Value)}.");
+
+            LanguageAPI.Add(prefix + "PRIMARY_RIFLE_INPUTS_NAME", "Human Machine Gun");
+            LanguageAPI.Add(prefix + "PRIMARY_RIFLE_INPUTS_DESCRIPTION", $"Fire a bullet for {Helpers.DamageValueText(AliemConfig.M1_MachineGun_Damage.Value)}." +
+                $"\n{Helpers.UtilityText("Hold to charge")} and fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Min.Value}-{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}%")}.");
+
+            #region cursed
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_NAME", "Ray Gun (not chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}." +
-                $"\n{Helpers.UtilityText("Charged:")} Shoot a charged blast that explodes for {Helpers.DamageValueText(RayGunChargedFire.BaseDamage)}");
+                $"\n{Helpers.UtilityText("Charged:")} Shoot a charged blast that explodes for {Helpers.DamageValueText(AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
 
-            LanguageAPI.Add(prefix + "PRIMARY_SWORD_NAME", "Energy Sword");
+            LanguageAPI.Add(prefix + "PRIMARY_SWORD_NAME", "Energy Sword (not chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_SWORD_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(AliemConfig.M1_Sword_Damage.Value)}." +
-                $"\n{Helpers.UtilityText("Charged:")} Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M2_SwordCharged_Damage.Value)}");
+                $"\n{Helpers.UtilityText("Charged:")} Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M1_SwordCharged_Damage_Min.Value)}.");
             
-            LanguageAPI.Add(prefix + "PRIMARY_RIFLE_NAME", "Human Machine Gun");
+            LanguageAPI.Add(prefix + "PRIMARY_RIFLE_NAME", "Human Machine Gun (not chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_RIFLE_DESCRIPTION", $"Fire a bullet for {Helpers.DamageValueText(AliemConfig.M1_MachineGun_Damage.Value)}." +
-                $"\n{Helpers.UtilityText("Charged:")} Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M2_MachineGunCharged_Bullets.Value}x{AliemConfig.M2_MachineGunCharged_Damage.Value * 100}%")}");
-
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_NAME", "Ray Gun (chargeable)");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INPUTS_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}.\nHold to charge up and fire a large blast for up to {Helpers.DamageValueText(10/*RayGunCharging.MaxDamageCoefficient*/)}");
+                $"\n{Helpers.UtilityText("Charged:")} Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Min.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}%")}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.RayGunChargeComponent.maxCharge)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(AliemMod.Components.PassiveBuildupComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.PassiveBuildupComponent.maxCharge)}.");
+            #endregion cursed
 
-            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_NAME", "Energy Sword (chargable)");
-            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}.\nHold to charge up and dash and slash for up to {Helpers.DamageValueText(6)}");
-
-            #endregion
+            #endregion Primary
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_CHARGED_NAME", "Charged Shot");
-            LanguageAPI.Add(prefix + "SECONDARY_CHARGED_DESCRIPTION", $"Shoot a charged version of your {Helpers.UtilityText("Primary weapon")} for enhanced effect");
+            LanguageAPI.Add(prefix + "SECONDARY_CHARGED_DESCRIPTION", $"Fire the charged version of your {Helpers.UtilityText("Primary weapon")} at {Helpers.DamageText("maximum charge")}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Ray Gun Big");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Shoot a charged blast that explodes for {Helpers.DamageValueText(RayGunChargedFire.BaseDamage)}");
+            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Shoot a charged blast that explodes for {Helpers.DamageValueText(AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
             
             LanguageAPI.Add(prefix + "SECONDARY_SWORD_NAME", "Energy Sword Charged");
-            LanguageAPI.Add(prefix + "SECONDARY_SWORD_DESCRIPTION", $"Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M2_SwordCharged_Damage.Value)}");
+            LanguageAPI.Add(prefix + "SECONDARY_SWORD_DESCRIPTION", $"Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M1_SwordCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_RIFLE_NAME", "Human Machine Gun Charged");
-            LanguageAPI.Add(prefix + "SECONDARY_RIFLE_DESCRIPTION", $"Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M2_MachineGunCharged_Bullets.Value}x{AliemConfig.M2_MachineGunCharged_Damage.Value*100}%")}");
+            LanguageAPI.Add(prefix + "SECONDARY_RIFLE_DESCRIPTION", $"Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value*100}% damage")}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_LUNAR_NAME", "Hungering Gaze Charged");
             LanguageAPI.Add(prefix + "SECONDARY_LUNAR_DESCRIPTION", $"Fire a conglomerate of {Helpers.UtilityText("tracking shards")} that explode for {Helpers.DamageText("9x120% damage")}.");
-            #endregion
+            #endregion Secondary
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
@@ -90,23 +99,29 @@ namespace Modules
 
             
             LanguageAPI.Add("LOADOUT_SKILL_RIDING", "Riding");
-            #endregion
+            #endregion Utility
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_GRENADE_NAME", "Grenade");
-            string specialDesc = $"Throw a grenade for {Helpers.DamageValueText(ThrowGrenade.DamageCoefficient)}.";
-            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_DESCRIPTION", specialDesc);
+            string specialGrenadeDesc = $"Throw a grenade for {Helpers.DamageValueText(ThrowGrenade.DamageCoefficient)}.";
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_DESCRIPTION", specialGrenadeDesc);
 
             LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_NAME", "Big Grenade");
-            specialDesc += $"{Helpers.ScepterDescription("Double area, double damage")}";
-            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION", specialDesc);
-            #endregion
+            specialGrenadeDesc += $"{Helpers.ScepterDescription("Double area, double damage")}";
+            LanguageAPI.Add(prefix + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION", specialGrenadeDesc);
+
+            string specialSwapDesc = $"Wield this weapon on your offhand for {AliemConfig.M4_WeaponSwap_Duration.Value} seconds.";
+            LanguageAPI.Add(prefix + "SPECIAL_WEAPONSWAP_DESCRIPTION", specialSwapDesc);
+
+            specialSwapDesc += $"{Helpers.ScepterDescription("Double Attack Speed for duration")}";
+            LanguageAPI.Add(prefix + "SPECIAL_WEAPONSWAP_SCEPTER_DESCRIPTION", specialSwapDesc);
+            #endregion Special
 
             #region Achievements
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
-            #endregion
+            #endregion Achievements
         }
     }
 }

@@ -14,6 +14,10 @@ internal static class Helpers {
     public static string DamageValueText(float value) {
         return $"<style=cIsDamage>{value * 100}% damage</style>";
     }
+    public static string DamageRangeText(float value1, float value2)
+    {
+        return $"<style=cIsDamage>{value1 * 100}%-{value2 * 100}% damage</style>";
+    }
 
     public static string UtilityText(string text) {
         return $"<style=cIsUtility>{text}</style>";

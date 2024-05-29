@@ -3,11 +3,16 @@ using System;
 
 namespace ModdedEntityStates
 {
-    public class BaseTimedSkillState : BaseSkillState
+    //see example skills below
+    public abstract class BaseTimedSkillState : BaseSkillState
     {
-        public static float TimedBaseDuration;
-        public static float TimedBaseCastStartTime;
-        public static float TimedBaseCastEndTime;
+        //total duration of the move
+        public abstract float TimedBaseDuration { get; }
+
+        //0-1 time relative to duration that the skill starts
+        //for example, set 0.5 and the "cast" will happen halfway through the skill
+        public abstract float TimedBaseCastStartPercentTime { get; }
+        public virtual float TimedBaseCastEndPercentTime => 1;
 
         protected float duration;
         protected float castStartTime;
@@ -16,16 +21,23 @@ namespace ModdedEntityStates
         protected bool isFiring;
         protected bool hasExited;
 
-        protected virtual void InitDurationValues(float baseDuration, float baseCastStartTime, float baseCastEndTime = 1)
+        public override void OnEnter()
         {
-            TimedBaseDuration = baseDuration;
-            TimedBaseCastStartTime = baseCastStartTime;
-            TimedBaseCastEndTime = baseCastEndTime;
-
-            duration = TimedBaseDuration / base.attackSpeedStat;
-            castStartTime = baseCastStartTime * duration;
-            castEndTime = baseCastEndTime * duration;
+            InitDurationValues();
+            base.OnEnter();
         }
+
+        protected virtual void InitDurationValues()
+        {
+            duration = TimedBaseDuration / attackSpeedStat;
+            this.castStartTime = TimedBaseCastStartPercentTime * duration;
+            this.castEndTime = TimedBaseCastEndPercentTime * duration;
+        }
+
+        protected virtual void OnCastEnter() { }
+        protected virtual void OnCastFixedUpdate() { }
+        protected virtual void OnCastUpdate() { }
+        protected virtual void OnCastExit() { }
 
         public override void FixedUpdate()
         {
@@ -40,7 +52,8 @@ namespace ModdedEntityStates
             {
                 isFiring = true;
                 OnCastFixedUpdate();
-                if (!hasFired) {
+                if (!hasFired)
+                {
                     OnCastEnter();
                     hasFired = true;
                 }
@@ -54,18 +67,14 @@ namespace ModdedEntityStates
 
             if (fixedAge > duration)
             {
-                EntityState state = ChooseNextState();
-                if (state == null) {
-                    outer.SetNextStateToMain();
-                } else {
-                    outer.SetNextState(state);
-                }
+                SetNextState();
                 return;
             }
         }
 
-        protected virtual EntityState ChooseNextState() {
-            return null;
+        protected virtual void SetNextState()
+        {
+            outer.SetNextStateToMain();
         }
 
         public override void Update()
@@ -76,10 +85,39 @@ namespace ModdedEntityStates
                 OnCastUpdate();
             }
         }
+    }
 
-        protected virtual void OnCastEnter() { }
-        protected virtual void OnCastFixedUpdate() { }
-        protected virtual void OnCastUpdate() { }
-        protected virtual void OnCastExit() { }
+    public class ExampleTimedSkillState : BaseTimedSkillState
+    {
+        public override float TimedBaseDuration => 1.5f;
+
+        public override float TimedBaseCastStartPercentTime => 0.2f;
+        public override float TimedBaseCastEndPercentTime => 0.9f;
+
+        protected override void OnCastEnter()
+        {
+            //perform my skill after 0.3 seconds of windup
+        }
+
+        protected override void OnCastFixedUpdate()
+        {
+            //perform some continuous action after the windup, which will end .15 seconds before the full duration
+        }
+
+        protected override void OnCastExit()
+        {
+            //probably play an animation at the end of the action
+        }
+    }
+
+    public class ExampleDelayedSkillState : BaseTimedSkillState
+    {
+        public override float TimedBaseDuration => 1.5f;
+        public override float TimedBaseCastStartPercentTime => 0.2f;
+
+        protected override void OnCastEnter()
+        {
+            //perform my skill after 0.3 seconds of windup
+        }
     }
 }

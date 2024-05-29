@@ -174,12 +174,23 @@ ModelImporter:
   - first:
       74: -3865135139349446554
     second: HominidArmature|ShootOld2
+  - first:
+      74: 2788841808228294430
+    second: HominidArmature|Shoot.R
+  - first:
+      74: 3337728823366024473
+    second: HominidArmature|HandRClosed
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hominid
     second: {fileID: 2100000, guid: 556772bc865ff2d408c5e39511a5829c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: f120357c4066a144ab25eda8b3ac5334, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -1615,6 +1626,64 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 10
+    - serializedVersion: 16
+      name: HominidArmature|Shoot.R
+      takeName: HominidArmature|Shoot.R
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 10
+    - serializedVersion: 16
+      name: HominidArmature|HandRClosed
+      takeName: HominidArmature|HandRClosed
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []

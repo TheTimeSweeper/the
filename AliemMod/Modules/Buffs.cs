@@ -11,6 +11,7 @@ namespace Modules {
         //Aliem
         public static BuffDef riddenBuff;
         public static BuffDef diveBuff;
+        public static BuffDef attackSpeedBuff;
 
         public static void RegisterBuffs() {
 
@@ -26,6 +27,13 @@ namespace Modules {
                 AddNewBuff("AliemDive",
                            Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/texBuffGenericShield.tif").WaitForCompletion(),
                            Color.yellow,
+                           false,
+                           false);
+
+            attackSpeedBuff =
+                AddNewBuff("AliemAttackSpeedBuff",
+                           Assets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliemGun"),
+                           Color.magenta,
                            false,
                            false);
         }

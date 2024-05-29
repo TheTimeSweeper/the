@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb932b5226bdb24b98ef658cb612a8c, type: 3}
-  m_Name: WeaponSkinSword
+  m_Name: WeaponSkinPrimary2Sword
   m_EditorClassIdentifier: 
   baseSkins: []
   icon: {fileID: 0}
@@ -29,7 +29,7 @@ MonoBehaviour:
   - renderer: {fileID: 3408561978280727660, guid: 2dad81005b208874b94370acc331606e,
       type: 3}
     defaultMaterial: {fileID: 2100000, guid: f120357c4066a144ab25eda8b3ac5334, type: 2}
-    defaultShadowCastingMode: 1
+    defaultShadowCastingMode: 0
     ignoreOverlays: 0
     hideOnDeath: 0
   gameObjectActivations:

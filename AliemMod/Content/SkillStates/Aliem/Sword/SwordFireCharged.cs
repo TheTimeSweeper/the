@@ -8,24 +8,28 @@ namespace ModdedEntityStates.Aliem
     {
         public override GameObject projectile => Modules.Projectiles.SwordProjectilePrefabBig;
         public override string soundString => "Play_AliemEnergySwordCharged";
-        public float SwordDamageCoefficient;
-        public override float BaseDamageCoefficient => SwordDamageCoefficient;
+        public override float BaseDamageCoefficient => _swordDamageCoefficient;
+
+        private float _swordDamageCoefficient;
+        private float _swordSpeedCoefficient;
 
         public SwordFireCharged()
         {
-            SwordDamageCoefficient = AliemConfig.M2_SwordCharged_Damage.Value;
+            _swordDamageCoefficient = AliemConfig.M1_SwordCharged_Damage_Max.Value;
+            _swordSpeedCoefficient = AliemConfig.M1_SwordCharged_Speed_Max.Value;
         }
 
-        public SwordFireCharged(float dam)
+        public SwordFireCharged(float dam, float sped)
         {
-            SwordDamageCoefficient = dam;
+            _swordDamageCoefficient = dam;
+            _swordSpeedCoefficient = sped;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
             var machine = RoR2.EntityStateMachine.FindByCustomName(gameObject, "Body");
-            machine.SetNextState(new SwordFireChargedDash());
+            machine.SetNextState(new SwordFireChargedDash(_swordSpeedCoefficient));
         }
     }
 }

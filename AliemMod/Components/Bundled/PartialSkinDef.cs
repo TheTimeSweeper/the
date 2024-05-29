@@ -29,22 +29,18 @@ namespace AliemMod.Components.Bundled
                     if (Util.BuildPrefabTransformPath(characterModel.transform, rendererInfo.renderer.transform) ==
                         runtimeSkin.rendererInfoTemplates[j].path)
                     {
-                        Helpers.LogWarning("matched");
                         rendererInfosBuffer[i] = runtimeSkin.rendererInfoTemplates[j].data;
                         rendererInfosBuffer[i].renderer = characterModel.transform.Find(runtimeSkin.rendererInfoTemplates[j].path).GetComponent<Renderer>();
                     }
                 }
             }
-            
+
+            //heh
+            characterModel.gameObjectActivationTransforms.Clear();
+
             runtimeSkin.Apply(characterModelObject);
 
             characterModel.baseRendererInfos = rendererInfosBuffer;
-
-            for (int i = 0; i < rendererInfosBuffer.Length; i++)
-            {
-                CharacterModel.RendererInfo rendererInfo = rendererInfosBuffer[i];
-                Helpers.LogWarning(rendererInfo.defaultMaterial);
-            }
         }
     }
 }

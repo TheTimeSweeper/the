@@ -1,5 +1,6 @@
 ﻿using AliemMod.Components;
 using AliemMod.Components.Bundled;
+using AliemMod.Content.SkillDefs;
 using BepInEx.Configuration;
 using KinematicCharacterController;
 using ModdedEntityStates.Aliem;
@@ -66,6 +67,14 @@ namespace AliemMod.Content.Survivors {
                 },
                 new CustomRendererInfo
                 {
+                    childName = "MeshBlasterR",
+                },
+                new CustomRendererInfo
+                {
+                    childName = "MeshWeapon2R",
+                },
+                new CustomRendererInfo
+                {
                     childName = "MeshKnife",
                 },
         };
@@ -91,12 +100,6 @@ namespace AliemMod.Content.Survivors {
 
             Hooks();
 
-            if (AliemConfig.Cursed.Value)
-            {
-                bodyPrefab.AddComponent<RayGunChargeComponent>();
-            }
-            bodyPrefab.AddComponent<WeaponSecondaryController>();
-
             Modules.Config.ConfigureBody(bodyPrefab.GetComponent<CharacterBody>(), AliemConfig.sectionBody);
 
             //VehicleSeat vehicleSeat = bodyPrefab.AddComponent<VehicleSeat>();
@@ -117,8 +120,10 @@ namespace AliemMod.Content.Survivors {
 
             bodyCharacterModel.GetComponent<ChildLocator>().FindChild("FakeAimOrigin").transform.position = bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform.position;
 
-            //todo animate popping out of the ground for css
-            //displayPrefab.AddComponent<AliemMenuSound>();
+            EntityStateMachine.FindByCustomName(bodyPrefab, "Slide").customName = "Weapon2";
+            Modules.Prefabs.AddEntityStateMachine(bodyPrefab, "Inputs1");
+            Modules.Prefabs.AddEntityStateMachine(bodyPrefab, "Inputs2");
+            Modules.Prefabs.AddEntityStateMachine(bodyPrefab, "Mutation");
         }
 
         private void FixMotorCollider() {
@@ -213,25 +218,15 @@ namespace AliemMod.Content.Survivors {
         public override void InitializeSkills() {
             Skills.ClearGenericSkills(bodyPrefab);
 
-
             #region Primary
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary);
 
-            SkillDef primarySimpleGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
-                "aliem_primary_gun",
-                ALIEM_PREFIX + "PRIMARY_GUN_NAME",
-                ALIEM_PREFIX + "PRIMARY_GUN_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
-                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunFireUncharged)),
-                "Weapon",
-                true));
-            AddWeaponSkin(primarySimpleGunSkillDef, 1);
-
+            #region ray gun
             SkillDef SecondaryGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_secondary_gun",
-                skillNameToken = ALIEM_PREFIX + "SECONDARY_GUN_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_GUN_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_GUN_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_GUN_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondaryGunBig"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
@@ -251,24 +246,25 @@ namespace AliemMod.Content.Survivors {
                 stockToConsume = 1,
                 keywordTokens = new string[] { }
             });
-            WeaponSecondaryController.skillPairs[primarySimpleGunSkillDef] = SecondaryGunSkillDef;
             Config.ConfigureSkillDef(SecondaryGunSkillDef, AliemConfig.sectionBody, "M2_RayGun_Charged");
 
-            SkillDef primarySwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
-                "aliem_primary_sword",
-                ALIEM_PREFIX + "PRIMARY_SWORD_NAME",
-                ALIEM_PREFIX + "PRIMARY_SWORD_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
-                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordFire)),
-                "Weapon",
+            SkillDef primaryGunInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_gun_inputs",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
+                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInputs)),
+                "Inputs1",
                 true));
-            AddWeaponSkin(primarySwordSkillDef, 2);
+            WeaponChargedSecondaryController.skillPairs[primaryGunInputsSkillDef] = SecondaryGunSkillDef;
+            AddWeaponSkin(primaryGunInputsSkillDef, 1);
+            #endregion ray gun
 
             SkillDef SecondarySwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_secondary_sword",
-                skillNameToken = ALIEM_PREFIX + "SECONDARY_SWORD_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_SWORD_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_SWORD_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_SWORD_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondarySwordBig"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SwordFireCharged)),
                 activationStateMachineName = "Weapon",
@@ -288,24 +284,24 @@ namespace AliemMod.Content.Survivors {
                 stockToConsume = 1,
                 keywordTokens = new string[] { }
             });
-            WeaponSecondaryController.skillPairs[primarySwordSkillDef] = SecondarySwordSkillDef;
             Config.ConfigureSkillDef(SecondarySwordSkillDef, AliemConfig.sectionBody, "M2_Sword_Charged");
 
-            SkillDef primaryRifleSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
-                "aliem_primary_rifle",
-                ALIEM_PREFIX + "PRIMARY_RIFLE_NAME",
-                ALIEM_PREFIX + "PRIMARY_RIFLE_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"),
-                new EntityStates.SerializableEntityStateType(typeof(ShootRifleUncharged)),
-                "Weapon",
+            SkillDef primarySwordInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_sword_inputs",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
+                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordInputs)),
+                "Inputs1",
                 true));
-            AddWeaponSkin(primaryRifleSkillDef, 3);
+            WeaponChargedSecondaryController.skillPairs[primarySwordInputsSkillDef] = SecondarySwordSkillDef;
+            AddWeaponSkin(primarySwordInputsSkillDef, 2);
 
             SkillDef SecondaryRifleSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_secondary_rifle",
-                skillNameToken = ALIEM_PREFIX + "SECONDARY_RIFLE_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_RIFLE_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_RIFLE_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_RIFLE_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondaryRifleBig"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ShootRifleCharged)),
                 activationStateMachineName = "Weapon",
@@ -325,48 +321,71 @@ namespace AliemMod.Content.Survivors {
                 stockToConsume = 1,
                 keywordTokens = new string[] { }
             });
-            WeaponSecondaryController.skillPairs[primaryRifleSkillDef] = SecondaryRifleSkillDef;
             Config.ConfigureSkillDef(SecondaryRifleSkillDef, AliemConfig.sectionBody, "M2_Rifle_Charged");
 
-            #region cursed
-            SkillDef primaryInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
-                "aliem_primary_gun_inputs",
-                ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
-                ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
-                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInputs)),
-                "Slide",
+            SkillDef primaryRifleInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_rifle_inputs",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_RIFLE_INPUTS_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_RIFLE_INPUTS_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"),
+                new EntityStates.SerializableEntityStateType(typeof(RifleInputs)),
+                "Inputs1",
                 true));
-            WeaponSecondaryController.skillPairs[primarySimpleGunSkillDef] = SecondaryGunSkillDef;
-            AddWeaponSkin(primaryInputsSkillDef, 1);
+            WeaponChargedSecondaryController.skillPairs[primaryRifleInputsSkillDef] = SecondaryRifleSkillDef;
+            AddWeaponSkin(primaryRifleInputsSkillDef, 3);
 
-            SkillDef primaryInstantSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+            #region cursed
+
+            PassiveBuildupComponentSkillDef primaryInstantSkillDef = Skills.CreateSkillDef<PassiveBuildupComponentSkillDef>(new SkillDefInfo(
                 "aliem_primary_gun_instant",
-                ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_NAME",
-                ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_DESCRIPTION",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_DESCRIPTION",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
                 new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInstant)),
                 "Weapon",
                 true));
             primaryInstantSkillDef.mustKeyPress = true;
-            WeaponSecondaryController.skillPairs[primaryInstantSkillDef] = SecondaryGunSkillDef;
+            WeaponChargedSecondaryController.skillPairs[primaryInstantSkillDef] = SecondaryGunSkillDef;
             AddWeaponSkin(primaryInstantSkillDef, 1);
 
-            SkillDef primaryInputsSwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
-                "aliem_primary_sword_inputs",
-                ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_NAME",
-                ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
-                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordInputs)),
-                "Slide",
+            SkillDef primarySimpleGunSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_gun",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
+                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunFireUncharged)),
+                "Weapon",
                 true));
-            WeaponSecondaryController.skillPairs[primaryInputsSwordSkillDef] = SecondaryGunSkillDef;
-            AddWeaponSkin(primaryInputsSwordSkillDef, 2);
+            WeaponChargedSecondaryController.skillPairs[primarySimpleGunSkillDef] = SecondaryGunSkillDef;
+            AddWeaponSkin(primarySimpleGunSkillDef, 1);
+
+            SkillDef primarySimpleSwordSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_sword",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SWORD_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SWORD_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
+                new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.SwordFire)),
+                "Weapon",
+                true));
+            WeaponChargedSecondaryController.skillPairs[primarySimpleSwordSkillDef] = SecondarySwordSkillDef;
+            AddWeaponSkin(primarySimpleSwordSkillDef, 2);
+
+            SkillDef primarySimpleRifleSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_rifle",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_RIFLE_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_RIFLE_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"),
+                new EntityStates.SerializableEntityStateType(typeof(ShootRifleUncharged)),
+                "Weapon",
+                true));
+            WeaponChargedSecondaryController.skillPairs[primarySimpleRifleSkillDef] = SecondaryRifleSkillDef;
+            AddWeaponSkin(primarySimpleRifleSkillDef, 3);
+
             #endregion cursed
 
-            Skills.AddPrimarySkills(bodyPrefab, primarySimpleGunSkillDef, primarySwordSkillDef, primaryRifleSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, primaryGunInputsSkillDef, primarySwordInputsSkillDef, primaryRifleInputsSkillDef);
             if (AliemConfig.Cursed.Value) {
-                Skills.AddPrimarySkills(bodyPrefab, primaryInputsSkillDef, primaryInstantSkillDef, primaryInputsSwordSkillDef);
+                Skills.AddPrimarySkills(bodyPrefab, primaryInstantSkillDef/*, primarySimpleGunSkillDef, primarySwordInputsSkillDef, primarySimpleRifleSkillDef*/);
             }
 
             SkillDef lunarPrimaryReplacement = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/LunarSkillReplacements/LunarPrimaryReplacement.asset").WaitForCompletion();
@@ -374,8 +393,8 @@ namespace AliemMod.Content.Survivors {
             SkillDef SecondaryLunarSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_secondary_lunar",
-                skillNameToken = ALIEM_PREFIX + "SECONDARY_LUNAR_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_LUNAR_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_LUNAR_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_LUNAR_DESCRIPTION",
                 skillIcon = lunarPrimaryReplacement.icon,
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ChargedLunarNeedleFire)),
                 activationStateMachineName = "Weapon",
@@ -396,7 +415,7 @@ namespace AliemMod.Content.Survivors {
                 keywordTokens = new string[] { }
             });
 
-            WeaponSecondaryController.skillPairs[lunarPrimaryReplacement] = SecondaryLunarSkillDef;
+            WeaponChargedSecondaryController.skillPairs[lunarPrimaryReplacement] = SecondaryLunarSkillDef;
 
             AddWeaponSkin(lunarPrimaryReplacement, 0);
 
@@ -407,10 +426,11 @@ namespace AliemMod.Content.Survivors {
             #region Secondary
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Secondary);
 
-            SkillDef SecondaryChargedSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+            WeaponSecondaryComponentSkillDef SecondaryChargedSkillDef = Skills.CreateSkillDef<WeaponSecondaryComponentSkillDef>(new SkillDefInfo
+            {
                 skillName = "aliem_secondary_Charged",
-                skillNameToken = ALIEM_PREFIX + "SECONDARY_CHARGED_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SECONDARY_CHARGED_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_CHARGED_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_CHARGED_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondaryGunBig"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
@@ -431,10 +451,11 @@ namespace AliemMod.Content.Survivors {
                 keywordTokens = new string[] { }
             });
 
-            SkillDef SecondaryLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+            SkillDef SecondaryLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
                 skillName = "aliem_secondary_leap",
-                skillNameToken = ALIEM_PREFIX + "UTILITY_LEAP_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM2)),
                 activationStateMachineName = "Body",
@@ -461,10 +482,11 @@ namespace AliemMod.Content.Survivors {
             #region Utility
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Utility);
 
-            SkillDef UtilityLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+            SkillDef UtilityLeapSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
                 skillName = "aliem_utility_leap",
-                skillNameToken = ALIEM_PREFIX + "UTILITY_LEAP_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM3)),
                 activationStateMachineName = "Body",
@@ -496,8 +518,8 @@ namespace AliemMod.Content.Survivors {
             SkillDef ChompSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_utility_Chomp",
-                skillNameToken = ALIEM_PREFIX + "UTILITY_CHOMP_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "UTILITY_CHOMP_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_CHOMP_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_CHOMP_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemChomp"),
                 keywordTokens = new string[] { },
 
@@ -531,13 +553,14 @@ namespace AliemMod.Content.Survivors {
             #region Special
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Special);
 
-            SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo {
+            SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
                 skillName = "aliem_special_grenade",
-                skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_NAME",
-                skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_DESCRIPTION",
+                skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SPECIAL_GRENADE_NAME",
+                skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SPECIAL_GRENADE_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenade"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenade)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Mutation",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -553,14 +576,89 @@ namespace AliemMod.Content.Survivors {
                 requiredStock = 1,
                 stockToConsume = 1
             });
-            
-            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
-            Config.ConfigureSkillDef(bombSkillDef, AliemConfig.sectionBody, "M4_Grenade");
-            #endregion
 
+            WeaponSwapSkillDef weaponSwapSkillDefBase = Skills.CreateSkillDef<WeaponSwapSkillDef>(new SkillDefInfo
+            {
+                skillName = "aliem_special_weaponSwap",
+                skillNameToken = primaryGunInputsSkillDef.skillNameToken,
+                skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_WEAPONSWAP_DESCRIPTION",
+                skillIcon = Assets.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SwapSecondaryWeapon)),
+                activationStateMachineName = "Mutation",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 10f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = false,
+                beginSkillCooldownOnSkillEnd = true,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+            weaponSwapSkillDefBase.swapSkillDef = CloneSwapSkillDef(primaryGunInputsSkillDef);
+            Config.ConfigureSkillDef(weaponSwapSkillDefBase, AliemConfig.sectionBody, "M4_WeaponSwaps");
+            AddWeaponSkinSecondary(weaponSwapSkillDefBase.swapSkillDef, 1);
+
+            WeaponSwapSkillDef weaponSwapSkillDefSword = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primarySwordInputsSkillDef);
+            AddWeaponSkinSecondary(weaponSwapSkillDefSword.swapSkillDef, 2);
+
+            WeaponSwapSkillDef weaponSwapSkillDefRifle = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primaryRifleInputsSkillDef);
+            AddWeaponSkinSecondary(weaponSwapSkillDefRifle.swapSkillDef, 3);
+
+            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, weaponSwapSkillDefBase, weaponSwapSkillDefSword, weaponSwapSkillDefRifle);
+            #endregion
+            
             if (Compat.ScepterInstalled) {
                 InitializeScepterSkills();
+                CreateScepterWeaponSwap(weaponSwapSkillDefBase, "texIconAliemPrimaryGunScepter");
+                CreateScepterWeaponSwap(weaponSwapSkillDefSword, "texIconAliemPrimarySwordScepter");
+                CreateScepterWeaponSwap(weaponSwapSkillDefRifle, "texIconAliemPrimaryRifleScepter");
             }
+        }
+
+        private OffHandSkillDef CloneSwapSkillDef(SkillDef primarySkillDef)
+        {
+            OffHandSkillDef newSkillDef = Modules.Skills.CloneSkillDef<OffHandSkillDef>(primarySkillDef);
+            (newSkillDef as ScriptableObject).name += "Secondary";
+            newSkillDef.skillName += "Secondary";
+            newSkillDef.activationStateMachineName = "Inputs2";
+            return newSkillDef;
+        }
+
+        private WeaponSwapSkillDef CreateWeeponSwapSkillDef(SkillDef originalSwapSkillDef, SkillDef primarySkillDef)
+        {
+            WeaponSwapSkillDef newSkillDef = Modules.Skills.CloneSkillDef<WeaponSwapSkillDef>(originalSwapSkillDef);
+            (newSkillDef as ScriptableObject).name += primarySkillDef.skillName;
+            newSkillDef.skillName += primarySkillDef.skillName;
+            newSkillDef.skillNameToken = primarySkillDef.skillNameToken;
+            newSkillDef.icon = primarySkillDef.icon;
+            newSkillDef.swapSkillDef = CloneSwapSkillDef(primarySkillDef);
+
+            return newSkillDef;
+        }
+
+        private void CreateScepterWeaponSwap(WeaponSwapSkillDef originalSkillDef, string iconPath)
+        {
+            WeaponSwapSkillDef scepterSwapSkillDef = Modules.Skills.CloneSkillDef<WeaponSwapSkillDef>(originalSkillDef);
+            (scepterSwapSkillDef as ScriptableObject).name += "scepter";
+            scepterSwapSkillDef.skillName += "scepter";
+            scepterSwapSkillDef.skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_WEAPONSWAP_SCEPTER_DESCRIPTION";
+            scepterSwapSkillDef.icon = Assets.LoadAsset<Sprite>(iconPath);
+            scepterSwapSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(SwapSecondaryWeaponScepter));
+            scepterSwapSkillDef.swapSkillDef = originalSkillDef.swapSkillDef;
+
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterSwapSkillDef, "AliemBody", originalSkillDef);
         }
 
         private void AddWeaponSkin(SkillDef skillDef, int skin)
@@ -573,6 +671,11 @@ namespace AliemMod.Content.Survivors {
 
             HG.ArrayUtils.ArrayAppend(ref cssPreviewDisplayController.skillChangeResponses, skillResponse);
         }
+
+        private void AddWeaponSkinSecondary(SkillDef skillDef, int skin)
+        {
+            bodyCharacterModel.GetComponent<WeaponSkinController>().AddWeaponSkinSecondary(skillDef, skin);
+        }
         
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
@@ -582,8 +685,8 @@ namespace AliemMod.Content.Survivors {
                 skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION",
                 skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenadeScepter"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ScepterThrowGrenade)),
-                activationStateMachineName = "Weapon",
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenadeScepter)),
+                activationStateMachineName = "Mutation",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
                 beginSkillCooldownOnSkillEnd = false,
