@@ -29,13 +29,20 @@ namespace AliemMod.Content
         public static ConfigEntry<float> M1_MachineGunCharged_Interval;
         public static ConfigEntry<float> M1_MachineGunCharged_Spread;
 
-        public static ConfigEntry<bool> M3_AlwaysRide;
-        public static ConfigEntry<float> M3_ImpactDamage;
-        public static ConfigEntry<float> M3_BurrowPopOutDamage;
-        public static ConfigEntry<float> M3_BurrowPopOutForce;
-        public static ConfigEntry<float> M3_ChompDamage;
-        public static ConfigEntry<bool> M3_ChompSlayer;
-        public static ConfigEntry<float> M3_ChompHealing;
+        public static ConfigEntry<float> M1_SawedOff_Damage;
+        public static ConfigEntry<int> M1_SawedOff_Bullets;
+        public static ConfigEntry<float> M1_SawedOffCharged_Damage_Min;
+        public static ConfigEntry<float> M1_SawedOffCharged_Damage_Max;
+
+        public static ConfigEntry<bool> M3_Leap_AlwaysRide;
+        public static ConfigEntry<float> M3_Leap_ImpactDamage;
+        public static ConfigEntry<int> M3_Leap_Armor;
+        public static ConfigEntry<int> M3_Leap_RidingArmor;
+        public static ConfigEntry<float> M3_Burrow_PopOutDamage;
+        public static ConfigEntry<float> M3_Burrow_PopOutForce;
+        public static ConfigEntry<float> M3_Chomp_Damage;
+        public static ConfigEntry<bool> M3_Chomp_Slayer;
+        public static ConfigEntry<float> M3_Chomp_Healing;
 
         public static ConfigEntry<float> M4_GrenadeDamage;
         public static ConfigEntry<float> M4_WeaponSwap_Duration;
@@ -45,11 +52,13 @@ namespace AliemMod.Content
         public static ConfigEntry<float> rideLerpTim;
         public static ConfigEntry<float> rideLerpTim2;
 
-        public static ConfigEntry<float> bloom1;
-        public static ConfigEntry<float> bloom2;
+        public static ConfigEntry<float> bloomRifle;
+        public static ConfigEntry<float> bloomCharged;
 
         public static ConfigEntry<float> radius;
         public static ConfigEntry<float> smallhop;
+
+        public static ConfigEntry<float> shotgunPitch;
 
         public static string sectionDebug = "Debug";
         public static string sectionSkills = "Skills";
@@ -107,14 +116,14 @@ namespace AliemMod.Content
             M1_SwordCharged_Damage_Min = Config.BindAndOptions(
                 sectionSkills,
                 nameof(M1_SwordCharged_Damage_Min),
-                1.5f,
+                3f,
                 0,
                 10,
                 "");
             M1_SwordCharged_Damage_Max = Config.BindAndOptions(
                 sectionSkills,
                 nameof(M1_SwordCharged_Damage_Max),
-                6f,
+                8f,
                 0,
                 10,
                 "");
@@ -173,50 +182,98 @@ namespace AliemMod.Content
             M1_MachineGunCharged_Spread = Config.BindAndOptions(
                 sectionSkills,
                 "M1_MachineGunCharged_Spread",
-                1f,
+                1.5f,
                 0,
                 360,
                 "");
 
-            M3_AlwaysRide = Config.BindAndOptions(
+            M1_SawedOff_Damage = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SawedOff_Damage),
+                1f,
+                0,
+                50,
+                "");
+
+            M1_SawedOff_Bullets = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SawedOff_Bullets),
+                5,
+                0,
+                50,
+                "");
+
+            M1_SawedOffCharged_Damage_Min = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SawedOffCharged_Damage_Min),
+                5f,
+                0,
+                20,
+                "");
+
+            M1_SawedOffCharged_Damage_Min = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M1_SawedOffCharged_Damage_Min),
+                5f,
+                0,
+                20,
+                "");
+
+            M3_Leap_AlwaysRide = Config.BindAndOptions(
                 sectionSkills,
                 "M3_AlwaysRide",
                 false,
                 "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
-            M3_ImpactDamage = Config.BindAndOptions(
+            M3_Leap_ImpactDamage = Config.BindAndOptions(
                 sectionSkills,
-                "M3_ImpactDamage",
+                nameof(M3_Leap_ImpactDamage),
                 1f,
                 0,
                 20,
                 "");
-            M3_BurrowPopOutDamage = Config.BindAndOptions(
+
+            M3_Leap_Armor = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M3_Leap_Armor),
+                50,
+                0,
+                100,
+                "");
+            M3_Leap_RidingArmor = Config.BindAndOptions(
+                sectionSkills,
+                nameof(M3_Leap_RidingArmor),
+                20,
+                0,
+                100,
+                "");
+
+            M3_Burrow_PopOutDamage = Config.BindAndOptions(
                 sectionSkills,
                 "M3_BurrowPopOutDamage",
                 2f,
                 0,
                 20,
                 "");
-            M3_BurrowPopOutForce = Config.BindAndOptions(
+            M3_Burrow_PopOutForce = Config.BindAndOptions(
                 sectionSkills,
                 "M3_BurrowPopOutForce",
                 1000f,
                 0,
                 10000,
                 "");
-            M3_ChompDamage = Config.BindAndOptions(
+            M3_Chomp_Damage = Config.BindAndOptions(
                 sectionSkills,
                 "M3_ChompDamage",
                 5f,
                 0,
                 20,
                 "");
-            M3_ChompSlayer = Config.BindAndOptions(
+            M3_Chomp_Slayer = Config.BindAndOptions(
                 sectionSkills,
                 "M3_ChompSlayer",
                 true,
                 "Does chomp deal up to 3x damage to low health enemies");
-            M3_ChompHealing = Config.BindAndOptions(
+            M3_Chomp_Healing = Config.BindAndOptions(
                 sectionSkills,
                 "M3_ChompHealing",
                 0.3f,
@@ -235,7 +292,7 @@ namespace AliemMod.Content
             M4_WeaponSwap_Duration = Config.BindAndOptions(
                 sectionSkills,
                 nameof(M4_WeaponSwap_Duration),
-                10f,
+                6f,
                 0,
                 20,
                 "");
@@ -266,20 +323,20 @@ namespace AliemMod.Content
             rideClimbAnimTime = Config.BindAndOptions(
                 sectionDebug,
                 "rideClimbAnimTime",
-                0.2f,
+                0.4f,
                 "");
 
-            bloom1 = Config.BindAndOptionsSlider(
+            bloomRifle = Config.BindAndOptionsSlider(
                 sectionDebug,
-                "bloom1",
+                "bloomRifle",
                 0.5f,
                 "",
                 0,
                 5);
 
-            bloom2 = Config.BindAndOptionsSlider(
+            bloomCharged = Config.BindAndOptionsSlider(
                 sectionDebug,
-                "bloom2",
+                "bloomCharged",
                 0.25f,
                 "",
                 0,
@@ -300,6 +357,14 @@ namespace AliemMod.Content
                 "",
                 0,
                 5);
+
+            shotgunPitch = Config.BindAndOptionsSlider(
+                sectionDebug,
+                "shotgunPitch",
+                0f,
+                "",
+                -110,
+                110);
             #endregion debug
         }
     }

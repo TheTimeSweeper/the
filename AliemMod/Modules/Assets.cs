@@ -41,6 +41,11 @@ namespace Modules {
         public static GameObject rifleTracer;
         public static GameObject rifleTracerBig;
 
+        public static GameObject sawedOffTracer;
+
+        internal static GameObject swirlCharge;
+        internal static GameObject swirlChargeMax;
+
         public static void Initialize()
         {
             //HENRY: check this somewhere else secretly
@@ -99,20 +104,31 @@ namespace Modules {
             mainAssetBundle.LoadAsset<Material>("matAliemRifle")
                 .SetHotpooMaterial()
                 .SetSpecular(0.3f, 10);
+            mainAssetBundle.LoadAsset<Material>("matAliemRevolver")
+                .SetHotpooMaterial()
+                .SetSpecular(0.3f, 10);
 
             CreateChargedLunarProjectile();
 
             HunkKnifeImpactEffect();
 
-            rifleTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GoldGat/TracerGoldGat.prefab").WaitForCompletion().InstantiateClone("TracerGoldGatAliem", false);
-            ColorTracer(rifleTracer, new Color(0.3581327f, 0.0518868f, 1, 1));
+            rifleTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GoldGat/TracerGoldGat.prefab").WaitForCompletion().InstantiateClone("TracerGoldGatAliemRifle", false);
+            ColorTracer(rifleTracer, new Color(0.3581327f, 0.0518868f, 1, 1), 2);
             AddNewEffectDef(rifleTracer);
+
+            sawedOffTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GoldGat/TracerGoldGat.prefab").WaitForCompletion().InstantiateClone("TracerGoldGatAliemSawedOff", false);
+            ColorTracer(sawedOffTracer, null, 3);
+            AddNewEffectDef(sawedOffTracer);
 
             rifleTracerBig = mainAssetBundle.LoadAsset<GameObject>("RifleTracerThick").InstantiateClone("okimgonnarenamethatonebeforeIfuckinforgetitandmakeahugemistake", false);
             rifleTracerBig.transform.Find("BeamTrails").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidRaidCrab/matVoidRaidCrabTripleBeam3.mat").WaitForCompletion();
             rifleTracerBig.transform.Find("VolumeTracer").transform.localScale = Vector3.one * AliemConfig.radius.Value;//radius
 
             AddNewEffectDef(rifleTracerBig);
+
+            swirlCharge = mainAssetBundle.LoadAsset<GameObject>("SwirlParticles").InstantiateClone("SwirlParticlessssssssssssss", false);
+            swirlChargeMax = mainAssetBundle.LoadAsset<GameObject>("SwirlParticlesMax").InstantiateClone("SwirlParticlesMaxxxxxxxxxxx", false);
+            AddNewEffectDef(swirlChargeMax);
         }
 
         private static void CreateChargedLunarProjectile()

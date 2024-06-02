@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
 {
-    public class ShootRifleCharged : BaseShootRifle
+    public class ShootRifleCharged : BaseShootBullet
     {
         public override float damageCoefficient => AliemConfig.M1_MachineGunCharged_Damage.Value;
-        public override float procCoefficient => 0.7f;
         public override float baseDuration => baseInterval * bullets;
+        public override float procCoefficient => 0.7f;
         public override float force => 200f;
         public override float recoil => 1f;
-        public override float bloom => AliemConfig.bloom2.Value;
+        public override float bloom => 0;
         public override float range => 256f;
         public override float radius => AliemConfig.radius.Value;
         public override float minSpread => spread;
@@ -28,6 +28,8 @@ namespace ModdedEntityStates.Aliem
         private float _shootTimer;
         private int _shotsFired;
         private int _chargedBullets;
+        private float _currentBloom;
+        private float _bloomIncrement => AliemConfig.bloomCharged.Value;
 
         public ShootRifleCharged()
         {
@@ -43,7 +45,6 @@ namespace ModdedEntityStates.Aliem
         {
             base.OnEnter();
             _interval = baseInterval / attackSpeedStat;
-            characterBody.SetSpreadBloom(0, false);
         }
 
         public override void FixedUpdate()
@@ -54,6 +55,8 @@ namespace ModdedEntityStates.Aliem
 
             while (_shootTimer <= 0 && _shotsFired < bullets)
             {
+                characterBody.SetSpreadBloom(_currentBloom, false);
+                _currentBloom += _bloomIncrement;
                 Fire();
                 _shootTimer += _interval;
                 _shotsFired++;

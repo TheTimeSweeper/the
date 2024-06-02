@@ -9,6 +9,7 @@ TagManager:
   - InitialBurst
   - Chest
   - CamAttachPoint
+  - CreditsGroup
   layers:
   - Default
   - TransparentFX

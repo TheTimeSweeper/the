@@ -10,6 +10,8 @@ namespace Modules {
         internal static GameObject RayGunProjectilePrefabBig;
         internal static GameObject SwordProjectilePrefab;
         internal static GameObject SwordProjectilePrefabBig;
+        internal static GameObject SawedOffProjectilePrefabBig;
+
         internal static GameObject GrenadeProjectile;
         internal static GameObject GrenadeProjectileScepter;
 

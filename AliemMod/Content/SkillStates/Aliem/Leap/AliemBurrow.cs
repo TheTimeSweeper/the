@@ -65,15 +65,15 @@ namespace ModdedEntityStates.Aliem {
 
 			GetModelChildLocator().FindChildGameObject("Burrow")?.SetActive(false);
 			base.PlayCrossfade("FullBody, Override", "UnBurrow", 0.1f);
-			Util.PlaySound("Play_INV_DigPopOut", gameObject);
+			Util.PlaySound("Play_DigPopOut_AHI", gameObject);
 
             if (isAuthority) {
                 new BlastAttack
                 {
                     attacker = base.gameObject,
-                    baseDamage = this.damageStat * AliemConfig.M3_BurrowPopOutDamage.Value,
+                    baseDamage = this.damageStat * AliemConfig.M3_Burrow_PopOutDamage.Value,
                     baseForce = 0,
-                    bonusForce = Vector3.up * AliemConfig.M3_BurrowPopOutForce.Value,
+                    bonusForce = Vector3.up * AliemConfig.M3_Burrow_PopOutForce.Value,
                     crit = base.RollCrit(),
                     damageType = DamageType.Stun1s,
                     falloffModel = BlastAttack.FalloffModel.None,

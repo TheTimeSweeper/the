@@ -41,7 +41,7 @@ namespace ModdedEntityStates.Aliem {
 				}
 			}
         }
-        public static float DamageCoefficient => AliemConfig.M3_ImpactDamage.Value;
+        public static float DamageCoefficient => AliemConfig.M3_Leap_ImpactDamage.Value;
 
 		private OverlapAttack overlapAttack;
 		//private List<HurtBox> overlapAttackHits = new List<HurtBox>();
@@ -128,7 +128,7 @@ namespace ModdedEntityStates.Aliem {
 					foundBody = FindBodyToRide();
 				}
 				
-				if(foundBody != null && (inputButtonState.down || AliemConfig.M3_AlwaysRide.Value)) {
+				if(foundBody != null && (inputButtonState.down || AliemConfig.M3_Leap_AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {
                         inputButton = inputButton,
 						riddenBody = foundBody

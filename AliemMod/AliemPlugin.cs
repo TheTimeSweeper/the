@@ -23,7 +23,7 @@ using System.Security.Permissions;
 public class AliemPlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.Aliem";
     public const string MODNAME = "Aliem";
-    public const string MODVERSION = "0.3.3";
+    public const string MODVERSION = "0.9.0";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -86,12 +86,17 @@ public class AliemPlugin : BaseUnityPlugin {
 
         if (sender.HasBuff(Modules.Buffs.diveBuff))
         {
-            args.armorAdd += 50f;
+            args.armorAdd += AliemConfig.M3_Leap_Armor.Value;
+        }
+
+        if (sender.HasBuff(Modules.Buffs.ridingBuff))
+        {
+            args.armorAdd += AliemConfig.M3_Leap_RidingArmor.Value;
         }
 
         if (sender.HasBuff(Modules.Buffs.attackSpeedBuff))
         {
-            args.attackSpeedMultAdd += 0.5f;
+            args.attackSpeedMultAdd += 1;
         }
     }
 }

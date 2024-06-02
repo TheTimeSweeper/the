@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem
 {
@@ -10,11 +11,16 @@ namespace ModdedEntityStates.Aliem
 
         public abstract float BaseMaxChargeDuration { get; }
 
-        protected virtual string maxChargeSound => "";//"Play_RayGunChargeMax";
+        protected virtual string maxChargeSound => "Play_AliemTeslaChargingComplete";
         protected virtual string chargeSound => "Play_RayGunChargeUp";
         protected virtual string chargeLoop1 => "Play_RayGunChargeLoop";
         protected virtual string chargeLoop2 => "Play_RayGunChargeLoopHigh";
         protected virtual string chargeAnimationLayer => "RightArm, Over";
+
+        protected virtual GameObject chargeEffectPrefab => Modules.Assets.swirlCharge;
+        protected virtual GameObject chargeEffectMaxPrefab => Modules.Assets.swirlChargeMax;
+
+        private GameObject _chargeEffect;
 
         private float _maxChargeDuration;
         private float _chargeTimer;
@@ -40,6 +46,8 @@ namespace ModdedEntityStates.Aliem
             PlayCrossfade(isOffHanded ? "LeftArm, Under" : "RightArm, Under", "ChargeGun", 0.2f);
 
             _chargeSoundID = Util.PlaySound(chargeSound, gameObject);
+
+            _chargeEffect = Object.Instantiate(chargeEffectPrefab, GetModelBaseTransform());
         }
 
         public override void FixedUpdate()
@@ -60,7 +68,7 @@ namespace ModdedEntityStates.Aliem
 
             //base.characterBody.SetSpreadBloom(Mathf.Lerp(minBloomRadius, maxBloomRadius, _chargeTimer / _maxChargeDuration), true);
 
-            if (!GetSkillButton().down)
+            if (!GetSkillButton().down && isAuthority)
             {
                 float charge = _chargeTimer / _maxChargeDuration;
                 StartNextState(charge);
@@ -69,7 +77,7 @@ namespace ModdedEntityStates.Aliem
 
         private InputBankTest.ButtonState GetSkillButton()
         {
-            return isOffHanded ? inputBank.skill2 : inputBank.skill1; ;
+            return isOffHanded ? inputBank.skill2 : inputBank.skill1;
         }
 
         protected abstract void StartNextState(float chargeCoefficient);
@@ -80,6 +88,8 @@ namespace ModdedEntityStates.Aliem
             {
                 Util.PlaySound(maxChargeSound, gameObject);
             }
+
+            EffectManager.SimpleMuzzleFlash(chargeEffectMaxPrefab, gameObject, "Burrow", false);
         }
 
         private void ManageSound()
@@ -113,9 +123,22 @@ namespace ModdedEntityStates.Aliem
             base.OnExit();
             AkSoundEngine.StopPlayingID(_chargeSoundID);
 
+            Object.Destroy(_chargeEffect);
+
             //PlayAnimation("Gesture, Override", "BufferEmpty");
             //PlayAnimation(isOffHanded ? "RightArm, Over" : "LeftArm, Over", "BufferEmpty");
             //PlayAnimation(isOffHanded ? "LeftArm, Under" : "RightArm, Under", "BufferEmpty");
+        }
+
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(isOffHanded);
+        }
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            isOffHanded = reader.ReadBoolean();
         }
     }
 }

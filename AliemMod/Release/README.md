@@ -28,7 +28,8 @@ The Behemoth - inspiration, sounds
 - ~~Item displays~~
 
 ## Changelog
-`1.0.0`
+`0.9.0`
+preview 1.0.0 so I can test it with peeps
 - added energy sword
 - added human machine gun
 - solidified mash to shoot and hold to charge functionality for primaries

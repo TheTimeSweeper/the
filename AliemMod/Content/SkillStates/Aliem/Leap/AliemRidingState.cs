@@ -1,6 +1,7 @@
 ﻿using AliemMod.Content;
 using AliemMod.Content.Survivors;
 using RoR2;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem {
 
@@ -57,6 +58,11 @@ namespace ModdedEntityStates.Aliem {
             _originalSkill = inputGenericSkill;
             inputGenericSkill = skillLocator.FindSkill("LOADOUT_SKILL_RIDING");
 
+            if (NetworkServer.active)
+            {
+                characterBody.AddBuff(Modules.Buffs.ridingBuff);
+            }
+
             ////skilldef replacement
             //inputGenericSkill.SetSkillOverride(this, skillLocator.FindSkill("Riding").skillDef, GenericSkill.SkillOverridePriority.Contextual);
         }
@@ -75,6 +81,11 @@ namespace ModdedEntityStates.Aliem {
         public override void OnExit()
         {
             base.OnExit();
+
+            if (NetworkServer.active)
+            {
+                characterBody.RemoveBuff(Modules.Buffs.ridingBuff);
+            }
 
             //genericskill swapping
             inputGenericSkill = _originalSkill;

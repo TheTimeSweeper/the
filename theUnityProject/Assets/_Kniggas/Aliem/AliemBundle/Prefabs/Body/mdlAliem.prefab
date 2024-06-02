@@ -175,11 +175,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f7f0cec0ce302243a5bc3cdaa7aff94, type: 2}
   - {fileID: 11400000, guid: 3fb873c9d4586c04aa914bf0b58eb84c, type: 2}
   - {fileID: 11400000, guid: 1fe46e5eee62cf349afb797405ec8399, type: 2}
+  - {fileID: 11400000, guid: c56ec2a109b8041479650c74955acaa3, type: 2}
   weaponSkinsSecondaries:
   - {fileID: 11400000, guid: 1e761c3fc5444314a91f68a5535f9595, type: 2}
   - {fileID: 11400000, guid: 654e3d30b6eb49b47ab0571807a3234c, type: 2}
   - {fileID: 11400000, guid: 364c3787d43ac1f42b78658638b61c6e, type: 2}
   - {fileID: 11400000, guid: 0d179d1fd0688c44f9a124c93ec519b6, type: 2}
+  - {fileID: 11400000, guid: cb23e4b5c3bc81a4db2b0934dbc3c0df, type: 2}
 --- !u!114 &8807146052828324765
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -137,6 +137,28 @@ namespace Modules {
         #endregion
 
         #region skilldefs
+
+        public static T CloneSkillDef<T>(SkillDef secondaryChargedSkillDef, string skillName, string tokenPrefix, string iconPath, SerializableEntityStateType stateType) where T : SkillDef
+        {
+            return CloneSkillDef<T>(
+                secondaryChargedSkillDef,
+                skillName,
+                tokenPrefix,
+                Assets.mainAssetBundle.LoadAsset<Sprite>(iconPath),
+                stateType);
+        }
+        public static T CloneSkillDef<T>(SkillDef secondaryChargedSkillDef, string skillName, string tokenPrefix, Sprite icon, SerializableEntityStateType stateType) where T: SkillDef
+        {
+            T skillDef = Skills.CloneSkillDef<T>(secondaryChargedSkillDef);
+            (skillDef as ScriptableObject).name = $"{tokenPrefix}{skillName}";
+            skillDef.skillNameToken = $"{tokenPrefix}{skillName.ToUpperInvariant()}_NAME";
+            skillDef.skillDescriptionToken = $"{tokenPrefix}{skillName.ToUpperInvariant()}_DESCRIPTION";
+            skillDef.icon = icon;
+            skillDef.activationState = stateType;
+
+            return skillDef;
+        }
+
         public static T CloneSkillDef<T>(SkillDef skillDefToCopy) where T: SkillDef
         {
             T skillDef = ScriptableObject.CreateInstance<T>();

@@ -19,10 +19,10 @@ namespace Modules
             string prefix = AliemMod.Content.Survivors.AliemSurvivor.ALIEM_PREFIX;
 
             string desc = "The alien hominid is a highly mobile maker of mischief" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Ray Gun can by used while sprinting, diving, and riding." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Charged Shot will be a powerful shot based on your Primary weapon" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Mash the primary button at a resonable rate to automatically fire at highest attack speed." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Hold instead of mashing to charge a powerful shot. Use secondary as a shorthand to fire at full power " + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Leap for movement, and to latch on to enemies, then chomp to deal heavy damage and heal." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Your Special mutation will have other cool options in the future." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Your Special mutation can change how you play." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so it left, mothership pleased.";
             string outroFailure = "..and so it vanished, the feds won.";
@@ -31,7 +31,7 @@ namespace Modules
             LanguageAPI.Add(prefix + "NAME", fullName);
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "head chomper");
-            LanguageAPI.Add(prefix + "LORE", "");
+            LanguageAPI.Add(prefix + "LORE", "do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama ");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -56,15 +56,15 @@ namespace Modules
             #region cursed
             LanguageAPI.Add(prefix + "PRIMARY_GUN_NAME", "Ray Gun (not chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_GUN_DESCRIPTION", $"Shoot your ray gun for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}." +
-                $"\n{Helpers.UtilityText("Charged:")} Shoot a charged blast that explodes for {Helpers.DamageValueText(AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
+                $"\n{Helpers.UtilityText("Secondary:")} Shoot a charged blast that explodes for {Helpers.DamageValueText(AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_SWORD_NAME", "Energy Sword (not chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_SWORD_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(AliemConfig.M1_Sword_Damage.Value)}." +
-                $"\n{Helpers.UtilityText("Charged:")} Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M1_SwordCharged_Damage_Min.Value)}.");
+                $"\n{Helpers.UtilityText("Secondary:")} Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M1_SwordCharged_Damage_Min.Value)}.");
             
             LanguageAPI.Add(prefix + "PRIMARY_RIFLE_NAME", "Human Machine Gun (not chargeable)");
             LanguageAPI.Add(prefix + "PRIMARY_RIFLE_DESCRIPTION", $"Fire a bullet for {Helpers.DamageValueText(AliemConfig.M1_MachineGun_Damage.Value)}." +
-                $"\n{Helpers.UtilityText("Charged:")} Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Min.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}%")}.");
+                $"\n{Helpers.UtilityText("Secondary:")} Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Min.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}%")}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(AliemMod.Components.PassiveBuildupComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.PassiveBuildupComponent.maxCharge)}.");
@@ -95,7 +95,7 @@ namespace Modules
                 $"Dive forward at hihg speed for {Helpers.DamageValueText(AliemLeap.DamageCoefficient)}. Hold input to either {Helpers.UtilityText("burrow")} into the ground or {Helpers.UtilityText("ride")} enemies.");
 
             LanguageAPI.Add(prefix + "UTILITY_CHOMP_NAME", "Chomp");
-            LanguageAPI.Add(prefix + "UTILITY_CHOMP_DESCRIPTION", $"While {Helpers.UtilityText("riding")}, chomp to <style=cIsHealing>heal for {AliemConfig.M3_ChompHealing.Value * 100}% of maximum health</style> and deal {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, up to {Helpers.DamageText("3x damage")} to low health targets.");
+            LanguageAPI.Add(prefix + "UTILITY_CHOMP_DESCRIPTION", $"While {Helpers.UtilityText("riding")}, chomp to <style=cIsHealing>heal for {AliemConfig.M3_Chomp_Healing.Value * 100}% of maximum health</style> and deal {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, up to {Helpers.DamageText("3x damage")} to low health targets.");
 
             
             LanguageAPI.Add("LOADOUT_SKILL_RIDING", "Riding");
@@ -113,7 +113,7 @@ namespace Modules
             string specialSwapDesc = $"Wield this weapon on your offhand for {AliemConfig.M4_WeaponSwap_Duration.Value} seconds.";
             LanguageAPI.Add(prefix + "SPECIAL_WEAPONSWAP_DESCRIPTION", specialSwapDesc);
 
-            specialSwapDesc += $"{Helpers.ScepterDescription("Double Attack Speed for duration")}";
+            specialSwapDesc += $"{Helpers.ScepterDescription("Increased Attack Speed for duration")}";
             LanguageAPI.Add(prefix + "SPECIAL_WEAPONSWAP_SCEPTER_DESCRIPTION", specialSwapDesc);
             #endregion Special
 

@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 7880610295682449118}
   - component: {fileID: 2774711668604365881}
   - component: {fileID: 5995413119527211269}
+  - component: {fileID: 7080615816332143259}
   m_Layer: 24
   m_Name: Trigger
   m_TagString: Untagged
@@ -348,3 +349,18 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeMax: 0.1
+--- !u!114 &7080615816332143259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624140736719127666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200f5320b1f21af458d6e9caa2d2c492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileController: {fileID: 2776849854764623763}
+  colliders:
+  - {fileID: 2774711668604365881}

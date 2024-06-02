@@ -3,15 +3,17 @@ using EntityStates;
 using Modules;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem
 {
     public class RayGunFire : GenericProjectileBaseState, IOffHandable {
 
+		public static float RayGunDamageCoefficient => AliemConfig.M1_RayGun_Damage.Value;
+
 		public virtual float BaseDuration => 0.3f;
 		public virtual float BaseDelayDuration => 0.00f;
 
-		public static float RayGunDamageCoefficient => AliemConfig.M1_RayGun_Damage.Value;
         public virtual float BaseDamageCoefficient => RayGunDamageCoefficient;
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
 
@@ -27,7 +29,7 @@ namespace ModdedEntityStates.Aliem
         public virtual string soundString => AliemConfig.M1_RayGun_Sound_Alt.Value? "Play_INV_RayGun" : "Play_RayGun";
 
         public bool isOffHanded { get; set; }
-
+        
         public override void OnEnter() {
 			base.projectilePrefab = projectile;
 			//base.effectPrefab
@@ -64,11 +66,20 @@ namespace ModdedEntityStates.Aliem
 
 		public override void PlayAnimation(float duration) {
 
-			if (base.GetModelAnimator()) {
-				base.PlayAnimation("Gesture, Override", "ShootGun", "ShootGun.playbackRate", duration);
-                base.PlayAnimation(isOffHanded ? "RightArm, Over" : "LeftArm, Over", "ShootGun");
-                base.PlayAnimation(isOffHanded ? "LeftArm, Under" : "RightArm, Under", "ShootGun");
-            }
-		}
-	}
+			base.PlayAnimation("Gesture, Override", "ShootGun", "ShootGun.playbackRate", duration);
+            base.PlayAnimation(isOffHanded ? "RightArm, Over" : "LeftArm, Over", "ShootGun");
+            base.PlayAnimation(isOffHanded ? "LeftArm, Under" : "RightArm, Under", "ShootGun");
+        }
+
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(isOffHanded);
+        }
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            isOffHanded = reader.ReadBoolean();
+        }
+    }
 }

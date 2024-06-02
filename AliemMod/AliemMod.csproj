@@ -59,11 +59,6 @@
 	  </Reference>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Content\SkillStates\Aliem\WeaponSwap\" />
-	  <Folder Include="Content\SkillStates\WeaponSwap\" />
-	</ItemGroup>
-
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 	  <Exec Command="copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; &quot;$(ProjectDir)&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; &quot;$(ProjectDir)&quot;" />
 	</Target>

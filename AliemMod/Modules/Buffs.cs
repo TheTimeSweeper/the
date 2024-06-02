@@ -12,6 +12,7 @@ namespace Modules {
         public static BuffDef riddenBuff;
         public static BuffDef diveBuff;
         public static BuffDef attackSpeedBuff;
+        public static BuffDef ridingBuff;
 
         public static void RegisterBuffs() {
 
@@ -20,11 +21,17 @@ namespace Modules {
                 AddNewBuff("RiddenByAliem",
                            Assets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliem"),
                            Color.yellow,
-                           false,
+                           true,
                            false);
 
             diveBuff =
-                AddNewBuff("AliemDive",
+                AddNewBuff("AliemLeaping",
+                           Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/texBuffGenericShield.tif").WaitForCompletion(),
+                           Color.yellow,
+                           false,
+                           false);
+            ridingBuff =
+                AddNewBuff("AliemRidingBuff",
                            Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/texBuffGenericShield.tif").WaitForCompletion(),
                            Color.yellow,
                            false,
@@ -36,6 +43,7 @@ namespace Modules {
                            Color.magenta,
                            false,
                            false);
+
         }
 
         public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {

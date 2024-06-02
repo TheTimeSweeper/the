@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem
 {
@@ -80,20 +81,29 @@ namespace ModdedEntityStates.Aliem
 				_holdTimer = 0;
             }
 
-			if (_holding) {
+            if (_holding)
+            {
 
-				if (RepeatHoldState && _hasFiredHold) {
-					outputESM.SetInterruptState(SetHandedness(newHoldState), holdInterruptPriority);
-				}
+                if (RepeatHoldState && _hasFiredHold)
+                {
+                    outputESM.SetInterruptState(SetHandedness(newHoldState), holdInterruptPriority);
+                }
 
-				if (outputESM.CanInterruptState(holdInterruptPriority)) {
-					_hasFiredHold = true;
-					outputESM.SetInterruptState(SetHandedness(newHoldState), holdInterruptPriority);
-				}
-			} else if (_mashing) {
-				outputESM.SetInterruptState(SetHandedness(newMashState), mashInterruptPriority);
-			}
-			if(!GetSkillButton().down && !_holding && !_mashing && _mashTimer < 0) {
+                if (outputESM.CanInterruptState(holdInterruptPriority))
+                {
+                    _hasFiredHold = true;
+                    outputESM.SetInterruptState(SetHandedness(newHoldState), holdInterruptPriority);
+                }
+            }
+            else if (_mashing)
+            {
+                if (outputESM.CanInterruptState(mashInterruptPriority))
+                {
+                    characterBody.OnSkillActivated(activatorSkillSlot);
+                    outputESM.SetInterruptState(SetHandedness(newMashState), mashInterruptPriority);
+                }
+            }
+			if(!GetSkillButton().down && !_holding && !_mashing && _mashTimer < 0 && isAuthority) {
 				outer.SetNextStateToMain();
             }
 		}
@@ -114,6 +124,17 @@ namespace ModdedEntityStates.Aliem
 
         public override InterruptPriority GetMinimumInterruptPriority() {
             return InterruptPriority.PrioritySkill;
+        }
+
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(isOffHanded);
+        }
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            isOffHanded = reader.ReadBoolean();
         }
     }
 }

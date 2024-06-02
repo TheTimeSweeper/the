@@ -13,7 +13,7 @@ namespace ModdedEntityStates.Aliem
         public override void OnEnter()
         {
             base.OnEnter();
-
+            
             if (!base.isGrounded)
             {
                 SmallHop(characterMotor, AliemConfig.smallhop.Value / Mathf.Sqrt(this.attackSpeedStat));
