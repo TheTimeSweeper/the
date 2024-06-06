@@ -2,7 +2,7 @@
 
 namespace ModdedEntityStates.Aliem
 {
-    public class SawedOffInputs : MashAndHoldInputs
+    public class InputSawedOff : MashAndHoldInputs
     {
         protected override EntityState newMashState => new ShootSawedOffUncharged();
 

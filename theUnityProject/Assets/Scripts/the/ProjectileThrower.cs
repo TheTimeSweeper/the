@@ -27,6 +27,9 @@ public class ProjectileThrower : MonoBehaviour
                     if(proj.TryGetComponent(out Rigidbody rib)) {
                         rib.velocity = transform.forward * projectileSimple.desiredForwardSpeed;
                     }
+                    if (proj.TryGetComponent(out Collider col)) {
+                        col.enabled = true;
+                    }
                 }
             }
         }

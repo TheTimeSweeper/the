@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
 {
-    internal class ChargeSawedOff : BaseChargingState
+    public class ChargeSawedOff : BaseChargingState
     {
         public override float BaseMaxChargeDuration => 3;
         public virtual float MinDamageCoefficient => AliemConfig.M1_SawedOffCharged_Damage_Min.Value;

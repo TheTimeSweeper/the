@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 7396669869713966542}
   - component: {fileID: 8558569880281472416}
   - component: {fileID: 4532640807492021452}
-  - component: {fileID: 8566530930475608033}
   - component: {fileID: 941361242582402722}
+  - component: {fileID: 2328346254913698202}
   m_Layer: 14
   m_Name: AliemSwordProjectile
   m_TagString: Untagged
@@ -198,28 +198,6 @@ MonoBehaviour:
   groupName: SwordProjectile
   hitBoxes:
   - {fileID: 1543812848339947119}
---- !u!114 &8566530930475608033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6143042293270001165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -899414464, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCoefficient: 1
-  impactEffect: {fileID: 0}
-  forceVector: {x: 0, y: 0, z: 0}
-  overlapProcCoefficient: 1
-  maximumOverlapTargets: 100
-  onServerHit:
-    m_PersistentCalls:
-      m_Calls: []
-  fireFrequency: 60
-  resetInterval: -1
 --- !u!54 &941361242582402722
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -236,6 +214,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2328346254913698202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143042293270001165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d0b68f241ee3948b027459b3e7d154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCoefficient: 1
+  impactEffect: {fileID: 0}
+  forceVector: {x: 0, y: 0, z: 0}
+  overlapProcCoefficient: 1
+  maximumOverlapTargets: 100
+  onServerHit:
+    m_PersistentCalls:
+      m_Calls: []
+  fireFrequency: 60
+  resetInterval: -1
 --- !u!1 &7774312390105989201
 GameObject:
   m_ObjectHideFlags: 0

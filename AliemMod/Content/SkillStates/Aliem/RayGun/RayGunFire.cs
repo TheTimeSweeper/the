@@ -29,6 +29,8 @@ namespace ModdedEntityStates.Aliem
         public virtual string soundString => AliemConfig.M1_RayGun_Sound_Alt.Value? "Play_INV_RayGun" : "Play_RayGun";
 
         public bool isOffHanded { get; set; }
+
+        public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
         
         public override void OnEnter() {
 			base.projectilePrefab = projectile;
@@ -38,7 +40,7 @@ namespace ModdedEntityStates.Aliem
 			base.baseDelayBeforeFiringProjectile = BaseDelayDuration;
 
             base.targetMuzzle = muzzleString;
-            base.effectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
+            base.effectPrefab = muzzleEffectPrefab;
 			base.damageCoefficient = BaseDamageCoefficient;
 			base.force = ProjectileForce;
 			//base.projectilePitchBonus = 0;

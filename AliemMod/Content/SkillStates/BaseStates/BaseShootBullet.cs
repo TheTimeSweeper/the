@@ -22,6 +22,7 @@ namespace ModdedEntityStates.Aliem
         public virtual float spreadPitchScale => 1;
         public virtual LayerMask stopperMask => LayerIndex.CommonMasks.bullet;
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
+        public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
 
         public virtual GameObject tracerEffectPrefab => Modules.Assets.rifleTracer;
 
@@ -52,17 +53,20 @@ namespace ModdedEntityStates.Aliem
             }
         }
 
-        protected virtual void Fire()
+        protected virtual void Fire(bool playEffects = true)
         {
-            characterBody.AddSpreadBloom(bloom);
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+            if (playEffects)
+            {
+                characterBody.AddSpreadBloom(bloom);
+                EffectManager.SimpleMuzzleFlash(muzzleEffectPrefab, gameObject, muzzleString, false);
 
-            playShootAnimation();
+                playShootAnimation();
 
+                AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
+            }
             if (isAuthority)
             {
                 Ray aimRay = GetAimRay();
-                AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
                 new BulletAttack
                 {

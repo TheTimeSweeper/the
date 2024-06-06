@@ -42,9 +42,12 @@ namespace Modules {
         public static GameObject rifleTracerBig;
 
         public static GameObject sawedOffTracer;
+        public static GameObject sawedOffMuzzleFlash;
 
-        internal static GameObject swirlCharge;
-        internal static GameObject swirlChargeMax;
+        public static GameObject swirlCharge;
+        public static GameObject swirlChargeMax;
+
+        public static GameObject burrowPopOutEffect;
 
         public static void Initialize()
         {
@@ -88,9 +91,9 @@ namespace Modules {
         private static void PopulateAss()
         {
             bloodEffect = LoadEffect("BloodParticle", true);
-            nemforcerImpactEffect = LoadEffect("ImpactNemforcer", true);
+            nemforcerImpactEffect = LoadEffect("ImpactNemforcer", "Play_Leap_Impact", true);
 
-            nemforcerImpactSound = CreateNetworkSoundEventDef("Play_Leap_Impact");
+            //nemforcerImpactSound = CreateNetworkSoundEventDef("Play_Leap_Impact");
 
             m1EffectPrefab = CreateM1Effect();
             m2EffectPrefab = CreateM2Effect();
@@ -101,10 +104,10 @@ namespace Modules {
             knifeSwingEffect.transform.GetChild(0).localPosition = new Vector3(0, 0, -0.9f);
             knifeSwingEffect.transform.GetChild(0).localEulerAngles = new Vector3(-90, 0, 0);
 
-            mainAssetBundle.LoadAsset<Material>("matAliemRifle")
+            mainAssetBundle.LoadAsset<Material>("matRifle")
                 .SetHotpooMaterial()
                 .SetSpecular(0.3f, 10);
-            mainAssetBundle.LoadAsset<Material>("matAliemRevolver")
+            mainAssetBundle.LoadAsset<Material>("matRevolver")
                 .SetHotpooMaterial()
                 .SetSpecular(0.3f, 10);
 
@@ -116,19 +119,26 @@ namespace Modules {
             ColorTracer(rifleTracer, new Color(0.3581327f, 0.0518868f, 1, 1), 2);
             AddNewEffectDef(rifleTracer);
 
-            sawedOffTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GoldGat/TracerGoldGat.prefab").WaitForCompletion().InstantiateClone("TracerGoldGatAliemSawedOff", false);
-            ColorTracer(sawedOffTracer, null, 3);
-            AddNewEffectDef(sawedOffTracer);
-
             rifleTracerBig = mainAssetBundle.LoadAsset<GameObject>("RifleTracerThick").InstantiateClone("okimgonnarenamethatonebeforeIfuckinforgetitandmakeahugemistake", false);
             rifleTracerBig.transform.Find("BeamTrails").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidRaidCrab/matVoidRaidCrabTripleBeam3.mat").WaitForCompletion();
             rifleTracerBig.transform.Find("VolumeTracer").transform.localScale = Vector3.one * AliemConfig.radius.Value;//radius
-
             AddNewEffectDef(rifleTracerBig);
+
+            sawedOffTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBruiser/TracerClayBruiserMinigun.prefab").WaitForCompletion().InstantiateClone("TracerClayBruiserMinigunAliemSawedOff", false);
+            ColorTracer(sawedOffTracer, null, 3);
+            AddNewEffectDef(sawedOffTracer);
+
+            sawedOffMuzzleFlash = mainAssetBundle.LoadAsset<GameObject>("Muzzleflash1Shotgun");
+            Material flashmat = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matSparkCutout00.mat").WaitForCompletion();
+            sawedOffMuzzleFlash.transform.Find("Starburst").GetComponent<ParticleSystemRenderer>().sharedMaterial = flashmat;
+            sawedOffMuzzleFlash.transform.Find("Starburst2").GetComponent<ParticleSystemRenderer>().sharedMaterial = flashmat;
+            AddNewEffectDef(sawedOffMuzzleFlash);
 
             swirlCharge = mainAssetBundle.LoadAsset<GameObject>("SwirlParticles").InstantiateClone("SwirlParticlessssssssssssss", false);
             swirlChargeMax = mainAssetBundle.LoadAsset<GameObject>("SwirlParticlesMax").InstantiateClone("SwirlParticlesMaxxxxxxxxxxx", false);
             AddNewEffectDef(swirlChargeMax);
+
+            burrowPopOutEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bell/BellBodyPartsImpact.prefab").WaitForCompletion();
         }
 
         private static void CreateChargedLunarProjectile()

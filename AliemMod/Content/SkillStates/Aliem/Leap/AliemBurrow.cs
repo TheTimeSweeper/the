@@ -1,5 +1,6 @@
 ﻿using AliemMod.Content;
 using EntityStates;
+using Modules;
 using RoR2;
 using UnityEngine;
 
@@ -63,9 +64,16 @@ namespace ModdedEntityStates.Aliem {
         public override void OnExit() {
             base.OnExit();
 
-			GetModelChildLocator().FindChildGameObject("Burrow")?.SetActive(false);
+            GameObject burrwoObject = GetModelChildLocator().FindChildGameObject("Burrow");
+            burrwoObject?.SetActive(false);
 			base.PlayCrossfade("FullBody, Override", "UnBurrow", 0.1f);
 			Util.PlaySound("Play_DigPopOut_AHI", gameObject);
+
+            EffectManager.SpawnEffect(Assets.burrowPopOutEffect, new EffectData
+            {
+                origin = burrwoObject.transform.position,
+                rotation = Util.QuaternionSafeLookRotation(Vector3.up),
+            }, false);
 
             if (isAuthority) {
                 new BlastAttack

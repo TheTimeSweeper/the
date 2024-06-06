@@ -89,7 +89,7 @@ namespace ModdedEntityStates.Aliem
                 Util.PlaySound(maxChargeSound, gameObject);
             }
 
-            EffectManager.SimpleMuzzleFlash(chargeEffectMaxPrefab, gameObject, "Burrow", false);
+            EffectManager.SimpleMuzzleFlash(chargeEffectMaxPrefab, gameObject, "ModelTransform", false);
         }
 
         private void ManageSound()

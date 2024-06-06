@@ -8,7 +8,7 @@ namespace AliemMod.Components.Bundled
     {
         [SerializeField]
         private ProjectileController projectileController;
-
+        
         [SerializeField]
         private Collider[] colliders;
 

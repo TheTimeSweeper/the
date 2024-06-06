@@ -35,6 +35,13 @@ namespace Modules {
             Content.AddEntityState(typeof(ChargeRifle));
 
 
+            Content.AddEntityState(typeof(ShootSawedOffUncharged));
+            Content.AddEntityState(typeof(ShootSawedOffCharged));
+
+            Content.AddEntityState(typeof(InputSawedOff));
+            Content.AddEntityState(typeof(ChargeSawedOff));
+
+
             Content.AddEntityState(typeof(ChargedLunarNeedleFire));
 
 

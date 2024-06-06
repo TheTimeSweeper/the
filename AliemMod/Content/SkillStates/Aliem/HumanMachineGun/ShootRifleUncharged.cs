@@ -12,7 +12,7 @@ namespace ModdedEntityStates.Aliem
         public override float range => 256f;
         public override float radius => 0.5f;
 
-        public override GameObject tracerEffectPrefab => Modules.Assets.sawedOffTracer;
+        public override GameObject tracerEffectPrefab => Modules.Assets.rifleTracer;
 
         public override void OnEnter()
         {

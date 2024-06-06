@@ -14,7 +14,7 @@ namespace ModdedEntityStates.Aliem
 		protected abstract EntityState newMashState { get; }
 		protected virtual InterruptPriority mashInterruptPriority => InterruptPriority.Any;
 		protected abstract EntityState newHoldState { get; }
-		protected virtual InterruptPriority holdInterruptPriority => InterruptPriority.Skill;
+		protected virtual InterruptPriority holdInterruptPriority => InterruptPriority.Any;
 
 		protected virtual bool RepeatHoldState => true;
 
@@ -25,6 +25,7 @@ namespace ModdedEntityStates.Aliem
 
         private EntityStateMachine outputESM;
 
+        private bool _hasFiredInitialState;
 		private bool _holding;
 		private bool _mashing;
 
@@ -38,17 +39,14 @@ namespace ModdedEntityStates.Aliem
 			base.OnEnter();
 			outputESM = EntityStateMachine.FindByCustomName(gameObject, StateMachineName);
 
-			if (initialMashState != null) {
-				outputESM.SetInterruptState(SetHandedness(initialMashState), mashInterruptPriority);
-			}
-
 			_mashTimer = minMashTime;
 		}
 
-        public override void FixedUpdate() {
+        public override void FixedUpdate()
+        {
             base.FixedUpdate();
 
-			if (!_holding)
+            if (!_holding)
             {
                 //timer counts down
                 _mashTimer -= Time.deltaTime;
@@ -72,13 +70,24 @@ namespace ModdedEntityStates.Aliem
                 }
             }
 
-            if (GetSkillButton().down) {
-				_holdTimer += Time.fixedDeltaTime;
+            if (GetSkillButton().down)
+            {
+                _holdTimer += Time.fixedDeltaTime;
+                _holding = _holdTimer > minHoldTime;
 
-				_holding = _holdTimer > minHoldTime;
-            } else {
-				_holding = false;
-				_holdTimer = 0;
+                //enter mash state if holding hasn't begun
+                if (!_holding && !_hasFiredInitialState && initialMashState != null)
+                {
+                    if (outputESM.CanInterruptState(mashInterruptPriority))
+                    {
+                        _hasFiredInitialState = outputESM.SetInterruptState(SetHandedness(initialMashState), mashInterruptPriority);
+                    }
+                }
+            }
+            else
+            {
+                _holding = false;
+                _holdTimer = 0;
             }
 
             if (_holding)
@@ -103,10 +112,19 @@ namespace ModdedEntityStates.Aliem
                     outputESM.SetInterruptState(SetHandedness(newMashState), mashInterruptPriority);
                 }
             }
-			if(!GetSkillButton().down && !_holding && !_mashing && _mashTimer < 0 && isAuthority) {
-				outer.SetNextStateToMain();
+            if (!GetSkillButton().down && !_holding && !_mashing && _mashTimer < 0 && isAuthority)
+            {
+                outer.SetNextStateToMain();
             }
-		}
+
+            //Helpers.LogWarning($"mash {_mashing}, timer {_mashTimer.ToString("0.00")} | hold {_holding} , timer {_holdTimer.ToString("0.00")}");
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            Helpers.LogWarning("lev");
+        }
 
         private InputBankTest.ButtonState GetSkillButton()
         {
