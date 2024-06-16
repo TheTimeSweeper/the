@@ -57,6 +57,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3167318638648925306, guid: 1f0ac2082a9b51b4a9589d6e780fd02c,
         type: 3}
+      propertyPath: lifetime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167318638648925306, guid: 1f0ac2082a9b51b4a9589d6e780fd02c,
+        type: 3}
       propertyPath: desiredForwardSpeed
       value: 30
       objectReference: {fileID: 0}

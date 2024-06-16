@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Modules {
+namespace AliemMod.Modules
+{
 
     internal class ContentPacks : IContentPackProvider
     {
@@ -40,7 +41,7 @@ namespace Modules {
 
         public System.Collections.IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
         {
-            this.contentPack.identifier = this.identifier;
+            contentPack.identifier = identifier;
 
             contentPack.bodyPrefabs.Add(bodyPrefabs.ToArray());
             contentPack.masterPrefabs.Add(masterPrefabs.ToArray());
@@ -64,7 +65,7 @@ namespace Modules {
 
         public System.Collections.IEnumerator GenerateContentPackAsync(GetContentPackAsyncArgs args)
         {
-            ContentPack.Copy(this.contentPack, args.output);
+            ContentPack.Copy(contentPack, args.output);
             args.ReportProgress(1f);
             yield break;
         }

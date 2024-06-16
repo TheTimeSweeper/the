@@ -1,10 +1,12 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace Modules.Characters {
+namespace AliemMod.Modules.Characters
+{
 
     // for simplifying characterbody creation
-    internal class BodyInfo {
+    public class BodyInfo
+    {
         public string bodyPrefabName = "";
         public string bodyNameToken = "";
         public string subtitleNameToken = "";
@@ -63,7 +65,7 @@ namespace Modules.Characters {
         public Vector3 modelBasePosition = new Vector3(0f, -0.92f, 0f);
         public Vector3 cameraPivotPosition = new Vector3(0f, 1.6f, 0f);
         public Vector3 aimOriginPosition = new Vector3(0f, 2.3f, 0f);
-        
+
         public float cameraParamsVerticalOffset = 1.2f;
         public float cameraParamsDepth = -12;
 
@@ -71,9 +73,12 @@ namespace Modules.Characters {
         /// <summary>
         /// taken care of by the fields, cameraParamsVerticalOffset, and cameraParamsDepth. If you create a new CharacterCameraParams for this field, those two fields will be ignored
         /// </summary>
-        public CharacterCameraParams cameraParams {
-            get {
-                if (_cameraParams == null) {
+        public CharacterCameraParams cameraParams
+        {
+            get
+            {
+                if (_cameraParams == null)
+                {
                     _cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
                     _cameraParams.data.minPitch = -70;
                     _cameraParams.data.maxPitch = 70;
@@ -86,16 +91,19 @@ namespace Modules.Characters {
             set => _cameraParams = value;
         }
 
-        public float SurvivorHeightToSet {
+        public float SurvivorHeightToSet
+        {
             //todo dynamically set good camera params based on a height that you want
-            set {
+            set
+            {
                 float height = value;
             }
         }
     }
 
     // for simplifying rendererinfo creation
-    public class CustomRendererInfo {
+    public class CustomRendererInfo
+    {
         public string childName;
         public Material material;
         public bool ignoreOverlays;

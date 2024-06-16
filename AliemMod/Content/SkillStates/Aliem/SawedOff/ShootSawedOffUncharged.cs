@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using RoR2;
 using UnityEngine;
 
@@ -17,8 +18,8 @@ namespace ModdedEntityStates.Aliem
         public override float spreadPitchScale => AliemConfig.shotgunSpreadPitchScale.Value;
         public override string muzzleString => isOffHanded ? "BlasterMuzzleFar.R" : "BlasterMuzzleFar";
 
-        public override GameObject muzzleEffectPrefab => Modules.Assets.sawedOffMuzzleFlash;
-        public override GameObject tracerEffectPrefab => Modules.Assets.sawedOffTracer;
+        public override GameObject muzzleEffectPrefab => Assets.sawedOffMuzzleFlash;
+        public override GameObject tracerEffectPrefab => Assets.sawedOffTracer;
 
         private uint _bullets = (uint)AliemConfig.M1_SawedOff_Bullets.Value - 1;
         private float _spread = AliemConfig.M1_SawedOff_Spread.Value;

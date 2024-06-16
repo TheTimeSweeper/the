@@ -228,17 +228,6 @@
 						<Action Name="" ID="{6E49B861-5210-4D4C-B0A4-E32B4E70A975}" ShortID="691772194">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="AliemSawedOffCharged" ID="{EAD031C5-8842-4C1C-B20E-6577E0868404}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="Play_AliemSawedOffChargedSimple" ID="{8C372AC4-0512-4212-BF42-D93342B90525}">
-					<ChildrenList>
-						<Action Name="" ID="{F16F3693-F1F4-47B0-9B00-F533FEAD4EB0}" ShortID="917587459">
-							<ReferenceList>
-								<Reference Name="Target">
 									<ObjectRef Name="AliemSawedOffChargedSimple" ID="{A3DF96CB-75DC-46FA-A30D-DD77002EECA5}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
 								</Reference>
 							</ReferenceList>

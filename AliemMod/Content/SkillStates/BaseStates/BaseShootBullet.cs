@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using RoR2;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace ModdedEntityStates.Aliem
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
         public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
 
-        public virtual GameObject tracerEffectPrefab => Modules.Assets.rifleTracer;
+        public virtual GameObject tracerEffectPrefab => Assets.rifleTracer;
 
         public bool isOffHanded { get; set; }
 

@@ -14,7 +14,7 @@ namespace ModdedEntityStates.Aliem
 
         protected override void StartNextState(float chargeCoefficient)
         {
-            string shootSound = chargeCoefficient >= 1 ? "Play_RayGunBigClassic" : "Play_RayGun";
+            string shootSound = chargeCoefficient >= 1 ? "Play_RayGunBigClassic" : "Play_RayGunBigClassic"/* "Play_RayGun"*/;
             outer.SetNextState(new RayGunChargedFire(GetChargedValue(MinDamageCoefficient, MaxDamageCoefficient), shootSound) { isOffHanded = isOffHanded });
         }
     }

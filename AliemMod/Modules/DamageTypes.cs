@@ -2,14 +2,17 @@
 using RoR2;
 using UnityEngine;
 
-namespace Modules {
+namespace AliemMod.Modules
+{
 
-    internal static class DamageTypes {
+    public static class DamageTypes
+    {
         //Aliem
         public static DamageAPI.ModdedDamageType ApplyAliemRiddenBuff;
         public static DamageAPI.ModdedDamageType Decapitating;
 
-        public static void RegisterDamageTypes() {
+        public static void RegisterDamageTypes()
+        {
 
             //Aliem
             ApplyAliemRiddenBuff = DamageAPI.ReserveDamageType();
@@ -18,11 +21,13 @@ namespace Modules {
             //SetHooks();
         }
 
-        private static void SetHooks() {
+        private static void SetHooks()
+        {
             On.RoR2.SetStateOnHurt.OnTakeDamageServer += SetStateOnHurt_OnTakeDamageServer;
         }
 
-        private static void SetStateOnHurt_OnTakeDamageServer(On.RoR2.SetStateOnHurt.orig_OnTakeDamageServer orig, SetStateOnHurt self, DamageReport damageReport) {
+        private static void SetStateOnHurt_OnTakeDamageServer(On.RoR2.SetStateOnHurt.orig_OnTakeDamageServer orig, SetStateOnHurt self, DamageReport damageReport)
+        {
             orig(self, damageReport);
         }
 

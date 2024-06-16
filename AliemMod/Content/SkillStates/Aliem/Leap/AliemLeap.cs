@@ -1,5 +1,6 @@
 ﻿using AliemMod.Content;
 using AliemMod.Content.Survivors;
+using AliemMod.Modules;
 using EntityStates;
 using EntityStates.Croco;
 using RoR2;
@@ -10,9 +11,10 @@ using UnityEngine;
 using UnityEngine.Networking;
 using static RoR2.LayerIndex;
 
-namespace ModdedEntityStates.Aliem {
+namespace ModdedEntityStates.Aliem
+{
 
-	public class AliemLeapM2 : AliemLeap {
+    public class AliemLeapM2 : AliemLeap {
         //is this jank?
         //yes, but iskillstate essentially does the same thing
         protected override int inputButton => 2;
@@ -69,7 +71,7 @@ namespace ModdedEntityStates.Aliem {
 				damage = DamageCoefficient * damageStat,
 				isCrit = RollCrit(),
 				hitBoxGroup = hitBoxGroup,
-				hitEffectPrefab = Modules.Assets.nemforcerImpactEffect,
+				hitEffectPrefab = Assets.nemforcerImpactEffect,
 				//impactSound = Modules.Assets.nemforcerImpactSound.index,
 				//damageType = DamageType.Stun1s,
 			};
@@ -104,7 +106,7 @@ namespace ModdedEntityStates.Aliem {
 
             if (NetworkServer.active)
             {
-                characterBody.AddBuff(Modules.Buffs.diveBuff);
+                characterBody.AddBuff(Buffs.diveBuff);
             }
 		}
 
@@ -154,7 +156,7 @@ namespace ModdedEntityStates.Aliem {
 				//hit wall or somethin
 				if (base.fixedAge >= BaseLeap.minimumDuration && this.hitSomethingFrames > 1) {
 
-                    PlayAnimation("FullBody, Underride", "BufferEmpty");
+                    //PlayAnimation("FullBody, Underride", "BufferEmpty");
                     this.outer.SetNextStateToMain();
 					return;
 				}
@@ -165,7 +167,7 @@ namespace ModdedEntityStates.Aliem {
         {
             if (jumpInputReceived)
             {
-                PlayAnimation("FullBody, Underride", "DiveRecover");
+                //PlayAnimation("FullBody, Underride", "DiveRecover");
                 outer.SetNextStateToMain();
             }
             base.ProcessJump();
@@ -202,8 +204,9 @@ namespace ModdedEntityStates.Aliem {
 
             if (base.isAuthority) {
 				base.characterMotor.onMovementHit -= this.OnMovementHit;
-			}
-			base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
+            }
+            PlayAnimation("FullBody, Underride", "DiveRecover");
+            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 			base.characterMotor.airControl = this.previousAirControl;
             //base.characterBody.isSprinting = false;
 
@@ -220,7 +223,7 @@ namespace ModdedEntityStates.Aliem {
 
             if (NetworkServer.active)
             {
-                characterBody.RemoveBuff(Modules.Buffs.diveBuff);
+                characterBody.RemoveBuff(Buffs.diveBuff);
             }
 
             base.OnExit();

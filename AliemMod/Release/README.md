@@ -2,6 +2,7 @@
 - ~~When will alien hominid invasion come out that shit's gonna be fun~~ it is fun indeed
 - happy halloween modjam 2022 c:
 - multiplayer compatible!
+- scepter support
 
 Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/ZZzmFgDbCH).
 
@@ -10,17 +11,11 @@ Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the
 ## Credits
 Dotflare - Model  
 rob - Animations  
+tsuyoikenko - Gip skin  
 The Behemoth - inspiration, sounds 
 
-## Known Issues
-- multiplayer
-  - animations will get stuck sometimes. 
-  - all funcitonality will work fine on your screen, but for others animations may be wonky
-- riding not tested on all enemies so there's probably some jank instances
-- might be fun might not be fun idk!!
-
 ## Future Plans (that I may or may not get to)
-- finish him lol
+- ~~finish him lol~~
 - better effects maybe
 - more sounds
 - replace pod with spaceship that crashes
@@ -28,24 +23,24 @@ The Behemoth - inspiration, sounds
 - ~~Item displays~~
 
 ## Changelog
-`0.9.0`
-preview 1.0.0 so I can test it with peeps
+`1.0.0`
 - added energy sword
 - added human machine gun
+- added sawed off
+- added Weapon Swap specials, replacing secondary with a second primary
+- added somwhat ror-friendly gup skin (thanks tsuyoikenko!)
 - solidified mash to shoot and hold to charge functionality for primaries
   - mash at pretty lenient pace and it will auto shoot at max attack speed
 - secondary now fires primary at max charge, depending on selected primary
-- added Weapon Swap specials, replacing secondary with a second primary
 - a slew of configs to fuck with
 - allow shooting while diving and riding
-- added armor while diving
-- gave him a double jump which can cancel dive
+- added armor while diving and riding
+- added a double jump which can cancel dive
 - severely improved riding presentation
 - added hitbox on popping out of burrowing
 - added shank on close range ray gun (in reference to the original game)
-- increased size of projectiles with respect to enemies but not world
+- increased hitbox size of projectiles with respect to enemies but not world
 - updated a lot of animations (thanks rob!)
-- I know there was more this can't be it
 
 `0.3.2`
 - increased damage on ray gun

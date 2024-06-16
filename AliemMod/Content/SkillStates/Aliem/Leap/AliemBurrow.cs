@@ -1,13 +1,17 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
-using Modules;
 using RoR2;
+using System;
 using UnityEngine;
 
-namespace ModdedEntityStates.Aliem {
+namespace ModdedEntityStates.Aliem
+{
     public class AliemBurrow : BaseCharacterMain {
 
-		private int inputButton = 2;
+        public static event Action<int> onBurrowPopOutMultiHit;
+
+        private int inputButton = 2;
 		private InputBankTest.ButtonState inputButtonState {
 			get {
 				switch (inputButton) {
@@ -49,12 +53,12 @@ namespace ModdedEntityStates.Aliem {
 
 			StartAimMode();
 
-			if (base.isAuthority && base.characterMotor) {
+			if (base.characterMotor && base.isAuthority) {
 				base.characterMotor.moveDirection = base.inputBank.moveVector * 2.6f;
 			}
 
-			if (fixedAge > minBurrowTime) {
-				if ((base.isAuthority && !inputButtonState.down) || !isGrounded || fixedAge > MaxBurrowTime) {
+			if (fixedAge > minBurrowTime && base.isAuthority) {
+				if (!inputButtonState.down || !isGrounded || fixedAge > MaxBurrowTime) {
 
 					base.outer.SetState(new AliemCharacterMain { wasRiding = true });
 				}
@@ -76,7 +80,8 @@ namespace ModdedEntityStates.Aliem {
             }, false);
 
             if (isAuthority) {
-                new BlastAttack
+
+                BlastAttack blast = new BlastAttack
                 {
                     attacker = base.gameObject,
                     baseDamage = this.damageStat * AliemConfig.M3_Burrow_PopOutDamage.Value,
@@ -91,7 +96,10 @@ namespace ModdedEntityStates.Aliem {
                     attackerFiltering = AttackerFiltering.NeverHitSelf,
                     //impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
                     teamIndex = base.teamComponent.teamIndex
-                }.Fire();
+                };
+
+                BlastAttack.Result blastResult = blast.Fire();
+                onBurrowPopOutMultiHit?.Invoke(blastResult.hitCount);
             }
 		}
     }

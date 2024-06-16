@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using RoR2;
 using RoR2.Projectile;
@@ -13,9 +14,9 @@ namespace ModdedEntityStates.Aliem
         public override float BaseDamageCoefficient => _chargedDamageCoefficient;
         public override string soundString => _chargedShootSound;
         public override string muzzleString => isOffHanded ? "BlasterMuzzleFar.R" : "BlasterMuzzleFar";
-        public override GameObject muzzleEffectPrefab => Modules.Assets.sawedOffMuzzleFlash;
+        public override GameObject muzzleEffectPrefab => Assets.sawedOffMuzzleFlash;
 
-        public override GameObject projectile => Modules.Projectiles.SawedOffProjectilePrefabBig;
+        public override GameObject projectile => Projectiles.SawedOffProjectilePrefabBig;
 
         private float _chargedDamageCoefficient;
         private string _chargedShootSound = "Play_AliemSawedOffCharged";

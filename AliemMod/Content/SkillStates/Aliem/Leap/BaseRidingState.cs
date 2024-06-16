@@ -1,11 +1,14 @@
-﻿using AliemMod.Content;
+﻿using AliemMod.Components;
+using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using RoR2;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.Aliem {
+namespace ModdedEntityStates.Aliem
+{
     public class BaseRidingState : GenericCharacterMain {
 
 		public CharacterBody riddenBody;
@@ -25,7 +28,7 @@ namespace ModdedEntityStates.Aliem {
             base.OnEnter();
 
             if (riddenBody && NetworkServer.active) {
-				riddenBody.AddBuff(Modules.Buffs.riddenBuff);
+				riddenBody.AddBuff(Buffs.riddenBuff);
 			}
 
 			riddenCollider = findHighestHurtbox();
@@ -34,6 +37,7 @@ namespace ModdedEntityStates.Aliem {
                 outer.SetNextStateToMain();
                 return;
             }
+            GetComponent<AliemRidingColliderHolderThatsIt>().riddenCollider = riddenCollider;
             Vector3 ridePosition = riddenCollider.bounds.center;
             ridePosition.y = riddenCollider.bounds.max.y;
             _anchor = new GameObject("aliemAnchor");
@@ -58,8 +62,8 @@ namespace ModdedEntityStates.Aliem {
             //this.characterDirection.enabled = false;
             this.modelLocator.enabled = false;
 
-            modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimPitch"), 0);
-            modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimYaw"), 0);
+           //modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimPitch"), 0);
+           //modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimYaw"), 0);
         }
 
         private Collider findHighestHurtbox() {
@@ -117,6 +121,11 @@ namespace ModdedEntityStates.Aliem {
 						return;
 					}
 				}
+
+                //if (riddenBody.isPlayerControlled)
+                //{
+                    riddenBody.inputBank.moveVector = GetAimRay().direction;
+                //}
 			} else {
 				base.outer.SetNextStateToMain();
 				return;
@@ -130,7 +139,7 @@ namespace ModdedEntityStates.Aliem {
             lerpPosition = Vector3.Lerp(_lastPosition, lerpPosition, AliemConfig.rideLerpTim.Value);
 
             characterMotor.Motor.SetPosition(lerpPosition);
-
+            
             if (_modelTransform)
             {
                 _modelTransform.position = lerpPosition;
@@ -146,9 +155,10 @@ namespace ModdedEntityStates.Aliem {
         public override void OnExit() {
 			base.OnExit();
 			if (riddenBody && NetworkServer.active) {
-				riddenBody.RemoveBuff(Modules.Buffs.riddenBuff);
-			}
-			gameObject.layer = RoR2.LayerIndex.defaultLayer.intVal;
+				riddenBody.RemoveBuff(Buffs.riddenBuff);
+            }
+            GetComponent<AliemRidingColliderHolderThatsIt>().riddenCollider = null;
+            gameObject.layer = RoR2.LayerIndex.defaultLayer.intVal;
             UnityEngine.Object.Destroy(_anchor);
 
             PlayAnimation("FullBody, Underride", "BufferEmpty");
@@ -156,8 +166,8 @@ namespace ModdedEntityStates.Aliem {
             //this.characterDirection.enabled = true;
             this.modelLocator.enabled = true;
 
-            modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimPitch"), 1);
-            modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimYaw"), 1);
+            //modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimPitch"), 1);
+            //modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimYaw"), 1);
         }
 
         public override void OnSerialize(NetworkWriter writer) {

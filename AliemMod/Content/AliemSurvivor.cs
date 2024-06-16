@@ -1,12 +1,12 @@
 ﻿using AliemMod.Components;
 using AliemMod.Components.Bundled;
 using AliemMod.Content.SkillDefs;
+using AliemMod.Modules;
+using AliemMod.Modules.Characters;
 using BepInEx.Configuration;
 using EntityStates;
 using KinematicCharacterController;
 using ModdedEntityStates.Aliem;
-using Modules;
-using Modules.Characters;
 using Modules.Survivors;
 using R2API;
 using RoR2;
@@ -15,11 +15,13 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using static RoR2.CharacterSelectSurvivorPreviewDisplayController;
 
-namespace AliemMod.Content.Survivors {
+namespace AliemMod.Content.Survivors
+{
 
-    internal class AliemSurvivor : SurvivorBase {
+    public class AliemSurvivor : SurvivorBase {
         public override string bodyName => "Aliem";
 
         public const string ALIEM_PREFIX = AliemPlugin.DEV_PREFIX + "_ALIEM_BODY_";
@@ -40,7 +42,7 @@ namespace AliemMod.Content.Survivors {
 
             maxHealth = 110f,
             healthRegen = 1.5f,
-            armor = 0f,
+            armor = 10f,
 
             jumpCount = 2,
 
@@ -87,12 +89,13 @@ namespace AliemMod.Content.Survivors {
         public override ItemDisplaysBase itemDisplays => new AliemItemDisplays();
 
         //if you have more than one character, easily create a config to enable/disable them like this
+        // If you ran out beard shampoo buy more.
         public override ConfigEntry<bool> characterEnabledConfig => null; //Modules.Config.CharacterEnableConfig(bodyName);
-
-        private static UnlockableDef masterySkinUnlockableDef;
 
         public static AliemSurvivor instance;
         private CharacterSelectSurvivorPreviewDisplayController cssPreviewDisplayController;
+
+        public static SkillDef ChompSkillDef;
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
@@ -101,17 +104,26 @@ namespace AliemMod.Content.Survivors {
 
             Hooks();
 
-            Modules.Config.ConfigureBody(bodyPrefab.GetComponent<CharacterBody>(), AliemConfig.sectionBody);
-
             //VehicleSeat vehicleSeat = bodyPrefab.AddComponent<VehicleSeat>();
             //vehicleSeat.passengerState = new EntityStates.SerializableEntityStateType(typeof(AliemRidingState));
             //vehicleSeat.hidePassenger = false;
             //vehicleSeat.disablePassengerMotor = true;
             //vehicleSeat.isEquipmentActivationAllowed = true;
         }
+        public override void InitializeAI()
+        {
+            AliemAI.Init(bodyPrefab, "AliemMonsterMaster");
+        }
 
         protected override void InitializeCharacterBodyAndModel() {
+
+            if (AliemConfig.GupDefault.Value) {
+
+                bodyInfo.characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texIconAliemGup");
+            }
             base.InitializeCharacterBodyAndModel();
+
+            Modules.Config.ConfigureBody(bodyPrefab.GetComponent<CharacterBody>(), AliemConfig.sectionBody);
 
             CreateBurrowEffect();
 
@@ -120,6 +132,8 @@ namespace AliemMod.Content.Survivors {
             cssPreviewDisplayController = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
 
             bodyCharacterModel.GetComponent<ChildLocator>().FindChild("FakeAimOrigin").transform.position = bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform.position;
+
+            bodyPrefab.AddComponent<AliemRidingColliderHolderThatsIt>();
 
             EntityStateMachine.FindByCustomName(bodyPrefab, "Slide").customName = "Weapon2";
             Modules.Prefabs.AddEntityStateMachine(bodyPrefab, "Inputs1");
@@ -198,7 +212,7 @@ namespace AliemMod.Content.Survivors {
 
         public override void InitializeUnlockables() {
             //uncomment this when you have a mastery skin. when you do, make sure you have an icon too
-            masterySkinUnlockableDef = R2API.UnlockableAPI.AddUnlockable<Content.Achievements.AliemMasteryAchievement>();
+            AliemUnlockables.Init();
         }
 
         public override void InitializeHitboxes() {
@@ -218,6 +232,8 @@ namespace AliemMod.Content.Survivors {
 
         public override void InitializeSkills() {
             Skills.ClearGenericSkills(bodyPrefab);
+
+            SkillLocator skillLocator = bodyPrefab.GetComponent<SkillLocator>();
 
             #region Primary
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary);
@@ -423,9 +439,9 @@ namespace AliemMod.Content.Survivors {
 
             #region chomp
 
-            GenericSkill chompSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_SKILL_RIDING", "Riding");
+            GenericSkill chompGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_SKILL_RIDING", "Riding");
 
-            SkillDef ChompSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef chompSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_utility_Chomp",
                 skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_CHOMP_NAME",
@@ -455,8 +471,9 @@ namespace AliemMod.Content.Survivors {
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = false,
             });
+            ChompSkillDef = chompSkillDef;
 
-            Skills.AddSkillsToFamily(chompSkill.skillFamily, ChompSkillDef);
+            Skills.AddSkillsToFamily(chompGenericSkill.skillFamily, chompSkillDef);
 
             #endregion
 
@@ -486,6 +503,7 @@ namespace AliemMod.Content.Survivors {
                 requiredStock = 1,
                 stockToConsume = 1
             });
+            Config.ConfigureSkillDef(bombSkillDef, AliemConfig.sectionBody, "M4_Grenade");
 
             WeaponSwapSkillDef weaponSwapSkillDefBase = Skills.CreateSkillDef<WeaponSwapSkillDef>(new SkillDefInfo
             {
@@ -539,6 +557,10 @@ namespace AliemMod.Content.Survivors {
                 CreateScepterWeaponSwap(weaponSwapSkillDefRifle, "texIconAliemPrimaryRifleScepter");
                 CreateScepterWeaponSwap(weaponSwapSkillDefSawedOff, "texIconAliemPrimarySawedOffScepter");
             }
+
+
+            Skills.AddUnlockablesToFamily(skillLocator.primary.skillFamily, null, AliemUnlockables.ChompEnemiesUnlockableDef, AliemUnlockables.BurrowPopOutUnlockableDef);
+            Skills.AddUnlockablesToFamily(skillLocator.special.skillFamily, null, AliemUnlockables.SlowMashUnlockableDef, AliemUnlockables.ChompEnemiesUnlockableDef, AliemUnlockables.BurrowPopOutUnlockableDef);
         }
 
         private OffHandSkillDef CloneSwapSkillDef(SkillDef primarySkillDef)
@@ -629,61 +651,55 @@ namespace AliemMod.Content.Survivors {
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            //this creates a SkinDef with all default fields
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(
+                "DEFAULT_SKIN",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);
             
-            //these are your Mesh Replacements. The order here is based on your CustomRendererInfos from earlier
-            //pass in meshes as they are named in your assetbundle
-            //defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRenderers,
-            //    "meshHenrySword",
-            //    "meshHenryGun",
-            //    "meshHenry");
+            defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
+                "meshAliembody",
+                "meshAliemWeapon_Blaster",
+                "meshAliemWeapon_Blaster.R",
+                "meshAliemWeapon_SecondMesh",
+                "meshAliemWeapon_SecondMesh.R",
+                "meshAliemKnife");
 
-            //add new skindef to our list of skindefs. this is what we'll be passing to the SkinController
-            skins.Add(defaultSkin);
             #endregion
 
-            //uncomment this when you have a mastery skin
             #region MasterySkin
-            /*
-            //creating a new skindef as we did before
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(AliemPlugin.DEV_PREFIX + "_HENRY_BODY_MASTERY_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
-                defaultRendererinfos,
-                model,
-                masterySkinUnlockableDef);
-
-            //adding the mesh replacements as above. 
-            //if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
-            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
-                "meshHenrySwordAlt",
-                null,//no gun mesh replacement. use same gun mesh
-                "meshHenryAlt");
-
-            //masterySkin has a new set of RendererInfos (based on default rendererinfos)
-            //you can simply access the RendererInfos defaultMaterials and set them to the new materials for your skin.
-            masterySkin.rendererInfos[0].defaultMaterial = Modules.Materials.CreateHopooMaterial("matHenryAlt");
-            masterySkin.rendererInfos[1].defaultMaterial = Modules.Materials.CreateHopooMaterial("matHenryAlt");
-            masterySkin.rendererInfos[2].defaultMaterial = Modules.Materials.CreateHopooMaterial("matHenryAlt");
-
-            //here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
-            masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
-            {
-                new SkinDef.GameObjectActivation
-                {
-                    gameObject = childLocator.FindChildGameObject("GunModel"),
-                    shouldActivate = false,
-                }
-            };
-            //simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
-
-            skins.Add(masterySkin);
-            */
-            #endregion
             
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(ALIEM_PREFIX + "GUP_SKIN_NAME",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinGup"),
+                defaultRendererinfos,
+                bodyCharacterModel.gameObject);
+            
+            masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(defaultRendererinfos,
+                "meshGupbody",
+                null,
+                null,
+                null,
+                null,
+                null);
+
+            Material gipMat = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/Gup/matGipBody.mat").WaitForCompletion();
+            masterySkin.rendererInfos[0].defaultMaterial = gipMat;
+            masterySkin.rendererInfos[5].defaultMaterial = gipMat;
+
+            if (!AliemConfig.GupDefault.Value)
+            {
+                skins.Add(defaultSkin);
+                skins.Add(masterySkin);
+            } 
+            else
+            {
+                skins.Add(masterySkin);
+                skins.Add(defaultSkin);
+            }
+            skins[1].unlockableDef = AliemUnlockables.masterySkinUnlockableDef;
+            
+            #endregion
+
             skins.Add(CreateRecolorSkin(defaultSkin, "Red"));
             skins.Add(CreateRecolorSkin(defaultSkin, "Green"));
             skins.Add(CreateRecolorSkin(defaultSkin, "Blue"));
@@ -697,7 +713,7 @@ namespace AliemMod.Content.Survivors {
             skinController.skins = skins.ToArray();
         }
 
-        private SkinDef CreateRecolorSkin(SkinDef defaultSkin, string skinColor) {
+        public SkinDef CreateRecolorSkin(SkinDef defaultSkin, string skinColor) {
 
             Material material = Materials.CreateHotpooMaterial($"matAliemRecolor_{skinColor}");
             Color color = material.GetColor("_Color");
@@ -708,7 +724,7 @@ namespace AliemMod.Content.Survivors {
                                                   CreateRecolorIcon(color),
                                                   defaultSkin.rendererInfos,
                                                   defaultSkin.rootObject,
-                                                  masterySkinUnlockableDef);
+                                                  AliemUnlockables.masterySkinUnlockableDef);
             skinDef.rendererInfos[0].defaultMaterial = material;
 
             R2API.LanguageAPI.Add(token, skinColor);

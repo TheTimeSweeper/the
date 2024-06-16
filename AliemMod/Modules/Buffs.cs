@@ -4,9 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Modules {
-
-    internal static class Buffs
+namespace AliemMod.Modules
+{
+    public static class Buffs
     {
         //Aliem
         public static BuffDef riddenBuff;
@@ -14,7 +14,8 @@ namespace Modules {
         public static BuffDef attackSpeedBuff;
         public static BuffDef ridingBuff;
 
-        public static void RegisterBuffs() {
+        public static void RegisterBuffs()
+        {
 
             //Aliem
             riddenBuff =
@@ -46,7 +47,8 @@ namespace Modules {
 
         }
 
-        public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff) {
+        public static BuffDef AddNewBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff)
+        {
             BuffDef buffDef = ScriptableObject.CreateInstance<BuffDef>();
             buffDef.name = buffName;
             buffDef.iconSprite = buffIcon;

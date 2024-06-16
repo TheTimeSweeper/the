@@ -2,11 +2,13 @@
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using Modules.Characters;
 using System;
 using System.Linq;
+using AliemMod.Modules.Characters;
+using RoR2.CharacterAI;
 
-namespace Modules {
+namespace AliemMod.Modules
+{
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to
 
@@ -20,7 +22,8 @@ namespace Modules {
             GameObject model = Assets.LoadSurvivorModel(displayModelName);
 
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
-            if (!characterModel) {
+            if (!characterModel)
+            {
                 characterModel = model.AddComponent<CharacterModel>();
             }
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
@@ -38,7 +41,7 @@ namespace Modules {
                 return null;
             }
 
-            GameObject newBodyPrefab = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"), bodyName);
+            GameObject newBodyPrefab = Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body").InstantiateClone(bodyName);
 
             Transform modelBaseTransform = null;
             GameObject newModel = null;
@@ -46,10 +49,10 @@ namespace Modules {
             {
                 newModel = Assets.LoadSurvivorModel(modelName);
                 //if load fails, just use body from the clone
-                if (newModel == null) 
+                if (newModel == null)
                     newModel = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
 
-                    modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, newModel.transform, bodyInfo);
+                modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, newModel.transform, bodyInfo);
             }
 
             #region CharacterBody
@@ -64,7 +67,7 @@ namespace Modules {
             bodyComponent._defaultCrosshairPrefab = bodyInfo.crosshair;
             bodyComponent.hideCrosshair = false;
             bodyComponent.preferredPodPrefab = bodyInfo.podPrefab;
-            
+
             //stats
             bodyComponent.baseMaxHealth = bodyInfo.maxHealth;
             bodyComponent.baseRegen = bodyInfo.healthRegen;
@@ -81,7 +84,8 @@ namespace Modules {
             //level stats
             bodyComponent.autoCalculateLevelStats = bodyInfo.autoCalculateLevelStats;
 
-            if (bodyInfo.autoCalculateLevelStats) {
+            if (bodyInfo.autoCalculateLevelStats)
+            {
 
                 bodyComponent.levelMaxHealth = Mathf.Round(bodyComponent.baseMaxHealth * 0.3f);
                 bodyComponent.levelMaxShield = Mathf.Round(bodyComponent.baseMaxShield * 0.3f);
@@ -96,7 +100,9 @@ namespace Modules {
 
                 bodyComponent.levelArmor = 0f;
 
-            } else {
+            }
+            else
+            {
 
                 bodyComponent.levelMaxHealth = bodyInfo.healthGrowth;
                 bodyComponent.levelMaxShield = bodyInfo.shieldGrowth;
@@ -136,10 +142,11 @@ namespace Modules {
 
             //funny hack
             //TODO: properly null check these functions
-            if (bodyInfo.bodyNameToClone != "EngiTurret") {
+            if (bodyInfo.bodyNameToClone != "EngiTurret")
+            {
                 if (modelBaseTransform != null) SetupCharacterDirection(newBodyPrefab, modelBaseTransform, newModel.transform);
-                    SetupFootstepController(newModel);
-                    SetupRagdoll(newModel);
+                SetupFootstepController(newModel);
+                SetupRagdoll(newModel);
             }
 
             Modules.Content.AddCharacterBodyPrefab(newBodyPrefab);
@@ -149,7 +156,7 @@ namespace Modules {
 
         public static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy)
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Assets.LoadAsset<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster"), masterName, true);
+            GameObject newMaster = Assets.LoadAsset<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster").InstantiateClone(masterName, true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
             Modules.Content.AddMasterPrefab(newMaster);
@@ -157,9 +164,10 @@ namespace Modules {
 
         #region ModelSetup
 
-        private static Transform AddCharacterModelToSurvivorBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo) 
+        private static Transform AddCharacterModelToSurvivorBody(GameObject bodyPrefab, Transform modelTransform, BodyInfo bodyInfo)
         {
-            for (int i = bodyPrefab.transform.childCount - 1; i >= 0; i--) {
+            for (int i = bodyPrefab.transform.childCount - 1; i >= 0; i--)
+            {
 
                 UnityEngine.Object.DestroyImmediate(bodyPrefab.transform.GetChild(i).gameObject);
             }
@@ -187,7 +195,8 @@ namespace Modules {
             return modelBase.transform;
         }
         public static CharacterModel SetupCharacterModel(GameObject prefab) => SetupCharacterModel(prefab, null);
-        public static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos) {
+        public static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos)
+        {
 
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
             bool preattached = characterModel != null;
@@ -200,47 +209,60 @@ namespace Modules {
             characterModel.invisibilityCount = 0;
             characterModel.temporaryOverlays = new List<TemporaryOverlay>();
 
-            if (!preattached) {
+            if (!preattached)
+            {
                 SetupCustomRendererInfos(characterModel, customInfos);
             }
-            else {
+            else
+            {
                 SetupPreAttachedRendererInfos(characterModel);
             }
             return characterModel;
         }
 
-        public static void SetupPreAttachedRendererInfos(CharacterModel characterModel) {
-            for (int i = 0; i < characterModel.baseRendererInfos.Length; i++) {
+        public static void SetupPreAttachedRendererInfos(CharacterModel characterModel)
+        {
+            for (int i = 0; i < characterModel.baseRendererInfos.Length; i++)
+            {
                 if (characterModel.baseRendererInfos[i].defaultMaterial == null)
                     characterModel.baseRendererInfos[i].defaultMaterial = characterModel.baseRendererInfos[i].renderer.sharedMaterial;
                 characterModel.baseRendererInfos[i].defaultMaterial.SetHotpooMaterial();
             }
         }
 
-        public static void SetupCustomRendererInfos(CharacterModel characterModel, CustomRendererInfo[] customInfos) {
+        public static void SetupCustomRendererInfos(CharacterModel characterModel, CustomRendererInfo[] customInfos)
+        {
 
             ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
-            if (!childLocator) {
+            if (!childLocator)
+            {
                 Debug.LogError("Failed CharacterModel setup: ChildLocator component does not exist on the model");
                 return;
             }
 
             List<CharacterModel.RendererInfo> rendererInfos = new List<CharacterModel.RendererInfo>();
 
-            for (int i = 0; i < customInfos.Length; i++) {
-                if (!childLocator.FindChild(customInfos[i].childName)) {
+            for (int i = 0; i < customInfos.Length; i++)
+            {
+                if (!childLocator.FindChild(customInfos[i].childName))
+                {
                     Debug.LogError("Trying to add a RendererInfo for a renderer that does not exist: " + customInfos[i].childName);
-                } else {
+                }
+                else
+                {
                     Renderer rend = childLocator.FindChild(customInfos[i].childName).GetComponent<Renderer>();
-                    if (rend) {
+                    if (rend)
+                    {
 
                         Material mat = customInfos[i].material;
 
-                        if (mat == null) {
+                        if (mat == null)
+                        {
                             mat = rend.sharedMaterial.SetHotpooMaterial();
                         }
 
-                        rendererInfos.Add(new CharacterModel.RendererInfo {
+                        rendererInfos.Add(new CharacterModel.RendererInfo
+                        {
                             renderer = rend,
                             defaultMaterial = mat,
                             ignoreOverlays = customInfos[i].ignoreOverlays,
@@ -290,7 +312,8 @@ namespace Modules {
         //    rigidbody.mass = 100f;
         //}
 
-        private static void SetupCapsuleCollider(GameObject prefab) {
+        private static void SetupCapsuleCollider(GameObject prefab)
+        {
             CapsuleCollider capsuleCollider = prefab.GetComponent<CapsuleCollider>();
             capsuleCollider.center = new Vector3(0f, 0f, 0f);
             capsuleCollider.radius = 0.5f;
@@ -326,17 +349,22 @@ namespace Modules {
             hurtBoxGroup.bullseyeCount = 1;
         }
 
-        public static void SetupHurtBoxGroup(GameObject bodyPrefab, GameObject bodyModel) {
+        public static void SetupHurtBoxGroup(GameObject bodyPrefab, GameObject bodyModel)
+        {
 
             HealthComponent healthComponent = bodyPrefab.GetComponent<HealthComponent>();
             HurtBoxGroup hurtboxGroup = bodyModel.GetComponent<HurtBoxGroup>();
 
-            if (hurtboxGroup != null) {
+            if (hurtboxGroup != null)
+            {
                 hurtboxGroup.mainHurtBox.healthComponent = healthComponent;
-                for (int i = 0; i < hurtboxGroup.hurtBoxes.Length; i++) {
+                for (int i = 0; i < hurtboxGroup.hurtBoxes.Length; i++)
+                {
                     hurtboxGroup.hurtBoxes[i].healthComponent = healthComponent;
                 }
-            } else {
+            }
+            else
+            {
                 SetupMainHurtboxFromChildLocator(bodyPrefab, bodyModel);
             }
 
@@ -388,15 +416,18 @@ namespace Modules {
             aimAnimator.inputBank = prefab.GetComponent<InputBankTest>();
         }
 
-        public static void SetupHitbox(GameObject modelPrefab, string groupName, params string[] hitboxChildNames) {
+        public static void SetupHitbox(GameObject modelPrefab, string groupName, params string[] hitboxChildNames)
+        {
 
             ChildLocator childLocator = modelPrefab.GetComponent<ChildLocator>();
 
             Transform[] hitboxTransforms = new Transform[hitboxChildNames.Length];
-            for (int i = 0; i < hitboxChildNames.Length; i++) {
+            for (int i = 0; i < hitboxChildNames.Length; i++)
+            {
                 hitboxTransforms[i] = childLocator.FindChild(hitboxChildNames[i]);
 
-                if (hitboxTransforms[i] == null) {
+                if (hitboxTransforms[i] == null)
+                {
                     AliemPlugin.Log.LogError("missing hitbox for " + hitboxChildNames[i]);
                 }
             }
@@ -539,6 +570,63 @@ namespace Modules {
             }
 
             return entityStateMachine;
+        }
+
+        public static GameObject CreateBlankMasterPrefab(GameObject bodyPrefab, string masterName)
+        {
+            GameObject masterObject = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster");
+
+            return CloneMaster(bodyPrefab, masterName, masterObject);
+        }
+        private static GameObject CloneMaster(GameObject bodyPrefab, string masterName, GameObject master)
+        {
+            GameObject masterObject = PrefabAPI.InstantiateClone(master, masterName, true);
+            //should the user call this themselves?
+            Modules.ContentPacks.masterPrefabs.Add(masterObject);
+
+            CharacterMaster characterMaster = masterObject.GetComponent<CharacterMaster>();
+            characterMaster.bodyPrefab = bodyPrefab;
+
+            AISkillDriver[] drivers = masterObject.GetComponents<AISkillDriver>();
+            for (int i = 0; i < drivers.Length; i++)
+            {
+                UnityEngine.Object.Destroy(drivers[i]);
+            }
+
+            return masterObject;
+        }
+
+        public static GameObject LoadMaster(this AssetBundle assetBundle, GameObject bodyPrefab, string assetName)
+        {
+            GameObject newMaster = assetBundle.LoadAsset<GameObject>(assetName);
+
+            BaseAI baseAI = newMaster.GetComponent<BaseAI>();
+            if (baseAI == null)
+            {
+                baseAI = newMaster.AddComponent<BaseAI>();
+                baseAI.aimVectorDampTime = 0.1f;
+                baseAI.aimVectorMaxSpeed = 360;
+            }
+            baseAI.scanState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.AI.Walker.Wander));
+
+            EntityStateMachine stateMachine = newMaster.GetComponent<EntityStateMachine>();
+            if (stateMachine == null)
+            {
+                AddEntityStateMachine(newMaster, "AI", typeof(EntityStates.AI.Walker.Wander), typeof(EntityStates.AI.Walker.Wander));
+            }
+
+            baseAI.stateMachine = stateMachine;
+
+            CharacterMaster characterMaster = newMaster.GetComponent<CharacterMaster>();
+            if (characterMaster == null)
+            {
+                characterMaster = newMaster.AddComponent<CharacterMaster>();
+            }
+            characterMaster.bodyPrefab = bodyPrefab;
+            characterMaster.teamIndex = TeamIndex.Monster;
+
+            Modules.Content.AddMasterPrefab(newMaster);
+            return newMaster;
         }
 
         #endregion ComponentSetup

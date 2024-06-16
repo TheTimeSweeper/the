@@ -1,16 +1,22 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using RoR2;
+using RoR2.Orbs;
+using System;
+using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.Aliem {
+namespace ModdedEntityStates.Aliem
+{
+    public class AliemRidingChomp : BaseSkillState {
 
-    internal class AliemRidingChomp : BaseSkillState {
+        public static float ChompDamageCoefficient => AliemConfig.M3_Chomp_Damage.Value;
 
-		public static float ChompDamageCoefficient => AliemConfig.M3_Chomp_Damage.Value;
+        public Collider riddenCollider;
 
-		public float baseDuration = 0.3f;
-		public float chompTime = 1f;
+		private float baseDuration = 0.3f;
+		private float chompPercentTime = 1f;
 
 		private float duration;
 
@@ -26,12 +32,12 @@ namespace ModdedEntityStates.Aliem {
         public override void FixedUpdate() {
             base.FixedUpdate();
 
-			if(base.fixedAge > duration * chompTime && !hasCasted) {
+			if(base.fixedAge > duration * chompPercentTime && !hasCasted) {
 				hasCasted = true;
 				OnCastEnter();
             }
 
-			if (base.fixedAge > duration) {
+			if (base.fixedAge > duration && isAuthority) {
                 base.outer.SetNextStateToMain();
 			}
 		}
@@ -40,7 +46,11 @@ namespace ModdedEntityStates.Aliem {
 
 			Util.PlayAttackSpeedSound("Play_Chomp", base.gameObject, this.attackSpeedStat);
 
-			if (base.isAuthority) {
+            Transform ridePoint = GetComponent<AliemMod.Components.AliemRidingColliderHolderThatsIt>().riddenCollider.transform;
+            if (ridePoint == null)
+                ridePoint = transform;
+
+            if (base.isAuthority) {
 				BlastAttack blast = new BlastAttack {
 					attacker = base.gameObject,
 					baseDamage = this.damageStat * ChompDamageCoefficient,
@@ -52,19 +62,32 @@ namespace ModdedEntityStates.Aliem {
 					falloffModel = BlastAttack.FalloffModel.None,
 					procCoefficient = 1,
 					radius = 2,
-					position = transform.position,
+					position = ridePoint.position,
 					attackerFiltering = AttackerFiltering.NeverHitSelf,
 					//impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
 					teamIndex = base.teamComponent.teamIndex
 				};
 
-				R2API.DamageAPI.AddModdedDamageType(blast, Modules.DamageTypes.Decapitating);
+				R2API.DamageAPI.AddModdedDamageType(blast, DamageTypes.Decapitating);
 
 				blast.Fire();
 			}
-
+            
             if (NetworkServer.active) {
-				healthComponent.Heal(characterBody.maxHealth * AliemConfig.M3_Chomp_Healing.Value, default(ProcChainMask));
+
+                float healAmount = characterBody.maxHealth - (AliemConfig.M3_Chomp_HealMissing.Value ? healthComponent.health : 0);
+                healAmount *= AliemConfig.M3_Chomp_Healing.Value;
+
+                Helpers.LogWarning($"\ncharacterBody.maxHealth {characterBody.maxHealth}\nhealthComponent.health{healthComponent.health}\ndiff {characterBody.maxHealth - healthComponent.health}\nfinal {healAmount}");
+
+                HealOrb healOrb = new HealOrb();
+                healOrb.origin = ridePoint.position;
+                healOrb.target = characterBody.mainHurtBox;
+                healOrb.healValue = healAmount;
+                healOrb.overrideDuration = 0.1f;
+                OrbManager.instance.AddOrb(healOrb);
+
+                //healthComponent.Heal(healAmount, default(ProcChainMask));
             }
 		}
 

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Modules
+namespace AliemMod.Modules
 {
     internal static class Skins
     {
-        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null) {
-            SkinDefInfo skinDefInfo = new SkinDefInfo {
+        public static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null)
+        {
+            SkinDefInfo skinDefInfo = new SkinDefInfo
+            {
                 BaseSkins = Array.Empty<SkinDef>(),
                 GameObjectActivations = new SkinDef.GameObjectActivation[0],
                 Icon = skinIcon,
@@ -25,7 +27,7 @@ namespace Modules
 
             On.RoR2.SkinDef.Awake += DoNothing;
 
-            SkinDef skinDef = ScriptableObject.CreateInstance<RoR2.SkinDef>();
+            SkinDef skinDef = ScriptableObject.CreateInstance<SkinDef>();
 
             PopulateSkinDef(defaultRendererInfos, skinDefInfo, skinDef);
 
@@ -34,19 +36,23 @@ namespace Modules
             return skinDef;
         }
 
-        public static SkinDef CreateRecolorSkinDef(string skinName, Sprite skinIcon, SkinDef baseSkin, UnlockableDef unlockableDef) {
+        public static SkinDef CreateRecolorSkinDef(string skinName, Sprite skinIcon, SkinDef baseSkin, UnlockableDef unlockableDef)
+        {
             SkinDef skindef = CreateSkinDef(skinName, skinIcon, baseSkin.rendererInfos, baseSkin.rootObject, unlockableDef);
             skindef.baseSkins = new SkinDef[] { baseSkin };
 
             return skindef;
         }
 
-        internal static SkinDef GetCurrentSkinDef(CharacterBody characterBody) {
+        internal static SkinDef GetCurrentSkinDef(CharacterBody characterBody)
+        {
             return SkinCatalog.GetBodySkinDef(characterBody.bodyIndex, (int)characterBody.skinIndex);
         }
 
-        public static T CreateSkinDef<T>(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null) where T:SkinDef {
-            SkinDefInfo skinDefInfo = new SkinDefInfo {
+        public static T CreateSkinDef<T>(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null) where T : SkinDef
+        {
+            SkinDefInfo skinDefInfo = new SkinDefInfo
+            {
                 BaseSkins = Array.Empty<SkinDef>(),
                 GameObjectActivations = new SkinDef.GameObjectActivation[0],
                 Icon = skinIcon,
@@ -71,7 +77,8 @@ namespace Modules
             return skinDef;
         }
 
-        private static void PopulateSkinDef(CharacterModel.RendererInfo[] rendererInfos, SkinDefInfo skinDefInfo, SkinDef skinDef) {
+        private static void PopulateSkinDef(CharacterModel.RendererInfo[] rendererInfos, SkinDefInfo skinDefInfo, SkinDef skinDef)
+        {
             skinDef.baseSkins = skinDefInfo.BaseSkins;
             skinDef.icon = skinDefInfo.Icon;
             skinDef.unlockableDef = skinDefInfo.UnlockableDef;
@@ -91,7 +98,8 @@ namespace Modules
         /// </summary>
         /// <param name="originalSkinDef"></param>
         /// <returns></returns>
-        public static T DuplicateScepterSkinDef<T>(T originalSkinDef, string newName = "_SCEPTER") where T: SkinDef{
+        public static T DuplicateScepterSkinDef<T>(T originalSkinDef, string newName = "_SCEPTER") where T : SkinDef
+        {
 
             //why do we need to do this again?
             On.RoR2.SkinDef.Awake += DoNothing;
@@ -114,7 +122,7 @@ namespace Modules
             return newSkinDef;
         }
 
-        private static void DoNothing(On.RoR2.SkinDef.orig_Awake orig, RoR2.SkinDef self)
+        private static void DoNothing(On.RoR2.SkinDef.orig_Awake orig, SkinDef self)
         {
         }
 
@@ -137,10 +145,12 @@ namespace Modules
         /// Plug in the names of all the GameObjects that are going to be activated/deactivated in any of your skins, and store this in a variable
         /// </summary>
         /// <returns>An ordered list of gameobjects to activate/deactivate</returns>
-        public static List<GameObject> createAllActivatedGameObjectsList(ChildLocator childLocator, params string[] allChildren) {
+        public static List<GameObject> createAllActivatedGameObjectsList(ChildLocator childLocator, params string[] allChildren)
+        {
             List<GameObject> allObjects = new List<GameObject>();
 
-            for (int i = 0; i < allChildren.Length; i++) {
+            for (int i = 0; i < allChildren.Length; i++)
+            {
                 allObjects.Add(childLocator.FindChildGameObject(allChildren[i]));
             }
             return allObjects;
@@ -149,12 +159,15 @@ namespace Modules
         /// <summary>
         /// Using the ActivatedGameObjects list, pass in the index of each gameobject to activate. Objects not passed in will deactivate.
         /// </summary>
-        public static SkinDef.GameObjectActivation[] getGameObjectActivationsFromList(List<GameObject> allObjects, params int[] activatedChildren) {
+        public static SkinDef.GameObjectActivation[] getGameObjectActivationsFromList(List<GameObject> allObjects, params int[] activatedChildren)
+        {
 
             SkinDef.GameObjectActivation[] gameObjectActivations = new SkinDef.GameObjectActivation[allObjects.Count];
 
-            for (int i = 0; i < allObjects.Count; i++) {
-                gameObjectActivations[i] = new SkinDef.GameObjectActivation {
+            for (int i = 0; i < allObjects.Count; i++)
+            {
+                gameObjectActivations[i] = new SkinDef.GameObjectActivation
+                {
                     gameObject = allObjects[i],
                     shouldActivate = activatedChildren.Contains(i),
                 };
@@ -163,16 +176,19 @@ namespace Modules
             return gameObjectActivations;
         }
 
-        internal static SkinDef.MeshReplacement[] getMeshReplacements(CharacterModel.RendererInfo[] rendererinfos, params string[] meshes) {
+        internal static SkinDef.MeshReplacement[] getMeshReplacements(CharacterModel.RendererInfo[] rendererinfos, params string[] meshes)
+        {
 
             List<SkinDef.MeshReplacement> meshReplacements = new List<SkinDef.MeshReplacement>();
 
-            for (int i = 0; i < rendererinfos.Length; i++) {
+            for (int i = 0; i < rendererinfos.Length; i++)
+            {
                 if (string.IsNullOrEmpty(meshes[i]))
                     continue;
 
                 meshReplacements.Add(
-                new SkinDef.MeshReplacement {
+                new SkinDef.MeshReplacement
+                {
                     renderer = rendererinfos[i].renderer,
                     mesh = Assets.LoadAsset<Mesh>(meshes[i])
                 });

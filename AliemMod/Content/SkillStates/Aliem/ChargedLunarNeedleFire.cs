@@ -1,5 +1,5 @@
-﻿using EntityStates.GlobalSkills.LunarNeedle;
-using Modules;
+﻿using AliemMod.Modules;
+using EntityStates.GlobalSkills.LunarNeedle;
 using RoR2;
 using UnityEngine;
 

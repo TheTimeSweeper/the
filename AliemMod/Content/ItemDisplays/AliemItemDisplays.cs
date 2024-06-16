@@ -1,13 +1,14 @@
-﻿using Modules.Characters;
-using Modules;
-using RoR2;
+﻿using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
+using AliemMod.Modules;
+using AliemMod.Modules.Characters;
 
-namespace AliemMod.Content {
+namespace AliemMod.Content
+{
 
     class AliemItemDisplays : ItemDisplaysBase {
 

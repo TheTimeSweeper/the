@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace ModdedEntityStates.Aliem
 {
     public class SwordFireCharged : SwordFire
     {
-        public override GameObject projectile => Modules.Projectiles.SwordProjectilePrefabBig;
+        public override GameObject projectile => Projectiles.SwordProjectilePrefabBig;
         public override string soundString => "Play_AliemEnergySwordCharged";
         public override float BaseDamageCoefficient => _swordDamageCoefficient;
 

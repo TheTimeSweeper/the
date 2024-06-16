@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace ModdedEntityStates.Aliem
         public override float BaseDamageCoefficient => _chargedDamageCoefficient;
         public override string soundString => _chargedShootSound;
 
-        public override GameObject projectile => Modules.Projectiles.RayGunProjectilePrefabBig;
+        public override GameObject projectile => Projectiles.RayGunProjectilePrefabBig;
 
 		private float _chargedDamageCoefficient;
         private string _chargedShootSound = "Play_RayGunBigClassic";

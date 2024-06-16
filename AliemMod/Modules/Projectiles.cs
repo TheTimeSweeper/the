@@ -4,8 +4,10 @@ using RoR2.Projectile;
 using System;
 using UnityEngine;
 
-namespace Modules {
-    internal static class Projectiles {
+namespace AliemMod.Modules
+{
+    public static class Projectiles
+    {
         internal static GameObject RayGunProjectilePrefab;
         internal static GameObject RayGunProjectilePrefabBig;
         internal static GameObject SwordProjectilePrefab;
@@ -17,7 +19,7 @@ namespace Modules {
 
         public static void Init()
         {
-            RayGunProjectilePrefab = JankyLoadAliemPrefab("AliemLemonProjectile");
+            RayGunProjectilePrefab = JankyLoadAliemPrefab("AliemLemonProjectile", true);
             RayGunProjectilePrefab.GetComponent<ProjectileSingleTargetImpact>().impactEffect = Assets.m1EffectPrefab;
 
             RayGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemLemonProjectileBig");
@@ -26,7 +28,7 @@ namespace Modules {
             SwordProjectilePrefab = JankyLoadAliemPrefab("AliemSwordProjectile");
             SwordProjectilePrefabBig = JankyLoadAliemPrefab("AliemSwordProjectileBig");
 
-            SawedOffProjectilePrefabBig = JankyLoadAliemPrefab("AliemSawedOffProjectileBig", true);
+            SawedOffProjectilePrefabBig = JankyLoadAliemPrefab("AliemSawedOffProjectileBig", true, true);
             Assets.ConvertAllRenderersToHopooShader(SawedOffProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
             SawedOffProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>().impactEffect = Assets.nemforcerImpactEffect;
 
@@ -43,18 +45,24 @@ namespace Modules {
         private static void FunnyMaterial(string assName)
         {
             GameObject prefab = Assets.LoadAsset<GameObject>(assName);//.InstantiateClone(assName, false);
-            
+
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetHotpooMaterial();
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetCull();
         }
 
-        public static GameObject JankyLoadAliemPrefab(string assName, bool clone = false) {
-
+        public static GameObject JankyLoadAliemPrefab(string assName, bool clone = false, bool cloneGhost = false)
+        {
             GameObject prefab = Assets.LoadAsset<GameObject>(assName);
-            R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
+            prefab.RegisterNetworkPrefab();
+            //so you can mess with it in runtimeinspector
             if (clone)
             {
                 prefab = prefab.InstantiateClone(assName, true);
+            }
+            if (cloneGhost)
+            {
+                ProjectileController projectileController = prefab.GetComponent<ProjectileController>();
+                projectileController.ghostPrefab = projectileController.ghostPrefab.InstantiateClone(projectileController.ghostPrefab.name, false);
             }
             Content.AddProjectilePrefab(prefab);
 

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using Modules.Survivors;
+using AliemMod.Modules;
 
-namespace Modules {
+namespace Modules
+{
     public class MemeCompat {
         public static void init() {
             //actually breaks the fucking game somehow

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using ModdedEntityStates.Aliem;
-using Modules;
 
-namespace Modules {
-    internal static class States {
-        public static void Init() {
+namespace AliemMod.Modules
+{
+    internal static class States
+    {
+        public static void Init()
+        {
             Content.AddEntityState(typeof(AliemCharacterMain));
 
             Content.AddEntityState(typeof(RayGunFire));
@@ -51,7 +53,7 @@ namespace Modules {
             Content.AddEntityState(typeof(AliemRidingState));
             Content.AddEntityState(typeof(EndRidingState));
             Content.AddEntityState(typeof(AliemBurrow));
-            
+
 
             Content.AddEntityState(typeof(ThrowGrenade));
             Content.AddEntityState(typeof(ThrowGrenadeScepter));

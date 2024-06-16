@@ -6,8 +6,12 @@ using UnityEngine.Networking;
 namespace ModdedEntityStates.Aliem
 {
     public abstract class MashAndHoldInputs : BaseSkillState, IOffHandable {
-		
-		protected virtual string StateMachineName => isOffHanded ? "Weapon2": "Weapon";
+
+        public static event System.Action onMash;
+        public static event System.Action onFire;
+        public static event System.Action onOnEnter;
+
+        protected virtual string StateMachineName => isOffHanded ? "Weapon2": "Weapon";
 
         protected virtual EntityState initialMashState => newMashState;
 
@@ -40,6 +44,7 @@ namespace ModdedEntityStates.Aliem
 			outputESM = EntityStateMachine.FindByCustomName(gameObject, StateMachineName);
 
 			_mashTimer = minMashTime;
+            onOnEnter?.Invoke();
 		}
 
         public override void FixedUpdate()
@@ -57,6 +62,7 @@ namespace ModdedEntityStates.Aliem
 
                 if (GetSkillButton().justPressed)
                 {
+                    onMash?.Invoke();
                     _mashes++;
 
                     //second time we mash within the right time, we are now mashing
@@ -108,6 +114,7 @@ namespace ModdedEntityStates.Aliem
             {
                 if (outputESM.CanInterruptState(mashInterruptPriority))
                 {
+                    onFire?.Invoke();
                     characterBody.OnSkillActivated(activatorSkillSlot);
                     outputESM.SetInterruptState(SetHandedness(newMashState), mashInterruptPriority);
                 }

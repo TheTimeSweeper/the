@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Modules {
+namespace AliemMod.Modules
+{
 
     internal static class Skills
     {
@@ -90,33 +91,41 @@ namespace Modules {
         #region skillfamilies
 
         //everything calls this
-        public static void AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef, UnlockableDef unlockableDef = null) {
+        public static void AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef, UnlockableDef unlockableDef = null)
+        {
 
             Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
 
-            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant {
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
                 skillDef = skillDef,
                 unlockableDef = unlockableDef,
                 viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
             };
         }
 
-        public static void AddSkillsToFamily (SkillFamily skillFamily, params SkillDef[] skillDefs) {
+        public static void AddSkillsToFamily(SkillFamily skillFamily, params SkillDef[] skillDefs)
+        {
 
-            foreach (SkillDef skillDef in skillDefs) {
+            foreach (SkillDef skillDef in skillDefs)
+            {
                 AddSkillToFamily(skillFamily, skillDef);
             }
         }
-        public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+        public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().primary.skillFamily, skillDefs);
         }
-        public static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+        public static void AddSecondarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().secondary.skillFamily, skillDefs);
         }
-        public static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+        public static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().utility.skillFamily, skillDefs);
         }
-        public static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs) {
+        public static void AddSpecialSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().special.skillFamily, skillDefs);
         }
 
@@ -126,9 +135,11 @@ namespace Modules {
         /// AddUnlockablesToFamily(skillLocator.primary, null, skill2UnlockableDef, null, skill4UnlockableDef);
         /// </code>
         /// </summary>
-        public static void AddUnlockablesToFamily(SkillFamily skillFamily, params UnlockableDef[] unlockableDefs) {
+        public static void AddUnlockablesToFamily(SkillFamily skillFamily, params UnlockableDef[] unlockableDefs)
+        {
 
-            for (int i = 0; i < unlockableDefs.Length; i++) {
+            for (int i = 0; i < unlockableDefs.Length; i++)
+            {
                 SkillFamily.Variant variant = skillFamily.variants[i];
                 variant.unlockableDef = unlockableDefs[i];
                 skillFamily.variants[i] = variant;
@@ -147,9 +158,9 @@ namespace Modules {
                 Assets.mainAssetBundle.LoadAsset<Sprite>(iconPath),
                 stateType);
         }
-        public static T CloneSkillDef<T>(SkillDef secondaryChargedSkillDef, string skillName, string tokenPrefix, Sprite icon, SerializableEntityStateType stateType) where T: SkillDef
+        public static T CloneSkillDef<T>(SkillDef secondaryChargedSkillDef, string skillName, string tokenPrefix, Sprite icon, SerializableEntityStateType stateType) where T : SkillDef
         {
-            T skillDef = Skills.CloneSkillDef<T>(secondaryChargedSkillDef);
+            T skillDef = CloneSkillDef<T>(secondaryChargedSkillDef);
             (skillDef as ScriptableObject).name = $"{tokenPrefix}{skillName}";
             skillDef.skillNameToken = $"{tokenPrefix}{skillName.ToUpperInvariant()}_NAME";
             skillDef.skillDescriptionToken = $"{tokenPrefix}{skillName.ToUpperInvariant()}_DESCRIPTION";
@@ -159,7 +170,7 @@ namespace Modules {
             return skillDef;
         }
 
-        public static T CloneSkillDef<T>(SkillDef skillDefToCopy) where T: SkillDef
+        public static T CloneSkillDef<T>(SkillDef skillDefToCopy) where T : SkillDef
         {
             T skillDef = ScriptableObject.CreateInstance<T>();
 
@@ -188,28 +199,31 @@ namespace Modules {
 
             skillDef.keywordTokens = skillDefToCopy.keywordTokens;
 
-            Modules.Content.AddSkillDef(skillDef);
+            Content.AddSkillDef(skillDef);
 
             return skillDef;
         }
 
-        public static SkillDef CreateSkillDef (SkillDefInfo skillDefInfo){
+        public static SkillDef CreateSkillDef(SkillDefInfo skillDefInfo)
+        {
 
             return CreateSkillDef<SkillDef>(skillDefInfo);
         }
 
-        public static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T: SkillDef {
+        public static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T : SkillDef
+        {
 
             T skillDef = ScriptableObject.CreateInstance<T>();
 
             popuplateSKillDef(skillDefInfo, skillDef);
 
-            Modules.Content.AddSkillDef(skillDef);
+            Content.AddSkillDef(skillDef);
 
             return skillDef;
         }
 
-        private static void popuplateSKillDef(SkillDefInfo skillDefInfo, SkillDef skillDef) {
+        private static void popuplateSKillDef(SkillDefInfo skillDefInfo, SkillDef skillDef)
+        {
             skillDef.skillName = skillDefInfo.skillName;
             (skillDef as ScriptableObject).name = skillDefInfo.skillName;
             skillDef.skillNameToken = skillDefInfo.skillNameToken;
@@ -242,7 +256,8 @@ namespace Modules {
 /// <summary>
 /// class for easily creating skilldefs with default values, and with a field for UnlockableDef
 /// </summary>
-internal class SkillDefInfo { 
+internal class SkillDefInfo
+{
 
     public string skillName;
     public string skillNameToken;
@@ -275,17 +290,18 @@ internal class SkillDefInfo {
     #region building
     public SkillDefInfo() { }
 
-    public SkillDefInfo(string skillName, 
-                          string skillNameToken, 
-                          string skillDescriptionToken, 
-                          Sprite skillIcon, 
+    public SkillDefInfo(string skillName,
+                          string skillNameToken,
+                          string skillDescriptionToken,
+                          Sprite skillIcon,
 
-                          SerializableEntityStateType activationState, 
-                          string activationStateMachineName, 
-                          InterruptPriority interruptPriority, 
-                          bool isCombatSkill, 
+                          SerializableEntityStateType activationState,
+                          string activationStateMachineName,
+                          InterruptPriority interruptPriority,
+                          bool isCombatSkill,
 
-                          float baseRechargeInterval) {
+                          float baseRechargeInterval)
+    {
         this.skillName = skillName;
         this.skillNameToken = skillNameToken;
         this.skillDescriptionToken = skillDescriptionToken;
@@ -307,7 +323,8 @@ internal class SkillDefInfo {
 
                           SerializableEntityStateType activationState,
                           string activationStateMachineName = "Weapon",
-                          bool agile = false) {
+                          bool agile = false)
+    {
 
         this.skillName = skillName;
         this.skillNameToken = skillNameToken;
@@ -317,16 +334,16 @@ internal class SkillDefInfo {
         this.activationState = activationState;
         this.activationStateMachineName = activationStateMachineName;
 
-        this.interruptPriority = InterruptPriority.Any;
-        this.isCombatSkill = true;
-        this.baseRechargeInterval = 0;
+        interruptPriority = InterruptPriority.Any;
+        isCombatSkill = true;
+        baseRechargeInterval = 0;
 
-        this.requiredStock = 0;
-        this.stockToConsume = 0;
+        requiredStock = 0;
+        stockToConsume = 0;
 
-        this.cancelSprintingOnActivation = !agile;
+        cancelSprintingOnActivation = !agile;
 
-        if (agile) this.keywordTokens = new string[] { "KEYWORD_AGILE" };
+        if (agile) keywordTokens = new string[] { "KEYWORD_AGILE" };
     }
     #endregion construction complete
 }

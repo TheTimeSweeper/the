@@ -1,4 +1,5 @@
-﻿using UnityEngine.Networking;
+﻿using AliemMod.Modules;
+using UnityEngine.Networking;
 
 namespace ModdedEntityStates.Aliem
 {
@@ -9,7 +10,7 @@ namespace ModdedEntityStates.Aliem
             base.OnEnter();
             if (NetworkServer.active)
             {
-                characterBody.AddBuff(Modules.Buffs.attackSpeedBuff);
+                characterBody.AddBuff(Buffs.attackSpeedBuff);
             }
         }
 
@@ -18,7 +19,7 @@ namespace ModdedEntityStates.Aliem
             base.OnExit();
             if (NetworkServer.active)
             {
-                characterBody.RemoveBuff(Modules.Buffs.attackSpeedBuff);
+                characterBody.RemoveBuff(Buffs.attackSpeedBuff);
             }
         }
     }

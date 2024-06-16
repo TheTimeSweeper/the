@@ -29,7 +29,6 @@
 		<PackageReference Include="R2API.Loadout" Version="1.*" />
 		<PackageReference Include="R2API.DamageType" Version="1.*" />
 		<PackageReference Include="R2API.RecalculateStats" Version="1.*" />
-		<PackageReference Include="R2API.Unlockable" Version="1.*" />
 	</ItemGroup>
 
 	<ItemGroup>

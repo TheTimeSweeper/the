@@ -12,9 +12,10 @@ using RoR2.Projectile;
 using UnityEngine.AddressableAssets;
 using AliemMod.Content;
 
-namespace Modules {
+namespace AliemMod.Modules
+{
 
-    internal static class Assets
+    public static class Assets
     {
         public static AssetBundle mainAssetBundle;
 
@@ -22,7 +23,7 @@ namespace Modules {
         #region indev
 
         // cache these and use to create our own materials
-        public static Shader hotpoo = RoR2.LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
+        public static Shader hotpoo = LegacyResourcesAPI.Load<Shader>("Shaders/Deferred/HGStandard");
         #endregion
 
         private const string assetbundleName = "aliem";
@@ -64,7 +65,7 @@ namespace Modules {
 
             PopulateAss();
         }
-        
+
         public static void LoadAssetBundle()
         {
             if (mainAssetBundle == null)
@@ -77,7 +78,7 @@ namespace Modules {
                 AliemPlugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(mainAssetBundle));
             }
         }
-        
+
         public static void LoadSoundbank()
         {
             using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("AliemMod.aliem.bnk"))
@@ -87,7 +88,7 @@ namespace Modules {
                 SoundAPI.SoundBanks.Add(array);
             }
         }
-        
+
         private static void PopulateAss()
         {
             bloodEffect = LoadEffect("BloodParticle", true);
@@ -189,7 +190,7 @@ namespace Modules {
             knifeImpactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/OmniImpactVFXSlashMerc.prefab").WaitForCompletion().InstantiateClone("HunkKnifeImpact", false);
             knifeImpactEffect.GetComponent<OmniEffect>().enabled = false;
 
-            Material hitsparkMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Merc/matOmniHitspark3Merc.mat").WaitForCompletion());
+            Material hitsparkMat = UnityEngine.Object.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Merc/matOmniHitspark3Merc.mat").WaitForCompletion());
             hitsparkMat.SetColor("_TintColor", Color.white);
 
             knifeImpactEffect.transform.GetChild(1).gameObject.GetComponent<ParticleSystemRenderer>().material = hitsparkMat;
@@ -197,7 +198,7 @@ namespace Modules {
             //knifeImpactEffect.transform.GetChild(2).localScale = Vector3.one * 1.5f;
             knifeImpactEffect.transform.GetChild(2).gameObject.GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Huntress/matOmniRing2Huntress.mat").WaitForCompletion();
 
-            Material slashMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matOmniRadialSlash1Generic.mat").WaitForCompletion());
+            Material slashMat = UnityEngine.Object.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matOmniRadialSlash1Generic.mat").WaitForCompletion());
 
             knifeImpactEffect.transform.GetChild(5).gameObject.GetComponent<ParticleSystemRenderer>().material = slashMat;
 
@@ -220,17 +221,19 @@ namespace Modules {
             AddNewEffectDef(knifeImpactEffect);
         }
 
-        private static GameObject CreateM2Effect() {
+        private static GameObject CreateM2Effect()
+        {
 
-            GameObject gunBigImpact = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "AliemM2OmniExplosionVFX", false);
+            GameObject gunBigImpact = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX").InstantiateClone("AliemM2OmniExplosionVFX", false);
             gunBigImpact.GetComponent<EffectComponent>().soundName = "Play_engi_M2_explo";
 
             CreateEffectFromObject(gunBigImpact);
             return gunBigImpact;
         }
 
-        private static GameObject CreateM1Effect() {
-            GameObject gunImpact = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "AliemM1OmniExplosionVFX", false);
+        private static GameObject CreateM1Effect()
+        {
+            GameObject gunImpact = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX").InstantiateClone("AliemM1OmniExplosionVFX", false);
             gunImpact.GetComponent<EffectComponent>().soundName = "Play_engi_M1_explo";
 
             CreateEffectFromObject(gunImpact);
@@ -239,14 +242,15 @@ namespace Modules {
 
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object
         {
-            T loadedAss = RoR2.LegacyResourcesAPI.Load<T>(assString);
+            T loadedAss = LegacyResourcesAPI.Load<T>(assString);
 
 
-            if (loadedAss == null) {
+            if (loadedAss == null)
+            {
                 loadedAss = mainAssetBundle.LoadAsset<T>(assString);
             }
-            
-            if(loadedAss == null)
+
+            if (loadedAss == null)
             {
                 Debug.LogError($"Null asset: {assString}.\nAttempt to load asset '{assString}' from assetbundles returned null");
             }
@@ -254,27 +258,34 @@ namespace Modules {
             return loadedAss;
         }
 
-        public static GameObject LoadSurvivorModel(string modelName) {
-            GameObject model = Modules.Assets.LoadAsset<GameObject>(modelName);
-            if (model == null) {
+        public static GameObject LoadSurvivorModel(string modelName)
+        {
+            GameObject model = LoadAsset<GameObject>(modelName);
+            if (model == null)
+            {
                 Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
                 return null;
             }
 
-            return PrefabAPI.InstantiateClone(model, model.name, false);
+            return model.InstantiateClone(model.name, false);
         }
 
-        public static void ConvertAllRenderersToHopooShader(GameObject objectToConvert) {
+        public static void ConvertAllRenderersToHopooShader(GameObject objectToConvert)
+        {
             if (!objectToConvert) return;
 
-            foreach (MeshRenderer i in objectToConvert.GetComponentsInChildren<MeshRenderer>()) {
-                if (i?.sharedMaterial != null) {
+            foreach (MeshRenderer i in objectToConvert.GetComponentsInChildren<MeshRenderer>())
+            {
+                if (i?.sharedMaterial != null)
+                {
                     i.sharedMaterial.SetHotpooMaterial();
                 }
             }
 
-            foreach (SkinnedMeshRenderer i in objectToConvert.GetComponentsInChildren<SkinnedMeshRenderer>()) {
-                if (i?.sharedMaterial != null) {
+            foreach (SkinnedMeshRenderer i in objectToConvert.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                if (i?.sharedMaterial != null)
+                {
                     i.sharedMaterial.SetHotpooMaterial();
                 }
             }
@@ -284,7 +295,8 @@ namespace Modules {
         {
             return LoadAsset<Texture>("tex" + characterName + "Icon");
         }
-        public static Texture LoadCharacterIcon(string name) {
+        public static Texture LoadCharacterIcon(string name)
+        {
             return LoadAsset<Texture>(name);
         }
         public static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
@@ -298,16 +310,20 @@ namespace Modules {
             return networkSoundEventDef;
         }
 
-        private static GameObject CloneLightningOrbEffect(string path, string name, Color beamColor, Color? lineColor = null, float width = 1) {
-            GameObject newEffect = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>(path), name, false);
+        private static GameObject CloneLightningOrbEffect(string path, string name, Color beamColor, Color? lineColor = null, float width = 1)
+        {
+            GameObject newEffect = LegacyResourcesAPI.Load<GameObject>(path).InstantiateClone(name, false);
 
-            foreach (LineRenderer rend in newEffect.GetComponentsInChildren<LineRenderer>()) {
-                if (rend) {
-                    Material mat = UnityEngine.Object.Instantiate<Material>(rend.sharedMaterial);
+            foreach (LineRenderer rend in newEffect.GetComponentsInChildren<LineRenderer>())
+            {
+                if (rend)
+                {
+                    Material mat = UnityEngine.Object.Instantiate(rend.sharedMaterial);
                     mat.SetColor("_TintColor", beamColor);
                     rend.sharedMaterial = mat;
 
-                    if (lineColor != null) {
+                    if (lineColor != null)
+                    {
                         rend.startColor = lineColor.Value;
                         rend.endColor = lineColor.Value;
                     }
@@ -329,31 +345,37 @@ namespace Modules {
             if (!newTracer.GetComponent<VFXAttributes>()) newTracer.AddComponent<VFXAttributes>();
             if (!newTracer.GetComponent<NetworkIdentity>()) newTracer.AddComponent<NetworkIdentity>();
 
-            Tracer tracer = newTracer.  GetComponent<Tracer>();
+            Tracer tracer = newTracer.GetComponent<Tracer>();
             if (tracer != null)
             {
                 tracer.speed = speed.HasValue ? speed.Value : tracer.speed;
                 tracer.length = length.HasValue ? length.Value : tracer.length;
             }
 
-            if (color != null || widthMultiplierMultiplier != 1) {
-                foreach (var lineREnderer in newTracer.GetComponentsInChildren<LineRenderer>()) {
-                    if (color.HasValue) {
+            if (color != null || widthMultiplierMultiplier != 1)
+            {
+                foreach (var lineREnderer in newTracer.GetComponentsInChildren<LineRenderer>())
+                {
+                    if (color.HasValue)
+                    {
                         lineREnderer.startColor = color.Value;
                         lineREnderer.endColor = color.Value;
                     }
-                    if(widthMultiplierMultiplier != 1){
+                    if (widthMultiplierMultiplier != 1)
+                    {
                         lineREnderer.widthMultiplier *= widthMultiplierMultiplier;
                     }
                 }
 
-                foreach (ParticleSystem particles in newTracer.GetComponentsInChildren<ParticleSystem>()) {
+                foreach (ParticleSystem particles in newTracer.GetComponentsInChildren<ParticleSystem>())
+                {
                     ParticleSystem.MainModule mainModule = particles.main;
                     mainModule.startSize = new ParticleSystem.MinMaxCurve(mainModule.startSize.constant * widthMultiplierMultiplier);
                     mainModule.startColor = new ParticleSystem.MinMaxGradient(color.Value);
 
                     ParticleSystem.TrailModule trailModule = particles.trails;
-                    if (trailModule.enabled) {
+                    if (trailModule.enabled)
+                    {
 
                         //Gradient gradient = trailModule.colorOverLifetime.gradientMin;
                         //gradient.colorKeys[0].color = Color.green;
@@ -377,8 +399,10 @@ namespace Modules {
                 }
             }
 
-            if (color != null) {
-                foreach(var rend in newTracer.GetComponentsInChildren<ParticleSystemRenderer>()) {
+            if (color != null)
+            {
+                foreach (var rend in newTracer.GetComponentsInChildren<ParticleSystemRenderer>())
+                {
                     Material mat = new Material(rend.material);
 
                     mat.SetColor("_MainColor", color.Value);
@@ -400,18 +424,20 @@ namespace Modules {
         /// <para>https://xiaoxiao921.github.io/GithubActionCacheTest/assetPathsDump.html</para>
         public static GameObject LoadCrosshair(string crosshairName)
         {
-            if (RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return Assets.LoadAsset<GameObject>("Prefabs/Crosshair/StandardCrosshair");
-            return RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
+            if (LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair") == null) return LoadAsset<GameObject>("Prefabs/Crosshair/StandardCrosshair");
+            return LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/" + crosshairName + "Crosshair");
         }
 
         private static GameObject LoadEffect(string resourceName) => LoadEffect(resourceName, "", false);
         private static GameObject LoadEffect(string resourceName, string soundName) => LoadEffect(resourceName, soundName, false);
         private static GameObject LoadEffect(string resourceName, bool parentToTransform) => LoadEffect(resourceName, "", parentToTransform);
-        private static GameObject LoadEffect(string resourceName, string soundName, bool parentToTransform) {
+        private static GameObject LoadEffect(string resourceName, string soundName, bool parentToTransform)
+        {
 
             GameObject newEffect = LoadAsset<GameObject>(resourceName);
 
-            if (!newEffect) {
+            if (!newEffect)
+            {
                 Debug.LogError("Failed to load effect: " + resourceName + " because it does not exist in the AssetBundle");
                 return null;
             }
@@ -423,15 +449,18 @@ namespace Modules {
 
         private static void CreateEffectFromObject(GameObject newEffect) => CreateEffectFromObject(newEffect, "", false);
 
-        private static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform) {
+        private static void CreateEffectFromObject(GameObject newEffect, string soundName, bool parentToTransform)
+        {
             newEffect.AddComponent<DestroyOnTimer>().duration = 6;
             newEffect.AddComponent<NetworkIdentity>();
-            if (!newEffect.GetComponent<VFXAttributes>()) {
+            if (!newEffect.GetComponent<VFXAttributes>())
+            {
                 newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
             }
 
             EffectComponent effect = newEffect.GetComponent<EffectComponent>();
-            if (!effect) {
+            if (!effect)
+            {
                 effect = newEffect.AddComponent<EffectComponent>();
                 effect.applyScale = true;
                 effect.effectIndex = EffectIndex.Invalid;
@@ -439,7 +468,7 @@ namespace Modules {
                 effect.positionAtReferencedTransform = true;
                 effect.soundName = soundName;
             }
-            
+
             AddNewEffectDef(newEffect, soundName);
         }
 
@@ -458,11 +487,11 @@ namespace Modules {
         #region materials(old)
         private const string obsolete = "use `Materials.CreateMaterial` instead, or use the extension `Material.SetHotpooMaterial` directly on a material";
         [Obsolete(obsolete)]
-        public static Material CreateMaterial(string materialName) => Assets.CreateMaterial(materialName, 0f);
+        public static Material CreateMaterial(string materialName) => CreateMaterial(materialName, 0f);
         [Obsolete(obsolete)]
-        public static Material CreateMaterial(string materialName, float emission) => Assets.CreateMaterial(materialName, emission, Color.white);
+        public static Material CreateMaterial(string materialName, float emission) => CreateMaterial(materialName, emission, Color.white);
         [Obsolete(obsolete)]
-        public static Material CreateMaterial(string materialName, float emission, Color emissionColor) => Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
+        public static Material CreateMaterial(string materialName, float emission, Color emissionColor) => CreateMaterial(materialName, emission, emissionColor, 0f);
         [Obsolete(obsolete)]
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength)
         {

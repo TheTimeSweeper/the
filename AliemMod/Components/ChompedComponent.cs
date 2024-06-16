@@ -2,8 +2,8 @@
 using RoR2;
 using UnityEngine;
 
-namespace AliemMod.Components {
-
+namespace AliemMod.Components
+{
     public class ChompedComponent : MonoBehaviour, RoR2.IOnKilledServerReceiver {
 
         private CharacterBody body;

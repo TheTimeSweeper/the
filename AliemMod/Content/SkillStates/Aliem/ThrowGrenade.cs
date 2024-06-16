@@ -1,9 +1,11 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using System;
 using UnityEngine;
 
-namespace ModdedEntityStates.Aliem {
+namespace ModdedEntityStates.Aliem
+{
 
     public class ThrowGrenade : GenericProjectileBaseState {
 
@@ -20,7 +22,7 @@ namespace ModdedEntityStates.Aliem {
 
 		public override void OnEnter() {
 
-			base.projectilePrefab = Modules.Projectiles.GrenadeProjectile;
+			base.projectilePrefab = Projectiles.GrenadeProjectile;
 			//projectilePrefab.GetComponent<RoR2.Projectile.ProjectileSimple>().desiredForwardSpeed = TestValueManager.value2;
 
 			//base.effectPrefab

@@ -1,13 +1,14 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
 {
     public class SwordFire : RayGunFire
     {
-        public override float BaseDuration => 0.2f;
+        public override float BaseDuration => AliemConfig.M1_Sword_Duration.Value;
         public override float BaseDamageCoefficient => AliemConfig.M1_Sword_Damage.Value;
-        public override GameObject projectile => Modules.Projectiles.SwordProjectilePrefab;
+        public override GameObject projectile => Projectiles.SwordProjectilePrefab;
         public override string soundString => "Play_AliemEnergySword";
 
         public override void OnEnter()

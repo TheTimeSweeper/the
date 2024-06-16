@@ -42,9 +42,9 @@ MonoBehaviour:
   meshReplacements:
   - renderer: {fileID: 2614009580564897429, guid: 2dad81005b208874b94370acc331606e,
       type: 3}
-    mesh: {fileID: 4300000, guid: 5b560c29d3a764b42a1b46976b0730e4, type: 2}
+    mesh: {fileID: 5022382079774806348, guid: b0ca607ac60be8349aac3883fab49d8b, type: 3}
   - renderer: {fileID: 3408561978280727660, guid: 2dad81005b208874b94370acc331606e,
       type: 3}
-    mesh: {fileID: 4300000, guid: 3bd724f6b300ddd4eaaa0492dfc46432, type: 2}
+    mesh: {fileID: 6876012223888826902, guid: b0ca607ac60be8349aac3883fab49d8b, type: 3}
   projectileGhostReplacements: []
   minionSkinReplacements: []

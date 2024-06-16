@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using AliemMod.Modules;
+using EntityStates;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -17,8 +18,8 @@ namespace ModdedEntityStates.Aliem
         protected virtual string chargeLoop2 => "Play_RayGunChargeLoopHigh";
         protected virtual string chargeAnimationLayer => "RightArm, Over";
 
-        protected virtual GameObject chargeEffectPrefab => Modules.Assets.swirlCharge;
-        protected virtual GameObject chargeEffectMaxPrefab => Modules.Assets.swirlChargeMax;
+        protected virtual GameObject chargeEffectPrefab => Assets.swirlCharge;
+        protected virtual GameObject chargeEffectMaxPrefab => Assets.swirlChargeMax;
 
         private GameObject _chargeEffect;
 

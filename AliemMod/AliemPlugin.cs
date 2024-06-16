@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using BepInEx;
 using BepInEx.Logging;
 using Modules.Survivors;
@@ -23,7 +24,7 @@ using System.Security.Permissions;
 public class AliemPlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.Aliem";
     public const string MODNAME = "Aliem";
-    public const string MODVERSION = "0.9.0";
+    public const string MODVERSION = "0.9.1";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -39,9 +40,9 @@ public class AliemPlugin : BaseUnityPlugin {
         
         Log = Logger;
 
-        Modules.Config.MyConfig = Config;
+        AliemMod.Modules.Config.MyConfig = Config;
 
-        Modules.DamageTypes.RegisterDamageTypes();
+        DamageTypes.RegisterDamageTypes();
 
         // load assets and read config
         AliemConfig.ReadConfig();
@@ -49,21 +50,21 @@ public class AliemPlugin : BaseUnityPlugin {
         if (AliemConfig.Debug.Value)
             gameObject.AddComponent<TestValueManager>();
 
-        Modules.Assets.Initialize();
-        Modules.Projectiles.Init();
-        Modules.States.Init();
+        Assets.Initialize();
+        Projectiles.Init();
+        States.Init();
 
         //if (Modules.Config.Debug)
         //    gameObject.AddComponent<TestValueManager>();
 
-        Modules.Compat.Initialize();
-        Modules.Tokens.AddTokens(); // register name tokens
-        Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
+        Compat.Initialize();
+        Tokens.AddTokens(); // register name tokens
+        ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
-        Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
-        Modules.Dots.RegisterDots();
+        Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
+        Dots.RegisterDots();
 
-        new Modules.ContentPacks().Initialize();
+        new ContentPacks().Initialize();
 
         Hook();
 
@@ -79,22 +80,22 @@ public class AliemPlugin : BaseUnityPlugin {
 
     private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
         
-        if (sender.HasBuff(Modules.Buffs.riddenBuff)) {
+        if (sender.HasBuff(Buffs.riddenBuff)) {
             args.moveSpeedMultAdd += 1.3f;
             //args.attackSpeedMultAdd += 1.2f;
         }
 
-        if (sender.HasBuff(Modules.Buffs.diveBuff))
+        if (sender.HasBuff(Buffs.diveBuff))
         {
             args.armorAdd += AliemConfig.M3_Leap_Armor.Value;
         }
 
-        if (sender.HasBuff(Modules.Buffs.ridingBuff))
+        if (sender.HasBuff(Buffs.ridingBuff))
         {
             args.armorAdd += AliemConfig.M3_Leap_RidingArmor.Value;
         }
 
-        if (sender.HasBuff(Modules.Buffs.attackSpeedBuff))
+        if (sender.HasBuff(Buffs.attackSpeedBuff))
         {
             args.attackSpeedMultAdd += 1;
         }

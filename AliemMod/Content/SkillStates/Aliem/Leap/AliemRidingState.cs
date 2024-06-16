@@ -1,10 +1,11 @@
 ﻿using AliemMod.Content;
 using AliemMod.Content.Survivors;
+using AliemMod.Modules;
 using RoR2;
 using UnityEngine.Networking;
 
-namespace ModdedEntityStates.Aliem {
-
+namespace ModdedEntityStates.Aliem
+{
     public class AliemRidingState : BaseRidingState {
 
         public int inputButton;
@@ -60,7 +61,7 @@ namespace ModdedEntityStates.Aliem {
 
             if (NetworkServer.active)
             {
-                characterBody.AddBuff(Modules.Buffs.ridingBuff);
+                characterBody.AddBuff(Buffs.ridingBuff);
             }
 
             ////skilldef replacement
@@ -84,7 +85,7 @@ namespace ModdedEntityStates.Aliem {
 
             if (NetworkServer.active)
             {
-                characterBody.RemoveBuff(Modules.Buffs.ridingBuff);
+                characterBody.RemoveBuff(Buffs.ridingBuff);
             }
 
             //genericskill swapping

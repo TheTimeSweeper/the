@@ -1,4 +1,5 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
 using RoR2;
 using UnityEngine;
@@ -15,10 +16,10 @@ namespace ModdedEntityStates.Aliem
         public override float bloom => 0;
         public override float range => 256f;
         public override float radius => AliemConfig.radius.Value;
-        public override float minSpread => spread;
+        public override float minSpread => 0;
         public override float spread => AliemConfig.M1_MachineGunCharged_Spread.Value * characterBody.spreadBloomAngle;
         public override LayerMask stopperMask => LayerIndex.world.mask;
-        public override GameObject tracerEffectPrefab => Modules.Assets.rifleTracerBig;
+        public override GameObject tracerEffectPrefab => Assets.rifleTracerBig;
         public override string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
 
         public virtual float baseInterval => AliemConfig.M1_MachineGunCharged_Interval.Value;

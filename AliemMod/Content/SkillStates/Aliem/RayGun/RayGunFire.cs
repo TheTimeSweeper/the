@@ -1,6 +1,6 @@
 ﻿using AliemMod.Content;
+using AliemMod.Modules;
 using EntityStates;
-using Modules;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,7 +11,7 @@ namespace ModdedEntityStates.Aliem
 
 		public static float RayGunDamageCoefficient => AliemConfig.M1_RayGun_Damage.Value;
 
-		public virtual float BaseDuration => 0.3f;
+		public virtual float BaseDuration => AliemConfig.M1_RayGun_Duration.Value;
 		public virtual float BaseDelayDuration => 0.00f;
 
         public virtual float BaseDamageCoefficient => RayGunDamageCoefficient;
@@ -24,7 +24,7 @@ namespace ModdedEntityStates.Aliem
 		
 		public static float ProjectileForce = 80f;
 
-        public virtual GameObject projectile => Modules.Projectiles.RayGunProjectilePrefab;
+        public virtual GameObject projectile => Projectiles.RayGunProjectilePrefab;
 
         public virtual string soundString => AliemConfig.M1_RayGun_Sound_Alt.Value? "Play_INV_RayGun" : "Play_RayGun";
 

@@ -4,11 +4,13 @@ using ModdedEntityStates.Aliem;
 using Modules.Survivors;
 using System.Collections.Generic;
 using AliemMod.Content;
+using AliemMod.Content.Achievements;
 
-namespace Modules
+namespace AliemMod.Modules
 {
-    internal static class Tokens {
-        
+    internal static class Tokens
+    {
+
         public static void AddTokens()
         {
             AddAliemTokens();
@@ -22,7 +24,7 @@ namespace Modules
             desc = desc + "< ! > Mash the primary button at a resonable rate to automatically fire at highest attack speed." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Hold instead of mashing to charge a powerful shot. Use secondary as a shorthand to fire at full power " + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Leap for movement, and to latch on to enemies, then chomp to deal heavy damage and heal." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Your Special mutation can change how you play." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > The grenade is a simple short range high damage crowd clearer." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so it left, mothership pleased.";
             string outroFailure = "..and so it vanished, the feds won.";
@@ -34,9 +36,9 @@ namespace Modules
             LanguageAPI.Add(prefix + "LORE", "do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama do it for mama ");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
-
+            
             #region Skins
-            //LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "skin?");
+            LanguageAPI.Add(prefix + "GUP_SKIN_NAME", "Gip");
             #endregion
 
             #region Primary
@@ -59,7 +61,7 @@ namespace Modules
 
             #region cursed
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(AliemMod.Components.PassiveBuildupComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(AliemMod.Components.PassiveBuildupComponent.maxCharge)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(Components.PassiveBuildupComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(Components.PassiveBuildupComponent.maxCharge)}.");
             #endregion cursed
 
             #endregion Primary
@@ -70,12 +72,12 @@ namespace Modules
 
             LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Ray Gun Big");
             LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", $"Shoot a charged blast that explodes for {Helpers.DamageValueText(AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
-            
+
             LanguageAPI.Add(prefix + "SECONDARY_SWORD_NAME", "Energy Sword Charged");
             LanguageAPI.Add(prefix + "SECONDARY_SWORD_DESCRIPTION", $"Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M1_SwordCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_RIFLE_NAME", "Human Machine Gun Charged");
-            LanguageAPI.Add(prefix + "SECONDARY_RIFLE_DESCRIPTION", $"Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value*100}% damage")}.");
+            LanguageAPI.Add(prefix + "SECONDARY_RIFLE_DESCRIPTION", $"Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}% damage")}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_SAWEDOFF_NAME", "Sawed Off Charged");
             LanguageAPI.Add(prefix + "SECONDARY_SAWEDOFF_DESCRIPTION", $"Fire large shotgun shells that barrel through enemies for {Helpers.DamageText("2x")}{Helpers.DamageValueText(AliemConfig.M1_SawedOffCharged_Damage_Max.Value)}.");
@@ -86,13 +88,12 @@ namespace Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_LEAP_NAME", "Leap");
-            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION", 
+            LanguageAPI.Add(prefix + "UTILITY_LEAP_DESCRIPTION",
                 $"Dive forward at hihg speed for {Helpers.DamageValueText(AliemLeap.DamageCoefficient)}. Hold input to either {Helpers.UtilityText("burrow")} into the ground or {Helpers.UtilityText("ride")} enemies.");
 
             LanguageAPI.Add(prefix + "UTILITY_CHOMP_NAME", "Chomp");
             LanguageAPI.Add(prefix + "UTILITY_CHOMP_DESCRIPTION", $"While {Helpers.UtilityText("riding")}, chomp to <style=cIsHealing>heal for {AliemConfig.M3_Chomp_Healing.Value * 100}% of maximum health</style> and deal {Helpers.DamageValueText(AliemRidingChomp.ChompDamageCoefficient)}, up to {Helpers.DamageText("3x damage")} to low health targets.");
 
-            
             LanguageAPI.Add("LOADOUT_SKILL_RIDING", "Riding");
             #endregion Utility
 
@@ -113,10 +114,33 @@ namespace Modules
             #endregion Special
 
             #region Achievements
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
+            LanguageAPI.Add(GetAchievementNameToken(AliemMasteryAchievement.identifier), $"{fullName}: Mastery");
+            LanguageAPI.Add(GetAchievementDescriptionToken(AliemMasteryAchievement.identifier), $"As {fullName}, beat the game or obliterate on Monsoon.");
+
+            LanguageAPI.Add(GetAchievementNameToken(AliemChompEnemiesAchievement.identifier), $"{fullName}: Chomp");
+            LanguageAPI.Add(GetAchievementDescriptionToken(AliemChompEnemiesAchievement.identifier), $"As {fullName}, chomp {AliemChompEnemiesAchievement.Requirement} enemies without touching the ground.");
+
+            LanguageAPI.Add(GetAchievementNameToken(AliemBurrowPopOutAchievement.identifier), $"{fullName}: Surprise!");
+            LanguageAPI.Add(GetAchievementDescriptionToken(AliemBurrowPopOutAchievement.identifier), $"As {fullName}, un-burrow near {AliemBurrowPopOutAchievement.Requirement} enemies at once.");
+
+            LanguageAPI.Add(GetAchievementNameToken(AliemSlowMashAchievement.identifier), $"{fullName}: ''Mashing''");
+            LanguageAPI.Add(GetAchievementDescriptionToken(AliemSlowMashAchievement.identifier), $"As {fullName}, shoot primary with a rate of fire that is double the rate of input.");
             #endregion Achievements
+        }
+        /// <summary>
+        /// gets langauge token from achievement's registered identifier
+        /// </summary>
+        ///</BEARD SHAMPOO>
+        public static string GetAchievementNameToken(string identifier)
+        {
+            return $"ACHIEVEMENT_{identifier.ToUpperInvariant()}_NAME";
+        }
+        /// <summary>
+        /// gets langauge token from achievement's registered identifier
+        /// </summary>
+        public static string GetAchievementDescriptionToken(string identifier)
+        {
+            return $"ACHIEVEMENT_{identifier.ToUpperInvariant()}_DESCRIPTION";
         }
     }
 }

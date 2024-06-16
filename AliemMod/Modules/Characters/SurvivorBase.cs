@@ -1,14 +1,16 @@
 ﻿using BepInEx.Configuration;
 using RoR2;
 using System;
-using Modules.Characters;
 using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Skills;
+using AliemMod.Modules.Characters;
+using AliemMod.Modules;
 
-namespace Modules.Survivors {
+namespace Modules.Survivors
+{
 
-    internal abstract class SurvivorBase : CharacterBase
+    public abstract class SurvivorBase : CharacterBase
     {
         public abstract string survivorTokenPrefix { get; }
 
@@ -27,7 +29,7 @@ namespace Modules.Survivors {
             
             base.InitializeCharacter();
 
-            InitializeDoppelganger("Merc");
+            InitializeAI();
 
             InitializeSurvivor();
         }
@@ -38,14 +40,14 @@ namespace Modules.Survivors {
         }
 
         protected virtual void InitializeDisplayPrefab() {
-            displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
+            displayPrefab = Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
         }
         public virtual void InitializeUnlockables()
         {
         }
 
-        public virtual void InitializeDoppelganger(string clone) {
-            Modules.Prefabs.CreateGenericDoppelganger(bodyPrefab, bodyName + "MonsterMaster", clone);
+        public virtual void InitializeAI() {
+            Prefabs.CreateGenericDoppelganger(bodyPrefab, bodyName + "MonsterMaster", "Merc");
         }
         
         protected virtual void InitializeSurvivor() {
@@ -70,7 +72,7 @@ namespace Modules.Survivors {
             survivorDef.desiredSortPosition = sortPosition;
             survivorDef.unlockableDef = unlockableDef;
 
-            Modules.Content.AddSurvivorDef(survivorDef);
+            Content.AddSurvivorDef(survivorDef);
         }
 
         #region CharacterSelectSurvivorPreviewDisplayController

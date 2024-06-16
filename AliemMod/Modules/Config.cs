@@ -7,14 +7,14 @@ using RiskOfOptions.OptionConfigs;
 using RoR2;
 using RoR2.Skills;
 
-namespace Modules
+namespace AliemMod.Modules
 {
     internal static class Config
     {
         public static ConfigFile MyConfig;
 
         public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false) =>
-            BindAndOptions<T>(section, name, defaultValue, 0, 20, description, restartRequired);
+            BindAndOptions(section, name, defaultValue, 0, 20, description, restartRequired);
         public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, float min, float max, string description = "", bool restartRequired = false)
         {
             if (string.IsNullOrEmpty(description))
@@ -38,7 +38,7 @@ namespace Modules
 
         //back compat
         public static ConfigEntry<float> BindAndOptionsSlider(string section, string name, float defaultValue, string description, float min = 0, float max = 20, bool restartRequired = false) =>
-            BindAndOptions<float>(section, name, defaultValue, min, max, description, restartRequired);
+            BindAndOptions(section, name, defaultValue, min, max, description, restartRequired);
 
         //add risk of options dll to your project libs and uncomment this for a soft dependency
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -56,7 +56,7 @@ namespace Modules
             {
                 ModSettingsManager.AddOption(new CheckBoxOption(entry as ConfigEntry<bool>, restartRequired));
             }
-            if (entry is BepInEx.Configuration.ConfigEntry<KeyboardShortcut>)
+            if (entry is ConfigEntry<KeyboardShortcut>)
             {
                 ModSettingsManager.AddOption(new KeyBindOption(entry as ConfigEntry<KeyboardShortcut>, restartRequired));
             }
@@ -83,7 +83,7 @@ namespace Modules
                 bodyInfoTitle = bodyComponent.name;
             }
 
-            bodyComponent.baseMaxHealth = Config.BindAndOptions(
+            bodyComponent.baseMaxHealth = BindAndOptions(
                     section,
                     $"{bodyInfoTitle} Base Max Health",
                     bodyComponent.baseMaxHealth,
@@ -93,7 +93,7 @@ namespace Modules
                     true).Value;
             bodyComponent.levelMaxHealth = Mathf.Round(bodyComponent.baseMaxHealth * 0.3f);
 
-            bodyComponent.baseRegen = Config.BindAndOptions(
+            bodyComponent.baseRegen = BindAndOptions(
                     section,
                     $"{bodyInfoTitle} Base Regen",
                     bodyComponent.baseRegen,
@@ -101,14 +101,14 @@ namespace Modules
                     true).Value;
             bodyComponent.levelRegen = bodyComponent.baseRegen * 0.2f;
 
-            bodyComponent.baseArmor = Config.BindAndOptions(
+            bodyComponent.baseArmor = BindAndOptions(
                     section,
                     $"{bodyInfoTitle} Armor",
                     bodyComponent.baseArmor,
                     "",
                     true).Value;
 
-            bodyComponent.baseDamage = Config.BindAndOptions(
+            bodyComponent.baseDamage = BindAndOptions(
                     section,
                     $"{bodyInfoTitle} Base Damage",
                     bodyComponent.baseDamage,
@@ -116,7 +116,7 @@ namespace Modules
                     true).Value;
             bodyComponent.levelDamage = bodyComponent.baseDamage * 0.2f;
 
-            bodyComponent.baseJumpCount = Config.BindAndOptions(
+            bodyComponent.baseJumpCount = BindAndOptions(
                     section,
                     $"{bodyInfoTitle} Jump Count",
                     bodyComponent.baseJumpCount,
@@ -128,7 +128,7 @@ namespace Modules
         {
             if (cooldown)
             {
-                skillDef.baseRechargeInterval = Config.BindAndOptions(
+                skillDef.baseRechargeInterval = BindAndOptions(
                     section,
                     $"{skillTitle} cooldown",
                     skillDef.baseRechargeInterval,
@@ -139,7 +139,7 @@ namespace Modules
             }
             if (maxStock)
             {
-                skillDef.baseMaxStock = Config.BindAndOptions(
+                skillDef.baseMaxStock = BindAndOptions(
                     section,
                     $"{skillTitle} stocks",
                     skillDef.baseMaxStock,
@@ -150,7 +150,7 @@ namespace Modules
             }
             if (rechargeStock)
             {
-                skillDef.rechargeStock = Config.BindAndOptions(
+                skillDef.rechargeStock = BindAndOptions(
                     section,
                     $"{skillTitle} recharge stocks",
                     skillDef.baseMaxStock,
