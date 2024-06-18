@@ -42,6 +42,7 @@ namespace AliemMod.Modules
         public static GameObject rifleTracer;
         public static GameObject rifleTracerBig;
 
+        public static GameObject sawedOffTracerThin;
         public static GameObject sawedOffTracer;
         public static GameObject sawedOffMuzzleFlash;
 
@@ -122,11 +123,22 @@ namespace AliemMod.Modules
 
             rifleTracerBig = mainAssetBundle.LoadAsset<GameObject>("RifleTracerThick").InstantiateClone("okimgonnarenamethatonebeforeIfuckinforgetitandmakeahugemistake", false);
             rifleTracerBig.transform.Find("BeamTrails").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidRaidCrab/matVoidRaidCrabTripleBeam3.mat").WaitForCompletion();
-            rifleTracerBig.transform.Find("VolumeTracer").transform.localScale = Vector3.one * AliemConfig.radius.Value;//radius
+            rifleTracerBig.transform.Find("VolumeTracer").transform.localScale = Vector3.one * 1.6f;//radius
             AddNewEffectDef(rifleTracerBig);
 
-            sawedOffTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBruiser/TracerClayBruiserMinigun.prefab").WaitForCompletion().InstantiateClone("TracerClayBruiserMinigunAliemSawedOff", false);
-            ColorTracer(sawedOffTracer, null, 3);
+            sawedOffTracerThin = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBruiser/TracerClayBruiserMinigun.prefab").WaitForCompletion().InstantiateClone("TracerClayBruiserMinigunAliemSawedOff", false);
+            ColorTracer(sawedOffTracerThin, null, 3);
+            AddNewEffectDef(sawedOffTracerThin);
+
+            sawedOffTracer = mainAssetBundle.LoadAsset<GameObject>("SawedOffTracer");
+            sawedOffTracer.transform.Find("BeamTrails/ScaledSmoke, Billboard").GetComponent<ParticleSystemRenderer>().sharedMaterial =
+                Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matOpaqueDust.mat").WaitForCompletion();
+            sawedOffTracer.transform.Find("BeamTrails/Unscaled Flames").GetComponent<ParticleSystemRenderer>().sharedMaterial =
+                Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matOmniExplosion1.mat").WaitForCompletion();
+            sawedOffTracer.transform.Find("SmokeLine").GetComponent<LineRenderer>().sharedMaterial =
+                Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matSmokeTrail.mat").WaitForCompletion();
+
+            sawedOffTracer = sawedOffTracer.DebugClone(false);
             AddNewEffectDef(sawedOffTracer);
 
             sawedOffMuzzleFlash = mainAssetBundle.LoadAsset<GameObject>("Muzzleflash1Shotgun");
@@ -135,8 +147,8 @@ namespace AliemMod.Modules
             sawedOffMuzzleFlash.transform.Find("Starburst2").GetComponent<ParticleSystemRenderer>().sharedMaterial = flashmat;
             AddNewEffectDef(sawedOffMuzzleFlash);
 
-            swirlCharge = mainAssetBundle.LoadAsset<GameObject>("SwirlParticles").InstantiateClone("SwirlParticlessssssssssssss", false);
-            swirlChargeMax = mainAssetBundle.LoadAsset<GameObject>("SwirlParticlesMax").InstantiateClone("SwirlParticlesMaxxxxxxxxxxx", false);
+            swirlCharge = mainAssetBundle.LoadAsset<GameObject>("SwirlParticles").DebugClone(false); //not an effect def
+            swirlChargeMax = mainAssetBundle.LoadAsset<GameObject>("SwirlParticlesMax").DebugClone(false);
             AddNewEffectDef(swirlChargeMax);
 
             burrowPopOutEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bell/BellBodyPartsImpact.prefab").WaitForCompletion();
@@ -238,6 +250,18 @@ namespace AliemMod.Modules
 
             CreateEffectFromObject(gunImpact);
             return gunImpact;
+        }
+
+        public static GameObject DebugClone(this GameObject clonee, bool net)
+        {
+            if (AliemConfig.Debug.Value)
+            {
+                return clonee.InstantiateClone(clonee.name, net);
+            }
+            else
+            {
+                return clonee;
+            }
         }
 
         public static T LoadAsset<T>(string assString) where T : UnityEngine.Object

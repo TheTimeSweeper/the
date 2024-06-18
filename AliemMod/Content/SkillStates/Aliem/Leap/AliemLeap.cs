@@ -1,4 +1,5 @@
-﻿using AliemMod.Content;
+﻿using AliemMod.Components;
+using AliemMod.Content;
 using AliemMod.Content.Survivors;
 using AliemMod.Modules;
 using EntityStates;
@@ -129,6 +130,13 @@ namespace ModdedEntityStates.Aliem
 				if (!foundBody) {
 					foundBody = FindBodyToRide();
 				}
+                if (foundBody && foundBody.TryGetComponent(out AliemRidingColliderHolderThatsIt ridingColliderHolder))
+                {
+                    if (ridingColliderHolder.riddenCollider != null)
+                    {
+                        foundBody = null;
+                    }
+                }
 				
 				if(foundBody != null && (inputButtonState.down || AliemConfig.M3_Leap_AlwaysRide.Value)) {
 					base.outer.SetNextState(new AliemRidingState {

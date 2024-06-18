@@ -53,7 +53,7 @@ namespace ModdedEntityStates.Aliem
         public override void OnEnter() {
             base.OnEnter();
 
-			PlayAnimation("FullBody, Underride", "RidingClimb", "RidincClimb.playbackRate", AliemConfig.rideClimbAnimTime.Value);
+			PlayAnimation("FullBody, Underride", "RidingClimb", "RidincClimb.playbackRate", 0.4f);
 
             //genericskill swapping
             _originalSkill = inputGenericSkill;

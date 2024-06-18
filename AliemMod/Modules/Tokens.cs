@@ -23,7 +23,7 @@ namespace AliemMod.Modules
             string desc = "The alien hominid is a highly mobile maker of mischief" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Mash the primary button at a resonable rate to automatically fire at highest attack speed." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Hold instead of mashing to charge a powerful shot. Use secondary as a shorthand to fire at full power " + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Leap for movement, and to latch on to enemies, then chomp to deal heavy damage and heal." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Leap on to enemies and chomp to heal, but diving into a group of enemies is risky." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > The grenade is a simple short range high damage crowd clearer." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so it left, mothership pleased.";
@@ -48,7 +48,7 @@ namespace AliemMod.Modules
                 $"\n{Helpers.UtilityText("Hold to charge")} and fire a large blast for {Helpers.DamageRangeText(AliemConfig.M1_RayGunCharged_Damage_Min.Value, AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_NAME", "Energy Sword");
-            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(RayGunFire.RayGunDamageCoefficient)}." +
+            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(AliemConfig.M1_Sword_Damage.Value)}." +
                 $"\n{Helpers.UtilityText("Hold to charge")} and dash and slash for {Helpers.DamageRangeText(AliemConfig.M1_SwordCharged_Damage_Min.Value, AliemConfig.M1_SwordCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_RIFLE_INPUTS_NAME", "Human Machine Gun");

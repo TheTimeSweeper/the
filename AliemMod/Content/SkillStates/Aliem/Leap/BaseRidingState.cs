@@ -2,6 +2,7 @@
 using AliemMod.Content;
 using AliemMod.Modules;
 using EntityStates;
+using ModdedEntityStates.Aliem.AI;
 using RoR2;
 using System;
 using UnityEngine;
@@ -27,8 +28,8 @@ namespace ModdedEntityStates.Aliem
         public override void OnEnter() {
             base.OnEnter();
 
-            if (riddenBody && NetworkServer.active) {
-				riddenBody.AddBuff(Buffs.riddenBuff);
+            if (this.riddenBody && NetworkServer.active) {
+				this.riddenBody.AddBuff(Buffs.riddenBuff);
 			}
 
 			riddenCollider = findHighestHurtbox();
@@ -43,12 +44,17 @@ namespace ModdedEntityStates.Aliem
             _anchor = new GameObject("aliemAnchor");
             _anchor.transform.SetParent(riddenCollider.transform);
             _anchor.transform.position = ridePosition;
-            if (riddenBody.modelLocator != null && riddenBody.modelLocator.modelTransform != null)
+            if (this.riddenBody.modelLocator != null && this.riddenBody.modelLocator.modelTransform != null)
             {
-                _anchor.transform.rotation = riddenBody.modelLocator.modelTransform.rotation;
+                _anchor.transform.rotation = this.riddenBody.modelLocator.modelTransform.rotation;
             }else
             {
-                _anchor.transform.rotation = riddenBody.gameObject.transform.rotation;
+                _anchor.transform.rotation = this.riddenBody.gameObject.transform.rotation;
+            }
+
+            if (AliemConfig.M3_Leap_RidingControl.Value && riddenBody && riddenBody.master && riddenBody.master.aiComponents.Length > 0 && riddenBody.master.aiComponents[0])
+            {
+                riddenBody.master.aiComponents[0].stateMachine.SetNextState(new OverrideAICombat { overridor = inputBank});
             }
 
             gameObject.layer = RoR2.LayerIndex.fakeActor.intVal;
@@ -121,11 +127,6 @@ namespace ModdedEntityStates.Aliem
 						return;
 					}
 				}
-
-                //if (riddenBody.isPlayerControlled)
-                //{
-                    riddenBody.inputBank.moveVector = GetAimRay().direction;
-                //}
 			} else {
 				base.outer.SetNextStateToMain();
 				return;
@@ -134,16 +135,16 @@ namespace ModdedEntityStates.Aliem
 
         private void UpdateRidingPosition(bool fixedUpdate = false)
         {
-            Vector3 lerpPosition = Vector3.Lerp(_initialPosition, _anchor.transform.position, base.fixedAge * AliemConfig.rideLerpSpeed.Value);
+            Vector3 lerpPosition = Vector3.Lerp(_initialPosition, _anchor.transform.position, base.fixedAge * 3);
 
-            lerpPosition = Vector3.Lerp(_lastPosition, lerpPosition, AliemConfig.rideLerpTim.Value);
+            lerpPosition = Vector3.Lerp(_lastPosition, lerpPosition, 0.5f);
 
             characterMotor.Motor.SetPosition(lerpPosition);
             
             if (_modelTransform)
             {
                 _modelTransform.position = lerpPosition;
-                Quaternion rotation = Quaternion.Lerp(_lastRotation, _anchor.transform.rotation, AliemConfig.rideLerpTim2.Value);
+                Quaternion rotation = Quaternion.Lerp(_lastRotation, _anchor.transform.rotation, 0.1f);
                 _modelTransform.rotation = rotation;
                 characterDirection.forward = _anchor.transform.forward;
                 _lastRotation = rotation;
@@ -157,6 +158,12 @@ namespace ModdedEntityStates.Aliem
 			if (riddenBody && NetworkServer.active) {
 				riddenBody.RemoveBuff(Buffs.riddenBuff);
             }
+
+            if (AliemConfig.M3_Leap_RidingControl.Value && riddenBody && riddenBody.master && riddenBody.master.aiComponents.Length > 0 && riddenBody.master.aiComponents[0])
+            {
+                riddenBody.master.aiComponents[0].stateMachine.SetNextState(new EntityStates.AI.Walker.Combat());
+            }
+
             GetComponent<AliemRidingColliderHolderThatsIt>().riddenCollider = null;
             gameObject.layer = RoR2.LayerIndex.defaultLayer.intVal;
             UnityEngine.Object.Destroy(_anchor);

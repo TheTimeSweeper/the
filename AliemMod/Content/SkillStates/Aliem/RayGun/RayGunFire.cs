@@ -16,7 +16,6 @@ namespace ModdedEntityStates.Aliem
 
         public virtual float BaseDamageCoefficient => RayGunDamageCoefficient;
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
-
         //needs to be set in the projectilecontroller component
         //public static float procCoefficient = 1f;
 

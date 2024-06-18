@@ -15,7 +15,7 @@ namespace ModdedEntityStates.Aliem
         public override float recoil => 1f;
         public override float bloom => 0;
         public override float range => 256f;
-        public override float radius => AliemConfig.radius.Value;
+        public override float radius => 1.6f;
         public override float minSpread => 0;
         public override float spread => AliemConfig.M1_MachineGunCharged_Spread.Value * characterBody.spreadBloomAngle;
         public override LayerMask stopperMask => LayerIndex.world.mask;
@@ -30,7 +30,7 @@ namespace ModdedEntityStates.Aliem
         private int _shotsFired;
         private int _chargedBullets;
         private float _currentBloom;
-        private float _bloomIncrement => AliemConfig.bloomCharged.Value;
+        private float _bloomIncrement => 0.5f;
 
         public ShootRifleCharged()
         {

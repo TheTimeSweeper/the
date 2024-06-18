@@ -1,6 +1,7 @@
 ﻿using AliemMod.Components;
 using AliemMod.Content.Survivors;
 using AliemMod.Modules;
+using ModdedEntityStates.Aliem.AI;
 using RoR2;
 using RoR2.CharacterAI;
 using UnityEngine;
@@ -16,6 +17,10 @@ namespace AliemMod.Content
             BaseAI baseAI = master.GetComponent<BaseAI>();
             baseAI.aimVectorDampTime = 0.1f;
             baseAI.aimVectorMaxSpeed = 360;
+
+            EntityStateMachine stateMachine = master.GetComponent<EntityStateMachine>();
+            stateMachine.initialStateType = new EntityStates.SerializableEntityStateType(typeof(DoubleInputWander));
+            stateMachine.mainStateType = new EntityStates.SerializableEntityStateType(typeof(DoubleInputWander));
 
             AISkillDriver biteDelay = master.AddComponent<AISkillDriver>();
             //Selection Conditions
@@ -99,11 +104,11 @@ namespace AliemMod.Content
             diveNear.requireSkillReady = true;
             diveNear.requireEquipmentReady = false;
             diveNear.minUserHealthFraction = float.NegativeInfinity;
-            diveNear.maxUserHealthFraction = 0.5f;
+            diveNear.maxUserHealthFraction = float.PositiveInfinity; // want him to only do it at low health if he's enemy but want him to do it at any time if he's goobo so dam
             diveNear.minTargetHealthFraction = float.NegativeInfinity;
             diveNear.maxTargetHealthFraction = float.PositiveInfinity;
             diveNear.minDistance = 0;
-            diveNear.maxDistance = 10;
+            diveNear.maxDistance = 20;
             diveNear.selectionRequiresTargetLoS = true;
             diveNear.selectionRequiresOnGround = false;
             diveNear.selectionRequiresAimTarget = true;
@@ -127,6 +132,54 @@ namespace AliemMod.Content
             diveNear.resetCurrentEnemyOnNextDriverSelection = false;
             diveNear.noRepeat = false;
             diveNear.nextHighPriorityOverride = null;
+
+            //use grenade if close
+            AISkillDriver bombDriver = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            bombDriver.customName = "Use Special bomb";
+            bombDriver.skillSlot = SkillSlot.Special;
+            bombDriver.requiredSkill = AliemSurvivor.GrenadeSkillDef;
+            bombDriver.requireSkillReady = true;
+            bombDriver.minDistance = 0;
+            bombDriver.maxDistance = 10;
+            bombDriver.selectionRequiresTargetLoS = false;
+            bombDriver.selectionRequiresOnGround = false;
+            bombDriver.selectionRequiresAimTarget = false;
+            bombDriver.maxTimesSelected = -1;
+
+            //Behavior
+            bombDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            bombDriver.activationRequiresTargetLoS = false;
+            bombDriver.activationRequiresAimTargetLoS = false;
+            bombDriver.activationRequiresAimConfirmation = false;
+            bombDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            bombDriver.moveInputScale = 1;
+            bombDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            bombDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            //use special any time if not grenade
+            AISkillDriver specialDriver = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            specialDriver.customName = "Use Special";
+            specialDriver.skillSlot = SkillSlot.Special;
+            specialDriver.requireSkillReady = true;
+            specialDriver.minDistance = 0;
+            specialDriver.maxDistance = 60;
+            specialDriver.selectionRequiresTargetLoS = false;
+            specialDriver.selectionRequiresOnGround = false;
+            specialDriver.selectionRequiresAimTarget = false;
+            specialDriver.maxTimesSelected = -1;
+
+            //Behavior
+            specialDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            specialDriver.activationRequiresTargetLoS = false;
+            specialDriver.activationRequiresAimTargetLoS = false;
+            specialDriver.activationRequiresAimConfirmation = false;
+            specialDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            specialDriver.moveInputScale = 1;
+            specialDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            specialDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            specialDriver.nextHighPriorityOverride = bombDriver;
 
             AISkillDriver socialDistance = master.AddComponent<AISkillDriver>();
             //Selection Conditions
@@ -186,9 +239,9 @@ namespace AliemMod.Content
             //mouse over these fields for tooltips
             DoubleAISkillDriver primaryStrafe = master.AddComponent<DoubleAISkillDriver>();
             //Selection Conditions
-            primaryStrafe.customName = "Use Primary Strafe";
+            primaryStrafe.customName = "Use Primary and secondasry Strafe";
             //primaryStrafe.skillSlot = SkillSlot.Primary;
-            primaryStrafe.skillSlot1 = SkillSlot.Primary;
+            primaryStrafe.skillSlot = SkillSlot.Primary;
             primaryStrafe.skillSlot2 = SkillSlot.Secondary;
             primaryStrafe.requiredSkill = null; //usually used when you have skills that override other skillslots like engi harpoons
             primaryStrafe.requireSkillReady = false; //usually false for primaries
@@ -225,7 +278,7 @@ namespace AliemMod.Content
 
             AISkillDriver diveCloseDistance = master.AddComponent<AISkillDriver>();
             //Selection Conditions
-            diveCloseDistance.customName = "Dive CLose Distance";
+            diveCloseDistance.customName = "Dive Close Distance";
             diveCloseDistance.skillSlot = SkillSlot.Utility;
             diveCloseDistance.requiredSkill = null;
             diveCloseDistance.requireSkillReady = true;
@@ -260,34 +313,50 @@ namespace AliemMod.Content
             diveCloseDistance.noRepeat = false;
             diveCloseDistance.nextHighPriorityOverride = null;
 
-            AISkillDriver bombDriver = master.AddComponent<AISkillDriver>();
-            //Selection Conditions
-            bombDriver.customName = "Use Special bomb";
-            bombDriver.skillSlot = SkillSlot.Special;
-            bombDriver.requireSkillReady = true;
-            bombDriver.minDistance = 0;
-            bombDriver.maxDistance = 30;
-            bombDriver.selectionRequiresTargetLoS = false;
-            bombDriver.selectionRequiresOnGround = false;
-            bombDriver.selectionRequiresAimTarget = false;
-            bombDriver.maxTimesSelected = -1;
+            //I wish
+            //AISkillDriver rideFriend = master.AddComponent<AISkillDriver>();
+            ////Selection Conditions
+            //rideFriend.customName = "RideFriend";
+            //rideFriend.skillSlot = SkillSlot.Utility;
+            //rideFriend.requiredSkill = null;
+            //rideFriend.requireSkillReady = true;
+            //rideFriend.requireEquipmentReady = false;
+            //rideFriend.minUserHealthFraction = float.NegativeInfinity;
+            //rideFriend.maxUserHealthFraction = float.PositiveInfinity; // want him to only do it at low health if he's enemy but want him to do it at any time if he's goobo so dam
+            //rideFriend.minTargetHealthFraction = float.NegativeInfinity;
+            //rideFriend.maxTargetHealthFraction = float.PositiveInfinity;
+            //rideFriend.minDistance = 0;
+            //rideFriend.maxDistance = 20;
+            //rideFriend.selectionRequiresTargetLoS = true;
+            //rideFriend.selectionRequiresOnGround = false;
+            //rideFriend.selectionRequiresAimTarget = true;
+            //rideFriend.maxTimesSelected = -1;
 
-            //Behavior
-            bombDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            bombDriver.activationRequiresTargetLoS = false;
-            bombDriver.activationRequiresAimTargetLoS = false;
-            bombDriver.activationRequiresAimConfirmation = false;
-            bombDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            bombDriver.moveInputScale = 1;
-            bombDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            bombDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            ////Behavior
+            //rideFriend.moveTargetType = AISkillDriver.TargetType.NearestFriendlyInSkillRange;
+            //rideFriend.activationRequiresTargetLoS = true;
+            //rideFriend.activationRequiresAimTargetLoS = true;
+            //rideFriend.activationRequiresAimConfirmation = true;
+            //rideFriend.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            //rideFriend.moveInputScale = 1;
+            //rideFriend.aimType = AISkillDriver.AimType.AtMoveTarget;
+            //rideFriend.ignoreNodeGraph = true;
+            //rideFriend.shouldSprint = false;
+            //rideFriend.shouldFireEquipment = false;
+            //rideFriend.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            ////Transition Behavior   
+            //rideFriend.driverUpdateTimerOverride = -1;
+            //rideFriend.resetCurrentEnemyOnNextDriverSelection = false;
+            //rideFriend.noRepeat = false;
+            //rideFriend.nextHighPriorityOverride = null;
 
             AISkillDriver chaseDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
             chaseDriver.customName = "Chase";
             chaseDriver.skillSlot = SkillSlot.None;
             chaseDriver.requireSkillReady = false;
-            chaseDriver.minDistance = 0;
+            chaseDriver.minDistance = 30;
             chaseDriver.maxDistance = float.PositiveInfinity;
 
             //Behavior
@@ -299,6 +368,7 @@ namespace AliemMod.Content
             chaseDriver.moveInputScale = 1;
             chaseDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
             chaseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            chaseDriver.shouldSprint = true;
 
             //recommend taking these for a spin in game, messing with them in runtimeinspector to get a feel for what they should do at certain ranges and such
         }

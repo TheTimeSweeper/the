@@ -1,6 +1,8 @@
 ﻿using AliemMod.Content;
 using AliemMod.Modules;
 using EntityStates;
+using RoR2;
+using RoR2.Projectile;
 using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
@@ -13,6 +15,7 @@ namespace ModdedEntityStates.Aliem
 
         private float _swordDamageCoefficient;
         private float _swordSpeedCoefficient;
+        private float _projectileSpeed;
 
         public SwordFireCharged()
         {
@@ -29,8 +32,27 @@ namespace ModdedEntityStates.Aliem
         public override void OnEnter()
         {
             base.OnEnter();
-            var machine = RoR2.EntityStateMachine.FindByCustomName(gameObject, "Body");
+            EntityStateMachine machine = RoR2.EntityStateMachine.FindByCustomName(gameObject, "Body");
             machine.SetNextState(new SwordFireChargedDash(_swordSpeedCoefficient));
+        }
+
+        public override void FireProjectile()
+        {
+            if (base.isAuthority)
+            {
+                Ray aimRay = base.GetAimRay();
+                aimRay = this.ModifyProjectileAimRay(aimRay);
+                //aimRay.direction = Util.ApplySpread(aimRay.direction, this.minSpread, this.maxSpread, 1f, 1f, 0f, this.projectilePitchBonus);
+                ProjectileManager.instance.FireProjectile(
+                    this.projectilePrefab,
+                    aimRay.origin,
+                    Util.QuaternionSafeLookRotation(aimRay.direction),
+                    base.gameObject, this.damageStat * this.damageCoefficient,
+                    this.force, Util.CheckRoll(this.critStat, base.characterBody.master),
+                    DamageColorIndex.Default,
+                    null,
+                    _swordSpeedCoefficient);
+            }
         }
     }
 }

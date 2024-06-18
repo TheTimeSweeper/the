@@ -28,11 +28,11 @@ The Behemoth - inspiration, sounds
 - added human machine gun
 - added sawed off
 - added Weapon Swap specials, replacing secondary with a second primary
-- added somwhat ror-friendly gup skin (thanks tsuyoikenko!)
+- added somwhat ror-friendly gup skin (thanks tsuyoikenko!) (set as default in config)
 - solidified mash to shoot and hold to charge functionality for primaries
   - mash at pretty lenient pace and it will auto shoot at max attack speed
 - secondary now fires primary at max charge, depending on selected primary
-- a slew of configs to fuck with
+- added configs for pretty much everything
 - allow shooting while diving and riding
 - added armor while diving and riding
 - added a double jump which can cancel dive

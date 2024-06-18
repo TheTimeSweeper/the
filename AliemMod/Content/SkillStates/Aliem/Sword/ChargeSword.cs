@@ -12,7 +12,12 @@ namespace ModdedEntityStates.Aliem
 
         protected override void StartNextState(float dam)
         {
-            outer.SetNextState(new SwordFireCharged(GetChargedValue(MinDamageCoefficient,MaxDamageCoefficient), GetChargedValue(MinSpeedCoefficient,MaxSpeedCoefficient)) { isOffHanded = isOffHanded });
+            outer.SetNextState(new SwordFireCharged(
+                GetChargedValue(MinDamageCoefficient,MaxDamageCoefficient), 
+                GetChargedValue(MinSpeedCoefficient,MaxSpeedCoefficient))
+            { 
+                isOffHanded = isOffHanded 
+            });
         }
     }
 }

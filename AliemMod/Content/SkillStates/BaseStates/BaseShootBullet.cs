@@ -15,12 +15,13 @@ namespace ModdedEntityStates.Aliem
         public virtual uint bullets => 1;
         public virtual float force => 100;
         public virtual float recoil => 0.1f;
-        public virtual float bloom => AliemConfig.bloomRifle.Value;
+        public virtual float bloom => 0.5f;
         public virtual float range => 256f;
         public virtual float radius => 0.5f;
         public virtual float minSpread => 0;
         public virtual float spread => 0;
         public virtual float spreadPitchScale => 1;
+        public virtual BulletAttack.FalloffModel falloff => BulletAttack.FalloffModel.None;
         public virtual LayerMask stopperMask => LayerIndex.CommonMasks.bullet;
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
         public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
@@ -29,6 +30,7 @@ namespace ModdedEntityStates.Aliem
 
         public bool isOffHanded { get; set; }
 
+        private bool _crit;
         private float duration;
 
         public override void OnEnter()
@@ -36,6 +38,7 @@ namespace ModdedEntityStates.Aliem
             base.OnEnter();
             duration = baseDuration / attackSpeedStat;
             characterBody.SetAimTimer(2f);
+            _crit = RollCrit();
         }
 
         public override void OnExit()
@@ -77,13 +80,13 @@ namespace ModdedEntityStates.Aliem
                     damage = damageCoefficient * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
                     damageType = DamageType.Generic,
-                    falloffModel = BulletAttack.FalloffModel.None,
+                    falloffModel = falloff,
                     maxDistance = range,
                     force = force,
                     hitMask = LayerIndex.CommonMasks.bullet,
                     minSpread = minSpread,
                     maxSpread = spread,
-                    isCrit = RollCrit(),
+                    isCrit = _crit,
                     owner = gameObject,
                     muzzleName = muzzleString,
                     smartCollision = true,

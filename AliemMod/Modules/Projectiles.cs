@@ -50,6 +50,7 @@ namespace AliemMod.Modules
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetCull();
         }
 
+        //suppose "janky" is an addmittance about the nature of non-thunderkit modding in general
         public static GameObject JankyLoadAliemPrefab(string assName, bool clone = false, bool cloneGhost = false)
         {
             GameObject prefab = Assets.LoadAsset<GameObject>(assName);
@@ -57,12 +58,12 @@ namespace AliemMod.Modules
             //so you can mess with it in runtimeinspector
             if (clone)
             {
-                prefab = prefab.InstantiateClone(assName, true);
+                prefab = prefab.DebugClone(true);
             }
             if (cloneGhost)
             {
                 ProjectileController projectileController = prefab.GetComponent<ProjectileController>();
-                projectileController.ghostPrefab = projectileController.ghostPrefab.InstantiateClone(projectileController.ghostPrefab.name, false);
+                projectileController.ghostPrefab = projectileController.ghostPrefab.DebugClone(false);
             }
             Content.AddProjectilePrefab(prefab);
 

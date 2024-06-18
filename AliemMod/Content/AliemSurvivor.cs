@@ -96,6 +96,7 @@ namespace AliemMod.Content.Survivors
         private CharacterSelectSurvivorPreviewDisplayController cssPreviewDisplayController;
 
         public static SkillDef ChompSkillDef;
+        public static SkillDef GrenadeSkillDef;
 
         public override void InitializeCharacter() {
             base.InitializeCharacter();
@@ -134,6 +135,7 @@ namespace AliemMod.Content.Survivors
             bodyCharacterModel.GetComponent<ChildLocator>().FindChild("FakeAimOrigin").transform.position = bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform.position;
 
             bodyPrefab.AddComponent<AliemRidingColliderHolderThatsIt>();
+            bodyPrefab.AddComponent<SmallHopController>();
 
             EntityStateMachine.FindByCustomName(bodyPrefab, "Slide").customName = "Weapon2";
             Modules.Prefabs.AddEntityStateMachine(bodyPrefab, "Inputs1");
@@ -309,7 +311,7 @@ namespace AliemMod.Content.Survivors
 
             #region Secondary
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Secondary);
-
+            3982 4100
             WeaponSecondaryComponentSkillDef SecondaryChargedSkillDef = Skills.CreateSkillDef<WeaponSecondaryComponentSkillDef>(new SkillDefInfo
             {
                 skillName = "aliem_secondary_Charged",
@@ -319,7 +321,7 @@ namespace AliemMod.Content.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -479,7 +481,7 @@ namespace AliemMod.Content.Survivors
 
             #region Special
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Special);
-
+            
             SkillDef bombSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "aliem_special_grenade",
@@ -504,6 +506,7 @@ namespace AliemMod.Content.Survivors
                 stockToConsume = 1
             });
             Config.ConfigureSkillDef(bombSkillDef, AliemConfig.sectionBody, "M4_Grenade");
+            GrenadeSkillDef = bombSkillDef;
 
             WeaponSwapSkillDef weaponSwapSkillDefBase = Skills.CreateSkillDef<WeaponSwapSkillDef>(new SkillDefInfo
             {
@@ -516,7 +519,7 @@ namespace AliemMod.Content.Survivors
                 activationStateMachineName = "Mutation",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 8f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,

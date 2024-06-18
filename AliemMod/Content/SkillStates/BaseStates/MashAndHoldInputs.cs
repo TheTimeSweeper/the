@@ -23,7 +23,7 @@ namespace ModdedEntityStates.Aliem
 		protected virtual bool RepeatHoldState => true;
 
         public bool isOffHanded { get; set; }
-
+        
         protected virtual float minHoldTime => 0.5f;
         protected virtual float minMashTime => 0.35f;
 
@@ -125,12 +125,6 @@ namespace ModdedEntityStates.Aliem
             }
 
             //Helpers.LogWarning($"mash {_mashing}, timer {_mashTimer.ToString("0.00")} | hold {_holding} , timer {_holdTimer.ToString("0.00")}");
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-            Helpers.LogWarning("lev");
         }
 
         private InputBankTest.ButtonState GetSkillButton()

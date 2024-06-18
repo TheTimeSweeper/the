@@ -34,12 +34,15 @@ namespace ModdedEntityStates.Aliem
             base.OnEnter();
             if (!isGrounded)
             {
-                characterMotor.velocity = characterMotor.velocity * (1 - AliemConfig.shotgunKnockbackSpeedOverride.Value) - GetAimRay().direction * AliemConfig.M1_SawedOffCharged_SelfKnockback.Value;
+                characterMotor.velocity = characterMotor.velocity - GetAimRay().direction * AliemConfig.M1_SawedOffCharged_SelfKnockback.Value;
             }
         }
 
         public override void FireProjectile()
         {
+            float recoil = AliemConfig.M1_SawedOff_Recoil.Value * 1.5f;
+            AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
+
             if (isAuthority)
             {
                 Ray aimRay = base.GetAimRay();
@@ -51,8 +54,8 @@ namespace ModdedEntityStates.Aliem
                 Vector3 horizontal = Vector3.Cross(aimRay.direction, Vector3.up).normalized;
 
                 Ray leftRay = new Ray(aimRay.origin, aimRay.direction);
-                leftRay.origin += horizontal * AliemConfig.   shotgunChargedSideShift.Value;
-                leftRay.direction += horizontal * AliemConfig.shotgunChargedSideTurn .Value;
+                leftRay.origin += horizontal * 0.5f;
+                leftRay.direction += horizontal * 0.1f;
 
                 FireProjectileSingle(leftRay);
 
@@ -61,7 +64,6 @@ namespace ModdedEntityStates.Aliem
                 rightRay.direction += horizontal * -AliemConfig.shotgunChargedSideTurn.Value;
 
                 FireProjectileSingle(rightRay);
-
             }
         }
 
@@ -82,7 +84,7 @@ namespace ModdedEntityStates.Aliem
         protected override void ModifyState()
         {
             base.ModifyState();
-            projectilePitchBonus = AliemConfig.ShotgunChargedPitch.Value;
+            projectilePitchBonus = -45;
         }
 
         public override void PlayAnimation(float duration) {
