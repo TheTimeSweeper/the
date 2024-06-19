@@ -59,6 +59,8 @@ public class AliemPlugin : BaseUnityPlugin {
 
         Compat.Initialize();
         Tokens.AddTokens(); // register name tokens
+        AliemMod.Modules.Language.Init();
+        AliemMod.Modules.Language.PrintOutput("aliem.txt");
         ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
         Buffs.RegisterBuffs(); // add and register custom buffs/debuffs

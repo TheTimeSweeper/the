@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="aliem" />
     <None Remove="aliem.bnk" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="aliem" />
     <EmbeddedResource Include="aliem.bnk" />
   </ItemGroup>
 
@@ -63,7 +61,7 @@
 	</Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy &quot;$(TargetPath)&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Alien_Hominid&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\Release&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; mkdir &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Alien_Hominid&quot;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Alien_Hominid&quot;" />
+	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; set build=true&#xD;&#xA;&#xD;&#xA;if defined build (&#xD;&#xA;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; (&#xD;&#xA;copy &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;)&#xD;&#xA;if exist &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; (&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Alien_Hominid\&quot;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Alien_Hominid\&quot;&#xD;&#xA;&#xD;&#xA;)&#xD;&#xA;" />
 	</Target>
 	
 </Project>

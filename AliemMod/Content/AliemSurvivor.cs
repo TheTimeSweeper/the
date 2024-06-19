@@ -271,6 +271,10 @@ namespace AliemMod.Content.Survivors
                 new EntityStates.SerializableEntityStateType(typeof(InputRifle)),
                 "Inputs1",
                 true));
+            if (AliemConfig.M1_MachineGun_Falloff.Value)
+            {
+                primaryRifleInputsSkillDef.keywordTokens = new string[] { ALIEM_PREFIX + "KEYWORD_FALLOFF" };
+            }
             AddWeaponSkin(primaryRifleInputsSkillDef, 3);
 
             SkillDef primarySawedOffInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
@@ -311,7 +315,7 @@ namespace AliemMod.Content.Survivors
 
             #region Secondary
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Secondary);
-            3982 4100
+
             WeaponSecondaryComponentSkillDef SecondaryChargedSkillDef = Skills.CreateSkillDef<WeaponSecondaryComponentSkillDef>(new SkillDefInfo
             {
                 skillName = "aliem_secondary_Charged",
@@ -321,7 +325,7 @@ namespace AliemMod.Content.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 6f,
+                baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -499,7 +503,7 @@ namespace AliemMod.Content.Survivors
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -519,7 +523,7 @@ namespace AliemMod.Content.Survivors
                 activationStateMachineName = "Mutation",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 6f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -529,7 +533,7 @@ namespace AliemMod.Content.Survivors
                 resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
@@ -562,8 +566,8 @@ namespace AliemMod.Content.Survivors
             }
 
 
-            Skills.AddUnlockablesToFamily(skillLocator.primary.skillFamily, null, AliemUnlockables.ChompEnemiesUnlockableDef, AliemUnlockables.BurrowPopOutUnlockableDef);
-            Skills.AddUnlockablesToFamily(skillLocator.special.skillFamily, null, AliemUnlockables.SlowMashUnlockableDef, AliemUnlockables.ChompEnemiesUnlockableDef, AliemUnlockables.BurrowPopOutUnlockableDef);
+            Skills.AddUnlockablesToFamily(skillLocator.primary.skillFamily, null, AliemUnlockables.ChompEnemiesUnlockableDef, AliemUnlockables.BurrowPopOutUnlockableDef, AliemUnlockables.ChargedKillUnlockableDef);
+            Skills.AddUnlockablesToFamily(skillLocator.special.skillFamily, null, AliemUnlockables.SlowMashUnlockableDef, AliemUnlockables.ChompEnemiesUnlockableDef, AliemUnlockables.BurrowPopOutUnlockableDef, AliemUnlockables.ChargedKillUnlockableDef);
         }
 
         private OffHandSkillDef CloneSwapSkillDef(SkillDef primarySkillDef)
@@ -700,18 +704,20 @@ namespace AliemMod.Content.Survivors
                 skins.Add(defaultSkin);
             }
             skins[1].unlockableDef = AliemUnlockables.masterySkinUnlockableDef;
-            
-            #endregion
 
-            skins.Add(CreateRecolorSkin(defaultSkin, "Red"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Green"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Blue"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Orange"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Brown"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Cyan"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Purple"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Magenta"));
-            skins.Add(CreateRecolorSkin(defaultSkin, "Black"));
+            #endregion
+            if (AliemConfig.Cursed.Value)
+            {
+                skins.Add(CreateRecolorSkin(defaultSkin, "Red"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Green"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Blue"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Orange"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Brown"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Cyan"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Purple"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Magenta"));
+                skins.Add(CreateRecolorSkin(defaultSkin, "Black"));
+            }
 
             skinController.skins = skins.ToArray();
         }
@@ -728,6 +734,7 @@ namespace AliemMod.Content.Survivors
                                                   defaultSkin.rendererInfos,
                                                   defaultSkin.rootObject,
                                                   AliemUnlockables.masterySkinUnlockableDef);
+            skinDef.meshReplacements = defaultSkin.meshReplacements;
             skinDef.rendererInfos[0].defaultMaterial = material;
 
             R2API.LanguageAPI.Add(token, skinColor);

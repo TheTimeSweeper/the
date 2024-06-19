@@ -24,13 +24,16 @@ namespace AliemMod.Modules
 
             RayGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemLemonProjectileBig");
             RayGunProjectilePrefabBig.GetComponent<ProjectileImpactExplosion>().impactEffect = Assets.m2EffectPrefab;
+            RayGunProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
 
             SwordProjectilePrefab = JankyLoadAliemPrefab("AliemSwordProjectile");
             SwordProjectilePrefabBig = JankyLoadAliemPrefab("AliemSwordProjectileBig");
+            SwordProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
 
             SawedOffProjectilePrefabBig = JankyLoadAliemPrefab("AliemSawedOffProjectileBig", true, true);
             Assets.ConvertAllRenderersToHopooShader(SawedOffProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
             SawedOffProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>().impactEffect = Assets.nemforcerImpactEffect;
+            SawedOffProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
 
             GrenadeProjectile = JankyLoadAliemPrefab("AliemGrenadeProjectile");
             GrenadeProjectile.GetComponent<ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXToolbotQuick");

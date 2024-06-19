@@ -11,6 +11,7 @@ using System.Linq;
 using RoR2.Projectile;
 using UnityEngine.AddressableAssets;
 using AliemMod.Content;
+using Path = System.IO.Path;
 
 namespace AliemMod.Modules
 {
@@ -62,32 +63,26 @@ namespace AliemMod.Modules
 
             LoadAssetBundle();
 
-            LoadSoundbank();
+            LoadSoundBank();
 
             PopulateAss();
         }
 
-        public static void LoadAssetBundle()
+        private static void LoadSoundBank()
         {
-            if (mainAssetBundle == null)
-            {
-                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("AliemMod." + assetbundleName))
-                {
-                    mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
-                }
+            if (UnityEngine.Application.isBatchMode) return;
 
-                AliemPlugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(mainAssetBundle));
-            }
+            AkSoundEngine.AddBasePath(Path.Combine(Path.GetDirectoryName(AliemPlugin.instance.Info.Location), "SoundBanks"));
+            AkSoundEngine.LoadBank("aliem.bnk", out var _soundBankId);
         }
 
-        public static void LoadSoundbank()
+        public static void LoadAssetBundle()
         {
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("AliemMod.aliem.bnk"))
+            try
             {
-                byte[] array = new byte[manifestResourceStream2.Length];
-                manifestResourceStream2.Read(array, 0, array.Length);
-                SoundAPI.SoundBanks.Add(array);
-            }
+                mainAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(AliemPlugin.instance.Info.Location), "AssetBundles", "aliem"));
+                AliemPlugin.instance.StartCoroutine(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(mainAssetBundle));
+            } catch { }
         }
 
         private static void PopulateAss()

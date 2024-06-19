@@ -60,8 +60,8 @@ namespace ModdedEntityStates.Aliem
                 FireProjectileSingle(leftRay);
 
                 Ray rightRay = new Ray(aimRay.origin, aimRay.direction);
-                rightRay.origin += horizontal * -AliemConfig.shotgunChargedSideShift.Value;
-                rightRay.direction += horizontal * -AliemConfig.shotgunChargedSideTurn.Value;
+                rightRay.origin += horizontal * -0.5f;
+                rightRay.direction += horizontal * -0.1f;
 
                 FireProjectileSingle(rightRay);
             }

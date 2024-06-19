@@ -7,9 +7,9 @@ namespace ModdedEntityStates.Aliem {
         
         protected override EntityState newMashState => new RayGunFire();
 		protected override InterruptPriority mashInterruptPriority => InterruptPriority.Any;
-		protected override EntityState newHoldState => new ChargeRayGun();
+		protected override EntityState newHoldState => new ChargeRayGun { activatorSkillSlot = activatorSkillSlot };
 		protected override InterruptPriority holdInterruptPriority => InterruptPriority.Any;
-
+        
 		protected override bool RepeatHoldState => false;
     }
 }

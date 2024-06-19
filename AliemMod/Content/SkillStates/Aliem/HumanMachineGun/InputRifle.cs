@@ -6,6 +6,6 @@ namespace ModdedEntityStates.Aliem
     {
         protected override EntityState newMashState => new ShootRifleUncharged();
 
-        protected override EntityState newHoldState => new ChargeRifle();
+        protected override EntityState newHoldState => new ChargeRifle { activatorSkillSlot = activatorSkillSlot };
     }
 }

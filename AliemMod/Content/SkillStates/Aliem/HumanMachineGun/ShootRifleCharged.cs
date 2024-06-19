@@ -64,6 +64,11 @@ namespace ModdedEntityStates.Aliem
             }
         }
 
+        protected override void ModifyBullet(BulletAttack bulletAttack)
+        {
+            R2API.DamageAPI.AddModdedDamageType(bulletAttack, DamageTypes.FuckinChargedKillAchievementTracking);
+        }
+
         protected override void playShootAnimation()
         {
             Util.PlaySound("Play_AliemRifleCharged", gameObject);

@@ -13,6 +13,8 @@ namespace AliemMod.Modules
     {
         public static ConfigFile MyConfig;
 
+        private static bool loadedIcon;
+
         public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, string description = "", bool restartRequired = false) =>
             BindAndOptions(section, name, defaultValue, 0, 20, description, restartRequired);
         public static ConfigEntry<T> BindAndOptions<T>(string section, string name, T defaultValue, float min, float max, string description = "", bool restartRequired = false)
@@ -59,6 +61,18 @@ namespace AliemMod.Modules
             if (entry is ConfigEntry<KeyboardShortcut>)
             {
                 ModSettingsManager.AddOption(new KeyBindOption(entry as ConfigEntry<KeyboardShortcut>, restartRequired));
+            }
+            if (!loadedIcon)
+            {
+                loadedIcon = true;
+                try
+                {
+                    ModSettingsManager.SetModIcon(ImgHandler.LoadSpriteFromModFolder("icon.png"));
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("error adding ROO mod icon for aliem\n" + e);
+                }
             }
         }
 

@@ -8,7 +8,7 @@ namespace ModdedEntityStates.Aliem {
 
         public PassiveBuildupComponent componentFromSkillDef1 { get; set; }
 
-        private float _buildup;
+        public static float builldupDamageCOefficient = 2;
 
         protected override void ModifyState() {
 
@@ -26,7 +26,9 @@ namespace ModdedEntityStates.Aliem {
             {
                 damageCoefficient = 0.6f;
             }
-		}
+            damageCoefficient *= builldupDamageCOefficient;
+
+        }
 
         public override InterruptPriority GetMinimumInterruptPriority() {
             return InterruptPriority.Any;

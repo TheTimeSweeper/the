@@ -6,26 +6,23 @@ using RoR2.Achievements;
 
 namespace AliemMod.Content.Achievements
 {
-    //automatically creates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
+
     [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, typeof(AliemChompEnemiesAchievementServer))]
     public class AliemChompEnemiesAchievement : BaseAchievement
     {
         public const string identifier = AliemSurvivor.ALIEM_PREFIX + "ChompEnemiesAchievement" + AliemUnlockables.DevResetString;
         public const string unlockableIdentifier = AliemSurvivor.ALIEM_PREFIX + "ChompEnemiesUnlockable" + AliemUnlockables.DevResetString;
 
-        public static float Requirement = 20;
+        public static float Requirement = 6;
 
         public override BodyIndex LookUpRequiredBodyIndex()
         {
-            Helpers.LogWarning("chompenemies bodyindex " + BodyCatalog.FindBodyIndex(AliemSurvivor.instance.bodyInfo.bodyPrefabName));
-
             return BodyCatalog.FindBodyIndex(AliemSurvivor.instance.bodyInfo.bodyPrefabName);
         }
 
         // Token: 0x0600581E RID: 22558 RVA: 0x001608E1 File Offset: 0x0015EAE1
         public override void OnBodyRequirementMet()
         {
-            Helpers.LogWarning("chompenemies met");
             base.OnBodyRequirementMet();
             base.SetServerTracked(true);
         }
@@ -33,7 +30,6 @@ namespace AliemMod.Content.Achievements
         // Token: 0x0600581F RID: 22559 RVA: 0x001608F0 File Offset: 0x0015EAF0
         public override void OnBodyRequirementBroken()
         {
-            Helpers.LogWarning("chompenemies broken");
             base.SetServerTracked(false);
             base.OnBodyRequirementBroken();
         }
@@ -71,7 +67,6 @@ namespace AliemMod.Content.Achievements
             public override void OnInstall()
             {
                 base.OnInstall();
-                Helpers.LogWarning("chompenemies install");
                 RoR2Application.onFixedUpdate += this.FixedUpdate;
                 GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
             }
@@ -79,7 +74,6 @@ namespace AliemMod.Content.Achievements
             // Token: 0x06005826 RID: 22566 RVA: 0x00164AE3 File Offset: 0x00162CE3
             public override void OnUninstall()
             {
-                Helpers.LogWarning("chompenemies uninstall");
                 this.trackedBody = null;
                 RoR2Application.onFixedUpdate -= this.FixedUpdate;
                 GlobalEventManager.onServerDamageDealt -= GlobalEventManager_onServerDamageDealt;
@@ -94,31 +88,26 @@ namespace AliemMod.Content.Achievements
 
             private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport)
             {
-                Helpers.LogWarning("decapitating" + DamageTypes.Decapitating);
-                if (!damageReport.damageInfo.HasModdedDamageType(DamageTypes.Decapitating))
-                    return;
-
                 if (damageReport.attackerBody == null || damageReport.attackerBody != this.trackedBody)
                     return;
-                
-                progress++;
-                Helpers.LogWarning("CHompEnemies progress " + progress);
-                if (progress >= AliemChompEnemiesAchievement.Requirement)
+
+                if (damageReport.damageInfo.HasModdedDamageType(DamageTypes.Decapitating))
                 {
-                    base.Grant();
+                    progress++;
+                    if (progress >= AliemChompEnemiesAchievement.Requirement)
+                    {
+                        base.Grant();
+                    }
                 }
-                
             }
 
             private void CharacterMotor_onHitGroundServer(ref CharacterMotor.HitGroundInfo hitGroundInfo)
             {
                 if (EntityStateMachine.FindByCustomName(_trackedBody.gameObject, "Body").state is ModdedEntityStates.Aliem.AliemRidingState)
                 {
-                    Helpers.LogWarning("no reset, riding");
                     return;
                 }
                 progress = 0;
-                Helpers.LogWarning("CHompEnemies progress reset " + progress);
             }
         }
     }

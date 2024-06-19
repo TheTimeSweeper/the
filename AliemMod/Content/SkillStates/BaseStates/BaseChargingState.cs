@@ -72,6 +72,7 @@ namespace ModdedEntityStates.Aliem
             if (!GetSkillButton().down && isAuthority)
             {
                 float charge = _chargeTimer / _maxChargeDuration;
+                characterBody.OnSkillActivated(activatorSkillSlot);
                 StartNextState(charge);
             }
         }

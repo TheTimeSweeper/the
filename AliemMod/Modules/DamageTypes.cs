@@ -10,27 +10,15 @@ namespace AliemMod.Modules
         //Aliem
         public static DamageAPI.ModdedDamageType ApplyAliemRiddenBuff;
         public static DamageAPI.ModdedDamageType Decapitating;
+        public static DamageAPI.ModdedDamageType FuckinChargedKillAchievementTracking;
 
         public static void RegisterDamageTypes()
         {
-
             //Aliem
             ApplyAliemRiddenBuff = DamageAPI.ReserveDamageType();
             Decapitating = DamageAPI.ReserveDamageType();
+            FuckinChargedKillAchievementTracking = DamageAPI.ReserveDamageType();
 
-            //SetHooks();
         }
-
-        private static void SetHooks()
-        {
-            On.RoR2.SetStateOnHurt.OnTakeDamageServer += SetStateOnHurt_OnTakeDamageServer;
-        }
-
-        private static void SetStateOnHurt_OnTakeDamageServer(On.RoR2.SetStateOnHurt.orig_OnTakeDamageServer orig, SetStateOnHurt self, DamageReport damageReport)
-        {
-            orig(self, damageReport);
-        }
-
-
     }
 }

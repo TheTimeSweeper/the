@@ -16,6 +16,7 @@ namespace ModdedEntityStates.Aliem
         public override float spread => _spread;
         public override uint bullets => _bullets;
         public override float spreadPitchScale => 0.6f;
+        public override float procCoefficient => 0.5f;
         public override float recoil => AliemConfig.M1_SawedOff_Recoil.Value;
         public override string muzzleString => isOffHanded ? "BlasterMuzzleFar.R" : "BlasterMuzzleFar";
 

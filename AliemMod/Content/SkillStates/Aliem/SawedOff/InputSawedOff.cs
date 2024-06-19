@@ -6,6 +6,6 @@ namespace ModdedEntityStates.Aliem
     {
         protected override EntityState newMashState => new ShootSawedOffUncharged();
 
-        protected override EntityState newHoldState => new ChargeSawedOff();
+        protected override EntityState newHoldState => new ChargeSawedOff { activatorSkillSlot = activatorSkillSlot };
     }
 }

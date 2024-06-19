@@ -21,6 +21,7 @@ namespace ModdedEntityStates.Aliem
 		private float duration;
 
 		private bool hasCasted;
+        private bool hasHealed;
 
         public override void OnEnter() {
             base.OnEnter();
@@ -42,43 +43,51 @@ namespace ModdedEntityStates.Aliem
 			}
 		}
 
-        protected void OnCastEnter() {
+        protected void OnCastEnter()
+        {
 
-			Util.PlayAttackSpeedSound("Play_Chomp", base.gameObject, this.attackSpeedStat);
+            Util.PlayAttackSpeedSound("Play_Chomp", base.gameObject, this.attackSpeedStat);
 
             Transform ridePoint = GetComponent<AliemMod.Components.AliemRidingColliderHolderThatsIt>().riddenCollider.transform;
             if (ridePoint == null)
                 ridePoint = transform;
 
-            if (base.isAuthority) {
-				BlastAttack blast = new BlastAttack {
-					attacker = base.gameObject,
-					baseDamage = this.damageStat * ChompDamageCoefficient,
-					damageType = AliemConfig.M3_Chomp_Slayer.Value? DamageType.BonusToLowHealth : DamageType.Generic,
-					//baseForce = this.blastForce,
-					//bonusForce = this.blastBonusForce,
-					crit = this.RollCrit(),
-					//damageType = this.GetBlastDamageType(),
-					falloffModel = BlastAttack.FalloffModel.None,
-					procCoefficient = 1,
-					radius = 2,
-					position = ridePoint.position,
-					attackerFiltering = AttackerFiltering.NeverHitSelf,
-					//impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
-					teamIndex = base.teamComponent.teamIndex
-				};
+            if (base.isAuthority)
+            {
+                BlastAttack blast = new BlastAttack
+                {
+                    attacker = base.gameObject,
+                    baseDamage = this.damageStat * ChompDamageCoefficient,
+                    damageType = AliemConfig.M3_Chomp_Slayer.Value ? DamageType.BonusToLowHealth : DamageType.Generic,
+                    //baseForce = this.blastForce,
+                    //bonusForce = this.blastBonusForce,
+                    crit = this.RollCrit(),
+                    //damageType = this.GetBlastDamageType(),
+                    falloffModel = BlastAttack.FalloffModel.None,
+                    procCoefficient = 1,
+                    radius = 2,
+                    position = ridePoint.position,
+                    attackerFiltering = AttackerFiltering.NeverHitSelf,
+                    //impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
+                    teamIndex = base.teamComponent.teamIndex
+                };
 
-				R2API.DamageAPI.AddModdedDamageType(blast, DamageTypes.Decapitating);
+                R2API.DamageAPI.AddModdedDamageType(blast, DamageTypes.Decapitating);
 
-				blast.Fire();
-			}
-            
-            if (NetworkServer.active) {
+                blast.Fire();
+            }
+            FuckinHealInMultiplayerPlease(ridePoint);
+        }
 
+        private void FuckinHealInMultiplayerPlease(Transform ridePoint)
+        {
+            hasHealed = true;
+            if (NetworkServer.active)
+            {
                 float healAmount = characterBody.maxHealth - (AliemConfig.M3_Chomp_HealMissing.Value ? healthComponent.health : 0);
                 healAmount *= AliemConfig.M3_Chomp_Healing.Value;
 
-                Helpers.LogWarning($"\ncharacterBody.maxHealth {characterBody.maxHealth}\nhealthComponent.health{healthComponent.health}\ndiff {characterBody.maxHealth - healthComponent.health}\nfinal {healAmount}");
+                //Helpers.LogWarning($"\ncharacterBody.maxHealth {characterBody.maxHealth}\nhealthComponent.health{healthComponent.health}\ndiff {characterBody.maxHealth - healthComponent.health}\nfinal {healAmount}");
 
                 HealOrb healOrb = new HealOrb();
                 healOrb.origin = ridePoint.position;
@@ -89,12 +98,17 @@ namespace ModdedEntityStates.Aliem
 
                 //healthComponent.Heal(healAmount, default(ProcChainMask));
             }
-		}
+        }
 
         public override void OnExit()
         {
             base.OnExit();
             EntityStateMachine.FindByCustomName(gameObject, "Body").SetInterruptState(new EndRidingState(), InterruptPriority.PrioritySkill);
+            if (!hasHealed)
+            {
+                FuckinHealInMultiplayerPlease(transform);
+                Helpers.LogWarning("you mother fucking fucker i caught you bitch", true);
+            }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

@@ -14,8 +14,9 @@ namespace AliemMod.Content
         public static UnlockableDef ChompEnemiesUnlockableDef;
         public static UnlockableDef BurrowPopOutUnlockableDef;
         public static UnlockableDef SlowMashUnlockableDef;
+        public static UnlockableDef ChargedKillUnlockableDef;
 
-        public const string DevResetString = "1";
+        public const string DevResetString = "2";
 
         public static void Init()
         {
@@ -33,6 +34,11 @@ namespace AliemMod.Content
                 AliemBurrowPopOutAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(AliemBurrowPopOutAchievement.identifier),
                 Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"));
+
+            ChargedKillUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
+                AliemChargedKillAchievement.unlockableIdentifier,
+                Modules.Tokens.GetAchievementNameToken(AliemChargedKillAchievement.identifier),
+                Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySawedOff"));
 
             SlowMashUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 AliemSlowMashAchievement.unlockableIdentifier,

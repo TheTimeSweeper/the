@@ -8,6 +8,6 @@ namespace ModdedEntityStates.Aliem
 
         protected override EntityState newMashState => new SwordFire();
 
-        protected override EntityState newHoldState => new ChargeSword();
+        protected override EntityState newHoldState => new ChargeSword { activatorSkillSlot = activatorSkillSlot };
     }
 }

@@ -15,6 +15,7 @@ namespace AliemMod.Components
 
         private CharacterMotor _motor;
         private GenericSkill _primarySkill;
+        private GenericSkill _secondarySkill;
         private CharacterBody _characterBody;
         private InputBankTest _inputBank;
 
@@ -26,6 +27,7 @@ namespace AliemMod.Components
             _motor = GetComponent<CharacterMotor>();
             _motor.onHitGroundAuthority += _motor_onHitGroundAuthority;
             _primarySkill = GetComponent<SkillLocator>().primary;
+            _secondarySkill = GetComponent<SkillLocator>().secondary;
             _characterBody = GetComponent<CharacterBody>();
             _inputBank = GetComponent<InputBankTest>();
 
@@ -50,7 +52,7 @@ namespace AliemMod.Components
 
         private void CharacterBody_onSkillActivatedAuthority(GenericSkill skill)
         {
-            if (skill == _primarySkill)
+            if (skill == _primarySkill || skill == _secondarySkill)
             {
                 CalculateSmallHop();
             }

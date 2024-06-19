@@ -2,6 +2,7 @@
 using AliemMod.Modules;
 using EntityStates;
 using RoR2;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -72,7 +73,7 @@ namespace ModdedEntityStates.Aliem
             {
                 Ray aimRay = GetAimRay();
 
-                new BulletAttack
+                BulletAttack bulletAttack = new BulletAttack
                 {
                     bulletCount = bullets,
                     aimVector = aimRay.direction,
@@ -101,9 +102,13 @@ namespace ModdedEntityStates.Aliem
                     spreadYawScale = 1f,
                     queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                     hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
-                }.Fire();
+                };
+                ModifyBullet(bulletAttack);
+                bulletAttack.Fire();
             }
         }
+
+        protected virtual void ModifyBullet(BulletAttack bulletAttack) { }
 
         protected virtual void playShootAnimation()
         {

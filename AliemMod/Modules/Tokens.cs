@@ -1,5 +1,4 @@
-﻿using R2API;
-using System;
+﻿using System;
 using ModdedEntityStates.Aliem;
 using Modules.Survivors;
 using System.Collections.Generic;
@@ -48,12 +47,13 @@ namespace AliemMod.Modules
                 $"\n{Helpers.UtilityText("Hold to charge")} and fire a large blast for {Helpers.DamageRangeText(AliemConfig.M1_RayGunCharged_Damage_Min.Value, AliemConfig.M1_RayGunCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_NAME", "Energy Sword");
-            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_DESCRIPTION", $"Slash in a piercing wave for {Helpers.DamageValueText(AliemConfig.M1_Sword_Damage.Value)}." +
+            LanguageAPI.Add(prefix + "PRIMARY_SWORD_INPUTS_DESCRIPTION", $"Slash in a {Helpers.DamageText("piercing")} wave for {Helpers.DamageValueText(AliemConfig.M1_Sword_Damage.Value)}." +
                 $"\n{Helpers.UtilityText("Hold to charge")} and dash and slash for {Helpers.DamageRangeText(AliemConfig.M1_SwordCharged_Damage_Min.Value, AliemConfig.M1_SwordCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "PRIMARY_RIFLE_INPUTS_NAME", "Human Machine Gun");
-            LanguageAPI.Add(prefix + "PRIMARY_RIFLE_INPUTS_DESCRIPTION", $"Fire a bullet for {Helpers.DamageValueText(AliemConfig.M1_MachineGun_Damage.Value)}." +
-                $"\n{Helpers.UtilityText("Hold to charge")} and fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Min.Value}-{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}%")}.");
+            LanguageAPI.Add(prefix + "PRIMARY_RIFLE_INPUTS_DESCRIPTION", $"Fire a bullet for {Helpers.DamageValueText(AliemConfig.M1_MachineGun_Damage.Value)}. {Helpers.UtilityText("Falls off")}." +
+                $"\n{Helpers.UtilityText("Hold to charge")} and fire a volley of {Helpers.DamageText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Min.Value}-{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}%")}.");
+            LanguageAPI.Add(prefix + "KEYWORD_FALLOFF", "These bullets deal less damage the further you are away from your target.");
 
             LanguageAPI.Add(prefix + "PRIMARY_SAWEDOFF_INPUTS_NAME", "Sawed Off");
             LanguageAPI.Add(prefix + "PRIMARY_SAWEDOFF_INPUTS_DESCRIPTION", $"Fire a shotgun blast for {Helpers.DamageText($"{AliemConfig.M1_SawedOff_Bullets.Value}x")}{Helpers.DamageValueText(AliemConfig.M1_SawedOff_Damage.Value)}." +
@@ -61,7 +61,7 @@ namespace AliemMod.Modules
 
             #region cursed
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
-            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(Components.PassiveBuildupComponent.minCharge)}. Passively charges for up to {Helpers.DamageValueText(Components.PassiveBuildupComponent.maxCharge)}.");
+            LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(Components.PassiveBuildupComponent.minCharge*RayGunInstant.builldupDamageCOefficient)}. Passively charges for up to {Helpers.DamageValueText(Components.PassiveBuildupComponent.maxCharge * RayGunInstant.builldupDamageCOefficient)}.");
             #endregion cursed
 
             #endregion Primary
@@ -77,7 +77,7 @@ namespace AliemMod.Modules
             LanguageAPI.Add(prefix + "SECONDARY_SWORD_DESCRIPTION", $"Dash and slash in a wide wave for {Helpers.DamageValueText(AliemConfig.M1_SwordCharged_Damage_Max.Value)}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_RIFLE_NAME", "Human Machine Gun Charged");
-            LanguageAPI.Add(prefix + "SECONDARY_RIFLE_DESCRIPTION", $"Fire a volley of {Helpers.UtilityText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}% damage")}.");
+            LanguageAPI.Add(prefix + "SECONDARY_RIFLE_DESCRIPTION", $"Fire a volley of {Helpers.DamageText("piercing")} bullets for {Helpers.DamageText($"{AliemConfig.M1_MachineGunCharged_Bullets_Max.Value}x{AliemConfig.M1_MachineGunCharged_Damage.Value * 100}% damage")}.");
 
             LanguageAPI.Add(prefix + "SECONDARY_SAWEDOFF_NAME", "Sawed Off Charged");
             LanguageAPI.Add(prefix + "SECONDARY_SAWEDOFF_DESCRIPTION", $"Fire large shotgun shells that barrel through enemies for {Helpers.DamageText("2x")}{Helpers.DamageValueText(AliemConfig.M1_SawedOffCharged_Damage_Max.Value)}.");
@@ -118,13 +118,17 @@ namespace AliemMod.Modules
             LanguageAPI.Add(GetAchievementDescriptionToken(AliemMasteryAchievement.identifier), $"As {fullName}, beat the game or obliterate on Monsoon.");
 
             LanguageAPI.Add(GetAchievementNameToken(AliemChompEnemiesAchievement.identifier), $"{fullName}: Chomp");
-            LanguageAPI.Add(GetAchievementDescriptionToken(AliemChompEnemiesAchievement.identifier), $"As {fullName}, chomp {AliemChompEnemiesAchievement.Requirement} enemies without touching the ground.");
+            LanguageAPI.Add(GetAchievementDescriptionToken(AliemChompEnemiesAchievement.identifier), $"As {fullName}, chomp {AliemChompEnemiesAchievement.Requirement} enemies with one bite.");
 
             LanguageAPI.Add(GetAchievementNameToken(AliemBurrowPopOutAchievement.identifier), $"{fullName}: Surprise!");
             LanguageAPI.Add(GetAchievementDescriptionToken(AliemBurrowPopOutAchievement.identifier), $"As {fullName}, un-burrow near {AliemBurrowPopOutAchievement.Requirement} enemies at once.");
+                
+            LanguageAPI.Add(GetAchievementNameToken(AliemChargedKillAchievement.identifier), $"{fullName}: Overcharged");
+            LanguageAPI.Add(GetAchievementDescriptionToken(AliemChargedKillAchievement.identifier), $"As {fullName}, kill {AliemChargedKillAchievement.Requirement} enemies at once with a charged shot.");
 
             LanguageAPI.Add(GetAchievementNameToken(AliemSlowMashAchievement.identifier), $"{fullName}: ''Mashing''");
             LanguageAPI.Add(GetAchievementDescriptionToken(AliemSlowMashAchievement.identifier), $"As {fullName}, shoot primary with a rate of fire that is double the rate of input.");
+
             #endregion Achievements
         }
         /// <summary>

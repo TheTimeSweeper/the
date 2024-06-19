@@ -27,7 +27,6 @@ namespace AliemMod.Content
         public static ConfigEntry<float> M1_MachineGun_Damage;
         public static ConfigEntry<float> M1_MachineGun_Duration;
         public static ConfigEntry<bool> M1_MachineGun_Falloff;
-        public static ConfigEntry<float> M1_MachineGun_Spread;
         public static ConfigEntry<float> M1_MachineGunCharged_Damage;
         public static ConfigEntry<int> M1_MachineGunCharged_Bullets_Min;
         public static ConfigEntry<int> M1_MachineGunCharged_Bullets_Max;
@@ -63,7 +62,9 @@ namespace AliemMod.Content
 
         public static string sectionDebug = "Debug";
         public static string sectionBody = "Aliem";
-        public static string sectionSkills = "Skills";
+        public static string sectionPrimaries = "Primaries";
+        public static string sectionUtility = "Utility";
+        public static string sectionTheRest = "Other";
 
         public static void ReadConfig()
         {
@@ -77,7 +78,7 @@ namespace AliemMod.Content
                 sectionBody,
                 "Cursed",
                 false,
-                "Enable wip/unused content",
+                "Enable wip/unused content and recolor skins",
                 true);
 
             GupDefault = Config.BindAndOptions(
@@ -89,62 +90,62 @@ namespace AliemMod.Content
                 true);
 
             M1_RayGun_Damage = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_RayGun_Damage",
-                1.6f,
+                2f,
                 0,
                 10,
                 "");
             M1_RayGun_Duration = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_RayGun_Duration),
-                0.3f,
+                0.32f,
                 0,
                 10,
                 "lower duration means higher attack speed");
             M1_RayGunCharged_Damage_Min = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_RayGunCharged_Damage_Min),
                 2f,
                 0,
                 20,
                 "");
             M1_RayGunCharged_Damage_Max = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_RayGunCharged_Damage_Max),
                 6f,
                 0,
                 20,
                 "");
             M1_RayGun_Sound_Alt = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_RayGun_Sound_Alt",
                 false,
                 "Lighter sound");
 
             M1_Sword_Damage = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_Sword_Damage",
-                1.4f,
+                1.2f,
                 0,
                 10,
                 "");
             M1_Sword_Duration = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_Sword_Duration),
                 0.2f,
                 0,
                 10,
                 "lower duration means higher attack speed");
             M1_SwordCharged_Damage_Min = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SwordCharged_Damage_Min),
                 2f,
                 0,
                 10,
                 "");
             M1_SwordCharged_Damage_Max = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SwordCharged_Damage_Max),
                 8f,
                 0,
@@ -152,14 +153,14 @@ namespace AliemMod.Content
                 "");
 
             M1_SwordCharged_Speed_Min = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SwordCharged_Speed_Min),
                 80f,
                 -20,
                 5000,
                 "");
             M1_SwordCharged_Speed_Max = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SwordCharged_Speed_Max),
                 122f,
                 0,
@@ -167,87 +168,79 @@ namespace AliemMod.Content
                 "");
 
             M1_MachineGun_Damage = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_MachineGun_Damage",
-                1.2f,
+                1.6f,
                 0,
                 10,
                 "");
 
-            M1_MachineGun_Falloff = Config.BindAndOptions(
-                sectionSkills, 
-                nameof(M1_MachineGun_Falloff),
-                true,
-                "If true, default falloff like commando. if false none");
-
-            M1_MachineGun_Spread = Config.BindAndOptions(
-                sectionSkills,
-                nameof(M1_MachineGun_Spread),
-                0.6f,
-                0,
-                10,
-                "based on crosshair bloom");
-
             M1_MachineGun_Duration = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_MachineGun_Duration",
                 0.22f,
                 0,
                 10,
                 "lower duration means higher attack speed");
 
+            M1_MachineGun_Falloff = Config.BindAndOptions(
+                sectionPrimaries, 
+                nameof(M1_MachineGun_Falloff),
+                true,
+                "If true, default falloff like commando. if false none\nMachine gun damage is balanced around this. if you disable falloff, reduce MachineGun_Damage a bit");
+
             M1_MachineGunCharged_Damage = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_MachineGunCharged_Damage",
                 1.2f,
                 0,
                 20,
-                "");
+                "if it seems like it's lower than uncharged, it's not really cause falloff");
             M1_MachineGunCharged_Bullets_Min = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_MachineGunCharged_Bullets_Min),
                 1,
                 0,
                 50,
                 "");
             M1_MachineGunCharged_Bullets_Max = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_MachineGunCharged_Bullets_Max),
                 8,
                 0,
                 50,
                 "");
-            M1_MachineGunCharged_Interval = Config.BindAndOptions(
-                sectionSkills,
-                "M1_MachineGunCharged_Interval",
-                0.1f,
-                0,
-                1,
-                "");
             M1_MachineGunCharged_Spread = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 "M1_MachineGunCharged_Spread",
                 3f,
                 0,
                 20,
                 "");
+            M1_MachineGunCharged_Interval = Config.BindAndOptions(
+                sectionPrimaries,
+                "M1_MachineGunCharged_Interval",
+                0.1f,
+                0,
+                1,
+                "lower interval means volley of shots fire faster");
 
             M1_SawedOff_Duration = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOff_Duration),
                 1f,
                 0,
                 5,
                 "lower duration means higher attack speed");
             M1_SawedOff_Damage = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOff_Damage),
-                0.8f,
+                0.7f,
                 0,
                 50,
                 "");
             M1_SawedOff_Bullets = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOff_Bullets),
                 12,
                 0,
@@ -255,15 +248,15 @@ namespace AliemMod.Content
                 "");
 
             M1_SawedOff_Recoil = Config.BindAndOptionsSlider(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOff_Recoil),
                 3f,
-                "Would prefer you don't just remove this. If it's really too much, find a value that feels good and let me know, please",
+                "screenshake",
                 0,
                 20);
 
             M1_SawedOff_Spread = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOff_Spread),
                 12f,
                 0,
@@ -271,15 +264,15 @@ namespace AliemMod.Content
                 "");
 
             M1_SawedOff_SelfKnockback = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOff_SelfKnockback),
-                16f,
+                12f,
                 0,
                 200,
                 "");
 
             M1_SawedOffCharged_Damage_Min = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOffCharged_Damage_Min),
                 2f,
                 0,
@@ -287,34 +280,34 @@ namespace AliemMod.Content
                 "");
 
             M1_SawedOffCharged_Damage_Max = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOffCharged_Damage_Max),
                 5f,
                 0,
                 20,
                 "");
             M1_SawedOffCharged_SelfKnockback = Config.BindAndOptions(
-                sectionSkills,
+                sectionPrimaries,
                 nameof(M1_SawedOffCharged_SelfKnockback),
-                25f,
+                18f,
                 0,
                 200,
                 "");
 
             M3_Leap_AlwaysRide = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 nameof(M3_Leap_AlwaysRide),
                 false,
                 "While leaping, you will only ride enemies while holding input. Set true to always ride enemy while leaping");
 
             M3_Leap_RidingControl = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 nameof(M3_Leap_RidingControl),
                 false,
                 "Should you be able to control an enemy's movement if you're riding it (doesn't override attacking, they'll still try to attack you)");
 
             M3_Leap_ImpactDamage = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 nameof(M3_Leap_ImpactDamage),
                 1f,
                 0,
@@ -322,14 +315,14 @@ namespace AliemMod.Content
                 "");
 
             M3_Leap_Armor = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 nameof(M3_Leap_Armor),
                 50,
                 0,
                 100,
                 "");
             M3_Leap_RidingArmor = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 nameof(M3_Leap_RidingArmor),
                 20,
                 0,
@@ -337,48 +330,48 @@ namespace AliemMod.Content
                 "");
 
             M3_Burrow_PopOutDamage = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 "M3_BurrowPopOutDamage",
                 2f,
                 0,
                 20,
                 "");
             M3_Burrow_PopOutForce = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 "M3_BurrowPopOutForce",
                 1000f,
                 0,
                 10000,
                 "");
             M3_Chomp_Damage = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 "M3_ChompDamage",
-                5f,
+                3f,
                 0,
                 20,
                 "");
             M3_Chomp_Slayer = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 "M3_ChompSlayer",
                 true,
                 "Does chomp deal up to 3x damage to low health enemies");
 
-            M3_Chomp_HealMissing = Config.BindAndOptions(
-                sectionSkills,
-                nameof(M3_Chomp_HealMissing),
-                true,
-                "Does chomp heal based on missing health or max health");
-
             M3_Chomp_Healing = Config.BindAndOptions(
-                sectionSkills,
+                sectionUtility,
                 "M3_ChompHealing",
                 0.3f,
                 0,
                 1,
                 "");
 
+            M3_Chomp_HealMissing = Config.BindAndOptions(
+                sectionUtility,
+                nameof(M3_Chomp_HealMissing),
+                true,
+                "Does chomp heal based on missing health or max health");
+
             M4_GrenadeDamage = Config.BindAndOptions(
-                sectionSkills,
+                sectionTheRest,
                 "M4_GrenadeDamage",
                 12f,
                 0,
@@ -386,7 +379,7 @@ namespace AliemMod.Content
                 "");
 
             M4_WeaponSwap_Duration = Config.BindAndOptions(
-                sectionSkills,
+                sectionTheRest,
                 nameof(M4_WeaponSwap_Duration),
                 6f,
                 0,
