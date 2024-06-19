@@ -3,10 +3,19 @@
 - happy halloween modjam 2022 c:
 - multiplayer compatible!
 - scepter support
+- somewhat-ror-friendly version in config
 
-Anything you'd like to say about the guy, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/ZZzmFgDbCH).
+Anything you'd like to say about the guy, ping me (`thetimesweeper`) on the ror2 modding discord or the enforcer discord (https://discord.gg/GgjjDvStcV).
 
 [![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/AliemMod/Release/_readme/aliem.png)]()
+*someone get me some cool screenshots pls*
+
+### Weapons
+There are different primary weapons to choose from.
+- Repeatedly press to shoot normally, and hold for an alternate fire that can charge up!
+- (You don't have to break your fingers. So long as you are pressing at a reasonable pace, you are considered mashing, and the weapon will fire at max attack speed.)
+
+[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/AliemMod/Release/_readme/weapons.png)]()
 
 ## Credits
 Dotflare - Model  
@@ -25,6 +34,7 @@ The Behemoth - inspiration, sounds
 - better effects maybe
 - more sounds
 - enemy version?
+- pretty up readme
 
 ## Changelog
 see changelog tab for more
