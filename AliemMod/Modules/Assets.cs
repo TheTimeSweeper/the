@@ -97,7 +97,7 @@ namespace AliemMod.Modules
 
             knifeSwingEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion().InstantiateClone("AliemHunkKnifeSwing", false);
             knifeSwingEffect.transform.GetChild(0).GetComponent<ParticleSystemRenderer>().sharedMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Huntress/matHuntressSwingTrail.mat").WaitForCompletion();
-            knifeSwingEffect.transform.GetChild(0).localScale = new Vector3(0.7f, 1.4f, 4);
+            knifeSwingEffect.transform.GetChild(0).localScale = new Vector3(0.9f, 2f, 6);
             knifeSwingEffect.transform.GetChild(0).localPosition = new Vector3(0, 0, -0.9f);
             knifeSwingEffect.transform.GetChild(0).localEulerAngles = new Vector3(-90, 0, 0);
 

@@ -1,7 +1,7 @@
 {
     "author": "TheTimesweeper",
     "name": "Alien_Hominid",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "website_url": "https://github.com/TheTimeSweeper/the",
     "description": "Adds an aliem | new weapons, configs, polish, and somewhat-ror-friendly config",
     "dependencies": [

@@ -50,7 +50,7 @@ public class TestValueManager : MonoBehaviour {
             _tim += Time.deltaTime;
 
             if (_tim > _holdTime) {
-                _tim = _holdTime - 0.02f; 
+                _tim = _holdTime - 0.02f;
                 value = setTestValue(value + amount, valueName);
             }
         }

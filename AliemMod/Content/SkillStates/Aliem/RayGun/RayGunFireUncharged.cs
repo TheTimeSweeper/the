@@ -14,7 +14,7 @@ namespace ModdedEntityStates.Aliem
             List<HurtBox> hitResults = new List<HurtBox>();
             
             overlap.Fire(hitResults);
-            if(hitResults.Count > 0)
+            if(hitResults.Count > 0 && isAuthority)
             {
                 outer.SetNextState(new CloseRangeKnife());
                 cancelCancelCancel = true;

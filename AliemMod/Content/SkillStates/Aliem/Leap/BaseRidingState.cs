@@ -177,13 +177,22 @@ namespace ModdedEntityStates.Aliem
             //modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("AimYaw"), 1);
         }
 
-        public override void OnSerialize(NetworkWriter writer) {
+        public override void OnSerialize(NetworkWriter writer)
+        {
             base.OnSerialize(writer);
-			writer.Write(riddenBody.gameObject);
+            if (riddenBody)
+            {
+                writer.Write(riddenBody.gameObject);
+            }
         }
-        public override void OnDeserialize(NetworkReader reader) {
+        public override void OnDeserialize(NetworkReader reader)
+        {
             base.OnDeserialize(reader);
-			riddenBody = reader.ReadGameObject().GetComponent<CharacterBody>();
+            GameObject readGameObject = reader.ReadGameObject();
+            if (readGameObject)
+            {
+                riddenBody = readGameObject.GetComponent<CharacterBody>();
+            }
         }
     }
 }

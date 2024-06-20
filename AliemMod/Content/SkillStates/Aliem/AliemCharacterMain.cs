@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using UnityEngine;
 
 namespace ModdedEntityStates.Aliem {
     public class AliemCharacterMain : GenericCharacterMain {
@@ -7,6 +8,12 @@ namespace ModdedEntityStates.Aliem {
 
         public override void OnEnter() {
             base.OnEnter();
+
+            if (Input.GetKey(KeyCode.G))
+            {
+                Animator animator = GetModelAnimator();
+                Helpers.LogWarning(animator.GetLayerWeight(animator.GetLayerIndex("Flinch")));
+            }
 
             if (wasRiding && base.isAuthority) {
 

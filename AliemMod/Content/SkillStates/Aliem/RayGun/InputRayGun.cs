@@ -5,7 +5,7 @@ namespace ModdedEntityStates.Aliem {
 
         protected override EntityState initialMashState => new RayGunFireUncharged();
         
-        protected override EntityState newMashState => new RayGunFire();
+        protected override EntityState newMashState => new RayGunFireUncharged();
 		protected override InterruptPriority mashInterruptPriority => InterruptPriority.Any;
 		protected override EntityState newHoldState => new ChargeRayGun { activatorSkillSlot = activatorSkillSlot };
 		protected override InterruptPriority holdInterruptPriority => InterruptPriority.Any;

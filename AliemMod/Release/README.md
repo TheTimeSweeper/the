@@ -39,6 +39,11 @@ The Behemoth - inspiration, sounds
 ## Changelog
 see changelog tab for more
 
+`1.0.1`
+- fixed close range knife not activating always
+- tweaked its hitboxes, added it to config
+- fixed skins breaking when raindroplobotomy was installed
+
 `1.0.0`
 shout out to rob. this update wouldn't have happened if he didn't give the boy some attention
 - added energy sword

@@ -39,7 +39,7 @@ namespace ModdedEntityStates
         protected GameObject hitEffectPrefab;
         protected NetworkSoundEventIndex impactSound = NetworkSoundEventIndex.Invalid;
 
-        public float duration;
+        public float duration = 1;
         private bool hasFired;
         private float hitPauseTimer;
         private OverlapAttack attack;

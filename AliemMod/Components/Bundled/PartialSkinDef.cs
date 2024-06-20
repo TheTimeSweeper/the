@@ -17,7 +17,11 @@ namespace AliemMod.Components.Bundled
                 return;
             }
 
-            rendererInfosBuffer = characterModel.baseRendererInfos;
+            rendererInfosBuffer = new CharacterModel.RendererInfo[characterModel.baseRendererInfos.Length];
+            for (int i = 0; i < characterModel.baseRendererInfos.Length; i++)
+            {
+                rendererInfosBuffer[i] = characterModel.baseRendererInfos[i];
+            }
 
             for (int i = 0; i < rendererInfosBuffer.Length; i++)
             {

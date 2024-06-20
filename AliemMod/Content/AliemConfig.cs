@@ -13,6 +13,8 @@ namespace AliemMod.Content
 
         public static ConfigEntry<float> M1_RayGun_Damage;
         public static ConfigEntry<float> M1_RayGun_Duration;
+        public static ConfigEntry<float> M1_RayGun_CloseRangeKnife_Damage_Multiplier;
+        public static ConfigEntry<float> M1_RayGun_CloseRangeKnife_Duration;
         public static ConfigEntry<float> M1_RayGunCharged_Damage_Min;
         public static ConfigEntry<float> M1_RayGunCharged_Damage_Max;
         public static ConfigEntry<bool> M1_RayGun_Sound_Alt;
@@ -100,6 +102,20 @@ namespace AliemMod.Content
                 sectionPrimaries,
                 nameof(M1_RayGun_Duration),
                 0.32f,
+                0,
+                10,
+                "lower duration means higher attack speed");
+            M1_RayGun_CloseRangeKnife_Damage_Multiplier = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_RayGun_CloseRangeKnife_Damage_Multiplier),
+                1f,
+                0,
+                10,
+                "based on raygun damage");
+            M1_RayGun_CloseRangeKnife_Duration = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_RayGun_CloseRangeKnife_Duration),
+                0.43f,
                 0,
                 10,
                 "lower duration means higher attack speed");

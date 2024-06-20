@@ -44,13 +44,11 @@ namespace AliemMod.Content.Achievements
 
         public override BodyIndex LookUpRequiredBodyIndex()
         {
-            Helpers.LogWarning("slowmash bodyindex " + BodyCatalog.FindBodyIndex("AliemBody"));
             return BodyCatalog.FindBodyIndex("AliemBody");
         }
 
         public override void OnBodyRequirementMet()
         {
-            Helpers.LogWarning("slowmash met");
             RoR2Application.onFixedUpdate += RoR2Application_onFixedUpdate;
             ModdedEntityStates.Aliem.MashAndHoldInputs.onOnEnter += MashAndHoldInputs_onOnEnter;
             ModdedEntityStates.Aliem.MashAndHoldInputs.onMash += MashAndHoldInputs_onMash;
@@ -59,7 +57,6 @@ namespace AliemMod.Content.Achievements
 
         public override void OnBodyRequirementBroken()
         {
-            Helpers.LogWarning("slowmash borken");
             RoR2Application.onFixedUpdate -= RoR2Application_onFixedUpdate;
             ModdedEntityStates.Aliem.MashAndHoldInputs.onOnEnter -= MashAndHoldInputs_onOnEnter;
             ModdedEntityStates.Aliem.MashAndHoldInputs.onMash -= MashAndHoldInputs_onMash;
@@ -102,7 +99,7 @@ namespace AliemMod.Content.Achievements
                 return;
             if (_fireTimeCounter == null)
                 return;
-            Helpers.LogWarning($"mash average {_mashTimeCounter.GetAverage().ToString("0.000")} fire average {_fireTimeCounter.GetAverage().ToString("0.000")}");
+            //Helpers.LogWarning($"mash average {_mashTimeCounter.GetAverage().ToString("0.000")} fire average {_fireTimeCounter.GetAverage().ToString("0.000")}");
             float _mashAverage = _mashTimeCounter.GetAverage();
             if (_mashAverage == -1)
                 return;
