@@ -45,6 +45,19 @@ namespace AliemMod.Content
         public static ConfigEntry<float> M1_SawedOffCharged_Damage_Max;
         public static ConfigEntry<float> M1_SawedOffCharged_SelfKnockback;
 
+        public static ConfigEntry<float> M1_BBGun_Damage;
+        public static ConfigEntry<float> M1_BBGun_ProcCoefficient;
+        public static ConfigEntry<float> M1_BBGun_Interval;
+        public static ConfigEntry<float> M1_BBGun_Spread;
+        public static ConfigEntry<bool> M1_BBGun_VFXAlways;
+
+        public static ConfigEntry<float> BBGunRange;
+        public static ConfigEntry<float> bbgunMinSpeed;
+        public static ConfigEntry<float> bbgunMaxSpeed;
+        public static ConfigEntry<float> bbgunSpreadYaw;
+        public static ConfigEntry<int> bbgunBaseBs;
+        public static ConfigEntry<int> bbgunRadius;
+
         public static ConfigEntry<bool> M3_Leap_AlwaysRide;
         public static ConfigEntry<bool> M3_Leap_RidingControl;
         public static ConfigEntry<float> M3_Leap_ImpactDamage;
@@ -308,6 +321,89 @@ namespace AliemMod.Content
                 18f,
                 0,
                 200,
+                "");
+
+            M1_BBGun_Damage = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGun_Damage),
+                0.56f,
+                0,
+                20,
+                "");
+
+            M1_BBGun_ProcCoefficient = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGun_ProcCoefficient),
+                0.3f,
+                0,
+                2,
+                "very low because very high firerate. if you lower firerate, increase this");
+            M1_BBGun_Interval = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGun_Interval),
+                4f,
+                0.01f,
+                1000,
+                "lower interval means fire faster. measured in fixedupdates (frames/ticks). ror2 updates 50 times per frame.\n" +
+                "set 1 to fire 50 times per second. set 5 to fire every 5 updates so 10 times per second, etc\n" +
+                "be careful, this attack scales past framerate");
+
+            M1_BBGun_Spread = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGun_Spread),
+                0f,
+                10,
+                100,
+                "");
+
+            M1_BBGun_VFXAlways = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGun_VFXAlways),
+                true,
+                "Set false and some bees will not render to help performance");
+
+            BBGunRange = Config.BindAndOptions(
+                sectionDebug,
+                nameof(BBGunRange),
+                10f,
+                0,
+                300,
+                "");
+            bbgunMinSpeed = Config.BindAndOptions(
+                sectionDebug,
+                nameof(bbgunMinSpeed),
+                10f,
+                0,
+                1000,
+                "");
+            bbgunMaxSpeed = Config.BindAndOptions(
+                sectionDebug,
+                nameof(bbgunMaxSpeed),
+                10f,
+                0,
+                1000,
+                "");
+            bbgunSpreadYaw = Config.BindAndOptions(
+                sectionDebug,
+                nameof(bbgunSpreadYaw),
+                1f,
+                0,
+                10,
+                "");
+            bbgunBaseBs = Config.BindAndOptions(
+                sectionDebug,
+                nameof(bbgunBaseBs),
+                2,
+                1,
+                10,
+                "");
+
+            bbgunRadius = Config.BindAndOptions(
+                sectionDebug,
+                nameof(bbgunRadius),
+                2,
+                0,
+                10,
                 "");
 
             M3_Leap_AlwaysRide = Config.BindAndOptions(

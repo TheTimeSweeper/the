@@ -1,6 +1,7 @@
 ﻿using AliemMod.Components;
 using AliemMod.Components.Bundled;
 using AliemMod.Content.SkillDefs;
+using AliemMod.Content.SkillStates.Aliem.BBGun;
 using AliemMod.Modules;
 using AliemMod.Modules.Characters;
 using BepInEx.Configuration;
@@ -8,8 +9,12 @@ using EntityStates;
 using KinematicCharacterController;
 using ModdedEntityStates.Aliem;
 using Modules.Survivors;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using R2API;
+using R2API.Utils;
 using RoR2;
+using RoR2.Orbs;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
@@ -158,6 +163,58 @@ namespace AliemMod.Content.Survivors
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
             On.RoR2.SurvivorMannequins.SurvivorMannequinSlotController.ApplyLoadoutToMannequinInstance += SurvivorMannequinSlotController_ApplyLoadoutToMannequinInstance;
+
+            R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+
+            IL.RoR2.Orbs.OrbEffect.Start += OrbEffect_Start;
+        }
+
+        private void OrbEffect_Start(MonoMod.Cil.ILContext il)
+        {
+            ILCursor cursor = new ILCursor(il);
+
+            cursor.GotoNext(MoveType.After,
+                instruction => instruction.MatchBrtrue(out _),
+                instruction => instruction.MatchLdarg(0),
+                instruction => instruction.MatchLdfld<OrbEffect>(nameof(OrbEffect.startPosition))
+                );
+
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.Emit(OpCodes.Ldfld, typeof(OrbEffect).GetFieldCached(nameof(OrbEffect.targetTransform)));
+            cursor.Emit(OpCodes.Ldloc_0);
+            cursor.EmitDelegate<Func<Vector3, Transform, EffectComponent, Vector3>>((startPosition, targetTransform, effectComponent) =>
+            {
+                if(targetTransform == null)
+                {
+                    startPosition = effectComponent.effectData.start;
+                }
+                return startPosition;
+            });
+        }
+
+        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
+        {
+
+            if (sender.HasBuff(Buffs.riddenBuff))
+            {
+                args.moveSpeedMultAdd += 1.3f;
+                //args.attackSpeedMultAdd += 1.2f;
+            }
+
+            if (sender.HasBuff(Buffs.diveBuff))
+            {
+                args.armorAdd += AliemConfig.M3_Leap_Armor.Value;
+            }
+
+            if (sender.HasBuff(Buffs.ridingBuff))
+            {
+                args.armorAdd += AliemConfig.M3_Leap_RidingArmor.Value;
+            }
+
+            if (sender.HasBuff(Buffs.attackSpeedBuff))
+            {
+                args.attackSpeedMultAdd += 1;
+            }
         }
 
         private void SurvivorMannequinSlotController_ApplyLoadoutToMannequinInstance(On.RoR2.SurvivorMannequins.SurvivorMannequinSlotController.orig_ApplyLoadoutToMannequinInstance orig, RoR2.SurvivorMannequins.SurvivorMannequinSlotController self)
@@ -240,8 +297,6 @@ namespace AliemMod.Content.Survivors
             #region Primary
             Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary);
 
-            #region ray gun
-
             SkillDef primaryGunInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
                 "aliem_primary_gun_inputs",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
@@ -251,7 +306,6 @@ namespace AliemMod.Content.Survivors
                 "Inputs1",
                 true));
             AddWeaponSkin(primaryGunInputsSkillDef, 1);
-            #endregion ray gun
 
             SkillDef primarySwordInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
                 "aliem_primary_sword_inputs",
@@ -287,6 +341,16 @@ namespace AliemMod.Content.Survivors
                 true));
             AddWeaponSkin(primarySawedOffInputsSkillDef, 4);
 
+            SkillDef primaryBBGunInputsSkillDef = Skills.CreateSkillDef(new SkillDefInfo(
+                "aliem_primary_bbgun_inputs",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_BBGUN_INPUTS_NAME",
+                AliemSurvivor.ALIEM_PREFIX + "PRIMARY_BBGUN_INPUTS_DESCRIPTION",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryBBGun"),
+                new EntityStates.SerializableEntityStateType(typeof(FireBBGun)),
+                "Weapon2",
+                true));
+            AddWeaponSkin(primaryBBGunInputsSkillDef, 5);
+
             #region cursed
 
             PassiveBuildupComponentSkillDef primaryInstantSkillDef = Skills.CreateSkillDef<PassiveBuildupComponentSkillDef>(new SkillDefInfo(
@@ -301,7 +365,7 @@ namespace AliemMod.Content.Survivors
             AddWeaponSkin(primaryInstantSkillDef, 1);
             #endregion cursed
 
-            Skills.AddPrimarySkills(bodyPrefab, primaryGunInputsSkillDef, primarySwordInputsSkillDef, primaryRifleInputsSkillDef, primarySawedOffInputsSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, primaryGunInputsSkillDef, primarySwordInputsSkillDef, primaryRifleInputsSkillDef, primarySawedOffInputsSkillDef, primaryBBGunInputsSkillDef);
             if (AliemConfig.Cursed.Value) {
                 Skills.AddPrimarySkills(bodyPrefab, primaryInstantSkillDef);
             }
@@ -554,7 +618,10 @@ namespace AliemMod.Content.Survivors
             WeaponSwapSkillDef weaponSwapSkillDefSawedOff = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primarySawedOffInputsSkillDef);
             AddWeaponSkinSecondary(weaponSwapSkillDefSawedOff.swapSkillDef, 4);
 
-            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, weaponSwapSkillDefBase, weaponSwapSkillDefSword, weaponSwapSkillDefRifle, weaponSwapSkillDefSawedOff);
+            WeaponSwapSkillDef weaponSwapSkillDefBBGun = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primaryBBGunInputsSkillDef);
+            AddWeaponSkinSecondary(weaponSwapSkillDefBBGun.swapSkillDef, 5);
+
+            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, weaponSwapSkillDefBase, weaponSwapSkillDefSword, weaponSwapSkillDefRifle, weaponSwapSkillDefSawedOff, weaponSwapSkillDefBBGun);
             #endregion
             
             if (Compat.ScepterInstalled) {
@@ -563,6 +630,7 @@ namespace AliemMod.Content.Survivors
                 CreateScepterWeaponSwap(weaponSwapSkillDefSword, "texIconAliemPrimarySwordScepter");
                 CreateScepterWeaponSwap(weaponSwapSkillDefRifle, "texIconAliemPrimaryRifleScepter");
                 CreateScepterWeaponSwap(weaponSwapSkillDefSawedOff, "texIconAliemPrimarySawedOffScepter");
+                CreateScepterWeaponSwap(weaponSwapSkillDefBBGun, "texIconAliemPrimaryBBGunScepter");
             }
 
 

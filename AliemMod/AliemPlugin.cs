@@ -68,38 +68,9 @@ public class AliemPlugin : BaseUnityPlugin {
 
         new ContentPacks().Initialize();
 
-        Hook();
-
         new AliemMod.Content.Survivors.AliemSurvivor().Initialize();
 
         Logger.LogInfo("[Initialized]");
     }
 
-    private void Hook() {
-
-        R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-    }
-
-    private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args) {
-        
-        if (sender.HasBuff(Buffs.riddenBuff)) {
-            args.moveSpeedMultAdd += 1.3f;
-            //args.attackSpeedMultAdd += 1.2f;
-        }
-
-        if (sender.HasBuff(Buffs.diveBuff))
-        {
-            args.armorAdd += AliemConfig.M3_Leap_Armor.Value;
-        }
-
-        if (sender.HasBuff(Buffs.ridingBuff))
-        {
-            args.armorAdd += AliemConfig.M3_Leap_RidingArmor.Value;
-        }
-
-        if (sender.HasBuff(Buffs.attackSpeedBuff))
-        {
-            args.attackSpeedMultAdd += 1;
-        }
-    }
 }
