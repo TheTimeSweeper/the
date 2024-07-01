@@ -74,8 +74,8 @@ namespace ModdedEntityStates.Desolator {
             }
 
             //bit of a hack to get around Body ESM not being in GenericCharacterMain
-            if (isAuthority && base.inputBank.skill4.justReleased && _inputDown) {
-                skillLocator.special.ExecuteIfReady();
+            if (isAuthority && base.inputBank.skill4.justPressed && _inputDown) {
+                outer.SetNextState(new DeployCancel());
             }
             
             if (isAuthority && inputBank.skill3.justPressed) {
@@ -138,8 +138,6 @@ namespace ModdedEntityStates.Desolator {
 
             if (!_complete) {
                 aimRequest?.Dispose();
-
-                skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
                 PlayCrossfade("FullBody, Override", "BufferEmpty", 0.5f);
 

@@ -1,4 +1,9 @@
 ## Changelog
+`2.2.4`
+- fixed desolator scepter forever
+    - completely removed the troublesome part of desolator's special code and replaced it with jank
+    - but jank that shouldn't fail anymore
+
 `2.2.3`
 - fixed desolator scepter resetting when zetaspects is installed
   - *skill will still reset if a buff is lost while in special because of code jank on scepter's end. full fix to completely workaround all this coming at some point.*

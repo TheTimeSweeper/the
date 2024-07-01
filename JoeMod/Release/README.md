@@ -22,7 +22,7 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
   - Aetherium (Item Displays)
   - CustomEmotesAPI
 
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/CSS2.png)]()
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/CSS2.png)
 
 Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7).  
 ___
@@ -30,12 +30,12 @@ ___
 Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
 
 Tesla Trooper is a mid-range bruiser on his own, and an all-range monster when he builds his Tesla Tower.  
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/zaps_combined.png)]()
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/zaps_combined.png)
 
 Desolator is a walking powerhouse of radiation and area damage.  
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/rad.png)]()
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/rad.png)
 
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/Icons.png)]()
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/Icons.png)
 
 ## Credits
 SkeletorChampion - Made the character models (which kicked off the mod. Without him, the mod wouldn't exist.), and grandmastery skin  
@@ -76,10 +76,15 @@ Currently Supported:
 
 ___
 for no particular reason I made a cool skin for minecraft check it out   
-[![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)]()
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/theUnityProject/Assets/_Kniggas/TeslaTrooper/TeslaBundle/textures/MC/MCSkin.png)
 ___
 ## Changelog
 see Changelog tab for more  
+
+`2.2.4`
+- fixed desolator scepter forever
+    - completely removed the troublesome part of desolator's special code and replaced it with jank
+    - but jank that shouldn't fail anymore
 
 `2.2.3`
 - fixed desolator scepter resetting when zetaspects is installed

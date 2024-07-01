@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 
-namespace RA2Mod.General.Components {
     public class nopejs : MonoBehaviour {
         [SerializeField, Range(-1, 1)]
         private float x;
@@ -17,4 +16,3 @@ namespace RA2Mod.General.Components {
             transform.Rotate(new Vector3(x, y, z) * mult * Time.deltaTime);
         }
     }
-}

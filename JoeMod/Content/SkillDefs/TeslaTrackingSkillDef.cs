@@ -2,8 +2,8 @@
 using RoR2;
 using RoR2.Skills;
 
-namespace TeslaTrooper {
-
+namespace TeslaTrooper
+{
     public class TeslaTrackingSkillDef : SkillDef {
 
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot) {

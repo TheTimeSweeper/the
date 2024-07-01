@@ -48,6 +48,13 @@ namespace ModdedEntityStates.Desolator {
             fireProjectileInfo.crit = _crit;
         }
 
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            StartAimMode();
+        }
+
         public override void OnProjectileFiredLocal() {
             Util.PlaySound("Play_Desolator_Beam_Deep2", gameObject);
 

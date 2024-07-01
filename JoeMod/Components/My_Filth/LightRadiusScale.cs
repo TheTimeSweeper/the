@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 
-namespace RA2Mod.General.Components {
     [RequireComponent(typeof(Light))]
     public class LightRadiusScale : MonoBehaviour {
         [SerializeField]
@@ -14,4 +13,3 @@ namespace RA2Mod.General.Components {
             light.range = transform.lossyScale.x * 2 * sizeMultiplier;
         }
     }
-}

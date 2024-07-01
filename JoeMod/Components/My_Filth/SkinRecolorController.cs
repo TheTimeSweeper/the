@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-namespace RA2Mod.General.Components {
     [System.Serializable]
     public class Recolor {
 
@@ -95,4 +94,3 @@ namespace RA2Mod.General.Components {
             }
         }
     }
-}

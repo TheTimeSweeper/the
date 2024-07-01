@@ -2,7 +2,6 @@
 using RoR2;
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Desolator.Components {
     public class SpawnProjectileOnAnimation : MonoBehaviour {
 
         [SerializeField]
@@ -12,4 +11,3 @@ namespace RA2Mod.Survivors.Desolator.Components {
             EntityStateMachine.FindByCustomName(characterModel.body.gameObject, "Weapon").SetNextState(new ModdedEntityStates.Desolator.EmoteRadiationProjectile());
         }
     }
-}

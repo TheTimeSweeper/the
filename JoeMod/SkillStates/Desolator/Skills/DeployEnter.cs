@@ -47,16 +47,15 @@ namespace ModdedEntityStates.Desolator {
         
         public override void OnExit() {
             base.OnExit();
-            if (_complete) {
-                skillLocator.special.SetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
-            } else {
-                aimRequest.Dispose();
 
-                skillLocator.special.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            if (_complete)
+                return;
+            
+            aimRequest.Dispose();
 
-                PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
-                PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
-            }
+
+            PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
+            PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
         }
         
         public override InterruptPriority GetMinimumInterruptPriority() {

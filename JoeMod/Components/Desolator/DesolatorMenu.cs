@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-namespace RA2Mod.Survivors.Desolator.Components {
     public class DesolatorMenu : MonoBehaviour {
 
         [SerializeField]
@@ -22,4 +21,3 @@ namespace RA2Mod.Survivors.Desolator.Components {
             }
         }
     }
-}

@@ -14,7 +14,6 @@ using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using Modules.Achievements;
 using EntityStates;
-using RA2Mod.General.Components;
 
 namespace Modules.Survivors {
 

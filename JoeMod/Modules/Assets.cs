@@ -11,7 +11,6 @@ using System.Linq;
 using RoR2.Projectile;
 using ThreeEyedGames;
 using ModdedEntityStates.Desolator;
-using RA2Mod.General.Components;
 
 namespace Modules {
     internal static class Assets

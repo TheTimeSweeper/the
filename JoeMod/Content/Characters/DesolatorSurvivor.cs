@@ -14,7 +14,6 @@ using RoR2.Orbs;
 using ModdedEntityStates.Desolator;
 using RoR2.Projectile;
 using EntityStates;
-using RA2Mod.General.Components;
 
 namespace Modules.Survivors {
     internal class DesolatorSurvivor : SurvivorBase {
@@ -59,8 +58,6 @@ namespace Modules.Survivors {
         
         public static DeployableSlot irradiatorDeployableSlot;
         public DeployableAPI.GetDeployableSameSlotLimit GetIrradiatorSlotLimit;
-
-        public static SkillDef cancelDeploySkillDef;
         
         public static float DotDamage = 0.07f;
         public static float DotInterval = 0.5f;
@@ -261,19 +258,19 @@ namespace Modules.Survivors {
 
         private void InitializeSpecialSkills() {
             
-            SkillDef deploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+            FuckingDesolatorDeploySkillDef deploySkillDef = Modules.Skills.CreateSkillDef<FuckingDesolatorDeploySkillDef>(new SkillDefInfo {
                 skillName = "Desolator_Special_Deploy",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_NAME",
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecial"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployEnter)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployIrradiate)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = false,
+                fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -284,30 +281,8 @@ namespace Modules.Survivors {
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
             });
-
-            cancelDeploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
-
-                skillName = "Desolator_Special_Deploy_Cancel",
-                skillNameToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_NAME",
-                skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_DEPLOY_CANCEL_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialCancel"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DeployCancel)),
-                activationStateMachineName = "Body",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Frozen,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = true,
-                rechargeStock = 0,
-                requiredStock = 0,
-                stockToConsume = 0,
-            });
+            deploySkillDef.actualActivationState = new SerializableEntityStateType(typeof(DeployEnter));
+            deploySkillDef.cancelIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialCancel");
 
             SkillDef irradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower",
@@ -339,19 +314,20 @@ namespace Modules.Survivors {
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void InitializeScepterSkills() {
 
-            SkillDef scepterDeploySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
+            FuckingDesolatorDeploySkillDef scepterDeploySkillDef = Modules.Skills.CreateSkillDef<FuckingDesolatorDeploySkillDef>(new SkillDefInfo
+            {
                 skillName = "Desolator_Special_Deploy_Scepter",
                 skillNameToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_DEPLOY_NAME",
                 skillDescriptionToken = DESOLATOR_PREFIX + "SPECIAL_SCEPTER_DEPLOY_DESCRIPTION",
                 skillIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialScepter"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ScepterDeployEnter)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ScepterDeployIrradiate)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = false,
+                fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -363,9 +339,10 @@ namespace Modules.Survivors {
 
                 keywordTokens = new string[] { "KEYWORD_RADIATION_SPECIAL" }
             });
+            scepterDeploySkillDef.actualActivationState = new SerializableEntityStateType(typeof(ScepterDeployEnter));
+            scepterDeploySkillDef.cancelIcon = Assets.LoadAsset<Sprite>("texDesolatorSkillSpecialCancel");
 
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterDeploySkillDef, "DesolatorBody", SkillSlot.Special, 0);
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterDeploySkillDef, "DesolatorBody", cancelDeploySkillDef);
 
             SkillDef scepterIrradiatorSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo {
                 skillName = "Desolator_Special_Tower_Scepter",

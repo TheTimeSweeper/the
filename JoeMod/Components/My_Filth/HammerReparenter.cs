@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 
-namespace RA2Mod.Survivors.Tesla.Components {
     public class HammerReparenter : MonoBehaviour {
         [SerializeField]
         private Transform hammer;
@@ -18,4 +17,3 @@ namespace RA2Mod.Survivors.Tesla.Components {
             hammer.localRotation = Quaternion.identity;
         }
     }
-}
