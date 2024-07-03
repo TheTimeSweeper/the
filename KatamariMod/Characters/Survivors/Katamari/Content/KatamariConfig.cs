@@ -9,6 +9,8 @@ namespace KatamariMod.Survivors.Katamari
         public static ConfigEntry<float> passive_speedAttackMultiplier;
 
         public static ConfigEntry<float> ChargeRoll_Multiplier;
+        public static ConfigEntry<float> shoveSpeed;
+        public static ConfigEntry<float> impactBounceMultiplier;
 
         public static void Init()
         {
@@ -44,6 +46,23 @@ namespace KatamariMod.Survivors.Katamari
                 "",
                 0,
                 10);
+
+            shoveSpeed = Modules.Config.BindAndOptionsSlider(
+                section,
+                nameof(shoveSpeed),
+                2f,
+                "",
+                0,
+                100);
+
+
+            impactBounceMultiplier = Modules.Config.BindAndOptionsSlider(
+                section,
+                nameof(impactBounceMultiplier),
+                10f,
+                "",
+                0,
+                100);
         }
     }
 }

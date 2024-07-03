@@ -45,7 +45,7 @@ namespace KatamariMod.Survivors.Katamari
             healthRegen = 1.5f,
             armor = 0f,
 
-            jumpCount = 2,
+            jumpCount = 1,
         };
 
         public override UnlockableDef characterUnlockableDef => KatamariUnlockables.characterUnlockableDef;
@@ -98,7 +98,7 @@ namespace KatamariMod.Survivors.Katamari
         {
             AddHitboxes();
 
-            //prefabCharacterModel.transform.Find("Katamari").gameObject.AddComponent<RollUp>().model = prefabCharacterModel;
+            prefabCharacterModel.transform.Find("Katamari").gameObject.AddComponent<RollUp>().model = prefabCharacterModel;
 
             //todo fail
             bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Commando.DeathState));
@@ -133,28 +133,28 @@ namespace KatamariMod.Survivors.Katamari
         {
             Skills.ClearGenericSkills(bodyPrefab);
 
-            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary);
+            Skills.CreateSkillFamilies(bodyPrefab, SkillSlot.Primary, SkillSlot.Utility);
 
             AddPrmarySkills();
             //AddSecondarySkills();
-            //AddUtiitySkills();
+            AddUtiitySkills();
             //AddSpecialSkills();
         }
         
         private void AddPrmarySkills()
         {
-            SkillDef slashSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef primarySkillDef = Skills.CreateSkillDef(new SkillDefInfo
                 (
-                    "chargeupRoll",
-                    JOHNSON_PREFIX + "PRIMARY_ROLL_NAME",
-                    JOHNSON_PREFIX + "PRIMARY_ROLL_DESCRIPTION",
+                    "shove",
+                    JOHNSON_PREFIX + "PRIMARY_SHOVE_NAME",
+                    JOHNSON_PREFIX + "PRIMARY_SHOVE_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texIconSkillPrimary"),
-                    new EntityStates.SerializableEntityStateType(typeof(States.ChargeUpRoll)),
+                    new EntityStates.SerializableEntityStateType(typeof(States.Shove)),
                     "Weapon",
                     true
                 ));
 
-            Skills.AddPrimarySkills(bodyPrefab, slashSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, primarySkillDef);
         }
 
         //private void AddSecondarySkills()
@@ -194,31 +194,31 @@ namespace KatamariMod.Survivors.Katamari
         //    Skills.AddSecondarySkills(bodyPrefab, gunSkillDef);
         //}
 
-        //private void AddUtiitySkills()
-        //{
-        //    //here's a skilldef of a typical movement skill. some fields are omitted and will just have default values
-        //    SkillDef rollSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-        //    {
-        //        skillName = "PlagueBlastJump",
-        //        skillNameToken = PLAGUE_PREFIX + "UTILITY_ROLL_NAME",
-        //        skillDescriptionToken = PLAGUE_PREFIX + "UTILITY_ROLL_DESCRIPTION",
-        //        skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillPlagueBlastJump"),
+        private void AddUtiitySkills()
+        {
+            //here's a skilldef of a typical movement skill. some fields are omitted and will just have default values
+            SkillDef rollSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "chargeuproll",
+                skillNameToken = JOHNSON_PREFIX + "UTILITY_ROLL_NAME",
+                skillDescriptionToken = JOHNSON_PREFIX + "UTILITY_ROLL_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconSkillUtilityRoll"),
 
-        //        activationState = new EntityStates.SerializableEntityStateType(typeof(SimpleBlastJump)),
-        //        activationStateMachineName = "Body",
-        //        interruptPriority = EntityStates.InterruptPriority.Skill,
-                
-        //        baseMaxStock = 2,
-        //        baseRechargeInterval = 8f,
+                activationState = new EntityStates.SerializableEntityStateType(typeof(States.ChargeUpRoll)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
 
-        //        isCombatSkill = false,
-        //        mustKeyPress = true,
-        //        forceSprintDuringState = true,
-        //        cancelSprintingOnActivation = false,
-        //    });
+                baseMaxStock = 1,
+                baseRechargeInterval = 8f,
 
-        //    Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
-        //}
+                isCombatSkill = false,
+                mustKeyPress = true,
+                forceSprintDuringState = true,
+                cancelSprintingOnActivation = false,
+            });
+
+            Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
+        }
 
         //private void AddSpecialSkills()
         //{

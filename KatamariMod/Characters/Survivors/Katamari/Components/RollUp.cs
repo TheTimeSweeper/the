@@ -35,7 +35,7 @@ namespace KatamariMod.Characters.Survivors.Katamari.Components
         {
             //if (other.gameObject.layer == RoR2.LayerIndex.defaultLayer.intVal)
             //{
-
+            return;
             if (other.TryGetComponent(out CharacterBody body) && model.body == body)
             {
                 return;

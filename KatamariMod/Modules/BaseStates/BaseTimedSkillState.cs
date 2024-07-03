@@ -4,33 +4,36 @@ using System;
 namespace KatamariMod.SkillStates.BaseStates
 {
     //see example skills below
-    public class BaseTimedSkillState : BaseSkillState
+    public abstract class BaseTimedSkillState : BaseSkillState
     {
         //total duration of the move
-        public float TimedBaseDuration;
+        public abstract float TimedBaseDuration { get; }
 
-        //time relative to duration that the skill starts
+        //0-1 time relative to duration that the skill starts
         //for example, set 0.5 and the "cast" will happen halfway through the skill
-        public float TimedBaseCastStartTime;
-        public float TimedBaseCastEndTime;
+        public abstract float TimedBaseCastStartPercentTime { get; }
+        public virtual float TimedBaseCastEndPercentTime => 1;
+
+        public virtual bool DontAttackSpeed => false;
 
         protected float duration;
-        protected float castStartPercentTime;
-        protected float castEndPercentTime;
+        protected float castStartTime;
+        protected float castEndTime;
         protected bool hasFired;
         protected bool isFiring;
         protected bool hasExited;
 
-        //initialize your time values here
-        protected virtual void InitDurationValues(float baseDuration, float castStartPercentTime, float castEndPercentTime = 1)
+        public override void OnEnter()
         {
-            TimedBaseDuration = baseDuration;
-            TimedBaseCastStartTime = castStartPercentTime;
-            TimedBaseCastEndTime = castEndPercentTime;
+            InitDurationValues();
+            base.OnEnter();
+        }
 
-            duration = TimedBaseDuration / base.attackSpeedStat;
-            this.castStartPercentTime = castStartPercentTime * duration;
-            this.castEndPercentTime = castEndPercentTime * duration;
+        protected virtual void InitDurationValues()
+        {
+            duration = TimedBaseDuration / (DontAttackSpeed? 1 : attackSpeedStat);
+            this.castStartTime = TimedBaseCastStartPercentTime * duration;
+            this.castEndTime = TimedBaseCastEndPercentTime * duration;
         }
 
         protected virtual void OnCastEnter() { }
@@ -42,15 +45,8 @@ namespace KatamariMod.SkillStates.BaseStates
         {
             base.FixedUpdate();
 
-            //wait start duration and fire
-            if(!hasFired && fixedAge > castStartPercentTime)
-            {
-                hasFired = true;
-                OnCastEnter();
-            }
-
-            bool fireStarted = fixedAge >= castStartPercentTime;
-            bool fireEnded = fixedAge >= castEndPercentTime;
+            bool fireStarted = fixedAge >= castStartTime;
+            bool fireEnded = fixedAge >= castEndTime;
             isFiring = false;
 
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
@@ -58,19 +54,29 @@ namespace KatamariMod.SkillStates.BaseStates
             {
                 isFiring = true;
                 OnCastFixedUpdate();
+                if (!hasFired)
+                {
+                    OnCastEnter();
+                    hasFired = true;
+                }
             }
 
-            if(fireEnded && !hasExited)
+            if (fireEnded && !hasExited)
             {
                 hasExited = true;
                 OnCastExit();
             }
 
-            if(fixedAge > duration)
+            if (fixedAge > duration)
             {
-                outer.SetNextStateToMain();
+                SetNextState();
                 return;
             }
+        }
+
+        protected virtual void SetNextState()
+        {
+            outer.SetNextStateToMain();
         }
 
         public override void Update()
@@ -80,53 +86,6 @@ namespace KatamariMod.SkillStates.BaseStates
             {
                 OnCastUpdate();
             }
-        }
-    }
-
-    public class ExampleTimedSkillState : BaseTimedSkillState
-    {
-        public static float SkillBaseDuration = 1.5f;
-        public static float SkillStartTime = 0.2f;
-        public static float SkillEndTime =  0.9f;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-
-            InitDurationValues(SkillBaseDuration, SkillStartTime, SkillEndTime);
-        }
-
-        protected override void OnCastEnter()
-        {
-            //perform my skill after 0.3 seconds of windup
-        }
-
-        protected override void OnCastFixedUpdate()
-        {
-            //perform some continuous action after the windup, which will end .15 seconds before the full duration
-        }
-
-        protected override void OnCastExit()
-        {
-            //probably play an animation at the end of the action
-        }
-    }
-
-    public class ExampleDelayedSkillState : BaseTimedSkillState
-    {
-        public static float SkillBaseDuration = 1.5f;
-        public static float SkillStartTime = 0.2f;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-
-            InitDurationValues(SkillBaseDuration, SkillStartTime);
-        }
-
-        protected override void OnCastEnter()
-        {
-            //perform my skill after 0.3 seconds of windup
         }
     }
 }

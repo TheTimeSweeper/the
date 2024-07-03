@@ -8,7 +8,6 @@ using RoR2.Audio;
 
 namespace KatamariMod.Survivors.Katamari.States
 {
-
     public class KatamariCharacterMain : GenericCharacterMain
     {
         private OverlapAttack overlapAttack;
@@ -27,8 +26,10 @@ namespace KatamariMod.Survivors.Katamari.States
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
+            
             float speed = velocity.magnitude;
+            float rootMotion = characterMotor.rootMotion.magnitude;
+            if(Input.GetKey(KeyCode.G)) Log.Warning(rootMotion);
 
             if (speed >= KatamariConfig.passive_speedAttackThreshold.Value)
             {
@@ -36,7 +37,13 @@ namespace KatamariMod.Survivors.Katamari.States
                 {
                     InitAttack(speed);
                 }
-                overlapAttack.Fire();
+                bool hit = overlapAttack.Fire();
+                if (hit)
+                {
+                    Vector3 recoilVelocity = Vector3.Cross(Vector3.Cross(GetAimRay().direction, Vector3.up), Vector3.down);
+                    recoilVelocity = -recoilVelocity + Vector3.up * 0.5f;
+                    characterMotor.velocity = recoilVelocity * KatamariConfig.impactBounceMultiplier.Value;
+                }
             }
 
             wasAttacking = speed >= KatamariConfig.passive_speedAttackThreshold.Value;

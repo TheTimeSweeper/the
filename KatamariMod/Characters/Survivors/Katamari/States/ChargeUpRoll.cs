@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using RoR2;
 
 namespace KatamariMod.Survivors.Katamari.States
 {
@@ -6,13 +7,31 @@ namespace KatamariMod.Survivors.Katamari.States
     {
         private float speed;
 
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            characterMotor.onHitGroundServer += CharacterMotor_onHitGround;
+
+            if ((characterBody.bodyFlags & CharacterBody.BodyFlags.IgnoreFallDamage) == CharacterBody.BodyFlags.IgnoreFallDamage)
+                return;
+
+            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
+        }
+
+        private void CharacterMotor_onHitGround(ref RoR2.CharacterMotor.HitGroundInfo hitGroundInfo)
+        {
+            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
+            characterMotor.onHitGroundServer -= CharacterMotor_onHitGround;
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
             speed += KatamariConfig.ChargeRoll_Multiplier.Value;
 
-            if (!inputBank.skill1.down)
+            if (!IsKeyDownAuthority())
             {
                 characterMotor.velocity = GetAimRay().direction.normalized * speed;
                 Log.Warning(speed);
