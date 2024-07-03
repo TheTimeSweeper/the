@@ -11,8 +11,7 @@ namespace RA2Mod.Minions.TeslaTower.States
 
     public class TowerBigZap : TowerZap
     {
-
-        public static Action<GameObject> onTowerBigZapMultiHit;
+        public static event Action<GameObject> onTowerBigZapMultiHit;
 
         new public static float DamageCoefficient = 15.0f;
         new public static float ProcCoefficient = 1f;

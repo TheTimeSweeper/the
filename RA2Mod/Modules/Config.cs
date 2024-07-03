@@ -42,6 +42,8 @@ namespace RA2Mod.Modules
 
         private static bool enableAll = true;
 
+        private static bool loadedIcon;
+
         public static void DisableSection(string section)
         {
             disabledSections.Add(section);
@@ -204,6 +206,18 @@ namespace RA2Mod.Modules
             if (entry is BepInEx.Configuration.ConfigEntry<KeyboardShortcut>)
             {
                 ModSettingsManager.AddOption(new KeyBindOption(entry as BepInEx.Configuration.ConfigEntry<KeyboardShortcut>, restartRequired));
+            }
+            if (!loadedIcon)
+            {
+                loadedIcon = true;
+                try
+                {
+                    ModSettingsManager.SetModIcon(ImgHandler.LoadSpriteFromModFolder("icon.png"));
+                }
+                catch (System.Exception e)
+                {
+                    Log.Error("error adding ROO mod icon\n" + e);
+                }
             }
         }
 

@@ -674,7 +674,7 @@ namespace RA2Mod.Modules
             {
                 UnityEngine.Object.Destroy(drivers[i]);
             }
-
+            
             return masterObject;
         }
 

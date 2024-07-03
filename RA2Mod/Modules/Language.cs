@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace RA2Mod.Modules {
-
+namespace RA2Mod.Modules
+{
     internal static class LanguageAPI
     {
         public static void Add(string token, string text)
