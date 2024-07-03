@@ -1,7 +1,6 @@
 ﻿using AliemMod.Components;
 using AliemMod.Components.Bundled;
 using AliemMod.Content.SkillDefs;
-using AliemMod.Content.SkillStates.Aliem.BBGun;
 using AliemMod.Modules;
 using AliemMod.Modules.Characters;
 using BepInEx.Configuration;
@@ -32,7 +31,7 @@ namespace AliemMod.Content.Survivors
         public const string ALIEM_PREFIX = AliemPlugin.DEV_PREFIX + "_ALIEM_BODY_";
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => ALIEM_PREFIX;
-
+        
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo {
             bodyPrefabName = "AliemBody",
             bodyNameToken = ALIEM_PREFIX + "NAME",
@@ -346,8 +345,8 @@ namespace AliemMod.Content.Survivors
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_BBGUN_INPUTS_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_BBGUN_INPUTS_DESCRIPTION",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryBBGun"),
-                new EntityStates.SerializableEntityStateType(typeof(FireBBGun)),
-                "Weapon2",
+                new EntityStates.SerializableEntityStateType(typeof(InputBBGun)),
+                "Inputs1",
                 true));
             AddWeaponSkin(primaryBBGunInputsSkillDef, 5);
 
@@ -438,6 +437,14 @@ namespace AliemMod.Content.Survivors
                 "texIconAliemSecondarySawedOffBig",
                 new EntityStates.SerializableEntityStateType(typeof(ShootSawedOffCharged)));
             WeaponChargedSecondaryController.skillPairs[primarySawedOffInputsSkillDef] = SecondarySawedOffSkillDef;
+
+            SkillDef SecondaryBBGunSkillDef = Skills.CloneSkillDef<SkillDef>(
+                SecondaryChargedSkillDef,
+                "secondary_bbgun",
+                ALIEM_PREFIX,
+                "texIconAliemSecondaryBBGunBig",
+                new EntityStates.SerializableEntityStateType(typeof(FireBBGunCharged)));
+            WeaponChargedSecondaryController.skillPairs[primaryBBGunInputsSkillDef] = SecondaryBBGunSkillDef;
 
             SkillDef SecondaryLunarSkillDef = Skills.CloneSkillDef<SkillDef>(
                 SecondaryChargedSkillDef,

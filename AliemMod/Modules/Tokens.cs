@@ -59,6 +59,10 @@ namespace AliemMod.Modules
             LanguageAPI.Add(prefix + "PRIMARY_SAWEDOFF_INPUTS_DESCRIPTION", $"Fire a shotgun blast for {Helpers.DamageText($"{AliemConfig.M1_SawedOff_Bullets.Value}x")}{Helpers.DamageValueText(AliemConfig.M1_SawedOff_Damage.Value)}." +
                 $"\n{Helpers.UtilityText("Hold to charge")} and fire large shotgun shells that barrel through enemies for {Helpers.DamageText("2x")}{Helpers.DamageRangeText(AliemConfig.M1_SawedOffCharged_Damage_Min.Value, AliemConfig.M1_SawedOffCharged_Damage_Max.Value)}.");
 
+            LanguageAPI.Add(prefix + "PRIMARY_BBGUN_INPUTS_NAME", "BB Gun");
+            LanguageAPI.Add(prefix + "PRIMARY_BBGUN_INPUTS_DESCRIPTION", $"Fire a swarm of bees, each dealing {Helpers.DamageValueText(AliemConfig.M1_BBGun_Damage.Value)}." +
+                $"\n{Helpers.UtilityText("Hold to charge")} and release a large bee that repeatedly hits enemies for {Helpers.DamageRangeText(AliemConfig.M1_BBGunCharged_Damage_Min.Value, AliemConfig.M1_BBGunCharged_Damage_Max.Value)}.");
+
             #region cursed
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_NAME", "Ray Gun (instant)");
             LanguageAPI.Add(prefix + "PRIMARY_GUN_INSTANT_DESCRIPTION", $"Shoot your ray gun for min {Helpers.DamageValueText(Components.PassiveBuildupComponent.minCharge*RayGunInstant.builldupDamageCOefficient)}. Passively charges for up to {Helpers.DamageValueText(Components.PassiveBuildupComponent.maxCharge * RayGunInstant.builldupDamageCOefficient)}.");

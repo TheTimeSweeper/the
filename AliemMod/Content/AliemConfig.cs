@@ -10,6 +10,7 @@ namespace AliemMod.Content
 
         public static ConfigEntry<bool> Cursed;
         public static ConfigEntry<bool> GupDefault;
+        public static ConfigEntry<bool> Mashing;
 
         public static ConfigEntry<float> M1_RayGun_Damage;
         public static ConfigEntry<float> M1_RayGun_Duration;
@@ -50,6 +51,9 @@ namespace AliemMod.Content
         public static ConfigEntry<float> M1_BBGun_Interval;
         public static ConfigEntry<float> M1_BBGun_Spread;
         public static ConfigEntry<bool> M1_BBGun_VFXAlways;
+        public static ConfigEntry<float> M1_BBGunCharged_Damage_Min;
+        public static ConfigEntry<float> M1_BBGunCharged_Damage_Max;
+        public static ConfigEntry<float> M1_BBGunCharged_HitInterval;
 
         public static ConfigEntry<float> BBGunRange;
         public static ConfigEntry<float> bbgunMinSpeed;
@@ -104,6 +108,13 @@ namespace AliemMod.Content
                 "\nshould also change the name and sounds but I can't be arsed",
                 true);
 
+            Mashing = Config.BindAndOptions(
+                sectionBody,
+                "Mashing",
+                true,
+                "Set false to disable mash to shoot, hold to charge functionality. Sword is a lot more boring tho");
+
+            #region primary
             M1_RayGun_Damage = Config.BindAndOptions(
                 sectionPrimaries,
                 "M1_RayGun_Damage",
@@ -337,7 +348,7 @@ namespace AliemMod.Content
                 0.3f,
                 0,
                 2,
-                "very low because very high firerate. if you lower firerate, increase this");
+                "very low because very high firerate. if you increase this, lower fire rate");
             M1_BBGun_Interval = Config.BindAndOptions(
                 sectionPrimaries,
                 nameof(M1_BBGun_Interval),
@@ -351,7 +362,7 @@ namespace AliemMod.Content
             M1_BBGun_Spread = Config.BindAndOptions(
                 sectionPrimaries,
                 nameof(M1_BBGun_Spread),
-                0f,
+                10f,
                 10,
                 100,
                 "");
@@ -360,7 +371,33 @@ namespace AliemMod.Content
                 sectionPrimaries,
                 nameof(M1_BBGun_VFXAlways),
                 true,
-                "Set false and some bees will not render to help performance");
+                "Set false and some bees will not render to help performance",
+                true);
+
+            M1_BBGunCharged_Damage_Min = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGunCharged_Damage_Min),
+                0.5f,
+                0,
+                20,
+                "");
+            
+            M1_BBGunCharged_Damage_Max = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGunCharged_Damage_Max),
+                2f,
+                0,
+                20,
+                "");
+
+            M1_BBGunCharged_HitInterval = Config.BindAndOptions(
+                sectionPrimaries,
+                nameof(M1_BBGunCharged_HitInterval),
+                0.5f,
+                -1,
+                2,
+                "interval between repeated hits of the big bee. -1 to only hit once. do not set to 0",
+                true);
 
             BBGunRange = Config.BindAndOptions(
                 sectionDebug,
@@ -406,6 +443,9 @@ namespace AliemMod.Content
                 10,
                 "");
 
+            #endregion primary
+
+            #region utility
             M3_Leap_AlwaysRide = Config.BindAndOptions(
                 sectionUtility,
                 nameof(M3_Leap_AlwaysRide),
@@ -481,7 +521,9 @@ namespace AliemMod.Content
                 nameof(M3_Chomp_HealMissing),
                 true,
                 "Does chomp heal based on missing health or max health");
+            #endregion utility
 
+            #region the rest
             M4_GrenadeDamage = Config.BindAndOptions(
                 sectionTheRest,
                 "M4_GrenadeDamage",
@@ -497,6 +539,7 @@ namespace AliemMod.Content
                 0,
                 20,
                 "");
+            #endregion the rest
 
             #region debug
 

@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using AliemMod.Content;
+using R2API;
 using RoR2;
 using RoR2.Projectile;
 using System;
@@ -13,6 +14,7 @@ namespace AliemMod.Modules
         internal static GameObject SwordProjectilePrefab;
         internal static GameObject SwordProjectilePrefabBig;
         internal static GameObject SawedOffProjectilePrefabBig;
+        internal static GameObject BBGunProjectilePrefabBig;
 
         internal static GameObject GrenadeProjectile;
         internal static GameObject GrenadeProjectileScepter;
@@ -34,6 +36,13 @@ namespace AliemMod.Modules
             Assets.ConvertAllRenderersToHopooShader(SawedOffProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
             SawedOffProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>().impactEffect = Assets.nemforcerImpactEffect;
             SawedOffProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
+
+            BBGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemBBGunProjectileBig", true);
+            ProjectileOverlapAttack BBOverlapAttack = BBGunProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>();
+            BBOverlapAttack.impactEffect = Assets.nemforcerImpactEffect;
+            BBOverlapAttack.resetInterval = AliemConfig.M1_BBGunCharged_HitInterval.Value;
+            BBOverlapAttack.fireFrequency = 1 / AliemConfig.M1_BBGunCharged_HitInterval.Value;
+            Assets.ConvertAllRenderersToHopooShader(BBGunProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
 
             GrenadeProjectile = JankyLoadAliemPrefab("AliemGrenadeProjectile");
             GrenadeProjectile.GetComponent<ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXToolbotQuick");

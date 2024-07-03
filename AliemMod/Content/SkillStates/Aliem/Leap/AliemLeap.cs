@@ -84,7 +84,7 @@ namespace ModdedEntityStates.Aliem
 			base.characterMotor.airControl = BaseLeap.airControl;
 			Vector3 direction = base.GetAimRay().direction;
 			if (base.isAuthority) {
-				direction.y = Mathf.Max(direction.y, BaseLeap.minimumY);
+				//direction.y = Mathf.Max(direction.y, BaseLeap.minimumY);
 				Vector3 a = direction.normalized * BaseLeap.aimVelocity * this.moveSpeedStat * (characterBody.isSprinting ? 1: characterBody.sprintingSpeedMultiplier);
 				Vector3 b = Vector3.up * BaseLeap.upwardVelocity;
 				Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * BaseLeap.forwardVelocity;

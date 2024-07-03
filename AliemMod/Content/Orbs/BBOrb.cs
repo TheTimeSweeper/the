@@ -3,7 +3,9 @@ using AliemMod.Modules;
 using RoR2;
 using RoR2.Orbs;
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using static RoR2.BulletAttack;
 
 namespace AliemMod.Content.Orbs
 {
@@ -18,9 +20,6 @@ namespace AliemMod.Content.Orbs
         public bool isCrit;
         public ProcChainMask procChainMask;
         public float procCoefficient;
-
-        private BulletAttack _backupBulletAttack;
-        private bool _bulletHit;
 
         public override void Begin()
         {
@@ -39,9 +38,9 @@ namespace AliemMod.Content.Orbs
                 start = this.targetPosition,
                 genericFloat = base.duration
             };
-            if (target != null) {
-                effectData.SetHurtBoxReference(target);
-            }
+            //if (target != null) {
+            //    effectData.SetHurtBoxReference(target);
+            //}
             EffectManager.SpawnEffect(Assets.BBOrbEffect, effectData, true);
         }
 
@@ -67,56 +66,7 @@ namespace AliemMod.Content.Orbs
                     GlobalEventManager.instance.OnHitEnemy(damageInfo, healthComponent.gameObject);
                     GlobalEventManager.instance.OnHitAll(damageInfo, healthComponent.gameObject);
                 }
-            } 
-            else if ((targetPosition != origin))
-            {
-                Firebullet();
             }
-
-        }
-
-        private void Firebullet()
-        {
-            if (_bulletHit)
-                return;
-
-            //todo move to state and do authority
-            //if (_backupBulletAttack == null)
-            //{
-                /*_backupBulleAttack = */new BulletAttack
-                {
-                    bulletCount = 1,
-                    aimVector = targetPosition - attackOrigin,
-                    origin = attackOrigin,
-                    damage = damageValue,
-                    damageColorIndex = DamageColorIndex.Default,
-                    damageType = DamageType.Generic,
-                    falloffModel = BulletAttack.FalloffModel.None,
-                    maxDistance = Vector3.Distance(origin, targetPosition),
-                    force = 0,
-                    hitMask = LayerIndex.CommonMasks.bullet,
-                    minSpread = 0,
-                    maxSpread = 0,
-                    isCrit = isCrit,
-                    owner = attacker,
-                    smartCollision = false,
-                    procChainMask = default,
-                    procCoefficient = procCoefficient,
-                    radius = 0.3f,
-                    tracerEffectPrefab = null,
-                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                    hitEffectPrefab = null,
-                    //hitCallback = hitCallback
-                }.Fire();
-            //}
-
-            //_backupBulletAttack.Fire();
-        }
-
-        private bool hitCallback(BulletAttack bulletAttack, ref BulletAttack.BulletHit hitInfo)
-        {
-            _bulletHit = BulletAttack.defaultHitCallback(bulletAttack, ref hitInfo);
-            return _bulletHit;
         }
     }
 }

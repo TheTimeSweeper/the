@@ -245,6 +245,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_AliemBB" ID="{8A22F253-4D23-4D56-897D-A4DFAECB94EC}">
+					<ChildrenList>
+						<Action Name="" ID="{01296314-759B-4137-AB4B-9CD6BAF5EBAD}" ShortID="840238286">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemBB" ID="{1849FE57-F501-4248-A79A-CF144C141E2E}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AliemBBCharged" ID="{6AA18269-AC73-4A77-A919-4DE91D39B46A}">
+					<ChildrenList>
+						<Action Name="" ID="{DE8BF525-7A67-48A3-ABA5-822D830A867E}" ShortID="932210676">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AliemBBCharged" ID="{4BEFBE63-6136-4670-8A65-EF6F56C1A14D}" WorkUnitID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

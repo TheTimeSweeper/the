@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using AliemMod.Content;
+using EntityStates;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -50,6 +51,21 @@ namespace ModdedEntityStates.Aliem
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            if (!AliemConfig.Mashing.Value)
+            {
+                if (outputESM.CanInterruptState(mashInterruptPriority))
+                {
+                    onFire?.Invoke();
+                    characterBody.OnSkillActivated(activatorSkillSlot);
+                    outputESM.SetInterruptState(SetHandedness(newMashState), mashInterruptPriority);
+                }
+                if (!GetSkillButton().down && isAuthority)
+                {
+                    outer.SetNextStateToMain();
+                }
+                return;
+            }
 
             if (!_holding)
             {
@@ -125,6 +141,17 @@ namespace ModdedEntityStates.Aliem
             }
 
             //Helpers.LogWarning($"mash {_mashing}, timer {_mashTimer.ToString("0.00")} | hold {_holding} , timer {_holdTimer.ToString("0.00")}");
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            IChannelingSkill channelingstate;
+            if ((channelingstate = outputESM.state as IChannelingSkill) != null)
+            {
+                channelingstate.StopChanneling();
+            }
         }
 
         private InputBankTest.ButtonState GetSkillButton()
