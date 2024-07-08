@@ -96,5 +96,10 @@ namespace AliemMod.Content.Orbs
             _bulletHit = BulletAttack.defaultHitCallback(bulletAttack, ref hitInfo);
             return _bulletHit;
         }
+
+        protected override void ReturnToPool()
+        {
+            AliemPoolManager.instance.ReturnBBOrbMissed(this);
+        }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4578560925962261241}
   - component: {fileID: 4578560925962261240}
   - component: {fileID: 895167517195751806}
-  - component: {fileID: 3569657723492815160}
+  - component: {fileID: 3392652863020704151}
   m_Layer: 0
   m_Name: BBGunOrbEffect
   m_TagString: Untagged
@@ -123,7 +123,7 @@ MonoBehaviour:
   vfxIntensity: 0
   optionalLights: []
   secondaryParticleSystem: []
---- !u!114 &3569657723492815160
+--- !u!114 &3392652863020704151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,11 +132,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4578560925962261243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1431018688, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Script: {fileID: 11500000, guid: 995b115bd2cf548458b01b093f14360b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTrailRenderers:
-  - {fileID: 73117865283193159}
+  effectComponent: {fileID: 4578560925962261241}
+  orbEffectComponent: {fileID: 4578560925962261240}
+  trailRenderer: {fileID: 73117865283193159}
 --- !u!1 &4989338513191843125
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-namespace AliemMod.Components.Bundled {
+namespace AliemMod.Components.Bundled
+{
     public class ControlledBounce: MonoBehaviour {
 
         [SerializeField]

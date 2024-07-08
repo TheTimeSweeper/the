@@ -18,8 +18,8 @@ namespace AliemMod.Content.Orbs
         public float damageValue;
         public GameObject attacker;
         public bool isCrit;
-        public ProcChainMask procChainMask;
-        public float procCoefficient;
+        public ProcChainMask procChainMask = default;
+        public float procCoefficient = AliemConfig.M1_BBGun_ProcCoefficient.Value;
 
         public override void Begin()
         {
@@ -67,6 +67,12 @@ namespace AliemMod.Content.Orbs
                     GlobalEventManager.instance.OnHitAll(damageInfo, healthComponent.gameObject);
                 }
             }
+            ReturnToPool();
+        }
+
+        protected virtual void ReturnToPool()
+        {
+            AliemPoolManager.instance.ReturnBBOrb(this);
         }
     }
 }

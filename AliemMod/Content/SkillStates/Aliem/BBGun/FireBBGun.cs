@@ -15,7 +15,6 @@ namespace ModdedEntityStates.Aliem
     public class FireBBGun : BaseSkillState, IOffHandable, IChannelingSkill
     {
         public float baseDamageCoefficient = AliemConfig.M1_BBGun_Damage.Value;
-        public float baseProcCoefficient = AliemConfig.M1_BBGun_ProcCoefficient.Value;
         public float maxSpread = AliemConfig.M1_BBGun_Spread.Value;
         public float spreadYawScale = AliemConfig.bbgunSpreadYaw.Value;
         public float range => AliemConfig.BBGunRange.Value;
@@ -136,7 +135,7 @@ namespace ModdedEntityStates.Aliem
         {
             HurtBox hitTarget = BootlegCharacterRaycastSingle(gameObject, new Ray(_currentRay.origin, aimVector), out Vector3 hitPoint, range, BulletAttack.defaultStopperMask, QueryTriggerInteraction.UseGlobal);
 
-            BBOrb orb = hitTarget ? new BBOrb() : new BBOrbMissed();
+            BBOrb orb = hitTarget ? AliemPoolManager.instance.RentBBOrb() : AliemPoolManager.instance.RentBBOrbMissed();
 
             orb.targetPosition = hitPoint;
             orb.speed = UnityEngine.Random.Range(AliemConfig.bbgunMinSpeed.Value, AliemConfig.bbgunMaxSpeed.Value);
@@ -144,8 +143,6 @@ namespace ModdedEntityStates.Aliem
             orb.damageValue = damageStat * baseDamageCoefficient;
             orb.attacker = gameObject;
             orb.isCrit = _currentCrit;
-            orb.procChainMask = default;
-            orb.procCoefficient = baseProcCoefficient;
             orb.origin = _muzzleTransform.position;
             orb.target = hitTarget;
 

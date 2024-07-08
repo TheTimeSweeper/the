@@ -70,6 +70,8 @@ public class AliemPlugin : BaseUnityPlugin {
 
         new AliemMod.Content.Survivors.AliemSurvivor().Initialize();
 
+        new AliemPoolManager(transform);
+
         Logger.LogInfo("[Initialized]");
     }
 
