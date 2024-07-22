@@ -99,6 +99,7 @@ namespace AliemMod.Content.Orbs
 
         protected override void ReturnToPool()
         {
+            _attempts = 0;
             AliemPoolManager.instance.ReturnBBOrbMissed(this);
         }
     }

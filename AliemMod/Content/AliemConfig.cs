@@ -51,6 +51,7 @@ namespace AliemMod.Content
         public static ConfigEntry<float> M1_BBGun_Interval;
         public static ConfigEntry<float> M1_BBGun_Spread;
         public static ConfigEntry<bool> M1_BBGun_VFXAlways;
+        public static ConfigEntry<bool> M1_BBGun_VFXPooled;
         public static ConfigEntry<float> M1_BBGunCharged_Damage_Min;
         public static ConfigEntry<float> M1_BBGunCharged_Damage_Max;
         public static ConfigEntry<float> M1_BBGunCharged_HitInterval;
@@ -334,114 +335,121 @@ namespace AliemMod.Content
                 200,
                 "");
 
-            M1_BBGun_Damage = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGun_Damage),
-                0.56f,
-                0,
-                20,
-                "");
+                M1_BBGun_Damage = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGun_Damage),
+                    0.65f,
+                    0,
+                    20,
+                    "");
 
-            M1_BBGun_ProcCoefficient = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGun_ProcCoefficient),
-                0.3f,
-                0,
-                2,
-                "very low because very high firerate. if you increase this, lower fire rate");
-            M1_BBGun_Interval = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGun_Interval),
-                4f,
-                0.01f,
-                1000,
-                "lower interval means fire faster. measured in fixedupdates (frames/ticks). ror2 updates 50 times per frame.\n" +
-                "set 1 to fire 50 times per second. set 5 to fire every 5 updates so 10 times per second, etc\n" +
-                "be careful, this attack scales past framerate");
+                M1_BBGun_ProcCoefficient = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGun_ProcCoefficient),
+                    0.55f,
+                    0,
+                    2,
+                    "very low because very high firerate. if you increase this, lower fire rate");
+                M1_BBGun_Interval = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGun_Interval),
+                    4f,
+                    0.01f,
+                    1000,
+                    "lower interval means fire faster. measured in fixedupdates (frames/ticks). ror2 updates 50 times per frame.\n" +
+                    "set 1 to fire 50 times per second. set 5 to fire every 5 updates so 10 times per second, etc\n" +
+                    "be careful, this attack scales past framerate");
 
-            M1_BBGun_Spread = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGun_Spread),
-                10f,
-                10,
-                100,
-                "");
+                M1_BBGun_Spread = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGun_Spread),
+                    10f,
+                    10,
+                    100,
+                    "");
 
-            M1_BBGun_VFXAlways = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGun_VFXAlways),
-                true,
-                "Set false and some bees will not render to help performance",
-                true);
+                M1_BBGun_VFXAlways = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGun_VFXAlways),
+                    true,
+                    "Set false and some bees will not render to help performance. Damage instances will not be affected",
+                    true);
 
-            M1_BBGunCharged_Damage_Min = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGunCharged_Damage_Min),
-                0.5f,
-                0,
-                20,
-                "");
-            
-            M1_BBGunCharged_Damage_Max = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGunCharged_Damage_Max),
-                2f,
-                0,
-                20,
-                "");
+                M1_BBGun_VFXPooled = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGun_VFXPooled),
+                    false,
+                    "[WIP] Squeezes out some extra frames by putting bees in an object pool.\nDisable if it is causing issues\nI wrote a bunch of code and it only saved like 8fps but it was an improvement so I'm keeping it.",
+                    true);
 
-            M1_BBGunCharged_HitInterval = Config.BindAndOptions(
-                sectionPrimaries,
-                nameof(M1_BBGunCharged_HitInterval),
-                0.5f,
-                -1,
-                2,
-                "interval between repeated hits of the big bee. -1 to only hit once. do not set to 0",
-                true);
+                M1_BBGunCharged_Damage_Min = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGunCharged_Damage_Min),
+                    0.5f,
+                    0,
+                    20,
+                    "");
 
-            BBGunRange = Config.BindAndOptions(
-                sectionDebug,
-                nameof(BBGunRange),
-                10f,
-                0,
-                300,
-                "");
-            bbgunMinSpeed = Config.BindAndOptions(
-                sectionDebug,
-                nameof(bbgunMinSpeed),
-                10f,
-                0,
-                1000,
-                "");
-            bbgunMaxSpeed = Config.BindAndOptions(
-                sectionDebug,
-                nameof(bbgunMaxSpeed),
-                10f,
-                0,
-                1000,
-                "");
-            bbgunSpreadYaw = Config.BindAndOptions(
-                sectionDebug,
-                nameof(bbgunSpreadYaw),
-                1f,
-                0,
-                10,
-                "");
-            bbgunBaseBs = Config.BindAndOptions(
-                sectionDebug,
-                nameof(bbgunBaseBs),
-                2,
-                1,
-                10,
-                "");
+                M1_BBGunCharged_Damage_Max = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGunCharged_Damage_Max),
+                    1.8f,
+                    0,
+                    20,
+                    "");
 
-            bbgunRadius = Config.BindAndOptions(
-                sectionDebug,
-                nameof(bbgunRadius),
-                2,
-                0,
-                10,
-                "");
+                M1_BBGunCharged_HitInterval = Config.BindAndOptions(
+                    sectionPrimaries,
+                    nameof(M1_BBGunCharged_HitInterval),
+                    0.5f,
+                    -1,
+                    2,
+                    "interval between repeated hits of the big bee. -1 to only hit once. do not set to 0",
+                    true);
+
+                BBGunRange = Config.BindAndOptions(
+                    sectionDebug,
+                    nameof(BBGunRange),
+                    42f,
+                    0,
+                    300,
+                    "");
+                bbgunMinSpeed = Config.BindAndOptions(
+                    sectionDebug,
+                    nameof(bbgunMinSpeed),
+                    55f,
+                    0,
+                    1000,
+                    "");
+                bbgunMaxSpeed = Config.BindAndOptions(
+                    sectionDebug,
+                    nameof(bbgunMaxSpeed),
+                    117f,
+                    0,
+                    1000,
+                    "");
+                bbgunSpreadYaw = Config.BindAndOptions(
+                    sectionDebug,
+                    nameof(bbgunSpreadYaw),
+                    2f,
+                    0,
+                    10,
+                    "");
+                bbgunBaseBs = Config.BindAndOptions(
+                    sectionDebug,
+                    nameof(bbgunBaseBs),
+                    2,
+                    1,
+                    10,
+                    "");
+
+                bbgunRadius = Config.BindAndOptions(
+                    sectionDebug,
+                    nameof(bbgunRadius),
+                    2,
+                    0,
+                    10,
+                    "");
 
             #endregion primary
 

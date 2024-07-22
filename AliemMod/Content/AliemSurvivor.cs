@@ -364,9 +364,9 @@ namespace AliemMod.Content.Survivors
             AddWeaponSkin(primaryInstantSkillDef, 1);
             #endregion cursed
 
-            Skills.AddPrimarySkills(bodyPrefab, primaryGunInputsSkillDef, primarySwordInputsSkillDef, primaryRifleInputsSkillDef, primarySawedOffInputsSkillDef, primaryBBGunInputsSkillDef);
+            Skills.AddPrimarySkills(bodyPrefab, primaryGunInputsSkillDef, primarySwordInputsSkillDef, primaryRifleInputsSkillDef, primarySawedOffInputsSkillDef/*, primaryBBGunInputsSkillDef*/);
             if (AliemConfig.Cursed.Value) {
-                Skills.AddPrimarySkills(bodyPrefab, primaryInstantSkillDef);
+                Skills.AddPrimarySkills(bodyPrefab, primaryBBGunInputsSkillDef, primaryInstantSkillDef);
             }
 
             SkillDef lunarPrimaryReplacement = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/LunarSkillReplacements/LunarPrimaryReplacement.asset").WaitForCompletion();
@@ -438,14 +438,16 @@ namespace AliemMod.Content.Survivors
                 new EntityStates.SerializableEntityStateType(typeof(ShootSawedOffCharged)));
             WeaponChargedSecondaryController.skillPairs[primarySawedOffInputsSkillDef] = SecondarySawedOffSkillDef;
 
-            SkillDef SecondaryBBGunSkillDef = Skills.CloneSkillDef<SkillDef>(
+            if (AliemConfig.Cursed.Value)
+            {
+                SkillDef SecondaryBBGunSkillDef = Skills.CloneSkillDef<SkillDef>(
                 SecondaryChargedSkillDef,
                 "secondary_bbgun",
                 ALIEM_PREFIX,
                 "texIconAliemSecondaryBBGunBig",
                 new EntityStates.SerializableEntityStateType(typeof(FireBBGunCharged)));
-            WeaponChargedSecondaryController.skillPairs[primaryBBGunInputsSkillDef] = SecondaryBBGunSkillDef;
-
+                WeaponChargedSecondaryController.skillPairs[primaryBBGunInputsSkillDef] = SecondaryBBGunSkillDef;
+            }
             SkillDef SecondaryLunarSkillDef = Skills.CloneSkillDef<SkillDef>(
                 SecondaryChargedSkillDef,
                 "secondary_lunar",
@@ -625,19 +627,32 @@ namespace AliemMod.Content.Survivors
             WeaponSwapSkillDef weaponSwapSkillDefSawedOff = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primarySawedOffInputsSkillDef);
             AddWeaponSkinSecondary(weaponSwapSkillDefSawedOff.swapSkillDef, 4);
 
-            WeaponSwapSkillDef weaponSwapSkillDefBBGun = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primaryBBGunInputsSkillDef);
-            AddWeaponSkinSecondary(weaponSwapSkillDefBBGun.swapSkillDef, 5);
+            WeaponSwapSkillDef weaponSwapSkillDefBBGun = null;
+            if (AliemConfig.Cursed.Value)
+            {
+                weaponSwapSkillDefBBGun = CreateWeeponSwapSkillDef(weaponSwapSkillDefBase, primaryBBGunInputsSkillDef);
+                AddWeaponSkinSecondary(weaponSwapSkillDefBBGun.swapSkillDef, 5);
+            }
+            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, weaponSwapSkillDefBase, weaponSwapSkillDefSword, weaponSwapSkillDefRifle, weaponSwapSkillDefSawedOff);
 
-            Skills.AddSpecialSkills(bodyPrefab, bombSkillDef, weaponSwapSkillDefBase, weaponSwapSkillDefSword, weaponSwapSkillDefRifle, weaponSwapSkillDefSawedOff, weaponSwapSkillDefBBGun);
+            if (AliemConfig.Cursed.Value)
+            {
+                Skills.AddSpecialSkills(bodyPrefab, weaponSwapSkillDefBBGun);
+
+            }
             #endregion
-            
+
             if (Compat.ScepterInstalled) {
                 InitializeScepterSkills();
                 CreateScepterWeaponSwap(weaponSwapSkillDefBase, "texIconAliemPrimaryGunScepter");
                 CreateScepterWeaponSwap(weaponSwapSkillDefSword, "texIconAliemPrimarySwordScepter");
                 CreateScepterWeaponSwap(weaponSwapSkillDefRifle, "texIconAliemPrimaryRifleScepter");
                 CreateScepterWeaponSwap(weaponSwapSkillDefSawedOff, "texIconAliemPrimarySawedOffScepter");
-                CreateScepterWeaponSwap(weaponSwapSkillDefBBGun, "texIconAliemPrimaryBBGunScepter");
+
+                if (AliemConfig.Cursed.Value)
+                {
+                    CreateScepterWeaponSwap(weaponSwapSkillDefBBGun, "texIconAliemPrimaryBBGunScepter");
+                }
             }
 
 

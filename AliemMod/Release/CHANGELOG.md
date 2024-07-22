@@ -1,4 +1,12 @@
 ## Changelog
+`1.1.0`
+- added config to remove mashing, allowing to simply hold to shoot. this removes the ability to hold to charge of course
+    - let me know if this causes any issues
+- added new WIP weaopn in cursed config, BBGun
+    - Ignore all the empty config entries haha
+    - let me know if this causes any issues
+  - *shoots a ton of bees, but they're optimized as fuck. if you have potato pc please reach out and let me know if it hurts your frames at all*
+
 `1.0.1`
 - fixed close range knife not activating always
 - tweaked its hitboxes, added it to config

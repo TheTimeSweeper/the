@@ -149,14 +149,18 @@ namespace AliemMod.Modules
             AddNewEffectDef(swirlChargeMax);
 
             burrowPopOutEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bell/BellBodyPartsImpact.prefab").WaitForCompletion();
-
-            BBOrbEffect = mainAssetBundle.LoadAsset<GameObject>("BBGunOrbEffect");
-            if (!AliemConfig.M1_BBGun_VFXAlways.Value)
+            if (AliemConfig.Cursed.Value)
             {
-                BBOrbEffect.GetComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Medium;
+                BBOrbEffect = mainAssetBundle.LoadAsset<GameObject>(AliemConfig.M1_BBGun_VFXPooled.Value ? "BBGunOrbEffectPooled" : "BBGunOrbEffect");
+
+                if (!AliemConfig.M1_BBGun_VFXAlways.Value)
+                {
+                    BBOrbEffect.GetComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Medium;
+                }
+                BBOrbEffect = DebugClone(BBOrbEffect, false);
+                AddNewEffectDef(BBOrbEffect);
             }
-            BBOrbEffect = DebugClone(BBOrbEffect, false);
-            AddNewEffectDef(BBOrbEffect);
+
         }
 
         private static void CreateChargedLunarProjectile()

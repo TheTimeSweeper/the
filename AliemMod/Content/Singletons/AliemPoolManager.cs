@@ -1,6 +1,9 @@
 ﻿using AliemMod.Components.Bundled;
 using AliemMod.Content.Orbs;
 using AliemMod.Modules;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using R2API.Utils;
 using RoR2;
 using RoR2.Orbs;
 using System;
@@ -17,24 +20,70 @@ namespace AliemMod.Content
         private Queue<BBOrb> _bbOrbPool = new Queue<BBOrb>();
         private Queue<BBOrbMissed> _bbOrbMissedPool = new Queue<BBOrbMissed>();
         private Queue<PooledOrbEffect> _orbEffectPool = new Queue<PooledOrbEffect>();
-        private List<PooledOrbEffect> _activeOrbEffects = new List<PooledOrbEffect>();
 
-        public Transform parent;
+        public Transform instanceTransform;
 
         public AliemPoolManager(Transform parent) {
             instance = this;
-            this.parent = parent;
+            instanceTransform = parent;
             Hook();
         }
 
         private void Hook()
         {
-            IL.RoR2.EffectManager.SpawnEffect_EffectIndex_EffectData_bool += EffectManager_SpawnEffect_EffectIndex_EffectData_bool;
+            if (AliemConfig.M1_BBGun_VFXPooled.Value)
+            {
+                IL.RoR2.EffectManager.SpawnEffect_EffectIndex_EffectData_bool += EffectManager_SpawnEffect_EffectIndex_EffectData_bool;
+            }
         }
 
         private void EffectManager_SpawnEffect_EffectIndex_EffectData_bool(MonoMod.Cil.ILContext il)
         {
-            //todo IL 00CD if effectdef.prefab == Assets.BBOrbEffect return aliempoolmanager.instance.rentorbeffect
+            ILCursor cursor = new ILCursor(il);
+                
+             cursor.GotoNext(MoveType.Before,
+                 Instruction => Instruction.MatchCall<UnityEngine.Object>("Instantiate")
+                 );
+            cursor.RemoveRange(2);
+            cursor.EmitDelegate<Func<GameObject, Vector3, Quaternion, EffectComponent>>((gob, origin, rotation) =>
+            {
+                if (gob == Assets.BBOrbEffect)
+                {
+                    return instance.RentOrbEffect(origin, rotation);
+                }
+
+                return UnityEngine.Object.Instantiate(gob, origin, rotation).GetComponent<EffectComponent>();
+            });
+
+            //ight I'ma just try remove
+            //cursor.GotoNext(MoveType.After,
+            //    Instruction => Instruction.MatchCallvirt<EffectDef>("get_prefab"),
+            //    Instruction => Instruction.MatchLdloc(3)
+            //    );
+
+            //Helpers.LogWarning(cursor);
+            //ILLabel afterGetPrefabLabel = cursor.MarkLabel();
+
+            //cursor.Index = 0;
+            //cursor.GotoNext(MoveType.Before, Instruction => Instruction.MatchCallvirt<GameObject>("GetComponent"));
+            //ILLabel getComponentLabel = cursor.MarkLabel();
+
+            //cursor.Index = 0;
+
+            //cursor.GotoNext(MoveType.After,
+            //    Instruction => Instruction.MatchCallvirt<EffectDef>("get_prefab")
+            //    );
+            //cursor.EmitDelegate<Func<GameObject, bool>>((gob) => { 
+            //    return gob == Assets.BBOrbEffect; 
+            //});
+            //cursor.Emit(OpCodes.Brtrue, afterGetPrefabLabel);
+            //cursor.Emit(OpCodes.Ldloc_3);
+            //cursor.EmitDelegate<Func<EffectData, EffectComponent>>((effectData) => {
+            //    return AliemPoolManager.instance.RentOrbEffect(effectData);
+            //});
+            //cursor.Emit(OpCodes.Br, getComponentLabel);
+
+            //Helpers.LogWarning(cursor);
         }
 
         #region orbs
@@ -69,7 +118,7 @@ namespace AliemMod.Content
 
         #region here we goo
 
-        public EffectComponent RentOrbEffect(EffectData effectData)
+        public EffectComponent RentOrbEffect(Vector3 origin, Quaternion rotation)
         {
             PooledOrbEffect pooledEffect;
             if (_orbEffectPool.Count > 0)
@@ -79,8 +128,9 @@ namespace AliemMod.Content
             else
             {
                 pooledEffect = UnityEngine.Object.Instantiate(Assets.BBOrbEffect).GetComponent<PooledOrbEffect>();
+                pooledEffect.transform.parent = instanceTransform;
             }
-            pooledEffect.OnRent(effectData);
+            pooledEffect.OnRent(origin, rotation);
             return pooledEffect.effectComponent;
         }
 

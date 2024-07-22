@@ -4,14 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="aliem.bnk" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="aliem.bnk" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
 			<PrivateAssets>all</PrivateAssets>
@@ -24,7 +16,6 @@
 		<PackageReference Include="R2API.Prefab" Version="1.*" />
 		<PackageReference Include="R2API.Language" Version="1.*" />
 		<PackageReference Include="R2API.Sound" Version="1.*" />
-		<PackageReference Include="R2API.Loadout" Version="1.*" />
 		<PackageReference Include="R2API.DamageType" Version="1.*" />
 		<PackageReference Include="R2API.RecalculateStats" Version="1.*" />
 	</ItemGroup>
