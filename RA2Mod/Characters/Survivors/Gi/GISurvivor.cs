@@ -19,7 +19,7 @@ namespace RA2Mod.Survivors.GI
 {
     public class GISurvivor : SurvivorBase<GISurvivor>
     {
-        public override string assetBundleName => "joe";
+        public override string assetBundleName => "joeRA2";
 
         public override string bodyName => "RA2GIBody";
         

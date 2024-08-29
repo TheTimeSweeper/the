@@ -30,7 +30,7 @@ namespace RA2Mod.Survivors.Chrono
         public static ConfigEntry<float> M4_Vanish_TickDamage;
         public static ConfigEntry<float> M4_Vanish_Duration;
         public static ConfigEntry<float> M4_Vanish_ChronoStacksRequired;
-        public const string ConfigVersion = " 0.0.0";
+        public const string ConfigVersion = " 0.0";
         public const string SectionSkills = "1-3. Chrono Skills" + ConfigVersion;
         public const string SectionBody = "1-3. Chrono Body" + ConfigVersion;
 

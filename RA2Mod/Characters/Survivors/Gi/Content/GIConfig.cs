@@ -48,14 +48,14 @@ namespace RA2Mod.Survivors.GI
         public static ConfigEntry<float> M4_Transform_OutDuration;
         public static ConfigEntry<float> M4_Transform_Armor;
 
-        public const string ConfigVersion = " 0.0.0";
+        public const string ConfigVersion = " 0.0";
         public const string SectionSkills = "1-4. G.I. Skills" + ConfigVersion;
         public const string SectionBody = "1-4. G.I. Body" + ConfigVersion;
 
         public static void Init()
         {
-            Config.DisableSection(SectionSkills);
-            Log.Warning(GISurvivor.instance.bodyName);
+            //Config.DisableSection(SectionSkills);
+            //Log.Warning(GISurvivor.instance.bodyName);
             #region m1 1 1
             M1_Pistol_Damage = Config.BindAndOptions(
                 SectionSkills,

@@ -4,7 +4,7 @@ namespace RA2Mod.Survivors.Conscript
 {
     public static class ConscriptConfig
     {
-        public const string ConfigVersion = " 0.0.0";
+        public const string ConfigVersion = " 0.0";
         public const string SectionSkills = "1-5. Conscript Skills" + ConfigVersion;
         public const string SectionBody = "1-5. Conscript Body" + ConfigVersion;
 

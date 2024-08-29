@@ -29,7 +29,7 @@ namespace RA2Mod.Survivors.GI
             string outro = "..and so he left, ra2 quote.";
             string outroFailure = "..and so he vanished, ra2 quote.";
 
-            Language.Add(prefix + "NAME", "G.I.");
+            Language.Add(prefix + "NAME", "G.I. ALPHA");
             Language.Add(prefix + "DESCRIPTION", desc);
             Language.Add(prefix + "SUBTITLE", "ra2 quote");
             Language.Add(prefix + "LORE", "ra2 quote");

@@ -1,3 +1,19 @@
+# Unit Ready
+
+Adds 3 (+1.5 more in config) new survivors, Tesla Trooper, Desolator, and Chrono Legionnaire
+
+Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
+
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/RA2Mod/Release/_readme/Icons.png) 
+
+Anything you'd like to say about the guys, ping me (`thetimesweeper`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7).
+
+## uh Tesla Trooper mod?
+Now that there's more Red Alert characters I'm reuploading the mod under a new name. sorry bout any inconveniences. on the bright side this opens the door for all kinds of Red Alert content in the coming years maybe.  
+Yes I have a lot of ideas but no I won't have time for them anytime soon. here's to hoping I suppose.
+
+I Initially planned this release to include a lot more content and sprucing up for Tesla and Deso to celebrate, but welcome Seekers of the Storm update so here's the wip. have fun love ya
+
 # Electrician In the Field
 Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
 - Item displays and ragdoll
@@ -9,7 +25,11 @@ Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
   - Aetherium (Item Displays)
   - CustomEmotesAPI
   - VRAPI
+  - Risk of Options
 - Y'all remember Red Alert 2?
+
+<img width="900" src="https://raw.githubusercontent.com/TheTimeSweeper/the/master/RA2Mod/Release/_readme/CSS_Tesla.png" />
+
 # SPREAD THE DOOM
 Adds the Desolator, who spreads large spheres of radiation everywhere in his wake.  
 - Item displays and ragdoll
@@ -19,29 +39,30 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
   - Skills++ (one skill lol)
   - Aetherium (Item Displays)
   - CustomEmotesAPI
-  
+
+<img width="900" src="https://raw.githubusercontent.com/TheTimeSweeper/the/master/RA2Mod/Release/_readme/CSS_Deso.png" />
+
 # They're History
 Adds the Chrono Legionnaire, who teleports around and vanishes enemies from existence.  
+- Beta. animations missing, and gameplay still in progress
 - Item displays and ragdoll
 - Fully multiplayer compatible
+- FULLY configurable
 - Mod Support
   - CustomEmotesAPI
+  - Risk of Options
 
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/CSS2.png)
+<img width="900" src="https://raw.githubusercontent.com/TheTimeSweeper/the/master/RA2Mod/Release/_readme/CSS_Chrono.png" />
 
-Anything you'd like to say about the guys, ping me (`TheTimesweeper#5727`) on the ror2 modding discord or the enforcer discord (https://discord.gg/r5XTMFd4W7).  
-___
-## Overview
-Based on their respective units from Red Alert 2, but with SkeletorChampion coming in and saying "nah I'm model them to fit RoR2, and look awesome, and my dong is enormous".
-
-Tesla Trooper is a mid-range bruiser on his own, and an all-range monster when he builds his Tesla Tower.  
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/zaps_combined.png)
-
-Desolator is a walking powerhouse of radiation and area damage.  
+# Checking Designs
+For SotS update I just decided to upload the work-in-progress parts of the mod so fuck it 1.5 more new characters. Enable in config.
+- G.I. is simple shoot man who can deploy to become beefier simple shoot man  
+- Conscript is simple shoot man who builds garrisons to help him simple shoot more  
+___ 
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/zaps_combined.png)  
 ![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/rad.png)
-
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/Icons.png)
-
+Chrono doesn't have screenshots yet but I assure you he is very cool
+___ 
 ## Credits
 SkeletorChampion - Made the character models (which kicked off the mod. Without him, the mod wouldn't exist.), and grandmastery skin  
 Violet Chaolan - wwise sound help  
@@ -49,6 +70,8 @@ SweeperSecret - icons,  <3
 Mr.Bones - mastery skins  
 Jaysian - Lores  
 SOM - animation help  
+Domi - Chrono Animations  
+Blast - Chrono Sounds  
 Moffein - consult, savior  
 DeegerDill - consult  
 Westwood Studios - sounds, inspiration  
@@ -88,42 +111,12 @@ ___
 ## Changelog
 see Changelog tab for more  
 
-`2.2.4`
-- fixed desolator scepter forever
-    - completely removed the troublesome part of desolator's special code and replaced it with jank
-    - but jank that shouldn't fail anymore
-
-`2.2.3`
-- fixed desolator scepter resetting when zetaspects is installed
-  - *skill will still reset if a buff is lost while in special because of code jank on scepter's end. full fix to completely workaround all this coming at some point.*
-- fixed desolator rad cannon not spinning when deployed
-
-`2.2.2`
-- fixed Tesla Trooper Surging Forward while rooted locking you in purgatory 
-- fixed Tesla Trooper M2 conflict with autosprint, only a year after it was reported
-- Desolator passive now counts stacks from SS2U Nucleator dot
-
-`2.2.1`
-- forgot to update text to the changes of last patch woops
- 
-`2.2.0`
-- tesla trooper
-  - passive: ally buff multiplier 1.3 -> 1.1
-  - passive: ally buff shock duration 1 - 3.5
-  - secondary (empowered): 1200% -> 1500%  
-    - *He gets a lot of feedback that he's very strong, this may surprise you, because he also gets a lot of feedback that he's weak.*  
-    - *I suspect a giant culprit is those people don't know to buff the tower before using secondary, missing out on a lot of his potential damage (1200% * 1.3 = 1560%)*  
-    - *These changes remove this aspect from being a necessity, in exchange buffing a bit of its utility when you do decide to use it*  
-    - *If you liked that aspect, configs will come at some point so you can revert these changes*
-  - primary: animation plays on each bolt  
-    - *as well as the tower aspect, I suspect the people are also missing out on tripling close-range primary damage. more feedback on doing multiple hits should help with this.*
-  - Utility: sound now plays when absorbing damage, increasing in pitch based on damage absorbed  
-    - *thanks rob for the suggestion. I agree with all your others as well so they'll come at some point*
-    - *except when you said it does a whole lot of nothing. late game it's a free 1800% with a giant aoe ya goon*
-  - secondary (empowered): now commands Starstorm 2 Shock Drones as well
-  - fix potential nullref spam on tracking component
-- Desolator
-  - fixed a bug where sceptered special reverts to regular special after using it
-    - *I assume. I could not reproduce it so if it still happens to you, let me know and give a log*
-  - he'll get some more love I promise
+`3.0.0` new mod new us
+- added Chrono Legionnaire, still Beta but all working and multiplayer compatible
+- added G.I., still alpha but all working and multiplayer compatible (afaik)
+- added Conscript, not even alpha lol, but hey if you're curious
+- Completely revamped code behind the scenes. some things may be improved some things may still be missing.
+- Character creation and some assets are now loaded async. this should improve load times by probably 0.0001%
+- Risk of options support for configs
+- I spent like months on this update there's no way it's like 5 lines
   

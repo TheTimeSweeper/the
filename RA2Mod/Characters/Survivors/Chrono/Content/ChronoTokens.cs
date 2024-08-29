@@ -29,7 +29,7 @@ namespace RA2Mod.Survivors.Chrono
             string outro = "..and so he left, without a trace.";
             string outroFailure = "..and so he vanished, as if he never existed.";
 
-            Language.Add(prefix + "NAME", "Chrono Legionnaire");
+            Language.Add(prefix + "NAME", "Chrono Legionnaire BETA");
             Language.Add(prefix + "DESCRIPTION", desc);
             Language.Add(prefix + "SUBTITLE", "Time Gun");
             Language.Add(prefix + "LORE", "Never Existed");

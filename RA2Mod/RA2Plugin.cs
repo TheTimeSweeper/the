@@ -27,9 +27,9 @@ namespace RA2Mod
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     public class RA2Plugin : BaseUnityPlugin
     {
-        public const string MODUID = "com.thetimesweeper.ra2mod";
-        public const string MODNAME = "RA2Mod";
-        public const string MODVERSION = "0.6.0";
+        public const string MODUID = "com.TheTimesweeper.RA2Mod";
+        public const string MODNAME = "Red Alert";
+        public const string MODVERSION = "3.0.0";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 

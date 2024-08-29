@@ -1,9 +1,9 @@
 {
     "author": "TheTimesweeper",
     "name": "RA2Mod",
-    "version_number": "0.6.0",
+    "version_number": "3.0.0",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Chrono Legionnaire (and the rest beind config)",
+    "description": "Adds 3 new survivors based on Red Alert 2, themed around RoR2: Tesla Trooper, Desolator, and Chrono Legionnaire",
     "dependencies": [
         "bbepis-BepInExPack-5.4.2101",
         "RiskofThunder-R2API_Core-5.0.3",

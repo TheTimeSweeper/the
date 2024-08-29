@@ -18,7 +18,7 @@ namespace RA2Mod.Survivors.Conscript
 {
     public class ConscriptSurvivor : SurvivorBase<ConscriptSurvivor>
     {
-        public override string assetBundleName => "joe";
+        public override string assetBundleName => "joeRA2";
 
         public override string bodyName => "RA2ConscriptBody";
         

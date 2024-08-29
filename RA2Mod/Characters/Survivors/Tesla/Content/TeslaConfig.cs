@@ -19,7 +19,7 @@ namespace RA2Mod.Survivors.Tesla
         public static ConfigEntry<bool> M4_Tower_Targeting;
         public static ConfigEntry<bool> M4_Tower_ItemDisplays;
 
-        public const string ConfigVersion = " 0.0.0";
+        public const string ConfigVersion = " 0.1";
         public const string SectionSkills = "1-1. Tesla Trooper Skills" + ConfigVersion;
         public const string SectionBody = "1-1. Tesla Trooper Body" + ConfigVersion;
 
