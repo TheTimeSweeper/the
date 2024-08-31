@@ -1,5 +1,5 @@
 ﻿using RoR2;
-using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 namespace AliemMod.Content.SkillDefs
 {

@@ -6,8 +6,8 @@ using RoR2.Achievements;
 
 namespace AliemMod.Content.Achievements
 {
-
-    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, typeof(AliemChompEnemiesAchievementServer))]
+                                                                                                                    //todo find out what good coin rewards are
+    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, 3, typeof(AliemChompEnemiesAchievementServer))]
     public class AliemChompEnemiesAchievement : BaseAchievement
     {
         public const string identifier = AliemSurvivor.ALIEM_PREFIX + "ChompEnemiesAchievement" + AliemUnlockables.DevResetString;

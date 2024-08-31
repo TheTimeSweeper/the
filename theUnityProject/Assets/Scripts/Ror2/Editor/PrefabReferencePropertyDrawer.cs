@@ -1,5 +1,5 @@
 ﻿using UnityEditor;
-using UnityEditor.Experimental.SceneManagement;
+
 using UnityEngine;
 
 namespace RoR2
@@ -9,7 +9,7 @@ namespace RoR2
     {
         private static GameObject ConvertToPrefab(GameObject sceneObject)
         {
-            PrefabStage prefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetPrefabStage(sceneObject);
+            UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(sceneObject);
             if (prefabStage == null)
             {
                 return null;

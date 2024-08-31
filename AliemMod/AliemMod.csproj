@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -9,15 +9,18 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="BepInEx.Core" Version="5.4.19" />
-		<PackageReference Include="RiskOfRain2.GameLibs" Version="*-*" />
-		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
+		<PackageReference Include="BepInEx.Core" Version="5.*" />
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.1.275-r.0" />
+		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
+		<PackageReference Include="MMHOOK.RoR2" Version="2024.8.28">
+			<NoWarn>NU1701</NoWarn>
+		</PackageReference>
 		<PackageReference Include="R2API.Core" Version="5.*" />
 		<PackageReference Include="R2API.Prefab" Version="1.*" />
 		<PackageReference Include="R2API.Language" Version="1.*" />
 		<PackageReference Include="R2API.Sound" Version="1.*" />
-		<PackageReference Include="R2API.DamageType" Version="1.*" />
 		<PackageReference Include="R2API.RecalculateStats" Version="1.*" />
+		<PackageReference Include="R2API.DamageType" Version="1.*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -48,7 +51,7 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; set build=true&#xD;&#xA;&#xD;&#xA;if defined build (&#xD;&#xA;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; (&#xD;&#xA;copy &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;)&#xD;&#xA;if exist &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; (&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Alien_Hominid\&quot;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Alien_Hominid\&quot;&#xD;&#xA;&#xD;&#xA;)&#xD;&#xA;" />
+	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; set build=true&#xD;&#xA;&#xD;&#xA;if defined build (&#xD;&#xA;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; (&#xD;&#xA;copy &quot;$(ProjectDir)..\theUnityProject\AssetBundles\aliem&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;)&#xD;&#xA;if exist &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; (&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\AliemWWISE\GeneratedSoundBanks\Windows\aliem.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&quot;&#xD;&#xA;ren &quot;$(ProjectDir)\Release\plugins\SoundBanks\aliem.bnk&quot; aliem.sound&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Alien_Hominid\&quot;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; &quot;C:\EnforcerBuild\plugins\TheTimesweeper-Alien_Hominid\&quot;&#xD;&#xA;&#xD;&#xA;)&#xD;&#xA;" />
 	</Target>
 	
 </Project>

@@ -6,7 +6,7 @@ using System;
 namespace AliemMod.Content.Achievements
 {
 
-    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, null)]
+    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, 1, null)]
     public class AliemBurrowPopOutAchievement : BaseAchievement
     {
         public const string identifier = AliemSurvivor.ALIEM_PREFIX + "BurrowPopOutAchievement" + AliemUnlockables.DevResetString;

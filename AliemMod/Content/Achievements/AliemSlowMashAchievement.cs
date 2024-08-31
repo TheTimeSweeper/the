@@ -4,7 +4,7 @@ using RoR2.Achievements;
 
 namespace AliemMod.Content.Achievements
 {
-    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, null)]
+    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, 3, null)]
     public class AliemSlowMashAchievement : BaseAchievement
     {
         public const string identifier = AliemSurvivor.ALIEM_PREFIX + "SlowMashAchievement" + AliemUnlockables.DevResetString;

@@ -41,7 +41,7 @@ namespace AliemMod.Content.Orbs
             //if (target != null) {
             //    effectData.SetHurtBoxReference(target);
             //}
-            EffectManager.SpawnEffect(Assets.BBOrbEffect, effectData, true);
+            EffectManager.SpawnEffect(AliemAssets.BBOrbEffect, effectData, true);
         }
 
         public override void OnArrival()

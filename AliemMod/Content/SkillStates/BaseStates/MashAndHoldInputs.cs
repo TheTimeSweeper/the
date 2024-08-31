@@ -94,7 +94,7 @@ namespace ModdedEntityStates.Aliem
 
             if (GetSkillButton().down)
             {
-                _holdTimer += Time.fixedDeltaTime;
+                _holdTimer += Time.deltaTime;
                 _holding = _holdTimer > minHoldTime;
 
                 //enter mash state if holding hasn't begun

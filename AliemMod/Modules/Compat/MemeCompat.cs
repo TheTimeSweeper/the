@@ -12,7 +12,7 @@ namespace Modules
 
         private static void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig) {
 
-            GameObject skele = Assets.LoadAsset<GameObject>("Aliem_Meme");
+            GameObject skele = AliemAssets.LoadAsset<GameObject>("Aliem_Meme");
             EmotesAPI.CustomEmotesAPI.ImportArmature(AliemMod.Content.Survivors.AliemSurvivor.instance.bodyPrefab, skele, false);
             //skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
             orig();

@@ -16,7 +16,7 @@ namespace ModdedEntityStates.Aliem
         public override float spread => 0;
         public override BulletAttack.FalloffModel falloff => AliemConfig.M1_MachineGun_Falloff.Value ? BulletAttack.FalloffModel.DefaultBullet : BulletAttack.FalloffModel.None;
 
-        public override GameObject tracerEffectPrefab => Assets.rifleTracer;
+        public override GameObject tracerEffectPrefab => AliemAssets.rifleTracer;
 
         public override void OnEnter()
         {

@@ -1,9 +1,9 @@
 ﻿using EntityStates;
+using JetBrains.Annotations;
 using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 93984793f0c3a464dadb1ee80436ac3e
 ModelImporter:
-  serializedVersion: 19301
+  serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: 8923724296118976376
@@ -213,6 +213,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -736,14 +737,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.21355931
-        functionName: FootStep
+        functionName: Footstep
         data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7084746
-        functionName: FootStep
+        functionName: Footstep
         data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -779,14 +780,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.1661017
-        functionName: FootStep
+        functionName: Footstep
         data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7084746
-        functionName: FootStep
+        functionName: Footstep
         data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -822,14 +823,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.23728813
-        functionName: FootStep
+        functionName: Footstep
         data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.69491524
-        functionName: FootStep
+        functionName: Footstep
         data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -981,14 +982,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.1559322
-        functionName: FootStep
+        functionName: Footstep
         data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.64745766
-        functionName: FootStep
+        functionName: Footstep
         data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -1053,14 +1054,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.14237288
-        functionName: FootStep
+        functionName: Footstep
         data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.640678
-        functionName: FootStep
+        functionName: Footstep
         data: FootR
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -1212,15 +1213,15 @@ ModelImporter:
       curves: []
       events:
       - time: 0.15254238
-        functionName: FootStep
-        data: FootL
+        functionName: Footstep
+        data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.63389826
-        functionName: FootStep
-        data: FootR
+        functionName: Footstep
+        data: FootL
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1963,21 +1964,27 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 0
   tangentSpace:
@@ -2011,6 +2018,8 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

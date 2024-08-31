@@ -22,10 +22,10 @@ namespace AliemMod.Modules
         public static void Init()
         {
             RayGunProjectilePrefab = JankyLoadAliemPrefab("AliemLemonProjectile", true);
-            RayGunProjectilePrefab.GetComponent<ProjectileSingleTargetImpact>().impactEffect = Assets.m1EffectPrefab;
+            RayGunProjectilePrefab.GetComponent<ProjectileSingleTargetImpact>().impactEffect = AliemAssets.m1EffectPrefab;
 
             RayGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemLemonProjectileBig");
-            RayGunProjectilePrefabBig.GetComponent<ProjectileImpactExplosion>().impactEffect = Assets.m2EffectPrefab;
+            RayGunProjectilePrefabBig.GetComponent<ProjectileImpactExplosion>().impactEffect = AliemAssets.m2EffectPrefab;
             RayGunProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
 
             SwordProjectilePrefab = JankyLoadAliemPrefab("AliemSwordProjectile");
@@ -33,16 +33,16 @@ namespace AliemMod.Modules
             SwordProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
 
             SawedOffProjectilePrefabBig = JankyLoadAliemPrefab("AliemSawedOffProjectileBig", true, true);
-            Assets.ConvertAllRenderersToHopooShader(SawedOffProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
-            SawedOffProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>().impactEffect = Assets.nemforcerImpactEffect;
+            AliemAssets.ConvertAllRenderersToHopooShader(SawedOffProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
+            SawedOffProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>().impactEffect = AliemAssets.nemforcerImpactEffect;
             SawedOffProjectilePrefabBig.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(DamageTypes.FuckinChargedKillAchievementTracking);
 
             BBGunProjectilePrefabBig = JankyLoadAliemPrefab("AliemBBGunProjectileBig", true);
             ProjectileOverlapAttack BBOverlapAttack = BBGunProjectilePrefabBig.GetComponent<ProjectileOverlapAttack>();
-            BBOverlapAttack.impactEffect = Assets.nemforcerImpactEffect;
+            BBOverlapAttack.impactEffect = AliemAssets.nemforcerImpactEffect;
             BBOverlapAttack.resetInterval = AliemConfig.M1_BBGunCharged_HitInterval.Value;
             BBOverlapAttack.fireFrequency = 1 / AliemConfig.M1_BBGunCharged_HitInterval.Value;
-            Assets.ConvertAllRenderersToHopooShader(BBGunProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
+            AliemAssets.ConvertAllRenderersToHopooShader(BBGunProjectilePrefabBig.GetComponent<ProjectileController>().ghostPrefab);
 
             GrenadeProjectile = JankyLoadAliemPrefab("AliemGrenadeProjectile");
             GrenadeProjectile.GetComponent<ProjectileImpactExplosion>().impactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXToolbotQuick");
@@ -56,7 +56,7 @@ namespace AliemMod.Modules
 
         private static void FunnyMaterial(string assName)
         {
-            GameObject prefab = Assets.LoadAsset<GameObject>(assName);//.InstantiateClone(assName, false);
+            GameObject prefab = AliemAssets.LoadAsset<GameObject>(assName);//.InstantiateClone(assName, false);
 
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetHotpooMaterial();
             prefab.GetComponentInChildren<Renderer>().sharedMaterial.SetCull();
@@ -65,8 +65,11 @@ namespace AliemMod.Modules
         //suppose "janky" is an addmittance about the nature of non-thunderkit modding in general
         public static GameObject JankyLoadAliemPrefab(string assName, bool clone = false, bool cloneGhost = false)
         {
-            GameObject prefab = Assets.LoadAsset<GameObject>(assName);
+            GameObject prefab = AliemAssets.LoadAsset<GameObject>(assName);
             prefab.RegisterNetworkPrefab();
+
+            ProjectileController projectileController = prefab.GetComponent<ProjectileController>();
+            projectileController.ghostPrefab.AddComponent<VFXAttributes>().DoNotPool = true;
             //so you can mess with it in runtimeinspector
             if (clone)
             {
@@ -74,7 +77,6 @@ namespace AliemMod.Modules
             }
             if (cloneGhost)
             {
-                ProjectileController projectileController = prefab.GetComponent<ProjectileController>();
                 projectileController.ghostPrefab = projectileController.ghostPrefab.DebugClone(false);
             }
             Content.AddProjectilePrefab(prefab);

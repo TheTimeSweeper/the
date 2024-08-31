@@ -7,7 +7,7 @@ namespace ModdedEntityStates.Aliem
 {
     public class ChargedLunarNeedleFire : RayGunChargedFire
     {
-        public override GameObject projectile => Assets.LunarChargedProjectile;
+        public override GameObject projectile => AliemAssets.LunarChargedProjectile;
 
         public override void OnEnter()
         {

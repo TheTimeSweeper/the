@@ -7,7 +7,7 @@ using System;
 
 namespace AliemMod.Content.Achievements
 {
-    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, typeof(AliemChargedKillAchievementServer))]
+    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, 3, typeof(AliemChargedKillAchievementServer))]
     public class AliemChargedKillAchievement : BaseAchievement
     {
         public const string identifier = AliemSurvivor.ALIEM_PREFIX + "ChargedKillAchievement" + AliemUnlockables.DevResetString;

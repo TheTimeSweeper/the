@@ -37,11 +37,11 @@ namespace AliemMod.Content.Survivors
             bodyNameToken = ALIEM_PREFIX + "NAME",
             subtitleNameToken = ALIEM_PREFIX + "SUBTITLE",
 
-            characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texIconAliem"),
+            characterPortrait = AliemAssets.mainAssetBundle.LoadAsset<Texture>("texIconAliem"),
             bodyColor = Color.yellow,
             sortPosition = 70f,
 
-            crosshair = Assets.LoadCrosshair("Default"),
+            crosshair = AliemAssets.LoadCrosshair("Default"),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 110f,
@@ -124,7 +124,7 @@ namespace AliemMod.Content.Survivors
 
             if (AliemConfig.GupDefault.Value) {
 
-                bodyInfo.characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texIconAliemGup");
+                bodyInfo.characterPortrait = AliemAssets.mainAssetBundle.LoadAsset<Texture>("texIconAliemGup");
             }
             base.InitializeCharacterBodyAndModel();
 
@@ -165,7 +165,8 @@ namespace AliemMod.Content.Survivors
 
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
-            IL.RoR2.Orbs.OrbEffect.Start += OrbEffect_Start;
+            IL.RoR2.Orbs.OrbEffect.Reset += OrbEffect_Start;
+            //IL.RoR2.Orbs.OrbEffect.Start += OrbEffect_Start;
         }
 
         private void OrbEffect_Start(MonoMod.Cil.ILContext il)
@@ -300,7 +301,7 @@ namespace AliemMod.Content.Survivors
                 "aliem_primary_gun_inputs",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
                 new EntityStates.SerializableEntityStateType(typeof(InputRayGun)),
                 "Inputs1",
                 true));
@@ -310,7 +311,7 @@ namespace AliemMod.Content.Survivors
                 "aliem_primary_sword_inputs",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SWORD_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"),
                 new EntityStates.SerializableEntityStateType(typeof(InputSword)),
                 "Inputs1",
                 true));
@@ -320,7 +321,7 @@ namespace AliemMod.Content.Survivors
                 "aliem_primary_rifle_inputs",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_RIFLE_INPUTS_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_RIFLE_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"),
                 new EntityStates.SerializableEntityStateType(typeof(InputRifle)),
                 "Inputs1",
                 true));
@@ -334,7 +335,7 @@ namespace AliemMod.Content.Survivors
                 "aliem_primary_sawedOff_inputs",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SAWEDOFF_INPUTS_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_SAWEDOFF_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySawedOff"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySawedOff"),
                 new EntityStates.SerializableEntityStateType(typeof(InputSawedOff)),
                 "Inputs1",
                 true));
@@ -344,7 +345,7 @@ namespace AliemMod.Content.Survivors
                 "aliem_primary_bbgun_inputs",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_BBGUN_INPUTS_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_BBGUN_INPUTS_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryBBGun"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryBBGun"),
                 new EntityStates.SerializableEntityStateType(typeof(InputBBGun)),
                 "Inputs1",
                 true));
@@ -356,7 +357,7 @@ namespace AliemMod.Content.Survivors
                 "aliem_primary_gun_instant",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_NAME",
                 AliemSurvivor.ALIEM_PREFIX + "PRIMARY_GUN_INSTANT_DESCRIPTION",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
                 new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunInstant)),
                 "Weapon",
                 true));
@@ -384,7 +385,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_secondary_Charged",
                 skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_CHARGED_NAME",
                 skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SECONDARY_CHARGED_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondaryGunBig"),
+                skillIcon = AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSecondaryGunBig"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.RayGunChargedFire)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -461,7 +462,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_secondary_leap",
                 skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_NAME",
                 skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
+                skillIcon = AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM2)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -492,7 +493,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_utility_leap",
                 skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_NAME",
                 skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_LEAP_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
+                skillIcon = AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemDive"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.AliemLeapM3)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -525,7 +526,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_utility_Chomp",
                 skillNameToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_CHOMP_NAME",
                 skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "UTILITY_CHOMP_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemChomp"),
+                skillIcon = AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemChomp"),
                 keywordTokens = new string[] { },
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AliemRidingChomp)),
@@ -564,7 +565,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_special_grenade",
                 skillNameToken = AliemSurvivor.ALIEM_PREFIX + "SPECIAL_GRENADE_NAME",
                 skillDescriptionToken = AliemSurvivor.ALIEM_PREFIX + "SPECIAL_GRENADE_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenade"),
+                skillIcon = AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenade"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenade)),
                 activationStateMachineName = "Mutation",
                 baseMaxStock = 1,
@@ -590,7 +591,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_special_weaponSwap",
                 skillNameToken = primaryGunInputsSkillDef.skillNameToken,
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_WEAPONSWAP_DESCRIPTION",
-                skillIcon = Assets.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
+                skillIcon = AliemAssets.LoadAsset<Sprite>("texIconAliemPrimaryGun"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SwapSecondaryWeapon)),
                 activationStateMachineName = "Mutation",
@@ -687,7 +688,7 @@ namespace AliemMod.Content.Survivors
             (scepterSwapSkillDef as ScriptableObject).name += "scepter";
             scepterSwapSkillDef.skillName += "scepter";
             scepterSwapSkillDef.skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_WEAPONSWAP_SCEPTER_DESCRIPTION";
-            scepterSwapSkillDef.icon = Assets.LoadAsset<Sprite>(iconPath);
+            scepterSwapSkillDef.icon = AliemAssets.LoadAsset<Sprite>(iconPath);
             scepterSwapSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(SwapSecondaryWeaponScepter));
             scepterSwapSkillDef.swapSkillDef = originalSkillDef.swapSkillDef;
 
@@ -717,7 +718,7 @@ namespace AliemMod.Content.Survivors
                 skillName = "aliem_special_grenade_scepter",
                 skillNameToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_NAME",
                 skillDescriptionToken = ALIEM_PREFIX + "SPECIAL_GRENADE_SCEPTER_DESCRIPTION",
-                skillIcon = Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenadeScepter"),
+                skillIcon = AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemSpecialGrenadeScepter"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Aliem.ThrowGrenadeScepter)),
                 activationStateMachineName = "Mutation",
                 baseMaxStock = 1,
@@ -750,7 +751,7 @@ namespace AliemMod.Content.Survivors
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(
                 "DEFAULT_SKIN",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinDefault"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);
             
@@ -767,7 +768,7 @@ namespace AliemMod.Content.Survivors
             #region MasterySkin
             
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(ALIEM_PREFIX + "GUP_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinGup"),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconSkinGup"),
                 defaultRendererinfos,
                 bodyCharacterModel.gameObject);
             

@@ -160,7 +160,7 @@ namespace ModdedEntityStates
         {
             base.FixedUpdate();
 
-            hitPauseTimer -= Time.fixedDeltaTime;
+            hitPauseTimer -= Time.deltaTime;
 
             if (hitPauseTimer <= 0f && inHitPause)
             {
@@ -169,7 +169,7 @@ namespace ModdedEntityStates
 
             if (!inHitPause)
             {
-                stopwatch += Time.fixedDeltaTime;
+                stopwatch += Time.deltaTime;
             }
             else
             {

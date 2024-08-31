@@ -24,7 +24,7 @@ namespace AliemMod.Modules
 
         private static void PopulateDisplaysFromBody(string bodyName)
         {
-            ItemDisplayRuleSet itemDisplayRuleSet = Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyName)?.GetComponent<ModelLocator>()?.modelTransform.GetComponent<CharacterModel>()?.itemDisplayRuleSet;
+            ItemDisplayRuleSet itemDisplayRuleSet = AliemAssets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyName)?.GetComponent<ModelLocator>()?.modelTransform.GetComponent<CharacterModel>()?.itemDisplayRuleSet;
             if (itemDisplayRuleSet == null)
             {
                 Debug.LogError("couldn't load ItemDisplayRuleSet from " + bodyName + ". Check if name was entered correctly");

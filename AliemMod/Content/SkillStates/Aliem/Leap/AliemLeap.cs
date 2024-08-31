@@ -72,7 +72,7 @@ namespace ModdedEntityStates.Aliem
 				damage = DamageCoefficient * damageStat,
 				isCrit = RollCrit(),
 				hitBoxGroup = hitBoxGroup,
-				hitEffectPrefab = Assets.nemforcerImpactEffect,
+				hitEffectPrefab = AliemAssets.nemforcerImpactEffect,
 				//impactSound = Modules.Assets.nemforcerImpactSound.index,
 				//damageType = DamageType.Stun1s,
 			};

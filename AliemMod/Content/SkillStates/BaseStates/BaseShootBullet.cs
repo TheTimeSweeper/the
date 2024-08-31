@@ -27,7 +27,7 @@ namespace ModdedEntityStates.Aliem
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
         public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
 
-        public virtual GameObject tracerEffectPrefab => Assets.rifleTracer;
+        public virtual GameObject tracerEffectPrefab => AliemAssets.rifleTracer;
 
         public bool isOffHanded { get; set; }
 

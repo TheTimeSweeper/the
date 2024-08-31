@@ -41,7 +41,7 @@ namespace ModdedEntityStates.Aliem
             if (base.characterMotor)
             {
                 base.characterMotor.velocity = Vector3.zero;
-                base.characterMotor.rootMotion += this.blinkVector * (_speedCoefficient * Time.fixedDeltaTime);
+                base.characterMotor.rootMotion += this.blinkVector * (_speedCoefficient * Time.deltaTime);
             }
         }
 

@@ -1,4 +1,27 @@
 ## Changelog
+
+`1.2.2`
+- fixed fps issues
+
+`1.2.1` nevermind DamageAPI is fixed
+- returned chomp decapitating and broken achievements
+- fixed missing footsteps
+- dive can now be aimed downwards (this was in a previous patch idk which)
+
+`1.2.0` half updated for sots
+- damagetypes are disabled until r2api.damagetypes is fixed. for now this means:
+    - chomp will not do decaptiate effect on kill
+    - some achievements are removed, their skills unlocked by default
+- sots fuckery. these issues are likely out of my control until gearbox fixes their issues
+    - sword projectile is no longer client authoritative. it might feel like ass on client. still works though
+    - hold to charge weapons now charge faster/slower based on fps
+    - sword dash now goes much further/shoerter baed on fps
+    - human machine gun charged shots shoot much faster/slower based on fps
+    - close range knife attacks faster/slower based on fps
+    - charactermotor onhitground changes have made burrowing inconsistent
+    - wew
+- wip BBGun weapon in cursed config untested for time. will be fixed/released with full patch
+
 `1.1.0`
 - added config to remove mashing, allowing to simply hold to shoot. this removes the ability to hold to charge of course
     - let me know if this causes any issues

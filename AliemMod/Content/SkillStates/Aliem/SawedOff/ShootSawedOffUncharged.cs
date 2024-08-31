@@ -20,8 +20,8 @@ namespace ModdedEntityStates.Aliem
         public override float recoil => AliemConfig.M1_SawedOff_Recoil.Value;
         public override string muzzleString => isOffHanded ? "BlasterMuzzleFar.R" : "BlasterMuzzleFar";
 
-        public override GameObject muzzleEffectPrefab => Assets.sawedOffMuzzleFlash;
-        public override GameObject tracerEffectPrefab => Assets.sawedOffTracer;
+        public override GameObject muzzleEffectPrefab => AliemAssets.sawedOffMuzzleFlash;
+        public override GameObject tracerEffectPrefab => AliemAssets.sawedOffTracer;
 
         private uint _bullets = (uint)AliemConfig.M1_SawedOff_Bullets.Value - 1;
         private float _spread = AliemConfig.M1_SawedOff_Spread.Value;

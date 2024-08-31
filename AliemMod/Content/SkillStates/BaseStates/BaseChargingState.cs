@@ -18,8 +18,8 @@ namespace ModdedEntityStates.Aliem
         protected virtual string chargeLoop2 => "Play_RayGunChargeLoopHigh";
         protected virtual string chargeAnimationLayer => "RightArm, Over";
 
-        protected virtual GameObject chargeEffectPrefab => Assets.swirlCharge;
-        protected virtual GameObject chargeEffectMaxPrefab => Assets.swirlChargeMax;
+        protected virtual GameObject chargeEffectPrefab => AliemAssets.swirlCharge;
+        protected virtual GameObject chargeEffectMaxPrefab => AliemAssets.swirlChargeMax;
 
         private GameObject _chargeEffect;
 
@@ -59,7 +59,7 @@ namespace ModdedEntityStates.Aliem
 
             StartAimMode();
 
-            _chargeTimer += Time.fixedDeltaTime;
+            _chargeTimer += Time.deltaTime;
 
             if (!_playedMaxChargeEffect && _chargeTimer > _maxChargeDuration)
             {

@@ -1,5 +1,5 @@
 # Aliem
-- ~~When will alien hominid invasion come out that shit's gonna be fun~~ it is fun indeed
+- ~~When will alien hominid invasion come out that shit's gonna be fun~~ it's out and it is fun indeed
 - happy halloween modjam 2022 c:
 - multiplayer compatible!
 - overly configurable
@@ -7,6 +7,11 @@
 - somewhat-ror-friendly version in config
 
 Anything you'd like to say about the guy, ping me (`thetimesweeper`) on the ror2 modding discord or the enforcer discord (https://discord.gg/GgjjDvStcV).
+
+## SotS fuckery. These issues are likely out of my control until gearbox fixes their issues
+
+- sword projectileoverlap is no longer client authoritative. it might feel like ass on client. still works though
+- charactermotor onhitground changes have made burrowing inconsistent
 
 ![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/AliemMod/Release/_readme/aliem.png)
 *someone get me some cool screenshots pls*
@@ -33,8 +38,9 @@ tsuyoikenko - Gip skin
 The Behemoth - inspiration, sounds 
 
 ## Known Issues
-- I fuckin fixed them all
-- if I didn't, let me know
+- ~~I fuckin fixed them all~~
+- ~~if I didn't, let me know~~
+- see SotS Fuckery section above
 
 ## Future Plans (that I may or may not get to)
 - ~~finish him lol~~
@@ -53,10 +59,24 @@ ___
 ## Changelog
 see changelog tab for more
 
-`1.1.0`
-- added config to remove mashing, allowing to simply hold to shoot. this removes the ability to hold to charge of course
-    - let me know if this causes any issues
-- added new WIP weaopn in cursed config, BBGun
-    - Ignore all the empty config entries haha. 
-    - let me know if this causes any issues
-  - *shoots a ton of bees, but they're optimized as fuck. if you have potato pc please reach out and let me know if it hurts your frames at all*
+`1.2.2`
+- fixed fps issues
+
+`1.2.1` nevermind DamageAPI is fixed
+- returned chomp decapitating and broken achievements
+- fixed missing footsteps
+- dive can now be aimed downwards (this was in a previous patch idk which)
+
+`1.2.0` half updated for sots
+- damagetypes are disabled until r2api.damagetypes is fixed. for now this means:
+    - chomp will not do decaptiate effect on kill
+    - some achievements are removed, their skills unlocked by default
+- sots fuckery. these issues are likely out of my control until gearbox fixes their issues
+    - sword projectile is no longer client authoritative. it might feel like ass on client. still works though
+    - ~~hold to charge weapons now charge faster/slower based on fps~~
+    - ~~sword dash now goes much further/shoerter baed on fps~~
+    - ~~human machine gun charged shots shoot much faster/slower based on fps~~
+    - ~~close range knife attacks faster/slower based on fps~~
+    - charactermotor onhitground changes have made burrowing inconsistent
+    - wew
+- wip BBGun weapon in cursed config untested for time. will be fixed/released with full patch

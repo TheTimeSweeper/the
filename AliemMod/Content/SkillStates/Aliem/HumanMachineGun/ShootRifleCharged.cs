@@ -19,7 +19,7 @@ namespace ModdedEntityStates.Aliem
         public override float minSpread => 0;
         public override float spread => AliemConfig.M1_MachineGunCharged_Spread.Value * characterBody.spreadBloomAngle;
         public override LayerMask stopperMask => LayerIndex.world.mask;
-        public override GameObject tracerEffectPrefab => Assets.rifleTracerBig;
+        public override GameObject tracerEffectPrefab => AliemAssets.rifleTracerBig;
         public override string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
 
         public virtual float baseInterval => AliemConfig.M1_MachineGunCharged_Interval.Value;
@@ -52,7 +52,7 @@ namespace ModdedEntityStates.Aliem
         {
             base.FixedUpdate();
 
-            _shootTimer -= Time.fixedDeltaTime;
+            _shootTimer -= Time.deltaTime;
 
             while (_shootTimer <= 0 && _shotsFired < bullets)
             {

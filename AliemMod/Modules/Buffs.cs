@@ -20,7 +20,7 @@ namespace AliemMod.Modules
             //Aliem
             riddenBuff =
                 AddNewBuff("RiddenByAliem",
-                           Assets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliem"),
+                           AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliem"),
                            Color.yellow,
                            true,
                            false);
@@ -40,7 +40,7 @@ namespace AliemMod.Modules
 
             attackSpeedBuff =
                 AddNewBuff("AliemAttackSpeedBuff",
-                           Assets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliemGun"),
+                           AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconBuffAliemGun"),
                            Color.magenta,
                            false,
                            false);

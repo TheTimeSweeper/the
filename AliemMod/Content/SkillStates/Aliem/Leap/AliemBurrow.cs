@@ -73,7 +73,7 @@ namespace ModdedEntityStates.Aliem
 			base.PlayCrossfade("FullBody, Override", "UnBurrow", 0.1f);
 			Util.PlaySound("Play_DigPopOut_AHI", gameObject);
 
-            EffectManager.SpawnEffect(Assets.burrowPopOutEffect, new EffectData
+            EffectManager.SpawnEffect(AliemAssets.burrowPopOutEffect, new EffectData
             {
                 origin = burrwoObject.transform.position,
                 rotation = Util.QuaternionSafeLookRotation(Vector3.up),

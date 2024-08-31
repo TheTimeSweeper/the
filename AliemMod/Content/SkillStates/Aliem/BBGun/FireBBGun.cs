@@ -58,8 +58,8 @@ namespace ModdedEntityStates.Aliem
         {
             base.FixedUpdate();
 
-            _rayTim -= Time.fixedDeltaTime;
-            _fireTim -= Time.fixedDeltaTime;
+            _rayTim -= Time.deltaTime;
+            _fireTim -= Time.deltaTime;
 
             if (_rayTim <= 0)
             {

@@ -19,7 +19,7 @@ namespace AliemMod.Modules
 
         public static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
-            GameObject model = Assets.LoadSurvivorModel(displayModelName);
+            GameObject model = AliemAssets.LoadSurvivorModel(displayModelName);
 
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
             if (!characterModel)
@@ -28,26 +28,26 @@ namespace AliemMod.Modules
             }
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(model);
+            Modules.AliemAssets.ConvertAllRenderersToHopooShader(model);
 
             return model.gameObject;
         }
 
         public static GameObject CreateBodyPrefab(string bodyName, string modelName, BodyInfo bodyInfo)
         {
-            if (!Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
+            if (!AliemAssets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body"))
             {
                 Debug.LogError(bodyInfo.bodyNameToClone + "Body is not a valid body, character creation failed");
                 return null;
             }
 
-            GameObject newBodyPrefab = Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body").InstantiateClone(bodyName);
+            GameObject newBodyPrefab = AliemAssets.LoadAsset<GameObject>("Prefabs/CharacterBodies/" + bodyInfo.bodyNameToClone + "Body").InstantiateClone(bodyName);
 
             Transform modelBaseTransform = null;
             GameObject newModel = null;
             if (modelName != "mdl")
             {
-                newModel = Assets.LoadSurvivorModel(modelName);
+                newModel = AliemAssets.LoadSurvivorModel(modelName);
                 //if load fails, just use body from the clone
                 if (newModel == null)
                     newModel = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
@@ -156,7 +156,7 @@ namespace AliemMod.Modules
 
         public static void CreateGenericDoppelganger(GameObject bodyPrefab, string masterName, string masterToCopy)
         {
-            GameObject newMaster = Assets.LoadAsset<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster").InstantiateClone(masterName, true);
+            GameObject newMaster = AliemAssets.LoadAsset<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster").InstantiateClone(masterName, true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
             Modules.Content.AddMasterPrefab(newMaster);
@@ -176,7 +176,7 @@ namespace AliemMod.Modules
             modelBase.parent = bodyPrefab.transform;
             modelBase.localPosition = bodyInfo.modelBasePosition;
             modelBase.localRotation = Quaternion.identity;
-
+            
             modelTransform.parent = modelBase.transform;
             modelTransform.localPosition = Vector3.zero;
             modelTransform.localRotation = Quaternion.identity;
@@ -207,7 +207,7 @@ namespace AliemMod.Modules
 
             characterModel.autoPopulateLightInfos = true;
             characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+            characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
 
             if (!preattached)
             {
@@ -376,7 +376,7 @@ namespace AliemMod.Modules
             footstepHandler.baseFootstepString = "Play_player_footstep";
             footstepHandler.sprintFootstepOverrideString = "";
             footstepHandler.enableFootstepDust = true;
-            footstepHandler.footstepDustPrefab = Assets.LoadAsset<GameObject>("Prefabs/GenericFootstepDust");
+            footstepHandler.footstepDustPrefab = AliemAssets.LoadAsset<GameObject>("Prefabs/GenericFootstepDust");
         }
 
         private static void SetupRagdoll(GameObject model)
@@ -385,7 +385,7 @@ namespace AliemMod.Modules
 
             if (!ragdollController) return;
 
-            if (ragdollMaterial == null) ragdollMaterial = Assets.LoadAsset<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
+            if (ragdollMaterial == null) ragdollMaterial = AliemAssets.LoadAsset<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<RagdollController>().bones[1].GetComponent<Collider>().material;
 
             foreach (Transform boneTransform in ragdollController.bones)
             {

@@ -24,7 +24,7 @@ using System.Security.Permissions;
 public class AliemPlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.Aliem";
     public const string MODNAME = "Aliem";
-    public const string MODVERSION = "1.1.0";
+    public const string MODVERSION = "1.2.2";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -50,7 +50,7 @@ public class AliemPlugin : BaseUnityPlugin {
         if (AliemConfig.Debug.Value)
             gameObject.AddComponent<TestValueManager>();
 
-        Assets.Initialize();
+        AliemMod.Modules.AliemAssets.Initialize();
         Projectiles.Init();
         States.Init();
 

@@ -23,27 +23,27 @@ namespace AliemMod.Content
             masterySkinUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 AliemMasteryAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(AliemMasteryAchievement.identifier),
-                Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconMasteryAchievement"));
+                Modules.AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconMasteryAchievement"));
 
             ChompEnemiesUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 AliemChompEnemiesAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(AliemChompEnemiesAchievement.identifier),
-                Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"));
+                Modules.AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySword"));
 
             BurrowPopOutUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 AliemBurrowPopOutAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(AliemBurrowPopOutAchievement.identifier),
-                Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"));
+                Modules.AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryRifle"));
 
             ChargedKillUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 AliemChargedKillAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(AliemChargedKillAchievement.identifier),
-                Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySawedOff"));
+                Modules.AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimarySawedOff"));
 
             SlowMashUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 AliemSlowMashAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(AliemSlowMashAchievement.identifier),
-                Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"));
+                Modules.AliemAssets.mainAssetBundle.LoadAsset<Sprite>("texIconAliemPrimaryGun"));
         }
     }
 }

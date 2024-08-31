@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{E3503187-302A-4EBE-BC9C-10B5395EDDD2}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="SFX" ID="{0C5D27AD-DF1D-45CD-99C8-94EE20A51053}" ShortID="1000852176">
+					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{147EA0C1-C066-4423-AACA-74A653450FF7}"/>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<RTPCList>
+								<RTPC Name="" ID="{098F005D-A72F-4538-9E2B-259530B428BD}" ShortID="209643698">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Volume_SFX" ID="{5919F527-9588-4EC7-80AA-DF73FD37968A}" WorkUnitID="{9DC89BA2-CA97-4035-A928-AD8C7A0CAEC1}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{ECED143C-D6F6-48D0-B690-8E56636A6348}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+						</Reference>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<ActorMixer Name="Aliem Sounds" ID="{1432591F-A4BD-4741-A096-8E501C17FD77}" ShortID="620368013">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{37CE4A04-6DF4-4E35-A8F7-AA818A15B214}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="GunChargeLoop" ID="{6C519C3A-D8C1-4E5F-8202-D1288E9E5030}" ShortID="287614804">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{72F95CE4-7241-4E8C-9611-590F51615645}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="GunChargeLoop" ID="{90799793-DF34-4924-A20D-A0D835DFD029}">
+											<Language>SFX</Language>
+											<AudioFile>GunChargeLoop.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="67742513"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="GunChargeLoop" ID="{90799793-DF34-4924-A20D-A0D835DFD029}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="GunChargeUp" ID="{9815DB07-8BD4-47FB-A13D-AA7048F39F1F}" ShortID="29600350">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E81C863B-E692-451E-B312-8E100F922825}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="GunChargeUp" ID="{0831EE62-5182-4A44-91EC-88AE1E048C29}">
+											<Language>SFX</Language>
+											<AudioFile>GunChargeUp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="947682086"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="GunChargeUp" ID="{0831EE62-5182-4A44-91EC-88AE1E048C29}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="GunChargeLoopHigh" ID="{4E5CA2CE-94D4-42EE-9AE0-633EE7F4670B}" ShortID="516619757">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>130</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{86E17F00-F518-4F9C-9C0F-C731FA7A1D57}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="GunChargeLoop" ID="{6592DFB8-8A92-4C5E-A351-3C19A00F0C22}">
+											<Language>SFX</Language>
+											<AudioFile>GunChargeLoop.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="67742513"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="GunChargeLoop" ID="{6592DFB8-8A92-4C5E-A351-3C19A00F0C22}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<ActorMixer Name="RandomPitch" ID="{AC64271B-C071-4994-8DAF-7EAF5800B232}" ShortID="318970278">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{3BAFE157-903C-4E47-8C7C-C9A4A4BB1B72}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="126"/>
+															<Property Name="Min" Type="Real64" Value="-177"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="AliemEnergySword" ID="{1BFA3688-6C7F-44B0-8037-B071F801DF76}" ShortID="945159007">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{0CECB1CF-DB26-4EC6-8734-3419EB5B10B3}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="126"/>
+																	<Property Name="Min" Type="Real64" Value="-152"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="swingEnergySword1" ID="{34F08717-907B-4148-B595-0BF00E484792}" ShortID="844609990">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="swingEnergySword1" ID="{7F9B4586-0C46-44AA-A4F4-AAD96568B108}">
+															<Language>SFX</Language>
+															<AudioFile>swingEnergySword1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="478240976"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="swingEnergySword1" ID="{7F9B4586-0C46-44AA-A4F4-AAD96568B108}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="swingEnergySword2" ID="{A7F4AFBC-6825-4374-A27E-6C46EF786B90}" ShortID="1068132618">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="swingEnergySword2" ID="{9EA7835F-0C9A-4A07-BE59-44D66CB53391}">
+															<Language>SFX</Language>
+															<AudioFile>swingEnergySword2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="152158963"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="swingEnergySword2" ID="{9EA7835F-0C9A-4A07-BE59-44D66CB53391}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="RayGunBigClassic" ID="{5D5896A0-DFF2-4713-A7A0-C6DAD08166D5}" ShortID="900525969">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{BA2941C8-35D8-45BB-BD87-A7A5EFE3EF1C}">
+																<PropertyList>
+																	<Property Name="Max" Type="Real64" Value="152"/>
+																	<Property Name="Min" Type="Real64" Value="-152"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="BigRayGunClassic" ID="{C8314764-4E9C-4E45-9BE7-4CBC69C09091}">
+													<Language>SFX</Language>
+													<AudioFile>BigRayGunClassic.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="88717859"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="BigRayGunClassic" ID="{C8314764-4E9C-4E45-9BE7-4CBC69C09091}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Heavy Swing Hit" ID="{EAE1CDBC-602F-426D-B317-620A55677A97}" ShortID="885355836">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{6FEE2E88-1E01-4B00-8D4F-B1AE3B69250F}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="328"/>
+																	<Property Name="Min" Type="Real64" Value="-253"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Heavy Swing Hit" ID="{DE5F6BD0-60F3-46BE-9C0F-969BCF7D651E}">
+													<Language>SFX</Language>
+													<AudioFile>Heavy Swing Hit.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="48913826"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Heavy Swing Hit" ID="{DE5F6BD0-60F3-46BE-9C0F-969BCF7D651E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AliemEnergySwordCharged" ID="{0DB8008E-8859-4044-BE1A-B8F34CD7BA4D}" ShortID="660432150">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{7D024A2C-47CE-429F-93DD-A022C657EDC7}">
+																<PropertyList>
+																	<Property Name="Max" Type="Real64" Value="126"/>
+																	<Property Name="Min" Type="Real64" Value="-152"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="swingEnergySwordCharged" ID="{E1928C9E-BC69-44F9-808C-DD1B0DBF2F19}">
+													<Language>SFX</Language>
+													<AudioFile>swingEnergySwordCharged.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1063021362"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="swingEnergySwordCharged" ID="{E1928C9E-BC69-44F9-808C-DD1B0DBF2F19}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RayGun" ID="{A2ED02D2-8CD2-49CA-BE2C-18C1B3B74C8B}" ShortID="388364141">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{D5C3F5C5-1A41-4B9F-B2D6-F1D114FE5FB4}">
+																<PropertyList>
+																	<Property Name="Max" Type="Real64" Value="152"/>
+																	<Property Name="Min" Type="Real64" Value="-152"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-8</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="raygun" ID="{31B0063C-E879-469E-94AE-90C925098F82}">
+													<Language>SFX</Language>
+													<AudioFile>raygun.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="899207982"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="raygun" ID="{31B0063C-E879-469E-94AE-90C925098F82}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="RayGun_AHI" ID="{DA091BA8-0541-48B5-8122-48FC69A6A903}" ShortID="608783398">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{FF424EDB-81B9-4666-AEBC-BA9144ADCBD4}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="INV_RayGun" ID="{2CEF430D-8389-41BB-9E91-7DE122923235}">
+													<Language>SFX</Language>
+													<AudioFile>INV_RayGun.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="143282573"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="INV_RayGun" ID="{2CEF430D-8389-41BB-9E91-7DE122923235}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="HenryBombThrow" ID="{601BEF13-C571-40A9-ACF9-D3FF394B890C}" ShortID="848146959">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{22FC6261-F282-4F53-B7FB-BAD9151A34B7}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="HenryBombThrow" ID="{EA0A819F-0F06-4CF2-9FCB-278667D78665}">
+													<Language>SFX</Language>
+													<AudioFile>HenryBombThrow.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1061544124"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="HenryBombThrow" ID="{EA0A819F-0F06-4CF2-9FCB-278667D78665}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AliemLightningCharged" ID="{F6445D6B-4D30-4B6D-84D3-A8AE70EFDCA9}" ShortID="192047012">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{EBF2D909-8662-489B-8C4B-0AA481F9AB4B}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="lightningCharged" ID="{B466BC1D-F915-44AA-A976-CA1CBB2C0FAF}">
+													<Language>SFX</Language>
+													<AudioFile>lightningCharged.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="967657837"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="lightningCharged" ID="{B466BC1D-F915-44AA-A976-CA1CBB2C0FAF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="AliemRifle" ID="{A17C88E4-3057-4968-9371-8735F951A9A1}" ShortID="140914759">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{8ADA6423-F4B2-4344-A190-9E9EEE6DFED2}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="AliemRifle1" ID="{99BAEF00-CFDE-4B41-8188-003732639C22}" ShortID="976681920">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rifle1" ID="{2125E6E2-528B-4486-85AF-A82A4B5164A3}">
+															<Language>SFX</Language>
+															<AudioFile>rifle1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1071376400"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rifle1" ID="{2125E6E2-528B-4486-85AF-A82A4B5164A3}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemRifle2" ID="{E6889337-5E8C-4CD0-A34D-C70588A39863}" ShortID="520910444">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rifle2" ID="{B8316A3E-16AF-4E17-85C4-450FC12F218C}">
+															<Language>SFX</Language>
+															<AudioFile>rifle2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="525493977"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rifle2" ID="{B8316A3E-16AF-4E17-85C4-450FC12F218C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="AliemMinigun" ID="{F80BEA4A-0364-49CE-86B8-FE87549E3C82}" ShortID="520058311">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{B9A092E1-BC33-4440-8C25-B526CCA18DC0}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="minigun1" ID="{7FA173ED-AEA0-4B02-AD0D-BCB2E4CEB8E0}" ShortID="912435168">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="minigun1" ID="{7556D6C0-E20F-48B0-A7C5-08D1002E23A0}">
+															<Language>SFX</Language>
+															<AudioFile>minigun1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="98893678"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="minigun1" ID="{7556D6C0-E20F-48B0-A7C5-08D1002E23A0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="minigun2" ID="{34982EEA-3097-4715-B953-2C7F86728BC3}" ShortID="1032882401">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="minigun2" ID="{5C3D3FB2-9484-41A8-857D-E0A287D6A520}">
+															<Language>SFX</Language>
+															<AudioFile>minigun2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="264497385"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="minigun2" ID="{5C3D3FB2-9484-41A8-857D-E0A287D6A520}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="AliemLightningGun1" ID="{703C6E54-108D-42F3-BC0B-91341B3ADAC1}" ShortID="897632559">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{F5C66372-D3B6-4B13-8C81-2CA9832D3D57}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="lightningGun1" ID="{FD2A730C-3FDC-4677-9EEB-61C3DDA8EE75}">
+													<Language>SFX</Language>
+													<AudioFile>lightningGun1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="736645380"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="lightningGun1" ID="{FD2A730C-3FDC-4677-9EEB-61C3DDA8EE75}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AliemRevolver1" ID="{5D11B284-935E-4D6A-B611-E4FA49FFA67E}" ShortID="835855718">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{02EE1CCF-A8C1-4612-B620-0D9C5C4B992A}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="revolver1" ID="{AA301864-9ACA-4EC6-8F37-C421859C3314}">
+													<Language>SFX</Language>
+													<AudioFile>revolver1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="789193136"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="revolver1" ID="{AA301864-9ACA-4EC6-8F37-C421859C3314}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="AliemRifleCharged" ID="{3E99077D-FDFB-4910-A89E-ABF4A71E7421}" ShortID="294788035">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="OverrideEffect" Type="bool" Value="True"/>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-330</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{D90911A2-F6C2-4646-A752-06D7C3166BBB}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="AliemRifle1" ID="{8A3CFBCA-0472-4DCF-9205-387A4DF113DF}" ShortID="293646017">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rifle1" ID="{04B2ADF4-1BCD-4C56-8D7F-DD71F8DE1098}">
+															<Language>SFX</Language>
+															<AudioFile>rifle1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1071376400"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rifle1" ID="{04B2ADF4-1BCD-4C56-8D7F-DD71F8DE1098}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemRifle2" ID="{5D04F23E-80A4-4340-9961-E005BA5C2F43}" ShortID="55000819">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="rifle2" ID="{1B0EAC3F-3E63-4985-A43D-C8A9ADB210A9}">
+															<Language>SFX</Language>
+															<AudioFile>rifle2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="525493977"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="rifle2" ID="{1B0EAC3F-3E63-4985-A43D-C8A9ADB210A9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="AliemSawedOff1" ID="{58E6FAE3-BFCC-4C1F-85E6-3B21BC9941CC}" ShortID="193570069">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{081DE6EB-ED4B-4CDD-A866-F98FA2DF93F9}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sawedoff1" ID="{C61F6CEB-D967-4B50-913F-269F51D78F58}">
+													<Language>SFX</Language>
+													<AudioFile>sawedoff1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="61898431"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sawedoff1" ID="{C61F6CEB-D967-4B50-913F-269F51D78F58}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AliemBBCharged" ID="{4BEFBE63-6136-4670-8A65-EF6F56C1A14D}" ShortID="802364195">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="AliemBBCharged" ID="{E33EF89B-A83B-4C3C-B6A5-2BEB8AC8E4F9}">
+													<Language>SFX</Language>
+													<AudioFile>AliemBBCharged.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="865284947"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="AliemBBCharged" ID="{E33EF89B-A83B-4C3C-B6A5-2BEB8AC8E4F9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<RandomSequenceContainer Name="AliemBB" ID="{1849FE57-F501-4248-A79A-CF144C141E2E}" ShortID="69514250">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="AliemBB4" ID="{E681C84F-AA51-4CED-B2FA-4077206BD1F6}" ShortID="641796818">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemBB4" ID="{CCD927DC-4CB5-4038-8694-D1B1D8B3A4FB}">
+															<Language>SFX</Language>
+															<AudioFile>AliemBB4.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="664958890"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemBB4" ID="{CCD927DC-4CB5-4038-8694-D1B1D8B3A4FB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemBB2" ID="{62172996-A795-42E5-BEA0-84BFA3CD604C}" ShortID="617419340">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemBB2" ID="{0B4C3A4B-EA79-4713-B776-028EB359546E}">
+															<Language>SFX</Language>
+															<AudioFile>AliemBB2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="296160323"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemBB2" ID="{0B4C3A4B-EA79-4713-B776-028EB359546E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemBB3" ID="{2F61A305-7080-4A32-965E-852FFC4E5DCA}" ShortID="721996126">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemBB3" ID="{2F9F6B7F-E263-4D9B-966E-864E15BCCFC8}">
+															<Language>SFX</Language>
+															<AudioFile>AliemBB3.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="262622108"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemBB3" ID="{2F9F6B7F-E263-4D9B-966E-864E15BCCFC8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemBB1" ID="{6CC629C3-37C3-4080-8CF5-1E0392F674EE}" ShortID="961407505">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemBB1" ID="{209AA9A9-E96E-471B-823D-9A22FB80D0D0}">
+															<Language>SFX</Language>
+															<AudioFile>AliemBB1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="67214818"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemBB1" ID="{209AA9A9-E96E-471B-823D-9A22FB80D0D0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="AliemMegashot" ID="{F0C9148F-A8B3-4150-91B9-B5F9105A1B65}" ShortID="20618710">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="AliemMegashot2" ID="{6CFD767C-7F56-4BB1-B10E-C29EDDE0ABED}" ShortID="259889835">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemMegashot2" ID="{E1BCB92F-67A9-457D-8D2B-DDA6D2FE59AD}">
+															<Language>SFX</Language>
+															<AudioFile>AliemMegashot2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1066032004"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemMegashot2" ID="{E1BCB92F-67A9-457D-8D2B-DDA6D2FE59AD}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemMegashot1" ID="{D7613C72-9BCE-4C6B-983E-D6CF786B1938}" ShortID="617071125">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemMegashot1" ID="{FC2B069E-5BEE-4D82-9094-A4B0FC8D1FE5}">
+															<Language>SFX</Language>
+															<AudioFile>AliemMegashot1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1028718208"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemMegashot1" ID="{FC2B069E-5BEE-4D82-9094-A4B0FC8D1FE5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="AliemMegashotCharged" ID="{0F037B44-D196-40EB-AA0C-E668799B87E7}" ShortID="851708870">
+											<PropertyList>
+												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="AliemMegashot_Charged1" ID="{00DD5557-CB0B-4B6A-ABD9-EFC7700D4551}" ShortID="593963856">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemMegashot_Charged1" ID="{3358FEB5-32B1-4180-B5E4-BB7957711C50}">
+															<Language>SFX</Language>
+															<AudioFile>AliemMegashot_Charged1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="592973880"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemMegashot_Charged1" ID="{3358FEB5-32B1-4180-B5E4-BB7957711C50}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="AliemMegashot_Charged2" ID="{C0E5068D-661C-4828-B912-68B67BB4E09C}" ShortID="830093753">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="AliemMegashot_Charged2" ID="{64161326-B762-4469-818E-B2D8A1C6AD4E}">
+															<Language>SFX</Language>
+															<AudioFile>AliemMegashot_Charged2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="838606637"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="AliemMegashot_Charged2" ID="{64161326-B762-4469-818E-B2D8A1C6AD4E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="AliemChargeupSawedOff" ID="{03761FA9-3C81-458B-B4C2-ADC926F3F35E}" ShortID="221798183">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="AliemChargeupSawedOff" ID="{059EAFEB-389A-42DB-8CDB-C4ECB782B871}">
+													<Language>SFX</Language>
+													<AudioFile>AliemChargeupSawedOff.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1040674989"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="AliemChargeupSawedOff" ID="{059EAFEB-389A-42DB-8CDB-C4ECB782B871}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AliemSawedOffCharged" ID="{EAD031C5-8842-4C1C-B20E-6577E0868404}" ShortID="430397671">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="AliemSawedoffCharged" ID="{4F56773A-80D4-4BBA-8E9A-021A19B5297D}">
+													<Language>SFX</Language>
+													<AudioFile>AliemSawedoffCharged.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="4174051"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="AliemSawedoffCharged" ID="{4F56773A-80D4-4BBA-8E9A-021A19B5297D}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="AliemSawedOffChargedSimple" ID="{A3DF96CB-75DC-46FA-A30D-DD77002EECA5}" ShortID="474485409">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{077A2B72-EDD0-4407-BC54-6D67CF746425}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="AliemSawedoffChargedSimple" ID="{3D1C0D55-EB06-4A8C-9D7B-C2DE33128FC3}">
+													<Language>SFX</Language>
+													<AudioFile>AliemSawedoffChargedSimple.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="514450483"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="AliemSawedoffChargedSimple" ID="{3D1C0D55-EB06-4A8C-9D7B-C2DE33128FC3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</ActorMixer>
+								<Sound Name="Chomp" ID="{A0B0D4F1-E626-47F2-9761-D9B2EBA7A35A}" ShortID="455795760">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0AF61188-3D98-4100-ADC1-38E3B0C80902}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="chomp" ID="{E8E1C8E3-61AB-43DA-ACD6-E25AEBD93B35}">
+											<Language>SFX</Language>
+											<AudioFile>chomp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="246871242"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="chomp" ID="{E8E1C8E3-61AB-43DA-ACD6-E25AEBD93B35}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="DigPopOut_AHI" ID="{4E6B7839-790B-4C36-841E-A50742631DAF}" ShortID="491455270">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{293F82A5-4FD0-4199-895D-4CFF84B33885}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="INV_DigPopOut" ID="{A8B4E3DF-772E-43B4-8945-80B94975E016}">
+											<Language>SFX</Language>
+											<AudioFile>INV_DigPopOut.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="435369935"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="INV_DigPopOut" ID="{A8B4E3DF-772E-43B4-8945-80B94975E016}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AliemTeslaChargingComplete" ID="{DC9664A2-513B-445C-85E1-D63A4188F7CF}" ShortID="848228030">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>27</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{A147BD34-8587-4016-BACC-6799919C4DE1}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Positioning" ID="{364B6FC6-F9DA-4BC8-A286-10E596C5BFCA}" WorkUnitID="{18011794-2BE0-4AD4-A105-E7CCD725B566}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{771EF477-08CE-45C6-A5F3-901C8D588AF5}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{73E21279-9BE3-457F-8637-0131B34CE367}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="TeslaChargingComplete" ID="{BD9F066D-EABC-4D35-A21D-875E76C8F3A8}">
+											<Language>SFX</Language>
+											<AudioFile>TeslaChargingComplete.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="872442832"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="TeslaChargingComplete" ID="{BD9F066D-EABC-4D35-A21D-875E76C8F3A8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

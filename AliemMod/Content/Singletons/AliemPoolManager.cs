@@ -47,7 +47,7 @@ namespace AliemMod.Content
             cursor.RemoveRange(2);
             cursor.EmitDelegate<Func<GameObject, Vector3, Quaternion, EffectComponent>>((gob, origin, rotation) =>
             {
-                if (gob == Assets.BBOrbEffect)
+                if (gob == AliemAssets.BBOrbEffect)
                 {
                     return instance.RentOrbEffect(origin, rotation);
                 }
@@ -127,7 +127,7 @@ namespace AliemMod.Content
             }
             else
             {
-                pooledEffect = UnityEngine.Object.Instantiate(Assets.BBOrbEffect).GetComponent<PooledOrbEffect>();
+                pooledEffect = UnityEngine.Object.Instantiate(AliemAssets.BBOrbEffect).GetComponent<PooledOrbEffect>();
                 pooledEffect.transform.parent = instanceTransform;
             }
             pooledEffect.OnRent(origin, rotation);

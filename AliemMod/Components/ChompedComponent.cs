@@ -22,7 +22,7 @@ namespace AliemMod.Components
                     modelChildIndex = (short)headIndex
                 };
                 
-                EffectManager.SpawnEffect(Modules.Assets.bloodEffect, effectData, true);
+                EffectManager.SpawnEffect(Modules.AliemAssets.bloodEffect, effectData, true);
                 head.gameObject.AddComponent<ShrinkComponent>();
             }
         }

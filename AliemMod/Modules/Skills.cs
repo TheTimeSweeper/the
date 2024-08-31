@@ -153,7 +153,7 @@ namespace AliemMod.Modules
                 secondaryChargedSkillDef,
                 skillName,
                 tokenPrefix,
-                Assets.mainAssetBundle.LoadAsset<Sprite>(iconPath),
+                AliemAssets.mainAssetBundle.LoadAsset<Sprite>(iconPath),
                 stateType);
         }
         public static T CloneSkillDef<T>(SkillDef secondaryChargedSkillDef, string skillName, string tokenPrefix, Sprite icon, SerializableEntityStateType stateType) where T : SkillDef

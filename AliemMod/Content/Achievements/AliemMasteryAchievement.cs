@@ -9,7 +9,7 @@ namespace AliemMod.Content.Achievements
 {
 
     //automatically creates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
-    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, null)]
+    [RegisterAchievement(identifier, unlockableIdentifier, AliemUnlockables.AliemPrerequisiteAchievementIdentifier, 10, null)]
     public class AliemMasteryAchievement : BaseMasteryAchievement
     {
         public const string identifier = AliemSurvivor.ALIEM_PREFIX + "MASTERYUNLOCKABLE_ACHIEVEMENT_ID";

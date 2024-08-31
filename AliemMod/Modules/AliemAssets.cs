@@ -16,7 +16,7 @@ using Path = System.IO.Path;
 namespace AliemMod.Modules
 {
 
-    public static class Assets
+    public static class AliemAssets
     {
         public static AssetBundle mainAssetBundle;
 
@@ -65,7 +65,7 @@ namespace AliemMod.Modules
 
             LoadAssetBundle();
 
-            LoadSoundBank();
+            //LoadSoundBank();
 
             PopulateAss();
         }

@@ -35,8 +35,8 @@ namespace ModdedEntityStates.Aliem
             hitSoundString = "";
             muzzleString = "KnifeHitbox";
             playbackRateParam = "ShootGun.playbackRate";
-            swingEffectPrefab = Assets.knifeSwingEffect;
-            hitEffectPrefab = Assets.knifeImpactEffect;
+            swingEffectPrefab = AliemAssets.knifeSwingEffect;
+            hitEffectPrefab = AliemAssets.knifeImpactEffect;
 
             //impactSound = HenryAssets.swordHitSoundEvent.index;
 
