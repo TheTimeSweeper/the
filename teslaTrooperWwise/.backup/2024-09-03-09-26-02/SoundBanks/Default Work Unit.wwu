@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{421A87F1-3971-4989-9B8B-843703D41DA2}" SchemaVersion="97">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{421A87F1-3971-4989-9B8B-843703D41DA2}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Tesla_Trooper" ID="{A5F99518-1799-484C-A035-35254139AD87}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Tesla Work Unit" ID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" WorkUnitID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Default Work Unit" ID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

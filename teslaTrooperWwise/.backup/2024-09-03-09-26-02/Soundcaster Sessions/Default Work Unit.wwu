@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B5BB95DD-837D-46BC-93AC-023348CC8944}" SchemaVersion="97">
+	<SoundcasterSessions>
+		<WorkUnit Name="Default Work Unit" ID="{B5BB95DD-837D-46BC-93AC-023348CC8944}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="test blast" ID="{D5F6EF97-16EA-4B2C-92A6-0509C7A2E23C}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_Chronosphere_StartLoop" ID="{F4D35CE7-1568-4ECB-93AA-7F16DB5C07AC}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_ChronosphereAlt_Start" ID="{B4892347-FFDE-46ED-8BE0-DFB4A9952A9D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_IvanBomb_Start" ID="{D7B78E8A-2DC7-41B8-B3C9-6C2288040495}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_Chronosphere_Move" ID="{78A17D02-A234-457E-89E6-02D7F2FC296D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_ChronosphereAlt_End" ID="{95C5EAC3-D3AA-4E9E-8A3E-E894DC2B224D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_ChronoAttack" ID="{5A2F8C9F-F30C-4CA3-8947-0D1FF0EB4E64}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_ChronoMove" ID="{C5DC965B-5196-4883-AB66-DECB6130B70D}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_ChronoAttackShort" ID="{0032535A-D822-481A-97F7-7FFEAF15A838}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_ChronoVanish" ID="{1EC29972-8084-4F04-BAD6-49C7D1D88DBE}" WorkUnitID="{856C9060-BF56-4907-80DE-5789D7C6BFCB}"/>
+							<Position X="4" Y="1"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Volume_SFX" ID="{E762E6E4-6033-452D-85FE-BFDC7B85E221}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Volume_TeslaVoice" ID="{BDD5C5C0-9F08-4EDB-BB44-2C45DA0E7809}"/>
+							<Value>100</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundcasterSessions>
+</WwiseDocument>

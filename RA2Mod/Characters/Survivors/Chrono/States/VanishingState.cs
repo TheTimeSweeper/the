@@ -7,7 +7,7 @@ namespace RA2Mod.Survivors.Chrono.States
     public class VanishingState : BaseState
     {
         public float freezeDuration = 1;
-        private TemporaryOverlay temporaryOverlay;
+        private TemporaryOverlayInstance temporaryOverlay;
         private Animator modelAnimator;
         private float duration;
 
@@ -20,10 +20,10 @@ namespace RA2Mod.Survivors.Chrono.States
                 CharacterModel component = modelTransform.GetComponent<CharacterModel>();
                 if (component)
                 {
-                    this.temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+                    this.temporaryOverlay = TemporaryOverlayManager.AddOverlay(base.gameObject);
                     this.temporaryOverlay.duration = this.freezeDuration;
                     this.temporaryOverlay.originalMaterial = ChronoAssets.frozenOverlayMaterial;
-                    this.temporaryOverlay.AddToCharacerModel(component);
+                    this.temporaryOverlay.AddToCharacterModel(component);
                 }
             }
             this.modelAnimator = base.GetModelAnimator();
@@ -72,9 +72,9 @@ namespace RA2Mod.Survivors.Chrono.States
             {
                 this.modelAnimator.enabled = true;
             }
-            if (this.temporaryOverlay)
+            if (this.temporaryOverlay != null)
             {
-                EntityState.Destroy(this.temporaryOverlay);
+                this.temporaryOverlay.Destroy();
             }
             //EffectManager.SpawnEffect(FrozenState.frozenEffectPrefab, new EffectData
             //{

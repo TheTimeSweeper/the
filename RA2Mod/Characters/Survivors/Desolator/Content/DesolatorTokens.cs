@@ -1,4 +1,5 @@
 ﻿using RA2Mod.Modules;
+using RA2Mod.Survivors.Desolator.Achievements;
 using RA2Mod.Survivors.Desolator.States;
 using System;
 
@@ -141,17 +142,14 @@ namespace RA2Mod.Survivors.Desolator
             #endregion
 
             #region Achievements
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Mastery");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Monsoon.");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Mastery");
+            LanguageAPI.Add(Tokens.GetAchievementNameToken(DesolatorMasteryAchievement.identifier),       $"{fullName}: Mastery");
+            LanguageAPI.Add(Tokens.GetAchievementDescriptionToken(DesolatorMasteryAchievement.identifier), $"As {fullName}, beat the game or obliterate on Monsoon.");
 
-            LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_NAME", $"{fullName}: Grand Mastery");
-            LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_ACHIEVEMENT_DESC", $"As {fullName}, beat the game or obliterate on Typhoon or Eclipse.\n<color=#8888>(Counts any difficulty Typhoon or higher)</color>");
-            LanguageAPI.Add(prefix + "GRANDMASTERYUNLOCKABLE_UNLOCKABLE_NAME", $"{fullName}: Grand Mastery");
+            LanguageAPI.Add(Tokens.GetAchievementNameToken(DesolatorGrandMasteryAchievement.identifier), $"{fullName}: Grand Mastery");
+            LanguageAPI.Add(Tokens.GetAchievementDescriptionToken(DesolatorGrandMasteryAchievement.identifier), $"As {fullName}, beat the game or obliterate on Typhoon or Eclipse.\n<color=#8888>(Counts any difficulty Typhoon or higher)</color>");
 
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_NAME", $"Irradiators");
             LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_ACHIEVEMENT_DESC", $"Find and activate the 3 irradiators in stage 3.");
-            LanguageAPI.Add(prefix + "CHARACTERUNLOCKABLE_UNLOCKABLE_NAME", $"Irradiators");
 
             #endregion
         }

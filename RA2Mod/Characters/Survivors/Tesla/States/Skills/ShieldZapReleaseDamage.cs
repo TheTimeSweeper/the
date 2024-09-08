@@ -24,6 +24,7 @@ namespace RA2Mod.Survivors.Tesla.States
 
         public CameraTargetParams.AimRequest aimRequest;
         public float collectedDamage;
+        public TemporaryOverlayInstance temporaryOverlay;
 
         public override void OnEnter()
         {
@@ -141,10 +142,9 @@ namespace RA2Mod.Survivors.Tesla.States
             if (aimRequest != null)
                 aimRequest.Dispose();
 
-            TemporaryOverlay overlay = GetComponent<TemporaryOverlay>();
-            if (overlay)
+            if (temporaryOverlay != null)
             {
-                UnityEngine.Object.DestroyImmediate(overlay);
+                temporaryOverlay.Destroy();
             }
         }
 

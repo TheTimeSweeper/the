@@ -97,7 +97,7 @@ namespace RA2Mod.Survivors.Desolator.States
             //bit of a hack to get around Body ESM not being in GenericCharacterMain
             if (isAuthority && GetThisSkillPressed() && _inputDown)
             {
-                activatorSkillSlot.ExecuteIfReady();
+                outer.SetNextState(new DeployCancel());
             }
 
             if (isAuthority && inputBank.skill3.justPressed)

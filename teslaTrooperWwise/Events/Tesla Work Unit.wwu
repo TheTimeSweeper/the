@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" SchemaVersion="97">
+<WwiseDocument Type="WorkUnit" ID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" SchemaVersion="119">
 	<Events>
 		<WorkUnit Name="Tesla Work Unit" ID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" PersistMode="Standalone">
 			<ChildrenList>

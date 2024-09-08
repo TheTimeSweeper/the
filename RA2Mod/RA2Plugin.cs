@@ -27,9 +27,9 @@ namespace RA2Mod
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     public class RA2Plugin : BaseUnityPlugin
     {
-        public const string MODUID = "com.TheTimesweeper.RA2Mod";
+        public const string MODUID = "com.TheTimesweeper.RedAlert";
         public const string MODNAME = "Red Alert";
-        public const string MODVERSION = "3.0.0";
+        public const string MODVERSION = "3.0.1";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 
@@ -41,11 +41,6 @@ namespace RA2Mod
             {
                 Log._startTime = System.DateTime.Now;
             }
-        }
-
-        void Start()
-        {
-            Modules.SoundBanks.Init();
         }
 
         void Awake()

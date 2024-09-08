@@ -38,7 +38,7 @@ namespace RA2Mod.Modules
                 }
                 characterModel.baseRendererInfos = characterModelObject.GetComponent<CharacterModel>().baseRendererInfos;
 
-                Modules.Assets.ConvertAllRenderersToHopooShader(display);
+                Modules.Asset.ConvertAllRenderersToHopooShader(display);
 
                 OnComplete(display);
             });
@@ -60,7 +60,7 @@ namespace RA2Mod.Modules
             }
             characterModel.baseRendererInfos = bodyPrefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(display);
+            Modules.Asset.ConvertAllRenderersToHopooShader(display);
 
             return display;
         }
@@ -74,7 +74,7 @@ namespace RA2Mod.Modules
 
         internal static IEnumerator CloneCharacterBodyAsync(GameObject modelObject, BodyInfo bodyInfo, Action<GameObject> onComplete)
         {
-            return Assets.LoadAssetCoroutine<GameObject>(bodyInfo.bodyToClonePath, (loadedBody) =>
+            return Asset.LoadAssetCoroutine<GameObject>(bodyInfo.bodyToClonePath, (loadedBody) =>
             {
                 if (!loadedBody)
                 {
@@ -552,7 +552,7 @@ namespace RA2Mod.Modules
             footstepHandler.sprintFootstepOverrideString = "";
             footstepHandler.enableFootstepDust = true;
 
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/Common/VFX/GenericFootstepDust.prefab", (result) =>
+            ContentPacks.asyncLoadCoroutines.Add(Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Common/VFX/GenericFootstepDust.prefab", (result) =>
             {
                 footstepHandler.footstepDustPrefab = result;
             }));
@@ -565,7 +565,7 @@ namespace RA2Mod.Modules
             if (!ragdollController) return;
             if (ragdollMaterial == null)
             {
-                ContentPacks.asyncLoadCoroutines.Add(Assets.LoadAssetCoroutine<PhysicMaterial>("RoR2/Base/Common/physmatRagdoll.physicMaterial", (result) =>
+                ContentPacks.asyncLoadCoroutines.Add(Asset.LoadAssetCoroutine<PhysicMaterial>("RoR2/Base/Common/physmatRagdoll.physicMaterial", (result) =>
                 {
                     ragdollMaterial = result;
                     SetupRagdollBones(ragdollController);
@@ -633,7 +633,7 @@ namespace RA2Mod.Modules
             CloneDopplegangerMasterAsync(bodyPrefab, masterName, "RoR2/Base/Merc/MercMonsterMaster.prefab", onComplete);
         public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, string masterToCopyPath, Action<GameObject> onComplete = null)
         {
-            return Assets.LoadAssetCoroutine<GameObject>(masterToCopyPath, (result) =>
+            return Asset.LoadAssetCoroutine<GameObject>(masterToCopyPath, (result) =>
             {
                 GameObject newMaster = PrefabAPI.InstantiateClone(result, masterName, true);
                 newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
@@ -654,7 +654,7 @@ namespace RA2Mod.Modules
 
         public static IEnumerator CreateBlankMasterPrefabAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete)
         {
-            return Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) =>
+            return Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) =>
             {
                 onComplete(CloneMaster(bodyPrefab, masterName, result));
             });

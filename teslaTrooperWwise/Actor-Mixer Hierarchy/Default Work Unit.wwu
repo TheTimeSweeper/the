@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{A5E43C36-3150-4618-AC50-22591D8150E6}" SchemaVersion="97">
+<WwiseDocument Type="WorkUnit" ID="{A5E43C36-3150-4618-AC50-22591D8150E6}" SchemaVersion="119">
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{A5E43C36-3150-4618-AC50-22591D8150E6}" PersistMode="Standalone">
 			<ChildrenList>
@@ -17,32 +17,6 @@
 							<ValueList>
 								<Value>-2</Value>
 							</ValueList>
-							<RTPCList>
-								<RTPC Name="" ID="{D226E29A-B2B1-464B-B360-B834A181860B}" ShortID="750042677">
-									<ReferenceList>
-										<Reference Name="ControlInput">
-											<ObjectRef Name="Volume_SFX" ID="{E762E6E4-6033-452D-85FE-BFDC7B85E221}" WorkUnitID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}"/>
-										</Reference>
-									</ReferenceList>
-									<Curve Name="" ID="{438709F3-7EF5-40CF-8F64-3B9FA8E3576F}">
-										<PropertyList>
-											<Property Name="Flags" Type="int32" Value="3"/>
-										</PropertyList>
-										<PointList>
-											<Point>
-												<XPos>0</XPos>
-												<YPos>-200</YPos>
-												<Flags>5</Flags>
-											</Point>
-											<Point>
-												<XPos>100</XPos>
-												<YPos>0</YPos>
-												<Flags>37</Flags>
-											</Point>
-										</PointList>
-									</Curve>
-								</RTPC>
-							</RTPCList>
 						</Property>
 					</PropertyList>
 					<ReferenceList>
@@ -1638,12 +1612,22 @@
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>
-													<Playlist>
-														<ItemRef Name="Voice_Chrono_Attack_1" ID="{4A726D75-AD66-4502-8905-05A1A90A3829}"/>
-														<ItemRef Name="Voice_Chrono_Attack_2" ID="{E796F13A-7248-478F-87BA-E6D76293840E}"/>
-														<ItemRef Name="Voice_Chrono_Attack_3" ID="{BBD9C5BC-3931-4635-A717-3AE47F09C38D}"/>
-														<ItemRef Name="Voice_Chrono_Attack_4" ID="{B9B37429-69D5-4B23-9CB4-175C8A7A9D0D}"/>
-													</Playlist>
+													<ObjectLists>
+														<ObjectList Name="Playlist">
+															<Reference>
+																<ObjectRef Name="Voice_Chrono_Attack_1" ID="{4A726D75-AD66-4502-8905-05A1A90A3829}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+															</Reference>
+															<Reference>
+																<ObjectRef Name="Voice_Chrono_Attack_2" ID="{E796F13A-7248-478F-87BA-E6D76293840E}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+															</Reference>
+															<Reference>
+																<ObjectRef Name="Voice_Chrono_Attack_3" ID="{BBD9C5BC-3931-4635-A717-3AE47F09C38D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+															</Reference>
+															<Reference>
+																<ObjectRef Name="Voice_Chrono_Attack_4" ID="{B9B37429-69D5-4B23-9CB4-175C8A7A9D0D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+															</Reference>
+														</ObjectList>
+													</ObjectLists>
 												</RandomSequenceContainer>
 												<RandomSequenceContainer Name="Move Voice" ID="{E494C514-8ACB-4C76-AA78-9CDFFB57DCCB}" ShortID="940850356">
 													<PropertyList>
@@ -3602,32 +3586,6 @@
 															</Modifier>
 														</ModifierInfo>
 													</ModifierList>
-													<RTPCList>
-														<RTPC Name="" ID="{3EC439C1-4692-4D55-B4B6-F4403066587E}" ShortID="286948270">
-															<ReferenceList>
-																<Reference Name="ControlInput">
-																	<ObjectRef Name="Pitch_TeslaCharge" ID="{7E611772-933D-4A81-9FD6-DE0D6DA41E34}" WorkUnitID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}"/>
-																</Reference>
-															</ReferenceList>
-															<Curve Name="" ID="{58EE3F5B-84D6-4825-93D0-ED0817695F8F}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="65537"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>-719</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>100</XPos>
-																		<YPos>248</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</RTPC>
-													</RTPCList>
 												</Property>
 												<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 											</PropertyList>
@@ -3726,6 +3684,45 @@
 													</ActiveSourceList>
 												</Sound>
 											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="RTPC">
+													<Reference>
+														<Local>
+															<RTPC Name="" ID="{3EC439C1-4692-4D55-B4B6-F4403066587E}" ShortID="286948270">
+																<PropertyList>
+																	<Property Name="PropertyName" Type="string" Value="Pitch"/>
+																</PropertyList>
+																<ReferenceList>
+																	<Reference Name="ControlInput">
+																		<ObjectRef Name="Pitch_TeslaCharge" ID="{7E611772-933D-4A81-9FD6-DE0D6DA41E34}" WorkUnitID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}"/>
+																	</Reference>
+																	<Reference Name="Curve">
+																		<Custom>
+																			<Curve Name="" ID="{58EE3F5B-84D6-4825-93D0-ED0817695F8F}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="65537"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>-719</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>100</XPos>
+																						<YPos>248</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</Custom>
+																	</Reference>
+																</ReferenceList>
+															</RTPC>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
@@ -4294,11 +4291,6 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
-																<Property Name="RenderEffect0" Type="bool">
-																	<ValueList>
-																		<Value>True</Value>
-																	</ValueList>
-																</Property>
 																<Property Name="Volume" Type="Real64">
 																	<ModifierList>
 																		<ModifierInfo>
@@ -4315,9 +4307,6 @@
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F4D87EEC-FC92-4A55-A4B2-250A8842D618}"/>
-																</Reference>
-																<Reference Name="Effect0" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
-																	<ObjectRef Name="Plate_Medium" ID="{33384D0C-6ACB-4E3D-AC82-73AAB3AE1CA5}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
 																</Reference>
 																<Reference Name="OutputBus">
 																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B91E43ED-F2F4-48E9-9773-DFE06237C754}"/>
@@ -4469,6 +4458,24 @@
 																	</ActiveSourceList>
 																</Sound>
 															</ChildrenList>
+															<ObjectLists>
+																<ObjectList Name="Effects">
+																	<Reference>
+																		<Local>
+																			<EffectSlot Name="" ID="{A3F28B58-9434-40A5-8D90-845720F5A820}" ShortID="1034142861">
+																				<PropertyList>
+																					<Property Name="Render" Type="bool" Value="True"/>
+																				</PropertyList>
+																				<ReferenceList>
+																					<Reference Name="Effect" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+																						<ObjectRef Name="Plate_Medium" ID="{33384D0C-6ACB-4E3D-AC82-73AAB3AE1CA5}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+																					</Reference>
+																				</ReferenceList>
+																			</EffectSlot>
+																		</Local>
+																	</Reference>
+																</ObjectList>
+															</ObjectLists>
 														</RandomSequenceContainer>
 													</ChildrenList>
 												</Folder>
@@ -7364,6 +7371,45 @@
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>
+					<ObjectLists>
+						<ObjectList Name="RTPC">
+							<Reference>
+								<Local>
+									<RTPC Name="" ID="{D226E29A-B2B1-464B-B360-B834A181860B}" ShortID="750042677">
+										<PropertyList>
+											<Property Name="PropertyName" Type="string" Value="Volume"/>
+										</PropertyList>
+										<ReferenceList>
+											<Reference Name="ControlInput">
+												<ObjectRef Name="Volume_SFX" ID="{E762E6E4-6033-452D-85FE-BFDC7B85E221}" WorkUnitID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}"/>
+											</Reference>
+											<Reference Name="Curve">
+												<Custom>
+													<Curve Name="" ID="{438709F3-7EF5-40CF-8F64-3B9FA8E3576F}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-200</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>0</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</RTPC>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
 				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>

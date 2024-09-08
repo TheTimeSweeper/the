@@ -1,6 +1,6 @@
 ﻿using RA2Mod.General.Components;
 using RoR2;
-using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 namespace RA2Mod.General.SkillDefs
 {

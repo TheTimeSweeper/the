@@ -31,8 +31,8 @@ namespace RA2Mod.Survivors.Chrono.States
         public InteractionDriver componentFromSkillDef3 { get; set; }
         private InteractionDriver interactor => componentFromSkillDef3;
 
-        private bool hasInputBank;
-        private bool markerInitted;
+        private bool _hasInputBank;
+        private int _fixedFrames;
 
         public override void OnEnter()
         {
@@ -44,13 +44,12 @@ namespace RA2Mod.Survivors.Chrono.States
                 heightLimit += characterBody.inventory.GetItemCount(RoR2Content.Items.JumpBoost) * characterBody.jumpPower * ChronoConfig.M0_JumpMultiplier.Value;
             }
 
-            hasInputBank = inputBank != null;
-            //well turns out the skilldef method only set 
+            _hasInputBank = inputBank != null;
+            //well turns out the skilldef method only sets on authority
             if(projectionSpawner == null)
             {
                 componentFromSkillDef2 = GetComponent<ChronoSprintProjectionSpawner>();
             }
-
             if (NetworkServer.active && projectionSpawner != null)
             {
                 projectionSpawner.SpawnProjectionServer(modelLocator.modelBaseTransform.position, transform.rotation);
@@ -64,7 +63,7 @@ namespace RA2Mod.Survivors.Chrono.States
             cameraOverride = CameraParams.OverrideCameraParams(base.cameraTargetParams, ChronoCameraParams.sprintCamera, 0.6f);
         }
 
-        private void InitMarker()
+        private void InitCameraToMarker()
         {            
             origPivot = cameraTargetParams.cameraPivotTransform;
             cameraTargetParams.cameraPivotTransform = marker.cameraPivot;
@@ -88,33 +87,32 @@ namespace RA2Mod.Survivors.Chrono.States
             if (marker == null)
                 return;
 
-            if (!markerInitted)
+            if (_fixedFrames > 0)//wait a frame
             {
-                InitMarker();
-                markerInitted = true;
+                InitCameraToMarker();
             }
             
-            timeSpent += Time.fixedDeltaTime;
+            timeSpent += Time.deltaTime;
 
-            if (hasInputBank)
+            if (_hasInputBank)
             {
-                Vector3 moveVector = inputBank.moveVector * (Mathf.Clamp(moveSpeedStat, 0, 10) * 0.1f);
+                Vector3 moveDeltaVector = inputBank.moveVector * Mathf.Clamp(moveSpeedStat, 0, 10) * ChronoConfig.M0_SprintTeleport_ProjectionSpeed.Value;
 
                 if (inputBank.jump.down)
                 {
                     if (marker.transform.position.y - transform.position.y < heightLimit)
                     {
-                        moveVector.y = 1;
+                        moveDeltaVector.y = 100;
                     }
                 }
                 else if(inputBank.skill3.down)
                 {
-                    moveVector.y = -1;
+                    moveDeltaVector.y = -100;
                 }
 
-                if (isAuthority)
+                if (isAuthority && _fixedFrames > 0)//wait a frame
                 {
-                  projectionSpawner.MoveMarkerAuthority(moveVector);
+                  projectionSpawner.MoveMarkerAuthority(moveDeltaVector * Time.deltaTime);
                 }
                 marker.UpdateAim(GetAimRay().direction);
             }
@@ -136,6 +134,7 @@ namespace RA2Mod.Survivors.Chrono.States
                 
                 outer.SetNextState(state);
             }
+            _fixedFrames += 1;
         }
 
         private bool GetSprintReleased()
@@ -148,7 +147,8 @@ namespace RA2Mod.Survivors.Chrono.States
                     //LocalUser localUser;
                     Player player;
                     //CameraRigController cameraRigController;
-                    if (PlayerCharacterMasterController.CanSendBodyInput(playerMaster.networkUser, out _, out player, out _))
+
+                    if (PlayerCharacterMasterController.CanSendBodyInput(playerMaster.networkUser, out _, out player, out _, out _))
                     {
                         return !player.GetButton(18);
                     }

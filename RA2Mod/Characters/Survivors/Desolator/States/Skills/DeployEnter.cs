@@ -34,7 +34,7 @@ namespace RA2Mod.Survivors.Desolator.States
 
             animator.SetFloat("aimYawCycle", 0.5f);
             animator.SetFloat("aimPitchCycle", 0.5f);
-
+            
             if (NetworkServer.active)
             {
                 characterBody.AddTimedBuff(RoR2.RoR2Content.Buffs.HiddenInvincibility, BaseDuration);
@@ -56,19 +56,18 @@ namespace RA2Mod.Survivors.Desolator.States
             var state = new DeployIrradiate { aimRequest = this.aimRequest, fromEnter = true, activatorSkillSlot = activatorSkillSlot };
             outer.SetNextState(state);
         }
-        
-        public override void OnExit() {
+
+        public override void OnExit()
+        {
             base.OnExit();
-            if (_complete) {
-                activatorSkillSlot.SetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
-            } else {
-                aimRequest.Dispose();
 
-                activatorSkillSlot.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            if (_complete)
+                return;
 
-                PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
-                PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
-            }
+            aimRequest.Dispose();
+
+            PlayCrossfade("RadCannonBar", "DesolatorIdlePose", 0.1f);
+            PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
         }
         
         public override InterruptPriority GetMinimumInterruptPriority() {

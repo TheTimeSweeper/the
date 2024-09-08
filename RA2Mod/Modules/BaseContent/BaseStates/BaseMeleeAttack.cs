@@ -154,7 +154,7 @@ namespace RA2Mod.Modules.BaseStates
         {
             base.FixedUpdate();
 
-            hitPauseTimer -= Time.fixedDeltaTime;
+            hitPauseTimer -= Time.deltaTime;
 
             if (hitPauseTimer <= 0f && inHitPause)
             {
@@ -163,7 +163,7 @@ namespace RA2Mod.Modules.BaseStates
 
             if (!inHitPause)
             {
-                stopwatch += Time.fixedDeltaTime;
+                stopwatch += Time.deltaTime;
             }
             else
             {

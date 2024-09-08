@@ -1,19 +1,20 @@
 {
     "author": "TheTimesweeper",
-    "name": "RA2Mod",
-    "version_number": "2.9.90",
+    "name": "Red_Alert",
+    "version_number": "3.0.2",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Adds 3 new survivors based on Red Alert 2, themed around RoR2: Tesla Trooper, Desolator, and Chrono Legionnaire",
-    "dependencies": [
-        "bbepis-BepInExPack-5.4.2101",
-        "RiskofThunder-R2API_Core-5.0.3",
-        "RiskofThunder-R2API_Prefab-1.0.1",
-        "RiskofThunder-R2API_DamageType-1.0.0",
-        "RiskofThunder-R2API_RecalculateStats-1.0.0",
-        "RiskofThunder-R2API_Language-1.0.2",
-        "RiskofThunder-R2API_Deployable-1.0.0",
-        "RiskofThunder-R2API_Dot-1.0.0",
-        "RiskofThunder-R2API_Color-1.0.0",
-        "Smooth_Salad-ShaderSwapper-1.0.0"
-    ]
+    "description": "Double Time. Adds 3 survivors based on Red Alert 2, themed around RoR2: Tesla Trooper, Desolator, and Chrono Legionnaire",
+  "dependencies": [
+    "bbepis-BepInExPack-5.4.2101",
+    "RiskofThunder-R2API_Core-5.0.3",
+    "RiskofThunder-R2API_Prefab-1.0.1",
+    "RiskofThunder-R2API_DamageType-1.0.0",
+    "RiskofThunder-R2API_RecalculateStats-1.0.0",
+    "RiskofThunder-R2API_Language-1.0.0",
+    "RiskofThunder-R2API_Deployable-1.0.0",
+    "RiskofThunder-R2API_Dot-1.0.0",
+    "RiskofThunder-R2API_Colors-1.0.0",
+    "RiskofThunder-R2API_Sound-1.0.0",
+    "Smooth_Salad-ShaderSwapper-1.0.0"
+  ]
 }

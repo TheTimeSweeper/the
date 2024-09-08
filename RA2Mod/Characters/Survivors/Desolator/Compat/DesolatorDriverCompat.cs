@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Desolator.Compat
 {
-    public class DesolatorDriverCompat
+    internal class DesolatorDriverCompat
     {
         private ushort desolatorGunIndex;
 

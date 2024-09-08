@@ -11,6 +11,7 @@ using System.Collections;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
 using R2API;
+using KinematicCharacterController;
 
 namespace RA2Mod.Survivors.Chrono
 {
@@ -47,7 +48,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public static List<IEnumerator> GetAssetBundleInitializedCoroutines(AssetBundle assetBundle)
         {
-            return Assets.PreLoadAssetsAsyncCoroutines<Sprite>(assetBundle,
+            return Asset.PreLoadAssetsAsyncCoroutines<Sprite>(assetBundle,
                 "texIconChrono",
                 "texIconChronoRA2",
                 "texIconChronoPassive",
@@ -128,17 +129,19 @@ namespace RA2Mod.Survivors.Chrono
                 (GameObject result) =>
                 {
                     markerPrefab = result.GetComponent<ChronoProjectionMotor>();
+                    markerPrefab.GetComponent<KinematicCharacterMotor>().playerCharacter = true;//todo set in editor when ror2 lib is updated
                     R2API.PrefabAPI.RegisterNetworkPrefab(markerPrefab.gameObject);
                     Modules.Content.AddNetworkedObject(markerPrefab.gameObject);
                 });
 
             //Ivan bomb
-            Assets.LoadAssetsAsync(
+            Asset.LoadAssetsAsync(
                 new AsyncAsset<GameObject>(assetBundle, "ChronoIvanBombProjectile"),
                 new AsyncAsset<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab"),
                 (ivanResult, result) =>
                 {
                     chronoBombProjectile = ivanResult;
+                    chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab.AddComponent<VFXAttributes>().DoNotPool = true;
                     R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
                     Content.AddProjectilePrefab(chronoBombProjectile);
                     
@@ -168,11 +171,11 @@ namespace RA2Mod.Survivors.Chrono
                 });
 
             //visualizers
-            Assets.LoadAssetAsync("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (GameObject result) => endPointivsualizer = result);
-            Assets.LoadAssetAsync("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (GameObject result) => arcvisualizer = result);
+            Asset.LoadAssetAsync("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (GameObject result) => endPointivsualizer = result);
+            Asset.LoadAssetAsync("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (GameObject result) => arcvisualizer = result);
 
             //tether
-            Assets.LoadAssetsAsync(
+            Asset.LoadAssetsAsync(
                 new AsyncAsset<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat"),
                 new AsyncAsset<GameObject>(assetBundle, "ChronoTether"),
                 new AsyncAsset<GameObject>(assetBundle, "ChronoTracer"),
@@ -193,7 +196,7 @@ namespace RA2Mod.Survivors.Chrono
                 });
 
             //tether 2
-            Assets.LoadAssetAsync("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", 
+            Asset.LoadAssetAsync("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", 
                 (Material beamMatResult) =>
                 {
                     Material beamMat = beamMatResult;
@@ -284,6 +287,7 @@ namespace RA2Mod.Survivors.Chrono
             loads.Add(assetBundle.LoadAssetCoroutine("ChronoProjection", (GameObject result) =>
             {
                 markerPrefab = result.GetComponent<ChronoProjectionMotor>();
+                markerPrefab.GetComponent<KinematicCharacterMotor>().playerCharacter = true;//todo set in editor when ror2 lib is updated
                 R2API.PrefabAPI.RegisterNetworkPrefab(markerPrefab.gameObject);
                 Modules.Content.AddNetworkedObject(markerPrefab.gameObject);
             }));
@@ -292,10 +296,11 @@ namespace RA2Mod.Survivors.Chrono
             loads.Add(assetBundle.LoadAssetCoroutine("ChronoIvanBombProjectile", (GameObject ivanResult) =>
             {
                 chronoBombProjectile = ivanResult;
+                chronoBombProjectile.GetComponent<ProjectileController>().ghostPrefab.AddComponent<VFXAttributes>().DoNotPool = true;
                 R2API.PrefabAPI.RegisterNetworkPrefab(chronoBombProjectile);
                 Content.AddProjectilePrefab(chronoBombProjectile);
 
-                loads.Add(Assets.LoadAssetCoroutine<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
+                loads.Add(Asset.LoadAssetCoroutine<GameObject>("RoR2/DLC1/LunarSun/ExplosionLunarSun.prefab", (result) =>
                 {
                     GameObject bombExplosion = result.InstantiateClone(result.name + "ChronoBomb", false);
                     bombExplosion.GetComponent<EffectComponent>().soundName = "Play_IvanBomb_Explode";
@@ -329,16 +334,16 @@ namespace RA2Mod.Survivors.Chrono
                 Modules.Content.CreateAndAddEffectDef(vanishEffect);
             }));
             //visualizers
-            loads.Add(Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
+            loads.Add(Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab", (result) =>
             {
                 endPointivsualizer = result;
             }));
-            loads.Add(Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
+            loads.Add(Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab", (result) =>
             {
                 arcvisualizer = result;
             }));
             //tether
-            loads.Add(Assets.LoadAssetCoroutine<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", (Material beamMatResult) =>
+            loads.Add(Asset.LoadAssetCoroutine<Material>("RoR2/Base/ClayBoss/matTrailSiphonHealth.mat", (Material beamMatResult) =>
             {
                 Material beamMat = beamMatResult;
 

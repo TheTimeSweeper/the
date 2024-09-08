@@ -7,6 +7,7 @@ using RA2Mod.Survivors.Tesla;
 using RA2Mod.Modules;
 using RA2Mod.Minions.TeslaTower.States;
 using System.Linq;
+using RA2Mod.General;
 
 namespace RA2Mod.Minions.TeslaTower
 {
@@ -166,31 +167,34 @@ namespace RA2Mod.Minions.TeslaTower
             #endregion Nod
 
             #region MC
-            TeslaSkinDef scepterMC = Skins.DuplicateScepterSkinDef(skinController.skins[3] as TeslaSkinDef);
 
-            scepterMC.meshReplacements = Modules.Skins.GetMeshReplacements(assetBundle, scepterMC.rendererInfos,
-                null,//"MC_Base_Pillars_Color_Scepter",
-                null,//"MC_Base_Platform",
-                null,//"MC_Tower_Scepter",//"MC_Base_Center_Scepter",
-                null,//"MC_Base_Tubes",
-
-                "MC_Circles_Scepter",
-                null,//"MC_Pole",
-                null,//"MC_Pole_Tracer",
-                null,//"MC_Emission_Scepter",
-                "MC_Orb_Scepter");
-
-
-            skinController.skins[3] = scepterMC;
-
-            MCMinionSkinReplacement = new SkinDef.MinionSkinReplacement
+            if (GeneralConfig.Cursed.Value)
             {
-                minionBodyPrefab = bodyPrefab,
-                minionSkin = scepterMC,
-            };
+                TeslaSkinDef scepterMC = Skins.DuplicateScepterSkinDef(skinController.skins[3] as TeslaSkinDef);
 
-            teslaSkins[3].minionSkinReplacements = teslaSkins[3].minionSkinReplacements.Append(MCMinionSkinReplacement).ToArray();
+                scepterMC.meshReplacements = Modules.Skins.GetMeshReplacements(assetBundle, scepterMC.rendererInfos,
+                    null,//"MC_Base_Pillars_Color_Scepter",
+                    null,//"MC_Base_Platform",
+                    null,//"MC_Tower_Scepter",//"MC_Base_Center_Scepter",
+                    null,//"MC_Base_Tubes",
 
+                    "MC_Circles_Scepter",
+                    null,//"MC_Pole",
+                    null,//"MC_Pole_Tracer",
+                    null,//"MC_Emission_Scepter",
+                    "MC_Orb_Scepter");
+
+
+                skinController.skins[3] = scepterMC;
+
+                MCMinionSkinReplacement = new SkinDef.MinionSkinReplacement
+                {
+                    minionBodyPrefab = bodyPrefab,
+                    minionSkin = scepterMC,
+                };
+
+                teslaSkins[3].minionSkinReplacements = teslaSkins[3].minionSkinReplacements.Append(MCMinionSkinReplacement).ToArray();
+            }
             #endregion MC
         }
     }

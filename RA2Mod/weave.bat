@@ -2,7 +2,7 @@ REM original version https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/C%23-
 REM open this in vs it'll be so much nicer
 
 set TargetFileName=RA2Mod.dll
-set TargetDir=bin\Debug\netstandard2.0
+set TargetDir=bin\Debug\netstandard2.1
 
 REM robocopy to our weaver folder. idk what the fuck robocopy does but we leave one there for storage
 robocopy %TargetDir% Weaver %TargetFileName% > %TargetDir%\Robocopy

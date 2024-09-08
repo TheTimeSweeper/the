@@ -6,7 +6,7 @@ namespace RA2Mod.Survivors.GI.SkillDefs
 {
     public class GILimitedUseSkillDef : SkillDef
     {
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot)
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime)
         {
         }
     }

@@ -6,7 +6,6 @@ namespace RA2Mod.Survivors.Desolator.Components
 {
     public class DesolatorWeaponComponent : MonoBehaviour
     {
-
         private CharacterBody characterBody;
         private Animator animator;
 

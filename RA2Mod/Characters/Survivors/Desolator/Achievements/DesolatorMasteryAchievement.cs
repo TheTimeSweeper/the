@@ -4,7 +4,7 @@ using RoR2;
 namespace RA2Mod.Survivors.Desolator.Achievements
 {
     //automatically creates language tokens $"ACHIEVMENT_{identifier.ToUpper()}_NAME" and $"ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
-    [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
+    [RegisterAchievement(identifier, unlockableIdentifier, null, 10, null)]
     public class DesolatorMasteryAchievement : BaseMasteryAchievement
     {
         public const string identifier = DesolatorSurvivor.TOKEN_PREFIX + "MASTERYUNLOCKABLE_ACHIEVEMENT_ID";

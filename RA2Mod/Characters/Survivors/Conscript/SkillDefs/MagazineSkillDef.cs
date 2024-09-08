@@ -3,7 +3,7 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using System.Text;
 using UnityEngine;
 
@@ -43,9 +43,9 @@ namespace RA2Mod.Survivors.Conscript.SkillDefs
         }
 
         // Token: 0x060045F2 RID: 17906 RVA: 0x00122B30 File Offset: 0x00120D30
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot)
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime)
         {
-            base.OnFixedUpdate(skillSlot);
+            base.OnFixedUpdate(skillSlot, deltaTime);
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
             instanceData.currentStock = skillSlot.stock;
 
@@ -53,13 +53,13 @@ namespace RA2Mod.Survivors.Conscript.SkillDefs
             {
                 if (skillSlot.stateMachine && !skillSlot.stateMachine.HasPendingState() && skillSlot.stateMachine.CanInterruptState(this.reloadInterruptPriority))
                 {
-                    instanceData.graceStopwatch += Time.fixedDeltaTime;
+                    instanceData.graceStopwatch += deltaTime;
                     if ((instanceData.graceStopwatch >= this.graceDuration || instanceData.currentStock == 0) && skillSlot.cooldownRemaining <= 0)
                     {
                         int magazines = skillSlot.GetComponent<CharacterBody>().GetBuffCount(ConscriptBuffs.magazineBuff);
                         SerializableEntityStateType newReloadState = magazines >= 1? hasMagazineReloadState : this.reloadState;
 
-                        EntityState entityState = EntityStateCatalog.InstantiateState(newReloadState);
+                        EntityState entityState = EntityStateCatalog.InstantiateState(ref newReloadState);
                         ISkillState skillState;
                         if ((skillState = (entityState as ISkillState)) != null) 
                         {

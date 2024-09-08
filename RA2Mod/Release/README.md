@@ -16,9 +16,9 @@ I Initially planned this release to include a lot more content and sprucing up f
 
 # Electrician In the Field
 Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
+- Fully multiplayer compatible
 - Item displays and ragdoll
 - Alt skills and skins with achievements
-- Fully multiplayer compatible
 - Mod Support
   - Ancient Scepter
   - Skills++
@@ -26,14 +26,13 @@ Adds the Tesla Trooper, who can construct Tesla Towers to help him fry enemies.
   - CustomEmotesAPI
   - VRAPI
   - Risk of Options
-- Y'all remember Red Alert 2?
 
 <img width="900" src="https://raw.githubusercontent.com/TheTimeSweeper/the/master/RA2Mod/Release/_readme/CSS_Tesla.png" />
 
 # SPREAD THE DOOM
 Adds the Desolator, who spreads large spheres of radiation everywhere in his wake.  
-- Item displays and ragdoll
 - Fully multiplayer compatible
+- Item displays and ragdoll
 - Mod Support
   - Ancient Scepter
   - Skills++ (one skill lol)
@@ -44,9 +43,9 @@ Adds the Desolator, who spreads large spheres of radiation everywhere in his wak
 
 # They're History
 Adds the Chrono Legionnaire, who teleports around and vanishes enemies from existence.  
-- Beta. animations missing, and gameplay still in progress
-- Item displays and ragdoll
+- Beta. animations missing, and gameplay has some reworks planned
 - Fully multiplayer compatible
+- ~~Item displays and~~ ragdoll
 - FULLY configurable
 - Mod Support
   - CustomEmotesAPI
@@ -57,7 +56,10 @@ Adds the Chrono Legionnaire, who teleports around and vanishes enemies from exis
 # Checking Designs
 For SotS update I just decided to upload the work-in-progress parts of the mod so fuck it 1.5 more new characters. Enable in config.
 - G.I. is simple shoot man who can deploy to become beefier simple shoot man  
+    - gameplay basically finished, fully multiplayer compatible, just missing visuals and effects
+    - fully configurable
 - Conscript is simple shoot man who builds garrisons to help him simple shoot more  
+    - prototype. hav fun
 ___ 
 ![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/zaps_combined.png)  
 ![](https://raw.githubusercontent.com/TheTimeSweeper/the/master/JoeMod/Release/_readme/rad.png)
@@ -91,7 +93,7 @@ Currently Supported:
 - BR Portuguese - by Kauzok
 - Chinese (simplified) - by Rody, and FallenTroop
 
-Chrono Legionnaire not translated at the moment
+Translations currently only apply to Tesla Trooper and Desolator
 
 ## Future Plans (that I may or may not get to)
 - Alt skills
@@ -110,6 +112,14 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 see Changelog tab for more  
+
+`3.0.2`
+- illegally forced compat with autosprint for chrono
+- fix error with m2 bombs when deputy was installed
+
+`3.0.1`
+- fixed conflict with riskytweaks removing something from frost relic that I was cloning
+- fixed some issues with scepter even though it's not working yet
 
 `3.0.0` new mod new us
 - added Chrono Legionnaire, still Beta but all working and multiplayer compatible

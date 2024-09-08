@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Tesla Work Unit" ID="{D03F0BA1-E91E-477B-A89A-AB6C8BCEFF78}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Trooper" ID="{7E24C498-F3D6-49B3-8C62-73A6B2F6E73F}" ShortID="897960931">
+					<ChildrenList>
+						<Event Name="Play_trooper_itesat2b_tesla_trooper_attack" ID="{FC319D99-D373-4687-92A3-33436FFF3A39}">
+							<ChildrenList>
+								<Action Name="" ID="{A4E49C75-0BF4-4564-A487-7B69631CB3B0}" ShortID="718543469">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="trooper_itesat2b tesla trooper attack" ID="{0504CB6D-23C2-4981-A424-3541A778490B}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_building_uselbuil" ID="{8FB88700-6B1A-46F3-AF6A-F63598E4E062}">
+							<ChildrenList>
+								<Action Name="" ID="{576415A8-0058-4E13-8DB2-1BE05B3C2004}" ShortID="104710326">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="building_uselbuil" ID="{7971E188-3EF1-44D9-AB66-32E62B10E135}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_prism_bpriat1a_prism_tower_attack" ID="{949E8CFF-D9A1-4E6E-B58E-B2C8FE6789BF}">
+							<ChildrenList>
+								<Action Name="" ID="{CEB3E728-4D28-4DAA-B7F7-E16AE682D40B}" ShortID="591367778">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="prism_bpriat1a prism tower attack" ID="{0238972C-4CAF-4B91-8753-598899BBBF3C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_prism_bpripow_prism_tower_prep" ID="{FE098812-43A9-4048-8E8E-9DC73B19038E}">
+							<ChildrenList>
+								<Action Name="" ID="{ACEF2450-42B1-4746-9260-0FDE1D2F3A01}" ShortID="551531933">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="prism_bpripow prism tower prep" ID="{2916C551-26DF-4439-8716-7A37EAC62A73}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_tower_bparatta_they_fucking_turned_eiffel_tower_to_a_tesla_tower" ID="{67E79CCF-1984-43C3-AD83-5A4727A6FA8B}">
+							<ChildrenList>
+								<Action Name="" ID="{2DAE0AA4-626D-4D3F-833E-5E6F0D260323}" ShortID="602441384">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tower_bparatta they fucking turned eiffel tower to a tesla tower" ID="{A7B973F4-8CF8-4DE2-BEE6-CED4CD194051}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_tower_btesat1a_tesla_tower_attack" ID="{29F73725-6010-43AC-909B-2AEBFB7F6B34}">
+							<ChildrenList>
+								<Action Name="" ID="{060319E2-DA6C-4549-BD2D-34A60068858B}" ShortID="525124809">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tower_btesat1a tesla tower attack" ID="{79B25811-2730-477E-93CC-DCCF226BC488}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_tower_btesat2a_tesla_tower_attack" ID="{E69E3105-AD88-4198-AB1E-541516B1DA56}">
+							<ChildrenList>
+								<Action Name="" ID="{28E1240C-DC61-4849-885A-86CB7439B727}" ShortID="92937866">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tower_btesat2a tesla tower attack" ID="{5FADD23D-EF7C-4A59-B6E3-0CF1C2940017}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_tower_btespow_tesla_tower_prep" ID="{FD5E8698-228D-40AC-B966-EACE670FC56D}">
+							<ChildrenList>
+								<Action Name="" ID="{85E0D28E-D52F-432F-96FA-467D5ED8F8F1}" ShortID="645766465">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tower_btespow tesla tower prep" ID="{9DA388E5-2284-4444-A35B-E69AD2C06BE7}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_prism_vpriatta_prism_tank_attack" ID="{CC2FD52E-5A8D-46DF-95DE-45D1D0D316F4}">
+							<ChildrenList>
+								<Action Name="" ID="{5A165D86-CDCB-411A-AD4A-62C8EE6FE46E}" ShortID="277091635">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="prism_vpriatta prism tank attack" ID="{86B02F1B-DA4D-4B38-BB77-C3C271CCDC31}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_buliding_uplace" ID="{27949F9A-3FF2-4C9D-A87B-A988F1C8B415}">
+							<ChildrenList>
+								<Action Name="" ID="{2608758F-8568-4991-BD66-33713167EAB7}" ShortID="865721758">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="buliding_uplace" ID="{4F483978-F45B-4FE6-82FB-3E644777E11A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_tank_vtesatta_tesla_tank_attack" ID="{8788E9F9-A3B7-4EDC-8CD2-81C7C6DF27A9}">
+							<ChildrenList>
+								<Action Name="" ID="{692A5A2A-B971-4CB1-B337-636212F9F9F2}" ShortID="438929391">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tank_vtesatta tesla tank attack" ID="{E1E3F839-8F17-4C79-9477-26878D05300C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_tank_vtesattb_tesla_tank_attack" ID="{2F87B4FA-0FCD-4A7B-930A-75278AE765D1}">
+							<ChildrenList>
+								<Action Name="" ID="{0F636CBA-6AFA-4DA3-BE13-D5CA73FEBBEB}" ShortID="260397727">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="tank_vtesattb tesla tank attack" ID="{F01484F2-6D5C-4508-9B48-61934A0C9EC6}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_trooper_itesat2a_tesla_trooper_attack" ID="{00B0A16A-FFFE-48DC-9331-8451C68CFC95}">
+							<ChildrenList>
+								<Action Name="" ID="{DCB0247F-2090-48C4-A269-F3705BCB17A2}" ShortID="50042421">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="trooper_itesat2a tesla trooper attack" ID="{EDFCE96D-9CAB-412B-B97E-4A58F06D3132}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_zap_crit" ID="{35D0D632-A999-4860-AC43-E4A39B3C5D00}">
+							<ChildrenList>
+								<Action Name="" ID="{B45747A2-8D84-4EEB-A4BE-152BCD7DD925}" ShortID="62256358">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="zap crit" ID="{31C349ED-9888-4195-83B4-8B37F4D6AC31}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Tesla_Lobby" ID="{28069552-2788-4230-B60B-9381DEFD4630}">
+							<ChildrenList>
+								<Action Name="" ID="{051602FF-7BC3-45DC-9CD4-3EB404DA4EF2}" ShortID="546377391">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="iteschaa" ID="{44F9795F-69DE-4509-B25B-B2C0AF606D62}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Folder Name="VoiceLines" ID="{1F3DF5E7-E3AE-44A8-A554-6AD8BF18F6FF}" ShortID="790632586">
+							<ChildrenList>
+								<Event Name="Play_Voiceline_Attack" ID="{5C2EDC96-331C-4BC4-B2D0-6841F6F828A7}">
+									<ChildrenList>
+										<Action Name="" ID="{279B72F5-3970-4D3C-BB65-E620632F2D68}" ShortID="836077812">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Attack Voice" ID="{B96B3495-940E-4C3B-9D84-DF8150C50811}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_VoiceLine" ID="{15E6FE52-0A44-4E4F-A9BC-83F94B3302EF}">
+									<ChildrenList>
+										<Action Name="" ID="{096C9535-0535-43BF-A0A4-A9DB1CC91253}" ShortID="371432114">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random Voice" ID="{C9B361C9-DF3E-43FD-84D2-712C50D65653}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voiceline_Move" ID="{614EAF26-0099-462D-8594-C1D7800870B2}">
+									<ChildrenList>
+										<Action Name="" ID="{CC7D0304-D2E9-4C76-80D1-DA6EEEDC759D}" ShortID="681969542">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Move Voice" ID="{58ED1D5C-E54E-426A-A530-8B2ECC904525}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voiceline_Select" ID="{034C56D9-69FB-4D80-8DDE-B7C4ADCD357F}">
+									<ChildrenList>
+										<Action Name="" ID="{41E8BE3C-2063-4C4E-8DD5-F95173D0B20A}" ShortID="7196291">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Select Voice" ID="{62747883-ED4F-445A-9BED-83BF645612B8}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voiceline_Driver" ID="{9C72DDCA-D035-444F-8A0F-62292B922D02}">
+									<ChildrenList>
+										<Action Name="" ID="{29BD9E1E-F99D-420D-825E-9E3303C56547}" ShortID="751522499">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Driver Voice" ID="{BC6E4D4E-B4A8-469E-AFF3-F908746E55DC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Move_2" ID="{C0A074A0-71F3-465D-BF26-2E5FA5EA3B51}">
+									<ChildrenList>
+										<Action Name="" ID="{5F83C506-A0BF-4B33-94A7-EB23982056C3}" ShortID="611017930">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Move_2" ID="{001D3AC3-554A-4091-95A8-55741D64EF56}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Move_3" ID="{9F4F7232-09FE-4813-8BBA-656C85174D51}">
+									<ChildrenList>
+										<Action Name="" ID="{7036E4F0-4269-4B69-9BDF-22CAAFCB3C7E}" ShortID="935582825">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Move_3" ID="{88DAA393-B61F-4B31-8D67-DB5EC8236EF1}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Select_1" ID="{A0A19962-8B7A-4D8E-9443-BDF11A8BC453}">
+									<ChildrenList>
+										<Action Name="" ID="{3E17ED83-F42C-40D5-ACE9-55F99EBEEE13}" ShortID="994268398">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Select_1" ID="{D59C4995-D8E4-4ECE-970E-66FB0204F1AF}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Attack_5" ID="{0BE8B4AB-5875-45C7-8615-B93A7930F773}">
+									<ChildrenList>
+										<Action Name="" ID="{2B687719-62F8-4795-B3A4-56805FB0A9B2}" ShortID="198918578">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Attack_5" ID="{084559F3-CFD3-4E01-8905-BD17CCEA3744}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Move_6" ID="{F45D5BCC-F75E-4ABF-BB8E-ED5CAFC065AF}">
+									<ChildrenList>
+										<Action Name="" ID="{AC788075-DB0D-4F71-BF7C-ED5A6AFE5854}" ShortID="22186828">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Move_6" ID="{D53F8379-CC49-47FF-B9E7-E08C2AC11179}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Death_2" ID="{E466D84B-9390-420B-9A1C-A274F51B0FED}">
+									<ChildrenList>
+										<Action Name="" ID="{AB54DD82-2025-4315-9B48-CE567F2CCD50}" ShortID="392752749">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Death_2" ID="{7D2AD72C-7EE2-4726-A2F4-2A1BCE726A0B}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Attack_2" ID="{676F8255-0B29-40F6-8D67-FA2855D603BE}">
+									<ChildrenList>
+										<Action Name="" ID="{367F1FB4-D5F5-4D24-8E28-A2F97645A192}" ShortID="706647729">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Attack_2" ID="{B9042F8C-14C7-4D82-9912-022FFA628C40}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Select_2" ID="{4969A7DC-B7B4-46F7-82C2-FF012356E677}">
+									<ChildrenList>
+										<Action Name="" ID="{34F2C8B9-BB4E-4699-ABC3-7663CB7AA3C1}" ShortID="412761215">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Select_2" ID="{510A8716-5550-4D87-B23D-C81C07F6445D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Death_1" ID="{3D67D516-C132-4831-8074-855C06576DDC}">
+									<ChildrenList>
+										<Action Name="" ID="{74A2747E-AE4A-405B-AC92-0B0097D208F8}" ShortID="88833471">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Death_1" ID="{A72EA4D9-414E-4031-B81E-6B3753AF2B04}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Move_1" ID="{EDAD68AC-8AD9-4991-9A5F-0081563AAEFF}">
+									<ChildrenList>
+										<Action Name="" ID="{23F5366E-EE3D-4BCB-BE2F-C2272490FEB8}" ShortID="763102420">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Move_1" ID="{6F033E49-0E69-40C6-A8A5-CA53E5FD0198}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Attack_1" ID="{C65CC0CB-2C7E-4E1A-AB5D-0F358472E197}">
+									<ChildrenList>
+										<Action Name="" ID="{6B0AD56D-C514-442F-B378-D6C04DD64A00}" ShortID="471447533">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Attack_1" ID="{4900A722-3DC9-4BE3-ADD4-56AAE3A681C4}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Select_3" ID="{EC3F8C32-4078-4CDF-8A80-901E7974F4E7}">
+									<ChildrenList>
+										<Action Name="" ID="{014F4DEB-CDCF-4C2E-A5F3-299564FA0D4B}" ShortID="329553404">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Select_3" ID="{59F31439-0BC2-4E62-B23C-583812B9FE8D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Attack_4" ID="{05DF250D-BD11-434E-8C9C-DA1BF47B690F}">
+									<ChildrenList>
+										<Action Name="" ID="{026434A6-960D-4173-97ED-CAE1243B2A39}" ShortID="403416898">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Attack_4" ID="{7F5E4403-4FA2-4921-A4FE-8FEC6BD531A7}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Move_4" ID="{8DE431DD-2AC2-4218-9C95-76A45F61AB81}">
+									<ChildrenList>
+										<Action Name="" ID="{1F48F1E8-AC12-4698-A512-F90785D50F72}" ShortID="689897879">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Move_4" ID="{A08C1B45-A858-404B-B65C-BCB1A5089F30}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Death_4" ID="{B6E38A17-7EDC-4819-9223-64D1DD625978}">
+									<ChildrenList>
+										<Action Name="" ID="{F724414A-7718-47CE-9A0E-A2A2B84E03BE}" ShortID="1070878352">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Death_4" ID="{8D37C35B-5518-443A-8575-F5F14453692A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Attack_3" ID="{66AE2204-FC45-4602-9D42-3FEA278474B8}">
+									<ChildrenList>
+										<Action Name="" ID="{0948CA5A-E48D-4C59-848B-C3B5A9D41AB2}" ShortID="481495311">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Attack_3" ID="{CD40A5A1-7E70-4637-9EE8-B931ADBBD882}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Move_5" ID="{3EBEAC6E-4550-414D-A5D9-D9C505D4A2EE}">
+									<ChildrenList>
+										<Action Name="" ID="{A6DB4959-5F63-4085-9F55-5849E987CA95}" ShortID="678431713">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Move_5" ID="{EEB1A9A7-0775-46E9-9BFF-96B7798E24FC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Death_3" ID="{00E67459-2A17-4C6F-9FF5-A2D76CB9102C}">
+									<ChildrenList>
+										<Action Name="" ID="{E4326A99-B496-411E-9F1A-25DDA9DE5FC8}" ShortID="713186199">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Death_3" ID="{2E13FC75-01C1-4943-8313-F7982C236BD3}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Tesla_Select_4" ID="{D494C910-2CFB-4718-8868-59A581238212}">
+									<ChildrenList>
+										<Action Name="" ID="{C00C3528-100B-4B36-AF33-6BB6C4F5596C}" ShortID="588286050">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Tesla_Select_4" ID="{FFF04AC1-251C-4210-9FDE-8C09ACA62F21}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Event Name="Play_itesatta" ID="{E35E2915-8DF7-4846-812E-93713BD76E31}">
+							<ChildrenList>
+								<Action Name="" ID="{B31162EF-3B48-4212-AF8E-F81E352D1F6A}" ShortID="325990187">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="itesatta_01" ID="{335609C6-CCB5-4991-8EC0-B125A68C2F1C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_trooper_blink" ID="{55A35621-870F-4C7A-B18A-41F1403C14DC}">
+							<ChildrenList>
+								<Action Name="" ID="{E0515A56-AC3E-4C48-A726-D12B0791BF00}" ShortID="712370215">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="itesatta_02" ID="{D0858A84-2DED-472E-857F-E764C610556E}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingUp" ID="{D1EFA5F2-FD61-456F-959C-FB966CC774C4}">
+							<ChildrenList>
+								<Action Name="" ID="{7ED3E9B4-19F3-4ABB-964F-42934D1BB234}" ShortID="801998620">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingUp" ID="{DF63301E-A667-47D6-AC9F-E0DF16A897E6}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingLoop" ID="{988A1990-B2FB-4470-BE39-0F98A968ECEA}">
+							<ChildrenList>
+								<Action Name="" ID="{9814E6CF-9856-4035-8717-53F2FD30D210}" ShortID="293909176">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingLoop" ID="{0D8E05F5-720D-4D55-BADA-D3A7F8E08F40}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingComplete" ID="{244896EA-BACB-48AC-98A1-60F63EB69148}">
+							<ChildrenList>
+								<Action Name="" ID="{32AF918E-F03B-43B7-A477-ACE327B2408F}" ShortID="300807743">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingComplete" ID="{6D89A082-796B-4D39-A916-D265A0219D30}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_TeslaChargingLoopHigh" ID="{1BB5E305-F9F7-4AD0-A92D-69FB297EAEE6}">
+							<ChildrenList>
+								<Action Name="" ID="{35192D23-A46E-4BB5-946D-AA9629627516}" ShortID="1025042613">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ChargingLoopHigh" ID="{B9E0A08A-83EF-4EF6-A6E9-7938265596B2}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_PunchWoosh" ID="{60259A5F-D2E2-4728-BF4F-BC7421D70780}">
+							<ChildrenList>
+								<Action Name="" ID="{AD648F67-BF08-471A-A916-FB548763EDE4}" ShortID="774265637">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PunchWoosh" ID="{7CDE8B54-A568-4804-BE9D-8B9E8D7C7C1E}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_PunchWoosh2" ID="{42954D0F-859A-435B-89B8-0B2C197173F6}">
+							<ChildrenList>
+								<Action Name="" ID="{404B3817-7D26-4A08-B404-FC4CCF91517E}" ShortID="789318850">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PunchWoosh2" ID="{3C1D32E7-F323-48D9-83A5-840F764DA3AC}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Tesla_ShieldTakeDamage" ID="{7C2A9A1F-1E8E-4667-8A1D-0662C8C4250C}">
+							<ChildrenList>
+								<Action Name="" ID="{2134F44E-9A01-4174-9332-14429D7CD673}" ShortID="681570867">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Tesla_ShieldTakeDamage" ID="{E518E037-E8E0-47EC-B833-999482304B6D}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Desolator" ID="{5F9071F2-7074-4763-B291-CBD1D0BF2C19}" ShortID="582821650">
+					<ChildrenList>
+						<Event Name="Play_Desolator_Beam" ID="{1BADFF2D-C983-48E3-8C63-C8A360683F35}">
+							<ChildrenList>
+								<Action Name="" ID="{D25A2E67-0447-4660-8EF9-3FB6EEA814E9}" ShortID="803015209">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="idesat1a_attack" ID="{7A9F5E43-77C3-40D0-81C8-C2EA24762C4B}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Desolator_Deploy" ID="{9849596B-24DA-4D8B-97F0-A920E2DBD4E0}">
+							<ChildrenList>
+								<Action Name="" ID="{060C72B7-151A-4822-98FC-6B6020B997F7}" ShortID="258621844">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="idesat2a_deploy" ID="{CA92D3CC-EACA-47CA-981C-2175D42E528A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Folder Name="VoiceLInes" ID="{6A7A8BB9-E075-4210-BFAC-C446EBE6ADA7}" ShortID="676786168">
+							<ChildrenList>
+								<Event Name="Play_Desolator_Voiceline_Attack" ID="{66708FCC-077A-433B-8EC5-301AB826AD02}">
+									<ChildrenList>
+										<Action Name="" ID="{ED588D31-156D-426B-8A81-516C0492DBD0}" ShortID="108255540">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Attack Voice" ID="{AF488118-7BD2-4058-8CAF-A882751E9E54}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Desolator_Voiceline_Move" ID="{9D3ED33B-62A3-4211-9E55-979424A7E68A}">
+									<ChildrenList>
+										<Action Name="" ID="{C979EB97-F238-47C6-A4A6-6A5679C3843E}" ShortID="466295601">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Move Voice" ID="{69215CB3-DDBE-4B65-B551-1E4CEC957F7C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Desolator_Voiceline_Select" ID="{26233A5D-46FE-45FA-835D-4BBA89E42BD9}">
+									<ChildrenList>
+										<Action Name="" ID="{26055DD1-0556-4B25-8FE1-DF6E4A0FFCF5}" ShortID="488680838">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Select Voice" ID="{1C88F122-7783-4DDC-A62F-C08A332AF199}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Desolator_Voiceline" ID="{30CF4F23-3B89-4004-A955-58AC389AA652}">
+									<ChildrenList>
+										<Action Name="" ID="{60F8B4C2-16D0-4FD8-8249-3FD41862641E}" ShortID="931563636">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Random Voice" ID="{43AE2BB2-856C-48AD-81A0-7F7F358B2B3C}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Desolator_Voiceline_Driver" ID="{2325DD1B-F9C9-41F1-9BB1-14F9AD6993FA}">
+									<ChildrenList>
+										<Action Name="" ID="{C9BF1C29-CAAA-4159-8D70-407219A517E3}" ShortID="370811730">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Driver Voice" ID="{BF3F0BCE-8CF4-44AB-83A3-282C985974B9}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Attack_1" ID="{FC16B291-AF81-41A6-AFF4-D8F1D2EB0457}">
+									<ChildrenList>
+										<Action Name="" ID="{BF0CF9CF-51D9-444F-8375-12495E37A962}" ShortID="60519372">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Attack_1" ID="{304311AB-21FC-4BE9-B9B7-64CD8F576C9F}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Select_2" ID="{42B94376-9490-40EF-8289-FCCFDD6BB3C2}">
+									<ChildrenList>
+										<Action Name="" ID="{F6583A67-2C3C-4099-86C8-C72B11DEAD00}" ShortID="846691978">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Select_2" ID="{A4435BCB-10AE-4320-B581-E71EB61D55E8}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Move_2" ID="{7FFEEE22-CD5F-40FD-808D-6EFAE63E3404}">
+									<ChildrenList>
+										<Action Name="" ID="{C90C312D-009E-47A6-A7AD-1E64C5B8DDEA}" ShortID="723442975">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Move_2" ID="{6375800E-7B83-4160-BDEF-02E37C141F1A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Attack_3" ID="{D6E31E5A-CA91-48AF-982F-194BE26A2FC2}">
+									<ChildrenList>
+										<Action Name="" ID="{999283FB-C700-4B91-9A88-E93818513CE4}" ShortID="704479366">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Attack_3" ID="{26E6738B-7BB4-4936-9B6B-90C1127F7672}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Attack_4" ID="{E3BB4F8C-F0A7-465A-86CD-6D0A15874E77}">
+									<ChildrenList>
+										<Action Name="" ID="{E58FF3FC-836A-4087-AAE1-8001DC0814B8}" ShortID="214318692">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Attack_4" ID="{E48A87CC-ED14-4264-9839-67649EB5FB37}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Move_4" ID="{F5F0A42B-5E9B-4047-B67A-2544BB1D9A7C}">
+									<ChildrenList>
+										<Action Name="" ID="{5EDF5E7F-6D1C-413C-9DEA-67A0BBD948E3}" ShortID="62943721">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Move_4" ID="{985B05AA-C825-4DC4-A136-F0063AD41612}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Select_5" ID="{248D2382-4350-46D9-90D0-47EFB5BFF19B}">
+									<ChildrenList>
+										<Action Name="" ID="{B3791478-B168-473D-B308-8CCA4BB01AF7}" ShortID="926718775">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Select_5" ID="{7A9567D9-01A2-4429-878E-F23E1AFFCA4A}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Select_4" ID="{CB085C55-F4CF-46D3-81D1-B2212459F640}">
+									<ChildrenList>
+										<Action Name="" ID="{C7C185AC-A113-463F-92AC-8F59D10D323A}" ShortID="477597818">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Select_4" ID="{2886636F-62A7-41E2-B80E-B8344F7ADC82}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Select_3" ID="{84EC12C4-38CA-4304-B6D4-F18BF27E6D51}">
+									<ChildrenList>
+										<Action Name="" ID="{75608DD6-3D6E-4CC2-B3CF-C3FF87C0B929}" ShortID="526244806">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Select_3" ID="{B806D93F-92F1-49FF-B29A-9751E2CF2199}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Attack_6" ID="{B2075659-962F-400C-B557-9759FB14CB72}">
+									<ChildrenList>
+										<Action Name="" ID="{917EF9DC-4F49-4D41-B0E6-DFFBA21B92FE}" ShortID="707594965">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Attack_6" ID="{230F5307-79CF-4BCF-9DE3-E01BA6BDEDD5}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Move_3" ID="{F89D2245-CB35-4763-A192-0B6AB3062C71}">
+									<ChildrenList>
+										<Action Name="" ID="{584D6E48-5103-4F4F-B49F-C33E2009F568}" ShortID="728751687">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Move_3" ID="{109E36A6-8933-48F5-A6D9-50865E381917}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Move_1" ID="{4893BA39-AB87-478A-9E32-AFEB9ACEEB17}">
+									<ChildrenList>
+										<Action Name="" ID="{4D1FA0BE-8B44-4F10-B567-D4DAA9528083}" ShortID="137919132">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Move_1" ID="{2D599C83-1F07-4A51-B122-D2CFC1EC190E}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Attack_2" ID="{466A8D77-D96C-4DD0-A96D-AD562961CEC1}">
+									<ChildrenList>
+										<Action Name="" ID="{004E5586-C9BC-4DCA-BE57-AD8E8B6A429C}" ShortID="890728657">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Attack_2" ID="{F0C64721-D112-482A-9D1F-AC266160F426}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Attack_5" ID="{A6CC59F1-A8A1-498B-989D-8133BB8B31D1}">
+									<ChildrenList>
+										<Action Name="" ID="{C030226C-E7B4-4C99-A878-00D1B5AE1CA9}" ShortID="904203485">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Attack_5" ID="{E366D83E-0A60-41D1-9EB1-900CFAEB0265}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_Voice_Desolator_Select_1" ID="{FDBC9ABB-98F2-43CC-9E55-A36BFD0A9E8E}">
+									<ChildrenList>
+										<Action Name="" ID="{5297C6B5-AB0D-42AF-A58B-374D0C58709A}" ShortID="764855617">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="Voice_Desolator_Select_1" ID="{EAB0C585-1D88-45B8-AAD2-1B78301EC491}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Event Name="Play_Desolator_Beam_Short" ID="{688428D0-9151-47DE-A8AC-C14EAC7AD445}">
+							<ChildrenList>
+								<Action Name="" ID="{A7CAA09D-02EA-4810-B140-6D5CEE3F51FC}" ShortID="284230061">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AttackShort" ID="{EE6831DD-AA94-4AA3-8443-D1B525F2B842}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Desolator_Beam_Deep" ID="{D99BF522-D5AD-456E-834B-2BB9D92E002B}">
+							<ChildrenList>
+								<Action Name="" ID="{8AA8B11D-DE97-4EDC-B4DD-5525455A1C3F}" ShortID="894053007">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="idesat1a_attack_deep_short" ID="{2E6FE9F8-0590-499D-AA61-839FE6C651F6}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Desolator_Beam_Deep2" ID="{4B2143B8-EAC9-4916-827A-FA55F62A432C}">
+							<ChildrenList>
+								<Action Name="" ID="{E6267C5F-C4B0-4407-8CF7-59442830ABDB}" ShortID="547688222">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="idesat1a_attack_shift" ID="{C855C0EE-294D-4C2E-89E8-25C3907AAFEB}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Desolator_Deploy_High" ID="{82445562-3B31-4859-8646-E9FC4DEE522E}">
+							<ChildrenList>
+								<Action Name="" ID="{FDDF9774-A4B1-4372-9098-3A5E1AC4820C}" ShortID="588078698">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="idesat2a_deploy_high" ID="{81F55BB9-E107-44BE-9DC4-8AB166ABA233}" WorkUnitID="{A5E43C36-3150-4618-AC50-22591D8150E6}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

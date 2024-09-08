@@ -18,6 +18,7 @@ namespace RA2Mod.Survivors.Tesla.States
 
         private bool completed;
         private bool buffDetectedAtSomePoint;
+        private TemporaryOverlayInstance temporaryOverlay;
 
         public override void OnEnter()
         {
@@ -37,10 +38,10 @@ namespace RA2Mod.Survivors.Tesla.States
             {
                 CharacterModel characterModel = GetModelTransform().GetComponent<CharacterModel>();
 
-                TemporaryOverlay temporaryOverlay = gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay = TemporaryOverlayManager.AddOverlay(gameObject);
                 temporaryOverlay.duration = ShieldBuffDuration + 1;
                 temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
-                temporaryOverlay.AddToCharacerModel(characterModel);
+                temporaryOverlay.AddToCharacterModel(characterModel);
             }
 
             if (NetworkServer.active)
@@ -68,6 +69,7 @@ namespace RA2Mod.Survivors.Tesla.States
                 {
                     aimRequest = aimRequest,
                     collectedDamage = blockedDamage,
+                    temporaryOverlay = temporaryOverlay,
                 };
                 /*EntityStateMachine.FindByCustomName(gameObject, "Weapon")*/
                 outer.SetNextState(newNextState);
@@ -79,7 +81,7 @@ namespace RA2Mod.Survivors.Tesla.States
         public override void OnExit()
         {
             base.OnExit();
-
+            
             if (!completed)
             {
                 if (aimRequest != null)

@@ -46,7 +46,7 @@ namespace RA2Mod.Modules
 
         internal static IEnumerator PopulateDisplays()
         {
-            IEnumerator loadIDRS = Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/Loader/LoaderBody.prefab", (result) => {
+            IEnumerator loadIDRS = Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Loader/LoaderBody.prefab", (result) => {
                 PopulateFromBody(result);
             });
 

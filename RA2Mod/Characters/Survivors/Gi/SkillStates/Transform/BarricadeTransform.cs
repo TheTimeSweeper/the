@@ -20,7 +20,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
             EntityState state;
             if(mainUpgrade != null)
             {
-                state = EntityStateCatalog.InstantiateState(mainUpgrade.enterBarricadeState);
+                state = EntityStateCatalog.InstantiateState(ref mainUpgrade.enterBarricadeState);
             } else
             {
                 state = new EnterBarricade();

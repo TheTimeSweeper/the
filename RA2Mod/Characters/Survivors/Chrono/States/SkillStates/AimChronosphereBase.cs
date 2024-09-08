@@ -161,7 +161,7 @@ namespace RA2Mod.Survivors.Chrono.States
             }
             else
             {
-                return EntityStateCatalog.InstantiateState(outer.mainStateType);
+                return EntityStateCatalog.InstantiateState(ref outer.mainStateType);
             }
         }
 

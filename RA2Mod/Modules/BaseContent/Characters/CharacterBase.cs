@@ -75,12 +75,16 @@ namespace RA2Mod.Modules.Characters
 
             Log.CurrentTime($"{bodyName} init");
 
-            Assets.LoadAssetBundleAsync(assetBundleName, (loadedAssetBundle) => {
+            Asset.LoadAssetBundleAsync(assetBundleName, (loadedAssetBundle) => {
 
                 Log.CurrentTime($"{bodyName} assetbundle loaded");
-                assetBundle = loadedAssetBundle;
 
+                assetBundle = loadedAssetBundle;
                 ContentPacks.asyncLoadCoroutines.Add(LoadAssetsThenInitializeCharacter());
+
+                if (_bodyInfo == null)
+                    return;
+
                 ContentPacks.asyncLoadCoroutines.Add(_bodyInfo.FinalizeBodyInfoAsync(assetBundle));
                 if(_bodyInfo.asyncLoads != null)
                 {
@@ -313,7 +317,7 @@ namespace RA2Mod.Modules.Characters
 
             if (characterPortrait == null)
             {
-                bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<Texture>(
+                bodyInfoLoads.Add(Asset.LoadFromAddressableOrBundle<Texture>(
                     assetBundle,
                     characterPortraitBundlePath,
                     characterPortraitAddressablePath,
@@ -321,7 +325,7 @@ namespace RA2Mod.Modules.Characters
             }
             if (crosshair == null)
             {
-                bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<GameObject>(
+                bodyInfoLoads.Add(Asset.LoadFromAddressableOrBundle<GameObject>(
                     assetBundle,
                     crosshairBundlePath,
                     crosshairAddressablePath,
@@ -329,7 +333,7 @@ namespace RA2Mod.Modules.Characters
             }
             if (podPrefab == null)
             {
-                bodyInfoLoads.Add(Assets.LoadFromAddressableOrBundle<GameObject>(
+                bodyInfoLoads.Add(Asset.LoadFromAddressableOrBundle<GameObject>(
                     assetBundle,
                     podPrefabBundlePath,
                     podPrefabAddressablePath,

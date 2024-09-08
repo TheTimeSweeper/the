@@ -70,14 +70,14 @@ namespace RA2Mod.Survivors.Tesla.SkillDefs
         }
 
         // Token: 0x060045D6 RID: 17878 RVA: 0x00121E18 File Offset: 0x00120018
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot)
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime)
         {
-            base.OnFixedUpdate(skillSlot);
+            base.OnFixedUpdate(skillSlot, deltaTime);
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
             ((InstanceData)skillSlot.skillInstanceData).teslaTracker.SetIsReady(IsReady(skillSlot));
 
-            instanceData.timeoutTimer -= Time.fixedDeltaTime;
+            instanceData.timeoutTimer -= deltaTime;
             if (instanceData.timeoutTimer <= 0f && instanceData.hasExtraStock)
             {
                 skillSlot.stock--;

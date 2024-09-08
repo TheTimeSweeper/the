@@ -33,7 +33,7 @@ namespace RA2Mod.Modules.Characters
 
         protected virtual void InitializeSurvivor()
         {
-            RegisterNewSurvivor(bodyPrefab, displayPrefab, bodyInfo.bodyColor, survivorTokenPrefix, characterUnlockableDef, bodyInfo.sortPosition);
+            RegisterNewSurvivor(bodyPrefab, displayPrefab, _bodyInfo.bodyColor, survivorTokenPrefix, characterUnlockableDef, _bodyInfo.sortPosition);
         }
 
         public static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, UnlockableDef unlockableDef, float sortPosition)

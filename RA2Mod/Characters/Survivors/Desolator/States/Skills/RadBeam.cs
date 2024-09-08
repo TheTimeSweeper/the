@@ -9,7 +9,7 @@ namespace RA2Mod.Survivors.Desolator.States
         public static float BaseDuration = 1.0f;
         public static float DamageCoefficient = 1.0f;
 
-        public static int RadStacks = 2;
+        public static int RadPrimaryStacks = 2;
         public static float RadDamageMultiplier = 0.7f;
 
         public float skillsPlusDurationMultiplier = 1;
@@ -38,7 +38,7 @@ namespace RA2Mod.Survivors.Desolator.States
             muzzleName = muzzleString;
             fireSoundString = "Play_Desolator_Beam_Short";
             muzzleFlashPrefab = goodstate.muzzleFlashPrefab;
-            tracerEffectPrefab = DesolatorAssets.DesolatorTracerSnipe;
+            tracerEffectPrefab = null; // DesolatorAssets.DesolatorTracerSnipe;
             hitEffectPrefab = DesolatorAssets.IrradiatedImpactEffect;
             base.OnEnter();
 

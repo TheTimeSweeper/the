@@ -45,15 +45,15 @@ namespace RA2Mod.General
             #region just loading one asset
             //manually adding to coroutines, requires oncomplete
             loads.Add(assetBundle.LoadAssetCoroutine<GameObject>("TeslaCoilBlueprint", (result) => TeslaCoilBlueprintGamOb = result));
-            loads.Add(Assets.LoadAssetCoroutine<GameObject>(assetBundle, "TeslaCoilBlueprint", (result) => TeslaCoilBlueprintGamOb = result));
-            loads.Add(Assets.LoadAssetCoroutine<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result)); 
+            loads.Add(Asset.LoadAssetCoroutine<GameObject>(assetBundle, "TeslaCoilBlueprint", (result) => TeslaCoilBlueprintGamOb = result));
+            loads.Add(Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result)); 
 
             //adds to coroutines for you, requries oncomplete
             assetBundle.LoadAssetAsync<GameObject>("TeslaCoilBlueprint", (result) => TeslaCoilBlueprintGamOb = result);
-            Assets.LoadAssetAsync<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result);
+            Asset.LoadAssetAsync<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result);
 
             assetBundle.LoadAssetAsync("TeslaCoilBlueprint", (GameObject result) => TeslaCoilBlueprintGamOb = result);
-            Assets.LoadAssetAsync("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (GameObject result) => TeslaCoilBlueprintGamOb = result);
+            Asset.LoadAssetAsync("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (GameObject result) => TeslaCoilBlueprintGamOb = result);
 
             ////manually creating AsyncAsset, must call addcoroutine
             ////no different from loadassetasync if you're going to do completion
@@ -63,7 +63,7 @@ namespace RA2Mod.General
             ////create asyncasset for you and adds coroutine
             ////no different from loadassetasync if you're going to do completion.
             assetBundle.AddAsyncAsset<GameObject>("TeslaCoilBlueprint", (result) => TeslaCoilBlueprintGamOb = result);
-            Assets.AddAsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result);
+            Asset.AddAsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab", (result) => TeslaCoilBlueprintGamOb = result);
 
             //we implicit now baybee
             TeslaCoilBlueprintAsync = new AsyncAsset<GameObject>(assetBundle, "TeslaCoilBlueprint").AddCoroutine();
@@ -71,7 +71,7 @@ namespace RA2Mod.General
 
             //implicit but adds coroutine for you
             TeslaCoilBlueprintAsync = assetBundle.AddAsyncAsset<GameObject>("TeslaCoilBlueprint");
-            TeslaCoilBlueprintAsync = Assets.AddAsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab");
+            TeslaCoilBlueprintAsync = Asset.AddAsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab");
 
             //some code later...
             GameObject projectilePrefab = TeslaCoilBlueprintAsync; //use gamobject like normal
@@ -82,7 +82,7 @@ namespace RA2Mod.General
             assetBundle.LoadAssetAsync("TeslaCoilBlueprint", (GameObject result) => TeslaCoilBlueprintGamOb = result); //think i'll go with this
 
             //yeah not even close
-            Assets.LoadAssetsAsync( 
+            Asset.LoadAssetsAsync( 
                 new AsyncAsset<GameObject>(assetBundle, "TeslaCoilBlueprint"), 
                 (result) => TeslaCoilBlueprintGamOb = result);
 
@@ -98,7 +98,7 @@ namespace RA2Mod.General
                     R2API.PrefabAPI.RegisterNetworkPrefab(TeslaCoilBlueprintGamOb);
                     Modules.Content.AddNetworkedObject(TeslaCoilBlueprintGamOb);
                 }));
-            loads.Add(Assets.LoadAssetCoroutine("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab",
+            loads.Add(Asset.LoadAssetCoroutine("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab",
                 (GameObject result) => {
                     TeslaCoilBlueprintGamOb = result;
                     R2API.PrefabAPI.RegisterNetworkPrefab(TeslaCoilBlueprintGamOb);
@@ -112,7 +112,7 @@ namespace RA2Mod.General
                     R2API.PrefabAPI.RegisterNetworkPrefab(TeslaCoilBlueprintGamOb);
                     Modules.Content.AddNetworkedObject(TeslaCoilBlueprintGamOb);
                 });
-            Assets.LoadAssetAsync("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab",
+            Asset.LoadAssetAsync("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab",
                 (GameObject result) => {
                     TeslaCoilBlueprintGamOb = result;
                     R2API.PrefabAPI.RegisterNetworkPrefab(TeslaCoilBlueprintGamOb);
@@ -137,14 +137,14 @@ namespace RA2Mod.General
                     R2API.PrefabAPI.RegisterNetworkPrefab(result);
                     Modules.Content.AddNetworkedObject(result);
                 });
-            TeslaCoilBlueprintAsync = Assets.AddAsyncAsset("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab",
+            TeslaCoilBlueprintAsync = Asset.AddAsyncAsset("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab",
                 (GameObject result) => {
                     R2API.PrefabAPI.RegisterNetworkPrefab(result);
                     Modules.Content.AddNetworkedObject(result);
                 });
 
             //bit more cumbersome but more consistent with loading multiple assets.
-            Assets.LoadAssetsAsync(
+            Asset.LoadAssetsAsync(
                 new AsyncAsset<GameObject>(assetBundle, "TeslaCoilBlueprint"),
                 (result) =>
                 {
@@ -152,7 +152,7 @@ namespace RA2Mod.General
                     R2API.PrefabAPI.RegisterNetworkPrefab(TeslaCoilBlueprintGamOb);
                     Modules.Content.AddNetworkedObject(TeslaCoilBlueprintGamOb);
                 });
-            Assets.LoadAssetsAsync(
+            Asset.LoadAssetsAsync(
                 new AsyncAsset<GameObject>("RoR2/Base/TeslaTrooper/TeslaCoilBlueprint.prefab"),
                 (result) =>
                 {
@@ -176,7 +176,7 @@ namespace RA2Mod.General
                     Modules.Content.AddNetworkedObject(result);
                 });
             //bit more cumbersome but more consistent with the easily best way of loading multiple assets.
-            Assets.LoadAssetsAsync(
+            Asset.LoadAssetsAsync(
                 new AsyncAsset<GameObject>(assetBundle, "TeslaCoilBlueprint"),
                 (result) => {
                     TeslaCoilBlueprintGamOb = result;
@@ -188,7 +188,7 @@ namespace RA2Mod.General
 
             #region loading multiple assets
             //it's no contest
-            Assets.LoadAssetsAsync(
+            Asset.LoadAssetsAsync(
                 new AsyncAsset<GameObject>(assetBundle, "TeslaCoilBlueprint"),
                 new AsyncAsset<Material>("RoR2/Base/Engi/matBlueprintsOk.mat"),
                 new AsyncAsset<Material>("RoR2/Base/Engi/matBlueprintsInvalid.mat"),
@@ -201,11 +201,11 @@ namespace RA2Mod.General
 
 
             //manually adding to coroutines
-            loads.Add(Assets.LoadAssetCoroutine(assetBundle, "TeslaCoilBlueprint",
+            loads.Add(Asset.LoadAssetCoroutine(assetBundle, "TeslaCoilBlueprint",
                 (GameObject blueprintObject) => {
-                    loads.Add(Assets.LoadAssetCoroutine("RoR2/Base/Engi/matBlueprintsOk.mat",
+                    loads.Add(Asset.LoadAssetCoroutine("RoR2/Base/Engi/matBlueprintsOk.mat",
                         (Material matOK) => {
-                            loads.Add(Assets.LoadAssetCoroutine("RoR2/Base/Engi/matBlueprintsInvalid.mat",
+                            loads.Add(Asset.LoadAssetCoroutine("RoR2/Base/Engi/matBlueprintsInvalid.mat",
                                 (Material matNo) => {
                                     blueprintObject.GetComponent<RoR2.BlueprintController>().okMaterial = matOK;
                                     blueprintObject.GetComponent<RoR2.BlueprintController>().invalidMaterial = matNo;
@@ -214,11 +214,11 @@ namespace RA2Mod.General
                         }));
                 }));
 
-            Assets.LoadAssetAsync(assetBundle, "TeslaCoilBlueprint",
+            Asset.LoadAssetAsync(assetBundle, "TeslaCoilBlueprint",
                 (GameObject blueprintObject) => {
-                    Assets.LoadAssetAsync("RoR2/Base/Engi/matBlueprintsOk.mat",
+                    Asset.LoadAssetAsync("RoR2/Base/Engi/matBlueprintsOk.mat",
                         (Material matOK) => {
-                            Assets.LoadAssetAsync("RoR2/Base/Engi/matBlueprintsInvalid.mat",
+                            Asset.LoadAssetAsync("RoR2/Base/Engi/matBlueprintsInvalid.mat",
                                 (Material matNo) => {
                                     blueprintObject.GetComponent<RoR2.BlueprintController>().okMaterial = matOK;
                                     blueprintObject.GetComponent<RoR2.BlueprintController>().invalidMaterial = matNo;

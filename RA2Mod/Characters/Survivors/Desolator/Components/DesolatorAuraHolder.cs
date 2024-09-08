@@ -5,7 +5,6 @@ namespace RA2Mod.Survivors.Desolator.Components
 {
     public class DesolatorAuraHolder : NetworkBehaviour
     {
-
         [SyncVar]
         private GameObject _spawnedAuraObject = null;
         private DesolatorAuraController _spawnedAura = null;
@@ -17,7 +16,6 @@ namespace RA2Mod.Survivors.Desolator.Components
 
         public void SpawnAura()
         {
-
             if (NetworkServer.active)
             {
                 GameObject spawnedAuraObject = Instantiate(DesolatorAssets.DesolatorAuraPrefab, base.transform.position, Quaternion.identity);
@@ -28,7 +26,6 @@ namespace RA2Mod.Survivors.Desolator.Components
 
         public void ActivateAura()
         {
-
             if (_spawnedAura == null)
             {
                 _spawnedAura = _spawnedAuraObject.GetComponent<DesolatorAuraController>();

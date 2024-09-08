@@ -45,10 +45,10 @@ namespace RA2Mod.Survivors.Chrono.States
             {
                 trackingTarget = componentFromSkillDef1.GetTrackingTarget();
             }
-            if (NetworkServer.active)
-            {
-                trackingTarget.healthComponent.body.AddTimedBuff(ChronoBuffs.ivand, 3);
-            }
+            //if (NetworkServer.active)
+            //{
+            //    trackingTarget.healthComponent.body.AddTimedBuff(ChronoBuffs.ivand, 3);
+            //}
 
             base.OnEnter();
         }

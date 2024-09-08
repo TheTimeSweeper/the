@@ -24,7 +24,7 @@ namespace RA2Mod.Survivors.Chrono
 {
     public class ChronoSurvivor : SurvivorBase<ChronoSurvivor>
     {
-        public override string assetBundleName => "joe";
+        public override string assetBundleName => "chrono";
 
         public override string bodyName => "RA2ChronoBody";
 
@@ -131,6 +131,8 @@ namespace RA2Mod.Survivors.Chrono
 
             VoiceLineInLobby voiceLineController = displayPrefab.AddComponent<VoiceLineInLobby>();
             voiceLineController.voiceLineContext = new VoiceLineContext("Chrono", 4, 5, 5);
+
+            displayPrefab.AddComponent<MenuSoundComponent>().sound = "Play_ChronoMove";
         }
 
         private void AdditionalBodySetup()
@@ -514,7 +516,7 @@ namespace RA2Mod.Survivors.Chrono
         {
             Hooks.RoR2.HealthComponent.TakeDamage_Pre += HealthComponent_TakeDamage_Pre;
             Hooks.RoR2.HealthComponent.TakeDamage_Post += HealthComponent_TakeDamage_Post;
-            IL.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamageIL;
+            IL.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageIL;
 
             IL.EntityStates.GenericCharacterDeath.OnEnter += GenericCharacterDeath_OnEnter1;
 
@@ -553,9 +555,10 @@ namespace RA2Mod.Survivors.Chrono
             ILCursor cursor = new ILCursor(il);
             cursor.GotoNext(MoveType.After,
                 instruction => instruction.MatchLdcI4(0x10000),
-                instruction => instruction.MatchOr(),
+                instruction => instruction.MatchCall<DamageTypeCombo>("op_Implicit"),
+                instruction => instruction.MatchCall<DamageTypeCombo>("op_BitwiseOr"),
                 instruction => instruction.MatchStfld<DamageInfo>("damageType"),
-                instruction => instruction.MatchLdloc(8)
+                instruction => instruction.MatchLdloc(9)
                 );
             cursor.Emit(OpCodes.Ldarg_1);
             cursor.Emit(OpCodes.Ldarg_0);

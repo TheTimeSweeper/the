@@ -13,6 +13,8 @@ namespace RA2Mod.General.Components
         private QuaternionPID pidComopnent;
         [SerializeField]
         private ProjectileTargetComponent targetComponent;
+        [SerializeField]
+        private Collider colliderToActivate;
 
         [SerializeField]
         private float overrideSqrDistance = 16f;
@@ -29,6 +31,10 @@ namespace RA2Mod.General.Components
             bool overriding = targetComponent.target && (transform.position - targetComponent.target.position).sqrMagnitude < overrideSqrDistance;
             steerComponent.enabled = overriding;
             pidComopnent.enabled = !overriding;
+            if (colliderToActivate)
+            {
+                colliderToActivate.enabled = overriding;
+            }
         }
     }
 }

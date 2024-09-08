@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Tesla.Achievements
 {
-    [RegisterAchievement(identifier, unlockableIdentifier, null, typeof(TeslaTrooperTowerBigZapServerAchievement))]
+    [RegisterAchievement(identifier, unlockableIdentifier, null, 3, typeof(TeslaTrooperTowerBigZapServerAchievement))]
     public class TeslaTowerBigZapAchievement : BaseAchievement
     {
         public const string identifier = TeslaTrooperSurvivor.TOKEN_PREFIX + "BIGZAPUNLOCKABLE_ACHIEVEMENT_ID";

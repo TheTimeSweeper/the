@@ -1,5 +1,14 @@
 ## Changelog
+`3.0.2`
+- illegally forced compat with autosprint for chrono
+- fix error with m2 bombs when deputy was installed
+
+`3.0.1`
+- fixed conflict with riskytweaks removing something from frost relic that I was cloning
+- fixed some issues with scepter even though it's not working yet
+
 `3.0.0` new mod new us
+- fixed for sots. please reach out if you find any more issues
 - added Chrono Legionnaire, still Beta but all working and multiplayer compatible
 - added G.I., still alpha but all working and multiplayer compatible (afaik)
 - added Conscript, not even alpha lol, but hey if you're curious

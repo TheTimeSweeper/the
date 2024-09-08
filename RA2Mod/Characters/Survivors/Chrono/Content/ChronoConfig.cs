@@ -8,6 +8,7 @@ namespace RA2Mod.Survivors.Chrono
 
         public static ConfigEntry<bool> M0_SprintTeleport_OnRelease;
 
+        public static ConfigEntry<float> M0_SprintTeleport_ProjectionSpeed;
         public static ConfigEntry<float> M0_SprintTeleport_DistTimeMulti;
         public static ConfigEntry<float> M0_SprintTeleport_TimeTimeMulti;
 
@@ -42,6 +43,14 @@ namespace RA2Mod.Survivors.Chrono
                 false,
                 "Should sprinting teleport on release, or should it require a second press of sprint");
 
+            M0_SprintTeleport_ProjectionSpeed = Config.BindAndOptionsSlider(
+                SectionSkills,
+                nameof(M0_SprintTeleport_ProjectionSpeed),
+                9f,
+                0,
+                100,
+                "speed multiplier for the projection sent out for teleporting to");
+
             M0_SprintTeleport_DistTimeMulti = Config.BindAndOptionsSlider(
                 SectionSkills,
                 "M0_SprintTeleport_DistTimeMulti",
@@ -62,7 +71,7 @@ namespace RA2Mod.Survivors.Chrono
             M0_JumpMultiplier = Config.BindAndOptionsSlider(
                 SectionSkills,
                 "M0_JumpMultiplier",
-                2f,
+                1.5f,
                 0,
                 100,
                 "");

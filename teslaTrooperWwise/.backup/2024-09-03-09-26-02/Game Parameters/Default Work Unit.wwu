@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}" SchemaVersion="97">
+	<GameParameters>
+		<WorkUnit Name="Default Work Unit" ID="{4BC0106B-B56F-4259-B2AA-E2DE59644C09}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="Volume_SFX" ID="{E762E6E4-6033-452D-85FE-BFDC7B85E221}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="100"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="Volume_TeslaVoice" ID="{BDD5C5C0-9F08-4EDB-BB44-2C45DA0E7809}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="100"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="Pitch_TeslaCharge" ID="{7E611772-933D-4A81-9FD6-DE0D6DA41E34}"/>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

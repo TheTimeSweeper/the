@@ -44,7 +44,7 @@ namespace RA2Mod.Survivors.Tesla
         internal static List<IEnumerator> GetAssetBundleInitializedCoroutines(AssetBundle assetBundle)
         {
             List<IEnumerator> loads = new List<IEnumerator>();
-            loads.Add(Assets.LoadAssetCoroutine<Material>("RoR2/Base/Common/VFX/matLightningLongBlue.mat", (mat) => ChainLightningMaterial = mat));
+            loads.Add(Asset.LoadAssetCoroutine<Material>("RoR2/Base/Common/VFX/matLightningLongBlue.mat", (mat) => ChainLightningMaterial = mat));
 
             return loads;
         }
@@ -214,7 +214,7 @@ namespace RA2Mod.Survivors.Tesla
 
             shockwaveParticle.GetComponent<ParticleSystemRenderer>().material.color = Color.cyan;
 
-            Assets.CreateEffectFromObject(zapConeEffect, "", false);
+            Asset.CreateEffectFromObject(zapConeEffect, "", false);
 
             return zapConeEffect;
         }

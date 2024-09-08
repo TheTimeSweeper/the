@@ -21,7 +21,7 @@ namespace RA2Mod.Survivors.Conscript
             M1_Rifle_Damage = Config.BindAndOptions(
                 SectionSkills,
                 "M1_Rifle_Damage",
-                1.0f,
+                3.0f,
                 0,
                 20,
                 "");

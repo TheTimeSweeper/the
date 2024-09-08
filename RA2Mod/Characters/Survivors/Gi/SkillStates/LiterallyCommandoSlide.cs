@@ -73,7 +73,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
                 {                    
                     float forwardSpeed = forwardSpeedCoefficientCurve.Evaluate(base.fixedAge / slideDuration);
                     
-                    base.characterMotor.rootMotion += forwardSpeed * this.moveSpeedStat * this.forwardDirection * Time.fixedDeltaTime;
+                    base.characterMotor.rootMotion += forwardSpeed * this.moveSpeedStat * this.forwardDirection * Time.deltaTime;
                 }
                 if (base.fixedAge >= slideDuration)
                 {

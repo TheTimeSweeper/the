@@ -303,7 +303,8 @@ namespace RA2Mod.Survivors.Tesla
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_SHOCKING" }
             });
-
+            Config.ConfigureSkillDef(bigZapSkillDef, TeslaConfig.SectionBody, "M2 BigZap");
+            Config.ConfigureSkillDef(bigZapPunchSkillDef, TeslaConfig.SectionBody, "M2 BigZapPunch");
             Modules.Skills.AddSecondarySkills(bodyPrefab, bigZapSkillDef, bigZapPunchSkillDef);
             Modules.Skills.AddUnlockablesToFamily(bodyPrefab.GetComponent<SkillLocator>().secondary.skillFamily, null, TeslaUnlockables.secondaryUnlockableDef);
         }
@@ -361,6 +362,8 @@ namespace RA2Mod.Survivors.Tesla
             blinkZapSkillDef.refreshedIcon = assetBundle.LoadAsset<Sprite>("texTeslaSkillUtilityAltRecast");
             blinkZapSkillDef.timeoutDuration = 3;
 
+            Config.ConfigureSkillDef(shieldSkillDef, TeslaConfig.SectionBody, "M3 Shield");
+            Config.ConfigureSkillDef(blinkZapSkillDef, TeslaConfig.SectionBody, "M2 BlinkZap");
             Modules.Skills.AddUtilitySkills(bodyPrefab, shieldSkillDef, blinkZapSkillDef);
             Modules.Skills.AddUnlockablesToFamily(bodyPrefab.GetComponent<SkillLocator>().utility.skillFamily, null, TeslaUnlockables.utilityUnlockableDef);
         }
@@ -391,6 +394,7 @@ namespace RA2Mod.Survivors.Tesla
                 stockToConsume = 0,
             });
 
+            Config.ConfigureSkillDef(teslaCoilSkillDef, TeslaConfig.SectionBody, "M4 Tower");
             Modules.Skills.AddSpecialSkills(bodyPrefab, teslaCoilSkillDef);
         }
 
@@ -646,7 +650,7 @@ namespace RA2Mod.Survivors.Tesla
 
             On.RoR2.Orbs.LightningOrb.Begin += LightningOrb_Begin;
 
-            On.RoR2.BodyCatalog.Init += BodyCatalog_Init;
+            //On.RoR2.BodyCatalog.Init += BodyCatalog_Init;
 
             //todo teslamove global hooks
             On.RoR2.SetStateOnHurt.OnTakeDamageServer += SetStateOnHurt_OnTakeDamageServer;

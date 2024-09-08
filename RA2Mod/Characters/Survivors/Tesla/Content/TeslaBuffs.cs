@@ -19,7 +19,7 @@ namespace RA2Mod.Survivors.Tesla
                 Color.cyan,
                 false,
                 false);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(zapShieldBuff, "RoR2/Base/Common/texBuffGenericShield.tif"));
+            ContentPacks.asyncLoadCoroutines.Add(Asset.LoadBuffIconAsync(zapShieldBuff, "RoR2/Base/Common/texBuffGenericShield.tif"));
 
             conductiveBuffTeam = Content.CreateAndAddBuff(
                 "Charged",
@@ -27,7 +27,7 @@ namespace RA2Mod.Survivors.Tesla
                 Color.cyan,
                 false,
                 false);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(conductiveBuffTeam, "RoR2/Base/ShockNearby/texBuffTeslaIcon.tif"));
+            ContentPacks.asyncLoadCoroutines.Add(Asset.LoadBuffIconAsync(conductiveBuffTeam, "RoR2/Base/ShockNearby/texBuffTeslaIcon.tif"));
             
             conductiveBuffTeamGrace = Content.CreateAndAddBuff(
                 "Charged2",
@@ -35,7 +35,7 @@ namespace RA2Mod.Survivors.Tesla
                 Color.blue,
                 false,
                 false);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(conductiveBuffTeamGrace, "RoR2/Base/ShockNearby/texBuffTeslaIcon.tif"));
+            ContentPacks.asyncLoadCoroutines.Add(Asset.LoadBuffIconAsync(conductiveBuffTeamGrace, "RoR2/Base/ShockNearby/texBuffTeslaIcon.tif"));
         }
     }
 }

@@ -17,14 +17,10 @@ namespace RA2Mod.Modules
     {
         public static string TokensOutput = "";
 
-        public static bool usingLanguageFolder = false;
-
         public static bool printingEnabled = false;
 
         public static void Init() {
-            if (usingLanguageFolder) {
                 RoR2.Language.collectLanguageRootFolders += Language_collectLanguageRootFolders;
-            }
         }
 
         private static void Language_collectLanguageRootFolders(List<string> obj) {
@@ -33,11 +29,9 @@ namespace RA2Mod.Modules
                 obj.Add(path);
             }
         }
-
+        
         public static void Add(string token, string text) {
-            if (!usingLanguageFolder) {
-                R2API.LanguageAPI.Add(token, text);
-            }
+            R2API.LanguageAPI.Add(token, text, "en");
 
             if (!printingEnabled) return;
 

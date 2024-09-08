@@ -12,7 +12,7 @@ using UnityEngine.Bindings;
 
 namespace RA2Mod.Survivors.Chrono
 {
-    public class ChronoDriverCompat
+    internal class ChronoDriverCompat
     {
         public static GameObject chronoIndicatorVanishDriver;
         public static ConfigEntry<float> DriverGunM1Damage;
@@ -169,7 +169,7 @@ namespace RA2Mod.Survivors.Chrono
         }
     }
 
-    public class ChronoTrackerVanishDriver : ChronoTrackerVanish
+    internal class ChronoTrackerVanishDriver : ChronoTrackerVanish
     {
         public override float maxTrackingDistance => 80;
 
@@ -188,7 +188,7 @@ namespace RA2Mod.Survivors.Chrono
     //public class ChronoTrackerSkillDefVanishDriver : ChronoTrackerSkillDefVanish { }
 
 
-    public class ShootDriver : ChronoShoot
+    internal class ShootDriver : ChronoShoot
     {
         public override float baseDuration => ChronoDriverCompat.DriverGunM1Duration.Value;
         public override float damageCoefficient => ChronoDriverCompat.DriverGunM1Damage.Value;
@@ -214,7 +214,7 @@ namespace RA2Mod.Survivors.Chrono
         }
     }
 
-    public class VanishDriver : Vanish
+    internal class VanishDriver : Vanish
     {
         public override float damageCoefficient => ChronoDriverCompat.DriverGunM2Damage.Value;
         public override float baseTickInterval =>  ChronoDriverCompat.DriverGunM2TickInterval.Value;

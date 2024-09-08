@@ -36,28 +36,28 @@ namespace RA2Mod.Survivors.Chrono.Components
                 deltaPosition.y = Mathf.Max(deltaPosition.y, 0);
             }
 
-            marker.SimpleMove(deltaPosition, marker.transform.position + deltaPosition);
+            marker.SimpleMove(deltaPosition);
 
             if (NetworkServer.active)
             {
-                RpcMove(deltaPosition, marker.transform.position + deltaPosition);
+                RpcMove(deltaPosition);
             }
             else
             {
-                CmdMove(deltaPosition, marker.transform.position + deltaPosition);
+                CmdMove(deltaPosition);
             }
         }
 
         [Command]
-        private void CmdMove(Vector3 deltaPosition, Vector3 finalPosition)
+        private void CmdMove(Vector3 deltaPosition)
         {
-            marker.SimpleMove(deltaPosition, finalPosition);
+            marker.SimpleMove(deltaPosition);
         }
 
         [ClientRpc]
-        private void RpcMove(Vector3 deltaPosition, Vector3 finalPosition)
+        private void RpcMove(Vector3 deltaPosition)
         {
-            marker.SimpleMove(deltaPosition, finalPosition);
+            marker.SimpleMove(deltaPosition);
         }
     }
 }

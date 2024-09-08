@@ -26,7 +26,7 @@ namespace RA2Mod.Survivors.GI.SkillStates
         {
             base.FixedUpdate();
 
-            intervalTim -= Time.fixedDeltaTime;
+            intervalTim -= Time.deltaTime;
 
             while (intervalTim <= 0)
             {

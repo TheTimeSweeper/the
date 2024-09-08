@@ -42,7 +42,7 @@ namespace RA2Mod.Survivors.Desolator
 
             desolatorDotDeBuff =
                 Content.CreateAndAddBuff("DesolatorIrradiated",
-                           LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Blight").iconSprite,
+                           assetBundle.LoadAsset<Sprite>("texBuffDesolatorRadiation"),
                            lime,
                            true,
                            false);

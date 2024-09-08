@@ -38,7 +38,7 @@ namespace RA2Mod.Survivors.Conscript
             subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconConscript"),
-            bodyColor = Color.blue,
+            bodyColor = Color.red,
             sortPosition = 69.5f,
             
             crosshairBundlePath = "GICrosshair",
@@ -125,7 +125,7 @@ namespace RA2Mod.Survivors.Conscript
             MagazineSkillDef primarySkillDef1 = Skills.CreateSkillDef<MagazineSkillDef>(new SkillDefInfo
             {
                 skillName = "ConscriptGun",
-                skillNameToken = TOKEN_PREFIX + "SECONDARY_GUN_NAME",
+                skillNameToken = TOKEN_PREFIX + "Gun that reloads",
                 skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_GUN_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
@@ -167,7 +167,7 @@ namespace RA2Mod.Survivors.Conscript
             MagazineSkillDef secondarySkillDef1 = Skills.CreateSkillDef<MagazineSkillDef>(new SkillDefInfo
             {
                 skillName = "ConscriptMolotov",
-                skillNameToken = TOKEN_PREFIX + "SECONDARY_GUN_NAME",
+                skillNameToken = TOKEN_PREFIX + "Molotov",
                 skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_GUN_DESCRIPTION",
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
@@ -207,8 +207,8 @@ namespace RA2Mod.Survivors.Conscript
             //here's a skilldef of a typical movement skill.
             SkillDef utilitySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryRoll",
-                skillNameToken = TOKEN_PREFIX + "UTILITY_ROLL_NAME",
+                skillName = "conscript_buff",
+                skillNameToken = TOKEN_PREFIX + "Armor and move buff",
                 skillDescriptionToken = TOKEN_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
@@ -243,9 +243,9 @@ namespace RA2Mod.Survivors.Conscript
             //a basic skill. some fields are omitted and will just have default values
             SkillDef specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "HenryBomb",
-                skillNameToken = TOKEN_PREFIX + "SPECIAL_BOMB_NAME",
-                skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillName = "conscript_garrison",
+                skillNameToken = TOKEN_PREFIX + "Garrison",
+                skillDescriptionToken = TOKEN_PREFIX + "m1 and m2 reload faster",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpawnGarrison)),

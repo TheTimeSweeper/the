@@ -12,10 +12,6 @@ namespace RA2Mod.General
         public delegate void Meme_SurivorCatalog_Init();
         public static event Meme_SurivorCatalog_Init Meme_OnSurvivorCatalog_Init;
 
-        //todo teslamove hooks
-        public delegate void Driver_SurvivorCatalog_SetSurvivorDefs(GameObject driverBody);
-        public static event Driver_SurvivorCatalog_SetSurvivorDefs FuckWithDriver;
-
         public static bool TinkersSatchelInstalled;
         public static bool AetheriumInstalled;
         public static bool ScepterInstalled;
@@ -39,24 +35,7 @@ namespace RA2Mod.General
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.Driver"))
             {
                 driverInstalled = true;
-                On.RoR2.SurvivorCatalog.SetSurvivorDefs += SurvivorCatalog_SetSurvivorDefs;
             }
-        }
-
-        private static void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs)
-        {
-            orig(newSurvivorDefs);
-
-            for (int i = 0; i < newSurvivorDefs.Length; i++)
-            {
-                if (newSurvivorDefs[i].bodyPrefab.name == "RobDriverBody")
-                {
-                    FuckWithDriver?.Invoke(newSurvivorDefs[i].bodyPrefab);
-                    return;
-                }
-            }
-
-            Log.Debug("no driver. ra2 compat failed");
         }
 
         internal static int TryGetScepterCount(Inventory inventory)

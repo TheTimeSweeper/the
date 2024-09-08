@@ -98,7 +98,7 @@ namespace RA2Mod.Survivors.Desolator.States
 
                 EffectManager.SpawnEffect(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CrocoLeapExplosion"), new EffectData {
                     origin = currentTrajectoryInfo.hitPoint,
-                    scale = BaseAttackRadius
+                    scale = BaseAttackRadius * 0.8f
                 }, true);
             }
         }

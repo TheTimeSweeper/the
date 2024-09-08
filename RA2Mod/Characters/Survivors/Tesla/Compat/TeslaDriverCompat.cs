@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace RA2Mod.Survivors.Tesla.Compat
 {
-    public class TeslaDriverCompat
+    internal class TeslaDriverCompat
     {
         private ushort teslaGunIndex;
 

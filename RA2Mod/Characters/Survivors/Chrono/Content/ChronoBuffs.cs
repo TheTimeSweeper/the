@@ -9,9 +9,9 @@ namespace RA2Mod.Survivors.Chrono {
     {
         // armor buff gained during roll
         public static BuffDef chronoSicknessDebuff;
-        public static BuffDef chronosphereRootDebuff;
-        public static BuffDef ivand;
-        public static BuffDef vanishFreeze;
+        //public static BuffDef chronosphereRootDebuff;
+        //public static BuffDef ivand;
+        //public static BuffDef vanishFreeze;
 
         public static void Init(AssetBundle assetBundle)
         {
@@ -20,7 +20,7 @@ namespace RA2Mod.Survivors.Chrono {
                 Color.cyan,
                 true,
                 true);
-            ContentPacks.asyncLoadCoroutines.Add(Assets.LoadBuffIconAsync(chronoSicknessDebuff, assetBundle, "texBuffChronoClock"));
+            ContentPacks.asyncLoadCoroutines.Add(Asset.LoadBuffIconAsync(chronoSicknessDebuff, assetBundle, "texBuffChronoClock"));
 
             //chronosphereRootDebuff = Modules.Content.CreateAndAddBuff("ChronosphereRoot",
             //    null,
@@ -45,9 +45,9 @@ namespace RA2Mod.Survivors.Chrono {
 
         }
         
-        private static bool GetHasIvanTempVisualEffect(CharacterBody body)
-        {
-            return body.HasBuff(ivand);
-        }
+        //private static bool GetHasIvanTempVisualEffect(CharacterBody body)
+        //{
+        //    return body.HasBuff(ivand);
+        //}
     }
 }

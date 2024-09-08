@@ -46,7 +46,7 @@ namespace RA2Mod.Modules.BaseStates
             bool fireStarted = fixedAge >= castStartTime;
             bool fireEnded = fixedAge >= castEndTime;
             isFiring = false;
-
+            
             //to guarantee attack comes out if at high attack speed the fixedage skips past the endtime
             if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired))
             {

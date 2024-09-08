@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9131547541180708400}
   m_RootOrder: 0
@@ -39,7 +40,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2746497873789975006}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.2084405
@@ -78,6 +79,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6095705924026308965}
   m_Father: {fileID: 0}
@@ -192,7 +194,7 @@ MonoBehaviour:
   startSound: 
   cannotBeDeleted: 0
   flightSoundLoop: {fileID: 0}
-  canImpactOnTrigger: 1
+  canImpactOnTrigger: 0
   allowPrediction: 1
   owner: {fileID: 0}
   procCoefficient: 1

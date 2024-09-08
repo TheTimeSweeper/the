@@ -55,7 +55,9 @@ namespace RA2Mod.Survivors.Chrono.Components
 
         public override void UpdateRotation(ref Quaternion currentRotation, float deltaTime) { }
 
-        public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime) { }
+        public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime) {
+            //currentVelocity = setDeltaPosition;
+        }
 
         public void InitNonAuthority()
         {
@@ -64,9 +66,12 @@ namespace RA2Mod.Survivors.Chrono.Components
             nonAuthority = true;
         }
 
-        public void SimpleMove(Vector3 deltaPosition, Vector3 finalPosition)
+        public void SimpleMove(Vector3 deltaPosition)
         {
-            Motor.MoveCharacter(finalPosition);
+            if (deltaPosition.magnitude > Mathf.Epsilon)//jittering when trying to set position to same position
+            {
+                Motor.MoveCharacter(transform.position + deltaPosition);
+            }
             if (deltaPosition.y > 0)
             {
                 Motor.ForceUnground();
@@ -131,10 +136,10 @@ namespace RA2Mod.Survivors.Chrono.Components
             {
                 viewYaw = setYaw;
             }
-            viewYaw = Mathf.Lerp(viewYaw, setYaw, 0.2f);
+            viewYaw = ExpDecayLerp(viewYaw, setYaw, 10, Time.deltaTime);
             positionProjection.transform.rotation = Quaternion.Euler(0f, viewYaw, 0f);
-            
-            viewDeltaPosition = Vector3.Lerp(viewDeltaPosition, setDeltaPosition, 0.2f);
+
+            viewDeltaPosition = ExpDecayLerp(viewDeltaPosition, setDeltaPosition, 10, Time.deltaTime);
             Vector3 currentDeltaPosition = positionProjection.transform.InverseTransformDirection(viewDeltaPosition);
             if (currentDeltaPosition.sqrMagnitude > 1)
             {
@@ -153,5 +158,20 @@ namespace RA2Mod.Survivors.Chrono.Components
             }
         }
         #endregion projection preview
+
+        /// <summary>
+        /// lerp but framerate independent. ty freya holmer https://www.youtube.com/watch?v=LSNQuFEDOyQ
+        /// </summary>
+        public static float ExpDecayLerp(float a, float b, float decay, float deltaTime)
+        {
+            return b + (a - b) * Mathf.Exp(-decay * deltaTime);
+        }
+        /// <summary>
+        /// lerp but framerate independent. ty freya holmer https://www.youtube.com/watch?v=LSNQuFEDOyQ
+        /// </summary>
+        public static Vector3 ExpDecayLerp(Vector3 a, Vector3 b, float decay, float deltaTime)
+        {
+            return b + (a - b) * Mathf.Exp(-decay * deltaTime);
+        }
     }
 }

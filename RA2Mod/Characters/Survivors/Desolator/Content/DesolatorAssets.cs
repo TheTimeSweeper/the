@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ThreeEyedGames;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RA2Mod.Survivors.Desolator
@@ -59,7 +60,7 @@ namespace RA2Mod.Survivors.Desolator
             IrradiatedImpactEffect = DesolatorIrradiatorProjectile.GetComponent<ProjectileDotZone>().impactEffect;
 
             DesolatorCrocoLeapProjectile = CreateDesolatorCrocoLeapProjectile();
-            Assets.CreateEffectFromObject(IrradiatedImpactEffect, "", false);
+            Asset.CreateEffectFromObject(IrradiatedImpactEffect, "", false);
 
             DesolatorAuraPrefab = CreateDesolatorAura();
 
@@ -220,12 +221,10 @@ namespace RA2Mod.Survivors.Desolator
 
         private static GameObject CreateDesolatorCrocoLeapProjectile()
         {
-
-            GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid"), "DesolatorLeapAcid");
+            GameObject leapAcidProjectile = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Croco/CrocoLeapAcid.prefab").WaitForCompletion(), "DesolatorLeapAcid");
 
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = leapAcidProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             damageTypeComponent.Add(DesolatorDamageTypes.DesolatorDot);
-
             ProjectileDotZone projectileDotZone = leapAcidProjectile.GetComponent<ProjectileDotZone>();
             projectileDotZone.impactEffect = IrradiatedImpactEffect;
             projectileDotZone.lifetime = AimBigRadBeam.DotZoneLifetime;
@@ -235,12 +234,16 @@ namespace RA2Mod.Survivors.Desolator
 
             leapAcidProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
 
-            Transform transformFindFX = leapAcidProjectile.transform.Find("FX");
-            transformFindFX.transform.localScale = Vector3.one * AimBigRadBeam.BaseAttackRadius * 1.8f;
+            ProjectileController projectileController = leapAcidProjectile.GetComponent<ProjectileController>();
+            GameObject leapAcidProjectileGhost = PrefabAPI.InstantiateClone(projectileController.ghostPrefab, "DesolatorLeapAcidGhost");
+            projectileController.ghostPrefab = leapAcidProjectileGhost;
+            
+            Transform transformFindFX = leapAcidProjectileGhost.transform.Find("FX");
+            transformFindFX.transform.localScale = Vector3.one * AimBigRadBeam.BaseAttackRadius * 1.2f;
             UnityEngine.Object.Destroy(transformFindFX.GetComponent<AlignToNormal>());
 
-            Transform transformFindDecal = leapAcidProjectile.transform.Find("FX/Decal");
-            float scale = AimBigRadBeam.BaseAttackRadius * 0.10f;
+            Transform transformFindDecal = leapAcidProjectileGhost.transform.Find("FX/Decal");
+            float scale = AimBigRadBeam.BaseAttackRadius * 0.13f;
             transformFindDecal.localScale = new Vector3(scale, 0.85f, scale);
             transformFindDecal.GetComponent<Decal>().Material.SetTexture("_MainTexture", assetBundle.LoadAsset<Texture2D>("texDesolatorDecal"));
 
@@ -250,10 +253,11 @@ namespace RA2Mod.Survivors.Desolator
 
             TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, leapAcidProjectile.transform);
             areaIndicator.teamFilter = leapAcidProjectile.GetComponent<TeamFilter>();
-            areaIndicator.transform.localScale = Vector3.one * AimBigRadBeam.BaseAttackRadius;
-            areaIndicator.transform.parent = transformFindFX;
-
-            leapAcidProjectile.transform.Find("FX/Hitbox (1)").localScale = Vector3.one;
+            areaIndicator.transform.parent = leapAcidProjectile.transform.Find("FX");
+            areaIndicator.transform.localScale = Vector3.one;
+            leapAcidProjectile.transform.Find("FX/Hitbox (1)").localScale = Vector3.one * 1.8f;
+            Transform transformFindFX2 = leapAcidProjectile.transform.Find("FX");
+            transformFindFX2.transform.localScale = Vector3.one * AimBigRadBeam.BaseAttackRadius;
 
             Content.AddProjectilePrefab(leapAcidProjectile);
 
@@ -263,7 +267,7 @@ namespace RA2Mod.Survivors.Desolator
         private static GameObject CreateDesolatorAura()
         {
             GameObject aura = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/IcicleAura"), "DesolatorAura", true);
-
+            
             UnityEngine.Object.Destroy(aura.GetComponent<IcicleAuraController>());
             aura.AddComponent<DesolatorAuraController>();
 
@@ -276,18 +280,23 @@ namespace RA2Mod.Survivors.Desolator
             buffWard.buffDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Weak");
             buffWard.radius = RadiationAura.Radius;
 
-            greenify(aura.transform.Find("Particles/Ring, Outer").GetComponent<ParticleSystem>());
-            greenify(aura.transform.Find("Particles/Ring, Core").GetComponent<ParticleSystem>());
-
-            aura.transform.Find("Particles/Area").GetComponent<ParticleSystemRenderer>().material = DesolatorTeamAreaIndicatorPrefab.teamMaterialPairs[1].sharedMaterial;
+            greenifyRing(aura.transform.Find("Particles/Ring, Outer").GetComponent<ParticleSystem>());
+            greenifyRing(aura.transform.Find("Particles/Ring, Core").GetComponent<ParticleSystem>());
+            
+            ParticleSystemRenderer shitthatgetsremovedbyfuckingriskytweaksbrojusthideit = aura.transform.Find("Particles/Area").GetComponent<ParticleSystemRenderer>();
+            if(shitthatgetsremovedbyfuckingriskytweaksbrojusthideit != null)
+            {
+                shitthatgetsremovedbyfuckingriskytweaksbrojusthideit.material = DesolatorTeamAreaIndicatorPrefab.teamMaterialPairs[1].sharedMaterial;
+            }
 
             return aura;
         }
 
-        private static void greenify(ParticleSystem particleSystem)
+        private static void greenifyRing(ParticleSystem particleSystem)
         {
             ParticleSystem.MainModule main = particleSystem.main;
             main.startColor = Color.green;
+            particleSystem.transform.localScale = new Vector3(0.8f, 1, 0.8f);
         }
 
         //todo deso move ugh

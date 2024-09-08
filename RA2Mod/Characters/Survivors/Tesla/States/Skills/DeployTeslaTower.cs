@@ -69,11 +69,11 @@ namespace RA2Mod.Survivors.Tesla.States
 
             if (isAuthority)
             {
-                entryCountdown -= Time.fixedDeltaTime;
+                entryCountdown -= Time.deltaTime;
 
                 if (exitPending)
                 {
-                    exitCountdown -= Time.fixedDeltaTime;
+                    exitCountdown -= Time.deltaTime;
                     if (exitCountdown <= 0f)
                     {
                         outer.SetNextStateToMain();

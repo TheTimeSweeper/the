@@ -9,7 +9,7 @@ namespace RA2Mod.Survivors.Chrono.States
 
         public float windDownTime = 0.5f;
         public PhaseIndicatorController controller;
-        private TemporaryOverlay temporaryOverlay;
+        private TemporaryOverlayInstance temporaryOverlay;
         private CharacterModel characterModel;
         private Ray aimRay;
 
@@ -36,10 +36,10 @@ namespace RA2Mod.Survivors.Chrono.States
                 if (characterModel)
                 {
                     //characterModel.invisibilityCount++;
-                    this.temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+                    temporaryOverlay = TemporaryOverlayManager.AddOverlay(gameObject);
                     this.temporaryOverlay.duration = windDownTime;
                     this.temporaryOverlay.originalMaterial = ChronoAssets.frozenOverlayMaterial;
-                    this.temporaryOverlay.AddToCharacerModel(characterModel);
+                    this.temporaryOverlay.AddToCharacterModel(characterModel);
                 }
             }
         }
@@ -50,9 +50,9 @@ namespace RA2Mod.Survivors.Chrono.States
 
             controller?.UpdateIndicatorActive(false);
             GetModelAnimator().enabled = true;
-            if (this.temporaryOverlay)
+            if (this.temporaryOverlay != null)
             {
-                EntityState.Destroy(this.temporaryOverlay);
+                this.temporaryOverlay.Destroy();
             }
 
             StartAimMode(1);
