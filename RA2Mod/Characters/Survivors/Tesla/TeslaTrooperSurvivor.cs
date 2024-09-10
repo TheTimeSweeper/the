@@ -753,9 +753,16 @@ namespace RA2Mod.Survivors.Tesla
         private void CharacterMaster_AddDeployable(On.RoR2.CharacterMaster.orig_AddDeployable orig, CharacterMaster self, Deployable deployable, DeployableSlot slot)
         {
             MasterCatalog.MasterIndex masterIndex = MasterCatalog.FindMasterIndex(deployable.gameObject);
+
+            Log.Warning($"masterindex {masterIndex} {masterIndex.i}");
+
+            Log.Warning($"MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) {MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)} {MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab).i}");
+            Log.Warning($"MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab) {MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab)} {MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab).i}");
+
             if (masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) ||
                 masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab))
             {
+                Log.Warning("true unfortunately");
                 slot = TeslaDeployables.teslaTowerDeployableSlot;
             }
 
