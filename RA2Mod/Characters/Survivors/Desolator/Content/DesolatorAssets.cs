@@ -182,8 +182,8 @@ namespace RA2Mod.Survivors.Desolator
             //Log.Warning($"irradiatorDeployableSlot {DesolatorDeployables.irradiatorDeployableSlot}");
             //irradiatorProjectile.GetComponent<ProjectileDeployToOwner>().deployableSlot = DesolatorDeployables.irradiatorDeployableSlot;
             //Log.Warning($"deployableSlot {DesolatorAssets.DesolatorIrradiatorProjectile.GetComponent<ProjectileDeployToOwner>().deployableSlot}");
-            UnityEngine.Object.Destroy(irradiatorProjectile.GetComponent<Deployable>());
-            UnityEngine.Object.Destroy(irradiatorProjectile.GetComponent<ProjectileDeployToOwner>());
+            //UnityEngine.Object.Destroy(irradiatorProjectile.GetComponent<Deployable>());
+            //UnityEngine.Object.Destroy(irradiatorProjectile.GetComponent<ProjectileDeployToOwner>());
 
             TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
             areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
@@ -204,8 +204,8 @@ namespace RA2Mod.Survivors.Desolator
 
             //todo deso fix this shit
             //irradiatorProjectileScepter.GetComponent<ProjectileDeployToOwner>().deployableSlot = DesolatorDeployables.irradiatorDeployableSlot;
-            UnityEngine.Object.Destroy(irradiatorProjectileScepter.GetComponent<Deployable>());
-            UnityEngine.Object.Destroy(irradiatorProjectileScepter.GetComponent<ProjectileDeployToOwner>());
+            //UnityEngine.Object.Destroy(irradiatorProjectileScepter.GetComponent<Deployable>());
+            //UnityEngine.Object.Destroy(irradiatorProjectileScepter.GetComponent<ProjectileDeployToOwner>());
 
             Renderer ghostRenderer = irradiatorProjectileScepter.GetComponent<ProjectileController>().ghostPrefab.GetComponentInChildren<Renderer>();
             ghostRenderer.material = ghostRenderer.material.ConvertDefaultShaderToHopoo();
