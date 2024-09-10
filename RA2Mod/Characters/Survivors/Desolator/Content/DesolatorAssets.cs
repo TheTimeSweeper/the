@@ -178,6 +178,13 @@ namespace RA2Mod.Survivors.Desolator
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = irradiatorProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             damageTypeComponent.Add(DesolatorDamageTypes.DesolatorDot);
 
+            //todo deso fix this shit
+            //Log.Warning($"irradiatorDeployableSlot {DesolatorDeployables.irradiatorDeployableSlot}");
+            //irradiatorProjectile.GetComponent<ProjectileDeployToOwner>().deployableSlot = DesolatorDeployables.irradiatorDeployableSlot;
+            //Log.Warning($"deployableSlot {DesolatorAssets.DesolatorIrradiatorProjectile.GetComponent<ProjectileDeployToOwner>().deployableSlot}");
+            UnityEngine.Object.Destroy(irradiatorProjectile.GetComponent<Deployable>());
+            UnityEngine.Object.Destroy(irradiatorProjectile.GetComponent<ProjectileDeployToOwner>());
+
             TeamAreaIndicator areaIndicator = UnityEngine.Object.Instantiate(DesolatorTeamAreaIndicatorPrefab, irradiatorProjectile.transform);
             areaIndicator.teamFilter = irradiatorProjectile.GetComponent<TeamFilter>();
             areaIndicator.transform.localScale = Vector3.one * ThrowIrradiator.Range;
@@ -194,6 +201,11 @@ namespace RA2Mod.Survivors.Desolator
         private static GameObject CreateIrradiatorProjectileScepter()
         {
             GameObject irradiatorProjectileScepter = PrefabAPI.InstantiateClone(assetBundle.LoadAsset<GameObject>("IrradiatorProjectileScepter"), "IrradiatorProjectileScepter", true);
+
+            //todo deso fix this shit
+            //irradiatorProjectileScepter.GetComponent<ProjectileDeployToOwner>().deployableSlot = DesolatorDeployables.irradiatorDeployableSlot;
+            UnityEngine.Object.Destroy(irradiatorProjectileScepter.GetComponent<Deployable>());
+            UnityEngine.Object.Destroy(irradiatorProjectileScepter.GetComponent<ProjectileDeployToOwner>());
 
             Renderer ghostRenderer = irradiatorProjectileScepter.GetComponent<ProjectileController>().ghostPrefab.GetComponentInChildren<Renderer>();
             ghostRenderer.material = ghostRenderer.material.ConvertDefaultShaderToHopoo();
@@ -258,7 +270,7 @@ namespace RA2Mod.Survivors.Desolator
             leapAcidProjectile.transform.Find("FX/Hitbox (1)").localScale = Vector3.one * 1.8f;
             Transform transformFindFX2 = leapAcidProjectile.transform.Find("FX");
             transformFindFX2.transform.localScale = Vector3.one * AimBigRadBeam.BaseAttackRadius;
-
+            
             Content.AddProjectilePrefab(leapAcidProjectile);
 
             return leapAcidProjectile;

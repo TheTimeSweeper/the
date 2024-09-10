@@ -1,4 +1,13 @@
 ## Changelog
+`3.0.4`
+- added AI for chrono (goobo and vengeance)
+- fixed tesla and deso goobo and vengeance being broken
+- temporarily removed deployable restriction on desolator glow sticks
+    - *couldn't figure out how to fix it right so for now grab some brain stalks and go crazy*
+
+`3.0.3`
+- fixed tesla trooper (and some other moves I think) not scaling with attack speed
+
 `3.0.2`
 - illegally forced compat with autosprint for chrono
 - fix error with m2 bombs when deputy was installed

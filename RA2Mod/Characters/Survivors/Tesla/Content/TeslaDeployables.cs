@@ -7,12 +7,9 @@ namespace RA2Mod.Survivors.Tesla
     public class TeslaDeployables
     {
         public static DeployableSlot teslaTowerDeployableSlot;
-        public static DeployableAPI.GetDeployableSameSlotLimit GetTeslaTowerSlotLimit;
 
         public static void Init()
         {
-            GetTeslaTowerSlotLimit += onGetTeslaTowerSlotLimit;
-
             teslaTowerDeployableSlot = DeployableAPI.RegisterDeployableSlot(onGetTeslaTowerSlotLimit);
         }
 

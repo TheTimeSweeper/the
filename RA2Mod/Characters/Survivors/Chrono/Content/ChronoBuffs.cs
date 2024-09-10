@@ -9,7 +9,7 @@ namespace RA2Mod.Survivors.Chrono {
     {
         // armor buff gained during roll
         public static BuffDef chronoSicknessDebuff;
-        //public static BuffDef chronosphereRootDebuff;
+        public static BuffDef chronosphereRootDebuff;
         //public static BuffDef ivand;
         //public static BuffDef vanishFreeze;
 

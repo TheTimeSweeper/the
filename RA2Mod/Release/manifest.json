@@ -1,9 +1,9 @@
 {
-    "author": "TheTimesweeper",
-    "name": "Red_Alert",
-    "version_number": "3.0.2",
-    "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Double Time. Adds 3 survivors based on Red Alert 2, themed around RoR2: Tesla Trooper, Desolator, and Chrono Legionnaire",
+  "author": "TheTimesweeper",
+  "name": "Red_Alert",
+  "version_number": "3.0.4",
+  "website_url": "https://github.com/TheTimeSweeper/the/tree/master/RA2Mod",
+  "description": "Deconstructing. Adds 3 survivors based on Red Alert 2, themed around RoR2. Tesla Trooper, Desolator, and Chrono Legionnaire",
   "dependencies": [
     "bbepis-BepInExPack-5.4.2101",
     "RiskofThunder-R2API_Core-5.0.3",

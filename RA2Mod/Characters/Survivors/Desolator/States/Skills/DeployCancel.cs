@@ -18,10 +18,6 @@ namespace RA2Mod.Survivors.Desolator.States
             PlayCrossfade("RadCannonSpin", "DesolatorIdlePose", 0.1f);
 
             base.outer.SetNextStateToMain();
-            
-            if (activatorSkillSlot.skillDef == DesolatorSurvivor.cancelDeploySkillDef) {
-                activatorSkillSlot.UnsetSkillOverride(gameObject, DesolatorSurvivor.cancelDeploySkillDef, RoR2.GenericSkill.SkillOverridePriority.Contextual);
-            }
         }
 
         //public override void FixedUpdate() {

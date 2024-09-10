@@ -23,8 +23,8 @@ namespace RA2Mod.Modules.BaseStates
 
         public override void OnEnter()
         {
-            InitDurationValues();
             base.OnEnter();
+            InitDurationValues();
         }
 
         protected virtual void InitDurationValues()

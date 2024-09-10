@@ -18,111 +18,145 @@ namespace RA2Mod.Survivors.Chrono
                 baseAI.aimVectorDampTime = 0.01f;
                 baseAI.aimVectorMaxSpeed = 360;
 
-                //TestShootAi(master);
-
-                TestSprintAI(master);
-
-                //CreateAI(master);
+                CreateAI(master);
             }));
         }
 
         private static void CreateAI(GameObject master)
         {
-            ////some fields omitted that aren't commonly changed. will be set to default values
-            //AISkillDriver shootDriver = master.AddComponent<AISkillDriver>();
-            ////Selection Conditions
-            //shootDriver.customName = "Use Secondary Shoot";
-            //shootDriver.skillSlot = SkillSlot.Secondary;
-            //shootDriver.requireSkillReady = true;
-            //shootDriver.minDistance = 0;
-            //shootDriver.maxDistance = 25;
-            //shootDriver.selectionRequiresTargetLoS = false;
-            //shootDriver.selectionRequiresOnGround = false;
-            //shootDriver.selectionRequiresAimTarget = false;
-            //shootDriver.maxTimesSelected = -1;
-
-            ////Behavior
-            //shootDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            //shootDriver.activationRequiresTargetLoS = false;
-            //shootDriver.activationRequiresAimTargetLoS = false;
-            //shootDriver.activationRequiresAimConfirmation = true;
-            //shootDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            //shootDriver.moveInputScale = 1;
-            //shootDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            //shootDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold; 
-
-            //AISkillDriver rollDriver = master.AddComponent<AISkillDriver>();
-            ////Selection Conditions
-            //rollDriver.customName = "Use Utility Roll";
-            //rollDriver.skillSlot = SkillSlot.Utility;
-            //rollDriver.requireSkillReady = true;
-            //rollDriver.minDistance = 8;
-            //rollDriver.maxDistance = 20;
-            //rollDriver.selectionRequiresTargetLoS = true;
-            //rollDriver.selectionRequiresOnGround = false;
-            //rollDriver.selectionRequiresAimTarget = false;
-            //rollDriver.maxTimesSelected = -1;
-
-            ////Behavior
-            //rollDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            //rollDriver.activationRequiresTargetLoS = false;
-            //rollDriver.activationRequiresAimTargetLoS = false;
-            //rollDriver.activationRequiresAimConfirmation = false;
-            //rollDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            //rollDriver.moveInputScale = 1;
-            //rollDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            //rollDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-
-
-            //AISkillDriver chaseDriver = master.AddComponent<AISkillDriver>();
-            ////Selection Conditions
-            //chaseDriver.customName = "Chase";
-            //chaseDriver.skillSlot = SkillSlot.None;
-            //chaseDriver.requireSkillReady = false;
-            //chaseDriver.minDistance = 0;
-            //chaseDriver.maxDistance = float.PositiveInfinity;
-
-            ////Behavior
-            //chaseDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            //chaseDriver.activationRequiresTargetLoS = false;
-            //chaseDriver.activationRequiresAimTargetLoS = false;
-            //chaseDriver.activationRequiresAimConfirmation = false;
-            //chaseDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            //chaseDriver.moveInputScale = 1;
-            //chaseDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            //chaseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-
-            //recommend taking these for a spin in game, messing with them in runtimeinspector to get a feel for what they should do at certain ranges and such
-        }
-
-        private static void TestSprintAI(GameObject master)
-        {
-            float sprintclose = 20;
+            float sprintclose = 40;
 
             float sprintFar= 80;
 
-            AISkillDriver dontSprintDriver = master.AddComponent<AISkillDriver>();
+            AISkillDriver bombDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
-            dontSprintDriver.customName = "dontSprint";
-            dontSprintDriver.skillSlot = SkillSlot.None;
-            dontSprintDriver.requireSkillReady = false;
-            dontSprintDriver.minDistance = 0;
-            dontSprintDriver.maxDistance = sprintclose;
-            dontSprintDriver.selectionRequiresTargetLoS = false;
-            dontSprintDriver.selectionRequiresOnGround = false;
-            dontSprintDriver.selectionRequiresAimTarget = false;
-            dontSprintDriver.maxTimesSelected = -1;
-
+            bombDriver.customName = "Secondary get close Bomb";
+            bombDriver.skillSlot = SkillSlot.Secondary;
+            bombDriver.requireSkillReady = true;
+            bombDriver.minDistance = 0;
+            bombDriver.maxDistance = 10;
+            bombDriver.selectionRequiresTargetLoS = false;
+            bombDriver.selectionRequiresOnGround = false;
+            bombDriver.selectionRequiresAimTarget = false;
+            bombDriver.maxTimesSelected = -1;
             //Behavior
-            dontSprintDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            dontSprintDriver.activationRequiresTargetLoS = false;
-            dontSprintDriver.activationRequiresAimTargetLoS = false;
-            dontSprintDriver.activationRequiresAimConfirmation = false;
-            dontSprintDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            dontSprintDriver.moveInputScale = 1;
-            dontSprintDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            dontSprintDriver.buttonPressType = AISkillDriver.ButtonPressType.Abstain;
-            dontSprintDriver.shouldSprint = false;
+            bombDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            bombDriver.activationRequiresTargetLoS = false;
+            bombDriver.activationRequiresAimTargetLoS = false;
+            bombDriver.activationRequiresAimConfirmation = false;
+            bombDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            bombDriver.moveInputScale = 1;
+            bombDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            bombDriver.buttonPressType = AISkillDriver.ButtonPressType.TapContinuous;
+            bombDriver.ignoreNodeGraph = true;
+
+            //mouse over these fields for tooltips
+            AISkillDriver specialDriver = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            specialDriver.customName = "Special";
+            specialDriver.skillSlot = SkillSlot.Special;
+            specialDriver.requiredSkill = null; //usually used when you have skills that override other skillslots like engi harpoons
+            specialDriver.requireSkillReady = true; //usually false for primaries
+            specialDriver.requireEquipmentReady = false;
+            specialDriver.minUserHealthFraction = float.NegativeInfinity;
+            specialDriver.maxUserHealthFraction = float.PositiveInfinity;
+            specialDriver.minTargetHealthFraction = float.NegativeInfinity;
+            specialDriver.maxTargetHealthFraction = float.PositiveInfinity;
+            specialDriver.minDistance = 5;
+            specialDriver.maxDistance = 20;
+            specialDriver.selectionRequiresTargetLoS = false;
+            specialDriver.selectionRequiresOnGround = false;
+            specialDriver.selectionRequiresAimTarget = false;
+            specialDriver.maxTimesSelected = -1;
+            //Behavior
+            specialDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            specialDriver.activationRequiresTargetLoS = false;
+            specialDriver.activationRequiresAimTargetLoS = false;
+            specialDriver.activationRequiresAimConfirmation = true;
+            specialDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            specialDriver.moveInputScale = 1;
+            specialDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            specialDriver.ignoreNodeGraph = false; //will chase relentlessly but be kind of stupid
+            specialDriver.shouldSprint = false;
+            specialDriver.shouldFireEquipment = false;
+            specialDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            //Transition Behavior
+            specialDriver.driverUpdateTimerOverride = -1;
+            specialDriver.resetCurrentEnemyOnNextDriverSelection = false;
+            specialDriver.noRepeat = false;
+            specialDriver.nextHighPriorityOverride = null;
+
+            //mouse over these fields for tooltips
+            AISkillDriver primaryCloseDriver = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            primaryCloseDriver.customName = "Primary get distance";
+            primaryCloseDriver.skillSlot = SkillSlot.Primary;
+            primaryCloseDriver.requiredSkill = null; //usually used when you have skills that override other skillslots like engi harpoons
+            primaryCloseDriver.requireSkillReady = false; //usually false for primaries
+            primaryCloseDriver.requireEquipmentReady = false;
+            primaryCloseDriver.minUserHealthFraction = float.NegativeInfinity;
+            primaryCloseDriver.maxUserHealthFraction = float.PositiveInfinity;
+            primaryCloseDriver.minTargetHealthFraction = float.NegativeInfinity;
+            primaryCloseDriver.maxTargetHealthFraction = float.PositiveInfinity;
+            primaryCloseDriver.minDistance = 0;
+            primaryCloseDriver.maxDistance = 10;
+            primaryCloseDriver.selectionRequiresTargetLoS = false;
+            primaryCloseDriver.selectionRequiresOnGround = false;
+            primaryCloseDriver.selectionRequiresAimTarget = false;
+            primaryCloseDriver.maxTimesSelected = -1;
+            //Behavior
+            primaryCloseDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            primaryCloseDriver.activationRequiresTargetLoS = false;
+            primaryCloseDriver.activationRequiresAimTargetLoS = false;
+            primaryCloseDriver.activationRequiresAimConfirmation = true;
+            primaryCloseDriver.movementType = AISkillDriver.MovementType.FleeMoveTarget;
+            primaryCloseDriver.moveInputScale = 1;
+            primaryCloseDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            primaryCloseDriver.ignoreNodeGraph = false; //will chase relentlessly but be kind of stupid
+            primaryCloseDriver.shouldSprint = false;
+            primaryCloseDriver.shouldFireEquipment = false;
+            primaryCloseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            //Transition Behavior
+            primaryCloseDriver.driverUpdateTimerOverride = -1;
+            primaryCloseDriver.resetCurrentEnemyOnNextDriverSelection = false;
+            primaryCloseDriver.noRepeat = false;
+            primaryCloseDriver.nextHighPriorityOverride = bombDriver;
+
+            //mouse over these fields for tooltips
+            AISkillDriver primaryDriver = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            primaryDriver.customName = "Primary strafe";
+            primaryDriver.skillSlot = SkillSlot.Primary;
+            primaryDriver.requiredSkill = null; //usually used when you have skills that override other skillslots like engi harpoons
+            primaryDriver.requireSkillReady = false; //usually false for primaries
+            primaryDriver.requireEquipmentReady = false;
+            primaryDriver.minUserHealthFraction = float.NegativeInfinity;
+            primaryDriver.maxUserHealthFraction = float.PositiveInfinity;
+            primaryDriver.minTargetHealthFraction = float.NegativeInfinity;
+            primaryDriver.maxTargetHealthFraction = float.PositiveInfinity;
+            primaryDriver.minDistance = 5;
+            primaryDriver.maxDistance = 20;
+            primaryDriver.selectionRequiresTargetLoS = false;
+            primaryDriver.selectionRequiresOnGround = false;
+            primaryDriver.selectionRequiresAimTarget = false;
+            primaryDriver.maxTimesSelected = -1;
+            //Behavior
+            primaryDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            primaryDriver.activationRequiresTargetLoS = false;
+            primaryDriver.activationRequiresAimTargetLoS = false;
+            primaryDriver.activationRequiresAimConfirmation = true;
+            primaryDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            primaryDriver.moveInputScale = 1;
+            primaryDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            primaryDriver.ignoreNodeGraph = false; //will chase relentlessly but be kind of stupid
+            primaryDriver.shouldSprint = false;
+            primaryDriver.shouldFireEquipment = false;
+            primaryDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            //Transition Behavior
+            primaryDriver.driverUpdateTimerOverride = -1;
+            primaryDriver.resetCurrentEnemyOnNextDriverSelection = false;
+            primaryDriver.noRepeat = false;
+            primaryDriver.nextHighPriorityOverride = null;
 
             AISkillDriver sprintDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
@@ -132,10 +166,9 @@ namespace RA2Mod.Survivors.Chrono
             sprintDriver.minDistance = sprintclose;
             sprintDriver.maxDistance = sprintFar;
             sprintDriver.selectionRequiresTargetLoS = false;
-            sprintDriver.selectionRequiresOnGround = false;
+            sprintDriver.selectionRequiresOnGround = true;
             sprintDriver.selectionRequiresAimTarget = true;
             sprintDriver.maxTimesSelected = -1;
-
             //Behavior
             sprintDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             sprintDriver.activationRequiresTargetLoS = false;
@@ -146,117 +179,65 @@ namespace RA2Mod.Survivors.Chrono
             sprintDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
             sprintDriver.buttonPressType = AISkillDriver.ButtonPressType.Abstain;
             sprintDriver.shouldSprint = true;
-            sprintDriver.nextHighPriorityOverride = dontSprintDriver;
-            sprintDriver.ignoreNodeGraph = true;
+            sprintDriver.nextHighPriorityOverride = null;
+            sprintDriver.ignoreNodeGraph = false;
+            //transition
+            sprintDriver.driverUpdateTimerOverride = -1;
+            sprintDriver.resetCurrentEnemyOnNextDriverSelection = false;
+            sprintDriver.noRepeat = true;
+            sprintDriver.nextHighPriorityOverride = null;
 
-            AISkillDriver dontSprint2Driver = master.AddComponent<AISkillDriver>();
+            AISkillDriver chaseNotSPrintDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
-            dontSprint2Driver.customName = "dontSprint2";
-            dontSprint2Driver.skillSlot = SkillSlot.None;
-            dontSprint2Driver.requireSkillReady = false;
-            dontSprint2Driver.minDistance = sprintFar;
-            dontSprint2Driver.maxDistance = float.PositiveInfinity;
-            dontSprint2Driver.selectionRequiresTargetLoS = false;
-            dontSprint2Driver.selectionRequiresOnGround = false;
-            dontSprint2Driver.selectionRequiresAimTarget = false;
-            dontSprint2Driver.maxTimesSelected = -1;
-
+            chaseNotSPrintDriver.customName = "chaseDontsprint";
+            chaseNotSPrintDriver.skillSlot = SkillSlot.None;
+            chaseNotSPrintDriver.requireSkillReady = false;
+            chaseNotSPrintDriver.minDistance = sprintclose;
+            chaseNotSPrintDriver.maxDistance = sprintFar;
+            chaseNotSPrintDriver.selectionRequiresTargetLoS = false;
+            chaseNotSPrintDriver.selectionRequiresOnGround = false;
+            chaseNotSPrintDriver.selectionRequiresAimTarget = true;
+            chaseNotSPrintDriver.maxTimesSelected = -1;
             //Behavior
-            dontSprint2Driver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            dontSprint2Driver.activationRequiresTargetLoS = false;
-            dontSprint2Driver.activationRequiresAimTargetLoS = false;
-            dontSprint2Driver.activationRequiresAimConfirmation = false;
-            dontSprint2Driver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            dontSprint2Driver.moveInputScale = 1;
-            dontSprint2Driver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            dontSprint2Driver.buttonPressType = AISkillDriver.ButtonPressType.Abstain;
-            dontSprint2Driver.shouldSprint = false;
-        }
+            chaseNotSPrintDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            chaseNotSPrintDriver.activationRequiresTargetLoS = false;
+            chaseNotSPrintDriver.activationRequiresAimTargetLoS = false;
+            chaseNotSPrintDriver.activationRequiresAimConfirmation = false;
+            chaseNotSPrintDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            chaseNotSPrintDriver.moveInputScale = 1;
+            chaseNotSPrintDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            chaseNotSPrintDriver.buttonPressType = AISkillDriver.ButtonPressType.Abstain;
+            chaseNotSPrintDriver.shouldSprint = false;
+            chaseNotSPrintDriver.nextHighPriorityOverride = null;
+            chaseNotSPrintDriver.ignoreNodeGraph = false;
+            //transition
+            chaseNotSPrintDriver.driverUpdateTimerOverride = -1;
+            chaseNotSPrintDriver.resetCurrentEnemyOnNextDriverSelection = false;
+            chaseNotSPrintDriver.noRepeat = true;
+            chaseNotSPrintDriver.nextHighPriorityOverride = null;
 
-        private static void TestShootAi(GameObject master)
-        {
 
-            //mouse over these fields for tooltips
-            AISkillDriver swingDriver = master.AddComponent<AISkillDriver>();
+            AISkillDriver stopSprintingFarDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
-            swingDriver.customName = "Use Primary Swing";
-            swingDriver.skillSlot = SkillSlot.Primary;
-            swingDriver.requiredSkill = null; //usually used when you have skills that override other skillslots like engi harpoons
-            swingDriver.requireSkillReady = false; //usually false for primaries
-            swingDriver.requireEquipmentReady = false;
-            swingDriver.minUserHealthFraction = float.NegativeInfinity;
-            swingDriver.maxUserHealthFraction = float.PositiveInfinity;
-            swingDriver.minTargetHealthFraction = float.NegativeInfinity;
-            swingDriver.maxTargetHealthFraction = float.PositiveInfinity;
-            swingDriver.minDistance = 0;
-            swingDriver.maxDistance = 10;
-            swingDriver.selectionRequiresTargetLoS = false;
-            swingDriver.selectionRequiresOnGround = false;
-            swingDriver.selectionRequiresAimTarget = false;
-            swingDriver.maxTimesSelected = -1;
-
+            stopSprintingFarDriver.customName = "dontSprint2";
+            stopSprintingFarDriver.skillSlot = SkillSlot.None;
+            stopSprintingFarDriver.requireSkillReady = false;
+            stopSprintingFarDriver.minDistance = sprintFar;
+            stopSprintingFarDriver.maxDistance = float.PositiveInfinity;
+            stopSprintingFarDriver.selectionRequiresTargetLoS = false;
+            stopSprintingFarDriver.selectionRequiresOnGround = false;
+            stopSprintingFarDriver.selectionRequiresAimTarget = false;
+            stopSprintingFarDriver.maxTimesSelected = -1;
             //Behavior
-            swingDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            swingDriver.activationRequiresTargetLoS = false;
-            swingDriver.activationRequiresAimTargetLoS = false;
-            swingDriver.activationRequiresAimConfirmation = false;
-            swingDriver.movementType = AISkillDriver.MovementType.Stop;
-            swingDriver.moveInputScale = 1;
-            swingDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            swingDriver.ignoreNodeGraph = false; //will chase relentlessly but be kind of stupid
-            swingDriver.shouldSprint = false;
-            swingDriver.shouldFireEquipment = false;
-            swingDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-
-            //Transition Behavior
-            swingDriver.driverUpdateTimerOverride = -1;
-            swingDriver.resetCurrentEnemyOnNextDriverSelection = false;
-            swingDriver.noRepeat = false;
-            swingDriver.nextHighPriorityOverride = null;
-
-            AISkillDriver bombDriver = master.AddComponent<AISkillDriver>();
-            //Selection Conditions
-            bombDriver.customName = "Use Special bomb";
-            bombDriver.skillSlot = SkillSlot.Special;
-            bombDriver.requireSkillReady = false;
-            bombDriver.minDistance = 10;
-            bombDriver.maxDistance = 20;
-            bombDriver.selectionRequiresTargetLoS = false;
-            bombDriver.selectionRequiresOnGround = false;
-            bombDriver.selectionRequiresAimTarget = false;
-            bombDriver.maxTimesSelected = -1;
-
-            //Behavior
-            bombDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            bombDriver.activationRequiresTargetLoS = false;
-            bombDriver.activationRequiresAimTargetLoS = false;
-            bombDriver.activationRequiresAimConfirmation = false;
-            bombDriver.movementType = AISkillDriver.MovementType.Stop;
-            bombDriver.moveInputScale = 1;
-            bombDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            bombDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-
-            AISkillDriver bstareDriver = master.AddComponent<AISkillDriver>();
-            //Selection Conditions
-            bstareDriver.customName = "stare";
-            bstareDriver.skillSlot = SkillSlot.None;
-            bstareDriver.requireSkillReady = false;
-            bstareDriver.minDistance = 20;
-            bstareDriver.maxDistance = float.PositiveInfinity;
-            bstareDriver.selectionRequiresTargetLoS = false;
-            bstareDriver.selectionRequiresOnGround = false;
-            bstareDriver.selectionRequiresAimTarget = false;
-            bstareDriver.maxTimesSelected = -1;
-
-            //Behavior
-            bstareDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            bstareDriver.activationRequiresTargetLoS = false;
-            bstareDriver.activationRequiresAimTargetLoS = false;
-            bstareDriver.activationRequiresAimConfirmation = false;
-            bstareDriver.movementType = AISkillDriver.MovementType.Stop;
-            bstareDriver.moveInputScale = 1;
-            bstareDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            bstareDriver.buttonPressType = AISkillDriver.ButtonPressType.Abstain;
+            stopSprintingFarDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            stopSprintingFarDriver.activationRequiresTargetLoS = false;
+            stopSprintingFarDriver.activationRequiresAimTargetLoS = false;
+            stopSprintingFarDriver.activationRequiresAimConfirmation = false;
+            stopSprintingFarDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            stopSprintingFarDriver.moveInputScale = 1;
+            stopSprintingFarDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            stopSprintingFarDriver.buttonPressType = AISkillDriver.ButtonPressType.Abstain;
+            stopSprintingFarDriver.shouldSprint = false;
         }
     }
 }

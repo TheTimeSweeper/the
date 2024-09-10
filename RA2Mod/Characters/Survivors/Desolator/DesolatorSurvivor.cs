@@ -128,6 +128,7 @@ namespace RA2Mod.Survivors.Desolator
             //some assets are changed based on config
             DesolatorConfig.Init();
             DesolatorDamageTypes.Init();
+            DesolatorDeployables.Init();
             DesolatorAssets.OnCharacterInitialized(assetBundle);
             DesolatorStates.Init();
             funTokenString = UnityEngine.Random.value <= 0.1f ? "_FUN" : "";
@@ -137,7 +138,6 @@ namespace RA2Mod.Survivors.Desolator
             DesolatorBuffs.Init(assetBundle);
             DesolatorDots.Init();
             DesolatorCompat.Init();
-            DesolatorDeployables.Init();
 
             InitializeEntityStateMachines();
             InitializeSkills();

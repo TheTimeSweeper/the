@@ -105,6 +105,7 @@ Translations currently only apply to Tesla Trooper and Desolator
 - Driver compat
 - Chrono Legionnaire, G.I.
 - Conscript, Prisma Trooper
+- MCV
 
 ___
 for no particular reason I made a cool skin for minecraft check it out   
@@ -112,6 +113,15 @@ for no particular reason I made a cool skin for minecraft check it out
 ___
 ## Changelog
 see Changelog tab for more  
+
+`3.0.4`
+- added AI for chrono (goobo and vengeance)
+- fixed tesla and deso goobo and vengeance being broken
+- temporarily removed deployable restriction on desolator glow sticks
+    - *couldn't figure out how to fix it right so for now grab some brain stalks and go crazy*
+
+`3.0.3`
+- fixed tesla trooper (and some other moves I think) not scaling with attack speed
 
 `3.0.2`
 - illegally forced compat with autosprint for chrono

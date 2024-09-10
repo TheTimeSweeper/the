@@ -629,9 +629,11 @@ namespace RA2Mod.Modules
             Modules.Content.AddMasterPrefab(newMaster);
             return newMaster;
         }
-        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete = null) =>
-            CloneDopplegangerMasterAsync(bodyPrefab, masterName, "RoR2/Base/Merc/MercMonsterMaster.prefab", onComplete);
-        public static IEnumerator CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, string masterToCopyPath, Action<GameObject> onComplete = null)
+        public static void CloneDopplegangerMasterAsync(GameObject bodyPrefab, string masterName, string masterToCopyPath = "RoR2/Base/Merc/MercMonsterMaster.prefab", Action<GameObject> onComplete = null)
+        {
+            Modules.ContentPacks.asyncLoadCoroutines.Add(CloneDopplegangerMasterAsyncCoroutine(bodyPrefab,masterName, masterToCopyPath, onComplete));
+        }
+        public static IEnumerator CloneDopplegangerMasterAsyncCoroutine(GameObject bodyPrefab, string masterName, string masterToCopyPath = "RoR2/Base/Merc/MercMonsterMaster.prefab", Action<GameObject> onComplete = null)
         {
             return Asset.LoadAssetCoroutine<GameObject>(masterToCopyPath, (result) =>
             {
@@ -639,7 +641,7 @@ namespace RA2Mod.Modules
                 newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
                 Modules.Content.AddMasterPrefab(newMaster);
-                onComplete(newMaster);
+                onComplete?.Invoke(newMaster);
             });
         }
 

@@ -23,9 +23,9 @@ namespace RA2Mod.Survivors.Chrono.Components
             this.indicator = new Indicator(base.gameObject, ChronoAssets.chronoIndicatorVanish);
         }
 
-        protected override TeamMask GetTeamMask()
-        {
-            return TeamMask.all;
-        }
+        //protected override TeamMask GetTeamMask()
+        //{
+        //    return TeamMask.all;
+        //}
     }
 }
