@@ -758,18 +758,20 @@ namespace RA2Mod.Survivors.Tesla
         {
             MasterCatalog.MasterIndex masterIndex = MasterCatalog.FindMasterIndex(deployable.gameObject);
 
-            Log.Warning($"masterindex {masterIndex}");
-
-            Log.Warning($"MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) {MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)}");
-            Log.Warning($"MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab) {MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab)}");
-
-            if (masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab) ||
-                masterIndex == MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab))
+            if (CompareMasterIndex(masterIndex, MasterCatalog.FindMasterIndex(TeslaTowerNotSurvivor.masterPrefab)) ||
+                CompareMasterIndex(masterIndex, MasterCatalog.FindMasterIndex(TeslaTowerScepter.masterPrefab)))
             {
                 slot = TeslaDeployables.teslaTowerDeployableSlot;
             }
 
             orig(self, deployable, slot);
+        }
+
+        private bool CompareMasterIndex(MasterCatalog.MasterIndex masterindex1, MasterCatalog.MasterIndex masterindex2)
+        {
+            if (masterindex2.i == -1 || masterindex1.i == -1)
+                return false;
+            return masterindex1 == masterindex2;
         }
 
         //private void Inventory_CopyItemsFrom_Inventory_Func2(On.RoR2.Inventory.orig_CopyItemsFrom_Inventory_Func2 orig, Inventory self, Inventory other, Func<ItemIndex, bool> filter) {

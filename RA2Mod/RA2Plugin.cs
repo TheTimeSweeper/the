@@ -5,6 +5,7 @@ using RA2Mod.Survivors.Chrono;
 using RA2Mod.Survivors.Conscript;
 using RA2Mod.Survivors.Desolator;
 using RA2Mod.Survivors.GI;
+using RA2Mod.Survivors.MCV;
 using RA2Mod.Survivors.Tesla;
 using System.Security;
 using System.Security.Permissions;
@@ -66,6 +67,7 @@ namespace RA2Mod
             new ChronoSurvivor().Initialize();
             new GISurvivor().Initialize();
             new ConscriptSurvivor().Initialize();
+            new MCVSurvivor().Initialize();
             
             new Modules.ContentPacks().Initialize();
 

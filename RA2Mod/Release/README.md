@@ -114,6 +114,9 @@ ___
 ## Changelog
 see Changelog tab for more  
 
+`3.0.5`
+- fixed all deployables (desolator irradiators, engi mines, everything) being set to the laws of tesla trooper's towers
+
 `3.0.4`
 - added AI for chrono (goobo and vengeance)
 - fixed tesla and deso goobo and vengeance being broken

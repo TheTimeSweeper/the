@@ -9,6 +9,30 @@ using UnityEngine;
 
 namespace RA2Mod.General.SkillDefs
 {
+
+    public abstract class PlayAnimationWhenReadySkillDef : SkillDef
+    {
+        public string animatorBoolParameterName;
+
+        public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
+        {
+            return new InstanceData { animator = skillSlot.characterBody.modelLocator.modelTransform.GetComponent<Animator>()};
+        }
+
+        public class InstanceData : BaseSkillInstanceData
+        {
+            public Animator animator;
+        }
+
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime)
+        {
+            if (!skillSlot.CanExecute())
+            {
+                ((InstanceData)skillSlot.skillInstanceData).animator.SetBool(animatorBoolParameterName, false);
+            }
+        }
+    }
+
     public interface IHasSkillDefComponent<T>
     {
         T componentFromSkillDef1 { get; set; }

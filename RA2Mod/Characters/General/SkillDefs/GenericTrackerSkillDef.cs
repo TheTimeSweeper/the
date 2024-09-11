@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 namespace RA2Mod.General.SkillDefs
 {
+
     public abstract class GenericTrackerSkillDef<T> : HasComponentSkillDef<T> where T : ITracker
     {
         // Token: 0x060045B8 RID: 17848 RVA: 0x00122449 File Offset: 0x00120649
