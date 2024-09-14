@@ -1,5 +1,8 @@
 ## Changelog
 
+`1.2.3`
+- fixed incredible nullref spam from the latest update
+
 `1.2.2`
 - fixed fps issues
 

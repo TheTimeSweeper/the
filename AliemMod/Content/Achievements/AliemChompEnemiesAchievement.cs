@@ -50,12 +50,12 @@ namespace AliemMod.Content.Achievements
                     }
                     if (this._trackedBody != null)
                     {
-                        this._trackedBody.characterMotor.onHitGroundServer -= CharacterMotor_onHitGroundServer;
+                        this._trackedBody.characterMotor.onHitGroundAuthority -= CharacterMotor_onHitGroundAuthority;
                     }
                     this._trackedBody = value;
                     if (this._trackedBody != null)
                     {
-                        this._trackedBody.characterMotor.onHitGroundServer += CharacterMotor_onHitGroundServer;
+                        this._trackedBody.characterMotor.onHitGroundAuthority += CharacterMotor_onHitGroundAuthority;
                         this.progress = 0;
                     }
                 }
@@ -101,7 +101,7 @@ namespace AliemMod.Content.Achievements
                 }
             }
 
-            private void CharacterMotor_onHitGroundServer(ref CharacterMotor.HitGroundInfo hitGroundInfo)
+            private void CharacterMotor_onHitGroundAuthority(ref CharacterMotor.HitGroundInfo hitGroundInfo)
             {
                 if (EntityStateMachine.FindByCustomName(_trackedBody.gameObject, "Body").state is ModdedEntityStates.Aliem.AliemRidingState)
                 {
