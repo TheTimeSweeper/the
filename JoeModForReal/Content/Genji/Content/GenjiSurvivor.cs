@@ -34,7 +34,7 @@ namespace JoeModForReal.Content.Survivors {
             subtitleNameToken = GENJI_PREFIX + "SUBTITLE",
             sortPosition = 69.6f,
 
-            characterPortrait = Modules.Assets.LoadCharacterIcon("texIconWeeb"),
+            characterPortrait = Modules.Asset.LoadCharacterIcon("texIconWeeb"),
             bodyColor = Color.green,
 
             crosshair = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/SimpleDotCrosshair"),
@@ -66,6 +66,9 @@ namespace JoeModForReal.Content.Survivors {
         public static SteppedSkillDef swingBladeSkillDef;
 
         public override void Initialize() {
+
+            if (!Config.Cursed.Value)
+                return;
 
             GenjiConfig.Init();
             GenjiProjectiles.Init();
@@ -155,7 +158,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("GenjiShuriken",
                                  GENJI_PREFIX + "PRIMARY_SHURIKEN_NAME",
                                  GENJI_PREFIX + "PRIMARY_SHURIKEN_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(ThrowShuriken)),
                                  "Weapon",
                                  true));
@@ -164,7 +167,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("GenjiShurikenAlt",
                                  GENJI_PREFIX + "PRIMARY_SHURIKENALT_NAME",
                                  GENJI_PREFIX + "PRIMARY_SHURIKENALT_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
                                  new EntityStates.SerializableEntityStateType(typeof(ThrowShurikenAlt)),
                                  "Weapon",
                                  true));
@@ -187,7 +190,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = GENJI_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = GENJI_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillDescriptionToken = GENJI_PREFIX + "SECONDARY_FIREBALL_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSecondary"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Deflect)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -216,7 +219,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = GENJI_PREFIX + "UTILITY_DASH_NAME",
                 skillNameToken = GENJI_PREFIX + "UTILITY_DASH_NAME",
                 skillDescriptionToken = GENJI_PREFIX + "UTILITY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconUtility"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconUtility"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Genji.Dash)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -244,7 +247,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = GENJI_PREFIX + "SPECIAL_DRAGONBLADE_NAME",
                 skillNameToken = GENJI_PREFIX + "SPECIAL_DRAGONBLADE_NAME",
                 skillDescriptionToken = GENJI_PREFIX + "SPECIAL_DRAGONBLADE_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSpecial"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(DragonBlade)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -270,7 +273,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("Onion",
                                  GENJI_PREFIX + "SPECIAL_SWINGBLADE_NAME",
                                  GENJI_PREFIX + "SPECIAL_SWINGBLADE_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(SwingBlade)),
                                  "Weapon",
                                  true));
@@ -302,7 +305,7 @@ namespace JoeModForReal.Content.Survivors {
             
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
-                Assets.LoadAsset<Sprite>("texiconSkinDefault"),
+                Asset.LoadAsset<Sprite>("texiconSkinDefault"),
                 defaultRenderers,
                 model);
 

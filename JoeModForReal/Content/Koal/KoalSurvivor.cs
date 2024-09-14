@@ -294,7 +294,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo(KOAL_PREFIX + "koalswingPrimary",
                                  KOAL_PREFIX + "PRIMARY_KOAL_NAME",
                                  KOAL_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Koal.KoalPrimary11)),
                                  "Weapon",
                                  true));
@@ -309,7 +309,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = KOAL_PREFIX + "koalSwingSecondary",
                 skillNameToken = KOAL_PREFIX + "SECONDARY_KOAL_NAME",
                 skillDescriptionToken = KOAL_PREFIX + "SECONDARY_KOAL_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Koal.KoalSecondary11)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 2,
@@ -343,7 +343,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = KOAL_PREFIX + "UTILITY_DASH_NAME",
                 skillNameToken = KOAL_PREFIX + "UTILITY_DASH_NAME",
                 skillDescriptionToken = KOAL_PREFIX + "UTILITY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconUtility"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconUtility"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Utility1Dash)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -371,7 +371,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = KOAL_PREFIX + "SPECIAL_TENTICLES_NAME",
                 skillNameToken = KOAL_PREFIX + "SPECIAL_TENTICLES_NAME",
                 skillDescriptionToken = KOAL_PREFIX + "SPECIAL_TENTICLES_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSpecial"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Special1Tenticles)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -407,7 +407,7 @@ namespace JoeModForReal.Content.Survivors {
 
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
-                Assets.LoadAsset<Sprite>("texiconSkinDefault"),
+                Asset.LoadAsset<Sprite>("texiconSkinDefault"),
                 defaultRenderers,
                 model);
 

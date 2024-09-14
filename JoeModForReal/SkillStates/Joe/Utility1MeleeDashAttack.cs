@@ -94,8 +94,8 @@ namespace ModdedEntityStates.Joe {
 
         private void ResetOverlap() {
             
-            this._attack = base.InitMeleeOverlap(chargedDamage, Modules.Assets.MercImpactEffect, modelLocator.modelTransform, "dash");
-            _attack.impactSound = Modules.Assets.FleshSliceSound.index;
+            this._attack = base.InitMeleeOverlap(chargedDamage, Modules.Asset.MercImpactEffect, modelLocator.modelTransform, "dash");
+            _attack.impactSound = Modules.Asset.FleshSliceSound.index;
             R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 

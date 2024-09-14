@@ -19,7 +19,7 @@ namespace JoeModForReal {
     public class FacelessJoePlugin : BaseUnityPlugin {
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
         public const string MODNAME = "Faceless Joe";
-        public const string MODVERSION = "69.0.0";
+        public const string MODVERSION = "0.2.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEV_PREFIX = "HABIBI";
@@ -27,7 +27,8 @@ namespace JoeModForReal {
         public static FacelessJoePlugin instance;
         public static ManualLogSource Log;
 
-        public static bool andrew = true;
+        //gnome would debug/prototype character stuff on a blank character called andrew
+        public static bool andrew = false;
 
         void Awake() {
 
@@ -42,33 +43,6 @@ namespace JoeModForReal {
 
             if (Modules.Config.Debug)
                 Modules.Tokens.GenerateTokens();
-
-            //On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
-
-            On.RoR2.SurvivorCatalog.SetSurvivorDefs += SurvivorCatalog_SetSurvivorDefs;
-        }
-
-        private void SurvivorCatalog_SetSurvivorDefs(On.RoR2.SurvivorCatalog.orig_SetSurvivorDefs orig, SurvivorDef[] newSurvivorDefs) {
-            orig(newSurvivorDefs);
-            RoR2.Skills.SkillDef tap = null;
-            for (int i = 0; i < newSurvivorDefs.Length; i++) {
-                if (newSurvivorDefs[i].cachedName.Contains("Commando")) {
-                    tap = newSurvivorDefs[i].bodyPrefab.GetComponent<SkillLocator>().primary.skillFamily.defaultSkillDef;
-                }
-            }
-            if (tap == null)
-                Log.LogWarning("no commando lol");
-
-            bool found = false;
-            for (int i = 0; i < newSurvivorDefs.Length; i++) {
-                if (newSurvivorDefs[i].bodyPrefab.name.Contains("avager")) {
-                    found = true;
-                    Modules.Skills.AddPrimarySkills(newSurvivorDefs[i].bodyPrefab, tap);
-
-                }
-            }
-
-            Log.LogWarning(found);
         }
 
         private void Start() {
@@ -78,30 +52,29 @@ namespace JoeModForReal {
             if (Modules.Config.Debug)
                 gameObject.AddComponent<TestValueManager>();
 
-            Modules.SoundBanks.Init();
-
             Modules.DamageTypes.RegisterDamageTypes();
 
-            Modules.Assets.Initialize();
+            Modules.Asset.Initialize();
             Modules.Projectiles.Init();
             Modules.EntityStates.Init();
-
-            Modules.Compat.Initialize();
 
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
             Modules.Dots.RegisterDots();
 
-            Modules.Assets.LateInitialize();
+            Modules.Asset.LateInitialize();
 
             new Modules.ContentPacks().Initialize();
 
             new JoeSurivor().Initialize();
 
+            new GenjiSurvivor().Initialize();
+
+            Modules.Compat.Initialize();
+
             if (andrew) {
-                //new KoalSurvivor().Initialize();
-                new GenjiSurvivor().Initialize();
+                new KoalSurvivor().Initialize();
                 Logger.LogError("ANDREW IS TRUE. DO NOT RELEASE");
             }
 

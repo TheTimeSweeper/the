@@ -40,7 +40,7 @@ namespace JoeModForReal.Content.Survivors {
 			data.ultimateBuildup.OnDamageForUltimate -= data.buildDamage;
 		}
 
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime) {
 			RunRechargeWithoutTheRecharge(skillSlot);
 			return;
         }

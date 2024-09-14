@@ -15,14 +15,13 @@ namespace ModdedEntityStates.Joe {
             }
 
             base.FireAttack();
-
         }
 
         private void FireSwordBeamAuthority() {
 
             Ray aimRay = base.GetAimRay();
 
-            Util.PlaySound("play_joe_loz_swordShoot", gameObject);
+            //Util.PlaySound("play_joe_loz_swordShoot", gameObject);
 
             ProjectileManager.instance.FireProjectile(Modules.Projectiles.JoeSwordBeam,
                 aimRay.origin,

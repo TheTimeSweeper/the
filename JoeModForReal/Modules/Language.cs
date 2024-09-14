@@ -2,6 +2,7 @@
 using Zio.FileSystems;
 using System.Linq;
 using System;
+using R2API;
 
 namespace Modules {
 
@@ -13,13 +14,25 @@ namespace Modules {
 
         internal static string TokensOutput = "";
 
-        public static void PrintOutput(string preface = "") {
-            Helpers.LogWarning($"{preface}\n{{\n    strings:\n    {{{TokensOutput}\n    }}\n}}");
-            TokensOutput = "";
+        public static bool printingEnabled;
+
+        public static void PrintOutput(string preface = "")
+        {
+            if (printingEnabled)
+            {
+                Helpers.LogWarning($"{preface}\n{{\n    strings:\n    {{{TokensOutput}\n    }}\n}}");
+                TokensOutput = "";
+            }
         }
 
         public static void Add(string token, string text) {
-            Language.TokensOutput += $"\n    \"{token}\" : \"{text.Replace(Environment.NewLine, "\\n").Replace("\n", "\\n")}\",";
+
+            LanguageAPI.Add(token, text, "en");
+
+            if (printingEnabled)
+            {
+                Language.TokensOutput += $"\n    \"{token}\" : \"{text.Replace(Environment.NewLine, "\\n").Replace("\n", "\\n")}\",";
+            }
         }
 
         public static void HookRegisterLanguageTokens() {

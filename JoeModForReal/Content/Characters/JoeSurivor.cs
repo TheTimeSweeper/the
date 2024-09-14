@@ -28,7 +28,7 @@ namespace JoeModForReal.Content.Survivors {
             subtitleNameToken = JOE_PREFIX + "SUBTITLE",
             sortPosition = 69,
 
-            characterPortrait = Modules.Assets.LoadCharacterIcon("joe_icon"),
+            characterPortrait = Modules.Asset.LoadCharacterIcon("joe_icon"),
             bodyColor = Color.magenta,
 
             crosshair = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Crosshair/SimpleDotCrosshair"),
@@ -85,7 +85,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SECONDARY_FIREBALL_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSecondary"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Secondary1Fireball)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -162,14 +162,14 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("JoeSwing",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1Swing)),
                                  "Weapon",
                                  true));
             primarySkillDef.stepCount = 2;
             primarySkillDef.stepGraceDuration = 1.2f;
 
-            primarySkillDef.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
+            primarySkillDef.ConditionalIcon = Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
             primarySkillDef.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
             primarySkillDef.ConditionalRequriedStock = 0;
             primarySkillDef.LookingDownAngle = 42;
@@ -180,7 +180,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("JoeSwingClassic",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME_CLASSIC",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimary"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryStupidSwing)),
                                  "Weapon",
                                  true) {
@@ -189,12 +189,12 @@ namespace JoeModForReal.Content.Survivors {
             primarySkillDefSilly.stepCount = 2;
             primarySkillDefSilly.stepGraceDuration = 1;
 
-            primarySkillDefSilly.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
+            primarySkillDefSilly.ConditionalIcon = Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing");
             primarySkillDefSilly.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Primary1JumpSwingFall));
             primarySkillDefSilly.ConditionalRequriedStock = 0;
             primarySkillDefSilly.LookingDownAngle = 42;
 
-            if (Modules.Config.Cursed) {
+            if (Modules.Config.Cursed.Value) {
                 Modules.Skills.AddPrimarySkills(bodyPrefab, primarySkillDefSilly);
             }
 
@@ -219,7 +219,7 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("koalswing",
                                  JOE_PREFIX + "PRIMARY_KOAL_NAME",
                                  JOE_PREFIX + "PRIMARY_KOAL_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.KoalCombo)),
                                  "Weapon",
                                  true));
@@ -239,7 +239,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillNameToken = JOE_PREFIX + "SECONDARY_FIREBALL_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SECONDARY_FIREBALL_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSecondary"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconSecondary"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.Secondary1Fireball)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -267,7 +267,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = JOE_PREFIX + "koalswingSecondary",
                 skillNameToken = JOE_PREFIX + "SECONDARY_KOAL_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SECONDARY_KOAL_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconPrimaryJumpSwing"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.KoalCombo2)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 2,
@@ -304,7 +304,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = JOE_PREFIX + "UTILITY_DASH_NAME",
                 skillNameToken = JOE_PREFIX + "UTILITY_DASH_NAME",
                 skillDescriptionToken = JOE_PREFIX + "UTILITY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconUtility"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconUtility"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Utility1Dash)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -332,7 +332,7 @@ namespace JoeModForReal.Content.Survivors {
                 skillName = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
                 skillNameToken = JOE_PREFIX + "SPECIAL_TENTICLES_NAME",
                 skillDescriptionToken = JOE_PREFIX + "SPECIAL_TENTICLES_DESCRIPTION",
-                skillIcon = Modules.Assets.LoadAsset<Sprite>("texIconSpecial"),
+                skillIcon = Modules.Asset.LoadAsset<Sprite>("texIconSpecial"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Special1Tenticles)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -363,20 +363,20 @@ namespace JoeModForReal.Content.Survivors {
                 new SkillDefInfo("JoeSwing",
                                  JOE_PREFIX + "PRIMARY_SWING_NAME",
                                  JOE_PREFIX + "PRIMARY_SWING_DESCRIPTION",
-                                 Modules.Assets.LoadAsset<Sprite>("texIconScepterPrimary"),
+                                 Modules.Asset.LoadAsset<Sprite>("texIconScepterPrimary"),
                                  new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryScepter1Swing)),
                                  "Weapon",
                                  true));
             primarySkillDef.stepCount = 2;
             primarySkillDef.stepGraceDuration = 1.2f;
 
-            primarySkillDef.ConditionalIcon = Modules.Assets.LoadAsset<Sprite>("texIconScepterPrimaryJumpSwing");
+            primarySkillDef.ConditionalIcon = Modules.Asset.LoadAsset<Sprite>("texIconScepterPrimaryJumpSwing");
             primarySkillDef.ConditionalState = new EntityStates.SerializableEntityStateType(typeof(ModdedEntityStates.Joe.PrimaryScepter1JumpSwingFall));
             primarySkillDef.ConditionalRequriedStock = 0;
             primarySkillDef.LookingDownAngle = 42;
 
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(primarySkillDef, "JoeBody", SkillSlot.Primary, 0);
-            if (Config.Cursed) {
+            if (Config.Cursed.Value) {
                 AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(primarySkillDef, "JoeBody", SkillSlot.Primary, 1);
             }
         }
@@ -395,7 +395,7 @@ namespace JoeModForReal.Content.Survivors {
             
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef("DEFAULT_SKIN",
-                Assets.LoadAsset<Sprite>("texiconSkinDefault"),
+                Asset.LoadAsset<Sprite>("texiconSkinDefault"),
                 defaultRenderers,
                 model);
 

@@ -87,8 +87,8 @@ namespace ModdedEntityStates.Genji {
 
         private void ResetOverlap() {
 
-            this._attack = base.InitMeleeOverlap(damageCoefficient, Modules.Assets.MercImpactEffect, modelLocator.modelTransform, "dash");
-            _attack.impactSound = Modules.Assets.FleshSliceSound.index;
+            this._attack = base.InitMeleeOverlap(damageCoefficient, Modules.Asset.MercImpactEffect, modelLocator.modelTransform, "dash");
+            _attack.impactSound = Modules.Asset.FleshSliceSound.index;
             //R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 

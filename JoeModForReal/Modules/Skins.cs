@@ -174,7 +174,7 @@ namespace Modules
                 meshReplacements.Add(
                 new SkinDef.MeshReplacement {
                     renderer = rendererinfos[i].renderer,
-                    mesh = Assets.LoadAsset<Mesh>(meshes[i])
+                    mesh = Asset.LoadAsset<Mesh>(meshes[i])
                 });
             }
 

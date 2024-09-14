@@ -35,10 +35,10 @@ namespace ModdedEntityStates.Genji {
             base.swingSoundString = "";//"play_joe_whoosh";
             base.hitSoundString = "";
             base.muzzleString = "notMercSlash";// swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
-            base.swingEffectPrefab = Modules.Assets.MercSwordSlash;
-            base.hitEffectPrefab = Modules.Assets.MercImpactEffect;// Modules.Assets.swordHitImpactEffect;
+            base.swingEffectPrefab = Modules.Asset.MercSwordSlash;
+            base.hitEffectPrefab = Modules.Asset.MercImpactEffect;// Modules.Assets.swordHitImpactEffect;
 
-            base.impactSound = Modules.Assets.FleshSliceSound.index;
+            base.impactSound = Modules.Asset.FleshSliceSound.index;
         }
 
         public override void FixedUpdate() {

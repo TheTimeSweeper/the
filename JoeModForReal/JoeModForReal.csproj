@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
 
@@ -10,10 +10,10 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="BepInEx.Core" Version="5.4.19" />
-		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.0" />
-		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
-		<PackageReference Include="MMHOOK.RoR2" Version="2022.9.20">
+		<PackageReference Include="BepInEx.Core" Version="5.*" />
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.2-r.1" />
+		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
+		<PackageReference Include="MMHOOK.RoR2" Version="2024.9.5">
 			<NoWarn>NU1701</NoWarn>
 		</PackageReference>
 
@@ -42,6 +42,6 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\joe&quot; &quot;$(ProjectDir)\Release\plugins\AssetBundles&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\JoeWwise\GeneratedSoundBanks\Windows\joe.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Faceless_Joe&quot;&#xD;&#xA;" />
+	  <Exec Command="if &quot;$(Username)&quot; == &quot;Erikbir&quot; copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)\Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)\Release\plugins\AssetBundles\joe&quot; ( del &quot;$(ProjectDir)\Release\plugins\AssetBundles\joe&quot;)&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\joee&quot; &quot;$(ProjectDir)\Release\plugins\AssetBundles&quot;&#xD;&#xA;ren &quot;$(ProjectDir)\Release\plugins\AssetBundles\joee&quot; joe&#xD;&#xA;if exist &quot;$(ProjectDir)\Release\plugins\SoundBanks\joe.sound&quot; ( del &quot;$(ProjectDir)\Release\plugins\SoundBanks\joe.sound&quot;)&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\JoeWwise\GeneratedSoundBanks\Windows\joe.bnk&quot; &quot;$(ProjectDir)\Release\plugins\SoundBanks&quot;&#xD;&#xA;ren &quot;$(ProjectDir)\Release\plugins\SoundBanks\joe.bnk&quot; joe.sound&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; Xcopy /E /I /Y &quot;$(ProjectDir)\Release\plugins&quot; &quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Faceless_Joe&quot;&#xD;&#xA;" />
 	</Target>
 </Project>

@@ -19,7 +19,7 @@ namespace JoeModForReal.Content.Survivors {
             UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileSteerTowardTarget>());
             UnityEngine.Object.Destroy(shuriken.GetComponent<ProjectileTargetComponent>());
 
-            shuriken.GetComponent<ProjectileController>().ghostPrefab = Assets.LoadAsset<GameObject>("GenjiProjectileGhostOW1Shuriken");
+            shuriken.GetComponent<ProjectileController>().ghostPrefab = Asset.LoadAsset<GameObject>("GenjiProjectileGhostOW1Shuriken");
 
             return shuriken;
         }

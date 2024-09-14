@@ -13,7 +13,7 @@ namespace Modules
     {
         public static bool Debug;
 
-        public static bool Cursed;
+        public static ConfigEntry<bool> Cursed;
 
         public static ConfigEntry<bool> jerry;
 
@@ -44,13 +44,13 @@ namespace Modules
                 sectionGeneral,
                 "Cursed",
                 false,
-                "Enable wip/unused content").Value;
+                "Enable wip/unused content");
 
             jerry =
                 BindAndOptions(
                     sectionGeneral,
                     "Everyone is Jerry",
-                    true,
+                    false,
                     "When anyone dies, the Jerry scream is heard.");
 
             #region fuck

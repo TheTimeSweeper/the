@@ -26,14 +26,14 @@ namespace Modules {
 
         private static GameObject CreateJoeSwordBeam() {
             
-            GameObject prefab = Assets.LoadAsset<GameObject>("SwordBeam");
+            GameObject prefab = Asset.LoadAsset<GameObject>("SwordBeam");
 
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = prefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             damageTypeComponent.Add(DamageTypes.TenticleLifeStealing);
 
             GameObject ghostPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/EvisProjectile").GetComponent<ProjectileController>().ghostPrefab;
             ghostPrefab = PrefabAPI.InstantiateClone(ghostPrefab, "JoeGreenEvisProjectile", false);
-            Modules.Assets.recolorEffects(Color.green, ghostPrefab);
+            Modules.Asset.recolorEffects(Color.green, ghostPrefab);
 
             prefab.GetComponent<ProjectileController>().ghostPrefab = ghostPrefab;
 
@@ -46,7 +46,7 @@ namespace Modules {
 
         public static GameObject LoadAndRegisterProjectileAsIs(string assName) {
 
-            GameObject prefab = Assets.LoadAsset<GameObject>(assName);
+            GameObject prefab = Asset.LoadAsset<GameObject>(assName);
             R2API.PrefabAPI.RegisterNetworkPrefab(prefab);
 
             Content.AddProjectilePrefab(prefab);

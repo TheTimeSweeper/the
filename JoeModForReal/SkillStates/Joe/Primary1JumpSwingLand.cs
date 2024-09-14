@@ -42,10 +42,10 @@ namespace ModdedEntityStates.Joe {
             base.swingSoundString = "play_joe_priAtt2tower";
             base.hitSoundString = "";
             base.muzzleString = "JumpSwingMuzzle";
-            base.swingEffectPrefab = Modules.Assets.JoeJumpSwingEffect;
-            base.hitEffectPrefab = Modules.Assets.MercImpactEffect; 
+            base.swingEffectPrefab = Modules.Asset.JoeJumpSwingEffect;
+            base.hitEffectPrefab = Modules.Asset.MercImpactEffect; 
 
-            base.impactSound = Modules.Assets.FleshSliceSound.index;
+            base.impactSound = Modules.Asset.FleshSliceSound.index;
         }
 
         public override void FixedUpdate() {

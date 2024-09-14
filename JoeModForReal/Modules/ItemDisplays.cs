@@ -11,17 +11,18 @@ namespace Modules
         private static bool recording = false;
         public static Dictionary<string, int> itemDisplayCheckCount = new Dictionary<string, int>();
         public static Dictionary<string, Object> itemDisplayCheckAsset = new Dictionary<string, Object>();
+        public static Dictionary<string, Object> KeyAssets = new Dictionary<string, Object>();
 
         public static void PopulateDisplays()
         {
-            PopulateDisplaysFromBody("MercBody");
-
+            PopulateDisplaysFromBody("LoaderBody");
+            
             //AddCustomLightningArm();
             AddMasterSwordDisplay();
         }
 
         private static void AddMasterSwordDisplay() {
-            GameObject display = Assets.LoadAsset<GameObject>("displayMasterSword");
+            GameObject display = Asset.LoadAsset<GameObject>("displayMasterSword");
             display.GetComponent<Renderer>().material.SetHotpooMaterial();
             itemDisplayPrefabs["displaymastersword"] = display;
         }
@@ -39,6 +40,7 @@ namespace Modules
             for (int i = 0; i < itemRuleGroups.Length; i++)
             {
                 ItemDisplayRule[] rules = itemRuleGroups[i].displayRuleGroup.rules;
+                KeyAssets[itemRuleGroups[i].keyAsset.name] = itemRuleGroups[i].keyAsset;
 
                 for (int j = 0; j < rules.Length; j++)
                 {

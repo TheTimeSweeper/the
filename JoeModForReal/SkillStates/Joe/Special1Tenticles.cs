@@ -16,7 +16,7 @@ namespace ModdedEntityStates.Joe {
 
             InitDurationValues(BaseDuration, 0);
             if (NetworkServer.active) {
-                GameObject gameObject = Object.Instantiate(Modules.Assets.TenticlesSpelledWrong, transform.position, Quaternion.identity);
+                GameObject gameObject = Object.Instantiate(Modules.Asset.TenticlesSpelledWrong, transform.position, Quaternion.identity);
                 gameObject.GetComponent<TeamFilter>().teamIndex = characterBody.teamComponent.teamIndex;
                 //gameObject.GetComponent<BuffWard>().Networkradius = 8f + 8f * (float)itemCount;
                 NetworkServer.Spawn(gameObject);

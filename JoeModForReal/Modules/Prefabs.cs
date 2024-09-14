@@ -15,7 +15,7 @@ namespace Modules {
 
         public static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
-            GameObject model = Assets.LoadSurvivorModel(displayModelName);
+            GameObject model = Asset.LoadSurvivorModel(displayModelName);
 
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
             if (!characterModel) {
@@ -23,7 +23,7 @@ namespace Modules {
             }
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(model);
+            Modules.Asset.ConvertAllRenderersToHopooShader(model);
 
             return model.gameObject;
         }
@@ -42,7 +42,7 @@ namespace Modules {
             GameObject newModel = null;
             if (modelName != "mdl")
             {
-                newModel = Assets.LoadSurvivorModel(modelName);
+                newModel = Asset.LoadSurvivorModel(modelName);
                 //if load fails, just use body from the clone
                 if (newModel == null) 
                     newModel = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
@@ -196,7 +196,7 @@ namespace Modules {
 
             characterModel.autoPopulateLightInfos = true;
             characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+            characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
 
             if (!preattached) {
                 SetupCustomRendererInfos(characterModel, customInfos);

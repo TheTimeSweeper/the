@@ -117,7 +117,7 @@ namespace JoeModForReal.Content {
 
             ComboRecipeCooker.ComboRecipe comboRecipe = _comboRecipeCooker.GetCombo(instanceData.comboHistory);
             if (comboRecipe != null) {
-                entityState = EntityStateCatalog.InstantiateState(comboRecipe.resultSkillDef.activationState);
+                entityState = EntityStateCatalog.InstantiateState(ref comboRecipe.resultSkillDef.activationState);
 
                 if (comboRecipe.resetComboHistory) {
 
@@ -178,8 +178,8 @@ namespace JoeModForReal.Content {
         }
 
         // Token: 0x06004621 RID: 17953 RVA: 0x001228F8 File Offset: 0x00120AF8
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {
-            base.OnFixedUpdate(skillSlot);
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime) {
+            base.OnFixedUpdate(skillSlot, deltaTime);
             if (skillSlot.CanExecute()) {
                 this._comboResetTimer += Time.fixedDeltaTime;
             } else {

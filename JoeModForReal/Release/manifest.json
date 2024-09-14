@@ -1,14 +1,17 @@
 {
-    "name": "Faceless_Joe",
-    "version_number": "0.1.0",
-    "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "A fast-paced in-your-face melee character. Personal guy I did just for fun",
-    "dependencies": [
-        "bbepis-BepInExPack-5.4.2101",
-        "RiskofThunder-R2API_Core-5.0.3",
-        "RiskofThunder-R2API_Prefab-1.0.1",
-        "RiskofThunder-R2API_Unlockable-1.0.0",
-        "RiskofThunder-R2API_RecalculateStats-1.0.0",
-        "RiskofThunder-R2API_DamageType-1.0.0"
-    ]
+  "author": "TheTimesweeper",
+  "name": "Faceless_Joe",
+  "version_number": "0.2.0",
+  "website_url": "https://github.com/TheTimeSweeper/the",
+  "description": "A fast-paced in-your-face melee character. Personal guy I did just for fun",
+  "dependencies": [
+    "bbepis-BepInExPack-5.4.2101",
+    "RiskofThunder-R2API_Core-5.0.3",
+    "RiskofThunder-R2API_Prefab-1.0.1",
+    "RiskofThunder-R2API_Unlockable-1.0.0",
+    "RiskofThunder-R2API_RecalculateStats-1.0.0",
+    "RiskofThunder-R2API_DamageType-1.0.0",
+    "RiskofThunder-R2API_Language-1.0.0",
+    "RiskofThunder-R2API_Sound-1.0.0"
+  ]
 }

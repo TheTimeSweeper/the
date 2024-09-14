@@ -162,8 +162,8 @@ namespace JoeModForReal.Content {
         }
 
         // Token: 0x06004621 RID: 17953 RVA: 0x001228F8 File Offset: 0x00120AF8
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {
-            base.OnFixedUpdate(skillSlot);
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime) {
+            base.OnFixedUpdate(skillSlot, deltaTime);
             if (skillSlot.CanExecute()) {
                 this.stepResetTimer += Time.fixedDeltaTime;
             } else {

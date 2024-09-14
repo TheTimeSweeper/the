@@ -17,7 +17,7 @@ namespace ModdedEntityStates.Genji {
         private DeflectAttackReceiver _deflectAttackReceiver;
         private GameObject _deflectHitbox;
         private ChildLocator _childLocator;
-        TemporaryOverlay _temporaryOverlay;
+        TemporaryOverlayInstance _temporaryOverlay;
         
         public override void OnEnter() {
             base.OnEnter();
@@ -42,22 +42,22 @@ namespace ModdedEntityStates.Genji {
 
             CharacterModel characterModel = base.GetModelTransform().GetComponent<CharacterModel>();
 
-            _temporaryOverlay = base.gameObject.AddComponent<TemporaryOverlay>();
+            _temporaryOverlay = TemporaryOverlayManager.AddOverlay(characterModel.gameObject);
             _temporaryOverlay.duration = Duration;
             _temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matIsShocked");
-            _temporaryOverlay.AddToCharacerModel(characterModel);
+            _temporaryOverlay.AddToCharacterModel(characterModel);
         }
 
         public override void FixedUpdate() {
             base.FixedUpdate();
 
             DeflectProjectiles();
-
+            
             if(fixedAge > Duration) {
                 outer.SetNextStateToMain();
             }
         }
-
+        
         public override void OnExit() {
             base.OnExit();
             //this can probably go wrong...
@@ -74,8 +74,8 @@ namespace ModdedEntityStates.Genji {
                 _deflectHitbox.SetActive(false);
             }
 
-            if (_temporaryOverlay) {
-                Destroy(_temporaryOverlay);
+            if (_temporaryOverlay!= null) {
+                _temporaryOverlay.Destroy();
             }
         }
 

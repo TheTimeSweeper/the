@@ -15,7 +15,7 @@ namespace Modules {
         public override string AchievementDescToken { get => AchievementTokenPrefix + "UNLOCKABLE_ACHIEVEMENT_DESC"; }
         public override string UnlockableNameToken { get => AchievementTokenPrefix + "UNLOCKABLE_UNLOCKABLE_NAME"; }
 
-        public override Sprite Sprite => Assets.LoadAsset<Sprite>(AchievementSpriteName);
+        public override Sprite Sprite => Asset.LoadAsset<Sprite>(AchievementSpriteName);
 
         public override Func<string> GetHowToUnlock {
             get => () => RoR2.Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]

@@ -38,8 +38,8 @@ namespace JoeModForReal.Content {
 
         protected bool conditionMet;
 
-        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot) {
-            base.OnFixedUpdate(skillSlot);
+        public override void OnFixedUpdate([NotNull] GenericSkill skillSlot, float deltaTime) {
+            base.OnFixedUpdate(skillSlot, deltaTime);
 
             conditionMet = CheckCondition(skillSlot);
         }
