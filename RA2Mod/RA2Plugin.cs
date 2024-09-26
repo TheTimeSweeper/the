@@ -7,6 +7,7 @@ using RA2Mod.Survivors.Desolator;
 using RA2Mod.Survivors.GI;
 using RA2Mod.Survivors.MCV;
 using RA2Mod.Survivors.Tesla;
+using System;
 using System.Security;
 using System.Security.Permissions;
 
@@ -46,6 +47,8 @@ namespace RA2Mod
 
         void Awake()
         {
+            Log.Error(instance.Info);
+
             instance = this;
             Log.Init(Logger);
 

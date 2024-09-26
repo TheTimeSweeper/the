@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{63A7B6F0-05EB-4030-AA05-02A1AAD56B06}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="Sounds" ID="{607C3D98-3F18-4485-BBEA-ECD7CB84893B}" ShortID="717943587">
+					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Attenuation">
+							<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+						</Reference>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<ActorMixer Name="SFX" ID="{2286FE3D-AD23-450A-A9A3-01532BD63C6A}" ShortID="39168867">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{79C613D7-1A41-46D6-B2E0-943D0C9A12E5}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="76"/>
+													<Property Name="Min" Type="Real64" Value="-76"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="fleshSlice" ID="{4C78E493-C19E-4C41-99A8-94E81D74406B}" ShortID="553738284">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{74F989F1-D3F4-4664-B2B3-4491E4C68D67}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="152"/>
+															<Property Name="Min" Type="Real64" Value="-202"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="fleshSlice" ID="{6700F640-3CC7-421B-BFA6-33B2F6B51D5C}">
+											<Language>SFX</Language>
+											<AudioFile>fleshSlice.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="81013995"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="fleshSlice" ID="{6700F640-3CC7-421B-BFA6-33B2F6B51D5C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<RandomSequenceContainer Name="whoosh" ID="{391A2187-1192-4EA8-9644-9314287F2C17}" ShortID="894028040">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="whoosh1" ID="{48A34C74-8CE6-41FC-B4E9-A006AA0176D3}" ShortID="296776766">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="whoosh1" ID="{27A6E174-2134-4382-A7DE-95AAE114AE90}">
+													<Language>SFX</Language>
+													<AudioFile>whoosh1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="700223451"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="whoosh1" ID="{27A6E174-2134-4382-A7DE-95AAE114AE90}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="whoosh2" ID="{458BC242-09FA-4DAE-8672-9418814FDA00}" ShortID="922948628">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="whoosh2" ID="{2D98ABBF-2AC8-4F01-9430-CD8B4B1B6330}">
+													<Language>SFX</Language>
+													<AudioFile>whoosh2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="188392812"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="whoosh2" ID="{2D98ABBF-2AC8-4F01-9430-CD8B4B1B6330}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="whoosh3" ID="{40E48A5F-4307-4094-A1CE-896DA9006AD4}" ShortID="88360428">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="whoosh3" ID="{90365EB5-933A-4E61-97F2-158055E17C18}">
+													<Language>SFX</Language>
+													<AudioFile>whoosh3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="120560998"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="whoosh3" ID="{90365EB5-933A-4E61-97F2-158055E17C18}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="whoosh5" ID="{536CBE9C-C171-4B0D-B57F-8ABF7F8D573E}" ShortID="577176326">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="whoosh5" ID="{D30F3BF1-5102-4285-8467-5247E6D35C6E}">
+													<Language>SFX</Language>
+													<AudioFile>whoosh5.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="218245423"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="whoosh5" ID="{D30F3BF1-5102-4285-8467-5247E6D35C6E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="whoosh4" ID="{159C05B6-14A9-43E0-93D1-A8BD78AF781B}" ShortID="162307774">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="whoosh4" ID="{A07DDF83-3F54-41CC-88C0-4972BD9A8C47}">
+													<Language>SFX</Language>
+													<AudioFile>whoosh4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="742685232"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="whoosh4" ID="{A07DDF83-3F54-41CC-88C0-4972BD9A8C47}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="jerryDeath" ID="{6A54D3DF-25C5-40CA-9B15-58906BE89554}" ShortID="11323839">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="JerryDeath3" ID="{193E5C98-E1B6-4834-B8F8-3A045D071652}" ShortID="813016816">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>2</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath3" ID="{B2B0A1A5-1A56-45F6-B3F4-4E7066EDBF26}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="577083552"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath3" ID="{B2B0A1A5-1A56-45F6-B3F4-4E7066EDBF26}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath1" ID="{4B4BF222-27F8-418E-BC21-4D33B0A9C06F}" ShortID="129785330">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath1" ID="{F65DF090-DD3A-4121-BE89-AD36CF64F5AB}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1064628591"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath1" ID="{F65DF090-DD3A-4121-BE89-AD36CF64F5AB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath2" ID="{9D47F99B-CC3B-413C-A506-4D78B7F56273}" ShortID="671787891">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath2" ID="{9F15DF77-A513-46E4-8E6D-44FC669A4EE5}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="369113512"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath2" ID="{9F15DF77-A513-46E4-8E6D-44FC669A4EE5}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath5" ID="{EF5D6D44-233F-4951-95A0-B2C874538B65}" ShortID="877262125">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath5" ID="{9BF1DB2E-E234-4F6E-B2FD-873980726F23}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath5.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="768397448"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath5" ID="{9BF1DB2E-E234-4F6E-B2FD-873980726F23}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath6" ID="{4A6A665E-FCF6-4D3A-BD6A-941C0F173AC3}" ShortID="351915276">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath6" ID="{FB6219B1-FC2A-4B27-A96E-E1505828816C}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath6.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="155760387"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath6" ID="{FB6219B1-FC2A-4B27-A96E-E1505828816C}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath4" ID="{43FEAD08-D3CF-4F80-A7FD-E557F138D5B7}" ShortID="325879193">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath4" ID="{1FC3DCA5-2D50-41D8-84A7-16568376C5A8}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath4.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="374162746"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath4" ID="{1FC3DCA5-2D50-41D8-84A7-16568376C5A8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath8" ID="{28D08008-F85F-4AB6-A5BD-CE9648C61092}" ShortID="1045825299">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath8" ID="{BA2415D3-3B47-43DE-A6CC-0AC36E1C17DF}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath8.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="40129160"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath8" ID="{BA2415D3-3B47-43DE-A6CC-0AC36E1C17DF}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath9" ID="{0D549A97-C824-438B-B18F-2FFB8F6D5098}" ShortID="934846120">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath9" ID="{AF1F36B7-5D9B-44F1-BC56-26EDD13D2752}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath9.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="473964815"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath9" ID="{AF1F36B7-5D9B-44F1-BC56-26EDD13D2752}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath7" ID="{9EE7F852-A4E6-4F4D-AE5A-A8C2AF09FFC8}" ShortID="1057984921">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath7" ID="{FBDA1823-F3EE-4878-A8D6-408976EA8C44}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath7.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="567174335"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath7" ID="{FBDA1823-F3EE-4878-A8D6-408976EA8C44}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="JerryDeath10" ID="{23D016C7-EA10-410C-9A6A-3CDD42D8F814}" ShortID="147653427">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="JerryDeath10" ID="{01C4050C-D571-44E5-A67E-D785F644771F}">
+													<Language>SFX</Language>
+													<AudioFile>JerryDeath10.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="736698287"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="JerryDeath10" ID="{01C4050C-D571-44E5-A67E-D785F644771F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<Sound Name="_priAtt1tank" ID="{C0ADC32F-63AC-4620-A382-6C3EB00133C7}" ShortID="345876690">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="_priAtt1tank" ID="{F733B1A8-AAC3-4744-B740-07595DF3859D}">
+											<Language>SFX</Language>
+											<AudioFile>_priAtt1tank.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="209777786"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="_priAtt1tank" ID="{F733B1A8-AAC3-4744-B740-07595DF3859D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="_priAtt2tower" ID="{C29FE812-0FCD-4C53-9066-D6B637A14D1C}" ShortID="139693023">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="_priAtt2tower" ID="{9074BAA7-C826-4CE6-B170-6B4A0E2AEBA2}">
+											<Language>SFX</Language>
+											<AudioFile>_priAtt2tower.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="533285121"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="_priAtt2tower" ID="{9074BAA7-C826-4CE6-B170-6B4A0E2AEBA2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="FireExplosion7" ID="{D9DBB57C-A406-4777-8AAB-127B3043F700}" ShortID="266950592">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="FireExplosion7" ID="{3449C53E-E71E-4752-B014-1F1363B68DE4}">
+											<Language>SFX</Language>
+											<AudioFile>FireExplosion7.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="977530294"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="FireExplosion7" ID="{3449C53E-E71E-4752-B014-1F1363B68DE4}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="FireShoot1" ID="{8AE114CF-9FC4-45F3-902B-E1F2FE00C848}" ShortID="135878202">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="FireShoot1" ID="{41D70197-BFAD-436A-9AF3-1DC75CC67CE4}">
+											<Language>SFX</Language>
+											<AudioFile>FireShoot1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="921082361"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="FireShoot1" ID="{41D70197-BFAD-436A-9AF3-1DC75CC67CE4}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="roguelDash" ID="{3006A705-C7C4-4ED1-A14F-0583BA1200CC}" ShortID="311128910">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7624DB4E-B5B7-4169-9112-B8869E1C6B93}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="202"/>
+															<Property Name="Min" Type="Real64" Value="-202"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="roguelDash" ID="{FDDE21CA-9A10-443F-974C-157BB7B683D2}">
+											<Language>SFX</Language>
+											<AudioFile>roguelDash.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="851629378"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="roguelDash" ID="{FDDE21CA-9A10-443F-974C-157BB7B683D2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+						<ActorMixer Name="Keep Pitch" ID="{BAA5B205-C01A-4DC3-95EE-801CFCDDE26B}" ShortID="956247820">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="LOZ_Fanfare2" ID="{8BE1F416-DA08-496F-9162-1FBBFA4DB8F3}" ShortID="276273520">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="LOZ_Fanfare2" ID="{F1C0B81F-8B13-4A1D-BB93-F099206D3210}">
+											<Language>SFX</Language>
+											<AudioFile>LOZ_Fanfare2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="119303480"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="LOZ_Fanfare2" ID="{F1C0B81F-8B13-4A1D-BB93-F099206D3210}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="LOZ_Sword_Shoot2" ID="{B0D49210-8961-4B87-80F8-CBDD9F600B5F}" ShortID="368955877">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="ranged" ID="{2C972674-AA6B-4CF1-9C72-AFBC4BFFDAF6}" WorkUnitID="{273B7544-8BCF-4429-A2AD-1417514FD7E2}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{A8DEC079-53C2-4066-925E-D93D7611DE09}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{FCF81354-C895-4D6C-A953-6ED9E93C254A}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="LOZ_Sword_Shoot2" ID="{61E880AB-1C24-4A42-A065-7E30C610AA76}">
+											<Language>SFX</Language>
+											<AudioFile>LOZ_Sword_Shoot2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="901846171"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="LOZ_Sword_Shoot2" ID="{61E880AB-1C24-4A42-A065-7E30C610AA76}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
