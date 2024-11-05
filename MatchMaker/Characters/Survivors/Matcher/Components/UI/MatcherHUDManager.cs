@@ -8,7 +8,9 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
 {
     public class MatcherHUDManager : CompanionHUDManager<MatcherGridController, MatcherUI>
     {
-        public override GameObject UIPrefab => MatcherMod.Survivors.Matcher.MatcherContent.Assets.matchGrid;
+        public override GameObject UIPrefab => MatcherContent.Assets.matchGrid;
+
+        public override bool LocalUserOnly => true;
 
         protected override string transformPath => "MainContainer/MainUIArea/SpringCanvas/BottomCenterCluster";
 

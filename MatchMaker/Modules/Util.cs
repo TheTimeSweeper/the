@@ -38,5 +38,12 @@ namespace Matchmaker
         {
             return b + (a - b) * Mathf.Exp(-decay * deltaTime);
         }
+        /// <summary>
+        /// lerp but framerate independent. ty freya holmer https://www.youtube.com/watch?v=LSNQuFEDOyQ
+        /// </summary>
+        public static Color ExpDecayLerp(Color a, Color b, float decay, float deltaTime)
+        {
+            return b + (a - b) * Mathf.Exp(-decay * deltaTime);
+        }
     }
 }

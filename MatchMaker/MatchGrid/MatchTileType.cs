@@ -11,5 +11,15 @@ namespace Matchmaker.MatchGrid
         {
             this.skillDef = skillDef;
         }
+
+        internal Color GetColor()
+        {
+            return Color.white;
+        }
+
+        internal Sprite GetIcon()
+        {
+            return skillDef.icon;
+        }
     }
 }

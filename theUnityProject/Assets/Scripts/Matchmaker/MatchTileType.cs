@@ -6,5 +6,15 @@ namespace Matchmaker.MatchGrid
     public class MatchTileType : ScriptableObject
     {
         public Color color = Color.white;
+
+        internal Color GetColor()
+        {
+            return color;
+        }
+
+        internal Sprite GetIcon()
+        {
+            return null;
+        }
     }
 }

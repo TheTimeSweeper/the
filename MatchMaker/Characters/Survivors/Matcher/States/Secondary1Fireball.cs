@@ -1,15 +1,16 @@
 ﻿using EntityStates;
-using Matchmaker.Survivors.Matcher.SkillDefs;
+using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.SkillDefs;
 using RoR2;
 using RoR2.Projectile;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UIElements.StyleSheets;
 
-namespace MatcherMod.Survivors.Matcher.SkillStates {
-
+namespace MatcherMod.Survivors.Matcher.SkillStates
+{
     public class Secondary1Fireball : BaseSkillState, IMatchBoostedState {
-
-        public static float damageCoefficient => 5.5f;
 
         public int consumedMatches { get; set; }
 
@@ -55,6 +56,9 @@ namespace MatcherMod.Survivors.Matcher.SkillStates {
                 this.hasFired = true;
                 Util.PlaySound("play_joe_fireShoot", base.gameObject);
 
+                int additionalStocks = activatorSkillSlot.stock;
+                activatorSkillSlot.stock = 0;
+
                 if (base.isAuthority) {
                     Ray aimRay = base.GetAimRay();
 
@@ -63,11 +67,11 @@ namespace MatcherMod.Survivors.Matcher.SkillStates {
                         position = aimRay.origin,
                         rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
                         owner = base.gameObject,
-                        damage = Secondary1Fireball.damageCoefficient * this.damageStat * (1 + consumedMatches),
-                        force = 4000f,
+                        damage = Config.M2_Staff_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
+                        force = 2000f,
                         crit = base.RollCrit(),
                         damageColorIndex = DamageColorIndex.Default,
-                        speedOverride = 100,
+                        //speedOverride = 100,
                         projectilePrefab = MatcherContent.Assets.JoeFireball
                     };
 

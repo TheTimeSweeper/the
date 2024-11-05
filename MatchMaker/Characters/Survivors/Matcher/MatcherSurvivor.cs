@@ -6,15 +6,17 @@ using MatcherMod.Modules.Characters;
 using MatcherMod.Survivors.Matcher.Components;
 using MatcherMod.Survivors.Matcher.Components.UI;
 using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.SkillDefs;
 using MatcherMod.Survivors.Matcher.SkillStates;
-using Matchmaker.Survivors.Matcher.SkillDefs;
 using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
+using Config = MatcherMod.Survivors.Matcher.MatcherContent.Config;
 
 namespace MatcherMod.Survivors.Matcher
 {
@@ -45,19 +47,20 @@ namespace MatcherMod.Survivors.Matcher
             bodyColor = Color.red,
             sortPosition = 69.5f,
             
-            crosshairBundlePath = "GICrosshair",
+            //crosshairBundlePath = "GICrosshair",
+            crosshairAddressablePath = "RoR2/Base/Toolbot/SMGCrosshair.prefab",
             podPrefabAddressablePath = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
 
-            maxHealth = 140f,
-            healthRegen = 2.0f,
-            armor = 10f,
+            maxHealth = 110f,
+            healthRegen = 1.0f,
+            armor = 00f,
 
             jumpCount = 1,
         };
 
         public override UnlockableDef characterUnlockableDef => null;// GIUnlockables.characterUnlockableDef;
 
-        public override ItemDisplaysBase itemDisplays { get; } = new MatcherContent.JoeItemDisplays();
+        public override BaseItemDisplaysSetup itemDisplays { get; } = new MatcherContent.JoeItemDisplays();
 
         public MatcherGridController matcherGridController;
 
@@ -79,10 +82,11 @@ namespace MatcherMod.Survivors.Matcher
 
             MatcherContent.States.Init();
             MatcherContent.Tokens.Init();
-            Modules.Language.PrintOutput("concsript.txt");
+            Modules.Language.PrintOutput("matchmaker.txt");
 
             MatcherContent.Buffs.Init(assetBundle);
             MatcherContent.Assets.Init(assetBundle);
+            MatcherContent.Items.Init();
 
             AdditionalBodySetup();
 
@@ -125,29 +129,24 @@ namespace MatcherMod.Survivors.Matcher
         //if this is your first look at skilldef creation, take a look at Secondary first
         private void AddPrimarySkills()
         {
-            var genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Primary);
+            GenericSkill genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Primary);
             matcherGridController.genericSkills.Add(genericSkill);
-
-            //the primary skill is created using a constructor for a typical primary
-            //it is also a SteppedSkillDef. Custom Skilldefs are very useful for custom behaviors related to casting a skill. see ror2's different skilldefs for reference
             MatchBoostedSkillDef primarySkillDef1 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
-                (
-                    "MatcherSword",
-                    TOKEN_PREFIX + "PRIMARY_SLASH_NAME",
-                    TOKEN_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
-                    assetBundle.LoadAsset<Sprite>("texTileSword"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)),
-                    "Weapon",
-                    true
-                ));
-            ////custom Skilldefs can have additional fields that you can set manually
+            (
+                "MatcherSword",
+                TOKEN_PREFIX + "PRIMARY_SWORD_NAME",
+                TOKEN_PREFIX + "PRIMARY_SWORD_DESCRIPTION",
+                assetBundle.LoadAsset<Sprite>("texTileSword"),
+                new EntityStates.SerializableEntityStateType(typeof(SkillStates.Sword)),
+                "Weapon",
+                true
+            ));
             //primarySkillDef1.stepCount = 2;
             //primarySkillDef1.stepGraceDuration = 0.5f;
             primarySkillDef1.matchConsumptionCost = 1;
             primarySkillDef1.matchConsumptionMinimum = 1;
             primarySkillDef1.matchMaxConsumptions = 1;
             primarySkillDef1.associatedBuff = CreateMatchBuff(primarySkillDef1);
-
 
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
         }
@@ -159,23 +158,23 @@ namespace MatcherMod.Survivors.Matcher
 
         private void AddSecondarySkills()
         {
-            var genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Secondary);
+            GenericSkill genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Secondary);
             matcherGridController.genericSkills.Add(genericSkill);
 
             //here is a basic skill def with all fields accounted for
             MatchBoostedSkillDef secondarySkillDef1 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
             {
                 skillName = "MatcherStaff",
-                skillNameToken = TOKEN_PREFIX + "SECONDARY_GUN_NAME",
-                skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_GUN_DESCRIPTION",
-                keywordTokens = new string[] { "KEYWORD_AGILE" },
+                skillNameToken = TOKEN_PREFIX + "SECONDARY_STAFF_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_STAFF_DESCRIPTION",
+                //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTileStaff"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Secondary1Fireball)),
-                activationStateMachineName = "Weapon2",
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 6f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -185,8 +184,8 @@ namespace MatcherMod.Survivors.Matcher
                 resetCooldownTimerOnUse = false,
                 fullRestockOnAssign = true,
                 dontAllowPastMaxStocks = false,
-                mustKeyPress = false,
-                beginSkillCooldownOnSkillEnd = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = true,
 
                 isCombatSkill = true,
                 canceledFromSprinting = false,
@@ -196,15 +195,51 @@ namespace MatcherMod.Survivors.Matcher
             });
             secondarySkillDef1.matchConsumptionCost = 1;
             secondarySkillDef1.matchConsumptionMinimum = 1;
-            secondarySkillDef1.matchMaxConsumptions = int.MaxValue;
+            secondarySkillDef1.matchMaxConsumptions = 10;
             secondarySkillDef1.associatedBuff = CreateMatchBuff(secondarySkillDef1);
 
-            Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
+            //here is a basic skill def with all fields accounted for
+            MatchBoostedSkillDef secondarySkillDef2 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
+            {
+                skillName = "MatcherStaff2",
+                skillNameToken = TOKEN_PREFIX + "SECONDARY_STAFF2_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SECONDARY_STAFF2_DESCRIPTION",
+                //keywordTokens = new string[] { "KEYWORD_AGILE" },
+                skillIcon = assetBundle.LoadAsset<Sprite>("texTileStaff"),
+
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Secondary1Explosion)),
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+
+                baseRechargeInterval = 8f,
+                baseMaxStock = 1,
+
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+                resetCooldownTimerOnUse = false,
+                fullRestockOnAssign = true,
+                dontAllowPastMaxStocks = false,
+                mustKeyPress = true,
+                beginSkillCooldownOnSkillEnd = true,
+
+                isCombatSkill = true,
+                canceledFromSprinting = false,
+                cancelSprintingOnActivation = false,
+                forceSprintDuringState = false,
+            });
+            secondarySkillDef2.matchConsumptionCost = 1;
+            secondarySkillDef2.matchConsumptionMinimum = 1;
+            secondarySkillDef2.matchMaxConsumptions = 10;
+            secondarySkillDef2.associatedBuff = CreateMatchBuff(secondarySkillDef2);
+
+            Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1, secondarySkillDef2);
         }
         
         private void AddUtiitySkills()
         {
-            var genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Utility);
+            GenericSkill genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Utility);
             matcherGridController.genericSkills.Add(genericSkill);
             //here's a skilldef of a typical movement skill.
             MatchBoostedSkillDef utilitySkillDef1 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
@@ -213,10 +248,10 @@ namespace MatcherMod.Survivors.Matcher
                 skillNameToken = TOKEN_PREFIX + "UTILITY_ROLL_NAME",
                 skillDescriptionToken = TOKEN_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTileShield"),
-
+                
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Roll)),
-                activationStateMachineName = "Body",
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 4f,
                 baseMaxStock = 1,
@@ -236,10 +271,11 @@ namespace MatcherMod.Survivors.Matcher
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = true,
             });
-            utilitySkillDef1.matchConsumptionCost = 3;
-            utilitySkillDef1.matchConsumptionMinimum = 3;
+            utilitySkillDef1.matchConsumptionCost = 5;
+            utilitySkillDef1.matchConsumptionMinimum = 5;
             utilitySkillDef1.matchMaxConsumptions = 1;
-            utilitySkillDef1.associatedBuff = CreateMatchBuff(utilitySkillDef1);
+            Buffs.shieldMatchBuff = CreateMatchBuff(utilitySkillDef1);
+            utilitySkillDef1.associatedBuff = Buffs.shieldMatchBuff;
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
         }
@@ -252,94 +288,126 @@ namespace MatcherMod.Survivors.Matcher
             MatchBoostedSkillDef passiveSkillDef1 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
             {
                 skillName = "MatcherKey",
-                skillNameToken = TOKEN_PREFIX + "PASSIVE_NAME",
-                skillDescriptionToken = TOKEN_PREFIX + "PASSIVE_DESCRIPTION",
-                keywordTokens = new string[] { "KEYWORD_AGILE" },
+                skillNameToken = TOKEN_PREFIX + "EXTRA_KEY_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "EXTRA_KEY_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTileKey"),
-
-                //unless you're somehow activating your passive like a skill, none of the following is needed.
-                //but that's just me saying things. the tools are here at your disposal to do whatever you like with
-
-                //activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
-                //activationStateMachineName = "Weapon1",
-                //interruptPriority = EntityStates.InterruptPriority.Skill,
-
-                //baseRechargeInterval = 1f,
-                //baseMaxStock = 1,
-
-                //rechargeStock = 1,
-                //requiredStock = 1,
-                //stockToConsume = 1,
-
-                //resetCooldownTimerOnUse = false,
-                //fullRestockOnAssign = true,
-                //dontAllowPastMaxStocks = false,
-                //mustKeyPress = false,
-                //beginSkillCooldownOnSkillEnd = false,
-
-                //isCombatSkill = true,
-                //canceledFromSprinting = false,
-                //cancelSprintingOnActivation = false,
-                //forceSprintDuringState = false,
-
             });
             passiveSkillDef1.matchConsumptionCost = 1;
             passiveSkillDef1.matchMaxConsumptions = 1;
             passiveSkillDef1.matchConsumptionMinimum = 1;
-            passiveSkillDef1.associatedBuff = CreateMatchBuff(passiveSkillDef1);
-            passiveSkillDef1.CustomMatchAction = (matcherGridController, matches) =>
-            {
-                GameObject currentInteractable = matcherGridController.GetComponent<InteractionDriver>().currentInteractable;
-                if (currentInteractable != null && currentInteractable.TryGetComponent(out PurchaseInteraction purchaseInteraction))
-                {
-                    if (purchaseInteraction.costType == CostTypeIndex.Money)
-                    {
-                        purchaseInteraction.Networkcost = Mathf.Max(0, purchaseInteraction.Networkcost - matches * Run.instance.GetDifficultyScaledCost(5));
-                    }
-                }
-                return false;
-            };
+            //passiveSkillDef1.associatedBuff = CreateMatchBuff(passiveSkillDef1);
+            passiveSkillDef1.CustomMatchAction = KeyMatchAction;
 
-            //MatchBoostedSkillDef passiveSkillDef2 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
+            CrateMatchSkillDef passiveSkillDef2 = Skills.CreateSkillDef<CrateMatchSkillDef>(new SkillDefInfo
+            {
+                skillName = "MatcherCrate",
+                skillNameToken = TOKEN_PREFIX + "EXTRA_CRATE_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "EXTRA_CRATE_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texTileCrate"),
+                
+            });
+            passiveSkillDef2.matchConsumptionCost = 1;
+            passiveSkillDef2.matchMaxConsumptions = 1;
+            passiveSkillDef2.matchConsumptionMinimum = 1;
+            //passiveSkillDef3.associatedBuff = CreateMatchBuff(passiveSkillDef3);
+            passiveSkillDef2.CustomMatchAction = CrateMatchSkillDef.CrateMatchAction;
+
+            MatchBoostedSkillDef passiveSkillDef3 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
+            {
+                skillName = "MatcherBrain",
+                skillNameToken = TOKEN_PREFIX + "EXTRA_BRAIN_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "EXTRA_BRAIN_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texTileBrain"),
+
+            });
+            passiveSkillDef3.matchConsumptionCost = 1;
+            passiveSkillDef3.matchMaxConsumptions = 1;
+            passiveSkillDef3.matchConsumptionMinimum = 1;
+            //passiveSkillDef3.associatedBuff = CreateMatchBuff(passiveSkillDef3);
+            passiveSkillDef3.CustomMatchAction = BrainMatchAction;
+
+            //MatchBoostedSkillDef passiveSkillDef4 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
             //{
             //    skillName = "MatcherMuscle",
             //    skillNameToken = TOKEN_PREFIX + "PASSIVE_NAME",
             //    skillDescriptionToken = TOKEN_PREFIX + "PASSIVE_DESCRIPTION",
-            //    keywordTokens = new string[] { "KEYWORD_AGILE" },
             //    skillIcon = assetBundle.LoadAsset<Sprite>("texTileMuscle"),
 
-            //    //unless you're somehow activating your passive like a skill, none of the following is needed.
-            //    //but that's just me saying things. the tools are here at your disposal to do whatever you like with
-
-            //    //activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
-            //    //activationStateMachineName = "Weapon1",
-            //    //interruptPriority = EntityStates.InterruptPriority.Skill,
-
-            //    //baseRechargeInterval = 1f,
-            //    //baseMaxStock = 1,
-
-            //    //rechargeStock = 1,
-            //    //requiredStock = 1,
-            //    //stockToConsume = 1,
-
-            //    //resetCooldownTimerOnUse = false,
-            //    //fullRestockOnAssign = true,
-            //    //dontAllowPastMaxStocks = false,
-            //    //mustKeyPress = false,
-            //    //beginSkillCooldownOnSkillEnd = false,
-
-            //    //isCombatSkill = true,
-            //    //canceledFromSprinting = false,
-            //    //cancelSprintingOnActivation = false,
-            //    //forceSprintDuringState = false,
-
             //});
-            //passiveSkillDef2.matchConsumptionCost = 1;
-            //passiveSkillDef2.matchMaxConsumptions = 1;
-            //passiveSkillDef2.matchConsumpationMinimum = 1;
-            //passiveSkillDef2.associatedBuff = CreateMatchBuff(passiveSkillDef2);
+            //passiveSkillDef4.matchConsumptionCost = 1;
+            //passiveSkillDef4.matchMaxConsumptions = 1;
+            //passiveSkillDef4.matchConsumptionMinimum = 1;
+            //passiveSkillDef4.associatedBuff = CreateMatchBuff(passiveSkillDef2);
 
-            Skills.AddSkillsToFamily(genericSkill.skillFamily, passiveSkillDef1/*, passiveSkillDef2*/);
+            MatchBoostedSkillDef passiveSkillDef5 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
+            {
+                skillName = "MatcherChicken",
+                skillNameToken = TOKEN_PREFIX + "EXTRA_CHICKEN_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "EXTRA_CHICKEN_DESCRIPTION",
+                skillIcon = assetBundle.LoadAsset<Sprite>("texTileChicken"),
+            });
+            passiveSkillDef5.matchConsumptionCost = 1;
+            passiveSkillDef5.matchMaxConsumptions = 1;
+            passiveSkillDef5.matchConsumptionMinimum = 1;
+            //passiveSkillDef5.associatedBuff = CreateMatchBuff(passiveSkillDef3);
+            passiveSkillDef5.CustomMatchAction = ChickenMatchAction;
+
+            Skills.AddSkillsToFamily(genericSkill.skillFamily, passiveSkillDef1, passiveSkillDef2, passiveSkillDef3/*, passiveSkillDef4*//*, passiveSkillDef5*/);
+        }
+
+        private static GameObject KeyMatchAction(MatcherGridController matcherGridController, GenericSkill genericSkill, int matches)
+        {
+            GameObject currentInteractable = matcherGridController.GetComponent<InteractionDriver>().currentInteractable;
+            if (currentInteractable != null && currentInteractable.TryGetComponent(out PurchaseInteraction purchaseInteraction))
+            {
+                if (purchaseInteraction.costType == CostTypeIndex.Money)
+                {
+                    int costReduce = matches * Run.instance.GetDifficultyScaledCost(MatcherContent.Config.M4_Key_UnlockBaseValue.Value);
+
+                    matcherGridController.CmdKeyReduceInteractableCost(purchaseInteraction.gameObject, costReduce);
+                    //purchaseInteraction.cost = Mathf.Max(0, purchaseInteraction.Networkcost - costReduce);
+                    return purchaseInteraction.gameObject;
+                }
+            }
+            return null;
+        }
+
+        private GameObject BrainMatchAction(MatcherGridController controller, GenericSkill genericSkill, int matches)
+        {
+            int nearBodies = 0;
+            for (TeamIndex teamIndex = TeamIndex.Player; teamIndex < TeamIndex.Count; teamIndex += 1)
+            {
+                ReadOnlyCollection<TeamComponent> teamComponents = TeamComponent.GetTeamMembers(teamIndex);
+
+                for (int i = 0; i < teamComponents.Count; i++)
+                {
+                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < Config.M4_Brain_NearDistance.Value)
+                    {
+                        if (teamComponents[i].TryGetComponent(out CharacterBody body))
+                        {
+                            if(teamComponents[i].teamIndex != controller.CharacterBody.teamComponent.teamIndex)
+                            {
+                                nearBodies++;
+                            }
+                        }
+                    }
+                }
+            }
+            nearBodies = Mathf.Max(nearBodies, 1);
+
+            controller.CharacterBody.master.GiveExperience((ulong)(nearBodies * matches * Config.M4_Brain_Experience.Value * controller.CharacterBody.level));
+            return controller.gameObject;
+        }
+
+        private GameObject ChickenMatchAction(MatcherGridController controller, GenericSkill genericSkill, int matches)
+        {
+            HealthComponent healthComponent = controller.CharacterBody.healthComponent;
+            if (healthComponent.combinedHealthFraction > 0.9f)
+            {
+                controller.CharacterBody.master.inventory.GiveItem(Items.ChickenItem);
+                return controller.gameObject;
+            }
+            return null;
         }
 
         private void AddSpecialSkills()
@@ -347,25 +415,26 @@ namespace MatcherMod.Survivors.Matcher
             Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Special);
 
             //a basic skill. some fields are omitted and will just have default values
-            SkillDef specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
+            HasMatcherGridControllerSkillDef specialSkillDef1 = Skills.CreateSkillDef<HasMatcherGridControllerSkillDef>(new SkillDefInfo
             {
                 skillName = "MatcherGrid",
-                skillNameToken = TOKEN_PREFIX + "SPECIAL_BOMB_NAME",
-                skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_BOMB_DESCRIPTION",
+                skillNameToken = TOKEN_PREFIX + "SPECIAL_MATCH_NAME",
+                skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_MATCH_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MatchMenu)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
-                activationStateMachineName = "Weapon2",
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                activationStateMachineName = "Weapon",
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseMaxStock = 1,
-                requiredStock = 0,
+                requiredStock = 1,
                 stockToConsume = 0,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 5f,
 
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = true,
+                cancelSprintingOnActivation = false
             });
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
@@ -458,12 +527,24 @@ namespace MatcherMod.Survivors.Matcher
             //how to load a master set up in unity, can be an empty gameobject with just AISkillDriver components
             //assetBundle.LoadMaster(bodyPrefab, masterName);
         }
-
+        
         private void AddHooks()
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
             On.RoR2.UI.HUD.Awake += HUD_Awake;
+
+            On.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
+        }
+
+        private void HealthComponent_TakeDamageProcess(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            orig(self, damageInfo);
+
+            if (self.body.HasBuff(Buffs.shieldMatchBuff))
+            {
+                self.body.RemoveBuff(Buffs.shieldMatchBuff);
+            }
         }
 
         private void HUD_Awake(On.RoR2.UI.HUD.orig_Awake orig, RoR2.UI.HUD self)
@@ -474,10 +555,9 @@ namespace MatcherMod.Survivors.Matcher
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(MatcherContent.Buffs.armorBuff))
+            if (sender.HasBuff(Buffs.shieldMatchBuff))
             {
-                args.armorAdd += 100;
-                args.moveSpeedMultAdd += 0.5f;
+                args.armorAdd += MatcherContent.Config.M3_Shield_BuffArmor.Value;
             }
         }
     }

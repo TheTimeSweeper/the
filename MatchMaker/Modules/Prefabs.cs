@@ -651,19 +651,27 @@ namespace MatcherMod.Modules
         //LegacyResourcesAPI old
         public static GameObject CreateBlankMasterPrefab(GameObject bodyPrefab, string masterName)
         {
-            GameObject masterObject = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster"), masterName, true);
+            GameObject masterObject = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster");
 
             return CloneMaster(bodyPrefab, masterName, masterObject);
         }
 
-
-        public static IEnumerator CreateBlankMasterPrefabAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete)
+        public static IEnumerator CreateBlankMasterPrefabAsyncCoroutine(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete)
         {
             return Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) =>
             {
                 onComplete(CloneMaster(bodyPrefab, masterName, result));
             });
         }
+
+        public static void CreateBlankMasterPrefabAsync(GameObject bodyPrefab, string masterName, Action<GameObject> onComplete)
+        {
+            Modules.ContentPacks.asyncLoadCoroutines.Add(Asset.LoadAssetCoroutine<GameObject>("RoR2/Base/Commando/CommandoMonsterMaster.prefab", (result) =>
+            {
+                onComplete(CloneMaster(bodyPrefab, masterName, result));
+            }));
+        }
+
 
         private static GameObject CloneMaster(GameObject bodyPrefab, string masterName, GameObject master)
         {

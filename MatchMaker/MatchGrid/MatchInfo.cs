@@ -10,11 +10,14 @@ namespace Matchmaker.MatchGrid
         {
             switch (tilesMatched.Length)
             {
-                default:
+                case 0:
+                case 1:
+                case 2:
                 case 3:
                     return 1;
                 case 4:
                     return 2;
+                default:
                 case 5:
                     return 5;
             }

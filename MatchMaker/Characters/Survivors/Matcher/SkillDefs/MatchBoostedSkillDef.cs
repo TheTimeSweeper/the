@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using JetBrains.Annotations;
+using MatcherMod;
 using MatcherMod.Modules.SkillDefs;
 using MatcherMod.Survivors.Matcher.Components;
 using RoR2;
@@ -9,9 +10,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace Matchmaker.Survivors.Matcher.SkillDefs
+namespace MatcherMod.Survivors.Matcher.SkillDefs
 {
-    public interface IMatchBoostedState 
+    public interface IMatchBoostedState
     {
         int consumedMatches { get; set; }
     }
@@ -30,40 +31,43 @@ namespace Matchmaker.Survivors.Matcher.SkillDefs
         /// the amount of times consumptionCost will be used
         /// </summary>
         public int matchMaxConsumptions = 1;
+        /// <summary>
+        /// set true if buffcount changes as not simply a display of match count 
+        /// </summary>
+        public bool respectChangedBuffCount = false;
 
         public BuffDef associatedBuff;
         /// <summary>
         /// Any custom functionality when matches are added. 
         /// </summary>
-        public Func<MatcherGridController, int, bool> CustomMatchAction;
-
-        public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
-        {
-            return base.OnAssigned(skillSlot);
-        }
+        public Func<MatcherGridController, GenericSkill, int, GameObject> CustomMatchAction = DefaultMatchAction;
 
         public override EntityState InstantiateNextState([NotNull] GenericSkill skillSlot)
         {
             EntityState entityState = base.InstantiateNextState(skillSlot);
 
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
-
             IMatchBoostedState matchBoostedState;
             if ((matchBoostedState = entityState as IMatchBoostedState) != null)
             {
-                matchBoostedState.consumedMatches = (instanceData.componentFromSkillDef1.ConsumeMatches(this, matchConsumptionCost, matchConsumptionMinimum, matchMaxConsumptions));
+                matchBoostedState.consumedMatches = instanceData.componentFromSkillDef1.ConsumeMatches(this, matchConsumptionCost, matchConsumptionMinimum, matchMaxConsumptions);
             }
 
             return entityState;
         }
 
-        public bool OnMatchAwarded(MatcherGridController matcherGridController, int matches)
+        public GameObject OnMatchAwarded(MatcherGridController matcherGridController, GenericSkill genericSkill, int matches)
         {
-            if(CustomMatchAction != null)
+            if (CustomMatchAction != null)
             {
-                return CustomMatchAction(matcherGridController, matches);
+                return CustomMatchAction(matcherGridController, genericSkill, matches);
             }
-            return true;
+            return matcherGridController.gameObject;
+        }
+
+        public static GameObject DefaultMatchAction(MatcherGridController controller, GenericSkill genericSkill, int matches)
+        {
+            return controller.gameObject;
         }
     }
 }

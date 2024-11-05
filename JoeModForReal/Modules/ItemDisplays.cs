@@ -19,7 +19,7 @@ namespace Modules
             
             //AddCustomLightningArm();
             AddMasterSwordDisplay();
-        }
+        } 
 
         private static void AddMasterSwordDisplay() {
             GameObject display = Asset.LoadAsset<GameObject>("displayMasterSword");

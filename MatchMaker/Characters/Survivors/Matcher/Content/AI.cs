@@ -8,11 +8,61 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
     {
         public static void Init(GameObject bodyPrefab, string masterName)
         {
-            GameObject master = Modules.Prefabs.CreateBlankMasterPrefab(bodyPrefab, masterName);
+            Modules.Prefabs.CreateBlankMasterPrefabAsync(bodyPrefab, masterName, (master) =>
+            {
+                SetupAI(master);
+            });
+        }
 
+        private static void SetupAI(GameObject master)
+        {
             BaseAI baseAI = master.GetComponent<BaseAI>();
             baseAI.aimVectorDampTime = 0.1f;
             baseAI.aimVectorMaxSpeed = 360;
+
+            //AISkillDriver matchDriverFlee = master.AddComponent<AISkillDriver>();
+            ////Selection Conditions
+            //matchDriverFlee.customName = "Match matches close";
+            //matchDriverFlee.skillSlot = SkillSlot.Special;
+            //matchDriverFlee.requireSkillReady = true;
+            //matchDriverFlee.minDistance = 0;
+            //matchDriverFlee.maxDistance = 20;
+            //matchDriverFlee.selectionRequiresTargetLoS = false;
+            //matchDriverFlee.selectionRequiresOnGround = false;
+            //matchDriverFlee.selectionRequiresAimTarget = false;
+            //matchDriverFlee.maxTimesSelected = -1;
+
+            ////Behavior
+            //matchDriverFlee.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            //matchDriverFlee.activationRequiresTargetLoS = false;
+            //matchDriverFlee.activationRequiresAimTargetLoS = false;
+            //matchDriverFlee.activationRequiresAimConfirmation = false;
+            //matchDriverFlee.movementType = AISkillDriver.MovementType.FleeMoveTarget;
+            //matchDriverFlee.moveInputScale = 1;
+            //matchDriverFlee.aimType = AISkillDriver.AimType.AtMoveTarget;
+            //matchDriverFlee.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver matchDriverChase = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            matchDriverChase.customName = "match matches far";
+            matchDriverChase.skillSlot = SkillSlot.Special;
+            matchDriverChase.requireSkillReady = true;
+            matchDriverChase.minDistance = 0;
+            matchDriverChase.maxDistance = float.NegativeInfinity;
+            matchDriverChase.selectionRequiresTargetLoS = false;
+            matchDriverChase.selectionRequiresOnGround = false;
+            matchDriverChase.selectionRequiresAimTarget = false;
+            matchDriverChase.maxTimesSelected = -1;
+
+            //Behavior
+            matchDriverChase.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            matchDriverChase.activationRequiresTargetLoS = false;
+            matchDriverChase.activationRequiresAimTargetLoS = false;
+            matchDriverChase.activationRequiresAimConfirmation = false;
+            matchDriverChase.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            matchDriverChase.moveInputScale = 1;
+            matchDriverChase.aimType = AISkillDriver.AimType.AtMoveTarget;
+            matchDriverChase.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
             //mouse over these fields for tooltips
             AISkillDriver swingDriver = master.AddComponent<AISkillDriver>();
@@ -42,9 +92,9 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
             swingDriver.moveInputScale = 1;
             swingDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
             swingDriver.ignoreNodeGraph = false; //will chase relentlessly but be kind of stupid
-            swingDriver.shouldSprint = false; 
+            swingDriver.shouldSprint = false;
             swingDriver.shouldFireEquipment = false;
-            swingDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold; 
+            swingDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
             //Transition Behavior
             swingDriver.driverUpdateTimerOverride = -1;
@@ -73,56 +123,35 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
             shootDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
             shootDriver.moveInputScale = 1;
             shootDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            shootDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold; 
-            
-            AISkillDriver rollDriver = master.AddComponent<AISkillDriver>();
+            shootDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver rollCloseDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
-            rollDriver.customName = "Use Utility Roll";
-            rollDriver.skillSlot = SkillSlot.Utility;
-            rollDriver.requireSkillReady = true;
-            rollDriver.minDistance = 8;
-            rollDriver.maxDistance = 20;
-            rollDriver.selectionRequiresTargetLoS = true;
-            rollDriver.selectionRequiresOnGround = false;
-            rollDriver.selectionRequiresAimTarget = false;
-            rollDriver.maxTimesSelected = -1;
+            rollCloseDriver.customName = "UtilityClose";
+            rollCloseDriver.skillSlot = SkillSlot.Utility;
+            rollCloseDriver.requireSkillReady = true;
+            rollCloseDriver.minDistance = 10;
+            rollCloseDriver.maxDistance = 30;
+            rollCloseDriver.selectionRequiresTargetLoS = true;
+            rollCloseDriver.selectionRequiresOnGround = false;
+            rollCloseDriver.selectionRequiresAimTarget = false;
+            rollCloseDriver.maxTimesSelected = -1;
 
             //Behavior
-            rollDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            rollDriver.activationRequiresTargetLoS = false;
-            rollDriver.activationRequiresAimTargetLoS = false;
-            rollDriver.activationRequiresAimConfirmation = false;
-            rollDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            rollDriver.moveInputScale = 1;
-            rollDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            rollDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            rollCloseDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            rollCloseDriver.activationRequiresTargetLoS = false;
+            rollCloseDriver.activationRequiresAimTargetLoS = false;
+            rollCloseDriver.activationRequiresAimConfirmation = false;
+            rollCloseDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            rollCloseDriver.moveInputScale = 1;
+            rollCloseDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            rollCloseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
-            AISkillDriver bombDriver = master.AddComponent<AISkillDriver>();
-            //Selection Conditions
-            bombDriver.customName = "Use Special bomb";
-            bombDriver.skillSlot = SkillSlot.Special;
-            bombDriver.requireSkillReady = true;
-            bombDriver.minDistance = 0;
-            bombDriver.maxDistance = 20;
-            bombDriver.selectionRequiresTargetLoS = false;
-            bombDriver.selectionRequiresOnGround = false;
-            bombDriver.selectionRequiresAimTarget = false;
-            bombDriver.maxTimesSelected = -1;
-
-            //Behavior
-            bombDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            bombDriver.activationRequiresTargetLoS = false;
-            bombDriver.activationRequiresAimTargetLoS = false;
-            bombDriver.activationRequiresAimConfirmation = false;
-            bombDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            bombDriver.moveInputScale = 1;
-            bombDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            bombDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
             AISkillDriver chaseDriver = master.AddComponent<AISkillDriver>();
             //Selection Conditions
-            chaseDriver.customName = "Chase";
-            chaseDriver.skillSlot = SkillSlot.None;
+            chaseDriver.customName = "Chase and match";
+            chaseDriver.skillSlot = SkillSlot.Special;
             chaseDriver.requireSkillReady = false;
             chaseDriver.minDistance = 0;
             chaseDriver.maxDistance = float.PositiveInfinity;
@@ -137,7 +166,27 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
             chaseDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
             chaseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
-            //recommend taking these for a spin in game, messing with them in runtimeinspector to get a feel for what they should do at certain ranges and such
+            AISkillDriver rollDriver = master.AddComponent<AISkillDriver>();
+            //Selection Conditions
+            rollDriver.customName = "UtilityCloseDistance";
+            rollDriver.skillSlot = SkillSlot.Utility;
+            rollDriver.requireSkillReady = true;
+            rollDriver.minDistance = 50;
+            rollDriver.maxDistance = float.PositiveInfinity;
+            rollDriver.selectionRequiresTargetLoS = true;
+            rollDriver.selectionRequiresOnGround = false;
+            rollDriver.selectionRequiresAimTarget = false;
+            rollDriver.maxTimesSelected = -1;
+
+            //Behavior
+            rollDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            rollDriver.activationRequiresTargetLoS = false;
+            rollDriver.activationRequiresAimTargetLoS = false;
+            rollDriver.activationRequiresAimConfirmation = false;
+            rollDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            rollDriver.moveInputScale = 1;
+            rollDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            rollDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
         }
     }
 }

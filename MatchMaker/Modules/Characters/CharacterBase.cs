@@ -35,7 +35,7 @@ namespace MatcherMod.Modules.Characters
 
         public virtual CustomRendererInfo[] customRendererInfos { get; }
 
-        public virtual ItemDisplaysBase itemDisplays { get; }
+        public virtual BaseItemDisplaysSetup itemDisplays { get; }
 
         public static T instance { get; private set; }
 

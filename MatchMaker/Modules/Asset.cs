@@ -81,8 +81,14 @@ namespace MatcherMod.Modules
             {
                 yield return null;
             }
-            ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(request.assetBundle));
+            //ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(request.assetBundle));
             onComplete?.Invoke(request.assetBundle);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void RunShaderSwaper(AssetBundleCreateRequest request)
+        {
+            ContentPacks.asyncLoadCoroutines.Add(ShaderSwapper.ShaderSwapper.UpgradeStubbedShadersAsync(request.assetBundle));
         }
         #endregion bundle
 

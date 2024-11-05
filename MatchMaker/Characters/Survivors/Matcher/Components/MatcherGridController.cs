@@ -1,17 +1,19 @@
 ﻿using MatcherMod.Modules.UI;
 using MatcherMod.Survivors.Matcher.Components.UI;
+using MatcherMod.Survivors.Matcher.SkillDefs;
 using Matchmaker.MatchGrid;
-using Matchmaker.Survivors.Matcher.SkillDefs;
 using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MatcherMod.Survivors.Matcher.Components
 {
-    public class MatcherGridController : MonoBehaviour, IHasCompanionUI<MatcherUI>
+    public class MatcherGridController : NetworkBehaviour, IHasCompanionUI<MatcherUI>
     {
         public bool allowUIUpdate { get; set; } = true;
         public MatcherUI CompanionUI { get; set; }
@@ -19,67 +21,164 @@ namespace MatcherMod.Survivors.Matcher.Components
         [SerializeField]
         public List<GenericSkill> genericSkills = new List<GenericSkill>();
 
-        public Dictionary<SkillDef, int> matchesGained = new Dictionary<SkillDef, int>();
-        private CharacterBody characterBody;
+        public Dictionary<SkillDef, int> matchesGainedMap = new Dictionary<SkillDef, int>();
+
+        private SkillDef[] _skillDefs = new SkillDef[4];
+
+        private int GetSkillIndex(SkillDef skillDef)
+        {
+            for (int i = 0; i < _skillDefs.Length; i++)
+            {
+                if (_skillDefs[i] == skillDef)
+                    return i;
+            }
+            return -1;
+        }
+
+        public CharacterBody CharacterBody;
 
         void Awake()
         {
-            characterBody = GetComponent<CharacterBody>();
-        }
+            CharacterBody = GetComponent<CharacterBody>();
 
-        public SkillDef[] GetSkillDefs()
-        {
-            SkillDef[] defs = new SkillDef[genericSkills.Count];
-            for (int i = 0; i < defs.Length; i++)
-            {
-                defs[i] = genericSkills[i].skillDef;
-            }
-            return defs;
-        }
-
-        public void SyncBuffCounts()
-        {
             for (int i = 0; i < genericSkills.Count; i++)
             {
-                MatchBoostedSkillDef matchSkillDef;
-                if ((matchSkillDef = genericSkills[0].skillDef as MatchBoostedSkillDef) != null)
-                {
-                    SyncBuffCount(matchSkillDef);
-                }
+                genericSkills[i].onSkillChanged += genericSkill_onSkillChanged;
             }
         }
+
+        void Start()
+        {
+            InitSkillDefs();
+        }
+
+        private void genericSkill_onSkillChanged(GenericSkill genericSkill)
+        {
+            if (CompanionUI == null) 
+                return;
+
+            if (!matchesGainedMap.ContainsKey(genericSkill.skillDef))
+            {
+                //ResetMatches();
+                CompanionUI.GenerateGrid(InitSkillDefs());
+            }
+        }
+
+        public bool ToggleUI()
+        {
+            if (CompanionUI != null)
+            {
+                if (!CompanionUI.Created)
+                {
+                    CompanionUI.GenerateGrid(InitSkillDefs());
+                }
+                CompanionUI.Show();
+                return CompanionUI.Showing;
+            }
+            return false;
+        }
+
+        public SkillDef[] InitSkillDefs()
+        {
+            matchesGainedMap = new Dictionary<SkillDef, int>();
+
+            _skillDefs = new SkillDef[genericSkills.Count];
+            for (int i = 0; i < _skillDefs.Length; i++)
+            {
+                _skillDefs[i] = genericSkills[i].skillDef;
+                matchesGainedMap[_skillDefs[i]] = 0;
+            }
+
+            return _skillDefs;
+        }
+
+        //private void ResetMatches()
+        //{
+        //    for (int i = 0; i < _skillDefs.Length; i++)
+        //    {
+        //        matchesGainedMap[_skillDefs[i]] = 0;
+        //    }
+
+        //    SyncBuffCounts();
+        //}
+
+        //public void SyncBuffCounts()
+        //{
+        //    for (int i = 0; i < genericSkills.Count; i++)
+        //    {
+        //        MatchBoostedSkillDef matchSkillDef;
+        //        if ((matchSkillDef = genericSkills[0].skillDef as MatchBoostedSkillDef) != null)
+        //        {
+        //            SyncBuffCount(matchSkillDef);
+        //        }
+        //    }
+        //}
 
         private void SyncBuffCount(MatchBoostedSkillDef matchSkillDef)
         {
-            if (matchesGained.ContainsKey(matchSkillDef))
+            if (matchSkillDef.associatedBuff == null)
+                return;
+
+            if (matchesGainedMap.ContainsKey(matchSkillDef))
             {
-                int buffCount = characterBody.GetBuffCount(matchSkillDef.associatedBuff);
-                while(buffCount > matchesGained[matchSkillDef])
-                {
-                    buffCount--;
-                    characterBody.RemoveBuff(matchSkillDef.associatedBuff);
-                }
-                while (buffCount < matchesGained[matchSkillDef])
-                {
-                    buffCount++;
-                    characterBody.AddBuff(matchSkillDef.associatedBuff);
-                }
+                int buffCount = CharacterBody.GetBuffCount(matchSkillDef.associatedBuff);
+
+                int matchCount = matchesGainedMap[matchSkillDef];
+
+                BuffIndex buffIndex = matchSkillDef.associatedBuff.buffIndex;
+
+                SetBuffAmount((int)buffIndex, buffCount, matchCount);
+            }
+        }
+
+        private void SetBuffAmount(int buffIndex, int buffCount, int matchCount)
+        {
+            if (NetworkServer.active)
+            {
+                SetBuffAmountInternal(buffIndex, buffCount, matchCount);
+            } else
+            {
+                CmdSetBuffAmount(buffIndex, buffCount, matchCount);
+            }
+        }
+
+        [Command]
+        private void CmdSetBuffAmount(int buffIndex, int buffCount, int matchCount)
+        {
+            SetBuffAmountInternal(buffIndex, buffCount, matchCount);
+        }
+
+        private void SetBuffAmountInternal(int buffIndex, int buffCount, int matchCount)
+        {
+            while (buffCount > matchCount)
+            {
+                buffCount--;
+                CharacterBody.RemoveBuff((BuffIndex)buffIndex);
+            }
+            while (buffCount < matchCount)
+            {
+                buffCount++;
+                CharacterBody.AddBuff((BuffIndex)buffIndex);
             }
         }
 
         public void OnMatchAwarded(int matchCount, MatchTileType matchType)
         {
             MatchBoostedSkillDef matchSkillDef;
+
+            GameObject orbTarget = gameObject;
             if((matchSkillDef = matchType.skillDef as MatchBoostedSkillDef) != null)
             {
-                bool addToMatches = matchSkillDef.OnMatchAwarded(this, matchCount);
-                if (addToMatches)
+                orbTarget = matchSkillDef.OnMatchAwarded(this, genericSkills[GetSkillIndex(matchSkillDef)], matchCount);
+                if (matchSkillDef.associatedBuff != null)
                 {
-                    if (!matchesGained.ContainsKey(matchSkillDef))
+                    if (!matchesGainedMap.ContainsKey(matchSkillDef))
                     {
-                        matchesGained.Add(matchSkillDef, 0);
+                        matchesGainedMap.Add(matchSkillDef, 0);
                     }
-                    matchesGained[matchSkillDef] += matchCount;
+
+                    matchesGainedMap[matchSkillDef] += matchCount;
+
                     SyncBuffCount(matchSkillDef);
                 }
             }
@@ -89,11 +188,30 @@ namespace MatcherMod.Survivors.Matcher.Components
                 {
                     if (genericSkills[i].skillDef == matchType.skillDef)
                     {
+                        if(i > 0)
+                        {
+                            matchCount -= 1;
+                        }
                         for (int j = 0; j < matchCount; j++)
                         {
                             genericSkills[i].AddOneStock();
                         }
                     }
+                }
+            }
+
+            if (orbTarget != null)
+            {
+                EffectData effectData = new EffectData
+                {
+                    origin = transform.position,
+                    genericFloat = 0.5f,
+                    genericUInt = Util.IntToUintPlusOne(SkillCatalog.FindSkillIndexByName(matchType.skillDef.skillName))
+                };
+                effectData.SetNetworkedObjectReference(orbTarget);
+                for (int i = 0; i < matchCount; i++)
+                {
+                    EffectManager.SpawnEffect(MatcherContent.Assets.SkillTakenOrbEffect, effectData, true);
                 }
             }
         }
@@ -108,16 +226,22 @@ namespace MatcherMod.Survivors.Matcher.Components
         /// <returns>the amount of successful consumptions. for example, if you had 6 matches and consumption cost was 3, result would be 2 consumptions</returns>
         public int ConsumeMatches(MatchBoostedSkillDef skillDef, int consumptionCost = 1, int consumptionMinimum = 1, int maxConsumptions = 1)
         {
-            if (matchesGained.ContainsKey(skillDef))
+            if (matchesGainedMap.ContainsKey(skillDef))
             {
-                if (matchesGained[skillDef] < consumptionMinimum)
+                if (skillDef.respectChangedBuffCount)
+                {
+                    matchesGainedMap[skillDef] = CharacterBody.GetBuffCount(skillDef.associatedBuff);
+                    SyncBuffCount(skillDef);
+                }
+
+                if (matchesGainedMap[skillDef] < consumptionMinimum)
                     return 0;
 
                 int consumptions = 0;
-                while (matchesGained[skillDef] >= consumptionCost && maxConsumptions > 0)
+                while (matchesGainedMap[skillDef] >= consumptionCost && maxConsumptions > 0)
                 {
                     consumptions++;
-                    matchesGained[skillDef] -= consumptionCost;
+                    matchesGainedMap[skillDef] -= consumptionCost;
                     maxConsumptions--;
                 }
 
@@ -126,6 +250,20 @@ namespace MatcherMod.Survivors.Matcher.Components
                 return consumptions;
             }
             return 0;
+        }
+
+        internal void AwardRandomMatchForAI(int matches)
+        {                                                                                  //just first 3 skilldefs
+            OnMatchAwarded(matches, new MatchTileType (_skillDefs[UnityEngine.Random.Range(0, 4)]));
+        }
+
+        [Command]
+        internal void CmdKeyReduceInteractableCost(GameObject gameObject, int costReduce)
+        {
+            if (gameObject.TryGetComponent(out PurchaseInteraction purchaseInteraction))
+            {
+                purchaseInteraction.Networkcost = Mathf.Max(0, purchaseInteraction.Networkcost - costReduce);
+            }
         }
     }
 }

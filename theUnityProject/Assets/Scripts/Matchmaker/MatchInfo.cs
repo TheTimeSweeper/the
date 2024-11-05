@@ -6,7 +6,22 @@ namespace Matchmaker.MatchGrid
     public class MatchInfo : IEquatable<MatchInfo>
     {
         public MatchTile[] tilesMatched;
-        public int matchCount => tilesMatched.Length;
+        public int GetMatchCount()
+        {
+            switch (tilesMatched.Length)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    return 1;
+                case 4:
+                    return 2;
+                default:
+                case 5:
+                    return 5;
+            }
+        }
         public MatchTileType matchType => tilesMatched[0].TileType;
 
         public MatchInfo(List<MatchTile> tilesMatched)

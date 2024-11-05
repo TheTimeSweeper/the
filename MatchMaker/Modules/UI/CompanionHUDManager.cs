@@ -1,5 +1,7 @@
-﻿using RoR2.UI;
+﻿using RoR2;
+using RoR2.UI;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MatcherMod.Modules.UI
 {
@@ -8,6 +10,7 @@ namespace MatcherMod.Modules.UI
         public HUD hud { get; set; }
 
         public abstract GameObject UIPrefab { get; }
+        public abstract bool LocalUserOnly { get; }
         protected abstract string transformPath { get; }
 
         private TUI companionUI;
@@ -26,6 +29,12 @@ namespace MatcherMod.Modules.UI
             {
                 if (cachedBodyObject == null || cachedBodyObject != hud.targetBodyObject)
                 {
+                    if(companionUI != null)
+                    {
+                        companionUI.OnBodyLost();
+                        companionUI = default;
+                    }
+
                     cachedBodyObject = hud.targetBodyObject;
                     companionComponent = cachedBodyObject.GetComponent<TComponent>();
 
@@ -38,7 +47,7 @@ namespace MatcherMod.Modules.UI
                     }
                 }
 
-                if (companionComponent != null && companionComponent.allowUIUpdate)
+                if (companionUI != null && companionComponent != null && companionComponent.allowUIUpdate)
                 {
                     companionComponent.CompanionUI = companionUI;
                     companionUI.OnUIUpdate();
@@ -48,6 +57,18 @@ namespace MatcherMod.Modules.UI
 
         private void InitCompanionUI()
         {
+            if (LocalUserOnly)
+            {
+                PlayerCharacterMasterController controller = hud.targetMaster.GetComponent<PlayerCharacterMasterController>();
+                if (controller == null)
+                    return;
+                NetworkIdentity identity = controller.networkUserObject.GetComponent<NetworkIdentity>();
+                if (identity == null)
+                    return;
+                if (!identity.isLocalPlayer)
+                    return;
+            }
+
             GameObject gob = Instantiate(UIPrefab, hud.transform.Find(transformPath));
             gob.transform.localPosition = Vector3.zero;
             companionUI = gob.GetComponent<TUI>();

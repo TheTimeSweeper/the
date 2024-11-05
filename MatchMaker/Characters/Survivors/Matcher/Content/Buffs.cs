@@ -8,6 +8,9 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
         // armor buff gained during roll
         public static BuffDef armorBuff;
 
+        //creasted in matchersurvivor skill setup
+        public static BuffDef shieldMatchBuff;
+
         public static void Init(AssetBundle assetBundle)
         {
             armorBuff = Modules.Content.CreateAndAddBuff("HenryArmorBuff",
@@ -15,7 +18,6 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
                 Color.white,
                 false,
                 false);
-
         }
     }
 }

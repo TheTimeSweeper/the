@@ -1,5 +1,6 @@
 ﻿using MatcherMod.Modules.UI;
 using Matchmaker.MatchGrid;
+using RoR2.UI;
 using UnityEngine;
 
 namespace MatcherMod.Survivors.Matcher.Components.UI
@@ -8,6 +9,9 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
     {
         [SerializeField]
         private MatchGrid matchGrid;
+
+        [SerializeField]
+        private MPEventSystemLocator eventSystemLocator;
 
         void ICompanionUI<MatcherGridController>.OnInitialize(MatcherGridController hasUIComponent)
         {

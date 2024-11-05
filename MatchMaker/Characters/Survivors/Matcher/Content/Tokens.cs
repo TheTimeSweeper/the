@@ -20,19 +20,19 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
         {
             string prefix = MatcherSurvivor.TOKEN_PREFIX;
 
-            string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
-             + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine
-             + "< ! > Pistol is a powerful anti air, with its low cooldown and high damage." + Environment.NewLine + Environment.NewLine
-             + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine
-             + "< ! > Bomb can be used to wipe crowds with ease." + Environment.NewLine + Environment.NewLine;
+            string desc = "The Match Maker matches tiles to increase the potency of his abilities.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
+             + "< ! > Match sword tiles to be epic." + Environment.NewLine + Environment.NewLine
+             + "< ! > Match staff tiles to be epic." + Environment.NewLine + Environment.NewLine
+             + "< ! > Match shield tiles to stay alive so you can be epic." + Environment.NewLine + Environment.NewLine
+             + "< ! > Match key tiles to just to add another symbol to the board cause 3 was too little." + Environment.NewLine + Environment.NewLine;
 
-            string outro = "..and so he left, searching for a new identity.";
-            string outroFailure = "..and so he vanished, forever a blank slate.";
+            string outro = "..and so he left, .";
+            string outroFailure = "..and so he vanished, .";
 
             Language.Add(prefix + "NAME", "Match Maker");
             Language.Add(prefix + "DESCRIPTION", desc);
-            Language.Add(prefix + "SUBTITLE", "The Chosen One");
-            Language.Add(prefix + "LORE", "sample lore");
+            Language.Add(prefix + "SUBTITLE", "High Scorer");
+            Language.Add(prefix + "LORE", "Society grows best when the old plant trees in whose shade they'll never sit.");
             Language.Add(prefix + "OUTRO_FLAVOR", outro);
             Language.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -40,34 +40,46 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
             Language.Add(prefix + "MASTERY_SKIN_NAME", "Alternate");
             #endregion
 
-            #region Passive
-            Language.Add(prefix + "PASSIVE_NAME", "Henry passive");
-            Language.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
-            #endregion
-
             #region Primary
-            Language.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
-            Language.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Modules.Tokens.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * MatcherContent.StaticValues.swordDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "PRIMARY_SWORD_NAME", "Sword Swing");
+            Language.Add(prefix + "PRIMARY_SWORD_DESCRIPTION", Modules.Tokens.agilePrefix + $" Swing for <style=cIsDamage>{100f * Config.M1_Sword_Damage.Value}% damage</style>. {Modules.Tokens.UtilityText("Consumes 1 Match")} to deal {Modules.Tokens.DamageText($"{1 + Config.M1_Sword_Multiplier.Value}x damage")}.");
             #endregion
 
             #region Secondary
-            Language.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            Language.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Modules.Tokens.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * MatcherContent.StaticValues.gunDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "SECONDARY_STAFF_NAME", "Staff Fireball");
+            Language.Add(prefix + "SECONDARY_STAFF_DESCRIPTION", $"Expend all stocks and channel a large fireblast for <style=cIsDamage>{100f * Config.M2_Staff_Damage.Value}% damage per stock</style>. {Modules.Tokens.UtilityText("Consumes up to 8 Matches")} to {Modules.Tokens.DamageText("multiply damage dealt")}.");
+
+            Language.Add(prefix + "SECONDARY_STAFF2_NAME", "Staff Explosion");
+            Language.Add(prefix + "SECONDARY_STAFF2_DESCRIPTION", $"Expend all stocks and channel a large fireblast for <style=cIsDamage>{100f * Config.M2_Staff_Damage.Value}% damage per stock</style>. {Modules.Tokens.UtilityText("Consumes all Matches")} to {Modules.Tokens.DamageText("multiply damage dealt")}.");
             #endregion
 
             #region Utility
-            Language.Add(prefix + "UTILITY_ROLL_NAME", "Roll");
-            Language.Add(prefix + "UTILITY_ROLL_DESCRIPTION", "Roll a short distance, gaining <style=cIsUtility>300 armor</style>. <style=cIsUtility>You cannot be hit during the roll.</style>");
+            Language.Add(prefix + "UTILITY_ROLL_NAME", "Shield Roll");
+            Language.Add(prefix + "UTILITY_ROLL_DESCRIPTION", $"Roll a short distance. {Modules.Tokens.UtilityText("Consumes 5 Matches")} to {Modules.Tokens.DamageText("increase distance")} and {Modules.Tokens.DamageText("grant invincibility")} while rolling.\n{Modules.Tokens.UtilityText("Shield matches")} passively grant {Modules.Tokens.DamageText($"{Config.M3_Shield_BuffArmor.Value} armor")} and are broken on hit");
+            #endregion
+
+            #region Extra Symbol
+            Language.Add(prefix + "EXTRA_KEY_NAME", "Key");
+            Language.Add(prefix + "EXTRA_KEY_DESCRIPTION", $"Matching slightly {Modules.Tokens.UtilityText("lowers the money cost")} on an interactable within purchase range.");
+
+            Language.Add(prefix + "EXTRA_CRATE_NAME", "Crate");
+            Language.Add(prefix + "EXTRA_CRATE_DESCRIPTION", $"Matching has a slight chance to {Modules.Tokens.UtilityText("give a random common item")}.");
+
+            Language.Add(prefix + "EXTRA_BRAIN_NAME", "Thought");
+            Language.Add(prefix + "EXTRA_BRAIN_DESCRIPTION", $"Matching gives a small amount of {Modules.Tokens.UtilityText("experience")} for each enemy nearby.");
+
+            Language.Add(prefix + "EXTRA_CHICKEN_NAME", "Food");
+            Language.Add(prefix + "EXTRA_CHICKEN_DESCRIPTION", $"Matching while above 90% health permanently increases your {Modules.Tokens.UtilityText("max health")}.");
             #endregion
 
             #region Special
-            Language.Add(prefix + "SPECIAL_BOMB_NAME", "Bomb");
-            Language.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * MatcherContent.StaticValues.bombDamageCoefficient}% damage</style>.");
+            Language.Add(prefix + "SPECIAL_MATCH_NAME", "Match");
+            Language.Add(prefix + "SPECIAL_MATCH_DESCRIPTION", $"Pull up a grid of tiles based on your skills. Match 3 or more tiles in a row to store {Modules.Tokens.UtilityText("Matches")} that can be used to boost its respective skill.");
             #endregion
 
             #region Achievements
-            Language.Add(Modules.Tokens.GetAchievementNameToken(MasteryAchievement.identifier), "Henry: Mastery");
-            Language.Add(Modules.Tokens.GetAchievementDescriptionToken(MasteryAchievement.identifier), "As Henry, beat the game or obliterate on Monsoon.");
+            Language.Add(Modules.Tokens.GetAchievementNameToken(MasteryAchievement.identifier), "Match Maker: Mastery");
+            Language.Add(Modules.Tokens.GetAchievementDescriptionToken(MasteryAchievement.identifier), "As Match Maker, beat the game or obliterate on Monsoon.");
             #endregion
         }
     }

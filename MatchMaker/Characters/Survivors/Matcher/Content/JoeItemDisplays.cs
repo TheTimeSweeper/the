@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace MatcherMod.Survivors.Matcher.MatcherContent
 {
-    internal class JoeItemDisplays : ItemDisplaysBase
+    internal class JoeItemDisplays : BaseItemDisplaysSetup
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {

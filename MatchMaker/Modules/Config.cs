@@ -179,7 +179,7 @@ namespace MatcherMod.Modules
 
             BepInEx.Configuration.ConfigEntry<T> configEntry = MyConfig.Bind(section, name, defaultValue, description);
 
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.smooth_salad.shaderswapper"))
             {
                 TryRegisterOption(configEntry, min, max, restartRequired);
             }

@@ -13,9 +13,9 @@ namespace MatcherMod
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     public class MatcherPlugin : BaseUnityPlugin
     {
-        public const string MODUID = "com.TheTimesweeper.Matcher";
-        public const string MODNAME = "Match Maker";
-        public const string MODVERSION = "0.2.0";
+        public const string MODUID = "com.TheTimesweeper.MatchMaker";
+        public const string MODNAME = "MatchMaker";
+        public const string MODVERSION = "0.3.0";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 

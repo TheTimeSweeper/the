@@ -1,0 +1,20 @@
+﻿using RoR2;
+using System.Collections.Generic;
+
+namespace MatcherMod.Modules.Characters
+{
+    public abstract class BaseItemDisplaysSetup
+    {
+        public void SetItemDisplays(ItemDisplayRuleSet itemDisplayRuleSet)
+        {
+            ItemDisplays.SetItemDisplaysWhenReady(() =>
+            {
+                List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
+                SetItemDisplayRules(itemDisplayRules);
+                itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
+            });
+        }
+
+        protected abstract void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules);
+    }
+}
