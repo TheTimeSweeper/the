@@ -37,7 +37,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                 }
             }
         }
-
+        
         protected override void OnCastEnter()
         {
             base.OnCastEnter();
@@ -64,7 +64,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                 new BlastAttack
                 {
                     attacker = base.characterBody.gameObject,
-                    baseDamage = Config.M2_Staff_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
+                    baseDamage = Config.M2_Staff2_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
                     baseForce = 2000,
                     attackerFiltering = AttackerFiltering.NeverHitSelf,
                     crit = base.characterBody.RollCrit(),

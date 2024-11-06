@@ -262,7 +262,7 @@ MonoBehaviour:
   breakTime: 0.15
   fallTime: 0.25
   matchGridInteractables: {fileID: 8341639236892885904}
-  _interactableTileChance: 0.03
+  _interactableTileChance: 0.02
 --- !u!114 &8341639236892885904
 MonoBehaviour:
   m_ObjectHideFlags: 0

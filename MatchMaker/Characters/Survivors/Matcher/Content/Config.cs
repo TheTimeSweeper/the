@@ -14,6 +14,8 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
 
         public static ConfigEntry<float> M2_Staff_Damage;
         public static ConfigEntry<float> M2_Staff_Radius;
+        public static ConfigEntry<float> M2_Staff2_Damage;
+        public static ConfigEntry<float> M2_Staff2_Radius;
         public static ConfigEntry<float> M2_Staff2_MatchRadius;
         public static ConfigEntry<float> M2_Staff2_SmallHop;
         public static ConfigEntry<float> M2_Staff2_AntiGrav;
@@ -43,12 +45,12 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
             nipper = Modules.Config.BindAndOptions(
                 SectionBody,
                 nameof(nipper),
-                5f);
+                6f, -2000, 2000);
 
             M1_Sword_Damage = Modules.Config.BindAndOptions(
                 SectionSkills,
                 nameof(M1_Sword_Damage),
-                2f);
+                2.2f);
 
             M1_Sword_Multiplier = Modules.Config.BindAndOptions(
                 SectionSkills,
@@ -65,28 +67,40 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
                 nameof(M2_Staff_Damage),
                 2.0f);
 
+            M2_Staff_Radius = Modules.Config.BindAndOptions(
+                SectionSkills,
+                nameof(M2_Staff_Radius),
+                30.0f,
+                0,
+                100,
+                "",
+                true);
+
+            M2_Staff2_Damage = Modules.Config.BindAndOptions(
+                SectionSkills,
+                nameof(M2_Staff2_Damage),
+                2.0f);
+
+            M2_Staff2_Radius = Modules.Config.BindAndOptions(
+                SectionSkills,
+                nameof(M2_Staff2_Radius),
+                30.0f,
+                0,
+                100,
+                "",
+                true);
+            M2_Staff2_MatchRadius = Modules.Config.BindAndOptions(
+                SectionSkills,
+                nameof(M2_Staff2_MatchRadius),
+                5.0f);
+
             M2_Staff2_SmallHop = Modules.Config.BindAndOptions(
                 SectionSkills,
                 nameof(M2_Staff2_SmallHop),
                 10.0f);
-
             M2_Staff2_AntiGrav = Modules.Config.BindAndOptions(
                 SectionSkills,
                 nameof(M2_Staff2_AntiGrav),
-                5.0f);
-
-            M2_Staff_Radius = Modules.Config.BindAndOptions(
-                SectionSkills,
-                nameof(M2_Staff_Radius),
-                30.0f, 
-                0,
-                100, 
-                "",
-                true);
-
-            M2_Staff2_MatchRadius = Modules.Config.BindAndOptions(
-                SectionSkills,
-                nameof(M2_Staff2_MatchRadius),
                 5.0f);
 
             M3_Shield_BuffArmor = Modules.Config.BindAndOptions(
@@ -110,7 +124,6 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
                 SectionSkills,
                 nameof(M3_Shield_RollInitialSpeed),
                 5f);
-
             M3_Shield_RollFinalSpeed = Modules.Config.BindAndOptions(
                 SectionSkills,
                 nameof(M3_Shield_RollFinalSpeed),

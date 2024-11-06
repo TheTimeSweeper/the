@@ -113,23 +113,38 @@ namespace MatcherMod.Modules
         internal static IEnumerator LoadAssetCoroutine<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
+            if (!assetBundle.Contains(name))
+            {
+                Log.Error($"shit not found {name}");
+                yield break;
+            }
             while (!request.isDone)
+            {
                 yield return null;
+            }
             
             onComplete?.Invoke(request.asset as T);
         }
+
         internal static IEnumerator LoadAssetCoroutine<T>(object key, Action<T> OnComplete) where T : Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            while (!loadAsset.IsDone) 
-                yield return null; 
+            Log.Message($"load addressable {key}");
+            while (!loadAsset.IsDone)
+            {
+                Log.Message($"loading addressable {key}");
+                yield return null;
+            }
+
+            Log.Warning($"done {key}");
             
             OnComplete?.Invoke(loadAsset.Result);
+            yield break;
         }
 
         internal static GameObject DebugClone(this GameObject gameObject, bool network = false)
         {
-            if (true/*GeneralConfig.Debug.Value*/)
+            if (false/*GeneralConfig.Debug.Value*/)
             {
                 return R2API.PrefabAPI.InstantiateClone(gameObject, gameObject.name, network);
             }
@@ -164,10 +179,20 @@ namespace MatcherMod.Modules
             AsyncAsset<T2> load2, 
             Action<T1, T2> onComplete) where T1: Object where T2: Object
         {
+
+            Log.Info("load 1");
             while (!load1.coroutine.MoveNext())
+            {
+                Log.Info("loading 1");
                 yield return null;
+            }
+            Log.Info("load 2");
             while (!load2.coroutine.MoveNext())
+            {
+                Log.Info(load2.result);
+                Log.Info("loading 2");
                 yield return null;
+            }
 
             onComplete(load1.result, load2.result);
         }
@@ -441,6 +466,7 @@ namespace MatcherMod.Modules
         public void OnCoroutineComplete(T loadResult)
         {
             result = loadResult;
+            Log.Warning($"coroutinecomplete {result}");
             isDone = true;
             onComplete?.Invoke(result);
         }

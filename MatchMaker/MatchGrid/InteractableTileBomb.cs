@@ -11,13 +11,35 @@ namespace Matchmaker.MatchGrid
         [SerializeField]
         private Image bombTarget;
 
+        private float _randomizeInterval = 0.69f;
+        private float _randomizeTim = 0.69f;
+        private int _tileTargetIndex = 0;
+
         public override void Init(MatchTile matchTile)
         {
             base.Init(matchTile);
-            if(tileToDestroy == null)
+            _tileTargetIndex = Random.Range(0, matchGrid.TileTypes.Length);
+            IncrementTargetTIle();
+        }
+
+        void FixedUpdate()
+        {
+            _randomizeTim -= Time.fixedDeltaTime;
+
+            if (_randomizeTim < 0)
             {
-                tileToDestroy = matchGrid.TileTypes[Random.Range(0,matchGrid.TileTypes.Length)];
+                _randomizeTim = _randomizeInterval;
+                IncrementTargetTIle();
             }
+        }
+
+        private void IncrementTargetTIle()
+        {
+            _tileTargetIndex++;
+            _tileTargetIndex %= matchGrid.TileTypes.Length;
+
+            tileToDestroy = matchGrid.TileTypes[_tileTargetIndex];
+
             bombTarget.color = tileToDestroy.GetColor();
             bombTarget.sprite = tileToDestroy.GetIcon();
         }

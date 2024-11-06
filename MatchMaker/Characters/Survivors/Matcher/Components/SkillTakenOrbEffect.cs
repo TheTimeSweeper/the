@@ -33,8 +33,9 @@ namespace MatcherMod.Survivors.Matcher.Components
             {
                 //colorIndex = itemDef.colorIndex;
                 sprite = skilldef.icon;
-
-                scaleSpriteComponent.scaleFactor = Config.nipper.Value/sprite.rect.width;
+                //scaleSpriteComponent.scaleFactor = (Config.nipper.Value * sprite.pixelsPerUnit) / sprite.texture.width;
+                this.iconSpriteRenderer.sprite = sprite;
+                Matchmaker.Util.NormalizeSpriteScale(iconSpriteRenderer, Config.nipper.Value);
             }
 
             Color color = Color.white;// ColorCatalog.GetColor(colorIndex);
@@ -50,7 +51,6 @@ namespace MatcherMod.Survivors.Matcher.Components
             {
                 this.spritesToColor[j].color = color;
             }
-            this.iconSpriteRenderer.sprite = sprite;
         }
 
         // Token: 0x04003F18 RID: 16152

@@ -44,7 +44,7 @@ namespace MatcherMod.Survivors.Matcher
             subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
 
             characterPortrait = assetBundle.LoadAsset<Texture>("texIconConscript"),
-            bodyColor = Color.red,
+            bodyColor = new Color(1, 0.616f, 0.49f),
             sortPosition = 69.5f,
             
             //crosshairBundlePath = "GICrosshair",
@@ -78,8 +78,6 @@ namespace MatcherMod.Survivors.Matcher
 
             MatcherContent.Config.Init();
 
-            //GIUnlockables.Init();
-
             MatcherContent.States.Init();
             MatcherContent.Tokens.Init();
             Modules.Language.PrintOutput("matchmaker.txt");
@@ -94,7 +92,6 @@ namespace MatcherMod.Survivors.Matcher
             InitializeSkills();
             InitializeSkins();
             InitializeCharacterMaster();
-
 
             AddHooks();
         }
@@ -195,7 +192,7 @@ namespace MatcherMod.Survivors.Matcher
             });
             secondarySkillDef1.matchConsumptionCost = 1;
             secondarySkillDef1.matchConsumptionMinimum = 1;
-            secondarySkillDef1.matchMaxConsumptions = 10;
+            secondarySkillDef1.matchMaxConsumptions = 8;
             secondarySkillDef1.associatedBuff = CreateMatchBuff(secondarySkillDef1);
 
             //here is a basic skill def with all fields accounted for
@@ -231,7 +228,7 @@ namespace MatcherMod.Survivors.Matcher
             });
             secondarySkillDef2.matchConsumptionCost = 1;
             secondarySkillDef2.matchConsumptionMinimum = 1;
-            secondarySkillDef2.matchMaxConsumptions = 10;
+            secondarySkillDef2.matchMaxConsumptions = int.MaxValue;
             secondarySkillDef2.associatedBuff = CreateMatchBuff(secondarySkillDef2);
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1, secondarySkillDef2);
@@ -535,6 +532,35 @@ namespace MatcherMod.Survivors.Matcher
             On.RoR2.UI.HUD.Awake += HUD_Awake;
 
             On.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
+
+            On.RoR2.TeleporterInteraction.OnInteractionBegin += TeleporterInteraction_OnInteractionBegin;
+        }
+
+        private void TeleporterInteraction_OnInteractionBegin(On.RoR2.TeleporterInteraction.orig_OnInteractionBegin orig, TeleporterInteraction self, Interactor activator)
+        {
+            if(self.currentState is TeleporterInteraction.IdleState)
+            {
+                List<MatcherGridController> matchers = InstanceTracker.GetInstancesList<MatcherGridController>();
+                if (matchers.Count > 0) {
+
+                    Vector3 random = UnityEngine.Random.onUnitSphere + self.transform.position;
+                    random.y = self.transform.position.y;
+
+                    GameObject box = UnityEngine.Object.Instantiate(MatcherContent.Assets.BoxToOpenByMatching, random, Quaternion.identity);
+
+                    int difficulty = Run.instance.stageClearCount * matchers.Count;
+
+                    int randomAmountsAmount = UnityEngine.Random.Range(1, 5);
+                    int[] randomAmounts = new int[randomAmountsAmount];
+                    for (int i = 0; i < randomAmountsAmount; i++)
+                    {
+                        randomAmounts[i] = UnityEngine.Random.Range(4, 7) * Mathf.Max(difficulty / 2, 1);
+                    }
+
+                    box.GetComponent<BoxToOpenByMatching>().Init(matchers[0].CompanionUI.MatchGrid.TileTypes, randomAmounts);
+                }
+            }
+            orig(self, activator);
         }
 
         private void HealthComponent_TakeDamageProcess(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)

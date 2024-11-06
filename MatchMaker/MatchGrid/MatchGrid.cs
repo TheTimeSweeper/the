@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,7 +9,7 @@ namespace Matchmaker.MatchGrid
 {
     public class MatchGrid : MonoBehaviour
     {
-        public delegate void MatchAwardedEvent(int matchCount, MatchTileType matchType);
+        public delegate void MatchAwardedEvent(MatchTileType matchType, int matchCount, int tilesMatched);
         public MatchAwardedEvent OnMatchAwarded;
 
         [SerializeField]
@@ -339,7 +340,7 @@ namespace Matchmaker.MatchGrid
         {
             for (int i = 0; i < matches.Count; i++)
             {
-                Award(matches[i].GetMatchCount(), matches[i].matchType);
+                Award(matches[i].matchType, matches[i].GetMatchCount(), matches[i].tilesMatched.Length);
                 matches[i].Break();
             }
             if (matches.Count > 0)
@@ -409,10 +410,10 @@ namespace Matchmaker.MatchGrid
             }
         }
 
-        private void Award(int matchCount, MatchTileType matchType)
+        private void Award(MatchTileType matchType, int matchCount, int tilesMatched)
         {
             Debug.LogWarning($"matched {matchCount} {matchType}s!");
-            OnMatchAwarded?.Invoke(matchCount, matchType);
+            OnMatchAwarded?.Invoke(matchType, matchCount, tilesMatched);
         }
 
         private bool CheckForMatch(MatchTileDragInfo startTile, DragDirection dragDirection, out MatchInfo foundMatch) => CheckForMatch(startTile.tile, startTile.currentGridPosition, dragDirection, out foundMatch);

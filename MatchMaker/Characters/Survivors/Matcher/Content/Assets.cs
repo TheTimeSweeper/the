@@ -25,6 +25,8 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
         public static AsyncAsset<BasicPickupDropTable> dtTier1Item;
         public static GameObject SkillTakenOrbEffect;
 
+        public static GameObject BoxToOpenByMatching;
+
         public static void Init(AssetBundle assetBundle)
         {
 
@@ -67,8 +69,9 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
                 SkillTakenOrbEffect.transform.Find("BillboardBase/Corners").gameObject.SetActive(false);
 
                 skillOrbEffect.scaleSpriteComponent = SkillTakenOrbEffect.transform.Find("BillboardBase").GetComponent<ScaleSpriteByCamDistance>();
+                skillOrbEffect.scaleSpriteComponent.enabled = false;
 
-                var orbEffect = SkillTakenOrbEffect.GetComponent<OrbEffect>();
+                OrbEffect orbEffect = SkillTakenOrbEffect.GetComponent<OrbEffect>();
                 orbEffect.startVelocity1 = new Vector3(-10, 0, -10);
                 orbEffect.startVelocity2 = new Vector3(10, 0, 10);
                 orbEffect.endVelocity1 = new Vector3(-10, 10, -10);
@@ -84,6 +87,18 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
         {
             matchGrid = Modules.Asset.AddAsyncAsset<GameObject>(_assetBundle/*_gridAssetBundle*/, "Grid");
             dtTier1Item = Modules.Asset.AddAsyncAsset<BasicPickupDropTable>("RoR2/Base/Common/dtTier1Item.asset");
+            Modules.Asset.LoadAssetsAsync<GameObject, TMPro.TMP_FontAsset>(
+                new AsyncAsset<GameObject>(_assetBundle, "BoxToOpenByMatching"),
+                new AsyncAsset<TMPro.TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset"), 
+                (box, font) =>
+                {
+                    BoxToOpenByMatching = box;
+                    BoxToOpenHologramContent hologramContent = BoxToOpenByMatching.GetComponent<BoxToOpenByMatching>().hologramPrefab.GetComponent<BoxToOpenHologramContent>();
+                    for (int i = 0; i < hologramContent.TileCostTexts.Length; i++)
+                    {
+                        hologramContent.TileCostTexts[i].font = font;
+                    }
+                });
         }
 
         #region effects

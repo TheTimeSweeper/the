@@ -45,5 +45,10 @@ namespace Matchmaker
         {
             return b + (a - b) * Mathf.Exp(-decay * deltaTime);
         }
+
+        internal static void ScaleSprite(SpriteRenderer spriteRenderer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

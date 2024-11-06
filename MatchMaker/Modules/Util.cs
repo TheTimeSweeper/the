@@ -45,5 +45,10 @@ namespace Matchmaker
         {
             return b + (a - b) * Mathf.Exp(-decay * deltaTime);
         }
+
+        public static void NormalizeSpriteScale(SpriteRenderer spriteRenderer, float scale)
+        {
+            spriteRenderer.transform.localScale = Vector3.one * scale * spriteRenderer.sprite.pixelsPerUnit / spriteRenderer.sprite.rect.width;
+        }
     }
 }

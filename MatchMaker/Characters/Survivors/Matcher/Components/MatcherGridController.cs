@@ -18,6 +18,9 @@ namespace MatcherMod.Survivors.Matcher.Components
         public bool allowUIUpdate { get; set; } = true;
         public MatcherUI CompanionUI { get; set; }
 
+        public delegate void MatchGainedEvent(MatchTileType type, int skillIndex, int matchesGained, int tilesMatched);
+        public event MatchGainedEvent OnMatchGained;
+
         [SerializeField]
         public List<GenericSkill> genericSkills = new List<GenericSkill>();
 
@@ -40,6 +43,7 @@ namespace MatcherMod.Survivors.Matcher.Components
         void Awake()
         {
             CharacterBody = GetComponent<CharacterBody>();
+            InstanceTracker.Add(this);
 
             for (int i = 0; i < genericSkills.Count; i++)
             {
@@ -50,6 +54,11 @@ namespace MatcherMod.Survivors.Matcher.Components
         void Start()
         {
             InitSkillDefs();
+        }
+
+        void OnDestroy()
+        {
+            InstanceTracker.Remove(this);
         }
 
         private void genericSkill_onSkillChanged(GenericSkill genericSkill)
@@ -162,9 +171,11 @@ namespace MatcherMod.Survivors.Matcher.Components
             }
         }
 
-        public void OnMatchAwarded(int matchCount, MatchTileType matchType)
+        public void OnMatchAwarded(MatchTileType matchType, int matchCount, int tilesMatched)
         {
             MatchBoostedSkillDef matchSkillDef;
+
+            OnMatchGained?.Invoke(matchType, GetSkillIndex(matchType.skillDef), matchCount, tilesMatched);
 
             GameObject orbTarget = gameObject;
             if((matchSkillDef = matchType.skillDef as MatchBoostedSkillDef) != null)
@@ -190,7 +201,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                     {
                         if(i > 0)
                         {
-                            matchCount -= 1;
+                            matchCount = Mathf.FloorToInt(matchCount/2);
                         }
                         for (int j = 0; j < matchCount; j++)
                         {
@@ -254,7 +265,7 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         internal void AwardRandomMatchForAI(int matches)
         {                                                                                  //just first 3 skilldefs
-            OnMatchAwarded(matches, new MatchTileType (_skillDefs[UnityEngine.Random.Range(0, 4)]));
+            OnMatchAwarded(new MatchTileType(_skillDefs[UnityEngine.Random.Range(0, 4)]), matches, matches * 3);
         }
 
         [Command]

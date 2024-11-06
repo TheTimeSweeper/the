@@ -47,10 +47,10 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
 
             #region Secondary
             Language.Add(prefix + "SECONDARY_STAFF_NAME", "Staff Fireball");
-            Language.Add(prefix + "SECONDARY_STAFF_DESCRIPTION", $"Expend all stocks and channel a large fireblast for <style=cIsDamage>{100f * Config.M2_Staff_Damage.Value}% damage per stock</style>. {Modules.Tokens.UtilityText("Consumes up to 8 Matches")} to {Modules.Tokens.DamageText("multiply damage dealt")}.");
+            Language.Add(prefix + "SECONDARY_STAFF_DESCRIPTION", $"Expend all stocks and fire a large fireblast for <style=cIsDamage>{100f * Config.M2_Staff_Damage.Value}% damage per stock</style>. {Modules.Tokens.UtilityText("Consumes up to 8 Matches")} to {Modules.Tokens.DamageText("multiply damage dealt")}.");
 
             Language.Add(prefix + "SECONDARY_STAFF2_NAME", "Staff Explosion");
-            Language.Add(prefix + "SECONDARY_STAFF2_DESCRIPTION", $"Expend all stocks and channel a large fireblast for <style=cIsDamage>{100f * Config.M2_Staff_Damage.Value}% damage per stock</style>. {Modules.Tokens.UtilityText("Consumes all Matches")} to {Modules.Tokens.DamageText("multiply damage dealt")}.");
+            Language.Add(prefix + "SECONDARY_STAFF2_DESCRIPTION", $"Expend all stocks and channel a large fireblast for <style=cIsDamage>{100f * Config.M2_Staff_Damage.Value}% damage per stock</style>. {Modules.Tokens.UtilityText("Consumes all Matches")} to {Modules.Tokens.DamageText("multiply damage dealt")} and {Modules.Tokens.UtilityText("increase range")}.");
             #endregion
 
             #region Utility

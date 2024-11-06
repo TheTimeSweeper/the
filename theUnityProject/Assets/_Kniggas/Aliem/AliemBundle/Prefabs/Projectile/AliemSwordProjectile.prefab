@@ -36,6 +36,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2655883070963775169}
   m_Father: {fileID: 0}
@@ -105,11 +106,14 @@ MonoBehaviour:
   ghostTransformAnchor: {fileID: 0}
   startSound: 
   cannotBeDeleted: 0
+  authorityHandlesCollisionEvents: 1
   flightSoundLoop: {fileID: 0}
   canImpactOnTrigger: 0
   allowPrediction: 1
   owner: {fileID: 0}
+  localCollisionHappened: 0
   procCoefficient: 1
+  CheckChildrenForCollidersAndIncludeDisabled: 0
 --- !u!114 &7827757718152977054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +129,10 @@ MonoBehaviour:
   positionTransmitInterval: 0.033333335
   interpolationFactor: 1
   allowClientsideCollision: 0
+  checkForLocalPlayerAuthority: 0
+  singletonArrayIndex: -1
+  serverPosition: {x: 0, y: 0, z: 0}
+  serverRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4350327060550585696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +188,10 @@ MonoBehaviour:
   crit: 0
   force: 0
   damageColorIndex: 0
-  damageType: 0
+  damageType:
+    damageType: 0
+    damageTypeExtended: 0
+    damageSource: 0
   useDotMaxStacksFromAttacker: 0
   dotMaxStacksFromAttacker: 4294967295
 --- !u!114 &4532640807492021452
@@ -236,6 +247,10 @@ MonoBehaviour:
       m_Calls: []
   fireFrequency: 60
   resetInterval: -1
+  requireDelayOnePhysicsFrame: 0
+  ScaleWithVelocity: 0
+  ScaleVelocitySource: {fileID: 0}
+  ScaleWithVelocityAxis: {x: 0, y: 0, z: 1}
 --- !u!1 &7774312390105989201
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +278,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.4699, y: 1.8638401, z: 2.7046285}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6969431981018999241}
   m_RootOrder: 0

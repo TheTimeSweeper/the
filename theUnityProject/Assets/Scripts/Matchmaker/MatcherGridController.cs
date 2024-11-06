@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MatcherMod.Survivors.Matcher.Components
 {
-    internal class MatcherGridController : MonoBehaviour, IHasCompanionUI<MatcherUI>
+    public class MatcherGridController : MonoBehaviour, IHasCompanionUI<MatcherUI>
     {
         public bool allowUIUpdate { get; set; }
         public MatcherUI CompanionUI { get; set; }

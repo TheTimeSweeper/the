@@ -10,6 +10,7 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
     {
         [SerializeField]
         private MatchGrid matchGrid;
+        public MatchGrid MatchGrid => matchGrid;
 
         [SerializeField]
         private MPEventSystemLocator eventSystemLocator;
