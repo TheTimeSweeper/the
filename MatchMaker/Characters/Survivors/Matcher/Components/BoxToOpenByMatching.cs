@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MatcherMod.Survivors.Matcher.Components
 {
-    public class BoxToOpenByMatching : MonoBehaviour, IHologramContentProvider
+    public class BoxToOpenByMatching : NetworkBehaviour, IHologramContentProvider
     {
         private GameObject cachedObject;
         private BoxToOpenHologramContent cachedHologram;

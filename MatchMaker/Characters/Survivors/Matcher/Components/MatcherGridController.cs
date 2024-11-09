@@ -27,6 +27,8 @@ namespace MatcherMod.Survivors.Matcher.Components
         public Dictionary<SkillDef, int> matchesGainedMap = new Dictionary<SkillDef, int>();
 
         private SkillDef[] _skillDefs = new SkillDef[4];
+        private MatchTileType[] _tileTypes;
+        public MatchTileType[] TileTypes => _tileTypes;
 
         private int GetSkillIndex(SkillDef skillDef)
         {
@@ -53,7 +55,7 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         void Start()
         {
-            InitSkillDefs();
+            InitSkillDefsAndTileTypes();
         }
 
         void OnDestroy()
@@ -69,7 +71,8 @@ namespace MatcherMod.Survivors.Matcher.Components
             if (!matchesGainedMap.ContainsKey(genericSkill.skillDef))
             {
                 //ResetMatches();
-                CompanionUI.GenerateGrid(InitSkillDefs());
+                InitSkillDefsAndTileTypes();
+                CompanionUI.GenerateGrid(_tileTypes);
             }
         }
 
@@ -79,7 +82,11 @@ namespace MatcherMod.Survivors.Matcher.Components
             {
                 if (!CompanionUI.Created)
                 {
-                    CompanionUI.GenerateGrid(InitSkillDefs());
+                    if (_tileTypes == null)
+                    {
+                        InitSkillDefsAndTileTypes();
+                    }
+                    CompanionUI.GenerateGrid(_tileTypes);
                 }
                 CompanionUI.Show();
                 return CompanionUI.Showing;
@@ -87,7 +94,7 @@ namespace MatcherMod.Survivors.Matcher.Components
             return false;
         }
 
-        public SkillDef[] InitSkillDefs()
+        public void InitSkillDefsAndTileTypes()
         {
             matchesGainedMap = new Dictionary<SkillDef, int>();
 
@@ -98,7 +105,11 @@ namespace MatcherMod.Survivors.Matcher.Components
                 matchesGainedMap[_skillDefs[i]] = 0;
             }
 
-            return _skillDefs;
+            _tileTypes = new MatchTileType[_skillDefs.Length];
+            for (int i = 0; i < _skillDefs.Length; i++)
+            {
+                _tileTypes[i] = new MatchTileType(_skillDefs[i]);
+            }
         }
 
         //private void ResetMatches()

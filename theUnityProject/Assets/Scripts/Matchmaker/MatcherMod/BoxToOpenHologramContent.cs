@@ -1,6 +1,7 @@
 ﻿using Matchmaker;
 using Matchmaker.MatchGrid;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,9 +24,8 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         public void Init(MatchTileType[] tileTypes, int[] costs)
         {
-
             int i = 0;
-            for (; i < tileTypes.Length; i++)
+            for (; i < costs.Length; i++)
             {
                 tileCostObjects[i].SetActive(true);
                 tileCostSprites[i].sprite = tileTypes[i].GetIcon();
@@ -42,7 +42,7 @@ namespace MatcherMod.Survivors.Matcher.Components
         {
             for (int i = 0; i < tileCostTexts.Length; i++)
             {
-                displayedCostAmounts[i] = Util.ExpDecayLerp(displayedCostAmounts[i], costAmounts[i], 1, Time.deltaTime);
+                displayedCostAmounts[i] = Util.ExpDecayLerp(displayedCostAmounts[i], costAmounts[i], 10, Time.deltaTime);
 
                 tileCostTexts[i].text = Mathf.RoundToInt(displayedCostAmounts[i]).ToString();
             }

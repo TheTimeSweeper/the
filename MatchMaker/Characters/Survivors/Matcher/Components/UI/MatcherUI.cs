@@ -27,17 +27,11 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
             Show(false);
         }
 
-        public void GenerateGrid(SkillDef[] skillDefs)
+        public void GenerateGrid(MatchTileType[] tileTypes)
         {
             Created = true;
 
             matchGrid.OnMatchAwarded = controller.OnMatchAwarded;
-
-            MatchTileType[] tileTypes = new MatchTileType[skillDefs.Length];
-            for (int i = 0; i < skillDefs.Length; i++)
-            {
-                tileTypes[i] = new MatchTileType(skillDefs[i]);
-            }
 
             matchGrid.Init(tileTypes);
         }

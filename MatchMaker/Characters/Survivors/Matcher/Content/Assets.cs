@@ -87,18 +87,32 @@ namespace MatcherMod.Survivors.Matcher.MatcherContent
         {
             matchGrid = Modules.Asset.AddAsyncAsset<GameObject>(_assetBundle/*_gridAssetBundle*/, "Grid");
             dtTier1Item = Modules.Asset.AddAsyncAsset<BasicPickupDropTable>("RoR2/Base/Common/dtTier1Item.asset");
-            Modules.Asset.LoadAssetsAsync<GameObject, TMPro.TMP_FontAsset>(
-                new AsyncAsset<GameObject>(_assetBundle, "BoxToOpenByMatching"),
-                new AsyncAsset<TMPro.TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset"), 
-                (box, font) =>
+
+            Modules.Asset.LoadAssetAsync<GameObject>(_assetBundle, "BoxToOpenByMatching", (box) =>
+            {
+                BoxToOpenByMatching = box;
+                Modules.Asset.LoadAssetAsync<TMPro.TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset", (font) =>
                 {
-                    BoxToOpenByMatching = box;
                     BoxToOpenHologramContent hologramContent = BoxToOpenByMatching.GetComponent<BoxToOpenByMatching>().hologramPrefab.GetComponent<BoxToOpenHologramContent>();
                     for (int i = 0; i < hologramContent.TileCostTexts.Length; i++)
                     {
                         hologramContent.TileCostTexts[i].font = font;
                     }
                 });
+            });
+            //Modules.Asset.LoadAssetsAsync(
+            //    new AsyncAsset<GameObject>(_assetBundle, "BoxToOpenByMatching"),
+            //    //new AsyncAsset<TMPro.TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset"), 
+            //    (box/*, font*/) =>
+            //    {
+            //        Log.Warning($"uh is it null {box}");
+            //        BoxToOpenByMatching = box;
+            //        //BoxToOpenHologramContent hologramContent = BoxToOpenByMatching.GetComponent<BoxToOpenByMatching>().hologramPrefab.GetComponent<BoxToOpenHologramContent>();
+            //        //for (int i = 0; i < hologramContent.TileCostTexts.Length; i++)
+            //        //{
+            //        //    hologramContent.TileCostTexts[i].font = font;
+            //        //}
+            //    });
         }
 
         #region effects

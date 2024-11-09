@@ -538,10 +538,13 @@ namespace MatcherMod.Survivors.Matcher
 
         private void TeleporterInteraction_OnInteractionBegin(On.RoR2.TeleporterInteraction.orig_OnInteractionBegin orig, TeleporterInteraction self, Interactor activator)
         {
-            if(self.currentState is TeleporterInteraction.IdleState)
+            orig(self, activator);
+
+            if (self.currentState is TeleporterInteraction.IdleState)
             {
                 List<MatcherGridController> matchers = InstanceTracker.GetInstancesList<MatcherGridController>();
-                if (matchers.Count > 0) {
+                if (matchers.Count > 0)
+                {
 
                     Vector3 random = UnityEngine.Random.onUnitSphere + self.transform.position;
                     random.y = self.transform.position.y;
@@ -557,10 +560,9 @@ namespace MatcherMod.Survivors.Matcher
                         randomAmounts[i] = UnityEngine.Random.Range(4, 7) * Mathf.Max(difficulty / 2, 1);
                     }
 
-                    box.GetComponent<BoxToOpenByMatching>().Init(matchers[0].CompanionUI.MatchGrid.TileTypes, randomAmounts);
+                    box.GetComponent<BoxToOpenByMatching>().Init(matchers[0].TileTypes, randomAmounts);
                 }
             }
-            orig(self, activator);
         }
 
         private void HealthComponent_TakeDamageProcess(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)

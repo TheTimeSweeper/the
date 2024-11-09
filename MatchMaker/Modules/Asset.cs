@@ -113,11 +113,6 @@ namespace MatcherMod.Modules
         internal static IEnumerator LoadAssetCoroutine<T>(this AssetBundle assetBundle, string name, Action<T> onComplete) where T : Object
         {
             AssetBundleRequest request = assetBundle.LoadAssetAsync<T>(name);
-            if (!assetBundle.Contains(name))
-            {
-                Log.Error($"shit not found {name}");
-                yield break;
-            }
             while (!request.isDone)
             {
                 yield return null;
@@ -132,7 +127,7 @@ namespace MatcherMod.Modules
             Log.Message($"load addressable {key}");
             while (!loadAsset.IsDone)
             {
-                Log.Message($"loading addressable {key}");
+                //Log.Message($"loading addressable {key}");
                 yield return null;
             }
 

@@ -21,7 +21,7 @@ namespace RA2Mod.Survivors.Desolator.Compat
 
             #region tokens
             Modules.Language.Add(DesolatorSurvivor.TOKEN_PREFIX + "DRIVER_GUN_NAME", "Rad Cannon");
-            Modules.Language.Add(DesolatorSurvivor.TOKEN_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Make it glow.");
+            Modules.Language.Add(DesolatorSurvivor.TOKEN_PREFIX + "DRIVER_GUN_DESCRIPTION", $"Spread the doom.");
 
             //Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_SHOOT_DRIVER_NAME", "Chrono Gun");
             //Modules.Language.Add(TeslaTrooperSurvivor.TESLA_PREFIX + "PRIMARY_SHOOT_DRIVER_DESCRIPTION", $"Fire for {Tokens.DamageValueText(DriverCompat.DriverGunM1Damage.Value)} and apply {Tokens.UtilityText("Chrono Sickness")} to enemies.");

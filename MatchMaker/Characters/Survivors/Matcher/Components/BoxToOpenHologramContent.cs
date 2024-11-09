@@ -53,7 +53,7 @@ namespace MatcherMod.Survivors.Matcher.Components
         {
             for (int i = 0; i < tileCostTexts.Length; i++)
             {
-                displayedCostAmounts[i] = Matchmaker.Util.ExpDecayLerp(displayedCostAmounts[i], costAmounts[i], 1, Time.deltaTime);
+                displayedCostAmounts[i] = Matchmaker.Util.ExpDecayLerp(displayedCostAmounts[i], costAmounts[i], 10, Time.deltaTime);
 
                 tileCostTexts[i].text = Mathf.RoundToInt(displayedCostAmounts[i]).ToString();
             }
