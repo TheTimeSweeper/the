@@ -5,6 +5,8 @@ namespace Matchmaker
 {
     public static class Util
     {
+        public static bool IsDebug => true;
+
         public static Vector3 ToVector3(this Vector2 vector) => new Vector3(vector.x, vector.y, 0);
         public static Vector3 ToVector3(this Vector2Int vector) => new Vector3(vector.x, vector.y, 0);
         public static Vector2 ToVector2(this Vector3 vector) => new Vector2(vector.x, vector.y);

@@ -8,7 +8,7 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
 {
     public class MatcherHUDManager : CompanionHUDManager<MatcherGridController, MatcherUI>
     {
-        public override GameObject UIPrefab => MatcherContent.Assets.matchGrid;
+        public override GameObject UIPrefab => Content.CharacterAssets.matchGrid;
 
         public override bool LocalUserOnly => true;
 

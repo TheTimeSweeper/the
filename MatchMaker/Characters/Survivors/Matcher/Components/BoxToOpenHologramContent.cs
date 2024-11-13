@@ -27,23 +27,25 @@ namespace MatcherMod.Survivors.Matcher.Components
             int i = 0;
             for (; i < costs.Length; i++)
             {
+                if(costs[i] <= 0)
+                {
+                    tileCostObjects[i].SetActive(false);
+                    costAmounts[i] = 0;
+                    continue;
+                }
+
                 tileCostObjects[i].SetActive(true);
                 tileCostSprites[i].sprite = tileTypes[i].GetIcon();
                 tileCostSprites[i].color = tileTypes[i].GetColor();
                 Matchmaker.Util.NormalizeSpriteScale(tileCostSprites[i], 0.9f);
                 costAmounts[i] = costs[i];
             }
-            for (; i < tileCostObjects.Length; i++)
-            {
-                tileCostObjects[i].SetActive(false);
-                costAmounts[i] = 0;
-            }
         }
 
         public void UpdateAmount(int skillIndex, int amount)
         {
             costAmounts[skillIndex] = Mathf.Max(amount, 0);
-            if(amount == 0)
+            if(amount <= 0)
             {
                 tileCostTexts[skillIndex].color = Color.green;
             }

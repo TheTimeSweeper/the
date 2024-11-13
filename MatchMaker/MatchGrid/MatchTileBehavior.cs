@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Matchmaker.MatchGrid
@@ -27,6 +28,21 @@ namespace Matchmaker.MatchGrid
         public virtual void OnTileDrag(PointerEventData eventData)
         {
             matchGrid.TileDrag(eventData);
+        }
+
+        public virtual bool CheckAgainstThisTile(MatchTile otherTile)
+        {
+            return otherTile.TileType == _matchTile.TileType;
+        }
+
+        public virtual bool CheckAgainstThisTileType(MatchTileType otherTile)
+        {
+            return otherTile == _matchTile.TileType;
+        }
+
+        public virtual void ApplyMatchModifier(ref int baseMatches)
+        {
+            return;
         }
     }
 }

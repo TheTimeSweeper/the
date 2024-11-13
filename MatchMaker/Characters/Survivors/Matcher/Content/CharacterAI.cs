@@ -2,9 +2,9 @@
 using RoR2.CharacterAI;
 using UnityEngine;
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
-    public static class AI
+    public static class CharacterAI
     {
         public static void Init(GameObject bodyPrefab, string masterName)
         {

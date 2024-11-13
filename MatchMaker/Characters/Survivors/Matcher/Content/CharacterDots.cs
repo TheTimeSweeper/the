@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
-    internal class Dots
+    internal class CharacterDots
     {
     }
 }

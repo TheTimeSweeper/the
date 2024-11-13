@@ -7,13 +7,21 @@ namespace Matchmaker.MatchGrid
         public override void OnTilePointerDown(MatchTile tile, PointerEventData eventData)
         {
             matchGrid.GetSelected();
-
-            if (!matchGrid.CanActivateInteractable)
+            if (!matchGrid.CanInteract)
                 return;
             Activate();
         }
 
         protected abstract void Activate();
+
+        public override bool CheckAgainstThisTile(MatchTile otherTile)
+        {
+            return false;
+        }
+        public override bool CheckAgainstThisTileType(MatchTileType otherTile)
+        {
+            return false;
+        }
 
         public override void OnTilePointerUp(MatchTile tile)
         {

@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using MatcherMod.Survivors.Matcher;
+using RoR2;
 using RoR2.Skills;
 using System;
 using UnityEngine;
@@ -112,6 +113,27 @@ namespace MatcherMod.Modules
         internal static void AddItemDef(ItemDef itemDef)
         {
             ContentPacks.itemDefs.Add(itemDef);
+        }
+
+        internal static ItemDef CreateAndAddItemDef(string itemName, Sprite iconSprite, ItemTier itemTier, bool hidden = false, bool canRemove = false)
+            => CreateAndAddItemDef(MatcherPlugin.DEVELOPER_PREFIX + itemName + "Item", itemName, iconSprite, itemTier, hidden, canRemove);
+        internal static ItemDef CreateAndAddItemDef(string itemname, string token, Sprite iconSprite, ItemTier itemTier, bool hidden = false, bool canRemove = false)
+        {
+            ItemDef itemDef = ScriptableObject.CreateInstance<ItemDef>();
+            itemDef.name = itemname;
+            itemDef.nameToken = MatcherSurvivor.TOKEN_PREFIX + $"ITEM_{token.ToUpperInvariant()}_NAME";
+            itemDef.descriptionToken = MatcherSurvivor.TOKEN_PREFIX + $"ITEM_{token.ToUpperInvariant()}_DESCRIPTION";
+            itemDef.pickupToken = MatcherSurvivor.TOKEN_PREFIX + $"ITEM_{token.ToUpperInvariant()}_PICKUP";
+            itemDef.loreToken = MatcherSurvivor.TOKEN_PREFIX + $"ITEM_{token.ToUpperInvariant()}_LORE";
+            itemDef.canRemove = canRemove;
+            itemDef.pickupIconSprite = iconSprite;
+            itemDef.hidden = hidden;
+            itemDef.tier = itemTier;
+            itemDef.deprecatedTier = itemTier;
+
+            AddItemDef(itemDef);
+
+            return itemDef;
         }
 
         internal static void AddEffectDef(EffectDef effectDef)

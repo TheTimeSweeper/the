@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Matchmaker.MatchGrid
@@ -70,6 +71,14 @@ namespace Matchmaker.MatchGrid
             }
             ghostTileHead.transform.localPosition = _headTile.transform.localPosition + _ghostTileOFfset;
             ghostTileTail.transform.localPosition = _tailTile.transform.localPosition - _ghostTileOFfset;
+        }
+
+        internal void AddRange(List<MatchTile> matchTiles, MatchGrid matchGrid)
+        {
+            for (int i = 0; i < matchTiles.Count; i++)
+            {
+                Add(new MatchTileDragInfo(matchTiles[i], matchGrid));
+            }
         }
 
         private void SetGhostTiles(MatchTile headTile, MatchTile tailTile)

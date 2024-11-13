@@ -1,6 +1,6 @@
 ﻿using MatcherMod.Survivors.Matcher.Components;
 using RoR2;
-using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.Content;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace MatcherMod.Survivors.Matcher.SkillDefs
 {
     public class CrateMatchSkillDef : MatchBoostedSkillDef
     {
-        public static BasicPickupDropTable dtTier1Item => MatcherContent.Assets.dtTier1Item;
+        public static BasicPickupDropTable dtTier1Item => Content.CharacterAssets.dropTableTier1Item;
 
         public class CrateInstanceData : InstanceData
         {
@@ -29,10 +29,11 @@ namespace MatcherMod.Survivors.Matcher.SkillDefs
 
         public static GameObject CrateMatchAction(MatcherGridController controller, GenericSkill skillSlot, int matches)
         {
-            if (RoR2.Util.CheckRoll(Config.M4_Crate_PercentChance.Value, controller.CharacterBody.master))
+            if (RoR2.Util.CheckRoll(CharacterConfig.M4_Crate_PercentChance.Value, controller.CharacterBody.master))
             {
                 PickupIndex pickup = dtTier1Item.GenerateDrop(((CrateInstanceData)skillSlot.skillInstanceData).rng);
                 controller.CharacterBody.master.inventory.GiveItem(PickupCatalog.GetPickupDef(pickup).itemIndex);
+                GenericPickupController.SendPickupMessage(controller.CharacterBody.master, pickup);
                 return controller.gameObject;
             }
             return null;

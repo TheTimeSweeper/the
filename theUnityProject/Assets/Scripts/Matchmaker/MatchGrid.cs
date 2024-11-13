@@ -8,7 +8,7 @@ namespace Matchmaker.MatchGrid
 {
     public class MatchGrid : MonoBehaviour
     {
-        public delegate void MatchAwardedEvent(int matchCount, MatchTileType matchType);
+        public delegate void MatchAwardedEvent(MatchTileType matchType, int matchCount, int tilesMatched);
         public MatchAwardedEvent OnMatchAwarded;
 
         [SerializeField]
@@ -40,12 +40,10 @@ namespace Matchmaker.MatchGrid
         private MatchTileType[] _tileTypes;
         public MatchTileType[] TileTypes => _tileTypes;
 
-        [SerializeField]
-        private MatchGridInteractables matchGridInteractables;
-        private MatchTile[] _interactableTileTypes;
+        private MatchTile[] _specialTileTypes;
 
         [SerializeField]
-        private float _interactableTileChance;
+        private float _specialTileChance;
 
         private Vector3 _gridStartLocalPosition;
 
@@ -99,10 +97,12 @@ namespace Matchmaker.MatchGrid
             }
         }
 
-        public void Init(MatchTileType[] tileTypes)
+        public void Init(MatchTileType[] tileTypes_, MatchTile[] specialTileTypes_) => Init(tileTypes_, specialTileTypes_, gridSize);
+        public void Init(MatchTileType[] tileTypes_, MatchTile[] specialTileTypes_, Vector2Int gridSize_)
         {
-            _tileTypes = tileTypes;
-            _interactableTileTypes = matchGridInteractables.InteractableTileTypes;
+            _tileTypes = tileTypes_;
+            _specialTileTypes = specialTileTypes_;
+            gridSize = gridSize_;
             ReGenerateGrid();
 
             if (_ghostTileHead == null)
@@ -146,12 +146,11 @@ namespace Matchmaker.MatchGrid
             }
 
             _manualCoroutine = ProcessAllGridMatches();
-
-            StartCoroutine(_manualCoroutine);
         }
 
         private IEnumerator ProcessAllGridMatches()
         {
+            Log.Debug("processing matches");
             int failsafe = 0;
 
             int chain = 0;
@@ -179,7 +178,7 @@ namespace Matchmaker.MatchGrid
             }
             while (matches.Count > 0);
 
-            Debug.Log($"match chain {chain}");
+            Log.Debug($"match chain {chain}");
 
             _manualCoroutine = null;
         }
@@ -198,47 +197,10 @@ namespace Matchmaker.MatchGrid
             return matches;
         }
 
-        private void CheckForMatches(MatchTileDragInfo matchTileDragInfo, List<MatchInfo> matches)
-        {
-            if (CheckForMatch(matchTileDragInfo, DragDirection.VERTICAL, out MatchInfo matchV))
-            {
-                if (!matches.Contains(matchV))
-                {
-                    matches.Add(matchV);
-                }
-            }
-
-            if (CheckForMatch(matchTileDragInfo, DragDirection.HORIZONTAL, out MatchInfo matchH))
-            {
-                if (!matches.Contains(matchH))
-                {
-                    matches.Add(matchH);
-                }
-            }
-        }
-        private void CheckForMatches(MatchTile tile, List<MatchInfo> matches)
-        {
-            if (CheckForMatch(tile, DragDirection.VERTICAL, out MatchInfo matchV))
-            {
-                if (!matches.Contains(matchV))
-                {
-                    matches.Add(matchV);
-                }
-            }
-
-            if (CheckForMatch(tile, DragDirection.HORIZONTAL, out MatchInfo matchH))
-            {
-                if (!matches.Contains(matchH))
-                {
-                    matches.Add(matchH);
-                }
-            }
-        }
-
         private MatchTile GenerateRandomTile(int gridX, int gridY)
         {
             MatchTile matchTile;
-            if (UnityEngine.Random.value > _interactableTileChance)
+            if (UnityEngine.Random.value > _specialTileChance)
             {
 
                 matchTile = Instantiate(tilePrefab, anchor);
@@ -250,7 +212,7 @@ namespace Matchmaker.MatchGrid
             }
             else
             {
-                matchTile = Instantiate(_interactableTileTypes[UnityEngine.Random.Range(0, _interactableTileTypes.Length)], anchor);
+                matchTile = Instantiate(_specialTileTypes[UnityEngine.Random.Range(0, _specialTileTypes.Length)], anchor);
                 matchTile.transform.localPosition = GridToWorldPosition(gridX, gridY);
                 matchTile.Init(this,
                                null,
@@ -279,9 +241,27 @@ namespace Matchmaker.MatchGrid
                     TempMoveTile(oldLineup_[i].currentGridPosition, oldLineup_[i].tile);
                 }
                 List<MatchInfo> matches = new List<MatchInfo>();
+
+
+
                 for (int i = 0; i < oldLineup_.Count; i++)
                 {
-                    CheckForMatches(oldLineup_[i], matches);
+                    MatchTileDragInfo matchTileDragInfo = oldLineup_[i];
+
+                    CheckForMatches(matchTileDragInfo, matches);
+
+                    List<MatchTile> tileLine = _dragDirection == DragDirection.VERTICAL ? GetGridRow(matchTileDragInfo.currentGridPosition.y) : GetGridColumn(matchTileDragInfo.currentGridPosition.x);
+
+                    //check the whole dang perpendicular row or column, in case wilds
+                    //if every single tile was wild, well god damn.
+                    for (int j = 0; j < tileLine.Count; j++)
+                    {
+                        //alreadyh checked this position, also this tile has been moved
+                        if (tileLine[j].GridPosition == matchTileDragInfo.currentGridPosition)
+                            continue;
+
+                        CheckForMatches(tileLine[j], matches);
+                    }
                 }
 
                 ClearTempGrid();
@@ -339,7 +319,19 @@ namespace Matchmaker.MatchGrid
         {
             for (int i = 0; i < matches.Count; i++)
             {
-                Award(matches[i].GetMatchCount(), matches[i].matchType);
+                #region log
+                if (Util.IsDebug)
+                {
+                    string log = "";
+                    for (int j = 0; j < matches[i].tilesMatched.Length; j++)
+                    {
+                        log += $"({matches[i].tilesMatched[j].GridPosition.x}, {matches[i].tilesMatched[j].GridPosition.y}) ";
+                    }
+                    Log.Warning($"matched {matches[i].GetMatchCount()} {matches[i].matchType}s!\n{log}");
+                }
+                #endregion log
+
+                Award(matches[i].matchType, matches[i].GetMatchCount(), matches[i].tilesMatched.Length);
                 matches[i].Break();
             }
             if (matches.Count > 0)
@@ -409,17 +401,62 @@ namespace Matchmaker.MatchGrid
             }
         }
 
-        private void Award(int matchCount, MatchTileType matchType)
+
+        private void Award(MatchTileType matchType, int matchCount, int tilesMatched)
         {
             Debug.LogWarning($"matched {matchCount} {matchType}s!");
-            OnMatchAwarded?.Invoke(matchCount, matchType);
+            OnMatchAwarded?.Invoke(matchType, matchCount, tilesMatched);
         }
 
-        private bool CheckForMatch(MatchTileDragInfo startTile, DragDirection dragDirection, out MatchInfo foundMatch) => CheckForMatch(startTile.tile, startTile.currentGridPosition, dragDirection, out foundMatch);
+
+        /// <summary>
+        /// when checking against a moved tile, check against its current dragged position, not the tile's original position
+        /// </summary>
+        private void CheckForMatches(MatchTileDragInfo matchTileDragInfo, List<MatchInfo> matches)
+        {
+            if (CheckForMatch(matchTileDragInfo.tile, matchTileDragInfo.currentGridPosition, DragDirection.VERTICAL, out MatchInfo matchV))
+            {
+                if (!matches.Contains(matchV))
+                {
+                    matches.Add(matchV);
+                }
+            }
+
+            if (CheckForMatch(matchTileDragInfo.tile, matchTileDragInfo.currentGridPosition, DragDirection.HORIZONTAL, out MatchInfo matchH))
+            {
+                if (!matches.Contains(matchH))
+                {
+                    matches.Add(matchH);
+                }
+            }
+        }
+
+        /// <summary>
+        /// if the tile isn't moving, go ahead and check its tile position
+        /// </summary>
+        private void CheckForMatches(MatchTile tile, List<MatchInfo> matches)
+        {
+            if (CheckForMatch(tile, DragDirection.VERTICAL, out MatchInfo matchV))
+            {
+                if (!matches.Contains(matchV))
+                {
+                    matches.Add(matchV);
+                }
+            }
+
+            if (CheckForMatch(tile, DragDirection.HORIZONTAL, out MatchInfo matchH))
+            {
+                if (!matches.Contains(matchH))
+                {
+                    matches.Add(matchH);
+                }
+            }
+        }
+
         private bool CheckForMatch(MatchTile tile, DragDirection dragDirection, out MatchInfo foundMatch) => CheckForMatch(tile, tile.GridPosition, dragDirection, out foundMatch);
         private bool CheckForMatch(MatchTile tile, Vector2Int currentGridPosition, DragDirection dragDirection, out MatchInfo foundMatch)
         {
-            if (tile == null || tile.TileType == null)
+            if (tile == null)
             {
                 foundMatch = null;
                 return false;
@@ -452,6 +489,8 @@ namespace Matchmaker.MatchGrid
             Queue<Vector2Int> tilePositionQueue = new Queue<Vector2Int>();
             tilePositionQueue.Enqueue(currentGridPosition);
 
+            var tileType = tile.TileType;
+
             int failsafe = 0;
             while (tilePositionQueue.Count > 0)
             {
@@ -461,19 +500,20 @@ namespace Matchmaker.MatchGrid
                 Vector2Int queueTile = tilePositionQueue.Dequeue();
                 if (dragDirection == DragDirection.HORIZONTAL)
                 {
-                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, tile.TileType, queueTile + Vector2Int.up);
-                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, tile.TileType, queueTile + Vector2Int.down);
+                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, ref tileType, queueTile + Vector2Int.up);
+                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, ref tileType, queueTile + Vector2Int.down);
                 }
                 else
                 {
-                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, tile.TileType, queueTile + Vector2Int.left);
-                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, tile.TileType, queueTile + Vector2Int.right);
+                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, ref tileType, queueTile + Vector2Int.left);
+                    CheckTile(matchedTiles, tilePositionQueue, checkedTilePositions, ref tileType, queueTile + Vector2Int.right);
                 }
             }
+
             return matchedTiles;
         }
 
-        private void CheckTile(List<MatchTile> matchedTiles, Queue<Vector2Int> tileCheckQueue, List<Vector2Int> checkedTilePositions, MatchTileType tileTYpe, Vector2Int checkTilePosition)
+        private void CheckTile(List<MatchTile> matchedTiles, Queue<Vector2Int> tileCheckQueue, List<Vector2Int> checkedTilePositions, ref MatchTileType tile, Vector2Int checkTilePosition)
         {
             if (!checkedTilePositions.Contains(checkTilePosition) &&
                 checkTilePosition.x >= 0 &&
@@ -481,8 +521,8 @@ namespace Matchmaker.MatchGrid
                 checkTilePosition.y >= 0 &&
                 checkTilePosition.y < gridSize.y)
             {
-                MatchTile lookTile = GetGridTileToCheck(checkTilePosition.x, checkTilePosition.y);
-                if (lookTile != null && lookTile.TileType != null && lookTile.TileType == tileTYpe)
+                MatchTile lookTile = GetGridTileToCheck(checkTilePosition);
+                if (lookTile != null && lookTile.CheckAgainstThisTileType(tile))
                 {
                     matchedTiles.Add(lookTile);
                     checkedTilePositions.Add(checkTilePosition);
@@ -491,6 +531,7 @@ namespace Matchmaker.MatchGrid
             }
         }
 
+        private MatchTile GetGridTileToCheck(Vector2Int coordinates) => GetGridTileToCheck(coordinates.x, coordinates.y);
         private MatchTile GetGridTileToCheck(int x, int y)
         {
             if (_tempTileGrid[x, y] != null)
@@ -504,8 +545,6 @@ namespace Matchmaker.MatchGrid
 
         public void TilePointerDown(MatchTile tile, PointerEventData eventData)
         {
-            UISelectOnHover.SetSelectedGameObject();
-
             if (tile.IsMoving)
                 return;
 
@@ -538,16 +577,31 @@ namespace Matchmaker.MatchGrid
         private void SetSelectedPositionLineups()
         {
             _selectedDragRow = new TileDragLineup(this, _ghostTileHead, _ghostTileTail);
-            for (int x = 0; x < _tileGrid.GetLength(0); x++)
-            {
-                _selectedDragRow.Add(new MatchTileDragInfo(_tileGrid[x, _selectedGridPosition.y], this));
-            }
+            _selectedDragRow.AddRange(GetGridRow(_selectedGridPosition.y), this);
 
             _selectedDragCol = new TileDragLineup(this, _ghostTileHead, _ghostTileTail);
+            _selectedDragCol.AddRange(GetGridColumn(_selectedGridPosition.x), this);
+        }
+
+        private List<MatchTile> GetGridRow(int y)
+        {
+            List<MatchTile> tilesH = new List<MatchTile>();
+            for (int x = 0; x < _tileGrid.GetLength(0); x++)
+            {
+                tilesH.Add(_tileGrid[x, y]);
+            }
+
+            return tilesH;
+        }
+        private List<MatchTile> GetGridColumn(int x)
+        {
+            List<MatchTile> tilesH = new List<MatchTile>();
             for (int y = 0; y < _tileGrid.GetLength(1); y++)
             {
-                _selectedDragCol.Add(new MatchTileDragInfo(_tileGrid[_selectedGridPosition.x, y], this));
+                tilesH.Add(_tileGrid[x, y]);
             }
+
+            return tilesH;
         }
 
         public void TilePointerUp(MatchTile tile)
@@ -647,6 +701,11 @@ namespace Matchmaker.MatchGrid
                 yield return null;
             }
             _manualCoroutine = coroutine;
+        }
+
+        public void GetSelected()
+        {
+            UISelectOnHover.SetSelectedGameObject();
         }
 
         #endregion tile event trigger callbacks

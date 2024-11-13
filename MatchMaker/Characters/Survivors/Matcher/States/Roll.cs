@@ -8,9 +8,9 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
 {
     public class Roll : BaseSkillState, IMatchBoostedState
     {
-        public static float baseDuration => MatcherContent.Config.M3_Shield_RollDuration.Value;
-        public static float initialSpeedCoefficient => MatcherContent.Config.M3_Shield_RollInitialSpeed.Value;
-        public static float finalSpeedCoefficient => MatcherContent.Config.M3_Shield_RollFinalSpeed.Value;
+        public static float baseDuration => Content.CharacterConfig.M3_Shield_RollDuration.Value;
+        public static float initialSpeedCoefficient => Content.CharacterConfig.M3_Shield_RollInitialSpeed.Value;
+        public static float finalSpeedCoefficient => Content.CharacterConfig.M3_Shield_RollFinalSpeed.Value;
 
         public static string dodgeSoundString = "HenryRoll";
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
@@ -33,7 +33,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             animator = GetModelAnimator();
 
             characterMotor.Motor.ForceUnground();
-            matchSpeedMultiplier = 1 + consumedMatches * MatcherContent.Config.M3_Shield_RollMatchSpeedMultiplier.Value;
+            matchSpeedMultiplier = 1 + consumedMatches * Content.CharacterConfig.M3_Shield_RollMatchSpeedMultiplier.Value;
             sprintSpeedMultiplier = characterBody.isSprinting ? 1 : characterBody.sprintingSpeedMultiplier;
 
             //if (isAuthority && inputBank && characterDirection)
@@ -126,6 +126,10 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
 
         public override void OnExit()
         {
+            fixedAge = duration;
+            RecalculateRollSpeed();
+            characterMotor.velocity = dashVector * rollSpeed;
+
             if (cameraTargetParams) cameraTargetParams.fovOverride = -1f;
             base.OnExit();
 

@@ -1,5 +1,6 @@
 ﻿using MatcherMod.Modules.UI;
 using MatcherMod.Survivors.Matcher.Components.UI;
+using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
 using Matchmaker.MatchGrid;
 using RoR2;
@@ -18,7 +19,7 @@ namespace MatcherMod.Survivors.Matcher.Components
         public bool allowUIUpdate { get; set; } = true;
         public MatcherUI CompanionUI { get; set; }
 
-        public delegate void MatchGainedEvent(MatchTileType type, int skillIndex, int matchesGained, int tilesMatched);
+        public delegate void MatchGainedEvent(MatcherGridController matcher, MatchTileType type, int skillIndex, int matchesGained, int tilesMatched);
         public event MatchGainedEvent OnMatchGained;
 
         [SerializeField]
@@ -29,6 +30,8 @@ namespace MatcherMod.Survivors.Matcher.Components
         private SkillDef[] _skillDefs = new SkillDef[4];
         private MatchTileType[] _tileTypes;
         public MatchTileType[] TileTypes => _tileTypes;
+
+        private bool _queueRegenerate;
 
         private int GetSkillIndex(SkillDef skillDef)
         {
@@ -63,6 +66,16 @@ namespace MatcherMod.Survivors.Matcher.Components
             InstanceTracker.Remove(this);
         }
 
+        void FixedUpdate()
+        {
+            if (_queueRegenerate && CompanionUI.MatchGrid.CanInteract)
+            {
+                _queueRegenerate = false;
+
+                ReGenerateGrid();
+            }
+        }
+
         private void genericSkill_onSkillChanged(GenericSkill genericSkill)
         {
             if (CompanionUI == null) 
@@ -72,8 +85,49 @@ namespace MatcherMod.Survivors.Matcher.Components
             {
                 //ResetMatches();
                 InitSkillDefsAndTileTypes();
-                CompanionUI.GenerateGrid(_tileTypes);
+                ReGenerateGrid();
             }
+        }
+
+        private void GenerateGrid()
+        {
+            CompanionUI.Init(_tileTypes, GetSpecialTiles(), GetGridSize());
+        }
+        private void ReGenerateGrid()
+        {
+            if (!CompanionUI.Created)
+            {
+                Log.Warning("unregenerating");
+                GenerateGrid();
+                return;
+            }
+            Log.Warning("regenerating");
+            CompanionUI.InitGrid(_tileTypes, GetSpecialTiles(), GetGridSize());
+        }
+
+        private SpecialTileInfo[] GetSpecialTiles()
+        {
+            List<SpecialTileInfo> specialTiles = new List<SpecialTileInfo>();
+
+            for (int i = 0; i < CharacterAssets.SpecialTiles.Count; i++)
+            {
+                SpecialTileInfo tile = CharacterAssets.SpecialTiles[i];
+
+                if (CharacterBody.inventory.GetItemCount(tile.itemDef) > 0)
+                {
+                    specialTiles.Add(tile);
+                }
+            }
+
+            return specialTiles.ToArray();
+        }
+
+        private Vector2Int GetGridSize()
+        {
+            int count = CharacterBody.inventory.GetItemCount(CharacterItems.ExpandTileGrid);
+
+            //start at (5, 4). increase x every other stack, starting at 2, increase y every other stack, starting at 1
+            return new Vector2Int(5 + Mathf.FloorToInt((count) / 2), 4 + Mathf.FloorToInt((count + 1) / 2));
         }
 
         public bool ToggleUI()
@@ -86,7 +140,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                     {
                         InitSkillDefsAndTileTypes();
                     }
-                    CompanionUI.GenerateGrid(_tileTypes);
+                    GenerateGrid();
                 }
                 CompanionUI.Show();
                 return CompanionUI.Showing;
@@ -186,11 +240,17 @@ namespace MatcherMod.Survivors.Matcher.Components
         {
             MatchBoostedSkillDef matchSkillDef;
 
-            OnMatchGained?.Invoke(matchType, GetSkillIndex(matchType.skillDef), matchCount, tilesMatched);
+            OnMatchGained?.Invoke(this, matchType, GetSkillIndex(matchType.skillDef), matchCount, tilesMatched);
 
             GameObject orbTarget = gameObject;
             if((matchSkillDef = matchType.skillDef as MatchBoostedSkillDef) != null)
             {
+                if (matchSkillDef.respectChangedBuffCount)
+                {
+                    matchesGainedMap[matchSkillDef] = CharacterBody.GetBuffCount(matchSkillDef.associatedBuff);
+                    SyncBuffCount(matchSkillDef);
+                }
+
                 orbTarget = matchSkillDef.OnMatchAwarded(this, genericSkills[GetSkillIndex(matchSkillDef)], matchCount);
                 if (matchSkillDef.associatedBuff != null)
                 {
@@ -233,7 +293,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 effectData.SetNetworkedObjectReference(orbTarget);
                 for (int i = 0; i < matchCount; i++)
                 {
-                    EffectManager.SpawnEffect(MatcherContent.Assets.SkillTakenOrbEffect, effectData, true);
+                    EffectManager.SpawnEffect(Content.CharacterAssets.SkillTakenOrbEffect, effectData, true);
                 }
             }
         }
@@ -274,18 +334,23 @@ namespace MatcherMod.Survivors.Matcher.Components
             return 0;
         }
 
-        internal void AwardRandomMatchForAI(int matches)
+        public void AwardRandomMatchForAI(int matches)
         {                                                                                  //just first 3 skilldefs
             OnMatchAwarded(new MatchTileType(_skillDefs[UnityEngine.Random.Range(0, 4)]), matches, matches * 3);
         }
 
         [Command]
-        internal void CmdKeyReduceInteractableCost(GameObject gameObject, int costReduce)
+        public void CmdKeyReduceInteractableCost(GameObject gameObject, int costReduce)
         {
             if (gameObject.TryGetComponent(out PurchaseInteraction purchaseInteraction))
             {
                 purchaseInteraction.Networkcost = Mathf.Max(0, purchaseInteraction.Networkcost - costReduce);
             }
+        }
+
+        public void OnBoxCompleted()
+        {
+            _queueRegenerate = true;
         }
     }
 }

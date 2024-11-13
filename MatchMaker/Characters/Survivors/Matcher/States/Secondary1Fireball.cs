@@ -1,5 +1,5 @@
 ﻿using EntityStates;
-using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
 using RoR2;
 using RoR2.Projectile;
@@ -67,12 +67,12 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                         position = aimRay.origin,
                         rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
                         owner = base.gameObject,
-                        damage = Config.M2_Staff_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
+                        damage = CharacterConfig.M2_Staff_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
                         force = 2000f,
                         crit = base.RollCrit(),
                         damageColorIndex = DamageColorIndex.Default,
                         //speedOverride = 100,
-                        projectilePrefab = MatcherContent.Assets.JoeFireball
+                        projectilePrefab = Content.CharacterAssets.JoeFireball
                     };
 
                     ProjectileManager.instance.FireProjectile(projectileInfo);

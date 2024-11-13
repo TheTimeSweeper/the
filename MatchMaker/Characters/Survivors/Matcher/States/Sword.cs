@@ -3,7 +3,7 @@ using RoR2.Skills;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
-using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
 
 namespace MatcherMod.Survivors.Matcher.SkillStates
@@ -23,30 +23,33 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
         public override void OnEnter()
         {
             //mouse over variables for detailed explanations
-            hitBoxGroupName = swingIndex == 0 ? "swing1" : "swing2";
+            hitBoxGroupName = "swingTall";
 
             damageType = DamageType.Generic;
-            damageCoefficient = Config.M1_Sword_Damage.Value * (1 + consumedMatches * Config.M1_Sword_Multiplier.Value);
+            damageCoefficient = CharacterConfig.M1_Sword_Damage.Value * Mathf.Max(1, consumedMatches * CharacterConfig.M1_Sword_MatchMultiplier.Value);
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
-            baseDuration = Config.M1_Sword_Duration.Value;
+            baseDuration = CharacterConfig.M1_Sword_Duration.Value;
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
-            attackStartPercentTime = 0.2f;
-            attackEndPercentTime = 0.5f;
+            attackStartPercentTime = 0.29f;
+            attackEndPercentTime = 0.45f;
 
             earlyExitPercentTime = 0.8f;
 
-            hitStopDuration = 0.012f;
+            hitStopDuration = baseDuration * (consumedMatches > 0 ? CharacterConfig.M1_Sword_HitStun2 : CharacterConfig.M1_Sword_HitStun);
             attackRecoil = 0.5f;
-            hitHopVelocity = 4f;
+            hitHopVelocity = CharacterConfig.M1_Sword_Hop * baseDuration;
 
             swingSoundString = "";
             playbackRateParam = "swing.playbackRate";
-            //muzzleString = swingIndex == 0 ? "hitboxSwing1" : "hitboxSwing2";
-            //swingEffectPrefab = MatcherContent.Assets.swordSwingEffect;
-            //hitEffectPrefab = MatcherContent.Assets.swordHitImpactEffect;
+            muzzleString = "notMercSlashVertical";
+            swingEffectPrefab = consumedMatches > 0 ? CharacterAssets.notMercSlashEffectThicc : CharacterAssets.notMercSlashEffect;
+            hitEffectPrefab = CharacterAssets.swordHitImpactEffect;
+
+            //interrupt the roll state so you can cut off its movement
+            EntityStateMachine.FindByCustomName(gameObject, "Weapon2").SetNextStateToMain();
 
             //impactSound = MatcherContent.Assets.swordHitSoundEvent.index;
 
@@ -55,16 +58,22 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             PlayAttackAnimation();
         }
 
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            StartAimMode(2);
+        }
+
         protected override void PlayAttackAnimation()
         {
             //play a adifferent animation based on what step of the combo you are currently in.
             if (swingIndex == 0)
             {
-                PlayCrossfade("Arms, Override", "swing1 v2", playbackRateParam, duration, 0.1f * duration);
+                PlayCrossfade("Arms, Override", "jumpSwingLandHeavy"/*"heavySwing"*/, playbackRateParam, duration, 0.1f * duration);
             }
             if (swingIndex == 1)
             {
-                PlayCrossfade("Arms, Override", "swing2 v2", playbackRateParam, duration, 0.1f * duration);
+                PlayCrossfade("Arms, Override", "jumpSwingLandHeavy"/*"heavySwing"*/, playbackRateParam, duration, 0.1f * duration);
             }
             //as a challenge, see if you can rewrite this code to be one line.
         }

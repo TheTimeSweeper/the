@@ -1,25 +1,44 @@
 ﻿using BepInEx.Configuration;
+using JBooth.VertexPainterPro;
+using Newtonsoft.Json.Serialization;
 using RiskOfOptions;
 using RiskOfOptions.OptionConfigs;
 using RiskOfOptions.Options;
 using RoR2;
 using RoR2.Skills;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace MatcherMod.Modules
 {
-    public class ConfigEntry<T>
+    public class ConfigEntry
     {
+
+    }
+
+    public class ConfigEntry<T> : ConfigEntry
+    {
+        public BepInEx.Configuration.ConfigEntry<T> ActualConfigEntry;
+        public T DefaultValue;
+
+        public static implicit operator T(ConfigEntry<T> config)
+        {
+            return config.Value;
+        }
+
+        public ConfigEntry(T defaultValue)
+        {
+            ActualConfigEntry = null;
+            DefaultValue = defaultValue;
+        }
+
         public ConfigEntry(BepInEx.Configuration.ConfigEntry<T> actualConfigEntry, T defaultValue)
         {
             ActualConfigEntry = actualConfigEntry;
             DefaultValue = defaultValue;
         }
-
-        public BepInEx.Configuration.ConfigEntry<T> ActualConfigEntry;
-        public T DefaultValue;
 
         public T Value
         {
@@ -186,6 +205,31 @@ namespace MatcherMod.Modules
 
             return new ConfigEntry<T>(configEntry, defaultValue);
         }
+        public static ConfigEntry BindAndOptions(string section, string name, System.ValueType defaultValue, float min, float max, string description = "", bool restartRequired = false)
+        {
+            if(defaultValue is float)
+            {
+                return BindAndOptions(section, name, (float)defaultValue, min, max, description, restartRequired);
+            }
+            if (defaultValue is int)
+            {
+                return BindAndOptions(section, name, (int)defaultValue, min, max, description, restartRequired);
+            }
+            if (defaultValue is bool)
+            {
+                return BindAndOptions(section, name, (bool)defaultValue, min, max, description, restartRequired);
+            }
+            if (defaultValue is KeyboardShortcut)
+            {
+                return BindAndOptions(section, name, (KeyboardShortcut)defaultValue, min, max, description, restartRequired);
+            }
+            if (defaultValue == null)
+            {
+                Log.Error($"defaultvalue was null somehow for {section}:{name} {defaultValue}");
+            }
+            Log.Error($"Configuring a field with unsupported type {defaultValue.GetType()} for {section}:{name}");
+            return null;
+        }
 
         //add risk of options dll to your project libs and uncomment this for a soft dependency
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -217,6 +261,21 @@ namespace MatcherMod.Modules
                 catch (System.Exception e)
                 {
                     Log.Error("error adding ROO mod icon\n" + e);
+                }
+            }
+        }
+
+        public static void InitConfigAttributes(System.Type typeWithStaticConfigFieldsMakeSureTheyreStatic)
+        {
+            var fields = typeWithStaticConfigFieldsMakeSureTheyreStatic.GetFields();
+
+            foreach (FieldInfo field in fields)
+            {
+                ConfigureAttribute attribute = field.GetCustomAttribute<ConfigureAttribute>();
+                if (attribute != null)
+                {
+                    attribute.InitFromField(field);
+                    field.SetValue(null, Config.BindAndOptions(attribute.section, attribute.name, attribute.defaultValue, attribute.min, attribute.max, attribute.description, attribute.restartRequired));
                 }
             }
         }

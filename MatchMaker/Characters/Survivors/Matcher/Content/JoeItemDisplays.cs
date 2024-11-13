@@ -11,7 +11,7 @@ using UnityEngine;
                     {localScale})
 */
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
     internal class JoeItemDisplays : BaseItemDisplaysSetup
     {

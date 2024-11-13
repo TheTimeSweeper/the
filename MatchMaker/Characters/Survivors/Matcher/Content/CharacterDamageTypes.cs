@@ -1,8 +1,8 @@
 ﻿using R2API;
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
-    public class DamageTypes
+    public class CharacterDamageTypes
     {
         public static DamageAPI.ModdedDamageType ComboFinisherDebuffDamage;
 

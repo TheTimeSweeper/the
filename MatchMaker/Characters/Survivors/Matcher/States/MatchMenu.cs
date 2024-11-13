@@ -11,7 +11,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
     internal class MatchMenu : BaseSkillState, IHasSkillDefComponent<MatcherGridController>
     {
         public MatcherGridController componentFromSkillDef1 { get; set; }
-
+        
         public override void OnEnter()
         {
             base.OnEnter();

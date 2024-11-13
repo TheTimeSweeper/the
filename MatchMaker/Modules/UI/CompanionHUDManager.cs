@@ -11,6 +11,9 @@ namespace MatcherMod.Modules.UI
 
         public abstract GameObject UIPrefab { get; }
         public abstract bool LocalUserOnly { get; }
+        /// <summary>
+        /// starts at HUDSimple(Clone). first child is MainContainer
+        /// </summary>
         protected abstract string transformPath { get; }
 
         private TUI companionUI;
@@ -55,7 +58,7 @@ namespace MatcherMod.Modules.UI
             }
         }
 
-        private void InitCompanionUI()
+        protected virtual void InitCompanionUI()
         {
             if (LocalUserOnly)
             {
@@ -72,7 +75,7 @@ namespace MatcherMod.Modules.UI
             GameObject gob = Instantiate(UIPrefab, hud.transform.Find(transformPath));
             gob.transform.localPosition = Vector3.zero;
             companionUI = gob.GetComponent<TUI>();
-            companionUI.OnInitialize(companionComponent);
+            companionUI.OnInitialize(companionComponent, hud);
         }
     }
 }

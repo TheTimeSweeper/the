@@ -76,6 +76,10 @@ namespace MatcherMod.Modules.BaseStates
         private HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
 
+        private GameObject swingEffectInstance;
+        private EffectManagerHelper swingEffectInstanceHelper;
+        private ScaleParticleSystemDuration swingEffectParticleScaler;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -106,12 +110,36 @@ namespace MatcherMod.Modules.BaseStates
             {
                 RemoveHitstop();
             }
+
+            //if (this.swingEffectInstance != null && swingEffectInstance.OwningPool != null)
+            //{
+            //    this.swingEffectInstance.OwningPool.ReturnObject(this.swingEffectInstance);
+            //}
+            //else
+            if (this.swingEffectInstance)
+            {
+                EntityState.Destroy(this.swingEffectInstance);
+            }
+            this.swingEffectInstance = null;
+
             base.OnExit();
+
         }
 
         protected virtual void PlaySwingEffect()
         {
-            EffectManager.SimpleMuzzleFlash(swingEffectPrefab, gameObject, muzzleString, false);
+            Transform transform = base.FindModelChild(muzzleString);
+            if (transform)
+            {
+                //this.swingEffectInstanceHelper = EffectManager.GetAndActivatePooledEffect(this.swingEffectPrefab, transform, true);
+                this.swingEffectInstance = UnityEngine.Object.Instantiate<GameObject>(this.swingEffectPrefab, transform);
+
+                swingEffectParticleScaler = this.swingEffectInstance.GetComponent<ScaleParticleSystemDuration>();
+                if (swingEffectParticleScaler)
+                {
+                    swingEffectParticleScaler.newDuration = swingEffectParticleScaler.initialDuration;
+                }
+            }
         }
 
         protected virtual void OnHitEnemyAuthority()
@@ -122,7 +150,7 @@ namespace MatcherMod.Modules.BaseStates
             {
                 if (characterMotor && !characterMotor.isGrounded && hitHopVelocity > 0f)
                 {
-                    SmallHop(characterMotor, hitHopVelocity);
+                    SmallHop(characterMotor, hitHopVelocity/ (attackSpeedStat * attackSpeedStat));
                 }
 
                 hasHopped = true;
@@ -139,6 +167,14 @@ namespace MatcherMod.Modules.BaseStates
                 hitStopCachedState = CreateHitStopCachedState(characterMotor, animator, playbackRateParam);
                 hitPauseTimer = hitStopDuration / attackSpeedStat;
                 inHitPause = true;
+            }
+
+            if (this.swingEffectInstance)
+            {
+                if (swingEffectParticleScaler)
+                {
+                    swingEffectParticleScaler.newDuration = 100f;
+                }
             }
         }
 
@@ -212,6 +248,14 @@ namespace MatcherMod.Modules.BaseStates
             ConsumeHitStopCachedState(hitStopCachedState, characterMotor, animator);
             inHitPause = false;
             characterMotor.velocity = storedVelocity;
+
+            if (this.swingEffectInstance)
+            {
+                if (swingEffectParticleScaler)
+                {
+                    swingEffectParticleScaler.newDuration = swingEffectParticleScaler.initialDuration;
+                }
+            }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

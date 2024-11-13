@@ -3,7 +3,7 @@ namespace Matchmaker.MatchGrid
 {
     public enum DragDirection
     {
-        HORIZONTAL,
-        VERTICAL
+        HORIZONTAL = 1,
+        VERTICAL = -1
     }
 }

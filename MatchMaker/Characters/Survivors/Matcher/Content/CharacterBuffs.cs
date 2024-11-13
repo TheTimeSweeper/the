@@ -1,9 +1,9 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
-    public static class Buffs
+    public static class CharacterBuffs
     {
         // armor buff gained during roll
         public static BuffDef armorBuff;

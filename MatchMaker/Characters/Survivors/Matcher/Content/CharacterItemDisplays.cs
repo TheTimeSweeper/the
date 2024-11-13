@@ -11,9 +11,9 @@ using UnityEngine;
                     {localScale})
 */
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
-    public class ItemDisplaysSetup : BaseItemDisplaysSetup
+    public class CharacterItemDisplays : BaseItemDisplaysSetup
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {

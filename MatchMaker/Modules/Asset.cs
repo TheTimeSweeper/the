@@ -124,26 +124,14 @@ namespace MatcherMod.Modules
         internal static IEnumerator LoadAssetCoroutine<T>(object key, Action<T> OnComplete) where T : Object
         {
             AsyncOperationHandle<T> loadAsset = Addressables.LoadAssetAsync<T>(key);
-            Log.Message($"load addressable {key}");
             while (!loadAsset.IsDone)
             {
                 //Log.Message($"loading addressable {key}");
                 yield return null;
             }
-
-            Log.Warning($"done {key}");
             
             OnComplete?.Invoke(loadAsset.Result);
             yield break;
-        }
-
-        internal static GameObject DebugClone(this GameObject gameObject, bool network = false)
-        {
-            if (false/*GeneralConfig.Debug.Value*/)
-            {
-                return R2API.PrefabAPI.InstantiateClone(gameObject, gameObject.name, network);
-            }
-            return gameObject;
         }
 
         #region there is a thin line between jank and genius
@@ -175,17 +163,12 @@ namespace MatcherMod.Modules
             Action<T1, T2> onComplete) where T1: Object where T2: Object
         {
 
-            Log.Info("load 1");
             while (!load1.coroutine.MoveNext())
             {
-                Log.Info("loading 1");
                 yield return null;
             }
-            Log.Info("load 2");
             while (!load2.coroutine.MoveNext())
             {
-                Log.Info(load2.result);
-                Log.Info("loading 2");
                 yield return null;
             }
 
@@ -304,7 +287,39 @@ namespace MatcherMod.Modules
         }
         #endregion sillyzone
 
-        #region legacy non-async helpers
+        #region helpers
+
+        public static void RecolorEffects(Color color, GameObject MercSwordSlash)
+        {
+            ParticleSystemRenderer[] rends = MercSwordSlash.GetComponentsInChildren<ParticleSystemRenderer>();
+
+            foreach (ParticleSystemRenderer rend in rends)
+            {
+                rend.sharedMaterial = new Material(rend.sharedMaterial);
+                rend.sharedMaterial.SetColor("_MainColor", color);
+                rend.sharedMaterial.SetColor("_Color", color);
+                rend.sharedMaterial.SetColor("_TintColor", color);
+            }
+
+            //didn't work so saving the processing
+            //ParticleSystem[] particles = MercSwordSlash.GetComponentsInChildren<ParticleSystem>();
+
+            //foreach (ParticleSystem particleSystem in particles) {
+
+            //    ParticleSystem.MainModule main = particleSystem.main;
+            //    main.startColor = color;
+            //}
+        }
+
+        internal static GameObject DebugClone(this GameObject gameObject, bool network = false)
+        {
+            if (false/*GeneralConfig.Debug.Value*/)
+            {
+                return R2API.PrefabAPI.InstantiateClone(gameObject, gameObject.name, network);
+            }
+            return gameObject;
+        }
+
         internal static GameObject CloneTracer(string originalTracerName, string newTracerName)
         {
             GameObject loadedTracer = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/" + originalTracerName);
@@ -461,7 +476,6 @@ namespace MatcherMod.Modules
         public void OnCoroutineComplete(T loadResult)
         {
             result = loadResult;
-            Log.Warning($"coroutinecomplete {result}");
             isDone = true;
             onComplete?.Invoke(result);
         }

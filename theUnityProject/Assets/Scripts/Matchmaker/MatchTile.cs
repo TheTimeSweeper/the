@@ -41,10 +41,10 @@ namespace Matchmaker.MatchGrid
             _matchGrid = matchGrid;
             _gridPosition = new Vector2Int(x, y);
 
+            InitTileType(tileType);
+
             trigger.Init(this);
             behavior.Init(this);
-
-            InitTileType(tileType);
         }
 
         public void InitTileType(MatchTileType tileType)
@@ -161,6 +161,22 @@ namespace Matchmaker.MatchGrid
                 yield return null;
             }
             flashImage.color = Color.clear;
+        }
+
+        public bool CheckAgainstThisTile(MatchTile otherTile)
+        {
+            return behavior.CheckAgainstThisTile(otherTile);
+        }
+
+
+        public bool CheckAgainstThisTileType(MatchTileType otherTile)
+        {
+            return behavior.CheckAgainstThisTileType(otherTile);
+        }
+
+        internal void ApplyMatchModifier(ref int baseMatches)
+        {
+            behavior.ApplyMatchModifier(ref baseMatches);
         }
     }
 }

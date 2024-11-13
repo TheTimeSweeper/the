@@ -1,4 +1,4 @@
-﻿using MatcherMod.Survivors.Matcher.MatcherContent;
+﻿using MatcherMod.Survivors.Matcher.Content;
 using RoR2;
 using RoR2.Skills;
 using System.Collections;
@@ -11,6 +11,8 @@ namespace MatcherMod.Survivors.Matcher.Components
     public class SkillTakenOrbEffect : MonoBehaviour
     {
         // ror2 modding has really stunted my growth as a developer hasn't it
+            //hello from a couple years later. nah it didn't
+                //probably
         // Token: 0x060058AA RID: 22698 RVA: 0x0003DAA5 File Offset: 0x0003BCA5
         private void OnEnable()
         {
@@ -35,7 +37,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 sprite = skilldef.icon;
                 //scaleSpriteComponent.scaleFactor = (Config.nipper.Value * sprite.pixelsPerUnit) / sprite.texture.width;
                 this.iconSpriteRenderer.sprite = sprite;
-                Matchmaker.Util.NormalizeSpriteScale(iconSpriteRenderer, Config.nipper.Value);
+                Matchmaker.Util.NormalizeSpriteScale(iconSpriteRenderer, CharacterConfig.nipper.Value);
             }
 
             Color color = Color.white;// ColorCatalog.GetColor(colorIndex);

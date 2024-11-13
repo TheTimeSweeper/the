@@ -1,8 +1,8 @@
 ﻿using MatcherMod.Survivors.Matcher.SkillStates;
 
-namespace MatcherMod.Survivors.Matcher.MatcherContent
+namespace MatcherMod.Survivors.Matcher.Content
 {
-    public static class States
+    public static class CharacterStates
     {
         public static void Init()
         {

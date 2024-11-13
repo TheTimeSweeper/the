@@ -1,5 +1,5 @@
 ﻿using MatcherMod.Modules.BaseStates;
-using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
 using RoR2;
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
 
             PlayAnimation("Fullbody, overried", "charge", "dash.playbackRate", duration);
 
-            SmallHop(characterMotor, Config.M2_Staff2_SmallHop.Value);
+            SmallHop(characterMotor, CharacterConfig.M2_Staff2_SmallHop.Value);
         }
 
         public override void FixedUpdate()
@@ -33,7 +33,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                 if (isAuthority)
                 {
                     ref float ySpeed = ref characterMotor.velocity.y;
-                    ySpeed += Config.M2_Staff2_AntiGrav.Value * Time.deltaTime;
+                    ySpeed += CharacterConfig.M2_Staff2_AntiGrav.Value * Time.deltaTime;
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             int additionalStocks = activatorSkillSlot.stock;
             activatorSkillSlot.stock = 0;
 
-            float blastRadius = Config.M2_Staff_Radius.Value + consumedMatches * Config.M2_Staff2_MatchRadius.Value;
+            float blastRadius = CharacterConfig.M2_Staff_Radius.Value + consumedMatches * CharacterConfig.M2_Staff2_MatchRadius.Value;
 
             if (isAuthority)
             {
@@ -59,12 +59,12 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                     origin = transform.position,
                 };
 
-                EffectManager.SpawnEffect(MatcherContent.Assets.JoeFireballExplosion, data, true);
+                EffectManager.SpawnEffect(Content.CharacterAssets.JoeFireballExplosion, data, true);
 
                 new BlastAttack
                 {
                     attacker = base.characterBody.gameObject,
-                    baseDamage = Config.M2_Staff2_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
+                    baseDamage = CharacterConfig.M2_Staff2_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
                     baseForce = 2000,
                     attackerFiltering = AttackerFiltering.NeverHitSelf,
                     crit = base.characterBody.RollCrit(),

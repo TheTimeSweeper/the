@@ -5,7 +5,7 @@ using MatcherMod.Modules;
 using MatcherMod.Modules.Characters;
 using MatcherMod.Survivors.Matcher.Components;
 using MatcherMod.Survivors.Matcher.Components.UI;
-using MatcherMod.Survivors.Matcher.MatcherContent;
+using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
 using MatcherMod.Survivors.Matcher.SkillStates;
 using RoR2;
@@ -16,7 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
-using Config = MatcherMod.Survivors.Matcher.MatcherContent.Config;
+using CharacterConfig = MatcherMod.Survivors.Matcher.Content.CharacterConfig;
 
 namespace MatcherMod.Survivors.Matcher
 {
@@ -60,7 +60,7 @@ namespace MatcherMod.Survivors.Matcher
 
         public override UnlockableDef characterUnlockableDef => null;// GIUnlockables.characterUnlockableDef;
 
-        public override BaseItemDisplaysSetup itemDisplays { get; } = new MatcherContent.JoeItemDisplays();
+        public override BaseItemDisplaysSetup itemDisplays { get; } = new Content.JoeItemDisplays();
 
         public MatcherGridController matcherGridController;
 
@@ -68,23 +68,28 @@ namespace MatcherMod.Survivors.Matcher
         {
             //if (!MatcherContent.Config.MatcherEnabled.Value)
             //    return;
-
+            
             base.Initialize();
+        }
+
+        public override List<IEnumerator> GetAssetBundleInitializedCoroutines()
+        {
+            return Content.CharacterAssets.GetAssetBundleInitializedCoroutines(assetBundle);
         }
 
         public override void OnCharacterInitialized()
         {
-            Modules.Config.ConfigureBody(prefabCharacterBody, MatcherContent.Config.SectionBody);
+            Modules.Config.ConfigureBody(prefabCharacterBody, Content.CharacterConfig.SectionBody);
 
-            MatcherContent.Config.Init();
+            new CharacterConfig().Init();
+            Content.CharacterItems.Init(assetBundle);
 
-            MatcherContent.States.Init();
-            MatcherContent.Tokens.Init();
+            Content.CharacterStates.Init();
+            Content.CharacterTokens.Init();
             Modules.Language.PrintOutput("matchmaker.txt");
 
-            MatcherContent.Buffs.Init(assetBundle);
-            MatcherContent.Assets.Init(assetBundle);
-            MatcherContent.Items.Init();
+            Content.CharacterBuffs.Init(assetBundle);
+            Content.CharacterAssets.Init(assetBundle);
 
             AdditionalBodySetup();
 
@@ -136,7 +141,7 @@ namespace MatcherMod.Survivors.Matcher
                 assetBundle.LoadAsset<Sprite>("texTileSword"),
                 new EntityStates.SerializableEntityStateType(typeof(SkillStates.Sword)),
                 "Weapon",
-                true
+                false
             ));
             //primarySkillDef1.stepCount = 2;
             //primarySkillDef1.stepGraceDuration = 0.5f;
@@ -150,7 +155,7 @@ namespace MatcherMod.Survivors.Matcher
 
         private BuffDef CreateMatchBuff(MatchBoostedSkillDef matchBoostedSkillDef)
         {
-            return Content.CreateAndAddBuff(matchBoostedSkillDef.skillName, matchBoostedSkillDef.icon, Color.white, true, false);
+            return Modules.Content.CreateAndAddBuff(matchBoostedSkillDef.skillName, matchBoostedSkillDef.icon, Color.white, true, false);
         }
 
         private void AddSecondarySkills()
@@ -171,7 +176,7 @@ namespace MatcherMod.Survivors.Matcher
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
-                baseRechargeInterval = 6f,
+                baseRechargeInterval = 4f,
                 baseMaxStock = 1,
 
                 rechargeStock = 1,
@@ -192,7 +197,7 @@ namespace MatcherMod.Survivors.Matcher
             });
             secondarySkillDef1.matchConsumptionCost = 1;
             secondarySkillDef1.matchConsumptionMinimum = 1;
-            secondarySkillDef1.matchMaxConsumptions = 8;
+            secondarySkillDef1.matchMaxConsumptions = 5;
             secondarySkillDef1.associatedBuff = CreateMatchBuff(secondarySkillDef1);
 
             //here is a basic skill def with all fields accounted for
@@ -247,7 +252,7 @@ namespace MatcherMod.Survivors.Matcher
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTileShield"),
                 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Roll)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 4f,
@@ -268,11 +273,13 @@ namespace MatcherMod.Survivors.Matcher
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = true,
             });
-            utilitySkillDef1.matchConsumptionCost = 5;
-            utilitySkillDef1.matchConsumptionMinimum = 5;
+            utilitySkillDef1.matchConsumptionCost = 3;
+            utilitySkillDef1.matchConsumptionMinimum = 3;
             utilitySkillDef1.matchMaxConsumptions = 1;
-            Buffs.shieldMatchBuff = CreateMatchBuff(utilitySkillDef1);
-            utilitySkillDef1.associatedBuff = Buffs.shieldMatchBuff;
+            utilitySkillDef1.respectChangedBuffCount = true;
+            CharacterBuffs.shieldMatchBuff = CreateMatchBuff(utilitySkillDef1);
+            utilitySkillDef1.associatedBuff = CharacterBuffs.shieldMatchBuff;
+
 
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
         }
@@ -335,6 +342,7 @@ namespace MatcherMod.Survivors.Matcher
             //passiveSkillDef4.matchMaxConsumptions = 1;
             //passiveSkillDef4.matchConsumptionMinimum = 1;
             //passiveSkillDef4.associatedBuff = CreateMatchBuff(passiveSkillDef2);
+            //passiveSkillDef4.CustomMatchAction = ;
 
             MatchBoostedSkillDef passiveSkillDef5 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
             {
@@ -349,7 +357,7 @@ namespace MatcherMod.Survivors.Matcher
             //passiveSkillDef5.associatedBuff = CreateMatchBuff(passiveSkillDef3);
             passiveSkillDef5.CustomMatchAction = ChickenMatchAction;
 
-            Skills.AddSkillsToFamily(genericSkill.skillFamily, passiveSkillDef1, passiveSkillDef2, passiveSkillDef3/*, passiveSkillDef4*//*, passiveSkillDef5*/);
+            Skills.AddSkillsToFamily(genericSkill.skillFamily, passiveSkillDef1, passiveSkillDef2, passiveSkillDef3/*, passiveSkillDef4*/, passiveSkillDef5);
         }
 
         private static GameObject KeyMatchAction(MatcherGridController matcherGridController, GenericSkill genericSkill, int matches)
@@ -359,7 +367,7 @@ namespace MatcherMod.Survivors.Matcher
             {
                 if (purchaseInteraction.costType == CostTypeIndex.Money)
                 {
-                    int costReduce = matches * Run.instance.GetDifficultyScaledCost(MatcherContent.Config.M4_Key_UnlockBaseValue.Value);
+                    int costReduce = matches * Run.instance.GetDifficultyScaledCost(Content.CharacterConfig.M4_Key_UnlockBaseValue.Value);
 
                     matcherGridController.CmdKeyReduceInteractableCost(purchaseInteraction.gameObject, costReduce);
                     //purchaseInteraction.cost = Mathf.Max(0, purchaseInteraction.Networkcost - costReduce);
@@ -378,7 +386,7 @@ namespace MatcherMod.Survivors.Matcher
 
                 for (int i = 0; i < teamComponents.Count; i++)
                 {
-                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < Config.M4_Brain_NearDistance.Value)
+                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < CharacterConfig.M4_Brain_NearDistance.Value)
                     {
                         if (teamComponents[i].TryGetComponent(out CharacterBody body))
                         {
@@ -392,16 +400,16 @@ namespace MatcherMod.Survivors.Matcher
             }
             nearBodies = Mathf.Max(nearBodies, 1);
 
-            controller.CharacterBody.master.GiveExperience((ulong)(nearBodies * matches * Config.M4_Brain_Experience.Value * controller.CharacterBody.level));
+            controller.CharacterBody.master.GiveExperience((ulong)(nearBodies * matches * CharacterConfig.M4_Brain_Experience.Value * controller.CharacterBody.level));
             return controller.gameObject;
         }
 
         private GameObject ChickenMatchAction(MatcherGridController controller, GenericSkill genericSkill, int matches)
         {
             HealthComponent healthComponent = controller.CharacterBody.healthComponent;
-            if (healthComponent.combinedHealthFraction > 0.9f)
+            if (healthComponent.combinedHealthFraction >= 0.9f)
             {
-                controller.CharacterBody.master.inventory.GiveItem(Items.ChickenItem);
+                controller.CharacterBody.master.inventory.GiveItem(CharacterItems.MatchChicken);
                 return controller.gameObject;
             }
             return null;
@@ -519,7 +527,7 @@ namespace MatcherMod.Survivors.Matcher
             //Modules.Prefabs.CloneDopplegangerMaster(bodyPrefab, masterName, "Merc");
 
             //how to set up AI in code
-            MatcherContent.AI.Init(bodyPrefab, masterName);
+            Content.CharacterAI.Init(bodyPrefab, masterName);
 
             //how to load a master set up in unity, can be an empty gameobject with just AISkillDriver components
             //assetBundle.LoadMaster(bodyPrefab, masterName);
@@ -545,22 +553,34 @@ namespace MatcherMod.Survivors.Matcher
                 List<MatcherGridController> matchers = InstanceTracker.GetInstancesList<MatcherGridController>();
                 if (matchers.Count > 0)
                 {
+                    Vector3 position = UnityEngine.Random.onUnitSphere * 5 + self.transform.position;
+                    position.y = self.transform.position.y + 0.5f;
 
-                    Vector3 random = UnityEngine.Random.onUnitSphere + self.transform.position;
-                    random.y = self.transform.position.y;
-
-                    GameObject box = UnityEngine.Object.Instantiate(MatcherContent.Assets.BoxToOpenByMatching, random, Quaternion.identity);
+                    GameObject box = UnityEngine.Object.Instantiate(Content.CharacterAssets.BoxToOpenByMatching, position, Quaternion.identity);
 
                     int difficulty = Run.instance.stageClearCount * matchers.Count;
 
-                    int randomAmountsAmount = UnityEngine.Random.Range(1, 5);
-                    int[] randomAmounts = new int[randomAmountsAmount];
-                    for (int i = 0; i < randomAmountsAmount; i++)
+                    int totalTileAmount = UnityEngine.Random.Range(5, 9) + 3 * Mathf.Max(difficulty / 2, 1);
+
+                    int amountOfRandomTileAmounts = UnityEngine.Random.Range(1, 5);
+
+                    int[] randomTileAmounts = new int[4];
+                    for (int i = 0; i < amountOfRandomTileAmounts; i++)
                     {
-                        randomAmounts[i] = UnityEngine.Random.Range(4, 7) * Mathf.Max(difficulty / 2, 1);
+                        int remaining = amountOfRandomTileAmounts - i - 1;
+                        if (remaining == 0)
+                        {
+                            randomTileAmounts[i] = totalTileAmount;
+                        } 
+                        else
+                        {
+                            int randomAmount = UnityEngine.Random.Range(2, totalTileAmount - (remaining * 2));
+                            randomTileAmounts[i] = randomAmount;
+                            totalTileAmount -= randomAmount;
+                        }
                     }
 
-                    box.GetComponent<BoxToOpenByMatching>().Init(matchers[0].TileTypes, randomAmounts);
+                    box.GetComponent<BoxToOpenByMatching>().Init(matchers[0].TileTypes, randomTileAmounts);
                 }
             }
         }
@@ -569,9 +589,9 @@ namespace MatcherMod.Survivors.Matcher
         {
             orig(self, damageInfo);
 
-            if (self.body.HasBuff(Buffs.shieldMatchBuff))
+            if (self.body.HasBuff(CharacterBuffs.shieldMatchBuff))
             {
-                self.body.RemoveBuff(Buffs.shieldMatchBuff);
+                self.body.RemoveBuff(CharacterBuffs.shieldMatchBuff);
             }
         }
 
@@ -583,10 +603,12 @@ namespace MatcherMod.Survivors.Matcher
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(Buffs.shieldMatchBuff))
+            args.armorAdd += Mathf.Min(CharacterConfig.M3_Shield_BuffArmor * sender.GetBuffCount(CharacterBuffs.shieldMatchBuff), CharacterConfig.M3_Shield_BuffArmorMax);
+
+            if(sender.inventory != null)
             {
-                args.armorAdd += MatcherContent.Config.M3_Shield_BuffArmor.Value;
-            }
+                args.levelHealthAdd += sender.inventory.GetItemCount(CharacterItems.MatchChicken) * CharacterConfig.M4_Chicken_HealthPerLevel;
+            }            
         }
     }
 }

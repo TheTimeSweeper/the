@@ -1,10 +1,14 @@
-﻿using System;
+﻿using MatcherMod.Survivors.Matcher.Content;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Matchmaker
 {
     public static class Util
     {
+        public static bool IsDebug => CharacterConfig.Debug.Value;
+
         public static Vector3 ToVector3(this Vector2 vector) => new Vector3(vector.x, vector.y, 0);
         public static Vector3 ToVector3(this Vector2Int vector) => new Vector3(vector.x, vector.y, 0);
         public static Vector2 ToVector2(this Vector3 vector) => new Vector2(vector.x, vector.y);
@@ -49,6 +53,46 @@ namespace Matchmaker
         public static void NormalizeSpriteScale(SpriteRenderer spriteRenderer, float scale)
         {
             spriteRenderer.transform.localScale = Vector3.one * scale * spriteRenderer.sprite.pixelsPerUnit / spriteRenderer.sprite.rect.width;
+        }
+
+        public static int WeightedRandom(List<float> values, bool normalize = true)
+        {
+            if (normalize)
+            {
+                Util.Normalize(values);
+            }
+
+            float sum = 0f;
+            float rand = UnityEngine.Random.value;
+
+            for (var i = 0; i < values.Count; i++)
+            {
+                sum += values[i];
+
+                if (rand <= sum)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
+        }
+
+        public static void Normalize(this List<float> weights)
+        {
+            float sum = 0;
+
+            for (int i = 0; i < weights.Count; i++)
+            {
+                sum += weights[i];
+            }
+            if (sum > 0)
+            {
+                for (int i = 0; i < weights.Count; i++)
+                {
+                    weights[i] /= sum;
+                }
+            }
         }
     }
 }

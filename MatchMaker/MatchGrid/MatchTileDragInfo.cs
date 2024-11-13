@@ -22,6 +22,7 @@ namespace Matchmaker.MatchGrid
         public void ResetTile()
         {
             tile.transform.localPosition = initialPosition;
+            currentGridPosition = initialGridPosition;
         }
 
         public bool UpdatePosition(Vector3 delta, Vector2Int deltaGridPosition)
