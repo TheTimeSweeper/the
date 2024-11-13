@@ -273,8 +273,8 @@ namespace MatcherMod.Survivors.Matcher
                 cancelSprintingOnActivation = false,
                 forceSprintDuringState = true,
             });
-            utilitySkillDef1.matchConsumptionCost = 3;
-            utilitySkillDef1.matchConsumptionMinimum = 3;
+            utilitySkillDef1.matchConsumptionCost = 1;
+            utilitySkillDef1.matchConsumptionMinimum = 1;
             utilitySkillDef1.matchMaxConsumptions = 1;
             utilitySkillDef1.respectChangedBuffCount = true;
             CharacterBuffs.shieldMatchBuff = CreateMatchBuff(utilitySkillDef1);
@@ -367,9 +367,7 @@ namespace MatcherMod.Survivors.Matcher
             {
                 if (purchaseInteraction.costType == CostTypeIndex.Money)
                 {
-                    int costReduce = matches * Run.instance.GetDifficultyScaledCost(Content.CharacterConfig.M4_Key_UnlockBaseValue.Value);
-
-                    matcherGridController.CmdKeyReduceInteractableCost(purchaseInteraction.gameObject, costReduce);
+                    matcherGridController.CmdKeySetInteractableCost(purchaseInteraction.gameObject, matches);
                     //purchaseInteraction.cost = Mathf.Max(0, purchaseInteraction.Networkcost - costReduce);
                     return purchaseInteraction.gameObject;
                 }
@@ -386,7 +384,7 @@ namespace MatcherMod.Survivors.Matcher
 
                 for (int i = 0; i < teamComponents.Count; i++)
                 {
-                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < CharacterConfig.M4_Brain_NearDistance.Value)
+                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < CharacterConfig.M4_Brain_NearDistance * CharacterConfig.M4_Brain_NearDistance)
                     {
                         if (teamComponents[i].TryGetComponent(out CharacterBody body))
                         {

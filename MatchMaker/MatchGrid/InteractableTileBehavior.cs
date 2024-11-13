@@ -31,5 +31,11 @@ namespace Matchmaker.MatchGrid
         {
             return;
         }
+
+        protected virtual void BreakThisTile()
+        {
+            _matchTile.Break();
+            matchGrid.FillEmptyTiles();
+        }
     }
 }

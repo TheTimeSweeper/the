@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Matchmaker
@@ -46,6 +47,46 @@ namespace Matchmaker
         public static Color ExpDecayLerp(Color a, Color b, float decay, float deltaTime)
         {
             return b + (a - b) * Mathf.Exp(-decay * deltaTime);
+        }
+
+        public static int WeightedRandom(List<float> values, bool normalize = true)
+        {
+            if (normalize)
+            {
+                Util.Normalize(values);
+            }
+
+            float sum = 0f;
+            float rand = UnityEngine.Random.value;
+
+            for (var i = 0; i < values.Count; i++)
+            {
+                sum += values[i];
+
+                if (rand <= sum)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
+        }
+
+        public static void Normalize(this List<float> weights)
+        {
+            float sum = 0;
+
+            for (int i = 0; i < weights.Count; i++)
+            {
+                sum += weights[i];
+            }
+            if (sum > 0)
+            {
+                for (int i = 0; i < weights.Count; i++)
+                {
+                    weights[i] /= sum;
+                }
+            }
         }
     }
 }

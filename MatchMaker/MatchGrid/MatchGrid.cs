@@ -83,6 +83,8 @@ namespace Matchmaker.MatchGrid
         private float _manualWait;
 
         public bool CanInteract => _manualCoroutine == null && !_isDragging;
+        private bool isTimeStopped => _timeStoppedTime > 0;
+        private float _timeStoppedTime;
 
         private void FixedUpdate()
         {
@@ -90,6 +92,21 @@ namespace Matchmaker.MatchGrid
             if (_manualCoroutine != null)
             {
                 _manualCoroutine.MoveNext();
+            }
+            if (_timeStoppedTime > 0)
+            {
+                _timeStoppedTime -= Time.fixedDeltaTime;
+
+                if (_timeStoppedTime < 0)
+                {
+                    if (_isDragging)
+                    {
+                        CancelDragging();
+                    }else
+                    {
+                        _manualCoroutine = ProcessAllGridMatches();
+                    }
+                }
             }
         }
 
@@ -132,8 +149,6 @@ namespace Matchmaker.MatchGrid
         {
             //CompleteCoroutine();
 
-            Log.Warning("grid?");
-
             for (int x = 0; x < _tileGrid.GetLength(0); x++)
             {
                 for (int y = 0; y < _tileGrid.GetLength(1); y++)
@@ -142,12 +157,11 @@ namespace Matchmaker.MatchGrid
 
                     if (tile != null)
                     {
-                        Log.Warning("deleting");
                         Destroy(tile.gameObject);
                     }
                     else
                     {
-                        Log.Warning($"null at {x}, {y}");
+                        Log.Warning($"null at {x}, {y} {Environment.StackTrace}");
                     }
                 }
             }
@@ -316,7 +330,7 @@ namespace Matchmaker.MatchGrid
 
                 ClearTempGrid();
 
-                if (matches.Count > 0)
+                if (matches.Count > 0 || isTimeStopped)
                 {
                     //set dragged line to new positions
                     for (int i = 0; i < oldLineup_.Count; i++)
@@ -331,11 +345,13 @@ namespace Matchmaker.MatchGrid
                 {
                     oldLineup_.ResetTiles();
                 }
+                if (!isTimeStopped){
 
-                IEnumerator allMatchesCoroutine = ProcessAllGridMatches();
-                while (allMatchesCoroutine.MoveNext())
-                {
-                    yield return null;
+                    IEnumerator allMatchesCoroutine = ProcessAllGridMatches();
+                    while (allMatchesCoroutine.MoveNext())
+                    {
+                        yield return null;
+                    } 
                 }
             }
             _manualCoroutine = null;
@@ -377,7 +393,7 @@ namespace Matchmaker.MatchGrid
                     {
                         log += $"({matches[i].tilesMatched[j].GridPosition.x}, {matches[i].tilesMatched[j].GridPosition.y}) ";
                     }
-                    Log.Warning($"matched {matches[i].GetMatchCount()} {matches[i].matchType}s!\n{log}");
+                    //Log.Debug($"matched {matches[i].GetMatchCount()} {matches[i].matchType}s!\n{log}");
                 }
                 #endregion log
 
@@ -768,6 +784,12 @@ namespace Matchmaker.MatchGrid
         public void GetSelected()
         {
             UISelectOnHover.SetSelectedGameObject();
+        }
+
+        //killing SOC to save some time I apologize
+        public void StopTime()
+        {
+            _timeStoppedTime = 3;
         }
 
         #endregion tile event trigger callbacks

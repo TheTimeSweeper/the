@@ -149,6 +149,10 @@ namespace MatcherMod.Survivors.Matcher.Content
             {
                 SpecialTiles.Add(new SpecialTileInfo(tile.GetComponent<MatchTile>(), CharacterItems.AddTileWild, CharacterConfig.Special_Wild_PercentChance));
             });
+            Asset.LoadAssetAsync<GameObject>(_assetBundle, "TileTimeStop", (tile) =>
+            {
+                SpecialTiles.Add(new SpecialTileInfo(tile.GetComponent<MatchTile>(), CharacterItems.AddTileTimeStop, CharacterConfig.Special_TimeStop_PercentChance));
+            });
         }
 
         private static void StealItemStealOrb()

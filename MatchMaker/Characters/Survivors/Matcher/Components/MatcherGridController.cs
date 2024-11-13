@@ -340,11 +340,20 @@ namespace MatcherMod.Survivors.Matcher.Components
         }
 
         [Command]
-        public void CmdKeyReduceInteractableCost(GameObject gameObject, int costReduce)
+        public void CmdKeySetInteractableCost(GameObject gameObject, int matches)
         {
             if (gameObject.TryGetComponent(out PurchaseInteraction purchaseInteraction))
             {
-                purchaseInteraction.Networkcost = Mathf.Max(0, purchaseInteraction.Networkcost - costReduce);
+                int flatCost = Run.instance.GetDifficultyScaledCost(Mathf.FloorToInt(CharacterConfig.M4_Key_UnlockBaseValue));
+
+                int cost = purchaseInteraction.Networkcost;
+                for (int i = 0; i < matches; i++)
+                {
+                    cost = Mathf.RoundToInt(cost * CharacterConfig.M4_Key_UnlockFractionValue * 0.01f - flatCost);
+                }
+                
+
+                purchaseInteraction.Networkcost = Mathf.Max(0, cost);
             }
         }
 

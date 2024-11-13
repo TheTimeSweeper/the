@@ -125,25 +125,28 @@ namespace MatcherMod.Survivors.Matcher.Components
                 switch (completedCount)
                 {
                     case 0:
-                        itemDef = GetRandomSpecialTile(master.inventory);
+                        itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileWild, CharacterItems.AddTileBomb);
                         break;
                     case 1:
                         itemDef = CharacterItems.AddTile2X;
                         break;
                     case 2:
-                        itemDef = CharacterItems.ExpandTileGrid;
+                        itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileScroll, CharacterItems.AddTileTimeStop);
                         break;
                     case 3:
-                        itemDef = GetRandomSpecialTile(master.inventory);
-                        break;
-                    case 4:
-                        itemDef = CharacterItems.AddTile3X;
-                        break;
-                    case 5:
                         itemDef = CharacterItems.ExpandTileGrid;
                         break;
+                    case 4:
+                        itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileWild, CharacterItems.AddTileBomb);
+                        break;
+                    case 5:
+                        itemDef = CharacterItems.AddTile3X;
+                        break;
                     case 6:
-                        itemDef = GetRandomSpecialTile(master.inventory);
+                        itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileScroll, CharacterItems.AddTileTimeStop);
+                        break;
+                    case 7:
+                        itemDef = CharacterItems.ExpandTileGrid;
                         break;
                 }
 
@@ -160,9 +163,14 @@ namespace MatcherMod.Survivors.Matcher.Components
         }
 
         //currently bomb, scroll, wild
-        private ItemDef GetRandomSpecialTile(Inventory inventory)
+        private ItemDef GetRandomSpecialTile(Inventory inventory, params ItemDef[] itemsToRandomize)
         {
             List<ItemDef> tiles = new List<ItemDef>();
+
+            for (int i = 0; i < itemsToRandomize.Length; i++)
+            {
+                AddIfMissing(inventory, tiles, itemsToRandomize[i]);
+            }
 
             AddIfMissing(inventory, tiles, CharacterItems.AddTileWild);
             AddIfMissing(inventory, tiles, CharacterItems.AddTileBomb);

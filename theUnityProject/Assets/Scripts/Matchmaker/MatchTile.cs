@@ -74,6 +74,11 @@ namespace Matchmaker.MatchGrid
             }
         }
 
+        private void OnDestroy()
+        {
+            IsMoving = false;
+        }
+
         internal void Break()
         {
             Broken = true;
@@ -86,6 +91,7 @@ namespace Matchmaker.MatchGrid
 
         private IEnumerator DestroyCoroutine()
         {
+            IsMoving = false;
             float destroyTimer = 0.5f;
             while (destroyTimer > 0)
             {

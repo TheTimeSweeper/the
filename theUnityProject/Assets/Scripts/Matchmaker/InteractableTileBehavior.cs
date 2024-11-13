@@ -7,7 +7,7 @@ namespace Matchmaker.MatchGrid
         public override void OnTilePointerDown(MatchTile tile, PointerEventData eventData)
         {
             matchGrid.GetSelected();
-            if (!matchGrid.CanActivateInteractable)
+            if (!matchGrid.CanInteract)
                 return;
             Activate();
         }
@@ -30,6 +30,12 @@ namespace Matchmaker.MatchGrid
         public override void OnTileDrag(PointerEventData eventData)
         {
             return;
+        }
+
+        protected virtual void BreakThisTile()
+        {
+            _matchTile.Break();
+            matchGrid.FillEmptyTiles();
         }
     }
 }

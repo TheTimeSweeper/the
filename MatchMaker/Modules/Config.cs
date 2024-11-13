@@ -275,7 +275,14 @@ namespace MatcherMod.Modules
                 if (attribute != null)
                 {
                     attribute.InitFromField(field);
-                    field.SetValue(null, Config.BindAndOptions(attribute.section, attribute.name, attribute.defaultValue, attribute.min, attribute.max, attribute.description, attribute.restartRequired));
+                    try
+                    {
+                        field.SetValue(null, Config.BindAndOptions(attribute.section, attribute.name, attribute.defaultValue, attribute.min, attribute.max, attribute.description, attribute.restartRequired));
+                    }
+                    catch
+                    {
+                        throw new System.Exception($"Error adding config {attribute.section}: {attribute.name}.");
+                    }
                 }
             }
         }

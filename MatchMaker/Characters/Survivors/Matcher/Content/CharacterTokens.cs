@@ -84,35 +84,39 @@ namespace MatcherMod.Survivors.Matcher.Content
 
             #region grid changing
             Language.Add(CharacterItems.ExpandTileGrid.nameToken, "Expand Grid");
-            Language.Add(CharacterItems.AddTile2X.nameToken, "2X tiles");
-            Language.Add(CharacterItems.AddTile3X.nameToken, "3X tiles");
-            Language.Add(CharacterItems.AddTileWild.nameToken, "Wild Tiles");
-            Language.Add(CharacterItems.AddTileBomb.nameToken, "Tile Bomb");
-            Language.Add(CharacterItems.AddTileScroll.nameToken, "Combat Scroll");
-
-            Language.Add(CharacterItems.ExpandTileGrid.pickupToken, "Expands Match Grid by 1 row or column.");
-            Language.Add(CharacterItems.AddTile2X.pickupToken, "Tiles have a chance to have a 2X multiplier.");
-            Language.Add(CharacterItems.AddTile3X.pickupToken, "Tiles have a chance to have a 3X multiplier.");
-            Language.Add(CharacterItems.AddTileWild.pickupToken, "Matches with any tile.");
-            Language.Add(CharacterItems.AddTileBomb.pickupToken, "Destroys all tiles of a type.");
-            Language.Add(CharacterItems.AddTileScroll.pickupToken, "Transforms all tiles to primary and secondary tiles.");
-
             Language.Add(CharacterItems.ExpandTileGrid.descriptionToken, "Expands Match Grid by 1 row or column.");
-            Language.Add(CharacterItems.AddTile2X.descriptionToken, "Tiles have a chance to have a 2X multiplier. Match with this tile to multiply total result.");
-            Language.Add(CharacterItems.AddTile3X.descriptionToken, "Tiles have a chance to have a 3X multiplier. Match with this tile to multiply total result.");
-            Language.Add(CharacterItems.AddTileWild.descriptionToken, "Adds Wild tiles to the grid. can match with any tile.");
-            Language.Add(CharacterItems.AddTileBomb.descriptionToken, "Adds Interactable Bomb Tiles to the grid. Activate to destroy the displayed tile.");
-            Language.Add(CharacterItems.AddTileScroll.descriptionToken, "Adds Interactable Scroll Tiles to the grid. Activate to transform all tiles to primary and secondary tiles.");
-
+            Language.Add(CharacterItems.ExpandTileGrid.pickupToken, "Expands Match Grid by 1 row or column.");
             Language.Add(CharacterItems.ExpandTileGrid.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
+
+            Language.Add(CharacterItems.AddTile2X.nameToken, "2X tiles");
+            Language.Add(CharacterItems.AddTile2X.pickupToken, "Tiles have a chance to have a 2X multiplier.");
+            Language.Add(CharacterItems.AddTile2X.descriptionToken, "Tiles have a chance to have a 2X multiplier.\nMatch with this tile to multiply total result.");
             Language.Add(CharacterItems.AddTile2X.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
+
+            Language.Add(CharacterItems.AddTile3X.nameToken, "3X tiles");
+            Language.Add(CharacterItems.AddTile3X.pickupToken, "Tiles have a chance to have a 3X multiplier.");
+            Language.Add(CharacterItems.AddTile3X.descriptionToken, "Tiles have a chance to have a 3X multiplier.\nMatch with this tile to multiply total result.");
             Language.Add(CharacterItems.AddTile3X.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
+
+            Language.Add(CharacterItems.AddTileWild.nameToken, "Wild Tiles");
+            Language.Add(CharacterItems.AddTileWild.pickupToken, "Matches with any tile.");
+            Language.Add(CharacterItems.AddTileWild.descriptionToken, "Adds Wild tiles to the grid.\nCan match with any tile.");
             Language.Add(CharacterItems.AddTileWild.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
+
+            Language.Add(CharacterItems.AddTileBomb.nameToken, "Tile Bomb");
+            Language.Add(CharacterItems.AddTileBomb.pickupToken, "Destroys all tiles of a type.");
+            Language.Add(CharacterItems.AddTileBomb.descriptionToken, "Adds Interactable Bomb Tiles to the grid.\nActivate to destroy the displayed tile.");
             Language.Add(CharacterItems.AddTileBomb.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
+
+            Language.Add(CharacterItems.AddTileScroll.nameToken, "Combat Scroll");
+            Language.Add(CharacterItems.AddTileScroll.pickupToken, "Transforms all tiles to primary and secondary tiles.");
+            Language.Add(CharacterItems.AddTileScroll.descriptionToken, "Adds Interactable Scroll Tiles to the grid.\nActivate to transform all tiles to primary and secondary tiles.");
             Language.Add(CharacterItems.AddTileScroll.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
 
-
-
+            Language.Add(CharacterItems.AddTileTimeStop.nameToken, "Time Stop");
+            Language.Add(CharacterItems.AddTileTimeStop.pickupToken, "Freely move tiles for 3 seconds.");
+            Language.Add(CharacterItems.AddTileTimeStop.descriptionToken, "Adds Interactable Scroll Tiles to the grid.\nActivate to stop time on the grid, allowing you to mive tiles freely for 3 seconds.");
+            Language.Add(CharacterItems.AddTileTimeStop.loreToken, "society grows great when the old plant trees in whose shade they'll never sit");
             #endregion grid changing
         }
     }

@@ -15,6 +15,7 @@ namespace MatcherMod.Survivors.Matcher.Content
         public static ItemDef AddTileWild;
         public static ItemDef AddTileBomb;
         public static ItemDef AddTileScroll;
+        public static ItemDef AddTileTimeStop;
 
         public static void Init(AssetBundle assetBundle)
         {
@@ -61,6 +62,11 @@ namespace MatcherMod.Survivors.Matcher.Content
             AddTileScroll = Modules.Content.CreateAndAddItemDef(
                 "TileScroll",
                 assetBundle.LoadAsset<Sprite>("texItemScroll"),
+                ItemTier.NoTier,
+                false);
+            AddTileTimeStop = Modules.Content.CreateAndAddItemDef(
+                "TileTimeStop",
+                assetBundle.LoadAsset<Sprite>("texItemTimeStop"),
                 ItemTier.NoTier,
                 false);
 

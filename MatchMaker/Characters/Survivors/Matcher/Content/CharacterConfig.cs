@@ -10,6 +10,7 @@ namespace MatcherMod.Survivors.Matcher.Content
         public const string SectionGeneral = "Hi";
         public const string SectionBody = "Body";
         public const string SectionSkills = "Skills";
+        public const string SectionMisc = "Misc";
 
         public static BepInEx.Configuration.ConfigEntry<bool> Debug;
 
@@ -30,7 +31,10 @@ namespace MatcherMod.Survivors.Matcher.Content
 
         public static ConfigEntry<float> M1_Sword_Damage;
         public static ConfigEntry<float> M1_Sword_MatchMultiplier;
+        [Configure(SectionSkills, 0.9f, max = 10f)]
         public static ConfigEntry<float> M1_Sword_Duration;
+        [Configure(SectionSkills, 1.1f, max = 10f, description = "stronger so a bit slower")]
+        public static ConfigEntry<float> M1_Sword_DurationBoostedMultiplier;
 
         public static ConfigEntry<float> M2_Staff_Damage;
         public static ConfigEntry<float> M2_Staff_Radius;
@@ -43,25 +47,31 @@ namespace MatcherMod.Survivors.Matcher.Content
         public static ConfigEntry<float> M3_Shield_BuffArmor;
         public static ConfigEntry<float> M3_Shield_BuffArmorMax;
 
-        public static ConfigEntry<int> M4_Key_UnlockBaseValue;
+        [Configure(SectionSkills, 1.5f, max = 20f)]
+        public static ConfigEntry<float> M4_Key_UnlockBaseValue;
+        [Configure(SectionSkills, 98.5f, max = 100f)]
+        public static ConfigEntry<float> M4_Key_UnlockFractionValue;
         public static ConfigEntry<float> M4_Crate_PercentChance;
         public static ConfigEntry<float> M4_Brain_Experience;
         public static ConfigEntry<int> M4_Chicken_HealthPerLevel;
 
-        [Configure(SectionBody, 2f, max = 100f)] 
+        [Configure(SectionMisc, 2f, max = 100f)] 
         public static ConfigEntry<float> Special_2X_PercentChance;
 
-        [Configure(SectionBody, 1f, max = 100f)]
+        [Configure(SectionMisc, 1f, max = 100f)]
         public static ConfigEntry<float> Special_3X_PercentChance;
 
-        [Configure(SectionBody, 0.5f, max = 100f)]  
+        [Configure(SectionMisc, 0.5f, max = 100f)]  
         public static ConfigEntry<float> Special_Bomb_PercentChance;
 
-        [Configure(SectionBody, 0.2f, max = 100f)]
+        [Configure(SectionMisc, 0.2f, max = 100f)]
         public static ConfigEntry<float> Special_Scroll_PercentChance;
 
-        [Configure(SectionBody, 2f, max = 100f)]
+        [Configure(SectionMisc, 2f, max = 100f)]
         public static ConfigEntry<float> Special_Wild_PercentChance;
+
+        [Configure(SectionMisc, 0.8f, max = 100f)]
+        public static ConfigEntry<float> Special_TimeStop_PercentChance;
 
         public void Init()
         {
@@ -102,11 +112,6 @@ namespace MatcherMod.Survivors.Matcher.Content
                 SectionSkills,
                 nameof(M1_Sword_MatchMultiplier),
                 2.5f);
-
-            M1_Sword_Duration = Config.BindAndOptions(
-                SectionSkills,
-                nameof(M1_Sword_Duration),
-                1f);
 
             M2_Staff_Damage = Config.BindAndOptions(
                 SectionSkills,
@@ -183,11 +188,6 @@ namespace MatcherMod.Survivors.Matcher.Content
                 0,
                 50,
                 "");
-
-            M4_Key_UnlockBaseValue = Config.BindAndOptions(
-                SectionSkills,
-                nameof(M4_Key_UnlockBaseValue),
-                3);
             M4_Crate_PercentChance = Config.BindAndOptions(
                 SectionSkills,
                 nameof(M4_Crate_PercentChance),

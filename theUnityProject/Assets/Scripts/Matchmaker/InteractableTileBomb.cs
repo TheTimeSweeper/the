@@ -46,8 +46,7 @@ namespace Matchmaker.MatchGrid
 
         protected override void Activate()
         {
-            _matchTile.Break();
-            matchGrid.FillEmptyTiles();
+            BreakThisTile();
             for (int x = 0; x < matchGrid.TileGrid.GetLength(0); x++)
             {
                 for (int y = 0; y < matchGrid.TileGrid.GetLength(1); y++)

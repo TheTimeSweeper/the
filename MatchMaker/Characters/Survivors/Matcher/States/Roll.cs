@@ -76,7 +76,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             if (NetworkServer.active && consumedMatches > 0)
             {
                 //characterBody.AddTimedBuff(MatcherContent.Buffs.armorBuff, 3f * duration);
-                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration);
+                characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, duration + 0.5f);
             }
         }
 

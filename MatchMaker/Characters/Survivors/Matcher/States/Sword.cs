@@ -30,7 +30,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
-            baseDuration = CharacterConfig.M1_Sword_Duration.Value;
+            baseDuration = CharacterConfig.M1_Sword_Duration * (consumedMatches > 0 ? CharacterConfig.M1_Sword_DurationBoostedMultiplier : 1f);
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
             attackStartPercentTime = 0.29f;

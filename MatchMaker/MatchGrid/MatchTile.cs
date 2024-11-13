@@ -74,6 +74,11 @@ namespace Matchmaker.MatchGrid
             }
         }
 
+        private void OnDestroy()
+        {
+            IsMoving = false;
+        }
+
         internal void Break()
         {
             Broken = true;
@@ -86,7 +91,7 @@ namespace Matchmaker.MatchGrid
 
         private IEnumerator DestroyCoroutine()
         {
-            IsMoving = false; //ew. I need to just do states
+            IsMoving = false;
             float destroyTimer = 0.5f;
             while (destroyTimer > 0)
             {
@@ -147,7 +152,6 @@ namespace Matchmaker.MatchGrid
 
         private IEnumerator TransformCoroutine()
         {
-            IsMoving = false; //ew. I need to just do states
             flashImage.color = Color.white;
             image.transform.localScale = Vector3.one * 1.1f;
 
