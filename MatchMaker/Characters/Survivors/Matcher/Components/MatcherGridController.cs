@@ -31,7 +31,7 @@ namespace MatcherMod.Survivors.Matcher.Components
         private MatchTileType[] _tileTypes;
         public MatchTileType[] TileTypes => _tileTypes;
 
-        private bool _queueRegenerate;
+        private Queue<Action> _actionQueue;
 
         private int GetSkillIndex(SkillDef skillDef)
         {
@@ -68,11 +68,9 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         void FixedUpdate()
         {
-            if (_queueRegenerate && CompanionUI.MatchGrid.CanInteract)
+            if (_actionQueue.Count > 0 && CompanionUI.MatchGrid.CanInteract)
             {
-                _queueRegenerate = false;
-
-                ReGenerateGrid();
+                _actionQueue.Dequeue().Invoke();
             }
         }
 
@@ -97,11 +95,9 @@ namespace MatcherMod.Survivors.Matcher.Components
         {
             if (!CompanionUI.Created)
             {
-                Log.Warning("unregenerating");
                 GenerateGrid();
                 return;
             }
-            Log.Warning("regenerating");
             CompanionUI.InitGrid(_tileTypes, GetSpecialTiles(), GetGridSize());
         }
 
@@ -132,20 +128,22 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         public bool ToggleUI()
         {
-            if (CompanionUI != null)
+            if (CompanionUI == null)
             {
-                if (!CompanionUI.Created)
-                {
-                    if (_tileTypes == null)
-                    {
-                        InitSkillDefsAndTileTypes();
-                    }
-                    GenerateGrid();
-                }
-                CompanionUI.Show();
-                return CompanionUI.Showing;
+                Log.Error($"No companion ui for {CharacterBody.name}" + Environment.StackTrace);
+                return false;
             }
-            return false;
+
+            if (!CompanionUI.Created)
+            {
+                if (_tileTypes == null)
+                {
+                    InitSkillDefsAndTileTypes();
+                }
+                GenerateGrid();
+            }
+            CompanionUI.Show();
+            return CompanionUI.Showing;
         }
 
         public void InitSkillDefsAndTileTypes()
@@ -359,7 +357,12 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         public void OnBoxCompleted()
         {
-            _queueRegenerate = true;
+            _actionQueue.Enqueue(ReGenerateGrid);
+        }
+
+        public void QueueGridClose()
+        {
+            _actionQueue.Enqueue(CompanionUI.Show);
         }
     }
 }
