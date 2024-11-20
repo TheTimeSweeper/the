@@ -4,10 +4,11 @@ using RoR2.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MatcherMod.Survivors.Matcher.Components
 {
-    public class BoxToOpenByMatching : MonoBehaviour, IHologramContentProvider
+    public class BoxToOpenByMatching : NetworkBehaviour, IHologramContentProvider
     {
         [SerializeField]
         public GameObject hologramPrefab;

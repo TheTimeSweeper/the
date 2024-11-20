@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
+using MatcherMod.Survivors.Matcher.Components;
 
 namespace MatcherMod.Survivors.Matcher.SkillStates
 {
@@ -33,17 +34,17 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             baseDuration = CharacterConfig.M1_Sword_Duration * (consumedMatches > 0 ? CharacterConfig.M1_Sword_DurationBoostedMultiplier : 1f);
 
             //0-1 multiplier of baseduration, used to time when the hitbox is out (usually based on the run time of the animation)
-            attackStartPercentTime = 0.29f;
+            attackStartPercentTime = 0.295f;
             attackEndPercentTime = 0.45f;
 
             earlyExitPercentTime = 0.8f;
 
-            hitStopDuration = baseDuration * (consumedMatches > 0 ? CharacterConfig.M1_Sword_HitStun2 : CharacterConfig.M1_Sword_HitStun);
+            hitStopDuration = baseDuration * (consumedMatches > 0 ? 0.15f : 0.1f);
             attackRecoil = 0.5f;
-            hitHopVelocity = CharacterConfig.M1_Sword_Hop * baseDuration;
+            hitHopVelocity = 8 * baseDuration;
 
             swingSoundString = "";
-            playbackRateParam = "swing.playbackRate";
+            playbackRateParam = "Swing.playbackRate";
             muzzleString = "notMercSlashVertical";
             swingEffectPrefab = consumedMatches > 0 ? CharacterAssets.notMercSlashEffectThicc : CharacterAssets.notMercSlashEffect;
             hitEffectPrefab = CharacterAssets.swordHitImpactEffect;
@@ -54,6 +55,11 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             //impactSound = MatcherContent.Assets.swordHitSoundEvent.index;
 
             base.OnEnter();
+
+            if (consumedMatches > 0)
+            {
+                GetModelTransform().gameObject.GetComponent<MatcherViewController>().RevealSword(duration);
+            }
 
             PlayAttackAnimation();
         }
@@ -66,16 +72,11 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
 
         protected override void PlayAttackAnimation()
         {
-            //play a adifferent animation based on what step of the combo you are currently in.
-            if (swingIndex == 0)
+            PlayCrossfade("Gesture, Override", "SwordSwingHeavy"/*"heavySwing"*/, playbackRateParam, duration, 0.1f * duration);
+            if (characterMotor.isGrounded && !animator.GetBool("isMoving"))
             {
-                PlayCrossfade("Arms, Override", "jumpSwingLandHeavy"/*"heavySwing"*/, playbackRateParam, duration, 0.1f * duration);
+               PlayCrossfade("FullBody, Override", "SwordSwingHeavy", playbackRateParam, duration, 0.1f * duration);
             }
-            if (swingIndex == 1)
-            {
-                PlayCrossfade("Arms, Override", "jumpSwingLandHeavy"/*"heavySwing"*/, playbackRateParam, duration, 0.1f * duration);
-            }
-            //as a challenge, see if you can rewrite this code to be one line.
         }
 
         protected override void PlaySwingEffect()

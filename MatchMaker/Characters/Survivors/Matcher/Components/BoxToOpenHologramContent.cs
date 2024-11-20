@@ -9,8 +9,7 @@ namespace MatcherMod.Survivors.Matcher.Components
 {
     public class BoxToOpenHologramContent : MonoBehaviour
     {
-        //let's try dropping a lot of OO principles to save on the amount of components
-
+        //let's try dropping OO principles to save on the amount of components
         [SerializeField]
         private GameObject[] tileCostObjects;
         [SerializeField]

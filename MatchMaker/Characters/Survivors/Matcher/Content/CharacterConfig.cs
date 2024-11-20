@@ -14,30 +14,6 @@ namespace MatcherMod.Survivors.Matcher.Content
 
         public static BepInEx.Configuration.ConfigEntry<bool> Debug;
 
-        [Configure(SectionBody, 10f, max = 20f)]
-        public static ConfigEntry<float> M1_Sword_Hop;
-        [Configure(SectionBody, 0.1f, max = 1f)]
-        public static ConfigEntry<float> M1_Sword_HitStun;
-        [Configure(SectionBody, 0.15f, max = 1f)]
-        public static ConfigEntry<float> M1_Sword_HitStun2;
-
-        [Configure(SectionSkills, 10f, max = 20f)]
-        public static ConfigEntry<float> M2_Staff2_SmallHop;//kill
-        [Configure(SectionSkills, 5f, max = 20f)]
-        public static ConfigEntry<float> M2_Staff2_AntiGrav;//kill
-
-        [Configure(SectionSkills, 7f, max = 50f)]
-        public static ConfigEntry<float> M3_Shield_RollInitialSpeed;//kill
-        [Configure(SectionSkills, 2f, max = 50f)]
-        public static ConfigEntry<float> M3_Shield_RollFinalSpeed;//kill
-        [Configure(SectionSkills, 0.3f, max = 10f)]
-        public static ConfigEntry<float> M3_Shield_RollDuration;//killv
-        [Configure(SectionSkills, 15f, max = 10f)]
-        public static ConfigEntry<float> M4_Brain_NearDistance;//kill
-
-        [Configure(SectionSkills, 6f, max = 10f)]
-        public static ConfigEntry<float> nipper;
-
         [Configure(SectionSkills, 3f, max = 10f)]
         public static ConfigEntry<float> M1_Sword_Damage;
         [Configure(SectionSkills, 2.5f, max = 10f)]
@@ -47,16 +23,25 @@ namespace MatcherMod.Survivors.Matcher.Content
         [Configure(SectionSkills, 1.1f, max = 10f, description = "stronger so a bit slower")]
         public static ConfigEntry<float> M1_Sword_DurationBoostedMultiplier;
 
-        [Configure(SectionSkills, 2.0f, max = 10f)]
+        [Configure(SectionSkills, 3.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff_Damage;
-        [Configure(SectionSkills, 30.0f, max = 100f)]
-        public static ConfigEntry<float> M2_Staff_Radius;
         [Configure(SectionSkills, 2.0f, max = 10f)]
+        public static ConfigEntry<float> M2_Staff_Damage_Match;
+        [Configure(SectionSkills, 30.0f, max = 100f, restartRequired = true)]
+        public static ConfigEntry<float> M2_Staff_Radius;
+        [Configure(SectionSkills, 30.0f, max = 100f, restartRequired = true)]
+        public static ConfigEntry<float> M2_Staff_Radius_Boosted;
+        [Configure(SectionSkills, 4.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff2_Damage;
+        [Configure(SectionSkills, 2.0f, max = 10f)]
+        public static ConfigEntry<float> M2_Staff2_Damage_Match;
         [Configure(SectionSkills, 30.0f, max = 100f)]
         public static ConfigEntry<float> M2_Staff2_Radius;
         [Configure(SectionSkills, 5.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff2_MatchRadius;
+
+        [Configure(SectionSkills, 7f, max = 50f)]
+        public static ConfigEntry<float> M3_Shield_RollInitialSpeed;
         [Configure(SectionSkills, 0.4f, max = 10f)]
         public static ConfigEntry<float> M3_Shield_RollMatchSpeedMultiplier;
 
@@ -67,33 +52,32 @@ namespace MatcherMod.Survivors.Matcher.Content
 
         [Configure(SectionSkills, 1.5f, max = 20f)]
         public static ConfigEntry<float> M4_Key_UnlockBaseValue;
-        [Configure(SectionSkills, 98.5f, max = 100f)]
-        public static ConfigEntry<float> M4_Key_UnlockFractionValue;
-        [Configure(SectionSkills, 7f, max = 20f)]
-        public static ConfigEntry<float> M4_Crate_PercentChance;
+        [Configure(SectionSkills, 1f, max = 100f)]
+        public static ConfigEntry<float> M4_Key_UnlockPercentValue;
         [Configure(SectionSkills, 3f, max = 20f)]
+        public static ConfigEntry<float> M4_Crate_PercentChance;
+        [Configure(SectionSkills, 2f, max = 20f)]
         public static ConfigEntry<float> M4_Brain_Experience;
+        //[Configure(SectionSkills, 20f, max = 10f)]
+        //public static ConfigEntry<float> M4_Brain_NearDistance;//kill
         [Configure(SectionSkills, 1, max = 20)]
         public static ConfigEntry<int> M4_Chicken_HealthPerLevel;
-
-        [Configure(SectionMisc, 2f, max = 100f)] 
-        public static ConfigEntry<float> Special_2X_PercentChance;
-        [Configure(SectionMisc, 1f, max = 100f)]
-        public static ConfigEntry<float> Special_3X_PercentChance;
-        [Configure(SectionMisc, 0.5f, max = 100f)]  
-        public static ConfigEntry<float> Special_Bomb_PercentChance;
-        [Configure(SectionMisc, 0.2f, max = 100f)]
-        public static ConfigEntry<float> Special_Scroll_PercentChance;
-        [Configure(SectionMisc, 2f, max = 100f)]
-        public static ConfigEntry<float> Special_Wild_PercentChance;
-        [Configure(SectionMisc, 0.8f, max = 100f)]
-        public static ConfigEntry<float> Special_TimeStop_PercentChance;
 
         [Configure(SectionSkills, 10f)]
         public static ConfigEntry<float> M5_MatchGrid_Duration;
 
-        
-        public static ConfigEntry<float> M5_MatchGrid_Damage;
+        [Configure(SectionMisc, 3f, max = 100f)] 
+        public static ConfigEntry<float> Special_2X_PercentChance;
+        [Configure(SectionMisc, 2f, max = 100f)]
+        public static ConfigEntry<float> Special_3X_PercentChance;
+        [Configure(SectionMisc, 0.8f, max = 100f)]  
+        public static ConfigEntry<float> Special_Bomb_PercentChance;
+        [Configure(SectionMisc, 0.69f, max = 100f)]
+        public static ConfigEntry<float> Special_Scroll_PercentChance;
+        [Configure(SectionMisc, 4f, max = 100f)]
+        public static ConfigEntry<float> Special_Wild_PercentChance;
+        [Configure(SectionMisc, 0.8f, max = 100f)]
+        public static ConfigEntry<float> Special_TimeStop_PercentChance;
 
         public void Init()
         {

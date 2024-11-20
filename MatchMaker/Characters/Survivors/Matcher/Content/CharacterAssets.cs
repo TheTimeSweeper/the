@@ -20,6 +20,7 @@ namespace MatcherMod.Survivors.Matcher.Content
 
         //projectiles
         public static GameObject JoeFireball;
+        public static GameObject JoeFireballBig;
 
         private static AssetBundle _assetBundle;
         public static AssetBundle _gridAssetBundle;
@@ -43,10 +44,23 @@ namespace MatcherMod.Survivors.Matcher.Content
 
         public static void Init(AssetBundle assetBundle)
         {
-
+            
             _assetBundle = assetBundle;
 
-            swordHitSoundEvent = Modules.Content.CreateAndAddNetworkSoundEventDef("HenrySwordHit");
+            //swordHitSoundEvent = Modules.Content.CreateAndAddNetworkSoundEventDef("HenrySwordHit");
+
+            _assetBundle.LoadAssetAsync<Material>("matMatcher", (mat) =>
+            {
+                mat.SetSpecular(0.6f, 1.6f);
+            });
+            _assetBundle.LoadAssetAsync<Material>("matMatcherStaff", (mat) =>
+            {
+                mat.SetEmission(3f);
+            });
+            _assetBundle.LoadAssetAsync<Material>("matMatcherSword", (mat) =>
+            {
+                mat.SetEmission(3f);
+            });
 
             CreateEffects();
 
@@ -67,7 +81,7 @@ namespace MatcherMod.Survivors.Matcher.Content
             Asset.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab", (slash) =>
             {
                 notMercSlashEffect = slash.InstantiateClone("MatcherSwordMercSlash", false);
-                Asset.RecolorEffects(Color.cyan, notMercSlashEffect);
+                Asset.RecolorEffects(new Color(0, 0.56f, 0.92f), notMercSlashEffect);
                 notMercSlashEffect.transform.Find("SwingTrail").localScale = new Vector3(1.1f, 1.2f, 5);
                 notMercSlashEffect.GetComponent<ScaleParticleSystemDuration>().initialDuration = 2f;
             });
@@ -86,8 +100,12 @@ namespace MatcherMod.Survivors.Matcher.Content
         private static void CreateProjectiles()
         {
             JoeFireball = _assetBundle.LoadAsset<GameObject>("JoeFireballMatcher");
-            JoeFireball.GetComponent<ProjectileImpactExplosion>().blastRadius = Content.CharacterConfig.M2_Staff_Radius.Value;
+            JoeFireball.GetComponent<ProjectileImpactExplosion>().blastRadius = CharacterConfig.M2_Staff_Radius;
             Modules.Content.NetworkAndAddProjectilePrefab(JoeFireball);
+
+            JoeFireballBig = _assetBundle.LoadAsset<GameObject>("JoeFireballMatcher").InstantiateClone("JoeFireballMatcherBig");
+            JoeFireballBig.GetComponent<ProjectileImpactExplosion>().blastRadius = CharacterConfig.M2_Staff_Radius_Boosted;
+            Modules.Content.NetworkAndAddProjectilePrefab(JoeFireballBig);
         }
         #endregion projectiles
 
@@ -125,6 +143,8 @@ namespace MatcherMod.Survivors.Matcher.Content
                     {
                         hologramContent.TileCostTexts[i].font = bombardierFont;
                     }
+                    BoxToOpenByMatching.RegisterNetworkPrefab();
+                    Modules.Content.AddNetworkedObject(BoxToOpenByMatching);
                 });
 
             Asset.LoadAssetAsync<GameObject>(_assetBundle, "Tile2X", (tile) =>

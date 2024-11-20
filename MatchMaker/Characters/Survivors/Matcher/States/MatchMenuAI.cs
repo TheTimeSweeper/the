@@ -1,11 +1,12 @@
 ﻿using EntityStates;
+using MatcherMod.Modules.SkillDefs;
 using MatcherMod.Survivors.Matcher.Components;
 
 namespace MatcherMod.Survivors.Matcher.SkillStates
 {
     internal class MatchMenuAI : BaseSkillState
     {
-        public MatcherGridController componentFromSkillDef1 { get; set; }
+        public MatcherGridController componentFromSkillDef1 { get; set; }//passed in from previous state
 
         private float interval = 0.6f;
         private float _tim;
@@ -14,17 +15,19 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
         {
             base.OnEnter();
 
-            activatorSkillSlot.DeductStock(1);
+            PlayAnimation("Gesture, Override", "HoldGrid");
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
+            PlayAnimation("Gesture, Override", "HoldGridReturn");
+
+            _tim -= GetDeltaTime();
+
             if (isAuthority)
             {
-                _tim -= GetDeltaTime();
-
                 while (_tim < 0)
                 {
                     _tim += interval;

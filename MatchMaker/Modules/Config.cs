@@ -1,5 +1,6 @@
 ﻿using BepInEx.Configuration;
 using JBooth.VertexPainterPro;
+using MatcherMod.Survivors.Matcher.SkillDefs;
 using Newtonsoft.Json.Serialization;
 using RiskOfOptions;
 using RiskOfOptions.OptionConfigs;
@@ -154,6 +155,36 @@ namespace MatcherMod.Modules
                     100,
                     "",
                     true).Value;
+            }
+
+            if(skillDef is MatchBoostedSkillDef)
+            {
+                MatchBoostedSkillDef boostedSkillDef = skillDef as MatchBoostedSkillDef;
+                boostedSkillDef.matchConsumptionCost = Config.BindAndOptions(
+                    section,
+                    $"{skillTitle} matchConsumptionCost",
+                    boostedSkillDef.matchConsumptionCost,
+                    0,
+                    20,
+                    "",
+                    true).Value;
+                boostedSkillDef.matchConsumptionMinimum = Config.BindAndOptions(
+                    section,
+                    $"{skillTitle} matchConsumptionMinimum",
+                    boostedSkillDef.matchConsumptionMinimum,
+                    0,
+                    100,
+                    "",
+                    true).Value;
+                boostedSkillDef.matchMaxConsumptions = Config.BindAndOptions(
+                    section,
+                    $"{skillTitle} matchMaxConsumptions",
+                    boostedSkillDef.matchMaxConsumptions,
+                    0,
+                    100,
+                    "",
+                    true).Value;
+
             }
         }
 

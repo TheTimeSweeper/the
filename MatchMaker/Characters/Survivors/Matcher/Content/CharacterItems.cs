@@ -41,12 +41,12 @@ namespace MatcherMod.Survivors.Matcher.Content
 
             AddTile2X = Modules.Content.CreateAndAddItemDef(
                 "Tile2x",
-                assetBundle.LoadAsset<Sprite>("texItem2X"),
+                assetBundle.LoadAsset<Sprite>("texItemTile2X"),
                 ItemTier.NoTier,
                 false);
             AddTile3X = Modules.Content.CreateAndAddItemDef(
                 "Tile3x",
-                assetBundle.LoadAsset<Sprite>("texItem3X"),
+                assetBundle.LoadAsset<Sprite>("texItemTile3X"),
                 ItemTier.NoTier,
                 false);
             AddTileWild = Modules.Content.CreateAndAddItemDef(

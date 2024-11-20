@@ -62,7 +62,7 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
         }
 
         public void Show() => Show(!Showing);
-        public void Show(bool shouldShow)
+        public void Show(bool shouldShow, Action<float> extendAction = null)
         {
             if (shouldShow == Showing)
                 return;
@@ -73,6 +73,7 @@ namespace MatcherMod.Survivors.Matcher.Components.UI
             {
                 notificationArea.anchoredPosition = new Vector2(notificationArea.anchoredPosition.x, notificationOriginalY + (shouldShow ? NOTIFICATION_SHIFT : 0));
             }
+            matchGrid.timeStopAction = shouldShow ? extendAction : null;
         }
 
         public void OnBodyLost()

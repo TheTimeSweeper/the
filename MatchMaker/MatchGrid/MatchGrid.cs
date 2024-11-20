@@ -85,6 +85,7 @@ namespace Matchmaker.MatchGrid
         public bool CanInteract => _manualCoroutine == null && !_isDragging;
         private bool isTimeStopped => _timeStoppedTime > 0;
         private float _timeStoppedTime;
+        public Action<float> timeStopAction;
 
         private void FixedUpdate()
         {
@@ -102,7 +103,8 @@ namespace Matchmaker.MatchGrid
                     if (_isDragging)
                     {
                         CancelDragging();
-                    }else
+                    }
+                    else
                     {
                         _manualCoroutine = ProcessAllGridMatches();
                     }
@@ -338,20 +340,21 @@ namespace Matchmaker.MatchGrid
                         MatchTileDragInfo tileInfo = oldLineup_[i];
                         Vector2Int newPosition = tileInfo.currentGridPosition;
 
-                        SetMoveTile(newPosition, tileInfo.tile);
+                        SetMoveTile(newPosition, tileInfo.tile, false);
                     }
                 }
                 else
                 {
                     oldLineup_.ResetTiles();
                 }
-                if (!isTimeStopped){
+                if (!isTimeStopped)
+                {
 
                     IEnumerator allMatchesCoroutine = ProcessAllGridMatches();
                     while (allMatchesCoroutine.MoveNext())
                     {
                         yield return null;
-                    } 
+                    }
                 }
             }
             _manualCoroutine = null;
@@ -373,9 +376,12 @@ namespace Matchmaker.MatchGrid
             _tempTileGrid[newPosition.x, newPosition.y] = movingTile;
         }
 
-        private void SetMoveTile(Vector2Int newPosition, MatchTile movingTile)
+        private void SetMoveTile(Vector2Int newPosition, MatchTile movingTile, bool animate = true)
         {
-            movingTile.OnMove();
+            if (animate)
+            {
+                movingTile.OnMove();
+            }
             movingTile.GridPosition = newPosition;
             movingTile.transform.localPosition = GridToWorldPosition(newPosition);
             _tileGrid[newPosition.x, newPosition.y] = movingTile;
@@ -468,9 +474,9 @@ namespace Matchmaker.MatchGrid
         }
 
 
-        private void Award(MatchTileType matchType, int matchCount, int tilesMatched)
+        public void Award(MatchTileType matchType, int matchCount, int tilesMatched)
         {
-            Debug.LogWarning($"matched {matchCount} {matchType}s!");
+            //Debug.LogWarning($"matched {matchCount} {matchType}s!");
             OnMatchAwarded?.Invoke(matchType, matchCount, tilesMatched);
         }
 
@@ -647,16 +653,38 @@ namespace Matchmaker.MatchGrid
             _selectedGridPosition = _awaitingGridPosition;
             _pointerDownPosition = _awaitingPointerDownPosition;
 
-            SetSelectedPositionLineups();
+            if (!SetSelectedPositionLineups())
+            {
+                CancelDragging();
+            }
         }
 
-        private void SetSelectedPositionLineups()
+        private bool SetSelectedPositionLineups()
         {
             _selectedDragRow = new TileDragLineup(this, _ghostTileHead, _ghostTileTail);
-            _selectedDragRow.AddRange(GetGridRow(_selectedGridPosition.y), this);
+
+            List<MatchTile> matchTilesRow = GetGridRow(_selectedGridPosition.y);
+            for (int i = 0; i < matchTilesRow.Count; i++)
+            {
+                if (matchTilesRow[i] == null)
+                {
+                    return false;
+                }
+            }
+            _selectedDragRow.AddRange(matchTilesRow, this);
 
             _selectedDragCol = new TileDragLineup(this, _ghostTileHead, _ghostTileTail);
-            _selectedDragCol.AddRange(GetGridColumn(_selectedGridPosition.x), this);
+
+            List<MatchTile> matchTilesColumn = GetGridColumn(_selectedGridPosition.x);
+            for (int i = 0; i < matchTilesColumn.Count; i++)
+            {
+                if (matchTilesColumn[i] == null)
+                {
+                    return false;
+                }
+            }
+            _selectedDragCol.AddRange(matchTilesColumn, this);
+            return true;
         }
 
         private List<MatchTile> GetGridRow(int y)
@@ -683,7 +711,8 @@ namespace Matchmaker.MatchGrid
         public void TilePointerUp(MatchTile tile)
         {
             CancelDragging();
-            if (_manualCoroutine == null)
+
+            if (_manualCoroutine == null && !isTimeStopped)
             {
                 _manualCoroutine = ProcessAllGridMatches();
             }
@@ -790,6 +819,7 @@ namespace Matchmaker.MatchGrid
         public void StopTime()
         {
             _timeStoppedTime = 3;
+            timeStopAction?.Invoke(3);
         }
 
         #endregion tile event trigger callbacks

@@ -35,6 +35,12 @@ public class BaseUnattachedAnimator : MonoBehaviour
     [SerializeField, Space]
     List<UnattachedAnimationCombo> animationCombos;
 
+
+    [SerializeField]
+    private float ascendMax;
+    [SerializeField]
+    private float descendMax;
+
     [Header("whyt he fuck aren't these in the animator")]
     [SerializeField, Range(0, 0.999f)]
     protected float aimPitch = 0.5f;
@@ -80,10 +86,10 @@ public class BaseUnattachedAnimator : MonoBehaviour
             animator.SetBool("isGrounded", false);
             _jumpTim = 1.5f;
         }
-
+        
         _jumpTim -= Time.deltaTime;
 
-        animator.SetFloat("upSpeed", Mathf.Lerp(-48, 16, _jumpTim / 2f));
+        animator.SetFloat("upSpeed", Mathf.Lerp(descendMax, ascendMax, _jumpTim / 2f));
 
         if (_jumpTim <= 0)
         {

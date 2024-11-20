@@ -19,8 +19,8 @@ namespace MatcherMod.Survivors.Matcher.Components
         public bool allowUIUpdate { get; set; } = true;
         public MatcherUI CompanionUI { get; set; }
 
-        public delegate void MatchGainedEvent(MatcherGridController matcher, MatchTileType type, int skillIndex, int matchesGained, int tilesMatched);
-        public event MatchGainedEvent OnMatchGained;
+        public delegate void MatchGainedEvent(GameObject matcher, int skillIndex, int matchesGained, int tilesMatched);
+        public event MatchGainedEvent OnMatchGainedServer;
 
         [SerializeField]
         public List<GenericSkill> genericSkills = new List<GenericSkill>();
@@ -31,7 +31,7 @@ namespace MatcherMod.Survivors.Matcher.Components
         private MatchTileType[] _tileTypes;
         public MatchTileType[] TileTypes => _tileTypes;
 
-        private Queue<Action> _actionQueue;
+        private Queue<Action> _awaitingGridActions = new Queue<Action>();
 
         private int GetSkillIndex(SkillDef skillDef)
         {
@@ -68,9 +68,9 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         void FixedUpdate()
         {
-            if (_actionQueue.Count > 0 && CompanionUI.MatchGrid.CanInteract)
+            if (_awaitingGridActions.Count > 0 && CompanionUI != null && CompanionUI.MatchGrid.CanInteract)
             {
-                _actionQueue.Dequeue().Invoke();
+                _awaitingGridActions.Dequeue().Invoke();
             }
         }
 
@@ -82,7 +82,7 @@ namespace MatcherMod.Survivors.Matcher.Components
             if (!matchesGainedMap.ContainsKey(genericSkill.skillDef))
             {
                 //ResetMatches();
-                InitSkillDefsAndTileTypes();
+                InitSkillDefsAndTileTypes(); 
                 ReGenerateGrid();
             }
         }
@@ -144,6 +144,37 @@ namespace MatcherMod.Survivors.Matcher.Components
             }
             CompanionUI.Show();
             return CompanionUI.Showing;
+        }
+
+        //ew copypaste
+        public void ShowUI(Action<float> timeStopAction)
+        {
+            if (CompanionUI == null)
+            {
+                Log.Error($"No companion ui for {CharacterBody.name}" + Environment.StackTrace);
+                return;
+            }
+
+            if (!CompanionUI.Created)
+            {
+                if (_tileTypes == null)
+                {
+                    InitSkillDefsAndTileTypes();
+                }
+                GenerateGrid();
+            }
+            CompanionUI.Show(true, timeStopAction);
+        }
+
+        public void HideUI()
+        {
+            if (CompanionUI == null || !CompanionUI.Created)
+            {
+                Log.Error($"No companion ui for {CharacterBody.name}" + Environment.StackTrace);
+                return;
+            }
+
+            CompanionUI.Show(false);
         }
 
         public void InitSkillDefsAndTileTypes()
@@ -238,10 +269,10 @@ namespace MatcherMod.Survivors.Matcher.Components
         {
             MatchBoostedSkillDef matchSkillDef;
 
-            OnMatchGained?.Invoke(this, matchType, GetSkillIndex(matchType.skillDef), matchCount, tilesMatched);
+            CallMatchGained(gameObject, matchCount, tilesMatched, GetSkillIndex(matchType.skillDef));
 
             GameObject orbTarget = gameObject;
-            if((matchSkillDef = matchType.skillDef as MatchBoostedSkillDef) != null)
+            if ((matchSkillDef = matchType.skillDef as MatchBoostedSkillDef) != null)
             {
                 if (matchSkillDef.respectChangedBuffCount)
                 {
@@ -268,9 +299,9 @@ namespace MatcherMod.Survivors.Matcher.Components
                 {
                     if (genericSkills[i].skillDef == matchType.skillDef)
                     {
-                        if(i > 0)
+                        if (i > 0)
                         {
-                            matchCount = Mathf.FloorToInt(matchCount/2);
+                            matchCount = Mathf.FloorToInt(matchCount / 2);
                         }
                         for (int j = 0; j < matchCount; j++)
                         {
@@ -294,6 +325,24 @@ namespace MatcherMod.Survivors.Matcher.Components
                     EffectManager.SpawnEffect(Content.CharacterAssets.SkillTakenOrbEffect, effectData, true);
                 }
             }
+        }
+
+        private void CallMatchGained(GameObject gameObject, int matchCount, int tilesMatched, int skillIndex)
+        {
+            if (NetworkServer.active)
+            {
+                OnMatchGainedServer?.Invoke(gameObject, skillIndex, matchCount, tilesMatched);
+            } 
+            else
+            {
+                CmdCallMatchGained(gameObject, matchCount, tilesMatched, skillIndex);
+            }
+        }
+
+        [Command]
+        private void CmdCallMatchGained(GameObject gameObject, int matchCount, int tilesMatched, int skillIndex)
+        {
+            OnMatchGainedServer?.Invoke(gameObject, skillIndex, matchCount, tilesMatched);
         }
 
         /// <summary>
@@ -347,7 +396,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 int cost = purchaseInteraction.Networkcost;
                 for (int i = 0; i < matches; i++)
                 {
-                    cost = Mathf.RoundToInt(cost * CharacterConfig.M4_Key_UnlockFractionValue * 0.01f - flatCost);
+                    cost = Mathf.RoundToInt(cost * (100 - CharacterConfig.M4_Key_UnlockPercentValue) * 0.01f - flatCost);
                 }
                 
 
@@ -357,12 +406,23 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         public void OnBoxCompleted()
         {
-            _actionQueue.Enqueue(ReGenerateGrid);
+            RpcQueueRegenerateGrid();
+        }
+        [ClientRpc]
+        private void RpcQueueRegenerateGrid()
+        {
+            if (CompanionUI != null)
+            {
+                _awaitingGridActions.Enqueue(ReGenerateGrid);
+            }
         }
 
         public void QueueGridClose()
         {
-            _actionQueue.Enqueue(CompanionUI.Show);
+            if (CompanionUI != null)
+            {
+                _awaitingGridActions.Enqueue(HideUI);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using MatcherMod.Survivors.Matcher.Components;
 using MatcherMod.Survivors.Matcher.Content;
 using MatcherMod.Survivors.Matcher.SkillDefs;
 using RoR2;
@@ -15,7 +16,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
         public int consumedMatches { get; set; }
 
         public static float procCoefficient = 1f;
-        public static float baseDuration = 0.3f;
+        public static float baseDuration = 0.4f;
         //public static float throwForce = 80f;
 
         private float duration;
@@ -30,7 +31,12 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
 
-            base.PlayAnimation("Arms, Override", "cast 2", "cast.playbackRate", this.duration);
+            base.PlayAnimation("Gesture, Override", "StaffShoot", "Staff.playbackRate", this.duration);
+
+            if (consumedMatches > 0)
+            {
+                GetModelTransform().gameObject.GetComponent<MatcherViewController>().RevealStaff(duration * 2);
+            }
         }
 
         public override void OnExit() {
@@ -67,12 +73,12 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                         position = aimRay.origin,
                         rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
                         owner = base.gameObject,
-                        damage = CharacterConfig.M2_Staff_Damage.Value * (1 + consumedMatches) * (1 + additionalStocks) * base.characterBody.damage,
+                        damage = base.characterBody.damage * ((1 + additionalStocks) * CharacterConfig.M2_Staff_Damage.Value + (consumedMatches * CharacterConfig.M2_Staff_Damage_Match.Value)),
                         force = 2000f,
                         crit = base.RollCrit(),
                         damageColorIndex = DamageColorIndex.Default,
                         //speedOverride = 100,
-                        projectilePrefab = Content.CharacterAssets.JoeFireball
+                        projectilePrefab = consumedMatches > 0 ? CharacterAssets.JoeFireballBig : CharacterAssets.JoeFireball
                     };
 
                     ProjectileManager.instance.FireProjectile(projectileInfo);
@@ -80,8 +86,8 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             }
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority() {
-            return base.GetMinimumInterruptPriority();
-        }
+        //public override InterruptPriority GetMinimumInterruptPriority() {
+        //    return base.GetMinimumInterruptPriority();
+        //}
     }
 }

@@ -37,7 +37,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 sprite = skilldef.icon;
                 //scaleSpriteComponent.scaleFactor = (Config.nipper.Value * sprite.pixelsPerUnit) / sprite.texture.width;
                 this.iconSpriteRenderer.sprite = sprite;
-                Matchmaker.Util.NormalizeSpriteScale(iconSpriteRenderer, CharacterConfig.nipper.Value);
+                Matchmaker.Util.NormalizeSpriteScale(iconSpriteRenderer, 6);
             }
 
             Color color = Color.white;// ColorCatalog.GetColor(colorIndex);

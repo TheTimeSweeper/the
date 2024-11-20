@@ -8,9 +8,9 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
 {
     public class Roll : BaseSkillState, IMatchBoostedState
     {
-        public static float baseDuration => Content.CharacterConfig.M3_Shield_RollDuration.Value;
+        public static float baseDuration = 0.3f;
         public static float initialSpeedCoefficient => Content.CharacterConfig.M3_Shield_RollInitialSpeed.Value;
-        public static float finalSpeedCoefficient => Content.CharacterConfig.M3_Shield_RollFinalSpeed.Value;
+        public static float finalSpeedCoefficient = 1;
 
         public static string dodgeSoundString = "HenryRoll";
         public static float dodgeFOV = global::EntityStates.Commando.DodgeState.dodgeFOV;
@@ -70,7 +70,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             //Vector3 b = characterMotor ? characterMotor.velocity : Vector3.zero;
             //previousPosition = transform.position - b;
 
-            PlayAnimation("Fullbody, overried", "Dash", "Dash.playbackRate", duration);
+            PlayAnimation("FullBody, Override", "Roll", "Roll.playbackRate", duration * 2);
             Util.PlaySound(dodgeSoundString, gameObject);
 
             if (NetworkServer.active && consumedMatches > 0)

@@ -14,7 +14,7 @@ namespace MatcherMod.Survivors.Matcher.Content
             masterySkinUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 MasteryAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(MasteryAchievement.identifier),
-                MatcherSurvivor.instance.assetBundle.LoadAsset<Sprite>("texMasteryAchievement"));
+                MatcherSurvivor.instance.assetBundle.LoadAsset<Sprite>("texIconSkinMatcherClassic"));
         }
     }
 }

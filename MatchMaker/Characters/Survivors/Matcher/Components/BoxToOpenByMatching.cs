@@ -12,6 +12,8 @@ namespace MatcherMod.Survivors.Matcher.Components
 {
     public class BoxToOpenByMatching : NetworkBehaviour, IHologramContentProvider
     {
+        public const int MAX_UPGRADES = 8;
+
         private GameObject cachedObject;
         private BoxToOpenHologramContent cachedHologram;
 
@@ -29,18 +31,25 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         private float _checkMatchersInterval = 0.2f;
 
-        public void Init(MatchTileType[] tileTypes, int[] matchAmounts)
+        private bool _initialized;
+
+        public void InitServer(GameObject matcher, int[] matchAmounts)
         {
+            RpcInit(matcher, matchAmounts);
+        }
+
+        [ClientRpc]
+        private void RpcInit(GameObject matcher, int[] matchAmounts)
+        {
+            MatchTileType[] tileTypes = matcher.GetComponent<MatcherGridController>().TileTypes;
+
             tileTypesToShow = tileTypes;
 
-            _tileMatchAmountsRemaining = new int[tileTypes.Length];
-            int i = 0;
-            for (; i < matchAmounts.Length; i++)
-            {
-                _tileMatchAmountsRemaining[i] = matchAmounts[i];
-            }
+            _tileMatchAmountsRemaining = matchAmounts;
+
             _amountsDirty = true;
-            
+            _initialized = true;
+
             CheckMatchers();
         }
 
@@ -62,7 +71,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 if (!subscribedMatchers.Contains(matchers[i]))
                 {
                     subscribedMatchers.Add(matchers[i]);
-                    matchers[i].OnMatchGained += ModifyAmount;
+                    matchers[i].OnMatchGainedServer += ModifyAmountServer;
                 }
             }
 
@@ -81,16 +90,22 @@ namespace MatcherMod.Survivors.Matcher.Components
             {
                 if (subscribedMatchers[i] != null)
                 {
-                    subscribedMatchers[i].OnMatchGained -= ModifyAmount;
+                    subscribedMatchers[i].OnMatchGainedServer -= ModifyAmountServer;
                 }
             }
         }
-
-        public void ModifyAmount(MatcherGridController matcher, MatchTileType type, int skillIndex, int matchesGained, int tilesMatched)
+        
+        public void ModifyAmountServer(GameObject matcher, int skillIndex, int matchesGained, int tilesMatched)
         {
-            if((matcher.transform.position - transform.position).magnitude > 15)
+            if ((matcher.transform.position - transform.position).magnitude > 15)
                 return;
 
+            RpcModifyAmount(skillIndex, tilesMatched);
+        }
+
+        [ClientRpc]
+        private void RpcModifyAmount(int skillIndex, int tilesMatched)
+        {
             _tileMatchAmountsRemaining[skillIndex] -= tilesMatched;
             _amountsDirty = true;
             CheckCompleted();
@@ -106,46 +121,55 @@ namespace MatcherMod.Survivors.Matcher.Components
                 if (_tileMatchAmountsRemaining[i] > 0)
                     return false;
             }
+
             _matchesCompleted = true;
-            OnComplete();
+            if (NetworkServer.active)
+            {
+                CompleteBoxServer();
+
+                //todo cool breaking animation
+                NetworkServer.Destroy(gameObject);
+            }
+
             return true;
         }
 
-        private void OnComplete()
+        private void CompleteBoxServer()
         {
             for (int i = 0; i < subscribedMatchers.Count; i++)
             {
                 CharacterMaster master = subscribedMatchers[i].CharacterBody.master;
+
                 int completedCount = master.inventory.GetItemCount(CharacterItems.GridUpgradedCount);
 
-                if (completedCount > 6)
+                if (completedCount >= MAX_UPGRADES)
                     continue;
 
                 ItemDef itemDef = null;
                 switch (completedCount)
                 {
-                    case 0:
+                    case 0: //enter stage 2
                         itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileWild, CharacterItems.AddTileBomb);
                         break;
-                    case 1:
+                    case 1: //enter stage 3
                         itemDef = CharacterItems.AddTile2X;
                         break;
-                    case 2:
+                    case 2: //enter stage 4
                         itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileScroll, CharacterItems.AddTileTimeStop);
                         break;
-                    case 3:
+                    case 3: //enter stage 5
                         itemDef = CharacterItems.ExpandTileGrid;
                         break;
-                    case 4:
+                    case 4: //enter stage 6
                         itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileWild, CharacterItems.AddTileBomb);
                         break;
-                    case 5:
+                    case 5: //enter stage 7
                         itemDef = CharacterItems.AddTile3X;
                         break;
-                    case 6:
+                    case 6: //enter stage 8
                         itemDef = GetRandomSpecialTile(master.inventory, CharacterItems.AddTileScroll, CharacterItems.AddTileTimeStop);
                         break;
-                    case 7:
+                    case 7: //enter stage 9
                         itemDef = CharacterItems.ExpandTileGrid;
                         break;
                 }
@@ -157,9 +181,6 @@ namespace MatcherMod.Survivors.Matcher.Components
 
                 subscribedMatchers[i].OnBoxCompleted();
             }
-
-            //todo cool breaking animation
-            Destroy(gameObject);
         }
 
         //currently bomb, scroll, wild
@@ -171,10 +192,6 @@ namespace MatcherMod.Survivors.Matcher.Components
             {
                 AddIfMissing(inventory, tiles, itemsToRandomize[i]);
             }
-
-            AddIfMissing(inventory, tiles, CharacterItems.AddTileWild);
-            AddIfMissing(inventory, tiles, CharacterItems.AddTileBomb);
-            AddIfMissing(inventory, tiles, CharacterItems.AddTileScroll);
 
             if (tiles.Count == 0)
                 return null;
@@ -202,7 +219,7 @@ namespace MatcherMod.Survivors.Matcher.Components
 
         public void UpdateHologramContent(GameObject hologramContentObject, Transform viewerBody)
         {
-            if (cachedHologram == null || hologramContentObject != cachedObject)
+            if (_initialized && (cachedHologram == null || hologramContentObject != cachedObject))
             {
                 cachedObject = hologramContentObject;
                 cachedHologram = hologramContentObject.GetComponent<BoxToOpenHologramContent>();
@@ -210,7 +227,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 cachedHologram.Init(tileTypesToShow, _tileMatchAmountsRemaining);
             }
 
-            if (cachedHologram != null && _amountsDirty)
+            if (_amountsDirty && cachedHologram != null)
             {
                 _amountsDirty = false;
 

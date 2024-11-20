@@ -16,6 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.Networking;
 using CharacterConfig = MatcherMod.Survivors.Matcher.Content.CharacterConfig;
 
 namespace MatcherMod.Survivors.Matcher
@@ -24,14 +25,14 @@ namespace MatcherMod.Survivors.Matcher
     {
         public const string CHARACTER_NAME = "Matcher";
 
-        public override string assetBundleName => "joe";
+        public override string assetBundleName => "matcher";
 
         public override string bodyName => CHARACTER_NAME + "Body";
 
         public override string masterName => CHARACTER_NAME + "MonsterMaster";
 
-        public override string modelPrefabName => "mdlJoe";
-        public override string displayPrefabName => "JoeDisplay";
+        public override string modelPrefabName => "mdlMatcher";
+        public override string displayPrefabName => "MatcherDisplay";
 
         public const string TOKEN_PREFIX = MatcherPlugin.DEVELOPER_PREFIX + "_MATCHER_";
 
@@ -43,24 +44,24 @@ namespace MatcherMod.Survivors.Matcher
             bodyNameToken = TOKEN_PREFIX + "NAME",
             subtitleNameToken = TOKEN_PREFIX + "SUBTITLE",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texIconConscript"),
-            bodyColor = new Color(1, 0.616f, 0.49f),
-            sortPosition = 69.5f,
+            characterPortrait = assetBundle.LoadAsset<Texture>("texIconMatcher"),
+            bodyColor = new Color(0.8f, 0.616f, 0.49f),
+            sortPosition = 71f,
             
             //crosshairBundlePath = "GICrosshair",
             crosshairAddressablePath = "RoR2/Base/Toolbot/SMGCrosshair.prefab",
             podPrefabAddressablePath = "RoR2/Base/SurvivorPod/SurvivorPod.prefab",
 
             maxHealth = 110f,
-            healthRegen = 1.0f,
-            armor = 00f,
+            healthRegen = 2.5f,
+            armor = 10f,
 
             jumpCount = 1,
         };
 
         public override UnlockableDef characterUnlockableDef => null;// GIUnlockables.characterUnlockableDef;
 
-        public override BaseItemDisplaysSetup itemDisplays { get; } = new Content.JoeItemDisplays();
+        public override BaseItemDisplaysSetup itemDisplays { get; } = new CharacterItemDisplays();
 
         public MatcherGridController matcherGridController;
 
@@ -86,6 +87,7 @@ namespace MatcherMod.Survivors.Matcher
 
             Content.CharacterStates.Init();
             Content.CharacterTokens.Init();
+            Content.CharacterUnlockables.Init();
             Modules.Language.PrintOutput("matchmaker.txt");
 
             Content.CharacterBuffs.Init(assetBundle);
@@ -104,6 +106,11 @@ namespace MatcherMod.Survivors.Matcher
         private void AdditionalBodySetup()
         {
             matcherGridController = bodyPrefab.AddComponent<Components.MatcherGridController>();
+
+            //just so you can see the running animation sideways
+            var aim = characterModelObject.GetComponent<AimAnimator>();
+            aim.yawGiveupRange = 0;
+            aim.giveupDuration = 2;
         }
 
         public override void InitializeEntityStateMachines() 
@@ -149,6 +156,8 @@ namespace MatcherMod.Survivors.Matcher
             primarySkillDef1.matchConsumptionMinimum = 1;
             primarySkillDef1.matchMaxConsumptions = 1;
             primarySkillDef1.associatedBuff = CreateMatchBuff(primarySkillDef1);
+
+            Config.ConfigureSkillDef(primarySkillDef1, CharacterConfig.SectionBody, "M1_Sword");
 
             Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
         }
@@ -197,8 +206,10 @@ namespace MatcherMod.Survivors.Matcher
             });
             secondarySkillDef1.matchConsumptionCost = 1;
             secondarySkillDef1.matchConsumptionMinimum = 1;
-            secondarySkillDef1.matchMaxConsumptions = 5;
+            secondarySkillDef1.matchMaxConsumptions = 8;
             secondarySkillDef1.associatedBuff = CreateMatchBuff(secondarySkillDef1);
+
+            Config.ConfigureSkillDef(secondarySkillDef1, CharacterConfig.SectionBody, "M2_Staff");
 
             //here is a basic skill def with all fields accounted for
             MatchBoostedSkillDef secondarySkillDef2 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
@@ -209,7 +220,7 @@ namespace MatcherMod.Survivors.Matcher
                 //keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texTileStaff"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Secondary1Explosion)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Secondary2Explosion)),
                 activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -235,6 +246,8 @@ namespace MatcherMod.Survivors.Matcher
             secondarySkillDef2.matchConsumptionMinimum = 1;
             secondarySkillDef2.matchMaxConsumptions = int.MaxValue;
             secondarySkillDef2.associatedBuff = CreateMatchBuff(secondarySkillDef2);
+
+            Config.ConfigureSkillDef(secondarySkillDef2, CharacterConfig.SectionBody, "M2_Staff2");
 
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1, secondarySkillDef2);
         }
@@ -281,12 +294,14 @@ namespace MatcherMod.Survivors.Matcher
             utilitySkillDef1.associatedBuff = CharacterBuffs.shieldMatchBuff;
 
 
+            Config.ConfigureSkillDef(utilitySkillDef1, CharacterConfig.SectionBody, "M3_Shield");
+
             Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1);
         }
 
         private void AddFourthSymbolSkills()
         {
-            GenericSkill genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "FourthSymbol");
+            GenericSkill genericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "LOADOUT_FOURTH_SYMBOL");
             matcherGridController.genericSkills.Add(genericSkill);
 
             MatchBoostedSkillDef passiveSkillDef1 = Skills.CreateSkillDef<MatchBoostedSkillDef>(new SkillDefInfo
@@ -384,7 +399,7 @@ namespace MatcherMod.Survivors.Matcher
 
                 for (int i = 0; i < teamComponents.Count; i++)
                 {
-                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < CharacterConfig.M4_Brain_NearDistance * CharacterConfig.M4_Brain_NearDistance)
+                    if ((teamComponents[i].transform.position - controller.transform.position).sqrMagnitude < 400/*CharacterConfig.M4_Brain_NearDistance * CharacterConfig.M4_Brain_NearDistance*/)
                     {
                         if (teamComponents[i].TryGetComponent(out CharacterBody body))
                         {
@@ -423,7 +438,7 @@ namespace MatcherMod.Survivors.Matcher
                 skillName = "MatcherGrid",
                 skillNameToken = TOKEN_PREFIX + "SPECIAL_MATCH_NAME",
                 skillDescriptionToken = TOKEN_PREFIX + "SPECIAL_MATCH_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = assetBundle.LoadAsset<Sprite>("texIconMatcherSpecial"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MatchMenu)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
@@ -432,13 +447,16 @@ namespace MatcherMod.Survivors.Matcher
 
                 baseMaxStock = 1,
                 requiredStock = 1,
-                stockToConsume = 0,
-                baseRechargeInterval = 5f,
+                stockToConsume = 1,
+                baseRechargeInterval = 20f,
 
                 isCombatSkill = false,
                 mustKeyPress = true,
-                cancelSprintingOnActivation = false
+                cancelSprintingOnActivation = false,
+                beginSkillCooldownOnSkillEnd = true
             });
+
+            Config.ConfigureSkillDef(specialSkillDef1, CharacterConfig.SectionBody, "M5_match");
 
             Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
         }
@@ -457,7 +475,7 @@ namespace MatcherMod.Survivors.Matcher
             #region DefaultSkin
             //this creates a SkinDef with all default fields
             SkinDef defaultSkin = Skins.CreateSkinDef("DEFAULT_SKIN",
-                assetBundle.LoadAsset<Sprite>("texMainSkin"),
+                assetBundle.LoadAsset<Sprite>("texIconSkinMatcherDefault"),
                 defaultRendererinfos,
                 prefabCharacterModel.gameObject);
 
@@ -477,25 +495,25 @@ namespace MatcherMod.Survivors.Matcher
             //uncomment this when you have a mastery skin
             #region MasterySkin
 
-            ////creating a new skindef as we did before
-            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(HENRY_PREFIX + "MASTERY_SKIN_NAME",
-            //    assetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
-            //    defaultRendererinfos,
-            //    prefabCharacterModel.gameObject,
-            //    HenryUnlockables.masterySkinUnlockableDef);
+            //creating a new skindef as we did before
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(TOKEN_PREFIX + "MASTERY_SKIN_NAME",
+                assetBundle.LoadAsset<Sprite>("texIconSkinMatcherClassic"),
+                defaultRendererinfos,
+                prefabCharacterModel.gameObject,
+                CharacterUnlockables.masterySkinUnlockableDef);
 
             ////adding the mesh replacements as above. 
             ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
-            //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
+            //masterySkin.meshReplacements = Modules.Skins.GetMeshReplacements(assetBundle, defaultRendererinfos,
             //    "meshHenrySwordAlt",
             //    null,//no gun mesh replacement. use same gun mesh
             //    "meshHenryAlt");
 
-            ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
-            ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-            //masterySkin.rendererInfos[0].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
-            //masterySkin.rendererInfos[1].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
-            //masterySkin.rendererInfos[2].defaultMaterial = assetBundle.LoadMaterial("matHenryAlt");
+            //masterySkin has a new set of RendererInfos (based on default rendererinfos)
+            //you can simply access the RendererInfos' materials and set them to the new materials for your skin.
+            masterySkin.rendererInfos[0].defaultMaterial = Materials.CreateHopooMaterialFromBundle(assetBundle, "matMatcherClassic").SetSpecular(0.3f, 0.6f);
+            masterySkin.rendererInfos[1].defaultMaterial = Materials.CreateHopooMaterialFromBundle(assetBundle, "matMatcherClassic");
+            masterySkin.rendererInfos[2].defaultMaterial = Materials.CreateHopooMaterialFromBundle(assetBundle, "matMatcherClassic");
 
             ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
             //masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
@@ -508,10 +526,10 @@ namespace MatcherMod.Survivors.Matcher
             //};
             ////simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
 
-            //skins.Add(masterySkin);
+            skins.Add(masterySkin);
 
             #endregion
-            
+
             skinController.skins = skins.ToArray();
         }
         #endregion skins
@@ -539,47 +557,64 @@ namespace MatcherMod.Survivors.Matcher
 
             On.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
 
-            On.RoR2.TeleporterInteraction.OnInteractionBegin += TeleporterInteraction_OnInteractionBegin;
+            On.RoR2.TeleporterInteraction.IdleToChargingState.OnEnter += IdleToChargingState_OnEnter;
         }
 
-        private void TeleporterInteraction_OnInteractionBegin(On.RoR2.TeleporterInteraction.orig_OnInteractionBegin orig, TeleporterInteraction self, Interactor activator)
+        private void IdleToChargingState_OnEnter(On.RoR2.TeleporterInteraction.IdleToChargingState.orig_OnEnter orig, BaseState self)
         {
-            orig(self, activator);
-
-            if (self.currentState is TeleporterInteraction.IdleState)
+            orig(self);
+            if(NetworkServer.active)
             {
-                List<MatcherGridController> matchers = InstanceTracker.GetInstancesList<MatcherGridController>();
-                if (matchers.Count > 0)
+                SpawnBoxServer(self.outer.gameObject.transform);
+            }
+        }
+
+        private static void SpawnBoxServer(Transform activationPoint)
+        {
+            List<MatcherGridController> matchers = InstanceTracker.GetInstancesList<MatcherGridController>();
+            if (matchers.Count > 0)
+            {
+                bool anyNeedUpgrade = false;
+                for (int i = 0; i < matchers.Count; i++)
                 {
-                    Vector3 position = UnityEngine.Random.onUnitSphere * 5 + self.transform.position;
-                    position.y = self.transform.position.y + 0.5f;
-
-                    GameObject box = UnityEngine.Object.Instantiate(Content.CharacterAssets.BoxToOpenByMatching, position, Quaternion.identity);
-
-                    int difficulty = Run.instance.stageClearCount * matchers.Count;
-
-                    int totalTileAmount = UnityEngine.Random.Range(5, 9) + 3 * Mathf.Max(difficulty / 2, 1);
-
-                    int amountOfRandomTileAmounts = UnityEngine.Random.Range(1, 5);
-
-                    int[] randomTileAmounts = new int[4];
-                    for (int i = 0; i < amountOfRandomTileAmounts; i++)
+                    if (matchers[i].CharacterBody.master.inventory.GetItemCount(CharacterItems.GridUpgradedCount) < BoxToOpenByMatching.MAX_UPGRADES)
                     {
-                        int remaining = amountOfRandomTileAmounts - i - 1;
-                        if (remaining == 0)
-                        {
-                            randomTileAmounts[i] = totalTileAmount;
-                        } 
-                        else
-                        {
-                            int randomAmount = UnityEngine.Random.Range(2, totalTileAmount - (remaining * 2));
-                            randomTileAmounts[i] = randomAmount;
-                            totalTileAmount -= randomAmount;
-                        }
+                        anyNeedUpgrade = true;
                     }
-
-                    box.GetComponent<BoxToOpenByMatching>().Init(matchers[0].TileTypes, randomTileAmounts);
                 }
+
+                if (!anyNeedUpgrade)
+                    return;
+
+                Vector3 position = UnityEngine.Random.onUnitSphere * 5 + activationPoint.position;
+                position.y = activationPoint.position.y + 0.5f;
+
+                GameObject box = UnityEngine.Object.Instantiate(Content.CharacterAssets.BoxToOpenByMatching, position, Quaternion.identity);
+                NetworkServer.Spawn(box);
+
+                int difficulty = Run.instance.stageClearCount * matchers.Count;
+
+                int totalTileAmount = UnityEngine.Random.Range(5, 9) + 5 * difficulty;// Mathf.Max(Mathf.RoundToInt(difficulty / 2f), 1);
+
+                int amountOfRandomTileAmounts = UnityEngine.Random.Range(1, 5);
+
+                int[] randomTileAmounts = new int[4];
+                for (int i = 0; i < amountOfRandomTileAmounts; i++)
+                {
+                    int remaining = amountOfRandomTileAmounts - i - 1;
+                    if (remaining == 0)
+                    {
+                        randomTileAmounts[i] = totalTileAmount;
+                    }
+                    else
+                    {
+                        int randomAmount = UnityEngine.Random.Range(2, totalTileAmount - (remaining * 2));
+                        randomTileAmounts[i] = randomAmount;
+                        totalTileAmount -= randomAmount;
+                    }
+                }
+
+                box.GetComponent<BoxToOpenByMatching>().InitServer(matchers[0].gameObject, randomTileAmounts);
             }
         }
 
