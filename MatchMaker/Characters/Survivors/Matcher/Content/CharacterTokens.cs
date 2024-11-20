@@ -24,17 +24,14 @@ namespace MatcherMod.Survivors.Matcher.Content
              + "< ! > Match sword tiles to be epic." + Environment.NewLine + Environment.NewLine
              + "< ! > Match staff tiles to be epic." + Environment.NewLine + Environment.NewLine
              + "< ! > Match shield tiles to stay alive so you can be epic." + Environment.NewLine + Environment.NewLine
-             + "< ! > Match crate tiles to just to add another symbol to the board cause 3 was too little." + Environment.NewLine + Environment.NewLine;
-
-            string outro = "..and so he left, .";
-            string outroFailure = "..and so he vanished, .";
+             + "< ! > Match key tiles even when they are not needed so you can match the other tiles more." + Environment.NewLine + Environment.NewLine;
 
             Language.Add(prefix + "NAME", "Match Maker");
             Language.Add(prefix + "DESCRIPTION", desc);
             Language.Add(prefix + "SUBTITLE", "Boat Builder");
             Language.Add(prefix + "LORE", "Society grows best when the old plant trees in whose shade they'll never sit.");
-            Language.Add(prefix + "OUTRO_FLAVOR", outro);
-            Language.Add(prefix + "OUTRO_FAILURE", outroFailure);
+            Language.Add(prefix + "OUTRO_FLAVOR", "..and so he left, to the east wind.");
+            Language.Add(prefix + "OUTRO_FAILURE", "..and so he vanished, into ten million pieces.");
 
             #region Skins
             Language.Add(prefix + "MASTERY_SKIN_NAME", "Alternate");
