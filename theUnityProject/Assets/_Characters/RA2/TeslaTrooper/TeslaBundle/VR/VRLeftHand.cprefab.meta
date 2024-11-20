@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: 605321a2f9fa946419b178996d01f675
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 5a28862b828b1dc4699420997f952964, type: 3}
+  references:
+  - referencedObject: {fileID: -7377804378205757712, guid: dca0393abfba11d40b854d952e17d2c0,
+      type: 3}
+    nameOverride: 
+  - referencedObject: {fileID: -9042386925868811508, guid: dca0393abfba11d40b854d952e17d2c0,
+      type: 3}
+    nameOverride: 
+  - referencedObject: {fileID: 891566749501179736, guid: dca0393abfba11d40b854d952e17d2c0,
+      type: 3}
+    nameOverride: 
+  - referencedObject: {fileID: -1632556177718503209, guid: dca0393abfba11d40b854d952e17d2c0,
+      type: 3}
+    nameOverride: 
+  - referencedObject: {fileID: -8679837913019646884, guid: dca0393abfba11d40b854d952e17d2c0,
+      type: 3}
+    nameOverride: 
+  useObjectAsRoot: 1

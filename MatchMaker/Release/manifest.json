@@ -3,7 +3,7 @@
   "name": "MatchMaker",
   "version_number": "0.1.0",
   "website_url": "https://github.com/TheTimeSweeper/WagaTamashiiWaMadaMoeteOru",
-  "description": "society grows great when the old plant trees in whose shade they'll never sit",
+  "description": "Pull up a match 3 grid and match tiles to boost your abilities. Yes, really. | Multiplayer Compatible | Beta Release",
   "dependencies": [
     "RiskofThunder-R2API_Core-5.0.3",
     "RiskofThunder-R2API_Prefab-1.0.1",
@@ -11,6 +11,5 @@
     "RiskofThunder-R2API_RecalculateStats-1.0.0",
     "RiskofThunder-R2API_Language-1.0.0",
     "RiskofThunder-R2API_Sound-1.0.0",
-    "DestroyedClone-FasterPickupText-1.1.0"
   ]
 }
