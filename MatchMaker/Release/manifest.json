@@ -1,7 +1,7 @@
 {
   "author": "TheTimesweeper",
   "name": "MatchMaker",
-  "version_number": "0.1.0",
+  "version_number": "0.2.0",
   "website_url": "https://github.com/TheTimeSweeper/the/tree/master/MatchMaker",
   "description": "Pull up a match 3 grid and match tiles to boost your abilities. Yes, really. | Multiplayer Compatible | Beta Release",
   "dependencies": [
@@ -10,6 +10,7 @@
     "RiskofThunder-R2API_DamageType-1.0.0",
     "RiskofThunder-R2API_RecalculateStats-1.0.0",
     "RiskofThunder-R2API_Language-1.0.0",
-    "RiskofThunder-R2API_Sound-1.0.0"
+    "RiskofThunder-R2API_Sound-1.0.0",
+    "DestroyedClone-FasterPickupText-1.1.1"
   ]
 }

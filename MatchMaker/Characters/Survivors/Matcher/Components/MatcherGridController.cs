@@ -396,7 +396,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 int cost = purchaseInteraction.Networkcost;
                 for (int i = 0; i < matches; i++)
                 {
-                    cost = Mathf.RoundToInt(cost * (100 - CharacterConfig.M4_Key_UnlockPercentValue) * 0.01f - flatCost);
+                    cost = Mathf.RoundToInt(cost * (100 - 0.99f) * 0.01f - flatCost);
                 }
                 
 

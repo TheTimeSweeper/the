@@ -41,7 +41,7 @@ namespace PlagueMod.Survivors.Plague
             bodyColor = Color.green,
             sortPosition = 69.3f,
 
-            crosshair = Assets.LoadCrosshair("Standard"),
+            crosshair = Asset.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 110f,

@@ -38,7 +38,7 @@ namespace KatamariMod.Survivors.Katamari
             bodyColor = Color.green,
             sortPosition = 69.3f,
 
-            crosshair = Assets.LoadCrosshair("Standard"),
+            crosshair = Asset.LoadCrosshair("Standard"),
             podPrefab = R2API.PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"), "nip", true),
 
             maxHealth = 110f,

@@ -9,31 +9,31 @@ namespace MatcherMod.Survivors.Matcher.Content
     {
         public const string SectionGeneral = "Hi";
         public const string SectionBody = "Body";
-        public const string SectionSkills = "Skills";
+        public const string SectionSkills = "Skills 0.2";
         public const string SectionMisc = "Misc";
 
         public static BepInEx.Configuration.ConfigEntry<bool> Debug;
 
         [Configure(SectionSkills, 3f, max = 10f)]
         public static ConfigEntry<float> M1_Sword_Damage;
-        [Configure(SectionSkills, 2.5f, max = 10f)]
+        [Configure(SectionSkills, 3f, max = 10f)]
         public static ConfigEntry<float> M1_Sword_MatchMultiplier;
-        [Configure(SectionSkills, 0.9f, max = 10f)]
+        [Configure(SectionSkills, 0.8f, max = 10f)]
         public static ConfigEntry<float> M1_Sword_Duration;
         [Configure(SectionSkills, 1.1f, max = 10f, description = "stronger so a bit slower")]
         public static ConfigEntry<float> M1_Sword_DurationBoostedMultiplier;
 
-        [Configure(SectionSkills, 3.0f, max = 10f)]
+        [Configure(SectionSkills, 5.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff_Damage;
-        [Configure(SectionSkills, 2.0f, max = 10f)]
+        [Configure(SectionSkills, 3.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff_Damage_Match;
-        [Configure(SectionSkills, 30.0f, max = 100f, restartRequired = true)]
+        [Configure(SectionSkills, 15.0f, max = 100f, restartRequired = true)]
         public static ConfigEntry<float> M2_Staff_Radius;
         [Configure(SectionSkills, 30.0f, max = 100f, restartRequired = true)]
         public static ConfigEntry<float> M2_Staff_Radius_Boosted;
         [Configure(SectionSkills, 4.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff2_Damage;
-        [Configure(SectionSkills, 2.0f, max = 10f)]
+        [Configure(SectionSkills, 3.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff2_Damage_Match;
         [Configure(SectionSkills, 30.0f, max = 100f)]
         public static ConfigEntry<float> M2_Staff2_Radius;
@@ -45,21 +45,17 @@ namespace MatcherMod.Survivors.Matcher.Content
         [Configure(SectionSkills, 0.4f, max = 10f)]
         public static ConfigEntry<float> M3_Shield_RollMatchSpeedMultiplier;
 
-        [Configure(SectionSkills, 10f, max = 10f)]
+        [Configure(SectionSkills, 20f, max = 10f)]
         public static ConfigEntry<float> M3_Shield_BuffArmor;
-        [Configure(SectionSkills, 100f, max = 10f)]
+        [Configure(SectionSkills, 120f, max = 10f)]
         public static ConfigEntry<float> M3_Shield_BuffArmorMax;
 
-        [Configure(SectionSkills, 1.5f, max = 20f)]
+        [Configure(SectionSkills, 2f, max = 20f)]
         public static ConfigEntry<float> M4_Key_UnlockBaseValue;
-        [Configure(SectionSkills, 1f, max = 100f)]
-        public static ConfigEntry<float> M4_Key_UnlockPercentValue;
         [Configure(SectionSkills, 3f, max = 20f)]
         public static ConfigEntry<float> M4_Crate_PercentChance;
         [Configure(SectionSkills, 2f, max = 20f)]
         public static ConfigEntry<float> M4_Brain_Experience;
-        //[Configure(SectionSkills, 20f, max = 10f)]
-        //public static ConfigEntry<float> M4_Brain_NearDistance;//kill
         [Configure(SectionSkills, 1, max = 20)]
         public static ConfigEntry<int> M4_Chicken_HealthPerLevel;
 

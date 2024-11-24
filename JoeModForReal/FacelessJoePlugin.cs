@@ -28,7 +28,7 @@ namespace JoeModForReal {
         public static ManualLogSource Log;
 
         //gnome would debug/prototype character stuff on a blank character called andrew
-        public static bool andrew = false;
+        public static bool andrew = true;
 
         void Awake() {
 

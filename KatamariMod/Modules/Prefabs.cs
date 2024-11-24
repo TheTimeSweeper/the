@@ -35,7 +35,7 @@ namespace KatamariMod.Modules
             }
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(display);
+            Modules.Asset.ConvertAllRenderersToHopooShader(display);
             
             return display;
         }
@@ -299,7 +299,7 @@ namespace KatamariMod.Modules
 
             characterModel.autoPopulateLightInfos = true;
             characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+            characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
 
             if (!preattached)
             {

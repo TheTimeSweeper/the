@@ -42,7 +42,7 @@ namespace KatamariMod.Modules.Characters
         public void Initialize()
         {
             instance = this as T;
-            assetBundle = Assets.LoadAssetBundle(assetBundleName);
+            assetBundle = Asset.LoadAssetBundle(assetBundleName);
 
             InitializeCharacter();
         }

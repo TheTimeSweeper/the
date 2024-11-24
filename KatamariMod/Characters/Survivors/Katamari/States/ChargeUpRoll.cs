@@ -11,7 +11,7 @@ namespace KatamariMod.Survivors.Katamari.States
         {
             base.OnEnter();
 
-            characterMotor.onHitGroundServer += CharacterMotor_onHitGround;
+            characterMotor.onHitGroundAuthority += CharacterMotor_onHitGround;
 
             if ((characterBody.bodyFlags & CharacterBody.BodyFlags.IgnoreFallDamage) == CharacterBody.BodyFlags.IgnoreFallDamage)
                 return;
@@ -22,7 +22,7 @@ namespace KatamariMod.Survivors.Katamari.States
         private void CharacterMotor_onHitGround(ref RoR2.CharacterMotor.HitGroundInfo hitGroundInfo)
         {
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
-            characterMotor.onHitGroundServer -= CharacterMotor_onHitGround;
+            characterMotor.onHitGroundAuthority -= CharacterMotor_onHitGround;
         }
 
         public override void FixedUpdate()

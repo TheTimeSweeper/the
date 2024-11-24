@@ -34,7 +34,7 @@ namespace PlagueMod
         void Awake()
         {
             instance = this;
-
+            
             Log.Init(Logger);
             Modules.Language.Init();
             

@@ -31,7 +31,8 @@ namespace PlagueMod.Survivors.Plague.SkillDefs
         //well if you're hooking that there's probably a problem no?
         public override EntityState InstantiateNextState([NotNull] GenericSkill skillSlot)
         {
-            EntityState entityState = EntityStateCatalog.InstantiateState(GetOverrideState(skillSlot));
+            SerializableEntityStateType overrideState = GetOverrideState(skillSlot);
+            EntityState entityState = EntityStateCatalog.InstantiateState(ref overrideState);
             ISkillState skillState;
             if ((skillState = (entityState as ISkillState)) != null)
             {
