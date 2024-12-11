@@ -68,7 +68,7 @@ namespace AliemMod.Content.Orbs
                 origin = bulletOrigin,
                 damage = damageValue,
                 damageColorIndex = DamageColorIndex.Default,
-                damageType = DamageType.Generic,
+                damageType = damageTypeCombo,
                 falloffModel = BulletAttack.FalloffModel.None,
                 maxDistance = _bulletDistance,
                 force = 0,

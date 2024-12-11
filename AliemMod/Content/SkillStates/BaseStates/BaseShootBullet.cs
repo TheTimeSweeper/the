@@ -26,6 +26,7 @@ namespace ModdedEntityStates.Aliem
         public virtual LayerMask stopperMask => LayerIndex.CommonMasks.bullet;
         public virtual string muzzleString => isOffHanded ? "BlasterMuzzle.R" : "BlasterMuzzle";
         public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
+        public DamageTypeCombo damageTypeCombo = DamageTypeCombo.GenericPrimary;
 
         public virtual GameObject tracerEffectPrefab => AliemAssets.rifleTracer;
 
@@ -80,7 +81,7 @@ namespace ModdedEntityStates.Aliem
                     origin = aimRay.origin,
                     damage = damageCoefficient * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
-                    damageType = DamageType.Generic,
+                    damageType = damageTypeCombo,
                     falloffModel = falloff,
                     maxDistance = range,
                     force = force,

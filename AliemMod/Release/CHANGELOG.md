@@ -1,5 +1,10 @@
 ## Changelog
 
+`1.2.4`
+- fixed for damagesource update
+- fixed cursed BBGun weapon
+- sword projectile is client side again
+
 `1.2.3`
 - fixed incredible nullref spam from the latest update
 

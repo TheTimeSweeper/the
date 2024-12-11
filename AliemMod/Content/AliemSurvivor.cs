@@ -157,7 +157,7 @@ namespace AliemMod.Content.Survivors
             motor.CapsuleRadius = 0.302f;
             motor.CapsuleHeight = 1.021f;
         }
-
+        
         private void Hooks() {
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
@@ -165,11 +165,11 @@ namespace AliemMod.Content.Survivors
 
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
-            IL.RoR2.Orbs.OrbEffect.Reset += OrbEffect_Start;
+            IL.RoR2.Orbs.OrbEffect.Reset += OrbEffect_Reset;
             //IL.RoR2.Orbs.OrbEffect.Start += OrbEffect_Start;
         }
-
-        private void OrbEffect_Start(MonoMod.Cil.ILContext il)
+        
+        private void OrbEffect_Reset(MonoMod.Cil.ILContext il)
         {
             ILCursor cursor = new ILCursor(il);
 
@@ -181,7 +181,8 @@ namespace AliemMod.Content.Survivors
 
             cursor.Emit(OpCodes.Ldarg_0);
             cursor.Emit(OpCodes.Ldfld, typeof(OrbEffect).GetFieldCached(nameof(OrbEffect.targetTransform)));
-            cursor.Emit(OpCodes.Ldloc_0);
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.Emit(OpCodes.Ldfld, typeof(OrbEffect).GetFieldCached(nameof(OrbEffect._effectComponent)));
             cursor.EmitDelegate<Func<Vector3, Transform, EffectComponent, Vector3>>((startPosition, targetTransform, effectComponent) =>
             {
                 if(targetTransform == null)
@@ -831,7 +832,6 @@ namespace AliemMod.Content.Survivors
             R2API.LanguageAPI.Add(token, skinColor);
             return skinDef;
         }
-
 
         internal static Sprite CreateRecolorIcon(Color color) {
             var tex = new Texture2D(4, 4, TextureFormat.RGBA32, false);

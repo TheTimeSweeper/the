@@ -1,6 +1,7 @@
 ﻿using AliemMod.Content;
 using AliemMod.Modules;
 using EntityStates;
+using RoR2;
 using UnityEngine;
 
 namespace ModdedEntityStates.Aliem
@@ -20,6 +21,7 @@ namespace ModdedEntityStates.Aliem
 
         public RayGunChargedFire() {
             _chargedDamageCoefficient = AliemConfig.M1_RayGunCharged_Damage_Max.Value;
+            damageTypeCombo = DamageTypeCombo.GenericSecondary;
         }
 
         public RayGunChargedFire(float dam_, string shootSound_) {

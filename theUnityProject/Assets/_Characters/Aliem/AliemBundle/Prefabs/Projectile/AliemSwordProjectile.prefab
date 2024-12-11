@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionTransmitInterval: 0.033333335
   interpolationFactor: 1
-  allowClientsideCollision: 0
+  allowClientsideCollision: 1
   checkForLocalPlayerAuthority: 0
   singletonArrayIndex: -1
   serverPosition: {x: 0, y: 0, z: 0}

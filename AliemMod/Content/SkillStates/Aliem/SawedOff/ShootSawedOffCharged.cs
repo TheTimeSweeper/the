@@ -23,6 +23,7 @@ namespace ModdedEntityStates.Aliem
 
         public ShootSawedOffCharged() {
             _chargedDamageCoefficient = AliemConfig.M1_SawedOffCharged_Damage_Max.Value;
+            damageTypeCombo = DamageTypeCombo.GenericSecondary;
         }
 
         public ShootSawedOffCharged(float dam_) {
@@ -78,7 +79,8 @@ namespace ModdedEntityStates.Aliem
                 Util.CheckRoll(this.critStat, base.characterBody.master),
                 DamageColorIndex.Default,
                 null,
-                -1f);
+                -1f,
+                damageTypeCombo);
         }
 
         protected override void ModifyState()

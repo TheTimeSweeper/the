@@ -11,6 +11,7 @@ namespace ModdedEntityStates.Aliem
 
         public override void OnEnter()
         {
+            damageTypeCombo = DamageTypeCombo.GenericSecondary;
             base.OnEnter();
 
             EffectManager.SimpleMuzzleFlash(FireLunarNeedle.muzzleFlashEffectPrefab, base.gameObject, "Head", false);

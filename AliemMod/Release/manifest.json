@@ -1,9 +1,9 @@
 {
     "author": "TheTimesweeper",
     "name": "Alien_Hominid",
-    "version_number": "1.2.3",
+    "version_number": "1.2.4",
     "website_url": "https://github.com/TheTimeSweeper/the",
-    "description": "Adds an aliem | fps bugs fixed",
+    "description": "Adds an aliem",
     "dependencies": [
         "bbepis-BepInExPack-5.4.2101",
         "RiskofThunder-R2API_Core-5.0.3",

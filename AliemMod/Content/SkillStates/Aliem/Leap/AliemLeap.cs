@@ -74,7 +74,7 @@ namespace ModdedEntityStates.Aliem
 				hitBoxGroup = hitBoxGroup,
 				hitEffectPrefab = AliemAssets.nemforcerImpactEffect,
 				//impactSound = Modules.Assets.nemforcerImpactSound.index,
-				//damageType = DamageType.Stun1s,
+				damageType = DamageTypeCombo.GenericUtility,
 			};
 
 			GetModelAnimator().SetFloat("aimYawCycle", 0.5f);

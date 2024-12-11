@@ -20,6 +20,7 @@ namespace AliemMod.Content.Orbs
         public bool isCrit;
         public ProcChainMask procChainMask = default;
         public float procCoefficient = AliemConfig.M1_BBGun_ProcCoefficient.Value;
+        public DamageTypeCombo damageTypeCombo = DamageTypeCombo.GenericPrimary;
 
         public override void Begin()
         {
@@ -61,7 +62,7 @@ namespace AliemMod.Content.Orbs
                     damageInfo.procCoefficient = this.procCoefficient;
                     damageInfo.position = this.target.transform.position;
                     //damageInfo.damageColorIndex = this.damageColorIndex;
-                    damageInfo.damageType = DamageType.Generic;
+                    damageInfo.damageType = damageTypeCombo;
                     healthComponent.TakeDamage(damageInfo);
                     GlobalEventManager.instance.OnHitEnemy(damageInfo, healthComponent.gameObject);
                     GlobalEventManager.instance.OnHitAll(damageInfo, healthComponent.gameObject);

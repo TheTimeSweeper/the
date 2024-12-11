@@ -145,6 +145,7 @@ namespace ModdedEntityStates.Aliem
             orb.isCrit = _currentCrit;
             orb.origin = _muzzleTransform.position;
             orb.target = hitTarget;
+            orb.damageTypeCombo = DamageTypeCombo.GenericPrimary;
 
             OrbManager.instance.AddOrb(orb);
         }

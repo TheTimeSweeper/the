@@ -2,6 +2,8 @@
 using UnityEngine;
 using AliemMod.Modules;
 using AliemMod.Content;
+using RoR2.Projectile;
+using RoR2;
 
 namespace ModdedEntityStates.Aliem
 {
@@ -17,10 +19,10 @@ namespace ModdedEntityStates.Aliem
         private float _chargedDamageCoefficient;
         private string _chargedShootSound = "Play_AliemBBCharged";
 
-
         public FireBBGunCharged()
         {
             _chargedDamageCoefficient = AliemConfig.M1_BBGunCharged_Damage_Max.Value;
+            damageTypeCombo = DamageTypeCombo.GenericSecondary;
         }
 
         public FireBBGunCharged(float dam_)

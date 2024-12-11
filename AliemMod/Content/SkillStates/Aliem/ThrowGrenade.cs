@@ -1,6 +1,8 @@
 ﻿using AliemMod.Content;
 using AliemMod.Modules;
 using EntityStates;
+using RoR2;
+using RoR2.Projectile;
 using System;
 using UnityEngine;
 
@@ -47,6 +49,12 @@ namespace ModdedEntityStates.Aliem
 
         protected virtual void ModifyState() { }
 
+
+        public override void ModifyProjectileInfo(ref FireProjectileInfo fireProjectileInfo)
+        {
+            base.ModifyProjectileInfo(ref fireProjectileInfo);
+            fireProjectileInfo.damageTypeOverride = new DamageTypeCombo?(DamageTypeCombo.GenericSpecial);
+        }
         public override Ray ModifyProjectileAimRay(Ray aimRay) {
 
 			Vector3 aimCross = Vector3.Cross(aimRay.direction, Vector3.up).normalized;

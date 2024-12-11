@@ -38,6 +38,7 @@ namespace ModdedEntityStates
         protected GameObject swingEffectPrefab;
         protected GameObject hitEffectPrefab;
         protected NetworkSoundEventIndex impactSound = NetworkSoundEventIndex.Invalid;
+        protected DamageTypeCombo damageTypeCombo = DamageTypeCombo.GenericPrimary;
 
         public float duration = 1;
         private bool hasFired;

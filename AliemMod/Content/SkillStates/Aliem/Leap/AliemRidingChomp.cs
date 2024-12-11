@@ -58,7 +58,7 @@ namespace ModdedEntityStates.Aliem
                 {
                     attacker = base.gameObject,
                     baseDamage = this.damageStat * ChompDamageCoefficient,
-                    damageType = AliemConfig.M3_Chomp_Slayer.Value ? DamageType.BonusToLowHealth : DamageType.Generic,
+                    damageType = DamageTypeCombo.GenericUtility,
                     //baseForce = this.blastForce,
                     //bonusForce = this.blastBonusForce,
                     crit = this.RollCrit(),
@@ -71,7 +71,10 @@ namespace ModdedEntityStates.Aliem
                     //impactEffect = EffectCatalog.FindEffectIndexFromPrefab(this.blastImpactEffectPrefab),
                     teamIndex = base.teamComponent.teamIndex
                 };
-
+                if (AliemConfig.M3_Chomp_Slayer.Value)
+                {
+                    blast.damageType.damageType |= DamageType.BonusToLowHealth;
+                }
                 R2API.DamageAPI.AddModdedDamageType(blast, DamageTypes.Decapitating);
 
                 blast.Fire();

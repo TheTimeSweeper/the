@@ -21,6 +21,7 @@ namespace ModdedEntityStates.Aliem
         {
             _swordDamageCoefficient = AliemConfig.M1_SwordCharged_Damage_Max.Value;
             _swordSpeedCoefficient = AliemConfig.M1_SwordCharged_Speed_Max.Value;
+            damageTypeCombo = DamageTypeCombo.GenericSecondary;
         }
 
         public SwordFireCharged(float dam, float sped)
@@ -51,7 +52,8 @@ namespace ModdedEntityStates.Aliem
                     this.force, Util.CheckRoll(this.critStat, base.characterBody.master),
                     DamageColorIndex.Default,
                     null,
-                    _swordSpeedCoefficient);
+                    _swordSpeedCoefficient,
+                    damageTypeCombo);
             }
         }
     }

@@ -35,6 +35,7 @@ namespace ModdedEntityStates.Aliem
         public ShootRifleCharged()
         {
             _chargedBullets = AliemConfig.M1_MachineGunCharged_Bullets_Max.Value;
+            damageTypeCombo = DamageTypeCombo.GenericSecondary;
         }
 
         public ShootRifleCharged(int bullets)

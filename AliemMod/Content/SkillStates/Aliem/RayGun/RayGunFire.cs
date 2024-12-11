@@ -2,6 +2,8 @@
 using AliemMod.Content.Orbs;
 using AliemMod.Modules;
 using EntityStates;
+using RoR2;
+using RoR2.Projectile;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -31,6 +33,8 @@ namespace ModdedEntityStates.Aliem
         public bool isOffHanded { get; set; }
 
         public virtual GameObject muzzleEffectPrefab => EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab;
+
+        public DamageTypeCombo damageTypeCombo = DamageTypeCombo.GenericPrimary;
         
         public override void OnEnter() {
 			base.projectilePrefab = projectile;
@@ -57,7 +61,14 @@ namespace ModdedEntityStates.Aliem
 		}
 
         protected virtual void ModifyState() { }
-		
+
+
+        public override void ModifyProjectileInfo(ref FireProjectileInfo fireProjectileInfo)
+        {
+            base.ModifyProjectileInfo(ref fireProjectileInfo);
+            fireProjectileInfo.damageTypeOverride = new DamageTypeCombo?(damageTypeCombo);
+        }
+
         public override void FixedUpdate() {
 			base.FixedUpdate();
 		}
