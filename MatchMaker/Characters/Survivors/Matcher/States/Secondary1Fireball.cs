@@ -78,7 +78,8 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                         crit = base.RollCrit(),
                         damageColorIndex = DamageColorIndex.Default,
                         //speedOverride = 100,
-                        projectilePrefab = consumedMatches > 0 ? CharacterAssets.JoeFireballBig : CharacterAssets.JoeFireball
+                        projectilePrefab = consumedMatches > 0 ? CharacterAssets.JoeFireballBig : CharacterAssets.JoeFireball,
+                        damageTypeOverride = DamageTypeCombo.GenericSecondary
                     };
 
                     ProjectileManager.instance.FireProjectile(projectileInfo);

@@ -77,7 +77,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
                     attackerFiltering = AttackerFiltering.NeverHitSelf,
                     crit = base.characterBody.RollCrit(),
                     //damageColorIndex = DamageColorIndex.Item,
-                    //damageType = DamageType.SlowOnHit,
+                    damageType = DamageTypeCombo.GenericSecondary,
                     inflictor = base.gameObject,
                     position = base.transform.position,
                     procChainMask = default(ProcChainMask),

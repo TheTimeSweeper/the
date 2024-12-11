@@ -1,4 +1,7 @@
 # Changelog
+`0.2.1`
+- fixed for damagesource update
+
 `0.2.0`
 - added dependency on FasterPickupText for box upgrade items and crate items
 - fixed wrong default values: 

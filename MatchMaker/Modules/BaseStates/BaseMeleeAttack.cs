@@ -16,7 +16,7 @@ namespace MatcherMod.Modules.BaseStates
         /// </summary>
         public string hitBoxGroupName = "SwordGroup";
 
-        public DamageType damageType = DamageType.Generic;
+        public DamageTypeCombo damageType = DamageTypeCombo.GenericPrimary;
         public float damageCoefficient = 3.5f;
         public float procCoefficient = 1f;
         public float pushForce = 300f;

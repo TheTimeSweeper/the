@@ -26,7 +26,7 @@ namespace MatcherMod.Survivors.Matcher.SkillStates
             //mouse over variables for detailed explanations
             hitBoxGroupName = "swingTall";
 
-            damageType = DamageType.Generic;
+            damageType = DamageTypeCombo.GenericPrimary;
             damageCoefficient = CharacterConfig.M1_Sword_Damage.Value * Mathf.Max(1, consumedMatches * CharacterConfig.M1_Sword_MatchMultiplier.Value);
             procCoefficient = 1f;
             pushForce = 300f;
