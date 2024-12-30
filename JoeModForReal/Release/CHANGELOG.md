@@ -1,3 +1,6 @@
+`0.2.1`
+- damagesource update
+
 `0.2.0`
 - sots fix
 - added scepter for primary but that mod's not working yet so uh might be broke

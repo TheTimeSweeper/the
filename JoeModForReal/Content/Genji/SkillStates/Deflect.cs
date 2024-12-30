@@ -104,13 +104,14 @@ namespace ModdedEntityStates.Genji {
             Ray aimRay = base.GetAimRay();
 
             float damage = 1 * damageStat;
-            DamageType damageType = DamageType.Generic;
+            DamageTypeCombo damageType = DamageType.Generic;
             float force = 200;
             if (projectileController.gameObject.TryGetComponent(out ProjectileDamage projectileDamage)) {
                 damage = projectileDamage.damage * GenjiConfig.deflectProjectileDamageMultiplier.Value;
                 damageType = projectileDamage.damageType;
                 force = projectileDamage.force;
             }
+            damageType.damageSource = DamageSource.Secondary;
 
             FireProjectileInfo info = new FireProjectileInfo() {
                 projectilePrefab = projectileController.gameObject,
@@ -136,6 +137,9 @@ namespace ModdedEntityStates.Genji {
 
             PlayDeflectEffect();
 
+            DamageTypeCombo damageTypeCombo = bulletAttack_.damageType;
+            damageTypeCombo.damageSource = DamageSource.Secondary;
+
             Ray aimRay = GetAimRay();
             BulletAttack deflectedBullet = new BulletAttack {
                 aimVector = aimRay.direction,
@@ -152,7 +156,7 @@ namespace ModdedEntityStates.Genji {
                 spreadYawScale = 1,
 
                 damage = bulletAttack_.damage * GenjiConfig.deflectBulletAttackDamageMultiplier.Value,
-                damageType = bulletAttack_.damageType,
+                damageType = damageTypeCombo,
                 falloffModel = bulletAttack_.falloffModel,
                 force = bulletAttack_.force,
                 HitEffectNormal = bulletAttack_.HitEffectNormal,
@@ -200,7 +204,8 @@ namespace ModdedEntityStates.Genji {
                     position = vector,
                     radius = FireLaser.blastRadius,
                     falloffModel = BlastAttack.FalloffModel.SweetSpot,
-                    bonusForce = FireLaser.force * modifiedAimRay.direction
+                    bonusForce = FireLaser.force * modifiedAimRay.direction,
+                    damageType = DamageTypeCombo.GenericSecondary,
                 }.Fire();
 
                 Vector3 origin = modifiedAimRay.origin;

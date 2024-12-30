@@ -32,7 +32,8 @@ namespace ModdedEntityStates.Joe {
                 rolledCrit,
                 DamageColorIndex.Default,
                 null,
-                100);
+                100,
+                DamageTypeCombo.GenericPrimary);
         }
 
         protected override EntityState GetJumpSwingState() {

@@ -63,7 +63,8 @@ namespace ModdedEntityStates.Joe {
                         base.RollCrit(),
                         DamageColorIndex.Default,
                         null,
-                        100);
+                        100,
+                        DamageTypeCombo.GenericSecondary);
                 }
             }
         }

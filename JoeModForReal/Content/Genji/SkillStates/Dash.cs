@@ -89,6 +89,7 @@ namespace ModdedEntityStates.Genji {
 
             this._attack = base.InitMeleeOverlap(damageCoefficient, Modules.Asset.MercImpactEffect, modelLocator.modelTransform, "dash");
             _attack.impactSound = Modules.Asset.FleshSliceSound.index;
+            _attack.damageType = DamageTypeCombo.GenericUtility;
             //R2API.DamageAPI.AddModdedDamageType(_attack, Modules.DamageTypes.TenticleLifeStealing);
         }
 

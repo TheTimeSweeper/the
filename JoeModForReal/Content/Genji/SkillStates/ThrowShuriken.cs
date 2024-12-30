@@ -33,7 +33,8 @@ namespace ModdedEntityStates.Genji {
 					base.RollCrit(),
 					DamageColorIndex.Default,
 					null,
-					100);
+					100,
+					DamageTypeCombo.GenericPrimary);
 			}
 		}
 

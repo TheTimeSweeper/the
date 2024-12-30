@@ -38,7 +38,7 @@ namespace ModdedEntityStates.Joe {
         protected virtual void SetSwingValues() {
             this.hitboxName = swingIndex % 2 == 0 ? "swing1" : "swing2";
 
-            base.damageType = DamageType.Generic;
+            //base.damageType = DamageType.Generic;
             base.damageCoefficient = Primary1Swing.swingDamage;
             base.procCoefficient = 1f;
             base.pushForce = 100f;

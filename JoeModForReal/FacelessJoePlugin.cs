@@ -19,7 +19,7 @@ namespace JoeModForReal {
     public class FacelessJoePlugin : BaseUnityPlugin {
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
         public const string MODNAME = "Faceless Joe";
-        public const string MODVERSION = "0.2.0";
+        public const string MODVERSION = "0.2.1";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEV_PREFIX = "HABIBI";
@@ -28,7 +28,7 @@ namespace JoeModForReal {
         public static ManualLogSource Log;
 
         //gnome would debug/prototype character stuff on a blank character called andrew
-        public static bool andrew = true;
+        public static bool andrew = false;
 
         void Awake() {
 

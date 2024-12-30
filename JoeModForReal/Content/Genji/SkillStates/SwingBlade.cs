@@ -17,7 +17,7 @@ namespace ModdedEntityStates.Genji {
         protected virtual void SetSwingValues() {
             this.hitboxName = swingIndex % 2 == 0 ? "swing1" : "swing2";
 
-            base.damageType = DamageType.Generic;
+            base.damageType = DamageTypeCombo.GenericSpecial;
             base.damageCoefficient = bladeDamage;
             base.procCoefficient = 1f;
             base.pushForce = 100f;
