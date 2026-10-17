@@ -169,7 +169,12 @@ namespace AliemMod.Modules
             LunarChargedProjectile = lunarNeedle.InstantiateClone("AliemChargedLunarNeedle", true);
 
             ProjectileController projectileController = LunarChargedProjectile.GetComponent<ProjectileController>();
-            GameObject newGhost = projectileController.ghostPrefab.InstantiateClone(projectileController.ghostPrefab.name + "AliemCharged", false);
+            GameObject vanillaGhost = projectileController.ghostPrefab;
+            if (vanillaGhost == null && projectileController.ghostPrefabAddress.RuntimeKeyIsValid())
+            {
+                vanillaGhost = Addressables.LoadAssetAsync<GameObject>(projectileController.ghostPrefabAddress).WaitForCompletion();
+            }
+            GameObject newGhost = vanillaGhost.InstantiateClone(vanillaGhost.name + "AliemCharged", false);
             GameObject newCore = mainAssetBundle.LoadAsset<GameObject>("ChargedLunarNeedleCore").InstantiateClone("ChargedLunarNeedleCore", false);
             Material matBig = new Material(Addressables.LoadAssetAsync<Material>("RoR2/Base/LunarSkillReplacements/matLunarNeedleImpactEffect.mat").WaitForCompletion());
             matBig.SetColor("_TintColor", new Color(0.4615285f, 0.0514418f, 0.6415094f));
@@ -177,6 +182,8 @@ namespace AliemMod.Modules
             newCore.transform.SetParent(newGhost.transform, false);
             newCore.transform.localPosition = Vector3.zero;
             projectileController.ghostPrefab = newGhost;
+            //address takes priority over ghostPrefab
+            projectileController.ghostPrefabAddress = new AssetReferenceT<GameObject>("");
 
             ProjectileImpactExplosion chargedImpactExplosion = LunarChargedProjectile.GetComponent<ProjectileImpactExplosion>();
             chargedImpactExplosion.fireChildren = true;

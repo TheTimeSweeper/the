@@ -33,7 +33,7 @@ namespace MatcherMod.Survivors.Matcher.SkillDefs
             {
                 PickupIndex pickup = dtTier1Item.GenerateDrop(((CrateInstanceData)skillSlot.skillInstanceData).rng);
                 controller.CharacterBody.master.inventory.GiveItem(PickupCatalog.GetPickupDef(pickup).itemIndex);
-                GenericPickupController.SendPickupMessage(controller.CharacterBody.master, pickup);
+                GenericPickupController.SendPickupMessage(controller.CharacterBody.master, new UniquePickup(pickup));
                 return controller.gameObject;
             }
             return null;

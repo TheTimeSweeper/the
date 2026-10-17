@@ -160,8 +160,7 @@ namespace AliemMod.Content.Survivors
         
         private void Hooks() {
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
-            On.RoR2.SurvivorMannequins.SurvivorMannequinSlotController.ApplyLoadoutToMannequinInstance += SurvivorMannequinSlotController_ApplyLoadoutToMannequinInstance;
+            //weapon skins are reapplied from ModelSkinController.onSkinApplied in WeaponSkinController, since skins apply async now
 
             R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
@@ -215,30 +214,6 @@ namespace AliemMod.Content.Survivors
             if (sender.HasBuff(Buffs.attackSpeedBuff))
             {
                 args.attackSpeedMultAdd += 1;
-            }
-        }
-
-        private void SurvivorMannequinSlotController_ApplyLoadoutToMannequinInstance(On.RoR2.SurvivorMannequins.SurvivorMannequinSlotController.orig_ApplyLoadoutToMannequinInstance orig, RoR2.SurvivorMannequins.SurvivorMannequinSlotController self)
-        {
-            orig(self);
-            CharacterModel model = self.GetComponentInChildren<CharacterModel>();
-            if (model != null)
-            {
-                ApplyWeaponSkin(model.gameObject);
-            }
-        }
-
-        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex)
-        {
-            orig(self, skinIndex);
-            ApplyWeaponSkin(self.gameObject);
-        }
-
-        private static void ApplyWeaponSkin(GameObject self)
-        {
-            if (self.TryGetComponent(out WeaponSkinController weaponSkinController))
-            {
-                weaponSkinController.ApplyCurrentWeaponSkin();
             }
         }
 

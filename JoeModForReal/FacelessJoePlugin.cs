@@ -91,9 +91,9 @@ namespace JoeModForReal {
             //On.RoR2.UI.CharacterSelectController.RebuildLocal += CharacterSelectController_RebuildLocal;
         }
 
-        private void CharacterSelectController_BuildSkillStripDisplayData(On.RoR2.UI.CharacterSelectController.orig_BuildSkillStripDisplayData orig, RoR2.UI.CharacterSelectController self, Loadout loadout, ValueType bodyInfo, object dest) {
-            orig(self, loadout, bodyInfo, dest);
-            ((RoR2.UI.CharacterSelectController.BodyInfo)bodyInfo).bodyPrefab.GetComponents<Components.ILoadoutDisplayStrip>();
+        private void CharacterSelectController_BuildSkillStripDisplayData(On.RoR2.UI.CharacterSelectController.orig_BuildSkillStripDisplayData orig, RoR2.UI.CharacterSelectController self, Loadout loadout, ref RoR2.UI.CharacterSelectController.BodyInfo bodyInfo, System.Collections.Generic.List<RoR2.UI.CharacterSelectController.StripDisplayData> dest) {
+            orig(self, loadout, ref bodyInfo, dest);
+            bodyInfo.bodyPrefab.GetComponents<Components.ILoadoutDisplayStrip>();
         }
 
         //private void CharacterSelectController_RebuildLocal(On.RoR2.UI.CharacterSelectController.orig_RebuildLocal orig, RoR2.UI.CharacterSelectController self) {

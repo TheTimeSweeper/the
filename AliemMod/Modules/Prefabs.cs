@@ -172,6 +172,8 @@ namespace AliemMod.Modules
                 UnityEngine.Object.DestroyImmediate(bodyPrefab.transform.GetChild(i).gameObject);
             }
 
+            PruneSpecialObjectAttributes(bodyPrefab);
+
             Transform modelBase = new GameObject("ModelBase").transform;
             modelBase.parent = bodyPrefab.transform;
             modelBase.localPosition = bodyInfo.modelBasePosition;
@@ -193,6 +195,33 @@ namespace AliemMod.Modules
             bodyPrefab.GetComponent<CharacterBody>().aimOriginTransform = aimOrigin.transform;
 
             return modelBase.transform;
+        }
+
+        //cloned body's SpecialObjectAttributes still references the children we just destroyed, which NREs in its Start
+        private static void PruneSpecialObjectAttributes(GameObject bodyPrefab)
+        {
+            if (!bodyPrefab.TryGetComponent(out SpecialObjectAttributes attributes))
+                return;
+
+            PruneDestroyed(attributes.collisionToDisable);
+            PruneDestroyed(attributes.renderersToDisable);
+            PruneDestroyed(attributes.behavioursToDisable);
+            PruneDestroyed(attributes.childObjectsToDisable);
+            PruneDestroyed(attributes.pickupDisplaysToDisable);
+            PruneDestroyed(attributes.lightsToDisable);
+            PruneDestroyed(attributes.objectsToDetach);
+            PruneDestroyed(attributes.soundEventsToStop);
+            PruneDestroyed(attributes.soundEventsToPlay);
+            PruneDestroyed(attributes.childSpecialObjectAttributes);
+
+            //turns a destroyed transform into a real null
+            if (attributes.indicatorOffset == null)
+                attributes.indicatorOffset = null;
+        }
+
+        private static void PruneDestroyed<T>(List<T> list) where T : UnityEngine.Object
+        {
+            list?.RemoveAll(obj => obj == null);
         }
         public static CharacterModel SetupCharacterModel(GameObject prefab) => SetupCharacterModel(prefab, null);
         public static CharacterModel SetupCharacterModel(GameObject prefab, CustomRendererInfo[] customInfos)
