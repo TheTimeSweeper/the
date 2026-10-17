@@ -24,7 +24,7 @@ using System.Security.Permissions;
 public class AliemPlugin : BaseUnityPlugin {
     public const string MODUID = "com.TheTimeSweeper.Aliem";
     public const string MODNAME = "Aliem";
-    public const string MODVERSION = "1.2.3";
+    public const string MODVERSION = "1.2.5";
 
     // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
     public const string DEV_PREFIX = "HABIBI";
@@ -60,7 +60,8 @@ public class AliemPlugin : BaseUnityPlugin {
         Tokens.AddTokens(); // register name tokens
         AliemMod.Modules.Language.Init();
         AliemMod.Modules.Language.PrintOutput("aliem.txt");
-        ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
+        //todo dlc4 itemdisplays
+        //ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
         Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
         Dots.RegisterDots();
         new ContentPacks().Initialize();        

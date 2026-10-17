@@ -30,7 +30,8 @@ Leap on to enemies and ride them, then chomp their heads off
 Dotflare - Model  
 rob - Animations  
 tsuyoikenko - Gip skin  
-The Behemoth - inspiration, sounds 
+Phreel - HC fixes  
+The Behemoth - inspiration, sounds
 
 ## Known Issues
 - ~~I fuckin fixed them all~~

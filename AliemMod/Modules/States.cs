@@ -10,7 +10,7 @@ namespace AliemMod.Modules
         public static void Init()
         {
             Content.AddEntityState(typeof(AliemCharacterMain));
-
+            //raygun
             Content.AddEntityState(typeof(RayGunFire));
             Content.AddEntityState(typeof(RayGunFireUncharged));
             Content.AddEntityState(typeof(CloseRangeKnife));
@@ -21,7 +21,7 @@ namespace AliemMod.Modules
 
             Content.AddEntityState(typeof(RayGunInstant));
 
-
+            //sword
             Content.AddEntityState(typeof(SwordFire));
             Content.AddEntityState(typeof(SwordFireCharged));
             Content.AddEntityState(typeof(SwordFireChargedDash));
@@ -29,24 +29,31 @@ namespace AliemMod.Modules
             Content.AddEntityState(typeof(InputSword));
             Content.AddEntityState(typeof(ChargeSword));
 
-
+            //rifle
             Content.AddEntityState(typeof(ShootRifleUncharged));
             Content.AddEntityState(typeof(ShootRifleCharged));
 
             Content.AddEntityState(typeof(InputRifle));
             Content.AddEntityState(typeof(ChargeRifle));
 
-
+            //sawedoff
             Content.AddEntityState(typeof(ShootSawedOffUncharged));
             Content.AddEntityState(typeof(ShootSawedOffCharged));
 
             Content.AddEntityState(typeof(InputSawedOff));
             Content.AddEntityState(typeof(ChargeSawedOff));
 
+            //bbgun
+            Content.AddEntityState(typeof(FireBBGun));
+            Content.AddEntityState(typeof(FireBBGunCharged));
 
+            Content.AddEntityState(typeof(InputBBGun));
+            Content.AddEntityState(typeof(ChargeBBGun));
+
+            //lunar
             Content.AddEntityState(typeof(ChargedLunarNeedleFire));
 
-
+            //not primaries
             Content.AddEntityState(typeof(AliemLeapM2));
             Content.AddEntityState(typeof(AliemLeapM3));
             Content.AddEntityState(typeof(AliemRidingChomp));

@@ -90,7 +90,7 @@ namespace AliemMod.Content.Survivors
 
         public override Type characterMainState => typeof(ModdedEntityStates.Aliem.AliemCharacterMain);
 
-        public override ItemDisplaysBase itemDisplays => new AliemItemDisplays();
+        public override ItemDisplaysBase itemDisplays => null;//todo dlc4 itemdisplays new AliemItemDisplays();
 
         //if you have more than one character, easily create a config to enable/disable them like this
         // If you ran out beard shampoo buy more.

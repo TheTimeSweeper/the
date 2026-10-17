@@ -364,7 +364,7 @@ namespace AliemMod.Content
                     sectionPrimaries,
                     nameof(M1_BBGun_Spread),
                     10f,
-                    10,
+                    5,
                     100,
                     "");
 

@@ -133,7 +133,7 @@ namespace ModdedEntityStates.Aliem
 
         private void FireSingleB(Vector3 aimVector)
         {
-            HurtBox hitTarget = BootlegCharacterRaycastSingle(gameObject, new Ray(_currentRay.origin, aimVector), out Vector3 hitPoint, range, BulletAttack.defaultStopperMask, QueryTriggerInteraction.UseGlobal);
+            HurtBox hitTarget = BootlegCharacterRaycastSingle(gameObject, new Ray(_currentRay.origin, aimVector), out Vector3 hitPoint, range, LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
 
             BBOrb orb = hitTarget ? AliemPoolManager.instance.RentBBOrb() : AliemPoolManager.instance.RentBBOrbMissed();
 

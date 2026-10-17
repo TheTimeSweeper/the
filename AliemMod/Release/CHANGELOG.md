@@ -1,5 +1,13 @@
 ## Changelog
 
+`1.2.5`
+- fixed for HC (*thanks phreel!*)
+- item displays disabled for now
+- weapon skins work again (*seriously, thanks phreel, I don't think I could have figured that out*)
+- weapon skins work in lobby again
+- bb gun no longer gets stopped by walls, but has short range
+- one day the bb gun will escape the cursed config
+
 `1.2.4`
 - fixed for damagesource update
 - fixed cursed BBGun weapon
