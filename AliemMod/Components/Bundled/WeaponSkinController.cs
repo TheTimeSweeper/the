@@ -22,6 +22,8 @@ namespace AliemMod.Components.Bundled
         private SkinDef _currentWeaponSkinPrimary;
         private SkinDef _currentWeaponSkinSecondary;
 
+        private ModelSkinController _modelSkinController;
+
         public void AddWeaponSkin(SkillDef skillDef, int skin)
         {
             if (!_weaponSkillsSkins.ContainsKey(skillDef))
@@ -34,6 +36,24 @@ namespace AliemMod.Components.Bundled
             if (!_weaponSkillsSkins.ContainsKey(skillDef))
             {
                 _weaponSkillsSkins[skillDef] = weaponSkinsSecondaries[skin];
+            }
+        }
+
+        void Awake()
+        {
+            //main skin applies async now and overwrites baseRendererInfos when it finishes, so apply on top of it after
+            if (TryGetComponent(out _modelSkinController))
+            {
+                _modelSkinController.onSkinApplied += OnSkinApplied;
+            }
+        }
+
+        private void OnSkinApplied(int skinIndex)
+        {
+            ApplyCurrentWeaponSkin();
+            if (_currentWeaponSkinSecondary != null)
+            {
+                ApplyWeaponSkinSecondary(_currentWeaponSkinSecondary);
             }
         }
 
@@ -56,6 +76,10 @@ namespace AliemMod.Components.Bundled
 
         void OnDestroy()
         {
+            if (_modelSkinController != null)
+            {
+                _modelSkinController.onSkinApplied -= OnSkinApplied;
+            }
             if (_primaryGenericSkill != null)
             {
                 _primaryGenericSkill.onSkillChanged -= OnSkillChanged;

@@ -31,7 +31,13 @@ namespace Modules {
             DamageAPI.ModdedDamageTypeHolderComponent damageTypeComponent = prefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             damageTypeComponent.Add(DamageTypes.TenticleLifeStealing);
 
-            GameObject ghostPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/EvisProjectile").GetComponent<ProjectileController>().ghostPrefab;
+            ProjectileController evisController = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/EvisProjectile").GetComponent<ProjectileController>();
+            //vanilla projectiles now reference their ghost through addressables instead of ghostPrefab
+            GameObject ghostPrefab = evisController.ghostPrefab;
+            if (!ghostPrefab) {
+                //the game may have already loaded the reference itself, so load by key instead of through the reference
+                ghostPrefab = Addressables.LoadAssetAsync<GameObject>(evisController.ghostPrefabAddress.RuntimeKey).WaitForCompletion();
+            }
             ghostPrefab = PrefabAPI.InstantiateClone(ghostPrefab, "JoeGreenEvisProjectile", false);
             Modules.Asset.recolorEffects(Color.green, ghostPrefab);
 

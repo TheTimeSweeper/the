@@ -175,7 +175,7 @@ namespace MatcherMod.Survivors.Matcher.Components
                 }
 
                 master.inventory.GiveItem(itemDef);
-                GenericPickupController.SendPickupMessage(master, PickupCatalog.FindPickupIndex(itemDef.itemIndex));
+                GenericPickupController.SendPickupMessage(master, new UniquePickup(PickupCatalog.FindPickupIndex(itemDef.itemIndex)));
 
                 master.inventory.GiveItem(CharacterItems.GridUpgradedCount);
 
