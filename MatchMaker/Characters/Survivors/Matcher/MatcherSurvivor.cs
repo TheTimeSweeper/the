@@ -57,6 +57,8 @@ namespace MatcherMod.Survivors.Matcher
             armor = 10f,
 
             jumpCount = 1,
+
+            cameraParamsDepth = -9
         };
 
         public override UnlockableDef characterUnlockableDef => null;// GIUnlockables.characterUnlockableDef;
