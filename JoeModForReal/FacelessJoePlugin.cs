@@ -19,7 +19,7 @@ namespace JoeModForReal {
     public class FacelessJoePlugin : BaseUnityPlugin {
         public const string MODUID = "com.TheTimeSweeper.FacelessJoe";
         public const string MODNAME = "Faceless Joe";
-        public const string MODVERSION = "0.2.1";
+        public const string MODVERSION = "0.2.2";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEV_PREFIX = "HABIBI";

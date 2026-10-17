@@ -50,7 +50,7 @@ namespace JoeModForReal.Content.Survivors {
 
         public override Type characterMainState => typeof(ModdedEntityStates.Joe.JoeMain);
 
-        public override ItemDisplaysBase itemDisplays => new JoeItemDisplays();
+        public override ItemDisplaysBase itemDisplays => null;//todo dlc4 item displays new JoeItemDisplays();
 
         public override ConfigEntry<bool> characterEnabledConfig => null;
         

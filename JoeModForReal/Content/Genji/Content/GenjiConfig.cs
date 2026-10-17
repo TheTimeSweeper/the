@@ -1,18 +1,6 @@
 ﻿using BepInEx.Configuration;
 
 namespace JoeModForReal.Content.Survivors {
-    public static class GenjiStates {
-        public static void Init() {
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.ThrowShuriken), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.ThrowShurikenAlt), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.Deflect), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.Dash), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.DragonBlade), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.DragonBladeIntro), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.DragonBladeOutro), out _);
-            R2API.ContentAddition.AddEntityState(typeof(ModdedEntityStates.Genji.SwingBlade), out _);
-        }
-    }
 
     public static class GenjiConfig {
 

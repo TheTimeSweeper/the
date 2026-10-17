@@ -1,3 +1,8 @@
+`0.2.2`
+- update for HC (*thanks phreel!*)
+- item displays disabled for now
+- fixed genji states not being registered but doubt they're networked anyway
+
 `0.2.1`
 - damagesource update
 

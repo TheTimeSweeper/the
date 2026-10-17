@@ -2,7 +2,6 @@
 using System;
 
 namespace JoeModForReal.Content.Survivors {
-
     public static class GenjiTokens {
 
         public static void Init() {
