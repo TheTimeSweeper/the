@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3730195936090230586}
   m_Father: {fileID: 0}
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3730195935176950272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1354289608, guid: 3029f3340c0951f4fbf7c3ea6dc0803e, type: 3}
+  m_Script: {fileID: 11500000, guid: bf2adab8206079e47ab77459ae4005f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 3730195936090230588}
@@ -77,6 +78,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -109,6 +111,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 3730195935176950279}
+          m_TargetAssemblyTypeName: 
           m_MethodName: HandlePointerDown
           m_Mode: 1
           m_Arguments:
@@ -147,6 +150,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3730195936090230586}
   m_RootOrder: 1
@@ -179,6 +183,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -222,6 +227,7 @@ RectTransform:
   m_LocalRotation: {x: -2.1316282e-14, y: -5.684342e-14, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.000000014546549}
   m_LocalScale: {x: 9, y: 0.72, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3730195936540969104}
   m_RootOrder: 0
@@ -254,6 +260,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.8820755, g: 0.979618, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -342,6 +349,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3826, y: 1.3826, z: 1.3826}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3730195936844659843}
   - {fileID: 3730195935746649796}
@@ -380,6 +388,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.101960786, g: 0.011764706, b: 0.101960786, a: 0.5764706}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -420,6 +429,7 @@ MonoBehaviour:
   wasReady: 0
   previousStock: 0
   tooltipProvider: {fileID: 5965977300330230588}
+  previousCoolDownInt: 0
 --- !u!114 &5965977300330230588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +446,9 @@ MonoBehaviour:
   titleColor: {r: 1, g: 1, b: 1, a: 1}
   bodyToken: 
   bodyColor: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 1}
+  extraUIDisplayPrefab: {fileID: 0}
+  AllowTooltipOnNavigationSelect: 0
+  RequiredInspectStateForNavigationTooltip: 3
   overrideTitleText: 
   overrideBodyText: 
   disableTitleRichText: 0
@@ -468,6 +481,7 @@ RectTransform:
     w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000004927878}
   m_LocalScale: {x: 0.9998987, y: 0.99989843, z: 0.9998988}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3730195936410138475}
   m_Father: {fileID: 3730195936090230586}
@@ -514,6 +528,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3730195936094129188}
   m_RootOrder: 0
@@ -546,6 +561,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -649,6 +665,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3499999, y: 1.3499999, z: 1.3499999}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3730195935982203732}
   m_Father: {fileID: 3730195936090230586}
@@ -682,6 +699,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.6839622, g: 0.9431958, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -777,6 +795,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -2.4980018e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3730195936090230586}
   m_RootOrder: 0
@@ -809,6 +828,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -851,6 +871,7 @@ RectTransform:
   m_LocalRotation: {x: -0.00000010430813, y: -0, z: 0.000000059604645, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000006, y: 1.0000014, z: 1.000001}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3730195936090230586}
   m_RootOrder: 3
@@ -883,6 +904,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9150943, g: 0.15107687, b: 0.15107687, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -922,6 +944,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3730195936090230586}
   m_RootOrder: 2
@@ -954,6 +977,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

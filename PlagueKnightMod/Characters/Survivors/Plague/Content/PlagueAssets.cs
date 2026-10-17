@@ -34,7 +34,14 @@ namespace PlagueMod.Survivors.Plague
             SimpleImpactPowderProjectile2.GetComponent<ProjectileImpactExplosion>().explosionEffect = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ExplosionGolem");
 
             bombSelectUI = assetBundle.LoadAsset<GameObject>("PlagueUI").GetComponent<PlagueBombSelectUI>();
+            var shit = assetBundle.LoadAsset<GameObject>("PlagueSkillIcon");
+            var shits = shit.GetComponents<MonoBehaviour>();
+            foreach (var crap in shits)
+            {
+                Log.Warning(crap.GetType());
+            }
             skillIconPrefab = assetBundle.LoadAsset<GameObject>("PlagueSkillIcon").GetComponent<BombSelectSkillIcon>();
+            
         }
     }
 }
