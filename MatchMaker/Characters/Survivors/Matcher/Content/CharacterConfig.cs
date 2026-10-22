@@ -9,7 +9,7 @@ namespace MatcherMod.Survivors.Matcher.Content
     {
         public const string SectionGeneral = "Hi";
         public const string SectionBody = "Body";
-        public const string SectionSkills = "Skills 0.2";
+        public const string SectionSkills = "Skills 0.2.2";
         public const string SectionMisc = "Misc";
 
         public static BepInEx.Configuration.ConfigEntry<bool> Debug;
@@ -40,7 +40,7 @@ namespace MatcherMod.Survivors.Matcher.Content
         [Configure(SectionSkills, 5.0f, max = 10f)]
         public static ConfigEntry<float> M2_Staff2_MatchRadius;
 
-        [Configure(SectionSkills, 7f, max = 50f)]
+        [Configure(SectionSkills, 11f, max = 50f)]
         public static ConfigEntry<float> M3_Shield_RollInitialSpeed;
         [Configure(SectionSkills, 0.4f, max = 10f)]
         public static ConfigEntry<float> M3_Shield_RollMatchSpeedMultiplier;

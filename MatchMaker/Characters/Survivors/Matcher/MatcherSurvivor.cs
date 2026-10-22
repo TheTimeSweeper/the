@@ -63,7 +63,7 @@ namespace MatcherMod.Survivors.Matcher
 
         public override UnlockableDef characterUnlockableDef => null;// GIUnlockables.characterUnlockableDef;
 
-        public override BaseItemDisplaysSetup itemDisplays { get; } = new CharacterItemDisplays();
+        public override BaseItemDisplaysSetup itemDisplays { get; } = null;// new CharacterItemDisplays();
 
         public MatcherGridController matcherGridController;
 

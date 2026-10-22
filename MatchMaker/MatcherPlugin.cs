@@ -15,7 +15,7 @@ namespace MatcherMod
     {
         public const string MODUID = "com.TheTimesweeper.MatchMaker";
         public const string MODNAME = "MatchMaker";
-        public const string MODVERSION = "0.3.0";
+        public const string MODVERSION = "0.2.2";
 
         public const string DEVELOPER_PREFIX = "HABIBI";
 

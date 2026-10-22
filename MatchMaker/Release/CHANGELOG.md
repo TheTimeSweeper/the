@@ -1,4 +1,9 @@
 # Changelog
+`0.2.2`
+- update for HC (*thanks phreel!*)
+- item displays disabled for now
+- buffed dash speed/distance
+
 `0.2.1`
 - fixed for damagesource update
 
