@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GorpMod.Survivors.Gorp.Content
+namespace GorpMod.Enemies.Gorp.Content
 {
     internal class CharacterDots
     {

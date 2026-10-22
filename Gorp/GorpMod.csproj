@@ -10,9 +10,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="BepInEx.Core" Version="5.*" />
-		<PackageReference Include="RiskOfRain2.GameLibs" Version="*-*" />
-		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
-		<PackageReference Include="MMHOOK.RoR2" Version="*">
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.5.*-*" />
+		<PackageReference Include="UnityEngine.Modules" Version="2021.3.45" />
+		<PackageReference Include="MMHOOK.RoR2" Version="2026.*">
 			<NoWarn>NU1701</NoWarn>
 		</PackageReference>
 		<PackageReference Include="R2API.Core" Version="5.*" />
@@ -26,7 +26,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Characters\Enemies\Gorp\States\" />
 	  <Folder Include="Release\Plugins\" />
 	</ItemGroup>
 

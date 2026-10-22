@@ -1,6 +1,6 @@
 ﻿using R2API;
 
-namespace GorpMod.Survivors.Gorp.Content
+namespace GorpMod.Enemies.Gorp.Content
 {
     public class CharacterDamageTypes
     {

@@ -1,4 +1,4 @@
-﻿using GorpMod.Survivors.Gorp.Content;
+﻿using GorpMod.Enemies.Gorp.Content;
 using RoR2;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace GorpMod.Characters.Enemies.Gorp.Comopnents
 {
     public class GorpController : MonoBehaviour, IOnTakeDamageServerReceiver
     {
-        private Transform _mdlTransform;
+        private Transform _armatureTransform;
         private CharacterBody _body;
 
         private float Thresholds = CharacterConfig.HealthThresholds;
@@ -18,7 +18,7 @@ namespace GorpMod.Characters.Enemies.Gorp.Comopnents
 
         void Start()
         {
-            _mdlTransform = GetComponent<ModelLocator>().modelTransform;
+            _armatureTransform = GetComponent<ModelLocator>().modelTransform.Find("mdlGupArmature");
             _body = GetComponent<CharacterBody>();
         }
 
@@ -49,7 +49,7 @@ namespace GorpMod.Characters.Enemies.Gorp.Comopnents
                 _body.AddBuff(CharacterBuffs.GorpHealthBuff);
             }
 
-            _mdlTransform.localScale = Vector3.one * Mathf.Lerp(CharacterConfig.Size_MaxHealth, CharacterConfig.Size_MinHealth, (lastThresholdReached / Thresholds));
+            _armatureTransform.localScale = Vector3.one * Mathf.Lerp(CharacterConfig.Size_MaxHealth, CharacterConfig.Size_MinHealth, (lastThresholdReached / Thresholds));
         }
     }
 }

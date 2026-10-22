@@ -1,5 +1,5 @@
 ﻿
-namespace GorpMod.Survivors.Gorp.Content
+namespace GorpMod.Enemies.Gorp.Content
 {
     public static class CharacterStates
     {

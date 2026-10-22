@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GorpMod.Enemies.Gorp.Content;
+using UnityEngine;
 
 namespace GorpMod.Characters.Enemies.Gorp.Comopnents
 {
@@ -6,7 +7,7 @@ namespace GorpMod.Characters.Enemies.Gorp.Comopnents
     {
         void LateUpdate()
         {
-            transform.localScale = Vector3.one * 2;
+            transform.localScale = Vector3.one * CharacterConfig.EarScale;
         }
     }
 }

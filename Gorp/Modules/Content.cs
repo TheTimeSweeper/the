@@ -1,4 +1,4 @@
-﻿using GorpMod.Survivors.Gorp;
+﻿using GorpMod.Enemies.Gorp;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -9,6 +9,10 @@ namespace GorpMod.Modules
     //consolidate contentaddition here in case something breaks and/or want to move to r2api
     internal class Content
     {
+        internal static void AddEntityStateConfiguration(EntityStateConfiguration entityStateConfiguration)
+        {
+            ContentPacks.entityStateConfigurations.Add(entityStateConfiguration);
+        }
         internal static void AddCharacterBodyPrefab(GameObject bprefab)
         {
             ContentPacks.bodyPrefabs.Add(bprefab);

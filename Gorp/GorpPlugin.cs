@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using EntityStates.FalseSonBoss;
 using GorpMod.Characters.Enemies.Gorp;
-using GorpMod.Survivors.Gorp;
+using GorpMod.Enemies.Gorp;
 using RoR2;
 using System;
 using System.Reflection;

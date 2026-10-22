@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace GorpMod.Survivors.Gorp.Content
+namespace GorpMod.Enemies.Gorp.Content
 {
     public static class CharacterBuffs
     {

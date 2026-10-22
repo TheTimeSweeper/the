@@ -1,4 +1,4 @@
-﻿using GorpMod.Survivors.Gorp.Content;
+﻿using GorpMod.Enemies.Gorp.Content;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

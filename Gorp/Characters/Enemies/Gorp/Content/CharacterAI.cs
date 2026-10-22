@@ -2,7 +2,7 @@
 using RoR2.CharacterAI;
 using UnityEngine;
 
-namespace GorpMod.Survivors.Gorp.Content
+namespace GorpMod.Enemies.Gorp.Content
 {
     public static class CharacterAI
     {

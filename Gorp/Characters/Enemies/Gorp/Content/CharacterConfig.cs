@@ -3,7 +3,7 @@ using R2API.Utils;
 using System;
 using System.Runtime.CompilerServices;
 
-namespace GorpMod.Survivors.Gorp.Content
+namespace GorpMod.Enemies.Gorp.Content
 {
     public class CharacterConfig
     {
@@ -21,6 +21,19 @@ namespace GorpMod.Survivors.Gorp.Content
         public static ConfigEntry<float> Size_MaxHealth;
         [Configure(SectionMisc, 9f, max = 30f)]
         public static ConfigEntry<float> Size_MinHealth;
+        [Configure(SectionMisc, 2f, max = 30f)]
+        public static ConfigEntry<float> EarScale;
+        [Configure(SectionMisc, 0.3f)]
+        public static ConfigEntry<float> SpikeStateRepeatInterval;
+
+        [Configure(SectionMisc, 0.5f)]
+        public static ConfigEntry<float> Mortar_baseDuration;
+        [Configure(SectionMisc, 1f)]
+        public static ConfigEntry<float> Mortar_minimumTime;
+        [Configure(SectionMisc, 10f, max = 100)]
+        public static ConfigEntry<float> Mortar_projectileHorizontalSpeed;
+        [Configure(SectionMisc, 1f)]
+        public static ConfigEntry<float> Mortar_animationSpeed;
 
         //[Configure(SectionMisc, 0f, max = 30f)]
         //public static ConfigEntry<float> Damage_MaxHealth;
