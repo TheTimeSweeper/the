@@ -1,7 +1,7 @@
 # Gorp
 I just needed a break from all the mod updating
 
-Adds a new teleporter boss, Gorp, to all maps that have gups
+Adds a new teleporter boss, Gorp, to all maps that have Gups
 - fully multiplayer compatible
 - decently configurable
 - boss item coming soon maybe
@@ -15,9 +15,9 @@ ___
 - Attack1: gup spike attack but with an actual telegraph and higher damage
 - Attack2: spends its health to mortar shoot three gips at you, predicts your movement
 
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/refs/heads/master/Gorp/Release/_misc/matcher_css.png)
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/refs/heads/master/Gorp/Release/_misc/matcher_match.png)
-![](https://raw.githubusercontent.com/TheTimeSweeper/the/refs/heads/master/Gorp/Release/_misc/MatchMaker/MatcherBundle/Icons/texIconMatcher.png)
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/refs/heads/master/Gorp/Release/_misc/endoftheslime.png)
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/refs/heads/master/Gorp/Release/_misc/spike.png)
+![](https://raw.githubusercontent.com/TheTimeSweeper/the/refs/heads/master/Gorp/Release/_misc/mortar.png)
 
 ## Credits
 - uh idk
