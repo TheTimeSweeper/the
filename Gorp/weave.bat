@@ -1,7 +1,7 @@
 REM original version https://risk-of-thunder.github.io/R2Wiki/Mod-Creation/C%23-Programming/Networking/UNet/
 REM open this in vs it'll be so much nicer
 
-set TargetFileName=Matchmaker.dll
+set TargetFileName=GorpMod.dll
 set TargetDir=bin\Debug\netstandard2.1
 
 REM robocopy to our weaver folder. idk what the fuck robocopy does but we leave one there for storage

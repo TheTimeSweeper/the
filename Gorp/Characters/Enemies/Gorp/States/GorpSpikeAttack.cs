@@ -7,7 +7,7 @@ namespace GorpMod.Characters.Enemies.Gorp.States
 
     public class GorpSpikeAttack : EntityStates.Gup.GupSpikesState
     {
-        private int repeats = 3;
+        private int repeats = CharacterConfig.SpikeStateRepeats;
         public override void OnEnter()
         {
             //baseDuration = CharacterConfig.SpikeStateDuration;

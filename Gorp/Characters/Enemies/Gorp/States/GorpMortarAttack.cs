@@ -16,14 +16,16 @@ namespace GorpMod.Characters.Enemies.Gorp.States
         public static float baseDuration => CharacterConfig.Mortar_baseDuration;
         public static float minimumTime => CharacterConfig.Mortar_minimumTime;
         public static float projectileHorizontalSpeed => CharacterConfig.Mortar_projectileHorizontalSpeed;
-        public static float animationTimeMulti => CharacterConfig.Mortar_animationSpeed;
+        public static float animationTimeMulti => CharacterConfig.Mortar_animationTimeMulti;
+
+        protected virtual int firings => 3;
         // Token: 0x04003698 RID: 13976
-        private float duration;
+        protected float duration;
         // Token: 0x04003696 RID: 13974
-        private Transform trackedTarget;
+        protected Transform trackedTarget;
         // Token: 0x04003697 RID: 13975
         private Transform muzzleTransform;
-        private TargetingAndPredictionController getTargetComponent;
+        protected TargetingAndPredictionController getTargetComponent;
 
         private int fired = 0;
         
@@ -67,13 +69,11 @@ namespace GorpMod.Characters.Enemies.Gorp.States
             }
             if (base.fixedAge >= this.duration)
             {
-                if (fired < 3)
+                if (fired < firings)
                 {
                     fired++;
                     fixedAge = 0;
                     this.FireProjectile();
-                    //for the next fire
-                    PlayTheOneAnimationWeGot();
                 }
                 else
                 {
@@ -86,12 +86,15 @@ namespace GorpMod.Characters.Enemies.Gorp.States
         }
 
         // Token: 0x060029ED RID: 10733 RVA: 0x000D1420 File Offset: 0x000CF620
-        private void FireProjectile()
+        protected virtual void FireProjectile()
         {
             if (!this.trackedTarget)
             {
                 return;
             }
+            //for the next fire
+            PlayTheOneAnimationWeGot();
+
             if (NetworkServer.active)
             {
 
@@ -100,12 +103,12 @@ namespace GorpMod.Characters.Enemies.Gorp.States
                     masterPrefab = CharacterAssets.GipMaster,
                     position = muzzleTransform.position,
                     rotation = transform.rotation,
-                    summonerBodyObject = gameObject,
+                    summonerBodyObject = null,
                     teamIndexOverride = teamComponent.teamIndex,
                     ignoreTeamMemberLimit = true,
-                    propogateMinionOwnership = true,
+                    propogateMinionOwnership = false,
                     loadout = null,
-                    inventoryToCopy = characterBody.inventory,
+                    inventoryToCopy = null,//characterBody.inventory,
                     inventoryItemCopyFilter = Inventory.defaultItemCopyFilterDelegate,
                     inventorySetupCallback = null,
                     preSpawnSetupCallback = null,
@@ -117,40 +120,46 @@ namespace GorpMod.Characters.Enemies.Gorp.States
             }
         }
 
-        private void CharacterMaster_onBodyStart(CharacterBody obj)
+        private void CharacterMaster_onBodyStart(CharacterBody spawnedBody)
         {
             Vector3 vector = this.trackedTarget.position - this.muzzleTransform.position;
             vector.y = 0f;
             float magnitude = vector.magnitude;
-            float num = Mathf.Max(minimumTime, magnitude / projectileHorizontalSpeed);
+            float predictionTime = Mathf.Max(minimumTime, magnitude / projectileHorizontalSpeed);
             Vector3 position;
-            if (!this.getTargetComponent.GetPredictionPosition(num, out position))
+            if (!this.getTargetComponent.GetPredictionPosition(predictionTime, out position))
             {
                 position = this.trackedTarget.position;
             }
-            Vector3 vector2 = Trajectory.CalculateInitialVelocityFromTime(transform.position, position, num, Physics.gravity.y * 2.2f, DenialProjectile.minimumDistance, DenialProjectile.maximumDistance);
+            Vector3 initialVelocity = Trajectory.CalculateInitialVelocityFromTime(transform.position, position, predictionTime, Physics.gravity.y * 2.2f, DenialProjectile.minimumDistance, DenialProjectile.maximumDistance);
 
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
             {
                 projectilePrefab = EntityStates.Poltergeist.DeathState.throwPrefab,
                 owner = base.gameObject,
                 position = this.muzzleTransform.position,
-                rotation = Util.QuaternionSafeLookRotation(vector2.normalized),
+                rotation = Util.QuaternionSafeLookRotation(initialVelocity.normalized),
                 damage = DenialProjectile.damageCoefficient * this.damageStat,
                 crit = base.RollCrit(),
-                speedOverride = vector2.magnitude,
+                speedOverride = initialVelocity.magnitude,
                 useSpeedOverride = true
             };
             ThrownObjectProjectileController component = ProjectileManager.instance.FireProjectileImmediateServer(fireProjectileInfo, null, 0, 0.0).GetComponent<ThrownObjectProjectileController>();
             if (component != null)
             {
-                component.SetPassengerServer(obj.gameObject);
+                component.SetPassengerServer(spawnedBody.gameObject);
             }
             if (component == null)
             {
                 return;
             }
             component.DisableCollision(0.1f);
+
+            DamageInfo info = new DamageInfo
+            {
+                damage = spawnedBody.healthComponent.health,//healthComponent.fullCombinedHealth * CharacterConfig.Mortar_healthPercentCost
+            };
+            healthComponent.TakeDamage(info);
         }
     }
 }

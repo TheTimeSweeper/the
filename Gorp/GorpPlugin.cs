@@ -48,7 +48,6 @@ namespace GorpMod
             helpText = "It's gorpin time.")]
         private static void CCGorp(ConCommandArgs args)
         {
-
             var senderBody = args.GetSenderBody();
             InputBankTest inputBank = senderBody.inputBank;
 

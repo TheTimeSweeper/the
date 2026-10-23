@@ -1,19 +1,22 @@
-﻿using GorpMod.Modules;
-using GorpMod.Modules.Characters;
+﻿using BepInEx.Configuration;
+using GorpMod.Characters.Enemies.Gorp.Comopnents;
+using GorpMod.Characters.Enemies.Gorp.States;
 using GorpMod.Enemies.Gorp.Content;
-using RoR2.CharacterAI;
+using GorpMod.Modules;
+using GorpMod.Modules.Characters;
 using R2API;
 using RoR2;
+using RoR2.CharacterAI;
+using RoR2.Navigation;
+using RoR2.Skills;
+using RoR2BepInExPack.GameAssetPathsBetter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using GorpMod.Characters.Enemies.Gorp.Comopnents;
-using RoR2.Skills;
-using GorpMod.Characters.Enemies.Gorp.States;
-using RoR2BepInExPack.GameAssetPathsBetter;
-using System.Linq;
+using static GorpMod.Enemies.Gorp.Content.CharacterConfig;
 
 namespace GorpMod.Characters.Enemies.Gorp
 {
@@ -37,31 +40,11 @@ namespace GorpMod.Characters.Enemies.Gorp
             CharacterTokens.Init();
             CharacterAssets.Init();
 
-            Log.Warning("hu");
-
             Asset.LoadAssetBundleAsync("boosgorpbundle", (loadedAssetBundle) =>
             {
-                Log.Warning("hu2");
-
                 assetBundle = loadedAssetBundle;
                 OnBundleLoaded();
             });
-
-
-            R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-        }
-
-        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            //int gorpHealthBuffCount = sender.GetBuffCount(CharacterBuffs.GorpHealthBuff);
-            //float t = (float)gorpHealthBuffCount / CharacterConfig.HealthThresholds;
-            //if (gorpHealthBuffCount > 0)
-            //{
-            //    args.attackSpeedMultAdd += Mathf.Lerp(CharacterConfig.ASpeed_MaxHealth, CharacterConfig.ASpeed_MinHealth, t);
-            //    args.moveSpeedMultAdd += Mathf.Lerp(CharacterConfig.Speed_MaxHealth, CharacterConfig.Speed_MinHealth, t);
-            //    args.damageMultAdd += Mathf.Lerp(CharacterConfig.Damage_MaxHealth, CharacterConfig.Damage_MinHealth, t);
-            //    args.cooldownReductionAdd += Mathf.Lerp(CharacterConfig.CDR_MaxHealth, CharacterConfig.CDR_MinHealth, t);
-            //}
         }
 
         private void OnBundleLoaded()
@@ -83,104 +66,158 @@ namespace GorpMod.Characters.Enemies.Gorp
 
         private void OnGupLoaded(GameObject gupPrefab)
         {
+            //create
             BodyPrefab = PrefabAPI.InstantiateClone(gupPrefab, "GorpBody", true);
             PrefabBody = BodyPrefab.GetComponent<CharacterBody>();
 
-            PrefabBody.baseMaxHealth = 2500;
-            PrefabBody.PerformAutoCalculateLevelStats();
-
+            //CharacterBody stuff
             PrefabBody.baseNameToken = TOKEN_PREFIX + "NAME";
             PrefabBody.subtitleNameToken = TOKEN_PREFIX + "SUBTITLE";
+            PrefabBody.portraitIcon = assetBundle.LoadAsset<Texture>("texIconGorp");
+
+            PrefabBody.baseMaxHealth = 2500;
+            PrefabBody.baseMoveSpeed = 8;
+            PrefabBody.PerformAutoCalculateLevelStats();
+
+            PrefabBody.isChampion = true;
+            PrefabBody.hullClassification = HullClassification.BeetleQueen;
 
             Modules.Config.ConfigureBody(PrefabBody, CharacterConfig.SectionBody);
 
-            BodyPrefab.transform.GetChild(0).transform.localScale = Vector3.one * CharacterConfig.Size_MaxHealth;
-
-            Content.AddCharacterBodyPrefab(BodyPrefab);
-
-            BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/ROOT/mainBody.1/mainBody.2/mainBody.3/mainBody.4/Ear.L").gameObject.AddComponent<FunnyScale>();
-            BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/ROOT/mainBody.1/mainBody.2/mainBody.3/mainBody.4/Ear.R").gameObject.AddComponent<FunnyScale>();
-            //BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/InitialHitBox");
-            BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[0] = BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[1];
-            BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[1].transform.localScale = new Vector3(4, 2.5f, 1);
-            BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[2].transform.localScale = new Vector3(2.5f, 4, 1);
-            var muzzle = new GameObject("MortarMuzzle");
-            muzzle.transform.parent = BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature");
-            muzzle.transform.localPosition = new Vector3(0, 0, 1.3f);
-
-            var childLocator = BodyPrefab.GetComponentInChildren<ChildLocator>(true);
-            childLocator.transformPairs = childLocator.transformPairs.Append(new ChildLocator.NameTransformPair { name = "MortarMuzzle", transform = muzzle.transform }).ToArray();
-
+            //Body Prefab stuff
+            BodyPrefab.AddComponent<GorpController>();
             BodyPrefab.AddComponent<TargetingAndPredictionController>();
-
+            BodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(GorpSplitDeath));
+            BodyPrefab.GetComponent<SetStateOnHurt>().canBeHitStunned = false;
             Asset.LoadAssetAsync<CharacterCameraParams>(RoR2_Base_Common.ccpStandardHuge_asset,
                 (loaded) =>
                 {
                     BodyPrefab.GetComponent<CameraTargetParams>().cameraParams = loaded;
                 });
 
+            //Model stuff
+            //scale handled by gorpcontroller
+            BodyPrefab.transform.Find("ModelBase/mdlGup").localScale = Vector3.one;
+            //BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature").localScale = Vector3.one;;
+
+            BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/ROOT/mainBody.1/mainBody.2/mainBody.3/mainBody.4/Ear.L").gameObject.AddComponent<FunnyScale>();
+            BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/ROOT/mainBody.1/mainBody.2/mainBody.3/mainBody.4/Ear.R").gameObject.AddComponent<FunnyScale>();
+            var standableSurface = BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/ROOT/mainBody.1/StandableSurfacePosition");
+            standableSurface.transform.localScale = new Vector3(0.8742901f, 0.8742901f, 0.5442675f);
+            standableSurface.transform.localPosition = new Vector3(0, 0.54f, 0);
+            //BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature/InitialHitBox");
+            BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[0] = BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[1];
+            BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[1].transform.localScale = new Vector3(4, 2.5f, 1.5f);
+            BodyPrefab.GetComponentInChildren<HitBoxGroup>().hitBoxes[2].transform.localScale = new Vector3(2.5f, 4, 1.5f);
+            var muzzle = new GameObject("MortarMuzzle");
+            muzzle.transform.parent = BodyPrefab.transform.Find("ModelBase/mdlGup/mdlGupArmature");
+            muzzle.transform.localPosition = new Vector3(0, 0, 1.3f);
+
+            var childLocator = BodyPrefab.GetComponentInChildren<ChildLocator>(true);
+            childLocator.transformPairs = childLocator.transformPairs.Append(new ChildLocator.NameTransformPair { name = "MortarMuzzle", transform = muzzle.transform }).ToArray();
+            
+            //add
+            Content.AddCharacterBodyPrefab(BodyPrefab);
+
+            //mod stuff
+            DoHooks();
+
             DoSkin();
 
             DoSkill();
         }
 
+        private void DoHooks()
+        {
+            R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients1;
+        }
+
+        private void RecalculateStatsAPI_GetStatCoefficients1(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            int thresholdBuffs = sender.GetBuffCount(CharacterBuffs.GorpThresholdBuff);
+            float t = (float)thresholdBuffs / CharacterConfig.HealthThresholds;
+            if (thresholdBuffs > 0)
+            {
+                args.baseMoveSpeedAdd += Mathf.Lerp(CharacterConfig.AdditionalMoveSpeed_MinHealth, 0, t);
+                //args.attackSpeedMultAdd += Mathf.Lerp(CharacterConfig.ASpeed_MaxHealth, CharacterConfig.ASpeed_MinHealth, t);
+                //args.moveSpeedMultAdd += Mathf.Lerp(CharacterConfig.Speed_MaxHealth, CharacterConfig.Speed_MinHealth, t);
+                //args.damageMultAdd += Mathf.Lerp(CharacterConfig.Damage_MaxHealth, CharacterConfig.Damage_MinHealth, t);
+                //args.cooldownReductionAdd += Mathf.Lerp(CharacterConfig.CDR_MaxHealth, CharacterConfig.CDR_MinHealth, t);
+            }
+        }
+
         private void DoSkill()
         {
-            //Asset.LoadAssetAsync<EntityStateConfiguration>(RoR2_DLC1_Gup.EntityStates_Gup_GupSpikesState_asset, 
-            //    (GupSpikeStateESC) =>
-            //    {
-            //        var spikeESC = ScriptableObject.CreateInstance<EntityStateConfiguration>();
-            //        spikeESC.serializedFieldsCollection = GupSpikeStateESC.serializedFieldsCollection;
-            //        spikeESC.targetType = new HG.SerializableSystemType();
-            //        spikeESC.targetType.assemblyQualifiedName = typeof(GorpSpikeAttack).AssemblyQualifiedName;
+            Content.AddEntityState(typeof(GorpSpikeAttack));
+            Content.AddEntityState(typeof(GorpBoundAttack));
+            Content.AddEntityState(typeof(GorpMortarAttack));
+            Content.AddEntityState(typeof(GorpSplitDeath));
 
-            //        Content.AddEntityStateConfiguration(spikeESC);
-            //    });
+            Asset.LoadAssetAsync<EntityStateConfiguration>(RoR2_DLC1_Gup.EntityStates_Gup_GupSpikesState_asset,
+                (GupSpikeStateESC) =>
+                {
+                    var spikeESC = assetBundle.LoadAsset<EntityStateConfiguration>("escGorpSpike");
+                    spikeESC.serializedFieldsCollection = GupSpikeStateESC.serializedFieldsCollection;
+                    spikeESC.targetType.assemblyQualifiedName = typeof(GorpSpikeAttack).AssemblyQualifiedName;
 
-            //Skills.ClearGenericSkills(BodyPrefab);
+                    for (int i = 0; i < spikeESC.serializedFieldsCollection.serializedFields.Length; i++)
+                    {
+                        if (spikeESC.serializedFieldsCollection.serializedFields[i].fieldName == "damageCoefficient")
+                        {
+                            spikeESC.serializedFieldsCollection.serializedFields[i].fieldValue.stringValue = CharacterConfig.SpikeStateDamage.Value.ToString();
+                        }
+                    }
 
-            //Skills.CreateSkillFamilies(BodyPrefab, SkillSlot.Primary/*, SkillSlot.Secondary*/);
+                    Content.AddEntityStateConfiguration(spikeESC);
+                });
 
-            //SkillDef newSkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            //(newSkillDef as ScriptableObject).name = "GorpAttack1";
-            //newSkillDef.skillNameToken = "GorpAttack1";
-            //newSkillDef.skillDescriptionToken = "";
-            //newSkillDef.icon = null;
-            //newSkillDef.activationStateMachineName = "Body";
-            //newSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(GorpSpikeAttack));
-            //newSkillDef.baseRechargeInterval = 1;
-            //newSkillDef.baseMaxStock= 1;
-            //newSkillDef.rechargeStock = 1;
-            //newSkillDef.requiredStock = 1;
-            //newSkillDef.stockToConsume = 1;
-            //newSkillDef.attackSpeedBuffsRestockSpeed = true;
-            //newSkillDef.attackSpeedBuffsRestockSpeed_Multiplier = 2;
-            //newSkillDef.resetCooldownTimerOnUse = false;
-            //newSkillDef.fullRestockOnAssign = true;
-            //newSkillDef.dontAllowPastMaxStocks = false;
-            //newSkillDef.beginSkillCooldownOnSkillEnd = true;
-            //newSkillDef.isCooldownBlockedUntilManuallyReset = false;
-            //newSkillDef.cancelSprintingOnActivation = true;
-            //newSkillDef.forceSprintDuringState = false;
-            //newSkillDef.canceledFromSprinting = false;
-            //newSkillDef.isCombatSkill = true;
-            //newSkillDef.mustKeyPress = false;
-            //newSkillDef.triggeredByPressRelease = false;
-            //newSkillDef.autoHandleLuminousShot = true;
-            //newSkillDef.suppressSkillActivation = false;
-            //newSkillDef.hideStockCount = false;
-            //newSkillDef.hideCooldown = false;
+            Skills.ClearGenericSkills(BodyPrefab);
 
-            //Content.AddSkillDef(newSkillDef);
+            //primary
+            Skills.CreateSkillFamilies(BodyPrefab, SkillSlot.Primary/*, SkillSlot.Secondary*/);
 
-            //Skills.AddPrimarySkills(BodyPrefab, newSkillDef);
+            SkillDef newSkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            (newSkillDef as ScriptableObject).name = "GorpAttack1";
+            newSkillDef.skillNameToken = "GorpAttack1";
+            newSkillDef.skillDescriptionToken = "";
+            newSkillDef.icon = null;
+            newSkillDef.activationStateMachineName = "Body";
+            newSkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(GorpSpikeAttack));
+            newSkillDef.baseRechargeInterval = 5;
+            newSkillDef.baseMaxStock = 1;
+            newSkillDef.rechargeStock = 1;
+            newSkillDef.requiredStock = 1;
+            newSkillDef.stockToConsume = 1;
+            newSkillDef.attackSpeedBuffsRestockSpeed = true;
+            newSkillDef.attackSpeedBuffsRestockSpeed_Multiplier = 2;
+            newSkillDef.resetCooldownTimerOnUse = false;
+            newSkillDef.fullRestockOnAssign = true;
+            newSkillDef.dontAllowPastMaxStocks = false;
+            newSkillDef.beginSkillCooldownOnSkillEnd = true;
+            newSkillDef.isCooldownBlockedUntilManuallyReset = false;
+            newSkillDef.cancelSprintingOnActivation = true;
+            newSkillDef.forceSprintDuringState = false;
+            newSkillDef.canceledFromSprinting = false;
+            newSkillDef.isCombatSkill = true;
+            newSkillDef.mustKeyPress = false;
+            newSkillDef.triggeredByPressRelease = false;
+            newSkillDef.autoHandleLuminousShot = true;
+            newSkillDef.suppressSkillActivation = false;
+            newSkillDef.hideStockCount = false;
+            newSkillDef.hideCooldown = false;
 
+            Config.ConfigureSkillDef(newSkillDef, SectionSkills, "Spike Attack");
 
+            Content.AddSkillDef(newSkillDef);
+
+            Skills.AddPrimarySkills(BodyPrefab, newSkillDef);
+
+            //secondary
             Skills.CreateSkillFamilies(BodyPrefab, SkillSlot.Secondary);
 
             SkillDef secondarySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            (secondarySkillDef as ScriptableObject).name = "GorpAttack1";
-            secondarySkillDef.skillNameToken = "GorpAttack1";
+            (secondarySkillDef as ScriptableObject).name = "GorpAttack2";
+            secondarySkillDef.skillNameToken = "GorpAttack2";
             secondarySkillDef.skillDescriptionToken = "";
             secondarySkillDef.icon = null;
             secondarySkillDef.activationStateMachineName = "Body";
@@ -208,9 +245,50 @@ namespace GorpMod.Characters.Enemies.Gorp
             secondarySkillDef.hideStockCount = false;
             secondarySkillDef.hideCooldown = false;
 
+            Config.ConfigureSkillDef(secondarySkillDef, SectionSkills, "Mortar Skill");
+
             Content.AddSkillDef(secondarySkillDef);
 
             Skills.AddSecondarySkills(BodyPrefab, secondarySkillDef);
+
+            //utility
+            Skills.CreateSkillFamilies(BodyPrefab, SkillSlot.Utility);
+
+            SkillDef utilitySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            (utilitySkillDef as ScriptableObject).name = "GorpAttack3";
+            utilitySkillDef.skillNameToken = "GorpAttack3";
+            utilitySkillDef.skillDescriptionToken = "";
+            utilitySkillDef.icon = null;
+            utilitySkillDef.activationStateMachineName = "Body";
+            utilitySkillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(GorpBoundAttack));
+            utilitySkillDef.baseRechargeInterval = 10;
+            utilitySkillDef.baseMaxStock = 1;
+            utilitySkillDef.rechargeStock = 1;
+            utilitySkillDef.requiredStock = 1;
+            utilitySkillDef.stockToConsume = 1;
+            utilitySkillDef.attackSpeedBuffsRestockSpeed = true;
+            utilitySkillDef.attackSpeedBuffsRestockSpeed_Multiplier = 2;
+            utilitySkillDef.resetCooldownTimerOnUse = false;
+            utilitySkillDef.fullRestockOnAssign = true;
+            utilitySkillDef.dontAllowPastMaxStocks = false;
+            utilitySkillDef.beginSkillCooldownOnSkillEnd = true;
+            utilitySkillDef.isCooldownBlockedUntilManuallyReset = false;
+            utilitySkillDef.cancelSprintingOnActivation = true;
+            utilitySkillDef.forceSprintDuringState = false;
+            utilitySkillDef.canceledFromSprinting = false;
+            utilitySkillDef.isCombatSkill = true;
+            utilitySkillDef.mustKeyPress = false;
+            utilitySkillDef.triggeredByPressRelease = false;
+            utilitySkillDef.autoHandleLuminousShot = true;
+            utilitySkillDef.suppressSkillActivation = false;
+            utilitySkillDef.hideStockCount = false;
+            utilitySkillDef.hideCooldown = false;
+
+            Config.ConfigureSkillDef(utilitySkillDef, SectionDebug, "Bound Skill");
+
+            Content.AddSkillDef(utilitySkillDef);
+
+            Skills.AddUtilitySkills(BodyPrefab, utilitySkillDef);
 
         }
 
@@ -242,7 +320,8 @@ namespace GorpMod.Characters.Enemies.Gorp
         {
             MasterPrefab = PrefabAPI.InstantiateClone(gupMaster, "GorpMaster", true);
             MasterPrefab.GetComponent<CharacterMaster>().bodyPrefab = BodyPrefab;
-            MasterPrefab.GetComponent<AISkillDriver>().maxDistance = 50;
+            MasterPrefab.GetComponent<AISkillDriver>().minDistance = 0;
+            MasterPrefab.GetComponent<AISkillDriver>().maxDistance = 30;
 
             UnityEngine.Object.Destroy(MasterPrefab.GetComponents<AISkillDriver>()[1]);
 
@@ -253,9 +332,9 @@ namespace GorpMod.Characters.Enemies.Gorp
             secondaryDriver.skillSlot = SkillSlot.Secondary;
             secondaryDriver.requireSkillReady = true;
             secondaryDriver.minDistance = 0;
-            secondaryDriver.maxDistance = 120;
-            secondaryDriver.minUserHealthFraction = 30;
-            secondaryDriver.maxUserHealthFraction = float.PositiveInfinity;
+            secondaryDriver.maxDistance = 160;
+            secondaryDriver.minUserHealthFraction = 0.30f;
+            secondaryDriver.maxUserHealthFraction = 0.9f;
             secondaryDriver.selectionRequiresTargetLoS = false;
             secondaryDriver.selectionRequiresOnGround = false;
             secondaryDriver.selectionRequiresAimTarget = true;
@@ -271,61 +350,63 @@ namespace GorpMod.Characters.Enemies.Gorp
             secondaryDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
             secondaryDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
-            //some fields omitted that aren't commonly changed. will be set to default values
-            AISkillDriver helpDriver = MasterPrefab.AddComponent<AISkillDriver>();
-            //Selection Conditions
-            helpDriver.customName = "FindGups";
-            helpDriver.skillSlot = SkillSlot.None;
-            helpDriver.requireSkillReady = true;
-            helpDriver.minDistance = 0;
-            helpDriver.maxDistance = 50;
-            helpDriver.minUserHealthFraction = float.NegativeInfinity;
-            helpDriver.maxUserHealthFraction = 40;
-            helpDriver.selectionRequiresTargetLoS = false;
-            helpDriver.selectionRequiresOnGround = false;
-            helpDriver.selectionRequiresAimTarget = false;
-            helpDriver.maxTimesSelected = 5;
+            //eh
+            ////some fields omitted that aren't commonly changed. will be set to default values
+            //AISkillDriver helpDriver = MasterPrefab.AddComponent<AISkillDriver>();
+            ////Selection Conditions
+            //helpDriver.customName = "FindGups";
+            //helpDriver.skillSlot = SkillSlot.None;
+            //helpDriver.requireSkillReady = true;
+            //helpDriver.minDistance = 0;
+            //helpDriver.maxDistance = 50;
+            //helpDriver.minUserHealthFraction = float.NegativeInfinity;
+            //helpDriver.maxUserHealthFraction = 0.40f;
+            //helpDriver.selectionRequiresTargetLoS = false;
+            //helpDriver.selectionRequiresOnGround = false;
+            //helpDriver.selectionRequiresAimTarget = false;
+            //helpDriver.maxTimesSelected = 5;
 
-            //Behavior
-            helpDriver.moveTargetType = AISkillDriver.TargetType.NearestFriendlyInSkillRange;
-            helpDriver.activationRequiresTargetLoS = false;
-            helpDriver.activationRequiresAimTargetLoS = false;
-            helpDriver.activationRequiresAimConfirmation = false;
-            helpDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            helpDriver.moveInputScale = 1;
-            helpDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            helpDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            ////Behavior
+            //helpDriver.moveTargetType = AISkillDriver.TargetType.NearestFriendlyInSkillRange;
+            //helpDriver.activationRequiresTargetLoS = false;
+            //helpDriver.activationRequiresAimTargetLoS = false;
+            //helpDriver.activationRequiresAimConfirmation = false;
+            //helpDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            //helpDriver.moveInputScale = 1;
+            //helpDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            //helpDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
-            helpDriver.noRepeat = true;
-            helpDriver.shouldSprint = true;
-            helpDriver.driverUpdateTimerOverride = 2;
+            //helpDriver.noRepeat = true;
+            //helpDriver.shouldSprint = true;
+            //helpDriver.driverUpdateTimerOverride = 2;
 
-            //some fields omitted that aren't commonly changed. will be set to default values
-            AISkillDriver chaseLowHealthDriver = MasterPrefab.AddComponent<AISkillDriver>();
-            //Selection Conditions
-            chaseLowHealthDriver.customName = "chaseLowHealth";
-            chaseLowHealthDriver.skillSlot = SkillSlot.None;
-            chaseLowHealthDriver.requireSkillReady = true;
-            chaseLowHealthDriver.minDistance = 0;
-            chaseLowHealthDriver.maxDistance = float.PositiveInfinity;
-            chaseLowHealthDriver.minUserHealthFraction = float.NegativeInfinity;
-            chaseLowHealthDriver.maxUserHealthFraction = 40;
-            chaseLowHealthDriver.selectionRequiresTargetLoS = false;
-            chaseLowHealthDriver.selectionRequiresOnGround = false;
-            chaseLowHealthDriver.selectionRequiresAimTarget = false;
-            chaseLowHealthDriver.maxTimesSelected = -1;
+            //he's getting move speed in a more tunable way. doesn't need sprint lol
+            ////some fields omitted that aren't commonly changed. will be set to default values
+            //AISkillDriver chaseLowHealthDriver = MasterPrefab.AddComponent<AISkillDriver>();
+            ////Selection Conditions
+            //chaseLowHealthDriver.customName = "chaseLowHealth";
+            //chaseLowHealthDriver.skillSlot = SkillSlot.None;
+            //chaseLowHealthDriver.requireSkillReady = true;
+            //chaseLowHealthDriver.minDistance = 0;
+            //chaseLowHealthDriver.maxDistance = float.PositiveInfinity;
+            //chaseLowHealthDriver.minUserHealthFraction = float.NegativeInfinity;
+            //chaseLowHealthDriver.maxUserHealthFraction = 0.40f;
+            //chaseLowHealthDriver.selectionRequiresTargetLoS = false;
+            //chaseLowHealthDriver.selectionRequiresOnGround = false;
+            //chaseLowHealthDriver.selectionRequiresAimTarget = false;
+            //chaseLowHealthDriver.maxTimesSelected = -1;
 
-            //Behavior
-            chaseLowHealthDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            chaseLowHealthDriver.activationRequiresTargetLoS = false;
-            chaseLowHealthDriver.activationRequiresAimTargetLoS = false;
-            chaseLowHealthDriver.activationRequiresAimConfirmation = false;
-            chaseLowHealthDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            chaseLowHealthDriver.moveInputScale = 1;
-            chaseLowHealthDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
-            chaseLowHealthDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            ////Behavior
+            //chaseLowHealthDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            //chaseLowHealthDriver.activationRequiresTargetLoS = false;
+            //chaseLowHealthDriver.activationRequiresAimTargetLoS = false;
+            //chaseLowHealthDriver.activationRequiresAimConfirmation = false;
+            //chaseLowHealthDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            //chaseLowHealthDriver.moveInputScale = 1;
+            //chaseLowHealthDriver.aimType = AISkillDriver.AimType.AtMoveTarget;
+            //chaseLowHealthDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 
-            chaseLowHealthDriver.shouldSprint = true;
+            //chaseLowHealthDriver.shouldSprint = true;
 
             //some fields omitted that aren't commonly changed. will be set to default values
             AISkillDriver chaseDriver = MasterPrefab.AddComponent<AISkillDriver>();
@@ -361,8 +442,46 @@ namespace GorpMod.Characters.Enemies.Gorp
             SpawnCard.prefab = MasterPrefab;
             SpawnCard.sendOverNetwork = true;
             SpawnCard.hullSize = HullClassification.BeetleQueen;
-            SpawnCard.directorCreditCost = 100;
+            SpawnCard.directorCreditCost = CharacterConfig.spawnCost;
             SpawnCard.forbiddenFlags |= RoR2.Navigation.NodeFlags.NoCharacterSpawn;
+
+            DirectorCard card = new DirectorCard
+            {
+                spawnCard = SpawnCard,
+                selectionWeight = 1,
+                preventOverhead = false,
+                minimumStageCompletions = CharacterConfig.minimumStageCount,
+                spawnDistance = DirectorCore.MonsterSpawnDistance.Standard
+            };                             //can you tell this was a copy paste job
+            DirectorAPI.DirectorCardHolder regigigasCard = new DirectorAPI.DirectorCardHolder
+            {
+                Card = card,
+                MonsterCategory = DirectorAPI.MonsterCategory.Champions,
+            };
+
+            DirectorCard cardLoop = new DirectorCard
+            {
+                spawnCard = SpawnCard,
+                selectionWeight = 1,
+                preventOverhead = false,
+                minimumStageCompletions = 5,
+                spawnDistance = DirectorCore.MonsterSpawnDistance.Standard
+            };
+            DirectorAPI.DirectorCardHolder regigigasCardLoop = new DirectorAPI.DirectorCardHolder
+            {
+                Card = cardLoop,
+                MonsterCategory = DirectorAPI.MonsterCategory.Champions,
+            };
+
+            DirectorCardCategorySelection dissonanceSpawns = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/MixEnemy/dccsMixEnemy.asset").WaitForCompletion();
+            dissonanceSpawns.AddCard(0, card);  //0 is Champions
+
+            foreach (StageSpawnInfo spawnInfo in CharacterConfig.StageList)
+            {
+                DirectorAPI.DirectorCardHolder toAdd = spawnInfo.GetMinStages() == 0 ? regigigasCard : regigigasCardLoop;
+                Log.Warning("adding to stage " + DirectorAPI.ParseInternalStageName(spawnInfo.GetStageName()));
+                DirectorAPI.Helpers.AddNewMonsterToStage(toAdd, false, DirectorAPI.ParseInternalStageName(spawnInfo.GetStageName()), spawnInfo.GetStageName());
+            }
         }
 
         private void CreateBossEncounter()
@@ -378,6 +497,24 @@ namespace GorpMod.Characters.Enemies.Gorp
                 }
             };
             Content.AddNetworkedObject(BossEncounter);
+        }
+
+        public static List<string> gupNames = new List<string>
+        {
+            "GorpBody",
+            "GupBody",
+            "GeepBody",
+            "GipBody",
+        };
+
+        public static bool IsGup(CharacterBody characterBody)
+        {
+            for (int i = 0; i < gupNames.Count; i++)
+            {
+                if (characterBody.bodyIndex == BodyCatalog.FindBodyIndex(gupNames[i]))
+                    return true;
+            }
+            return false;
         }
     }
 }

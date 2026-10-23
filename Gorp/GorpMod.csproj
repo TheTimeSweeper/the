@@ -23,6 +23,7 @@
 		<PackageReference Include="R2API.DamageType" Version="1.*" />
 		<PackageReference Include="R2API.Dot" Version="1.*" />
 		<PackageReference Include="R2API.Director" Version="1.*" />
+		<PackageReference Include="R2API.Execute" Version="1.*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -39,7 +40,7 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="rem call &quot;$(ProjectDir)weave.bat&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; set buildpath=&quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Gorp\&quot;&#xD;&#xA;&#xD;&#xA;if defined buildpath (&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;copy &quot;$(TargetDir)GorpMod.pdb&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\boosgorpbundle&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; %25buildpath%25&#xD;&#xA;&#xD;&#xA;del &quot;$(ProjectDir)Release\plugins\GorpMod.pdb&quot;&#xD;&#xA;&#xD;&#xA;)" />
+	  <Exec Command="call &quot;$(ProjectDir)weave.bat&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(Username)&quot; == &quot;Erikbir&quot; set buildpath=&quot;E:\r2Profiles\Blinx Returns\BepInEx\plugins\TheTimesweeper-Gorp\&quot;&#xD;&#xA;&#xD;&#xA;if defined buildpath (&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(TargetPath)&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;copy &quot;$(TargetDir)GorpMod.pdb&quot; &quot;$(ProjectDir)Release\plugins&quot;&#xD;&#xA;&#xD;&#xA;copy /Y &quot;$(ProjectDir)..\theUnityProject\AssetBundles\boosgorpbundle&quot; &quot;$(ProjectDir)Release\plugins\AssetBundles&quot;&#xD;&#xA;&#xD;&#xA;Xcopy /E /I /Y &quot;$(ProjectDir)Release\plugins&quot; %25buildpath%25&#xD;&#xA;&#xD;&#xA;del &quot;$(ProjectDir)Release\plugins\GorpMod.pdb&quot;&#xD;&#xA;&#xD;&#xA;)" />
 	</Target>
 	
 </Project>

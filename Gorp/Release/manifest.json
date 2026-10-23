@@ -1,9 +1,9 @@
 {
   "author": "TheTimesweeper",
   "name": "Gorp",
-  "version_number": "0.1.0",
+  "version_number": "1.0.0",
   "website_url": "https://github.com/TheTimeSweeper/the/tree/master/Gorp",
-  "description": "Big gup",
+  "description": "Big gup boss",
   "dependencies": [
     "RiskofThunder-R2API_Core-5.0.3",
     "RiskofThunder-R2API_Prefab-1.0.1",
